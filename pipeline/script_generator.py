@@ -307,10 +307,15 @@ Generate the complete JSON specification strictly adhering to this structure:
     raw_text = response.text.strip()
 
     try:
-        spec = json.loads(raw_text)
-    except json.JSONDecodeError as e:
-        print("Raw LLM output:\n", raw_text)
-        raise RuntimeError(f"Failed to parse LLM JSON: {e}")
+        spec = json.loads(raw_text, strict=False)
+    except json.JSONDecodeError:
+        # Auto-heal unescaped LaTeX backslashes (e.g. \alpha, \sum, \tau, \implies)
+        fixed_text = re.sub(r'\\(?![/"\\bfnrtu]|u[0-9a-fA-F]{4})', r'\\\\', raw_text)
+        try:
+            spec = json.loads(fixed_text, strict=False)
+        except json.JSONDecodeError as e:
+            print("Raw LLM output:\n", raw_text)
+            raise RuntimeError(f"Failed to parse LLM JSON: {e}")
 
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
