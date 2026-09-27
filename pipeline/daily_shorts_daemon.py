@@ -21,6 +21,11 @@ from pipeline.batch_digest import get_trending_digest, record_paper_production, 
 from pipeline.auto_produce import auto_produce
 from pipeline.script_critic import ScriptCritic
 from pipeline.config import WORKSPACE_ROOT, BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS
+from pipeline.analytics_feedback import (
+    retention_analytics,
+    get_performance_category_bias,
+    get_recommended_pacing
+)
 
 DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -53,6 +58,13 @@ def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]], count: int 
             f"    Abstract: {c['abstract'][:250]}..."
         )
 
+    # Query dynamic retention multipliers from analytics feedback
+    category_biases = get_performance_category_bias()
+    bias_desc = ""
+    if category_biases:
+        bias_str = ", ".join([f"{k}: {v}x multiplier" for k, v in category_biases.items()])
+        bias_desc = f"\n4. Audience Retention & Views Velocity: Live YouTube analytics shows viewers strongly favor topics with high multipliers: [{bias_str}]. Favor papers whose domains align with these winning formats!"
+
     prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI.
 
 Review these top {len(cand_summaries)} trending AI papers from today:
@@ -62,7 +74,7 @@ Select the {target_count} BEST and MOST DIVERSE papers for 45-second educational
 Criteria:
 1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits).
 2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static)?
-3. Domain Diversity: Pick papers from DIFFERENT categories (e.g. architectures, reasoning/planning, attention/memory, multimodal/diffusion, benchmarks) to keep the channel varied.
+3. Domain Diversity: Pick papers from DIFFERENT categories (e.g. architectures, reasoning/planning, attention/memory, multimodal/diffusion, benchmarks) to keep the channel varied.{bias_desc}
 
 Return ONLY valid JSON matching this schema:
 {{
@@ -135,6 +147,13 @@ class DailyShortsDaemon:
         print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reels")
         print("=" * 80)
 
+        # 0. Poll YouTube Analytics & Refresh Performance Multipliers
+        print("\n📊 Step 0: Polling YouTube Analytics & Real-Time Viewer Retention...")
+        try:
+            retention_analytics.generate_and_save_ledger()
+        except Exception as e:
+            print(f"   ⚠️ Could not refresh retention ledger: {e}")
+
         # 1. Fetch & score trending papers
         print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
         papers = get_trending_digest(limit=35)
@@ -188,9 +207,12 @@ class DailyShortsDaemon:
                 continue
 
             # Production (Script + Critic + 1440p60 Manim + Thumbnail + YouTube)
+            pacing = get_recommended_pacing()
+            rec_speed = pacing.get("tts_speed", 1.12)
             video_out = auto_produce(
                 arxiv=arxiv_id,
                 category=category,
+                speed=rec_speed,
                 quality=self.quality,
                 publish=publish,
                 privacy=self.privacy
