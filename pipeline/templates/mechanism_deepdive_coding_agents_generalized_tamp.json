@@ -1,0 +1,1433 @@
+{
+  "id": "coding_agents_generalized_tamp",
+  "title": "Coding Agents for Generalized Task and Motion Planning",
+  "arxiv_id": "2609.30233",
+  "domain_taxonomy": "robotics_tamp",
+  "category": "mechanism_deepdive",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Can an autonomous coding agent solve robotic task and motion planning faster than classical algorithms across thousands of unseen environments?",
+      "visual_focus": "Chalkboard schematic of dual state-space showing discrete symbols coupled to continuous manipulator trajectories",
+      "highlight_words": {
+        "robotic task and motion planning": "#38BDF8",
+        "unseen environments": "#F59E0B"
+      },
+      "audio_duration": 8.55,
+      "slot_duration": 8.85,
+      "start": 0.0,
+      "end": 8.55,
+      "word_timings": [
+        {
+          "word": "Can",
+          "clean_word": "can",
+          "phonemes": "k\u02c8\u00e6n",
+          "start": 0.025,
+          "end": 0.255,
+          "duration": 0.23,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 0.255,
+          "end": 0.335,
+          "duration": 0.08,
+          "frame_ahead_trigger": 0.215
+        },
+        {
+          "word": "autonomous",
+          "clean_word": "autonomous",
+          "phonemes": "\u0254\u02d0t\u02c8\u0251\u02d0n\u0259m\u0259s",
+          "start": 0.335,
+          "end": 1.055,
+          "duration": 0.72,
+          "frame_ahead_trigger": 0.295
+        },
+        {
+          "word": "coding",
+          "clean_word": "coding",
+          "phonemes": "k\u02c8o\u028ad\u026a\u014b",
+          "start": 1.055,
+          "end": 1.485,
+          "duration": 0.43,
+          "frame_ahead_trigger": 1.015
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 1.485,
+          "end": 2.01,
+          "duration": 0.525,
+          "frame_ahead_trigger": 1.445
+        },
+        {
+          "word": "solve",
+          "clean_word": "solve",
+          "phonemes": "s\u02c8\u0251\u02d0lv",
+          "start": 2.01,
+          "end": 2.245,
+          "duration": 0.235,
+          "frame_ahead_trigger": 1.97
+        },
+        {
+          "word": "robotic",
+          "clean_word": "robotic",
+          "phonemes": "\u0279o\u028ab\u02c8\u0251\u02d0\u027e\u026ak",
+          "start": 2.245,
+          "end": 2.89,
+          "duration": 0.645,
+          "frame_ahead_trigger": 2.205
+        },
+        {
+          "word": "task",
+          "clean_word": "task",
+          "phonemes": "t\u02c8\u00e6sk",
+          "start": 2.89,
+          "end": 3.14,
+          "duration": 0.25,
+          "frame_ahead_trigger": 2.85
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 3.14,
+          "end": 3.515,
+          "duration": 0.375,
+          "frame_ahead_trigger": 3.1
+        },
+        {
+          "word": "motion",
+          "clean_word": "motion",
+          "phonemes": "m\u02c8o\u028a\u0283\u0259n",
+          "start": 3.515,
+          "end": 3.857,
+          "duration": 0.342,
+          "frame_ahead_trigger": 3.475
+        },
+        {
+          "word": "planning",
+          "clean_word": "planning",
+          "phonemes": "pl\u02c8\u00e6n\u026a\u014b",
+          "start": 3.857,
+          "end": 4.283,
+          "duration": 0.426,
+          "frame_ahead_trigger": 3.817
+        },
+        {
+          "word": "faster",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 4.283,
+          "end": 4.725,
+          "duration": 0.442,
+          "frame_ahead_trigger": 4.243
+        },
+        {
+          "word": "than",
+          "clean_word": "than",
+          "phonemes": "\u00f0\u0250n",
+          "start": 4.725,
+          "end": 4.83,
+          "duration": 0.105,
+          "frame_ahead_trigger": 4.685
+        },
+        {
+          "word": "classical",
+          "clean_word": "classical",
+          "phonemes": "kl\u02c8\u00e6s\u026ak\u0259l",
+          "start": 4.83,
+          "end": 5.35,
+          "duration": 0.52,
+          "frame_ahead_trigger": 4.79
+        },
+        {
+          "word": "algorithms",
+          "clean_word": "algorithms",
+          "phonemes": "\u02c8\u00e6l\u0261\u025a\u0279\u02cc\u026a\u03b8\u0259mz",
+          "start": 5.35,
+          "end": 6.135,
+          "duration": 0.785,
+          "frame_ahead_trigger": 5.31
+        },
+        {
+          "word": "across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 6.135,
+          "end": 6.61,
+          "duration": 0.475,
+          "frame_ahead_trigger": 6.095
+        },
+        {
+          "word": "thousands",
+          "clean_word": "thousands",
+          "phonemes": "\u03b8\u02c8a\u028az\u0259ndz",
+          "start": 6.61,
+          "end": 7.09,
+          "duration": 0.48,
+          "frame_ahead_trigger": 6.57
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.09,
+          "end": 7.185,
+          "duration": 0.095,
+          "frame_ahead_trigger": 7.05
+        },
+        {
+          "word": "unseen",
+          "clean_word": "unseen",
+          "phonemes": "\u028cns\u02c8i\u02d0n",
+          "start": 7.185,
+          "end": 7.59,
+          "duration": 0.405,
+          "frame_ahead_trigger": 7.145
+        },
+        {
+          "word": "environments?",
+          "clean_word": "environments",
+          "phonemes": "\u025bnv\u02c8a\u026a\u0279\u0259nm\u0259nts",
+          "start": 7.59,
+          "end": 8.48,
+          "duration": 0.89,
+          "frame_ahead_trigger": 7.55
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Traditional planners suffer exponential search complexity because discrete logic decisions remain tightly coupled to continuous geometric and kinematic trajectory constraints.",
+      "visual_focus": "Exponentially branching search tree choking on continuous collision boundaries and kinematics checks",
+      "highlight_words": {
+        "exponential search complexity": "#EF4444",
+        "kinematic trajectory constraints": "#EF4444"
+      },
+      "audio_duration": 10.26,
+      "slot_duration": 10.56,
+      "start": 8.85,
+      "end": 19.12,
+      "word_timings": [
+        {
+          "word": "Traditional",
+          "clean_word": "traditional",
+          "phonemes": "t\u0279\u0250d\u02c8\u026a\u0283\u0259n\u0259l",
+          "start": 8.88,
+          "end": 9.585,
+          "duration": 0.705,
+          "frame_ahead_trigger": 8.84
+        },
+        {
+          "word": "planners",
+          "clean_word": "planners",
+          "phonemes": "pl\u02c8\u00e6n\u025az",
+          "start": 9.585,
+          "end": 9.885,
+          "duration": 0.3,
+          "frame_ahead_trigger": 9.545
+        },
+        {
+          "word": "suffer",
+          "clean_word": "suffer",
+          "phonemes": "s\u02c8\u028cf\u025a",
+          "start": 9.885,
+          "end": 10.26,
+          "duration": 0.375,
+          "frame_ahead_trigger": 9.845
+        },
+        {
+          "word": "exponential",
+          "clean_word": "exponential",
+          "phonemes": "\u02cc\u025bksp\u0259n\u02c8\u025bn\u0283\u0259l",
+          "start": 10.26,
+          "end": 11.015,
+          "duration": 0.755,
+          "frame_ahead_trigger": 10.22
+        },
+        {
+          "word": "search",
+          "clean_word": "search",
+          "phonemes": "s\u02c8\u025c\u02d0t\u0283",
+          "start": 11.015,
+          "end": 11.315,
+          "duration": 0.3,
+          "frame_ahead_trigger": 10.975
+        },
+        {
+          "word": "complexity",
+          "clean_word": "complexity",
+          "phonemes": "k\u0259mpl\u02c8\u025bks\u1d7b\u027ei",
+          "start": 11.315,
+          "end": 12.048,
+          "duration": 0.733,
+          "frame_ahead_trigger": 11.275
+        },
+        {
+          "word": "because",
+          "clean_word": "because",
+          "phonemes": "b\u026ak\u02c8\u028cz",
+          "start": 12.048,
+          "end": 12.35,
+          "duration": 0.302,
+          "frame_ahead_trigger": 12.008
+        },
+        {
+          "word": "discrete",
+          "clean_word": "discrete",
+          "phonemes": "d\u026ask\u0279\u02c8i\u02d0t",
+          "start": 12.35,
+          "end": 12.865,
+          "duration": 0.515,
+          "frame_ahead_trigger": 12.31
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 12.865,
+          "end": 13.41,
+          "duration": 0.545,
+          "frame_ahead_trigger": 12.825
+        },
+        {
+          "word": "decisions",
+          "clean_word": "decisions",
+          "phonemes": "d\u1d7bs\u02c8\u026a\u0292\u0259nz",
+          "start": 13.41,
+          "end": 13.89,
+          "duration": 0.48,
+          "frame_ahead_trigger": 13.37
+        },
+        {
+          "word": "remain",
+          "clean_word": "remain",
+          "phonemes": "\u0279\u1d7bm\u02c8e\u026an",
+          "start": 13.89,
+          "end": 14.3,
+          "duration": 0.41,
+          "frame_ahead_trigger": 13.85
+        },
+        {
+          "word": "tightly",
+          "clean_word": "tightly",
+          "phonemes": "t\u02c8a\u026atli",
+          "start": 14.3,
+          "end": 14.85,
+          "duration": 0.55,
+          "frame_ahead_trigger": 14.26
+        },
+        {
+          "word": "coupled",
+          "clean_word": "coupled",
+          "phonemes": "k\u02c8\u028cp\u0259ld",
+          "start": 14.85,
+          "end": 15.2,
+          "duration": 0.35,
+          "frame_ahead_trigger": 14.81
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.2,
+          "end": 15.41,
+          "duration": 0.21,
+          "frame_ahead_trigger": 15.16
+        },
+        {
+          "word": "continuous",
+          "clean_word": "continuous",
+          "phonemes": "k\u0259nt\u02c8\u026anju\u02d0\u0259s",
+          "start": 15.41,
+          "end": 16.037,
+          "duration": 0.628,
+          "frame_ahead_trigger": 15.37
+        },
+        {
+          "word": "geometric",
+          "clean_word": "geometric",
+          "phonemes": "d\u0292\u02cci\u02d0o\u028am\u02c8\u025bt\u0279\u026ak",
+          "start": 16.037,
+          "end": 16.859,
+          "duration": 0.821,
+          "frame_ahead_trigger": 15.997
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 16.859,
+          "end": 17.085,
+          "duration": 0.226,
+          "frame_ahead_trigger": 16.819
+        },
+        {
+          "word": "kinematic",
+          "clean_word": "kinematic",
+          "phonemes": "ka\u026anm\u02c8\u00e6\u027e\u026ak",
+          "start": 17.085,
+          "end": 17.7,
+          "duration": 0.615,
+          "frame_ahead_trigger": 17.045
+        },
+        {
+          "word": "trajectory",
+          "clean_word": "trajectory",
+          "phonemes": "t\u0279\u0259d\u0292\u02c8\u025bkt\u025a\u0279i",
+          "start": 17.7,
+          "end": 18.42,
+          "duration": 0.72,
+          "frame_ahead_trigger": 17.66
+        },
+        {
+          "word": "constraints.",
+          "clean_word": "constraints",
+          "phonemes": "k\u0259nst\u0279\u02c8e\u026ants",
+          "start": 18.42,
+          "end": 19.03,
+          "duration": 0.61,
+          "frame_ahead_trigger": 18.38
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Instead of solving instances individually, coding agents explore simulator sandboxes to synthesize generalized Python programs that amortize geometric reasoning.",
+      "visual_focus": "Synthesis sandbox where agent observes simulation trace and emits modular executable Python policy",
+      "highlight_words": {
+        "simulator sandboxes": "#38BDF8",
+        "synthesize generalized Python programs": "#34D399"
+      },
+      "audio_duration": 9.86,
+      "slot_duration": 10.16,
+      "start": 19.42,
+      "end": 29.27,
+      "word_timings": [
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 19.426,
+          "end": 19.751,
+          "duration": 0.325,
+          "frame_ahead_trigger": 19.386
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 19.751,
+          "end": 19.931,
+          "duration": 0.18,
+          "frame_ahead_trigger": 19.711
+        },
+        {
+          "word": "solving",
+          "clean_word": "solving",
+          "phonemes": "s\u02c8\u0251\u02d0lv\u026a\u014b",
+          "start": 19.931,
+          "end": 20.421,
+          "duration": 0.49,
+          "frame_ahead_trigger": 19.891
+        },
+        {
+          "word": "instances",
+          "clean_word": "instances",
+          "phonemes": "\u02c8\u026anst\u0259ns\u1d7bz",
+          "start": 20.421,
+          "end": 20.961,
+          "duration": 0.54,
+          "frame_ahead_trigger": 20.381
+        },
+        {
+          "word": "individually,",
+          "clean_word": "individually",
+          "phonemes": "\u02cc\u026and\u1d7bv\u02c8\u026ad\u0292u\u02d0\u0259li",
+          "start": 20.961,
+          "end": 21.781,
+          "duration": 0.82,
+          "frame_ahead_trigger": 20.921
+        },
+        {
+          "word": "coding",
+          "clean_word": "coding",
+          "phonemes": "k\u02c8o\u028ad\u026a\u014b",
+          "start": 21.781,
+          "end": 22.186,
+          "duration": 0.405,
+          "frame_ahead_trigger": 21.741
+        },
+        {
+          "word": "agents",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 22.186,
+          "end": 22.706,
+          "duration": 0.52,
+          "frame_ahead_trigger": 22.146
+        },
+        {
+          "word": "explore",
+          "clean_word": "explore",
+          "phonemes": "\u025bkspl\u02c8\u0254\u02d0\u0279",
+          "start": 22.706,
+          "end": 23.231,
+          "duration": 0.525,
+          "frame_ahead_trigger": 22.666
+        },
+        {
+          "word": "simulator",
+          "clean_word": "simulator",
+          "phonemes": "s\u02c8\u026amj\u028al\u02cce\u026a\u027e\u025a",
+          "start": 23.231,
+          "end": 23.816,
+          "duration": 0.585,
+          "frame_ahead_trigger": 23.191
+        },
+        {
+          "word": "sandboxes",
+          "clean_word": "sandboxes",
+          "phonemes": "s\u02c8\u00e6ndb\u0251\u02d0ks\u1d7bz",
+          "start": 23.816,
+          "end": 24.501,
+          "duration": 0.685,
+          "frame_ahead_trigger": 23.776
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 24.501,
+          "end": 24.621,
+          "duration": 0.12,
+          "frame_ahead_trigger": 24.461
+        },
+        {
+          "word": "synthesize",
+          "clean_word": "synthesize",
+          "phonemes": "s\u02c8\u026an\u03b8\u0259s\u02cca\u026az",
+          "start": 24.621,
+          "end": 25.286,
+          "duration": 0.665,
+          "frame_ahead_trigger": 24.581
+        },
+        {
+          "word": "generalized",
+          "clean_word": "generalized",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u0259l\u02cca\u026azd",
+          "start": 25.286,
+          "end": 26.031,
+          "duration": 0.745,
+          "frame_ahead_trigger": 25.246
+        },
+        {
+          "word": "Python",
+          "clean_word": "python",
+          "phonemes": "p\u02c8a\u026a\u03b8\u0259n",
+          "start": 26.031,
+          "end": 26.471,
+          "duration": 0.44,
+          "frame_ahead_trigger": 25.991
+        },
+        {
+          "word": "programs",
+          "clean_word": "programs",
+          "phonemes": "p\u0279\u02c8o\u028a\u0261\u0279\u00e6mz",
+          "start": 26.471,
+          "end": 27.051,
+          "duration": 0.58,
+          "frame_ahead_trigger": 26.431
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 27.051,
+          "end": 27.261,
+          "duration": 0.21,
+          "frame_ahead_trigger": 27.011
+        },
+        {
+          "word": "amortize",
+          "clean_word": "amortize",
+          "phonemes": "\u0250m\u02c8\u0254\u02d0\u0279\u027ea\u026az",
+          "start": 27.261,
+          "end": 27.836,
+          "duration": 0.575,
+          "frame_ahead_trigger": 27.221
+        },
+        {
+          "word": "geometric",
+          "clean_word": "geometric",
+          "phonemes": "d\u0292\u02cci\u02d0o\u028am\u02c8\u025bt\u0279\u026ak",
+          "start": 27.836,
+          "end": 28.691,
+          "duration": 0.855,
+          "frame_ahead_trigger": 27.796
+        },
+        {
+          "word": "reasoning.",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 28.691,
+          "end": 29.126,
+          "duration": 0.435,
+          "frame_ahead_trigger": 28.651
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The agent iteratively samples transition dynamics, debugging trajectory edge cases until synthesized policy program Pi satisfies all discrete and continuous conditions.",
+      "visual_focus": "Closed-loop refinement loop matching program execution outputs against geometric invariants and goal predicates",
+      "highlight_words": {
+        "synthesized policy program": "#38BDF8",
+        "continuous conditions": "#F59E0B"
+      },
+      "audio_duration": 10.71,
+      "slot_duration": 11.01,
+      "start": 29.57,
+      "end": 40.28,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.587,
+          "end": 29.682,
+          "duration": 0.095,
+          "frame_ahead_trigger": 29.547
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 29.682,
+          "end": 30.187,
+          "duration": 0.505,
+          "frame_ahead_trigger": 29.642
+        },
+        {
+          "word": "iteratively",
+          "clean_word": "iteratively",
+          "phonemes": "\u02c8\u026a\u027e\u025a\u0279\u0259t\u02cc\u026avli",
+          "start": 30.187,
+          "end": 30.977,
+          "duration": 0.79,
+          "frame_ahead_trigger": 30.147
+        },
+        {
+          "word": "samples",
+          "clean_word": "samples",
+          "phonemes": "s\u02c8\u00e6mp\u0259lz",
+          "start": 30.977,
+          "end": 31.442,
+          "duration": 0.465,
+          "frame_ahead_trigger": 30.937
+        },
+        {
+          "word": "transition",
+          "clean_word": "transition",
+          "phonemes": "t\u0279\u00e6ns\u02c8\u026a\u0283\u0259n",
+          "start": 31.442,
+          "end": 32.065,
+          "duration": 0.623,
+          "frame_ahead_trigger": 31.402
+        },
+        {
+          "word": "dynamics,",
+          "clean_word": "dynamics",
+          "phonemes": "da\u026an\u02c8\u00e6m\u026aks",
+          "start": 32.065,
+          "end": 32.777,
+          "duration": 0.712,
+          "frame_ahead_trigger": 32.025
+        },
+        {
+          "word": "debugging",
+          "clean_word": "debugging",
+          "phonemes": "d\u02c8i\u02d0b\u02cc\u028c\u0261\u026a\u014b",
+          "start": 32.777,
+          "end": 33.302,
+          "duration": 0.525,
+          "frame_ahead_trigger": 32.737
+        },
+        {
+          "word": "trajectory",
+          "clean_word": "trajectory",
+          "phonemes": "t\u0279\u0259d\u0292\u02c8\u025bkt\u025a\u0279i",
+          "start": 33.302,
+          "end": 34.082,
+          "duration": 0.78,
+          "frame_ahead_trigger": 33.262
+        },
+        {
+          "word": "edge",
+          "clean_word": "edge",
+          "phonemes": "\u02c8\u025bd\u0292",
+          "start": 34.082,
+          "end": 34.317,
+          "duration": 0.235,
+          "frame_ahead_trigger": 34.042
+        },
+        {
+          "word": "cases",
+          "clean_word": "cases",
+          "phonemes": "k\u02c8e\u026as\u1d7bz",
+          "start": 34.317,
+          "end": 34.73,
+          "duration": 0.413,
+          "frame_ahead_trigger": 34.277
+        },
+        {
+          "word": "until",
+          "clean_word": "until",
+          "phonemes": "\u028cnt\u02c8\u026al",
+          "start": 34.73,
+          "end": 35.152,
+          "duration": 0.422,
+          "frame_ahead_trigger": 34.69
+        },
+        {
+          "word": "synthesized",
+          "clean_word": "synthesized",
+          "phonemes": "s\u02c8\u026an\u03b8\u0259s\u02cca\u026azd",
+          "start": 35.152,
+          "end": 35.812,
+          "duration": 0.66,
+          "frame_ahead_trigger": 35.112
+        },
+        {
+          "word": "policy",
+          "clean_word": "policy",
+          "phonemes": "p\u02c8\u0251\u02d0l\u026asi",
+          "start": 35.812,
+          "end": 36.282,
+          "duration": 0.47,
+          "frame_ahead_trigger": 35.772
+        },
+        {
+          "word": "program",
+          "clean_word": "program",
+          "phonemes": "p\u0279\u02c8o\u028a\u0261\u0279\u00e6m",
+          "start": 36.282,
+          "end": 36.898,
+          "duration": 0.616,
+          "frame_ahead_trigger": 36.242
+        },
+        {
+          "word": "Pi",
+          "clean_word": "pi",
+          "phonemes": "p\u02c8a\u026a",
+          "start": 36.898,
+          "end": 37.146,
+          "duration": 0.248,
+          "frame_ahead_trigger": 36.858
+        },
+        {
+          "word": "satisfies",
+          "clean_word": "satisfies",
+          "phonemes": "s\u02c8\u00e6\u027e\u026asf\u02cca\u026az",
+          "start": 37.146,
+          "end": 37.822,
+          "duration": 0.676,
+          "frame_ahead_trigger": 37.106
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 37.822,
+          "end": 38.007,
+          "duration": 0.185,
+          "frame_ahead_trigger": 37.782
+        },
+        {
+          "word": "discrete",
+          "clean_word": "discrete",
+          "phonemes": "d\u026ask\u0279\u02c8i\u02d0t",
+          "start": 38.007,
+          "end": 38.527,
+          "duration": 0.52,
+          "frame_ahead_trigger": 37.967
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 38.527,
+          "end": 38.842,
+          "duration": 0.315,
+          "frame_ahead_trigger": 38.487
+        },
+        {
+          "word": "continuous",
+          "clean_word": "continuous",
+          "phonemes": "k\u0259nt\u02c8\u026anju\u02d0\u0259s",
+          "start": 38.842,
+          "end": 39.567,
+          "duration": 0.725,
+          "frame_ahead_trigger": 38.802
+        },
+        {
+          "word": "conditions.",
+          "clean_word": "conditions",
+          "phonemes": "k\u0259nd\u02c8\u026a\u0283\u0259nz",
+          "start": 39.567,
+          "end": 40.182,
+          "duration": 0.615,
+          "frame_ahead_trigger": 39.527
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "Across ninety-eight thousand evaluation episodes, synthesized programs achieve ninety-five percent success versus forty-seven percent for classical planners, using tenfold less computation.",
+      "visual_focus": "Side-by-side performance chart showing 95% versus 47% success rate alongside a 10x compute reduction",
+      "highlight_words": {
+        "ninety-five percent success": "#34D399",
+        "forty-seven percent": "#EF4444",
+        "tenfold less computation": "#F59E0B"
+      },
+      "audio_duration": 11.05,
+      "slot_duration": 11.35,
+      "start": 40.58,
+      "end": 51.63,
+      "word_timings": [
+        {
+          "word": "Across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 40.631,
+          "end": 41.131,
+          "duration": 0.5,
+          "frame_ahead_trigger": 40.591
+        },
+        {
+          "word": "ninety-eight",
+          "clean_word": "ninetyeight",
+          "phonemes": "n\u02cca\u026ant\u026a\u02c8e\u026at",
+          "start": 41.131,
+          "end": 41.656,
+          "duration": 0.525,
+          "frame_ahead_trigger": 41.091
+        },
+        {
+          "word": "thousand",
+          "clean_word": "thousand",
+          "phonemes": "\u03b8\u02c8a\u028az\u0259nd",
+          "start": 41.656,
+          "end": 42.136,
+          "duration": 0.48,
+          "frame_ahead_trigger": 41.616
+        },
+        {
+          "word": "evaluation",
+          "clean_word": "evaluation",
+          "phonemes": "\u026av\u02cc\u00e6lju\u02d0\u02c8e\u026a\u0283\u0259n",
+          "start": 42.136,
+          "end": 43.021,
+          "duration": 0.885,
+          "frame_ahead_trigger": 42.096
+        },
+        {
+          "word": "episodes,",
+          "clean_word": "episodes",
+          "phonemes": "\u02c8\u025bp\u026as\u02cco\u028adz",
+          "start": 43.021,
+          "end": 43.456,
+          "duration": 0.435,
+          "frame_ahead_trigger": 42.981
+        },
+        {
+          "word": "synthesized",
+          "clean_word": "synthesized",
+          "phonemes": "s\u02c8\u026an\u03b8\u0259s\u02cca\u026azd",
+          "start": 43.456,
+          "end": 44.181,
+          "duration": 0.725,
+          "frame_ahead_trigger": 43.416
+        },
+        {
+          "word": "programs",
+          "clean_word": "programs",
+          "phonemes": "p\u0279\u02c8o\u028a\u0261\u0279\u00e6mz",
+          "start": 44.181,
+          "end": 44.771,
+          "duration": 0.59,
+          "frame_ahead_trigger": 44.141
+        },
+        {
+          "word": "achieve",
+          "clean_word": "achieve",
+          "phonemes": "\u0250t\u0283\u02c8i\u02d0v",
+          "start": 44.771,
+          "end": 45.301,
+          "duration": 0.53,
+          "frame_ahead_trigger": 44.731
+        },
+        {
+          "word": "ninety-five",
+          "clean_word": "ninetyfive",
+          "phonemes": "n\u02cca\u026ant\u026af\u02c8a\u026av",
+          "start": 45.301,
+          "end": 45.931,
+          "duration": 0.63,
+          "frame_ahead_trigger": 45.261
+        },
+        {
+          "word": "percent",
+          "clean_word": "percent",
+          "phonemes": "p\u025as\u02c8\u025bnt",
+          "start": 45.931,
+          "end": 46.296,
+          "duration": 0.365,
+          "frame_ahead_trigger": 45.891
+        },
+        {
+          "word": "success",
+          "clean_word": "success",
+          "phonemes": "s\u0259ks\u02c8\u025bs",
+          "start": 46.296,
+          "end": 46.621,
+          "duration": 0.325,
+          "frame_ahead_trigger": 46.256
+        },
+        {
+          "word": "versus",
+          "clean_word": "versus",
+          "phonemes": "v\u02c8\u025c\u02d0s\u1d7bz",
+          "start": 46.621,
+          "end": 47.126,
+          "duration": 0.505,
+          "frame_ahead_trigger": 46.581
+        },
+        {
+          "word": "forty-seven",
+          "clean_word": "fortyseven",
+          "phonemes": "f\u02cc\u0254\u02d0\u0279\u027e\u026as\u02c8\u025bv\u0259n",
+          "start": 47.126,
+          "end": 47.831,
+          "duration": 0.705,
+          "frame_ahead_trigger": 47.086
+        },
+        {
+          "word": "percent",
+          "clean_word": "percent",
+          "phonemes": "p\u025as\u02c8\u025bnt",
+          "start": 47.831,
+          "end": 48.291,
+          "duration": 0.46,
+          "frame_ahead_trigger": 47.791
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 48.291,
+          "end": 48.511,
+          "duration": 0.22,
+          "frame_ahead_trigger": 48.251
+        },
+        {
+          "word": "classical",
+          "clean_word": "classical",
+          "phonemes": "kl\u02c8\u00e6s\u026ak\u0259l",
+          "start": 48.511,
+          "end": 49.007,
+          "duration": 0.496,
+          "frame_ahead_trigger": 48.471
+        },
+        {
+          "word": "planners,",
+          "clean_word": "planners",
+          "phonemes": "pl\u02c8\u00e6n\u025az",
+          "start": 49.007,
+          "end": 49.412,
+          "duration": 0.404,
+          "frame_ahead_trigger": 48.967
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 49.412,
+          "end": 49.781,
+          "duration": 0.37,
+          "frame_ahead_trigger": 49.372
+        },
+        {
+          "word": "tenfold",
+          "clean_word": "tenfold",
+          "phonemes": "t\u02c8\u025bnfo\u028ald",
+          "start": 49.781,
+          "end": 50.236,
+          "duration": 0.455,
+          "frame_ahead_trigger": 49.741
+        },
+        {
+          "word": "less",
+          "clean_word": "less",
+          "phonemes": "l\u02c8\u025bs",
+          "start": 50.236,
+          "end": 50.521,
+          "duration": 0.285,
+          "frame_ahead_trigger": 50.196
+        },
+        {
+          "word": "computation.",
+          "clean_word": "computation",
+          "phonemes": "k\u02cc\u0251\u02d0mpju\u02d0t\u02c8e\u026a\u0283\u0259n",
+          "start": 50.521,
+          "end": 51.491,
+          "duration": 0.97,
+          "frame_ahead_trigger": 50.481
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures, where frontier coding agents automate generalized robotics and deep algorithmic synthesis.",
+      "visual_focus": "Minimalist signature card of The Model Verse radiating architectural blueprints into clean dark background",
+      "highlight_words": {
+        "The Model Verse": "#34D399",
+        "frontier coding agents": "#38BDF8"
+      },
+      "audio_duration": 9.66,
+      "slot_duration": 10.16,
+      "start": 51.93,
+      "end": 61.6,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 51.947,
+          "end": 52.312,
+          "duration": 0.365,
+          "frame_ahead_trigger": 51.907
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 52.312,
+          "end": 52.487,
+          "duration": 0.175,
+          "frame_ahead_trigger": 52.272
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 52.487,
+          "end": 52.837,
+          "duration": 0.35,
+          "frame_ahead_trigger": 52.447
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 52.837,
+          "end": 53.172,
+          "duration": 0.335,
+          "frame_ahead_trigger": 52.797
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 53.172,
+          "end": 53.352,
+          "duration": 0.18,
+          "frame_ahead_trigger": 53.132
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 53.352,
+          "end": 53.457,
+          "duration": 0.105,
+          "frame_ahead_trigger": 53.312
+        },
+        {
+          "word": "engineering",
+          "clean_word": "engineering",
+          "phonemes": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279\u026a\u014b",
+          "start": 53.457,
+          "end": 54.142,
+          "duration": 0.685,
+          "frame_ahead_trigger": 53.417
+        },
+        {
+          "word": "behind",
+          "clean_word": "behind",
+          "phonemes": "b\u1d7bh\u02c8a\u026and",
+          "start": 54.142,
+          "end": 54.607,
+          "duration": 0.465,
+          "frame_ahead_trigger": 54.102
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 54.607,
+          "end": 55.102,
+          "duration": 0.495,
+          "frame_ahead_trigger": 54.567
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 55.102,
+          "end": 55.367,
+          "duration": 0.265,
+          "frame_ahead_trigger": 55.062
+        },
+        {
+          "word": "architectures,",
+          "clean_word": "architectures",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
+          "start": 55.367,
+          "end": 56.287,
+          "duration": 0.92,
+          "frame_ahead_trigger": 55.327
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 56.287,
+          "end": 56.457,
+          "duration": 0.17,
+          "frame_ahead_trigger": 56.247
+        },
+        {
+          "word": "frontier",
+          "clean_word": "frontier",
+          "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
+          "start": 56.457,
+          "end": 56.897,
+          "duration": 0.44,
+          "frame_ahead_trigger": 56.417
+        },
+        {
+          "word": "coding",
+          "clean_word": "coding",
+          "phonemes": "k\u02c8o\u028ad\u026a\u014b",
+          "start": 56.897,
+          "end": 57.212,
+          "duration": 0.315,
+          "frame_ahead_trigger": 56.857
+        },
+        {
+          "word": "agents",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 57.212,
+          "end": 57.722,
+          "duration": 0.51,
+          "frame_ahead_trigger": 57.172
+        },
+        {
+          "word": "automate",
+          "clean_word": "automate",
+          "phonemes": "\u02c8\u0254\u02d0\u027e\u0259m\u02cce\u026at",
+          "start": 57.722,
+          "end": 58.372,
+          "duration": 0.65,
+          "frame_ahead_trigger": 57.682
+        },
+        {
+          "word": "generalized",
+          "clean_word": "generalized",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u0259l\u02cca\u026azd",
+          "start": 58.372,
+          "end": 59.247,
+          "duration": 0.875,
+          "frame_ahead_trigger": 58.332
+        },
+        {
+          "word": "robotics",
+          "clean_word": "robotics",
+          "phonemes": "\u0279o\u028ab\u02c8\u0251\u02d0\u027e\u026aks",
+          "start": 59.247,
+          "end": 59.892,
+          "duration": 0.645,
+          "frame_ahead_trigger": 59.207
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 59.892,
+          "end": 59.978,
+          "duration": 0.086,
+          "frame_ahead_trigger": 59.852
+        },
+        {
+          "word": "deep",
+          "clean_word": "deep",
+          "phonemes": "d\u02c8i\u02d0p",
+          "start": 59.978,
+          "end": 60.277,
+          "duration": 0.299,
+          "frame_ahead_trigger": 59.938
+        },
+        {
+          "word": "algorithmic",
+          "clean_word": "algorithmic",
+          "phonemes": "\u02cc\u00e6l\u0261\u025a\u0279\u02c8\u026a\u03b8m\u026ak",
+          "start": 60.277,
+          "end": 60.907,
+          "duration": 0.63,
+          "frame_ahead_trigger": 60.237
+        },
+        {
+          "word": "synthesis.",
+          "clean_word": "synthesis",
+          "phonemes": "s\u02c8\u026an\u03b8\u0259s\u02cc\u026as",
+          "start": 60.907,
+          "end": 61.527,
+          "duration": 0.62,
+          "frame_ahead_trigger": 60.867
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{S} = \\mathcal{S}_{\\mathrm{sym}} \\times \\mathcal{Q}_{\\mathrm{kinematic}} \\implies N_{\\mathrm{eval}} = 98{,}000$",
+      "filename": "tamp_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{S}_{\\mathrm{sym}}",
+          "label": "Symbolic Logic States"
+        },
+        {
+          "term": "\\mathcal{Q}_{\\mathrm{kinematic}}",
+          "label": "Continuous Config Space"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{C}_{\\mathrm{plan}} = \\mathcal{O}\\left(b^{d}_{\\mathrm{discrete}} \\cdot \\mathrm{Vol}(\\mathcal{Q}_{\\mathrm{free}})^{-1}\\right)$",
+      "filename": "tamp_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "b^{d}_{\\mathrm{discrete}}",
+          "label": "Combinatorial Search Tree"
+        },
+        {
+          "term": "\\mathrm{Vol}(\\mathcal{Q}_{\\mathrm{free}})",
+          "label": "Valid Motion Manifold"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\Pi^* = \\arg\\max_{\\Pi \\in \\mathcal{L}_{\\mathrm{code}}} \\mathbb{E}_{\\tau \\sim \\mathcal{E}}\\left[\\mathcal{R}(\\Pi(\\tau))\\right]$",
+      "filename": "tamp_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Pi^*",
+          "label": "Synthesized General Policy"
+        },
+        {
+          "term": "\\mathcal{L}_{\\mathrm{code}}",
+          "label": "Executable Program Space"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\Pi_{k+1} = \\mathrm{Refine}\\left(\\Pi_k, \\, \\mathcal{E}_{\\mathrm{sim}}(\\Pi_k) \\models \\mathcal{C}_{\\mathrm{geom}} \\land \\mathcal{G}_{\\mathrm{task}}\\right)$",
+      "filename": "tamp_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{E}_{\\mathrm{sim}}",
+          "label": "Interactive Simulator Sandbox"
+        },
+        {
+          "term": "\\mathcal{C}_{\\mathrm{geom}}",
+          "label": "Kinematic Feasibility Guard"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Success}(\\Pi^*) = 95.0\\% \\gg 47.0\\%, \\quad \\mathrm{Cost} = 0.10 \\times \\mathcal{C}_{\\mathrm{baseline}}$",
+      "filename": "tamp_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "95.0\\%",
+          "label": "Synthesized Program Success"
+        },
+        {
+          "term": "0.10 \\times",
+          "label": "Runtime Compute Overhead"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Discrete Task Logic",
+          "color": "#38BDF8",
+          "items": [
+            "pick(obj)",
+            "place(bin)",
+            "stack(A, B)"
+          ]
+        },
+        {
+          "name": "Continuous Geometry",
+          "color": "#10B981",
+          "items": [
+            "IK_solve",
+            "collision_free",
+            "traj_spline"
+          ]
+        },
+        {
+          "name": "Synthesized Policy",
+          "color": "#F59E0B",
+          "items": [
+            "sort_by_depth()",
+            "batch_route()",
+            "fallback_clear()"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Task: \"Clear 15 Obstacles\"",
+        "target_cluster": "Synthesized Policy",
+        "token": "\"Clear 15 Obstacles\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Classical Planner: Backtracking Timeout",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Joint Space Explosion",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Coding Agent (Claude Code / Codex)",
+    "model_a_specs": [
+      "Amortized Program Synthesis",
+      "Simulator Sandbox Debugging",
+      "95% Generalized Success"
+    ],
+    "model_b": "Classical TAMP (PDDLStream / KinDER)",
+    "model_b_specs": [
+      "Per-Instance Online Search",
+      "Exponential Backtracking",
+      "47% Baseline Success"
+    ],
+    "divide_title": "SEARCH TREE VS AMORTIZED CODE DIVIDE",
+    "model_a_stat": "95%",
+    "model_a_stat_label": "AGENT PROGRAM SUCCESS",
+    "model_b_stat": "47%",
+    "model_b_stat_label": "CLASSICAL PLANNER SUCCESS",
+    "efficiency_badge": "\u26a1 10x COMPUTE REDUCTION",
+    "benchmarks": [
+      {
+        "name": "KinDER & PDDLStream Benchmarks",
+        "score_a": "95%",
+        "score_b": "47%"
+      },
+      {
+        "name": "Inference Time per Episode",
+        "score_a": "0.10x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Scaling with Object Count",
+        "score_a": "Robust",
+        "score_b": "Degrades"
+      }
+    ],
+    "scale_metric": "98k",
+    "scale_label": "Evaluation Episodes Analyzed",
+    "bottleneck_title": "EXPONENTIAL SEARCH BOTTLENECK",
+    "bottleneck_desc": "Coupled Symbolic and Continuous Infeasibility",
+    "solution_title": "AMORTIZED PROGRAM SYNTHESIS",
+    "solution_components": "Interactive Sandbox & Code Debugging",
+    "mechanism_title": "CLOSED-LOOP CONSTRAINT REFINEMENT",
+    "payoff_stat": "95%",
+    "payoff_label": "PEAK SUCCESS RATE",
+    "payoff_sub": "Beating Hand-Engineered Planners Across 28 Environments",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "Synthesized Code Policy",
+    "payoff_base_stat": 47.0,
+    "payoff_base_label": "Hand-Engineered Planner",
+    "payoff_delta_badge": "\u26a1 +48.0% PLANNING ACCURACY GAIN",
+    "challenger": "Coding Agents",
+    "incumbent": "Classical TAMP Planners"
+  }
+}

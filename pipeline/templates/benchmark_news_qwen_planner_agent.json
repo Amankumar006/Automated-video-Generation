@@ -1,0 +1,352 @@
+{
+  "id": "qwen_planner_agent",
+  "title": "AI-for-AI Planning Frameworks",
+  "category": "benchmark_news",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "BENCHMARK NEWS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How can an AI become smart enough to build other AI agents? It\u2019s like a sculptor teaching a student how to carve marble statues.",
+      "visual_focus": "A glowing AI brain cluster spawning smaller, identical robotic controller agents into a clean workspace.",
+      "highlight_words": {
+        "AI agents": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Qwen-Planner",
+        "action_verb": "spawns",
+        "direct_object": "Robotic Planner Agents",
+        "anchor_word": "build",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Real-world mobile robots are chaotic. Teaching them is like trying to guide a blindfolded person through a library while the shelves keep shifting.",
+      "visual_focus": "A robotic arm fumbling in a shifting 3D grid environment representing complex mobile planning tasks.",
+      "highlight_words": {
+        "chaotic": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Mobile Agent",
+        "action_verb": "navigates",
+        "direct_object": "Shifting Workspace Trajectories",
+        "anchor_word": "chaotic",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "Instead of guessing, we build a data flywheel. The AI constructs its own training tasks, curating perfect examples of what success looks like daily.",
+      "visual_focus": "A circular loop diagram where training data feeds into a model, which then produces better task data for itself.",
+      "highlight_words": {
+        "data flywheel": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Data Flywheel",
+        "action_verb": "curates",
+        "direct_object": "Human-gated Training Tasks",
+        "anchor_word": "curating",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "The model uses a competence-aware mechanism to chip away unnecessary tool usage costs, keeping only the most efficient skills for every complex action.",
+      "visual_focus": "An optimization gate filtering a list of skills; unnecessary tools fade away, leaving only high-precision planning commands.",
+      "highlight_words": {
+        "efficient skills": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Competence-Aware Gate",
+        "action_verb": "prunes",
+        "direct_object": "High-Cost Planning Tools",
+        "anchor_word": "chip away",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This closed-loop orchestration creates a model that outperforms all previous benchmarks, proving AI can effectively bootstrap its own growth and real-world intelligence.",
+      "visual_focus": "A bar chart showing Qwen-Planner rising above all other competitors on a benchmark scale.",
+      "highlight_words": {
+        "outperforms": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Qwen-Planner-Agent",
+        "action_verb": "surpasses",
+        "direct_object": "MobilePA-Bench Baseline",
+        "anchor_word": "outperforms",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears with a subtle pulse, indicating the end of the technical breakdown.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "simplifies",
+        "direct_object": "Modern AI Architecture",
+        "anchor_word": "explanations",
+        "semantic_role": "state_transition"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{agents}} = \\sum_{i=1}^{k} \\mathrm{Task}_{i}$",
+      "filename": "qwen_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Active Agent Count"
+        },
+        {
+          "term": "Task_i",
+          "label": "Planning Trajectory"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(T_{\\mathrm{horizon}} \\times S_{\\mathrm{state}})$",
+      "filename": "qwen_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Horizon Depth"
+        },
+        {
+          "term": "S",
+          "label": "State Space Complexity"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$D_{\\mathrm{new}} = \\mathrm{Filter}(\\mathrm{Model}(\\mathcal{T}_{\\mathrm{prev}}))$",
+      "filename": "qwen_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "D",
+          "label": "Refined Data"
+        },
+        {
+          "term": "T",
+          "label": "Previous Trace"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{R} = \\mathrm{TopK}(\\sigma(W_{\\mathrm{care}} \\cdot \\mathbf{x}))$",
+      "filename": "qwen_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "W",
+          "label": "Competence Weight"
+        },
+        {
+          "term": "R",
+          "label": "Reduced Tool Cost"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Perf}_{\\mathrm{QPA}} > \\mathrm{Perf}_{\\mathrm{Baseline}} + \\Delta$",
+      "filename": "qwen_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Perf",
+          "label": "Benchmark Success"
+        },
+        {
+          "term": "Delta",
+          "label": "Improvement Gain"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "DATA",
+          "color": "#38BDF8",
+          "items": [
+            "Task Gen",
+            "Trajectory",
+            "Balance"
+          ]
+        },
+        {
+          "name": "TRAINING",
+          "color": "#10B981",
+          "items": [
+            "CARE",
+            "Reward",
+            "Reinforcement"
+          ]
+        },
+        {
+          "name": "EXECUTION",
+          "color": "#F59E0B",
+          "items": [
+            "Memory",
+            "Skills",
+            "Tools"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Plan\"",
+        "target_cluster": "EXECUTION",
+        "token": "\"Plan\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'fail'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'trace'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Qwen-Planner-Agent",
+    "model_a_specs": [
+      "Closed-loop Framework",
+      "Agentic Flywheel",
+      "CARE Engineering"
+    ],
+    "model_b": "MobilePA-Bench Baselines",
+    "model_b_specs": [
+      "Manual TAMP",
+      "Standard LLMs",
+      "Open-loop Planning"
+    ],
+    "divide_title": "AI-FOR-AI PERFORMANCE DIVIDE",
+    "model_a_stat": "SOTA",
+    "model_a_stat_label": "MobilePA-Bench",
+    "model_b_stat": "Baseline",
+    "model_b_stat_label": "MobilePA-Bench",
+    "efficiency_badge": "\u26a1 +Agentic Scalability",
+    "benchmarks": [
+      {
+        "name": "Tool Use",
+        "score_a": "High",
+        "score_b": "Low"
+      },
+      {
+        "name": "Reliability",
+        "score_a": "High",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Efficiency",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "100%",
+    "scale_label": "Closed-Loop Integration",
+    "bottleneck_title": "NON-SCALABLE REAL-DEVICE BOTTLENECK",
+    "bottleneck_desc": "High Cost Interaction Constraints",
+    "solution_title": "AGENTIC DATA FLYWHEEL",
+    "solution_components": "Data-Training-Execution Loop",
+    "mechanism_title": "COMPETENCE-AWARE REWARD ENGINEERING",
+    "payoff_stat": "Best",
+    "payoff_label": "BENCHMARK PERFORMANCE",
+    "payoff_sub": "Outperforming All Evaluated Baselines",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "Agent Success",
+    "payoff_base_stat": 42.0,
+    "payoff_base_label": "General Model",
+    "payoff_delta_badge": "\u26a1 +53% PERFORMANCE GAIN",
+    "challenger": "Qwen-Planner-Agent",
+    "incumbent": "General LLM Planners"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "deepseek-v3",
+  "title": "DeepSeek-V3",
+  "category": "architecture_breakdown",
+  "hook_tag": "FRONTIER AI ARCHITECTURE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "DeepSeek-V3 has 671 billion parameters. But running it costs almost nothing. How?",
+      "visual_focus": "hook_671b_counter",
+      "audio_duration": 6.14,
+      "slot_duration": 6.44,
+      "start": 0.0,
+      "end": 6.14
+    },
+    {
+      "beat_id": 2,
+      "text": "In a standard dense model, every single word forces all 671 billion weights to calculate at once. A massive brute-force bottleneck.",
+      "visual_focus": "dense_monolithic_overload",
+      "audio_duration": 9.0,
+      "slot_duration": 9.3,
+      "start": 6.44,
+      "end": 15.45
+    },
+    {
+      "beat_id": 3,
+      "text": "DeepSeek flips this with Sparse Mixture of Experts, dividing the entire model into 256 specialized sub-networks.",
+      "visual_focus": "moe_256_constellation",
+      "audio_duration": 7.51,
+      "slot_duration": 7.81,
+      "start": 15.75,
+      "end": 23.26
+    },
+    {
+      "beat_id": 4,
+      "text": "Plus one permanently active shared expert that never sleeps, capturing universal knowledge.",
+      "visual_focus": "shared_expert_amber",
+      "audio_duration": 5.16,
+      "slot_duration": 5.46,
+      "start": 23.56,
+      "end": 28.72
+    },
+    {
+      "beat_id": 5,
+      "text": "When a token enters, a high-speed router scores affinity, dispatching to only the top 8 experts.",
+      "visual_focus": "top8_sigmoid_routing_lasers",
+      "audio_duration": 5.8,
+      "slot_duration": 6.1,
+      "start": 29.02,
+      "end": 34.82
+    },
+    {
+      "beat_id": 6,
+      "text": "The result? 671 billion parameters of intelligence, but only 37 billion active per token. 94 percent of compute, saved.",
+      "visual_focus": "active_37b_efficiency_gauge",
+      "audio_duration": 9.09,
+      "slot_duration": 9.39,
+      "start": 35.12,
+      "end": 44.21
+    },
+    {
+      "beat_id": 7,
+      "text": "Follow The Model Verse for more deep architecture breakdowns like this.",
+      "visual_focus": "clean_outro_cta",
+      "audio_duration": 3.58,
+      "slot_duration": 4.08,
+      "start": 44.51,
+      "end": 48.09
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.9,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 7.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 14.8,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 15.5,
+      "sound_type": "click",
+      "volume": 0.3
+    },
+    {
+      "timestamp": 22.5,
+      "sound_type": "chime",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 27.8,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 28.8,
+      "sound_type": "click",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 29.8,
+      "sound_type": "laser",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 33.8,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 42.8,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 43.6,
+      "sound_type": "click",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 44.3,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "total_parameters": "671B",
+    "active_parameters": "37B",
+    "expert_count": 256,
+    "active_experts": 8,
+    "shared_experts": 1,
+    "compute_savings": "94.5%"
+  }
+}

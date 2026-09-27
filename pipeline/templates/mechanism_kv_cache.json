@@ -1,0 +1,55 @@
+{
+  "id": "kv_cache",
+  "title": "KV Cache Explained",
+  "category": "mechanism_deepdive",
+  "hook_tag": "AI ENGINEERING PRIMITIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why does generating long text slow large language models down to a crawl?",
+      "visual_focus": "hook_quadratic_bottleneck"
+    },
+    {
+      "beat_id": 2,
+      "text": "In raw self-attention, generating each new word forces the GPU to recalculate every previous token from scratch. That's an O of N squared memory explosion.",
+      "visual_focus": "quadratic_matrix_explosion"
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter the Key-Value Cache. Instead of recomputing history, the model stores past keys and values directly in GPU high-speed VRAM.",
+      "visual_focus": "kv_cache_storage_blocks"
+    },
+    {
+      "beat_id": 4,
+      "text": "When the next token enters, it only projects a single Query vector, fetching all prior context from the cache in constant O of 1 time.",
+      "visual_focus": "query_fetching_cached_kv"
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? Instant inference speed, a ten-fold throughput boost, and massive VRAM efficiency on long prompts.",
+      "visual_focus": "throughput_speedometer_payoff"
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "clean_outro_cta"
+    }
+  ],
+  "sfx_cues": [
+    { "timestamp": 0.8, "sound_type": "sub_impact", "volume": 0.45 },
+    { "timestamp": 4.8, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 6.0, "sound_type": "click", "volume": 0.35 },
+    { "timestamp": 14.5, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 22.0, "sound_type": "laser", "volume": 0.40 },
+    { "timestamp": 29.5, "sound_type": "sub_impact", "volume": 0.50 },
+    { "timestamp": 37.0, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 37.8, "sound_type": "click", "volume": 0.40 },
+    { "timestamp": 38.5, "sound_type": "chime", "volume": 0.40 }
+  ],
+  "metadata": {
+    "bottleneck": "O(N²) Quadratic Complexity",
+    "solution": "KV Cache in VRAM",
+    "speedup": "10x Throughput Boost",
+    "query_complexity": "O(1) Step-Time"
+  }
+}

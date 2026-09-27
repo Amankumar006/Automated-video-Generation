@@ -1,0 +1,54 @@
+# Secrets & Credentials (STRICTLY EXCLUDED)
+.env
+*.env
+*.pickle
+*token*.json
+*secret*.json
+!client_secrets.example.json
+credentials.json
+google-analytics-credentials.json
+pipeline/youtube_token.json
+pipeline/client_secrets.json
+
+# Cache & Downloaded arXiv Assets
+public/arxiv_cache/
+test_media/
+
+# Python & Virtual Environments
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Model Weights & Binaries (>100MB)
+kokoro_models/
+*.onnx
+*.bin
+*.pth
+*.pt
+*.safetensors
+
+# Media, Video & Audio Caches
+node_modules
+dist
+.DS_Store
+.remotion
+out
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.png
+*.jpg
+*.jpeg
+media/
+public/audio_cache/
+public/rendered_videos/
+frames_*/
+
+# OS Artifacts
+.DS_Store
+Thumbs.db

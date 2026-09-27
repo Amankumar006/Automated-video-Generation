@@ -1,0 +1,191 @@
+{
+  "id": "transformer_linear_superposition",
+  "title": "Your Transformer Can Hold Two Thoughts at Once",
+  "category": "architecture_breakdown",
+  "hook_tag": "ARCHITECTURE BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Can an autoregressive transformer process two completely unrelated prompts simultaneously in a single forward pass without catastrophic cross-attention collapse?",
+      "visual_focus": "Split chalkboard showing prompt A and prompt B vector inputs feeding into a single shared transformer block simultaneously.",
+      "highlight_words": {
+        "simultaneously": "#34D399",
+        "cross-attention collapse": "#EF4444"
+      },
+      "audio_duration": 9.24,
+      "slot_duration": 9.54,
+      "start": 0.0,
+      "end": 9.24
+    },
+    {
+      "beat_id": 2,
+      "text": "Deep networks stack non-linear activations, yet forcing distinct prompt embeddings together typically triggers unrecoverable feature entanglement and hallucinatory output distributions.",
+      "visual_focus": "Nonlinear activation graph showing high-dimensional vector collision and corrupted probability distribution logits.",
+      "highlight_words": {
+        "feature entanglement": "#EF4444",
+        "hallucinatory": "#EF4444"
+      },
+      "audio_duration": 10.52,
+      "slot_duration": 10.82,
+      "start": 9.54,
+      "end": 20.05
+    },
+    {
+      "beat_id": 3,
+      "text": "The Superposition Linearity Hypothesis reveals an unexpected architectural truth: transformer hidden states naturally maintain parallel linear representations across distinct input streams.",
+      "visual_focus": "Geometric decomposition of the residual stream showing two orthogonal subspace planes coexisting inside the same hidden dimension.",
+      "highlight_words": {
+        "Superposition Linearity": "#38BDF8",
+        "parallel linear representations": "#34D399"
+      },
+      "audio_duration": 11.58,
+      "slot_duration": 11.88,
+      "start": 20.35,
+      "end": 31.94
+    },
+    {
+      "beat_id": 4,
+      "text": "Linearly blending separate input token embeddings directly outputs a clean superposition matching the exact mean of their individual next-token probability vectors.",
+      "visual_focus": "Vector addition formula highlighting the linear mapping from mixed input tokens to the averaged softmax probability distribution.",
+      "highlight_words": {
+        "superposition": "#38BDF8",
+        "probability vectors": "#F59E0B"
+      },
+      "audio_duration": 9.54,
+      "slot_duration": 9.84,
+      "start": 32.24,
+      "end": 41.77
+    },
+    {
+      "beat_id": 5,
+      "text": "Guided decoding then disentangles this mixed state, generating two coherent, independent token trajectories from a single forward pass without extra latency.",
+      "visual_focus": "Dual-branch decoding tree demonstrating two distinct fluent sentence outputs unraveling synchronously from a solitary inference step.",
+      "highlight_words": {
+        "two coherent": "#F59E0B",
+        "single forward pass": "#34D399"
+      },
+      "audio_duration": 9.45,
+      "slot_duration": 9.75,
+      "start": 42.07,
+      "end": 51.53
+    },
+    {
+      "beat_id": 6,
+      "text": "To master the mathematical mechanics driving frontier language models, follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "Clean chalkboard logo of The Model Verse radiating geometric vector fields and orthogonal subspace lines.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "audio_duration": 8.38,
+      "slot_duration": 8.88,
+      "start": 51.83,
+      "end": 60.21
+    }
+  ],
+  "math_formulas": [
+    {
+      "latex": "$\\mathbf{x}_{\\mathrm{mix}} = \\alpha \\mathbf{x}_A + (1 - \\alpha) \\mathbf{x}_B$",
+      "filename": "superposition_input_mix.svg",
+      "fontsize": 26,
+      "color": "white"
+    },
+    {
+      "latex": "$P(y \\mid \\mathbf{x}_{\\mathrm{mix}}) \\approx \\alpha P(y \\mid \\mathbf{x}_A) + (1 - \\alpha) P(y \\mid \\mathbf{x}_B)$",
+      "filename": "linear_probability_superposition.svg",
+      "fontsize": 24,
+      "color": "#38BDF8"
+    },
+    {
+      "latex": "$\\hat{y}_t^{(A)} = \\arg\\max_{v} \\left[ \\log P(v \\mid \\mathbf{x}_{\\mathrm{mix}}) - \\lambda \\log P(v \\mid \\mathbf{x}_B) \\right]$",
+      "filename": "guided_disentanglement_decoding.svg",
+      "fontsize": 22,
+      "color": "#34D399"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "model_a": "Superposed Dual Decoding",
+    "model_a_specs": [
+      "1 Shared Forward Pass",
+      "Linear Hidden Subspaces",
+      "Guided Disentangling"
+    ],
+    "model_b": "Standard Autoregressive Pass",
+    "model_b_specs": [
+      "2 Independent Passes",
+      "Quadratic FLOP Scale",
+      "Zero Cross-Subspace Reuse"
+    ],
+    "divide_title": "INDEPENDENT VS SUPERPOSED GENERATION",
+    "model_a_stat": "2x",
+    "model_a_stat_label": "THROUGHPUT PER FORWARD PASS",
+    "model_b_stat": "1x",
+    "model_b_stat_label": "BASELINE GENERATION STREAM",
+    "efficiency_badge": "\u26a1 50% FORWARD PASS COMPUTE SAVED",
+    "benchmarks": [
+      {
+        "name": "Output Distribution TVD",
+        "score_a": "0.08",
+        "score_b": "0.42"
+      },
+      {
+        "name": "Parallel Stream Coherence",
+        "score_a": "98.4%",
+        "score_b": "51.2%"
+      },
+      {
+        "name": "Forward Compute Cost",
+        "score_a": "0.5x",
+        "score_b": "1.0x"
+      }
+    ],
+    "scale_metric": "2-in-1",
+    "scale_label": "Superposed Independent Output Streams",
+    "bottleneck_title": "NON-LINEAR ENTANGLEMENT BARRIER",
+    "bottleneck_desc": "Superposition collapses when non-linear activations cross-contaminate distinct token features.",
+    "solution_title": "SUPERPOSITION LINEARITY HYPOTHESIS",
+    "solution_components": "Intrinsic Linear Residual Stream & Subspace Invariance",
+    "mechanism_title": "LINEAR INPUT MIXING & GUIDED PROJECTION",
+    "payoff_stat": "2x",
+    "payoff_label": "STREAM GENERATION THROUGHPUT",
+    "payoff_sub": "Two Coherent Continuations Disentangled from One Forward Pass",
+    "challenger": "Superposed Decoding",
+    "incumbent": "Independent Standard Decoding"
+  }
+}

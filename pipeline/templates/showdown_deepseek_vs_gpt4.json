@@ -1,0 +1,68 @@
+{
+  "id": "deepseek_vs_gpt4",
+  "title": "DeepSeek-V3 vs GPT-4o",
+  "category": "model_showdown",
+  "hook_tag": "HEAD-TO-HEAD SHOWDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Can an open-weights model beat GPT-4o at less than one-tenth the inference cost?",
+      "visual_focus": "hook_showdown_matchup"
+    },
+    {
+      "beat_id": 2,
+      "text": "On the left: DeepSeek-V3 with 671 billion sparse parameters. On the right: GPT-4o with an estimated 1.8 trillion dense weights.",
+      "visual_focus": "split_screen_contenders"
+    },
+    {
+      "beat_id": 3,
+      "text": "While GPT-4o fires every weight per token, DeepSeek's gating router activates only 37 billion parameters.",
+      "visual_focus": "dense_vs_sparse_activation"
+    },
+    {
+      "beat_id": 4,
+      "text": "Across MMLU Pro, HumanEval coding, and MATH-500, DeepSeek matches or exceeds frontier accuracy.",
+      "visual_focus": "benchmark_score_race"
+    },
+    {
+      "beat_id": 5,
+      "text": "The pricing verdict is an economic shock: fourteen cents per million tokens versus two dollars and fifty cents.",
+      "visual_focus": "pricing_collapse_gauge"
+    },
+    {
+      "beat_id": 6,
+      "text": "Which model are you building with? Follow The Model Verse for more AI showdowns like this.",
+      "visual_focus": "clean_outro_cta"
+    }
+  ],
+  "sfx_cues": [
+    { "timestamp": 0.8, "sound_type": "sub_impact", "volume": 0.45 },
+    { "timestamp": 5.2, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 6.0, "sound_type": "click", "volume": 0.35 },
+    { "timestamp": 14.5, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 22.0, "sound_type": "sub_impact", "volume": 0.40 },
+    { "timestamp": 29.5, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 30.5, "sound_type": "sub_impact", "volume": 0.50 },
+    { "timestamp": 38.0, "sound_type": "whoosh", "volume": 0.35 },
+    { "timestamp": 38.8, "sound_type": "click", "volume": 0.40 },
+    { "timestamp": 39.5, "sound_type": "chime", "volume": 0.40 }
+  ],
+  "metadata": {
+    "model_a": {
+      "name": "DeepSeek-V3",
+      "type": "Sparse MoE",
+      "total_params": "671B",
+      "active_params": "37B",
+      "price_per_m": "$0.14",
+      "coding_score": "82.6%"
+    },
+    "model_b": {
+      "name": "GPT-4o",
+      "type": "Dense Monolith",
+      "total_params": "~1.8T",
+      "active_params": "100%",
+      "price_per_m": "$2.50",
+      "coding_score": "80.2%"
+    }
+  }
+}

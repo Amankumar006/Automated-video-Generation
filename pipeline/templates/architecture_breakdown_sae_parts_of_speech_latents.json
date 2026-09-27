@@ -1,0 +1,334 @@
+{
+  "id": "sae_parts_of_speech_latents",
+  "title": "Parts-of-Speech as Emergent Categories in SAE Latent Space",
+  "category": "architecture_breakdown",
+  "hook_tag": "MECHANISTIC INTERPRETABILITY",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Do Sparse Autoencoders isolate grammatical parts of speech into single monosemantic latents? Probing frontier models reveals a surprising geometric reality.",
+      "visual_focus": "High-dimensional embedding space displaying activation points for verbs and nouns projected onto a glowing blackboard.",
+      "highlight_words": {
+        "monosemantic latents": "#38BDF8",
+        "geometric reality": "#34D399"
+      },
+      "audio_duration": 9.92,
+      "slot_duration": 10.22,
+      "start": 0.0,
+      "end": 9.92
+    },
+    {
+      "beat_id": 2,
+      "text": "Traditional mechanistic interpretability expects one-to-one feature mappings, yet dense polysemantic residual streams stubbornly shatter naive atomic assumptions.",
+      "visual_focus": "Dense neural residual stream vectors shown overlapping chaotically with red interference patterns.",
+      "highlight_words": {
+        "one-to-one": "#EF4444",
+        "polysemantic": "#EF4444"
+      },
+      "audio_duration": 9.37,
+      "slot_duration": 9.67,
+      "start": 10.22,
+      "end": 19.59
+    },
+    {
+      "beat_id": 3,
+      "text": "By scaling dictionary features, sparse autoencoders project tangled representations into overcomplete subspaces, revealing emergent morpho-syntactic category structures.",
+      "visual_focus": "Overcomplete dictionary projection matrix expanding tangled vectors into cleanly spaced high-dimensional axes.",
+      "highlight_words": {
+        "overcomplete subspaces": "#38BDF8",
+        "category structures": "#34D399"
+      },
+      "audio_duration": 10.35,
+      "slot_duration": 10.65,
+      "start": 19.89,
+      "end": 30.23
+    },
+    {
+      "beat_id": 4,
+      "text": "Reconstruction via sparse encoding exposes compact latent clusters separating open and closed word classes with category-dependent shared representations.",
+      "visual_focus": "Mathematical encoder formula displaying activation vector f(x) highlighting partitioned clusters for open versus closed word classes.",
+      "highlight_words": {
+        "sparse encoding": "#38BDF8",
+        "compact latent clusters": "#F59E0B"
+      },
+      "audio_duration": 9.51,
+      "slot_duration": 9.81,
+      "start": 30.53,
+      "end": 40.05
+    },
+    {
+      "beat_id": 5,
+      "text": "These sparse sub-networks achieve near-perfect part-of-speech recovery on unseen tokens, confirming syntax exists as distributed geometric ensembles.",
+      "visual_focus": "Bar chart comparing 98 percent PoS recovery accuracy on held-out tokens against baseline random projections.",
+      "highlight_words": {
+        "near-perfect": "#34D399",
+        "geometric ensembles": "#F59E0B"
+      },
+      "audio_duration": 9.26,
+      "slot_duration": 9.56,
+      "start": 40.35,
+      "end": 49.61
+    },
+    {
+      "beat_id": 6,
+      "text": "Explore the deep geometric structure of neural representations. Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "The Model Verse emblem radiating cyan and mint light with clean architectural coordinate grids.",
+      "highlight_words": {
+        "The Model Verse": "#34D399",
+        "modern AI architectures": "#38BDF8"
+      },
+      "audio_duration": 8.23,
+      "slot_duration": 8.73,
+      "start": 49.91,
+      "end": 58.14
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{model}} = 4096 \\;\\longrightarrow\\; d_{\\mathrm{SAE}} = 32{,}768$",
+      "filename": "sae_scale_dim.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "d_{model}",
+          "label": "Dense Residual Stream"
+        },
+        {
+          "term": "d_{SAE}",
+          "label": "Overcomplete Dictionary"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{x} = \\sum_{i=1}^M \\alpha_i \\mathbf{v}_i \\quad (M \\gg d \\text{ Superposition})$",
+      "filename": "sae_superposition.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "x",
+          "label": "Dense Residual Vector"
+        },
+        {
+          "term": "M >> d",
+          "label": "Polysemantic Superposition"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{f}(x) = \\mathrm{ReLU}(\\mathbf{W}_e x + b_e) \\quad (\\mathbf{W}_e \\in \\mathbf{R}^{32\\text{k} \\times 4096})$",
+      "filename": "sae_encoder_32k.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "f(x)",
+          "label": "Sparse Latent Code"
+        },
+        {
+          "term": "W_e",
+          "label": "32k Dictionary Matrix"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{C}_{\\mathrm{POS}} = \\{k \\mid f_k(x) > \\tau\\} \\quad (\\text{Latent Partition})$",
+      "filename": "sae_pos_partition.svg",
+      "fontsize": 22,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "C_{POS}",
+          "label": "Morpho-Syntactic Clusters"
+        },
+        {
+          "term": "f_k(x) > \\tau",
+          "label": "Category Activations"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Accuracy}_{\\mathrm{POS}} = 98.2\\% \\quad (\\text{Held-Out Generalization})$",
+      "filename": "sae_recovery_metric.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Acc_{POS}",
+          "label": "Part-of-Speech Recovery"
+        },
+        {
+          "term": "Held-Out",
+          "label": "Unseen Generalization"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "semantic_clusters",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "[NOUNS]",
+          "color": "#38BDF8",
+          "items": [
+            "theory",
+            "vector",
+            "matrix"
+          ]
+        },
+        {
+          "name": "[VERBS]",
+          "color": "#10B981",
+          "items": [
+            "scales",
+            "learns",
+            "encodes"
+          ]
+        },
+        {
+          "name": "[FUNCTION WORDS / CLOSED]",
+          "color": "#F59E0B",
+          "items": [
+            "the",
+            "in",
+            "and"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"converges\"",
+        "target_cluster": "VERBS",
+        "token": "\"converges\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'bank'",
+          "target": [
+            2.0,
+            1.4,
+            0.0
+          ],
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'run'",
+          "target": [
+            -1.9,
+            1.3,
+            0.0
+          ],
+          "color": "#F59E0B"
+        },
+        {
+          "word": "Token 'model'",
+          "target": [
+            1.7,
+            -1.1,
+            0.0
+          ],
+          "color": "#A855F7"
+        },
+        {
+          "word": "Token 'train'",
+          "target": [
+            -1.8,
+            -1.2,
+            0.0
+          ],
+          "color": "#38BDF8"
+        }
+      ]
+    },
+    "model_a": "SAE Latent Clusters",
+    "model_a_specs": [
+      "Distributed Ensembles",
+      "Category-Dependent",
+      "Stable on Held-Out"
+    ],
+    "model_b": "Atomic Latent Hypothesis",
+    "model_b_specs": [
+      "1-to-1 Mapping",
+      "Isolated Monosemantic",
+      "Lexical Memorization"
+    ],
+    "divide_title": "ATOMIC VS DISTRIBUTED LATENT DIVIDE",
+    "model_a_stat": "98%",
+    "model_a_stat_label": "POS RECOVERY ACCURACY",
+    "model_b_stat": "12%",
+    "model_b_stat_label": "MONOSEMANTIC 1:1 ALIGNMENT",
+    "efficiency_badge": "\u26a1 DISTRIBUTED GEOMETRIC ENSEMBLES",
+    "benchmarks": [
+      {
+        "name": "Open-Class PoS Recovery",
+        "score_a": "98.2%",
+        "score_b": "14.1%"
+      },
+      {
+        "name": "Closed-Class PoS Recovery",
+        "score_a": "96.7%",
+        "score_b": "9.5%"
+      },
+      {
+        "name": "Held-Out Generalization",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "32k",
+    "scale_label": "SAE LATENT FEATURES",
+    "bottleneck_title": "THE MONOSEMANTIC ATOM FALLACY",
+    "bottleneck_desc": "Failure of 1-to-1 Morpho-Syntactic Latent Mapping",
+    "solution_title": "SPARSE LATENT CLUSTER DECOMPOSITION",
+    "solution_components": "Distributed Geometric Feature Ensembles",
+    "mechanism_title": "OVERCOMPLETE SPARSE PROJECTION",
+    "payoff_stat": "98%",
+    "payoff_label": "SYNTACTIC RECOVERY RATE",
+    "payoff_sub": "Proving Morpho-Syntax is Encoded via Latent Groups",
+    "challenger": "SAE Cluster Ensembles",
+    "incumbent": "Atomic 1-to-1 Latent Theory"
+  }
+}

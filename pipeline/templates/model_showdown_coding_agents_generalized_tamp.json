@@ -1,0 +1,146 @@
+{
+  "id": "coding_agents_generalized_tamp",
+  "title": "Coding Agents vs Classical TAMP Planners",
+  "category": "model_showdown",
+  "hook_tag": "MODEL SHOWDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Can an autonomous coding agent outplan classical robotics engines across complex, multi-object task and motion environments?",
+      "visual_focus": "Dual chalkboard split showing robotic arm motion trajectory versus synthesized Python policy code blocks.",
+      "highlight_words": {
+        "coding agent": "#38BDF8",
+        "classical robotics engines": "#EF4444"
+      },
+      "audio_duration": 8.64,
+      "slot_duration": 8.94,
+      "start": 0.0,
+      "end": 8.64
+    },
+    {
+      "beat_id": 2,
+      "text": "Classical TAMP couples discrete search with continuous kinematic constraints, suffering exponential search explosion as object count N scales.",
+      "visual_focus": "Exponential branching tree labeled O(b^N) colliding with geometric boundary collision hulls.",
+      "highlight_words": {
+        "kinematic constraints": "#EF4444",
+        "exponential search explosion": "#EF4444"
+      },
+      "audio_duration": 9.6,
+      "slot_duration": 9.9,
+      "start": 8.94,
+      "end": 18.54
+    },
+    {
+      "beat_id": 3,
+      "text": "Instead of solving per instance, frontier models like Claude Code synthesize generalized algorithmic policy scripts in simulator sandboxes.",
+      "visual_focus": "Simulator-in-the-loop feedback graph: LLM agent emits policy code, executes in KinDER simulator, inspects runtime traces.",
+      "highlight_words": {
+        "synthesize generalized algorithmic": "#34D399",
+        "Claude Code": "#38BDF8"
+      },
+      "audio_duration": 9.32,
+      "slot_duration": 9.62,
+      "start": 18.84,
+      "end": 28.16
+    },
+    {
+      "beat_id": 4,
+      "text": "Agents iteratively test edge cases, calibrate physics models, and freeze verified programs for instant execution on held-out worlds.",
+      "visual_focus": "Algorithmic synthesis loop: program generation mapped to verified test suite pass rate with frozen policy deployment.",
+      "highlight_words": {
+        "calibrate physics": "#38BDF8",
+        "freeze verified programs": "#34D399"
+      },
+      "audio_duration": 8.96,
+      "slot_duration": 9.26,
+      "start": 28.46,
+      "end": 37.42
+    },
+    {
+      "beat_id": 5,
+      "text": "Across ninety-eight thousand test episodes, synthesized code achieved ninety-five percent success, beating hand-crafted planners with ten-fold less computation.",
+      "visual_focus": "Bar chart comparing 47% classical planner success vs 95% agent success alongside a 10x compute reduction badge.",
+      "highlight_words": {
+        "ninety-five percent success": "#34D399",
+        "ten-fold less computation": "#F59E0B"
+      },
+      "audio_duration": 10.84,
+      "slot_duration": 11.14,
+      "start": 37.72,
+      "end": 48.56
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "Minimalist chalkboard vector logo of The Model Verse with subtle glowing emerald particle field.",
+      "highlight_words": {
+        "The Model Verse": "#34D399",
+        "modern AI architectures": "#FFFFFF"
+      },
+      "audio_duration": 5.03,
+      "slot_duration": 5.53,
+      "start": 48.86,
+      "end": 53.89
+    }
+  ],
+  "math_formulas": [
+    {
+      "latex": "$\\mathcal{T}_{\\mathrm{TAMP}} = \\mathcal{S}_{\\mathrm{discrete}} \\times \\mathcal{C}_{\\mathrm{kinematic}}$",
+      "filename": "tamp_coupling.svg",
+      "fontsize": 24,
+      "color": "#EF4444"
+    },
+    {
+      "latex": "$\\pi^* = \\arg\\max_{\\pi \\in \\Pi_{\\mathrm{code}}} \\mathbb{E}_{w \\sim \\mathcal{W}} [\\mathcal{R}(\\pi, w)]$",
+      "filename": "generalized_program_objective.svg",
+      "fontsize": 26,
+      "color": "white"
+    },
+    {
+      "latex": "$\\mathrm{Success}_{\\mathrm{Agent}} = 95\\% \\gg 47\\% \\; (10\\times \\text{ faster})$",
+      "filename": "success_rate_comparison.svg",
+      "fontsize": 26,
+      "color": "#34D399"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "key_stat": "95% vs 47% success rate"
+  }
+}

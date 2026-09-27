@@ -1,0 +1,345 @@
+{
+  "id": "self_organizing_agent_teams",
+  "title": "Self-Organizing Agent Teams",
+  "category": "benchmark_news",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "AGENT TEAMS LEARN TO REASON",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How can a team of AI agents learn to solve hard math problems that no single agent can finish on its own today?",
+      "visual_focus": "A central glowing node connected to scattered, dim agent sparks on a dark void background.",
+      "highlight_words": {
+        "AI agents": "#38BDF8",
+        "hard math": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Agent Network",
+        "action_verb": "emerges",
+        "direct_object": "Collaborative Reasoning",
+        "anchor_word": "learn",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like a group of people at a whiteboard. They try, fail, and fix each other until the answer finally clicks for everyone.",
+      "visual_focus": "Multiple geometric shapes colliding and merging into a single, complex, coherent structure.",
+      "highlight_words": {
+        "whiteboard": "#34D399",
+        "fix each other": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Agent Team",
+        "action_verb": "collides",
+        "direct_object": "Partial Reasoning",
+        "anchor_word": "whiteboard",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "The secret is learning how to organize work on the fly. They practice together on old tests to find the best team strategy.",
+      "visual_focus": "A flow chart reorganizing its own branches into a new, efficient hierarchy as data passes through.",
+      "highlight_words": {
+        "organize work": "#34D399",
+        "team strategy": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Strategy Learner",
+        "action_verb": "reconfigures",
+        "direct_object": "Information Flow",
+        "anchor_word": "organize",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "Agents play distinct roles. Some check the math, others look for errors, and the rest combine it all into a final, true path.",
+      "visual_focus": "Three distinct colored streams merging into one golden laser beam of correct reasoning.",
+      "highlight_words": {
+        "distinct roles": "#EF4444",
+        "final true path": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Synthesizer Node",
+        "action_verb": "prunes",
+        "direct_object": "False Logic",
+        "anchor_word": "combine",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This team approach beats the best single agent by a lot, hitting over sixty-six percent accuracy on some very tough science exams.",
+      "visual_focus": "A bar chart rising rapidly to 66.7 percent, dwarfing the smaller 48 percent baseline bar.",
+      "highlight_words": {
+        "beats": "#34D399",
+        "sixty-six percent": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Benchmark Metric",
+        "action_verb": "surpasses",
+        "direct_object": "Strongest Member",
+        "anchor_word": "accuracy",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears in the center with a subtle pulse.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{agents}} = 1 \\to N_{\\mathrm{team}} = 5$",
+      "filename": "team_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Agent Count"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{S} = \\sum_{i=1}^{k} \\alpha_i \\cdot r_i$",
+      "filename": "team_sum.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "r_i",
+          "label": "Reasoning"
+        },
+        {
+          "term": "alpha",
+          "label": "Role weight"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{P}_{t+1} = \\mathrm{Update}(\\mathcal{P}_t, \\mathcal{D})$",
+      "filename": "strat_update.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "P",
+          "label": "Policy"
+        },
+        {
+          "term": "D",
+          "label": "Data"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Filter}(x) = \\{r \\mid \\mathrm{Valid}(r) = 1\\}$",
+      "filename": "logic_gate.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "r",
+          "label": "Reasoning"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Accuracy}_{SAT} = 66.7\\%$",
+      "filename": "final_score.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "SAT",
+          "label": "Team Accuracy"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Agent A",
+          "color": "#38BDF8",
+          "items": [
+            "math",
+            "check",
+            "loop"
+          ]
+        },
+        {
+          "name": "Agent B",
+          "color": "#10B981",
+          "items": [
+            "logic",
+            "fix",
+            "link"
+          ]
+        },
+        {
+          "name": "Agent C",
+          "color": "#F59E0B",
+          "items": [
+            "synthesis",
+            "truth",
+            "final"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"solve\"",
+        "target_cluster": "Agent A",
+        "token": "\"solve\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'error'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'bias'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Self-Organizing Team",
+    "model_a_specs": [
+      "Dynamic",
+      "Learned",
+      "Collaborative"
+    ],
+    "model_b": "Strongest Single Agent",
+    "model_b_specs": [
+      "Fixed",
+      "Static",
+      "Standalone"
+    ],
+    "divide_title": "TEAM VS SINGLE AGENT",
+    "model_a_stat": "66.7%",
+    "model_a_stat_label": "TEAM SUCCESS",
+    "model_b_stat": "48.8%",
+    "model_b_stat_label": "SOLO SUCCESS",
+    "efficiency_badge": "\u26a1 +17.9% PERFORMANCE GAIN",
+    "benchmarks": [
+      {
+        "name": "Math",
+        "score_a": "66.7%",
+        "score_b": "48.8%"
+      },
+      {
+        "name": "Physics",
+        "score_a": "High",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "AIME 2026",
+        "score_a": "Gain",
+        "score_b": "Loss"
+      }
+    ],
+    "scale_metric": "66.7",
+    "scale_label": "Team Accuracy",
+    "bottleneck_title": "COLLECTIVE BOTTLENECK",
+    "bottleneck_desc": "Fragmented reasoning paths",
+    "solution_title": "ORGANIZATIONAL LEARNING",
+    "solution_components": "Agent Strategy Optimization",
+    "mechanism_title": "COLLABORATIVE COMPUTATION",
+    "payoff_stat": "66.7%",
+    "payoff_label": "TEAM ACCURACY",
+    "payoff_sub": "Outperforming fixed protocols",
+    "payoff_hero_stat": 66.7,
+    "payoff_hero_label": "Self-Organizing Teams",
+    "payoff_base_stat": 48.8,
+    "payoff_base_label": "Solo Strongest",
+    "payoff_delta_badge": "\u26a1 +17.9% GAIN",
+    "challenger": "SAT",
+    "incumbent": "Solo-Agent"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "id": "coding_agents_tamp",
+  "title": "Coding Agents for Generalized TAMP",
+  "category": "model_showdown",
+  "hook_tag": "MODEL SHOWDOWN: TAMP AUTOMATION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How do we bridge the gap between abstract task logic and physical robot motion? Can coding agents solve TAMP without exhaustive, hand-engineered geometric planning?",
+      "visual_focus": "A split screen showing a complex robot planning tree on the left and a clean Python script on the right.",
+      "highlight_words": {
+        "Coding Agents": "#38BDF8",
+        "TAMP": "#F59E0B"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Traditional TAMP solvers face a catastrophic combinatorial explosion, where discrete task decisions are tightly coupled to continuous geometric constraints, making scaling near impossible for new environments.",
+      "visual_focus": "A collapsing grid graph representing the exponential branching factor of traditional planners.",
+      "highlight_words": {
+        "combinatorial explosion": "#EF4444",
+        "tightly coupled": "#EF4444"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "Instead of manual heuristics, we treat planning as a synthesis task; agents interact with simulators to develop programs that generalize across unseen instances and object counts.",
+      "visual_focus": "An agent's feedback loop connecting a simulation environment to a code synthesis engine.",
+      "highlight_words": {
+        "synthesis task": "#34D399",
+        "generalize": "#34D399"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "The mechanism relies on calibrating physical models through iterative interaction, testing edge cases, and freezing logic into robust programs before evaluating on Held-out test instances.",
+      "visual_focus": "A block diagram showing the Program Synthesis, Interaction, and Frozen Evaluation loop.",
+      "highlight_words": {
+        "iterative interaction": "#F59E0B",
+        "Frozen": "#F59E0B"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "Agents outperform classical planners, achieving a 95% success rate while requiring ten times less computation per instance across ninety-eight thousand simulated episodes of robot motion.",
+      "visual_focus": "A bar chart comparing agent success (95%) versus baseline planner success (47%).",
+      "highlight_words": {
+        "95%": "#34D399",
+        "ten times less": "#34D399"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures and the future of autonomous planning agents.",
+      "visual_focus": "The Model Verse logo appearing on a clean chalkboard background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{tasks}} \\times \\mathrm{Constraints} \\to \\infty$",
+      "filename": "tamp_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N_{tasks}",
+          "label": "Instance count"
+        },
+        {
+          "term": "Constraints",
+          "label": "Kinematic limits"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(2^{n} \\cdot d^{m})$",
+      "filename": "tamp_complexity.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "2^n",
+          "label": "Discrete logic"
+        },
+        {
+          "term": "d^m",
+          "label": "Geometric search"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\Pi_{\\theta} : \\mathcal{S} \\times \\mathcal{A} \\to \\mathcal{P}$",
+      "filename": "tamp_synthesis.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "S",
+          "label": "State space"
+        },
+        {
+          "term": "P",
+          "label": "Synthesized program"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Update}(\\theta_{t+1}) = \\nabla_{\\theta} \\mathbb{E}[\\mathcal{L}_{sim}] $",
+      "filename": "tamp_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "L_{sim}",
+          "label": "Interaction loss"
+        },
+        {
+          "term": "theta",
+          "label": "Agent policy"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\frac{\\mathrm{Success}_{agent}}{\\mathrm{Success}_{planner}} \\approx 2.02$",
+      "filename": "tamp_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "2.02",
+          "label": "Relative gain"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "TASK_LOGIC",
+          "color": "#38BDF8",
+          "items": [
+            "P_D_D_L",
+            "Sequence",
+            "Predicate"
+          ]
+        },
+        {
+          "name": "GEOMETRIC",
+          "color": "#10B981",
+          "items": [
+            "Collision",
+            "Kinematics",
+            "Dynamics"
+          ]
+        },
+        {
+          "name": "SYNTHESIS",
+          "color": "#F59E0B",
+          "items": [
+            "Code",
+            "Budget",
+            "Verification"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Prompt",
+        "target_cluster": "SYNTHESIS",
+        "token": "PlannerScript"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Search_Time",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Branch_Depth",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Coding Agents (Claude/GPT)",
+    "model_a_specs": [
+      "Python Synthesis",
+      "Simulator Interaction",
+      "Generalization"
+    ],
+    "model_b": "Hand-Engineered PDDL",
+    "model_b_specs": [
+      "Rigid Heuristics",
+      "High Compute",
+      "Problem Specific"
+    ],
+    "divide_title": "CODING AGENTS VS CLASSICAL PLANNERS",
+    "model_a_stat": "95%",
+    "model_a_stat_label": "MAX SUCCESS RATE",
+    "model_b_stat": "47%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 10x COMPUTE EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "KinDER/PDDLStream",
+        "score_a": "95%",
+        "score_b": "47%"
+      },
+      {
+        "name": "Computation",
+        "score_a": "0.1x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Generalization",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "98,000",
+    "scale_label": "EVALUATION EPISODES",
+    "bottleneck_title": "THE COMBINATORIAL BOTTLENECK",
+    "bottleneck_desc": "Coupling geometric motion with discrete task logic causes exponential search failure.",
+    "solution_title": "PROGRAM SYNTHESIS AS PLANNING",
+    "solution_components": "Interaction-Driven Calibration",
+    "mechanism_title": "DYNAMIC MODEL CALIBRATION",
+    "payoff_stat": "95%",
+    "payoff_label": "SUCCESS RATE",
+    "payoff_sub": "Outperforming traditional hand-crafted planners in TAMP",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "Coding Agents",
+    "payoff_base_stat": 47.0,
+    "payoff_base_label": "Classical Planners",
+    "payoff_delta_badge": "\u26a1 +48% SUCCESS GAP",
+    "challenger": "Coding Agents",
+    "incumbent": "PDDLStream"
+  }
+}

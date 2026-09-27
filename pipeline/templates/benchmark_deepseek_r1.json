@@ -1,0 +1,161 @@
+{
+  "id": "deepseek-r1_benchmark_news",
+  "title": "DeepSeek-R1: Open Weights Shock SOTA",
+  "category": "benchmark_news",
+  "hook_tag": "LEADERBOARD UPSET // SOTA",
+  "arxiv_url": "https://arxiv.org/abs/2501.12948",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "The AI leaderboard just had its biggest upset. An open-weights model matched OpenAI's o1 at a fraction of the cost.",
+      "visual_focus": "SOTA milestone stamp with AIME 79.8% Pass@1 Computer Modern formula",
+      "highlight_words": {
+        "biggest upset": "#F59E0B",
+        "open-weights": "#34D399",
+        "OpenAI's o1": "#38BDF8"
+      },
+      "audio_duration": 6.95,
+      "slot_duration": 7.25,
+      "start": 0.0,
+      "end": 6.95
+    },
+    {
+      "beat_id": 2,
+      "text": "Proprietary reasoning models held the monopoly. Frontier math capabilities were locked behind expensive enterprise APIs.",
+      "visual_focus": "Closed proprietary leaderboard hierarchy with $15.00/1M pricing fence",
+      "highlight_words": {
+        "Proprietary": "#EF4444",
+        "monopoly": "#EF4444",
+        "expensive": "#F59E0B"
+      },
+      "audio_duration": 7.06,
+      "slot_duration": 7.36,
+      "start": 7.25,
+      "end": 14.32
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter DeepSeek-R1: trained without human supervision, developing chain-of-thought reasoning purely through reinforcement learning.",
+      "visual_focus": "Chalkboard reasoning search tree and GRPO loss formula",
+      "highlight_words": {
+        "DeepSeek-R1": "#34D399",
+        "without human supervision": "#F59E0B",
+        "reinforcement learning": "#34D399"
+      },
+      "audio_duration": 7.15,
+      "slot_duration": 7.45,
+      "start": 14.62,
+      "end": 21.76
+    },
+    {
+      "beat_id": 4,
+      "text": "On the grueling AIME exam, it scored 79.8 percent, overtaking o1 and matching the 96th percentile on Codeforces.",
+      "visual_focus": "Dynamic leaderboard race with DeepSeek-R1 surging past o1 to Rank 1",
+      "highlight_words": {
+        "79.8 percent": "#F59E0B",
+        "overtaking o1": "#34D399",
+        "Codeforces": "#38BDF8"
+      },
+      "audio_duration": 7.72,
+      "slot_duration": 8.02,
+      "start": 22.06,
+      "end": 29.79
+    },
+    {
+      "beat_id": 5,
+      "text": "Best of all: it is fully open source under MIT license, running at 27 times lower API cost than proprietary alternatives.",
+      "visual_focus": "Economic disruption meter with 27x Cheaper banner and MIT open license badge",
+      "highlight_words": {
+        "open source": "#34D399",
+        "MIT license": "#F59E0B",
+        "27 times lower": "#34D399"
+      },
+      "audio_duration": 8.11,
+      "slot_duration": 8.41,
+      "start": 30.09,
+      "end": 38.19
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind frontier AI.",
+      "visual_focus": "Chalkboard brand outro with rotating neural constellation and domain",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "audio_duration": 3.48,
+      "slot_duration": 3.98,
+      "start": 38.49,
+      "end": 41.97
+    }
+  ],
+  "math_formulas": [
+    {
+      "latex": "$\\mathrm{AIME\\,2024}: 79.8\\% \\quad (\\text{Pass@1})$",
+      "filename": "aime_benchmark.svg",
+      "fontsize": 24,
+      "color": "#34D399"
+    },
+    {
+      "latex": "$\\mathcal{J}_{\\mathrm{GRPO}}(\\theta) = \\mathbb{E}_{q, \\{o_i\\}}\\left[\\frac{1}{G}\\sum_{i=1}^G \\min\\left(r_i \\hat{A}_i, \\text{clip}(r_i)\\hat{A}_i\\right)\\right]$",
+      "filename": "grpo_formula.svg",
+      "fontsize": 20,
+      "color": "white"
+    },
+    {
+      "latex": "$\\Delta \\mathrm{Score} = +14.4\\% \\quad (\\text{Codeforces } 96.3^{\\mathrm{th}} \\% \\text{ile})$",
+      "filename": "accuracy_delta.svg",
+      "fontsize": 22,
+      "color": "#38BDF8"
+    },
+    {
+      "latex": "$\\frac{\\text{Cost}_{\\mathrm{R1}}}{\\text{Cost}_{\\mathrm{o1}}} = \\frac{\\$0.55}{\\$15.00} = 3.7\\% \\quad \\Rightarrow \\quad 27\\times \\text{Cheaper}$",
+      "filename": "cost_disparity_r1.svg",
+      "fontsize": 21,
+      "color": "#34D399"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 12.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 18.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 25.0,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 31.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 32.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "challenger": "DeepSeek-R1",
+    "incumbent": "OpenAI o1",
+    "aime_score": "79.8%",
+    "cost_multiplier": "27x",
+    "license": "MIT"
+  }
+}

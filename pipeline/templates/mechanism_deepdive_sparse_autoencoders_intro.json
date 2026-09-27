@@ -1,0 +1,333 @@
+{
+  "id": "sparse_autoencoders_intro",
+  "title": "Unlocking Polysemantic Neural Latents",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_sae",
+  "hook_tag": "NEURAL SUPERPOSITION ARCHITECTURE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How can a model track millions of features using a hidden dimension of only four thousand? The secret is neural superposition.",
+      "visual_focus": "A dense vector space collapsing into a glowing, high-dimensional lattice.",
+      "highlight_words": {
+        "neural superposition": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Neural Latents",
+        "action_verb": "collapse",
+        "direct_object": "hidden dimensions",
+        "anchor_word": "superposition",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Dense layers are bottlenecked by interference. Features overlap in polysemantic vectors, making individual neurons impossible to interpret or isolate effectively.",
+      "visual_focus": "Intertwined, blurry overlapping color clouds showing chaotic interference.",
+      "highlight_words": {
+        "interference": "#EF4444",
+        "polysemantic": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Dense Weights",
+        "action_verb": "entangle",
+        "direct_object": "feature activations",
+        "anchor_word": "interference",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "Sparse Autoencoders solve this by projecting latent activations into a massive, expanded dictionary of over-complete, monosemantic feature directions.",
+      "visual_focus": "A single vector expanding into a wide, structured dictionary array.",
+      "highlight_words": {
+        "Sparse Autoencoders": "#34D399",
+        "monosemantic": "#34D399"
+      },
+      "svo_action": {
+        "subject": "SAE Encoder",
+        "action_verb": "projects",
+        "direct_object": "latent activations",
+        "anchor_word": "projecting",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "We apply an L1 penalty to the latent vector, forcing the model to select only the most relevant, non-zero feature activations.",
+      "visual_focus": "A threshold filter gating a stream of activation values.",
+      "highlight_words": {
+        "L1 penalty": "#F59E0B",
+        "non-zero": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "L1 Gate",
+        "action_verb": "prunes",
+        "direct_object": "non-zero latents",
+        "anchor_word": "pruning",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This yields ninety-eight percent recovery of internal states, effectively untangling the model without sacrificing performance or compute efficiency.",
+      "visual_focus": "Two charts showing recovered features aligning perfectly with ground truth.",
+      "highlight_words": {
+        "ninety-eight percent": "#34D399"
+      },
+      "svo_action": {
+        "subject": "SAE Decoder",
+        "action_verb": "reconstructs",
+        "direct_object": "original activations",
+        "anchor_word": "recovery",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "The Model Verse logo fades in against a clean chalkboard grid.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "reveals",
+        "direct_object": "architectural engineering",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{latent}} = 4096 \\ll N_{\\mathrm{features}} = 32{,}768$",
+      "filename": "beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "d_{latent}",
+          "label": "Model hidden dimension"
+        },
+        {
+          "term": "N_{features}",
+          "label": "SAE dictionary size"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{a} = \\mathrm{ReLU}(\\mathbf{W} \\mathbf{x} + \\mathbf{b})$",
+      "filename": "beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "a",
+          "label": "Polysemantic activation"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\hat{\\mathbf{x}} = \\mathbf{W}_d \\mathrm{ReLU}(\\mathbf{W}_e \\mathbf{x} + \\mathbf{b}_e)$",
+      "filename": "beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "W_e",
+          "label": "Encoder weights"
+        },
+        {
+          "term": "W_d",
+          "label": "Decoder weights"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{L} = ||\\mathbf{x} - \\hat{\\mathbf{x}}||^2 + \\lambda ||\\mathbf{f}||_1$",
+      "filename": "beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\lambda",
+          "label": "Sparsity weight"
+        },
+        {
+          "term": "||f||_1",
+          "label": "L1 norm"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Recovery} = \\frac{\\mathrm{Var}(\\hat{\\mathbf{x}})}{\\mathrm{Var}(\\mathbf{x})} \\approx 0.98$",
+      "filename": "beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Var",
+          "label": "Explained variance"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "overcomplete_dictionary",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Input",
+          "color": "#38BDF8",
+          "items": [
+            "x1",
+            "x2",
+            "x3"
+          ]
+        },
+        {
+          "name": "Latents",
+          "color": "#10B981",
+          "items": [
+            "f1",
+            "f2",
+            "f3"
+          ]
+        },
+        {
+          "name": "Recon",
+          "color": "#F59E0B",
+          "items": [
+            "x_hat1",
+            "x_hat2"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Feature_A\"",
+        "target_cluster": "Latents",
+        "token": "\"Feature_A\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'poly1'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'poly2'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Sparse Autoencoder",
+    "model_a_specs": [
+      "Dictionary size 32k",
+      "L1 regularization",
+      "High interpretability"
+    ],
+    "model_b": "Dense Baseline",
+    "model_b_specs": [
+      "Hidden dimension 4k",
+      "Polysemantic",
+      "Low interpretability"
+    ],
+    "divide_title": "DENSE VS SPARSE LATENT DIVIDE",
+    "model_a_stat": "98%",
+    "model_a_stat_label": "RECOVERY SCORE",
+    "model_b_stat": "41%",
+    "model_b_stat_label": "BASELINE INTERPRETABILITY",
+    "efficiency_badge": "\u26a1 +57% INTERPRETABILITY GAIN",
+    "benchmarks": [
+      {
+        "name": "Accuracy",
+        "score_a": "98%",
+        "score_b": "41%"
+      },
+      {
+        "name": "Speed",
+        "score_a": "Fast",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Clarity",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "32,768",
+    "scale_label": "Latent Features",
+    "bottleneck_title": "MONOLITHIC FEATURE BOTTLENECK",
+    "bottleneck_desc": "Polysemantic superposition causing interference",
+    "solution_title": "SAE DICTIONARY EXPANSION",
+    "solution_components": "Monosemantic Latent Dictionary",
+    "mechanism_title": "STRUCTURED L1 LATENT ACTIVATION",
+    "payoff_stat": "98%",
+    "payoff_label": "FEATURE RECOVERY",
+    "payoff_sub": "Outperforming dense baseline interpretability",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "Sparse SAE Latents",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +56.7% SYNTACTIC RECOVERY GAIN",
+    "challenger": "Sparse Autoencoder",
+    "incumbent": "Dense Autoencoder"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "sae_constellation",
+      "entity_type": "sae_constellation",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

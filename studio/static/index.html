@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Model Verse — Interactive Production Studio</title>
+  <link rel="stylesheet" href="/static/studio.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">M</div>
+      <div class="brand-title">THE MODEL VERSE <span>STUDIO v2.0</span></div>
+    </div>
+    <div class="header-status">
+      <div class="status-badge">
+        <div class="dot"></div>
+        <span>Kokoro: <strong id="statusKokoro">READY</strong></span>
+      </div>
+      <div class="status-badge">
+        <div class="dot" style="background:var(--cyan); box-shadow:0 0 8px var(--cyan);"></div>
+        <span>Manim: <strong id="statusFFmpeg">READY</strong></span>
+      </div>
+      <div class="status-badge">
+        <div class="dot" style="background:var(--gold); box-shadow:0 0 8px var(--gold);"></div>
+        <span id="videoCountBadge">Loading...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Grid Workspace -->
+  <main class="app-container">
+
+    <!-- Column 1: Research & Script Lab -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">📚 Content & Script Lab</div>
+        <div class="panel-tabs">
+          <button class="tab-btn active" data-tab="tabDigest">Trending</button>
+          <button class="tab-btn" data-tab="tabTemplates">Templates</button>
+          <button class="tab-btn" data-tab="tabBeatViewer">Beats</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <!-- Trending Digest Feed -->
+        <div id="tabDigest" class="tab-content" style="display:block;">
+          <!-- Injected dynamically via studio.js -->
+        </div>
+
+        <!-- Saved Templates -->
+        <div id="tabTemplates" class="tab-content" style="display:none;">
+          <!-- Injected dynamically via studio.js -->
+        </div>
+
+        <!-- Beat Inspector -->
+        <div id="tabBeatViewer" class="tab-content" style="display:none;">
+          <div style="font-size:12px; color:var(--text-dim); margin-bottom:10px;">
+            Select a template from the "Templates" tab to view beat timings and formulas.
+          </div>
+          <div id="templateBeatList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column 2: 9:16 Broadcast Theater -->
+    <section class="panel theater-panel">
+      <div class="panel-header" style="width:100%;">
+        <div class="panel-title">🎬 9:16 Broadcast Player</div>
+        <div id="videoMetaLabel" style="font-size:11px; font-family:var(--font-mono); color:var(--text-dim);"></div>
+      </div>
+
+      <!-- Video Selector -->
+      <div class="video-selector-bar" style="padding: 0 16px;">
+        <select id="videoSelect" style="width:100%;">
+          <option value="">Loading videos...</option>
+        </select>
+      </div>
+
+      <!-- 9:16 Video Player -->
+      <div class="video-container">
+        <video id="mainVideoPlayer" controls playsinline></video>
+      </div>
+      <div id="videoTitleLabel" style="font-weight:700; font-size:14px; text-align:center;"></div>
+
+      <!-- Keyframe Strip -->
+      <div style="width:100%; padding:0 16px;">
+        <div style="font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:4px; display:flex; justify-content:space-between;">
+          <span>📸 Inspection Keyframes</span>
+          <span style="font-size:10px; color:var(--text-dim); font-weight:normal;">Click to inspect</span>
+        </div>
+        <div id="keyframeStrip" class="keyframe-strip">
+          <!-- Injected dynamically via studio.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Column 3: Audio & Production Cockpit -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">🎚️ Audio & Production Cockpit</div>
+      </div>
+      <div class="panel-body">
+        
+        <!-- Live Audio Laboratory -->
+        <div class="deck-group">
+          <h4>Audio Deck & Sidechain Inspection</h4>
+
+          <div class="audio-card">
+            <div class="audio-header">
+              <span>🎙️ Speech Narration</span>
+              <span style="font-size:10px; color:var(--mint);">Kokoro TTS</span>
+            </div>
+            <audio id="audioNarration" controls></audio>
+          </div>
+
+          <div class="audio-card">
+            <div class="audio-header">
+              <span>🎹 Ambient Synth Soundtrack</span>
+              <span style="font-size:10px; color:var(--gold);">Lo-Fi Procedural</span>
+            </div>
+            <audio id="audioSoundtrack" controls></audio>
+          </div>
+
+          <div class="audio-card">
+            <div class="audio-header">
+              <span>🎚️ Master Ducked Mix</span>
+              <span style="font-size:10px; color:var(--cyan);">-0.5 dB Peak Cap</span>
+            </div>
+            <audio id="audioMaster" controls></audio>
+          </div>
+        </div>
+
+        <!-- Dynamic Ducking Tuning -->
+        <div class="deck-group">
+          <h4>Dynamic Sidechain Ducking</h4>
+          
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Ducked Speech Gain (Voice Active)</span>
+              <span id="duckGainVal">10% (-20 dB)</span>
+            </div>
+            <input type="range" id="duckGainSlider" min="0.05" max="0.25" step="0.01" value="0.10">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Swell Gain (Pauses & Outro)</span>
+              <span id="swellGainVal">32% (-10 dB)</span>
+            </div>
+            <input type="range" id="swellGainSlider" min="0.20" max="0.50" step="0.01" value="0.32">
+          </div>
+
+          <button id="btnSynthTest" class="btn btn-synth btn-block" style="margin-bottom:12px;">
+            🎹 Test Synth Ducking
+          </button>
+        </div>
+
+        <!-- Production Parameters Form -->
+        <div class="deck-group">
+          <h4>Production Parameters</h4>
+
+          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+            <input type="text" id="prodTopic" placeholder="Topic (e.g. DeepSeek-R1 or FlashAttention-3)">
+            <input type="text" id="prodArxiv" placeholder="arXiv ID (optional, e.g. 2407.08608)">
+
+            <select id="prodCategory">
+              <option value="mechanism_deepdive">Category: Mechanism Deep Dive</option>
+              <option value="architecture_breakdown">Category: Architecture Breakdown</option>
+              <option value="model_showdown">Category: Model Showdown</option>
+              <option value="benchmark_news">Category: Benchmark News</option>
+            </select>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <select id="prodVoice">
+                <option value="am_adam">Voice: am_adam (M)</option>
+                <option value="af_sarah">Voice: af_sarah (F)</option>
+                <option value="am_michael">Voice: am_michael (M)</option>
+                <option value="af_nicole">Voice: af_nicole (F)</option>
+              </select>
+
+              <select id="prodQuality">
+                <option value="-qm">Quality: 720p (-qm)</option>
+                <option value="-ql">Fast: 480p (-ql)</option>
+                <option value="-qh">Master: 1080p (-qh)</option>
+              </select>
+            </div>
+
+            <div class="slider-group" style="margin-top:4px;">
+              <div class="slider-label">
+                <span>Speech Speed</span>
+                <span id="speedVal">1.12x</span>
+              </div>
+              <input type="range" id="speedSlider" min="1.00" max="1.30" step="0.02" value="1.12">
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:6px; font-size:12px; color:var(--text-muted); margin-top:4px;">
+              <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                <input type="checkbox" id="prodEnableMusic" checked> Enable Lo-Fi Ambient Synth Soundtrack
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                <input type="checkbox" id="prodSkipScript"> Use Existing Script Template (if matched)
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+                <input type="checkbox" id="prodDryRunPublish"> YouTube Metadata Preview (Dry-Run)
+              </label>
+            </div>
+          </div>
+
+          <button id="btnProduce" class="btn btn-primary btn-block">
+            ⚡ Produce Broadcast Short
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Drawer: Real-Time SSE Log Console -->
+  <aside class="terminal-drawer">
+    <div class="terminal-header">
+      <span>🖥️ Autonomous Pipeline Log Stream (SSE)</span>
+      <span style="font-size:10px; color:var(--text-dim);">Live stdout</span>
+    </div>
+    <div id="terminalLogs" class="terminal-logs">
+      <div class="log-line" style="color:var(--text-dim);">Ready for production jobs...</div>
+    </div>
+  </aside>
+
+  <!-- Keyframe Lightbox Modal -->
+  <div id="imageModal" class="modal-overlay">
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="Zoomed Keyframe">
+    </div>
+  </div>
+
+  <script src="/static/studio.js"></script>
+</body>
+</html>

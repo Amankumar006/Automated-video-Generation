@@ -1,0 +1,154 @@
+{
+  "id": "flashattention-3_mechanism_deepdive",
+  "title": "FlashAttention-3: Asynchronous, Low-Precision Attention",
+  "category": "mechanism_deepdive",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "FlashAttention-2, an optimized attention algorithm, still achieved only 35% H100 GPU utilization. Why does attention remain such a bottleneck despite prior advancements?",
+      "visual_focus": "H100 GPU chip with '35% UTILIZED' overlay, showing a significant unused portion.",
+      "highlight_words": {
+        "35% H100 GPU utilization": "#F59E0B",
+        "bottleneck": "#EF4444"
+      },
+      "audio_duration": 12.07,
+      "slot_duration": 12.37,
+      "start": 0.0,
+      "end": 12.07
+    },
+    {
+      "beat_id": 2,
+      "text": "The core problem is attention's heavy reliance on memory I/O. Constant movement of intermediate matrices between slow global memory and fast on-chip SRAM creates a severe data transfer bottleneck.",
+      "visual_focus": "Animated diagram showing data flowing between 'Global Memory (HBM)' and 'SRAM (Fast Cache)' with a large 'Data Transfer Bottleneck' label in between for Q, K, V matrices.",
+      "highlight_words": {
+        "memory I/O": "#EF4444",
+        "data transfer bottleneck": "#EF4444"
+      },
+      "audio_duration": 12.44,
+      "slot_duration": 12.74,
+      "start": 12.37,
+      "end": 24.81
+    },
+    {
+      "beat_id": 3,
+      "text": "FlashAttention-3 tackles this by exploiting Hopper H100 hardware: advanced asynchrony and native FP8 low-precision support. It cleverly overlaps computation with data movement via warp-specialization.",
+      "visual_focus": "Hopper H100 architecture schematic, highlighting 'Tensor Cores' and 'TMA (Transformer Memory Accelerator)' with arrows showing 'Asynchronous Operations' and 'FP8 Precision' labels.",
+      "highlight_words": {
+        "Hopper H100 hardware": "#38BDF8",
+        "asynchrony": "#38BDF8",
+        "FP8 low-precision": "#38BDF8"
+      },
+      "audio_duration": 12.93,
+      "slot_duration": 13.23,
+      "start": 25.11,
+      "end": 38.04
+    },
+    {
+      "beat_id": 4,
+      "text": "The mechanism involves interleaving block-wise matrix multiplications and softmax operations directly within SRAM, minimizing reads. Quantization to FP8 further shrinks data, enabling faster Tensor Core processing.",
+      "visual_focus": "Detailed animation: SRAM block showing iterative `Q_b K_b^T` followed by `softmax(S_b) V_b` operations within the same memory, then transitioning to an 'FP8 Block' for data reduction.",
+      "highlight_words": {
+        "interleaving block-wise": "#38BDF8",
+        "softmax operations": "#38BDF8",
+        "Quantization to FP8": "#38BDF8"
+      },
+      "audio_duration": 13.89,
+      "slot_duration": 14.19,
+      "start": 38.34,
+      "end": 52.23
+    },
+    {
+      "beat_id": 5,
+      "text": "This innovation yields significant gains: 1.5-2.0x speedup. FlashAttention-3 reaches 740 TFLOPs/s with FP16 and nearly 1.2 PFLOPs/s with FP8, pushing H100 utilization to 75%.",
+      "visual_focus": "Dynamic bar chart comparing 'FA-2' vs 'FA-3 (FP16)' vs 'FA-3 (FP8)' showing TFLOPs/s. Then a pie chart for H100 utilization with 75% highlighted.",
+      "highlight_words": {
+        "1.5-2.0x speedup": "#34D399",
+        "1.2 PFLOPs/s": "#34D399",
+        "75%": "#F59E0B"
+      },
+      "audio_duration": 17.13,
+      "slot_duration": 17.43,
+      "start": 52.53,
+      "end": 69.66
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "The Model Verse logo and URL (themodelverse.in) displayed prominently.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "audio_duration": 4.29,
+      "slot_duration": 4.79,
+      "start": 69.96,
+      "end": 74.25
+    }
+  ],
+  "math_formulas": [
+    {
+      "latex": "$\\mathrm{Attention}(Q, K, V) = \\mathrm{softmax}(\\frac{QK^T}{\\sqrt{d_k}})V$",
+      "filename": "attention_equation.svg",
+      "fontsize": 26,
+      "color": "white"
+    },
+    {
+      "latex": "$\\mathbf{Q}_b \\mathbf{K}_b^T$",
+      "filename": "block_matmul.svg",
+      "fontsize": 28,
+      "color": "white"
+    },
+    {
+      "latex": "$\\mathrm{softmax}(\\mathbf{S}_b) \\mathbf{V}_b$",
+      "filename": "block_softmax_v.svg",
+      "fontsize": 28,
+      "color": "white"
+    },
+    {
+      "latex": "$\\mathrm{FP8}(X)$",
+      "filename": "fp8_quantization.svg",
+      "fontsize": 30,
+      "color": "#38BDF8"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "key_stat": "1.2 PFLOPs/s with FP8"
+  }
+}

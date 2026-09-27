@@ -1,0 +1,122 @@
+{
+  "id": "flashattention_io_complexity",
+  "title": "FlashAttention: Breaking the Quadratic Memory Wall",
+  "category": "mechanism_deepdive",
+  "hook_tag": "MECHANISM DEEP DIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Standard attention forces GPUs to materialize an N by N matrix, stalling memory pipelines when scaling context windows to hundreds of thousands of tokens.",
+      "visual_focus": "Grid visualization of an N by N attention score matrix overflowing VRAM capacity.",
+      "highlight_words": {
+        "N by N matrix": "#EF4444",
+        "stalling memory": "#EF4444"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Reading and writing intermediate attention scores between slow High Bandwidth Memory and chip compute units creates an inescapable memory-bound quadratic IO bottleneck.",
+      "visual_focus": "Chalkboard schematic showing high-latency data traffic between HBM memory and GPU SRAM compute blocks.",
+      "highlight_words": {
+        "High Bandwidth Memory": "#38BDF8",
+        "quadratic IO bottleneck": "#EF4444"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "FlashAttention eliminates large matrix materialization entirely by partitioning input sequences into compact blocks that fit inside fast on-chip SRAM caches.",
+      "visual_focus": "Tiled sub-matrices moving directly into fast on-chip SRAM without touching global DRAM.",
+      "highlight_words": {
+        "FlashAttention": "#34D399",
+        "SRAM caches": "#38BDF8"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "Using online softmax rescaling, the kernel computes attention incrementally in a single fused pass, scaling IO complexity strictly linearly with token length.",
+      "visual_focus": "Online softmax rescaling equation updating running maximum and sum across blocks seamlessly.",
+      "highlight_words": {
+        "online softmax rescaling": "#38BDF8",
+        "strictly linearly": "#34D399"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This algebraic restructuring delivers a three to five times wall-clock speedup while reducing peak attention memory from quadratic down to linear.",
+      "visual_focus": "Split benchmark chart showing wall-clock execution time dropping sharply alongside memory consumption.",
+      "highlight_words": {
+        "five times wall-clock speedup": "#F59E0B",
+        "linear": "#34D399"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Can hardware-aware algorithms unlock infinite context limits? Follow The Model Verse for the engineering behind modern AI architectures.",
+      "visual_focus": "Minimalist signature card with The Model Verse branding and subtle animated grid matrix.",
+      "highlight_words": {
+        "The Model Verse": "#34D399",
+        "modern AI architectures": "#FFFFFF"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "latex": "$\\mathbf{S} = \\mathbf{Q}\\mathbf{K}^T \\in \\mathbb{R}^{N \\times N}$",
+      "filename": "attention_score_matrix.svg",
+      "fontsize": 26,
+      "color": "#EF4444"
+    },
+    {
+      "latex": "$m_{\\mathrm{new}} = \\max(m_{\\mathrm{prev}}, \\, \\max(S^{(j)}))$",
+      "filename": "online_softmax_running_max.svg",
+      "fontsize": 24,
+      "color": "#38BDF8"
+    },
+    {
+      "latex": "$\\mathcal{O}\\left(\\frac{N^2 d}{M}\\right) \\longrightarrow \\mathcal{O}(N d)$",
+      "filename": "hbm_io_complexity.svg",
+      "fontsize": 26,
+      "color": "#34D399"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "key_stat": "5x speedup via O(N) IO reduction"
+  }
+}
