@@ -25,6 +25,24 @@ from scripts.synth_music_generator import (
 )
 from pipeline.aligner import AcousticForcedAligner, generate_kinetic_sfx_cues
 
+def ensure_kokoro_models():
+    """Ensures Kokoro ONNX model and voices are downloaded."""
+    os.makedirs(os.path.dirname(KOKORO_MODEL_PATH), exist_ok=True)
+    import urllib.request
+    
+    if not os.path.exists(KOKORO_MODEL_PATH):
+        print(f"📥 Downloading kokoro-v1.0.onnx from official release...")
+        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx"
+        urllib.request.urlretrieve(url, KOKORO_MODEL_PATH)
+        print("✅ kokoro-v1.0.onnx downloaded successfully.")
+
+    if not os.path.exists(KOKORO_VOICES_PATH):
+        print(f"📥 Downloading voices-v1.0.bin from official release...")
+        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
+        urllib.request.urlretrieve(url, KOKORO_VOICES_PATH)
+        print("✅ voices-v1.0.bin downloaded successfully.")
+
+
 def synthesize_audio_for_spec(
     spec_data: dict,
     voice: str = DEFAULT_VOICE,
@@ -45,6 +63,7 @@ def synthesize_audio_for_spec(
     master_out = os.path.join(PUBLIC_DIR, f"{spec_id}_master_audio.wav")
 
     print(f"🎙️ Synthesizing narration for '{spec_data.get('title', spec_id)}' (Voice: {voice}, Speed: {speed})...")
+    ensure_kokoro_models()
     kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
     aligner = AcousticForcedAligner(tokenizer=kokoro.tokenizer)
     sr = SAMPLE_RATE
