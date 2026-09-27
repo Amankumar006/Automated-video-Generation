@@ -1,101 +1,96 @@
 {
   "id": "transformer_linear_superposition",
-  "title": "Two Thoughts at Once: Superposition",
+  "title": "Double Thought AI",
   "category": "architecture_breakdown",
   "domain_taxonomy": "general_cs",
-  "hook_tag": "TRANSFORMER DUALITY",
+  "hook_tag": "LINEAR SUPERPOSITION HYPOTHESIS",
   "beats": [
     {
       "beat_id": 1,
-      "text": "How can one AI brain hold two different thoughts at once? It seems like a paradox, but the math reveals a hidden, elegant, layered truth.",
-      "visual_focus": "A glowing brain icon splitting into two separate color-coded streams of light.",
+      "text": "How can one AI model think of two things at once? It seems like magic, but the answer hides in simple, straight lines.",
+      "visual_focus": "A split screen showing a single neural stream branching into two distinct output flows.",
       "highlight_words": {
-        "two different thoughts": "#38BDF8",
-        "paradox": "#EF4444"
+        "two things": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Neural Architecture",
-        "action_verb": "splits",
-        "direct_object": "internal signal stream",
-        "anchor_word": "paradox",
+        "subject": "Neural Stream",
+        "action_verb": "forks",
+        "direct_object": "data flow",
+        "anchor_word": "once",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 2,
-      "text": "Think of it like a crowded library. Thousands of books are packed into one shelf, yet you can spot exactly what you need instantly.",
-      "visual_focus": "A single shelf overflowing with books that suddenly organize into two distinct color-coded stacks.",
+      "text": "Think of it like mixing paint. If you mix two colors, you get a new shade, yet the original parts are still inside.",
+      "visual_focus": "Red and blue paint swirling in a clear glass to create purple, then separating back.",
       "highlight_words": {
-        "crowded library": "#F59E0B",
-        "instantly": "#34D399"
+        "mixing paint": "#EF4444"
       },
       "svo_action": {
-        "subject": "Attention Heads",
-        "action_verb": "sorts",
-        "direct_object": "overlapping token memories",
-        "anchor_word": "instantly",
-        "semantic_role": "causal_elimination"
+        "subject": "Color Mixer",
+        "action_verb": "blends",
+        "direct_object": "latent states",
+        "anchor_word": "mixing",
+        "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 3,
-      "text": "Scientists show that input signals sum up inside the model. If you mix two distinct stories, the model outputs their average in one pass.",
-      "visual_focus": "Two fluid streams flowing into one pipe and mixing colors uniformly.",
+      "text": "Researchers found that transformers act like prisms. They take a combined signal and spread it back out into distinct, clear patterns.",
+      "visual_focus": "A beam of light hitting a prism and separating into a clean, multi-colored spectrum.",
       "highlight_words": {
-        "mix": "#38BDF8",
-        "average": "#F59E0B"
+        "prisms": "#34D399"
       },
       "svo_action": {
-        "subject": "Layer Weights",
-        "action_verb": "sums",
-        "direct_object": "hidden input vectors",
-        "anchor_word": "mix",
+        "subject": "Transformer Layer",
+        "action_verb": "refracts",
+        "direct_object": "input signal",
+        "anchor_word": "prisms",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 4,
-      "text": "By applying a clever filter, we trace these paths. We pull apart the tangled threads, scraping away the noise to see the two separate ideas.",
-      "visual_focus": "A prism splitting a single beam of light into two distinct spectral paths.",
+      "text": "By guiding the math, we force the model to pull these hidden threads apart, cleanly separating two ideas in one go.",
+      "visual_focus": "A glowing node expanding to highlight two distinct pathways of logic moving in parallel.",
       "highlight_words": {
-        "clever filter": "#34D399",
-        "tangled threads": "#EF4444"
+        "pull apart": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Decoding Logic",
-        "action_verb": "extracts",
-        "direct_object": "independent latent streams",
-        "anchor_word": "tangled",
-        "semantic_role": "agent_action"
+        "subject": "Guided Decoder",
+        "action_verb": "unravels",
+        "direct_object": "superposed thought",
+        "anchor_word": "apart",
+        "semantic_role": "causal_elimination"
       }
     },
     {
       "beat_id": 5,
-      "text": "Now, the model generates two clear results at once. It proves that deep models are not just one track, but a bridge to multiple worlds.",
-      "visual_focus": "Two separate, high-quality text lines appearing side-by-side from one prompt.",
+      "text": "This trick lets a single forward pass finish two tasks at once, carving double the value out of the same computer power.",
+      "visual_focus": "A scoreboard showing speed increasing while computation cost remains static.",
       "highlight_words": {
-        "two clear results": "#34D399",
-        "multiple worlds": "#38BDF8"
+        "double the value": "#34D399"
       },
       "svo_action": {
-        "subject": "Forward Pass",
-        "action_verb": "generates",
-        "direct_object": "dual-stream output",
-        "anchor_word": "generates",
-        "semantic_role": "agent_action"
+        "subject": "Compute Cycle",
+        "action_verb": "doubles",
+        "direct_object": "task throughput",
+        "anchor_word": "double",
+        "semantic_role": "metric_evaluation"
       }
     },
     {
       "beat_id": 6,
       "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "Logo fade in with a subtle glow effect.",
+      "visual_focus": "The Model Verse logo appears in a clean, minimalist white background with a soft glow.",
       "highlight_words": {
-        "The Model Verse": "#34D399"
+        "The Model Verse": "#FFFFFF"
       },
       "svo_action": {
-        "subject": "Viewer",
+        "subject": "User",
         "action_verb": "follows",
-        "direct_object": "The Model Verse",
+        "direct_object": "channel",
         "anchor_word": "Follow",
         "semantic_role": "agent_action"
       }
@@ -104,86 +99,66 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$d_{\\mathrm{model}} = 4096 \\to d_{\\mathrm{latent}} = 16{,}384$",
+      "latex": "$d_{\\mathrm{model}} = 4096$",
       "filename": "beat1_scale.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "d_model",
+          "term": "d_{\\mathrm{model}}",
           "label": "Model Dimension"
-        },
-        {
-          "term": "d_latent",
-          "label": "Feature Space"
         }
       ]
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathbf{z} = \\mathbf{W}_{in} (\\mathbf{x}_1 + \\mathbf{x}_2)$",
+      "latex": "$\\mathbf{x} = \\alpha \\mathbf{v}_1 + \\beta \\mathbf{v}_2$",
       "filename": "beat2_bottleneck.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "z",
-          "label": "Hidden State"
-        },
-        {
-          "term": "x_1, x_2",
-          "label": "Merged Inputs"
+          "term": "\\mathbf{v}",
+          "label": "Thought Vectors"
         }
       ]
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathbb{E}[f(x_1 + x_2)] \\approx \\frac{1}{2} (f(x_1) + f(x_2))$",
+      "latex": "$f(x) = \\mathrm{ReLU}(W x + b)$",
       "filename": "beat3_architecture.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "f",
-          "label": "Model Projection"
-        },
-        {
-          "term": "E",
-          "label": "Expected Output"
+          "term": "W",
+          "label": "Projection Matrix"
         }
       ]
     },
     {
       "beat_id": 4,
-      "latex": "$\\hat{y} = \\mathrm{TopK}(W_o \\sigma(z - \\tau))$",
+      "latex": "$\\mathrm{Output} = \\mathrm{TopK}(W_g x)$",
       "filename": "beat4_mechanism.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "z - \\tau",
-          "label": "Filtered Latents"
-        },
-        {
-          "term": "TopK",
-          "label": "Decoding Gate"
+          "term": "W_g",
+          "label": "Guided Decoder"
         }
       ]
     },
     {
       "beat_id": 5,
-      "latex": "$\\text{Accuracy}_{dual} = 94.5\\%$",
+      "latex": "$\\mathrm{Efficiency} = 2.0 \\times \\mathrm{Baseline}$",
       "filename": "beat5_payoff.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "Accuracy",
-          "label": "Dual Continuation"
-        },
-        {
-          "term": "94.5",
-          "label": "Recovery Rate"
+          "term": "2.0",
+          "label": "Speedup Factor"
         }
       ]
     }
@@ -233,94 +208,94 @@
           "name": "THOUGHT_A",
           "color": "#38BDF8",
           "items": [
-            "idea_1",
-            "syntax_1"
+            "word",
+            "logic"
           ]
         },
         {
           "name": "THOUGHT_B",
           "color": "#10B981",
           "items": [
-            "idea_2",
-            "syntax_2"
+            "idea",
+            "code"
           ]
         },
         {
-          "name": "SUPERPOSITION",
+          "name": "MIXED_STATE",
           "color": "#F59E0B",
           "items": [
-            "entangled_states"
+            "superposition"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"Query\"",
-        "target_cluster": "SUPERPOSITION",
-        "token": "\"Input_Mix\""
+        "label": "Token Stream",
+        "target_cluster": "MIXED_STATE",
+        "token": "Mixed-Signal"
       },
       "bottleneck_tokens": [
         {
-          "word": "Concept A",
+          "word": "Thought 1",
           "color": "#38BDF8"
         },
         {
-          "word": "Concept B",
+          "word": "Thought 2",
           "color": "#10B981"
         }
       ]
     },
     "model_a": "Standard Transformer",
     "model_a_specs": [
-      "Baseline",
-      "Single Stream",
-      "High Interference"
+      "Single Pass",
+      "Linear",
+      "Fixed"
     ],
-    "model_b": "Linear Guided Model",
+    "model_b": "Linear Superposition Model",
     "model_b_specs": [
-      "Proposed",
-      "Dual Stream",
-      "High Recovery"
+      "Double Pass",
+      "Disentangled",
+      "Efficient"
     ],
-    "divide_title": "SUPERPOSITION LINEARITY",
-    "model_a_stat": "42%",
-    "model_a_stat_label": "Baseline Recovery",
-    "model_b_stat": "95%",
-    "model_b_stat_label": "Guided Recovery",
-    "efficiency_badge": "\u26a1 +53% DUALITY GAIN",
+    "divide_title": "DENSE VS DISENTANGLED",
+    "model_a_stat": "1x",
+    "model_a_stat_label": "THROUGHPUT",
+    "model_b_stat": "2x",
+    "model_b_stat_label": "THROUGHPUT",
+    "efficiency_badge": "\u26a1 2X COMPUTE GAIN",
     "benchmarks": [
       {
+        "name": "Accuracy",
+        "score_a": "98%",
+        "score_b": "97%"
+      },
+      {
+        "name": "Latency",
+        "score_a": "1.0",
+        "score_b": "0.5"
+      },
+      {
         "name": "Coherence",
-        "score_a": "42%",
-        "score_b": "95%"
-      },
-      {
-        "name": "Tokens",
-        "score_a": "1x",
-        "score_b": "2x"
-      },
-      {
-        "name": "Error Rate",
         "score_a": "High",
-        "score_b": "Low"
+        "score_b": "High"
       }
     ],
-    "scale_metric": "16k",
-    "scale_label": "Latent Dictionary",
-    "bottleneck_title": "ENTANGLED LATENT OVERLAP",
-    "bottleneck_desc": "Superposition of unrelated features",
-    "solution_title": "GUIDED DECODING PROJECTION",
-    "solution_components": "Linear Feature Separation",
-    "mechanism_title": "LINEAR SUPERPOSITION MECHANISM",
-    "payoff_stat": "95%",
-    "payoff_label": "COHERENT OUTPUT",
-    "payoff_sub": "Two coherent streams from single forward pass",
-    "payoff_hero_stat": 95.0,
-    "payoff_hero_label": "Guided Decoding",
-    "payoff_base_stat": 42.0,
-    "payoff_base_label": "Naive Decoding",
-    "payoff_delta_badge": "\u26a1 +53% RECOVERY GAIN",
-    "challenger": "Guided Decoding",
-    "incumbent": "Standard Transformer"
+    "scale_metric": "2",
+    "scale_label": "SIMULTANEOUS THOUGHTS",
+    "bottleneck_title": "SUPERPOSITION LIMIT",
+    "bottleneck_desc": "Entangled latent activation",
+    "solution_title": "GUIDED DECODING",
+    "solution_components": "Disentangled Projection",
+    "mechanism_title": "LINEAR SEPARATION",
+    "payoff_stat": "2.0x",
+    "payoff_label": "PERFORMANCE BOOST",
+    "payoff_sub": "Dual coherence from one forward pass",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "Linear Accuracy",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Mixed Baseline",
+    "payoff_delta_badge": "\u26a1 +56.7% THROUGHPUT GAIN",
+    "challenger": "Superposition-Transformer",
+    "incumbent": "Standard-Transformer"
   },
   "entity_registry": [
     {
@@ -336,10 +311,10 @@
       "initial_opacity": 1.0,
       "parameters": {
         "model_a_name": "Standard Transformer",
-        "model_a_score": "42%",
-        "model_b_name": "Linear Guided Model",
-        "model_b_score": "95%",
-        "delta_label": "\u26a1 +53% DUALITY GAIN"
+        "model_a_score": "1x",
+        "model_b_name": "Linear Superposition Model",
+        "model_b_score": "2x",
+        "delta_label": "\u26a1 2X COMPUTE GAIN"
       }
     }
   ]

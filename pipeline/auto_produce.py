@@ -29,7 +29,7 @@ def auto_produce(
     arxiv: str = None,
     category: str = None,
     voice: str = "am_adam",
-    speed: float = 1.10,
+    speed: float = None,
     quality: str = "-qm",
     skip_script: bool = False,
     template: str = None,
@@ -42,6 +42,14 @@ def auto_produce(
     print("\n=======================================================")
     print("🚀 THE MODEL VERSE — AUTONOMOUS SHORT VIDEO PRODUCER")
     print("=======================================================\n")
+
+    if speed is None:
+        try:
+            from pipeline.analytics_feedback import get_recommended_pacing
+            speed = get_recommended_pacing().get("tts_speed", 1.12)
+            print(f"⚡ Dynamic Audience Retention Pacing Applied: {speed}x speech delivery")
+        except Exception:
+            speed = 1.10
 
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
