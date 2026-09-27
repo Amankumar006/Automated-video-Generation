@@ -251,7 +251,15 @@
           "duration": 0.265,
           "frame_ahead_trigger": 7.09
         }
-      ]
+      ],
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "THOUGHT 1 (SIGNAL A)",
+        "signal_b_label": "THOUGHT 2 (SIGNAL B)",
+        "result_label": "OVERLAPPING SUPERPOSITION",
+        "result_sub": "Two independent concepts packed into one channel"
+      },
+      "kinetic_action": "wave_pulse"
     },
     {
       "beat_id": 2,
@@ -499,7 +507,15 @@
           "duration": 0.39,
           "frame_ahead_trigger": 15.149
         }
-      ]
+      ],
+      "motif_type": "radio_tuner",
+      "motif_params": {
+        "station_a_label": "98.5 MHz\n[STATION A]",
+        "station_b_label": "104.2 MHz\n[STATION B]",
+        "tuner_status": "TUNER: BETWEEN STATIONS (STATIC)",
+        "scope_label": "MESSY OVERLAPPING SOUND WAVES"
+      },
+      "kinetic_action": "needle_sweep"
     },
     {
       "beat_id": 3,
@@ -747,7 +763,18 @@
           "duration": 0.591,
           "frame_ahead_trigger": 22.634
         }
-      ]
+      ],
+      "motif_type": "subspace_vectors",
+      "motif_params": {
+        "title": "SUPERPOSITION: PACKING MULTIPLE IDEAS",
+        "sub": "Almost-orthogonal directions allow N > D concepts in D dimensions",
+        "vec1_label": "Concept v\u2081\n[Thought A]",
+        "vec2_label": "Concept v\u2082\n[Thought B]",
+        "angle_label": "\u03b8 \u2248 90\u00b0 (Orthogonal)",
+        "badge_title": "IT IS A FEATURE, NOT A BUG",
+        "badge_sub": "The model re-uses latent space to compress memory exponentially."
+      },
+      "kinetic_action": "vector_scale"
     },
     {
       "beat_id": 4,
@@ -995,7 +1022,17 @@
           "duration": 0.25,
           "frame_ahead_trigger": 30.734
         }
-      ]
+      ],
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "PEELING LAYERS APART (DISENTANGLEMENT)",
+        "sub": "Gentle model tuning turns noise into two distinct thought streams",
+        "in_label": "TANGLED\nSUPERPOSITION",
+        "prism_label": "LINEAR\nDECODER",
+        "out1_label": "CLEAN THOUGHT 1 (SIGNAL A)",
+        "out2_label": "CLEAN THOUGHT 2 (SIGNAL B)"
+      },
+      "kinetic_action": "beam_glow"
     },
     {
       "beat_id": 5,
@@ -1234,7 +1271,18 @@
           "duration": 0.295,
           "frame_ahead_trigger": 39.693
         }
-      ]
+      ],
+      "motif_type": "branching_outputs",
+      "motif_params": {
+        "in_label": "DUAL PROMPT CONTEXT",
+        "core_title": "1 FORWARD PASS",
+        "core_sub": "Shared Latent Linear Map",
+        "card1_title": "ANSWER 1",
+        "card1_body": "Reasoning Flow\nAccuracy: 99.4%",
+        "card2_title": "ANSWER 2",
+        "card2_body": "Creative Synthesis\nAccuracy: 98.9%"
+      },
+      "kinetic_action": "branch_pop"
     },
     {
       "beat_id": 6,

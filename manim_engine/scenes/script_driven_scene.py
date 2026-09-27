@@ -31,11 +31,8 @@ config.background_color = BG_CARBON
 from manim_engine.scheduler import KineticScheduler
 from manim_engine.primitives.outro_card import create_chalkboard_brand_outro
 from manim_engine.primitives.script_motifs import (
-    ScriptWaveInterference,
-    ScriptRadioTunerDial,
-    ScriptSubspacePacking,
-    ScriptPrismDisentangler,
-    ScriptBranchingOutputs
+    MOTIF_REGISTRY,
+    create_script_motif
 )
 
 
@@ -187,113 +184,93 @@ class ScriptDrivenScene(Scene):
             beat_id = b.get("beat_id", i + 1)
             b_text = b.get("text", "")
             v_focus = b.get("visual_focus", "")
-            text_lower = (b_text + " " + v_focus).lower()
 
-            # Skip outro beat, handled separately
+            # Skip outro beat, handled separately in play_brand_outro
             if beat_id >= 6 or "Follow The Model Verse" in b_text or beat_id == total_beats:
                 continue
 
             duration = self.get_beat_duration(beat_id, 6.5)
-            print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} (Allotted: {duration:.2f}s)...")
+            motif_type = b.get("motif_type")
+            motif_params = b.get("motif_params", {})
+            kinetic_action = b.get("kinetic_action", "pulse")
+
+            # Fallback if motif_type was not assigned in spec
+            if not motif_type or motif_type not in MOTIF_REGISTRY:
+                text_lower = (b_text + " " + v_focus).lower()
+                if any(k in text_lower for k in ["wave", "signal", "interference", "sound"]):
+                    motif_type = "wave_collision"
+                elif any(k in text_lower for k in ["radio", "dial", "tuner", "station", "static"]):
+                    motif_type = "radio_tuner"
+                elif any(k in text_lower for k in ["space", "vector", "dimension", "orthogonal"]):
+                    motif_type = "subspace_vectors"
+                elif any(k in text_lower for k in ["prism", "peel", "disentangl", "decoder"]):
+                    motif_type = "prism_disentangler"
+                elif any(k in text_lower for k in ["branch", "two clear answers", "simultaneous", "forward pass"]):
+                    motif_type = "branching_outputs"
+                elif any(k in text_lower for k in ["tree", "search", "mcts", "reason", "logic", "prun"]):
+                    motif_type = "tree_search"
+                elif any(k in text_lower for k in ["diffus", "noise", "denois", "image", "latent"]):
+                    motif_type = "diffusion_denoise"
+                elif any(k in text_lower for k in ["attention", "head", "expert", "moe", "rout"]):
+                    motif_type = "attention_routing"
+                elif any(k in text_lower for k in ["cache", "kv", "memory", "buffer", "context"]):
+                    motif_type = "memory_buffer"
+                elif beat_id == 5 or any(k in text_lower for k in ["benchmark", "accuracy", "speedup", "faster"]):
+                    motif_type = "comparative_bars"
+                else:
+                    motif_type = "custom_flow"
+
+            print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' (Allotted: {duration:.2f}s)...")
 
             # 1. Update lower math/concept tray
             self.display_math_formula(beat_id, run_time=0.4)
 
-            # 2. Select Motifs or Custom SVG based on Beat Content
-            active_mobj = None
+            # 2. Instantiate Parameterized Script Motif
+            motif = create_script_motif(motif_type, motif_params).move_to([0, 0.4, 0])
 
-            if "wave" in text_lower and ("merg" in text_lower or "two distinct" in text_lower or "collision" in text_lower or beat_id == 1):
-                # Beat 1 Motif: Wave collision and interference
-                motif = ScriptWaveInterference().move_to([0, 0.4, 0])
-                enter_time = min(1.2, duration * 0.25)
-                self.play(FadeIn(motif, scale=0.95), run_time=enter_time)
-                action_time = min(1.6, duration * 0.3)
-                self.play(motif.wave_c.animate.set_color("#FF2A55"), run_time=action_time * 0.5)
-                self.play(motif.wave_c.animate.set_color("#EF4444"), run_time=action_time * 0.5)
-                active_mobj = motif
+            # 3. Entrance: Whole Diagram visible within 1.0s
+            enter_time = min(1.1, duration * 0.25)
+            self.play(FadeIn(motif, scale=0.96), run_time=enter_time)
 
-            elif "radio" in text_lower or "dial" in text_lower or "tuner" in text_lower or "station" in text_lower:
-                # Beat 2 Motif: Analog Radio Tuner with Sweeping Needle
-                motif = ScriptRadioTunerDial().move_to([0, 0.4, 0])
-                enter_time = min(1.2, duration * 0.25)
-                self.play(FadeIn(motif, scale=0.95), run_time=enter_time)
-                # Sweep needle to show channel conflict
-                action_time = min(1.8, duration * 0.35)
-                self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.4, rate_func=there_and_back)
-                self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.4, rate_func=there_and_back)
-                active_mobj = motif
+            # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
+            action_time = min(1.8, duration * 0.35)
+            try:
+                if motif_type == "radio_tuner" and hasattr(motif, "needle"):
+                    self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
+                    self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
+                elif motif_type == "wave_collision" and hasattr(motif, "wave_c"):
+                    self.play(motif.wave_c.animate.set_color("#FF2A55"), run_time=action_time * 0.5)
+                    self.play(motif.wave_c.animate.set_color("#EF4444"), run_time=action_time * 0.5)
+                elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
+                    self.play(motif.angle_arc.animate.set_color("#34D399"), motif.badge_box.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1"):
+                    self.play(motif.out_beam1.animate.set_stroke(width=8.0), motif.out_beam2.animate.set_stroke(width=8.0), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "branching_outputs" and hasattr(motif, "card1"):
+                    self.play(motif.card1.animate.scale(1.05), motif.card2.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "tree_search" and hasattr(motif, "c1"):
+                    self.play(motif.c1.animate.scale(1.06), motif.c2.animate.set_stroke(color="#991B1B"), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "diffusion_denoise" and hasattr(motif, "dots1"):
+                    self.play(motif.dots1.animate.set_opacity(0.3), motif.shape3.animate.scale(1.15), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "attention_routing" and hasattr(motif, "lasers"):
+                    self.play(motif.lasers.animate.set_stroke(width=6.0, color="#34D399"), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "memory_buffer" and hasattr(motif, "slots"):
+                    self.play(motif.slots.animate.set_stroke(color="#34D399"), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "comparative_bars" and hasattr(motif, "fill_bar_a"):
+                    self.play(motif.fill_bar_a.animate.scale(1.03), motif.badge.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                elif hasattr(motif, "box2"):
+                    self.play(motif.box2.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                else:
+                    self.play(motif.animate.scale(1.02), rate_func=there_and_back, run_time=action_time)
+            except Exception as e:
+                print(f"⚠️ Kinetic action warning for {motif_type}: {e}")
+                self.wait(action_time)
 
-            elif "space" in text_lower or "bookshelf" in text_lower or "save room" in text_lower or "feature" in text_lower or beat_id == 3:
-                # Beat 3 Motif: 2D Subspace Packing & Almost Orthogonal Vectors
-                motif = ScriptSubspacePacking().move_to([0, 0.4, 0])
-                enter_time = min(1.2, duration * 0.25)
-                self.play(FadeIn(motif, scale=0.95), run_time=enter_time)
-                action_time = min(1.5, duration * 0.3)
-                self.play(motif.angle_arc.animate.set_color("#34D399"), motif.badge_box.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
-                active_mobj = motif
-
-            elif "prism" in text_lower or "peel" in text_lower or "light beam" in text_lower or "disentangl" in text_lower:
-                # Beat 4 Motif: Optical Prism Beam Disentangler
-                motif = ScriptPrismDisentangler().move_to([0, 0.4, 0])
-                enter_time = min(1.2, duration * 0.25)
-                self.play(FadeIn(motif, scale=0.95), run_time=enter_time)
-                action_time = min(1.5, duration * 0.3)
-                self.play(motif.out_beam1.animate.set_stroke(width=8.0), motif.out_beam2.animate.set_stroke(width=8.0), rate_func=there_and_back, run_time=action_time)
-                active_mobj = motif
-
-            elif "branch" in text_lower or "two clear answers" in text_lower or "forward pass" in text_lower or beat_id == 5:
-                # Beat 5 Motif: Dual Branching Answers
-                motif = ScriptBranchingOutputs().move_to([0, 0.4, 0])
-                enter_time = min(1.2, duration * 0.25)
-                self.play(FadeIn(motif, scale=0.95), run_time=enter_time)
-                action_time = min(1.5, duration * 0.3)
-                self.play(motif.card1.animate.scale(1.05), motif.card2.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
-                active_mobj = motif
-
-            else:
-                # General Custom SVG with Auto-Scaling and Manim Typography
-                clean_id = self.spec.get("id", "short_topic")
-                default_svg = PROJECT_ROOT / "public" / "visual_assets" / f"{clean_id}_beat_{beat_id}.svg"
-                svg_rel_path = b.get("bespoke_svg_path")
-
-                active_svg_path = None
-                if svg_rel_path and (PROJECT_ROOT / svg_rel_path).exists():
-                    active_svg_path = PROJECT_ROOT / svg_rel_path
-                elif default_svg.exists():
-                    active_svg_path = default_svg
-
-                if active_svg_path and active_svg_path.exists():
-                    try:
-                        svg_mobj = SVGMobject(str(active_svg_path))
-                        # Scale to fill 60-70% of vertical viewport
-                        if svg_mobj.width > 6.4:
-                            svg_mobj.scale_to_fit_width(6.4)
-                        if svg_mobj.height > 6.0:
-                            svg_mobj.scale_to_fit_height(6.0)
-                        svg_mobj.move_to([0, 0.4, 0])
-
-                        # Add clear descriptive title banner
-                        title_text = v_focus.upper() if len(v_focus) < 40 else (v_focus[:37] + "...").upper()
-                        callout = Text(title_text, font=FONT_HELVETICA, font_size=14, color="#38BDF8", weight=HEAVY).move_to([0, 3.8, 0])
-
-                        active_mobj = VGroup(svg_mobj, callout)
-                        enter_time = min(1.8, duration * 0.35)
-                        self.play(Create(svg_mobj), FadeIn(callout, shift=DOWN * 0.2), run_time=enter_time)
-                        action_time = min(1.2, duration * 0.25)
-                        self.play(svg_mobj.animate.scale(1.03), rate_func=there_and_back, run_time=action_time)
-
-                    except Exception as e:
-                        print(f"⚠️ Error rendering bespoke SVG: {e}")
-
-            # 3. Handle Timing and Transition
-            if active_mobj:
-                used_time = enter_time + action_time
-                remaining = duration - used_time - 0.4
-                if remaining > 0.1:
-                    self.wait(remaining)
-                self.play(FadeOut(active_mobj, shift=DOWN * 0.2), run_time=0.4)
-            else:
-                self.wait(duration)
+            # 5. Hold and Clean Exit
+            used_time = enter_time + action_time
+            remaining = duration - used_time - 0.4
+            if remaining > 0.1:
+                self.wait(remaining)
+            self.play(FadeOut(motif, shift=DOWN * 0.15), run_time=0.4)
 
     def play_brand_outro(self):
         """Standard high-conversion 3Blue1Brown chalkboard outro."""
