@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <!-- Radio Dial Outer Casing -->
+  <rect x="80" y="200" width="640" height="300" rx="20" fill="#1E293B" stroke="#475569" stroke-width="4" opacity="0.8"/>
+  <!-- Frequency Ticks -->
+  <g id="frequency_scale">
+    <line x1="120" y1="320" x2="680" y2="320" stroke="#64748B" stroke-width="2"/>
+    <line x1="160" y1="300" x2="160" y2="320" stroke="#F8FAFC" stroke-width="3"/>
+    <text x="160" y="280" fill="#94A3B8" font-family="sans-serif" font-size="16" text-anchor="middle">88 MHz</text>
+    <line x1="280" y1="300" x2="280" y2="320" stroke="#38BDF8" stroke-width="4"/>
+    <text x="280" y="280" fill="#38BDF8" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">98.5 [STATION A]</text>
+    <line x1="520" y1="300" x2="520" y2="320" stroke="#F59E0B" stroke-width="4"/>
+    <text x="520" y="280" fill="#F59E0B" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">104.2 [STATION B]</text>
+    <line x1="640" y1="300" x2="640" y2="320" stroke="#F8FAFC" stroke-width="3"/>
+    <text x="640" y="280" fill="#94A3B8" font-family="sans-serif" font-size="16" text-anchor="middle">108 MHz</text>
+  </g>
+  <!-- Tuner Needle between stations -->
+  <g id="tuner_needle">
+    <line x1="400" y1="230" x2="400" y2="420" stroke="#EF4444" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="400" cy="420" r="10" fill="#EF4444"/>
+    <text x="400" y="470" fill="#EF4444" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">TUNER: DOUBLE INTERFERENCE</text>
+  </g>
+  <!-- Static Sound Waveforms -->
+  <g id="static_wave">
+    <path d="M 100 620 L 150 590 L 190 640 L 240 580 L 300 650 L 370 570 L 420 660 L 500 580 L 580 640 L 640 600 L 700 620" fill="none" stroke="#F59E0B" stroke-width="4"/>
+    <text x="400" y="730" fill="#F8FAFC" font-family="sans-serif" font-size="20" font-weight="700" text-anchor="middle">COLLIDING AUDIO WAVES</text>
+    <text x="400" y="765" fill="#94A3B8" font-family="sans-serif" font-size="16" text-anchor="middle">The weights blend two signals on one single channel</text>
+  </g>
+</svg>

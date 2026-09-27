@@ -112,14 +112,25 @@ def auto_produce(
     else:
         print(f"   ✅ Script Quality Gate Passed: Conversational, accessible, and grounded in everyday examples.")
 
+    # Step 2.8: Script-Driven Visual Storyboard Synthesis
+    print(f"\n🎨 Step 2.8: Designing bespoke script-driven visual storyboard...")
+    try:
+        from pipeline.visual_director import VisualDirector
+        visual_director = VisualDirector()
+        spec = visual_director.prepare_storyboard_for_spec(spec)
+        with open(template_path, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
+    except Exception as e:
+        print(f"⚠️ Visual Director bypassed: {e}")
+
     resolved_category = spec.get("category", category or "mechanism_deepdive")
     if resolved_category not in CATEGORY_SCENE_MAP:
         resolved_category = "mechanism_deepdive"
 
     if not legacy_engine:
-        scene_file = "manim_engine/scenes/dynamic_scene.py"
-        scene_class = "DynamicCompositeScene"
-        engine_label = "Visual Engine 2.0 Dynamic Compiler"
+        scene_file = "manim_engine/scenes/script_driven_scene.py"
+        scene_class = "ScriptDrivenScene"
+        engine_label = "Visual Engine 3.0 Script-Driven Compiler"
     else:
         scene_info = CATEGORY_SCENE_MAP[resolved_category]
         scene_file = scene_info["file"]

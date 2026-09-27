@@ -69,6 +69,15 @@ def render_scene(scene_file: str, scene_class: str, quality: str = "-qh", spec_p
     start_time = time.time()
     env = os.environ.copy()
     env["PATH"] = f"/Users/amankumar/bin:{env.get('PATH', '')}"
+    if quality in ("draft", "low", "ql"):
+        quality = "-ql"
+    elif quality in ("medium", "mid", "qm"):
+        quality = "-qm"
+    elif quality in ("high", "qh"):
+        quality = "-qh"
+    elif not quality.startswith("-"):
+        quality = f"-{quality}"
+
     if spec_path:
         env["ACTIVE_SPEC_PATH"] = str(spec_path)
     cmd = [

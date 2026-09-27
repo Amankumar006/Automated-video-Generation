@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <defs>
+    <linearGradient id="grad_blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="1.0"/>
+    </linearGradient>
+    <linearGradient id="grad_orange" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="1.0"/>
+    </linearGradient>
+  </defs>
+  <!-- Stream A: Blue Wave -->
+  <g id="stream_a">
+    <text x="120" y="240" fill="#38BDF8" font-family="sans-serif" font-size="20" font-weight="700">THOUGHT A: SIGNAL 1</text>
+    <path d="M 50 300 Q 150 200 250 300 T 450 300" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- Stream B: Orange Wave -->
+  <g id="stream_b">
+    <text x="500" y="240" fill="#F59E0B" font-family="sans-serif" font-size="20" font-weight="700">THOUGHT B: SIGNAL 2</text>
+    <path d="M 350 300 Q 450 400 550 300 T 750 300" fill="none" stroke="#F59E0B" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <!-- Central Collision / Overlap Zone -->
+  <g id="collision_zone">
+    <circle cx="400" cy="550" r="140" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="6 6" opacity="0.6"/>
+    <path d="M 150 550 Q 250 430 320 570 T 400 530 T 480 580 T 650 550" fill="none" stroke="#EF4444" stroke-width="6"/>
+    <text x="400" y="740" fill="#F8FAFC" font-family="sans-serif" font-size="22" font-weight="700" text-anchor="middle">OVERLAPPING SUPERPOSITION</text>
+    <text x="400" y="775" fill="#94A3B8" font-family="sans-serif" font-size="16" text-anchor="middle">Two Independent Concepts in One Latent Channel</text>
+  </g>
+</svg>
