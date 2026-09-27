@@ -254,10 +254,10 @@
       ],
       "motif_type": "wave_collision",
       "motif_params": {
-        "signal_a_label": "THOUGHT 1 (SIGNAL A)",
-        "signal_b_label": "THOUGHT 2 (SIGNAL B)",
-        "result_label": "OVERLAPPING SUPERPOSITION",
-        "result_sub": "Two independent concepts packed into one channel"
+        "signal_a_label": "THOUGHT STREAM A (\u03bb = 440 nm)",
+        "signal_b_label": "THOUGHT STREAM B (\u03bb = 580 nm)",
+        "result_label": "SUPERPOSED INTERFERENCE PATTERN",
+        "result_sub": "Destructive overlap in shared activation space"
       },
       "kinetic_action": "wave_pulse"
     },
@@ -510,12 +510,12 @@
       ],
       "motif_type": "radio_tuner",
       "motif_params": {
-        "station_a_label": "98.5 MHz\n[STATION A]",
-        "station_b_label": "104.2 MHz\n[STATION B]",
-        "tuner_status": "TUNER: BETWEEN STATIONS (STATIC)",
-        "scope_label": "MESSY OVERLAPPING SOUND WAVES"
+        "station_a_label": "98.5 MHz [STATION A: LOGIC]",
+        "station_b_label": "101.3 MHz [STATION B: CONTEXT]",
+        "tuner_status": "CO-CHANNEL STATIC & CROSS-TALK",
+        "scope_label": "SUPERPOSITION BANDWIDTH (\u0394f \u2248 0)"
       },
-      "kinetic_action": "needle_sweep"
+      "kinetic_action": "frequency_sweep"
     },
     {
       "beat_id": 3,
@@ -766,15 +766,15 @@
       ],
       "motif_type": "subspace_vectors",
       "motif_params": {
-        "title": "SUPERPOSITION: PACKING MULTIPLE IDEAS",
-        "sub": "Almost-orthogonal directions allow N > D concepts in D dimensions",
-        "vec1_label": "Concept v\u2081\n[Thought A]",
-        "vec2_label": "Concept v\u2082\n[Thought B]",
-        "angle_label": "\u03b8 \u2248 90\u00b0 (Orthogonal)",
-        "badge_title": "IT IS A FEATURE, NOT A BUG",
-        "badge_sub": "The model re-uses latent space to compress memory exponentially."
+        "title": "HIGH-DIMENSIONAL CAPACITY",
+        "sub": "Orthogonal concept packing in shared residual stream",
+        "vec1_label": "v\u2081: CONCEPT A [SUBSPACE 1]",
+        "vec2_label": "v\u2082: CONCEPT B [SUBSPACE 2]",
+        "angle_label": "\u03b8 = 89.4\u00b0 (QUASI-ORTHOGONAL)",
+        "badge_title": "CAPACITY MULTIPLIER",
+        "badge_sub": "O(e^d) independent directions via Johnson-Lindenstrauss lemma"
       },
-      "kinetic_action": "vector_scale"
+      "kinetic_action": "vector_rotation"
     },
     {
       "beat_id": 4,
@@ -1025,14 +1025,14 @@
       ],
       "motif_type": "prism_disentangler",
       "motif_params": {
-        "title": "PEELING LAYERS APART (DISENTANGLEMENT)",
-        "sub": "Gentle model tuning turns noise into two distinct thought streams",
-        "in_label": "TANGLED\nSUPERPOSITION",
-        "prism_label": "LINEAR\nDECODER",
-        "out1_label": "CLEAN THOUGHT 1 (SIGNAL A)",
-        "out2_label": "CLEAN THOUGHT 2 (SIGNAL B)"
+        "title": "LINEAR PROJECTION DECODER",
+        "sub": "Peeling entangled superposition into independent cognitive channels",
+        "in_label": "SUPERPOSED LATENT STATE (z_t)",
+        "prism_label": "STEERING MATRIX (W_decode)",
+        "out1_label": "STREAM 1: FORMAL DEDUCTION",
+        "out2_label": "STREAM 2: LATENT EVALUATION"
       },
-      "kinetic_action": "beam_glow"
+      "kinetic_action": "beam_refraction"
     },
     {
       "beat_id": 5,
@@ -1274,15 +1274,15 @@
       ],
       "motif_type": "branching_outputs",
       "motif_params": {
-        "in_label": "DUAL PROMPT CONTEXT",
-        "core_title": "1 FORWARD PASS",
-        "core_sub": "Shared Latent Linear Map",
-        "card1_title": "ANSWER 1",
-        "card1_body": "Reasoning Flow\nAccuracy: 99.4%",
-        "card2_title": "ANSWER 2",
-        "card2_body": "Creative Synthesis\nAccuracy: 98.9%"
+        "in_label": "SINGLE FORWARD PASS [x_input]",
+        "core_title": "TRANSFORMER RESIDUAL CORE",
+        "core_sub": "Linear separation matrix extracted at Layer 32",
+        "card1_title": "BRANCH \u03b1 [REASONING TRACE]",
+        "card1_body": "Confidence: 99.4% | Perplexity: 1.04 | Top-1 Deterministic",
+        "card2_title": "BRANCH \u03b2 [COUNTERFACTUAL]",
+        "card2_body": "Confidence: 98.8% | Perplexity: 1.09 | Top-1 Alternative"
       },
-      "kinetic_action": "branch_pop"
+      "kinetic_action": "parallel_branch_glow"
     },
     {
       "beat_id": 6,
@@ -1593,25 +1593,75 @@
     "1": {
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 1.0
+        "dy": 1.2,
+        "scale_multiplier": 1.155
       },
       "math_formula": {
         "dx": 0.0,
         "dy": 0.736,
+        "scale_multiplier": 1.0
+      },
+      "wave_group_a": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      },
+      "wave_merged": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      },
+      "footer_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "top_wave_pair": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "interference_wave": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "distracting_labels": {
+        "dx": 0.0,
+        "dy": -1.78,
         "scale_multiplier": 1.0
       }
     },
     "2": {
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 1.0
+        "dy": 0.2,
+        "scale_multiplier": 0.9
       },
       "math_formula": {
         "dx": 0.0,
         "dy": 1.04,
         "scale_multiplier": 1.0
+      },
+      "top_ui_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.888
+      },
+      "bottom_ui_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.888
+      },
+      "radio_tuner_card": {
+        "dx": 0.0,
+        "dy": 0.004,
+        "scale_multiplier": 0.881
+      },
+      "waveform_box": {
+        "dx": 0.0,
+        "dy": -0.004,
+        "scale_multiplier": 0.881
       }
     },
     "3": {
@@ -1632,12 +1682,22 @@
       },
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 1.0
+        "dy": -0.261,
+        "scale_multiplier": 0.783
       },
       "math_formula": {
         "dx": 0.0,
         "dy": 0.864,
+        "scale_multiplier": 1.0
+      },
+      "placeholder_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "text_card_ui": {
+        "dx": 0.121,
+        "dy": -0.193,
         "scale_multiplier": 1.0
       }
     },
@@ -1645,15 +1705,51 @@
       "hero_visual": {
         "dx": 0.0,
         "dy": 0.2,
-        "scale_multiplier": 1.0
+        "scale_multiplier": 1.322
       },
       "math_formula": {
         "dx": 0.0,
         "dy": 1.184,
         "scale_multiplier": 1.0
+      },
+      "prism_hero": {
+        "dx": -1.103,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "output_streams": {
+        "dx": -1.816,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "text_clutter": {
+        "dx": -0.404,
+        "dy": -0.23,
+        "scale_multiplier": 0.736
+      },
+      "redundant_text_labels": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.711
       }
     },
-    "5": {},
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.7,
+        "scale_multiplier": 0.99
+      },
+      "branch_alpha": {
+        "dx": 0.22,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "branch_beta": {
+        "dx": -0.265,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
     "6": {
       "header_text": {
         "dx": 0.0,
@@ -1668,7 +1764,22 @@
       "brand_text": {
         "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 0.909
+        "scale_multiplier": 0.959
+      },
+      "logo_mark": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 1.15
+      },
+      "text_block": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.0
+      },
+      "mismatched_sub_header": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
       }
     }
   }
