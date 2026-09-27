@@ -105,6 +105,5 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          mkdir -p public/daemon_logs pipeline/templates public/math_svgs
           git add -A pipeline/digest_history.json public/daemon_logs/ pipeline/templates/ public/math_svgs/ 2>/dev/null || true
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(daemon): update daily production log [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(daemon): update daily production log [skip ci]" && git pull --rebase origin main && git push)
