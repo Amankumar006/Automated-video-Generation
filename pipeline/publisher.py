@@ -49,6 +49,8 @@ def get_authenticated_service(client_secrets_file: str = YOUTUBE_CLIENT_SECRETS_
             try:
                 print("🔄 Refreshing expired YouTube OAuth token...")
                 creds.refresh(Request())
+                with open(token_file, "w", encoding="utf-8") as f:
+                    f.write(creds.to_json())
             except Exception as e:
                 print(f"⚠️ Token refresh failed: {e}. Starting fresh authentication flow...")
                 creds = None
