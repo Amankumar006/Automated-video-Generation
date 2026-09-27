@@ -1,0 +1,294 @@
+{
+  "id": "wanpe_cinematic_enhancement",
+  "title": "WanPE: Cinematic Prompt Enhancement",
+  "category": "benchmark_news",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "CINEMATIC PROMPT SCALING",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do video AI tools struggle to keep a movie scene steady? They lack a director to plan the shot for long, clear clips.",
+      "visual_focus": "A chaotic montage of blurry video clips snapping into a smooth, storyboarded sequence.",
+      "highlight_words": {
+        "video AI": "#38BDF8",
+        "director": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "AI Model",
+        "action_verb": "maps",
+        "direct_object": "Cinematic Trajectory",
+        "anchor_word": "plan",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of it like writing a script. A raw prompt is just a rough idea, like a napkin sketch instead of a final movie plan.",
+      "visual_focus": "A hand scribbling on a napkin versus a complex, multi-layered movie production storyboard.",
+      "highlight_words": {
+        "raw prompt": "#EF4444",
+        "movie plan": "#34D399"
+      },
+      "svo_action": {
+        "subject": "User Prompt",
+        "action_verb": "scales",
+        "direct_object": "Production Complexity",
+        "anchor_word": "sketch",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "WanPE fixes this by looking at real films. It learns to work backward, tracing a full shot back to a perfect, simple text command.",
+      "visual_focus": "A reverse-engineering animation where a video frame dissolves into a structured text screenplay line.",
+      "highlight_words": {
+        "work backward": "#34D399",
+        "perfect": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "WanPE Model",
+        "action_verb": "reconstructs",
+        "direct_object": "Semantic Screenplay",
+        "anchor_word": "backward",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "It uses a special loop to check if the scene stays true to your intent, pruning away ideas that do not fit the main plot.",
+      "visual_focus": "A logic gate filtering glowing concept threads, keeping only those aligned with the user goal.",
+      "highlight_words": {
+        "special loop": "#F59E0B",
+        "pruning": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Semantic Loop",
+        "action_verb": "filters",
+        "direct_object": "Incoherent Scenes",
+        "anchor_word": "pruning",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This leads to a fifty point jump in human preference for thirty second clips. It creates truly professional art from simple words.",
+      "visual_focus": "A side-by-side comparison showing a shaky raw video versus a stable, cinematic high-fidelity production.",
+      "highlight_words": {
+        "fifty point jump": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Cinematic Plan",
+        "action_verb": "elevates",
+        "direct_object": "Human Preference Score",
+        "anchor_word": "jump",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo pulsing with a clean, cinematic light effect.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "User",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{params}} = 397 \\times 10^9$",
+      "filename": "wanpe_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Total Model Parameters"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$C = \\sum_{s=1}^{S} \\text{Duration}_s$",
+      "filename": "wanpe_complexity.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "S",
+          "label": "Number of Shots"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$P_{\\mathrm{final}} = \\mathrm{RevConstruct}(V_{\\mathrm{ref}})$",
+      "filename": "wanpe_reconstruction.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "V_ref",
+          "label": "Reference Video Data"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{G} = \\mathrm{Gate}(H_{\\mathrm{seq}} > \\tau)$",
+      "filename": "wanpe_gating.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "tau",
+          "label": "Semantic Threshold"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\mathrm{Pref} \\approx 50.86\\%$",
+      "filename": "wanpe_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Delta",
+          "label": "Preference Gain"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Cinematic Plan",
+          "color": "#38BDF8",
+          "items": [
+            "Camera",
+            "Lighting",
+            "Action"
+          ]
+        },
+        {
+          "name": "User Intent",
+          "color": "#10B981",
+          "items": [
+            "Style",
+            "Subject",
+            "Tone"
+          ]
+        },
+        {
+          "name": "Refinement",
+          "color": "#F59E0B",
+          "items": [
+            "Pruning",
+            "Consistency",
+            "Score"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Cinematic\"",
+        "target_cluster": "Cinematic Plan",
+        "token": "\"Cinematic\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Ambiguity",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Jitter",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "WanPE-397B",
+    "model_a_specs": [
+      "397B Params",
+      "SC-GRPO Trained",
+      "1.05M Videos"
+    ],
+    "model_b": "Raw Prompting",
+    "model_b_specs": [
+      "Zero Planning",
+      "Direct Generation",
+      "No Memory"
+    ],
+    "divide_title": "PLANNING VS RAW GENERATION",
+    "model_a_stat": "50.86",
+    "model_a_stat_label": "Preference Gain",
+    "model_b_stat": "0.0",
+    "model_b_stat_label": "Baseline",
+    "efficiency_badge": "\u26a1 50+ Point Gain",
+    "benchmarks": [
+      {
+        "name": "5-15s Clips",
+        "score_a": "18.8",
+        "score_b": "0"
+      },
+      {
+        "name": "30s Clips",
+        "score_a": "50.8",
+        "score_b": "0"
+      }
+    ],
+    "scale_metric": "397B",
+    "scale_label": "Total Parameters",
+    "bottleneck_title": "TEXTUAL AMBIGUITY",
+    "bottleneck_desc": "Loss of semantic fidelity over time",
+    "solution_title": "REVERSE CONSTRUCTION",
+    "solution_components": "Video-grounded cinematic planning",
+    "mechanism_title": "SEMANTIC CONSISTENCY",
+    "payoff_stat": "50.86",
+    "payoff_label": "PREFERENCE GAIN",
+    "payoff_sub": "At 30-second benchmark arena",
+    "payoff_hero_stat": 50.86,
+    "payoff_hero_label": "WanPE Boost",
+    "payoff_base_stat": 0,
+    "payoff_base_label": "Baseline",
+    "payoff_delta_badge": "\u26a1 CINEMATIC MASTERY ACHIEVED",
+    "challenger": "WanPE",
+    "incumbent": "Seedance 2.5"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

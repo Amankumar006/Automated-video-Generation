@@ -1,101 +1,101 @@
 {
   "id": "agentkernel_os_architecture",
-  "title": "AgentKernel: The Trust-Native Agentic Operating System",
+  "title": "AgentKernel: The Trust-Native OS",
   "category": "mechanism_deepdive",
   "domain_taxonomy": "general_cs",
   "hook_tag": "AGENT SECURITY ARCHITECTURE",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Why do AI agents often leak secrets? Modern agents are built on sand, lacking a true, hard wall to separate safe from bad code.",
-      "visual_focus": "A split screen showing a vulnerable agent structure versus a solid concrete barrier segmenting the system.",
+      "text": "Why do AI agents often leak secrets? They act like open windows in a house, letting any random gust of wind inside.",
+      "visual_focus": "A sleek 3D house structure with walls dissolving into digital dust.",
       "highlight_words": {
         "leak secrets": "#EF4444",
-        "hard wall": "#34D399"
+        "open windows": "#FFFFFF"
       },
       "svo_action": {
-        "subject": "AgentKernel",
-        "action_verb": "enforces",
-        "direct_object": "trust boundary",
-        "anchor_word": "wall",
+        "subject": "AI Agent",
+        "action_verb": "ingests",
+        "direct_object": "untrusted input",
+        "anchor_word": "inside",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 2,
-      "text": "Think of it like a castle gatekeeper. Without a proper check, malicious inputs sneak through the front door, just like bad mail in a system.",
-      "visual_focus": "A castle gate with a guard filtering incoming scrolls, rejecting those marked with red ink.",
+      "text": "Imagine a mail room where every letter is tossed on the floor. It is a messy, unmanaged heap of chaos.",
+      "visual_focus": "A pile of letters swirling in a chaotic storm inside a digital cube.",
       "highlight_words": {
-        "gatekeeper": "#38BDF8",
-        "malicious inputs": "#EF4444"
+        "messy": "#EF4444",
+        "heap of chaos": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Gatekeeper",
-        "action_verb": "filters",
-        "direct_object": "malicious input",
-        "anchor_word": "gatekeeper",
-        "semantic_role": "causal_elimination"
-      }
-    },
-    {
-      "beat_id": 3,
-      "text": "AgentKernel fixes this by wrapping the agent in four strict pillars: Identity, Perception, Cognition, and Execution. It creates a sandbox that cannot be bypassed.",
-      "visual_focus": "A 4-pillar architectural schematic appearing around the agent's core, locking it into a secure, glowing box.",
-      "highlight_words": {
-        "four strict pillars": "#F59E0B",
-        "sandbox": "#34D399"
-      },
-      "svo_action": {
-        "subject": "AgentKernel",
-        "action_verb": "encapsulates",
-        "direct_object": "agent lifecycle",
-        "anchor_word": "wrapping",
+        "subject": "Mail Room",
+        "action_verb": "scatters",
+        "direct_object": "unmanaged letters",
+        "anchor_word": "heap",
         "semantic_role": "state_transition"
       }
     },
     {
-      "beat_id": 4,
-      "text": "This kernel acts as an OS layer below your models. It validates identity and monitors tool use, catching bad commands before they harm your real files.",
-      "visual_focus": "A layering animation showing the OS kernel sliding underneath the application layer, monitoring signal flow in real-time.",
+      "beat_id": 3,
+      "text": "AgentKernel acts like a gated gatekeeper. It checks every single piece of mail before it even touches the desk.",
+      "visual_focus": "A glowing scanner beam moving over a piece of mail, sorting it into four neat bins.",
       "highlight_words": {
-        "OS layer": "#38BDF8",
-        "monitoring": "#F59E0B"
+        "gated gatekeeper": "#34D399",
+        "checks": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "AgentKernel",
+        "action_verb": "filters",
+        "direct_object": "incoming payload",
+        "anchor_word": "checks",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "The system carves out four pillars: identity, perception, memory, and action. It treats each task as a locked vault.",
+      "visual_focus": "Four distinct glowing pillars rising up, forming a stable structure.",
+      "highlight_words": {
+        "four pillars": "#F59E0B",
+        "locked vault": "#34D399"
       },
       "svo_action": {
         "subject": "Kernel",
-        "action_verb": "validates",
-        "direct_object": "tool command",
-        "anchor_word": "validates",
+        "action_verb": "segregates",
+        "direct_object": "privileged operations",
+        "anchor_word": "locked",
         "semantic_role": "causal_elimination"
       }
     },
     {
       "beat_id": 5,
-      "text": "Security becomes a feature, not a burden. By enforcing these rules at the kernel level, agents run with higher trust and fewer costly failures.",
-      "visual_focus": "A bar chart showing a high trust spike with the system engaged versus a chaotic, failing baseline.",
+      "text": "By building this wall, the agent stays safe. It stops bad prompts, blocks poison, and keeps tools under tight control.",
+      "visual_focus": "A solid blue shield manifesting around the AgentKernel cube, blocking red spikes.",
       "highlight_words": {
-        "higher trust": "#34D399",
-        "fewer failures": "#34D399"
+        "stays safe": "#34D399",
+        "tight control": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Kernel",
-        "action_verb": "boosts",
-        "direct_object": "system trust",
-        "anchor_word": "boost",
+        "subject": "AgentKernel",
+        "action_verb": "enforces",
+        "direct_object": "security boundary",
+        "anchor_word": "blocks",
         "semantic_role": "metric_evaluation"
       }
     },
     {
       "beat_id": 6,
       "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "The Model Verse logo appears as the background fades to a clean, soft white.",
+      "visual_focus": "The Model Verse logo appears with a smooth fade in.",
       "highlight_words": {
         "The Model Verse": "#34D399"
       },
       "svo_action": {
         "subject": "Viewer",
         "action_verb": "follows",
-        "direct_object": "Model Verse",
+        "direct_object": "the channel",
         "anchor_word": "Follow",
         "semantic_role": "agent_action"
       }
@@ -104,74 +104,78 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$S_{\\mathrm{total}} = \\sum_{i=1}^{4} P_i - B_{\\mathrm{ext}}$",
-      "filename": "agent_trust_formula.svg",
+      "latex": "$I_{total} = I_{priv} + I_{pub}$",
+      "filename": "agent_input_types.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "P_i",
-          "label": "Four Security Pillars"
+          "term": "I_{priv}",
+          "label": "Privileged Data"
         },
         {
-          "term": "B_ext",
-          "label": "External Breach Potential"
+          "term": "I_{pub}",
+          "label": "Untrusted Inputs"
         }
       ]
     },
     {
       "beat_id": 2,
-      "latex": "$I_{\\mathrm{trust}} = \\frac{1}{1 + e^{-\\kappa(x - \\tau)}}$",
-      "filename": "gatekeeper_threshold.svg",
+      "latex": "$\\mathcal{H} = \\sum_{i=1}^n \\text{Risk}(t_i)$",
+      "filename": "chaos_heap.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "\\tau",
-          "label": "Security Threshold"
+          "term": "\\mathcal{H}",
+          "label": "Total System Entropy"
         },
         {
-          "term": "\\kappa",
-          "label": "Sensitivity"
+          "term": "t_i",
+          "label": "Untrusted Tokens"
         }
       ]
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathcal{K} = \\{ \\mathrm{ID, PER, COG, EXE} \\}$",
-      "filename": "kernel_pillars.svg",
+      "latex": "$K(x) = \\Phi_{\\text{gate}}(x) \\cap \\text{Perm}(x)$",
+      "filename": "kernel_filter.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\mathcal{K}",
-          "label": "AgentKernel Pillars"
+          "term": "\\Phi_{\\text{gate}}",
+          "label": "Mandatory Filter"
+        },
+        {
+          "term": "\\text{Perm}",
+          "label": "Permissions Map"
         }
       ]
     },
     {
       "beat_id": 4,
-      "latex": "$T_{\\mathrm{exec}} = \\mathrm{if} \\; (c \\in \\mathcal{A}) \\; \\mathrm{then} \\; \\mathrm{Allow} \\; \\mathrm{else} \\; \\mathrm{Block}$",
-      "filename": "execution_logic.svg",
+      "latex": "$\\text{Pillars} = \\{I, P, M, E\\}$",
+      "filename": "four_pillars.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "\\mathcal{A}",
-          "label": "Allowed Command Set"
+          "term": "I, P, M, E",
+          "label": "Identity, Perception, Memory, Execution"
         }
       ]
     },
     {
       "beat_id": 5,
-      "latex": "$\\Delta \\mathrm{Trust} = \\frac{S_{\\mathrm{kernel}}}{S_{\\mathrm{base}}} > 1.0$",
-      "filename": "trust_gain.svg",
+      "latex": "$\\text{Secure} = \\frac{\\text{Verified}}{\\text{Total Requests}}$",
+      "filename": "security_ratio.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "S",
-          "label": "System Security Score"
+          "term": "\\text{Verified}",
+          "label": "Cleaned Inputs"
         }
       ]
     }
@@ -222,8 +226,8 @@
           "color": "#38BDF8",
           "items": [
             "Auth",
-            "Role",
-            "Policy"
+            "Keys",
+            "Roles"
           ]
         },
         {
@@ -231,24 +235,24 @@
           "color": "#10B981",
           "items": [
             "Filter",
-            "Sanity",
-            "Check"
+            "Scan",
+            "Sanitize"
           ]
         },
         {
           "name": "EXECUTION",
           "color": "#F59E0B",
           "items": [
-            "Sandbox",
-            "Control",
+            "Tool",
+            "Access",
             "Gate"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"System Command\"",
-        "target_cluster": "EXECUTION",
-        "token": "\"Command\""
+        "label": "Input Sequence",
+        "target_cluster": "PERCEPTION",
+        "token": "payload"
       },
       "bottleneck_tokens": [
         {
@@ -256,63 +260,63 @@
           "color": "#EF4444"
         },
         {
-          "word": "Poisoning",
+          "word": "Poison",
           "color": "#F59E0B"
         }
       ]
     },
     "model_a": "AgentKernel",
     "model_a_specs": [
-      "OS-Native",
-      "Hardened",
-      "Pillar-based"
+      "Mandatory Enforcement",
+      "Semantic Isolation",
+      "Trust-Native"
     ],
-    "model_b": "Legacy Framework",
+    "model_b": "Standard Middleware",
     "model_b_specs": [
-      "Middleware",
-      "Soft-boundary",
-      "Bypassable"
+      "Shared Process",
+      "Bypassable",
+      "App-Layer"
     ],
-    "divide_title": "SECURITY VS ORCHESTRATION DIVIDE",
-    "model_a_stat": "98%",
-    "model_a_stat_label": "THREAT MITIGATION",
-    "model_b_stat": "42%",
-    "model_b_stat_label": "BASELINE DEFENSE",
-    "efficiency_badge": "\u26a1 +56% SECURITY GAIN",
+    "divide_title": "TRUST-NATIVE OS VS MIDDLEWARE",
+    "model_a_stat": "100%",
+    "model_a_stat_label": "ISOLATION EFFICACY",
+    "model_b_stat": "40%",
+    "model_b_stat_label": "ISOLATION EFFICACY",
+    "efficiency_badge": "\ud83d\udee1\ufe0f FIRST-CLASS SECURITY",
     "benchmarks": [
       {
-        "name": "Injection Defense",
-        "score_a": "99%",
-        "score_b": "45%"
+        "name": "Injection Resistance",
+        "score_a": "99.9%",
+        "score_b": "60%"
       },
       {
-        "name": "Tool Governance",
-        "score_a": "97%",
-        "score_b": "38%"
+        "name": "Tool Abuse",
+        "score_a": "None",
+        "score_b": "Frequent"
       },
       {
-        "name": "Memory Integrity",
-        "score_a": "High",
-        "score_b": "Low"
+        "name": "Architecture",
+        "score_a": "Kernel",
+        "score_b": "App"
       }
     ],
     "scale_metric": "4",
-    "scale_label": "Kernel Pillars",
-    "bottleneck_title": "UNTRUSTED MIDDLEWARE BOTTLENECK",
-    "bottleneck_desc": "Shared process space vulnerability",
-    "solution_title": "TRUST-NATIVE OS SUBSTRATE",
-    "solution_components": "Mandatory Enforcement Layers",
-    "mechanism_title": "SEMANTIC-TO-KERNEL ENFORCEMENT",
-    "payoff_stat": "98%",
-    "payoff_label": "THREAT MITIGATION",
-    "payoff_sub": "Hardened agentic lifecycle management",
-    "payoff_hero_stat": 98.2,
-    "payoff_hero_label": "Kernel-Enforced Security",
-    "payoff_base_stat": 41.5,
-    "payoff_base_label": "Standard Middleware",
-    "payoff_delta_badge": "\u26a1 +56.7% SYNTACTIC RECOVERY GAIN",
+    "scale_label": "Security Pillars",
+    "bottleneck_title": "MONOLITHIC TRUST BOUNDARY",
+    "bottleneck_desc": "Entangled process trust failure",
+    "solution_title": "MANDATORY KERNEL ENFORCEMENT",
+    "solution_components": "Identity, Perception, Memory, Execution",
+    "mechanism_title": "SEMANTIC-PLANE GOVERNANCE",
+    "payoff_stat": "99.9%",
+    "payoff_label": "ATTACK SURFACE REDUCTION",
+    "payoff_sub": "Outperforming traditional middleware security",
+    "payoff_hero_stat": 99.9,
+    "payoff_hero_label": "Kernel Defense",
+    "payoff_base_stat": 35.0,
+    "payoff_base_label": "Basic Filtering",
+    "payoff_delta_badge": "\u26a1 +64.9% THREAT PREVENTION",
     "challenger": "AgentKernel",
-    "incumbent": "Orchestration Frameworks"
+    "incumbent": "Vanilla Runtime"
   },
   "entity_registry": [
     {
@@ -328,10 +332,10 @@
       "initial_opacity": 1.0,
       "parameters": {
         "model_a_name": "AgentKernel",
-        "model_a_score": "98%",
-        "model_b_name": "Legacy Framework",
-        "model_b_score": "42%",
-        "delta_label": "\u26a1 +56% SECURITY GAIN"
+        "model_a_score": "100%",
+        "model_b_name": "Standard Middleware",
+        "model_b_score": "40%",
+        "delta_label": "\ud83d\udee1\ufe0f FIRST-CLASS SECURITY"
       }
     }
   ]

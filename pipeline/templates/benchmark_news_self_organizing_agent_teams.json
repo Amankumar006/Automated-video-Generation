@@ -7,91 +7,96 @@
   "beats": [
     {
       "beat_id": 1,
-      "text": "Why do some AI teams fail while others solve hard math puzzles with ease? It is not about the members, but how they organize.",
-      "visual_focus": "A scattered group of glowing nodes (agents) forming a structured, synchronized ring.",
+      "text": "Why do lone AI agents fail at hard tasks, even when they know the math? Let us see how teams fix this.",
+      "visual_focus": "A lone, flickering light bulb representing an agent struggling with a complex geometric puzzle.",
       "highlight_words": {
-        "organize": "#34D399"
+        "lone AI agents": "#EF4444",
+        "teams": "#34D399"
       },
       "svo_action": {
-        "subject": "Agent Team",
-        "action_verb": "organizes",
-        "direct_object": "Collaborative Reasoning Structure",
-        "anchor_word": "organize",
+        "subject": "Single Agent",
+        "action_verb": "stumbles",
+        "direct_object": "Complex Logic Gate",
+        "anchor_word": "fail",
         "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 2,
-      "text": "Think of a jazz band. No one has a script; they learn to listen, trade, and play off each other to build a new sound.",
-      "visual_focus": "Musical notes flowing between agents as they refine a shared, complex solution path.",
+      "text": "Think of it like a group of people solving a jigsaw puzzle. Without a plan, they just get in each other's way.",
+      "visual_focus": "Animated puzzle pieces floating in space, overlapping and bumping into one another chaotically.",
       "highlight_words": {
-        "jazz band": "#38BDF8"
+        "jigsaw puzzle": "#F59E0B",
+        "in each other's way": "#EF4444"
       },
       "svo_action": {
-        "subject": "Agent Teams",
-        "action_verb": "mimics",
-        "direct_object": "Dynamic Jazz Improvisation",
-        "anchor_word": "jazz",
+        "subject": "Puzzle Pieces",
+        "action_verb": "clash",
+        "direct_object": "Collaborative Workspace",
+        "anchor_word": "way",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 3,
-      "text": "Scientists built a way for agents to practice together. They trade, test, and fix their logic until they find the truth through sheer teamwork.",
-      "visual_focus": "Data packets moving back and forth; incorrect paths fade away while the correct one grows bright.",
+      "text": "New teams do not use fixed rules. They learn how to chat, swap info, and fix mistakes as they work together.",
+      "visual_focus": "Nodes connecting with lines that thicken and brighten as they communicate and refine a shared idea.",
       "highlight_words": {
-        "practice": "#34D399"
+        "learn": "#34D399",
+        "swap info": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Collaborative Computation",
-        "action_verb": "synthesizes",
-        "direct_object": "Partial Reasoning Fragments",
-        "anchor_word": "truth",
-        "semantic_role": "agent_action"
+        "subject": "Agent Nodes",
+        "action_verb": "link",
+        "direct_object": "Shared Strategy Map",
+        "anchor_word": "learn",
+        "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 4,
-      "text": "The team checks if the answer works. Like picking a winning idea from a pile, they learn to spot good logic from pure noise.",
-      "visual_focus": "A filter sorting through reasoning chains, keeping only the coherent, correct steps.",
+      "text": "They act like a sculptor carving marble. Each agent chips away bad logic until the clear, true answer appears bright.",
+      "visual_focus": "A glowing crystal being chiseled by multiple small tools, revealing a perfectly structured geometric shape inside.",
       "highlight_words": {
-        "logic": "#F59E0B"
+        "sculptor": "#F59E0B",
+        "clear, true answer": "#34D399"
       },
       "svo_action": {
-        "subject": "Demonstrability Filter",
-        "action_verb": "prunes",
-        "direct_object": "Incorrect Reasoning Branches",
-        "anchor_word": "logic",
+        "subject": "Agent Team",
+        "action_verb": "refines",
+        "direct_object": "Partial Reasoning",
+        "anchor_word": "chips",
         "semantic_role": "causal_elimination"
       }
     },
     {
       "beat_id": 5,
-      "text": "These self-led teams now beat their best single member, solving complex physics and math problems by shaping ideas no single agent could reach alone.",
-      "visual_focus": "A rising bar chart showing the Team performance (66.7%) significantly higher than the strongest individual agent (48.8%).",
+      "text": "The result is huge. These teams hit sixty-six percent accuracy, far beating any single member working on their own alone.",
+      "visual_focus": "A bar chart where the 'Team' bar rapidly grows to tower over the individual agent columns.",
       "highlight_words": {
-        "beat": "#34D399"
+        "sixty-six percent": "#34D399",
+        "far beating": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Self-Organizing Team",
+        "subject": "Performance Metric",
         "action_verb": "surpasses",
-        "direct_object": "Strongest Independent Agent",
-        "anchor_word": "beat",
+        "direct_object": "Independent Baseline",
+        "anchor_word": "beating",
         "semantic_role": "metric_evaluation"
       }
     },
     {
       "beat_id": 6,
       "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "The Model Verse logo appears in center screen with a soft, clean glow.",
+      "visual_focus": "The Model Verse logo appears in the center, pulsing with a clean, soft mint light.",
       "highlight_words": {
         "The Model Verse": "#34D399"
       },
       "svo_action": {
-        "subject": "Viewer",
-        "action_verb": "follows",
-        "direct_object": "The Model Verse",
-        "anchor_word": "Follow",
+        "subject": "Brand Logo",
+        "action_verb": "appears",
+        "direct_object": "Center Stage",
+        "anchor_word": "Model Verse",
         "semantic_role": "agent_action"
       }
     }
@@ -99,66 +104,74 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$N_{\\mathrm{agents}} = 5 \\times T_{\\mathrm{phases}}$",
-      "filename": "beat1_scale.svg",
+      "latex": "$N_{agents} = 1 \\implies Acc = 48.8\\%$",
+      "filename": "solo_limit.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "N",
+          "term": "N_{agents}",
           "label": "Number of Agents"
+        },
+        {
+          "term": "Acc",
+          "label": "Success Rate"
         }
       ]
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{S} = \\sum_{i=1}^{n} \\mathrm{Role}_i \\otimes \\mathrm{Flow}_j$",
-      "filename": "beat2_bottleneck.svg",
+      "latex": "$\\mathcal{O}(N^2) \\text{ conflict interactions}$",
+      "filename": "chaos_math.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "S",
-          "label": "Strategy Space"
+          "term": "\\mathcal{O}(N^2)",
+          "label": "Complexity"
         }
       ]
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathrm{Collab} = \\mathrm{Exchange} \\oplus \\mathrm{Synthesize}$",
-      "filename": "beat3_architecture.svg",
+      "latex": "$\\Delta S = f(\\text{exchange, challenge, repair})$",
+      "filename": "team_logic.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "Collab",
-          "label": "Reasoning Integration"
+          "term": "\\Delta S",
+          "label": "Strategy Gain"
         }
       ]
     },
     {
       "beat_id": 4,
-      "latex": "$\\rho = 0.90 \\implies \\mathrm{Success}(\\tau)$",
-      "filename": "beat4_mechanism.svg",
+      "latex": "$\\mathrm{Top8}(\\text{Reasoning}) \\to \\mathrm{Solution}$",
+      "filename": "refinement_math.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "rho",
-          "label": "Demonstrability Correlation"
+          "term": "\\mathrm{Top8}",
+          "label": "Selection"
         }
       ]
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{Acc}_{\\mathrm{team}} = 66.7\\% > 48.8\\%_{\\mathrm{base}}$",
-      "filename": "beat5_payoff.svg",
+      "latex": "$\\mathrm{Acc}_{team} = 66.7\\% > \\mathrm{Acc}_{max}$",
+      "filename": "final_gain.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "Acc",
-          "label": "Benchmarking Accuracy"
+          "term": "\\mathrm{Acc}_{team}",
+          "label": "Team Accuracy"
+        },
+        {
+          "term": "\\mathrm{Acc}_{max}",
+          "label": "Top Agent"
         }
       ]
     }
@@ -205,96 +218,94 @@
     "visual_entities": {
       "clusters": [
         {
-          "name": "Agent Roles",
+          "name": "Agents",
           "color": "#38BDF8",
           "items": [
-            "Plan",
-            "Review",
-            "Code"
+            "Agent A",
+            "Agent B",
+            "Agent C"
           ]
         },
         {
-          "name": "Information",
+          "name": "Reasoning",
           "color": "#10B981",
           "items": [
-            "Fact",
-            "Trace",
-            "Logic"
+            "Logic",
+            "Math",
+            "Facts"
           ]
         },
         {
-          "name": "Synthesis",
+          "name": "Final",
           "color": "#F59E0B",
           "items": [
-            "Merge",
-            "Adapt",
-            "Solve"
+            "Solution"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Reasoning Step",
-        "target_cluster": "Information",
-        "token": "Logic"
+        "label": "Token: \"Problem\"",
+        "target_cluster": "Agents",
+        "token": "\"Problem\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Rigid Protocol",
+          "word": "Solo Limit",
           "color": "#EF4444"
         },
         {
-          "word": "Fixed Routing",
+          "word": "Team Gain",
           "color": "#F59E0B"
         }
       ]
     },
     "model_a": "Self-Organizing Team",
     "model_a_specs": [
-      "Dynamic Strategy",
-      "Collaborative Computation",
-      "Adaptive Roles"
+      "Dynamic roles",
+      "Collaborative",
+      "Self-learned"
     ],
-    "model_b": "Strongest Independent Agent",
+    "model_b": "Strongest Agent",
     "model_b_specs": [
-      "Fixed Protocol",
-      "Static Reasoning",
-      "Solo Execution"
+      "Fixed protocol",
+      "Isolated",
+      "Standalone"
     ],
-    "divide_title": "SELF-ORGANIZATION VS FIXED PROTOCOL",
+    "divide_title": "TEAM VS AGENT GAP",
     "model_a_stat": "66.7%",
-    "model_a_stat_label": "TEAM SUCCESS",
+    "model_a_stat_label": "TEAM ACCURACY",
     "model_b_stat": "48.8%",
-    "model_b_stat_label": "INDIVIDUAL SUCCESS",
+    "model_b_stat_label": "AGENT ACCURACY",
     "efficiency_badge": "\u26a1 +17.9% PERFORMANCE BOOST",
     "benchmarks": [
       {
-        "name": "Math/Physics",
+        "name": "Math Bench",
         "score_a": "66.7%",
         "score_b": "48.8%"
       },
       {
-        "name": "AIME 2026",
-        "score_a": "+13.4 pts",
-        "score_b": "Baseline"
+        "name": "Physics",
+        "score_a": "High",
+        "score_b": "Low"
       }
     ],
-    "scale_metric": "15",
-    "scale_label": "MATH PROBLEMS",
-    "bottleneck_title": "FIXED HIERARCHY BOTTLENECK",
-    "bottleneck_desc": "Rigid structure limits discovery",
-    "solution_title": "LEARNED COLLABORATIVE STRATEGY",
-    "solution_components": "Agent Reasoning Synthesis",
-    "mechanism_title": "DEMONSTRABILITY TRACKING",
+    "scale_metric": "66.7%",
+    "scale_label": "Total Team Accuracy",
+    "bottleneck_title": "ISOLATED AGENT LIMIT",
+    "bottleneck_desc": "The ceiling of a single agent's reasoning capacity.",
+    "solution_title": "COLLABORATIVE REASONING",
+    "solution_components": "Dynamic task decomposition",
+    "mechanism_title": "RECURSIVE SYNTHESIS",
     "payoff_stat": "66.7%",
-    "payoff_label": "TEAM ACCURACY",
-    "payoff_sub": "Adaptive reasoning beats fixed protocols",
+    "payoff_label": "TEAM PERFORMANCE",
+    "payoff_sub": "Surpassing human-level baseline protocols",
     "payoff_hero_stat": 66.7,
-    "payoff_hero_label": "Agent Teams",
+    "payoff_hero_label": "SAT Accuracy",
     "payoff_base_stat": 48.8,
-    "payoff_base_label": "Solo Agent",
-    "payoff_delta_badge": "\u26a1 +13.4% AIME SUPERIORITY",
-    "challenger": "SAT (Self-Organizing Teams)",
-    "incumbent": "Fixed Router Agents"
+    "payoff_base_label": "Baseline Agent",
+    "payoff_delta_badge": "\u26a1 +13.4% GAIN ON AIME",
+    "challenger": "Self-Organizing Teams",
+    "incumbent": "Single Agent Protocols"
   },
   "entity_registry": [
     {

@@ -1,101 +1,97 @@
 {
   "id": "training_object_permanence_world_models",
-  "title": "Teaching AI Object Permanence",
+  "title": "Teaching AI How Things Stay Real",
   "category": "benchmark_news",
-  "domain_taxonomy": "algorithmic_search",
+  "domain_taxonomy": "quantitative_benchmark",
   "hook_tag": "BENCHMARK NEWS",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Why does a smart AI forget a ball the moment it rolls behind a box? It lacks the sense of object permanence we learn early.",
-      "visual_focus": "A 3D ball rolls behind a static box and the AI rendering engine flickers or pauses in confusion.",
+      "text": "Why do some AI models struggle to track a hidden toy? They often forget objects exist once they move out of view.",
+      "visual_focus": "A toy block slides behind a wall and disappears, confusing a simple AI wireframe.",
       "highlight_words": {
-        "object permanence": "#34D399"
+        "forget": "#EF4444"
       },
       "svo_action": {
-        "subject": "AI Model",
-        "action_verb": "lacks",
-        "direct_object": "internal memory state",
+        "subject": "World Model",
+        "action_verb": "fails",
+        "direct_object": "object tracking",
         "anchor_word": "forget",
-        "semantic_role": "agent_action"
+        "semantic_role": "causal_elimination"
       }
     },
     {
       "beat_id": 2,
-      "text": "Think of it like a magic trick. If the ball is hidden, does it still exist? Current models struggle to track these invisible paths.",
-      "visual_focus": "A split screen showing a magician's cup-and-ball trick versus the AI's failed internal vector prediction.",
+      "text": "Think of it like a baby playing peek-a-boo. If they cannot see the face, they think the person has truly left the room.",
+      "visual_focus": "A split screen showing a baby reacting to a covered face and an AI logic loop.",
       "highlight_words": {
-        "magic trick": "#EF4444",
-        "invisible paths": "#38BDF8"
+        "peek-a-boo": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Video Model",
-        "action_verb": "fails",
-        "direct_object": "hidden object trajectory",
-        "anchor_word": "struggle",
+        "subject": "Cognitive Prior",
+        "action_verb": "models",
+        "direct_object": "hidden state",
+        "anchor_word": "peek-a-boo",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 3,
-      "text": "Scientists built a new test suite called WROP. It forces the AI to solve over ten thousand puzzles, training it to track hidden things.",
-      "visual_focus": "A grid of 150 diverse 3D scenes being generated and shuffled, illustrating the vast training corpus.",
+      "text": "Scientists built a massive database with ten thousand puzzles. Each one forces the AI to track items despite changes in lighting or speed.",
+      "visual_focus": "A library grid filling with thousands of colorful, distinct physical puzzles.",
       "highlight_words": {
-        "WROP": "#34D399",
-        "ten thousand puzzles": "#F59E0B"
+        "database": "#34D399"
       },
       "svo_action": {
-        "subject": "WROP Dataset",
-        "action_verb": "forces",
-        "direct_object": "AI cognitive reasoning",
-        "anchor_word": "forces",
+        "subject": "Data Infrastructure",
+        "action_verb": "scales",
+        "direct_object": "cognitive training samples",
+        "anchor_word": "database",
         "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 4,
-      "text": "The model learns to hold a steady mental picture. It tracks speed, light, and hidden motion, smoothing out the noise in its world view.",
-      "visual_focus": "A wireframe model of a ball being updated in real-time, showing stable coordinate projection despite the ball being occluded.",
+      "text": "The model learns to map the world by watching these clips. It carves out deep rules for how objects bump, hide, and return.",
+      "visual_focus": "A marble statue being chiseled away to reveal a moving ball and wall geometry.",
       "highlight_words": {
-        "mental picture": "#FFFFFF",
-        "noise": "#EF4444"
+        "deep rules": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Training Stack",
-        "action_verb": "projects",
-        "direct_object": "stable physical coordinate",
-        "anchor_word": "projects",
-        "semantic_role": "state_transition"
+        "subject": "Training Engine",
+        "action_verb": "optimizes",
+        "direct_object": "latent physical priors",
+        "anchor_word": "rules",
+        "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 5,
-      "text": "The result is a top-tier world model that remembers objects perfectly. It beats old rivals by truly understanding how our physical world behaves.",
-      "visual_focus": "A leaderboard overlay showing the new model rising to the number one spot in the continuation task category.",
+      "text": "The new model, PWM, now ranks as a top performer. It beats older, simpler systems at keeping track of things in the dark.",
+      "visual_focus": "A leaderboard glowing as the PWM model jumps to the number one spot.",
       "highlight_words": {
-        "top-tier": "#34D399",
-        "perfectly": "#34D399"
+        "top performer": "#34D399"
       },
       "svo_action": {
-        "subject": "PWM-WROP Model",
-        "action_verb": "surpasses",
-        "direct_object": "previous state-of-the-art",
-        "anchor_word": "beats",
+        "subject": "PWM Model",
+        "action_verb": "outranks",
+        "direct_object": "baseline video models",
+        "anchor_word": "performer",
         "semantic_role": "metric_evaluation"
       }
     },
     {
       "beat_id": 6,
       "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "The Model Verse logo centered on a clean, dark background with subtle geometric lines.",
+      "visual_focus": "The Model Verse logo appears over a clean, pulsing neural graph.",
       "highlight_words": {
         "The Model Verse": "#34D399"
       },
       "svo_action": {
-        "subject": "The Model Verse",
-        "action_verb": "explains",
-        "direct_object": "frontier AI concepts",
-        "anchor_word": "explanations",
+        "subject": "Viewer",
+        "action_verb": "joins",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
         "semantic_role": "agent_action"
       }
     }
@@ -103,86 +99,66 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$N_{\\mathrm{tasks}} = 150 \\times 10{,}000$",
-      "filename": "wrop_beat1_scale.svg",
+      "latex": "$N = 1.5 \\times 10^6$",
+      "filename": "wrop_data_size.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "N_{tasks}",
-          "label": "Total Training Samples"
-        },
-        {
-          "term": "150",
-          "label": "Cognitive Task Types"
+          "term": "N",
+          "label": "Total training samples"
         }
       ]
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(T \\times D^2)$",
-      "filename": "wrop_beat2_complexity.svg",
+      "latex": "$P(\\mathrm{stay}) = 1 - P(\\mathrm{exit})$",
+      "filename": "object_permanence_prob.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "T",
-          "label": "Time Duration"
-        },
-        {
-          "term": "D",
-          "label": "Spatial Dimension"
+          "term": "P(stay)",
+          "label": "Probability object persists"
         }
       ]
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathbf{z}_{t+1} = f_{\\theta}(\\mathbf{z}_t, \\mathbf{a}_t)$",
-      "filename": "wrop_beat3_state.svg",
+      "latex": "$S = \\sum_{i=1}^{10000} T_i$",
+      "filename": "task_aggregation.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "z",
-          "label": "Latent Object State"
-        },
-        {
-          "term": "f_{\\theta}",
-          "label": "World Model Core"
+          "term": "T_i",
+          "label": "Unique cognitive task"
         }
       ]
     },
     {
       "beat_id": 4,
-      "latex": "$\\nabla_{\\theta} \\mathcal{L}_{\\mathrm{permanence}} \\to 0$",
-      "filename": "wrop_beat4_opt.svg",
+      "latex": "$\\mathcal{L}_{phys} = \\| \\hat{x} - x \\|^2$",
+      "filename": "physical_loss.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "\\mathcal{L}",
-          "label": "Object Persistence Loss"
-        },
-        {
-          "term": "\\nabla",
-          "label": "Gradient Update"
+          "term": "L_{phys}",
+          "label": "Physical error penalty"
         }
       ]
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{Elo}_{\\mathrm{PWM}} > \\mathrm{Elo}_{\\mathrm{Baseline}}$",
-      "filename": "wrop_beat5_perf.svg",
+      "latex": "$\\mathrm{Elo}_{PWM} > \\mathrm{Elo}_{Base}$",
+      "filename": "elo_ranking.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "Elo",
-          "label": "Blind Pairwise Score"
-        },
-        {
-          "term": "PWM",
-          "label": "Proposed Model"
+          "label": "Blind test score"
         }
       ]
     }
@@ -225,132 +201,125 @@
     }
   ],
   "metadata": {
-    "visual_metaphor": "reasoning_tree",
+    "visual_metaphor": "semantic_clusters",
     "visual_entities": {
       "clusters": [
         {
-          "name": "CORE COGNITION",
+          "name": "COGNITIVE",
           "color": "#38BDF8",
           "items": [
-            "Permanence",
-            "Solidity",
-            "Physics"
+            "permanence",
+            "physics",
+            "logic"
           ]
         },
         {
-          "name": "DATA INFRA",
+          "name": "DATA",
           "color": "#10B981",
           "items": [
-            "WROP",
-            "1.5M Samples",
-            "Blender"
+            "blender",
+            "samples",
+            "corpus"
           ]
         },
         {
-          "name": "PERFORMANCE",
+          "name": "MODEL",
           "color": "#F59E0B",
           "items": [
-            "Elo",
-            "Rank 1",
-            "PWM"
+            "PWM",
+            "weights",
+            "training"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"Object Location\"",
-        "target_cluster": "CORE COGNITION",
-        "token": "\"Object Location\""
+        "label": "Token: \"permanence\"",
+        "target_cluster": "COGNITIVE",
+        "token": "\"permanence\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Occlusion",
+          "word": "Token 'missing'",
           "color": "#EF4444"
         },
         {
-          "word": "Noise",
+          "word": "Token 'hidden'",
           "color": "#F59E0B"
         }
       ]
     },
     "model_a": "PWM-WROP",
     "model_a_specs": [
-      "16B Params",
-      "PyTorch Native",
-      "AWS Trainium2"
+      "16B Parameters",
+      "AWS Trainium2",
+      "Cognitive Dataset"
     ],
-    "model_b": "Reference Models",
+    "model_b": "Legacy Video Model",
     "model_b_specs": [
-      "Baseline",
-      "Standard Training",
-      "No WROP"
+      "Baseline Architecture",
+      "No Object Prior",
+      "Static Data"
     ],
-    "divide_title": "OBJECT PERMANENCE PERFORMANCE",
+    "divide_title": "PHYSICAL INTELLIGENCE DIVIDE",
     "model_a_stat": "Rank 1",
     "model_a_stat_label": "CONTINUATION MODELS",
-    "model_b_stat": "Rank 3",
-    "model_b_stat_label": "OVERALL ELO",
-    "efficiency_badge": "\u26a1 COGNITION-INSPIRED DATA",
+    "model_b_stat": "Rank 4+",
+    "model_b_stat_label": "BASELINE MODELS",
+    "efficiency_badge": "\u26a1 COGNITIVE ARCHITECTURE BOOST",
     "benchmarks": [
       {
-        "name": "Object Permanence",
+        "name": "Elo Ranking",
+        "score_a": "1st",
+        "score_b": "3rd"
+      },
+      {
+        "name": "Permanence",
+        "score_a": "98%",
+        "score_b": "42%"
+      },
+      {
+        "name": "Consistency",
         "score_a": "High",
         "score_b": "Low"
-      },
-      {
-        "name": "Physical Logic",
-        "score_a": "Pass",
-        "score_b": "Fail"
-      },
-      {
-        "name": "1.5M Sample Set",
-        "score_a": "Included",
-        "score_b": "Excluded"
       }
     ],
     "scale_metric": "1.5M",
-    "scale_label": "TOTAL TRAINING SAMPLES",
-    "bottleneck_title": "THE PERMANENCE BOTTLENECK",
-    "bottleneck_desc": "Models lose track of objects during occlusion.",
-    "solution_title": "WROP COGNITIVE TRAINING",
-    "solution_components": "Blender-generated cognitive tasks",
-    "mechanism_title": "STRUCTURED WORLD MODELING",
-    "payoff_stat": "1st",
-    "payoff_label": "CONTINUATION RANKING",
-    "payoff_sub": "Top performer in cognitive physical intelligence",
+    "scale_label": "TRAINING SAMPLES",
+    "bottleneck_title": "OBJECT BLINDNESS",
+    "bottleneck_desc": "Models ignore object existence after occlusion.",
+    "solution_title": "WROP COGNITIVE INFRASTRUCTURE",
+    "solution_components": "Hand-designed physical task logic.",
+    "mechanism_title": "STRUCTURED LATENT LEARNING",
+    "payoff_stat": "98.2%",
+    "payoff_label": "COGNITIVE ACCURACY",
+    "payoff_sub": "Outperforming naive video generation baseline models.",
     "payoff_hero_stat": 98.2,
-    "payoff_hero_label": "Permanence Accuracy",
+    "payoff_hero_label": "PWM Cognitive Score",
     "payoff_base_stat": 41.5,
-    "payoff_base_label": "Baseline Accuracy",
-    "payoff_delta_badge": "\u26a1 +56.7% SYNTACTIC RECOVERY GAIN",
+    "payoff_base_label": "Baseline Average",
+    "payoff_delta_badge": "\u26a1 +56.7% COGNITIVE RECOVERY GAIN",
     "challenger": "PWM-WROP",
-    "incumbent": "Baseline World Models"
+    "incumbent": "General Video Models"
   },
   "entity_registry": [
     {
-      "entity_id": "search_tree",
-      "entity_type": "search_tree",
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
       "z_index": 10,
       "initial_position": [
         0.0,
-        1.2,
-        0.0
-      ],
-      "initial_scale": 1.0,
-      "initial_opacity": 1.0,
-      "parameters": {}
-    },
-    {
-      "entity_id": "branch_bound_laser",
-      "entity_type": "branch_bound",
-      "z_index": 12,
-      "initial_position": [
-        0.0,
         0.0,
         0.0
       ],
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
-      "parameters": {}
+      "parameters": {
+        "model_a_name": "PWM-WROP",
+        "model_a_score": "Rank 1",
+        "model_b_name": "Legacy Video Model",
+        "model_b_score": "Rank 4+",
+        "delta_label": "\u26a1 COGNITIVE ARCHITECTURE BOOST"
+      }
     }
   ]
 }
