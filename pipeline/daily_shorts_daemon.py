@@ -250,11 +250,11 @@ class DailyShortsDaemon:
 
     def start_standing_daemon(self, target_hours_utc: Optional[List[int]] = None, interval_minutes: int = 30):
         """
-        Runs continuously in the background across staggered peak engagement hours.
-        Default hours (UTC): [3, 7, 11, 14, 17] -> 5 reels spaced throughout the day.
+        Runs continuously in the background across 5 research-backed pre-peak upload windows.
+        Default hours (UTC): [1, 5, 9, 12, 16] -> 5 reels timed right before global viewer surges.
         """
         if target_hours_utc is None:
-            target_hours_utc = [3, 7, 11, 14, 17]
+            target_hours_utc = [1, 5, 9, 12, 16]
 
         print(f"🚀 Starting standing daemon loop (Checking every {interval_minutes}m, Target Hours UTC: {target_hours_utc})...")
         last_triggered_hour = -1

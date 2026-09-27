@@ -2,13 +2,17 @@ name: Autonomous Daily Shorts Daemon
 
 on:
   schedule:
-    # 5 Staggered Daily Reel Drops at Peak Viewership Hours (UTC):
-    # 03:00 UTC = 08:30 AM IST (Morning drop)
-    # 07:00 UTC = 12:30 PM IST (Midday lunch drop)
-    # 11:00 UTC = 04:30 PM IST (Afternoon drop)
-    # 14:00 UTC = 07:30 PM IST (Evening peak drop)
-    # 17:00 UTC = 10:30 PM IST (Late evening nightcap)
-    - cron: '0 3,7,11,14,17 * * *'
+    # 5 Research-Backed Pre-Peak Upload Windows (UTC / IST / EST):
+    # Slot 1: Morning Commute Drop (01:30 UTC = 07:00 AM IST -> Hits 08:30-10:00 AM IST & US West Coast late night)
+    - cron: '30 1 * * *'
+    # Slot 2: Midday Lunch Drop (05:30 UTC = 11:00 AM IST -> Hits 12:30-02:00 PM IST Lunch & Europe 08:00 AM commute)
+    - cron: '30 5 * * *'
+    # Slot 3: US Morning / EU Lunch Drop (09:00 UTC = 02:30 PM IST -> Hits 04:00-05:30 PM IST & 06:30-08:00 AM EST US Wakeup)
+    - cron: '0 9 * * *'
+    # Slot 4: Global Super-Peak (12:30 UTC = 06:00 PM IST -> Hits 07:30-09:30 PM IST Prime + 10:00 AM-12:00 PM EST US Lunch + Europe Evening)
+    - cron: '30 12 * * *'
+    # Slot 5: Bedtime & US Afternoon Drop (16:00 UTC = 09:30 PM IST -> Hits 10:30 PM-Midnight IST Bedtime + 01:00-03:00 PM EST US Afternoon)
+    - cron: '0 16 * * *'
   workflow_dispatch:
     inputs:
       count:
