@@ -1,100 +1,97 @@
 {
   "id": "wanpe_cinematic_prompt_enhancement",
-  "title": "WanPE Cinematic Prompt Planning",
+  "title": "WanPE: The Director's Lens",
   "category": "benchmark_news",
-  "domain_taxonomy": "quantitative_benchmark",
-  "hook_tag": "CINEMATIC PROMPT PLANNING",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "VIDEO GENERATION BREAKTHROUGH",
   "beats": [
     {
       "beat_id": 1,
-      "text": "How do we turn a short prompt into a thirty-second movie? It starts by solving the mystery of what the camera should do next.",
-      "visual_focus": "A blank screen suddenly populating with a branching storyboard of movie scenes.",
+      "text": "How can AI turn a simple text line into a full movie? It starts with a massive, cinematic brain hidden inside the model code.",
+      "visual_focus": "A glowing brain icon expanding into a timeline with film strip markers.",
       "highlight_words": {
-        "thirty-second": "#F59E0B",
-        "mystery": "#38BDF8"
+        "cinematic brain": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Prompt Enhancer",
-        "action_verb": "maps",
-        "direct_object": "Cinematic Storyboard",
-        "anchor_word": "movie",
+        "subject": "WanPE",
+        "action_verb": "expands",
+        "direct_object": "cinematic screenplay",
+        "anchor_word": "brain",
         "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 2,
-      "text": "It is like a director guessing the whole play from one word. Without guidance, the AI gets lost in a sea of messy choices.",
-      "visual_focus": "A single word exploding into a tangled, chaotic cloud of conflicting film styles.",
+      "text": "Writing long scripts is hard. AI often gets lost in the middle, like a writer forgetting the plot halfway through a long, complex story.",
+      "visual_focus": "A tangled ball of yarn representing a broken script sequence.",
       "highlight_words": {
-        "messy choices": "#EF4444"
+        "gets lost": "#EF4444"
       },
       "svo_action": {
-        "subject": "Raw Prompt",
-        "action_verb": "diffuses",
-        "direct_object": "Ambiguous Latent Space",
-        "anchor_word": "choices",
+        "subject": "AI Prompt",
+        "action_verb": "tangles",
+        "direct_object": "script plot",
+        "anchor_word": "lost",
         "semantic_role": "state_transition"
       }
     },
     {
       "beat_id": 3,
-      "text": "WanPE fixes this by looking at real films backwards. It chips away at scenes to find the perfect map for a director to use.",
-      "visual_focus": "A sculptor carving a clay figure labeled 'Shot Plan' from a solid block of grey data.",
+      "text": "WanPE uses a smart trick called reverse construction. It plans the final shot first, then works back to build the start of the scene.",
+      "visual_focus": "An arrow moving right to left from 'End Shot' to 'Start Shot'.",
       "highlight_words": {
-        "backwards": "#34D399",
-        "perfect map": "#34D399"
+        "reverse construction": "#34D399"
       },
       "svo_action": {
-        "subject": "Reverse Constructor",
+        "subject": "WanPE Planner",
         "action_verb": "projects",
-        "direct_object": "Shot-level Plan",
-        "anchor_word": "map",
+        "direct_object": "reverse sequence",
+        "anchor_word": "reverse",
         "semantic_role": "agent_action"
       }
     },
     {
       "beat_id": 4,
-      "text": "The model uses tiny logic gates to keep the story flow on track. It tests every shot to make sure it matches your goal.",
-      "visual_focus": "A series of green gates swinging open or shut as a stream of data tokens flows through them.",
+      "text": "It keeps every piece on track by checking the plan against user goals, pruning away shots that drift from the original vision and intent.",
+      "visual_focus": "A filter removing blurry frames from a sequence.",
       "highlight_words": {
-        "logic gates": "#F59E0B",
-        "on track": "#34D399"
+        "pruning": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Semantic Gate",
-        "action_verb": "filters",
-        "direct_object": "Sequence Coherence",
-        "anchor_word": "gates",
+        "subject": "SC-GRPO Filter",
+        "action_verb": "prunes",
+        "direct_object": "drifting shots",
+        "anchor_word": "pruning",
         "semantic_role": "causal_elimination"
       }
     },
     {
       "beat_id": 5,
-      "text": "The result is a fifty point jump in human preference. It is clear that better planning makes for much better video output today.",
-      "visual_focus": "Two bar charts comparing, with the WanPE bar leaping far above the baseline.",
+      "text": "This method works. It boosts video quality by over fifty points, proving that smart planning beats simple guessing for long, complex video scenes.",
+      "visual_focus": "A bar chart showing a massive spike in preference scores.",
       "highlight_words": {
-        "fifty point jump": "#34D399"
+        "fifty points": "#34D399"
       },
       "svo_action": {
-        "subject": "WanPE",
-        "action_verb": "surpasses",
-        "direct_object": "Human Preference Metric",
-        "anchor_word": "jump",
+        "subject": "WanPE Model",
+        "action_verb": "boosts",
+        "direct_object": "preference score",
+        "anchor_word": "boosts",
         "semantic_role": "metric_evaluation"
       }
     },
     {
       "beat_id": 6,
       "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "A sleek logo animation with the text 'The Model Verse' appearing on a clean dark background.",
+      "visual_focus": "The Model Verse logo centered on a clean dark screen.",
       "highlight_words": {
         "The Model Verse": "#34D399"
       },
       "svo_action": {
-        "subject": "Viewer",
-        "action_verb": "follows",
-        "direct_object": "The Model Verse",
-        "anchor_word": "Follow",
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI architecture",
+        "anchor_word": "Model Verse",
         "semantic_role": "agent_action"
       }
     }
@@ -102,70 +99,70 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$N = 397 \\times 10^9$",
+      "latex": "$P = 397 \\times 10^9$",
       "filename": "wanpe_scale.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "N",
-          "label": "Model Parameters"
+          "term": "P",
+          "label": "Total Parameters"
         }
       ]
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(V^T)$",
+      "latex": "$\\mathcal{O}(L^2)$",
       "filename": "wanpe_complexity.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "V^T",
-          "label": "Video-Prompt Space"
+          "term": "L",
+          "label": "Script Length"
         }
       ]
     },
     {
       "beat_id": 3,
-      "latex": "$P(S | V) = \\prod_{t=1}^{T} P(s_t | s_{<t}, V)$",
+      "latex": "$S_t = f(S_{t+1}, U)$",
       "filename": "wanpe_reverse.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "s_t",
+          "term": "S_t",
           "label": "Shot Plan"
         },
         {
-          "term": "V",
-          "label": "Video Reference"
+          "term": "U",
+          "label": "User Goal"
         }
       ]
     },
     {
       "beat_id": 4,
-      "latex": "$G(x) = \\mathrm{sigmoid}(W_g x) > \\tau$",
-      "filename": "wanpe_gate.svg",
+      "latex": "$\\nabla_{\\theta} \\mathbb{E}[R(S)] > 0$",
+      "filename": "wanpe_gradient.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "G(x)",
-          "label": "Semantic Gate"
+          "term": "R",
+          "label": "Semantic Reward"
         }
       ]
     },
     {
       "beat_id": 5,
-      "latex": "$\\Delta \\mathrm{Pref} = 50.86\\%$",
-      "filename": "wanpe_payoff.svg",
+      "latex": "$\\Delta = 50.86\\%$",
+      "filename": "wanpe_gain.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "\\Delta",
-          "label": "Human Preference Gain"
+          "label": "Preference Boost"
         }
       ]
     }
@@ -208,49 +205,48 @@
     }
   ],
   "metadata": {
-    "visual_metaphor": "semantic_clusters",
+    "visual_metaphor": "reasoning_tree",
     "visual_entities": {
       "clusters": [
         {
-          "name": "DIRECTOR_INTENT",
+          "name": "SHOT_PLANS",
           "color": "#38BDF8",
           "items": [
-            "Shot",
-            "Angle",
-            "Lighting"
+            "start",
+            "mid",
+            "end"
           ]
         },
         {
-          "name": "VIDEO_MODEL",
+          "name": "USER_GOALS",
           "color": "#10B981",
           "items": [
-            "Pixels",
-            "Motion",
-            "Temporal"
+            "theme",
+            "style",
+            "intent"
           ]
         },
         {
-          "name": "PROMPT_ENHANCER",
+          "name": "METRICS",
           "color": "#F59E0B",
           "items": [
-            "Plan",
-            "Goal",
-            "Consistency"
+            "fidelity",
+            "coherence"
           ]
         }
       ],
       "incoming_token": {
-        "label": "User Prompt",
-        "target_cluster": "PROMPT_ENHANCER",
-        "token": "\"Sunset\""
+        "label": "Token: \"Cinematic\"",
+        "target_cluster": "USER_GOALS",
+        "token": "\"Cinematic\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Ambiguity",
+          "word": "Drift",
           "color": "#EF4444"
         },
         {
-          "word": "Conflict",
+          "word": "Loss",
           "color": "#F59E0B"
         }
       ]
@@ -258,61 +254,74 @@
     "model_a": "WanPE-397B",
     "model_a_specs": [
       "397B Params",
-      "Reverse Construction",
-      "SC-GRPO trained"
+      "Reverse Planning",
+      "GRPO Trained"
     ],
-    "model_b": "Raw Prompting",
+    "model_b": "Forward Rewriting",
     "model_b_specs": [
-      "Zero-shot",
-      "Forward inference",
-      "No planning"
+      "Traditional",
+      "Linear Flow",
+      "No Look-back"
     ],
-    "divide_title": "PLANNING VS RAW GENERATION",
-    "model_a_stat": "50.86",
+    "divide_title": "PLANNING VS GENERATION DIVIDE",
+    "model_a_stat": "50.86 pts",
     "model_a_stat_label": "PREFERENCE GAIN",
     "model_b_stat": "Baseline",
-    "model_b_stat_label": "RAW INPUT",
-    "efficiency_badge": "\u26a1 +50.86 PTS PREFERENCE",
+    "model_b_stat_label": "STANDARD PROMPT",
+    "efficiency_badge": "\u26a1 50+ PT PREFERENCE BOOST",
     "benchmarks": [
       {
-        "name": "5-15s Preference",
-        "score_a": "+18.8",
-        "score_b": "Baseline"
+        "name": "5-15s Videos",
+        "score_a": "18.84",
+        "score_b": "0"
       },
       {
-        "name": "30s Preference",
-        "score_a": "+50.8",
-        "score_b": "Baseline"
+        "name": "30s Videos",
+        "score_a": "50.86",
+        "score_b": "0"
       },
       {
         "name": "Fidelity",
         "score_a": "High",
-        "score_b": "Low"
+        "score_b": "Moderate"
       }
     ],
     "scale_metric": "397B",
-    "scale_label": "PARAMETERS",
-    "bottleneck_title": "THE PLANNING GAP",
-    "bottleneck_desc": "Raw prompts lack the cinematic structure required for long-form video consistency.",
-    "solution_title": "REVERSE CONSTRUCTIVE PLANNING",
-    "solution_components": "Video-Grounded Shot Planning",
-    "mechanism_title": "SEMANTIC FIDELITY GATE",
+    "scale_label": "Total Parameters",
+    "bottleneck_title": "LINEAR GENERATION LOSS",
+    "bottleneck_desc": "Sequential drift over long durations",
+    "solution_title": "REVERSE CONSTRUCTION PLANNING",
+    "solution_components": "Cinematic Goal Anchoring",
+    "mechanism_title": "SEMANTIC CONSISTENCY GRPO",
     "payoff_stat": "50.86",
-    "payoff_label": "PREFERENCE GAIN",
-    "payoff_sub": "Dramatic improvement in 30-second long-form video coherence.",
-    "payoff_hero_stat": 50.8,
-    "payoff_hero_label": "WanPE Boost",
+    "payoff_label": "PREFERENCE SCORE INCREASE",
+    "payoff_sub": "Mastering director-level cinematic planning for long-form video",
+    "payoff_hero_stat": 50.86,
+    "payoff_hero_label": "WanPE Gain",
     "payoff_base_stat": 0,
-    "payoff_base_label": "Baseline",
-    "payoff_delta_badge": "\u26a1 +50.86 PTS GAIN",
-    "challenger": "WanPE",
-    "incumbent": "Standard Video Generators"
+    "payoff_base_label": "Baseline Prompt",
+    "payoff_delta_badge": "\u26a1 +50.86 PREFERENCE GAIN",
+    "challenger": "WanPE-397B",
+    "incumbent": "Standard Prompting"
   },
   "entity_registry": [
     {
-      "entity_id": "dual_metric_gauge",
-      "entity_type": "dual_metric",
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
       "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
       "initial_position": [
         0.0,
         0.0,
@@ -320,13 +329,7 @@
       ],
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
-      "parameters": {
-        "model_a_name": "WanPE-397B",
-        "model_a_score": "50.86",
-        "model_b_name": "Raw Prompting",
-        "model_b_score": "Baseline",
-        "delta_label": "\u26a1 +50.86 PTS PREFERENCE"
-      }
+      "parameters": {}
     }
   ]
 }
