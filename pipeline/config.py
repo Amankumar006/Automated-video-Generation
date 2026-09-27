@@ -3,11 +3,12 @@ The Model Verse — Configuration & Design Tokens
 """
 
 import os
+import shutil
 from pathlib import Path
 
-# Paths
-WORKSPACE_ROOT = Path("/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts")
-FFMPEG_BIN = "/Users/amankumar/bin/ffmpeg"
+# Paths (Dynamic for local macOS and cloud Linux)
+WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+FFMPEG_BIN = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg") or "/Users/amankumar/bin/ffmpeg"
 KOKORO_MODEL_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "kokoro-v1.0.onnx")
 KOKORO_VOICES_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "voices-v1.0.bin")
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
