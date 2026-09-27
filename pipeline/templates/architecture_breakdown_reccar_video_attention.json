@@ -1,0 +1,321 @@
+{
+  "id": "reccar_video_attention",
+  "title": "Closing the Cross-Attention Gap",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "CROSS-MODAL ALIGNMENT GAP",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do AI models get video right but fail to sync sound or motion? It feels like the two sides don't talk well enough.",
+      "visual_focus": "A split-screen showing a video stream on the left and audio waveform on the right, with a broken bridge connecting them.",
+      "highlight_words": {
+        "sync": "#EF4444",
+        "talk": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "AI Model",
+        "action_verb": "fails",
+        "direct_object": "Modality Sync",
+        "anchor_word": "fail",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of a student reading a book. They track the text well, but the book does not track where their eyes are looking back.",
+      "visual_focus": "An illustration of a student's eyes moving across a page, representing the one-way street of information.",
+      "highlight_words": {
+        "one-way": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Student",
+        "action_verb": "reads",
+        "direct_object": "Book Text",
+        "anchor_word": "reading",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "We fix this with a bridge. We make the sound and motion look at the video with the same care the video uses.",
+      "visual_focus": "A glowing bridge forming between the audio icons and the video stream on the chalkboard.",
+      "highlight_words": {
+        "bridge": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Bridge Mechanism",
+        "action_verb": "aligns",
+        "direct_object": "Modality Correspondence",
+        "anchor_word": "bridge",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "Our rule forces the weak side to match the strong side. It treats both like equal partners dancing in a perfectly timed loop.",
+      "visual_focus": "A math constraint pulling two graphs together until their peaks overlap perfectly.",
+      "highlight_words": {
+        "forces": "#F59E0B",
+        "equal": "#34D399"
+      },
+      "svo_action": {
+        "subject": "RecCAR Rule",
+        "action_verb": "forces",
+        "direct_object": "Correspondence Gap",
+        "anchor_word": "forces",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "The result is clear. Humans look more real, and the sound matches the image, cutting down on messy blurs and timing drifts.",
+      "visual_focus": "A blurry video sharpening into a crisp image with audio peaks perfectly synced to mouth movements.",
+      "highlight_words": {
+        "clear": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Regularization",
+        "action_verb": "improves",
+        "direct_object": "Human Anatomy Score",
+        "anchor_word": "result",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo pulsing in the center of the screen.",
+      "highlight_words": {
+        "Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI Mechanisms",
+        "anchor_word": "explanations",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$G = A_{v \\to m} - A_{m \\to v}$",
+      "filename": "gap_eq.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "G",
+          "label": "Correspondence Gap"
+        },
+        {
+          "term": "A",
+          "label": "Attention Score"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$P(v|m) \\neq P(m|v)$",
+      "filename": "asymmetry_eq.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "P",
+          "label": "Probability"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{L}_{Rec} = KL(A_{v \\to m} || A_{m \\to v})$",
+      "filename": "regularizer_eq.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "KL",
+          "label": "Similarity Measure"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$A_{m \\to v} \\approx A_{v \\to m}$",
+      "filename": "alignment_eq.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "A",
+          "label": "Reciprocal Alignment"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta_{score} = 0.75 - 0.69$",
+      "filename": "improvement_eq.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "0.75",
+          "label": "New Human Anatomy Score"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Video",
+          "color": "#38BDF8",
+          "items": [
+            "frames",
+            "motion",
+            "pixels"
+          ]
+        },
+        {
+          "name": "Modality",
+          "color": "#10B981",
+          "items": [
+            "audio",
+            "motion",
+            "sync"
+          ]
+        },
+        {
+          "name": "Bridge",
+          "color": "#F59E0B",
+          "items": [
+            "alignment",
+            "regularization",
+            "RecCAR"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"motion_sync\"",
+        "target_cluster": "Modality",
+        "token": "\"motion_sync\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Attention Gap",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    "model_a": "RecCAR-Enhanced Transformer",
+    "model_a_specs": [
+      "Cross-modal alignment",
+      "KL regularization",
+      "Joint training"
+    ],
+    "model_b": "Standard Video Diffusion",
+    "model_b_specs": [
+      "Unconstrained attention",
+      "Asymmetric mapping",
+      "Drift susceptible"
+    ],
+    "divide_title": "RECIPROCAL ATTENTION GAP",
+    "model_a_stat": "0.75",
+    "model_a_stat_label": "HUMAN ANATOMY SCORE",
+    "model_b_stat": "0.69",
+    "model_b_stat_label": "BASELINE ANATOMY",
+    "efficiency_badge": "\u26a1 +8.7% ANATOMY GAIN",
+    "benchmarks": [
+      {
+        "name": "Anatomy Score",
+        "score_a": "0.75",
+        "score_b": "0.69"
+      },
+      {
+        "name": "Sync Error",
+        "score_a": "0.752",
+        "score_b": "0.804"
+      },
+      {
+        "name": "Overall Perf",
+        "score_a": "High",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "0.05",
+    "scale_label": "Latency Gap Reduced",
+    "bottleneck_title": "MODALITY MISMATCH",
+    "bottleneck_desc": "One-way attention bottleneck",
+    "solution_title": "RECIPROCAL REGULARIZATION",
+    "solution_components": "Attention Bridge",
+    "mechanism_title": "KL-DIVERGENCE ALIGNMENT",
+    "payoff_stat": "0.75",
+    "payoff_label": "ANATOMY SCORE",
+    "payoff_sub": "Aligning reciprocal cross-modal signals",
+    "payoff_hero_stat": 0.75,
+    "payoff_hero_label": "RecCAR Score",
+    "payoff_base_stat": 0.69,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +8.7% ALIGNMENT IMPROVEMENT",
+    "challenger": "RecCAR",
+    "incumbent": "Baseline Diffusion"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

@@ -23,6 +23,8 @@ def sanitize_latex(latex_str: str) -> str:
     cleaned = re.sub(r'\\overbrace\{([^}]+)\}(?:\^\{[^}]+\})?', r'\1', cleaned)
     # Replace \mathbb{R} with \mathbf{R}
     cleaned = re.sub(r'\\mathbb\{([A-Za-z])\}', r'\\mathbf{\1}', cleaned)
+    # Replace unsupported arrows with standard mathtext equivalents
+    cleaned = cleaned.replace(r'\implies', r'\to').replace(r'\iff', r'\leftrightarrow')
     # Fix dollar signs reliably
     cleaned = cleaned.strip("$").strip()
     return f"${cleaned}$"

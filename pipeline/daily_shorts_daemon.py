@@ -26,45 +26,54 @@ DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]]) -> Dict[str, Any]:
+def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]], count: int = 1) -> List[Dict[str, Any]]:
     """
-    Evaluates candidate trending papers with Gemini to pick the most
-    curiosity-inducing, visually teachable paper for a 3Blue1Brown-style short.
+    Evaluates candidate trending papers with Gemini to pick the top `count`
+    curiosity-inducing, visually teachable papers across diverse AI domains.
     """
     import google.generativeai as genai
 
+    if not candidates:
+        return []
+
+    target_count = min(count, len(candidates))
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        return candidates[0]
+        return candidates[:target_count]
 
     genai.configure(api_key=api_key)
 
     cand_summaries = []
-    for i, c in enumerate(candidates[:5]):
+    num_eval = min(20, len(candidates))
+    for i, c in enumerate(candidates[:num_eval]):
         cand_summaries.append(
             f"[{i+1}] Title: {c['title']}\n"
             f"    arXiv: {c['id']}\n"
             f"    Category: {c.get('recommended_category', 'mechanism_deepdive')}\n"
-            f"    Abstract: {c['abstract'][:300]}..."
+            f"    Abstract: {c['abstract'][:250]}..."
         )
 
     prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI.
 
-Review these top 5 trending AI papers from today:
+Review these top {len(cand_summaries)} trending AI papers from today:
 {chr(10).join(cand_summaries)}
 
-Select the SINGLE BEST paper for a 45-second educational animated Short.
+Select the {target_count} BEST and MOST DIVERSE papers for 45-second educational animated Shorts.
 Criteria:
-1. High Public Fascination: Does it answer a fascinating question that even curious non-specialists care about? (e.g. memory, reasoning, attention, world models, neural circuits).
-2. Physical Analogy Potential: Can the core idea be explained using a physical daily-life metaphor (like TV static, cloud shapes, library catalogs, cutting boards)?
-3. Visual Geometry: Can Manim represent this using clear chalkboard geometry (graphs, trees, vectors, fields)?
+1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits).
+2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static)?
+3. Domain Diversity: Pick papers from DIFFERENT categories (e.g. architectures, reasoning/planning, attention/memory, multimodal/diffusion, benchmarks) to keep the channel varied.
 
 Return ONLY valid JSON matching this schema:
 {{
-  "selected_index": 1,
-  "reasoning": "Brief explanation of why this paper was chosen",
-  "recommended_hook": "One-sentence curiosity hook for the script",
-  "suggested_everyday_analogy": "The physical analogy to base the explanation on"
+  "selected_papers": [
+    {{
+      "selected_index": 1,
+      "reasoning": "Brief explanation of why this paper was chosen",
+      "recommended_hook": "One-sentence curiosity hook for the script",
+      "suggested_everyday_analogy": "The physical analogy to base the explanation on"
+    }}
+  ]
 }}
 """
     candidate_models = ["gemini-3.1-flash-lite", "gemini-flash-latest", "gemini-2.0-flash", "gemini-3.8-flash"]
@@ -77,16 +86,37 @@ Return ONLY valid JSON matching this schema:
             )
             if response and response.text:
                 decision = json.loads(response.text.strip())
-                idx = int(decision.get("selected_index", 1)) - 1
-                if 0 <= idx < len(candidates):
-                    selected = candidates[idx]
-                    selected["editorial_notes"] = decision
-                    return selected
-        except Exception as e:
+                chosen_items = decision.get("selected_papers", [])
+                if not chosen_items and "selected_index" in decision:
+                    chosen_items = [decision]
+
+                selected_list = []
+                selected_indices = set()
+                for item in chosen_items:
+                    idx = int(item.get("selected_index", 1)) - 1
+                    if 0 <= idx < len(candidates) and idx not in selected_indices:
+                        cand = candidates[idx]
+                        cand["editorial_notes"] = item
+                        selected_list.append(cand)
+                        selected_indices.add(idx)
+                        if len(selected_list) >= target_count:
+                            break
+
+                # Fill any shortfall with remaining diverse candidates
+                for c_idx, cand in enumerate(candidates):
+                    if len(selected_list) >= target_count:
+                        break
+                    if c_idx not in selected_indices:
+                        selected_list.append(cand)
+                        selected_indices.add(c_idx)
+
+                if selected_list:
+                    return selected_list
+        except Exception:
             continue
 
-    print("⚠️ Pedagogical evaluation fallback: using top scoring candidate")
-    return candidates[0]
+    print(f"⚠️ Pedagogical evaluation fallback: selecting top {target_count} candidates")
+    return candidates[:target_count]
 
 
 class DailyShortsDaemon:
@@ -97,123 +127,155 @@ class DailyShortsDaemon:
         self.privacy = privacy
         self.critic = ScriptCritic()
 
-    def run_daily_cycle(self, dry_run: bool = False, publish: bool = True) -> Optional[Dict[str, Any]]:
-        """Executes one complete daily discovery, production, and publishing cycle."""
+    def run_daily_cycle(self, count: int = 1, dry_run: bool = False, publish: bool = True) -> List[Dict[str, Any]]:
+        """Executes discovery, production, and publishing for `count` reels."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
-        print(f"⏰ Cycle Triggered: {timestamp}")
+        print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reels")
         print("=" * 80)
 
         # 1. Fetch & score trending papers
         print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
-        papers = get_trending_digest(limit=25)
+        papers = get_trending_digest(limit=35)
         unprocessed = [p for p in papers if not p.get("is_processed")]
 
         if not unprocessed:
             print("ℹ️ All trending papers for today have already been produced. Daily quota satisfied.")
-            return None
+            return []
 
-        print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top pedagogical breakthrough...")
+        print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
 
-        # 2. Select top candidate using pedagogical viability filter
-        top_paper = evaluate_pedagogical_viability(unprocessed)
-        title = top_paper["title"]
-        arxiv_id = top_paper["id"]
-        category = top_paper.get("recommended_category", "mechanism_deepdive")
-        notes = top_paper.get("editorial_notes", {})
+        # 2. Select top diverse candidates using pedagogical viability filter
+        selected_papers = evaluate_pedagogical_viability(unprocessed, count=count)
+        print(f"\n🏆 Selected {len(selected_papers)} Breakthrough Papers for Today's Reels Quota:")
+        for idx, p in enumerate(selected_papers):
+            notes = p.get("editorial_notes", {})
+            print(f"   [{idx+1}/{len(selected_papers)}] {p['title']} ({p['id']}) — Category: {p.get('recommended_category', 'mechanism_deepdive').upper()}")
+            if notes.get("recommended_hook"):
+                print(f"       💡 Hook: {notes.get('recommended_hook')}")
+            if notes.get("suggested_everyday_analogy"):
+                print(f"       🍎 Analogy: {notes.get('suggested_everyday_analogy')}")
 
-        print(f"\n🏆 Selected Today's Breakthrough:")
-        print(f"   📄 Title: {title}")
-        print(f"   🆔 arXiv: {arxiv_id} | Category: {category.upper()}")
-        if notes:
-            print(f"   💡 Editorial Hook: {notes.get('recommended_hook')}")
-            print(f"   🍎 Everyday Analogy: {notes.get('suggested_everyday_analogy')}")
+        reports = []
 
-        if dry_run:
-            print("\n🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
-            from pipeline.script_generator import generate_script
-            spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
-            audit = self.critic.evaluate_script(spec, use_llm=False)
-            print(f"   📊 Pedagogical Score: {audit.overall_score}/10 | Grade Level: {audit.grade_level}")
-            print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon}")
-            print(f"   ✅ Quality Gate Passed: {audit.passed}")
-            print("\n🎉 [DRY-RUN] Candidate evaluated successfully. Skipping render & upload.")
-            return {"paper": top_paper, "spec": spec, "audit": audit}
+        # 3. Produce each reel sequentially
+        for idx, top_paper in enumerate(selected_papers):
+            title = top_paper["title"]
+            arxiv_id = top_paper["id"]
+            category = top_paper.get("recommended_category", "mechanism_deepdive")
+            notes = top_paper.get("editorial_notes", {})
 
-        # 3. Produce Full Video (Script + Critic + 1440p60 Manim + Thumbnail + YouTube)
-        print("\n🎬 Step 2: Launching End-to-End Autonomous Production Pipeline...")
-        video_out = auto_produce(
-            arxiv=arxiv_id,
-            category=category,
-            quality=self.quality,
-            publish=publish,
-            privacy=self.privacy
-        )
+            print("\n" + "-" * 70)
+            print(f"🎬 Producing Reel [{idx+1}/{len(selected_papers)}]: {title}")
+            print(f"   arXiv: {arxiv_id} | Category: {category.upper()}")
+            print("-" * 70)
 
-        record_paper_production(arxiv_id, title, category, video_out)
+            if dry_run:
+                print("🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
+                from pipeline.script_generator import generate_script
+                spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
+                audit = self.critic.evaluate_script(spec, use_llm=False)
+                print(f"   📊 Pedagogical Score: {audit.overall_score}/10 | Grade Level: {audit.grade_level}")
+                print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon}")
+                print(f"   ✅ Quality Gate Passed: {audit.passed}")
+                reports.append({
+                    "paper": top_paper,
+                    "spec": spec,
+                    "audit": audit,
+                    "status": "dry_run_success"
+                })
+                continue
+
+            # Production (Script + Critic + 1440p60 Manim + Thumbnail + YouTube)
+            video_out = auto_produce(
+                arxiv=arxiv_id,
+                category=category,
+                quality=self.quality,
+                publish=publish,
+                privacy=self.privacy
+            )
+
+            record_paper_production(arxiv_id, title, category, video_out)
+
+            report_item = {
+                "reel_index": idx + 1,
+                "timestamp": timestamp,
+                "paper_id": arxiv_id,
+                "title": title,
+                "category": category,
+                "video_path": video_out,
+                "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
+                "editorial_notes": notes
+            }
+            reports.append(report_item)
 
         # 4. Generate Daily Production Log Report
-        report_data = {
-            "timestamp": timestamp,
-            "paper_id": arxiv_id,
-            "title": title,
-            "category": category,
-            "video_path": video_out,
-            "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
-            "editorial_notes": notes
-        }
+        if not dry_run and reports:
+            today_str = datetime.date.today().isoformat()
+            log_file = DAEMON_LOGS_DIR / f"daemon_report_{today_str}.json"
+            with open(log_file, "w", encoding="utf-8") as f:
+                json.dump({"date": today_str, "total_reels": len(reports), "reels": reports}, f, indent=2)
 
-        log_file = DAEMON_LOGS_DIR / f"daemon_report_{datetime.date.today().isoformat()}.json"
-        with open(log_file, "w", encoding="utf-8") as f:
-            json.dump(report_data, f, indent=2)
+            md_file = DAEMON_LOGS_DIR / f"daemon_report_{today_str}.md"
+            reels_md = []
+            for r in reports:
+                ed = r.get("editorial_notes", {})
+                reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
+- **arXiv ID:** [{r['paper_id']}](https://arxiv.org/abs/{r['paper_id']})
+- **Category:** `{r['category']}`
+- **Editorial Hook:** *{ed.get('recommended_hook', 'N/A')}*
+- **Everyday Analogy:** *{ed.get('suggested_everyday_analogy', 'N/A')}*
+- **Local Master Video:** `{r['video_path']}`
+- **Resolution:** `{r['resolution']}`
+""")
 
-        md_file = DAEMON_LOGS_DIR / f"daemon_report_{datetime.date.today().isoformat()}.md"
-        with open(md_file, "w", encoding="utf-8") as f:
-            f.write(f"""# 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** {datetime.date.today().isoformat()} | **Timestamp:** {timestamp}
+            with open(md_file, "w", encoding="utf-8") as f:
+                f.write(f"""# 🤖 The Model Verse — Daily Shorts Production Report
+**Date:** {today_str} | **Timestamp:** {timestamp}
+**Total Reels Produced:** {len(reports)} / {count}
 
-## 🏆 Selected Breakthrough Paper
-- **Title:** {title}
-- **arXiv ID:** [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})
-- **Taxonomy / Category:** `{category}`
-- **Editorial Hook:** *{notes.get('recommended_hook', 'N/A')}*
-- **Everyday Physical Analogy:** *{notes.get('suggested_everyday_analogy', 'N/A')}*
-
+{''.join(reels_md)}
 ## 🎬 Production & Broadcast Specs
 - **Master Resolution:** {BROADCAST_WIDTH}x{BROADCAST_HEIGHT} (2K QHD Vertical)
 - **Framerate:** {BROADCAST_FPS} FPS
 - **Codec Profile:** High-Tier VP09/AV01 Compatible (CRF 15, BT.709)
-- **Local Master Video:** `{video_out}`
 - **YouTube Upload Privacy:** `{self.privacy}`
 """)
 
-        print(f"\n✅ Daily Production Cycle Complete!")
-        print(f"🎥 Master Video: {video_out}")
-        print(f"📑 Daemon Log Saved: {log_file} and {md_file}")
-        return report_data
+            print(f"\n✅ Daily Production Cycle Complete for {len(reports)} Reels!")
+            print(f"📑 Daemon Log Saved: {log_file} and {md_file}")
 
-    def start_standing_daemon(self, target_hour_utc: int = 3, interval_minutes: int = 60):
+        return reports
+
+    def start_standing_daemon(self, target_hours_utc: Optional[List[int]] = None, interval_minutes: int = 30):
         """
-        Runs continuously as a background process, checking daily at target_hour_utc (e.g. 03:00 UTC = 8:30 AM IST).
+        Runs continuously in the background across staggered peak engagement hours.
+        Default hours (UTC): [3, 7, 11, 14, 17] -> 5 reels spaced throughout the day.
         """
-        print(f"🚀 Starting standing daemon loop (Checking every {interval_minutes}m, Target: {target_hour_utc:02d}:00 UTC)...")
+        if target_hours_utc is None:
+            target_hours_utc = [3, 7, 11, 14, 17]
+
+        print(f"🚀 Starting standing daemon loop (Checking every {interval_minutes}m, Target Hours UTC: {target_hours_utc})...")
+        last_triggered_hour = -1
         while True:
             now = datetime.datetime.now(datetime.timezone.utc)
-            # Check if current hour matches target and hasn't produced today
-            if now.hour == target_hour_utc:
+            if now.hour in target_hours_utc and now.hour != last_triggered_hour:
+                print(f"⏰ Peak Hour Reached ({now.hour:02d}:00 UTC). Triggering Reel Production...")
                 try:
-                    self.run_daily_cycle(dry_run=False, publish=True)
+                    self.run_daily_cycle(count=1, dry_run=False, publish=True)
+                    last_triggered_hour = now.hour
                 except Exception as e:
-                    print(f"⚠️ Error during daemon daily cycle: {e}")
+                    print(f"⚠️ Error during daemon cycle: {e}")
             time.sleep(interval_minutes * 60)
 
 
 def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Autonomous Daily Paper-to-Shorts Daemon")
-    parser.add_argument("--run-now", action="store_true", help="Execute one production cycle immediately")
+    parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
+    parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
-    parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop")
+    parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
     parser.add_argument("--quality", default="-qh", help="Render quality (default: -qh 60fps)")
     args = parser.parse_args()
@@ -221,13 +283,14 @@ def main():
     daemon = DailyShortsDaemon(quality=args.quality, privacy=args.privacy)
 
     if args.dry_run:
-        daemon.run_daily_cycle(dry_run=True, publish=False)
+        daemon.run_daily_cycle(count=args.count, dry_run=True, publish=False)
     elif args.daemon:
         daemon.start_standing_daemon()
     else:
-        # Default to running one cycle
-        daemon.run_daily_cycle(dry_run=False, publish=True)
+        # Default to running cycle with specified count
+        daemon.run_daily_cycle(count=args.count, dry_run=False, publish=True)
 
 
 if __name__ == "__main__":
     main()
+

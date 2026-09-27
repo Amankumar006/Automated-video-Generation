@@ -2,9 +2,26 @@ name: Autonomous Daily Shorts Daemon
 
 on:
   schedule:
-    - cron: '0 3 * * *' # Daily at 03:00 UTC (8:30 AM IST)
+    # 5 Staggered Daily Reel Drops at Peak Viewership Hours (UTC):
+    # 03:00 UTC = 08:30 AM IST (Morning drop)
+    # 07:00 UTC = 12:30 PM IST (Midday lunch drop)
+    # 11:00 UTC = 04:30 PM IST (Afternoon drop)
+    # 14:00 UTC = 07:30 PM IST (Evening peak drop)
+    # 17:00 UTC = 10:30 PM IST (Late evening nightcap)
+    - cron: '0 3,7,11,14,17 * * *'
   workflow_dispatch:
     inputs:
+      count:
+        description: 'Number of reels to produce'
+        required: false
+        default: '1'
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
       dry_run:
         description: 'Dry run (Scrape and evaluate without rendering)'
         required: false
@@ -71,11 +88,12 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          COUNT="${{ github.event.inputs.count || '1' }}"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            python3 pipeline/daily_shorts_daemon.py --dry-run
+            python3 pipeline/daily_shorts_daemon.py --dry-run --count "$COUNT"
           else
             PRIVACY="${{ github.event.inputs.privacy || 'unlisted' }}"
-            python3 pipeline/daily_shorts_daemon.py --run-now --privacy "$PRIVACY"
+            python3 pipeline/daily_shorts_daemon.py --run-now --count "$COUNT" --privacy "$PRIVACY"
           fi
 
       - name: Commit & Push Daily Production Logs

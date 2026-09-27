@@ -1,0 +1,264 @@
+{
+  "id": "transformer_superposition_linearity",
+  "title": "Dual Thought Transformers",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "LINEAR SUPERPOSITION HYPOTHESIS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Can a single brain hold two distinct thoughts at once? Usually, AI models act like a crowded room where every voice talks over the other.",
+      "visual_focus": "Two distinct color-coded waves merging into one thick, messy line.",
+      "highlight_words": {
+        "two distinct thoughts": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Neural Network",
+        "action_verb": "merges",
+        "direct_object": "distinct input streams",
+        "anchor_word": "merging",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of this like two radio stations playing on one dial. The model blends these signals into a messy static pile of overlapping sound waves.",
+      "visual_focus": "A radio tuner dial showing two signal patterns overlapping in a single channel.",
+      "highlight_words": {
+        "overlapping": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Model Weights",
+        "action_verb": "compresses",
+        "direct_object": "input signals",
+        "anchor_word": "blends",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "Scientists found that this is not a bug. It is a feature. The model stores different ideas in the same space to save room efficiently.",
+      "visual_focus": "A bookshelf where multiple books are squeezed onto one shelf, showing internal structure.",
+      "highlight_words": {
+        "feature": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Transformer Architecture",
+        "action_verb": "projects",
+        "direct_object": "latent concepts",
+        "anchor_word": "stores",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "By tuning the model gently, we teach it to peel these layers apart. It turns the static back into two clean, separate streams of thought.",
+      "visual_focus": "A slider pulling two colored light beams away from each other to show hidden details.",
+      "highlight_words": {
+        "peel": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Guided Decoding",
+        "action_verb": "disentangles",
+        "direct_object": "superposed outputs",
+        "anchor_word": "peel",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "Now, one forward pass generates two clear answers. This discovery proves that even complex models keep a simple, linear map hidden inside their core.",
+      "visual_focus": "One input arrow branching into two precise, high-confidence output sequences.",
+      "highlight_words": {
+        "linear map": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Transformer Core",
+        "action_verb": "produces",
+        "direct_object": "parallel continuations",
+        "anchor_word": "generates",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appearing on a clean, minimalist background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{thoughts}} = 2; d_{\\mathrm{model}} = 4096$",
+      "filename": "scale_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Simultaneous thoughts"
+        },
+        {
+          "term": "d",
+          "label": "Model dimension"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{y} = f(x_1 + x_2) \\approx f(x_1) + f(x_2)$",
+      "filename": "superposition_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "f(x)",
+          "label": "Transformer pass"
+        },
+        {
+          "term": "x_i",
+          "label": "Input streams"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{H} = \\mathrm{dim}(\\mathrm{span}(\\{v_1, v_2\\}))$",
+      "filename": "latent_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "v_i",
+          "label": "Thought vectors"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\Delta = \\| \\hat{y} - \\frac{y_1 + y_2}{2} \\| < \\tau$",
+      "filename": "disentangle_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "tau",
+          "label": "Error threshold"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Accuracy}_{\\mathrm{dual}} = 94.2\\%$",
+      "filename": "performance_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Accuracy",
+          "label": "Dual stream success"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "semantic_clusters",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Thought A",
+          "color": "#38BDF8",
+          "items": [
+            "idea_1",
+            "path_1"
+          ]
+        },
+        {
+          "name": "Thought B",
+          "color": "#10B981",
+          "items": [
+            "idea_2",
+            "path_2"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Input\"",
+        "target_cluster": "Thought A",
+        "token": "\"Dual Input\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Thought A",
+          "color": "#38BDF8"
+        },
+        {
+          "word": "Thought B",
+          "color": "#10B981"
+        }
+      ]
+    }
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}
