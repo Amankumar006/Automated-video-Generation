@@ -134,7 +134,7 @@ Return ONLY valid JSON matching this schema:
 class DailyShortsDaemon:
     """Autonomous scheduler and engine for daily AI Shorts production."""
 
-    def __init__(self, quality: str = "-qh", privacy: str = "unlisted"):
+    def __init__(self, quality: str = "-qh", privacy: str = "public"):
         self.quality = quality
         self.privacy = privacy
         self.critic = ScriptCritic()
@@ -298,7 +298,7 @@ def main():
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
-    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
+    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--quality", default="-qh", help="Render quality (default: -qh 60fps)")
     args = parser.parse_args()
 

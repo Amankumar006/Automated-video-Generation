@@ -34,7 +34,7 @@ def auto_produce(
     skip_script: bool = False,
     template: str = None,
     publish: bool = False,
-    privacy: str = "unlisted",
+    privacy: str = "public",
     dry_run_publish: bool = False,
     enable_music: bool = True,
     legacy_engine: bool = False
@@ -377,7 +377,7 @@ def main():
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
-    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
+    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
     args = parser.parse_args()

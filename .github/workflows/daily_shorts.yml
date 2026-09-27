@@ -34,12 +34,12 @@ on:
       privacy:
         description: 'YouTube upload privacy'
         required: false
-        default: 'unlisted'
+        default: 'public'
         type: choice
         options:
+          - public
           - unlisted
           - private
-          - public
 
 jobs:
   produce-short:
@@ -96,7 +96,7 @@ jobs:
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
             python3 pipeline/daily_shorts_daemon.py --dry-run --count "$COUNT"
           else
-            PRIVACY="${{ github.event.inputs.privacy || 'unlisted' }}"
+            PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
             python3 pipeline/daily_shorts_daemon.py --run-now --count "$COUNT" --privacy "$PRIVACY"
           fi
 
