@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <!-- Incoming Mixed Beam -->
+  <g id="incoming_tangled_beam">
+    <text x="160" y="320" fill="#EF4444" font-family="sans-serif" font-size="20" font-weight="700" text-anchor="middle">MIXED STATIC</text>
+    <line x1="80" y1="450" x2="330" y2="450" stroke="#EF4444" stroke-width="8" stroke-linecap="round"/>
+    <line x1="80" y1="450" x2="330" y2="450" stroke="#F59E0B" stroke-width="4" stroke-dasharray="8 4"/>
+  </g>
+  <!-- Optical / Linear Decoder Prism -->
+  <g id="decoder_prism">
+    <polygon points="400,320 480,560 320,560" fill="#1E293B" stroke="#38BDF8" stroke-width="5"/>
+    <text x="400" y="480" fill="#38BDF8" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">LINEAR</text>
+    <text x="400" y="505" fill="#38BDF8" font-family="sans-serif" font-size="16" text-anchor="middle">DECODER</text>
+  </g>
+  <!-- Separated Disentangled Streams -->
+  <g id="separated_streams">
+    <!-- Stream 1 (Blue) Upward -->
+    <path d="M 430 430 L 720 280" fill="none" stroke="#38BDF8" stroke-width="7" stroke-linecap="round"/>
+    <text x="620" y="250" fill="#38BDF8" font-family="sans-serif" font-size="20" font-weight="700">CLEAN THOUGHT 1</text>
+    <!-- Stream 2 (Mint) Downward -->
+    <path d="M 430 470 L 720 620" fill="none" stroke="#34D399" stroke-width="7" stroke-linecap="round"/>
+    <text x="620" y="660" fill="#34D399" font-family="sans-serif" font-size="20" font-weight="700">CLEAN THOUGHT 2</text>
+  </g>
+  <text x="400" y="780" fill="#F8FAFC" font-family="sans-serif" font-size="22" font-weight="700" text-anchor="middle">PEELING LAYERS APART</text>
+  <text x="400" y="815" fill="#94A3B8" font-family="sans-serif" font-size="16" text-anchor="middle">Tuned projection isolates each independent concept</text>
+</svg>

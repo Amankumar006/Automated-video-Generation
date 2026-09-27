@@ -38,7 +38,12 @@ def _spec_hash(spec: Dict[str, Any]) -> str:
     return hashlib.sha1(canonical.encode()).hexdigest()[:12]
 
 
-def _render_draft_video(spec: Dict[str, Any], tmp_spec_path: Path) -> Optional[str]:
+def _render_draft_video(
+    spec: Dict[str, Any],
+    tmp_spec_path: Path,
+    scene_file: str = "manim_engine/scenes/script_driven_scene.py",
+    scene_class: str = "ScriptDrivenScene"
+) -> Optional[str]:
     """
     Renders a -ql draft video from the given spec via a subprocess Manim call.
     Returns path to the rendered MP4, or None on failure.
@@ -53,15 +58,15 @@ def _render_draft_video(spec: Dict[str, Any], tmp_spec_path: Path) -> Optional[s
     cmd = [
         sys.executable, "-m", "manim",
         "-ql",
-        "manim_engine/scenes/dynamic_scene.py",
-        "DynamicCompositeScene"
+        scene_file,
+        scene_class
     ]
     res = subprocess.run(cmd, cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True)
     if res.returncode != 0:
         print(f"⚠️ Draft render error:\n{res.stderr[-800:]}")
         return None
 
-    # Locate the output MP4 from stdout or recursively in media/videos/dynamic_scene
+    # Locate the output MP4 from stdout or recursively in media/videos/
     out_text = res.stdout + "\n" + res.stderr
     for line in out_text.splitlines():
         if "File ready at" in line or "File written to" in line:
@@ -74,11 +79,13 @@ def _render_draft_video(spec: Dict[str, Any], tmp_spec_path: Path) -> Optional[s
                 if cand.exists():
                     return str(cand)
 
-    out_dir = PROJECT_ROOT / "media" / "videos" / "dynamic_scene"
-    candidates = sorted(out_dir.glob("**/*.mp4"), key=lambda p: p.stat().st_mtime, reverse=True)
-    for c in candidates:
-        if "partial_movie_files" not in str(c):
-            return str(c)
+    for sub_dir in ["script_driven_scene", "dynamic_scene"]:
+        out_dir = PROJECT_ROOT / "media" / "videos" / sub_dir
+        if out_dir.exists():
+            candidates = sorted(out_dir.glob("**/*.mp4"), key=lambda p: p.stat().st_mtime, reverse=True)
+            for c in candidates:
+                if "partial_movie_files" not in str(c):
+                    return str(c)
     return None
 
 

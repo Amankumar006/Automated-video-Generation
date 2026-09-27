@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900" width="800" height="900">
+  <!-- Coordinate Grid -->
+  <g id="grid_axes">
+    <line x1="150" y1="500" x2="650" y2="500" stroke="#475569" stroke-width="3"/>
+    <line x1="400" y1="750" x2="400" y2="250" stroke="#475569" stroke-width="3"/>
+    <polygon points="655,500 640,492 640,508" fill="#475569"/>
+    <polygon points="400,245 392,260 408,260" fill="#475569"/>
+    <text x="660" y="525" fill="#94A3B8" font-family="sans-serif" font-size="16">Dim X</text>
+    <text x="415" y="250" fill="#94A3B8" font-family="sans-serif" font-size="16">Dim Y</text>
+  </g>
+  <!-- Vector 1 (Blue) -->
+  <g id="vector_1">
+    <line x1="400" y1="500" x2="580" y2="350" stroke="#38BDF8" stroke-width="6" stroke-linecap="round"/>
+    <polygon points="585,345 570,355 575,370" fill="#38BDF8"/>
+    <text x="600" y="340" fill="#38BDF8" font-family="sans-serif" font-size="20" font-weight="700">Concept v₁</text>
+  </g>
+  <!-- Vector 2 (Green) -->
+  <g id="vector_2">
+    <line x1="400" y1="500" x2="250" y2="330" stroke="#34D399" stroke-width="6" stroke-linecap="round"/>
+    <polygon points="245,325 252,342 267,335" fill="#34D399"/>
+    <text x="160" y="320" fill="#34D399" font-family="sans-serif" font-size="20" font-weight="700">Concept v₂</text>
+  </g>
+  <!-- Orthogonal Superposition Angle -->
+  <g id="angle_badge">
+    <path d="M 470 440 Q 400 400 350 440" fill="none" stroke="#F59E0B" stroke-width="3" stroke-dasharray="5 5"/>
+    <text x="400" y="420" fill="#F59E0B" font-family="sans-serif" font-size="18" font-weight="700" text-anchor="middle">θ ≈ 90° (Almost Orthogonal)</text>
+    <rect x="180" y="650" width="440" height="90" rx="15" fill="#1E293B" stroke="#34D399" stroke-width="3"/>
+    <text x="400" y="690" fill="#34D399" font-family="sans-serif" font-size="22" font-weight="700" text-anchor="middle">SUPERPOSITION CAPACITY</text>
+    <text x="400" y="720" fill="#E2E8F0" font-family="sans-serif" font-size="16" text-anchor="middle">Stores N > D features inside D dimensions</text>
+  </g>
+</svg>
