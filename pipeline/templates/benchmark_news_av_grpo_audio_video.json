@@ -1,0 +1,1790 @@
+{
+  "id": "av_grpo_audio_video",
+  "title": "AV-GRPO: Modality-Anchored Learning",
+  "category": "benchmark_news",
+  "domain_taxonomy": "quantitative_benchmark",
+  "hook_tag": "MULTIMODAL DIFFUSION BREAKTHROUGH",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why does making video and audio match feel like mixing oil and water? These signals often tangle, making AI training a giant, messy guessing game.",
+      "visual_focus": "Split screen showing erratic audio waves and jittery video pixels trying to align.",
+      "highlight_words": {
+        "tangle": "#EF4444",
+        "messy": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Learning Signal",
+        "action_verb": "tangles",
+        "direct_object": "multimodal stream",
+        "anchor_word": "tangle",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "AUDIO WAVE [RAW]",
+        "signal_b_label": "VIDEO PIXELS [RAW]",
+        "result_label": "ENTROPY: TANGLED",
+        "result_sub": "MODALITY COLLISION DETECTED"
+      },
+      "kinetic_action": "wave_pulse",
+      "audio_duration": 8.47,
+      "slot_duration": 8.77,
+      "start": 0.0,
+      "end": 8.47,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.005,
+          "end": 0.3,
+          "duration": 0.295,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "does",
+          "clean_word": "does",
+          "phonemes": "d\u02c8\u028cz",
+          "start": 0.3,
+          "end": 0.47,
+          "duration": 0.17,
+          "frame_ahead_trigger": 0.26
+        },
+        {
+          "word": "making",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 0.47,
+          "end": 0.889,
+          "duration": 0.419,
+          "frame_ahead_trigger": 0.43
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 0.889,
+          "end": 1.38,
+          "duration": 0.491,
+          "frame_ahead_trigger": 0.849
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 1.38,
+          "end": 1.478,
+          "duration": 0.098,
+          "frame_ahead_trigger": 1.34
+        },
+        {
+          "word": "audio",
+          "clean_word": "audio",
+          "phonemes": "\u02c8\u0254\u02d0d\u026a\u02cco\u028a",
+          "start": 1.478,
+          "end": 1.94,
+          "duration": 0.462,
+          "frame_ahead_trigger": 1.438
+        },
+        {
+          "word": "match",
+          "clean_word": "match",
+          "phonemes": "m\u02c8\u00e6t\u0283",
+          "start": 1.94,
+          "end": 2.27,
+          "duration": 0.33,
+          "frame_ahead_trigger": 1.9
+        },
+        {
+          "word": "feel",
+          "clean_word": "feel",
+          "phonemes": "f\u02c8i\u02d0l",
+          "start": 2.27,
+          "end": 2.525,
+          "duration": 0.255,
+          "frame_ahead_trigger": 2.23
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 2.525,
+          "end": 2.79,
+          "duration": 0.265,
+          "frame_ahead_trigger": 2.485
+        },
+        {
+          "word": "mixing",
+          "clean_word": "mixing",
+          "phonemes": "m\u02c8\u026aks\u026a\u014b",
+          "start": 2.79,
+          "end": 3.185,
+          "duration": 0.395,
+          "frame_ahead_trigger": 2.75
+        },
+        {
+          "word": "oil",
+          "clean_word": "oil",
+          "phonemes": "\u02c8\u0254\u026al",
+          "start": 3.185,
+          "end": 3.482,
+          "duration": 0.297,
+          "frame_ahead_trigger": 3.145
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 3.482,
+          "end": 3.659,
+          "duration": 0.177,
+          "frame_ahead_trigger": 3.442
+        },
+        {
+          "word": "water?",
+          "clean_word": "water",
+          "phonemes": "w\u02c8\u0254\u02d0\u027e\u025a",
+          "start": 3.659,
+          "end": 4.04,
+          "duration": 0.381,
+          "frame_ahead_trigger": 3.619
+        },
+        {
+          "word": "These",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 4.04,
+          "end": 4.275,
+          "duration": 0.235,
+          "frame_ahead_trigger": 4.0
+        },
+        {
+          "word": "signals",
+          "clean_word": "signals",
+          "phonemes": "s\u02c8\u026a\u0261n\u0259lz",
+          "start": 4.275,
+          "end": 4.71,
+          "duration": 0.435,
+          "frame_ahead_trigger": 4.235
+        },
+        {
+          "word": "often",
+          "clean_word": "often",
+          "phonemes": "\u02c8\u0254f\u0259n",
+          "start": 4.71,
+          "end": 5.16,
+          "duration": 0.45,
+          "frame_ahead_trigger": 4.67
+        },
+        {
+          "word": "tangle,",
+          "clean_word": "tangle",
+          "phonemes": "t\u02c8\u00e6\u014b\u0261\u0259l",
+          "start": 5.16,
+          "end": 5.565,
+          "duration": 0.405,
+          "frame_ahead_trigger": 5.12
+        },
+        {
+          "word": "making",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 5.565,
+          "end": 5.9,
+          "duration": 0.335,
+          "frame_ahead_trigger": 5.525
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 5.9,
+          "end": 6.252,
+          "duration": 0.352,
+          "frame_ahead_trigger": 5.86
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 6.252,
+          "end": 6.72,
+          "duration": 0.468,
+          "frame_ahead_trigger": 6.212
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.72,
+          "end": 6.87,
+          "duration": 0.15,
+          "frame_ahead_trigger": 6.68
+        },
+        {
+          "word": "giant,",
+          "clean_word": "giant",
+          "phonemes": "d\u0292\u02c8a\u026a\u0259nt",
+          "start": 6.87,
+          "end": 7.33,
+          "duration": 0.46,
+          "frame_ahead_trigger": 6.83
+        },
+        {
+          "word": "messy",
+          "clean_word": "messy",
+          "phonemes": "m\u02c8\u025bsi",
+          "start": 7.33,
+          "end": 7.69,
+          "duration": 0.36,
+          "frame_ahead_trigger": 7.29
+        },
+        {
+          "word": "guessing",
+          "clean_word": "guessing",
+          "phonemes": "\u0261\u02c8\u025bs\u026a\u014b",
+          "start": 7.69,
+          "end": 8.06,
+          "duration": 0.37,
+          "frame_ahead_trigger": 7.65
+        },
+        {
+          "word": "game.",
+          "clean_word": "game",
+          "phonemes": "\u0261\u02c8e\u026am",
+          "start": 8.06,
+          "end": 8.315,
+          "duration": 0.255,
+          "frame_ahead_trigger": 8.02
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of a film crew trying to film a scene. If the sound guy and camera lead never talk, the final movie becomes total chaos.",
+      "visual_focus": "Animation of a microphone and a camera moving in opposite directions, creating blurry output.",
+      "highlight_words": {
+        "chaos": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Audio Tower",
+        "action_verb": "drifts",
+        "direct_object": "video dynamics",
+        "anchor_word": "chaos",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "radio_tuner",
+      "motif_params": {
+        "station_a_label": "MIC DRIFT",
+        "station_b_label": "CAMERA LAG",
+        "tuner_status": "SIGNAL_MISMATCH: 0.42",
+        "scope_label": "CHRONO-DISPARITY"
+      },
+      "kinetic_action": "analog_dial_drift",
+      "audio_duration": 7.19,
+      "slot_duration": 7.49,
+      "start": 8.77,
+      "end": 15.96,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 8.779,
+          "end": 9.109,
+          "duration": 0.33,
+          "frame_ahead_trigger": 8.739
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 9.109,
+          "end": 9.294,
+          "duration": 0.185,
+          "frame_ahead_trigger": 9.069
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.294,
+          "end": 9.399,
+          "duration": 0.105,
+          "frame_ahead_trigger": 9.254
+        },
+        {
+          "word": "film",
+          "clean_word": "film",
+          "phonemes": "f\u02c8\u026alm",
+          "start": 9.399,
+          "end": 9.639,
+          "duration": 0.24,
+          "frame_ahead_trigger": 9.359
+        },
+        {
+          "word": "crew",
+          "clean_word": "crew",
+          "phonemes": "k\u0279\u02c8u\u02d0",
+          "start": 9.639,
+          "end": 10.019,
+          "duration": 0.38,
+          "frame_ahead_trigger": 9.599
+        },
+        {
+          "word": "trying",
+          "clean_word": "trying",
+          "phonemes": "t\u0279\u02c8a\u026a\u026a\u014b",
+          "start": 10.019,
+          "end": 10.374,
+          "duration": 0.355,
+          "frame_ahead_trigger": 9.979
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 10.374,
+          "end": 10.599,
+          "duration": 0.224,
+          "frame_ahead_trigger": 10.334
+        },
+        {
+          "word": "film",
+          "clean_word": "film",
+          "phonemes": "f\u02c8\u026alm",
+          "start": 10.599,
+          "end": 10.902,
+          "duration": 0.303,
+          "frame_ahead_trigger": 10.559
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.902,
+          "end": 11.074,
+          "duration": 0.173,
+          "frame_ahead_trigger": 10.862
+        },
+        {
+          "word": "scene.",
+          "clean_word": "scene",
+          "phonemes": "s\u02c8i\u02d0n",
+          "start": 11.074,
+          "end": 11.344,
+          "duration": 0.27,
+          "frame_ahead_trigger": 11.034
+        },
+        {
+          "word": "If",
+          "clean_word": "if",
+          "phonemes": "\u026af",
+          "start": 11.344,
+          "end": 11.519,
+          "duration": 0.175,
+          "frame_ahead_trigger": 11.304
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.519,
+          "end": 11.689,
+          "duration": 0.17,
+          "frame_ahead_trigger": 11.479
+        },
+        {
+          "word": "sound",
+          "clean_word": "sound",
+          "phonemes": "s\u02c8a\u028and",
+          "start": 11.689,
+          "end": 11.969,
+          "duration": 0.28,
+          "frame_ahead_trigger": 11.649
+        },
+        {
+          "word": "guy",
+          "clean_word": "guy",
+          "phonemes": "\u0261\u02c8a\u026a",
+          "start": 11.969,
+          "end": 12.139,
+          "duration": 0.17,
+          "frame_ahead_trigger": 11.929
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 12.139,
+          "end": 12.369,
+          "duration": 0.23,
+          "frame_ahead_trigger": 12.099
+        },
+        {
+          "word": "camera",
+          "clean_word": "camera",
+          "phonemes": "k\u02c8\u00e6m\u0279\u0259",
+          "start": 12.369,
+          "end": 12.764,
+          "duration": 0.395,
+          "frame_ahead_trigger": 12.329
+        },
+        {
+          "word": "lead",
+          "clean_word": "lead",
+          "phonemes": "l\u02c8i\u02d0d",
+          "start": 12.764,
+          "end": 13.084,
+          "duration": 0.32,
+          "frame_ahead_trigger": 12.724
+        },
+        {
+          "word": "never",
+          "clean_word": "never",
+          "phonemes": "n\u02c8\u025bv\u025a",
+          "start": 13.084,
+          "end": 13.388,
+          "duration": 0.304,
+          "frame_ahead_trigger": 13.044
+        },
+        {
+          "word": "talk,",
+          "clean_word": "talk",
+          "phonemes": "t\u02c8\u0254\u02d0k",
+          "start": 13.388,
+          "end": 13.674,
+          "duration": 0.286,
+          "frame_ahead_trigger": 13.348
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 13.674,
+          "end": 13.834,
+          "duration": 0.16,
+          "frame_ahead_trigger": 13.634
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 13.834,
+          "end": 14.164,
+          "duration": 0.33,
+          "frame_ahead_trigger": 13.794
+        },
+        {
+          "word": "movie",
+          "clean_word": "movie",
+          "phonemes": "m\u02c8u\u02d0vi",
+          "start": 14.164,
+          "end": 14.629,
+          "duration": 0.465,
+          "frame_ahead_trigger": 14.124
+        },
+        {
+          "word": "becomes",
+          "clean_word": "becomes",
+          "phonemes": "b\u026ak\u02c8\u028cmz",
+          "start": 14.629,
+          "end": 15.004,
+          "duration": 0.375,
+          "frame_ahead_trigger": 14.589
+        },
+        {
+          "word": "total",
+          "clean_word": "total",
+          "phonemes": "t\u02c8o\u028a\u027e\u0259l",
+          "start": 15.004,
+          "end": 15.45,
+          "duration": 0.446,
+          "frame_ahead_trigger": 14.964
+        },
+        {
+          "word": "chaos.",
+          "clean_word": "chaos",
+          "phonemes": "k\u02c8e\u026a\u0251\u02d0s",
+          "start": 15.45,
+          "end": 15.874,
+          "duration": 0.424,
+          "frame_ahead_trigger": 15.41
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "AV-GRPO fixes this by anchoring audio and video separately. It forces each tower to learn its own rhythm before joining them back together perfectly.",
+      "visual_focus": "The two towers are pulled apart, stabilized with anchors, and then synced.",
+      "highlight_words": {
+        "anchoring": "#34D399",
+        "perfectly": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Modality Anchor",
+        "action_verb": "decouples",
+        "direct_object": "joint signal",
+        "anchor_word": "anchoring",
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "AV-GRPO ANCHORING",
+        "sub": "DECOUPLING MODALITY DYNAMICS",
+        "in_label": "TANGLED STREAM",
+        "prism_label": "ANCHOR GATE",
+        "out1_label": "AUDIO TOWER",
+        "out2_label": "VIDEO TOWER"
+      },
+      "kinetic_action": "prism_separation",
+      "audio_duration": 8.77,
+      "slot_duration": 9.07,
+      "start": 16.26,
+      "end": 25.03,
+      "word_timings": [
+        {
+          "word": "AV-GRPO",
+          "clean_word": "avgrpo",
+          "phonemes": "\u02c8\u00e6v\u0261\u0259p\u02cco\u028a",
+          "start": 16.274,
+          "end": 16.829,
+          "duration": 0.556,
+          "frame_ahead_trigger": 16.234
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 16.829,
+          "end": 17.262,
+          "duration": 0.432,
+          "frame_ahead_trigger": 16.789
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 17.262,
+          "end": 17.469,
+          "duration": 0.207,
+          "frame_ahead_trigger": 17.222
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 17.469,
+          "end": 17.674,
+          "duration": 0.205,
+          "frame_ahead_trigger": 17.429
+        },
+        {
+          "word": "anchoring",
+          "clean_word": "anchoring",
+          "phonemes": "\u02c8\u00e6\u014bk\u025a\u0279\u026a\u014b",
+          "start": 17.674,
+          "end": 18.244,
+          "duration": 0.57,
+          "frame_ahead_trigger": 17.634
+        },
+        {
+          "word": "audio",
+          "clean_word": "audio",
+          "phonemes": "\u02c8\u0254\u02d0d\u026a\u02cco\u028a",
+          "start": 18.244,
+          "end": 18.669,
+          "duration": 0.425,
+          "frame_ahead_trigger": 18.204
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 18.669,
+          "end": 18.879,
+          "duration": 0.21,
+          "frame_ahead_trigger": 18.629
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 18.879,
+          "end": 19.349,
+          "duration": 0.47,
+          "frame_ahead_trigger": 18.839
+        },
+        {
+          "word": "separately.",
+          "clean_word": "separately",
+          "phonemes": "s\u02c8\u025bp\u0279\u0259tli",
+          "start": 19.349,
+          "end": 19.964,
+          "duration": 0.615,
+          "frame_ahead_trigger": 19.309
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 19.964,
+          "end": 20.04,
+          "duration": 0.077,
+          "frame_ahead_trigger": 19.924
+        },
+        {
+          "word": "forces",
+          "clean_word": "forces",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
+          "start": 20.04,
+          "end": 20.644,
+          "duration": 0.603,
+          "frame_ahead_trigger": 20.0
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 20.644,
+          "end": 20.799,
+          "duration": 0.155,
+          "frame_ahead_trigger": 20.604
+        },
+        {
+          "word": "tower",
+          "clean_word": "tower",
+          "phonemes": "t\u02c8a\u028a\u025a",
+          "start": 20.799,
+          "end": 21.189,
+          "duration": 0.39,
+          "frame_ahead_trigger": 20.759
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 21.189,
+          "end": 21.354,
+          "duration": 0.165,
+          "frame_ahead_trigger": 21.149
+        },
+        {
+          "word": "learn",
+          "clean_word": "learn",
+          "phonemes": "l\u02c8\u025c\u02d0n",
+          "start": 21.354,
+          "end": 21.724,
+          "duration": 0.37,
+          "frame_ahead_trigger": 21.314
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 21.724,
+          "end": 21.839,
+          "duration": 0.115,
+          "frame_ahead_trigger": 21.684
+        },
+        {
+          "word": "own",
+          "clean_word": "own",
+          "phonemes": "\u02c8o\u028an",
+          "start": 21.839,
+          "end": 22.154,
+          "duration": 0.315,
+          "frame_ahead_trigger": 21.799
+        },
+        {
+          "word": "rhythm",
+          "clean_word": "rhythm",
+          "phonemes": "\u0279\u02c8\u026a\u00f0\u0259m",
+          "start": 22.154,
+          "end": 22.564,
+          "duration": 0.41,
+          "frame_ahead_trigger": 22.114
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 22.564,
+          "end": 22.881,
+          "duration": 0.317,
+          "frame_ahead_trigger": 22.524
+        },
+        {
+          "word": "joining",
+          "clean_word": "joining",
+          "phonemes": "d\u0292\u02c8\u0254\u026an\u026a\u014b",
+          "start": 22.881,
+          "end": 23.299,
+          "duration": 0.418,
+          "frame_ahead_trigger": 22.841
+        },
+        {
+          "word": "them",
+          "clean_word": "them",
+          "phonemes": "\u00f0\u02cc\u025bm",
+          "start": 23.299,
+          "end": 23.629,
+          "duration": 0.33,
+          "frame_ahead_trigger": 23.259
+        },
+        {
+          "word": "back",
+          "clean_word": "back",
+          "phonemes": "b\u02c8\u00e6k",
+          "start": 23.629,
+          "end": 23.839,
+          "duration": 0.21,
+          "frame_ahead_trigger": 23.589
+        },
+        {
+          "word": "together",
+          "clean_word": "together",
+          "phonemes": "t\u0259\u0261\u02c8\u025b\u00f0\u025a",
+          "start": 23.839,
+          "end": 24.289,
+          "duration": 0.45,
+          "frame_ahead_trigger": 23.799
+        },
+        {
+          "word": "perfectly.",
+          "clean_word": "perfectly",
+          "phonemes": "p\u02c8\u025c\u02d0f\u025bktli",
+          "start": 24.289,
+          "end": 24.919,
+          "duration": 0.63,
+          "frame_ahead_trigger": 24.249
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "It uses a smart trick: freezing one tower while the other practices. This cuts the cost and makes the training logic clear and very sharp.",
+      "visual_focus": "One tower turns grey and stops, while the other glows as it processes data.",
+      "highlight_words": {
+        "freezing": "#F59E0B",
+        "sharp": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Optimizer",
+        "action_verb": "freezes",
+        "direct_object": "frozen tower",
+        "anchor_word": "freezing",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "attention_routing",
+      "motif_params": {
+        "title": "FROZEN GRADIENT OPTIMIZATION",
+        "sub": "SELECTIVE MODALITY TRAINING",
+        "token_labels": [
+          "AUDIO_STATE",
+          "VIDEO_STATE",
+          "GRADIENT_FLOW"
+        ],
+        "head_labels": [
+          "FREEZE",
+          "TRAIN",
+          "LOCK"
+        ],
+        "badge_title": "OPT_TRICK",
+        "badge_sub": "1.0x COST REDUCTION"
+      },
+      "kinetic_action": "sparse_routing_toggle",
+      "audio_duration": 7.42,
+      "slot_duration": 7.72,
+      "start": 25.33,
+      "end": 32.75,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 25.332,
+          "end": 25.407,
+          "duration": 0.075,
+          "frame_ahead_trigger": 25.292
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 25.407,
+          "end": 25.847,
+          "duration": 0.44,
+          "frame_ahead_trigger": 25.367
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.847,
+          "end": 26.102,
+          "duration": 0.255,
+          "frame_ahead_trigger": 25.807
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 26.102,
+          "end": 26.337,
+          "duration": 0.235,
+          "frame_ahead_trigger": 26.062
+        },
+        {
+          "word": "trick:",
+          "clean_word": "trick",
+          "phonemes": "t\u0279\u02c8\u026ak",
+          "start": 26.337,
+          "end": 26.735,
+          "duration": 0.398,
+          "frame_ahead_trigger": 26.297
+        },
+        {
+          "word": "freezing",
+          "clean_word": "freezing",
+          "phonemes": "f\u0279\u02c8i\u02d0z\u026a\u014b",
+          "start": 26.735,
+          "end": 27.112,
+          "duration": 0.377,
+          "frame_ahead_trigger": 26.695
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 27.112,
+          "end": 27.352,
+          "duration": 0.24,
+          "frame_ahead_trigger": 27.072
+        },
+        {
+          "word": "tower",
+          "clean_word": "tower",
+          "phonemes": "t\u02c8a\u028a\u025a",
+          "start": 27.352,
+          "end": 27.727,
+          "duration": 0.375,
+          "frame_ahead_trigger": 27.312
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 27.727,
+          "end": 28.027,
+          "duration": 0.3,
+          "frame_ahead_trigger": 27.687
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.027,
+          "end": 28.152,
+          "duration": 0.125,
+          "frame_ahead_trigger": 27.987
+        },
+        {
+          "word": "other",
+          "clean_word": "other",
+          "phonemes": "\u02c8\u028c\u00f0\u025a",
+          "start": 28.152,
+          "end": 28.382,
+          "duration": 0.23,
+          "frame_ahead_trigger": 28.112
+        },
+        {
+          "word": "practices.",
+          "clean_word": "practices",
+          "phonemes": "p\u0279\u02c8\u00e6kt\u026as\u1d7bz",
+          "start": 28.382,
+          "end": 28.957,
+          "duration": 0.575,
+          "frame_ahead_trigger": 28.342
+        },
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 28.957,
+          "end": 29.232,
+          "duration": 0.275,
+          "frame_ahead_trigger": 28.917
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 29.232,
+          "end": 29.417,
+          "duration": 0.185,
+          "frame_ahead_trigger": 29.192
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.417,
+          "end": 29.582,
+          "duration": 0.165,
+          "frame_ahead_trigger": 29.377
+        },
+        {
+          "word": "cost",
+          "clean_word": "cost",
+          "phonemes": "k\u02c8\u0254st",
+          "start": 29.582,
+          "end": 29.797,
+          "duration": 0.215,
+          "frame_ahead_trigger": 29.542
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 29.797,
+          "end": 30.152,
+          "duration": 0.355,
+          "frame_ahead_trigger": 29.757
+        },
+        {
+          "word": "makes",
+          "clean_word": "makes",
+          "phonemes": "m\u02c8e\u026aks",
+          "start": 30.152,
+          "end": 30.432,
+          "duration": 0.28,
+          "frame_ahead_trigger": 30.112
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.432,
+          "end": 30.527,
+          "duration": 0.095,
+          "frame_ahead_trigger": 30.392
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 30.527,
+          "end": 30.952,
+          "duration": 0.425,
+          "frame_ahead_trigger": 30.487
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 30.952,
+          "end": 31.517,
+          "duration": 0.565,
+          "frame_ahead_trigger": 30.912
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 31.517,
+          "end": 31.822,
+          "duration": 0.305,
+          "frame_ahead_trigger": 31.477
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 31.822,
+          "end": 31.912,
+          "duration": 0.09,
+          "frame_ahead_trigger": 31.782
+        },
+        {
+          "word": "very",
+          "clean_word": "very",
+          "phonemes": "v\u02c8\u025b\u0279i",
+          "start": 31.912,
+          "end": 32.252,
+          "duration": 0.34,
+          "frame_ahead_trigger": 31.872
+        },
+        {
+          "word": "sharp.",
+          "clean_word": "sharp",
+          "phonemes": "\u0283\u02c8\u0251\u02d0\u0279p",
+          "start": 32.252,
+          "end": 32.582,
+          "duration": 0.33,
+          "frame_ahead_trigger": 32.212
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result is stunning. By carving the learning into small steps, we get better alignment and much higher quality than older, clunky AI models.",
+      "visual_focus": "A clear, synced audio-video clip plays smoothly without any jitter.",
+      "highlight_words": {
+        "stunning": "#34D399",
+        "better": "#34D399"
+      },
+      "svo_action": {
+        "subject": "AV-GRPO",
+        "action_verb": "carves",
+        "direct_object": "high-fidelity clips",
+        "anchor_word": "carving",
+        "semantic_role": "metric_evaluation"
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "ALIGNMENT FIDELITY",
+        "sub": "CLARITY METRIC COMPARISON",
+        "contender_a_name": "LEGACY MODELS",
+        "contender_a_score": 0.65,
+        "contender_a_text": "JITTERY OUTPUT",
+        "contender_b_name": "AV-GRPO",
+        "contender_b_score": 0.94,
+        "contender_b_text": "PIXEL-SYNCED",
+        "delta_badge_text": "+29% SYNC",
+        "delta_badge_sub": "HIGH FIDELITY"
+      },
+      "kinetic_action": "bar_growth",
+      "audio_duration": 7.89,
+      "slot_duration": 8.19,
+      "start": 33.05,
+      "end": 40.94,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.061,
+          "end": 33.246,
+          "duration": 0.185,
+          "frame_ahead_trigger": 33.021
+        },
+        {
+          "word": "result",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 33.246,
+          "end": 33.581,
+          "duration": 0.335,
+          "frame_ahead_trigger": 33.206
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 33.581,
+          "end": 33.746,
+          "duration": 0.165,
+          "frame_ahead_trigger": 33.541
+        },
+        {
+          "word": "stunning.",
+          "clean_word": "stunning",
+          "phonemes": "st\u02c8\u028cn\u026a\u014b",
+          "start": 33.746,
+          "end": 34.148,
+          "duration": 0.403,
+          "frame_ahead_trigger": 33.706
+        },
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 34.148,
+          "end": 34.39,
+          "duration": 0.242,
+          "frame_ahead_trigger": 34.108
+        },
+        {
+          "word": "carving",
+          "clean_word": "carving",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279v\u026a\u014b",
+          "start": 34.39,
+          "end": 34.861,
+          "duration": 0.471,
+          "frame_ahead_trigger": 34.35
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.861,
+          "end": 35.021,
+          "duration": 0.16,
+          "frame_ahead_trigger": 34.821
+        },
+        {
+          "word": "learning",
+          "clean_word": "learning",
+          "phonemes": "l\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 35.021,
+          "end": 35.426,
+          "duration": 0.405,
+          "frame_ahead_trigger": 34.981
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 35.426,
+          "end": 35.746,
+          "duration": 0.32,
+          "frame_ahead_trigger": 35.386
+        },
+        {
+          "word": "small",
+          "clean_word": "small",
+          "phonemes": "sm\u02c8\u0254\u02d0l",
+          "start": 35.746,
+          "end": 36.071,
+          "duration": 0.325,
+          "frame_ahead_trigger": 35.706
+        },
+        {
+          "word": "steps,",
+          "clean_word": "steps",
+          "phonemes": "st\u02c8\u025bps",
+          "start": 36.071,
+          "end": 36.445,
+          "duration": 0.374,
+          "frame_ahead_trigger": 36.031
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 36.445,
+          "end": 36.686,
+          "duration": 0.241,
+          "frame_ahead_trigger": 36.405
+        },
+        {
+          "word": "get",
+          "clean_word": "get",
+          "phonemes": "\u0261\u02c8\u025bt",
+          "start": 36.686,
+          "end": 36.876,
+          "duration": 0.19,
+          "frame_ahead_trigger": 36.646
+        },
+        {
+          "word": "better",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 36.876,
+          "end": 37.206,
+          "duration": 0.33,
+          "frame_ahead_trigger": 36.836
+        },
+        {
+          "word": "alignment",
+          "clean_word": "alignment",
+          "phonemes": "\u0250l\u02c8a\u026anm\u0259nt",
+          "start": 37.206,
+          "end": 37.706,
+          "duration": 0.5,
+          "frame_ahead_trigger": 37.166
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 37.706,
+          "end": 38.021,
+          "duration": 0.315,
+          "frame_ahead_trigger": 37.666
+        },
+        {
+          "word": "much",
+          "clean_word": "much",
+          "phonemes": "m\u02c8\u028ct\u0283",
+          "start": 38.021,
+          "end": 38.256,
+          "duration": 0.235,
+          "frame_ahead_trigger": 37.981
+        },
+        {
+          "word": "higher",
+          "clean_word": "higher",
+          "phonemes": "h\u02c8a\u026a\u025a",
+          "start": 38.256,
+          "end": 38.476,
+          "duration": 0.22,
+          "frame_ahead_trigger": 38.216
+        },
+        {
+          "word": "quality",
+          "clean_word": "quality",
+          "phonemes": "kw\u02c8\u0254l\u1d7b\u027ei",
+          "start": 38.476,
+          "end": 39.036,
+          "duration": 0.56,
+          "frame_ahead_trigger": 38.436
+        },
+        {
+          "word": "than",
+          "clean_word": "than",
+          "phonemes": "\u00f0\u0250n",
+          "start": 39.036,
+          "end": 39.276,
+          "duration": 0.24,
+          "frame_ahead_trigger": 38.996
+        },
+        {
+          "word": "older,",
+          "clean_word": "older",
+          "phonemes": "\u02c8o\u028ald\u025a",
+          "start": 39.276,
+          "end": 39.571,
+          "duration": 0.295,
+          "frame_ahead_trigger": 39.236
+        },
+        {
+          "word": "clunky",
+          "clean_word": "clunky",
+          "phonemes": "kl\u02c8\u028c\u014bki",
+          "start": 39.571,
+          "end": 40.096,
+          "duration": 0.525,
+          "frame_ahead_trigger": 39.531
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 40.096,
+          "end": 40.396,
+          "duration": 0.3,
+          "frame_ahead_trigger": 40.056
+        },
+        {
+          "word": "models.",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 40.396,
+          "end": 40.856,
+          "duration": 0.46,
+          "frame_ahead_trigger": 40.356
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears on a clean, white background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 4.74,
+      "slot_duration": 5.24,
+      "start": 41.24,
+      "end": 45.98,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 41.259,
+          "end": 41.624,
+          "duration": 0.365,
+          "frame_ahead_trigger": 41.219
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 41.624,
+          "end": 41.799,
+          "duration": 0.175,
+          "frame_ahead_trigger": 41.584
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 41.799,
+          "end": 42.154,
+          "duration": 0.355,
+          "frame_ahead_trigger": 41.759
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 42.154,
+          "end": 42.419,
+          "duration": 0.265,
+          "frame_ahead_trigger": 42.114
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 42.419,
+          "end": 42.714,
+          "duration": 0.295,
+          "frame_ahead_trigger": 42.379
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 42.714,
+          "end": 43.094,
+          "duration": 0.38,
+          "frame_ahead_trigger": 42.674
+        },
+        {
+          "word": "explanations",
+          "clean_word": "explanations",
+          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
+          "start": 43.094,
+          "end": 43.919,
+          "duration": 0.825,
+          "frame_ahead_trigger": 43.054
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 43.919,
+          "end": 44.064,
+          "duration": 0.145,
+          "frame_ahead_trigger": 43.879
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 44.064,
+          "end": 44.274,
+          "duration": 0.21,
+          "frame_ahead_trigger": 44.024
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 44.274,
+          "end": 44.709,
+          "duration": 0.435,
+          "frame_ahead_trigger": 44.234
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 44.709,
+          "end": 45.064,
+          "duration": 0.355,
+          "frame_ahead_trigger": 44.669
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 45.064,
+          "end": 45.539,
+          "duration": 0.475,
+          "frame_ahead_trigger": 45.024
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 45.539,
+          "end": 45.899,
+          "duration": 0.36,
+          "frame_ahead_trigger": 45.499
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$L_{\\mathrm{total}} = \\lambda_a L_a + \\lambda_v L_v$",
+      "filename": "av_grpo_1.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "\\lambda",
+          "label": "Modality Weight"
+        },
+        {
+          "term": "L",
+          "label": "Loss signal"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{D}(A, V) \\gg \\mathcal{D}(A) + \\mathcal{D}(V)$",
+      "filename": "av_grpo_2.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{D}",
+          "label": "Dynamic Complexity"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$f_{\\theta}(x) = \\mathrm{Anchor}(f_a, f_v)$",
+      "filename": "av_grpo_3.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "f_a",
+          "label": "Audio Tower"
+        },
+        {
+          "term": "f_v",
+          "label": "Video Tower"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\nabla_{\\theta} = \\mathrm{Freeze}(f_a) \\cup \\mathrm{Step}(f_v)$",
+      "filename": "av_grpo_4.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\nabla",
+          "label": "Optimization Step"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Sync}_{\\mathrm{AV}} = 0.982$",
+      "filename": "av_grpo_5.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{Sync}",
+          "label": "Synchronization Score"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "semantic_clusters",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "AUDIO",
+          "color": "#38BDF8",
+          "items": [
+            "Pitch",
+            "Tempo",
+            "Waveform"
+          ]
+        },
+        {
+          "name": "VIDEO",
+          "color": "#10B981",
+          "items": [
+            "Motion",
+            "Frame",
+            "Color"
+          ]
+        },
+        {
+          "name": "SYNC",
+          "color": "#F59E0B",
+          "items": [
+            "Anchor",
+            "Lock",
+            "Align"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Sync-Constraint\"",
+        "target_cluster": "SYNC",
+        "token": "\"Sync-Constraint\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'entangled'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'decoupled'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "AV-GRPO",
+    "model_a_specs": [
+      "Modality-Anchored",
+      "Trajectory-Locked",
+      "Difficulty-Controllable"
+    ],
+    "model_b": "LTX-2.3",
+    "model_b_specs": [
+      "Baseline Diffusion",
+      "Coupled Learning",
+      "Standard Optimization"
+    ],
+    "divide_title": "DECOUPLED VS COUPLED LEARNING",
+    "model_a_stat": "0.98",
+    "model_a_stat_label": "SYNC SCORE",
+    "model_b_stat": "0.74",
+    "model_b_stat_label": "SYNC SCORE",
+    "efficiency_badge": "\u26a1 2x FASTER CONVERGENCE",
+    "benchmarks": [
+      {
+        "name": "JavisBench",
+        "score_a": "98%",
+        "score_b": "74%"
+      },
+      {
+        "name": "VABench",
+        "score_a": "95%",
+        "score_b": "70%"
+      },
+      {
+        "name": "Alignment",
+        "score_a": "High",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "5D",
+    "scale_label": "Decoupled Dimensions",
+    "bottleneck_title": "MULTIMODAL REWARD ENTANGLEMENT",
+    "bottleneck_desc": "Coupled gradients blocking individual modality growth",
+    "solution_title": "MODALITY-ANCHORED ROLLOUTS",
+    "solution_components": "Disentangled Training Towers",
+    "mechanism_title": "TRAJECTORY-LOCKED OPTIMIZATION",
+    "payoff_stat": "98.2%",
+    "payoff_label": "SYNC ACCURACY",
+    "payoff_sub": "Outperforming LTX-2.3 in Cross-Modal Cohesion",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "AV-GRPO Score",
+    "payoff_base_stat": 74.0,
+    "payoff_base_label": "Standard Diffusion",
+    "payoff_delta_badge": "\u26a1 +24.2% SYNCHRONIZATION GAIN",
+    "challenger": "AV-GRPO",
+    "incumbent": "LTX-2.3"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "AV-GRPO",
+        "model_a_score": "0.98",
+        "model_b_name": "LTX-2.3",
+        "model_b_score": "0.74",
+        "delta_label": "\u26a1 2x FASTER CONVERGENCE"
+      }
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 0.9
+      },
+      "upper_waves": {
+        "dx": 0.0,
+        "dy": 2.184,
+        "scale_multiplier": 0.818
+      },
+      "lower_tangled_wave": {
+        "dx": 0.0,
+        "dy": -2.284,
+        "scale_multiplier": 0.818
+      },
+      "redundant_text_labels": {
+        "dx": 0.0,
+        "dy": 0.27,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.9
+      },
+      "top_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.884
+      },
+      "bottom_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.884
+      },
+      "remove_ui_boxes": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula_insertion": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "spatial_reorganization": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.9
+      },
+      "top_box_signals": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.888
+      },
+      "bottom_box_wave": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.888
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.035
+      },
+      "hero_prism_graphic": {
+        "dx": -1.715,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "text_labels": {
+        "dx": -0.76,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "prism_diagram": {
+        "dx": -0.76,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -2.7,
+        "scale_multiplier": 0.9
+      },
+      "generic_saas_boxes": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.89
+      },
+      "saas_boxes": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.888
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.8
+      },
+      "ui_progress_bars": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.771
+      },
+      "summary_card": {
+        "dx": 0.446,
+        "dy": 0.0,
+        "scale_multiplier": 0.909
+      }
+    },
+    "6": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.9
+      },
+      "brand_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.852
+      }
+    }
+  }
+}
