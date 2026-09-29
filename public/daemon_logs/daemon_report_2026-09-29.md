@@ -1,13 +1,13 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 07:10:59 UTC
+**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 11:33:59 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: SolveEdit: Benchmarking Visual Problem Solving in Generative Models
-- **arXiv ID:** [2609.35504](https://arxiv.org/abs/2609.35504)
-- **Category:** `benchmark_news`
-- **Editorial Hook:** *Can AI actually 'see' a problem, or is it just guessing the next word?*
-- **Everyday Analogy:** *Treating AI like a student taking a geometry test where the 'logic' is hidden in the arrangement of shapes, not just written text.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_solveedit_benchmark_news_benchmark_news.mp4`
+### Reel 1: FlowTool: Controlling Tool Parameter in Image Retouching via Flow Matching
+- **arXiv ID:** [2609.35673](https://arxiv.org/abs/2609.35673)
+- **Category:** `architecture_breakdown`
+- **Editorial Hook:** *What if you could 'steer' the artistic intent of an AI generator like you're adjusting a water faucet?*
+- **Everyday Analogy:** *Adjusting a high-pressure nozzle to guide water flow precisely where you want it on a canvas.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_flowtool_image_retouching_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
