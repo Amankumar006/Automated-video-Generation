@@ -1,13 +1,13 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 15:21:14 UTC
+**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 20:24:52 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: In-Flight KV Cache with Clean Anchors for Faster Autoregressive Video Diffusion
-- **arXiv ID:** [2609.32540](https://arxiv.org/abs/2609.32540)
-- **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *Why do AI videos stutter when they get too long, and how can we stop them?*
-- **Everyday Analogy:** *A relay race where each runner holds a 'memory snapshot' (the KV cache) to ensure the next runner doesn't forget the story so far.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_flash_forward_kv_cache_mechanism_deepdive.mp4`
+### Reel 1: Structured Residual Connectivity Matters for Diffusion Transformers
+- **arXiv ID:** [2609.33203](https://arxiv.org/abs/2609.33203)
+- **Category:** `architecture_breakdown`
+- **Editorial Hook:** *Why do AI models sometimes 'forget' what they just saw, and how can a simple shortcut fix it?*
+- **Everyday Analogy:** *The difference between a rigid train track and an 'express lane' highway that allows cars to skip traffic and reach the finish line faster.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_structured_residual_connectivity_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
