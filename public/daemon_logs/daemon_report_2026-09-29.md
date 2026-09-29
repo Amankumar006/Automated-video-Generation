@@ -1,13 +1,13 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 11:33:59 UTC
+**Date:** 2026-09-29 | **Timestamp:** 2026-09-29 15:21:14 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: FlowTool: Controlling Tool Parameter in Image Retouching via Flow Matching
-- **arXiv ID:** [2609.35673](https://arxiv.org/abs/2609.35673)
-- **Category:** `architecture_breakdown`
-- **Editorial Hook:** *What if you could 'steer' the artistic intent of an AI generator like you're adjusting a water faucet?*
-- **Everyday Analogy:** *Adjusting a high-pressure nozzle to guide water flow precisely where you want it on a canvas.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_flowtool_image_retouching_architecture_breakdown.mp4`
+### Reel 1: In-Flight KV Cache with Clean Anchors for Faster Autoregressive Video Diffusion
+- **arXiv ID:** [2609.32540](https://arxiv.org/abs/2609.32540)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *Why do AI videos stutter when they get too long, and how can we stop them?*
+- **Everyday Analogy:** *A relay race where each runner holds a 'memory snapshot' (the KV cache) to ensure the next runner doesn't forget the story so far.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_flash_forward_kv_cache_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs

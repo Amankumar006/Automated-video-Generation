@@ -1,0 +1,1777 @@
+{
+  "id": "flash_forward_kv_cache",
+  "title": "FlashForward Video Generation",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why does making long videos feel like an endless, sluggish chore for AI? It keeps re-doing the same work over and over.",
+      "visual_focus": "A progress bar stuttering while generating a long video stream.",
+      "highlight_words": {
+        "endless": "#EF4444",
+        "sluggish": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "AI Generator",
+        "action_verb": "stutters",
+        "direct_object": "video_stream",
+        "anchor_word": "sluggish",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "PREVIOUS FRAME DATA",
+        "signal_b_label": "REDUNDANT COMPUTATION",
+        "result_label": "STUTTERING FLOW",
+        "result_sub": "O(N\u00b2) OVERHEAD"
+      },
+      "kinetic_action": "High-frequency interference jitter",
+      "audio_duration": 6.38,
+      "slot_duration": 6.68,
+      "start": 0.0,
+      "end": 6.38,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.015,
+          "end": 0.165,
+          "duration": 0.15,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "does",
+          "clean_word": "does",
+          "phonemes": "d\u02c8\u028cz",
+          "start": 0.165,
+          "end": 0.475,
+          "duration": 0.31,
+          "frame_ahead_trigger": 0.125
+        },
+        {
+          "word": "making",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 0.475,
+          "end": 0.85,
+          "duration": 0.375,
+          "frame_ahead_trigger": 0.435
+        },
+        {
+          "word": "long",
+          "clean_word": "long",
+          "phonemes": "l\u02c8\u0254\u014b",
+          "start": 0.85,
+          "end": 1.055,
+          "duration": 0.205,
+          "frame_ahead_trigger": 0.81
+        },
+        {
+          "word": "videos",
+          "clean_word": "videos",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028az",
+          "start": 1.055,
+          "end": 1.54,
+          "duration": 0.485,
+          "frame_ahead_trigger": 1.015
+        },
+        {
+          "word": "feel",
+          "clean_word": "feel",
+          "phonemes": "f\u02c8i\u02d0l",
+          "start": 1.54,
+          "end": 1.825,
+          "duration": 0.285,
+          "frame_ahead_trigger": 1.5
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 1.825,
+          "end": 2.04,
+          "duration": 0.215,
+          "frame_ahead_trigger": 1.785
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 2.04,
+          "end": 2.195,
+          "duration": 0.155,
+          "frame_ahead_trigger": 2.0
+        },
+        {
+          "word": "endless,",
+          "clean_word": "endless",
+          "phonemes": "\u02c8\u025bndl\u0259s",
+          "start": 2.195,
+          "end": 2.625,
+          "duration": 0.43,
+          "frame_ahead_trigger": 2.155
+        },
+        {
+          "word": "sluggish",
+          "clean_word": "sluggish",
+          "phonemes": "sl\u02c8\u028c\u0261\u026a\u0283",
+          "start": 2.625,
+          "end": 2.895,
+          "duration": 0.27,
+          "frame_ahead_trigger": 2.585
+        },
+        {
+          "word": "chore",
+          "clean_word": "chore",
+          "phonemes": "t\u0283\u02c8\u0254\u02d0\u0279",
+          "start": 2.895,
+          "end": 3.315,
+          "duration": 0.42,
+          "frame_ahead_trigger": 2.855
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 3.315,
+          "end": 3.465,
+          "duration": 0.15,
+          "frame_ahead_trigger": 3.275
+        },
+        {
+          "word": "AI?",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 3.465,
+          "end": 3.894,
+          "duration": 0.429,
+          "frame_ahead_trigger": 3.425
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 3.894,
+          "end": 4.006,
+          "duration": 0.112,
+          "frame_ahead_trigger": 3.854
+        },
+        {
+          "word": "keeps",
+          "clean_word": "keeps",
+          "phonemes": "k\u02c8i\u02d0ps",
+          "start": 4.006,
+          "end": 4.36,
+          "duration": 0.354,
+          "frame_ahead_trigger": 3.966
+        },
+        {
+          "word": "re-doing",
+          "clean_word": "redoing",
+          "phonemes": "\u0279\u02c8i\u02d0du\u02d0\u026a\u014b",
+          "start": 4.36,
+          "end": 4.745,
+          "duration": 0.385,
+          "frame_ahead_trigger": 4.32
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.745,
+          "end": 4.955,
+          "duration": 0.21,
+          "frame_ahead_trigger": 4.705
+        },
+        {
+          "word": "same",
+          "clean_word": "same",
+          "phonemes": "s\u02c8e\u026am",
+          "start": 4.955,
+          "end": 5.26,
+          "duration": 0.305,
+          "frame_ahead_trigger": 4.915
+        },
+        {
+          "word": "work",
+          "clean_word": "work",
+          "phonemes": "w\u02c8\u025c\u02d0k",
+          "start": 5.26,
+          "end": 5.54,
+          "duration": 0.28,
+          "frame_ahead_trigger": 5.22
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 5.54,
+          "end": 5.755,
+          "duration": 0.215,
+          "frame_ahead_trigger": 5.5
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 5.755,
+          "end": 5.95,
+          "duration": 0.195,
+          "frame_ahead_trigger": 5.715
+        },
+        {
+          "word": "over.",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 5.95,
+          "end": 6.255,
+          "duration": 0.305,
+          "frame_ahead_trigger": 5.91
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of it like a library. Instead of scanning the whole book, the AI needs a smart index to find what it just read.",
+      "visual_focus": "A library card catalog with tokens being sorted into labeled drawers.",
+      "highlight_words": {
+        "library": "#FFFFFF",
+        "smart index": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "FlashForward System",
+        "action_verb": "indexes",
+        "direct_object": "generated_chunks",
+        "anchor_word": "index",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "memory_buffer",
+      "motif_params": {
+        "title": "TOKEN INDEXING",
+        "sub": "Library cataloging system for efficient lookup",
+        "in_stream_label": "GENERATED TOKENS",
+        "cache_status_label": "INDEXED ACCESS",
+        "gain_badge_title": "1.0x",
+        "gain_badge_sub": "RETRIEVAL LATENCY"
+      },
+      "kinetic_action": "Logical drawer sliding",
+      "audio_duration": 6.06,
+      "slot_duration": 6.36,
+      "start": 6.68,
+      "end": 12.74,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 6.714,
+          "end": 7.029,
+          "duration": 0.315,
+          "frame_ahead_trigger": 6.674
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.029,
+          "end": 7.087,
+          "duration": 0.058,
+          "frame_ahead_trigger": 6.989
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 7.087,
+          "end": 7.169,
+          "duration": 0.082,
+          "frame_ahead_trigger": 7.047
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.169,
+          "end": 7.449,
+          "duration": 0.28,
+          "frame_ahead_trigger": 7.129
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.449,
+          "end": 7.554,
+          "duration": 0.105,
+          "frame_ahead_trigger": 7.409
+        },
+        {
+          "word": "library.",
+          "clean_word": "library",
+          "phonemes": "l\u02c8a\u026ab\u0279\u025b\u0279i",
+          "start": 7.554,
+          "end": 8.1,
+          "duration": 0.546,
+          "frame_ahead_trigger": 7.514
+        },
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 8.1,
+          "end": 8.469,
+          "duration": 0.369,
+          "frame_ahead_trigger": 8.06
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 8.469,
+          "end": 8.584,
+          "duration": 0.115,
+          "frame_ahead_trigger": 8.429
+        },
+        {
+          "word": "scanning",
+          "clean_word": "scanning",
+          "phonemes": "sk\u02c8\u00e6n\u026a\u014b",
+          "start": 8.584,
+          "end": 8.954,
+          "duration": 0.37,
+          "frame_ahead_trigger": 8.544
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.954,
+          "end": 9.079,
+          "duration": 0.125,
+          "frame_ahead_trigger": 8.914
+        },
+        {
+          "word": "whole",
+          "clean_word": "whole",
+          "phonemes": "h\u02c8o\u028al",
+          "start": 9.079,
+          "end": 9.326,
+          "duration": 0.248,
+          "frame_ahead_trigger": 9.039
+        },
+        {
+          "word": "book,",
+          "clean_word": "book",
+          "phonemes": "b\u02c8\u028ak",
+          "start": 9.326,
+          "end": 9.469,
+          "duration": 0.142,
+          "frame_ahead_trigger": 9.286
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 9.469,
+          "end": 9.646,
+          "duration": 0.178,
+          "frame_ahead_trigger": 9.429
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 9.646,
+          "end": 9.934,
+          "duration": 0.287,
+          "frame_ahead_trigger": 9.606
+        },
+        {
+          "word": "needs",
+          "clean_word": "needs",
+          "phonemes": "n\u02c8i\u02d0dz",
+          "start": 9.934,
+          "end": 10.286,
+          "duration": 0.352,
+          "frame_ahead_trigger": 9.894
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.286,
+          "end": 10.429,
+          "duration": 0.143,
+          "frame_ahead_trigger": 10.246
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 10.429,
+          "end": 10.814,
+          "duration": 0.385,
+          "frame_ahead_trigger": 10.389
+        },
+        {
+          "word": "index",
+          "clean_word": "index",
+          "phonemes": "\u02c8\u026and\u025bks",
+          "start": 10.814,
+          "end": 11.214,
+          "duration": 0.4,
+          "frame_ahead_trigger": 10.774
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 11.214,
+          "end": 11.359,
+          "duration": 0.145,
+          "frame_ahead_trigger": 11.174
+        },
+        {
+          "word": "find",
+          "clean_word": "find",
+          "phonemes": "f\u02c8a\u026and",
+          "start": 11.359,
+          "end": 11.619,
+          "duration": 0.26,
+          "frame_ahead_trigger": 11.319
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 11.619,
+          "end": 11.879,
+          "duration": 0.26,
+          "frame_ahead_trigger": 11.579
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 11.879,
+          "end": 11.964,
+          "duration": 0.085,
+          "frame_ahead_trigger": 11.839
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 11.964,
+          "end": 12.259,
+          "duration": 0.295,
+          "frame_ahead_trigger": 11.924
+        },
+        {
+          "word": "read.",
+          "clean_word": "read",
+          "phonemes": "\u0279\u02c8i\u02d0d",
+          "start": 12.259,
+          "end": 12.579,
+          "duration": 0.32,
+          "frame_ahead_trigger": 12.219
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Scientists built a new path. It grabs the memory it already made during the first steps, skipping the slow, redundant math.",
+      "visual_focus": "A path bypasses a heavy calculation block, leading directly to the next frame.",
+      "highlight_words": {
+        "new path": "#34D399",
+        "skipping": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Memory Path",
+        "action_verb": "bypasses",
+        "direct_object": "redundant_math",
+        "anchor_word": "skipping",
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "tree_search",
+      "motif_params": {
+        "title": "CALCULATION BYPASS",
+        "sub": "Skipping redundant mathematical paths",
+        "root_label": "INPUT FRAME",
+        "optimal_label": "FAST-PATH",
+        "optimal_sub": "REUSED MEMORY",
+        "pruned_label": "REDUNANT MATH",
+        "pruned_sub": "SKIPPED OPERATIONS",
+        "badge_title": "PRUNED",
+        "badge_sub": "100% COMPUTATION SAVED"
+      },
+      "kinetic_action": "Path simplification animation",
+      "audio_duration": 6.55,
+      "slot_duration": 6.85,
+      "start": 13.04,
+      "end": 19.59,
+      "word_timings": [
+        {
+          "word": "Scientists",
+          "clean_word": "scientists",
+          "phonemes": "s\u02c8a\u026a\u0259nt\u026asts",
+          "start": 13.062,
+          "end": 13.637,
+          "duration": 0.575,
+          "frame_ahead_trigger": 13.022
+        },
+        {
+          "word": "built",
+          "clean_word": "built",
+          "phonemes": "b\u02c8\u026alt",
+          "start": 13.637,
+          "end": 14.067,
+          "duration": 0.43,
+          "frame_ahead_trigger": 13.597
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 14.067,
+          "end": 14.183,
+          "duration": 0.116,
+          "frame_ahead_trigger": 14.027
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 14.183,
+          "end": 14.419,
+          "duration": 0.236,
+          "frame_ahead_trigger": 14.143
+        },
+        {
+          "word": "path.",
+          "clean_word": "path",
+          "phonemes": "p\u02c8\u00e6\u03b8",
+          "start": 14.419,
+          "end": 14.655,
+          "duration": 0.236,
+          "frame_ahead_trigger": 14.379
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 14.655,
+          "end": 14.812,
+          "duration": 0.158,
+          "frame_ahead_trigger": 14.615
+        },
+        {
+          "word": "grabs",
+          "clean_word": "grabs",
+          "phonemes": "\u0261\u0279\u02c8\u00e6bz",
+          "start": 14.812,
+          "end": 15.137,
+          "duration": 0.325,
+          "frame_ahead_trigger": 14.772
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.137,
+          "end": 15.222,
+          "duration": 0.085,
+          "frame_ahead_trigger": 15.097
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 15.222,
+          "end": 15.692,
+          "duration": 0.47,
+          "frame_ahead_trigger": 15.182
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 15.692,
+          "end": 15.842,
+          "duration": 0.15,
+          "frame_ahead_trigger": 15.652
+        },
+        {
+          "word": "already",
+          "clean_word": "already",
+          "phonemes": "\u0254\u02d0l\u0279\u02c8\u025bdi",
+          "start": 15.842,
+          "end": 16.172,
+          "duration": 0.33,
+          "frame_ahead_trigger": 15.802
+        },
+        {
+          "word": "made",
+          "clean_word": "made",
+          "phonemes": "m\u02c8e\u026ad",
+          "start": 16.172,
+          "end": 16.467,
+          "duration": 0.295,
+          "frame_ahead_trigger": 16.132
+        },
+        {
+          "word": "during",
+          "clean_word": "during",
+          "phonemes": "d\u02c8\u028a\u0279\u0279\u026a\u014b",
+          "start": 16.467,
+          "end": 16.967,
+          "duration": 0.5,
+          "frame_ahead_trigger": 16.427
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.967,
+          "end": 17.127,
+          "duration": 0.16,
+          "frame_ahead_trigger": 16.927
+        },
+        {
+          "word": "first",
+          "clean_word": "first",
+          "phonemes": "f\u02c8\u025c\u02d0st",
+          "start": 17.127,
+          "end": 17.327,
+          "duration": 0.2,
+          "frame_ahead_trigger": 17.087
+        },
+        {
+          "word": "steps,",
+          "clean_word": "steps",
+          "phonemes": "st\u02c8\u025bps",
+          "start": 17.327,
+          "end": 17.752,
+          "duration": 0.425,
+          "frame_ahead_trigger": 17.287
+        },
+        {
+          "word": "skipping",
+          "clean_word": "skipping",
+          "phonemes": "sk\u02c8\u026ap\u026a\u014b",
+          "start": 17.752,
+          "end": 18.232,
+          "duration": 0.48,
+          "frame_ahead_trigger": 17.712
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.232,
+          "end": 18.312,
+          "duration": 0.079,
+          "frame_ahead_trigger": 18.192
+        },
+        {
+          "word": "slow,",
+          "clean_word": "slow",
+          "phonemes": "sl\u02c8o\u028a",
+          "start": 18.312,
+          "end": 18.627,
+          "duration": 0.316,
+          "frame_ahead_trigger": 18.272
+        },
+        {
+          "word": "redundant",
+          "clean_word": "redundant",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
+          "start": 18.627,
+          "end": 19.152,
+          "duration": 0.525,
+          "frame_ahead_trigger": 18.587
+        },
+        {
+          "word": "math.",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 19.152,
+          "end": 19.432,
+          "duration": 0.28,
+          "frame_ahead_trigger": 19.112
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "By saving tiny clean anchors, it maps out the main shapes early on, keeping the video from drifting into weird, fuzzy static.",
+      "visual_focus": "Steady anchor points holding a structure together while details fill in around them.",
+      "highlight_words": {
+        "clean anchors": "#F59E0B",
+        "drifting": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Anchor Latents",
+        "action_verb": "stabilizes",
+        "direct_object": "video_trajectory",
+        "anchor_word": "stabilized",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "subspace_vectors",
+      "motif_params": {
+        "title": "ANCHOR LATENTS",
+        "sub": "Defining the geometric stable points in vector space",
+        "vec1_label": "DRIFT VECTOR",
+        "vec2_label": "ANCHOR VECTOR",
+        "angle_label": "STABILIZATION ANGLE",
+        "badge_title": "FIXED",
+        "badge_sub": "GEOMETRIC CONSTANTS"
+      },
+      "kinetic_action": "Vector alignment snap",
+      "audio_duration": 7.02,
+      "slot_duration": 7.32,
+      "start": 19.89,
+      "end": 26.91,
+      "word_timings": [
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 19.892,
+          "end": 20.082,
+          "duration": 0.19,
+          "frame_ahead_trigger": 19.852
+        },
+        {
+          "word": "saving",
+          "clean_word": "saving",
+          "phonemes": "s\u02c8e\u026av\u026a\u014b",
+          "start": 20.082,
+          "end": 20.672,
+          "duration": 0.59,
+          "frame_ahead_trigger": 20.042
+        },
+        {
+          "word": "tiny",
+          "clean_word": "tiny",
+          "phonemes": "t\u02c8a\u026ani",
+          "start": 20.672,
+          "end": 20.967,
+          "duration": 0.295,
+          "frame_ahead_trigger": 20.632
+        },
+        {
+          "word": "clean",
+          "clean_word": "clean",
+          "phonemes": "kl\u02c8i\u02d0n",
+          "start": 20.967,
+          "end": 21.242,
+          "duration": 0.275,
+          "frame_ahead_trigger": 20.927
+        },
+        {
+          "word": "anchors,",
+          "clean_word": "anchors",
+          "phonemes": "\u02c8\u00e6\u014bk\u025az",
+          "start": 21.242,
+          "end": 21.672,
+          "duration": 0.43,
+          "frame_ahead_trigger": 21.202
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 21.672,
+          "end": 21.842,
+          "duration": 0.17,
+          "frame_ahead_trigger": 21.632
+        },
+        {
+          "word": "maps",
+          "clean_word": "maps",
+          "phonemes": "m\u02c8\u00e6ps",
+          "start": 21.842,
+          "end": 22.187,
+          "duration": 0.345,
+          "frame_ahead_trigger": 21.802
+        },
+        {
+          "word": "out",
+          "clean_word": "out",
+          "phonemes": "\u02c8a\u028at",
+          "start": 22.187,
+          "end": 22.412,
+          "duration": 0.225,
+          "frame_ahead_trigger": 22.147
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.412,
+          "end": 22.497,
+          "duration": 0.085,
+          "frame_ahead_trigger": 22.372
+        },
+        {
+          "word": "main",
+          "clean_word": "main",
+          "phonemes": "m\u02c8e\u026an",
+          "start": 22.497,
+          "end": 22.787,
+          "duration": 0.29,
+          "frame_ahead_trigger": 22.457
+        },
+        {
+          "word": "shapes",
+          "clean_word": "shapes",
+          "phonemes": "\u0283\u02c8e\u026aps",
+          "start": 22.787,
+          "end": 23.192,
+          "duration": 0.405,
+          "frame_ahead_trigger": 22.747
+        },
+        {
+          "word": "early",
+          "clean_word": "early",
+          "phonemes": "\u02c8\u025c\u02d0li",
+          "start": 23.192,
+          "end": 23.417,
+          "duration": 0.225,
+          "frame_ahead_trigger": 23.152
+        },
+        {
+          "word": "on,",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 23.417,
+          "end": 23.637,
+          "duration": 0.22,
+          "frame_ahead_trigger": 23.377
+        },
+        {
+          "word": "keeping",
+          "clean_word": "keeping",
+          "phonemes": "k\u02c8i\u02d0p\u026a\u014b",
+          "start": 23.637,
+          "end": 24.047,
+          "duration": 0.41,
+          "frame_ahead_trigger": 23.597
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.047,
+          "end": 24.212,
+          "duration": 0.165,
+          "frame_ahead_trigger": 24.007
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 24.212,
+          "end": 24.617,
+          "duration": 0.405,
+          "frame_ahead_trigger": 24.172
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 24.617,
+          "end": 24.822,
+          "duration": 0.205,
+          "frame_ahead_trigger": 24.577
+        },
+        {
+          "word": "drifting",
+          "clean_word": "drifting",
+          "phonemes": "d\u0279\u02c8\u026aft\u026a\u014b",
+          "start": 24.822,
+          "end": 25.297,
+          "duration": 0.475,
+          "frame_ahead_trigger": 24.782
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 25.297,
+          "end": 25.607,
+          "duration": 0.31,
+          "frame_ahead_trigger": 25.257
+        },
+        {
+          "word": "weird,",
+          "clean_word": "weird",
+          "phonemes": "w\u02c8\u026a\u0279d",
+          "start": 25.607,
+          "end": 26.072,
+          "duration": 0.465,
+          "frame_ahead_trigger": 25.567
+        },
+        {
+          "word": "fuzzy",
+          "clean_word": "fuzzy",
+          "phonemes": "f\u02c8\u028czi",
+          "start": 26.072,
+          "end": 26.332,
+          "duration": 0.26,
+          "frame_ahead_trigger": 26.032
+        },
+        {
+          "word": "static.",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 26.332,
+          "end": 26.707,
+          "duration": 0.375,
+          "frame_ahead_trigger": 26.292
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "With this dual-layer setup, it runs nearly three times faster. That is the magic of turning heavy work into a smooth stream.",
+      "visual_focus": "Side-by-side comparison showing one process dragging and the new one flowing rapidly.",
+      "highlight_words": {
+        "three times faster": "#34D399"
+      },
+      "svo_action": {
+        "subject": "FlashForward",
+        "action_verb": "accelerates",
+        "direct_object": "generation_speed",
+        "anchor_word": "faster",
+        "semantic_role": "metric_evaluation"
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "INFERENCE SPEEDUP",
+        "sub": "Comparative throughput of FlashForward vs Legacy systems",
+        "contender_a_name": "LEGACY GENERATION",
+        "contender_a_score": 0.33,
+        "contender_a_text": "33% VELOCITY",
+        "contender_b_name": "FLASHFORWARD",
+        "contender_b_score": 1.0,
+        "contender_b_text": "300% VELOCITY",
+        "delta_badge_text": "3.0x",
+        "delta_badge_sub": "SPEED MULTIPLIER"
+      },
+      "kinetic_action": "Exponential bar growth",
+      "audio_duration": 6.74,
+      "slot_duration": 7.04,
+      "start": 27.21,
+      "end": 33.95,
+      "word_timings": [
+        {
+          "word": "With",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 27.215,
+          "end": 27.34,
+          "duration": 0.125,
+          "frame_ahead_trigger": 27.175
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 27.34,
+          "end": 27.725,
+          "duration": 0.385,
+          "frame_ahead_trigger": 27.3
+        },
+        {
+          "word": "dual-layer",
+          "clean_word": "duallayer",
+          "phonemes": "d\u02c8u\u02d0\u0250l\u02cce\u026a\u025a",
+          "start": 27.725,
+          "end": 28.21,
+          "duration": 0.485,
+          "frame_ahead_trigger": 27.685
+        },
+        {
+          "word": "setup,",
+          "clean_word": "setup",
+          "phonemes": "s\u02c8\u025b\u027e\u028cp",
+          "start": 28.21,
+          "end": 28.621,
+          "duration": 0.411,
+          "frame_ahead_trigger": 28.17
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 28.621,
+          "end": 28.775,
+          "duration": 0.154,
+          "frame_ahead_trigger": 28.581
+        },
+        {
+          "word": "runs",
+          "clean_word": "runs",
+          "phonemes": "\u0279\u02c8\u028cnz",
+          "start": 28.775,
+          "end": 29.049,
+          "duration": 0.273,
+          "frame_ahead_trigger": 28.735
+        },
+        {
+          "word": "nearly",
+          "clean_word": "nearly",
+          "phonemes": "n\u02c8\u026a\u0279li",
+          "start": 29.049,
+          "end": 29.39,
+          "duration": 0.342,
+          "frame_ahead_trigger": 29.009
+        },
+        {
+          "word": "three",
+          "clean_word": "three",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0",
+          "start": 29.39,
+          "end": 29.765,
+          "duration": 0.375,
+          "frame_ahead_trigger": 29.35
+        },
+        {
+          "word": "times",
+          "clean_word": "times",
+          "phonemes": "t\u02c8a\u026amz",
+          "start": 29.765,
+          "end": 30.07,
+          "duration": 0.305,
+          "frame_ahead_trigger": 29.725
+        },
+        {
+          "word": "faster.",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 30.07,
+          "end": 30.47,
+          "duration": 0.4,
+          "frame_ahead_trigger": 30.03
+        },
+        {
+          "word": "That",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 30.47,
+          "end": 30.699,
+          "duration": 0.228,
+          "frame_ahead_trigger": 30.43
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 30.699,
+          "end": 30.821,
+          "duration": 0.122,
+          "frame_ahead_trigger": 30.659
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.821,
+          "end": 30.943,
+          "duration": 0.122,
+          "frame_ahead_trigger": 30.781
+        },
+        {
+          "word": "magic",
+          "clean_word": "magic",
+          "phonemes": "m\u02c8\u00e6d\u0292\u026ak",
+          "start": 30.943,
+          "end": 31.415,
+          "duration": 0.472,
+          "frame_ahead_trigger": 30.903
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 31.415,
+          "end": 31.493,
+          "duration": 0.078,
+          "frame_ahead_trigger": 31.375
+        },
+        {
+          "word": "turning",
+          "clean_word": "turning",
+          "phonemes": "t\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 31.493,
+          "end": 31.895,
+          "duration": 0.402,
+          "frame_ahead_trigger": 31.453
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 31.895,
+          "end": 32.235,
+          "duration": 0.34,
+          "frame_ahead_trigger": 31.855
+        },
+        {
+          "word": "work",
+          "clean_word": "work",
+          "phonemes": "w\u02c8\u025c\u02d0k",
+          "start": 32.235,
+          "end": 32.5,
+          "duration": 0.265,
+          "frame_ahead_trigger": 32.195
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 32.5,
+          "end": 32.855,
+          "duration": 0.355,
+          "frame_ahead_trigger": 32.46
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 32.855,
+          "end": 33.01,
+          "duration": 0.155,
+          "frame_ahead_trigger": 32.815
+        },
+        {
+          "word": "smooth",
+          "clean_word": "smooth",
+          "phonemes": "sm\u02c8u\u02d0\u00f0",
+          "start": 33.01,
+          "end": 33.39,
+          "duration": 0.38,
+          "frame_ahead_trigger": 32.97
+        },
+        {
+          "word": "stream.",
+          "clean_word": "stream",
+          "phonemes": "st\u0279\u02c8i\u02d0m",
+          "start": 33.39,
+          "end": 33.815,
+          "duration": 0.425,
+          "frame_ahead_trigger": 33.35
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works. Build better, faster, and smarter every single day.",
+      "visual_focus": "The Model Verse logo appears with a clean, glowing interface design.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 7.79,
+      "slot_duration": 8.29,
+      "start": 34.25,
+      "end": 42.03,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.262,
+          "end": 34.727,
+          "duration": 0.465,
+          "frame_ahead_trigger": 34.222
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.727,
+          "end": 34.797,
+          "duration": 0.07,
+          "frame_ahead_trigger": 34.687
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.797,
+          "end": 35.212,
+          "duration": 0.415,
+          "frame_ahead_trigger": 34.757
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 35.212,
+          "end": 35.532,
+          "duration": 0.32,
+          "frame_ahead_trigger": 35.172
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.532,
+          "end": 35.847,
+          "duration": 0.315,
+          "frame_ahead_trigger": 35.492
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 35.847,
+          "end": 36.242,
+          "duration": 0.395,
+          "frame_ahead_trigger": 35.807
+        },
+        {
+          "word": "explanations",
+          "clean_word": "explanations",
+          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
+          "start": 36.242,
+          "end": 37.117,
+          "duration": 0.875,
+          "frame_ahead_trigger": 36.202
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 37.117,
+          "end": 37.287,
+          "duration": 0.17,
+          "frame_ahead_trigger": 37.077
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 37.287,
+          "end": 37.468,
+          "duration": 0.181,
+          "frame_ahead_trigger": 37.247
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 37.468,
+          "end": 37.967,
+          "duration": 0.499,
+          "frame_ahead_trigger": 37.428
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 37.967,
+          "end": 38.317,
+          "duration": 0.35,
+          "frame_ahead_trigger": 37.927
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 38.317,
+          "end": 38.937,
+          "duration": 0.62,
+          "frame_ahead_trigger": 38.277
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 38.937,
+          "end": 39.232,
+          "duration": 0.295,
+          "frame_ahead_trigger": 38.897
+        },
+        {
+          "word": "Build",
+          "clean_word": "build",
+          "phonemes": "b\u02c8\u026ald",
+          "start": 39.232,
+          "end": 39.564,
+          "duration": 0.332,
+          "frame_ahead_trigger": 39.192
+        },
+        {
+          "word": "better,",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 39.564,
+          "end": 39.862,
+          "duration": 0.298,
+          "frame_ahead_trigger": 39.524
+        },
+        {
+          "word": "faster,",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 39.862,
+          "end": 40.167,
+          "duration": 0.305,
+          "frame_ahead_trigger": 39.822
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 40.167,
+          "end": 40.362,
+          "duration": 0.195,
+          "frame_ahead_trigger": 40.127
+        },
+        {
+          "word": "smarter",
+          "clean_word": "smarter",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279\u027e\u025a",
+          "start": 40.362,
+          "end": 40.982,
+          "duration": 0.62,
+          "frame_ahead_trigger": 40.322
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 40.982,
+          "end": 41.272,
+          "duration": 0.29,
+          "frame_ahead_trigger": 40.942
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 41.272,
+          "end": 41.667,
+          "duration": 0.395,
+          "frame_ahead_trigger": 41.232
+        },
+        {
+          "word": "day.",
+          "clean_word": "day",
+          "phonemes": "d\u02c8e\u026a",
+          "start": 41.667,
+          "end": 41.907,
+          "duration": 0.24,
+          "frame_ahead_trigger": 41.627
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{total} = N_{chunks} \\times (T_{denoise} + T_{cache})$",
+      "filename": "flash_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{cache}",
+          "label": "Time spent updating cache"
+        },
+        {
+          "term": "T_{denoise}",
+          "label": "Time spent generating"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{H}_{in-flight} \\approx \\sum_{i=0}^k \\mathbf{q}_i \\mathbf{k}_i^T$",
+      "filename": "flash_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "H_{in-flight}",
+          "label": "Reusable memory cache"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{Cache}_{new} = \\mathrm{Reuse}(\\mathbf{Cache}_{stage})$",
+      "filename": "flash_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Reuse",
+          "label": "Direct memory copy"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{L}_{stab} = ||\\mathbf{A}_{anchor} - \\mathbf{Z}_{gen}||_2$",
+      "filename": "flash_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "A_{anchor}",
+          "label": "Clean anchor latent"
+        },
+        {
+          "term": "Z_{gen}",
+          "label": "Noisy generation trajectory"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = \\frac{\\mathrm{Time}_{old}}{\\mathrm{Time}_{FlashForward}} \\approx 2.92\\times$",
+      "filename": "flash_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "2.92\\times",
+          "label": "Peak generation speedup"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "KV Cache",
+          "color": "#38BDF8",
+          "items": [
+            "Keys",
+            "Values",
+            "States"
+          ]
+        },
+        {
+          "name": "Anchors",
+          "color": "#10B981",
+          "items": [
+            "Sparse",
+            "Clean",
+            "Guidance"
+          ]
+        },
+        {
+          "name": "Chunks",
+          "color": "#F59E0B",
+          "items": [
+            "Temporal",
+            "Denoising",
+            "Stages"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"video_frame\"",
+        "target_cluster": "KV Cache",
+        "token": "\"frame_data\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Cache Update",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Drift",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "FlashForward",
+    "model_a_specs": [
+      "Multi-GPU",
+      "Sparse Anchors",
+      "In-Flight Cache"
+    ],
+    "model_b": "HiAR / Self-Forcing",
+    "model_b_specs": [
+      "Reconstruction Forward",
+      "Heavy Updates",
+      "Single Path"
+    ],
+    "divide_title": "GENERATION SPEED DIVIDE",
+    "model_a_stat": "2.92x",
+    "model_a_stat_label": "MAX SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 2.92x COMPUTE REDUCTION",
+    "benchmarks": [
+      {
+        "name": "Generation Speed",
+        "score_a": "2.92x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "VBench Quality",
+        "score_a": "Stable",
+        "score_b": "Drifting"
+      },
+      {
+        "name": "Temporal Logic",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "14B",
+    "scale_label": "Backbone Scale",
+    "bottleneck_title": "MONOLITHIC GENERATION BOTTLENECK",
+    "bottleneck_desc": "Redundant Cache Updates",
+    "solution_title": "IN-FLIGHT KV CACHE & ANCHORS",
+    "solution_components": "Sparse Anchors",
+    "mechanism_title": "TEMPORAL STABILIZATION",
+    "payoff_stat": "2.92x",
+    "payoff_label": "SPEED GAIN",
+    "payoff_sub": "Faster autoregressive diffusion",
+    "payoff_hero_stat": 2.92,
+    "payoff_hero_label": "FlashForward Speedup",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Baseline Model",
+    "payoff_delta_badge": "\u26a1 +192% FASTER VIDEO GENERATION",
+    "challenger": "FlashForward",
+    "incumbent": "Self-Forcing"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "FlashForward",
+        "model_a_score": "2.92x",
+        "model_b_name": "HiAR / Self-Forcing",
+        "model_b_score": "1.0x",
+        "delta_label": "\u26a1 2.92x COMPUTE REDUCTION"
+      }
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "remove_redundant_ui_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "add_math_formula": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 1.0
+      },
+      "replace_sine_waves": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "sine_wave_group": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "redundant_ui_text": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.85
+      },
+      "wave_diagrams": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "footer_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 0.99
+      },
+      "generic_ui_grid": {
+        "dx": -0.067,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "main_ui_grid": {
+        "dx": -0.067,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.7,
+        "scale_multiplier": 1.15
+      },
+      "flowchart_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "ui_to_flow": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.8
+      },
+      "formula_addition": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 1.0
+      },
+      "comparison_split": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.853
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.7,
+        "scale_multiplier": 1.0
+      },
+      "vector_diagram": {
+        "dx": 0.0,
+        "dy": 0.12,
+        "scale_multiplier": 0.738
+      },
+      "ui_card_anchor": {
+        "dx": 0.0,
+        "dy": -0.06,
+        "scale_multiplier": 0.91
+      },
+      "ui_card": {
+        "dx": 0.0,
+        "dy": -0.06,
+        "scale_multiplier": 0.91
+      },
+      "footer_text": {
+        "dx": 0.0,
+        "dy": 0.576,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "legacy_bar": {
+        "dx": 0.8,
+        "dy": 0.5,
+        "scale_multiplier": 0.8
+      },
+      "speedup_card": {
+        "dx": 0.419,
+        "dy": -0.5,
+        "scale_multiplier": 0.909
+      },
+      "flashforward_bar": {
+        "dx": 0.8,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "speedup_box": {
+        "dx": 0.397,
+        "dy": 0.0,
+        "scale_multiplier": 0.732
+      }
+    },
+    "6": {
+      "logo_graph": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "brand_text_block": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.807
+      },
+      "cta_text": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.15
+      },
+      "main_title": {
+        "dx": 0.0,
+        "dy": -0.1,
+        "scale_multiplier": 0.891
+      }
+    }
+  }
+}
