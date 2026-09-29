@@ -1,0 +1,1720 @@
+{
+  "id": "solveedit_benchmark_news",
+  "title": "Visual Problem Solving Benchmarks",
+  "category": "benchmark_news",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "VISUAL AI BENCHMARKS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do AI models fail to move objects on a screen? They often guess wrong when asked to change a layout for a goal.",
+      "visual_focus": "A split screen showing a messy desk and an AI failing to organize it, with a count of 2,728 test cases displayed.",
+      "highlight_words": {
+        "fail": "#EF4444",
+        "2,728": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Generative Model",
+        "action_verb": "fails",
+        "direct_object": "visual layout",
+        "anchor_word": "fail",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "Layout Target",
+        "signal_b_label": "Model Prediction",
+        "result_label": "Failure: Error 2,728",
+        "result_sub": "Misaligned Geometry"
+      },
+      "kinetic_action": "opposing_pulses_collapse",
+      "audio_duration": 6.21,
+      "slot_duration": 6.51,
+      "start": 0.0,
+      "end": 6.21,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.005,
+          "end": 0.17,
+          "duration": 0.165,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.46,
+          "duration": 0.29,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 0.46,
+          "end": 0.725,
+          "duration": 0.265,
+          "frame_ahead_trigger": 0.42
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 0.725,
+          "end": 1.14,
+          "duration": 0.415,
+          "frame_ahead_trigger": 0.685
+        },
+        {
+          "word": "fail",
+          "clean_word": "fail",
+          "phonemes": "f\u02c8e\u026al",
+          "start": 1.14,
+          "end": 1.335,
+          "duration": 0.195,
+          "frame_ahead_trigger": 1.1
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 1.335,
+          "end": 1.56,
+          "duration": 0.225,
+          "frame_ahead_trigger": 1.295
+        },
+        {
+          "word": "move",
+          "clean_word": "move",
+          "phonemes": "m\u02c8u\u02d0v",
+          "start": 1.56,
+          "end": 1.845,
+          "duration": 0.285,
+          "frame_ahead_trigger": 1.52
+        },
+        {
+          "word": "objects",
+          "clean_word": "objects",
+          "phonemes": "\u02c8\u0251\u02d0bd\u0292\u025bkts",
+          "start": 1.845,
+          "end": 2.36,
+          "duration": 0.515,
+          "frame_ahead_trigger": 1.805
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 2.36,
+          "end": 2.519,
+          "duration": 0.159,
+          "frame_ahead_trigger": 2.32
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 2.519,
+          "end": 2.676,
+          "duration": 0.157,
+          "frame_ahead_trigger": 2.479
+        },
+        {
+          "word": "screen?",
+          "clean_word": "screen",
+          "phonemes": "sk\u0279\u02c8i\u02d0n",
+          "start": 2.676,
+          "end": 3.075,
+          "duration": 0.399,
+          "frame_ahead_trigger": 2.636
+        },
+        {
+          "word": "They",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 3.075,
+          "end": 3.16,
+          "duration": 0.085,
+          "frame_ahead_trigger": 3.035
+        },
+        {
+          "word": "often",
+          "clean_word": "often",
+          "phonemes": "\u02c8\u0254f\u0259n",
+          "start": 3.16,
+          "end": 3.46,
+          "duration": 0.3,
+          "frame_ahead_trigger": 3.12
+        },
+        {
+          "word": "guess",
+          "clean_word": "guess",
+          "phonemes": "\u0261\u02c8\u025bs",
+          "start": 3.46,
+          "end": 3.665,
+          "duration": 0.205,
+          "frame_ahead_trigger": 3.42
+        },
+        {
+          "word": "wrong",
+          "clean_word": "wrong",
+          "phonemes": "\u0279\u02c8\u0254\u014b",
+          "start": 3.665,
+          "end": 3.88,
+          "duration": 0.215,
+          "frame_ahead_trigger": 3.625
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 3.88,
+          "end": 4.08,
+          "duration": 0.2,
+          "frame_ahead_trigger": 3.84
+        },
+        {
+          "word": "asked",
+          "clean_word": "asked",
+          "phonemes": "\u02c8\u00e6skt",
+          "start": 4.08,
+          "end": 4.32,
+          "duration": 0.24,
+          "frame_ahead_trigger": 4.04
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 4.32,
+          "end": 4.51,
+          "duration": 0.19,
+          "frame_ahead_trigger": 4.28
+        },
+        {
+          "word": "change",
+          "clean_word": "change",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292",
+          "start": 4.51,
+          "end": 4.895,
+          "duration": 0.385,
+          "frame_ahead_trigger": 4.47
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 4.895,
+          "end": 5.1,
+          "duration": 0.205,
+          "frame_ahead_trigger": 4.855
+        },
+        {
+          "word": "layout",
+          "clean_word": "layout",
+          "phonemes": "l\u02c8e\u026aa\u028at",
+          "start": 5.1,
+          "end": 5.47,
+          "duration": 0.37,
+          "frame_ahead_trigger": 5.06
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 5.47,
+          "end": 5.661,
+          "duration": 0.191,
+          "frame_ahead_trigger": 5.43
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 5.661,
+          "end": 5.795,
+          "duration": 0.134,
+          "frame_ahead_trigger": 5.621
+        },
+        {
+          "word": "goal.",
+          "clean_word": "goal",
+          "phonemes": "\u0261\u02c8o\u028al",
+          "start": 5.795,
+          "end": 6.08,
+          "duration": 0.285,
+          "frame_ahead_trigger": 5.755
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like solving a puzzle where you must shift items but keep other parts safe. Most models lack this simple, goal-driven plan.",
+      "visual_focus": "A sliding tile puzzle being solved, with a cursor highlighting the correct move versus a broken one.",
+      "highlight_words": {
+        "puzzle": "#38BDF8",
+        "plan": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Goal-driven model",
+        "action_verb": "shifts",
+        "direct_object": "image tiles",
+        "anchor_word": "shift",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "tree_search",
+      "motif_params": {
+        "title": "Goal-Driven Shift",
+        "sub": "Recursive Tile Puzzle",
+        "root_label": "Current State",
+        "optimal_label": "Valid Move",
+        "optimal_sub": "Correct Shift",
+        "pruned_label": "Invalid Move",
+        "pruned_sub": "Broken Constraint",
+        "badge_title": "Goal-Driven",
+        "badge_sub": "Planning Logic"
+      },
+      "kinetic_action": "path_pruning",
+      "audio_duration": 6.87,
+      "slot_duration": 7.17,
+      "start": 6.51,
+      "end": 13.38,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 6.518,
+          "end": 6.583,
+          "duration": 0.065,
+          "frame_ahead_trigger": 6.478
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.583,
+          "end": 6.693,
+          "duration": 0.11,
+          "frame_ahead_trigger": 6.543
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 6.693,
+          "end": 7.013,
+          "duration": 0.32,
+          "frame_ahead_trigger": 6.653
+        },
+        {
+          "word": "solving",
+          "clean_word": "solving",
+          "phonemes": "s\u02c8\u0251\u02d0lv\u026a\u014b",
+          "start": 7.013,
+          "end": 7.518,
+          "duration": 0.505,
+          "frame_ahead_trigger": 6.973
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.518,
+          "end": 7.668,
+          "duration": 0.15,
+          "frame_ahead_trigger": 7.478
+        },
+        {
+          "word": "puzzle",
+          "clean_word": "puzzle",
+          "phonemes": "p\u02c8\u028cz\u0259l",
+          "start": 7.668,
+          "end": 7.908,
+          "duration": 0.24,
+          "frame_ahead_trigger": 7.628
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 7.908,
+          "end": 8.108,
+          "duration": 0.2,
+          "frame_ahead_trigger": 7.868
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 8.108,
+          "end": 8.353,
+          "duration": 0.245,
+          "frame_ahead_trigger": 8.068
+        },
+        {
+          "word": "must",
+          "clean_word": "must",
+          "phonemes": "m\u02c8\u028cst",
+          "start": 8.353,
+          "end": 8.588,
+          "duration": 0.235,
+          "frame_ahead_trigger": 8.313
+        },
+        {
+          "word": "shift",
+          "clean_word": "shift",
+          "phonemes": "\u0283\u02c8\u026aft",
+          "start": 8.588,
+          "end": 8.968,
+          "duration": 0.38,
+          "frame_ahead_trigger": 8.548
+        },
+        {
+          "word": "items",
+          "clean_word": "items",
+          "phonemes": "\u02c8a\u026a\u027e\u0259mz",
+          "start": 8.968,
+          "end": 9.378,
+          "duration": 0.41,
+          "frame_ahead_trigger": 8.928
+        },
+        {
+          "word": "but",
+          "clean_word": "but",
+          "phonemes": "b\u02cc\u028ct",
+          "start": 9.378,
+          "end": 9.613,
+          "duration": 0.235,
+          "frame_ahead_trigger": 9.338
+        },
+        {
+          "word": "keep",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 9.613,
+          "end": 9.738,
+          "duration": 0.125,
+          "frame_ahead_trigger": 9.573
+        },
+        {
+          "word": "other",
+          "clean_word": "other",
+          "phonemes": "\u02c8\u028c\u00f0\u025a",
+          "start": 9.738,
+          "end": 10.054,
+          "duration": 0.316,
+          "frame_ahead_trigger": 9.698
+        },
+        {
+          "word": "parts",
+          "clean_word": "parts",
+          "phonemes": "p\u02c8\u0251\u02d0\u0279ts",
+          "start": 10.054,
+          "end": 10.498,
+          "duration": 0.444,
+          "frame_ahead_trigger": 10.014
+        },
+        {
+          "word": "safe.",
+          "clean_word": "safe",
+          "phonemes": "s\u02c8e\u026af",
+          "start": 10.498,
+          "end": 10.743,
+          "duration": 0.245,
+          "frame_ahead_trigger": 10.458
+        },
+        {
+          "word": "Most",
+          "clean_word": "most",
+          "phonemes": "m\u02c8o\u028ast",
+          "start": 10.743,
+          "end": 11.118,
+          "duration": 0.375,
+          "frame_ahead_trigger": 10.703
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 11.118,
+          "end": 11.553,
+          "duration": 0.435,
+          "frame_ahead_trigger": 11.078
+        },
+        {
+          "word": "lack",
+          "clean_word": "lack",
+          "phonemes": "l\u02c8\u00e6k",
+          "start": 11.553,
+          "end": 11.718,
+          "duration": 0.165,
+          "frame_ahead_trigger": 11.513
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 11.718,
+          "end": 11.898,
+          "duration": 0.18,
+          "frame_ahead_trigger": 11.678
+        },
+        {
+          "word": "simple,",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 11.898,
+          "end": 12.355,
+          "duration": 0.457,
+          "frame_ahead_trigger": 11.858
+        },
+        {
+          "word": "goal-driven",
+          "clean_word": "goaldriven",
+          "phonemes": "\u0261\u02c8o\u028ald\u0279\u026av\u0259n",
+          "start": 12.355,
+          "end": 12.908,
+          "duration": 0.553,
+          "frame_ahead_trigger": 12.315
+        },
+        {
+          "word": "plan.",
+          "clean_word": "plan",
+          "phonemes": "pl\u02c8\u00e6n",
+          "start": 12.908,
+          "end": 13.253,
+          "duration": 0.345,
+          "frame_ahead_trigger": 12.868
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "New tests break tasks into atomic steps. It forces the AI to check what must change versus what must stay exactly as is.",
+      "visual_focus": "An image split into 'Change' and 'Keep' masks, showing the model separating the two logic layers.",
+      "highlight_words": {
+        "atomic": "#34D399",
+        "steps": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Benchmark",
+        "action_verb": "separates",
+        "direct_object": "visual components",
+        "anchor_word": "break",
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "Atomic Task Decomposition",
+        "sub": "Logical Layer Separation",
+        "in_label": "Input Visual",
+        "prism_label": "Benchmark Logic",
+        "out1_label": "Keep (Static)",
+        "out2_label": "Change (Active)"
+      },
+      "kinetic_action": "color_spectrum_split",
+      "audio_duration": 7.08,
+      "slot_duration": 7.38,
+      "start": 13.68,
+      "end": 20.76,
+      "word_timings": [
+        {
+          "word": "New",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 13.687,
+          "end": 13.817,
+          "duration": 0.13,
+          "frame_ahead_trigger": 13.647
+        },
+        {
+          "word": "tests",
+          "clean_word": "tests",
+          "phonemes": "t\u02c8\u025bsts",
+          "start": 13.817,
+          "end": 14.207,
+          "duration": 0.39,
+          "frame_ahead_trigger": 13.777
+        },
+        {
+          "word": "break",
+          "clean_word": "break",
+          "phonemes": "b\u0279\u02c8e\u026ak",
+          "start": 14.207,
+          "end": 14.712,
+          "duration": 0.505,
+          "frame_ahead_trigger": 14.167
+        },
+        {
+          "word": "tasks",
+          "clean_word": "tasks",
+          "phonemes": "t\u02c8\u00e6sks",
+          "start": 14.712,
+          "end": 14.982,
+          "duration": 0.27,
+          "frame_ahead_trigger": 14.672
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 14.982,
+          "end": 15.172,
+          "duration": 0.19,
+          "frame_ahead_trigger": 14.942
+        },
+        {
+          "word": "atomic",
+          "clean_word": "atomic",
+          "phonemes": "\u0250t\u02c8\u0251\u02d0m\u026ak",
+          "start": 15.172,
+          "end": 15.852,
+          "duration": 0.68,
+          "frame_ahead_trigger": 15.132
+        },
+        {
+          "word": "steps.",
+          "clean_word": "steps",
+          "phonemes": "st\u02c8\u025bps",
+          "start": 15.852,
+          "end": 16.111,
+          "duration": 0.259,
+          "frame_ahead_trigger": 15.812
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 16.111,
+          "end": 16.229,
+          "duration": 0.118,
+          "frame_ahead_trigger": 16.071
+        },
+        {
+          "word": "forces",
+          "clean_word": "forces",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
+          "start": 16.229,
+          "end": 16.727,
+          "duration": 0.498,
+          "frame_ahead_trigger": 16.189
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.727,
+          "end": 16.882,
+          "duration": 0.155,
+          "frame_ahead_trigger": 16.687
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 16.882,
+          "end": 17.167,
+          "duration": 0.285,
+          "frame_ahead_trigger": 16.842
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 17.167,
+          "end": 17.352,
+          "duration": 0.185,
+          "frame_ahead_trigger": 17.127
+        },
+        {
+          "word": "check",
+          "clean_word": "check",
+          "phonemes": "t\u0283\u02c8\u025bk",
+          "start": 17.352,
+          "end": 17.637,
+          "duration": 0.285,
+          "frame_ahead_trigger": 17.312
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 17.637,
+          "end": 17.882,
+          "duration": 0.245,
+          "frame_ahead_trigger": 17.597
+        },
+        {
+          "word": "must",
+          "clean_word": "must",
+          "phonemes": "m\u02c8\u028cst",
+          "start": 17.882,
+          "end": 18.207,
+          "duration": 0.325,
+          "frame_ahead_trigger": 17.842
+        },
+        {
+          "word": "change",
+          "clean_word": "change",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292",
+          "start": 18.207,
+          "end": 18.607,
+          "duration": 0.4,
+          "frame_ahead_trigger": 18.167
+        },
+        {
+          "word": "versus",
+          "clean_word": "versus",
+          "phonemes": "v\u02c8\u025c\u02d0s\u1d7bz",
+          "start": 18.607,
+          "end": 19.017,
+          "duration": 0.41,
+          "frame_ahead_trigger": 18.567
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 19.017,
+          "end": 19.322,
+          "duration": 0.305,
+          "frame_ahead_trigger": 18.977
+        },
+        {
+          "word": "must",
+          "clean_word": "must",
+          "phonemes": "m\u02c8\u028cst",
+          "start": 19.322,
+          "end": 19.592,
+          "duration": 0.27,
+          "frame_ahead_trigger": 19.282
+        },
+        {
+          "word": "stay",
+          "clean_word": "stay",
+          "phonemes": "st\u02c8e\u026a",
+          "start": 19.592,
+          "end": 20.012,
+          "duration": 0.42,
+          "frame_ahead_trigger": 19.552
+        },
+        {
+          "word": "exactly",
+          "clean_word": "exactly",
+          "phonemes": "\u025b\u0261z\u02c8\u00e6ktli",
+          "start": 20.012,
+          "end": 20.402,
+          "duration": 0.39,
+          "frame_ahead_trigger": 19.972
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 20.402,
+          "end": 20.544,
+          "duration": 0.142,
+          "frame_ahead_trigger": 20.362
+        },
+        {
+          "word": "is.",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 20.544,
+          "end": 20.662,
+          "duration": 0.118,
+          "frame_ahead_trigger": 20.504
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "By adding a two-stage planner, the AI thinks through the move before it draws. It cuts errors by building a clear step-map first.",
+      "visual_focus": "A two-step flowchart showing 'Plan' feeding into 'Render', turning noise into a clean, solved visual state.",
+      "highlight_words": {
+        "two-stage": "#38BDF8",
+        "planner": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Visual Planner",
+        "action_verb": "maps",
+        "direct_object": "transformation steps",
+        "anchor_word": "planner",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "custom_flow",
+      "motif_params": {
+        "title": "Two-Stage Planner",
+        "sub": "Input-to-Rendering Pipeline",
+        "step1_title": "Plan",
+        "step1_sub": "Generate Step-Map",
+        "step2_title": "Transform",
+        "step2_sub": "Execute Coordinates",
+        "step3_title": "Render",
+        "step3_sub": "Final Output State"
+      },
+      "kinetic_action": "data_stream_progression",
+      "audio_duration": 6.93,
+      "slot_duration": 7.23,
+      "start": 21.06,
+      "end": 27.99,
+      "word_timings": [
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 21.065,
+          "end": 21.295,
+          "duration": 0.23,
+          "frame_ahead_trigger": 21.025
+        },
+        {
+          "word": "adding",
+          "clean_word": "adding",
+          "phonemes": "\u02c8\u00e6d\u026a\u014b",
+          "start": 21.295,
+          "end": 21.67,
+          "duration": 0.375,
+          "frame_ahead_trigger": 21.255
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 21.67,
+          "end": 21.745,
+          "duration": 0.075,
+          "frame_ahead_trigger": 21.63
+        },
+        {
+          "word": "two-stage",
+          "clean_word": "twostage",
+          "phonemes": "t\u02c8u\u02d0ste\u026ad\u0292",
+          "start": 21.745,
+          "end": 22.32,
+          "duration": 0.575,
+          "frame_ahead_trigger": 21.705
+        },
+        {
+          "word": "planner,",
+          "clean_word": "planner",
+          "phonemes": "pl\u02c8\u00e6n\u025a",
+          "start": 22.32,
+          "end": 22.795,
+          "duration": 0.475,
+          "frame_ahead_trigger": 22.28
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.795,
+          "end": 22.856,
+          "duration": 0.061,
+          "frame_ahead_trigger": 22.755
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 22.856,
+          "end": 23.315,
+          "duration": 0.459,
+          "frame_ahead_trigger": 22.816
+        },
+        {
+          "word": "thinks",
+          "clean_word": "thinks",
+          "phonemes": "\u03b8\u02c8\u026a\u014bks",
+          "start": 23.315,
+          "end": 23.57,
+          "duration": 0.255,
+          "frame_ahead_trigger": 23.275
+        },
+        {
+          "word": "through",
+          "clean_word": "through",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
+          "start": 23.57,
+          "end": 23.84,
+          "duration": 0.27,
+          "frame_ahead_trigger": 23.53
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.84,
+          "end": 23.99,
+          "duration": 0.15,
+          "frame_ahead_trigger": 23.8
+        },
+        {
+          "word": "move",
+          "clean_word": "move",
+          "phonemes": "m\u02c8u\u02d0v",
+          "start": 23.99,
+          "end": 24.285,
+          "duration": 0.295,
+          "frame_ahead_trigger": 23.95
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 24.285,
+          "end": 24.706,
+          "duration": 0.421,
+          "frame_ahead_trigger": 24.245
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 24.706,
+          "end": 24.88,
+          "duration": 0.174,
+          "frame_ahead_trigger": 24.666
+        },
+        {
+          "word": "draws.",
+          "clean_word": "draws",
+          "phonemes": "d\u0279\u02c8\u0254\u02d0z",
+          "start": 24.88,
+          "end": 25.184,
+          "duration": 0.304,
+          "frame_ahead_trigger": 24.84
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 25.184,
+          "end": 25.415,
+          "duration": 0.231,
+          "frame_ahead_trigger": 25.144
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 25.415,
+          "end": 25.54,
+          "duration": 0.125,
+          "frame_ahead_trigger": 25.375
+        },
+        {
+          "word": "errors",
+          "clean_word": "errors",
+          "phonemes": "\u02c8\u025b\u0279\u025az",
+          "start": 25.54,
+          "end": 25.98,
+          "duration": 0.44,
+          "frame_ahead_trigger": 25.5
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 25.98,
+          "end": 26.205,
+          "duration": 0.225,
+          "frame_ahead_trigger": 25.94
+        },
+        {
+          "word": "building",
+          "clean_word": "building",
+          "phonemes": "b\u02c8\u026ald\u026a\u014b",
+          "start": 26.205,
+          "end": 26.555,
+          "duration": 0.35,
+          "frame_ahead_trigger": 26.165
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 26.555,
+          "end": 26.755,
+          "duration": 0.2,
+          "frame_ahead_trigger": 26.515
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 26.755,
+          "end": 26.995,
+          "duration": 0.24,
+          "frame_ahead_trigger": 26.715
+        },
+        {
+          "word": "step-map",
+          "clean_word": "stepmap",
+          "phonemes": "st\u02c8\u025bpm\u00e6p",
+          "start": 26.995,
+          "end": 27.495,
+          "duration": 0.5,
+          "frame_ahead_trigger": 26.955
+        },
+        {
+          "word": "first.",
+          "clean_word": "first",
+          "phonemes": "f\u02c8\u025c\u02d0st",
+          "start": 27.495,
+          "end": 27.87,
+          "duration": 0.375,
+          "frame_ahead_trigger": 27.455
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "This trick boosts performance from fifty-seven up to seventy-one percent. It finally lets models solve visual puzzles with high precision and real intent.",
+      "visual_focus": "A bar chart rising from 57% to 71.6% as a gold star appears on the screen.",
+      "highlight_words": {
+        "boosts": "#34D399",
+        "71.6%": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "SolveEdit-PLAN",
+        "action_verb": "improves",
+        "direct_object": "success score",
+        "anchor_word": "boosts",
+        "semantic_role": "metric_evaluation"
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "Performance Benchmark",
+        "sub": "Success rate improvement",
+        "contender_a_name": "Standard GenAI",
+        "contender_a_score": 0.57,
+        "contender_a_text": "57% Accuracy",
+        "contender_b_name": "SolveEdit-PLAN",
+        "contender_b_score": 0.716,
+        "contender_b_text": "71.6% Accuracy",
+        "delta_badge_text": "+14.6%",
+        "delta_badge_sub": "Performance Gain"
+      },
+      "kinetic_action": "bar_growth_animation",
+      "audio_duration": 8.41,
+      "slot_duration": 8.71,
+      "start": 28.29,
+      "end": 36.7,
+      "word_timings": [
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 28.308,
+          "end": 28.463,
+          "duration": 0.155,
+          "frame_ahead_trigger": 28.268
+        },
+        {
+          "word": "trick",
+          "clean_word": "trick",
+          "phonemes": "t\u0279\u02c8\u026ak",
+          "start": 28.463,
+          "end": 28.822,
+          "duration": 0.358,
+          "frame_ahead_trigger": 28.423
+        },
+        {
+          "word": "boosts",
+          "clean_word": "boosts",
+          "phonemes": "b\u02c8u\u02d0sts",
+          "start": 28.822,
+          "end": 29.283,
+          "duration": 0.462,
+          "frame_ahead_trigger": 28.782
+        },
+        {
+          "word": "performance",
+          "clean_word": "performance",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279m\u0259ns",
+          "start": 29.283,
+          "end": 29.928,
+          "duration": 0.645,
+          "frame_ahead_trigger": 29.243
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 29.928,
+          "end": 30.078,
+          "duration": 0.15,
+          "frame_ahead_trigger": 29.888
+        },
+        {
+          "word": "fifty-seven",
+          "clean_word": "fiftyseven",
+          "phonemes": "f\u02cc\u026aft\u026as\u02c8\u025bv\u0259n",
+          "start": 30.078,
+          "end": 30.763,
+          "duration": 0.685,
+          "frame_ahead_trigger": 30.038
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 30.763,
+          "end": 30.938,
+          "duration": 0.175,
+          "frame_ahead_trigger": 30.723
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 30.938,
+          "end": 31.143,
+          "duration": 0.205,
+          "frame_ahead_trigger": 30.898
+        },
+        {
+          "word": "seventy-one",
+          "clean_word": "seventyone",
+          "phonemes": "s\u02cc\u025bv\u0259nt\u026aw\u02c8\u028cn",
+          "start": 31.143,
+          "end": 31.788,
+          "duration": 0.645,
+          "frame_ahead_trigger": 31.103
+        },
+        {
+          "word": "percent.",
+          "clean_word": "percent",
+          "phonemes": "p\u025as\u02c8\u025bnt",
+          "start": 31.788,
+          "end": 32.223,
+          "duration": 0.435,
+          "frame_ahead_trigger": 31.748
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 32.223,
+          "end": 32.302,
+          "duration": 0.078,
+          "frame_ahead_trigger": 32.183
+        },
+        {
+          "word": "finally",
+          "clean_word": "finally",
+          "phonemes": "f\u02c8a\u026an\u0259li",
+          "start": 32.302,
+          "end": 32.783,
+          "duration": 0.482,
+          "frame_ahead_trigger": 32.262
+        },
+        {
+          "word": "lets",
+          "clean_word": "lets",
+          "phonemes": "l\u02c8\u025bts",
+          "start": 32.783,
+          "end": 33.033,
+          "duration": 0.25,
+          "frame_ahead_trigger": 32.743
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 33.033,
+          "end": 33.488,
+          "duration": 0.455,
+          "frame_ahead_trigger": 32.993
+        },
+        {
+          "word": "solve",
+          "clean_word": "solve",
+          "phonemes": "s\u02c8\u0251\u02d0lv",
+          "start": 33.488,
+          "end": 33.843,
+          "duration": 0.355,
+          "frame_ahead_trigger": 33.448
+        },
+        {
+          "word": "visual",
+          "clean_word": "visual",
+          "phonemes": "v\u02c8\u026a\u0292u\u02d0\u0259l",
+          "start": 33.843,
+          "end": 34.208,
+          "duration": 0.365,
+          "frame_ahead_trigger": 33.803
+        },
+        {
+          "word": "puzzles",
+          "clean_word": "puzzles",
+          "phonemes": "p\u02c8\u028cz\u0259lz",
+          "start": 34.208,
+          "end": 34.673,
+          "duration": 0.465,
+          "frame_ahead_trigger": 34.168
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 34.673,
+          "end": 34.803,
+          "duration": 0.13,
+          "frame_ahead_trigger": 34.633
+        },
+        {
+          "word": "high",
+          "clean_word": "high",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 34.803,
+          "end": 35.113,
+          "duration": 0.31,
+          "frame_ahead_trigger": 34.763
+        },
+        {
+          "word": "precision",
+          "clean_word": "precision",
+          "phonemes": "p\u0279\u026as\u02c8\u026a\u0292\u0259n",
+          "start": 35.113,
+          "end": 35.548,
+          "duration": 0.435,
+          "frame_ahead_trigger": 35.073
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 35.548,
+          "end": 35.703,
+          "duration": 0.155,
+          "frame_ahead_trigger": 35.508
+        },
+        {
+          "word": "real",
+          "clean_word": "real",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259l",
+          "start": 35.703,
+          "end": 36.148,
+          "duration": 0.445,
+          "frame_ahead_trigger": 35.663
+        },
+        {
+          "word": "intent.",
+          "clean_word": "intent",
+          "phonemes": "\u026ant\u02c8\u025bnt",
+          "start": 36.148,
+          "end": 36.523,
+          "duration": 0.375,
+          "frame_ahead_trigger": 36.108
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears with a clean, light-blue background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 4.74,
+      "slot_duration": 5.24,
+      "start": 37.0,
+      "end": 41.73,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 37.014,
+          "end": 37.379,
+          "duration": 0.365,
+          "frame_ahead_trigger": 36.974
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.379,
+          "end": 37.554,
+          "duration": 0.175,
+          "frame_ahead_trigger": 37.339
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 37.554,
+          "end": 37.909,
+          "duration": 0.355,
+          "frame_ahead_trigger": 37.514
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 37.909,
+          "end": 38.174,
+          "duration": 0.265,
+          "frame_ahead_trigger": 37.869
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 38.174,
+          "end": 38.469,
+          "duration": 0.295,
+          "frame_ahead_trigger": 38.134
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 38.469,
+          "end": 38.849,
+          "duration": 0.38,
+          "frame_ahead_trigger": 38.429
+        },
+        {
+          "word": "explanations",
+          "clean_word": "explanations",
+          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
+          "start": 38.849,
+          "end": 39.674,
+          "duration": 0.825,
+          "frame_ahead_trigger": 38.809
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 39.674,
+          "end": 39.819,
+          "duration": 0.145,
+          "frame_ahead_trigger": 39.634
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.819,
+          "end": 40.029,
+          "duration": 0.21,
+          "frame_ahead_trigger": 39.779
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 40.029,
+          "end": 40.464,
+          "duration": 0.435,
+          "frame_ahead_trigger": 39.989
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 40.464,
+          "end": 40.819,
+          "duration": 0.355,
+          "frame_ahead_trigger": 40.424
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 40.819,
+          "end": 41.294,
+          "duration": 0.475,
+          "frame_ahead_trigger": 40.779
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 41.294,
+          "end": 41.654,
+          "duration": 0.36,
+          "frame_ahead_trigger": 41.254
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{cases} = 2728$",
+      "filename": "solve_cases.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N_{cases}",
+          "label": "Total Benchmarked Tasks"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{P} = \\{T, C, K\\}$",
+      "filename": "solve_puzzle.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Transformation"
+        },
+        {
+          "term": "K",
+          "label": "Kept Context"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$f(x) \\to \\mathrm{Mask}_{change} + \\mathrm{Mask}_{static}$",
+      "filename": "solve_atomic.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{Mask}_{change}",
+          "label": "Required Modification"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Score} = \\frac{1}{N} \\sum \\mathrm{Solved}(i)$",
+      "filename": "solve_score.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{Solved}",
+          "label": "Binary Completion Check"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta = 71.6\\% - 57.0\\% = 14.6\\%$",
+      "filename": "solve_gain.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta",
+          "label": "Accuracy Gain"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "PLANNING",
+          "color": "#38BDF8",
+          "items": [
+            "step1",
+            "step2",
+            "goal"
+          ]
+        },
+        {
+          "name": "EXECUTION",
+          "color": "#10B981",
+          "items": [
+            "render",
+            "edit",
+            "pixel"
+          ]
+        },
+        {
+          "name": "BENCHMARK",
+          "color": "#F59E0B",
+          "items": [
+            "test",
+            "case",
+            "score"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Arrange\"",
+        "target_cluster": "PLANNING",
+        "token": "\"Arrange\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'No-Plan'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'Plan'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "GPT-Image-2",
+    "model_a_specs": [
+      "Two-Stage Planner",
+      "Visual Logic",
+      "Atomic Steps"
+    ],
+    "model_b": "Baseline Model",
+    "model_b_specs": [
+      "Direct Generation",
+      "No Planning",
+      "Visual Perception"
+    ],
+    "divide_title": "PLANNING VS GENERATION DIVIDE",
+    "model_a_stat": "71.6%",
+    "model_a_stat_label": "PLANNER SUCCESS",
+    "model_b_stat": "57.0%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 +9.1% AVERAGE IMPROVEMENT",
+    "benchmarks": [
+      {
+        "name": "SolvEScore",
+        "score_a": "71.6%",
+        "score_b": "57.0%"
+      },
+      {
+        "name": "Tasks",
+        "score_a": "2728",
+        "score_b": "2728"
+      },
+      {
+        "name": "Logic",
+        "score_a": "Two-Stage",
+        "score_b": "Single"
+      }
+    ],
+    "scale_metric": "2728",
+    "scale_label": "Test Cases",
+    "bottleneck_title": "MONOLITHIC GENERATION BOTTLENECK",
+    "bottleneck_desc": "Models skip logical planning leading to object distortion.",
+    "solution_title": "TWO-STAGE VISUAL PLANNER",
+    "solution_components": "Decomposition into Plan & Execution",
+    "mechanism_title": "ATOMIC TRANSITION CONTRACTS",
+    "payoff_stat": "71.6%",
+    "payoff_label": "SUCCESS RATE",
+    "payoff_sub": "Outperforming standard models via structured planning.",
+    "payoff_hero_stat": 71.6,
+    "payoff_hero_label": "With SolveEdit-PLAN",
+    "payoff_base_stat": 57.0,
+    "payoff_base_label": "Without Planner",
+    "payoff_delta_badge": "\u26a1 +14.6% ACCURACY GAIN",
+    "challenger": "SolveEdit-PLAN",
+    "incumbent": "Vanilla Generative Models"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.7,
+        "scale_multiplier": 1.15
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.1
+      },
+      "upper_sine_waves": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "lower_resultant_wave": {
+        "dx": 0.0,
+        "dy": 0.1,
+        "scale_multiplier": 0.818
+      },
+      "error_label": {
+        "dx": 0.0,
+        "dy": -0.1,
+        "scale_multiplier": 1.0
+      },
+      "sine_graphs": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "caption_text": {
+        "dx": 0.0,
+        "dy": 0.8,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.9,
+        "scale_multiplier": 0.748
+      },
+      "redundant_footer_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "caption_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "caption_text": {
+        "dx": 0.0,
+        "dy": 0.76,
+        "scale_multiplier": 1.2
+      },
+      "prism_diagram": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 0.665
+      }
+    },
+    "4": {
+      "replace_ui_with_diagram": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.0
+      },
+      "add_formula": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "chart_container": {
+        "dx": 0.4,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "delta_box": {
+        "dx": 0.625,
+        "dy": 0.5,
+        "scale_multiplier": 0.8
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "progress_bars": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.695
+      },
+      "chart_replacement": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "performance_box": {
+        "dx": 0.625,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "brand_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.727
+      }
+    }
+  }
+}
