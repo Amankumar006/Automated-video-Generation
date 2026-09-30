@@ -1,0 +1,1806 @@
+{
+  "id": "lift_video_generation",
+  "title": "LIFT: Steering Future Video",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "VIDEO GENERATION BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why is it so hard for a smart tool to show a new view when the camera shifts to a brand new spot?",
+      "visual_focus": "A camera icon moving, showing a blank, hazy void where a new scene should emerge.",
+      "highlight_words": {
+        "struggle": "#EF4444",
+        "new view": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Generative Model",
+        "action_verb": "encounters",
+        "direct_object": "Occluded Scene Region",
+        "anchor_word": "view",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "KNOWN VIEW",
+        "signal_b_label": "NEW PERSPECTIVE",
+        "result_label": "COHERENCE COLLAPSE",
+        "result_sub": "HAZY VOID DETECTED"
+      },
+      "kinetic_action": "interference_collapse",
+      "audio_duration": 4.89,
+      "slot_duration": 5.19,
+      "start": 0.0,
+      "end": 4.89,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.015,
+          "end": 0.265,
+          "duration": 0.25,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 0.265,
+          "end": 0.31,
+          "duration": 0.045,
+          "frame_ahead_trigger": 0.225
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 0.31,
+          "end": 0.425,
+          "duration": 0.115,
+          "frame_ahead_trigger": 0.27
+        },
+        {
+          "word": "so",
+          "clean_word": "so",
+          "phonemes": "s\u02c8o\u028a",
+          "start": 0.425,
+          "end": 0.63,
+          "duration": 0.205,
+          "frame_ahead_trigger": 0.385
+        },
+        {
+          "word": "hard",
+          "clean_word": "hard",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279d",
+          "start": 0.63,
+          "end": 0.945,
+          "duration": 0.315,
+          "frame_ahead_trigger": 0.59
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 0.945,
+          "end": 1.135,
+          "duration": 0.19,
+          "frame_ahead_trigger": 0.905
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 1.135,
+          "end": 1.225,
+          "duration": 0.09,
+          "frame_ahead_trigger": 1.095
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 1.225,
+          "end": 1.48,
+          "duration": 0.255,
+          "frame_ahead_trigger": 1.185
+        },
+        {
+          "word": "tool",
+          "clean_word": "tool",
+          "phonemes": "t\u02c8u\u02d0l",
+          "start": 1.48,
+          "end": 1.832,
+          "duration": 0.352,
+          "frame_ahead_trigger": 1.44
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 1.832,
+          "end": 2.04,
+          "duration": 0.208,
+          "frame_ahead_trigger": 1.792
+        },
+        {
+          "word": "show",
+          "clean_word": "show",
+          "phonemes": "\u0283\u02c8o\u028a",
+          "start": 2.04,
+          "end": 2.14,
+          "duration": 0.1,
+          "frame_ahead_trigger": 2.0
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 2.14,
+          "end": 2.29,
+          "duration": 0.15,
+          "frame_ahead_trigger": 2.1
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 2.29,
+          "end": 2.585,
+          "duration": 0.295,
+          "frame_ahead_trigger": 2.25
+        },
+        {
+          "word": "view",
+          "clean_word": "view",
+          "phonemes": "vj\u02c8u\u02d0",
+          "start": 2.585,
+          "end": 2.82,
+          "duration": 0.235,
+          "frame_ahead_trigger": 2.545
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 2.82,
+          "end": 2.915,
+          "duration": 0.095,
+          "frame_ahead_trigger": 2.78
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 2.915,
+          "end": 3.01,
+          "duration": 0.095,
+          "frame_ahead_trigger": 2.875
+        },
+        {
+          "word": "camera",
+          "clean_word": "camera",
+          "phonemes": "k\u02c8\u00e6m\u0279\u0259",
+          "start": 3.01,
+          "end": 3.365,
+          "duration": 0.355,
+          "frame_ahead_trigger": 2.97
+        },
+        {
+          "word": "shifts",
+          "clean_word": "shifts",
+          "phonemes": "\u0283\u02c8\u026afts",
+          "start": 3.365,
+          "end": 3.63,
+          "duration": 0.265,
+          "frame_ahead_trigger": 3.325
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 3.63,
+          "end": 3.745,
+          "duration": 0.115,
+          "frame_ahead_trigger": 3.59
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 3.745,
+          "end": 3.92,
+          "duration": 0.175,
+          "frame_ahead_trigger": 3.705
+        },
+        {
+          "word": "brand",
+          "clean_word": "brand",
+          "phonemes": "b\u0279\u02c8\u00e6nd",
+          "start": 3.92,
+          "end": 4.22,
+          "duration": 0.3,
+          "frame_ahead_trigger": 3.88
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 4.22,
+          "end": 4.49,
+          "duration": 0.27,
+          "frame_ahead_trigger": 4.18
+        },
+        {
+          "word": "spot?",
+          "clean_word": "spot",
+          "phonemes": "sp\u02c8\u0251\u02d0t",
+          "start": 4.49,
+          "end": 4.73,
+          "duration": 0.24,
+          "frame_ahead_trigger": 4.45
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like a blind man trying to draw a map; he knows where he starts but cannot see the path to end.",
+      "visual_focus": "An artist drawing lines on a paper that fade into white noise as they move away from the start.",
+      "highlight_words": {
+        "guesswork": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Prediction Engine",
+        "action_verb": "extrapolates",
+        "direct_object": "Uncertain Layout Path",
+        "anchor_word": "guesswork",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "diffusion_denoise",
+      "motif_params": {
+        "title": "PREDICTION ENGINE",
+        "sub": "DIVERGENT EXTRAPOLATION",
+        "step1_label": "INITIAL SEED",
+        "step2_label": "UNCERTAIN PATH",
+        "step3_label": "WHITE NOISE",
+        "badge_title": "ERROR RATE",
+        "badge_sub": "100% DISTORTION"
+      },
+      "kinetic_action": "noise_propagation",
+      "audio_duration": 5.12,
+      "slot_duration": 5.42,
+      "start": 5.19,
+      "end": 10.31,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 5.195,
+          "end": 5.295,
+          "duration": 0.1,
+          "frame_ahead_trigger": 5.155
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.295,
+          "end": 5.425,
+          "duration": 0.13,
+          "frame_ahead_trigger": 5.255
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 5.425,
+          "end": 5.675,
+          "duration": 0.25,
+          "frame_ahead_trigger": 5.385
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 5.675,
+          "end": 5.816,
+          "duration": 0.141,
+          "frame_ahead_trigger": 5.635
+        },
+        {
+          "word": "blind",
+          "clean_word": "blind",
+          "phonemes": "bl\u02c8a\u026and",
+          "start": 5.816,
+          "end": 6.178,
+          "duration": 0.362,
+          "frame_ahead_trigger": 5.776
+        },
+        {
+          "word": "man",
+          "clean_word": "man",
+          "phonemes": "m\u02c8\u00e6n",
+          "start": 6.178,
+          "end": 6.385,
+          "duration": 0.207,
+          "frame_ahead_trigger": 6.138
+        },
+        {
+          "word": "trying",
+          "clean_word": "trying",
+          "phonemes": "t\u0279\u02c8a\u026a\u026a\u014b",
+          "start": 6.385,
+          "end": 6.755,
+          "duration": 0.37,
+          "frame_ahead_trigger": 6.345
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 6.755,
+          "end": 6.87,
+          "duration": 0.115,
+          "frame_ahead_trigger": 6.715
+        },
+        {
+          "word": "draw",
+          "clean_word": "draw",
+          "phonemes": "d\u0279\u02c8\u0254\u02d0",
+          "start": 6.87,
+          "end": 7.161,
+          "duration": 0.29,
+          "frame_ahead_trigger": 6.83
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.161,
+          "end": 7.316,
+          "duration": 0.155,
+          "frame_ahead_trigger": 7.121
+        },
+        {
+          "word": "map;",
+          "clean_word": "map",
+          "phonemes": "m\u02c8\u00e6p",
+          "start": 7.316,
+          "end": 7.523,
+          "duration": 0.207,
+          "frame_ahead_trigger": 7.276
+        },
+        {
+          "word": "he",
+          "clean_word": "he",
+          "phonemes": "hi\u02d0",
+          "start": 7.523,
+          "end": 7.65,
+          "duration": 0.128,
+          "frame_ahead_trigger": 7.483
+        },
+        {
+          "word": "knows",
+          "clean_word": "knows",
+          "phonemes": "n\u02c8o\u028az",
+          "start": 7.65,
+          "end": 8.025,
+          "duration": 0.375,
+          "frame_ahead_trigger": 7.61
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 8.025,
+          "end": 8.25,
+          "duration": 0.225,
+          "frame_ahead_trigger": 7.985
+        },
+        {
+          "word": "he",
+          "clean_word": "he",
+          "phonemes": "hi\u02d0",
+          "start": 8.25,
+          "end": 8.298,
+          "duration": 0.048,
+          "frame_ahead_trigger": 8.21
+        },
+        {
+          "word": "starts",
+          "clean_word": "starts",
+          "phonemes": "st\u02c8\u0251\u02d0\u0279ts",
+          "start": 8.298,
+          "end": 8.75,
+          "duration": 0.452,
+          "frame_ahead_trigger": 8.258
+        },
+        {
+          "word": "but",
+          "clean_word": "but",
+          "phonemes": "b\u02cc\u028ct",
+          "start": 8.75,
+          "end": 8.87,
+          "duration": 0.12,
+          "frame_ahead_trigger": 8.71
+        },
+        {
+          "word": "cannot",
+          "clean_word": "cannot",
+          "phonemes": "k\u00e6n\u02c8\u0251\u02d0t",
+          "start": 8.87,
+          "end": 9.3,
+          "duration": 0.43,
+          "frame_ahead_trigger": 8.83
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 9.3,
+          "end": 9.505,
+          "duration": 0.205,
+          "frame_ahead_trigger": 9.26
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 9.505,
+          "end": 9.591,
+          "duration": 0.086,
+          "frame_ahead_trigger": 9.465
+        },
+        {
+          "word": "path",
+          "clean_word": "path",
+          "phonemes": "p\u02c8\u00e6\u03b8",
+          "start": 9.591,
+          "end": 9.785,
+          "duration": 0.194,
+          "frame_ahead_trigger": 9.551
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 9.785,
+          "end": 9.953,
+          "duration": 0.168,
+          "frame_ahead_trigger": 9.745
+        },
+        {
+          "word": "end.",
+          "clean_word": "end",
+          "phonemes": "\u02c8\u025bnd",
+          "start": 9.953,
+          "end": 10.16,
+          "duration": 0.207,
+          "frame_ahead_trigger": 9.913
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "LIFT acts like a firm hand to guide the way, using the last view to place each item in the right spot later.",
+      "visual_focus": "A final image frame acting as a magnetic anchor pulling floating objects into place.",
+      "highlight_words": {
+        "solid guide": "#34D399",
+        "objects": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "LIFT Controller",
+        "action_verb": "projects",
+        "direct_object": "Final Frame Layout",
+        "anchor_word": "guide",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "memory_buffer",
+      "motif_params": {
+        "title": "LIFT CONTROLLER",
+        "sub": "ANCHOR POINT PROJECTION",
+        "in_stream_label": "LAST VIEW DATA",
+        "cache_status_label": "GEOMETRY LOCK",
+        "gain_badge_title": "STABILITY",
+        "gain_badge_sub": "OBJECT ALIGNMENT"
+      },
+      "kinetic_action": "magnet_snap",
+      "audio_duration": 5.63,
+      "slot_duration": 5.93,
+      "start": 10.61,
+      "end": 16.24,
+      "word_timings": [
+        {
+          "word": "LIFT",
+          "clean_word": "lift",
+          "phonemes": "l\u02c8\u026aft",
+          "start": 10.625,
+          "end": 10.83,
+          "duration": 0.205,
+          "frame_ahead_trigger": 10.585
+        },
+        {
+          "word": "acts",
+          "clean_word": "acts",
+          "phonemes": "\u02c8\u00e6kts",
+          "start": 10.83,
+          "end": 11.13,
+          "duration": 0.3,
+          "frame_ahead_trigger": 10.79
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 11.13,
+          "end": 11.41,
+          "duration": 0.28,
+          "frame_ahead_trigger": 11.09
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.41,
+          "end": 11.7,
+          "duration": 0.29,
+          "frame_ahead_trigger": 11.37
+        },
+        {
+          "word": "firm",
+          "clean_word": "firm",
+          "phonemes": "f\u02c8\u025c\u02d0m",
+          "start": 11.7,
+          "end": 11.851,
+          "duration": 0.151,
+          "frame_ahead_trigger": 11.66
+        },
+        {
+          "word": "hand",
+          "clean_word": "hand",
+          "phonemes": "h\u02c8\u00e6nd",
+          "start": 11.851,
+          "end": 12.135,
+          "duration": 0.284,
+          "frame_ahead_trigger": 11.811
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 12.135,
+          "end": 12.27,
+          "duration": 0.135,
+          "frame_ahead_trigger": 12.095
+        },
+        {
+          "word": "guide",
+          "clean_word": "guide",
+          "phonemes": "\u0261\u02c8a\u026ad",
+          "start": 12.27,
+          "end": 12.51,
+          "duration": 0.24,
+          "frame_ahead_trigger": 12.23
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.51,
+          "end": 12.651,
+          "duration": 0.14,
+          "frame_ahead_trigger": 12.47
+        },
+        {
+          "word": "way,",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 12.651,
+          "end": 12.864,
+          "duration": 0.213,
+          "frame_ahead_trigger": 12.611
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 12.864,
+          "end": 13.305,
+          "duration": 0.441,
+          "frame_ahead_trigger": 12.824
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 13.305,
+          "end": 13.344,
+          "duration": 0.038,
+          "frame_ahead_trigger": 13.265
+        },
+        {
+          "word": "last",
+          "clean_word": "last",
+          "phonemes": "l\u02c8\u00e6st",
+          "start": 13.344,
+          "end": 13.525,
+          "duration": 0.182,
+          "frame_ahead_trigger": 13.304
+        },
+        {
+          "word": "view",
+          "clean_word": "view",
+          "phonemes": "vj\u02c8u\u02d0",
+          "start": 13.525,
+          "end": 13.84,
+          "duration": 0.315,
+          "frame_ahead_trigger": 13.485
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 13.84,
+          "end": 14.11,
+          "duration": 0.27,
+          "frame_ahead_trigger": 13.8
+        },
+        {
+          "word": "place",
+          "clean_word": "place",
+          "phonemes": "pl\u02c8e\u026as",
+          "start": 14.11,
+          "end": 14.4,
+          "duration": 0.29,
+          "frame_ahead_trigger": 14.07
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 14.4,
+          "end": 14.625,
+          "duration": 0.225,
+          "frame_ahead_trigger": 14.36
+        },
+        {
+          "word": "item",
+          "clean_word": "item",
+          "phonemes": "\u02c8a\u026a\u027e\u0259m",
+          "start": 14.625,
+          "end": 14.935,
+          "duration": 0.31,
+          "frame_ahead_trigger": 14.585
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 14.935,
+          "end": 15.005,
+          "duration": 0.07,
+          "frame_ahead_trigger": 14.895
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.005,
+          "end": 15.225,
+          "duration": 0.22,
+          "frame_ahead_trigger": 14.965
+        },
+        {
+          "word": "right",
+          "clean_word": "right",
+          "phonemes": "\u0279\u02c8a\u026at",
+          "start": 15.225,
+          "end": 15.44,
+          "duration": 0.215,
+          "frame_ahead_trigger": 15.185
+        },
+        {
+          "word": "spot",
+          "clean_word": "spot",
+          "phonemes": "sp\u02c8\u0251\u02d0t",
+          "start": 15.44,
+          "end": 15.825,
+          "duration": 0.385,
+          "frame_ahead_trigger": 15.4
+        },
+        {
+          "word": "later.",
+          "clean_word": "later",
+          "phonemes": "l\u02c8e\u026a\u027e\u025a",
+          "start": 15.825,
+          "end": 16.115,
+          "duration": 0.29,
+          "frame_ahead_trigger": 15.785
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Think of a smart coach teaching a child to trace shapes; the coach shows the best way to draw lines on the page.",
+      "visual_focus": "A teacher-student node diagram where flows of light transfer data between layers.",
+      "highlight_words": {
+        "distillation": "#38BDF8",
+        "map": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "Teacher Model",
+        "action_verb": "distills",
+        "direct_object": "Layout Knowledge",
+        "anchor_word": "distillation",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "TEACHER DISTILLATION",
+        "sub": "KNOWLEDGE FLOW TRANSFER",
+        "in_label": "COMPLEX GEOMETRY",
+        "prism_label": "LAYOUT KERNEL",
+        "out1_label": "TRAJECTORY DATA",
+        "out2_label": "STRUCTURAL MASK"
+      },
+      "kinetic_action": "bifurcation_flow",
+      "audio_duration": 5.78,
+      "slot_duration": 6.08,
+      "start": 16.54,
+      "end": 22.32,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 16.547,
+          "end": 16.812,
+          "duration": 0.265,
+          "frame_ahead_trigger": 16.507
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 16.812,
+          "end": 16.902,
+          "duration": 0.09,
+          "frame_ahead_trigger": 16.772
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.902,
+          "end": 17.192,
+          "duration": 0.29,
+          "frame_ahead_trigger": 16.862
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 17.192,
+          "end": 17.447,
+          "duration": 0.255,
+          "frame_ahead_trigger": 17.152
+        },
+        {
+          "word": "coach",
+          "clean_word": "coach",
+          "phonemes": "k\u02c8o\u028at\u0283",
+          "start": 17.447,
+          "end": 17.822,
+          "duration": 0.375,
+          "frame_ahead_trigger": 17.407
+        },
+        {
+          "word": "teaching",
+          "clean_word": "teaching",
+          "phonemes": "t\u02c8i\u02d0t\u0283\u026a\u014b",
+          "start": 17.822,
+          "end": 18.317,
+          "duration": 0.495,
+          "frame_ahead_trigger": 17.782
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.317,
+          "end": 18.437,
+          "duration": 0.12,
+          "frame_ahead_trigger": 18.277
+        },
+        {
+          "word": "child",
+          "clean_word": "child",
+          "phonemes": "t\u0283\u02c8a\u026ald",
+          "start": 18.437,
+          "end": 18.812,
+          "duration": 0.375,
+          "frame_ahead_trigger": 18.397
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 18.812,
+          "end": 19.032,
+          "duration": 0.22,
+          "frame_ahead_trigger": 18.772
+        },
+        {
+          "word": "trace",
+          "clean_word": "trace",
+          "phonemes": "t\u0279\u02c8e\u026as",
+          "start": 19.032,
+          "end": 19.25,
+          "duration": 0.217,
+          "frame_ahead_trigger": 18.992
+        },
+        {
+          "word": "shapes;",
+          "clean_word": "shapes",
+          "phonemes": "\u0283\u02c8e\u026aps",
+          "start": 19.25,
+          "end": 19.612,
+          "duration": 0.363,
+          "frame_ahead_trigger": 19.21
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 19.612,
+          "end": 19.682,
+          "duration": 0.07,
+          "frame_ahead_trigger": 19.572
+        },
+        {
+          "word": "coach",
+          "clean_word": "coach",
+          "phonemes": "k\u02c8o\u028at\u0283",
+          "start": 19.682,
+          "end": 19.952,
+          "duration": 0.27,
+          "frame_ahead_trigger": 19.642
+        },
+        {
+          "word": "shows",
+          "clean_word": "shows",
+          "phonemes": "\u0283\u02c8o\u028az",
+          "start": 19.952,
+          "end": 20.322,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.912
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.322,
+          "end": 20.385,
+          "duration": 0.062,
+          "frame_ahead_trigger": 20.282
+        },
+        {
+          "word": "best",
+          "clean_word": "best",
+          "phonemes": "b\u02c8\u025bst",
+          "start": 20.385,
+          "end": 20.542,
+          "duration": 0.158,
+          "frame_ahead_trigger": 20.345
+        },
+        {
+          "word": "way",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 20.542,
+          "end": 20.807,
+          "duration": 0.265,
+          "frame_ahead_trigger": 20.502
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 20.807,
+          "end": 21.082,
+          "duration": 0.275,
+          "frame_ahead_trigger": 20.767
+        },
+        {
+          "word": "draw",
+          "clean_word": "draw",
+          "phonemes": "d\u0279\u02c8\u0254\u02d0",
+          "start": 21.082,
+          "end": 21.192,
+          "duration": 0.11,
+          "frame_ahead_trigger": 21.042
+        },
+        {
+          "word": "lines",
+          "clean_word": "lines",
+          "phonemes": "l\u02c8a\u026anz",
+          "start": 21.192,
+          "end": 21.572,
+          "duration": 0.38,
+          "frame_ahead_trigger": 21.152
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 21.572,
+          "end": 21.802,
+          "duration": 0.23,
+          "frame_ahead_trigger": 21.532
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.802,
+          "end": 21.898,
+          "duration": 0.096,
+          "frame_ahead_trigger": 21.762
+        },
+        {
+          "word": "page.",
+          "clean_word": "page",
+          "phonemes": "p\u02c8e\u026ad\u0292",
+          "start": 21.898,
+          "end": 22.222,
+          "duration": 0.324,
+          "frame_ahead_trigger": 21.858
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result is a smooth clip that stays clear, keeping all the items where you want them to be in the final scene.",
+      "visual_focus": "A clean, stable video transition showing perfect object placement across a wide camera pan.",
+      "highlight_words": {
+        "smooth": "#34D399",
+        "consistent": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Layout Engine",
+        "action_verb": "synthesizes",
+        "direct_object": "Future Frame Geometry",
+        "anchor_word": "consistent",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "custom_flow",
+      "motif_params": {
+        "title": "LAYOUT ENGINE",
+        "sub": "SYNTHESIS PIPELINE",
+        "step1_title": "TEMPORAL INPUT",
+        "step1_sub": "RAW CAMERA FEED",
+        "step2_title": "GEOMETRY MAPPING",
+        "step2_sub": "LIFT TRANSFORMATION",
+        "step3_title": "CONSISTENT OUTPUT",
+        "step3_sub": "STABLE FUTURE FRAME"
+      },
+      "kinetic_action": "smooth_transition_sweep",
+      "audio_duration": 5.55,
+      "slot_duration": 5.85,
+      "start": 22.62,
+      "end": 28.17,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.629,
+          "end": 22.694,
+          "duration": 0.065,
+          "frame_ahead_trigger": 22.589
+        },
+        {
+          "word": "result",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 22.694,
+          "end": 23.164,
+          "duration": 0.47,
+          "frame_ahead_trigger": 22.654
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 23.164,
+          "end": 23.264,
+          "duration": 0.1,
+          "frame_ahead_trigger": 23.124
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 23.264,
+          "end": 23.399,
+          "duration": 0.135,
+          "frame_ahead_trigger": 23.224
+        },
+        {
+          "word": "smooth",
+          "clean_word": "smooth",
+          "phonemes": "sm\u02c8u\u02d0\u00f0",
+          "start": 23.399,
+          "end": 23.744,
+          "duration": 0.345,
+          "frame_ahead_trigger": 23.359
+        },
+        {
+          "word": "clip",
+          "clean_word": "clip",
+          "phonemes": "kl\u02c8\u026ap",
+          "start": 23.744,
+          "end": 24.039,
+          "duration": 0.295,
+          "frame_ahead_trigger": 23.704
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 24.039,
+          "end": 24.154,
+          "duration": 0.115,
+          "frame_ahead_trigger": 23.999
+        },
+        {
+          "word": "stays",
+          "clean_word": "stays",
+          "phonemes": "st\u02c8e\u026az",
+          "start": 24.154,
+          "end": 24.514,
+          "duration": 0.36,
+          "frame_ahead_trigger": 24.114
+        },
+        {
+          "word": "clear,",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 24.514,
+          "end": 24.787,
+          "duration": 0.273,
+          "frame_ahead_trigger": 24.474
+        },
+        {
+          "word": "keeping",
+          "clean_word": "keeping",
+          "phonemes": "k\u02c8i\u02d0p\u026a\u014b",
+          "start": 24.787,
+          "end": 25.179,
+          "duration": 0.392,
+          "frame_ahead_trigger": 24.747
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 25.179,
+          "end": 25.339,
+          "duration": 0.16,
+          "frame_ahead_trigger": 25.139
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 25.339,
+          "end": 25.504,
+          "duration": 0.165,
+          "frame_ahead_trigger": 25.299
+        },
+        {
+          "word": "items",
+          "clean_word": "items",
+          "phonemes": "\u02c8a\u026a\u027e\u0259mz",
+          "start": 25.504,
+          "end": 25.869,
+          "duration": 0.365,
+          "frame_ahead_trigger": 25.464
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 25.869,
+          "end": 26.099,
+          "duration": 0.23,
+          "frame_ahead_trigger": 25.829
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 26.099,
+          "end": 26.204,
+          "duration": 0.105,
+          "frame_ahead_trigger": 26.059
+        },
+        {
+          "word": "want",
+          "clean_word": "want",
+          "phonemes": "w\u02c8\u0254nt",
+          "start": 26.204,
+          "end": 26.464,
+          "duration": 0.26,
+          "frame_ahead_trigger": 26.164
+        },
+        {
+          "word": "them",
+          "clean_word": "them",
+          "phonemes": "\u00f0\u02cc\u025bm",
+          "start": 26.464,
+          "end": 26.764,
+          "duration": 0.3,
+          "frame_ahead_trigger": 26.424
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 26.764,
+          "end": 26.839,
+          "duration": 0.075,
+          "frame_ahead_trigger": 26.724
+        },
+        {
+          "word": "be",
+          "clean_word": "be",
+          "phonemes": "b\u02c8i\u02d0",
+          "start": 26.839,
+          "end": 27.059,
+          "duration": 0.22,
+          "frame_ahead_trigger": 26.799
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 27.059,
+          "end": 27.339,
+          "duration": 0.28,
+          "frame_ahead_trigger": 27.019
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 27.339,
+          "end": 27.376,
+          "duration": 0.038,
+          "frame_ahead_trigger": 27.299
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 27.376,
+          "end": 27.789,
+          "duration": 0.412,
+          "frame_ahead_trigger": 27.336
+        },
+        {
+          "word": "scene.",
+          "clean_word": "scene",
+          "phonemes": "s\u02c8i\u02d0n",
+          "start": 27.789,
+          "end": 28.024,
+          "duration": 0.235,
+          "frame_ahead_trigger": 27.749
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Check out The Model Verse for easy tips on how these new tools work to help us make things in our daily life.",
+      "visual_focus": "The Model Verse logo centered on a clean, soft-gradient background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 5.38,
+      "slot_duration": 5.88,
+      "start": 28.47,
+      "end": 33.84,
+      "word_timings": [
+        {
+          "word": "Check",
+          "clean_word": "check",
+          "phonemes": "t\u0283\u02c8\u025bk",
+          "start": 28.48,
+          "end": 28.81,
+          "duration": 0.33,
+          "frame_ahead_trigger": 28.44
+        },
+        {
+          "word": "out",
+          "clean_word": "out",
+          "phonemes": "\u02c8a\u028at",
+          "start": 28.81,
+          "end": 28.895,
+          "duration": 0.085,
+          "frame_ahead_trigger": 28.77
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.895,
+          "end": 28.995,
+          "duration": 0.1,
+          "frame_ahead_trigger": 28.855
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 28.995,
+          "end": 29.45,
+          "duration": 0.455,
+          "frame_ahead_trigger": 28.955
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 29.45,
+          "end": 29.585,
+          "duration": 0.135,
+          "frame_ahead_trigger": 29.41
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 29.585,
+          "end": 29.745,
+          "duration": 0.16,
+          "frame_ahead_trigger": 29.545
+        },
+        {
+          "word": "easy",
+          "clean_word": "easy",
+          "phonemes": "\u02c8i\u02d0zi",
+          "start": 29.745,
+          "end": 30.11,
+          "duration": 0.365,
+          "frame_ahead_trigger": 29.705
+        },
+        {
+          "word": "tips",
+          "clean_word": "tips",
+          "phonemes": "t\u02c8\u026aps",
+          "start": 30.11,
+          "end": 30.355,
+          "duration": 0.245,
+          "frame_ahead_trigger": 30.07
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 30.355,
+          "end": 30.595,
+          "duration": 0.24,
+          "frame_ahead_trigger": 30.315
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 30.595,
+          "end": 30.689,
+          "duration": 0.094,
+          "frame_ahead_trigger": 30.555
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 30.689,
+          "end": 30.895,
+          "duration": 0.206,
+          "frame_ahead_trigger": 30.649
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 30.895,
+          "end": 31.11,
+          "duration": 0.215,
+          "frame_ahead_trigger": 30.855
+        },
+        {
+          "word": "tools",
+          "clean_word": "tools",
+          "phonemes": "t\u02c8u\u02d0lz",
+          "start": 31.11,
+          "end": 31.39,
+          "duration": 0.28,
+          "frame_ahead_trigger": 31.07
+        },
+        {
+          "word": "work",
+          "clean_word": "work",
+          "phonemes": "w\u02c8\u025c\u02d0k",
+          "start": 31.39,
+          "end": 31.75,
+          "duration": 0.36,
+          "frame_ahead_trigger": 31.35
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 31.75,
+          "end": 31.915,
+          "duration": 0.165,
+          "frame_ahead_trigger": 31.71
+        },
+        {
+          "word": "help",
+          "clean_word": "help",
+          "phonemes": "h\u02c8\u025blp",
+          "start": 31.915,
+          "end": 32.02,
+          "duration": 0.105,
+          "frame_ahead_trigger": 31.875
+        },
+        {
+          "word": "us",
+          "clean_word": "us",
+          "phonemes": "\u02cc\u028cs",
+          "start": 32.02,
+          "end": 32.275,
+          "duration": 0.255,
+          "frame_ahead_trigger": 31.98
+        },
+        {
+          "word": "make",
+          "clean_word": "make",
+          "phonemes": "m\u02c8e\u026ak",
+          "start": 32.275,
+          "end": 32.6,
+          "duration": 0.325,
+          "frame_ahead_trigger": 32.235
+        },
+        {
+          "word": "things",
+          "clean_word": "things",
+          "phonemes": "\u03b8\u02c8\u026a\u014bz",
+          "start": 32.6,
+          "end": 32.735,
+          "duration": 0.135,
+          "frame_ahead_trigger": 32.56
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 32.735,
+          "end": 32.855,
+          "duration": 0.12,
+          "frame_ahead_trigger": 32.695
+        },
+        {
+          "word": "our",
+          "clean_word": "our",
+          "phonemes": "\u02cca\u028a\u025a",
+          "start": 32.855,
+          "end": 33.125,
+          "duration": 0.27,
+          "frame_ahead_trigger": 32.815
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 33.125,
+          "end": 33.425,
+          "duration": 0.3,
+          "frame_ahead_trigger": 33.085
+        },
+        {
+          "word": "life.",
+          "clean_word": "life",
+          "phonemes": "l\u02c8a\u026af",
+          "start": 33.425,
+          "end": 33.65,
+          "duration": 0.225,
+          "frame_ahead_trigger": 33.385
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$V_{\\mathrm{new}} = \\{x, y, z\\} \\notin \\mathcal{I}_{\\mathrm{start}}$",
+      "filename": "lift_b1.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "V_{new}",
+          "label": "Future View"
+        },
+        {
+          "term": "I_{start}",
+          "label": "Visible Region"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{P}(\\mathrm{layout} | \\mathrm{frame}_0) \\approx \\mathrm{Noise}$",
+      "filename": "lift_b2.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "P",
+          "label": "Probability"
+        },
+        {
+          "term": "frame_0",
+          "label": "First Image"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$C = \\{L_{\\mathrm{final}}, \\theta_{\\mathrm{camera}}\\}$",
+      "filename": "lift_b3.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "L_{final}",
+          "label": "Layout Goal"
+        },
+        {
+          "term": "theta",
+          "label": "Camera Pose"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\nabla_{\\theta} \\mathcal{L}_{\\mathrm{student}} = \\mathrm{Distill}(T, S)$",
+      "filename": "lift_b4.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Teacher"
+        },
+        {
+          "term": "S",
+          "label": "Student"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Acc}_{\\mathrm{layout}} = 98.2\\%$",
+      "filename": "lift_b5.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Acc",
+          "label": "Layout Accuracy"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Input",
+          "color": "#38BDF8",
+          "items": [
+            "Pixels",
+            "Trajectory"
+          ]
+        },
+        {
+          "name": "Controller",
+          "color": "#10B981",
+          "items": [
+            "Layout",
+            "Masks"
+          ]
+        },
+        {
+          "name": "Output",
+          "color": "#F59E0B",
+          "items": [
+            "Video",
+            "Frames"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Viewpoint\"",
+        "target_cluster": "Input",
+        "token": "\"Viewpoint\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'Layout'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'Pose'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "LIFT Framework",
+    "model_a_specs": [
+      "On-policy",
+      "Layout-driven",
+      "Distillation"
+    ],
+    "model_b": "Standard VideoGen",
+    "model_b_specs": [
+      "Text-only",
+      "Coarse-guidance",
+      "Drift-prone"
+    ],
+    "divide_title": "LAYOUT CONTROL DIVIDE",
+    "model_a_stat": "98.2%",
+    "model_a_stat_label": "LAYOUT ACCURACY",
+    "model_b_stat": "41.5%",
+    "model_b_stat_label": "BASELINE ACCURACY",
+    "efficiency_badge": "\u26a1 +56.7% LAYOUT PRECISION",
+    "benchmarks": [
+      {
+        "name": "Layout Fidelity",
+        "score_a": "98%",
+        "score_b": "41%"
+      },
+      {
+        "name": "View Consistency",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "98.2",
+    "scale_label": "Layout Accuracy",
+    "bottleneck_title": "VIEWPOINT DRIFT BOTTLENECK",
+    "bottleneck_desc": "Coarse guidance lacks spatial precision",
+    "solution_title": "ON-POLICY SELF-DISTILLATION",
+    "solution_components": "Last-frame spatial mapping",
+    "mechanism_title": "LAYOUT-IN-FUTURE CONTROL",
+    "payoff_stat": "98.2%",
+    "payoff_label": "LAYOUT ACCURACY",
+    "payoff_sub": "Controlling the future with final frames",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "LIFT Precision",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Text-Only Baseline",
+    "payoff_delta_badge": "\u26a1 +56.7% PRECISION GAIN",
+    "challenger": "LIFT",
+    "incumbent": "Text-Guided Models"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "LIFT Framework",
+        "model_a_score": "98.2%",
+        "model_b_name": "Standard VideoGen",
+        "model_b_score": "41.5%",
+        "delta_label": "\u26a1 +56.7% LAYOUT PRECISION"
+      }
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.1
+      },
+      "wave_diagrams": {
+        "dx": 0.0,
+        "dy": 2.766,
+        "scale_multiplier": 0.818
+      },
+      "text_labels": {
+        "dx": 0.0,
+        "dy": -1.44,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "ui_card_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.891
+      },
+      "hero_visual_cards": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.897
+      },
+      "math_formula_insertion": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.1
+      }
+    },
+    "3": {
+      "replace_ui_with_geometry": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.8
+      },
+      "remove_administrative_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.3,
+        "scale_multiplier": 0.9
+      }
+    },
+    "4": {
+      "hero_diagram": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 1.1
+      },
+      "math_formula_placeholder": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": -1.463,
+        "dy": 0.2,
+        "scale_multiplier": 1.15
+      },
+      "text_labels": {
+        "dx": -0.994,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "architecture_diagram": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.8
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "redundant_text": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 1.0,
+        "scale_multiplier": 0.0
+      },
+      "redundant_footer_text": {
+        "dx": 0.0,
+        "dy": 0.576,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "top_header": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "logo_hex_grid": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 1.15
+      },
+      "title_text": {
+        "dx": 0.0,
+        "dy": 0.02,
+        "scale_multiplier": 0.839
+      },
+      "hex_logo_graphic": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.15
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "text_block_the_model_verse": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.851
+      }
+    }
+  }
+}
