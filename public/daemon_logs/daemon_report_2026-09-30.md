@@ -1,13 +1,13 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-09-30 | **Timestamp:** 2026-09-30 11:22:25 UTC
+**Date:** 2026-09-30 | **Timestamp:** 2026-09-30 15:36:35 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Persistence Forcing: Exploiting Feature Specialization in Pixel-Space Diffusion
-- **arXiv ID:** [2609.36014](https://arxiv.org/abs/2609.36014)
-- **Category:** `architecture_breakdown`
-- **Editorial Hook:** *Why does AI struggle to paint the tiny details in a video, even when it knows the big picture?*
-- **Everyday Analogy:** *Like a sculptor starting with a massive block of stone and needing to switch from a sledgehammer to a needle-point chisel as they get closer to the surface.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_persistence_forcing_diffusion_architecture_breakdown.mp4`
+### Reel 1: SoL-Refiner: Speed-of-Light One-Step Refinement for High-Resolution Video
+- **arXiv ID:** [2609.37969](https://arxiv.org/abs/2609.37969)
+- **Category:** `benchmark_news`
+- **Editorial Hook:** *What if you could turn a blurry, low-res video into a crystal-clear masterpiece in a single blink?*
+- **Everyday Analogy:** *A professional digital artist who makes a rough sketch in seconds, then instantly applies a filter that fills in all the intricate textures and details.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_sol_refiner_video_speed_benchmark_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs

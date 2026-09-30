@@ -1,0 +1,1716 @@
+{
+  "id": "sol_refiner_video_speed",
+  "title": "SoL-Refiner: Speed of Light Video Scaling",
+  "category": "benchmark_news",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "VIDEO REFINEMENT SPEED",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do high-res videos take so long to make? Every pixel is a huge math load, and current models struggle to scale up efficiently.",
+      "visual_focus": "Grid of pixel squares flickering as they increase in size and resolution.",
+      "highlight_words": {
+        "high-res": "#38BDF8",
+        "math load": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Model Generator",
+        "action_verb": "expands",
+        "direct_object": "Spatiotemporal Tokens",
+        "anchor_word": "pixel",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "subspace_vectors",
+      "motif_params": {
+        "title": "Pixel Density Load",
+        "sub": "Calculating spatiotemporal token volume",
+        "vec1_label": "Frame Rate",
+        "vec2_label": "Resolution Scale",
+        "angle_label": "64-bit Payload",
+        "badge_title": "MATH LOAD",
+        "badge_sub": "100% Efficiency"
+      },
+      "kinetic_action": "grid_expansion",
+      "audio_duration": 7.19,
+      "slot_duration": 7.49,
+      "start": 0.0,
+      "end": 7.19,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.015,
+          "end": 0.205,
+          "duration": 0.19,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.205,
+          "end": 0.48,
+          "duration": 0.275,
+          "frame_ahead_trigger": 0.165
+        },
+        {
+          "word": "high-res",
+          "clean_word": "highres",
+          "phonemes": "h\u02c8a\u026a\u025az",
+          "start": 0.48,
+          "end": 0.82,
+          "duration": 0.34,
+          "frame_ahead_trigger": 0.44
+        },
+        {
+          "word": "videos",
+          "clean_word": "videos",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028az",
+          "start": 0.82,
+          "end": 1.265,
+          "duration": 0.445,
+          "frame_ahead_trigger": 0.78
+        },
+        {
+          "word": "take",
+          "clean_word": "take",
+          "phonemes": "t\u02c8e\u026ak",
+          "start": 1.265,
+          "end": 1.52,
+          "duration": 0.255,
+          "frame_ahead_trigger": 1.225
+        },
+        {
+          "word": "so",
+          "clean_word": "so",
+          "phonemes": "s\u02c8o\u028a",
+          "start": 1.52,
+          "end": 1.69,
+          "duration": 0.17,
+          "frame_ahead_trigger": 1.48
+        },
+        {
+          "word": "long",
+          "clean_word": "long",
+          "phonemes": "l\u02c8\u0254\u014b",
+          "start": 1.69,
+          "end": 1.945,
+          "duration": 0.255,
+          "frame_ahead_trigger": 1.65
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 1.945,
+          "end": 2.16,
+          "duration": 0.215,
+          "frame_ahead_trigger": 1.905
+        },
+        {
+          "word": "make?",
+          "clean_word": "make",
+          "phonemes": "m\u02c8e\u026ak",
+          "start": 2.16,
+          "end": 2.442,
+          "duration": 0.282,
+          "frame_ahead_trigger": 2.12
+        },
+        {
+          "word": "Every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 2.442,
+          "end": 2.7,
+          "duration": 0.258,
+          "frame_ahead_trigger": 2.402
+        },
+        {
+          "word": "pixel",
+          "clean_word": "pixel",
+          "phonemes": "p\u02c8\u026aks\u0259l",
+          "start": 2.7,
+          "end": 3.165,
+          "duration": 0.465,
+          "frame_ahead_trigger": 2.66
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 3.165,
+          "end": 3.25,
+          "duration": 0.085,
+          "frame_ahead_trigger": 3.125
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 3.25,
+          "end": 3.36,
+          "duration": 0.11,
+          "frame_ahead_trigger": 3.21
+        },
+        {
+          "word": "huge",
+          "clean_word": "huge",
+          "phonemes": "hj\u02c8u\u02d0d\u0292",
+          "start": 3.36,
+          "end": 3.84,
+          "duration": 0.48,
+          "frame_ahead_trigger": 3.32
+        },
+        {
+          "word": "math",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 3.84,
+          "end": 3.91,
+          "duration": 0.07,
+          "frame_ahead_trigger": 3.8
+        },
+        {
+          "word": "load,",
+          "clean_word": "load",
+          "phonemes": "l\u02c8o\u028ad",
+          "start": 3.91,
+          "end": 4.225,
+          "duration": 0.315,
+          "frame_ahead_trigger": 3.87
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 4.225,
+          "end": 4.43,
+          "duration": 0.205,
+          "frame_ahead_trigger": 4.185
+        },
+        {
+          "word": "current",
+          "clean_word": "current",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 4.43,
+          "end": 4.9,
+          "duration": 0.47,
+          "frame_ahead_trigger": 4.39
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 4.9,
+          "end": 5.38,
+          "duration": 0.48,
+          "frame_ahead_trigger": 4.86
+        },
+        {
+          "word": "struggle",
+          "clean_word": "struggle",
+          "phonemes": "st\u0279\u02c8\u028c\u0261\u0259l",
+          "start": 5.38,
+          "end": 5.825,
+          "duration": 0.445,
+          "frame_ahead_trigger": 5.34
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 5.825,
+          "end": 5.965,
+          "duration": 0.14,
+          "frame_ahead_trigger": 5.785
+        },
+        {
+          "word": "scale",
+          "clean_word": "scale",
+          "phonemes": "sk\u02c8e\u026al",
+          "start": 5.965,
+          "end": 6.38,
+          "duration": 0.415,
+          "frame_ahead_trigger": 5.925
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 6.38,
+          "end": 6.515,
+          "duration": 0.135,
+          "frame_ahead_trigger": 6.34
+        },
+        {
+          "word": "efficiently.",
+          "clean_word": "efficiently",
+          "phonemes": "\u026af\u02c8\u026a\u0283\u0259ntli",
+          "start": 6.515,
+          "end": 7.07,
+          "duration": 0.555,
+          "frame_ahead_trigger": 6.475
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of a library where you must pull fifty books just to find one fact. That slow, multi-step search is a massive production bottleneck.",
+      "visual_focus": "A library shelf where a robotic arm repeatedly pulls many books to find one thin slip of paper.",
+      "highlight_words": {
+        "multi-step": "#EF4444",
+        "bottleneck": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Bottleneck",
+        "action_verb": "constrains",
+        "direct_object": "Sampling Latency",
+        "anchor_word": "bottleneck",
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "tree_search",
+      "motif_params": {
+        "title": "Sampling Latency Bottleneck",
+        "sub": "Recursive search through state-space library",
+        "root_label": "Initial Frame",
+        "optimal_label": "Target Pixel",
+        "optimal_sub": "Search Success",
+        "pruned_label": "Redundant Paths",
+        "pruned_sub": "50x Branching",
+        "badge_title": "BOTTLENECK",
+        "badge_sub": "High Latency"
+      },
+      "kinetic_action": "branch_pruning",
+      "audio_duration": 7.51,
+      "slot_duration": 7.81,
+      "start": 7.49,
+      "end": 15.0,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 7.499,
+          "end": 7.774,
+          "duration": 0.275,
+          "frame_ahead_trigger": 7.459
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.774,
+          "end": 7.939,
+          "duration": 0.165,
+          "frame_ahead_trigger": 7.734
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.939,
+          "end": 8.039,
+          "duration": 0.1,
+          "frame_ahead_trigger": 7.899
+        },
+        {
+          "word": "library",
+          "clean_word": "library",
+          "phonemes": "l\u02c8a\u026ab\u0279\u025b\u0279i",
+          "start": 8.039,
+          "end": 8.544,
+          "duration": 0.505,
+          "frame_ahead_trigger": 7.999
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 8.544,
+          "end": 8.814,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.504
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 8.814,
+          "end": 9.099,
+          "duration": 0.285,
+          "frame_ahead_trigger": 8.774
+        },
+        {
+          "word": "must",
+          "clean_word": "must",
+          "phonemes": "m\u02c8\u028cst",
+          "start": 9.099,
+          "end": 9.254,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.059
+        },
+        {
+          "word": "pull",
+          "clean_word": "pull",
+          "phonemes": "p\u02c8\u028al",
+          "start": 9.254,
+          "end": 9.579,
+          "duration": 0.325,
+          "frame_ahead_trigger": 9.214
+        },
+        {
+          "word": "fifty",
+          "clean_word": "fifty",
+          "phonemes": "f\u02c8\u026afti",
+          "start": 9.579,
+          "end": 9.929,
+          "duration": 0.35,
+          "frame_ahead_trigger": 9.539
+        },
+        {
+          "word": "books",
+          "clean_word": "books",
+          "phonemes": "b\u02c8\u028aks",
+          "start": 9.929,
+          "end": 10.064,
+          "duration": 0.135,
+          "frame_ahead_trigger": 9.889
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 10.064,
+          "end": 10.354,
+          "duration": 0.29,
+          "frame_ahead_trigger": 10.024
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 10.354,
+          "end": 10.624,
+          "duration": 0.27,
+          "frame_ahead_trigger": 10.314
+        },
+        {
+          "word": "find",
+          "clean_word": "find",
+          "phonemes": "f\u02c8a\u026and",
+          "start": 10.624,
+          "end": 10.988,
+          "duration": 0.363,
+          "frame_ahead_trigger": 10.584
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 10.988,
+          "end": 11.217,
+          "duration": 0.229,
+          "frame_ahead_trigger": 10.948
+        },
+        {
+          "word": "fact.",
+          "clean_word": "fact",
+          "phonemes": "f\u02c8\u00e6kt",
+          "start": 11.217,
+          "end": 11.554,
+          "duration": 0.338,
+          "frame_ahead_trigger": 11.177
+        },
+        {
+          "word": "That",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 11.554,
+          "end": 11.714,
+          "duration": 0.16,
+          "frame_ahead_trigger": 11.514
+        },
+        {
+          "word": "slow,",
+          "clean_word": "slow",
+          "phonemes": "sl\u02c8o\u028a",
+          "start": 11.714,
+          "end": 12.099,
+          "duration": 0.385,
+          "frame_ahead_trigger": 11.674
+        },
+        {
+          "word": "multi-step",
+          "clean_word": "multistep",
+          "phonemes": "m\u02c8\u028cltist\u02cc\u025bp",
+          "start": 12.099,
+          "end": 12.639,
+          "duration": 0.54,
+          "frame_ahead_trigger": 12.059
+        },
+        {
+          "word": "search",
+          "clean_word": "search",
+          "phonemes": "s\u02c8\u025c\u02d0t\u0283",
+          "start": 12.639,
+          "end": 12.924,
+          "duration": 0.285,
+          "frame_ahead_trigger": 12.599
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 12.924,
+          "end": 13.124,
+          "duration": 0.2,
+          "frame_ahead_trigger": 12.884
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 13.124,
+          "end": 13.309,
+          "duration": 0.185,
+          "frame_ahead_trigger": 13.084
+        },
+        {
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 13.309,
+          "end": 13.679,
+          "duration": 0.37,
+          "frame_ahead_trigger": 13.269
+        },
+        {
+          "word": "production",
+          "clean_word": "production",
+          "phonemes": "p\u0279\u0259d\u02c8\u028ck\u0283\u0259n",
+          "start": 13.679,
+          "end": 14.159,
+          "duration": 0.48,
+          "frame_ahead_trigger": 13.639
+        },
+        {
+          "word": "bottleneck.",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 14.159,
+          "end": 14.819,
+          "duration": 0.66,
+          "frame_ahead_trigger": 14.119
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "SoL-Refiner changes the game. It uses a clever recipe of custom training to learn the path from blurry clips to crisp, sharp 4K frames.",
+      "visual_focus": "A blurry, low-res image transitioning into a sharp 4K frame in a single, smooth wipe.",
+      "highlight_words": {
+        "SoL-Refiner": "#34D399",
+        "sharp": "#34D399"
+      },
+      "svo_action": {
+        "subject": "SoL-Refiner",
+        "action_verb": "maps",
+        "direct_object": "Low-Res Input",
+        "anchor_word": "maps",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "SoL-Refiner Mapping",
+        "sub": "Denoising low-resolution input into sharp 4K frames",
+        "in_label": "Blurry Latent Stream",
+        "prism_label": "Refinement Transform",
+        "out1_label": "Sharpened Output",
+        "out2_label": "High-Detail Texture"
+      },
+      "kinetic_action": "spectral_shift",
+      "audio_duration": 7.94,
+      "slot_duration": 8.24,
+      "start": 15.3,
+      "end": 23.23,
+      "word_timings": [
+        {
+          "word": "SoL-Refiner",
+          "clean_word": "solrefiner",
+          "phonemes": "s\u02cco\u028a \u02c8\u025bl \u0279\u1d7bf\u02c8\u026an\u025a",
+          "start": 15.299,
+          "end": 16.274,
+          "duration": 0.975,
+          "frame_ahead_trigger": 15.259
+        },
+        {
+          "word": "changes",
+          "clean_word": "changes",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292\u1d7bz",
+          "start": 16.274,
+          "end": 16.757,
+          "duration": 0.484,
+          "frame_ahead_trigger": 16.234
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.757,
+          "end": 16.87,
+          "duration": 0.112,
+          "frame_ahead_trigger": 16.717
+        },
+        {
+          "word": "game.",
+          "clean_word": "game",
+          "phonemes": "\u0261\u02c8e\u026am",
+          "start": 16.87,
+          "end": 17.15,
+          "duration": 0.281,
+          "frame_ahead_trigger": 16.83
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 17.15,
+          "end": 17.274,
+          "duration": 0.123,
+          "frame_ahead_trigger": 17.11
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 17.274,
+          "end": 17.639,
+          "duration": 0.365,
+          "frame_ahead_trigger": 17.234
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 17.639,
+          "end": 17.739,
+          "duration": 0.1,
+          "frame_ahead_trigger": 17.599
+        },
+        {
+          "word": "clever",
+          "clean_word": "clever",
+          "phonemes": "kl\u02c8\u025bv\u025a",
+          "start": 17.739,
+          "end": 18.199,
+          "duration": 0.46,
+          "frame_ahead_trigger": 17.699
+        },
+        {
+          "word": "recipe",
+          "clean_word": "recipe",
+          "phonemes": "\u0279\u02c8\u025bs\u1d7bp\u02cci\u02d0",
+          "start": 18.199,
+          "end": 18.614,
+          "duration": 0.415,
+          "frame_ahead_trigger": 18.159
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 18.614,
+          "end": 18.779,
+          "duration": 0.165,
+          "frame_ahead_trigger": 18.574
+        },
+        {
+          "word": "custom",
+          "clean_word": "custom",
+          "phonemes": "k\u02c8\u028cst\u0259m",
+          "start": 18.779,
+          "end": 19.17,
+          "duration": 0.391,
+          "frame_ahead_trigger": 18.739
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 19.17,
+          "end": 19.689,
+          "duration": 0.519,
+          "frame_ahead_trigger": 19.13
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 19.689,
+          "end": 19.799,
+          "duration": 0.11,
+          "frame_ahead_trigger": 19.649
+        },
+        {
+          "word": "learn",
+          "clean_word": "learn",
+          "phonemes": "l\u02c8\u025c\u02d0n",
+          "start": 19.799,
+          "end": 20.109,
+          "duration": 0.31,
+          "frame_ahead_trigger": 19.759
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.109,
+          "end": 20.199,
+          "duration": 0.09,
+          "frame_ahead_trigger": 20.069
+        },
+        {
+          "word": "path",
+          "clean_word": "path",
+          "phonemes": "p\u02c8\u00e6\u03b8",
+          "start": 20.199,
+          "end": 20.504,
+          "duration": 0.305,
+          "frame_ahead_trigger": 20.159
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 20.504,
+          "end": 20.634,
+          "duration": 0.13,
+          "frame_ahead_trigger": 20.464
+        },
+        {
+          "word": "blurry",
+          "clean_word": "blurry",
+          "phonemes": "bl\u02c8\u025c\u02d0\u0279i",
+          "start": 20.634,
+          "end": 21.074,
+          "duration": 0.44,
+          "frame_ahead_trigger": 20.594
+        },
+        {
+          "word": "clips",
+          "clean_word": "clips",
+          "phonemes": "kl\u02c8\u026aps",
+          "start": 21.074,
+          "end": 21.389,
+          "duration": 0.315,
+          "frame_ahead_trigger": 21.034
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 21.389,
+          "end": 21.527,
+          "duration": 0.138,
+          "frame_ahead_trigger": 21.349
+        },
+        {
+          "word": "crisp,",
+          "clean_word": "crisp",
+          "phonemes": "k\u0279\u02c8\u026asp",
+          "start": 21.527,
+          "end": 21.863,
+          "duration": 0.337,
+          "frame_ahead_trigger": 21.487
+        },
+        {
+          "word": "sharp",
+          "clean_word": "sharp",
+          "phonemes": "\u0283\u02c8\u0251\u02d0\u0279p",
+          "start": 21.863,
+          "end": 22.2,
+          "duration": 0.337,
+          "frame_ahead_trigger": 21.823
+        },
+        {
+          "word": "4K",
+          "clean_word": "4k",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279 k\u02c8e\u026a",
+          "start": 22.2,
+          "end": 22.744,
+          "duration": 0.544,
+          "frame_ahead_trigger": 22.16
+        },
+        {
+          "word": "frames.",
+          "clean_word": "frames",
+          "phonemes": "f\u0279\u02c8e\u026amz",
+          "start": 22.744,
+          "end": 23.154,
+          "duration": 0.41,
+          "frame_ahead_trigger": 22.704
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Instead of many slow guesses, it takes just one clean shot. It uses distilled math to polish the final video in one fast pass.",
+      "visual_focus": "A single chisel striking a marble block, instantly revealing a clean, high-detail texture surface.",
+      "highlight_words": {
+        "one clean shot": "#F59E0B",
+        "fast pass": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Distilled Math",
+        "action_verb": "polishes",
+        "direct_object": "Latent Frames",
+        "anchor_word": "polish",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "custom_flow",
+      "motif_params": {
+        "title": "Distilled Math Pass",
+        "sub": "Single-shot frame polishing sequence",
+        "step1_title": "Input Latent",
+        "step1_sub": "Initial noise state",
+        "step2_title": "Distilled Engine",
+        "step2_sub": "One-pass sharpening math",
+        "step3_title": "Sharp Frame",
+        "step3_sub": "Final pixel detail"
+      },
+      "kinetic_action": "smooth_wipe",
+      "audio_duration": 7.49,
+      "slot_duration": 7.79,
+      "start": 23.53,
+      "end": 31.02,
+      "word_timings": [
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 23.545,
+          "end": 24.015,
+          "duration": 0.47,
+          "frame_ahead_trigger": 23.505
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 24.015,
+          "end": 24.115,
+          "duration": 0.1,
+          "frame_ahead_trigger": 23.975
+        },
+        {
+          "word": "many",
+          "clean_word": "many",
+          "phonemes": "m\u02c8\u025bni",
+          "start": 24.115,
+          "end": 24.44,
+          "duration": 0.325,
+          "frame_ahead_trigger": 24.075
+        },
+        {
+          "word": "slow",
+          "clean_word": "slow",
+          "phonemes": "sl\u02c8o\u028a",
+          "start": 24.44,
+          "end": 24.8,
+          "duration": 0.36,
+          "frame_ahead_trigger": 24.4
+        },
+        {
+          "word": "guesses,",
+          "clean_word": "guesses",
+          "phonemes": "\u0261\u02c8\u025bs\u1d7bz",
+          "start": 24.8,
+          "end": 25.13,
+          "duration": 0.33,
+          "frame_ahead_trigger": 24.76
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 25.13,
+          "end": 25.245,
+          "duration": 0.115,
+          "frame_ahead_trigger": 25.09
+        },
+        {
+          "word": "takes",
+          "clean_word": "takes",
+          "phonemes": "t\u02c8e\u026aks",
+          "start": 25.245,
+          "end": 25.695,
+          "duration": 0.45,
+          "frame_ahead_trigger": 25.205
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 25.695,
+          "end": 25.98,
+          "duration": 0.285,
+          "frame_ahead_trigger": 25.655
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 25.98,
+          "end": 26.29,
+          "duration": 0.31,
+          "frame_ahead_trigger": 25.94
+        },
+        {
+          "word": "clean",
+          "clean_word": "clean",
+          "phonemes": "kl\u02c8i\u02d0n",
+          "start": 26.29,
+          "end": 26.638,
+          "duration": 0.348,
+          "frame_ahead_trigger": 26.25
+        },
+        {
+          "word": "shot.",
+          "clean_word": "shot",
+          "phonemes": "\u0283\u02c8\u0251\u02d0t",
+          "start": 26.638,
+          "end": 26.953,
+          "duration": 0.316,
+          "frame_ahead_trigger": 26.598
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 26.953,
+          "end": 27.135,
+          "duration": 0.182,
+          "frame_ahead_trigger": 26.913
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 27.135,
+          "end": 27.57,
+          "duration": 0.435,
+          "frame_ahead_trigger": 27.095
+        },
+        {
+          "word": "distilled",
+          "clean_word": "distilled",
+          "phonemes": "d\u026ast\u02c8\u026ald",
+          "start": 27.57,
+          "end": 28.015,
+          "duration": 0.445,
+          "frame_ahead_trigger": 27.53
+        },
+        {
+          "word": "math",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 28.015,
+          "end": 28.39,
+          "duration": 0.375,
+          "frame_ahead_trigger": 27.975
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 28.39,
+          "end": 28.53,
+          "duration": 0.14,
+          "frame_ahead_trigger": 28.35
+        },
+        {
+          "word": "polish",
+          "clean_word": "polish",
+          "phonemes": "p\u02c8\u0251\u02d0l\u026a\u0283",
+          "start": 28.53,
+          "end": 28.93,
+          "duration": 0.4,
+          "frame_ahead_trigger": 28.49
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.93,
+          "end": 29.08,
+          "duration": 0.15,
+          "frame_ahead_trigger": 28.89
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 29.08,
+          "end": 29.525,
+          "duration": 0.445,
+          "frame_ahead_trigger": 29.04
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 29.525,
+          "end": 29.835,
+          "duration": 0.31,
+          "frame_ahead_trigger": 29.485
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 29.835,
+          "end": 30.195,
+          "duration": 0.36,
+          "frame_ahead_trigger": 29.795
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 30.195,
+          "end": 30.395,
+          "duration": 0.2,
+          "frame_ahead_trigger": 30.155
+        },
+        {
+          "word": "fast",
+          "clean_word": "fast",
+          "phonemes": "f\u02c8\u00e6st",
+          "start": 30.395,
+          "end": 30.677,
+          "duration": 0.283,
+          "frame_ahead_trigger": 30.355
+        },
+        {
+          "word": "pass.",
+          "clean_word": "pass",
+          "phonemes": "p\u02c8\u00e6s",
+          "start": 30.677,
+          "end": 30.93,
+          "duration": 0.252,
+          "frame_ahead_trigger": 30.637
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result is a stunning eight times faster speed. It beats older, slower tools while making your videos look better than ever before.",
+      "visual_focus": "A side-by-side comparison showing SoL-Refiner completing in 1s versus a legacy model taking 8s.",
+      "highlight_words": {
+        "eight times faster": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Refinement Engine",
+        "action_verb": "outperforms",
+        "direct_object": "Legacy Baseline",
+        "anchor_word": "beats",
+        "semantic_role": "metric_evaluation"
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "Efficiency Benchmark",
+        "sub": "Performance comparison: Latency (seconds)",
+        "contender_a_name": "Legacy Baseline",
+        "contender_a_score": 1.0,
+        "contender_a_text": "8.0s",
+        "contender_b_name": "SoL-Refiner",
+        "contender_b_score": 0.125,
+        "contender_b_text": "1.0s",
+        "delta_badge_text": "8X SPEEDUP",
+        "delta_badge_sub": "Latency Reduction"
+      },
+      "kinetic_action": "bar_scaling",
+      "audio_duration": 6.95,
+      "slot_duration": 7.25,
+      "start": 31.32,
+      "end": 38.28,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 31.333,
+          "end": 31.398,
+          "duration": 0.065,
+          "frame_ahead_trigger": 31.293
+        },
+        {
+          "word": "result",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 31.398,
+          "end": 31.868,
+          "duration": 0.47,
+          "frame_ahead_trigger": 31.358
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 31.868,
+          "end": 31.973,
+          "duration": 0.105,
+          "frame_ahead_trigger": 31.828
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 31.973,
+          "end": 32.218,
+          "duration": 0.245,
+          "frame_ahead_trigger": 31.933
+        },
+        {
+          "word": "stunning",
+          "clean_word": "stunning",
+          "phonemes": "st\u02c8\u028cn\u026a\u014b",
+          "start": 32.218,
+          "end": 32.573,
+          "duration": 0.355,
+          "frame_ahead_trigger": 32.178
+        },
+        {
+          "word": "eight",
+          "clean_word": "eight",
+          "phonemes": "\u02c8e\u026at",
+          "start": 32.573,
+          "end": 32.893,
+          "duration": 0.32,
+          "frame_ahead_trigger": 32.533
+        },
+        {
+          "word": "times",
+          "clean_word": "times",
+          "phonemes": "t\u02c8a\u026amz",
+          "start": 32.893,
+          "end": 33.218,
+          "duration": 0.325,
+          "frame_ahead_trigger": 32.853
+        },
+        {
+          "word": "faster",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 33.218,
+          "end": 33.443,
+          "duration": 0.225,
+          "frame_ahead_trigger": 33.178
+        },
+        {
+          "word": "speed.",
+          "clean_word": "speed",
+          "phonemes": "sp\u02c8i\u02d0d",
+          "start": 33.443,
+          "end": 33.883,
+          "duration": 0.44,
+          "frame_ahead_trigger": 33.403
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 33.883,
+          "end": 34.001,
+          "duration": 0.119,
+          "frame_ahead_trigger": 33.843
+        },
+        {
+          "word": "beats",
+          "clean_word": "beats",
+          "phonemes": "b\u02c8i\u02d0ts",
+          "start": 34.001,
+          "end": 34.328,
+          "duration": 0.326,
+          "frame_ahead_trigger": 33.961
+        },
+        {
+          "word": "older,",
+          "clean_word": "older",
+          "phonemes": "\u02c8o\u028ald\u025a",
+          "start": 34.328,
+          "end": 34.618,
+          "duration": 0.29,
+          "frame_ahead_trigger": 34.288
+        },
+        {
+          "word": "slower",
+          "clean_word": "slower",
+          "phonemes": "sl\u02c8o\u028a\u025a",
+          "start": 34.618,
+          "end": 35.113,
+          "duration": 0.495,
+          "frame_ahead_trigger": 34.578
+        },
+        {
+          "word": "tools",
+          "clean_word": "tools",
+          "phonemes": "t\u02c8u\u02d0lz",
+          "start": 35.113,
+          "end": 35.418,
+          "duration": 0.305,
+          "frame_ahead_trigger": 35.073
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 35.418,
+          "end": 35.721,
+          "duration": 0.304,
+          "frame_ahead_trigger": 35.378
+        },
+        {
+          "word": "making",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 35.721,
+          "end": 36.173,
+          "duration": 0.451,
+          "frame_ahead_trigger": 35.681
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 36.173,
+          "end": 36.433,
+          "duration": 0.26,
+          "frame_ahead_trigger": 36.133
+        },
+        {
+          "word": "videos",
+          "clean_word": "videos",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028az",
+          "start": 36.433,
+          "end": 36.818,
+          "duration": 0.385,
+          "frame_ahead_trigger": 36.393
+        },
+        {
+          "word": "look",
+          "clean_word": "look",
+          "phonemes": "l\u02c8\u028ak",
+          "start": 36.818,
+          "end": 37.053,
+          "duration": 0.235,
+          "frame_ahead_trigger": 36.778
+        },
+        {
+          "word": "better",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 37.053,
+          "end": 37.338,
+          "duration": 0.285,
+          "frame_ahead_trigger": 37.013
+        },
+        {
+          "word": "than",
+          "clean_word": "than",
+          "phonemes": "\u00f0\u0250n",
+          "start": 37.338,
+          "end": 37.473,
+          "duration": 0.135,
+          "frame_ahead_trigger": 37.298
+        },
+        {
+          "word": "ever",
+          "clean_word": "ever",
+          "phonemes": "\u02c8\u025bv\u025a",
+          "start": 37.473,
+          "end": 37.728,
+          "duration": 0.255,
+          "frame_ahead_trigger": 37.433
+        },
+        {
+          "word": "before.",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 37.728,
+          "end": 38.153,
+          "duration": 0.425,
+          "frame_ahead_trigger": 37.688
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears with a clean, pulsing light effect.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Model Verse",
+        "action_verb": "reveals",
+        "direct_object": "AI Mechanisms",
+        "anchor_word": "explanations",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 4.74,
+      "slot_duration": 5.24,
+      "start": 38.58,
+      "end": 43.31,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 38.592,
+          "end": 38.957,
+          "duration": 0.365,
+          "frame_ahead_trigger": 38.552
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.957,
+          "end": 39.132,
+          "duration": 0.175,
+          "frame_ahead_trigger": 38.917
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 39.132,
+          "end": 39.487,
+          "duration": 0.355,
+          "frame_ahead_trigger": 39.092
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 39.487,
+          "end": 39.752,
+          "duration": 0.265,
+          "frame_ahead_trigger": 39.447
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 39.752,
+          "end": 40.047,
+          "duration": 0.295,
+          "frame_ahead_trigger": 39.712
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 40.047,
+          "end": 40.427,
+          "duration": 0.38,
+          "frame_ahead_trigger": 40.007
+        },
+        {
+          "word": "explanations",
+          "clean_word": "explanations",
+          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
+          "start": 40.427,
+          "end": 41.252,
+          "duration": 0.825,
+          "frame_ahead_trigger": 40.387
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 41.252,
+          "end": 41.397,
+          "duration": 0.145,
+          "frame_ahead_trigger": 41.212
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 41.397,
+          "end": 41.607,
+          "duration": 0.21,
+          "frame_ahead_trigger": 41.357
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 41.607,
+          "end": 42.042,
+          "duration": 0.435,
+          "frame_ahead_trigger": 41.567
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 42.042,
+          "end": 42.397,
+          "duration": 0.355,
+          "frame_ahead_trigger": 42.002
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 42.397,
+          "end": 42.872,
+          "duration": 0.475,
+          "frame_ahead_trigger": 42.357
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 42.872,
+          "end": 43.232,
+          "duration": 0.36,
+          "frame_ahead_trigger": 42.832
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$C = N_x \\times N_y \\times T$",
+      "filename": "sol_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "C",
+          "label": "Compute Cost"
+        },
+        {
+          "term": "T",
+          "label": "Temporal Tokens"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$L = \\sum_{i=1}^{K} s_i$",
+      "filename": "sol_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "L",
+          "label": "Total Latency"
+        },
+        {
+          "term": "K",
+          "label": "Refinement Steps"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$V_{4K} = f_{\\theta}(V_{LR})$",
+      "filename": "sol_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "V_{4K}",
+          "label": "High Res Output"
+        },
+        {
+          "term": "f_{\\theta}",
+          "label": "Refinement Network"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$D = \\sigma(W \\cdot x + b)$",
+      "filename": "sol_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "D",
+          "label": "Denoised Frame"
+        },
+        {
+          "term": "W",
+          "label": "Distilled Weights"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta = \\frac{T_{baseline}}{T_{SoL}} \\approx 8.91$",
+      "filename": "sol_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta",
+          "label": "Speedup Factor"
+        },
+        {
+          "term": "T",
+          "label": "Time per sample"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Low-Res Input",
+          "color": "#38BDF8",
+          "items": [
+            "pixels",
+            "frames",
+            "motion"
+          ]
+        },
+        {
+          "name": "Refiner",
+          "color": "#10B981",
+          "items": [
+            "distilled",
+            "weights",
+            "fast"
+          ]
+        },
+        {
+          "name": "High-Res Output",
+          "color": "#F59E0B",
+          "items": [
+            "4K",
+            "details",
+            "sharp"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"video_frame\"",
+        "target_cluster": "Refiner",
+        "token": "\"video_frame\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'step1'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'stepN'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "SoL-Refiner",
+    "model_a_specs": [
+      "One-step",
+      "4K output",
+      "RL-trained"
+    ],
+    "model_b": "LTX-2.3 Refiner",
+    "model_b_specs": [
+      "Three-step",
+      "High latency",
+      "Baseline"
+    ],
+    "divide_title": "LATENCY SPEEDUP COMPARISON",
+    "model_a_stat": "8.91x",
+    "model_a_stat_label": "LATENCY SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE SPEED",
+    "efficiency_badge": "\u26a1 8.91x LATENCY REDUCTION",
+    "benchmarks": [
+      {
+        "name": "VBench",
+        "score_a": "High",
+        "score_b": "Low"
+      },
+      {
+        "name": "UniPercept",
+        "score_a": "Better",
+        "score_b": "Base"
+      },
+      {
+        "name": "Resolution",
+        "score_a": "3840x2176",
+        "score_b": "2K"
+      }
+    ],
+    "scale_metric": "8.91",
+    "scale_label": "Refinement Speedup",
+    "bottleneck_title": "SAMPLING BOTTLENECK",
+    "bottleneck_desc": "Multi-step computation delay",
+    "solution_title": "ONE-STEP DISTILLATION",
+    "solution_components": "High-Res Continual Training",
+    "mechanism_title": "SPEED-OF-LIGHT REFINEMENT",
+    "payoff_stat": "8.91x",
+    "payoff_label": "LATENCY SPEEDUP",
+    "payoff_sub": "Outperforming 3-step baselines",
+    "payoff_hero_stat": 8.91,
+    "payoff_hero_label": "SoL-Refiner",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Legacy Models",
+    "payoff_delta_badge": "\u26a1 +8.9x FASTER REFINEMENT",
+    "challenger": "SoL-Refiner",
+    "incumbent": "LTX-2.3"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "math_load_card": {
+        "dx": 0.0,
+        "dy": 0.08,
+        "scale_multiplier": 1.0
+      },
+      "vector_diagram": {
+        "dx": 0.0,
+        "dy": -0.44,
+        "scale_multiplier": 0.9
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 1.15
+      },
+      "generic_axes_diagram": {
+        "dx": 0.0,
+        "dy": 0.06,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.0
+      },
+      "flowchart_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.701
+      },
+      "redundant_text_caption": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "prism_diagram": {
+        "dx": 0.0,
+        "dy": -1.992,
+        "scale_multiplier": 0.8
+      },
+      "math_formula_insertion": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "header_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "text_labels": {
+        "dx": 0.0,
+        "dy": 1.492,
+        "scale_multiplier": 0.71
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "comparison_bars": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "redundant_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "cta_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.909
+      }
+    },
+    "6": {}
+  }
+}
