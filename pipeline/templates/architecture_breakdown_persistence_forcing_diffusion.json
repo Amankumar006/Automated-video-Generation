@@ -1,0 +1,1790 @@
+{
+  "id": "persistence_forcing_diffusion",
+  "title": "Persistence Forcing: Sharp Vision from Blurred Pixels",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "ARCHITECTURAL BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do AI images often look blurry when generating high-res art? It is like trying to paint a masterpiece while using a very shaky hand.",
+      "visual_focus": "A grid of pixels flickering between noisy grey and sharp color as a slider moves.",
+      "highlight_words": {
+        "shaky hand": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Diffusion Model",
+        "action_verb": "generates",
+        "direct_object": "pixel noise",
+        "anchor_word": "pixel",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "High-Frequency Detail",
+        "signal_b_label": "Gaussian Pixel Noise",
+        "result_label": "Blurred Latent State",
+        "result_sub": "Signal-to-Noise Ratio: 0.12"
+      },
+      "kinetic_action": "noise_shimmer_collapse",
+      "audio_duration": 7.91,
+      "slot_duration": 8.21,
+      "start": 0.0,
+      "end": 7.91,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.005,
+          "end": 0.2,
+          "duration": 0.195,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.2,
+          "end": 0.505,
+          "duration": 0.305,
+          "frame_ahead_trigger": 0.16
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 0.505,
+          "end": 0.845,
+          "duration": 0.34,
+          "frame_ahead_trigger": 0.465
+        },
+        {
+          "word": "images",
+          "clean_word": "images",
+          "phonemes": "\u02c8\u026am\u026ad\u0292\u1d7bz",
+          "start": 0.845,
+          "end": 1.36,
+          "duration": 0.515,
+          "frame_ahead_trigger": 0.805
+        },
+        {
+          "word": "often",
+          "clean_word": "often",
+          "phonemes": "\u02c8\u0254f\u0259n",
+          "start": 1.36,
+          "end": 1.54,
+          "duration": 0.18,
+          "frame_ahead_trigger": 1.32
+        },
+        {
+          "word": "look",
+          "clean_word": "look",
+          "phonemes": "l\u02c8\u028ak",
+          "start": 1.54,
+          "end": 1.759,
+          "duration": 0.219,
+          "frame_ahead_trigger": 1.5
+        },
+        {
+          "word": "blurry",
+          "clean_word": "blurry",
+          "phonemes": "bl\u02c8\u025c\u02d0\u0279i",
+          "start": 1.759,
+          "end": 2.155,
+          "duration": 0.396,
+          "frame_ahead_trigger": 1.719
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 2.155,
+          "end": 2.37,
+          "duration": 0.215,
+          "frame_ahead_trigger": 2.115
+        },
+        {
+          "word": "generating",
+          "clean_word": "generating",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u02cce\u026a\u027e\u026a\u014b",
+          "start": 2.37,
+          "end": 3.1,
+          "duration": 0.73,
+          "frame_ahead_trigger": 2.33
+        },
+        {
+          "word": "high-res",
+          "clean_word": "highres",
+          "phonemes": "h\u02c8a\u026a\u025az",
+          "start": 3.1,
+          "end": 3.44,
+          "duration": 0.34,
+          "frame_ahead_trigger": 3.06
+        },
+        {
+          "word": "art?",
+          "clean_word": "art",
+          "phonemes": "\u02c8\u0251\u02d0\u0279t",
+          "start": 3.44,
+          "end": 3.69,
+          "duration": 0.25,
+          "frame_ahead_trigger": 3.4
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 3.69,
+          "end": 3.853,
+          "duration": 0.163,
+          "frame_ahead_trigger": 3.65
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 3.853,
+          "end": 3.966,
+          "duration": 0.113,
+          "frame_ahead_trigger": 3.812
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 3.966,
+          "end": 4.249,
+          "duration": 0.283,
+          "frame_ahead_trigger": 3.926
+        },
+        {
+          "word": "trying",
+          "clean_word": "trying",
+          "phonemes": "t\u0279\u02c8a\u026a\u026a\u014b",
+          "start": 4.249,
+          "end": 4.645,
+          "duration": 0.396,
+          "frame_ahead_trigger": 4.209
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 4.645,
+          "end": 4.81,
+          "duration": 0.165,
+          "frame_ahead_trigger": 4.605
+        },
+        {
+          "word": "paint",
+          "clean_word": "paint",
+          "phonemes": "p\u02c8e\u026ant",
+          "start": 4.81,
+          "end": 5.15,
+          "duration": 0.34,
+          "frame_ahead_trigger": 4.77
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 5.15,
+          "end": 5.35,
+          "duration": 0.2,
+          "frame_ahead_trigger": 5.11
+        },
+        {
+          "word": "masterpiece",
+          "clean_word": "masterpiece",
+          "phonemes": "m\u02c8\u00e6st\u025ap\u02cci\u02d0s",
+          "start": 5.35,
+          "end": 5.995,
+          "duration": 0.645,
+          "frame_ahead_trigger": 5.31
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 5.995,
+          "end": 6.25,
+          "duration": 0.255,
+          "frame_ahead_trigger": 5.955
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 6.25,
+          "end": 6.64,
+          "duration": 0.39,
+          "frame_ahead_trigger": 6.21
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.64,
+          "end": 6.765,
+          "duration": 0.125,
+          "frame_ahead_trigger": 6.6
+        },
+        {
+          "word": "very",
+          "clean_word": "very",
+          "phonemes": "v\u02c8\u025b\u0279i",
+          "start": 6.765,
+          "end": 7.12,
+          "duration": 0.355,
+          "frame_ahead_trigger": 6.725
+        },
+        {
+          "word": "shaky",
+          "clean_word": "shaky",
+          "phonemes": "\u0283\u02c8e\u026aki",
+          "start": 7.12,
+          "end": 7.425,
+          "duration": 0.305,
+          "frame_ahead_trigger": 7.08
+        },
+        {
+          "word": "hand.",
+          "clean_word": "hand",
+          "phonemes": "h\u02c8\u00e6nd",
+          "start": 7.425,
+          "end": 7.7,
+          "duration": 0.275,
+          "frame_ahead_trigger": 7.385
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of it like sketching a house. You draw the big walls first, then add the tiny windows and fine bricks one step at a time.",
+      "visual_focus": "A charcoal sketch forming: bold outlines appear first, followed by intricate shading and tiny details.",
+      "highlight_words": {
+        "big walls": "#38BDF8",
+        "tiny windows": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Refinement Layer",
+        "action_verb": "sketches",
+        "direct_object": "global structure",
+        "anchor_word": "sketching",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "diffusion_denoise",
+      "motif_params": {
+        "title": "Iterative Sketch Refinement",
+        "sub": "Transitioning from coarse structural priors to pixel-perfect edges",
+        "step1_label": "Global Outline",
+        "step2_label": "Intermediate Shading",
+        "step3_label": "Fine Texture Detail",
+        "badge_title": "Denoising Path",
+        "badge_sub": "t = 1000 down to 0"
+      },
+      "kinetic_action": "sequential_gradient_sharpening",
+      "audio_duration": 6.49,
+      "slot_duration": 6.79,
+      "start": 8.21,
+      "end": 14.7,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 8.225,
+          "end": 8.505,
+          "duration": 0.28,
+          "frame_ahead_trigger": 8.185
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 8.505,
+          "end": 8.645,
+          "duration": 0.14,
+          "frame_ahead_trigger": 8.465
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 8.645,
+          "end": 8.77,
+          "duration": 0.125,
+          "frame_ahead_trigger": 8.605
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 8.77,
+          "end": 9.05,
+          "duration": 0.28,
+          "frame_ahead_trigger": 8.73
+        },
+        {
+          "word": "sketching",
+          "clean_word": "sketching",
+          "phonemes": "sk\u02c8\u025bt\u0283\u026a\u014b",
+          "start": 9.05,
+          "end": 9.4,
+          "duration": 0.35,
+          "frame_ahead_trigger": 9.01
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.4,
+          "end": 9.638,
+          "duration": 0.238,
+          "frame_ahead_trigger": 9.36
+        },
+        {
+          "word": "house.",
+          "clean_word": "house",
+          "phonemes": "h\u02c8a\u028as",
+          "start": 9.638,
+          "end": 9.915,
+          "duration": 0.277,
+          "frame_ahead_trigger": 9.598
+        },
+        {
+          "word": "You",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 9.915,
+          "end": 10.05,
+          "duration": 0.135,
+          "frame_ahead_trigger": 9.875
+        },
+        {
+          "word": "draw",
+          "clean_word": "draw",
+          "phonemes": "d\u0279\u02c8\u0254\u02d0",
+          "start": 10.05,
+          "end": 10.35,
+          "duration": 0.3,
+          "frame_ahead_trigger": 10.01
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 10.35,
+          "end": 10.49,
+          "duration": 0.14,
+          "frame_ahead_trigger": 10.31
+        },
+        {
+          "word": "big",
+          "clean_word": "big",
+          "phonemes": "b\u02c8\u026a\u0261",
+          "start": 10.49,
+          "end": 10.711,
+          "duration": 0.222,
+          "frame_ahead_trigger": 10.45
+        },
+        {
+          "word": "walls",
+          "clean_word": "walls",
+          "phonemes": "w\u02c8\u0254\u02d0lz",
+          "start": 10.711,
+          "end": 10.955,
+          "duration": 0.243,
+          "frame_ahead_trigger": 10.671
+        },
+        {
+          "word": "first,",
+          "clean_word": "first",
+          "phonemes": "f\u02c8\u025c\u02d0st",
+          "start": 10.955,
+          "end": 11.495,
+          "duration": 0.54,
+          "frame_ahead_trigger": 10.915
+        },
+        {
+          "word": "then",
+          "clean_word": "then",
+          "phonemes": "\u00f0\u02c8\u025bn",
+          "start": 11.495,
+          "end": 11.65,
+          "duration": 0.155,
+          "frame_ahead_trigger": 11.455
+        },
+        {
+          "word": "add",
+          "clean_word": "add",
+          "phonemes": "\u02c8\u00e6d",
+          "start": 11.65,
+          "end": 11.825,
+          "duration": 0.175,
+          "frame_ahead_trigger": 11.61
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.825,
+          "end": 11.93,
+          "duration": 0.105,
+          "frame_ahead_trigger": 11.785
+        },
+        {
+          "word": "tiny",
+          "clean_word": "tiny",
+          "phonemes": "t\u02c8a\u026ani",
+          "start": 11.93,
+          "end": 12.18,
+          "duration": 0.25,
+          "frame_ahead_trigger": 11.89
+        },
+        {
+          "word": "windows",
+          "clean_word": "windows",
+          "phonemes": "w\u02c8\u026ando\u028az",
+          "start": 12.18,
+          "end": 12.75,
+          "duration": 0.57,
+          "frame_ahead_trigger": 12.14
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 12.75,
+          "end": 12.859,
+          "duration": 0.109,
+          "frame_ahead_trigger": 12.71
+        },
+        {
+          "word": "fine",
+          "clean_word": "fine",
+          "phonemes": "f\u02c8a\u026an",
+          "start": 12.859,
+          "end": 13.185,
+          "duration": 0.326,
+          "frame_ahead_trigger": 12.819
+        },
+        {
+          "word": "bricks",
+          "clean_word": "bricks",
+          "phonemes": "b\u0279\u02c8\u026aks",
+          "start": 13.185,
+          "end": 13.46,
+          "duration": 0.275,
+          "frame_ahead_trigger": 13.145
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 13.46,
+          "end": 13.815,
+          "duration": 0.355,
+          "frame_ahead_trigger": 13.42
+        },
+        {
+          "word": "step",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 13.815,
+          "end": 14.06,
+          "duration": 0.245,
+          "frame_ahead_trigger": 13.775
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 14.06,
+          "end": 14.103,
+          "duration": 0.043,
+          "frame_ahead_trigger": 14.02
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 14.103,
+          "end": 14.24,
+          "duration": 0.137,
+          "frame_ahead_trigger": 14.063
+        },
+        {
+          "word": "time.",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 14.24,
+          "end": 14.555,
+          "duration": 0.315,
+          "frame_ahead_trigger": 14.2
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "We split the AI brain into two teams. One group keeps the big shape steady, while the other team hunts for sharp, local edge details.",
+      "visual_focus": "A dual-path network diagram branching into 'Persistent' and 'Active' feature clusters.",
+      "highlight_words": {
+        "steady": "#F59E0B",
+        "edge details": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Neural Router",
+        "action_verb": "splits",
+        "direct_object": "refinement budget",
+        "anchor_word": "split",
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "branching_outputs",
+      "motif_params": {
+        "in_label": "Neural Latent Space",
+        "core_title": "Brain Partitioning",
+        "core_sub": "Dual-path compute allocation",
+        "card1_title": "Persistent Path",
+        "card1_body": "Maintains structural global layout",
+        "card2_title": "Active Path",
+        "card2_body": "Dynamically generates edge sharpness"
+      },
+      "kinetic_action": "node_bifurcation",
+      "audio_duration": 7.36,
+      "slot_duration": 7.66,
+      "start": 15.0,
+      "end": 22.36,
+      "word_timings": [
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 15.015,
+          "end": 15.17,
+          "duration": 0.155,
+          "frame_ahead_trigger": 14.975
+        },
+        {
+          "word": "split",
+          "clean_word": "split",
+          "phonemes": "spl\u02c8\u026at",
+          "start": 15.17,
+          "end": 15.595,
+          "duration": 0.425,
+          "frame_ahead_trigger": 15.13
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.595,
+          "end": 15.665,
+          "duration": 0.07,
+          "frame_ahead_trigger": 15.555
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 15.665,
+          "end": 15.935,
+          "duration": 0.27,
+          "frame_ahead_trigger": 15.625
+        },
+        {
+          "word": "brain",
+          "clean_word": "brain",
+          "phonemes": "b\u0279\u02c8e\u026an",
+          "start": 15.935,
+          "end": 16.42,
+          "duration": 0.485,
+          "frame_ahead_trigger": 15.895
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 16.42,
+          "end": 16.655,
+          "duration": 0.235,
+          "frame_ahead_trigger": 16.38
+        },
+        {
+          "word": "two",
+          "clean_word": "two",
+          "phonemes": "t\u02c8u\u02d0",
+          "start": 16.655,
+          "end": 17.02,
+          "duration": 0.365,
+          "frame_ahead_trigger": 16.615
+        },
+        {
+          "word": "teams.",
+          "clean_word": "teams",
+          "phonemes": "t\u02c8i\u02d0mz",
+          "start": 17.02,
+          "end": 17.259,
+          "duration": 0.239,
+          "frame_ahead_trigger": 16.98
+        },
+        {
+          "word": "One",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 17.259,
+          "end": 17.55,
+          "duration": 0.291,
+          "frame_ahead_trigger": 17.219
+        },
+        {
+          "word": "group",
+          "clean_word": "group",
+          "phonemes": "\u0261\u0279\u02c8u\u02d0p",
+          "start": 17.55,
+          "end": 17.835,
+          "duration": 0.285,
+          "frame_ahead_trigger": 17.51
+        },
+        {
+          "word": "keeps",
+          "clean_word": "keeps",
+          "phonemes": "k\u02c8i\u02d0ps",
+          "start": 17.835,
+          "end": 18.23,
+          "duration": 0.395,
+          "frame_ahead_trigger": 17.795
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.23,
+          "end": 18.34,
+          "duration": 0.11,
+          "frame_ahead_trigger": 18.19
+        },
+        {
+          "word": "big",
+          "clean_word": "big",
+          "phonemes": "b\u02c8\u026a\u0261",
+          "start": 18.34,
+          "end": 18.62,
+          "duration": 0.28,
+          "frame_ahead_trigger": 18.3
+        },
+        {
+          "word": "shape",
+          "clean_word": "shape",
+          "phonemes": "\u0283\u02c8e\u026ap",
+          "start": 18.62,
+          "end": 18.895,
+          "duration": 0.275,
+          "frame_ahead_trigger": 18.58
+        },
+        {
+          "word": "steady,",
+          "clean_word": "steady",
+          "phonemes": "st\u02c8\u025bdi",
+          "start": 18.895,
+          "end": 19.195,
+          "duration": 0.3,
+          "frame_ahead_trigger": 18.855
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 19.195,
+          "end": 19.605,
+          "duration": 0.41,
+          "frame_ahead_trigger": 19.155
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 19.605,
+          "end": 19.622,
+          "duration": 0.017,
+          "frame_ahead_trigger": 19.565
+        },
+        {
+          "word": "other",
+          "clean_word": "other",
+          "phonemes": "\u02c8\u028c\u00f0\u025a",
+          "start": 19.622,
+          "end": 19.895,
+          "duration": 0.273,
+          "frame_ahead_trigger": 19.582
+        },
+        {
+          "word": "team",
+          "clean_word": "team",
+          "phonemes": "t\u02c8i\u02d0m",
+          "start": 19.895,
+          "end": 20.154,
+          "duration": 0.259,
+          "frame_ahead_trigger": 19.855
+        },
+        {
+          "word": "hunts",
+          "clean_word": "hunts",
+          "phonemes": "h\u02c8\u028cnts",
+          "start": 20.154,
+          "end": 20.51,
+          "duration": 0.356,
+          "frame_ahead_trigger": 20.114
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 20.51,
+          "end": 20.7,
+          "duration": 0.19,
+          "frame_ahead_trigger": 20.47
+        },
+        {
+          "word": "sharp,",
+          "clean_word": "sharp",
+          "phonemes": "\u0283\u02c8\u0251\u02d0\u0279p",
+          "start": 20.7,
+          "end": 21.099,
+          "duration": 0.399,
+          "frame_ahead_trigger": 20.66
+        },
+        {
+          "word": "local",
+          "clean_word": "local",
+          "phonemes": "l\u02c8o\u028ak\u0259l",
+          "start": 21.099,
+          "end": 21.41,
+          "duration": 0.311,
+          "frame_ahead_trigger": 21.059
+        },
+        {
+          "word": "edge",
+          "clean_word": "edge",
+          "phonemes": "\u02c8\u025bd\u0292",
+          "start": 21.41,
+          "end": 21.665,
+          "duration": 0.255,
+          "frame_ahead_trigger": 21.37
+        },
+        {
+          "word": "details.",
+          "clean_word": "details",
+          "phonemes": "di\u02d0t\u02c8e\u026alz",
+          "start": 21.665,
+          "end": 22.28,
+          "duration": 0.615,
+          "frame_ahead_trigger": 21.625
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "This trick, called Persistence Forcing, lets the stable global features guide the active ones. It is like a frame that holds a painting flat.",
+      "visual_focus": "A ghosted outline of a house holding a set of active, vibrant painting tools in place.",
+      "highlight_words": {
+        "Persistence Forcing": "#34D399",
+        "guide": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Persistence Feature",
+        "action_verb": "guides",
+        "direct_object": "active refinement",
+        "anchor_word": "guide",
+        "semantic_role": "agent_action"
+      },
+      "motif_type": "prism_disentangler",
+      "motif_params": {
+        "title": "Persistence Forcing Mechanism",
+        "sub": "Stabilizing active refinement via structural anchors",
+        "in_label": "Ambiguous Latent Signal",
+        "prism_label": "Persistence Constraint",
+        "out1_label": "Fixed Global Geometry",
+        "out2_label": "Focused Detail Injection"
+      },
+      "kinetic_action": "beam_alignment",
+      "audio_duration": 7.66,
+      "slot_duration": 7.96,
+      "start": 22.66,
+      "end": 30.32,
+      "word_timings": [
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 22.67,
+          "end": 22.83,
+          "duration": 0.16,
+          "frame_ahead_trigger": 22.63
+        },
+        {
+          "word": "trick,",
+          "clean_word": "trick",
+          "phonemes": "t\u0279\u02c8\u026ak",
+          "start": 22.83,
+          "end": 23.14,
+          "duration": 0.31,
+          "frame_ahead_trigger": 22.79
+        },
+        {
+          "word": "called",
+          "clean_word": "called",
+          "phonemes": "k\u02c8\u0254\u02d0ld",
+          "start": 23.14,
+          "end": 23.585,
+          "duration": 0.445,
+          "frame_ahead_trigger": 23.1
+        },
+        {
+          "word": "Persistence",
+          "clean_word": "persistence",
+          "phonemes": "p\u025as\u02c8\u026ast\u0259ns",
+          "start": 23.585,
+          "end": 24.245,
+          "duration": 0.66,
+          "frame_ahead_trigger": 23.545
+        },
+        {
+          "word": "Forcing,",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 24.245,
+          "end": 24.74,
+          "duration": 0.495,
+          "frame_ahead_trigger": 24.205
+        },
+        {
+          "word": "lets",
+          "clean_word": "lets",
+          "phonemes": "l\u02c8\u025bts",
+          "start": 24.74,
+          "end": 24.895,
+          "duration": 0.155,
+          "frame_ahead_trigger": 24.7
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.895,
+          "end": 25.0,
+          "duration": 0.105,
+          "frame_ahead_trigger": 24.855
+        },
+        {
+          "word": "stable",
+          "clean_word": "stable",
+          "phonemes": "st\u02c8e\u026ab\u0259l",
+          "start": 25.0,
+          "end": 25.565,
+          "duration": 0.565,
+          "frame_ahead_trigger": 24.96
+        },
+        {
+          "word": "global",
+          "clean_word": "global",
+          "phonemes": "\u0261l\u02c8o\u028ab\u0259l",
+          "start": 25.565,
+          "end": 26.025,
+          "duration": 0.46,
+          "frame_ahead_trigger": 25.525
+        },
+        {
+          "word": "features",
+          "clean_word": "features",
+          "phonemes": "f\u02c8i\u02d0t\u0283\u025az",
+          "start": 26.025,
+          "end": 26.53,
+          "duration": 0.505,
+          "frame_ahead_trigger": 25.985
+        },
+        {
+          "word": "guide",
+          "clean_word": "guide",
+          "phonemes": "\u0261\u02c8a\u026ad",
+          "start": 26.53,
+          "end": 26.855,
+          "duration": 0.325,
+          "frame_ahead_trigger": 26.49
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.855,
+          "end": 26.888,
+          "duration": 0.033,
+          "frame_ahead_trigger": 26.815
+        },
+        {
+          "word": "active",
+          "clean_word": "active",
+          "phonemes": "\u02c8\u00e6kt\u026av",
+          "start": 26.888,
+          "end": 27.275,
+          "duration": 0.387,
+          "frame_ahead_trigger": 26.848
+        },
+        {
+          "word": "ones.",
+          "clean_word": "ones",
+          "phonemes": "w\u02cc\u028cnz",
+          "start": 27.275,
+          "end": 27.51,
+          "duration": 0.235,
+          "frame_ahead_trigger": 27.235
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 27.51,
+          "end": 27.66,
+          "duration": 0.15,
+          "frame_ahead_trigger": 27.47
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 27.66,
+          "end": 27.779,
+          "duration": 0.119,
+          "frame_ahead_trigger": 27.62
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 27.779,
+          "end": 28.04,
+          "duration": 0.261,
+          "frame_ahead_trigger": 27.739
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 28.04,
+          "end": 28.245,
+          "duration": 0.205,
+          "frame_ahead_trigger": 28.0
+        },
+        {
+          "word": "frame",
+          "clean_word": "frame",
+          "phonemes": "f\u0279\u02c8e\u026am",
+          "start": 28.245,
+          "end": 28.56,
+          "duration": 0.315,
+          "frame_ahead_trigger": 28.205
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 28.56,
+          "end": 28.87,
+          "duration": 0.31,
+          "frame_ahead_trigger": 28.52
+        },
+        {
+          "word": "holds",
+          "clean_word": "holds",
+          "phonemes": "h\u02c8o\u028aldz",
+          "start": 28.87,
+          "end": 29.345,
+          "duration": 0.475,
+          "frame_ahead_trigger": 28.83
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 29.345,
+          "end": 29.465,
+          "duration": 0.12,
+          "frame_ahead_trigger": 29.305
+        },
+        {
+          "word": "painting",
+          "clean_word": "painting",
+          "phonemes": "p\u02c8e\u026ant\u026a\u014b",
+          "start": 29.465,
+          "end": 29.93,
+          "duration": 0.465,
+          "frame_ahead_trigger": 29.425
+        },
+        {
+          "word": "flat.",
+          "clean_word": "flat",
+          "phonemes": "fl\u02c8\u00e6t",
+          "start": 29.93,
+          "end": 30.215,
+          "duration": 0.285,
+          "frame_ahead_trigger": 29.89
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "Now, we get crisp, stunning images using half the effort. It is a smarter way to build clarity without wasting precious computer time or energy.",
+      "visual_focus": "A side-by-side comparison: a clean, sharp building appearing instantly compared to a heavy, slow render.",
+      "highlight_words": {
+        "half the effort": "#34D399"
+      },
+      "svo_action": {
+        "subject": "PerF-L Model",
+        "action_verb": "achieves",
+        "direct_object": "high-res clarity",
+        "anchor_word": "clarity",
+        "semantic_role": "metric_evaluation"
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "Efficiency Benchmarking",
+        "sub": "PerF-L Model performance vs Standard Generation",
+        "contender_a_name": "Standard Diffusion",
+        "contender_a_score": 0.45,
+        "contender_a_text": "Slow Convergence",
+        "contender_b_name": "Persistence Forcing (PerF-L)",
+        "contender_b_score": 0.92,
+        "contender_b_text": "High-Res Clarity",
+        "delta_badge_text": "+47% Efficiency",
+        "delta_badge_sub": "Compute cycles saved"
+      },
+      "kinetic_action": "bar_growth_anim",
+      "audio_duration": 7.91,
+      "slot_duration": 8.21,
+      "start": 30.62,
+      "end": 38.53,
+      "word_timings": [
+        {
+          "word": "Now,",
+          "clean_word": "now",
+          "phonemes": "n\u02c8a\u028a",
+          "start": 30.629,
+          "end": 30.909,
+          "duration": 0.28,
+          "frame_ahead_trigger": 30.589
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 30.909,
+          "end": 31.024,
+          "duration": 0.115,
+          "frame_ahead_trigger": 30.869
+        },
+        {
+          "word": "get",
+          "clean_word": "get",
+          "phonemes": "\u0261\u02c8\u025bt",
+          "start": 31.024,
+          "end": 31.164,
+          "duration": 0.14,
+          "frame_ahead_trigger": 30.984
+        },
+        {
+          "word": "crisp,",
+          "clean_word": "crisp",
+          "phonemes": "k\u0279\u02c8\u026asp",
+          "start": 31.164,
+          "end": 31.534,
+          "duration": 0.37,
+          "frame_ahead_trigger": 31.124
+        },
+        {
+          "word": "stunning",
+          "clean_word": "stunning",
+          "phonemes": "st\u02c8\u028cn\u026a\u014b",
+          "start": 31.534,
+          "end": 31.989,
+          "duration": 0.455,
+          "frame_ahead_trigger": 31.494
+        },
+        {
+          "word": "images",
+          "clean_word": "images",
+          "phonemes": "\u02c8\u026am\u026ad\u0292\u1d7bz",
+          "start": 31.989,
+          "end": 32.614,
+          "duration": 0.625,
+          "frame_ahead_trigger": 31.949
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 32.614,
+          "end": 32.944,
+          "duration": 0.33,
+          "frame_ahead_trigger": 32.574
+        },
+        {
+          "word": "half",
+          "clean_word": "half",
+          "phonemes": "h\u02c8\u00e6f",
+          "start": 32.944,
+          "end": 33.179,
+          "duration": 0.235,
+          "frame_ahead_trigger": 32.904
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.179,
+          "end": 33.264,
+          "duration": 0.085,
+          "frame_ahead_trigger": 33.139
+        },
+        {
+          "word": "effort.",
+          "clean_word": "effort",
+          "phonemes": "\u02c8\u025bf\u025at",
+          "start": 33.264,
+          "end": 33.579,
+          "duration": 0.316,
+          "frame_ahead_trigger": 33.224
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 33.579,
+          "end": 33.697,
+          "duration": 0.118,
+          "frame_ahead_trigger": 33.539
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 33.697,
+          "end": 33.815,
+          "duration": 0.118,
+          "frame_ahead_trigger": 33.657
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 33.815,
+          "end": 34.074,
+          "duration": 0.258,
+          "frame_ahead_trigger": 33.775
+        },
+        {
+          "word": "smarter",
+          "clean_word": "smarter",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279\u027e\u025a",
+          "start": 34.074,
+          "end": 34.474,
+          "duration": 0.4,
+          "frame_ahead_trigger": 34.034
+        },
+        {
+          "word": "way",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 34.474,
+          "end": 34.694,
+          "duration": 0.22,
+          "frame_ahead_trigger": 34.434
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 34.694,
+          "end": 34.819,
+          "duration": 0.125,
+          "frame_ahead_trigger": 34.654
+        },
+        {
+          "word": "build",
+          "clean_word": "build",
+          "phonemes": "b\u02c8\u026ald",
+          "start": 34.819,
+          "end": 35.159,
+          "duration": 0.34,
+          "frame_ahead_trigger": 34.779
+        },
+        {
+          "word": "clarity",
+          "clean_word": "clarity",
+          "phonemes": "kl\u02c8\u00e6\u0279\u1d7b\u027ei",
+          "start": 35.159,
+          "end": 35.674,
+          "duration": 0.515,
+          "frame_ahead_trigger": 35.119
+        },
+        {
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 35.674,
+          "end": 35.999,
+          "duration": 0.325,
+          "frame_ahead_trigger": 35.634
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 35.999,
+          "end": 36.444,
+          "duration": 0.445,
+          "frame_ahead_trigger": 35.959
+        },
+        {
+          "word": "precious",
+          "clean_word": "precious",
+          "phonemes": "p\u0279\u02c8\u025b\u0283\u0259s",
+          "start": 36.444,
+          "end": 36.959,
+          "duration": 0.515,
+          "frame_ahead_trigger": 36.404
+        },
+        {
+          "word": "computer",
+          "clean_word": "computer",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0\u027e\u025a",
+          "start": 36.959,
+          "end": 37.459,
+          "duration": 0.5,
+          "frame_ahead_trigger": 36.919
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 37.459,
+          "end": 37.839,
+          "duration": 0.38,
+          "frame_ahead_trigger": 37.419
+        },
+        {
+          "word": "or",
+          "clean_word": "or",
+          "phonemes": "\u0254\u02d0\u0279",
+          "start": 37.839,
+          "end": 38.049,
+          "duration": 0.21,
+          "frame_ahead_trigger": 37.799
+        },
+        {
+          "word": "energy.",
+          "clean_word": "energy",
+          "phonemes": "\u02c8\u025bn\u025ad\u0292i",
+          "start": 38.049,
+          "end": 38.419,
+          "duration": 0.37,
+          "frame_ahead_trigger": 38.009
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears in the center of a clean, white background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "audio_duration": 4.74,
+      "slot_duration": 5.24,
+      "start": 38.83,
+      "end": 43.57,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 38.848,
+          "end": 39.213,
+          "duration": 0.365,
+          "frame_ahead_trigger": 38.808
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 39.213,
+          "end": 39.388,
+          "duration": 0.175,
+          "frame_ahead_trigger": 39.173
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 39.388,
+          "end": 39.743,
+          "duration": 0.355,
+          "frame_ahead_trigger": 39.348
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 39.743,
+          "end": 40.008,
+          "duration": 0.265,
+          "frame_ahead_trigger": 39.703
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 40.008,
+          "end": 40.303,
+          "duration": 0.295,
+          "frame_ahead_trigger": 39.968
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 40.303,
+          "end": 40.683,
+          "duration": 0.38,
+          "frame_ahead_trigger": 40.263
+        },
+        {
+          "word": "explanations",
+          "clean_word": "explanations",
+          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
+          "start": 40.683,
+          "end": 41.508,
+          "duration": 0.825,
+          "frame_ahead_trigger": 40.643
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 41.508,
+          "end": 41.653,
+          "duration": 0.145,
+          "frame_ahead_trigger": 41.468
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 41.653,
+          "end": 41.863,
+          "duration": 0.21,
+          "frame_ahead_trigger": 41.613
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 41.863,
+          "end": 42.298,
+          "duration": 0.435,
+          "frame_ahead_trigger": 41.823
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 42.298,
+          "end": 42.653,
+          "duration": 0.355,
+          "frame_ahead_trigger": 42.258
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 42.653,
+          "end": 43.128,
+          "duration": 0.475,
+          "frame_ahead_trigger": 42.613
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 43.128,
+          "end": 43.488,
+          "duration": 0.36,
+          "frame_ahead_trigger": 43.088
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{pixels}} = 256 \\times 256 \\approx 65{,}536$",
+      "filename": "perF_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "d_{\\mathrm{pixels}}",
+          "label": "Image dimension"
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{X} = \\mathbf{F}_{\\mathrm{persistent}} + \\mathbf{F}_{\\mathrm{active}}$",
+      "filename": "perF_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{F}_{\\mathrm{persistent}}",
+          "label": "Global shape"
+        },
+        {
+          "term": "\\mathbf{F}_{\\mathrm{active}}",
+          "label": "Local detail"
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\Delta = \\mathrm{Refine}(\\mathbf{F}_{\\mathrm{active}} | \\mathbf{F}_{\\mathrm{persistent}})$",
+      "filename": "perF_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta",
+          "label": "Update signal"
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbf{G} = \\nabla_{\\mathbf{x}} \\mathrm{PerF}(\\mathbf{x}, t)$",
+      "filename": "perF_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{G}",
+          "label": "Guidance direction"
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{FID}_{\\mathrm{PerF}} = 1.63 < \\mathrm{FID}_{\\mathrm{Baseline}}$",
+      "filename": "perF_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{FID}",
+          "label": "Quality metric"
+        }
+      ]
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "PERSISTENT",
+          "color": "#38BDF8",
+          "items": [
+            "global",
+            "shape",
+            "edges"
+          ]
+        },
+        {
+          "name": "ACTIVE",
+          "color": "#34D399",
+          "items": [
+            "texture",
+            "high-freq",
+            "detail"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Latent Block",
+        "target_cluster": "PERSISTENT",
+        "token": "x_t"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Global",
+          "color": "#38BDF8"
+        },
+        {
+          "word": "Local",
+          "color": "#34D399"
+        }
+      ]
+    },
+    "model_a": "PerF-H",
+    "model_a_specs": [
+      "Persistence Forcing",
+      "Pixel-Space DiT",
+      "Heterogeneous Refinement"
+    ],
+    "model_b": "Baseline DiT",
+    "model_b_specs": [
+      "Uniform Refinement",
+      "Standard Diffusion",
+      "Full Parameter Load"
+    ],
+    "divide_title": "REFINEMENT BUDGET DIVIDE",
+    "model_a_stat": "1.63",
+    "model_a_stat_label": "FID SCORE",
+    "model_b_stat": "2.10",
+    "model_b_stat_label": "BASELINE FID",
+    "efficiency_badge": "\u26a1 2x COMPUTE EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "Quality (FID)",
+        "score_a": "1.63",
+        "score_b": "2.10"
+      },
+      {
+        "name": "Params",
+        "score_a": "0.5x",
+        "score_b": "1x"
+      },
+      {
+        "name": "Resolution",
+        "score_a": "512p",
+        "score_b": "256p"
+      }
+    ],
+    "scale_metric": "1.63",
+    "scale_label": "FID QUALITY SCORE",
+    "bottleneck_title": "UNIFORM REFINE BOTTLENECK",
+    "bottleneck_desc": "All pixels treated with equal depth",
+    "solution_title": "PERSISTENCE FORCING",
+    "solution_components": "Persistent vs Active Features",
+    "mechanism_title": "STRUCTURED LATENT ACTIVATION",
+    "payoff_stat": "1.63",
+    "payoff_label": "FID QUALITY",
+    "payoff_sub": "Outperforming dense uniform refinement models",
+    "payoff_hero_stat": 1.63,
+    "payoff_hero_label": "PerF Quality",
+    "payoff_base_stat": 2.1,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +22% QUALITY IMPROVEMENT",
+    "challenger": "PerF-H",
+    "incumbent": "Standard DiT"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "PerF-H",
+        "model_a_score": "1.63",
+        "model_b_name": "Baseline DiT",
+        "model_b_score": "2.10",
+        "delta_label": "\u26a1 2x COMPUTE EFFICIENCY"
+      }
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.0,
+        "scale_multiplier": 0.85
+      },
+      "top_wave_pair": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "bottom_wave_result": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      },
+      "caption_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "header_branding": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "signal_summation_graphs": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      },
+      "text_caption": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.99
+      },
+      "saas_cards": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.896
+      }
+    },
+    "3": {
+      "flowchart_group": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 0.508
+      },
+      "math_formula_insertion": {
+        "dx": 0.0,
+        "dy": -1.3,
+        "scale_multiplier": 1.0
+      },
+      "footer_text": {
+        "dx": 0.0,
+        "dy": 0.64,
+        "scale_multiplier": 1.0
+      },
+      "footer_debug_text": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "triangle_diagram": {
+        "dx": 0.0,
+        "dy": -1.5,
+        "scale_multiplier": 1.0
+      },
+      "label_group": {
+        "dx": -0.284,
+        "dy": 1.5,
+        "scale_multiplier": 0.779
+      },
+      "hero_diagram": {
+        "dx": 0.0,
+        "dy": -0.513,
+        "scale_multiplier": 1.0
+      },
+      "text_labels": {
+        "dx": 0.0,
+        "dy": 2.567,
+        "scale_multiplier": 0.681
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.7,
+        "scale_multiplier": 1.1
+      },
+      "progress_bar_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.727
+      },
+      "corporate_stat_box": {
+        "dx": 0.85,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "main_text": {
+        "dx": 0.0,
+        "dy": 0.02,
+        "scale_multiplier": 0.85
+      },
+      "text_brand": {
+        "dx": 0.0,
+        "dy": 0.012,
+        "scale_multiplier": 0.849
+      }
+    }
+  }
+}

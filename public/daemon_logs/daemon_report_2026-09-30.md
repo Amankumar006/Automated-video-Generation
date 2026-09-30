@@ -1,13 +1,13 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-09-30 | **Timestamp:** 2026-09-30 07:01:44 UTC
+**Date:** 2026-09-30 | **Timestamp:** 2026-09-30 11:22:25 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: LIFT: Layout-In-Future Video Generation under Large Viewpoint Change via On-Policy Self-Distillation
-- **arXiv ID:** [2609.38146](https://arxiv.org/abs/2609.38146)
+### Reel 1: Persistence Forcing: Exploiting Feature Specialization in Pixel-Space Diffusion
+- **arXiv ID:** [2609.36014](https://arxiv.org/abs/2609.36014)
 - **Category:** `architecture_breakdown`
-- **Editorial Hook:** *What if you could tell an AI not just what to film, but exactly how the camera should move through a scene before it even exists?*
-- **Everyday Analogy:** *A film director using a miniature 3D model set to mark where actors and cameras should travel, then hitting 'play' to bring the scene to life.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_lift_video_generation_architecture_breakdown.mp4`
+- **Editorial Hook:** *Why does AI struggle to paint the tiny details in a video, even when it knows the big picture?*
+- **Everyday Analogy:** *Like a sculptor starting with a massive block of stone and needing to switch from a sledgehammer to a needle-point chisel as they get closer to the surface.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_persistence_forcing_diffusion_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
