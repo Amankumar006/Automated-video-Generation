@@ -233,7 +233,8 @@ class DailyShortsDaemon:
                 speed=rec_speed,
                 quality=self.quality,
                 publish=publish,
-                privacy=self.privacy
+                privacy=self.privacy,
+                paper_meta=top_paper
             )
 
             record_paper_production(arxiv_id, title, category, video_out)

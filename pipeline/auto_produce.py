@@ -37,7 +37,8 @@ def auto_produce(
     privacy: str = "public",
     dry_run_publish: bool = False,
     enable_music: bool = True,
-    legacy_engine: bool = False
+    legacy_engine: bool = False,
+    paper_meta: Optional[Dict[str, Any]] = None
 ) -> str:
     print("\n=======================================================")
     print("🚀 THE MODEL VERSE — AUTONOMOUS SHORT VIDEO PRODUCER")
@@ -67,8 +68,8 @@ def auto_produce(
         else:
             raise FileNotFoundError(f"Specified template not found: {template}")
 
-    arxiv_meta = None
-    if arxiv and not spec:
+    arxiv_meta = paper_meta
+    if not arxiv_meta and arxiv and not spec:
         print(f"🔍 Step 1: Ingesting arXiv paper '{arxiv}'...")
         arxiv_meta = fetch_arxiv_paper(arxiv)
         if not arxiv_meta:
@@ -76,6 +77,9 @@ def auto_produce(
         if not topic:
             topic = arxiv_meta["title"]
         print(f"📄 Ingested: {arxiv_meta['title']}")
+    elif arxiv_meta and not topic:
+        topic = arxiv_meta.get("title", "Untitled")
+        print(f"📄 Using provided metadata: {topic}")
 
     if not topic and not spec:
         raise ValueError("Either topic, arxiv, or template must be provided.")
