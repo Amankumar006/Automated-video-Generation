@@ -675,8 +675,10 @@ MOTIF_REGISTRY = {
     "custom_flow": ScriptCustomFlow,
     "paper_figure": ScriptPaperFigure,
     "bespoke_svg": ScriptDynamicBespokeSVG,
-    "dynamic_svg": ScriptDynamicBespokeSVG
+    "dynamic_svg": ScriptDynamicBespokeSVG,
+    "visual_composition": ScriptCustomFlow
 }
+
 
 
 def create_script_motif(motif_type: str, params: Optional[Dict[str, Any]] = None) -> VGroup:

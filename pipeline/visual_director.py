@@ -215,19 +215,25 @@ class VisualDirector:
                 continue
 
             # -------------------------------------------------------------
-            # BEAT 5: Empirical Benchmark Evaluation Bars
+            # BEAT 5: Empirical Benchmark Evaluation Bars (Default if no blueprint)
             # -------------------------------------------------------------
-            if b_id == 5:
+            bp = b.get("visual_blueprint")
+            if b_id == 5 and (not bp or bp.get("layout") in ["comparative_bars", "benchmark_bars"]):
                 b["motif_type"] = "comparative_bars"
                 b["kinetic_action"] = "bar_fill"
                 payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
                 payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
                 score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
                 score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
+                
+                v_foc = b.get("visual_focus", "")
+                if len(v_foc) > 55:
+                    v_foc = v_foc[:55].rsplit(" ", 1)[0]
+
                 b["motif_params"] = {
                     "title": f"BENCHMARK RESULTS: {topic.upper()[:20]}",
-                    "sub": b.get("visual_focus", "")[:55] or "Empirical evaluation against prior frontier models",
-                    "contender_a_name": f"{topic.upper()[:18]} (OURS)",
+                    "sub": v_foc or "Empirical evaluation against prior frontier models",
+                    "contender_a_name": f"{topic.upper()[:16].strip()} (OURS)",
                     "contender_a_score": score_a,
                     "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
                     "contender_b_name": "PRIOR BASELINE",
@@ -238,6 +244,7 @@ class VisualDirector:
                 }
                 print(f"   ✨ Beat 5: Assigned 'comparative_bars' (Benchmark Payoff)")
                 continue
+
 
             # -------------------------------------------------------------
             # BEAT 3: Authentic Paper Figure (if extracted from arXiv)

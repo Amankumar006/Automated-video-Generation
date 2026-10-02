@@ -216,13 +216,19 @@ class ScriptDrivenScene(MovingCameraScene):
                 "wave_collision", "radio_tuner", "subspace_vectors", "diffusion_denoise"
             ]
 
-            if beat_id == 5:
+            from manim_engine.primitives.visual_compositions import BLUEPRINT_COMPOSITION_REGISTRY
+
+            # Visual Engine 4.0: Composable Visual Blueprint (First-class citizen)
+            if motif_type == "visual_composition" or motif_type in BLUEPRINT_COMPOSITION_REGISTRY:
+                pass
+            elif beat_id == 5 and (not b.get("visual_blueprint") or b.get("visual_blueprint", {}).get("layout") in ["comparative_bars", "benchmark_bars"]):
                 motif_type = "comparative_bars"
             elif motif_type in canned_legacy or not motif_type or motif_type not in MOTIF_REGISTRY:
                 if beat_id == 3 and self.spec.get("paper_figures"):
                     motif_type = "paper_figure"
                 else:
-                    motif_type = "bespoke_svg"
+                    motif_type = "visual_composition"
+
 
             print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' (Allotted: {duration:.2f}s)...")
 
