@@ -31,10 +31,45 @@ DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]], count: int = 1) -> List[Dict[str, Any]]:
+# 5 Automated Daily Upload Windows calibrated to global peak viewer hours and audience analytics
+SLOT_SCHEDULE: Dict[int, Dict[str, Any]] = {
+    1: {
+        "slot_name": "Window 1 (01:00 UTC - Asia/Europe Morning Surge)",
+        "preferred_taxonomy": "multimodal_diffusion",
+        "description": "Visual diffusion, flow matching, and video generation breakthroughs"
+    },
+    5: {
+        "slot_name": "Window 2 (05:00 UTC - Europe Developer Prime)",
+        "preferred_taxonomy": "hardware_efficiency",
+        "description": "KV cache, GPU optimization, latency, and memory throughput"
+    },
+    9: {
+        "slot_name": "Window 3 (09:00 UTC - Midday Global Tech Feed)",
+        "preferred_taxonomy": "multimodal_diffusion",
+        "description": "Multimodal video/image synthesis and generative world models"
+    },
+    12: {
+        "slot_name": "Window 4 (12:00 UTC - US East Coast Morning Peak)",
+        "preferred_taxonomy": "hardware_efficiency",
+        "description": "Quantization (FP8/FP4), CUDA kernels, and inference acceleration"
+    },
+    16: {
+        "slot_name": "Window 5 (16:00 UTC - US West / Global Prime Time)",
+        "preferred_taxonomy": None,  # Highest overall weighted breakthrough candidate (≥1.0x velocity)
+        "description": "Top breakthrough paper across high-performing categories"
+    }
+}
+
+
+def evaluate_pedagogical_viability(
+    candidates: List[Dict[str, Any]],
+    count: int = 1,
+    preferred_taxonomy: Optional[str] = None
+) -> List[Dict[str, Any]]:
     """
     Evaluates candidate trending papers with Gemini to pick the top `count`
-    curiosity-inducing, visually teachable papers across diverse AI domains.
+    curiosity-inducing, visually teachable papers, aggressively favoring high-velocity
+    domains (multimodal_diffusion 1.29x, hardware_efficiency 1.19x).
     """
     import google.generativeai as genai
 
@@ -42,18 +77,34 @@ def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]], count: int 
         return []
 
     target_count = min(count, len(candidates))
+
+    # Helper function for deterministic fallback
+    def get_fallback_candidates() -> List[Dict[str, Any]]:
+        def candidate_priority(c):
+            tax = c.get("taxonomy", "")
+            mult = c.get("analytics_multiplier", 1.0)
+            is_pref = 2 if (preferred_taxonomy and tax == preferred_taxonomy) else 0
+            is_high_velocity = 1 if mult > 1.0 else 0
+            return (is_pref, is_high_velocity, c.get("impact_score", 0))
+
+        sorted_cands = sorted(candidates, key=candidate_priority, reverse=True)
+        return sorted_cands[:target_count]
+
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        return candidates[:target_count]
+        return get_fallback_candidates()
 
     genai.configure(api_key=api_key)
 
     cand_summaries = []
     num_eval = min(20, len(candidates))
     for i, c in enumerate(candidates[:num_eval]):
+        tax = c.get("taxonomy", "general_breakthroughs")
+        mult = c.get("analytics_multiplier", 1.0)
         cand_summaries.append(
             f"[{i+1}] Title: {c['title']}\n"
             f"    arXiv: {c['id']}\n"
+            f"    Domain Taxonomy: {tax} (Audience Velocity Multiplier: {mult:.2f}x)\n"
             f"    Category: {c.get('recommended_category', 'mechanism_deepdive')}\n"
             f"    Abstract: {c['abstract'][:250]}..."
         )
@@ -63,7 +114,15 @@ def evaluate_pedagogical_viability(candidates: List[Dict[str, Any]], count: int 
     bias_desc = ""
     if category_biases:
         bias_str = ", ".join([f"{k}: {v}x multiplier" for k, v in category_biases.items()])
-        bias_desc = f"\n4. Audience Retention & Views Velocity: Live YouTube analytics shows viewers strongly favor topics with high multipliers: [{bias_str}]. Favor papers whose domains align with these winning formats!"
+        bias_desc = f"""
+4. CRITICAL AUDIENCE ENGAGEMENT ALIGNMENT (MANDATORY):
+   - Real-time YouTube analytics reveals that 'multimodal_diffusion' (1.29x multiplier) and 'hardware_efficiency' (1.19x multiplier, 3,347+ views, peak velocity 14.55 views/hour) are our top viral growth drivers on YouTube Shorts.
+   - Conversely, 'reasoning_models' and 'mechanistic_interpretability' (~0.60x multiplier) are currently suffering steep audience drop-offs on YouTube Shorts.
+   - Live category multipliers: [{bias_str}].
+   - MANDATORY DIRECTIVE: You MUST AGGRESSIVELY FAVOR candidates in 'multimodal_diffusion' and 'hardware_efficiency'. Unless no viable candidate exists, at least 80% of selections MUST come from these two winning categories."""
+
+    if preferred_taxonomy:
+        bias_desc += f"\n5. TARGET UPLOAD WINDOW FOCUS: This automated upload window specifically targets '{preferred_taxonomy.upper()}'. Prioritize the best candidate in '{preferred_taxonomy}'."
 
     prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI.
 
@@ -74,7 +133,7 @@ Select the {target_count} BEST and MOST DIVERSE papers for 45-second educational
 Criteria:
 1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits).
 2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static)?
-3. Domain Diversity: Pick papers from DIFFERENT categories (e.g. architectures, reasoning/planning, attention/memory, multimodal/diffusion, benchmarks) to keep the channel varied.{bias_desc}
+3. High Production Value: Can the concepts be visualized with dynamic 3b1b animations (e.g. wave collisions, streaming KV buffers, noise-to-latent diffusion trajectories)?{bias_desc}
 
 Return ONLY valid JSON matching this schema:
 {{
@@ -114,21 +173,22 @@ Return ONLY valid JSON matching this schema:
                         if len(selected_list) >= target_count:
                             break
 
-                # Fill any shortfall with remaining diverse candidates
-                for c_idx, cand in enumerate(candidates):
-                    if len(selected_list) >= target_count:
-                        break
-                    if c_idx not in selected_indices:
-                        selected_list.append(cand)
-                        selected_indices.add(c_idx)
+                # Fill any shortfall with remaining high-velocity candidates
+                if len(selected_list) < target_count:
+                    fallback_pool = get_fallback_candidates()
+                    for cand in fallback_pool:
+                        if len(selected_list) >= target_count:
+                            break
+                        if cand["id"] not in {c["id"] for c in selected_list}:
+                            selected_list.append(cand)
 
                 if selected_list:
                     return selected_list
         except Exception:
             continue
 
-    print(f"⚠️ Pedagogical evaluation fallback: selecting top {target_count} candidates")
-    return candidates[:target_count]
+    print(f"⚠️ Pedagogical evaluation fallback: selecting top {target_count} candidates calibrated to audience analytics")
+    return get_fallback_candidates()
 
 
 class DailyShortsDaemon:
@@ -142,12 +202,28 @@ class DailyShortsDaemon:
         self.privacy = privacy
         self.critic = ScriptCritic()
 
-    def run_daily_cycle(self, count: int = 1, dry_run: bool = False, publish: bool = True, target_arxiv: Optional[str] = None) -> List[Dict[str, Any]]:
-        """Executes discovery, production, and publishing for `count` reels."""
+    def run_daily_cycle(
+        self,
+        count: int = 1,
+        dry_run: bool = False,
+        publish: bool = True,
+        target_arxiv: Optional[str] = None,
+        target_slot_hour: Optional[int] = None,
+        preferred_taxonomy: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
-        print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reels")
+        print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s)")
+        if target_slot_hour is not None and target_slot_hour in SLOT_SCHEDULE:
+            slot_info = SLOT_SCHEDULE[target_slot_hour]
+            print(f"🎯 Automated Window: {slot_info['slot_name']}")
+            print(f"   Target Directive: {slot_info['description']}")
+            if not preferred_taxonomy and slot_info.get("preferred_taxonomy"):
+                preferred_taxonomy = slot_info["preferred_taxonomy"]
+        if preferred_taxonomy:
+            print(f"📈 Analytics Category Bias: Aggressively prioritizing '{preferred_taxonomy.upper()}'")
         print("=" * 80)
 
         # 0. Poll YouTube Analytics & Refresh Performance Multipliers
@@ -175,7 +251,7 @@ class DailyShortsDaemon:
                 }
             }]
         else:
-            # 1. Fetch & score trending papers
+            # 1. Fetch & score trending papers (with analytics multipliers integrated)
             print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
             papers = get_trending_digest(limit=35)
             unprocessed = [p for p in papers if not p.get("is_processed")]
@@ -186,12 +262,19 @@ class DailyShortsDaemon:
 
             print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
 
-            # 2. Select top diverse candidates using pedagogical viability filter
-            selected_papers = evaluate_pedagogical_viability(unprocessed, count=count)
+            # 2. Select top candidates using pedagogical viability filter calibrated to audience analytics
+            selected_papers = evaluate_pedagogical_viability(
+                unprocessed,
+                count=count,
+                preferred_taxonomy=preferred_taxonomy
+            )
         print(f"\n🏆 Selected {len(selected_papers)} Breakthrough Papers for Today's Reels Quota:")
         for idx, p in enumerate(selected_papers):
             notes = p.get("editorial_notes", {})
-            print(f"   [{idx+1}/{len(selected_papers)}] {p['title']} ({p['id']}) — Category: {p.get('recommended_category', 'mechanism_deepdive').upper()}")
+            tax = p.get("taxonomy", "general_breakthroughs")
+            mult = p.get("analytics_multiplier", 1.0)
+            print(f"   [{idx+1}/{len(selected_papers)}] {p['title']} ({p['id']})")
+            print(f"       Domain: {tax.upper()} ({mult:.2f}x velocity) | Category: {p.get('recommended_category', 'mechanism_deepdive').upper()}")
             if notes.get("recommended_hook"):
                 print(f"       💡 Hook: {notes.get('recommended_hook')}")
             if notes.get("suggested_everyday_analogy"):
@@ -248,6 +331,8 @@ class DailyShortsDaemon:
                 "paper_id": arxiv_id,
                 "title": title,
                 "category": category,
+                "taxonomy": top_paper.get("taxonomy", "general"),
+                "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
                 "video_path": video_out,
                 "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
                 "editorial_notes": notes
@@ -267,6 +352,7 @@ class DailyShortsDaemon:
                 ed = r.get("editorial_notes", {})
                 reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
 - **arXiv ID:** [{r['paper_id']}](https://arxiv.org/abs/{r['paper_id']})
+- **Domain Taxonomy:** `{r.get('taxonomy', 'general')}` ({r.get('analytics_multiplier', 1.0):.2f}x velocity)
 - **Category:** `{r['category']}`
 - **Editorial Hook:** *{ed.get('recommended_hook', 'N/A')}*
 - **Everyday Analogy:** *{ed.get('suggested_everyday_analogy', 'N/A')}*
@@ -295,19 +381,36 @@ class DailyShortsDaemon:
     def start_standing_daemon(self, target_hours_utc: Optional[List[int]] = None, interval_minutes: int = 30):
         """
         Runs continuously in the background across 5 research-backed pre-peak upload windows.
-        Default hours (UTC): [1, 5, 9, 12, 16] -> 5 reels timed right before global viewer surges.
+        Default hours (UTC): [1, 5, 9, 12, 16] -> 5 reels timed right before global viewer surges,
+        calibrated to audience velocity (multimodal_diffusion: 1.29x, hardware_efficiency: 1.19x).
         """
         if target_hours_utc is None:
-            target_hours_utc = [1, 5, 9, 12, 16]
+            target_hours_utc = list(SLOT_SCHEDULE.keys())
 
         print(f"🚀 Starting standing daemon loop (Checking every {interval_minutes}m, Target Hours UTC: {target_hours_utc})...")
+        print("📊 5-Slot Audience Alignment Schedule:")
+        for h in target_hours_utc:
+            info = SLOT_SCHEDULE.get(h, {})
+            pref = info.get("preferred_taxonomy") or "Top High-Velocity Breakthrough"
+            print(f"   • Window {h:02d}:00 UTC -> Focus: {pref}")
+
         last_triggered_hour = -1
         while True:
             now = datetime.datetime.now(datetime.timezone.utc)
             if now.hour in target_hours_utc and now.hour != last_triggered_hour:
-                print(f"⏰ Peak Hour Reached ({now.hour:02d}:00 UTC). Triggering Reel Production...")
+                slot_info = SLOT_SCHEDULE.get(now.hour, {})
+                slot_name = slot_info.get("slot_name", f"{now.hour:02d}:00 UTC")
+                pref_tax = slot_info.get("preferred_taxonomy")
+                print(f"\n⏰ Peak Window Reached ({now.hour:02d}:00 UTC): {slot_name}")
+                print(f"🎯 Calibrating to domain target: {pref_tax or 'Overall Highest Velocity'}")
                 try:
-                    self.run_daily_cycle(count=1, dry_run=False, publish=True)
+                    self.run_daily_cycle(
+                        count=1,
+                        dry_run=False,
+                        publish=True,
+                        target_slot_hour=now.hour,
+                        preferred_taxonomy=pref_tax
+                    )
                     last_triggered_hour = now.hour
                 except Exception as e:
                     print(f"⚠️ Error during daemon cycle: {e}")
@@ -320,6 +423,8 @@ def main():
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
+    parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
+    parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
@@ -328,12 +433,26 @@ def main():
     daemon = DailyShortsDaemon(quality=args.quality, privacy=args.privacy)
 
     if args.dry_run:
-        daemon.run_daily_cycle(count=args.count, dry_run=True, publish=False, target_arxiv=args.arxiv or None)
+        daemon.run_daily_cycle(
+            count=args.count,
+            dry_run=True,
+            publish=False,
+            target_arxiv=args.arxiv or None,
+            target_slot_hour=args.slot_hour,
+            preferred_taxonomy=args.preferred_taxonomy
+        )
     elif args.daemon:
         daemon.start_standing_daemon()
     else:
         # Default to running cycle with specified count
-        daemon.run_daily_cycle(count=args.count, dry_run=False, publish=True, target_arxiv=args.arxiv or None)
+        daemon.run_daily_cycle(
+            count=args.count,
+            dry_run=False,
+            publish=True,
+            target_arxiv=args.arxiv or None,
+            target_slot_hour=args.slot_hour,
+            preferred_taxonomy=args.preferred_taxonomy
+        )
 
 
 if __name__ == "__main__":
