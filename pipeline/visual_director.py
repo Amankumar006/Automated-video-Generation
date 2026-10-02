@@ -55,6 +55,53 @@ class VisualDirector:
 
         candidates = []
 
+        # Physics Simulation 1: Vector Flow Field / Continuous Latent Trajectory
+        if any(k in text for k in ["vector", "flow", "drift", "field", "manifold", "trajectory", "stream", "continuous", "velocity", "diffusion", "denois", "fluid"]):
+            candidates.append({
+                "layout": "vector_flow_field",
+                "title": f"VECTOR FLOW FIELD: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Continuous velocity streamlines guiding latent trajectory drift",
+                "accent_color": "#38BDF8",
+                "field_title": f"CONTINUOUS {topic.upper()[:16]} MANIFOLD",
+                "source_label": f"SOURCE: {subj.upper()[:14]}",
+                "target_label": f"TARGET: {obj.upper()[:14]}",
+                "stream_formula": "dx/dt = v_theta(x, t)"
+            })
+
+        # Physics Simulation 2: Neural Activation Wave / Synaptic Network
+        if any(k in text for k in ["neural", "activation", "synap", "network", "pulse", "firing", "deep layer", "neuron", "forward pass", "cascade"]):
+            candidates.append({
+                "layout": "neural_activation_wave",
+                "title": f"SYNAPTIC PROPAGATION: {subj.upper()[:14]}",
+                "sub": v_focus[:65] or "Propagating activation wave across dense synaptic layers",
+                "accent_color": "#A855F7",
+                "input_label": f"L1: {subj.upper()[:14]}",
+                "hidden_label": "L2: LATENT REASONING",
+                "output_label": f"L3: {obj.upper()[:14]}"
+            })
+
+        # Physics Simulation 3: Attention Prism Refraction / Optical Splitting
+        if any(k in text for k in ["prism", "attention", "refract", "query", "key", "value", "qkv", "beam", "optical", "token split"]):
+            candidates.append({
+                "layout": "attention_prism_refraction",
+                "title": "ATTENTION PRISM REFRACTION",
+                "sub": v_focus[:65] or "Token laser beam refracted into Query, Key, and Value vectors",
+                "accent_color": "#F59E0B",
+                "token_label": f"TOKEN: {subj.upper()[:14]}",
+                "matrix_title": f"{topic.upper()[:16]} ATTENTION"
+            })
+
+        # Physics Simulation 4: 2.5D Loss Landscape / Gradient Descent Basin
+        if any(k in text for k in ["loss", "landscape", "surface", "gradient", "basin", "descent", "roll", "valley", "minimum", "optimiz", "energy"]):
+            candidates.append({
+                "layout": "optimization_landscape",
+                "title": "LOSS LANDSCAPE DESCENT",
+                "sub": v_focus[:65] or "Optimization trajectory rolling through energy basin into global minimum",
+                "accent_color": "#34D399",
+                "landscape_title": f"{topic.upper()[:16]} OBJECTIVE SURFACE",
+                "optima_label": f"OPTIMA: {obj.upper()[:14]}"
+            })
+
         # 1. Split / Diverging / Bifurcated Flow
         if any(k in text for k in ["split", "dual", "bifurcat", "two path", "branch", "two stream", "decoupl", "separate semantic"]):
             candidates.append({

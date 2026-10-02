@@ -69,11 +69,11 @@ def render_scene(scene_file: str, scene_class: str, quality: str = "-qh", spec_p
     start_time = time.time()
     env = os.environ.copy()
     env["PATH"] = f"/Users/amankumar/bin:{env.get('PATH', '')}"
-    if quality in ("draft", "low", "ql"):
+    if quality in ("draft", "low", "ql", "l", "-l"):
         quality = "-ql"
-    elif quality in ("medium", "mid", "qm"):
+    elif quality in ("medium", "mid", "qm", "m", "-m"):
         quality = "-qm"
-    elif quality in ("high", "qh"):
+    elif quality in ("high", "qh", "h", "-h"):
         quality = "-qh"
     elif not quality.startswith("-"):
         quality = f"-{quality}"

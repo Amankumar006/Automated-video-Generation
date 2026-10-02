@@ -77,6 +77,10 @@ class BaseBlueprintComposition(VGroup):
         self.content_group = VGroup()
         self.kinetic_elements = VGroup()
 
+    def get_entrance_animation(self, run_time: float = 1.0) -> Animation:
+        """Returns the entrance animation for this composition. Defaults to FadeIn."""
+        return FadeIn(self, scale=0.96, run_time=run_time)
+
     def get_kinetic_animation(self, run_time: float = 1.5) -> Animation:
         """Returns the primary kinetic transformation animation for this composition."""
         if self.kinetic_elements and len(self.kinetic_elements) > 0:
@@ -656,12 +660,18 @@ BLUEPRINT_COMPOSITION_REGISTRY = {
     "side_by_side": BlueprintSideBySideComparison
 }
 
-
 def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] = None) -> BaseBlueprintComposition:
     """
     Factory function to instantiate any composable visual blueprint with provided parameters.
     Falls back gracefully to BlueprintPipelineStages if layout unknown.
     """
+    if layout not in BLUEPRINT_COMPOSITION_REGISTRY:
+        try:
+            from manim_engine.primitives.physics_simulations import PHYSICS_SIMULATION_REGISTRY
+            BLUEPRINT_COMPOSITION_REGISTRY.update(PHYSICS_SIMULATION_REGISTRY)
+        except Exception:
+            pass
+
     cls = BLUEPRINT_COMPOSITION_REGISTRY.get(layout, BlueprintPipelineStages)
     clean_params = dict(params) if params else {}
     clean_params.pop("layout", None)
