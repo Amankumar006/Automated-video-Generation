@@ -87,7 +87,8 @@ class SVGSynthesizer:
         analogy = beat.get("everyday_analogy", "")
 
         prompt = f"""You are the Lead Visual Designer for 'The Model Verse' 3Blue1Brown-style animations.
-Create clean, valid, standalone SVG XML code that visually diagrams this specific concept and physical analogy:
+Create clean, valid, standalone SVG XML code that visually diagrams this SPECIFIC concept and physical analogy.
+The diagram MUST be UNIQUE to this exact paper concept — never reuse generic network graphs, generic circles, or abstract arrows.
 
 Topic: {topic}
 Voiceover Narration: "{b_text}"
@@ -96,11 +97,12 @@ Physical Analogy: "{analogy}"
 SVO Entities: Subject='{svo.get("subject", "")}', Action='{svo.get("action_verb", "")}', Object='{svo.get("direct_object", "")}'
 
 CRITICAL DESIGN & TECHNICAL RULES:
-1. Canvas: <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-2. Visual Style: Signature 3Blue1Brown chalkboard vector geometry.
-3. Elements allowed: ONLY <path>, <rect>, <circle>, <ellipse>, <polygon>, <polyline>, <line>, <g>.
-4. STRICT PROHIBITION: DO NOT USE ANY <text> TAGS! (All text is rendered natively by Manim over the diagram).
-5. Colors to use:
+1. Canvas: <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+2. USE THE FULL 600x600 CANVAS. Fill the entire viewport with the diagram — no tiny centered icons surrounded by empty space!
+3. Visual Style: Signature 3Blue1Brown chalkboard vector geometry with bold strokes (stroke-width 3-6px).
+4. Elements allowed: ONLY <path>, <rect>, <circle>, <ellipse>, <polygon>, <polyline>, <line>, <g>, <defs>, <linearGradient>.
+5. STRICT PROHIBITION: DO NOT USE ANY <text> TAGS! (All text is rendered natively by Manim over the diagram).
+6. Colors to use:
    - Neon Cyan: #38BDF8
    - Mint Green: #34D399
    - Amber / Gold: #F59E0B
@@ -108,8 +110,9 @@ CRITICAL DESIGN & TECHNICAL RULES:
    - Violet: #A855F7
    - Chalk White: #F8FAFC
    - Muted Slate: #475569
-6. Depict the ACTUAL physical metaphor (e.g. if smoothie/blender, draw a sleek beaker/vessel and fruit shapes; if contour/wireframe, draw nodes connected by neon vector lines; if dual tracks, draw two parallel flowing conduits; if barrier, draw an energy field with deflection arrows).
-7. Output ONLY the raw <svg>...</svg> XML markup. No explanation, no markdown ticks."""
+7. Depict the ACTUAL physical metaphor from the narration. If it describes spatial memory, draw a 3D grid of memory cells. If it describes camera rays, draw perspective projection lines. If it describes streaming video, draw filmstrip frames flowing into a pipeline. BE LITERAL AND SPECIFIC.
+8. Make the diagram LARGE, BOLD, and DETAILED with at least 15-20 distinct SVG elements. No tiny diagrams!
+9. Output ONLY the raw <svg>...</svg> XML markup. No explanation, no markdown ticks."""
 
         for model_name in self.candidate_models:
             try:
