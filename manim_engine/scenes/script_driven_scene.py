@@ -237,9 +237,11 @@ class ScriptDrivenScene(MovingCameraScene):
             self.display_math_formula(beat_id, run_time=0.4)
 
             # Resolve paper figure SVG if paper_figure motif requested
-            if motif_type == "paper_figure":
+            if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
                 if not motif_params.get("svg_path"):
-                    if b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
+                    if b.get("svg_path") and os.path.exists(b.get("svg_path")):
+                        motif_params["svg_path"] = b.get("svg_path")
+                    elif b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
                         motif_params["svg_path"] = b.get("paper_figure_path")
                     elif self.spec.get("paper_figures"):
                         motif_params["svg_path"] = self.spec["paper_figures"][0].get("svg_path")
@@ -262,8 +264,9 @@ class ScriptDrivenScene(MovingCameraScene):
             # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
             action_time = min(1.8, duration * 0.35)
             try:
-                if motif_type == "paper_figure" and hasattr(motif, "frame"):
-                    self.play(motif.frame.animate.set_stroke(color="#38BDF8", width=3.0), motif.badge.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
+                if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "frame"):
+                    accent = getattr(motif, "accent_color", "#38BDF8")
+                    self.play(motif.frame.animate.set_stroke(color=accent, width=3.5), motif.badge.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
                     self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
                     self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
@@ -345,8 +348,11 @@ class ScriptDrivenScene(MovingCameraScene):
                 anims.append(motif.slots.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#34D399", width=3.5))
             elif motif_type == "comparative_bars" and hasattr(motif, "fill_bar_a"):
                 anims.append(motif.fill_bar_a.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
-            elif motif_type == "paper_figure" and hasattr(motif, "frame"):
-                anims.append(motif.frame.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#38BDF8", width=3.5))
+            elif motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "frame"):
+                accent = getattr(motif, "accent_color", "#38BDF8")
+                anims.append(motif.frame.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color=accent, width=3.2))
+                if hasattr(motif, "fig_mobj") and motif.fig_mobj:
+                    anims.append(motif.fig_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.015))
             elif hasattr(motif, "badge"):
                 anims.append(motif.badge.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
             else:

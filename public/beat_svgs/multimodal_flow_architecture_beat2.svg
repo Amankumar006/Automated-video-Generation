@@ -1,0 +1,50 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sunsetGradient" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="35%" stop-color="#EF4444"/>
+      <stop offset="70%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(50, 50)">
+    <!-- Curvy Sunset Path -->
+    <path d="M 0,250 C 100,50 200,300 300,100 S 400,200 500,50" 
+          fill="none" stroke="url(#sunsetGradient)" stroke-width="40" stroke-linecap="round"/>
+    
+    <!-- The Lego Grid Constraint -->
+    <g stroke="#F8FAFC" stroke-width="1.5" fill="none" opacity="0.6">
+      <line x1="0" y1="0" x2="500" y2="0"/>
+      <line x1="0" y1="50" x2="500" y2="50"/>
+      <line x1="0" y1="100" x2="500" y2="100"/>
+      <line x1="0" y1="150" x2="500" y2="150"/>
+      <line x1="0" y1="200" x2="500" y2="200"/>
+      <line x1="0" y1="250" x2="500" y2="250"/>
+      
+      <line x1="0" y1="0" x2="0" y2="300"/>
+      <line x1="50" y1="0" x2="50" y2="300"/>
+      <line x1="100" y1="0" x2="100" y2="300"/>
+      <line x1="150" y1="0" x2="150" y2="300"/>
+      <line x1="200" y1="0" x2="200" y2="300"/>
+      <line x1="250" y1="0" x2="250" y2="300"/>
+      <line x1="300" y1="0" x2="300" y2="300"/>
+      <line x1="350" y1="0" x2="350" y2="300"/>
+      <line x1="400" y1="0" x2="400" y2="300"/>
+      <line x1="450" y1="0" x2="450" y2="300"/>
+      <line x1="500" y1="0" x2="500" y2="300"/>
+    </g>
+
+    <!-- Pixelated Representation (Jagged blocks) -->
+    <rect x="0" y="250" width="50" height="50" fill="#34D399"/>
+    <rect x="50" y="200" width="50" height="50" fill="#34D399"/>
+    <rect x="100" y="100" width="50" height="100" fill="#F59E0B"/>
+    <rect x="150" y="100" width="50" height="50" fill="#F59E0B"/>
+    <rect x="200" y="150" width="50" height="100" fill="#EF4444"/>
+    <rect x="250" y="100" width="50" height="50" fill="#EF4444"/>
+    <rect x="300" y="50" width="50" height="100" fill="#A855F7"/>
+    <rect x="350" y="100" width="50" height="50" fill="#A855F7"/>
+    <rect x="400" y="50" width="50" height="50" fill="#A855F7"/>
+    <rect x="450" y="0" width="50" height="50" fill="#38BDF8"/>
+  </g>
+</svg>

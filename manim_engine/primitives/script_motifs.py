@@ -16,6 +16,7 @@ High-end, bespoke 3Blue1Brown procedural animations for technical and physical a
 
 from manim import *
 import numpy as np
+import os
 import sys
 from pathlib import Path
 from typing import Optional, List, Dict, Any
@@ -605,6 +606,79 @@ class ScriptPaperFigure(VGroup):
         self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)
 
 
+class ScriptDynamicBespokeSVG(VGroup):
+    """
+    Renders a bespoke, beat-specific vector diagram synthesized for the exact
+    narrative script and physical analogy of a beat (e.g. smoothie blender,
+    flickering canvas wireframe, bifurcated dual tracks, anti-bleed barrier, etc.).
+    Framed in signature 3Blue1Brown chalkboard glass-chassis styling with dynamic badges.
+    """
+    def __init__(
+        self,
+        svg_path: Optional[str] = None,
+        title: str = "BESPOKE CONCEPT DIAGRAM",
+        sub: str = "Procedural vector visualization tailored to narrative beat",
+        badge_text: str = "DYNAMIC BEAT SPECIFICATION",
+        accent_color: str = "#38BDF8",
+        max_width: float = 6.2,
+        max_height: float = 3.8,
+        **kwargs
+    ):
+        super().__init__(**kwargs)
+        self.accent_color = accent_color
+
+        self.title = Text(title, font=FONT_HELVETICA, font_size=13, color=accent_color, weight=BOLD).move_to([0, 3.5, 0])
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=10, color="#94A3B8").next_to(self.title, DOWN, buff=0.1)
+
+        # Outer chassis frame
+        frame_w = max_width + 0.4
+        frame_h = max_height + 0.6
+        self.frame = RoundedRectangle(
+            corner_radius=0.16,
+            width=frame_w,
+            height=frame_h,
+            color="#334155",
+            fill_color="#0D1117",
+            fill_opacity=0.92,
+            stroke_width=2.0
+        ).move_to([0, 0.4, 0])
+
+        # Vector diagram
+        self.fig_mobj = None
+        if svg_path and os.path.exists(svg_path):
+            try:
+                m = SVGMobject(str(svg_path))
+                if m.width > max_width:
+                    m.scale_to_fit_width(max_width)
+                if m.height > max_height:
+                    m.scale_to_fit_height(max_height)
+                m.move_to(self.frame.get_center())
+                self.fig_mobj = m
+            except Exception as e:
+                print(f"⚠️ Error loading bespoke SVG: {e}")
+
+        if not self.fig_mobj:
+            fallback_box = Rectangle(width=max_width - 1.0, height=2.2, color=accent_color, stroke_width=1.5).move_to(self.frame.get_center())
+            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color=accent_color, weight=BOLD).move_to(fallback_box)
+            self.fig_mobj = VGroup(fallback_box, lbl)
+
+        # Bottom badge
+        badge_w = max(2.6, min(5.4, len(badge_text) * 0.16 + 0.6))
+        self.badge_box = RoundedRectangle(
+            corner_radius=0.1,
+            width=badge_w,
+            height=0.45,
+            color=accent_color,
+            fill_color="#0F172A",
+            fill_opacity=0.9,
+            stroke_width=1.5
+        ).next_to(self.frame, DOWN, buff=0.15)
+        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color=accent_color, weight=BOLD).move_to(self.badge_box)
+        self.badge = VGroup(self.badge_box, self.badge_txt)
+
+        self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)
+
+
 MOTIF_REGISTRY = {
     "wave_collision": ScriptWaveInterference,
     "radio_tuner": ScriptRadioTunerDial,
@@ -617,7 +691,9 @@ MOTIF_REGISTRY = {
     "memory_buffer": ScriptMemoryKVBuffer,
     "comparative_bars": ScriptComparativeBenchmarkBars,
     "custom_flow": ScriptCustomFlow,
-    "paper_figure": ScriptPaperFigure
+    "paper_figure": ScriptPaperFigure,
+    "bespoke_svg": ScriptDynamicBespokeSVG,
+    "dynamic_svg": ScriptDynamicBespokeSVG
 }
 
 

@@ -108,6 +108,8 @@ AVAILABLE MOTIFS IN THE LIBRARY:
    params: title, sub, step1_title, step1_sub, step2_title, step2_sub, step3_title, step3_sub
 12. "paper_figure": Displays the official vector architecture diagram extracted directly from the paper.
    params: title, sub, badge_text
+13. "bespoke_svg": For beats presenting unique physical analogies, visual metaphors, or custom mechanisms (e.g. fruit smoothie blender, flickering canvas portrait, connect-the-dots wireframe, bifurcated dual tracks, anti-bleed barrier, lego quantization, puzzle pieces, highway bottleneck). Our dynamic vector engine synthesizes an exact custom vector diagram for this beat.
+   params: title, sub, badge_text, accent_color
 
 CRITICAL GUIDELINES:
 - NEVER use generic progress circles or repetitive gauges.
@@ -174,6 +176,106 @@ Return ONLY a valid JSON object matching this schema:
                         "badge_text": f"PRIMARY MECHANISM: {subj.upper()[:20]}"
                     },
                     "kinetic_action": "figure_scan"
+                })
+            # Rich Physical Analogy Detection -> Bespoke Dynamic Vector SVG
+            elif any(k in text for k in ["smoothie", "blend", "fruit", "strawberr", "puree"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"DESTRUCTIVE BLENDING VS PRESERVATION",
+                        "sub": v_focus[:55] or "Preserving discrete structural boundaries vs uniform puree",
+                        "badge_text": f"ANALYSIS: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["flicker", "portrait", "sketch", "outline", "contour", "wireframe", "dots"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"CRISP BOUNDARY RESOLUTION",
+                        "sub": v_focus[:55] or "Resolving sharp structural contours from flickering noise",
+                        "badge_text": f"STRUCTURE: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["split", "dual", "track", "bifurcat", "two path", "semantic and geometric"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"BIFURCATED DUAL-TRACK ARCHITECTURE",
+                        "sub": v_focus[:55] or "Decoupling high-level semantics from low-level geometric depth",
+                        "badge_text": f"DUAL ROUTING: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["barrier", "penalty", "bleed", "prevent", "isolate", "separate paths", "forcefield"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"ORTHOGONAL ANTI-BLEED BARRIER",
+                        "sub": v_focus[:55] or "Strict penalty prevents cross-talk between latent streams",
+                        "badge_text": f"ISOLATION: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["lego", "voxel", "quantiz", "block", "grid", "pixelat", "chunk"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"CONTINUOUS VS DISCRETE QUANTIZATION",
+                        "sub": v_focus[:55] or "Stepping continuous signals into discrete computational blocks",
+                        "badge_text": f"QUANTIZATION: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["puzzle", "jigsaw", "snap", "broken", "interlock"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"JIGSAW ASSEMBLY TRAJECTORY",
+                        "sub": v_focus[:55] or "Interlocking fragmented latents into a unified path",
+                        "badge_text": f"ASSEMBLY: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif any(k in text for k in ["bottleneck", "highway", "toll", "choke", "narrow", "express"]):
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "bespoke_svg",
+                    "motif_params": {
+                        "title": f"HIGHWAY BOTTLENECK & EXPRESS BYPASS",
+                        "sub": v_focus[:55] or "Bypassing serialization bottlenecks with parallel express lanes",
+                        "badge_text": f"THROUGHPUT: {subj.upper()[:20]}"
+                    },
+                    "kinetic_action": "figure_scan"
+                })
+            elif b_id == 5 or any(k in text for k in ["benchmark", "accuracy", "speedup", "gain", "percent", "faster"]):
+                payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
+                payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
+                score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
+                score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
+                storyboard.append({
+                    "beat_id": b_id,
+                    "motif_type": "comparative_bars",
+                    "motif_params": {
+                        "title": f"BENCHMARK RESULTS: {topic_title.upper()[:20]}",
+                        "sub": v_focus[:55] or "Empirical evaluation against prior frontier models",
+                        "contender_a_name": f"{topic_title.upper()[:18]} (OURS)",
+                        "contender_a_score": score_a,
+                        "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
+                        "contender_b_name": "PRIOR BASELINE",
+                        "contender_b_score": score_b,
+                        "contender_b_text": f"{payoff_base}%" if isinstance(payoff_base, (int, float)) else str(payoff_base),
+                        "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
+                        "delta_badge_sub": "Significant efficiency and accuracy milestone"
+                    },
+                    "kinetic_action": "bar_fill"
                 })
             elif any(k in text for k in ["radio", "dial", "tuner", "station"]):
                 lbl_a = hl_keys[0].upper() if hl_keys else "CHANNEL 1"
@@ -315,24 +417,7 @@ Return ONLY a valid JSON object matching this schema:
                     },
                     "kinetic_action": "buffer_stream"
                 })
-            elif b_id == 5 or any(k in text for k in ["benchmark", "accuracy", "speedup", "gain", "percent", "faster"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "comparative_bars",
-                    "motif_params": {
-                        "title": f"BENCHMARK RESULTS: {topic_title.upper()[:20]}",
-                        "sub": v_focus[:55] or "Empirical evaluation against prior frontier models",
-                        "contender_a_name": f"{topic_title.upper()[:18]} (OURS)",
-                        "contender_a_score": 0.94,
-                        "contender_a_text": "94.0%",
-                        "contender_b_name": "PRIOR BASELINE",
-                        "contender_b_score": 0.54,
-                        "contender_b_text": "54.0%",
-                        "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
-                        "delta_badge_sub": f"Significant efficiency and accuracy milestone"
-                    },
-                    "kinetic_action": "bar_fill"
-                })
+
             else:
                 s1_t = hl_keys[0].upper() if hl_keys else "INPUT STATE"
                 s2_t = svo.get("action_verb", "TRANSFORMATION").upper() + " ENGINE"
@@ -370,8 +455,14 @@ Return ONLY a valid JSON object matching this schema:
         storyboard = self.plan_script_storyboard(spec)
         sb_by_id = {item.get("beat_id"): item for item in storyboard}
 
+        from pipeline.svg_synthesizer import SVGSynthesizer
+        svg_synthesizer = SVGSynthesizer()
+
         for i, b in enumerate(beats):
             b_id = b.get("beat_id", i + 1)
+            if b_id > 5:
+                continue
+
             if b_id in sb_by_id:
                 plan_item = sb_by_id[b_id]
                 b["motif_type"] = plan_item.get("motif_type", "custom_flow")
@@ -379,15 +470,52 @@ Return ONLY a valid JSON object matching this schema:
                 b["kinetic_action"] = plan_item.get("kinetic_action", "pulse")
 
             # If paper figures are available and Beat 3 didn't get paper_figure, assign it!
-            if paper_figures and b_id == 3 and b.get("motif_type") != "paper_figure":
-                b["motif_type"] = "paper_figure"
-                b["motif_params"] = {
-                    "svg_path": paper_figures[0].get("svg_path"),
-                    "title": f"{topic.upper()[:28]} ARCHITECTURE",
-                    "sub": b.get("visual_focus", "")[:55] or "Official architectural diagram from arXiv source",
-                    "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
-                }
-                b["kinetic_action"] = "figure_scan"
+            if paper_figures and b_id == 3:
+                fig_svg = paper_figures[0].get("svg_path")
+                if fig_svg and not os.path.exists(fig_svg):
+                    rel_match = re.search(r"(public/arxiv_cache/.*)", fig_svg)
+                    if rel_match:
+                        local_fig = str(PROJECT_ROOT / rel_match.group(1))
+                        if os.path.exists(local_fig):
+                            fig_svg = local_fig
+                        else:
+                            fig_svg = None
+                    else:
+                        fig_svg = None
+
+                if fig_svg and os.path.exists(fig_svg):
+                    b["motif_type"] = "paper_figure"
+                    b["motif_params"] = {
+                        "svg_path": fig_svg,
+                        "title": f"{topic.upper()[:28]} ARCHITECTURE",
+                        "sub": b.get("visual_focus", "")[:55] or "Official architectural diagram from arXiv source",
+                        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+                    }
+                    b["kinetic_action"] = "figure_scan"
+                else:
+                    b["motif_type"] = "bespoke_svg"
+
+            # Dynamic Bespoke SVG Synthesis:
+            # If the beat is assigned bespoke_svg, OR if it has a physical analogy, OR was defaulting to custom_flow,
+            # synthesize a clean custom vector SVG matching this beat!
+            if b.get("motif_type") in ["bespoke_svg", "dynamic_svg", "custom_flow"]:
+                try:
+                    svg_path = svg_synthesizer.synthesize_beat_svg(b, topic, clean_id, b_id)
+                    if svg_path and svg_path.exists():
+                        b["motif_type"] = "bespoke_svg"
+                        if not b.get("motif_params"):
+                            b["motif_params"] = {}
+                        b["motif_params"]["svg_path"] = str(svg_path)
+                        if not b["motif_params"].get("title"):
+                            b["motif_params"]["title"] = f"{topic.upper()[:24]}: BEAT {b_id}"
+                        if not b["motif_params"].get("sub"):
+                            b["motif_params"]["sub"] = b.get("visual_focus", "")[:55] or "Dynamic vector diagram tailored to narrative beat"
+                        if not b["motif_params"].get("badge_text"):
+                            svo = b.get("svo_action", {})
+                            b["motif_params"]["badge_text"] = f"MECHANISM: {svo.get('subject', 'CORE').upper()[:20]}"
+                        b["kinetic_action"] = "figure_scan"
+                except Exception as e:
+                    print(f"⚠️ Error synthesizing SVG for beat {b_id}: {e}")
 
             print(f"   ✨ Beat {b_id}: Assigned Motif '{b.get('motif_type')}' ({b.get('kinetic_action')})")
 

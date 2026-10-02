@@ -1,0 +1,37 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <g stroke-width="3" fill="none">
+    <!-- Channel 1 Path (Neon Cyan) -->
+    <path d="M 50 150 Q 250 150 550 150" stroke="#38BDF8" stroke-dasharray="10 10"/>
+    <circle cx="100" cy="150" r="8" fill="#38BDF8" filter="url(#glow)"/>
+    <circle cx="200" cy="150" r="8" fill="#38BDF8" filter="url(#glow)"/>
+    
+    <!-- Channel 2 Path (Coral Crimson) -->
+    <path d="M 50 250 Q 250 250 550 250" stroke="#EF4444" stroke-dasharray="10 10"/>
+    <circle cx="120" cy="250" r="8" fill="#EF4444" filter="url(#glow)"/>
+    <circle cx="220" cy="250" r="8" fill="#EF4444" filter="url(#glow)"/>
+
+    <!-- The Barrier (Violet Energy Field) -->
+    <rect x="280" y="100" width="40" height="200" fill="#A855F7" fill-opacity="0.2" stroke="#A855F7" stroke-width="4" rx="5"/>
+    
+    <!-- Deflection Arrows -->
+    <path d="M 270 160 L 250 140 L 270 120" stroke="#38BDF8" stroke-width="2"/>
+    <path d="M 270 240 L 250 260 L 270 280" stroke="#EF4444" stroke-width="2"/>
+    
+    <!-- Particle bleed attempts (faded dots) -->
+    <circle cx="280" cy="160" r="4" fill="#38BDF8" opacity="0.4"/>
+    <circle cx="280" cy="240" r="4" fill="#EF4444" opacity="0.4"/>
+
+    <!-- Grid lines -->
+    <line x1="0" y1="200" x2="600" y2="200" stroke="#475569" stroke-width="1" stroke-dasharray="4 8"/>
+  </g>
+</svg>
