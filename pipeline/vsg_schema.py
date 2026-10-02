@@ -66,10 +66,14 @@ class EasingFunction(str, Enum):
 
 class SFXType(str, Enum):
     WHOOSH = "whoosh"
-    SUB_IMPACT = "sub_impact"
+    POP = "pop"
     CLICK = "click"
+    GLASS_PING = "glass_ping"
+    SUB_IMPACT = "sub_impact"
     LASER_DISPATCH = "laser_dispatch"
+    LASER = "laser"
     CHIME = "chime"
+    BRAND_CHIME = "brand_chime"
     SEVER_SLICE = "sever_slice"
 
 

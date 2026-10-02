@@ -208,85 +208,161 @@ class AcousticForcedAligner:
 
 def generate_kinetic_sfx_cues(
     timing_data: List[Dict[str, Any]],
-    domain_taxonomy: str = "robotics_tamp"
+    domain_taxonomy: str = "robotics_tamp",
+    spec: Optional[Dict[str, Any]] = None
 ) -> List[Dict[str, Any]]:
     """
-    Synthesizes procedurally synchronized SFX cues directly mapped to
-    acoustic word boundaries and kinetic action triggers.
+    Synthesizes procedurally synchronized tactile Foley SFX cues mapped directly to
+    exact visual Manim choreography moments:
+      1. Formula Reveal: Crystalline glass ping when LaTeX snaps into lower tray (t = start + 0.00s)
+      2. Motif Entrance: Air swish/whoosh when central diagram animates in (t = start + 0.35s)
+      3. Progressive Element Pop: Soft bubble/wood pop as nodes/elements draw (t = start + 0.60s)
+      4. Kinetic Action / Keyword: Sub-bass punch, cyber laser, or mechanical clicks on action trigger
+      5. Brand Outro: Signature Model Verse sparkling pentatonic chime & URL click
     """
-    cues = []
-    
-    # Sound type mapping based on domain and semantic roles
+    raw_cues = []
+    total_beats = len(timing_data)
+
+    spec_beats = {}
+    if spec and "beats" in spec:
+        for b in spec["beats"]:
+            spec_beats[b.get("beat_id")] = b
+
     for td in timing_data:
         beat_id = td.get("beat_id", 1)
         beat_start = td.get("start", 0.0)
+        beat_dur = td.get("duration", 5.0)
         word_timings = td.get("word_timings", [])
-        
-        # Beat 1: Hook Impact
-        if beat_id == 1:
-            impact_t = beat_start + 0.40
-            if word_timings and len(word_timings) > 1:
-                impact_t = word_timings[min(1, len(word_timings) - 1)]["frame_ahead_trigger"]
-            cues.append({
-                "timestamp": round(impact_t, 2),
-                "sound_type": "sub_impact",
-                "volume": 0.50,
-                "reason": "hook_impact"
+        b_spec = spec_beats.get(beat_id, {})
+        v_focus = td.get("visual_focus", "") or b_spec.get("visual_focus", "")
+        v_blueprint = b_spec.get("visual_blueprint", {})
+        layout = v_blueprint.get("layout", "")
+
+        is_outro = (beat_id == 6 or beat_id == total_beats or "Follow The Model Verse" in td.get("text", ""))
+
+        if not is_outro:
+            # 1. Formula Reveal: Crystal glass ping when LaTeX snaps into lower tray
+            raw_cues.append({
+                "timestamp": round(beat_start + 0.02, 3),
+                "sound_type": "glass_ping",
+                "volume": 0.28,
+                "reason": f"beat_{beat_id}_formula_snap"
             })
-            
-        # Beat 2: Core Mechanism Reveal / Whoosh
-        elif beat_id == 2:
-            whoosh_t = beat_start + 0.05
-            cues.append({
-                "timestamp": round(whoosh_t, 2),
+
+            # 2. Motif Entrance: Aerodynamic whoosh/swish when diagram enters (after math_time = 0.35s)
+            raw_cues.append({
+                "timestamp": round(beat_start + 0.35, 3),
                 "sound_type": "whoosh",
-                "volume": 0.35,
-                "reason": "mechanism_reveal"
+                "volume": 0.24,
+                "reason": f"beat_{beat_id}_motif_entrance"
             })
-            
-        # Beat 3: Transformation / Laser or Projection
-        elif beat_id == 3:
-            laser_t = beat_start + 0.10
-            # If domain is MoE or Search, use laser
-            s_type = "laser" if domain_taxonomy in ["neural_moe", "algorithmic_search"] else "whoosh"
-            cues.append({
-                "timestamp": round(laser_t, 2),
-                "sound_type": s_type,
-                "volume": 0.38,
-                "reason": "state_transition"
+
+            # 3. Progressive Component Pop: Soft interface pop as nodes/cards draw
+            raw_cues.append({
+                "timestamp": round(beat_start + 0.62, 3),
+                "sound_type": "pop",
+                "volume": 0.22,
+                "reason": f"beat_{beat_id}_entity_pop"
             })
-            
-        # Beat 4: Collision / Pruning / Bottleneck Strike
-        elif beat_id == 4:
-            cues.append({
-                "timestamp": round(beat_start + 0.08, 2),
-                "sound_type": "sub_impact" if domain_taxonomy == "robotics_tamp" else "laser",
-                "volume": 0.42,
-                "reason": "pruning_or_collision_strike"
-            })
-            
-        # Beat 5: Benchmark / Synthesis Resolution
-        elif beat_id == 5:
-            cues.append({
-                "timestamp": round(beat_start + 0.12, 2),
-                "sound_type": "click",
-                "volume": 0.40,
-                "reason": "metric_counter_advance"
-            })
-            
-        # Beat 6: Brand Outro & Chime
-        elif beat_id == 6:
-            cues.append({
-                "timestamp": round(beat_start + 0.05, 2),
+
+            # 4. Focal Kinetic Action / Word Anchor Trigger
+            action_time = round(beat_start + 1.35, 3)
+            # If anchor word exists in word timings, snap to it
+            anchor_word = b_spec.get("anchor_word") or b_spec.get("action_verb")
+            if anchor_word and word_timings:
+                for wt in word_timings:
+                    cw = wt.get("clean_word", "")
+                    if cw and (cw in anchor_word.lower() or anchor_word.lower() in cw):
+                        action_time = round(wt["frame_ahead_trigger"], 3)
+                        break
+
+            # Tailor action sound based on beat archetype & domain
+            if beat_id == 1:
+                # Curiosity Hook Punch
+                raw_cues.append({
+                    "timestamp": action_time,
+                    "sound_type": "sub_impact",
+                    "volume": 0.42,
+                    "reason": "hook_curiosity_punch"
+                })
+            elif beat_id == 2:
+                # Core Mechanism Reveal
+                raw_cues.append({
+                    "timestamp": action_time,
+                    "sound_type": "pop",
+                    "volume": 0.26,
+                    "reason": "mechanism_reveal_pop"
+                })
+            elif beat_id == 3:
+                # Deep Tech Transformation / Streaming
+                s_type = "laser" if domain_taxonomy in ["neural_moe", "algorithmic_search", "neural_attention"] else "whoosh"
+                raw_cues.append({
+                    "timestamp": action_time,
+                    "sound_type": s_type,
+                    "volume": 0.28,
+                    "reason": "state_transformation"
+                })
+            elif beat_id == 4:
+                # Bottleneck / Pruning / Challenge
+                s_type = "sub_impact" if "bottleneck" in v_focus.lower() or "limit" in v_focus.lower() else "click"
+                raw_cues.append({
+                    "timestamp": action_time,
+                    "sound_type": s_type,
+                    "volume": 0.36 if s_type == "sub_impact" else 0.28,
+                    "reason": "bottleneck_or_prune"
+                })
+            elif beat_id == 5:
+                # Benchmark / Metric Payoff: Double mechanical click for metric counter advance
+                raw_cues.append({
+                    "timestamp": action_time,
+                    "sound_type": "click",
+                    "volume": 0.32,
+                    "reason": "metric_counter_tick_1"
+                })
+                raw_cues.append({
+                    "timestamp": round(action_time + 0.14, 3),
+                    "sound_type": "click",
+                    "volume": 0.28,
+                    "reason": "metric_counter_tick_2"
+                })
+
+        else:
+            # 5. Beat 6 (Brand Outro)
+            # Whoosh as chalkboard logo draws
+            raw_cues.append({
+                "timestamp": round(beat_start + 0.25, 3),
                 "sound_type": "whoosh",
-                "volume": 0.35,
-                "reason": "outro_transition"
+                "volume": 0.28,
+                "reason": "outro_logo_draw"
             })
-            cues.append({
-                "timestamp": round(beat_start + 1.15, 2),
-                "sound_type": "chime",
-                "volume": 0.45,
+            # Sparkling Pentatonic Crystal Chime for The Model Verse
+            raw_cues.append({
+                "timestamp": round(beat_start + 0.50, 3),
+                "sound_type": "brand_chime",
+                "volume": 0.44,
                 "reason": "brand_signature_sparkle"
             })
-            
-    return cues
+            # Tactile click as URL / subscribe button slides up
+            raw_cues.append({
+                "timestamp": round(beat_start + 1.25, 3),
+                "sound_type": "click",
+                "volume": 0.26,
+                "reason": "subscribe_cta_click"
+            })
+
+    # Sort cues by timestamp
+    raw_cues.sort(key=lambda x: x["timestamp"])
+
+    # De-duplicate: Ensure at least 60ms gap between identical sounds to prevent comb filtering
+    filtered_cues = []
+    for c in raw_cues:
+        if not filtered_cues:
+            filtered_cues.append(c)
+            continue
+        prev = filtered_cues[-1]
+        dt = c["timestamp"] - prev["timestamp"]
+        if dt < 0.050 and c["sound_type"] == prev["sound_type"]:
+            continue
+        filtered_cues.append(c)
+
+    return filtered_cues
