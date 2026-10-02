@@ -39,16 +39,23 @@ Your job is to craft high-retention, educational short scripts explaining fronti
 Aesthetic & Pedagogical Philosophy (The Feynman & 3Blue1Brown Standard):
 - Explain complex AI through everyday physical intuition: use simple, relatable words that a curious 14-year-old immediately understands.
 - STRICTLY ZERO ACADEMIC JARGON in spoken narration: Never speak words like 'Softmax', 'SwiGLU', 'eigenvectors', 'quadratic matrix explosion', 'residual manifolds', or 'loss landscape'.
-- MANDATORY EVERYDAY ANALOGIES: Ground every abstract mechanism in a tangible real-world comparison (e.g. TV static, a foggy mirror clearing up, spotting shapes in clouds, a sculptor chipping marble, an autocomplete guessing game, a library card catalog).
+- MANDATORY EVERYDAY ANALOGIES: Ground every abstract mechanism in a tangible real-world comparison (e.g. TV static, a foggy mirror clearing up, spotting shapes in clouds, a sculptor chipping marble, an autocomplete guessing game, a library card catalog, a prism bending sunlight).
 - READABILITY & SIMPLICITY (Strict Grade 6-8 Standard):
-  * Use simple 1-to-2 syllable conversational words (e.g. cut, build, test, fix, learn, shape, pick, clean, map, trace).
+  * Use simple 1-to-2 syllable conversational words (e.g. cut, build, test, fix, learn, shape, pick, clean, map, trace, steer).
   * Ban multi-syllable buzzwords: NEVER say 'orchestration', 'competence-aware', 'effectively', 'subsequently', 'multimodal optimization', or 'bootstrapping'.
   * Keep sentences short (average 10-14 words).
-- Auditory-Visual Complementarity: The voiceover carries relatable intuition and metaphors; the chalkboard screen illustrates the clean geometry and mechanical state.
+- DUAL-CADENCE SENTENCE STRUCTURE (Sync with Visual Action):
+  * Every beat should follow a dual-cadence rhythm: [Setup Clause] + [Action Trigger Clause].
+  * The [Action Trigger Clause] contains the `anchor_word` where on-screen physical action fires.
+- Auditory-Visual Complementarity: The voiceover carries relatable intuition and metaphors; the chalkboard screen illustrates the living geometry, physical fields, and mechanical state.
 - Pacing: Exactly 6 beats. Each beat MUST be 20 to 26 words maximum (around 7-9 seconds of natural, conversational speech).
 
-The 6-Beat Narrative Arc:
-1. Beat 1 (Hook / The Everyday Mystery, 0-5s): A curious question or surprising everyday paradox (e.g., why AI starts with pure TV static, or why it lies with 100% confidence).
+The 6-Beat Narrative Arc & Curiosity-Gap Hooks:
+1. Beat 1 (Hook / The Everyday Mystery, 0-5s):
+   Use one of these three Curiosity-Gap Archetypes:
+   - Archetype A (The Paradox): A mind-bending contradiction (e.g. 'Why does your 70-billion parameter model crumble on a 5-year-old's riddle?').
+   - Archetype B (The Scale Shock): A shocking hidden inefficiency (e.g. 'Every single second, your GPU wastes 90% of its memory doing pure busywork.').
+   - Archetype C (The Secret Mechanism): A hidden physical analogy (e.g. 'Inside every modern AI lies a tiny optical trick that nobody talks about.').
 2. Beat 2 (The Relatable Analogy, 5-13s): Anchor the mechanism in a daily-life experience (e.g., staring at clouds to spot a rabbit, or an autocomplete game).
 3. Beat 3 (The Behind-the-Scenes Trick, 13-21s): How scientists taught it this skill using an everyday process (e.g., slowly fogging up a mirror, or practicing on millions of examples).
 4. Beat 4 (The Physical Mechanism, 21-29s): The concrete step-by-step action (e.g., like a sculptor chipping away dust, scraping off unwanted noise layer by layer).
@@ -92,7 +99,17 @@ DYNAMIC VISUAL METAPHOR, SVO TRIPLES & ENTITIES (STRICT REQUIREMENT):
   * `anchor_word`: The exact word in the beat text whose vocalization triggers the visual action.
 DEDICATED FULL-SCREEN VISUAL BLUEPRINTS (CRITICAL ARCHITECTURAL DIRECTIVE):
 - For EACH beat (Beats 1 to 5), you MUST specify a structured `visual_blueprint` dict that dictates what Manim composable layout to render on screen.
-- Choose the layout that DIRECTLY visualizes the spoken analogy and mechanism:
+- Choose the layout that DIRECTLY visualizes the spoken analogy and mechanism.
+- VISUAL ENGINE 5.0 LIVING PHYSICS & GEOMETRIC SIMULATORS (PREFER THESE FOR FRONTIER PAPERS):
+  * "vector_flow_field": For continuous latent trajectories, diffusion denoising drift, flow matching velocity fields, or smooth state-space transitions.
+    params: {"field_title": "...", "source_label": "...", "target_label": "...", "stream_formula": "..."}
+  * "neural_activation_wave": For multi-layer deep network forward passes, cascading synaptic firing, electrical feature propagation, or deep layer activations.
+    params: {"input_label": "...", "hidden_label": "...", "output_label": "..."}
+  * "attention_prism_refraction": For optical token splitting, refracting a dense input embedding into Query/Key/Value vectors, and projecting onto an attention heatmap.
+    params: {"token_label": "...", "matrix_title": "..."}
+  * "optimization_landscape": For 2.5D loss surfaces, energy basins, gradient descent optimization paths, or ball rolling into the global minimum.
+    params: {"landscape_title": "...", "optima_label": "..."}
+- STRUCTURAL & FLOW COMPOSITIONS:
   * "split_flow": For bifurcated paths, dual decoders, splitting high-level semantics from low-level geometry/depth, or 2-way routing.
     params: {"input_label": "...", "router_label": "...", "branch_a_label": "...", "branch_a_sub": "...", "branch_b_label": "...", "branch_b_sub": "..."}
   * "pipeline_stages": For multi-step processing, sequential pipelines, or ingestion -> transformation -> reconstruction.
@@ -170,7 +187,7 @@ Generate the complete JSON specification strictly adhering to this structure:
         "semantic_role": "agent_action | state_transition | causal_elimination | metric_evaluation"
       }},
       "visual_blueprint": {{
-        "layout": "split_flow | pipeline_stages | grid_memory | projection_rays | barrier_separation | tree_hierarchy | layer_stack | convergence_funnel | catalog_routing | comparison_side_by_side",
+        "layout": "vector_flow_field | neural_activation_wave | attention_prism_refraction | optimization_landscape | split_flow | pipeline_stages | grid_memory | projection_rays | barrier_separation | tree_hierarchy | layer_stack | convergence_funnel | catalog_routing | comparison_side_by_side",
         "title": "CLEAR UPPERCASE CONCEPT TITLE",
         "sub": "Concise 1-line description of visual structure",
         "accent_color": "#38BDF8",
@@ -354,6 +371,22 @@ Generate the complete JSON specification strictly adhering to this structure:
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
     spec["id"] = clean_id
+
+    # Guarantee exactly 6 beats (auto-append Beat 6 brand outro if omitted by LLM)
+    if len(spec.get("beats", [])) == 5:
+        spec["beats"].append({
+            "beat_id": 6,
+            "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+            "visual_focus": "Minimalist chalkboard outro with The Model Verse branding.",
+            "highlight_words": {"The Model Verse": "#34D399"},
+            "svo_action": {
+                "subject": "The Model Verse",
+                "action_verb": "demystifies",
+                "direct_object": "Modern AI",
+                "anchor_word": "Model",
+                "semantic_role": "metric_evaluation"
+            }
+        })
 
     # Autonomous Pedagogy & Simplicity Self-Refinement Loop
     try:

@@ -233,7 +233,8 @@ class ScriptDrivenScene(MovingCameraScene):
             print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' (Allotted: {duration:.2f}s)...")
 
             # 1. Update lower math/concept tray
-            self.display_math_formula(beat_id, run_time=0.4)
+            math_time = 0.35
+            self.display_math_formula(beat_id, run_time=math_time)
 
             # Resolve SVG asset for paper_figure or bespoke_svg
             if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
@@ -266,12 +267,15 @@ class ScriptDrivenScene(MovingCameraScene):
             # 2. Instantiate Parameterized Script Motif
             motif = create_script_motif(motif_type, motif_params).move_to([0, 0.4, 0])
 
-            # 3. Entrance: Whole Diagram visible within 1.0s
-            enter_time = min(1.1, duration * 0.25)
-            self.play(FadeIn(motif, scale=0.96), run_time=enter_time)
+            # 3. Entrance: Whole Diagram visible within 1.0s (Progressive Build)
+            enter_time = min(1.0, duration * 0.22)
+            if hasattr(motif, "get_entrance_animation"):
+                self.play(motif.get_entrance_animation(run_time=enter_time))
+            else:
+                self.play(FadeIn(motif, scale=0.96), run_time=enter_time)
 
             # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
-            action_time = min(1.8, duration * 0.35)
+            action_time = min(1.8, duration * 0.32)
             try:
                 if hasattr(motif, "get_kinetic_animation"):
                     self.play(motif.get_kinetic_animation(run_time=action_time))
@@ -308,14 +312,15 @@ class ScriptDrivenScene(MovingCameraScene):
                 self.wait(action_time)
 
             # 5. Continuous 3b1b Camera Breathing & Ambient Micro-Motion (Eliminating Dead Screens)
-            used_time = enter_time + action_time
-            remaining = duration - used_time - 0.4
-            if remaining > 0.1:
+            exit_time = 0.35
+            used_time = math_time + enter_time + action_time + exit_time
+            remaining = max(0.05, duration - used_time)
+            if remaining > 0.05:
                 self.play_ambient_micro_motion(motif, motif_type, remaining)
 
             # 6. Clean Exit & Seamless Camera Reset
-            reset_cam = self.camera.frame.animate(run_time=0.4, rate_func=smooth).set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_cam, run_time=0.4)
+            reset_cam = self.camera.frame.animate(run_time=exit_time, rate_func=smooth).set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
+            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_cam, run_time=exit_time)
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
@@ -324,7 +329,7 @@ class ScriptDrivenScene(MovingCameraScene):
         Applies a gentle 2.5% slow camera push-in and subtle drift,
         coupled with contextual traveling energy pulses across active motif elements.
         """
-        if remaining_time <= 0.1:
+        if remaining_time <= 0.05:
             return
 
         anims = []
@@ -380,9 +385,12 @@ class ScriptDrivenScene(MovingCameraScene):
     def play_brand_outro(self):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
         duration = self.get_beat_duration(6, 4.5)
+        fadeout_math_time = 0.3
         if self.current_formula_mobj:
-            self.play(FadeOut(self.current_formula_mobj), run_time=0.3)
+            self.play(FadeOut(self.current_formula_mobj), run_time=fadeout_math_time)
             self.current_formula_mobj = None
+        else:
+            fadeout_math_time = 0.0
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(
             logo_title="THE MODEL VERSE",
@@ -392,15 +400,19 @@ class ScriptDrivenScene(MovingCameraScene):
         )
         outro_group = VGroup(logo_icon, brand_text, sub)
 
-        self.play(Create(logo_icon), FadeIn(brand_text, shift=UP * 0.2), run_time=1.0)
-        self.play(FadeIn(sub, shift=UP * 0.1), run_time=0.6)
+        intro_logo_time = 0.9
+        intro_sub_time = 0.5
+        exit_time = 0.35
+        self.play(Create(logo_icon), FadeIn(brand_text, shift=UP * 0.2), run_time=intro_logo_time)
+        self.play(FadeIn(sub, shift=UP * 0.1), run_time=intro_sub_time)
 
         # Micro-drift during outro narration & music
-        outro_hold = max(0.5, duration - 2.0)
+        used_so_far = fadeout_math_time + intro_logo_time + intro_sub_time + exit_time
+        outro_hold = max(0.5, duration - used_so_far)
         self.play(
             self.camera.frame.animate(rate_func=linear).scale(0.985).shift(UP * 0.05),
             brand_text.animate(rate_func=there_and_back).set_color("#34D399"),
             logo_icon.animate(rate_func=there_and_back).scale(1.03),
             run_time=outro_hold
         )
-        self.play(FadeOut(outro_group), run_time=0.4)
+        self.play(FadeOut(outro_group), run_time=exit_time)
