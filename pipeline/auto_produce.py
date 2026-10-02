@@ -108,6 +108,20 @@ def auto_produce(
         )
         template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
 
+    # Step 2.3: Extract native arXiv chalkboard-recolored vector figures
+    arxiv_id_to_fetch = spec.get("arxiv_id") or arxiv or (arxiv_meta.get("id") if arxiv_meta else None)
+    if arxiv_id_to_fetch and not spec.get("paper_figures"):
+        spec["arxiv_id"] = arxiv_id_to_fetch
+        try:
+            from pipeline.arxiv_vector_extractor import extract_vector_figures
+            print(f"\n📊 Step 2.3: Extracting native vector figures from arXiv '{arxiv_id_to_fetch}'...")
+            figs = extract_vector_figures(arxiv_id_to_fetch, max_figures=3)
+            if figs:
+                spec["paper_figures"] = figs
+                print(f"   ✅ Extracted {len(figs)} chalkboard-recolored vector diagrams from publication!")
+        except Exception as e:
+            print(f"   ℹ️ arXiv figure extraction notice: {e}")
+
     # Step 2.5: Script Pedagogy & Comprehensibility Audit
     print(f"\n🎙️ Step 2.5: Running Script Pedagogy & Comprehensibility Audit...")
     from pipeline.script_critic import ScriptCritic

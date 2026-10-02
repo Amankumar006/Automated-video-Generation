@@ -139,7 +139,7 @@ class DailyShortsDaemon:
         self.privacy = privacy
         self.critic = ScriptCritic()
 
-    def run_daily_cycle(self, count: int = 1, dry_run: bool = False, publish: bool = True) -> List[Dict[str, Any]]:
+    def run_daily_cycle(self, count: int = 1, dry_run: bool = False, publish: bool = True, target_arxiv: Optional[str] = None) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         print("\n" + "=" * 80)
@@ -154,19 +154,37 @@ class DailyShortsDaemon:
         except Exception as e:
             print(f"   ⚠️ Could not refresh retention ledger: {e}")
 
-        # 1. Fetch & score trending papers
-        print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
-        papers = get_trending_digest(limit=35)
-        unprocessed = [p for p in papers if not p.get("is_processed")]
+        if target_arxiv:
+            print(f"\n🎯 Direct Target Paper Specified: {target_arxiv}")
+            from pipeline.arxiv_fetcher import fetch_arxiv_paper
+            p_data = fetch_arxiv_paper(target_arxiv)
+            if not p_data:
+                print(f"⚠️ Could not fetch metadata for arXiv ID: {target_arxiv}")
+                return []
+            selected_papers = [{
+                "title": p_data["title"],
+                "id": p_data["arxiv_id"],
+                "recommended_category": "mechanism_deepdive",
+                "abstract": p_data.get("abstract", ""),
+                "editorial_notes": {
+                    "recommended_hook": f"How {p_data['title']} works under the hood",
+                    "suggested_everyday_analogy": "Mechanical blueprint breakdown"
+                }
+            }]
+        else:
+            # 1. Fetch & score trending papers
+            print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
+            papers = get_trending_digest(limit=35)
+            unprocessed = [p for p in papers if not p.get("is_processed")]
 
-        if not unprocessed:
-            print("ℹ️ All trending papers for today have already been produced. Daily quota satisfied.")
-            return []
+            if not unprocessed:
+                print("ℹ️ All trending papers for today have already been produced. Daily quota satisfied.")
+                return []
 
-        print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
+            print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
 
-        # 2. Select top diverse candidates using pedagogical viability filter
-        selected_papers = evaluate_pedagogical_viability(unprocessed, count=count)
+            # 2. Select top diverse candidates using pedagogical viability filter
+            selected_papers = evaluate_pedagogical_viability(unprocessed, count=count)
         print(f"\n🏆 Selected {len(selected_papers)} Breakthrough Papers for Today's Reels Quota:")
         for idx, p in enumerate(selected_papers):
             notes = p.get("editorial_notes", {})
@@ -300,17 +318,18 @@ def main():
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--quality", default="-qh", help="Render quality (default: -qh 60fps)")
+    parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
     args = parser.parse_args()
 
     daemon = DailyShortsDaemon(quality=args.quality, privacy=args.privacy)
 
     if args.dry_run:
-        daemon.run_daily_cycle(count=args.count, dry_run=True, publish=False)
+        daemon.run_daily_cycle(count=args.count, dry_run=True, publish=False, target_arxiv=args.arxiv or None)
     elif args.daemon:
         daemon.start_standing_daemon()
     else:
         # Default to running cycle with specified count
-        daemon.run_daily_cycle(count=args.count, dry_run=False, publish=True)
+        daemon.run_daily_cycle(count=args.count, dry_run=False, publish=True, target_arxiv=args.arxiv or None)
 
 
 if __name__ == "__main__":

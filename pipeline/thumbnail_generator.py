@@ -373,12 +373,28 @@ class ShortsThumbnailGenerator:
         if not svg_filename:
             formulas = spec.get("math_formulas", [])
             if formulas:
-                # Pick the first valid formula svg that exists on disk
+                # 1. Pick the first valid formula svg that already exists on disk
                 for f_info in formulas:
-                    fn = f_info.get("filename", "")
+                    fn = f_info.get("filename") or f_info.get("svg_filename") or ""
                     if fn and (PROJECT_ROOT / "public" / "math_svgs" / fn).exists():
                         svg_filename = fn
                         break
+
+                # 2. If not yet rendered on disk, dynamically render the paper's primary formula on-the-fly!
+                if not svg_filename:
+                    for f_info in formulas:
+                        latex_str = f_info.get("latex", "")
+                        target_fn = f_info.get("filename") or f_info.get("svg_filename") or f"{clean_id}_thumb_formula.svg"
+                        if latex_str:
+                            try:
+                                from scripts.generate_math_svgs import render_math_to_svg
+                                render_math_to_svg(latex_str, target_fn, fontsize=24)
+                                if (PROJECT_ROOT / "public" / "math_svgs" / target_fn).exists():
+                                    svg_filename = target_fn
+                                    break
+                            except Exception as e:
+                                print(f"⚠️ Thumbnail on-the-fly math render failed: {e}")
+
         if not svg_filename:
             svg_filename = profile.get("default_svg")
 

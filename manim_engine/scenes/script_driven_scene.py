@@ -127,8 +127,18 @@ class ScriptDrivenScene(Scene):
         tray_group = VGroup()
         if matching_formula:
             # Check for pre-rendered SVG math
-            svg_filename = matching_formula.get("svg_filename", "")
+            svg_filename = matching_formula.get("svg_filename") or matching_formula.get("filename") or ""
             svg_path = PROJECT_ROOT / "public" / "math_svgs" / svg_filename if svg_filename else None
+
+            # Render on-the-fly via matplotlib mathtext if file is missing from disk
+            if svg_filename and (not svg_path or not svg_path.exists()):
+                latex_code = matching_formula.get("latex", "")
+                if latex_code:
+                    try:
+                        from scripts.generate_math_svgs import render_math_to_svg
+                        render_math_to_svg(latex_code, svg_filename, fontsize=matching_formula.get("fontsize", 24))
+                    except Exception as e:
+                        print(f"⚠️ On-the-fly math SVG generation failed: {e}")
 
             if svg_path and svg_path.exists():
                 try:
@@ -225,6 +235,22 @@ class ScriptDrivenScene(Scene):
             # 1. Update lower math/concept tray
             self.display_math_formula(beat_id, run_time=0.4)
 
+            # Resolve paper figure SVG if paper_figure motif requested
+            if motif_type == "paper_figure":
+                if not motif_params.get("svg_path"):
+                    if b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
+                        motif_params["svg_path"] = b.get("paper_figure_path")
+                    elif self.spec.get("paper_figures"):
+                        motif_params["svg_path"] = self.spec["paper_figures"][0].get("svg_path")
+                    elif self.spec.get("arxiv_id"):
+                        try:
+                            from pipeline.arxiv_vector_extractor import get_paper_vector_figure
+                            fig_path = get_paper_vector_figure(self.spec.get("arxiv_id"))
+                            if fig_path:
+                                motif_params["svg_path"] = fig_path
+                        except Exception:
+                            pass
+
             # 2. Instantiate Parameterized Script Motif
             motif = create_script_motif(motif_type, motif_params).move_to([0, 0.4, 0])
 
@@ -235,7 +261,9 @@ class ScriptDrivenScene(Scene):
             # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
             action_time = min(1.8, duration * 0.35)
             try:
-                if motif_type == "radio_tuner" and hasattr(motif, "needle"):
+                if motif_type == "paper_figure" and hasattr(motif, "frame"):
+                    self.play(motif.frame.animate.set_stroke(color="#38BDF8", width=3.0), motif.badge.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
+                elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
                     self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
                     self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
                 elif motif_type == "wave_collision" and hasattr(motif, "wave_c"):

@@ -48,6 +48,9 @@ def _render_draft_video(
     Renders a -ql draft video from the given spec via a subprocess Manim call.
     Returns path to the rendered MP4, or None on failure.
     """
+    scene_file = spec.get("scene_file", scene_file)
+    scene_class = spec.get("scene_class", scene_class)
+
     with open(tmp_spec_path, "w", encoding="utf-8") as f:
         json.dump(spec, f, indent=2)
 
@@ -58,6 +61,7 @@ def _render_draft_video(
     cmd = [
         sys.executable, "-m", "manim",
         "-ql",
+        "-r", "480,854",
         scene_file,
         scene_class
     ]
@@ -79,13 +83,18 @@ def _render_draft_video(
                 if cand.exists():
                     return str(cand)
 
-    for sub_dir in ["script_driven_scene", "dynamic_scene"]:
+    scene_stem = Path(scene_file).stem
+    candidate_dirs = [scene_stem] + [d for d in ["script_driven_scene", "dynamic_scene"] if d != scene_stem]
+    all_candidates = []
+    for sub_dir in candidate_dirs:
         out_dir = PROJECT_ROOT / "media" / "videos" / sub_dir
         if out_dir.exists():
-            candidates = sorted(out_dir.glob("**/*.mp4"), key=lambda p: p.stat().st_mtime, reverse=True)
-            for c in candidates:
+            for c in out_dir.glob("**/*.mp4"):
                 if "partial_movie_files" not in str(c):
-                    return str(c)
+                    all_candidates.append(c)
+    if all_candidates:
+        all_candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+        return str(all_candidates[0])
     return None
 
 
