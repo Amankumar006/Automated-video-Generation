@@ -48,20 +48,33 @@ class CoupledCanvas(VGroup):
             stroke_opacity=0.6
         )
 
-        # Organic manifold labels floating on chalkboard
-        self.discrete_label = Text(
-            "S_discrete : Symbolic Task Plan",
-            font=FONT_HELVETICA,
-            font_size=13,
-            color="#94A3B8"
-        ).move_to([-0.8, ty_max - 0.25, 0])
+        # Pane 1: Discrete Task Space Pill Badge (aligned at x = -2.0)
+        d_text = Text("TASK SPACE: DISCRETE LOGIC", font=FONT_HELVETICA, font_size=11, color="#38BDF8", weight=BOLD)
+        d_bg = RoundedRectangle(
+            corner_radius=0.08,
+            width=d_text.width + 0.36,
+            height=0.38,
+            color="#38BDF8",
+            fill_color="#0A0D14",
+            fill_opacity=0.95,
+            stroke_width=1.2
+        )
+        d_text.move_to(d_bg)
+        self.discrete_label = VGroup(d_bg, d_text).move_to([-2.0, ty_max - 0.32, 0])
 
-        self.continuous_label = Text(
-            "C-Space : Continuous Configuration Manifold",
-            font=FONT_HELVETICA,
-            font_size=13,
-            color="#34D399"
-        ).move_to([-0.3, mid_y - 0.25, 0])
+        # Pane 2: Continuous C-Space Pill Badge (aligned at x = -2.0, completely clear of beam flight path)
+        c_text = Text("C-SPACE: KINEMATICS", font=FONT_HELVETICA, font_size=11, color="#34D399", weight=BOLD)
+        c_bg = RoundedRectangle(
+            corner_radius=0.08,
+            width=c_text.width + 0.36,
+            height=0.38,
+            color="#10B981",
+            fill_color="#0A0D14",
+            fill_opacity=0.95,
+            stroke_width=1.2
+        )
+        c_text.move_to(c_bg)
+        self.continuous_label = VGroup(c_bg, c_text).move_to([-2.0, mid_y - 0.32, 0])
 
         # Coordinate Grid inside continuous pane (floating without box)
         self.continuous_axes = Axes(
@@ -219,8 +232,8 @@ class GeometricRefinementPulse:
         witness_badge = Text("q_coll: INFEASIBLE", font=FONT_HELVETICA, font_size=10, color="#FECDD3", weight=BOLD)
         witness_card = RoundedRectangle(
             width=1.9, height=0.35, corner_radius=0.08,
-            color=COLOR_DANGER, fill_color="#450A0A", fill_opacity=0.9
-        ).move_to(collision_point + UP * 0.38)
+            color=COLOR_DANGER, fill_color="#450A0A", fill_opacity=0.95
+        ).move_to(collision_point + UP * 0.78)
         witness_badge.move_to(witness_card)
         witness = VGroup(witness_card, witness_badge)
 

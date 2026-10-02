@@ -294,8 +294,18 @@ class DynamicCompositeScene(Scene):
             base_point=[-1.2, -3.2, 0], link_lengths=[1.5, 1.2],
             joint_angles=[0.4, 0.8], color="#38BDF8"
         )
-        arm = self.apply_layout_patch(arm, "robot_arm", 1)
-        task_predicate = Text("TASK: ∃ q ∈ C_free . Reach(q, Goal)", font="Courier", font_size=11, color="#94A3B8").move_to([0, 3.2, 0])
+        tp_text = Text("TASK: ∃ q ∈ C_free . Reach(q, Goal)", font="Courier", font_size=10, color="#94A3B8")
+        tp_bg = RoundedRectangle(
+            corner_radius=0.08,
+            width=tp_text.width + 0.36,
+            height=0.36,
+            color="#334155",
+            fill_color="#0A0D14",
+            fill_opacity=0.92,
+            stroke_width=1.0
+        )
+        tp_text.move_to(tp_bg)
+        task_predicate = VGroup(tp_bg, tp_text).move_to([0, 3.2, 0])
         node_init = CoupledNode(title="Action a_0", symbol="a_0", status="active").move_to([0, 2.0, 0])
         sheaf_init = ConstraintProjectionSheaf(
             coupled_node=node_init,
@@ -356,7 +366,18 @@ class DynamicCompositeScene(Scene):
         )
         
         ast_tree = ASTMorphTree(scale=0.75).move_to([0.0, 2.35, 0])
-        tree_label = Text("SYNTHESIZED CODE AST POLICY", font_size=11, font="Helvetica", color="#38BDF8", weight=BOLD).next_to(ast_tree, UP, buff=0.15)
+        tl_text = Text("SYNTHESIZED CODE AST POLICY", font_size=10, font="Helvetica", color="#38BDF8", weight=BOLD)
+        tl_bg = RoundedRectangle(
+            corner_radius=0.08,
+            width=tl_text.width + 0.36,
+            height=0.34,
+            color="#0284C7",
+            fill_color="#0A0D14",
+            fill_opacity=0.95,
+            stroke_width=1.2
+        )
+        tl_text.move_to(tl_bg)
+        tree_label = VGroup(tl_bg, tl_text).next_to(ast_tree, UP, buff=0.15)
         main_fig_mobj = VGroup(ast_tree, tree_label)
         main_fig_mobj = self.apply_layout_patch(main_fig_mobj, "ast_tree", 3)
         

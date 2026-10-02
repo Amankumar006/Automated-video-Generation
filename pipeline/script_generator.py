@@ -383,18 +383,30 @@ Return ONLY valid JSON matching this schema:
     except Exception as e:
         print(f"⚠️ Warning: Could not enrich spec with VSG schema: {e}")
 
-    # Auto-generate LaTeX SVGs
+    # Auto-generate LaTeX SVGs with topic-scoped unique filenames
     print(f"📐 Auto-synthesizing {len(spec.get('math_formulas', []))} LaTeX mathematical SVGs...")
     for f in spec.get("math_formulas", []):
         latex = f.get("latex", "")
-        fname = f.get("filename", "formula.svg")
+        orig_fname = f.get("filename") or f.get("svg_filename") or ""
+        bid = f.get("beat_id", 1)
+        # Ensure filename is uniquely scoped to this paper ID to prevent cross-paper collisions
+        generic_names = {"formula.svg", "beat1_scale.svg", "beat2_bottleneck.svg", "beat3_architecture.svg", "beat4_mechanism.svg", "beat5_payoff.svg"}
+        if not orig_fname or orig_fname in generic_names or not orig_fname.startswith(clean_id):
+            clean_fname = f"{clean_id}_beat{bid}_formula.svg"
+        else:
+            clean_fname = orig_fname
+
+        # Set BOTH keys so every consumer resolves the file unambiguously
+        f["filename"] = clean_fname
+        f["svg_filename"] = clean_fname
+
         fontsize = f.get("fontsize", 26)
         color = f.get("color", "white")
-        if latex and fname:
+        if latex and clean_fname:
             try:
-                render_math_to_svg(latex, fname, fontsize=fontsize, color=color)
+                render_math_to_svg(latex, clean_fname, fontsize=fontsize, color=color)
             except Exception as e:
-                print(f"⚠️ Warning: Could not render math SVG '{fname}': {e}")
+                print(f"⚠️ Warning: Could not render math SVG '{clean_fname}': {e}")
 
     # Save to templates directory
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"

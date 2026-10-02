@@ -47,40 +47,44 @@ class ASTMorphTree(VGroup):
             self.scale(scale_val)
 
     def _get_node_shape(self, node_type: str, label: str) -> VGroup:
-        """Morphological shape selector based on syntax grammar."""
-        if node_type == "ControlFlow":  # Hexagon
-            shape = RegularPolygon(
-                n=6, radius=0.40, color="#F59E0B", stroke_width=1.5,
-                fill_color="#451A03", fill_opacity=0.88
-            )
-        elif node_type == "Function":   # Rounded Pill
-            shape = RoundedRectangle(
-                width=1.5, height=0.50, corner_radius=0.10,
-                color="#38BDF8", stroke_width=1.5,
-                fill_color="#082F49", fill_opacity=0.88
-            )
-        elif node_type == "Condition":  # Diamond
-            shape = RegularPolygon(
-                n=4, radius=0.38, color="#A855F7", stroke_width=1.5,
-                fill_color="#3B0764", fill_opacity=0.88
-            ).rotate(PI / 4)
-        elif node_type == "Hole":       # Dashed Circle for Unfilled Spec
-            shape = Circle(
-                radius=0.35, color="#E2E8F0", stroke_width=1.8,
-                fill_color="#0A0D14", fill_opacity=0.95
-            )
-        else:                           # Default Primitive Block
-            shape = RoundedRectangle(
-                width=1.3, height=0.45, corner_radius=0.08,
-                color="#10B981", stroke_width=1.5,
-                fill_color="#064E3B", fill_opacity=0.88
-            )
+        """Morphological shape selector based on syntax grammar with pristine typography."""
+        font_name = FONT_HELVETICA if "FONT_HELVETICA" in globals() else "Helvetica"
+        
+        # Color theme and syntax tag per node type
+        if node_type == "ControlFlow":
+            border_col = "#F59E0B"
+            fill_col = "#451A03"
+            tag = "loop"
+        elif node_type == "Function":
+            border_col = "#38BDF8"
+            fill_col = "#082F49"
+            tag = "fn"
+        elif node_type == "Condition":
+            border_col = "#A855F7"
+            fill_col = "#3B0764"
+            tag = "if"
+        elif node_type in ("Hole", "SketchHole"):
+            border_col = "#FB7185"
+            fill_col = "#4C0519"
+            tag = "?"
+        else:  # Action / Block
+            border_col = "#10B981"
+            fill_col = "#064E3B"
+            tag = "act"
 
-        txt = Text(label, font=FONT_HELVETICA if "FONT_HELVETICA" in globals() else "Helvetica", font_size=11, color=WHITE, weight=BOLD).move_to(shape)
-        max_w = shape.width * 0.85
-        if txt.width > max_w:
-            txt.scale_to_fit_width(max_w)
-        return VGroup(shape, txt)
+        txt = Text(label, font=font_name, font_size=12, color=WHITE, weight=BOLD)
+        tag_txt = Text(f"[{tag}]", font=font_name, font_size=9, color=border_col, weight=BOLD)
+        
+        card_w = max(1.75, txt.width + tag_txt.width + 0.45)
+        card_h = 0.48
+        card = RoundedRectangle(
+            width=card_w, height=card_h, corner_radius=0.10,
+            color=border_col, stroke_width=1.5,
+            fill_color=fill_col, fill_opacity=0.92
+        )
+        
+        content = VGroup(tag_txt, txt).arrange(RIGHT, buff=0.10).move_to(card)
+        return VGroup(card, content)
 
     def _build_tree(self, node_data: dict, curr_pos: np.ndarray, h_spacing: float, v_spacing: float):
         node_id = node_data["id"]
