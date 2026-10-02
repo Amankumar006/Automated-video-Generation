@@ -1,0 +1,404 @@
+{
+  "id": "memorizon_world_models",
+  "title": "Memorizon: Training World Models Beyond Their Context Window",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "MEMORY ARCHITECTURE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How can an AI recall a spot it saw just now without using up all its energy on each tiny, small, fast image?",
+      "visual_focus": "A camera moving through a long corridor with flickering memory fragments.",
+      "highlight_words": {
+        "brain power": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "World Model",
+        "action_verb": "drains",
+        "direct_object": "Context Window Capacity",
+        "anchor_word": "power",
+        "semantic_role": "causal_elimination"
+      },
+      "visual_blueprint": {
+        "layout": "pipeline_stages",
+        "title": "THE MEMORY PARADOX",
+        "sub": "Comparing long-span vision vs compute constraints",
+        "accent_color": "#EF4444",
+        "params": {
+          "stage_1_label": "Long History",
+          "stage_1_sub": "Minutes of video",
+          "stage_2_label": "Quadratic Cost",
+          "stage_2_sub": "Attention explosion",
+          "stage_3_label": "Model Crash",
+          "stage_3_sub": "System overload"
+        }
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of a library where you do not read each book, you just pick key notes from a shared desk for your big task.",
+      "visual_focus": "A bustling library with cards floating from shelves into a central index desk.",
+      "highlight_words": {
+        "library": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Retrieval Engine",
+        "action_verb": "fetches",
+        "direct_object": "Key Frame Latents",
+        "anchor_word": "cards",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "catalog_routing",
+        "title": "INDEXED RETRIEVAL",
+        "sub": "Accessing memory without reading full sequence",
+        "accent_color": "#38BDF8",
+        "params": {
+          "index_label": "Active Memory Bank",
+          "drawer_a_label": "Recent",
+          "drawer_b_label": "Shared",
+          "drawer_c_label": "Previous"
+        }
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "We teach the bot to hold just the last few parts, making a small stack of key shots from each path it takes.",
+      "visual_focus": "A stream of video frames being condensed into tiny, glowing data squares.",
+      "highlight_words": {
+        "snapshots": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Training Loop",
+        "action_verb": "compresses",
+        "direct_object": "Temporal History",
+        "anchor_word": "snapshots",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "SNAPSHOT CONDENSATION",
+        "sub": "Merging long timelines into sparse storage",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "Chunk A",
+          "input_2_label": "Chunk B",
+          "input_3_label": "Chunk C",
+          "fused_label": "Shared Bank"
+        }
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "The bot uses views to link these parts, like a sculptor who wipes off the clay to keep only the main, strong form.",
+      "visual_focus": "Light rays connecting two distant points in a 3D scene, discarding surrounding haze.",
+      "highlight_words": {
+        "sight-lines": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Attention Gate",
+        "action_verb": "projects",
+        "direct_object": "Co-Visible Latents",
+        "anchor_word": "sight-lines",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "projection_rays",
+        "title": "GEOMETRIC ALIGNMENT",
+        "sub": "Linking revisits through camera perspective",
+        "accent_color": "#F59E0B",
+        "params": {
+          "camera_label": "Revisit Camera",
+          "focal_plane_label": "Common Viewpoint",
+          "target_label": "Shared Latent"
+        }
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "Now, the bot stays sharp for a long time. It keeps things clear while the cost stays low for any length of trip.",
+      "visual_focus": "A cost graph showing a sharp spike for old methods and a flat line for the new model.",
+      "highlight_words": {
+        "consistency": "#34D399"
+      },
+      "svo_action": {
+        "subject": "System Latency",
+        "action_verb": "stabilizes",
+        "direct_object": "Compute Load",
+        "anchor_word": "flat",
+        "semantic_role": "metric_evaluation"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "COST VS PERFORMANCE",
+        "sub": "Memorizon vs Standard Sliding Window",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "Sliding Window",
+          "col_a_stat": "High Cost",
+          "col_b_title": "Memorizon",
+          "col_b_stat": "Flat Cost"
+        }
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for easy chats on how our new tech works in a way that makes sense for you each day.",
+      "visual_focus": "Logo overlay of The Model Verse with a clean, fading background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI Mechanisms",
+        "anchor_word": "explanations",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE MODEL VERSE",
+        "sub": "Simplified frontier AI",
+        "accent_color": "#FFFFFF",
+        "params": {
+          "bottom_layer": "Architecture",
+          "mid_layer": "Training",
+          "top_layer": "Insight"
+        }
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$L = T_{total} / T_{chunk}$",
+      "filename": "memorizon_world_models_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "L",
+          "label": "Sequence Length"
+        },
+        {
+          "term": "T",
+          "label": "Time Duration"
+        }
+      ],
+      "svg_filename": "memorizon_world_models_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathrm{Bank} = \\{K_1, K_2, \\dots, K_{kK}\\}$",
+      "filename": "memorizon_world_models_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "K",
+          "label": "Top-K Latents"
+        }
+      ],
+      "svg_filename": "memorizon_world_models_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$C = S \\times k$",
+      "filename": "memorizon_world_models_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "C",
+          "label": "Compute Cost"
+        },
+        {
+          "term": "k",
+          "label": "Scored Chunks"
+        }
+      ],
+      "svg_filename": "memorizon_world_models_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Score} = \\mathrm{Visibility}(v_1, v_2)$",
+      "filename": "memorizon_world_models_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "v",
+          "label": "Visit Frames"
+        }
+      ],
+      "svg_filename": "memorizon_world_models_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\mathrm{Time} = +12\\% \\text{ per } 300\\mathrm{s}$",
+      "filename": "memorizon_world_models_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta",
+          "label": "Delta Step Time"
+        }
+      ],
+      "svg_filename": "memorizon_world_models_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Memory",
+          "color": "#38BDF8",
+          "items": [
+            "bank",
+            "index",
+            "storage"
+          ]
+        },
+        {
+          "name": "Compute",
+          "color": "#10B981",
+          "items": [
+            "chunks",
+            "speed",
+            "steps"
+          ]
+        },
+        {
+          "name": "Vision",
+          "color": "#F59E0B",
+          "items": [
+            "frames",
+            "sight",
+            "views"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"revisit\"",
+        "target_cluster": "Vision",
+        "token": "\"revisit\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'full-span'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'quad-cost'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Memorizon",
+    "model_a_specs": [
+      "Bounded Bank",
+      "Sparse Retrieval",
+      "Fixed Compute"
+    ],
+    "model_b": "Sliding Window",
+    "model_b_specs": [
+      "Dense Attention",
+      "Quadratic Scaling",
+      "Heavy Compute"
+    ],
+    "divide_title": "MEMORY ARCHITECTURE DIVIDE",
+    "model_a_stat": "30%",
+    "model_a_stat_label": "REVISIT CONSISTENCY GAIN",
+    "model_b_stat": "4x",
+    "model_b_stat_label": "COMPUTE PENALTY",
+    "efficiency_badge": "\u26a1 12% STEP OVERHEAD",
+    "benchmarks": [
+      {
+        "name": "Revisit Accuracy",
+        "score_a": "High",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Step Time",
+        "score_a": "Stable",
+        "score_b": "Explosive"
+      },
+      {
+        "name": "Context Length",
+        "score_a": "Infinite",
+        "score_b": "Limited"
+      }
+    ],
+    "scale_metric": "30%",
+    "scale_label": "Revisit Correlation",
+    "bottleneck_title": "QUADRATIC ATTENTION EXPLOSION",
+    "bottleneck_desc": "Full-span dependencies cause training slowdowns.",
+    "solution_title": "SPARSE BANK RETRIEVAL",
+    "solution_components": "Shared memory across disparate temporal windows.",
+    "mechanism_title": "CO-VISIBILITY INDEXING",
+    "payoff_stat": "30%",
+    "payoff_label": "CONSISTENCY GAIN",
+    "payoff_sub": "Stable training for long video spans",
+    "payoff_hero_stat": 30.0,
+    "payoff_hero_label": "Revisit Correlation",
+    "payoff_base_stat": 83.0,
+    "payoff_base_label": "Random Retrieval",
+    "payoff_delta_badge": "\u26a1 +30% CONSISTENCY IMPROVEMENT",
+    "challenger": "Memorizon",
+    "incumbent": "Sliding Window Baseline"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

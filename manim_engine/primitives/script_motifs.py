@@ -682,13 +682,30 @@ MOTIF_REGISTRY = {
 def create_script_motif(motif_type: str, params: Optional[Dict[str, Any]] = None) -> VGroup:
     """
     Factory function to instantiate any script motif with provided parameters.
-    Falls back gracefully to ScriptCustomFlow if unknown.
+    Seamlessly routes visual blueprint layouts to composable Manim primitives.
     """
-    cls = MOTIF_REGISTRY.get(motif_type, ScriptCustomFlow)
+    from manim_engine.primitives.visual_compositions import (
+        BLUEPRINT_COMPOSITION_REGISTRY,
+        create_blueprint_composition
+    )
+
     clean_params = params or {}
+
+    # 1. Composable Visual Blueprint Routing (Visual Engine 4.0)
+    if motif_type == "visual_composition":
+        layout = clean_params.get("layout", "pipeline_stages")
+        return create_blueprint_composition(layout, clean_params)
+    elif motif_type in BLUEPRINT_COMPOSITION_REGISTRY:
+        return create_blueprint_composition(motif_type, clean_params)
+
+    # 2. Legacy / Standard Motifs (Paper Figure, Comparative Bars, etc.)
+    cls = MOTIF_REGISTRY.get(motif_type, ScriptCustomFlow)
     try:
         return cls(**clean_params)
     except Exception as e:
-        print(f"⚠️ Error creating motif '{motif_type}': {e}. Falling back to default.")
-        return cls()
+        print(f"⚠️ Error creating motif '{motif_type}': {e}. Falling back to composable pipeline.")
+        try:
+            return create_blueprint_composition("pipeline_stages", clean_params)
+        except Exception:
+            return ScriptCustomFlow()
 

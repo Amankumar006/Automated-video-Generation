@@ -267,7 +267,9 @@ class ScriptDrivenScene(MovingCameraScene):
             # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
             action_time = min(1.8, duration * 0.35)
             try:
-                if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "fig_mobj") and motif.fig_mobj:
+                if hasattr(motif, "get_kinetic_animation"):
+                    self.play(motif.get_kinetic_animation(run_time=action_time))
+                elif motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "fig_mobj") and motif.fig_mobj:
                     self.play(motif.fig_mobj.animate.scale(1.03), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
                     self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
@@ -328,7 +330,9 @@ class ScriptDrivenScene(MovingCameraScene):
 
         # 2. Contextual Traveling Energy & Shimmer on the Active Motif
         try:
-            if motif_type == "wave_collision" and hasattr(motif, "wave_c"):
+            if hasattr(motif, "get_ambient_animation"):
+                anims.append(motif.get_ambient_animation(run_time=remaining_time))
+            elif motif_type == "wave_collision" and hasattr(motif, "wave_c"):
                 anims.append(motif.wave_c.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=5.8, color="#F43F5E"))
             elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
                 anims.append(motif.needle.animate(rate_func=there_and_back, run_time=remaining_time).shift(RIGHT * 0.18))
