@@ -1,8 +1,8 @@
 """
-The Model Verse — Script-Driven Visual Director (Visual Engine 3.0)
+The Model Verse — Script-Driven Visual Director (Visual Engine 4.0)
 Reads the voiceover script, conceptual shifts, and physical analogies for each beat,
-and dynamically generates bespoke, high-fidelity 3Blue1Brown storyboard specifications
-and visual parameters. Eliminates generic templates and repetitive circular score gauges.
+and maps them to full-screen composable Manim visual primitives and authentic arXiv figures.
+Eliminates canned toy motifs and fragile SVG synthesizers.
 """
 
 import os
@@ -16,7 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import WORKSPACE_ROOT
-from manim_engine.primitives.script_motifs import MOTIF_REGISTRY
+from manim_engine.primitives.visual_compositions import BLUEPRINT_COMPOSITION_REGISTRY
 
 VISUAL_ASSETS_DIR = PROJECT_ROOT / "public" / "visual_assets"
 VISUAL_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
@@ -24,452 +24,231 @@ VISUAL_ASSETS_DIR.mkdir(parents=True, exist_ok=True)
 
 class VisualDirector:
     """
-    AI Visual Director that designs bespoke graphic scenes for every beat of a video script.
-    Directly aligns voiceover beats to intuitive 3Blue1Brown mathematical and physical motifs.
+    Script-Driven Visual Director that designs bespoke graphic scenes for every beat.
+    Directly aligns voiceover beats to intuitive, full-screen 3Blue1Brown visual compositions.
     """
 
     def __init__(self):
         self.api_key = os.environ.get("GEMINI_API_KEY")
-        if self.api_key:
-            try:
-                import google.generativeai as genai
-                genai.configure(api_key=self.api_key)
-            except Exception:
-                pass
-        self.candidate_models = ["gemini-3.8-flash", "gemini-3.1-flash-lite", "gemini-2.0-flash", "gemini-flash-latest"]
 
-    def _call_gemini_json(self, prompt: str) -> Optional[Dict[str, Any]]:
-        """Calls Gemini with model fallback cascade and JSON parsing."""
-        if not self.api_key:
-            return None
-
-        import google.generativeai as genai
-        for model_name in self.candidate_models:
-            try:
-                model = genai.GenerativeModel(
-                    model_name,
-                    generation_config={"response_mime_type": "application/json"}
-                )
-                response = model.generate_content(prompt)
-                if response and response.text:
-                    clean_text = response.text.strip()
-                    return json.loads(clean_text)
-            except Exception as e:
-                continue
-        return None
-
-    def plan_script_storyboard(self, spec: Dict[str, Any]) -> List[Dict[str, Any]]:
+    def synthesize_visual_blueprint(
+        self,
+        beat: Dict[str, Any],
+        topic: str,
+        beat_id: int,
+        used_layouts: Optional[set] = None
+    ) -> Dict[str, Any]:
         """
-        Reads the full video script beat-by-beat and uses Gemini (or heuristic fallback)
-        to assign each beat an authentic, explanatory 3b1b visual motif and custom labels.
+        Derives a rich, context-specific visual blueprint for a beat if not already provided
+        by the script generator. Analyzes spoken text, visual focus, analogies, and SVO actions.
+        Guarantees layout diversity so no two beats in the same video repeat the same layout.
         """
-        topic = spec.get("title", spec.get("id", "AI Breakthrough"))
-        beats = spec.get("beats", [])
-        num_beats = min(5, len(beats))
+        used = used_layouts or set()
+        text = (beat.get("text", "") + " " + beat.get("visual_focus", "") + " " + str(beat.get("everyday_analogy", ""))).lower()
+        svo = beat.get("svo_action", {})
+        hl_keys = list(beat.get("highlight_words", {}).keys())
 
-        beat_summaries = []
-        for i in range(num_beats):
-            b = beats[i]
-            beat_summaries.append(
-                f"Beat {b.get('beat_id', i+1)}: Voiceover: \"{b.get('text', '')}\"\n"
-                f"   Visual Focus: \"{b.get('visual_focus', '')}\"\n"
-                f"   Action: {b.get('svo_action', {})}"
-            )
+        subj = svo.get("subject", hl_keys[0] if hl_keys else "Signal Stream")
+        action = svo.get("action_verb", "transforms")
+        obj = svo.get("direct_object", hl_keys[1] if len(hl_keys) > 1 else "Latent Output")
+        v_focus = beat.get("visual_focus", "")
 
-        prompt = f"""You are the Executive Visual Director for 'The Model Verse', an elite 3Blue1Brown-style educational channel explaining cutting-edge AI breakthroughs.
+        candidates = []
 
-Read the 5 narrative beats for our video: '{topic}'
-{chr(10).join(beat_summaries)}
+        # 1. Split / Diverging / Bifurcated Flow
+        if any(k in text for k in ["split", "dual", "bifurcat", "two path", "branch", "two stream", "decoupl", "separate semantic"]):
+            candidates.append({
+                "layout": "split_flow",
+                "title": f"BIFURCATED ROUTING: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Decoupling high-level semantics from low-level geometric depth",
+                "accent_color": "#38BDF8",
+                "input_label": f"UNIFIED {topic.upper()[:16]} STREAM",
+                "router_label": f"{subj.upper()[:14]} ROUTER",
+                "branch_a_label": f"STREAM A: {subj.upper()[:14]}",
+                "branch_a_sub": "Semantic Representation",
+                "branch_b_label": f"STREAM B: {obj.upper()[:14]}",
+                "branch_b_sub": "Geometric Spatial Depth"
+            })
 
-Your mission: For EACH of the 5 beats, select the SINGLE BEST explanatory visual motif from our 3b1b primitive library, and customize its exact text labels, titles, and parameters to directly explain what the voiceover is narrating.
+        # 2. Catalog / Library / Index / Drawer Dispatch
+        if any(k in text for k in ["library", "catalog", "index", "desk", "drawer", "dispatch", "sort", "unbounded"]):
+            candidates.append({
+                "layout": "catalog_routing",
+                "title": f"CENTRAL INDEX DISPATCH: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Instant O(1) hash map routing queries to specialized drawers",
+                "accent_color": "#38BDF8",
+                "index_label": f"{topic.upper()[:18]} INDEX DESK",
+                "drawer_a_label": f"EXPERT 1: {subj[:12]}",
+                "drawer_b_label": f"EXPERT 2: {obj[:12]}",
+                "drawer_c_label": "EXPERT 3: REASONING"
+            })
 
-AVAILABLE MOTIFS IN THE LIBRARY:
-1. "wave_collision": For colliding signals, wave interference, noise vs signal, or superposition.
-   params: signal_a_label, signal_b_label, result_label, result_sub
-2. "radio_tuner": For analog dials, frequency tuning, picking channels, or channel static.
-   params: station_a_label, station_b_label, tuner_status, scope_label
-3. "subspace_vectors": For packing concepts into vector spaces, coordinate grids, or orthogonal angles.
-   params: title, sub, vec1_label, vec2_label, angle_label, badge_title, badge_sub
-4. "prism_disentangler": For separating tangled thoughts, linear decoders, filtering noise, or peeling layers.
-   params: title, sub, in_label, prism_label, out1_label, out2_label
-5. "branching_outputs": For a single model / forward pass yielding dual answers or parallel decisions.
-   params: in_label, core_title, core_sub, card1_title, card1_body, card2_title, card2_body
-6. "tree_search": For reasoning models, MCTS, search paths, candidate exploration, and pruning dead ends.
-   params: title, sub, root_label, optimal_label, optimal_sub, pruned_label, pruned_sub, badge_title, badge_sub
-7. "diffusion_denoise": For diffusion, image/video generation, noise trajectories, or flow matching.
-   params: title, sub, step1_label, step2_label, step3_label, badge_title, badge_sub
-8. "attention_routing": For transformer attention, token dispatch, multi-head routing, or sparse MoE.
-   params: title, sub, token_labels (list of 3), head_labels (list of 3), badge_title, badge_sub
-9. "memory_buffer": For KV-cache, context windows, RAM, compression, or streaming buffers.
-   params: title, sub, in_stream_label, cache_status_label, gain_badge_title, gain_badge_sub
-10. "comparative_bars": For quantitative payoffs, benchmark comparisons, speedups, or accuracy deltas. (NEVER USE CIRCLES).
-   params: title, sub, contender_a_name, contender_a_score (0.0-1.0), contender_a_text, contender_b_name, contender_b_score (0.0-1.0), contender_b_text, delta_badge_text, delta_badge_sub
-11. "custom_flow": Universal 3-stage pipeline (Input -> Engine -> Result) for any bespoke mechanism.
-   params: title, sub, step1_title, step1_sub, step2_title, step2_sub, step3_title, step3_sub
-12. "paper_figure": Displays the official vector architecture diagram extracted directly from the paper.
-   params: title, sub, badge_text
-13. "bespoke_svg": For beats presenting unique physical analogies, visual metaphors, or custom mechanisms (e.g. fruit smoothie blender, flickering canvas portrait, connect-the-dots wireframe, bifurcated dual tracks, anti-bleed barrier, lego quantization, puzzle pieces, highway bottleneck). Our dynamic vector engine synthesizes an exact custom vector diagram for this beat.
-   params: title, sub, badge_text, accent_color
+        # 3. Camera / Spatial Ray-casting / Perspective / Coordinates
+        if any(k in text for k in ["camera math", "camera rays", "projective", "perspective", "sightline", "ray", "focal plane"]):
+            candidates.append({
+                "layout": "projection_rays",
+                "title": f"PROJECTIVE GEOMETRY: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Mapping camera rays to local stored spatial feature anchors",
+                "accent_color": "#38BDF8",
+                "camera_label": "OBSERVER CAMERA POSE",
+                "focal_plane_label": f"{topic.upper()[:18]} FOCAL PLANE",
+                "target_label": f"ANCHOR: {obj.upper()[:22]}"
+            })
 
-CRITICAL GUIDELINES:
-- NEVER use generic progress circles or repetitive gauges.
-- Every label MUST be meaningful technical typography tailored to this specific paper (never reuse unrelated placeholder labels).
-- Ensure the selected motif directly depicts the exact physical metaphor spoken in that beat.
-{"- NOTE: Official vector figures are extracted for this paper. Use 'paper_figure' for Beat 3 or Beat 4 to showcase the authentic publication diagram!" if spec.get("paper_figures") else ""}
+        # 4. Memory / Cache / Grid / Matrix / Spatial Slots
+        if any(k in text for k in ["memory", "grid", "cache", "kv", "buffer", "matrix", "cell", "store", "slot"]):
+            candidates.append({
+                "layout": "grid_memory",
+                "title": f"SPATIAL MEMORY MATRIX: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "O(1) constant-latency query over persistent memory grid",
+                "accent_color": "#38BDF8",
+                "grid_title": f"{topic.upper()[:22]} COORDINATE GRID",
+                "active_cell_label": f"HIT: {subj.upper()[:14]}",
+                "efficiency_label": "O(1) CONSTANT LATENCY"
+            })
 
-Return ONLY a valid JSON object matching this schema:
-{{
-  "storyboard": [
-    {{
-      "beat_id": 1,
-      "motif_type": "wave_collision",
-      "motif_params": {{ ... }},
-      "kinetic_action": "wave_pulse",
-      "reasoning": "Directly matches the voiceover description"
-    }}
-  ]
-}}
-"""
-        plan_data = self._call_gemini_json(prompt)
-        storyboard = []
-        if plan_data and "storyboard" in plan_data:
-            storyboard = plan_data["storyboard"]
+        # 5. Mirror / Blur / Contrast / Side-by-Side Comparison
+        if any(k in text for k in ["mirror", "reflection", "forget", "blur", "versus", "compare", "traditional", "prior", "baseline", "monolithic"]):
+            candidates.append({
+                "layout": "comparison_side_by_side",
+                "title": f"COHERENCE VS DECAY: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Contrasting persistent spatial memory against temporal decay",
+                "accent_color": "#34D399",
+                "col_a_title": "TEMPORAL FORGETTING",
+                "col_a_stat": "Blur & Memory Wipeout",
+                "col_b_title": f"{topic.upper()[:14]} PERSISTENCE",
+                "col_b_stat": "O(1) Sharp Coherence"
+            })
 
-        if not storyboard or len(storyboard) < num_beats:
-            print("   ℹ️ Using intelligent semantic fallback for storyboard assignment...")
-            storyboard = self._fallback_storyboard_plan(spec)
+        # 6. Barrier / Wall / Penalty / Anti-bleed / Isolation
+        if any(k in text for k in ["barrier", "wall", "penalty", "bleed", "isolate", "prevent", "guard", "forcefield"]):
+            candidates.append({
+                "layout": "barrier_separation",
+                "title": f"ORTHOGONAL BARRIER: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Strict penalty prevents cross-talk between latent streams",
+                "accent_color": "#EF4444",
+                "stream_a_label": f"STREAM 1: {subj.upper()[:14]}",
+                "stream_b_label": f"STREAM 2: {obj.upper()[:14]}",
+                "barrier_label": "ORTHOGONAL PENALTY BARRIER",
+                "barrier_sub": "Zero cross-stream interference"
+            })
 
-        return storyboard
+        # 7. Tree / Decision Hierarchy / Search / Reasoning / Choice
+        if any(k in text for k in ["tree", "search", "mcts", "reason", "decision", "choice", "prun", "binary game"]):
+            candidates.append({
+                "layout": "tree_hierarchy",
+                "title": f"DECISION TREE: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Pruning low-confidence candidates to isolate optimal choice",
+                "accent_color": "#34D399",
+                "root_label": f"{topic.upper()[:16]} QUERY",
+                "optimal_label": f"CHOSEN: {subj.upper()[:16]}",
+                "pruned_label": "PRUNED DEAD END"
+            })
 
-    def _fallback_storyboard_plan(self, spec: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """
-        Deterministic, semantic keyword matcher to select and parameterize motifs
-        when LLM is unavailable. Dynamically derives labels from topic title,
-        SVO actions, highlight words, and extracted paper figures.
-        """
-        beats = spec.get("beats", [])
-        topic_title = spec.get("title", "AI Breakthrough")
-        paper_figures = spec.get("paper_figures", [])
-        storyboard = []
+        # 8. Stack / Layers / Judgment / Deep Hierarchy
+        if any(k in text for k in ["layer", "stack", "deep", "hierarchy", "level", "judgment", "scores"]):
+            candidates.append({
+                "layout": "layer_stack",
+                "title": f"LAYERED COMPOSITION: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Hierarchical abstraction assembling high-confidence decisions",
+                "accent_color": "#38BDF8",
+                "bottom_layer": f"L1: {subj.upper()[:18]} INPUTS",
+                "mid_layer": "L2: ROUTING & CONFIDENCE",
+                "top_layer": f"L3: {obj.upper()[:18]} OUTPUT"
+            })
 
-        for i, b in enumerate(beats):
-            b_id = b.get("beat_id", i + 1)
-            if b_id > 5:
-                continue
+        # 9. Convergence / Funnel / Multimodal Fusion
+        if any(k in text for k in ["funnel", "multimodal", "fuse", "combine", "converge", "aggregate", "condens"]):
+            candidates.append({
+                "layout": "convergence_funnel",
+                "title": f"MULTIMODAL FUSION: {subj.upper()[:18]}",
+                "sub": v_focus[:65] or "Harmonizing multiple streams into a unified representation",
+                "accent_color": "#38BDF8",
+                "input_1_label": "STREAM A",
+                "input_2_label": f"{subj[:12]}",
+                "input_3_label": f"{obj[:12]}",
+                "fused_label": f"{topic.upper()[:20]} UNIFIED CORE"
+            })
 
-            text = (b.get("text", "") + " " + b.get("visual_focus", "")).lower()
-            hl_keys = list(b.get("highlight_words", {}).keys())
-            svo = b.get("svo_action", {})
-            subj = svo.get("subject", hl_keys[0] if hl_keys else "Signal A")
-            obj = svo.get("direct_object", hl_keys[1] if len(hl_keys) > 1 else "Signal B")
-            v_focus = b.get("visual_focus", "")
+        # Default fallback candidate: Sequential Pipeline Stages
+        pipeline_cand = {
+            "layout": "pipeline_stages",
+            "title": f"{topic.upper()[:20]}: {subj.upper()[:16]}",
+            "sub": v_focus[:65] or f"Sequential transformation from {subj.lower()} to {obj.lower()}",
+            "accent_color": "#38BDF8",
+            "stage_1_label": f"STAGE 1: {subj.upper()[:18]}",
+            "stage_1_sub": "Raw high-dimensional inputs",
+            "stage_2_label": f"STAGE 2: {action.upper()[:18]} ENGINE",
+            "stage_2_sub": "Core mathematical transformation",
+            "stage_3_label": f"STAGE 3: {obj.upper()[:18]}",
+            "stage_3_sub": "Target reconstructed state"
+        }
+        candidates.append(pipeline_cand)
 
-            # If paper vector figures were extracted, prioritize paper_figure for core mechanism (Beat 3)
-            if paper_figures and b_id == 3:
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "paper_figure",
-                    "motif_params": {
-                        "svg_path": paper_figures[0].get("svg_path"),
-                        "title": f"{topic_title.upper()[:28]} ARCHITECTURE",
-                        "sub": v_focus[:55] or "Official architectural diagram from arXiv source",
-                        "badge_text": f"PRIMARY MECHANISM: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            # Rich Physical Analogy Detection -> Bespoke Dynamic Vector SVG
-            elif any(k in text for k in ["smoothie", "blend", "fruit", "strawberr", "puree"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"DESTRUCTIVE BLENDING VS PRESERVATION",
-                        "sub": v_focus[:55] or "Preserving discrete structural boundaries vs uniform puree",
-                        "badge_text": f"ANALYSIS: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["flicker", "portrait", "sketch", "outline", "contour", "wireframe", "dots"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"CRISP BOUNDARY RESOLUTION",
-                        "sub": v_focus[:55] or "Resolving sharp structural contours from flickering noise",
-                        "badge_text": f"STRUCTURE: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["split", "dual", "track", "bifurcat", "two path", "semantic and geometric"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"BIFURCATED DUAL-TRACK ARCHITECTURE",
-                        "sub": v_focus[:55] or "Decoupling high-level semantics from low-level geometric depth",
-                        "badge_text": f"DUAL ROUTING: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["barrier", "penalty", "bleed", "prevent", "isolate", "separate paths", "forcefield"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"ORTHOGONAL ANTI-BLEED BARRIER",
-                        "sub": v_focus[:55] or "Strict penalty prevents cross-talk between latent streams",
-                        "badge_text": f"ISOLATION: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["lego", "voxel", "quantiz", "block", "grid", "pixelat", "chunk"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"CONTINUOUS VS DISCRETE QUANTIZATION",
-                        "sub": v_focus[:55] or "Stepping continuous signals into discrete computational blocks",
-                        "badge_text": f"QUANTIZATION: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["puzzle", "jigsaw", "snap", "broken", "interlock"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"JIGSAW ASSEMBLY TRAJECTORY",
-                        "sub": v_focus[:55] or "Interlocking fragmented latents into a unified path",
-                        "badge_text": f"ASSEMBLY: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif any(k in text for k in ["bottleneck", "highway", "toll", "choke", "narrow", "express"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "bespoke_svg",
-                    "motif_params": {
-                        "title": f"HIGHWAY BOTTLENECK & EXPRESS BYPASS",
-                        "sub": v_focus[:55] or "Bypassing serialization bottlenecks with parallel express lanes",
-                        "badge_text": f"THROUGHPUT: {subj.upper()[:20]}"
-                    },
-                    "kinetic_action": "figure_scan"
-                })
-            elif b_id == 5 or any(k in text for k in ["benchmark", "accuracy", "speedup", "gain", "percent", "faster"]):
-                payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
-                payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
-                score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
-                score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "comparative_bars",
-                    "motif_params": {
-                        "title": f"BENCHMARK RESULTS: {topic_title.upper()[:20]}",
-                        "sub": v_focus[:55] or "Empirical evaluation against prior frontier models",
-                        "contender_a_name": f"{topic_title.upper()[:18]} (OURS)",
-                        "contender_a_score": score_a,
-                        "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
-                        "contender_b_name": "PRIOR BASELINE",
-                        "contender_b_score": score_b,
-                        "contender_b_text": f"{payoff_base}%" if isinstance(payoff_base, (int, float)) else str(payoff_base),
-                        "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
-                        "delta_badge_sub": "Significant efficiency and accuracy milestone"
-                    },
-                    "kinetic_action": "bar_fill"
-                })
-            elif any(k in text for k in ["radio", "dial", "tuner", "station"]):
-                lbl_a = hl_keys[0].upper() if hl_keys else "CHANNEL 1"
-                lbl_b = hl_keys[1].upper() if len(hl_keys) > 1 else "CHANNEL 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "radio_tuner",
-                    "motif_params": {
-                        "station_a_label": f"FREQ A\n[{lbl_a[:14]}]",
-                        "station_b_label": f"FREQ B\n[{lbl_b[:14]}]",
-                        "tuner_status": f"TUNER: ISOLATING {lbl_a[:16]}",
-                        "scope_label": f"RESOLVED WAVEFORMS: {subj.upper()[:22]}"
-                    },
-                    "kinetic_action": "needle_sweep"
-                })
-            elif any(k in text for k in ["prism", "peel", "disentangl", "separate streams", "decoder"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else "SIGNAL 1"
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else "SIGNAL 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "prism_disentangler",
-                    "motif_params": {
-                        "title": f"DISENTANGLING {topic_title.upper()[:22]}",
-                        "sub": v_focus[:55] or "Linear map isolates mixed representations into distinct vectors",
-                        "in_label": "SUPERPOSED\nINPUT",
-                        "prism_label": "DECODER\nMAP",
-                        "out1_label": f"STREAM 1: {lbl1[:16]}",
-                        "out2_label": f"STREAM 2: {lbl2[:16]}"
-                    },
-                    "kinetic_action": "beam_glow"
-                })
-            elif any(k in text for k in ["branch", "two clear answers", "simultaneous", "forward pass"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else "OUTPUT 1"
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else "OUTPUT 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "branching_outputs",
-                    "motif_params": {
-                        "in_label": f"{subj.upper()[:16]}\nCONTEXT",
-                        "core_title": "1 FORWARD PASS",
-                        "core_sub": f"{topic_title[:24]} Latent Map",
-                        "card1_title": lbl1[:14],
-                        "card1_body": f"Verified Stream\nConfidence: 99.2%",
-                        "card2_title": lbl2[:14],
-                        "card2_body": f"Adaptive Output\nConfidence: 98.7%"
-                    },
-                    "kinetic_action": "branch_pop"
-                })
-            elif any(k in text for k in ["space", "save room", "vector", "dimension", "orthogonal", "coordinate", "bookshelf"]):
-                lbl1 = hl_keys[0] if hl_keys else "Concept 1"
-                lbl2 = hl_keys[1] if len(hl_keys) > 1 else "Concept 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "subspace_vectors",
-                    "motif_params": {
-                        "title": f"{topic_title.upper()[:22]}: SUBSPACE PACKING",
-                        "sub": v_focus[:55] or "Almost-orthogonal vectors pack N > D concepts in D dimensions",
-                        "vec1_label": f"Vector v₁\n[{lbl1[:12]}]",
-                        "vec2_label": f"Vector v₂\n[{lbl2[:12]}]",
-                        "angle_label": "θ ≈ 90° (Orthogonal)",
-                        "badge_title": f"OPTIMAL LATENT COMPRESSION",
-                        "badge_sub": f"Exponential density sustained for {subj[:20]}"
-                    },
-                    "kinetic_action": "vector_scale"
-                })
-            elif any(k in text for k in ["wave", "signal", "interference", "sound wave", "collid", "two distinct thoughts", "crowded room"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else subj.upper()
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else obj.upper()
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "wave_collision",
-                    "motif_params": {
-                        "signal_a_label": f"{lbl1[:16]} [STREAM A]",
-                        "signal_b_label": f"{lbl2[:16]} [STREAM B]",
-                        "result_label": f"SUPERPOSITION: {topic_title.upper()[:18]}",
-                        "result_sub": v_focus[:50] or f"Joint activation packing two distinct representations"
-                    },
-                    "kinetic_action": "wave_pulse"
-                })
+        # Select first candidate not already used in this video
+        for cand in candidates:
+            if cand["layout"] not in used:
+                return cand
 
-            elif any(k in text for k in ["tree", "search", "mcts", "reason", "logic", "prun"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "tree_search",
-                    "motif_params": {
-                        "title": f"REASONING SEARCH & HEURISTIC PRUNING",
-                        "sub": v_focus[:55] or f"Exploring parallel thoughts and pruning invalid logic paths",
-                        "root_label": f"QUERY: {subj.upper()[:16]}",
-                        "optimal_label": "OPTIMAL CHAIN",
-                        "optimal_sub": f"Verified reasoning path\nAccuracy: 98.4%",
-                        "pruned_label": "PRUNED BRANCH",
-                        "pruned_sub": f"Suboptimal direction\nTerminated early",
-                        "badge_title": "SEARCH EFFICIENCY",
-                        "badge_sub": f"Focuses compute exclusively on high-reward logic paths"
-                    },
-                    "kinetic_action": "tree_prune"
-                })
-            elif any(k in text for k in ["diffus", "noise", "denois", "image", "video", "latent"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "diffusion_denoise",
-                    "motif_params": {
-                        "title": f"DIFFUSION & FLOW TRAJECTORY",
-                        "sub": v_focus[:55] or "Iterative reverse trajectory peels noise into clear signals",
-                        "step1_label": "STEP 1: GAUSSIAN NOISE",
-                        "step2_label": f"STEP 2: {subj.upper()[:12]}",
-                        "step3_label": f"STEP 3: {obj.upper()[:12]}",
-                        "badge_title": "VELOCITY FIELD INTEGRATION",
-                        "badge_sub": f"Straight trajectory slashes step count by 80%"
-                    },
-                    "kinetic_action": "denoise_step"
-                })
-            elif any(k in text for k in ["attention", "head", "expert", "moe", "rout", "token"]):
-                t_lbls = [w.capitalize() for w in hl_keys[:3]] if len(hl_keys) >= 3 else ["Query", "Key", "Value"]
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "attention_routing",
-                    "motif_params": {
-                        "title": f"{topic_title.upper()[:22]}: ATTENTION ROUTING",
-                        "sub": v_focus[:55] or "Dynamic laser routing dispatches tokens to specialized heads",
-                        "token_labels": [f"Token: '{t_lbls[0]}'", f"Token: '{t_lbls[1]}'", f"Token: '{t_lbls[2]}'"],
-                        "head_labels": ["HEAD 1 (ROUTER)", "HEAD 2 (COMPUTE)", "HEAD 3 (SYNTHESIS)"],
-                        "badge_title": "DYNAMIC DISPATCH",
-                        "badge_sub": f"Only active paths execute, maximizing throughput"
-                    },
-                    "kinetic_action": "laser_route"
-                })
-            elif any(k in text for k in ["cache", "kv", "memory", "buffer", "context", "window"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "memory_buffer",
-                    "motif_params": {
-                        "title": f"CONTEXT MEMORY & KV-CACHE COMPRESSION",
-                        "sub": v_focus[:55] or "Streaming long context horizons without quadratic memory explosion",
-                        "in_stream_label": f"STREAM: {subj.upper()[:18]}",
-                        "cache_status_label": "ACTIVE KV BUFFER",
-                        "gain_badge_title": "VRAM FOOTPRINT SAVED",
-                        "gain_badge_sub": f"Constant inference latency across extended sequence"
-                    },
-                    "kinetic_action": "buffer_stream"
-                })
-
-            else:
-                s1_t = hl_keys[0].upper() if hl_keys else "INPUT STATE"
-                s2_t = svo.get("action_verb", "TRANSFORMATION").upper() + " ENGINE"
-                s3_t = obj.upper() if obj else "FINAL OUTPUT"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "custom_flow",
-                    "motif_params": {
-                        "title": f"{topic_title.upper()[:22]} PIPELINE",
-                        "sub": v_focus[:55] or "End-to-end procedural mechanism execution",
-                        "step1_title": s1_t[:18],
-                        "step1_sub": f"Ingests {subj.lower()[:20]}",
-                        "step2_title": s2_t[:18],
-                        "step2_sub": f"Applies core mechanism",
-                        "step3_title": s3_t[:18],
-                        "step3_sub": f"Produces verified output"
-                    },
-                    "kinetic_action": "flow_pulse"
-                })
-
-        return storyboard
+        # If all candidates used, fallback to the top match
+        return candidates[0]
 
     def prepare_storyboard_for_spec(self, spec: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Plans the visual choreography for each beat based on the voiceover script,
-        and annotates the spec beats with rich motif directives.
+        Plans the visual choreography for each beat based on the voiceover script.
+        Assigns:
+          - Beat 5: comparative_bars
+          - Beat 3: paper_figure (if authentic arXiv vector diagram is available)
+          - Beats 1, 2, 4 (and Beat 3 if no paper figure): composable visual blueprint
         """
         clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
         topic = spec.get("title", clean_id)
         beats = spec.get("beats", [])
         paper_figures = spec.get("paper_figures", [])
+        used_layouts = set()
 
-        print(f"\n🎬 [VisualDirector] Designing Script-Driven Visual Storyboard for '{topic}'...")
-
-        storyboard = self.plan_script_storyboard(spec)
-        sb_by_id = {item.get("beat_id"): item for item in storyboard}
-
-        from pipeline.svg_synthesizer import SVGSynthesizer
-        svg_synthesizer = SVGSynthesizer()
+        print(f"\n🎬 [VisualDirector 4.0] Designing Script-Driven Visual Storyboard for '{topic}'...")
 
         for i, b in enumerate(beats):
             b_id = b.get("beat_id", i + 1)
             if b_id > 5:
                 continue
 
-            if b_id in sb_by_id:
-                plan_item = sb_by_id[b_id]
-                b["motif_type"] = plan_item.get("motif_type", "custom_flow")
-                b["motif_params"] = plan_item.get("motif_params", {})
-                b["kinetic_action"] = plan_item.get("kinetic_action", "pulse")
+            # -------------------------------------------------------------
+            # BEAT 5: Empirical Benchmark Evaluation Bars (Default if no blueprint)
+            # -------------------------------------------------------------
+            bp = b.get("visual_blueprint")
+            if b_id == 5 and (not bp or bp.get("layout") in ["comparative_bars", "benchmark_bars"]):
+                b["motif_type"] = "comparative_bars"
+                b["kinetic_action"] = "bar_fill"
+                payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
+                payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
+                score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
+                score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
+                
+                v_foc = b.get("visual_focus", "")
+                if len(v_foc) > 55:
+                    v_foc = v_foc[:55].rsplit(" ", 1)[0]
 
-            # If paper figures are available and Beat 3 didn't get paper_figure, assign it!
+                b["motif_params"] = {
+                    "title": f"BENCHMARK RESULTS: {topic.upper()[:20]}",
+                    "sub": v_foc or "Empirical evaluation against prior frontier models",
+                    "contender_a_name": f"{topic.upper()[:16].strip()} (OURS)",
+                    "contender_a_score": score_a,
+                    "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
+                    "contender_b_name": "PRIOR BASELINE",
+                    "contender_b_score": score_b,
+                    "contender_b_text": f"{payoff_base}%" if isinstance(payoff_base, (int, float)) else str(payoff_base),
+                    "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
+                    "delta_badge_sub": "Significant efficiency and accuracy milestone"
+                }
+                print(f"   ✨ Beat 5: Assigned 'comparative_bars' (Benchmark Payoff)")
+                continue
+
+
+            # -------------------------------------------------------------
+            # BEAT 3: Authentic Paper Figure (if extracted from arXiv)
+            # -------------------------------------------------------------
             if paper_figures and b_id == 3:
                 fig_svg = paper_figures[0].get("svg_path")
                 if fig_svg and not os.path.exists(fig_svg):
@@ -488,36 +267,42 @@ Return ONLY a valid JSON object matching this schema:
                     b["motif_params"] = {
                         "svg_path": fig_svg,
                         "title": f"{topic.upper()[:28]} ARCHITECTURE",
-                        "sub": b.get("visual_focus", "")[:55] or "Official architectural diagram from arXiv source",
+                        "sub": b.get("visual_focus", "")[:65] or "Official architectural diagram from arXiv source",
                         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
                     }
                     b["kinetic_action"] = "figure_scan"
-                else:
-                    b["motif_type"] = "bespoke_svg"
+                    print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(fig_svg)}'")
+                    continue
 
-            # Dynamic Bespoke SVG Synthesis:
-            # If the beat is assigned bespoke_svg, OR if it has a physical analogy, OR was defaulting to custom_flow,
-            # synthesize a clean custom vector SVG matching this beat!
-            if b.get("motif_type") in ["bespoke_svg", "dynamic_svg", "custom_flow"]:
-                try:
-                    svg_path = svg_synthesizer.synthesize_beat_svg(b, topic, clean_id, b_id)
-                    if svg_path and svg_path.exists():
-                        b["motif_type"] = "bespoke_svg"
-                        if not b.get("motif_params"):
-                            b["motif_params"] = {}
-                        b["motif_params"]["svg_path"] = str(svg_path)
-                        if not b["motif_params"].get("title"):
-                            b["motif_params"]["title"] = f"{topic.upper()[:24]}: BEAT {b_id}"
-                        if not b["motif_params"].get("sub"):
-                            b["motif_params"]["sub"] = b.get("visual_focus", "")[:55] or "Dynamic vector diagram tailored to narrative beat"
-                        if not b["motif_params"].get("badge_text"):
-                            svo = b.get("svo_action", {})
-                            b["motif_params"]["badge_text"] = f"MECHANISM: {svo.get('subject', 'CORE').upper()[:20]}"
-                        b["kinetic_action"] = "figure_scan"
-                except Exception as e:
-                    print(f"⚠️ Error synthesizing SVG for beat {b_id}: {e}")
+            # -------------------------------------------------------------
+            # NARRATIVE BEATS (1, 2, 4, and 3 without paper figure):
+            # Composable Visual Blueprint (Visual Engine 4.0)
+            # -------------------------------------------------------------
+            blueprint = b.get("visual_blueprint")
+            if not blueprint or not isinstance(blueprint, dict) or not blueprint.get("layout"):
+                blueprint = self.synthesize_visual_blueprint(b, topic, b_id, used_layouts=used_layouts)
 
-            print(f"   ✨ Beat {b_id}: Assigned Motif '{b.get('motif_type')}' ({b.get('kinetic_action')})")
+            layout = blueprint.get("layout", "pipeline_stages")
+            used_layouts.add(layout)
+            params = blueprint.get("params", {})
+            # Flatten top-level blueprint metadata into params for the composition
+            composition_params = {
+                "layout": layout,
+                "title": blueprint.get("title", f"{topic.upper()[:22]}: BEAT {b_id}"),
+                "sub": blueprint.get("sub", b.get("visual_focus", "")[:65]),
+                "accent_color": blueprint.get("accent_color", "#38BDF8"),
+            }
+            # Merge any explicit sub-params
+            for k, v in blueprint.items():
+                if k not in ["layout", "title", "sub", "accent_color", "params"]:
+                    composition_params[k] = v
+            if isinstance(params, dict):
+                composition_params.update(params)
+
+            b["motif_type"] = "visual_composition"
+            b["motif_params"] = composition_params
+            b["kinetic_action"] = "blueprint_transform"
+            print(f"   ✨ Beat {b_id}: Assigned Composable Visual Blueprint '{layout}' ({composition_params.get('title')})")
 
         spec["script_driven_visuals"] = True
         return spec

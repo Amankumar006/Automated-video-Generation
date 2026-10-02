@@ -15,7 +15,7 @@ PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
 
 # Typography & Visual Design Tokens
-FONT_HELVETICA = "Helvetica Neue"
+FONT_HELVETICA = "Helvetica"
 BG_CARBON = "#0A0D14"
 COLOR_MINT = "#10B981"
 COLOR_MINT_LIGHT = "#A7F3D0"

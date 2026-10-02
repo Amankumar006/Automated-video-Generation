@@ -90,8 +90,30 @@ DYNAMIC VISUAL METAPHOR, SVO TRIPLES & ENTITIES (STRICT REQUIREMENT):
   * `action_verb`: The concrete physical/mechanical action (e.g. "prunes", "dispatches", "projects", "synthesizes", "bounds").
   * `direct_object`: The geometric entity being acted upon (e.g. "Collision Trajectory", "Top-8 Experts", "Latent Activation Vector").
   * `anchor_word`: The exact word in the beat text whose vocalization triggers the visual action.
-  * `semantic_role`: One of "agent_action" | "state_transition" | "causal_elimination" | "metric_evaluation".
-- In `metadata`, specify `visual_metaphor` and concrete `visual_entities` customized to the paper/topic.
+DEDICATED FULL-SCREEN VISUAL BLUEPRINTS (CRITICAL ARCHITECTURAL DIRECTIVE):
+- For EACH beat (Beats 1 to 5), you MUST specify a structured `visual_blueprint` dict that dictates what Manim composable layout to render on screen.
+- Choose the layout that DIRECTLY visualizes the spoken analogy and mechanism:
+  * "split_flow": For bifurcated paths, dual decoders, splitting high-level semantics from low-level geometry/depth, or 2-way routing.
+    params: {"input_label": "...", "router_label": "...", "branch_a_label": "...", "branch_a_sub": "...", "branch_b_label": "...", "branch_b_sub": "..."}
+  * "pipeline_stages": For multi-step processing, sequential pipelines, or ingestion -> transformation -> reconstruction.
+    params: {"stage_1_label": "...", "stage_1_sub": "...", "stage_2_label": "...", "stage_2_sub": "...", "stage_3_label": "...", "stage_3_sub": "..."}
+  * "grid_memory": For spatial memory, KV-cache buffers, coordinate matrices, voxel arrays, or O(1) latency lookup.
+    params: {"grid_title": "...", "active_cell_label": "...", "efficiency_label": "..."}
+  * "projection_rays": For camera math, perspective ray-casting, world coordinates, sightline intersections, or 3D localization.
+    params: {"camera_label": "...", "focal_plane_label": "...", "target_label": "..."}
+  * "barrier_separation": For orthogonal penalties, isolating representations, preventing cross-talk, or walls between streams.
+    params: {"stream_a_label": "...", "stream_b_label": "...", "barrier_label": "...", "barrier_sub": "..."}
+  * "tree_hierarchy": For decision trees, MCTS search paths, exploration vs pruning, or reasoning chains.
+    params: {"root_label": "...", "optimal_label": "...", "pruned_label": "..."}
+  * "layer_stack": For hierarchical representations, stacking judgment layers, or deep latent abstractions.
+    params: {"bottom_layer": "...", "mid_layer": "...", "top_layer": "..."}
+  * "convergence_funnel": For multimodal fusion, combining text/vision/audio, or condensing multiple streams into one core.
+    params: {"input_1_label": "...", "input_2_label": "...", "input_3_label": "...", "fused_label": "..."}
+  * "catalog_routing": For library card catalogs, indexing desks, hash map lookups, or dispatching to specialized drawers.
+    params: {"index_label": "...", "drawer_a_label": "...", "drawer_b_label": "...", "drawer_c_label": "..."}
+  * "comparison_side_by_side": For contrasting two opposing approaches side-by-side (e.g. Traditional Flawed vs Breakthrough).
+    params: {"col_a_title": "...", "col_a_stat": "...", "col_b_title": "...", "col_b_stat": "..."}
+- NEVER reuse the same blueprint layout across beats in the same video. Every beat must have its own distinct visual layout!
 """
 
 def generate_script(
@@ -146,6 +168,16 @@ Generate the complete JSON specification strictly adhering to this structure:
         "direct_object": "visual_geometric_target",
         "anchor_word": "trigger_word_in_text",
         "semantic_role": "agent_action | state_transition | causal_elimination | metric_evaluation"
+      }},
+      "visual_blueprint": {{
+        "layout": "split_flow | pipeline_stages | grid_memory | projection_rays | barrier_separation | tree_hierarchy | layer_stack | convergence_funnel | catalog_routing | comparison_side_by_side",
+        "title": "CLEAR UPPERCASE CONCEPT TITLE",
+        "sub": "Concise 1-line description of visual structure",
+        "accent_color": "#38BDF8",
+        "params": {{
+          "param_key_1": "specific descriptive label",
+          "param_key_2": "specific descriptive label"
+        }}
       }}
     }}
   ],

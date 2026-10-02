@@ -1,1334 +1,1517 @@
 {
   "id": "memorizon_world_models",
-  "title": "Memorizon: Breaking the Context Wall",
+  "title": "Memorizon: Training World Models Beyond Their Context Window",
   "category": "mechanism_deepdive",
   "domain_taxonomy": "neural_attention",
-  "hook_tag": "MECHANISM DEEPDIVE",
+  "hook_tag": "MEMORY ARCHITECTURE",
   "beats": [
     {
       "beat_id": 1,
-      "text": "How can an AI remember a room it saw minutes ago, without slowing down to a crawl every time it takes a new look?",
-      "visual_focus": "A camera scanning a room that repeats across a timeline, showing memory gaps.",
+      "text": "How can an AI recall a spot it saw just now without using up all its energy on each tiny, small, fast image?",
+      "visual_focus": "A camera moving through a long corridor with flickering memory fragments.",
       "highlight_words": {
-        "remember": "#34D399",
-        "slowing down": "#EF4444"
+        "brain power": "#EF4444"
       },
       "svo_action": {
         "subject": "World Model",
-        "action_verb": "tracks",
-        "direct_object": "revisit consistency",
-        "anchor_word": "remember",
-        "semantic_role": "agent_action"
+        "action_verb": "drains",
+        "direct_object": "Context Window Capacity",
+        "anchor_word": "power",
+        "semantic_role": "causal_elimination"
       },
-      "motif_type": "wave_collision",
+      "visual_blueprint": {
+        "layout": "pipeline_stages",
+        "title": "THE MEMORY PARADOX",
+        "sub": "Comparing long-span vision vs compute constraints",
+        "accent_color": "#EF4444",
+        "params": {
+          "stage_1_label": "Long History",
+          "stage_1_sub": "Minutes of video",
+          "stage_2_label": "Quadratic Cost",
+          "stage_2_sub": "Attention explosion",
+          "stage_3_label": "Model Crash",
+          "stage_3_sub": "System overload"
+        }
+      },
+      "motif_type": "visual_composition",
       "motif_params": {
-        "signal_a_label": "Temporal Scan",
-        "signal_b_label": "Persistent Memory",
-        "result_label": "Consistent Trace",
-        "result_sub": "Synchronized Perception"
+        "layout": "pipeline_stages",
+        "title": "THE MEMORY PARADOX",
+        "sub": "Comparing long-span vision vs compute constraints",
+        "accent_color": "#EF4444",
+        "stage_1_label": "Long History",
+        "stage_1_sub": "Minutes of video",
+        "stage_2_label": "Quadratic Cost",
+        "stage_2_sub": "Attention explosion",
+        "stage_3_label": "Model Crash",
+        "stage_3_sub": "System overload"
       },
-      "kinetic_action": "wave_pulse",
-      "audio_duration": 5.91,
-      "slot_duration": 6.21,
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.46,
+      "slot_duration": 6.76,
       "start": 0.0,
-      "end": 5.91,
+      "end": 6.46,
       "word_timings": [
         {
           "word": "How",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
           "start": 0.02,
-          "end": 0.265,
-          "duration": 0.245,
+          "end": 0.22,
+          "duration": 0.2,
           "frame_ahead_trigger": 0.0
         },
         {
           "word": "can",
           "clean_word": "can",
           "phonemes": "k\u02c8\u00e6n",
-          "start": 0.265,
-          "end": 0.4,
-          "duration": 0.135,
-          "frame_ahead_trigger": 0.225
+          "start": 0.22,
+          "end": 0.47,
+          "duration": 0.25,
+          "frame_ahead_trigger": 0.18
         },
         {
           "word": "an",
           "clean_word": "an",
           "phonemes": "\u00e6n",
-          "start": 0.4,
-          "end": 0.565,
-          "duration": 0.165,
-          "frame_ahead_trigger": 0.36
+          "start": 0.47,
+          "end": 0.66,
+          "duration": 0.19,
+          "frame_ahead_trigger": 0.43
         },
         {
           "word": "AI",
           "clean_word": "ai",
           "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 0.565,
-          "end": 0.915,
-          "duration": 0.35,
-          "frame_ahead_trigger": 0.525
+          "start": 0.66,
+          "end": 0.96,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.62
         },
         {
-          "word": "remember",
-          "clean_word": "remember",
-          "phonemes": "\u0279\u1d7bm\u02c8\u025bmb\u025a",
-          "start": 0.915,
-          "end": 1.18,
-          "duration": 0.265,
-          "frame_ahead_trigger": 0.875
+          "word": "recall",
+          "clean_word": "recall",
+          "phonemes": "\u0279\u02c8i\u02d0k\u0254\u02d0l",
+          "start": 0.96,
+          "end": 1.325,
+          "duration": 0.365,
+          "frame_ahead_trigger": 0.92
         },
         {
           "word": "a",
           "clean_word": "a",
           "phonemes": "\u02c8e\u026a",
-          "start": 1.18,
-          "end": 1.345,
-          "duration": 0.165,
-          "frame_ahead_trigger": 1.14
+          "start": 1.325,
+          "end": 1.56,
+          "duration": 0.235,
+          "frame_ahead_trigger": 1.285
         },
         {
-          "word": "room",
-          "clean_word": "room",
-          "phonemes": "\u0279\u02c8u\u02d0m",
-          "start": 1.345,
-          "end": 1.715,
-          "duration": 0.37,
-          "frame_ahead_trigger": 1.305
+          "word": "spot",
+          "clean_word": "spot",
+          "phonemes": "sp\u02c8\u0251\u02d0t",
+          "start": 1.56,
+          "end": 1.88,
+          "duration": 0.32,
+          "frame_ahead_trigger": 1.52
         },
         {
           "word": "it",
           "clean_word": "it",
           "phonemes": "\u026at",
-          "start": 1.715,
-          "end": 1.779,
-          "duration": 0.064,
-          "frame_ahead_trigger": 1.675
+          "start": 1.88,
+          "end": 2.01,
+          "duration": 0.13,
+          "frame_ahead_trigger": 1.84
         },
         {
           "word": "saw",
           "clean_word": "saw",
           "phonemes": "s\u02c8\u0254\u02d0",
-          "start": 1.779,
-          "end": 1.985,
-          "duration": 0.206,
-          "frame_ahead_trigger": 1.739
-        },
-        {
-          "word": "minutes",
-          "clean_word": "minutes",
-          "phonemes": "m\u02c8\u026an\u026ats",
-          "start": 1.985,
-          "end": 2.23,
+          "start": 2.01,
+          "end": 2.255,
           "duration": 0.245,
-          "frame_ahead_trigger": 1.945
-        },
-        {
-          "word": "ago,",
-          "clean_word": "ago",
-          "phonemes": "\u0250\u0261\u02c8o\u028a",
-          "start": 2.23,
-          "end": 2.606,
-          "duration": 0.376,
-          "frame_ahead_trigger": 2.19
-        },
-        {
-          "word": "without",
-          "clean_word": "without",
-          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
-          "start": 2.606,
-          "end": 3.03,
-          "duration": 0.424,
-          "frame_ahead_trigger": 2.566
-        },
-        {
-          "word": "slowing",
-          "clean_word": "slowing",
-          "phonemes": "sl\u02c8o\u028a\u026a\u014b",
-          "start": 3.03,
-          "end": 3.345,
-          "duration": 0.315,
-          "frame_ahead_trigger": 2.99
-        },
-        {
-          "word": "down",
-          "clean_word": "down",
-          "phonemes": "d\u02c8a\u028an",
-          "start": 3.345,
-          "end": 3.68,
-          "duration": 0.335,
-          "frame_ahead_trigger": 3.305
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 3.68,
-          "end": 3.744,
-          "duration": 0.064,
-          "frame_ahead_trigger": 3.64
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 3.744,
-          "end": 3.855,
-          "duration": 0.111,
-          "frame_ahead_trigger": 3.704
-        },
-        {
-          "word": "crawl",
-          "clean_word": "crawl",
-          "phonemes": "k\u0279\u02c8\u0254\u02d0l",
-          "start": 3.855,
-          "end": 4.21,
-          "duration": 0.355,
-          "frame_ahead_trigger": 3.815
-        },
-        {
-          "word": "every",
-          "clean_word": "every",
-          "phonemes": "\u02c8\u025bv\u0279i",
-          "start": 4.21,
-          "end": 4.485,
-          "duration": 0.275,
-          "frame_ahead_trigger": 4.17
-        },
-        {
-          "word": "time",
-          "clean_word": "time",
-          "phonemes": "t\u02c8a\u026am",
-          "start": 4.485,
-          "end": 4.695,
-          "duration": 0.21,
-          "frame_ahead_trigger": 4.445
-        },
-        {
-          "word": "it",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 4.695,
-          "end": 4.831,
-          "duration": 0.136,
-          "frame_ahead_trigger": 4.655
-        },
-        {
-          "word": "takes",
-          "clean_word": "takes",
-          "phonemes": "t\u02c8e\u026aks",
-          "start": 4.831,
-          "end": 5.055,
-          "duration": 0.224,
-          "frame_ahead_trigger": 4.791
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 5.055,
-          "end": 5.32,
-          "duration": 0.265,
-          "frame_ahead_trigger": 5.015
-        },
-        {
-          "word": "new",
-          "clean_word": "new",
-          "phonemes": "n\u02c8u\u02d0",
-          "start": 5.32,
-          "end": 5.58,
-          "duration": 0.26,
-          "frame_ahead_trigger": 5.28
-        },
-        {
-          "word": "look?",
-          "clean_word": "look",
-          "phonemes": "l\u02c8\u028ak",
-          "start": 5.58,
-          "end": 5.71,
-          "duration": 0.13,
-          "frame_ahead_trigger": 5.54
-        }
-      ]
-    },
-    {
-      "beat_id": 2,
-      "text": "Staring at every frame at once is like reading a whole library just to find one page. It costs way too much time.",
-      "visual_focus": "A giant wall of books collapsing under the weight of an infinite context window.",
-      "highlight_words": {
-        "library": "#EF4444",
-        "too much": "#F59E0B"
-      },
-      "svo_action": {
-        "subject": "Attention Engine",
-        "action_verb": "prunes",
-        "direct_object": "quadratic costs",
-        "anchor_word": "costs",
-        "semantic_role": "causal_elimination"
-      },
-      "motif_type": "tree_search",
-      "motif_params": {
-        "title": "Quadratic Cost Pruning",
-        "sub": "Efficiency analysis of context expansion",
-        "root_label": "Global Attention",
-        "optimal_label": "Selective Focus",
-        "optimal_sub": "O(N) Complexity",
-        "pruned_label": "Quadratic Overload",
-        "pruned_sub": "O(N^2) Collapse",
-        "badge_title": "100x Faster",
-        "badge_sub": "Compute Saved"
-      },
-      "kinetic_action": "branch_collapse",
-      "audio_duration": 6.38,
-      "slot_duration": 6.68,
-      "start": 6.21,
-      "end": 12.59,
-      "word_timings": [
-        {
-          "word": "Staring",
-          "clean_word": "staring",
-          "phonemes": "st\u02c8\u025b\u0279\u026a\u014b",
-          "start": 6.224,
-          "end": 6.664,
-          "duration": 0.44,
-          "frame_ahead_trigger": 6.184
-        },
-        {
-          "word": "at",
-          "clean_word": "at",
-          "phonemes": "\u00e6t",
-          "start": 6.664,
-          "end": 6.809,
-          "duration": 0.145,
-          "frame_ahead_trigger": 6.624
-        },
-        {
-          "word": "every",
-          "clean_word": "every",
-          "phonemes": "\u02c8\u025bv\u0279i",
-          "start": 6.809,
-          "end": 7.034,
-          "duration": 0.225,
-          "frame_ahead_trigger": 6.769
-        },
-        {
-          "word": "frame",
-          "clean_word": "frame",
-          "phonemes": "f\u0279\u02c8e\u026am",
-          "start": 7.034,
-          "end": 7.359,
-          "duration": 0.325,
-          "frame_ahead_trigger": 6.994
-        },
-        {
-          "word": "at",
-          "clean_word": "at",
-          "phonemes": "\u00e6t",
-          "start": 7.359,
-          "end": 7.479,
-          "duration": 0.119,
-          "frame_ahead_trigger": 7.319
-        },
-        {
-          "word": "once",
-          "clean_word": "once",
-          "phonemes": "w\u02c8\u028cns",
-          "start": 7.479,
-          "end": 7.714,
-          "duration": 0.236,
-          "frame_ahead_trigger": 7.439
-        },
-        {
-          "word": "is",
-          "clean_word": "is",
-          "phonemes": "\u026az",
-          "start": 7.714,
-          "end": 7.819,
-          "duration": 0.105,
-          "frame_ahead_trigger": 7.674
-        },
-        {
-          "word": "like",
-          "clean_word": "like",
-          "phonemes": "l\u02c8a\u026ak",
-          "start": 7.819,
-          "end": 8.159,
-          "duration": 0.34,
-          "frame_ahead_trigger": 7.779
-        },
-        {
-          "word": "reading",
-          "clean_word": "reading",
-          "phonemes": "\u0279\u02c8i\u02d0d\u026a\u014b",
-          "start": 8.159,
-          "end": 8.634,
-          "duration": 0.475,
-          "frame_ahead_trigger": 8.119
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 8.634,
-          "end": 8.829,
-          "duration": 0.195,
-          "frame_ahead_trigger": 8.594
-        },
-        {
-          "word": "whole",
-          "clean_word": "whole",
-          "phonemes": "h\u02c8o\u028al",
-          "start": 8.829,
-          "end": 8.939,
-          "duration": 0.11,
-          "frame_ahead_trigger": 8.789
-        },
-        {
-          "word": "library",
-          "clean_word": "library",
-          "phonemes": "l\u02c8a\u026ab\u0279\u025b\u0279i",
-          "start": 8.939,
-          "end": 9.579,
-          "duration": 0.64,
-          "frame_ahead_trigger": 8.899
+          "frame_ahead_trigger": 1.97
         },
         {
           "word": "just",
           "clean_word": "just",
           "phonemes": "d\u0292\u02c8\u028cst",
-          "start": 9.579,
-          "end": 9.849,
-          "duration": 0.27,
-          "frame_ahead_trigger": 9.539
+          "start": 2.255,
+          "end": 2.598,
+          "duration": 0.344,
+          "frame_ahead_trigger": 2.215
         },
         {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 9.849,
-          "end": 10.084,
-          "duration": 0.235,
-          "frame_ahead_trigger": 9.809
+          "word": "now",
+          "clean_word": "now",
+          "phonemes": "n\u02c8a\u028a",
+          "start": 2.598,
+          "end": 2.845,
+          "duration": 0.247,
+          "frame_ahead_trigger": 2.558
         },
         {
-          "word": "find",
-          "clean_word": "find",
-          "phonemes": "f\u02c8a\u026and",
-          "start": 10.084,
-          "end": 10.404,
-          "duration": 0.32,
-          "frame_ahead_trigger": 10.044
-        },
-        {
-          "word": "one",
-          "clean_word": "one",
-          "phonemes": "w\u02cc\u028cn",
-          "start": 10.404,
-          "end": 10.615,
-          "duration": 0.21,
-          "frame_ahead_trigger": 10.364
-        },
-        {
-          "word": "page.",
-          "clean_word": "page",
-          "phonemes": "p\u02c8e\u026ad\u0292",
-          "start": 10.615,
-          "end": 11.009,
-          "duration": 0.395,
-          "frame_ahead_trigger": 10.575
-        },
-        {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 11.009,
-          "end": 11.071,
-          "duration": 0.062,
-          "frame_ahead_trigger": 10.969
-        },
-        {
-          "word": "costs",
-          "clean_word": "costs",
-          "phonemes": "k\u02c8\u0254sts",
-          "start": 11.071,
-          "end": 11.439,
-          "duration": 0.368,
-          "frame_ahead_trigger": 11.031
-        },
-        {
-          "word": "way",
-          "clean_word": "way",
-          "phonemes": "w\u02c8e\u026a",
-          "start": 11.439,
-          "end": 11.729,
-          "duration": 0.29,
-          "frame_ahead_trigger": 11.399
-        },
-        {
-          "word": "too",
-          "clean_word": "too",
-          "phonemes": "t\u02c8u\u02d0",
-          "start": 11.729,
-          "end": 11.894,
-          "duration": 0.165,
-          "frame_ahead_trigger": 11.689
-        },
-        {
-          "word": "much",
-          "clean_word": "much",
-          "phonemes": "m\u02c8\u028ct\u0283",
-          "start": 11.894,
-          "end": 12.144,
-          "duration": 0.25,
-          "frame_ahead_trigger": 11.854
-        },
-        {
-          "word": "time.",
-          "clean_word": "time",
-          "phonemes": "t\u02c8a\u026am",
-          "start": 12.144,
-          "end": 12.439,
-          "duration": 0.295,
-          "frame_ahead_trigger": 12.104
-        }
-      ]
-    },
-    {
-      "beat_id": 3,
-      "text": "Memorizon acts like a shortcut. It only grabs the key bits it needs from the past, skipping the boring frames in between.",
-      "visual_focus": "Sparse dots forming a bridge between two distant points in a long timeline.",
-      "highlight_words": {
-        "shortcut": "#34D399",
-        "key bits": "#38BDF8"
-      },
-      "svo_action": {
-        "subject": "Memorizon Bank",
-        "action_verb": "retrieves",
-        "direct_object": "top-K latents",
-        "anchor_word": "grabs",
-        "semantic_role": "state_transition"
-      },
-      "motif_type": "paper_figure",
-      "motif_params": {
-        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.00544/chalkboard_figures/fig_1_interval.svg",
-        "title": "MEMORIZON: BREAKING THE CONT ARCHITECTURE",
-        "sub": "Sparse dots forming a bridge between two distant points",
-        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
-      },
-      "kinetic_action": "figure_scan",
-      "audio_duration": 6.76,
-      "slot_duration": 7.06,
-      "start": 12.89,
-      "end": 19.65,
-      "word_timings": [
-        {
-          "word": "Memorizon",
-          "clean_word": "memorizon",
-          "phonemes": "m\u02cc\u025bm\u025a\u0279\u02c8a\u026az\u0259n",
-          "start": 12.898,
-          "end": 13.533,
-          "duration": 0.635,
-          "frame_ahead_trigger": 12.858
-        },
-        {
-          "word": "acts",
-          "clean_word": "acts",
-          "phonemes": "\u02c8\u00e6kts",
-          "start": 13.533,
-          "end": 13.908,
-          "duration": 0.375,
-          "frame_ahead_trigger": 13.493
-        },
-        {
-          "word": "like",
-          "clean_word": "like",
-          "phonemes": "l\u02c8a\u026ak",
-          "start": 13.908,
-          "end": 14.288,
-          "duration": 0.38,
-          "frame_ahead_trigger": 13.868
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 14.288,
-          "end": 14.375,
-          "duration": 0.087,
-          "frame_ahead_trigger": 14.248
-        },
-        {
-          "word": "shortcut.",
-          "clean_word": "shortcut",
-          "phonemes": "\u0283\u02c8\u0254\u02d0\u0279tk\u028ct",
-          "start": 14.375,
-          "end": 14.943,
-          "duration": 0.568,
-          "frame_ahead_trigger": 14.335
-        },
-        {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 14.943,
-          "end": 15.028,
-          "duration": 0.085,
-          "frame_ahead_trigger": 14.903
-        },
-        {
-          "word": "only",
-          "clean_word": "only",
-          "phonemes": "\u02c8o\u028anli",
-          "start": 15.028,
-          "end": 15.303,
-          "duration": 0.275,
-          "frame_ahead_trigger": 14.988
-        },
-        {
-          "word": "grabs",
-          "clean_word": "grabs",
-          "phonemes": "\u0261\u0279\u02c8\u00e6bz",
-          "start": 15.303,
-          "end": 15.763,
-          "duration": 0.46,
-          "frame_ahead_trigger": 15.263
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 15.763,
-          "end": 15.938,
-          "duration": 0.175,
-          "frame_ahead_trigger": 15.723
-        },
-        {
-          "word": "key",
-          "clean_word": "key",
-          "phonemes": "k\u02c8i\u02d0",
-          "start": 15.938,
-          "end": 16.048,
-          "duration": 0.11,
-          "frame_ahead_trigger": 15.898
-        },
-        {
-          "word": "bits",
-          "clean_word": "bits",
-          "phonemes": "b\u02c8\u026ats",
-          "start": 16.048,
-          "end": 16.333,
-          "duration": 0.285,
-          "frame_ahead_trigger": 16.008
-        },
-        {
-          "word": "it",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 16.333,
-          "end": 16.578,
-          "duration": 0.245,
-          "frame_ahead_trigger": 16.293
-        },
-        {
-          "word": "needs",
-          "clean_word": "needs",
-          "phonemes": "n\u02c8i\u02d0dz",
-          "start": 16.578,
-          "end": 16.903,
-          "duration": 0.325,
-          "frame_ahead_trigger": 16.538
-        },
-        {
-          "word": "from",
-          "clean_word": "from",
-          "phonemes": "f\u0279\u028cm",
-          "start": 16.903,
-          "end": 17.208,
-          "duration": 0.305,
-          "frame_ahead_trigger": 16.863
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 17.208,
-          "end": 17.21,
-          "duration": 0.002,
-          "frame_ahead_trigger": 17.168
-        },
-        {
-          "word": "past,",
-          "clean_word": "past",
-          "phonemes": "p\u02c8\u00e6st",
-          "start": 17.21,
-          "end": 17.553,
-          "duration": 0.343,
-          "frame_ahead_trigger": 17.17
-        },
-        {
-          "word": "skipping",
-          "clean_word": "skipping",
-          "phonemes": "sk\u02c8\u026ap\u026a\u014b",
-          "start": 17.553,
-          "end": 17.888,
-          "duration": 0.335,
-          "frame_ahead_trigger": 17.513
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 17.888,
-          "end": 18.058,
-          "duration": 0.17,
-          "frame_ahead_trigger": 17.848
-        },
-        {
-          "word": "boring",
-          "clean_word": "boring",
-          "phonemes": "b\u02c8\u0254\u02d0\u0279\u026a\u014b",
-          "start": 18.058,
-          "end": 18.378,
-          "duration": 0.32,
-          "frame_ahead_trigger": 18.018
-        },
-        {
-          "word": "frames",
-          "clean_word": "frames",
-          "phonemes": "f\u0279\u02c8e\u026amz",
-          "start": 18.378,
-          "end": 18.883,
-          "duration": 0.505,
-          "frame_ahead_trigger": 18.338
-        },
-        {
-          "word": "in",
-          "clean_word": "in",
-          "phonemes": "\u02c8\u026an",
-          "start": 18.883,
-          "end": 19.073,
-          "duration": 0.19,
-          "frame_ahead_trigger": 18.843
-        },
-        {
-          "word": "between.",
-          "clean_word": "between",
-          "phonemes": "b\u1d7btw\u02c8i\u02d0n",
-          "start": 19.073,
-          "end": 19.513,
-          "duration": 0.44,
-          "frame_ahead_trigger": 19.033
-        }
-      ]
-    },
-    {
-      "beat_id": 4,
-      "text": "Each chunk of the movie keeps its own private folder of memories. It builds a shared bank that stays small, no matter the length.",
-      "visual_focus": "Separate folders merging into a single, compact shared bank of visual data.",
-      "highlight_words": {
-        "shared bank": "#34D399",
-        "stays small": "#38BDF8"
-      },
-      "svo_action": {
-        "subject": "Shared Bank",
-        "action_verb": "bounds",
-        "direct_object": "sequence length",
-        "anchor_word": "bounds",
-        "semantic_role": "state_transition"
-      },
-      "motif_type": "memory_buffer",
-      "motif_params": {
-        "title": "Compressed Shared Bank",
-        "sub": "Constant time memory accumulation",
-        "in_stream_label": "Chunked Latent Streams",
-        "cache_status_label": "Bounded Compact Bank",
-        "gain_badge_title": "Fixed Memory",
-        "gain_badge_sub": "Constant Footprint"
-      },
-      "kinetic_action": "buffer_compression",
-      "audio_duration": 6.87,
-      "slot_duration": 7.17,
-      "start": 19.95,
-      "end": 26.82,
-      "word_timings": [
-        {
-          "word": "Each",
-          "clean_word": "each",
-          "phonemes": "\u02c8i\u02d0t\u0283",
-          "start": 19.956,
-          "end": 20.261,
-          "duration": 0.305,
-          "frame_ahead_trigger": 19.916
-        },
-        {
-          "word": "chunk",
-          "clean_word": "chunk",
-          "phonemes": "t\u0283\u02c8\u028c\u014bk",
-          "start": 20.261,
-          "end": 20.611,
-          "duration": 0.35,
-          "frame_ahead_trigger": 20.221
-        },
-        {
-          "word": "of",
-          "clean_word": "of",
-          "phonemes": "\u028cv",
-          "start": 20.611,
-          "end": 20.826,
-          "duration": 0.215,
-          "frame_ahead_trigger": 20.571
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 20.826,
-          "end": 20.848,
-          "duration": 0.022,
-          "frame_ahead_trigger": 20.786
-        },
-        {
-          "word": "movie",
-          "clean_word": "movie",
-          "phonemes": "m\u02c8u\u02d0vi",
-          "start": 20.848,
-          "end": 21.261,
-          "duration": 0.413,
-          "frame_ahead_trigger": 20.808
-        },
-        {
-          "word": "keeps",
-          "clean_word": "keeps",
-          "phonemes": "k\u02c8i\u02d0ps",
-          "start": 21.261,
-          "end": 21.551,
-          "duration": 0.29,
-          "frame_ahead_trigger": 21.221
-        },
-        {
-          "word": "its",
-          "clean_word": "its",
-          "phonemes": "\u026ats",
-          "start": 21.551,
-          "end": 21.801,
-          "duration": 0.25,
-          "frame_ahead_trigger": 21.511
-        },
-        {
-          "word": "own",
-          "clean_word": "own",
-          "phonemes": "\u02c8o\u028an",
-          "start": 21.801,
-          "end": 22.021,
-          "duration": 0.22,
-          "frame_ahead_trigger": 21.761
-        },
-        {
-          "word": "private",
-          "clean_word": "private",
-          "phonemes": "p\u0279\u02c8a\u026av\u0259t",
-          "start": 22.021,
-          "end": 22.441,
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 2.845,
+          "end": 3.265,
           "duration": 0.42,
-          "frame_ahead_trigger": 21.981
-        },
-        {
-          "word": "folder",
-          "clean_word": "folder",
-          "phonemes": "f\u02c8o\u028ald\u025a",
-          "start": 22.441,
-          "end": 22.866,
-          "duration": 0.425,
-          "frame_ahead_trigger": 22.401
-        },
-        {
-          "word": "of",
-          "clean_word": "of",
-          "phonemes": "\u028cv",
-          "start": 22.866,
-          "end": 22.988,
-          "duration": 0.123,
-          "frame_ahead_trigger": 22.826
-        },
-        {
-          "word": "memories.",
-          "clean_word": "memories",
-          "phonemes": "m\u02c8\u025bm\u025a\u0279iz",
-          "start": 22.988,
-          "end": 23.406,
-          "duration": 0.417,
-          "frame_ahead_trigger": 22.948
-        },
-        {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 23.406,
-          "end": 23.551,
-          "duration": 0.145,
-          "frame_ahead_trigger": 23.366
-        },
-        {
-          "word": "builds",
-          "clean_word": "builds",
-          "phonemes": "b\u02c8\u026aldz",
-          "start": 23.551,
-          "end": 23.901,
-          "duration": 0.35,
-          "frame_ahead_trigger": 23.511
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 23.901,
-          "end": 24.081,
-          "duration": 0.18,
-          "frame_ahead_trigger": 23.861
-        },
-        {
-          "word": "shared",
-          "clean_word": "shared",
-          "phonemes": "\u0283\u02c8\u025b\u0279d",
-          "start": 24.081,
-          "end": 24.415,
-          "duration": 0.335,
-          "frame_ahead_trigger": 24.041
-        },
-        {
-          "word": "bank",
-          "clean_word": "bank",
-          "phonemes": "b\u02c8\u00e6\u014bk",
-          "start": 24.415,
-          "end": 24.686,
-          "duration": 0.27,
-          "frame_ahead_trigger": 24.375
-        },
-        {
-          "word": "that",
-          "clean_word": "that",
-          "phonemes": "\u00f0\u02c8\u00e6t",
-          "start": 24.686,
-          "end": 25.006,
-          "duration": 0.32,
-          "frame_ahead_trigger": 24.646
-        },
-        {
-          "word": "stays",
-          "clean_word": "stays",
-          "phonemes": "st\u02c8e\u026az",
-          "start": 25.006,
-          "end": 25.307,
-          "duration": 0.302,
-          "frame_ahead_trigger": 24.966
-        },
-        {
-          "word": "small,",
-          "clean_word": "small",
-          "phonemes": "sm\u02c8\u0254\u02d0l",
-          "start": 25.307,
-          "end": 25.701,
-          "duration": 0.393,
-          "frame_ahead_trigger": 25.267
-        },
-        {
-          "word": "no",
-          "clean_word": "no",
-          "phonemes": "n\u02c8o\u028a",
-          "start": 25.701,
-          "end": 25.916,
-          "duration": 0.215,
-          "frame_ahead_trigger": 25.661
-        },
-        {
-          "word": "matter",
-          "clean_word": "matter",
-          "phonemes": "m\u02c8\u00e6\u027e\u025a",
-          "start": 25.916,
-          "end": 26.156,
-          "duration": 0.24,
-          "frame_ahead_trigger": 25.876
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 26.156,
-          "end": 26.271,
-          "duration": 0.115,
-          "frame_ahead_trigger": 26.116
-        },
-        {
-          "word": "length.",
-          "clean_word": "length",
-          "phonemes": "l\u02c8\u025b\u014b\u03b8",
-          "start": 26.271,
-          "end": 26.616,
-          "duration": 0.345,
-          "frame_ahead_trigger": 26.231
-        }
-      ]
-    },
-    {
-      "beat_id": 5,
-      "text": "This means your AI stays sharp even after long journeys, using only a tiny fraction of the usual heavy lifting power.",
-      "visual_focus": "A clean, consistent path traced across a long journey, glowing with high performance.",
-      "highlight_words": {
-        "stays sharp": "#34D399",
-        "tiny fraction": "#F59E0B"
-      },
-      "svo_action": {
-        "subject": "Compute Engine",
-        "action_verb": "reduces",
-        "direct_object": "step-time cost",
-        "anchor_word": "fraction",
-        "semantic_role": "metric_evaluation"
-      },
-      "motif_type": "comparative_bars",
-      "motif_params": {
-        "title": "Step-Time Efficiency",
-        "sub": "Computational overhead reduction comparison",
-        "contender_a_name": "Standard Attention",
-        "contender_a_score": 0.85,
-        "contender_a_text": "High Latency",
-        "contender_b_name": "Memorizon",
-        "contender_b_score": 0.15,
-        "contender_b_text": "Ultra-Low Latency",
-        "delta_badge_text": "-82% Cost",
-        "delta_badge_sub": "Compute Gain"
-      },
-      "kinetic_action": "bar_growth",
-      "audio_duration": 6.68,
-      "slot_duration": 6.98,
-      "start": 27.12,
-      "end": 33.8,
-      "word_timings": [
-        {
-          "word": "This",
-          "clean_word": "this",
-          "phonemes": "\u00f0\u02c8\u026as",
-          "start": 27.135,
-          "end": 27.275,
-          "duration": 0.14,
-          "frame_ahead_trigger": 27.095
-        },
-        {
-          "word": "means",
-          "clean_word": "means",
-          "phonemes": "m\u02c8i\u02d0nz",
-          "start": 27.275,
-          "end": 27.7,
-          "duration": 0.425,
-          "frame_ahead_trigger": 27.235
-        },
-        {
-          "word": "your",
-          "clean_word": "your",
-          "phonemes": "j\u028a\u0279",
-          "start": 27.7,
-          "end": 27.865,
-          "duration": 0.165,
-          "frame_ahead_trigger": 27.66
-        },
-        {
-          "word": "AI",
-          "clean_word": "ai",
-          "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 27.865,
-          "end": 28.185,
-          "duration": 0.32,
-          "frame_ahead_trigger": 27.825
-        },
-        {
-          "word": "stays",
-          "clean_word": "stays",
-          "phonemes": "st\u02c8e\u026az",
-          "start": 28.185,
-          "end": 28.6,
-          "duration": 0.415,
-          "frame_ahead_trigger": 28.145
-        },
-        {
-          "word": "sharp",
-          "clean_word": "sharp",
-          "phonemes": "\u0283\u02c8\u0251\u02d0\u0279p",
-          "start": 28.6,
-          "end": 28.865,
-          "duration": 0.265,
-          "frame_ahead_trigger": 28.56
-        },
-        {
-          "word": "even",
-          "clean_word": "even",
-          "phonemes": "\u02c8i\u02d0v\u0259n",
-          "start": 28.865,
-          "end": 29.335,
-          "duration": 0.47,
-          "frame_ahead_trigger": 28.825
-        },
-        {
-          "word": "after",
-          "clean_word": "after",
-          "phonemes": "\u02c8\u00e6ft\u025a",
-          "start": 29.335,
-          "end": 29.465,
-          "duration": 0.13,
-          "frame_ahead_trigger": 29.295
-        },
-        {
-          "word": "long",
-          "clean_word": "long",
-          "phonemes": "l\u02c8\u0254\u014b",
-          "start": 29.465,
-          "end": 29.78,
-          "duration": 0.315,
-          "frame_ahead_trigger": 29.425
-        },
-        {
-          "word": "journeys,",
-          "clean_word": "journeys",
-          "phonemes": "d\u0292\u02c8\u025c\u02d0niz",
-          "start": 29.78,
-          "end": 30.16,
-          "duration": 0.38,
-          "frame_ahead_trigger": 29.74
+          "frame_ahead_trigger": 2.805
         },
         {
           "word": "using",
           "clean_word": "using",
           "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
-          "start": 30.16,
-          "end": 30.595,
-          "duration": 0.435,
-          "frame_ahead_trigger": 30.12
+          "start": 3.265,
+          "end": 3.64,
+          "duration": 0.375,
+          "frame_ahead_trigger": 3.225
         },
         {
-          "word": "only",
-          "clean_word": "only",
-          "phonemes": "\u02c8o\u028anli",
-          "start": 30.595,
-          "end": 30.89,
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 3.64,
+          "end": 3.735,
+          "duration": 0.095,
+          "frame_ahead_trigger": 3.6
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 3.735,
+          "end": 4.03,
           "duration": 0.295,
-          "frame_ahead_trigger": 30.555
+          "frame_ahead_trigger": 3.695
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 4.03,
+          "end": 4.23,
+          "duration": 0.2,
+          "frame_ahead_trigger": 3.99
+        },
+        {
+          "word": "energy",
+          "clean_word": "energy",
+          "phonemes": "\u02c8\u025bn\u025ad\u0292i",
+          "start": 4.23,
+          "end": 4.62,
+          "duration": 0.39,
+          "frame_ahead_trigger": 4.19
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 4.62,
+          "end": 4.695,
+          "duration": 0.075,
+          "frame_ahead_trigger": 4.58
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 4.695,
+          "end": 5.1,
+          "duration": 0.405,
+          "frame_ahead_trigger": 4.655
+        },
+        {
+          "word": "tiny,",
+          "clean_word": "tiny",
+          "phonemes": "t\u02c8a\u026ani",
+          "start": 5.1,
+          "end": 5.406,
+          "duration": 0.306,
+          "frame_ahead_trigger": 5.06
+        },
+        {
+          "word": "small,",
+          "clean_word": "small",
+          "phonemes": "sm\u02c8\u0254\u02d0l",
+          "start": 5.406,
+          "end": 5.66,
+          "duration": 0.254,
+          "frame_ahead_trigger": 5.366
+        },
+        {
+          "word": "fast",
+          "clean_word": "fast",
+          "phonemes": "f\u02c8\u00e6st",
+          "start": 5.66,
+          "end": 5.96,
+          "duration": 0.3,
+          "frame_ahead_trigger": 5.62
+        },
+        {
+          "word": "image?",
+          "clean_word": "image",
+          "phonemes": "\u02c8\u026am\u026ad\u0292",
+          "start": 5.96,
+          "end": 6.38,
+          "duration": 0.42,
+          "frame_ahead_trigger": 5.92
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of a library where you do not read each book, you just pick key notes from a shared desk for your big task.",
+      "visual_focus": "A bustling library with cards floating from shelves into a central index desk.",
+      "highlight_words": {
+        "library": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Retrieval Engine",
+        "action_verb": "fetches",
+        "direct_object": "Key Frame Latents",
+        "anchor_word": "cards",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "catalog_routing",
+        "title": "INDEXED RETRIEVAL",
+        "sub": "Accessing memory without reading full sequence",
+        "accent_color": "#38BDF8",
+        "params": {
+          "index_label": "Active Memory Bank",
+          "drawer_a_label": "Recent",
+          "drawer_b_label": "Shared",
+          "drawer_c_label": "Previous"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "catalog_routing",
+        "title": "INDEXED RETRIEVAL",
+        "sub": "Accessing memory without reading full sequence",
+        "accent_color": "#38BDF8",
+        "index_label": "Active Memory Bank",
+        "drawer_a_label": "Recent",
+        "drawer_b_label": "Shared",
+        "drawer_c_label": "Previous"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.33,
+      "slot_duration": 5.63,
+      "start": 6.76,
+      "end": 12.1,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 6.774,
+          "end": 7.049,
+          "duration": 0.275,
+          "frame_ahead_trigger": 6.734
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.049,
+          "end": 7.121,
+          "duration": 0.072,
+          "frame_ahead_trigger": 7.009
         },
         {
           "word": "a",
           "clean_word": "a",
           "phonemes": "\u02c8e\u026a",
-          "start": 30.89,
-          "end": 31.175,
-          "duration": 0.285,
-          "frame_ahead_trigger": 30.85
+          "start": 7.121,
+          "end": 7.239,
+          "duration": 0.118,
+          "frame_ahead_trigger": 7.081
         },
         {
-          "word": "tiny",
-          "clean_word": "tiny",
-          "phonemes": "t\u02c8a\u026ani",
-          "start": 31.175,
-          "end": 31.535,
-          "duration": 0.36,
-          "frame_ahead_trigger": 31.135
+          "word": "library",
+          "clean_word": "library",
+          "phonemes": "l\u02c8a\u026ab\u0279\u025b\u0279i",
+          "start": 7.239,
+          "end": 7.669,
+          "duration": 0.43,
+          "frame_ahead_trigger": 7.199
         },
         {
-          "word": "fraction",
-          "clean_word": "fraction",
-          "phonemes": "f\u0279\u02c8\u00e6k\u0283\u0259n",
-          "start": 31.535,
-          "end": 31.94,
-          "duration": 0.405,
-          "frame_ahead_trigger": 31.495
-        },
-        {
-          "word": "of",
-          "clean_word": "of",
-          "phonemes": "\u028cv",
-          "start": 31.94,
-          "end": 32.125,
-          "duration": 0.185,
-          "frame_ahead_trigger": 31.9
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 32.125,
-          "end": 32.172,
-          "duration": 0.047,
-          "frame_ahead_trigger": 32.085
-        },
-        {
-          "word": "usual",
-          "clean_word": "usual",
-          "phonemes": "j\u02c8u\u02d0\u0292u\u02d0\u0259l",
-          "start": 32.172,
-          "end": 32.705,
-          "duration": 0.533,
-          "frame_ahead_trigger": 32.132
-        },
-        {
-          "word": "heavy",
-          "clean_word": "heavy",
-          "phonemes": "h\u02c8\u025bvi",
-          "start": 32.705,
-          "end": 33.0,
-          "duration": 0.295,
-          "frame_ahead_trigger": 32.665
-        },
-        {
-          "word": "lifting",
-          "clean_word": "lifting",
-          "phonemes": "l\u02c8\u026aft\u026a\u014b",
-          "start": 33.0,
-          "end": 33.365,
-          "duration": 0.365,
-          "frame_ahead_trigger": 32.96
-        },
-        {
-          "word": "power.",
-          "clean_word": "power",
-          "phonemes": "p\u02c8a\u028a\u025a",
-          "start": 33.365,
-          "end": 33.66,
-          "duration": 0.295,
-          "frame_ahead_trigger": 33.325
-        }
-      ]
-    },
-    {
-      "beat_id": 6,
-      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "The Model Verse logo appearing on a clean dark background.",
-      "highlight_words": {
-        "Model Verse": "#34D399"
-      },
-      "svo_action": {
-        "subject": "User",
-        "action_verb": "follows",
-        "direct_object": "The Model Verse",
-        "anchor_word": "Follow",
-        "semantic_role": "agent_action"
-      },
-      "audio_duration": 4.74,
-      "slot_duration": 5.24,
-      "start": 34.1,
-      "end": 38.83,
-      "word_timings": [
-        {
-          "word": "Follow",
-          "clean_word": "follow",
-          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 34.112,
-          "end": 34.477,
-          "duration": 0.365,
-          "frame_ahead_trigger": 34.072
-        },
-        {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 34.477,
-          "end": 34.652,
-          "duration": 0.175,
-          "frame_ahead_trigger": 34.437
-        },
-        {
-          "word": "Model",
-          "clean_word": "model",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 34.652,
-          "end": 35.007,
-          "duration": 0.355,
-          "frame_ahead_trigger": 34.612
-        },
-        {
-          "word": "Verse",
-          "clean_word": "verse",
-          "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 35.007,
-          "end": 35.272,
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 7.669,
+          "end": 7.934,
           "duration": 0.265,
-          "frame_ahead_trigger": 34.967
+          "frame_ahead_trigger": 7.629
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 7.934,
+          "end": 8.039,
+          "duration": 0.105,
+          "frame_ahead_trigger": 7.894
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 8.039,
+          "end": 8.214,
+          "duration": 0.175,
+          "frame_ahead_trigger": 7.999
+        },
+        {
+          "word": "not",
+          "clean_word": "not",
+          "phonemes": "n\u02c8\u0251\u02d0t",
+          "start": 8.214,
+          "end": 8.519,
+          "duration": 0.305,
+          "frame_ahead_trigger": 8.174
+        },
+        {
+          "word": "read",
+          "clean_word": "read",
+          "phonemes": "\u0279\u02c8i\u02d0d",
+          "start": 8.519,
+          "end": 8.649,
+          "duration": 0.13,
+          "frame_ahead_trigger": 8.479
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 8.649,
+          "end": 9.003,
+          "duration": 0.354,
+          "frame_ahead_trigger": 8.609
+        },
+        {
+          "word": "book,",
+          "clean_word": "book",
+          "phonemes": "b\u02c8\u028ak",
+          "start": 9.003,
+          "end": 9.209,
+          "duration": 0.206,
+          "frame_ahead_trigger": 8.963
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 9.209,
+          "end": 9.339,
+          "duration": 0.13,
+          "frame_ahead_trigger": 9.169
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 9.339,
+          "end": 9.644,
+          "duration": 0.305,
+          "frame_ahead_trigger": 9.299
+        },
+        {
+          "word": "pick",
+          "clean_word": "pick",
+          "phonemes": "p\u02c8\u026ak",
+          "start": 9.644,
+          "end": 9.859,
+          "duration": 0.215,
+          "frame_ahead_trigger": 9.604
+        },
+        {
+          "word": "key",
+          "clean_word": "key",
+          "phonemes": "k\u02c8i\u02d0",
+          "start": 9.859,
+          "end": 10.043,
+          "duration": 0.184,
+          "frame_ahead_trigger": 9.819
+        },
+        {
+          "word": "notes",
+          "clean_word": "notes",
+          "phonemes": "n\u02c8o\u028ats",
+          "start": 10.043,
+          "end": 10.359,
+          "duration": 0.316,
+          "frame_ahead_trigger": 10.003
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 10.359,
+          "end": 10.544,
+          "duration": 0.185,
+          "frame_ahead_trigger": 10.319
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.544,
+          "end": 10.686,
+          "duration": 0.142,
+          "frame_ahead_trigger": 10.504
+        },
+        {
+          "word": "shared",
+          "clean_word": "shared",
+          "phonemes": "\u0283\u02c8\u025b\u0279d",
+          "start": 10.686,
+          "end": 10.989,
+          "duration": 0.303,
+          "frame_ahead_trigger": 10.646
+        },
+        {
+          "word": "desk",
+          "clean_word": "desk",
+          "phonemes": "d\u02c8\u025bsk",
+          "start": 10.989,
+          "end": 11.254,
+          "duration": 0.265,
+          "frame_ahead_trigger": 10.949
         },
         {
           "word": "for",
           "clean_word": "for",
           "phonemes": "f\u0254\u02d0\u0279",
-          "start": 35.272,
-          "end": 35.567,
-          "duration": 0.295,
-          "frame_ahead_trigger": 35.232
+          "start": 11.254,
+          "end": 11.399,
+          "duration": 0.145,
+          "frame_ahead_trigger": 11.214
         },
         {
-          "word": "simple",
-          "clean_word": "simple",
-          "phonemes": "s\u02c8\u026amp\u0259l",
-          "start": 35.567,
-          "end": 35.947,
-          "duration": 0.38,
-          "frame_ahead_trigger": 35.527
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 11.399,
+          "end": 11.584,
+          "duration": 0.185,
+          "frame_ahead_trigger": 11.359
         },
         {
-          "word": "explanations",
-          "clean_word": "explanations",
-          "phonemes": "\u025bkspl\u0250n\u02c8e\u026a\u0283\u0259nz",
-          "start": 35.947,
-          "end": 36.772,
-          "duration": 0.825,
-          "frame_ahead_trigger": 35.907
+          "word": "big",
+          "clean_word": "big",
+          "phonemes": "b\u02c8\u026a\u0261",
+          "start": 11.584,
+          "end": 11.726,
+          "duration": 0.142,
+          "frame_ahead_trigger": 11.544
+        },
+        {
+          "word": "task.",
+          "clean_word": "task",
+          "phonemes": "t\u02c8\u00e6sk",
+          "start": 11.726,
+          "end": 11.974,
+          "duration": 0.248,
+          "frame_ahead_trigger": 11.686
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "We teach the bot to hold just the last few parts, making a small stack of key shots from each path it takes.",
+      "visual_focus": "A stream of video frames being condensed into tiny, glowing data squares.",
+      "highlight_words": {
+        "snapshots": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Training Loop",
+        "action_verb": "compresses",
+        "direct_object": "Temporal History",
+        "anchor_word": "snapshots",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "SNAPSHOT CONDENSATION",
+        "sub": "Merging long timelines into sparse storage",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "Chunk A",
+          "input_2_label": "Chunk B",
+          "input_3_label": "Chunk C",
+          "fused_label": "Shared Bank"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "convergence_funnel",
+        "title": "SNAPSHOT CONDENSATION",
+        "sub": "Merging long timelines into sparse storage",
+        "accent_color": "#34D399",
+        "input_1_label": "Chunk A",
+        "input_2_label": "Chunk B",
+        "input_3_label": "Chunk C",
+        "fused_label": "Shared Bank"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.59,
+      "slot_duration": 5.89,
+      "start": 12.4,
+      "end": 17.99,
+      "word_timings": [
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 12.407,
+          "end": 12.502,
+          "duration": 0.095,
+          "frame_ahead_trigger": 12.367
+        },
+        {
+          "word": "teach",
+          "clean_word": "teach",
+          "phonemes": "t\u02c8i\u02d0t\u0283",
+          "start": 12.502,
+          "end": 12.847,
+          "duration": 0.345,
+          "frame_ahead_trigger": 12.462
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.847,
+          "end": 12.987,
+          "duration": 0.14,
+          "frame_ahead_trigger": 12.807
+        },
+        {
+          "word": "bot",
+          "clean_word": "bot",
+          "phonemes": "b\u02c8\u0251\u02d0t",
+          "start": 12.987,
+          "end": 13.257,
+          "duration": 0.27,
+          "frame_ahead_trigger": 12.947
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 13.257,
+          "end": 13.409,
+          "duration": 0.152,
+          "frame_ahead_trigger": 13.217
+        },
+        {
+          "word": "hold",
+          "clean_word": "hold",
+          "phonemes": "h\u02c8o\u028ald",
+          "start": 13.409,
+          "end": 13.692,
+          "duration": 0.283,
+          "frame_ahead_trigger": 13.369
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 13.692,
+          "end": 14.127,
+          "duration": 0.435,
+          "frame_ahead_trigger": 13.652
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 14.127,
+          "end": 14.148,
+          "duration": 0.02,
+          "frame_ahead_trigger": 14.087
+        },
+        {
+          "word": "last",
+          "clean_word": "last",
+          "phonemes": "l\u02c8\u00e6st",
+          "start": 14.148,
+          "end": 14.307,
+          "duration": 0.16,
+          "frame_ahead_trigger": 14.108
+        },
+        {
+          "word": "few",
+          "clean_word": "few",
+          "phonemes": "fj\u02c8u\u02d0",
+          "start": 14.307,
+          "end": 14.597,
+          "duration": 0.29,
+          "frame_ahead_trigger": 14.267
+        },
+        {
+          "word": "parts,",
+          "clean_word": "parts",
+          "phonemes": "p\u02c8\u0251\u02d0\u0279ts",
+          "start": 14.597,
+          "end": 15.007,
+          "duration": 0.41,
+          "frame_ahead_trigger": 14.557
+        },
+        {
+          "word": "making",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 15.007,
+          "end": 15.442,
+          "duration": 0.435,
+          "frame_ahead_trigger": 14.967
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 15.442,
+          "end": 15.572,
+          "duration": 0.129,
+          "frame_ahead_trigger": 15.402
+        },
+        {
+          "word": "small",
+          "clean_word": "small",
+          "phonemes": "sm\u02c8\u0254\u02d0l",
+          "start": 15.572,
+          "end": 15.807,
+          "duration": 0.236,
+          "frame_ahead_trigger": 15.532
+        },
+        {
+          "word": "stack",
+          "clean_word": "stack",
+          "phonemes": "st\u02c8\u00e6k",
+          "start": 15.807,
+          "end": 16.127,
+          "duration": 0.32,
+          "frame_ahead_trigger": 15.767
         },
         {
           "word": "of",
           "clean_word": "of",
           "phonemes": "\u028cv",
-          "start": 36.772,
-          "end": 36.917,
-          "duration": 0.145,
-          "frame_ahead_trigger": 36.732
+          "start": 16.127,
+          "end": 16.367,
+          "duration": 0.24,
+          "frame_ahead_trigger": 16.087
+        },
+        {
+          "word": "key",
+          "clean_word": "key",
+          "phonemes": "k\u02c8i\u02d0",
+          "start": 16.367,
+          "end": 16.437,
+          "duration": 0.07,
+          "frame_ahead_trigger": 16.327
+        },
+        {
+          "word": "shots",
+          "clean_word": "shots",
+          "phonemes": "\u0283\u02c8\u0251\u02d0ts",
+          "start": 16.437,
+          "end": 16.782,
+          "duration": 0.345,
+          "frame_ahead_trigger": 16.397
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 16.782,
+          "end": 17.057,
+          "duration": 0.275,
+          "frame_ahead_trigger": 16.742
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 17.057,
+          "end": 17.157,
+          "duration": 0.1,
+          "frame_ahead_trigger": 17.017
+        },
+        {
+          "word": "path",
+          "clean_word": "path",
+          "phonemes": "p\u02c8\u00e6\u03b8",
+          "start": 17.157,
+          "end": 17.502,
+          "duration": 0.345,
+          "frame_ahead_trigger": 17.117
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 17.502,
+          "end": 17.576,
+          "duration": 0.074,
+          "frame_ahead_trigger": 17.462
+        },
+        {
+          "word": "takes.",
+          "clean_word": "takes",
+          "phonemes": "t\u02c8e\u026aks",
+          "start": 17.576,
+          "end": 17.892,
+          "duration": 0.316,
+          "frame_ahead_trigger": 17.536
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The bot uses views to link these parts, like a sculptor who wipes off the clay to keep only the main, strong form.",
+      "visual_focus": "Light rays connecting two distant points in a 3D scene, discarding surrounding haze.",
+      "highlight_words": {
+        "sight-lines": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Attention Gate",
+        "action_verb": "projects",
+        "direct_object": "Co-Visible Latents",
+        "anchor_word": "sight-lines",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "projection_rays",
+        "title": "GEOMETRIC ALIGNMENT",
+        "sub": "Linking revisits through camera perspective",
+        "accent_color": "#F59E0B",
+        "params": {
+          "camera_label": "Revisit Camera",
+          "focal_plane_label": "Common Viewpoint",
+          "target_label": "Shared Latent"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "projection_rays",
+        "title": "GEOMETRIC ALIGNMENT",
+        "sub": "Linking revisits through camera perspective",
+        "accent_color": "#F59E0B",
+        "camera_label": "Revisit Camera",
+        "focal_plane_label": "Common Viewpoint",
+        "target_label": "Shared Latent"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.08,
+      "slot_duration": 6.38,
+      "start": 18.29,
+      "end": 24.37,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.297,
+          "end": 18.372,
+          "duration": 0.075,
+          "frame_ahead_trigger": 18.257
+        },
+        {
+          "word": "bot",
+          "clean_word": "bot",
+          "phonemes": "b\u02c8\u0251\u02d0t",
+          "start": 18.372,
+          "end": 18.617,
+          "duration": 0.245,
+          "frame_ahead_trigger": 18.332
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 18.617,
+          "end": 18.987,
+          "duration": 0.37,
+          "frame_ahead_trigger": 18.577
+        },
+        {
+          "word": "views",
+          "clean_word": "views",
+          "phonemes": "vj\u02c8u\u02d0z",
+          "start": 18.987,
+          "end": 19.407,
+          "duration": 0.42,
+          "frame_ahead_trigger": 18.947
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 19.407,
+          "end": 19.587,
+          "duration": 0.18,
+          "frame_ahead_trigger": 19.367
+        },
+        {
+          "word": "link",
+          "clean_word": "link",
+          "phonemes": "l\u02c8\u026a\u014bk",
+          "start": 19.587,
+          "end": 19.822,
+          "duration": 0.235,
+          "frame_ahead_trigger": 19.547
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 19.822,
+          "end": 20.132,
+          "duration": 0.31,
+          "frame_ahead_trigger": 19.782
+        },
+        {
+          "word": "parts,",
+          "clean_word": "parts",
+          "phonemes": "p\u02c8\u0251\u02d0\u0279ts",
+          "start": 20.132,
+          "end": 20.557,
+          "duration": 0.425,
+          "frame_ahead_trigger": 20.092
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 20.557,
+          "end": 20.767,
+          "duration": 0.21,
+          "frame_ahead_trigger": 20.517
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 20.767,
+          "end": 20.852,
+          "duration": 0.085,
+          "frame_ahead_trigger": 20.727
+        },
+        {
+          "word": "sculptor",
+          "clean_word": "sculptor",
+          "phonemes": "sk\u02c8\u028clpt\u025a",
+          "start": 20.852,
+          "end": 21.352,
+          "duration": 0.5,
+          "frame_ahead_trigger": 20.812
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 21.352,
+          "end": 21.557,
+          "duration": 0.205,
+          "frame_ahead_trigger": 21.312
+        },
+        {
+          "word": "wipes",
+          "clean_word": "wipes",
+          "phonemes": "w\u02c8a\u026aps",
+          "start": 21.557,
+          "end": 21.857,
+          "duration": 0.3,
+          "frame_ahead_trigger": 21.517
+        },
+        {
+          "word": "off",
+          "clean_word": "off",
+          "phonemes": "\u02c8\u0254f",
+          "start": 21.857,
+          "end": 21.952,
+          "duration": 0.095,
+          "frame_ahead_trigger": 21.817
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.952,
+          "end": 22.277,
+          "duration": 0.325,
+          "frame_ahead_trigger": 21.912
+        },
+        {
+          "word": "clay",
+          "clean_word": "clay",
+          "phonemes": "kl\u02c8e\u026a",
+          "start": 22.277,
+          "end": 22.372,
+          "duration": 0.095,
+          "frame_ahead_trigger": 22.237
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 22.372,
+          "end": 22.542,
+          "duration": 0.17,
+          "frame_ahead_trigger": 22.332
+        },
+        {
+          "word": "keep",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 22.542,
+          "end": 22.852,
+          "duration": 0.31,
+          "frame_ahead_trigger": 22.502
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 22.852,
+          "end": 23.201,
+          "duration": 0.35,
+          "frame_ahead_trigger": 22.812
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.201,
+          "end": 23.427,
+          "duration": 0.225,
+          "frame_ahead_trigger": 23.161
+        },
+        {
+          "word": "main,",
+          "clean_word": "main",
+          "phonemes": "m\u02c8e\u026an",
+          "start": 23.427,
+          "end": 23.582,
+          "duration": 0.155,
+          "frame_ahead_trigger": 23.387
+        },
+        {
+          "word": "strong",
+          "clean_word": "strong",
+          "phonemes": "st\u0279\u02c8\u0254\u014b",
+          "start": 23.582,
+          "end": 23.957,
+          "duration": 0.375,
+          "frame_ahead_trigger": 23.542
+        },
+        {
+          "word": "form.",
+          "clean_word": "form",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279m",
+          "start": 23.957,
+          "end": 24.237,
+          "duration": 0.28,
+          "frame_ahead_trigger": 23.917
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "Now, the bot stays sharp for a long time. It keeps things clear while the cost stays low for any length of trip.",
+      "visual_focus": "A cost graph showing a sharp spike for old methods and a flat line for the new model.",
+      "highlight_words": {
+        "consistency": "#34D399"
+      },
+      "svo_action": {
+        "subject": "System Latency",
+        "action_verb": "stabilizes",
+        "direct_object": "Compute Load",
+        "anchor_word": "flat",
+        "semantic_role": "metric_evaluation"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "COST VS PERFORMANCE",
+        "sub": "Memorizon vs Standard Sliding Window",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "Sliding Window",
+          "col_a_stat": "High Cost",
+          "col_b_title": "Memorizon",
+          "col_b_stat": "Flat Cost"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "COST VS PERFORMANCE",
+        "sub": "Memorizon vs Standard Sliding Window",
+        "accent_color": "#34D399",
+        "col_a_title": "Sliding Window",
+        "col_a_stat": "High Cost",
+        "col_b_title": "Memorizon",
+        "col_b_stat": "Flat Cost"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.55,
+      "slot_duration": 5.85,
+      "start": 24.67,
+      "end": 30.21,
+      "word_timings": [
+        {
+          "word": "Now,",
+          "clean_word": "now",
+          "phonemes": "n\u02c8a\u028a",
+          "start": 24.677,
+          "end": 24.887,
+          "duration": 0.21,
+          "frame_ahead_trigger": 24.637
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.887,
+          "end": 25.002,
+          "duration": 0.115,
+          "frame_ahead_trigger": 24.847
+        },
+        {
+          "word": "bot",
+          "clean_word": "bot",
+          "phonemes": "b\u02c8\u0251\u02d0t",
+          "start": 25.002,
+          "end": 25.232,
+          "duration": 0.23,
+          "frame_ahead_trigger": 24.962
+        },
+        {
+          "word": "stays",
+          "clean_word": "stays",
+          "phonemes": "st\u02c8e\u026az",
+          "start": 25.232,
+          "end": 25.622,
+          "duration": 0.39,
+          "frame_ahead_trigger": 25.192
+        },
+        {
+          "word": "sharp",
+          "clean_word": "sharp",
+          "phonemes": "\u0283\u02c8\u0251\u02d0\u0279p",
+          "start": 25.622,
+          "end": 26.027,
+          "duration": 0.405,
+          "frame_ahead_trigger": 25.582
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 26.027,
+          "end": 26.202,
+          "duration": 0.175,
+          "frame_ahead_trigger": 25.987
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 26.202,
+          "end": 26.282,
+          "duration": 0.08,
+          "frame_ahead_trigger": 26.162
+        },
+        {
+          "word": "long",
+          "clean_word": "long",
+          "phonemes": "l\u02c8\u0254\u014b",
+          "start": 26.282,
+          "end": 26.529,
+          "duration": 0.248,
+          "frame_ahead_trigger": 26.242
+        },
+        {
+          "word": "time.",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 26.529,
+          "end": 26.802,
+          "duration": 0.272,
+          "frame_ahead_trigger": 26.489
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 26.802,
+          "end": 26.992,
+          "duration": 0.19,
+          "frame_ahead_trigger": 26.762
+        },
+        {
+          "word": "keeps",
+          "clean_word": "keeps",
+          "phonemes": "k\u02c8i\u02d0ps",
+          "start": 26.992,
+          "end": 27.272,
+          "duration": 0.28,
+          "frame_ahead_trigger": 26.952
+        },
+        {
+          "word": "things",
+          "clean_word": "things",
+          "phonemes": "\u03b8\u02c8\u026a\u014bz",
+          "start": 27.272,
+          "end": 27.507,
+          "duration": 0.235,
+          "frame_ahead_trigger": 27.232
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 27.507,
+          "end": 27.732,
+          "duration": 0.225,
+          "frame_ahead_trigger": 27.467
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 27.732,
+          "end": 28.002,
+          "duration": 0.27,
+          "frame_ahead_trigger": 27.692
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.002,
+          "end": 28.142,
+          "duration": 0.14,
+          "frame_ahead_trigger": 27.962
+        },
+        {
+          "word": "cost",
+          "clean_word": "cost",
+          "phonemes": "k\u02c8\u0254st",
+          "start": 28.142,
+          "end": 28.497,
+          "duration": 0.355,
+          "frame_ahead_trigger": 28.102
+        },
+        {
+          "word": "stays",
+          "clean_word": "stays",
+          "phonemes": "st\u02c8e\u026az",
+          "start": 28.497,
+          "end": 28.657,
+          "duration": 0.16,
+          "frame_ahead_trigger": 28.457
+        },
+        {
+          "word": "low",
+          "clean_word": "low",
+          "phonemes": "l\u02c8o\u028a",
+          "start": 28.657,
+          "end": 28.877,
+          "duration": 0.22,
+          "frame_ahead_trigger": 28.617
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 28.877,
+          "end": 29.272,
+          "duration": 0.395,
+          "frame_ahead_trigger": 28.837
+        },
+        {
+          "word": "any",
+          "clean_word": "any",
+          "phonemes": "\u02cc\u025bni",
+          "start": 29.272,
+          "end": 29.427,
+          "duration": 0.155,
+          "frame_ahead_trigger": 29.232
+        },
+        {
+          "word": "length",
+          "clean_word": "length",
+          "phonemes": "l\u02c8\u025b\u014b\u03b8",
+          "start": 29.427,
+          "end": 29.752,
+          "duration": 0.325,
+          "frame_ahead_trigger": 29.387
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 29.752,
+          "end": 29.799,
+          "duration": 0.048,
+          "frame_ahead_trigger": 29.712
+        },
+        {
+          "word": "trip.",
+          "clean_word": "trip",
+          "phonemes": "t\u0279\u02c8\u026ap",
+          "start": 29.799,
+          "end": 30.072,
+          "duration": 0.272,
+          "frame_ahead_trigger": 29.759
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for easy chats on how our new tech works in a way that makes sense for you each day.",
+      "visual_focus": "Logo overlay of The Model Verse with a clean, fading background.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI Mechanisms",
+        "anchor_word": "explanations",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE MODEL VERSE",
+        "sub": "Simplified frontier AI",
+        "accent_color": "#FFFFFF",
+        "params": {
+          "bottom_layer": "Architecture",
+          "mid_layer": "Training",
+          "top_layer": "Insight"
+        }
+      },
+      "audio_duration": 5.25,
+      "slot_duration": 5.75,
+      "start": 30.51,
+      "end": 35.76,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 30.528,
+          "end": 30.893,
+          "duration": 0.365,
+          "frame_ahead_trigger": 30.488
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.893,
+          "end": 30.998,
+          "duration": 0.105,
+          "frame_ahead_trigger": 30.853
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 30.998,
+          "end": 31.408,
+          "duration": 0.41,
+          "frame_ahead_trigger": 30.958
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 31.408,
+          "end": 31.623,
+          "duration": 0.215,
+          "frame_ahead_trigger": 31.368
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 31.623,
+          "end": 31.813,
+          "duration": 0.19,
+          "frame_ahead_trigger": 31.583
+        },
+        {
+          "word": "easy",
+          "clean_word": "easy",
+          "phonemes": "\u02c8i\u02d0zi",
+          "start": 31.813,
+          "end": 32.028,
+          "duration": 0.215,
+          "frame_ahead_trigger": 31.773
+        },
+        {
+          "word": "chats",
+          "clean_word": "chats",
+          "phonemes": "t\u0283\u02c8\u00e6ts",
+          "start": 32.028,
+          "end": 32.268,
+          "duration": 0.24,
+          "frame_ahead_trigger": 31.988
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 32.268,
+          "end": 32.553,
+          "duration": 0.285,
+          "frame_ahead_trigger": 32.228
         },
         {
           "word": "how",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
-          "start": 36.917,
-          "end": 37.127,
-          "duration": 0.21,
-          "frame_ahead_trigger": 36.877
+          "start": 32.553,
+          "end": 32.683,
+          "duration": 0.13,
+          "frame_ahead_trigger": 32.513
         },
         {
-          "word": "modern",
-          "clean_word": "modern",
-          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
-          "start": 37.127,
-          "end": 37.562,
-          "duration": 0.435,
-          "frame_ahead_trigger": 37.087
+          "word": "our",
+          "clean_word": "our",
+          "phonemes": "\u02cca\u028a\u025a",
+          "start": 32.683,
+          "end": 32.943,
+          "duration": 0.26,
+          "frame_ahead_trigger": 32.643
         },
         {
-          "word": "AI",
-          "clean_word": "ai",
-          "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 37.562,
-          "end": 37.917,
-          "duration": 0.355,
-          "frame_ahead_trigger": 37.522
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 32.943,
+          "end": 33.133,
+          "duration": 0.19,
+          "frame_ahead_trigger": 32.903
         },
         {
-          "word": "actually",
-          "clean_word": "actually",
-          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
-          "start": 37.917,
-          "end": 38.392,
-          "duration": 0.475,
-          "frame_ahead_trigger": 37.877
+          "word": "tech",
+          "clean_word": "tech",
+          "phonemes": "t\u02c8\u025bk",
+          "start": 33.133,
+          "end": 33.203,
+          "duration": 0.07,
+          "frame_ahead_trigger": 33.093
         },
         {
-          "word": "works.",
+          "word": "works",
           "clean_word": "works",
           "phonemes": "w\u02c8\u025c\u02d0ks",
-          "start": 38.392,
-          "end": 38.752,
-          "duration": 0.36,
-          "frame_ahead_trigger": 38.352
+          "start": 33.203,
+          "end": 33.638,
+          "duration": 0.435,
+          "frame_ahead_trigger": 33.163
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 33.638,
+          "end": 33.793,
+          "duration": 0.155,
+          "frame_ahead_trigger": 33.598
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 33.793,
+          "end": 33.893,
+          "duration": 0.1,
+          "frame_ahead_trigger": 33.753
+        },
+        {
+          "word": "way",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 33.893,
+          "end": 34.093,
+          "duration": 0.2,
+          "frame_ahead_trigger": 33.853
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 34.093,
+          "end": 34.208,
+          "duration": 0.115,
+          "frame_ahead_trigger": 34.053
+        },
+        {
+          "word": "makes",
+          "clean_word": "makes",
+          "phonemes": "m\u02c8e\u026aks",
+          "start": 34.208,
+          "end": 34.543,
+          "duration": 0.335,
+          "frame_ahead_trigger": 34.168
+        },
+        {
+          "word": "sense",
+          "clean_word": "sense",
+          "phonemes": "s\u02c8\u025bns",
+          "start": 34.543,
+          "end": 34.838,
+          "duration": 0.295,
+          "frame_ahead_trigger": 34.503
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 34.838,
+          "end": 34.963,
+          "duration": 0.125,
+          "frame_ahead_trigger": 34.798
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 34.963,
+          "end": 35.128,
+          "duration": 0.165,
+          "frame_ahead_trigger": 34.923
+        },
+        {
+          "word": "each",
+          "clean_word": "each",
+          "phonemes": "\u02c8i\u02d0t\u0283",
+          "start": 35.128,
+          "end": 35.408,
+          "duration": 0.28,
+          "frame_ahead_trigger": 35.088
+        },
+        {
+          "word": "day.",
+          "clean_word": "day",
+          "phonemes": "d\u02c8e\u026a",
+          "start": 35.408,
+          "end": 35.628,
+          "duration": 0.22,
+          "frame_ahead_trigger": 35.368
         }
       ]
     }
@@ -1336,70 +1519,78 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$T_{\\mathrm{total}} = \\sum_{i=1}^{n} T_i$",
+      "latex": "$L = T_{total} / T_{chunk}$",
       "filename": "memorizon_world_models_beat1_formula.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "T_i",
-          "label": "Time per chunk"
+          "term": "L",
+          "label": "Sequence Length"
+        },
+        {
+          "term": "T",
+          "label": "Time Duration"
         }
       ],
       "svg_filename": "memorizon_world_models_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(L^2) \\to \\infty$",
+      "latex": "$\\mathrm{Bank} = \\{K_1, K_2, \\dots, K_{kK}\\}$",
       "filename": "memorizon_world_models_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
-      "term_annotations": [
-        {
-          "term": "L",
-          "label": "Context Length"
-        }
-      ],
-      "svg_filename": "memorizon_world_models_beat2_formula.svg"
-    },
-    {
-      "beat_id": 3,
-      "latex": "$K_{\\mathrm{retrieved}} \\ll L$",
-      "filename": "memorizon_world_models_beat3_formula.svg",
-      "fontsize": 24,
-      "color": "#34D399",
       "term_annotations": [
         {
           "term": "K",
           "label": "Top-K Latents"
         }
       ],
+      "svg_filename": "memorizon_world_models_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$C = S \\times k$",
+      "filename": "memorizon_world_models_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "C",
+          "label": "Compute Cost"
+        },
+        {
+          "term": "k",
+          "label": "Scored Chunks"
+        }
+      ],
       "svg_filename": "memorizon_world_models_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$B = k \\times K$",
+      "latex": "$\\mathrm{Score} = \\mathrm{Visibility}(v_1, v_2)$",
       "filename": "memorizon_world_models_beat4_formula.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "B",
-          "label": "Bank Size"
+          "term": "v",
+          "label": "Visit Frames"
         }
       ],
       "svg_filename": "memorizon_world_models_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\Delta \\mathrm{Time} \\approx 12\\%$",
+      "latex": "$\\Delta \\mathrm{Time} = +12\\% \\text{ per } 300\\mathrm{s}$",
       "filename": "memorizon_world_models_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "\\Delta",
-          "label": "Added Cost"
+          "label": "Delta Step Time"
         }
       ],
       "svg_filename": "memorizon_world_models_beat5_formula.svg"
@@ -1447,98 +1638,101 @@
     "visual_entities": {
       "clusters": [
         {
-          "name": "History",
+          "name": "Memory",
           "color": "#38BDF8",
           "items": [
-            "Frame 1",
-            "Frame 2"
+            "bank",
+            "index",
+            "storage"
           ]
         },
         {
-          "name": "Bank",
+          "name": "Compute",
           "color": "#10B981",
           "items": [
-            "Top-K",
-            "Latent"
+            "chunks",
+            "speed",
+            "steps"
           ]
         },
         {
-          "name": "Query",
+          "name": "Vision",
           "color": "#F59E0B",
           "items": [
-            "Current",
-            "Revisit"
+            "frames",
+            "sight",
+            "views"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"Room\"",
-        "target_cluster": "Bank",
-        "token": "\"Room\""
+        "label": "Token: \"revisit\"",
+        "target_cluster": "Vision",
+        "token": "\"revisit\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Token 'old'",
+          "word": "Token 'full-span'",
           "color": "#EF4444"
         },
         {
-          "word": "Token 'new'",
+          "word": "Token 'quad-cost'",
           "color": "#F59E0B"
         }
       ]
     },
     "model_a": "Memorizon",
     "model_a_specs": [
-      "Sparse Retrieval",
       "Bounded Bank",
-      "Memory Efficient"
+      "Sparse Retrieval",
+      "Fixed Compute"
     ],
-    "model_b": "Dense Sliding Window",
+    "model_b": "Sliding Window",
     "model_b_specs": [
-      "Quadratic Cost",
-      "Fixed Window",
-      "Redundant"
+      "Dense Attention",
+      "Quadratic Scaling",
+      "Heavy Compute"
     ],
-    "divide_title": "RETRIEVAL VS DENSE WINDOW",
+    "divide_title": "MEMORY ARCHITECTURE DIVIDE",
     "model_a_stat": "30%",
     "model_a_stat_label": "REVISIT CONSISTENCY GAIN",
-    "model_b_stat": "83%",
-    "model_b_stat_label": "REVISIT CORRELATION LOSS",
-    "efficiency_badge": "\u26a1 12% STEP TIME INCREASE",
+    "model_b_stat": "4x",
+    "model_b_stat_label": "COMPUTE PENALTY",
+    "efficiency_badge": "\u26a1 12% STEP OVERHEAD",
     "benchmarks": [
       {
-        "name": "Consistency",
+        "name": "Revisit Accuracy",
         "score_a": "High",
-        "score_b": "Low"
+        "score_b": "Baseline"
       },
       {
-        "name": "Cost",
-        "score_a": "Linear",
-        "score_b": "Quadratic"
+        "name": "Step Time",
+        "score_a": "Stable",
+        "score_b": "Explosive"
       },
       {
-        "name": "Scaling",
-        "score_a": "400s+",
+        "name": "Context Length",
+        "score_a": "Infinite",
         "score_b": "Limited"
       }
     ],
-    "scale_metric": "400s",
-    "scale_label": "Training Span",
-    "bottleneck_title": "QUADRATIC ATTENTION BOTTLENECK",
-    "bottleneck_desc": "Dense history processing causes memory explosion.",
-    "solution_title": "SPARSE LATENT RETRIEVAL",
-    "solution_components": "Top-K Co-visibility Bank",
-    "mechanism_title": "BOUNDED SEQUENCE BANKING",
+    "scale_metric": "30%",
+    "scale_label": "Revisit Correlation",
+    "bottleneck_title": "QUADRATIC ATTENTION EXPLOSION",
+    "bottleneck_desc": "Full-span dependencies cause training slowdowns.",
+    "solution_title": "SPARSE BANK RETRIEVAL",
+    "solution_components": "Shared memory across disparate temporal windows.",
+    "mechanism_title": "CO-VISIBILITY INDEXING",
     "payoff_stat": "30%",
-    "payoff_label": "REVISIT CONSISTENCY IMPROVEMENT",
-    "payoff_sub": "Efficient world models beyond context limits",
+    "payoff_label": "CONSISTENCY GAIN",
+    "payoff_sub": "Stable training for long video spans",
     "payoff_hero_stat": 30.0,
-    "payoff_hero_label": "Consistency Gain",
+    "payoff_hero_label": "Revisit Correlation",
     "payoff_base_stat": 83.0,
-    "payoff_base_label": "Baseline Correlation Loss",
-    "payoff_delta_badge": "\u26a1 +30% CONSISTENCY GAIN",
+    "payoff_base_label": "Random Retrieval",
+    "payoff_delta_badge": "\u26a1 +30% CONSISTENCY IMPROVEMENT",
     "challenger": "Memorizon",
-    "incumbent": "Sliding Window"
+    "incumbent": "Sliding Window Baseline"
   },
   "entity_registry": [
     {
@@ -1555,115 +1749,83 @@
       "parameters": {}
     }
   ],
-  "arxiv_id": "2610.00544",
-  "paper_figures": [
-    {
-      "figure_id": "fig_1",
-      "stem": "interval",
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.00544/source/figures/interval.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.00544/chalkboard_figures/fig_1_interval.svg",
-      "type": "vector_pdf"
-    },
-    {
-      "figure_id": "fig_2",
-      "stem": "revisit_stats",
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.00544/source/figures/revisit_stats.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.00544/chalkboard_figures/fig_2_revisit_stats.svg",
-      "type": "vector_pdf"
-    }
-  ],
   "script_driven_visuals": true,
   "layout_overrides": {
     "1": {
       "hero_visual": {
         "dx": 0.0,
-        "dy": -0.2,
-        "scale_multiplier": 0.85
-      },
-      "conceptual_shift": {
-        "dx": 0.0,
         "dy": 0.0,
         "scale_multiplier": 1.0
       },
-      "top_wave_pair": {
+      "flowchart_group": {
         "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 0.818
-      },
-      "resultant_wave": {
-        "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.818
+        "scale_multiplier": 0.884
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 1.28,
+        "dy": 1.784,
         "scale_multiplier": 1.0
       },
-      "wave_diagram_top": {
+      "process_flow_container": {
         "dx": 0.0,
         "dy": 0.5,
-        "scale_multiplier": 0.695
-      },
-      "wave_diagram_bottom": {
-        "dx": 0.0,
-        "dy": -0.2,
-        "scale_multiplier": 0.736
+        "scale_multiplier": 0.702
       }
     },
     "2": {
-      "flowchart_replacement": {
+      "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 0.0
+        "dy": -0.3,
+        "scale_multiplier": 1.15
+      },
+      "saas_boxes": {
+        "dx": -0.085,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 1.72,
-        "scale_multiplier": 1.1
-      },
-      "hero_visual": {
-        "dx": 0.0,
-        "dy": 0.0,
+        "dy": 1.84,
         "scale_multiplier": 1.0
+      },
+      "generic_saas_diagram": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.751
       }
     },
     "3": {
-      "hero_visual": {
+      "ui_blocks": {
         "dx": 0.0,
-        "dy": 0.3,
-        "scale_multiplier": 0.8
-      },
-      "generic_bar_chart": {
-        "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.916
+        "dy": -0.2,
+        "scale_multiplier": 0.722
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 1.872,
+        "dy": 3.0,
         "scale_multiplier": 1.0
       },
-      "generic_academic_plot": {
+      "saas_boxes": {
         "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.863
+        "dy": 0.2,
+        "scale_multiplier": 0.765
       }
     },
     "4": {
-      "hero_visual_grid": {
-        "dx": -0.139,
-        "dy": 0.5,
-        "scale_multiplier": 0.85
-      },
-      "fixed_memory_block": {
+      "hero_visual": {
         "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.0
+        "dy": 0.2,
+        "scale_multiplier": 1.15
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 0.944,
+        "dy": 1.648,
+        "scale_multiplier": 1.0
+      },
+      "ray_geometry": {
+        "dx": 0.0,
+        "dy": -0.152,
         "scale_multiplier": 1.0
       }
     },
@@ -1671,33 +1833,33 @@
       "hero_visual": {
         "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 1.0
+        "scale_multiplier": 0.0
       },
-      "generic_bar_charts": {
+      "comparison_cards": {
         "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 0.779
+        "scale_multiplier": 0.836
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 2.08,
+        "dy": 1.632,
         "scale_multiplier": 1.0
       },
-      "generic_bars": {
+      "cards_comparison": {
         "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 0.779
+        "scale_multiplier": 0.839
       }
     },
     "6": {
-      "text_primary_brand": {
+      "logo_container": {
         "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.966
+        "dy": 0.2,
+        "scale_multiplier": 1.05
       },
-      "logo_geometric_icon": {
+      "brand_text": {
         "dx": 0.0,
-        "dy": -0.5,
+        "dy": 0.2,
         "scale_multiplier": 1.0
       }
     }
