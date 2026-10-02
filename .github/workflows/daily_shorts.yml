@@ -34,12 +34,12 @@ on:
       quality:
         description: 'Render quality profile'
         required: false
-        default: '-qm'
+        default: 'qm'
         type: choice
         options:
-          - '-qm'
-          - '-qh'
-          - '-ql'
+          - 'qm'
+          - 'qh'
+          - 'ql'
       dry_run:
         description: 'Dry run (Scrape and evaluate without rendering)'
         required: false
@@ -120,7 +120,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           COUNT="${{ github.event.inputs.count || '1' }}"
-          QUALITY="${{ github.event.inputs.quality || '-qm' }}"
+          QUALITY="${{ github.event.inputs.quality || 'qm' }}"
           ARXIV_ID="${{ github.event.inputs.arxiv_id || '' }}"
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
 

@@ -135,7 +135,10 @@ class DailyShortsDaemon:
     """Autonomous scheduler and engine for daily AI Shorts production."""
 
     def __init__(self, quality: str = "-qh", privacy: str = "public"):
-        self.quality = quality
+        if quality and not quality.startswith("-"):
+            self.quality = f"-{quality}"
+        else:
+            self.quality = quality or "-qh"
         self.privacy = privacy
         self.critic = ScriptCritic()
 
@@ -318,7 +321,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
-    parser.add_argument("--quality", default="-qh", help="Render quality (default: -qh 60fps)")
+    parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
     args = parser.parse_args()
 

@@ -1,0 +1,337 @@
+{
+  "id": "multimodal_flow_architecture",
+  "title": "Multimodal Flow: A Unified Continuous Paradigm",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "MULTIMODAL FLOW MECHANICS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do AI models struggle to speak and see at once? Old ways chop images into tiny, discrete blocks that break the natural flow.",
+      "visual_focus": "A split screen showing a smooth line for language and a jagged, broken puzzle for images, then merging them.",
+      "highlight_words": {
+        "struggle": "#EF4444",
+        "discrete": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Discrete Tokenizer",
+        "action_verb": "chops",
+        "direct_object": "Continuous Visual Stream",
+        "anchor_word": "chop",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of this like trying to map a curvy, colorful sunset using only a rigid grid of Lego bricks. You lose the true shape.",
+      "visual_focus": "A beautiful gradient sunset being pixelated into sharp, jagged blocks, illustrating loss of information.",
+      "highlight_words": {
+        "rigid": "#EF4444",
+        "lose": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Lego Grid",
+        "action_verb": "constrains",
+        "direct_object": "Curvy Visual Hue",
+        "anchor_word": "grid",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "Multimodal Flow treats text and pixels as one smooth, continuous river. Scientists align them into shared chunks that keep their spatial, logic order.",
+      "visual_focus": "Text and image data flowing together in a singular, fluid stream within a shared coordinate system.",
+      "highlight_words": {
+        "smooth": "#34D399",
+        "shared": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Flow Backbone",
+        "action_verb": "aligns",
+        "direct_object": "Shared Hyperchunks",
+        "anchor_word": "align",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "The model acts like a sculptor. It learns a single vector field that carves meaning from chaos, processing both modalities as one unified signal.",
+      "visual_focus": "A block of marble shifting into a detailed 3D shape, guided by flowing vector arrows representing the model field.",
+      "highlight_words": {
+        "sculptor": "#34D399",
+        "unified": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Vector Field",
+        "action_verb": "carves",
+        "direct_object": "Semantic Latent Shape",
+        "anchor_word": "carves",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This leads to peak performance. With far fewer training steps, it beats older hybrid models, showing that fully continuous flow is the smarter way.",
+      "visual_focus": "A bar chart showing 'Multimodal Flow' rising rapidly, crossing and dwarfing the 'Hybrid Model' baseline bars.",
+      "highlight_words": {
+        "peak": "#34D399",
+        "smarter": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Continuous Flow",
+        "action_verb": "surpasses",
+        "direct_object": "Hybrid Benchmark Scores",
+        "anchor_word": "beats",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appears with a clean, animated, growing geometric node connection.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "guides",
+        "direct_object": "AI Understanding",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{total}} = d_{\\mathrm{text}} \\cup d_{\\mathrm{visual}}$",
+      "filename": "multimodal_flow_architecture_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "d_{total}",
+          "label": "Unified Space"
+        },
+        {
+          "term": "d_{visual}",
+          "label": "Image Dimension"
+        }
+      ],
+      "svg_filename": "multimodal_flow_architecture_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(\\text{Tokens}) \\approx \\sum_{i=1}^N \\text{Grid}_i$",
+      "filename": "multimodal_flow_architecture_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "Grid",
+          "label": "Discrete Quantization"
+        }
+      ],
+      "svg_filename": "multimodal_flow_architecture_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{F}(x, t) = \\nabla \\log p(x_t)$",
+      "filename": "multimodal_flow_architecture_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{F}",
+          "label": "Continuous Flow Field"
+        },
+        {
+          "term": "p(x_t)",
+          "label": "Data Density"
+        }
+      ],
+      "svg_filename": "multimodal_flow_architecture_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Output} = \\mathrm{JointAttention}(Q, K, V)$",
+      "filename": "multimodal_flow_architecture_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "Q, K, V",
+          "label": "Cross-Modal Weights"
+        }
+      ],
+      "svg_filename": "multimodal_flow_architecture_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Gain} = \\frac{\\mathrm{Score}_{MF}}{\\mathrm{Score}_{Hybrid}} > 1$",
+      "filename": "multimodal_flow_architecture_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Score_{MF}",
+          "label": "Multimodal Flow Result"
+        }
+      ],
+      "svg_filename": "multimodal_flow_architecture_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "TEXT_SPACE",
+          "color": "#38BDF8",
+          "items": [
+            "word",
+            "token",
+            "order"
+          ]
+        },
+        {
+          "name": "VISUAL_SPACE",
+          "color": "#10B981",
+          "items": [
+            "pixel",
+            "structure",
+            "shape"
+          ]
+        },
+        {
+          "name": "HYPERCHUNKS",
+          "color": "#F59E0B",
+          "items": [
+            "vector",
+            "field",
+            "flow"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"multimodal\"",
+        "target_cluster": "HYPERCHUNKS",
+        "token": "\"multimodal\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'Quantized'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'Discrete'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Multimodal Flow",
+    "model_a_specs": [
+      "Fully Continuous",
+      "Shared Backbone",
+      "Chunk-Causal"
+    ],
+    "model_b": "Discrete Hybrids",
+    "model_b_specs": [
+      "Visual Bottleneck",
+      "Modality-Dependent",
+      "Quantized"
+    ],
+    "divide_title": "CONTINUOUS FLOW VS DISCRETE BOTTLENECK",
+    "model_a_stat": "82.8",
+    "model_a_stat_label": "GENEVAL SCORE",
+    "model_b_stat": "75.3",
+    "model_b_stat_label": "BASELINE AVG",
+    "efficiency_badge": "\u26a1 150B TOKENS EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "GenEval",
+        "score_a": "82.8",
+        "score_b": "78.1"
+      },
+      {
+        "name": "VQAv2",
+        "score_a": "75.3",
+        "score_b": "72.4"
+      },
+      {
+        "name": "MMBench",
+        "score_a": "Competitive",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "1.6B",
+    "scale_label": "Parameters Tested",
+    "bottleneck_title": "VISUAL QUANTIZATION BOTTLENECK",
+    "bottleneck_desc": "Information loss from discrete tokenization",
+    "solution_title": "CONTINUOUS CHUNK-BASED EMBEDDING",
+    "solution_components": "Unified Generative Process",
+    "mechanism_title": "FLOW MATCHING VECTOR FIELD",
+    "payoff_stat": "82.8",
+    "payoff_label": "TOP BENCHMARK PERFORMANCE",
+    "payoff_sub": "Outperforming traditional hybrid and discrete models",
+    "payoff_hero_stat": 82.8,
+    "payoff_hero_label": "Multimodal Flow",
+    "payoff_base_stat": 75.3,
+    "payoff_base_label": "Previous Hybrid Best",
+    "payoff_delta_badge": "\u26a1 +9.9% UNIFIED MODELING GAIN",
+    "challenger": "Multimodal Flow",
+    "incumbent": "Representative Hybrids"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}
