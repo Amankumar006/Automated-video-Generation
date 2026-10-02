@@ -1,13 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-02 | **Timestamp:** 2026-10-02 12:38:39 UTC
+**Date:** 2026-10-02 | **Timestamp:** 2026-10-02 15:19:37 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation
-- **arXiv ID:** [2610.02148](https://arxiv.org/abs/2610.02148)
-- **Category:** `architecture_breakdown`
-- **Editorial Hook:** *What if you could shrink a brain to 1/10th its size without losing any of its memories?*
-- **Everyday Analogy:** *A 'magic suitcase' where you use hyper-efficient, space-saving vacuum seals to pack an entire closet's worth of clothes into a tiny carry-on without wrinkling them.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_omni_embed_mini_breakdown_architecture_breakdown.mp4`
+### Reel 1: LOCI: Spatial Linear Memory for Streaming World Models
+- **arXiv ID:** [2609.40222](https://arxiv.org/abs/2609.40222)
+- **Domain Taxonomy:** `hardware_efficiency` (1.48x velocity)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *Why does your AI get 'dizzy' when it turns back to look at where it just came from?*
+- **Everyday Analogy:** *A physical map that automatically unfolds and highlights the room you are currently standing in as you walk through a house.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_loci_spatial_memory_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
