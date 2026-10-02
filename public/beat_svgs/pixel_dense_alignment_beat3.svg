@@ -1,0 +1,37 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Router Gate -->
+  <g fill="none" stroke="#F8FAFC" stroke-width="3">
+    <path d="M 200 200 L 280 200 L 320 240 L 320 160 L 280 200" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="200" cy="200" r="15" fill="#475569" stroke="#F8FAFC"/>
+  </g>
+
+  <!-- Input Stream -->
+  <path d="M 50 200 L 185 200" stroke="#F8FAFC" stroke-width="4" stroke-dasharray="8 8"/>
+
+  <!-- Pipeline 1: Blue (Meanings) -->
+  <g filter="url(#glow)">
+    <path d="M 320 160 Q 450 160 550 120" stroke="#38BDF8" stroke-width="6" fill="none"/>
+    <circle cx="380" cy="160" r="6" fill="#38BDF8"/>
+    <circle cx="450" cy="160" r="6" fill="#38BDF8"/>
+    <circle cx="520" cy="140" r="6" fill="#38BDF8"/>
+  </g>
+
+  <!-- Pipeline 2: Gold (Shapes) -->
+  <g filter="url(#glow)">
+    <path d="M 320 240 Q 450 240 550 280" stroke="#F59E0B" stroke-width="6" fill="none"/>
+    <rect x="375" y="234" width="12" height="12" fill="#F59E0B" transform="rotate(20 381 240)"/>
+    <rect x="445" y="234" width="12" height="12" fill="#F59E0B" transform="rotate(10 451 240)"/>
+    <rect x="515" y="265" width="12" height="12" fill="#F59E0B" transform="rotate(30 521 271)"/>
+  </g>
+
+  <!-- Splitting Points (Nodes) -->
+  <circle cx="320" cy="160" r="8" fill="#38BDF8"/>
+  <circle cx="320" cy="240" r="8" fill="#F59E0B"/>
+</svg>

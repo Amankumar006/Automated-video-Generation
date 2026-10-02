@@ -19,6 +19,7 @@ sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.arxiv_fetcher import extract_arxiv_id
 from pipeline.auto_produce import auto_produce
+from pipeline.analytics_feedback import classify_content_taxonomy, get_performance_category_bias
 
 HISTORY_FILE = PROJECT_ROOT / "pipeline" / "digest_history.json"
 
@@ -27,13 +28,16 @@ MECHANISM_KEYWORDS = {
     "attention": 14, "kv cache": 16, "memory": 10, "quantization": 14, "fp8": 15, "fp4": 15,
     "kernel": 12, "cuda": 12, "flashattention": 18, "speculative decoding": 16,
     "context window": 12, "linear attention": 14, "state space": 14, "mamba": 14,
-    "throughput": 10, "latency": 10, "vram": 12, "bandwidth": 12, "pagedattention": 16
+    "throughput": 10, "latency": 10, "vram": 12, "bandwidth": 12, "pagedattention": 16,
+    "cache compression": 16, "spatial memory": 14, "denoising": 14, "diffusion step": 14
 }
 
 ARCHITECTURE_KEYWORDS = {
     "mixture of experts": 16, "moe": 16, "sparse": 12, "router": 12, "transformer": 10,
     "deepseek": 14, "llama": 12, "qwen": 12, "foundation model": 10, "distillation": 12,
-    "parameters": 10, "hybrid architecture": 14, "multimodal": 10, "diffusion transformer": 14
+    "parameters": 10, "hybrid architecture": 14, "multimodal": 12, "diffusion transformer": 16,
+    "flow matching": 16, "video generation": 16, "image synthesis": 14, "visual generation": 14,
+    "generative video": 16, "world models": 14
 }
 
 BENCHMARK_KEYWORDS = {
@@ -174,8 +178,19 @@ def score_and_classify_paper(paper: Dict[str, Any]) -> Dict[str, Any]:
         if kw in title_lower:
             total_score += 10
 
+    # 4. Integrate Live YouTube Analytics Multipliers (Option 2)
+    taxonomy = classify_content_taxonomy(paper["title"], paper.get("abstract", ""))
+    category_biases = get_performance_category_bias()
+    multiplier = category_biases.get(taxonomy, 1.0)
+
+    raw_impact_score = round(total_score, 1)
+    weighted_impact_score = round(raw_impact_score * multiplier, 1)
+
     paper_out = dict(paper)
-    paper_out["impact_score"] = round(total_score, 1)
+    paper_out["raw_impact_score"] = raw_impact_score
+    paper_out["taxonomy"] = taxonomy
+    paper_out["analytics_multiplier"] = multiplier
+    paper_out["impact_score"] = weighted_impact_score
     paper_out["recommended_category"] = best_cat
     paper_out["category_scores"] = scores
     return paper_out
@@ -200,20 +215,21 @@ def get_trending_digest(date_str: Optional[str] = None, limit: int = 25) -> List
     return scored_papers
 
 def display_digest(papers: List[Dict[str, Any]], top_n: int = 10):
-    """Renders a formatted terminal table of trending papers."""
-    print("\n" + "=" * 90)
-    print("🔥 THE MODEL VERSE — DAILY TRENDING AI RESEARCH DIGEST")
-    print("=" * 90)
-    print(f"{'RANK':<5} {'ARXIV ID':<13} {'SCORE':<7} {'UPVOTES':<8} {'CATEGORY':<23} {'STATUS':<10} {'TITLE'}")
-    print("-" * 90)
+    """Renders a formatted terminal table of trending papers with analytics multipliers."""
+    print("\n" + "=" * 110)
+    print("🔥 THE MODEL VERSE — DAILY TRENDING AI RESEARCH DIGEST (ANALYTICS ALIGNED)")
+    print("=" * 110)
+    print(f"{'RANK':<5} {'ARXIV ID':<13} {'SCORE':<7} {'MULT':<6} {'TAXONOMY':<25} {'CATEGORY':<21} {'STATUS':<9} {'TITLE'}")
+    print("-" * 110)
 
     for i, p in enumerate(papers[:top_n], start=1):
         status = "✅ DONE" if p["is_processed"] else "⚡ READY"
-        upvotes_str = f"▲ {p['upvotes']}" if p.get("upvotes") else "—"
-        cat_str = p["recommended_category"].replace("_", " ").title()
-        title_trunc = p["title"] if len(p["title"]) <= 42 else p["title"][:39] + "..."
-        print(f"#{i:<4} {p['id']:<13} {p['impact_score']:<7.1f} {upvotes_str:<8} {cat_str:<23} {status:<10} {title_trunc}")
-    print("=" * 90 + "\n")
+        mult_str = f"{p.get('analytics_multiplier', 1.0):.2f}x"
+        tax_str = p.get("taxonomy", "general").replace("_", " ").title()[:24]
+        cat_str = p.get("recommended_category", "mechanism_deepdive").replace("_", " ").title()[:20]
+        title_trunc = p["title"] if len(p["title"]) <= 33 else p["title"][:30] + "..."
+        print(f"#{i:<4} {p['id']:<13} {p['impact_score']:<7.1f} {mult_str:<6} {tax_str:<25} {cat_str:<21} {status:<9} {title_trunc}")
+    print("=" * 110 + "\n")
 
 def run_cron_cycle(quality: str = "-qh", publish: bool = False, privacy: str = "unlisted"):
     """

@@ -1,0 +1,36 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#F8FAFC" />
+    </marker>
+  </defs>
+
+  <!-- Flow Conduits -->
+  <path d="M 100 100 C 200 100, 200 150, 300 150" fill="none" stroke="#38BDF8" stroke-width="4" stroke-dasharray="8 8" />
+  <path d="M 100 300 C 200 300, 200 250, 300 250" fill="none" stroke="#34D399" stroke-width="4" stroke-dasharray="8 8" />
+
+  <!-- Bottleneck Funnel Shape -->
+  <path d="M 300 120 L 400 180 L 400 220 L 300 280 Z" fill="none" stroke="#F8FAFC" stroke-width="3" />
+  
+  <!-- Clogged Data Particles -->
+  <circle cx="280" cy="150" r="12" fill="#38BDF8" />
+  <circle cx="260" cy="140" r="10" fill="#38BDF8" />
+  <circle cx="270" cy="165" r="8" fill="#38BDF8" />
+  
+  <circle cx="280" cy="250" r="12" fill="#34D399" />
+  <circle cx="260" cy="260" r="10" fill="#34D399" />
+  <circle cx="270" cy="235" r="8" fill="#34D399" />
+
+  <!-- The Bottleneck Jam -->
+  <circle cx="330" cy="200" r="15" fill="#EF4444" />
+  <circle cx="350" cy="200" r="12" fill="#F59E0B" />
+  <circle cx="340" cy="180" r="10" fill="#A855F7" />
+  <circle cx="340" cy="220" r="10" fill="#F59E0B" />
+
+  <!-- Explosion / Pressure Lines -->
+  <line x1="310" y1="170" x2="290" y2="150" stroke="#EF4444" stroke-width="2" />
+  <line x1="310" y1="230" x2="290" y2="250" stroke="#EF4444" stroke-width="2" />
+
+  <!-- Output Path -->
+  <path d="M 400 200 L 500 200" fill="none" stroke="#F8FAFC" stroke-width="4" marker-end="url(#arrow)" />
+</svg>

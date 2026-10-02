@@ -36,11 +36,12 @@ from manim_engine.primitives.script_motifs import (
 )
 
 
-class ScriptDrivenScene(Scene):
+class ScriptDrivenScene(MovingCameraScene):
     """
-    Intelligent Script-Driven Visual Engine.
+    Intelligent Script-Driven Visual Engine (Visual Engine 3.1).
     Directly binds bespoke vector designs and procedural geometric motifs to voiceover beats,
-    ensuring every second of video provides clear, intuitive visual intuition.
+    with continuous 3Blue1Brown-style camera breathing and ambient micro-motion to eliminate
+    static dead screens while narrations speak.
     """
 
     def construct(self):
@@ -236,9 +237,11 @@ class ScriptDrivenScene(Scene):
             self.display_math_formula(beat_id, run_time=0.4)
 
             # Resolve paper figure SVG if paper_figure motif requested
-            if motif_type == "paper_figure":
+            if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
                 if not motif_params.get("svg_path"):
-                    if b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
+                    if b.get("svg_path") and os.path.exists(b.get("svg_path")):
+                        motif_params["svg_path"] = b.get("svg_path")
+                    elif b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
                         motif_params["svg_path"] = b.get("paper_figure_path")
                     elif self.spec.get("paper_figures"):
                         motif_params["svg_path"] = self.spec["paper_figures"][0].get("svg_path")
@@ -261,8 +264,9 @@ class ScriptDrivenScene(Scene):
             # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
             action_time = min(1.8, duration * 0.35)
             try:
-                if motif_type == "paper_figure" and hasattr(motif, "frame"):
-                    self.play(motif.frame.animate.set_stroke(color="#38BDF8", width=3.0), motif.badge.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
+                if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "frame"):
+                    accent = getattr(motif, "accent_color", "#38BDF8")
+                    self.play(motif.frame.animate.set_stroke(color=accent, width=3.5), motif.badge.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
                     self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
                     self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
@@ -293,15 +297,79 @@ class ScriptDrivenScene(Scene):
                 print(f"⚠️ Kinetic action warning for {motif_type}: {e}")
                 self.wait(action_time)
 
-            # 5. Hold and Clean Exit
+            # 5. Continuous 3b1b Camera Breathing & Ambient Micro-Motion (Eliminating Dead Screens)
             used_time = enter_time + action_time
             remaining = duration - used_time - 0.4
             if remaining > 0.1:
-                self.wait(remaining)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), run_time=0.4)
+                self.play_ambient_micro_motion(motif, motif_type, remaining)
+
+            # 6. Clean Exit & Seamless Camera Reset
+            reset_cam = self.camera.frame.animate(run_time=0.4, rate_func=smooth).set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
+            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_cam, run_time=0.4)
+
+    def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
+        """
+        3Blue1Brown-Standard Continuous Ambient Micro-Motion:
+        Eliminates 'dead screens' / static wait during remaining voiceover narration.
+        Applies a gentle 2.5% slow camera push-in and subtle drift,
+        coupled with contextual traveling energy pulses across active motif elements.
+        """
+        if remaining_time <= 0.1:
+            return
+
+        anims = []
+
+        # 1. Subtle Continuous 2.5% Camera Drift / Slow Push-In (Linear rate func)
+        anims.append(
+            self.camera.frame.animate(rate_func=linear, run_time=remaining_time).scale(0.975).shift(UP * 0.08)
+        )
+
+        # 2. Contextual Traveling Energy & Shimmer on the Active Motif
+        try:
+            if motif_type == "wave_collision" and hasattr(motif, "wave_c"):
+                anims.append(motif.wave_c.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=5.8, color="#F43F5E"))
+            elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
+                anims.append(motif.needle.animate(rate_func=there_and_back, run_time=remaining_time).shift(RIGHT * 0.18))
+            elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
+                anims.append(motif.angle_arc.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#10B981", width=5.0))
+            elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1") and hasattr(motif, "out_beam2"):
+                anims.append(motif.out_beam1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.5, color="#67E8F9"))
+                anims.append(motif.out_beam2.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.5, color="#FBBF24"))
+            elif motif_type == "branching_outputs" and hasattr(motif, "card1") and hasattr(motif, "card2"):
+                anims.append(motif.card1.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+                anims.append(motif.card2.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+            elif motif_type == "tree_search" and hasattr(motif, "c1"):
+                anims.append(motif.c1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#FBBF24", width=3.5))
+            elif motif_type == "diffusion_denoise" and hasattr(motif, "shape3"):
+                anims.append(motif.shape3.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.04))
+            elif motif_type == "attention_routing" and hasattr(motif, "lasers"):
+                anims.append(motif.lasers.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.0, color="#6EE7B7"))
+            elif motif_type == "memory_buffer" and hasattr(motif, "slots"):
+                anims.append(motif.slots.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#34D399", width=3.5))
+            elif motif_type == "comparative_bars" and hasattr(motif, "fill_bar_a"):
+                anims.append(motif.fill_bar_a.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+            elif motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "frame"):
+                accent = getattr(motif, "accent_color", "#38BDF8")
+                anims.append(motif.frame.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color=accent, width=3.2))
+                if hasattr(motif, "fig_mobj") and motif.fig_mobj:
+                    anims.append(motif.fig_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.015))
+            elif hasattr(motif, "badge"):
+                anims.append(motif.badge.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+            else:
+                anims.append(motif.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.018))
+        except Exception as e:
+            print(f"⚠️ Ambient micro-motion note for {motif_type}: {e}")
+
+        # 3. Soft ambient pulse on lower concept/formula tray
+        if self.current_formula_mobj:
+            anims.append(
+                self.current_formula_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.012)
+            )
+
+        self.play(*anims, run_time=remaining_time)
 
     def play_brand_outro(self):
-        """Standard high-conversion 3Blue1Brown chalkboard outro."""
+        """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
         duration = self.get_beat_duration(6, 4.5)
         if self.current_formula_mobj:
             self.play(FadeOut(self.current_formula_mobj), run_time=0.3)
@@ -317,5 +385,13 @@ class ScriptDrivenScene(Scene):
 
         self.play(Create(logo_icon), FadeIn(brand_text, shift=UP * 0.2), run_time=1.0)
         self.play(FadeIn(sub, shift=UP * 0.1), run_time=0.6)
-        self.wait(max(0.5, duration - 2.0))
+
+        # Micro-drift during outro narration & music
+        outro_hold = max(0.5, duration - 2.0)
+        self.play(
+            self.camera.frame.animate(rate_func=linear).scale(0.985).shift(UP * 0.05),
+            brand_text.animate(rate_func=there_and_back).set_color("#34D399"),
+            logo_icon.animate(rate_func=there_and_back).scale(1.03),
+            run_time=outro_hold
+        )
         self.play(FadeOut(outro_group), run_time=0.4)
