@@ -81,50 +81,38 @@ class VisualDirector:
 Read the 5 narrative beats for our video: '{topic}'
 {chr(10).join(beat_summaries)}
 
-Your mission: For EACH of the 5 beats, select the SINGLE BEST explanatory visual motif from our 3b1b primitive library, and customize its exact text labels, titles, and parameters to directly explain what the voiceover is narrating.
+Your mission: For EACH of the 5 beats, select the SINGLE BEST explanatory visual motif and customize its exact text labels, titles, and parameters to directly explain what the voiceover is narrating.
 
-AVAILABLE MOTIFS IN THE LIBRARY:
-1. "wave_collision": For colliding signals, wave interference, noise vs signal, or superposition.
-   params: signal_a_label, signal_b_label, result_label, result_sub
-2. "radio_tuner": For analog dials, frequency tuning, picking channels, or channel static.
-   params: station_a_label, station_b_label, tuner_status, scope_label
-3. "subspace_vectors": For packing concepts into vector spaces, coordinate grids, or orthogonal angles.
-   params: title, sub, vec1_label, vec2_label, angle_label, badge_title, badge_sub
-4. "prism_disentangler": For separating tangled thoughts, linear decoders, filtering noise, or peeling layers.
-   params: title, sub, in_label, prism_label, out1_label, out2_label
-5. "branching_outputs": For a single model / forward pass yielding dual answers or parallel decisions.
-   params: in_label, core_title, core_sub, card1_title, card1_body, card2_title, card2_body
-6. "tree_search": For reasoning models, MCTS, search paths, candidate exploration, and pruning dead ends.
-   params: title, sub, root_label, optimal_label, optimal_sub, pruned_label, pruned_sub, badge_title, badge_sub
-7. "diffusion_denoise": For diffusion, image/video generation, noise trajectories, or flow matching.
-   params: title, sub, step1_label, step2_label, step3_label, badge_title, badge_sub
-8. "attention_routing": For transformer attention, token dispatch, multi-head routing, or sparse MoE.
-   params: title, sub, token_labels (list of 3), head_labels (list of 3), badge_title, badge_sub
-9. "memory_buffer": For KV-cache, context windows, RAM, compression, or streaming buffers.
-   params: title, sub, in_stream_label, cache_status_label, gain_badge_title, gain_badge_sub
-10. "comparative_bars": For quantitative payoffs, benchmark comparisons, speedups, or accuracy deltas. (NEVER USE CIRCLES).
-   params: title, sub, contender_a_name, contender_a_score (0.0-1.0), contender_a_text, contender_b_name, contender_b_score (0.0-1.0), contender_b_text, delta_badge_text, delta_badge_sub
-11. "custom_flow": Universal 3-stage pipeline (Input -> Engine -> Result) for any bespoke mechanism.
-   params: title, sub, step1_title, step1_sub, step2_title, step2_sub, step3_title, step3_sub
-12. "paper_figure": Displays the official vector architecture diagram extracted directly from the paper.
+PRIMARY ARCHITECTURAL ENGINES:
+1. "bespoke_svg" (PRIMARY ENGINE FOR NARRATIVE BEATS 1, 2, 4, AND BEAT 3):
+   Our dynamic vector synthesizer generates an exact, bespoke chalkboard vector illustration directly explaining the physical analogy or technical mechanism narrated in this beat.
+   params: title, sub, badge_text, accent_color (#38BDF8, #34D399, #F59E0B, #A855F7)
+2. "paper_figure" (FOR BEAT 3 IF OFFICIAL ARXIV DIAGRAM EXISTS):
+   Displays the official publication architecture vector diagram extracted directly from the paper's LaTeX/PDF source.
    params: title, sub, badge_text
-13. "bespoke_svg": For beats presenting unique physical analogies, visual metaphors, or custom mechanisms (e.g. fruit smoothie blender, flickering canvas portrait, connect-the-dots wireframe, bifurcated dual tracks, anti-bleed barrier, lego quantization, puzzle pieces, highway bottleneck). Our dynamic vector engine synthesizes an exact custom vector diagram for this beat.
-   params: title, sub, badge_text, accent_color
+3. "comparative_bars" (MANDATORY FOR BEAT 5):
+   Clean horizontal metric comparison bars comparing the new breakthrough vs prior baselines.
+   params: title, sub, contender_a_name, contender_a_score (0.0-1.0), contender_a_text, contender_b_name, contender_b_score (0.0-1.0), contender_b_text, delta_badge_text, delta_badge_sub
 
-CRITICAL GUIDELINES:
-- NEVER use generic progress circles or repetitive gauges.
-- Every label MUST be meaningful technical typography tailored to this specific paper (never reuse unrelated placeholder labels).
-- Ensure the selected motif directly depicts the exact physical metaphor spoken in that beat.
-{"- NOTE: Official vector figures are extracted for this paper. Use 'paper_figure' for Beat 3 or Beat 4 to showcase the authentic publication diagram!" if spec.get("paper_figures") else ""}
+CRITICAL DIRECTIVES:
+- NEVER use generic progress circles or repetitive canned diagrams.
+- Narrative beats (Beats 1 to 4) MUST use "bespoke_svg" (or "paper_figure" if official vector figures exist).
+- Payoff beat (Beat 5) MUST use "comparative_bars".
+{"- NOTE: Official vector figures are extracted for this paper. Use 'paper_figure' for Beat 3 to showcase the authentic publication diagram!" if spec.get("paper_figures") else ""}
 
 Return ONLY a valid JSON object matching this schema:
 {{
   "storyboard": [
     {{
       "beat_id": 1,
-      "motif_type": "wave_collision",
-      "motif_params": {{ ... }},
-      "kinetic_action": "wave_pulse",
+      "motif_type": "bespoke_svg",
+      "motif_params": {{
+        "title": "SPECIFIC CONCEPT TITLE",
+        "sub": "Explanation of visual analogy",
+        "badge_text": "TECHNICAL ROLE",
+        "accent_color": "#38BDF8"
+      }},
+      "kinetic_action": "figure_scan",
       "reasoning": "Directly matches the voiceover description"
     }}
   ]
@@ -277,165 +265,19 @@ Return ONLY a valid JSON object matching this schema:
                     },
                     "kinetic_action": "bar_fill"
                 })
-            elif any(k in text for k in ["radio", "dial", "tuner", "station"]):
-                lbl_a = hl_keys[0].upper() if hl_keys else "CHANNEL 1"
-                lbl_b = hl_keys[1].upper() if len(hl_keys) > 1 else "CHANNEL 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "radio_tuner",
-                    "motif_params": {
-                        "station_a_label": f"FREQ A\n[{lbl_a[:14]}]",
-                        "station_b_label": f"FREQ B\n[{lbl_b[:14]}]",
-                        "tuner_status": f"TUNER: ISOLATING {lbl_a[:16]}",
-                        "scope_label": f"RESOLVED WAVEFORMS: {subj.upper()[:22]}"
-                    },
-                    "kinetic_action": "needle_sweep"
-                })
-            elif any(k in text for k in ["prism", "peel", "disentangl", "separate streams", "decoder"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else "SIGNAL 1"
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else "SIGNAL 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "prism_disentangler",
-                    "motif_params": {
-                        "title": f"DISENTANGLING {topic_title.upper()[:22]}",
-                        "sub": v_focus[:55] or "Linear map isolates mixed representations into distinct vectors",
-                        "in_label": "SUPERPOSED\nINPUT",
-                        "prism_label": "DECODER\nMAP",
-                        "out1_label": f"STREAM 1: {lbl1[:16]}",
-                        "out2_label": f"STREAM 2: {lbl2[:16]}"
-                    },
-                    "kinetic_action": "beam_glow"
-                })
-            elif any(k in text for k in ["branch", "two clear answers", "simultaneous", "forward pass"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else "OUTPUT 1"
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else "OUTPUT 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "branching_outputs",
-                    "motif_params": {
-                        "in_label": f"{subj.upper()[:16]}\nCONTEXT",
-                        "core_title": "1 FORWARD PASS",
-                        "core_sub": f"{topic_title[:24]} Latent Map",
-                        "card1_title": lbl1[:14],
-                        "card1_body": f"Verified Stream\nConfidence: 99.2%",
-                        "card2_title": lbl2[:14],
-                        "card2_body": f"Adaptive Output\nConfidence: 98.7%"
-                    },
-                    "kinetic_action": "branch_pop"
-                })
-            elif any(k in text for k in ["space", "save room", "vector", "dimension", "orthogonal", "coordinate", "bookshelf"]):
-                lbl1 = hl_keys[0] if hl_keys else "Concept 1"
-                lbl2 = hl_keys[1] if len(hl_keys) > 1 else "Concept 2"
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "subspace_vectors",
-                    "motif_params": {
-                        "title": f"{topic_title.upper()[:22]}: SUBSPACE PACKING",
-                        "sub": v_focus[:55] or "Almost-orthogonal vectors pack N > D concepts in D dimensions",
-                        "vec1_label": f"Vector v₁\n[{lbl1[:12]}]",
-                        "vec2_label": f"Vector v₂\n[{lbl2[:12]}]",
-                        "angle_label": "θ ≈ 90° (Orthogonal)",
-                        "badge_title": f"OPTIMAL LATENT COMPRESSION",
-                        "badge_sub": f"Exponential density sustained for {subj[:20]}"
-                    },
-                    "kinetic_action": "vector_scale"
-                })
-            elif any(k in text for k in ["wave", "signal", "interference", "sound wave", "collid", "two distinct thoughts", "crowded room"]):
-                lbl1 = hl_keys[0].upper() if hl_keys else subj.upper()
-                lbl2 = hl_keys[1].upper() if len(hl_keys) > 1 else obj.upper()
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "wave_collision",
-                    "motif_params": {
-                        "signal_a_label": f"{lbl1[:16]} [STREAM A]",
-                        "signal_b_label": f"{lbl2[:16]} [STREAM B]",
-                        "result_label": f"SUPERPOSITION: {topic_title.upper()[:18]}",
-                        "result_sub": v_focus[:50] or f"Joint activation packing two distinct representations"
-                    },
-                    "kinetic_action": "wave_pulse"
-                })
-
-            elif any(k in text for k in ["tree", "search", "mcts", "reason", "logic", "prun"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "tree_search",
-                    "motif_params": {
-                        "title": f"REASONING SEARCH & HEURISTIC PRUNING",
-                        "sub": v_focus[:55] or f"Exploring parallel thoughts and pruning invalid logic paths",
-                        "root_label": f"QUERY: {subj.upper()[:16]}",
-                        "optimal_label": "OPTIMAL CHAIN",
-                        "optimal_sub": f"Verified reasoning path\nAccuracy: 98.4%",
-                        "pruned_label": "PRUNED BRANCH",
-                        "pruned_sub": f"Suboptimal direction\nTerminated early",
-                        "badge_title": "SEARCH EFFICIENCY",
-                        "badge_sub": f"Focuses compute exclusively on high-reward logic paths"
-                    },
-                    "kinetic_action": "tree_prune"
-                })
-            elif any(k in text for k in ["diffus", "noise", "denois", "image", "video", "latent"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "diffusion_denoise",
-                    "motif_params": {
-                        "title": f"DIFFUSION & FLOW TRAJECTORY",
-                        "sub": v_focus[:55] or "Iterative reverse trajectory peels noise into clear signals",
-                        "step1_label": "STEP 1: GAUSSIAN NOISE",
-                        "step2_label": f"STEP 2: {subj.upper()[:12]}",
-                        "step3_label": f"STEP 3: {obj.upper()[:12]}",
-                        "badge_title": "VELOCITY FIELD INTEGRATION",
-                        "badge_sub": f"Straight trajectory slashes step count by 80%"
-                    },
-                    "kinetic_action": "denoise_step"
-                })
-            elif any(k in text for k in ["attention", "head", "expert", "moe", "rout", "token"]):
-                t_lbls = [w.capitalize() for w in hl_keys[:3]] if len(hl_keys) >= 3 else ["Query", "Key", "Value"]
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "attention_routing",
-                    "motif_params": {
-                        "title": f"{topic_title.upper()[:22]}: ATTENTION ROUTING",
-                        "sub": v_focus[:55] or "Dynamic laser routing dispatches tokens to specialized heads",
-                        "token_labels": [f"Token: '{t_lbls[0]}'", f"Token: '{t_lbls[1]}'", f"Token: '{t_lbls[2]}'"],
-                        "head_labels": ["HEAD 1 (ROUTER)", "HEAD 2 (COMPUTE)", "HEAD 3 (SYNTHESIS)"],
-                        "badge_title": "DYNAMIC DISPATCH",
-                        "badge_sub": f"Only active paths execute, maximizing throughput"
-                    },
-                    "kinetic_action": "laser_route"
-                })
-            elif any(k in text for k in ["cache", "kv", "memory", "buffer", "context", "window"]):
-                storyboard.append({
-                    "beat_id": b_id,
-                    "motif_type": "memory_buffer",
-                    "motif_params": {
-                        "title": f"CONTEXT MEMORY & KV-CACHE COMPRESSION",
-                        "sub": v_focus[:55] or "Streaming long context horizons without quadratic memory explosion",
-                        "in_stream_label": f"STREAM: {subj.upper()[:18]}",
-                        "cache_status_label": "ACTIVE KV BUFFER",
-                        "gain_badge_title": "VRAM FOOTPRINT SAVED",
-                        "gain_badge_sub": f"Constant inference latency across extended sequence"
-                    },
-                    "kinetic_action": "buffer_stream"
-                })
-
             else:
                 s1_t = hl_keys[0].upper() if hl_keys else "INPUT STATE"
-                s2_t = svo.get("action_verb", "TRANSFORMATION").upper() + " ENGINE"
-                s3_t = obj.upper() if obj else "FINAL OUTPUT"
+                s2_t = svo.get("action_verb", "TRANSFORMATION").upper() + " MECHANISM"
                 storyboard.append({
                     "beat_id": b_id,
-                    "motif_type": "custom_flow",
+                    "motif_type": "bespoke_svg",
                     "motif_params": {
-                        "title": f"{topic_title.upper()[:22]} PIPELINE",
-                        "sub": v_focus[:55] or "End-to-end procedural mechanism execution",
-                        "step1_title": s1_t[:18],
-                        "step1_sub": f"Ingests {subj.lower()[:20]}",
-                        "step2_title": s2_t[:18],
-                        "step2_sub": f"Applies core mechanism",
-                        "step3_title": s3_t[:18],
-                        "step3_sub": f"Produces verified output"
+                        "title": f"{topic_title.upper()[:22]}: {subj.upper()[:16]}",
+                        "sub": v_focus[:55] or f"Visualizing {subj.lower()} and {obj.lower()}",
+                        "badge_text": f"CORE: {subj.upper()[:18]}",
+                        "accent_color": "#38BDF8"
                     },
-                    "kinetic_action": "flow_pulse"
+                    "kinetic_action": "figure_scan"
                 })
 
         return storyboard
@@ -444,6 +286,8 @@ Return ONLY a valid JSON object matching this schema:
         """
         Plans the visual choreography for each beat based on the voiceover script,
         and annotates the spec beats with rich motif directives.
+        Guarantees that narrative beats 1-4 use bespoke vector diagrams (or authentic paper figures)
+        and eliminates repetitive canned diagrams.
         """
         clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
         topic = spec.get("title", clean_id)
@@ -458,6 +302,12 @@ Return ONLY a valid JSON object matching this schema:
         from pipeline.svg_synthesizer import SVGSynthesizer
         svg_synthesizer = SVGSynthesizer()
 
+        canned_motifs = [
+            "prism_disentangler", "attention_routing", "tree_search",
+            "memory_buffer", "custom_flow", "branching_outputs",
+            "wave_collision", "radio_tuner", "subspace_vectors", "diffusion_denoise"
+        ]
+
         for i, b in enumerate(beats):
             b_id = b.get("beat_id", i + 1)
             if b_id > 5:
@@ -465,11 +315,35 @@ Return ONLY a valid JSON object matching this schema:
 
             if b_id in sb_by_id:
                 plan_item = sb_by_id[b_id]
-                b["motif_type"] = plan_item.get("motif_type", "custom_flow")
+                b["motif_type"] = plan_item.get("motif_type", "bespoke_svg")
                 b["motif_params"] = plan_item.get("motif_params", {})
-                b["kinetic_action"] = plan_item.get("kinetic_action", "pulse")
+                b["kinetic_action"] = plan_item.get("kinetic_action", "figure_scan")
 
-            # If paper figures are available and Beat 3 didn't get paper_figure, assign it!
+            # Beat 5: Empirical benchmark evaluation bars
+            if b_id == 5:
+                b["motif_type"] = "comparative_bars"
+                b["kinetic_action"] = "bar_fill"
+                if not b.get("motif_params"):
+                    payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
+                    payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
+                    score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
+                    score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
+                    b["motif_params"] = {
+                        "title": f"BENCHMARK RESULTS: {topic.upper()[:20]}",
+                        "sub": b.get("visual_focus", "")[:55] or "Empirical evaluation against prior frontier models",
+                        "contender_a_name": f"{topic.upper()[:18]} (OURS)",
+                        "contender_a_score": score_a,
+                        "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
+                        "contender_b_name": "PRIOR BASELINE",
+                        "contender_b_score": score_b,
+                        "contender_b_text": f"{payoff_base}%" if isinstance(payoff_base, (int, float)) else str(payoff_base),
+                        "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
+                        "delta_badge_sub": "Significant efficiency and accuracy milestone"
+                    }
+                print(f"   ✨ Beat 5: Assigned Motif 'comparative_bars' (bar_fill)")
+                continue
+
+            # Beat 3: Authentic paper diagram if extracted from arXiv
             if paper_figures and b_id == 3:
                 fig_svg = paper_figures[0].get("svg_path")
                 if fig_svg and not os.path.exists(fig_svg):
@@ -492,28 +366,27 @@ Return ONLY a valid JSON object matching this schema:
                         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
                     }
                     b["kinetic_action"] = "figure_scan"
-                else:
-                    b["motif_type"] = "bespoke_svg"
+                    print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(fig_svg)}'")
+                    continue
 
-            # Dynamic Bespoke SVG Synthesis:
-            # If the beat is assigned bespoke_svg, OR if it has a physical analogy, OR was defaulting to custom_flow,
-            # synthesize a clean custom vector SVG matching this beat!
-            if b.get("motif_type") in ["bespoke_svg", "dynamic_svg", "custom_flow"]:
+            # Narrative Beats (1, 2, 4, and 3 without paper figure):
+            # MANDATE bespoke_svg! Overwrite any legacy canned motif!
+            if b.get("motif_type") in canned_motifs or not b.get("motif_type") or b.get("motif_type") in ["bespoke_svg", "dynamic_svg"]:
+                b["motif_type"] = "bespoke_svg"
+                b["kinetic_action"] = "figure_scan"
                 try:
                     svg_path = svg_synthesizer.synthesize_beat_svg(b, topic, clean_id, b_id)
                     if svg_path and svg_path.exists():
-                        b["motif_type"] = "bespoke_svg"
                         if not b.get("motif_params"):
                             b["motif_params"] = {}
                         b["motif_params"]["svg_path"] = str(svg_path)
                         if not b["motif_params"].get("title"):
-                            b["motif_params"]["title"] = f"{topic.upper()[:24]}: BEAT {b_id}"
+                            b["motif_params"]["title"] = f"{topic.upper()[:22]}: BEAT {b_id}"
                         if not b["motif_params"].get("sub"):
                             b["motif_params"]["sub"] = b.get("visual_focus", "")[:55] or "Dynamic vector diagram tailored to narrative beat"
                         if not b["motif_params"].get("badge_text"):
                             svo = b.get("svo_action", {})
-                            b["motif_params"]["badge_text"] = f"MECHANISM: {svo.get('subject', 'CORE').upper()[:20]}"
-                        b["kinetic_action"] = "figure_scan"
+                            b["motif_params"]["badge_text"] = f"MECHANISM: {svo.get('subject', 'CORE').upper()[:18]}"
                 except Exception as e:
                     print(f"⚠️ Error synthesizing SVG for beat {b_id}: {e}")
 

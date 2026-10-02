@@ -25,6 +25,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
+from manim_engine.primitives.typography import CleanText
+
+# Alias Text -> CleanText so all procedural script motifs render with flawless subpixel typography
+Text = CleanText
 
 
 class ScriptWaveInterference(VGroup):
@@ -467,27 +471,33 @@ class ScriptComparativeBenchmarkBars(VGroup):
     ):
         super().__init__(**kwargs)
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=14, color="#38BDF8", weight=BOLD).move_to([0, 3.4, 0])
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8").next_to(self.title, DOWN, buff=0.1)
+        self.title = Text(title, font=FONT_HELVETICA, font_size=15, color="#38BDF8", weight=MEDIUM).move_to([0, 3.4, 0])
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.12)
 
-        # Bar 1: New Method (Emerald Mint)
-        self.lbl_a = Text(contender_a_name, font=FONT_HELVETICA, font_size=12, color="#34D399", weight=BOLD).move_to([-3.1, 2.0, 0], aligned_edge=LEFT)
-        self.bg_bar_a = RoundedRectangle(corner_radius=0.08, width=5.4, height=0.5, color="#334155", fill_color="#1E293B", fill_opacity=0.85).move_to([-0.2, 1.4, 0])
-        w_a = max(0.5, 5.4 * min(1.0, contender_a_score))
-        self.fill_bar_a = RoundedRectangle(corner_radius=0.08, width=w_a, height=0.5, color="#34D399", fill_color="#34D399", fill_opacity=0.9).move_to(self.bg_bar_a.get_left() + RIGHT * (w_a / 2))
-        self.val_a = Text(contender_a_text, font=FONT_HELVETICA, font_size=14, color="#34D399", weight=BOLD).next_to(self.bg_bar_a, RIGHT, buff=0.2)
+        # Bar 1: Contender A (Red/Orange if baseline, Mint if ours)
+        col_a = "#34D399" if "ours" in contender_a_name.lower() or contender_a_score > contender_b_score else "#94A3B8"
+        self.lbl_a = Text(contender_a_name, font=FONT_HELVETICA, font_size=12, color=col_a, weight=MEDIUM).move_to([-3.0, 1.9, 0], aligned_edge=LEFT)
+        self.bg_bar_a = RoundedRectangle(corner_radius=0.08, width=4.0, height=0.45, color="#334155", fill_color="#1E293B", fill_opacity=0.85).move_to([-0.9, 1.4, 0])
+        w_a = max(0.4, 4.0 * min(1.0, contender_a_score))
+        self.fill_bar_a = RoundedRectangle(corner_radius=0.08, width=w_a, height=0.45, color=col_a, fill_color=col_a, fill_opacity=0.85).move_to(self.bg_bar_a.get_left() + RIGHT * (w_a / 2))
+        self.val_a = Text(contender_a_text, font=FONT_HELVETICA, font_size=11, color=col_a, weight=MEDIUM).next_to(self.bg_bar_a, RIGHT, buff=0.18)
+        if self.val_a.width > 1.8:
+            self.val_a.scale_to_fit_width(1.8)
 
-        # Bar 2: Baseline (Slate)
-        self.lbl_b = Text(contender_b_name, font=FONT_HELVETICA, font_size=12, color="#94A3B8", weight=BOLD).move_to([-3.1, 0.4, 0], aligned_edge=LEFT)
-        self.bg_bar_b = RoundedRectangle(corner_radius=0.08, width=5.4, height=0.5, color="#334155", fill_color="#1E293B", fill_opacity=0.85).move_to([-0.2, -0.2, 0])
-        w_b = max(0.5, 5.4 * min(1.0, contender_b_score))
-        self.fill_bar_b = RoundedRectangle(corner_radius=0.08, width=w_b, height=0.5, color="#64748B", fill_color="#64748B", fill_opacity=0.9).move_to(self.bg_bar_b.get_left() + RIGHT * (w_b / 2))
-        self.val_b = Text(contender_b_text, font=FONT_HELVETICA, font_size=14, color="#94A3B8", weight=BOLD).next_to(self.bg_bar_b, RIGHT, buff=0.2)
+        # Bar 2: Contender B (Mint if ours, Slate if baseline)
+        col_b = "#34D399" if "ours" in contender_b_name.lower() or contender_b_score >= contender_a_score else "#94A3B8"
+        self.lbl_b = Text(contender_b_name, font=FONT_HELVETICA, font_size=12, color=col_b, weight=MEDIUM).move_to([-3.0, 0.4, 0], aligned_edge=LEFT)
+        self.bg_bar_b = RoundedRectangle(corner_radius=0.08, width=4.0, height=0.45, color="#334155", fill_color="#1E293B", fill_opacity=0.85).move_to([-0.9, -0.1, 0])
+        w_b = max(0.4, 4.0 * min(1.0, contender_b_score))
+        self.fill_bar_b = RoundedRectangle(corner_radius=0.08, width=w_b, height=0.45, color=col_b, fill_color=col_b, fill_opacity=0.9).move_to(self.bg_bar_b.get_left() + RIGHT * (w_b / 2))
+        self.val_b = Text(contender_b_text, font=FONT_HELVETICA, font_size=11, color=col_b, weight=MEDIUM).next_to(self.bg_bar_b, RIGHT, buff=0.18)
+        if self.val_b.width > 1.8:
+            self.val_b.scale_to_fit_width(1.8)
 
         # Central Delta Badge
         self.badge = RoundedRectangle(corner_radius=0.15, width=6.2, height=1.3, color="#F59E0B", fill_color="#1E293B", fill_opacity=0.9, stroke_width=2.5).move_to([0, -1.8, 0])
-        self.b_txt = Text(delta_badge_text, font=FONT_HELVETICA, font_size=13, color="#F59E0B", weight=HEAVY).move_to([0, -1.6, 0])
-        self.b_sub = Text(delta_badge_sub, font=FONT_HELVETICA, font_size=11, color="#F8FAFC").move_to([0, -2.0, 0])
+        self.b_txt = Text(delta_badge_text, font=FONT_HELVETICA, font_size=13, color="#F59E0B", weight=NORMAL).move_to([0, -1.6, 0])
+        self.b_sub = Text(delta_badge_sub, font=FONT_HELVETICA, font_size=10, color="#F8FAFC", weight=NORMAL).move_to([0, -2.0, 0])
 
         self.add(self.title, self.sub, self.lbl_a, self.bg_bar_a, self.fill_bar_a, self.val_a, self.lbl_b, self.bg_bar_b, self.fill_bar_b, self.val_b, self.badge, self.b_txt, self.b_sub)
 
@@ -554,8 +564,8 @@ class ScriptPaperFigure(VGroup):
     ):
         super().__init__(**kwargs)
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=13, color="#38BDF8", weight=BOLD).move_to([0, 3.5, 0])
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=10, color="#94A3B8").next_to(self.title, DOWN, buff=0.1)
+        self.title = Text(title, font=FONT_HELVETICA, font_size=15, color="#38BDF8", weight=MEDIUM).move_to([0, 3.5, 0])
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.1)
 
         # Outer chassis frame
         frame_w = max_width + 0.4
@@ -586,7 +596,7 @@ class ScriptPaperFigure(VGroup):
 
         if not self.fig_mobj:
             fallback_box = Rectangle(width=max_width - 1.0, height=2.2, color="#38BDF8", stroke_width=1.5).move_to(self.frame.get_center())
-            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color="#38BDF8", weight=BOLD).move_to(fallback_box)
+            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color="#38BDF8", weight=MEDIUM).move_to(fallback_box)
             self.fig_mobj = VGroup(fallback_box, lbl)
 
         # Bottom badge
@@ -600,7 +610,7 @@ class ScriptPaperFigure(VGroup):
             fill_opacity=0.85,
             stroke_width=1.5
         ).next_to(self.frame, DOWN, buff=0.15)
-        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color="#34D399", weight=BOLD).move_to(self.badge_box)
+        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color="#34D399", weight=MEDIUM).move_to(self.badge_box)
         self.badge = VGroup(self.badge_box, self.badge_txt)
 
         self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)
@@ -627,8 +637,8 @@ class ScriptDynamicBespokeSVG(VGroup):
         super().__init__(**kwargs)
         self.accent_color = accent_color
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=13, color=accent_color, weight=BOLD).move_to([0, 3.5, 0])
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=10, color="#94A3B8").next_to(self.title, DOWN, buff=0.1)
+        self.title = Text(title, font=FONT_HELVETICA, font_size=15, color=accent_color, weight=MEDIUM).move_to([0, 3.5, 0])
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.1)
 
         # Outer chassis frame
         frame_w = max_width + 0.4
@@ -659,7 +669,7 @@ class ScriptDynamicBespokeSVG(VGroup):
 
         if not self.fig_mobj:
             fallback_box = Rectangle(width=max_width - 1.0, height=2.2, color=accent_color, stroke_width=1.5).move_to(self.frame.get_center())
-            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color=accent_color, weight=BOLD).move_to(fallback_box)
+            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color=accent_color, weight=MEDIUM).move_to(fallback_box)
             self.fig_mobj = VGroup(fallback_box, lbl)
 
         # Bottom badge
@@ -673,7 +683,7 @@ class ScriptDynamicBespokeSVG(VGroup):
             fill_opacity=0.9,
             stroke_width=1.5
         ).next_to(self.frame, DOWN, buff=0.15)
-        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color=accent_color, weight=BOLD).move_to(self.badge_box)
+        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color=accent_color, weight=MEDIUM).move_to(self.badge_box)
         self.badge = VGroup(self.badge_box, self.badge_txt)
 
         self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)

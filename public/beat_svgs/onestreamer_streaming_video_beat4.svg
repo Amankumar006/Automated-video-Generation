@@ -1,0 +1,47 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Chalkboard -->
+  
+
+  <!-- The "Full Movie Stream" (Blurred horizontal conduit) -->
+  <g opacity="0.3" stroke="#475569" stroke-width="2" fill="none">
+    <path d="M50 150 L550 150" stroke-dasharray="8 8"/>
+    <path d="M50 180 L550 180" stroke-dasharray="8 8"/>
+    <path d="M50 210 L550 210" stroke-dasharray="8 8"/>
+  </g>
+
+  <!-- The "Factual Memory" Cards -->
+  <g fill="#34D399" filter="url(#glow)">
+    <rect x="150" y="280" width="40" height="60" rx="4" />
+    <rect x="250" y="280" width="40" height="60" rx="4" />
+    <rect x="350" y="280" width="40" height="60" rx="4" />
+    <rect x="450" y="280" width="40" height="60" rx="4" />
+  </g>
+
+  <!-- The "Proactive Logic" Source (A glowing aperture) -->
+  <circle cx="300" cy="50" r="15" fill="#38BDF8" filter="url(#glow)"/>
+  
+  <!-- The "Query" Light Beam (Focusing on a specific card) -->
+  <g>
+    <polygon points="300,65 375,280 365,280" fill="#38BDF8" opacity="0.4"/>
+    <line x1="300" y1="65" x2="370" y2="280" stroke="#38BDF8" stroke-width="2" filter="url(#glow)"/>
+  </g>
+
+  <!-- Indicator nodes on the stream -->
+  <circle cx="170" cy="180" r="6" fill="#F59E0B" filter="url(#glow)"/>
+  <circle cx="270" cy="180" r="6" fill="#F59E0B" filter="url(#glow)"/>
+  <circle cx="370" cy="180" r="6" fill="#F59E0B" filter="url(#glow)"/>
+  <circle cx="470" cy="180" r="6" fill="#F59E0B" filter="url(#glow)"/>
+
+  <!-- Energy pulse connecting logic to card -->
+  <circle cx="370" cy="280" r="8" fill="#F8FAFC" filter="url(#glow)"/>
+</svg>

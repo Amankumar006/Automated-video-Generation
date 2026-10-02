@@ -20,6 +20,10 @@ from pipeline.config import (
     VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON,
     FONT_HELVETICA
 )
+from manim_engine.primitives.typography import CleanText
+
+# Alias Text -> CleanText so HUD headers and brand watermarks render with flawless subpixel typography
+Text = CleanText
 
 # 9:16 vertical video dimensions
 config.pixel_width = VIDEO_WIDTH
@@ -205,54 +209,53 @@ class ScriptDrivenScene(MovingCameraScene):
             motif_params = b.get("motif_params", {})
             kinetic_action = b.get("kinetic_action", "pulse")
 
-            # Fallback if motif_type was not assigned in spec
-            if not motif_type or motif_type not in MOTIF_REGISTRY:
-                text_lower = (b_text + " " + v_focus).lower()
-                if any(k in text_lower for k in ["wave", "signal", "interference", "sound"]):
-                    motif_type = "wave_collision"
-                elif any(k in text_lower for k in ["radio", "dial", "tuner", "station", "static"]):
-                    motif_type = "radio_tuner"
-                elif any(k in text_lower for k in ["space", "vector", "dimension", "orthogonal"]):
-                    motif_type = "subspace_vectors"
-                elif any(k in text_lower for k in ["prism", "peel", "disentangl", "decoder"]):
-                    motif_type = "prism_disentangler"
-                elif any(k in text_lower for k in ["branch", "two clear answers", "simultaneous", "forward pass"]):
-                    motif_type = "branching_outputs"
-                elif any(k in text_lower for k in ["tree", "search", "mcts", "reason", "logic", "prun"]):
-                    motif_type = "tree_search"
-                elif any(k in text_lower for k in ["diffus", "noise", "denois", "image", "latent"]):
-                    motif_type = "diffusion_denoise"
-                elif any(k in text_lower for k in ["attention", "head", "expert", "moe", "rout"]):
-                    motif_type = "attention_routing"
-                elif any(k in text_lower for k in ["cache", "kv", "memory", "buffer", "context"]):
-                    motif_type = "memory_buffer"
-                elif beat_id == 5 or any(k in text_lower for k in ["benchmark", "accuracy", "speedup", "faster"]):
-                    motif_type = "comparative_bars"
+            # Force Upgrade: Never render legacy repetitive canned motifs!
+            canned_legacy = [
+                "prism_disentangler", "attention_routing", "tree_search",
+                "memory_buffer", "custom_flow", "branching_outputs",
+                "wave_collision", "radio_tuner", "subspace_vectors", "diffusion_denoise"
+            ]
+
+            if beat_id == 5:
+                motif_type = "comparative_bars"
+            elif motif_type in canned_legacy or not motif_type or motif_type not in MOTIF_REGISTRY:
+                if beat_id == 3 and self.spec.get("paper_figures"):
+                    motif_type = "paper_figure"
                 else:
-                    motif_type = "custom_flow"
+                    motif_type = "bespoke_svg"
 
             print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' (Allotted: {duration:.2f}s)...")
 
             # 1. Update lower math/concept tray
             self.display_math_formula(beat_id, run_time=0.4)
 
-            # Resolve paper figure SVG if paper_figure motif requested
+            # Resolve SVG asset for paper_figure or bespoke_svg
             if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
-                if not motif_params.get("svg_path"):
-                    if b.get("svg_path") and os.path.exists(b.get("svg_path")):
-                        motif_params["svg_path"] = b.get("svg_path")
-                    elif b.get("paper_figure_path") and os.path.exists(b.get("paper_figure_path")):
-                        motif_params["svg_path"] = b.get("paper_figure_path")
-                    elif self.spec.get("paper_figures"):
-                        motif_params["svg_path"] = self.spec["paper_figures"][0].get("svg_path")
-                    elif self.spec.get("arxiv_id"):
-                        try:
-                            from pipeline.arxiv_vector_extractor import get_paper_vector_figure
-                            fig_path = get_paper_vector_figure(self.spec.get("arxiv_id"))
-                            if fig_path:
-                                motif_params["svg_path"] = fig_path
-                        except Exception:
-                            pass
+                current_svg = motif_params.get("svg_path") or b.get("svg_path") or b.get("paper_figure_path")
+                if not current_svg or not os.path.exists(current_svg):
+                    if motif_type == "paper_figure" and self.spec.get("paper_figures"):
+                        current_svg = self.spec["paper_figures"][0].get("svg_path")
+
+                # If bespoke_svg file missing, synthesize on-the-fly via SVGSynthesizer!
+                if not current_svg or not os.path.exists(current_svg):
+                    try:
+                        import re
+                        from pipeline.svg_synthesizer import SVGSynthesizer
+                        clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "topic")).lower()
+                        topic = self.spec.get("title", clean_id)
+                        synth = SVGSynthesizer()
+                        synth_path = synth.synthesize_beat_svg(b, topic, clean_id, beat_id)
+                        if synth_path and synth_path.exists():
+                            current_svg = str(synth_path)
+                    except Exception as e:
+                        print(f"⚠️ On-the-fly SVG synthesis notice: {e}")
+
+                if current_svg and os.path.exists(current_svg):
+                    motif_params["svg_path"] = current_svg
+                    if not motif_params.get("title"):
+                        motif_params["title"] = f"{self.spec.get('title', 'AI')[:22].upper()}: BEAT {beat_id}"
+                    if not motif_params.get("sub"):
+                        motif_params["sub"] = v_focus[:55] or "Dynamic vector diagram tailored to narrative beat"
 
             # 2. Instantiate Parameterized Script Motif
             motif = create_script_motif(motif_type, motif_params).move_to([0, 0.4, 0])

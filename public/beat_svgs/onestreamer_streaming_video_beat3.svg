@@ -1,0 +1,40 @@
+<svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect x="50" y="50" width="500" height="300" rx="10" fill="none" stroke="#475569" stroke-width="2" stroke-dasharray="8 8"/>
+
+  <g id="LibraryCardStack" transform="translate(100, 100)">
+    <rect x="0" y="0" width="120" height="180" rx="5" fill="#F8FAFC" stroke="#475569" stroke-width="2"/>
+    <line x1="20" y1="30" x2="100" y2="30" stroke="#475569" stroke-width="2"/>
+    <line x1="20" y1="50" x2="100" y2="50" stroke="#475569" stroke-width="2"/>
+    <line x1="20" y1="70" x2="70" y2="70" stroke="#475569" stroke-width="2"/>
+    <rect x="10" y="140" width="100" height="30" rx="2" fill="#38BDF8" filter="url(#glow)"/>
+  </g>
+
+  <g id="LibraryCardStackShifted" transform="translate(115, 115)">
+    <rect x="0" y="0" width="120" height="180" rx="5" fill="#F8FAFC" stroke="#475569" stroke-width="2"/>
+    <line x1="20" y1="30" x2="100" y2="30" stroke="#475569" stroke-width="2"/>
+    <rect x="10" y="140" width="100" height="30" rx="2" fill="#34D399" filter="url(#glow)"/>
+  </g>
+
+  <g id="SortingCabinet" transform="translate(350, 80)">
+    <rect x="0" y="0" width="180" height="220" rx="5" fill="none" stroke="#F8FAFC" stroke-width="3"/>
+    <line x1="0" y1="55" x2="180" y2="55" stroke="#F8FAFC" stroke-width="2"/>
+    <line x1="0" y1="110" x2="180" y2="110" stroke="#F8FAFC" stroke-width="2"/>
+    <line x1="0" y1="165" x2="180" y2="165" stroke="#F8FAFC" stroke-width="2"/>
+    
+    <rect x="20" y="15" width="40" height="25" rx="2" fill="#F59E0B" filter="url(#glow)"/>
+    <rect x="80" y="15" width="80" height="25" rx="2" fill="#A855F7" filter="url(#glow)"/>
+    
+    <rect x="20" y="70" width="60" height="25" rx="2" fill="#EF4444" filter="url(#glow)"/>
+    <rect x="100" y="70" width="60" height="25" rx="2" fill="#38BDF8" filter="url(#glow)"/>
+  </g>
+
+  <path d="M 240 180 Q 295 180 340 160" fill="none" stroke="#F8FAFC" stroke-width="4" stroke-dasharray="6 6"/>
+  <polygon points="340,160 330,150 330,170" fill="#F8FAFC"/>
+</svg>

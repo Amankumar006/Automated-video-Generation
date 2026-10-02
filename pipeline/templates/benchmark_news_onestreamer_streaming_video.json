@@ -20,16 +20,15 @@
         "anchor_word": "stream",
         "semantic_role": "state_transition"
       },
-      "motif_type": "memory_buffer",
+      "motif_type": "bespoke_svg",
       "motif_params": {
         "title": "Temporal Context Flow",
-        "sub": "Persistent tracking through video frames",
-        "in_stream_label": "Frame Buffer",
-        "cache_status_label": "Active Memory State",
-        "gain_badge_title": "128k+",
-        "gain_badge_sub": "Context tokens"
+        "sub": "Individual video frames being processed into persistent memory blocks",
+        "badge_text": "STREAM TRACKING",
+        "accent_color": "#38BDF8",
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/beat_svgs/onestreamer_streaming_video_beat1.svg"
       },
-      "kinetic_action": "smooth_stream_loading",
+      "kinetic_action": "figure_scan",
       "audio_duration": 5.53,
       "slot_duration": 5.83,
       "start": 0.0,
@@ -259,16 +258,15 @@
         "anchor_word": "pick",
         "semantic_role": "causal_elimination"
       },
-      "motif_type": "prism_disentangler",
+      "motif_type": "bespoke_svg",
       "motif_params": {
-        "title": "Information Bottleneck",
-        "sub": "Extracting latent meaning from rapid sequences",
-        "in_label": "Raw Video Input",
-        "prism_label": "Compression Logic",
-        "out1_label": "Event Sequences",
-        "out2_label": "Discarded Noise"
+        "title": "Selective Compression Logic",
+        "sub": "Filtering high-entropy sequences into essential memory representations",
+        "badge_text": "CAUSAL REDUCTION",
+        "accent_color": "#F59E0B",
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/beat_svgs/onestreamer_streaming_video_beat2.svg"
       },
-      "kinetic_action": "spectral_filtering",
+      "kinetic_action": "figure_scan",
       "audio_duration": 5.31,
       "slot_duration": 5.61,
       "start": 5.83,
@@ -489,24 +487,13 @@
         "anchor_word": "library",
         "semantic_role": "agent_action"
       },
-      "motif_type": "attention_routing",
+      "motif_type": "paper_figure",
       "motif_params": {
         "title": "PHCM Indexing System",
-        "sub": "Organizing temporal events into searchable buckets",
-        "token_labels": [
-          "Event T1",
-          "Event T2",
-          "Event T3"
-        ],
-        "head_labels": [
-          "Metadata Tag",
-          "Semantic Key",
-          "Temporal Pointer"
-        ],
-        "badge_title": "OneStreamer",
-        "badge_sub": "Index Layer"
+        "sub": "Hierarchy of Progressive Hierarchical Contextual Memory tags",
+        "badge_text": "ARCHITECTURAL SCHEMA"
       },
-      "kinetic_action": "routing_to_labels",
+      "kinetic_action": "diagram_reveal",
       "audio_duration": 6.14,
       "slot_duration": 6.44,
       "start": 11.44,
@@ -718,19 +705,15 @@
         "anchor_word": "reads",
         "semantic_role": "state_transition"
       },
-      "motif_type": "tree_search",
+      "motif_type": "bespoke_svg",
       "motif_params": {
-        "title": "Proactive Memory Query",
-        "sub": "Accessing focused summaries instead of full re-computation",
-        "root_label": "Query Request",
-        "optimal_label": "Target Memory",
-        "optimal_sub": "High-Confidence Summary",
-        "pruned_label": "Full History",
-        "pruned_sub": "Skipped Frames",
-        "badge_title": "Efficiency",
-        "badge_sub": "O(1) Access"
+        "title": "Proactive Memory Retrieval",
+        "sub": "Spotlight scanning summary cards to access factual history",
+        "badge_text": "QUERY OPTIMIZATION",
+        "accent_color": "#A855F7",
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/beat_svgs/onestreamer_streaming_video_beat4.svg"
       },
-      "kinetic_action": "branch_pruning",
+      "kinetic_action": "figure_scan",
       "audio_duration": 5.25,
       "slot_duration": 5.55,
       "start": 17.88,
@@ -944,18 +927,18 @@
       },
       "motif_type": "comparative_bars",
       "motif_params": {
-        "title": "Performance vs Energy Efficiency",
-        "sub": "OneStreamer-4B vs Baseline Architectures",
-        "contender_a_name": "Standard Models",
-        "contender_a_score": 0.45,
-        "contender_a_text": "High Power Drain",
-        "contender_b_name": "OneStreamer-4B",
-        "contender_b_score": 0.92,
-        "contender_b_text": "Optimized Throughput",
-        "delta_badge_text": "2.4x",
-        "delta_badge_sub": "Power Reduction"
+        "title": "Performance vs. Power Efficiency",
+        "sub": "OneStreamer-4B benchmark metrics vs standard autoregressive models",
+        "contender_a_name": "OneStreamer-4B",
+        "contender_a_score": 0.92,
+        "contender_a_text": "SOTA Performance",
+        "contender_b_name": "Baseline LLM",
+        "contender_b_score": 0.45,
+        "contender_b_text": "Standard Efficiency",
+        "delta_badge_text": "2.1x",
+        "delta_badge_sub": "Efficiency Gain"
       },
-      "kinetic_action": "bar_growth_anim",
+      "kinetic_action": "bar_fill",
       "audio_duration": 5.1,
       "slot_duration": 5.4,
       "start": 23.43,
@@ -1634,7 +1617,27 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 0.96,
+        "dy": 2.88,
+        "scale_multiplier": 1.0
+      },
+      "meta_header": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "button_ui": {
+        "dx": 0.0,
+        "dy": -0.073,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 1.03,
+        "scale_multiplier": 1.044
+      },
+      "ui_button": {
+        "dx": 0.0,
+        "dy": -0.073,
         "scale_multiplier": 1.0
       }
     },
@@ -1651,13 +1654,38 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 1.824,
-        "scale_multiplier": 1.0
+        "dy": 5.692,
+        "scale_multiplier": 1.1
       },
       "hero_visual": {
         "dx": 0.0,
-        "dy": -0.5,
-        "scale_multiplier": 1.1
+        "dy": -1.993,
+        "scale_multiplier": 1.219
+      },
+      "ui_clutter_button": {
+        "dx": 0.0,
+        "dy": -0.1,
+        "scale_multiplier": 1.0
+      },
+      "ui_noise_elements": {
+        "dx": 0.0,
+        "dy": 2.028,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual_container": {
+        "dx": 0.0,
+        "dy": -0.485,
+        "scale_multiplier": 0.842
+      },
+      "causal_reduction_button": {
+        "dx": 0.0,
+        "dy": -0.073,
+        "scale_multiplier": 1.0
+      },
+      "meta_text_and_button": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
       }
     },
     "3": {
@@ -1668,25 +1696,35 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 2.072,
+        "dy": 5.624,
         "scale_multiplier": 1.1
       },
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 0.9
+        "dy": 1.1,
+        "scale_multiplier": 0.0
       },
       "hero_ui_elements": {
         "dx": 0.0,
         "dy": 0.0,
         "scale_multiplier": 0.894
+      },
+      "text_elements": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "remove_text_elements": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
       }
     },
     "4": {
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 0.9
+        "dy": 2.326,
+        "scale_multiplier": 0.967
       },
       "saas_flow_diagram": {
         "dx": 0.0,
@@ -1695,7 +1733,7 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 2.08,
+        "dy": 4.64,
         "scale_multiplier": 1.0
       },
       "flowchart_block": {
@@ -1707,6 +1745,31 @@
         "dx": 0.0,
         "dy": 0.0,
         "scale_multiplier": 0.0
+      },
+      "ui_container": {
+        "dx": 0.0,
+        "dy": -1.128,
+        "scale_multiplier": 0.888
+      },
+      "ui_button": {
+        "dx": 0.0,
+        "dy": -0.854,
+        "scale_multiplier": 1.0
+      },
+      "ui_clutter_button": {
+        "dx": 0.0,
+        "dy": -0.087,
+        "scale_multiplier": 1.0
+      },
+      "hero_container": {
+        "dx": 0.0,
+        "dy": 0.015,
+        "scale_multiplier": 0.0
+      },
+      "query_optimization_button": {
+        "dx": 0.0,
+        "dy": -0.073,
+        "scale_multiplier": 0.0
       }
     },
     "5": {
@@ -1717,18 +1780,28 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 1.52,
+        "dy": 5.408,
         "scale_multiplier": 1.05
       },
       "hero_visual": {
         "dx": 0.0,
         "dy": 0.5,
-        "scale_multiplier": 0.85
+        "scale_multiplier": 0.704
       },
       "bar_chart_group": {
         "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.885
+      },
+      "generic_card_ui": {
+        "dx": 0.0,
         "dy": 0.0,
-        "scale_multiplier": 0.77
+        "scale_multiplier": 1.0
+      },
+      "chart_container": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.85
       }
     },
     "6": {
@@ -1744,8 +1817,23 @@
       },
       "text_block": {
         "dx": 0.0,
-        "dy": 0.0,
-        "scale_multiplier": 0.918
+        "dy": -0.2,
+        "scale_multiplier": 0.77
+      },
+      "logo_icon": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.85
+      },
+      "brand_text": {
+        "dx": 0.0,
+        "dy": -0.48,
+        "scale_multiplier": 0.909
+      },
+      "logo_mark": {
+        "dx": 0.0,
+        "dy": -1.0,
+        "scale_multiplier": 0.977
       }
     }
   }
