@@ -35,23 +35,78 @@ def _parse_iso_duration(iso_duration: str) -> float:
     return float(minutes * 60 + seconds)
 
 
+# Canonical taxonomy keywords used across YouTube analytics, paper discovery, and daemon scheduling
+TAXONOMY_KEYWORDS: Dict[str, List[str]] = {
+    "multimodal_diffusion": [
+        "diffusion", "flow matching", "text-to-image", "text-to-video", "video generation",
+        "image synthesis", "denoising", "stable diffusion", "dit", "diffusion transformer",
+        "flux", "visual generation", "generative video", "streaming video", "video interaction",
+        "latent diffusion", "3d generation", "texture generation", "multimodal flow",
+        "tv static", "omni-embed", "videollm", "visual text rendering", "motion transfer",
+        "video-to-video", "image-to-video"
+    ],
+    "hardware_efficiency": [
+        "flashattention", "kv cache", "quantization", "fp8", "fp4", "int4", "int8",
+        "cuda", "kernel", "sram", "vram", "bandwidth", "memory efficiency", "throughput",
+        "latency", "pagedattention", "speculative decoding", "cache compression", "hardware",
+        "gpu", "serving", "inference acceleration", "linear attention", "state space", "mamba",
+        "context window", "prefill-free", "spatial linear memory", "linear memory", "pflops",
+        "uniformity trap", "persistence forcing", "lift", "skip connections", "focusvtc", "flowtool"
+    ],
+    "efficient_architectures": [
+        "deepseek-v3", "moe", "mixture of experts", "mixture-of-experts", "sparse routing",
+        "router gate", "671b", "expert capacity", "auxiliary loss", "load balancing", "e-moe"
+    ],
+    "robotics_tamp": [
+        "tamp", "robot", "robotics", "manipulation", "kinematic", "motion plan",
+        "c-space", "end-effector", "trajectory optimization", "embodied", "tactile",
+        "humanoid", "loco-manipulation", "coding agent", "robot agent"
+    ],
+    "mechanistic_interpretability": [
+        "sae", "sparse autoencoder", "interpretability", "monosemantic", "polysemantic",
+        "circuits", "superposition", "latent feature", "probing", "steering vector",
+        "activation patch", "mechanistic auditing", "grammar"
+    ],
+    "reasoning_models": [
+        "r1", "reasoning", "chain-of-thought", "reinforcement learning", "cot", "o1",
+        "test-time compute", "search space", "tree search", "math reasoning", "aime",
+        "gpqa", "deepseek-r1", "grpo", "rlhf", "self-rewarding", "corrgrpo", "reward program",
+        "shock", "jev"
+    ]
+}
+
+
+def classify_content_taxonomy(title: str, text: str = "", tags: Optional[List[str]] = None) -> str:
+    """
+    Classifies a paper, video, or script into our channel taxonomy based on title,
+    abstract/body text, and tags. Title matches are weighted heavily (3x) over body/tags (1x).
+    """
+    t_lower = (title or "").lower()
+    b_lower = (text or "").lower()
+    tags_lower = " ".join(tags or []).lower()
+
+    scores: Dict[str, int] = {}
+    for cat, kws in TAXONOMY_KEYWORDS.items():
+        score = 0
+        for kw in kws:
+            if kw in t_lower:
+                score += 3
+            if kw in b_lower:
+                score += 1
+            if kw in tags_lower:
+                score += 1
+        scores[cat] = score
+
+    best_cat = max(scores, key=scores.get)
+    if scores[best_cat] > 0:
+        return best_cat
+    return "general_breakthroughs"
+
+
 def _classify_video_topic(title: str, tags: List[str]) -> str:
     """Determines the domain taxonomy and category from video metadata."""
-    t_lower = (title + " " + " ".join(tags)).lower()
-    if any(k in t_lower for k in ["tamp", "robot", "coding agent", "motion plan", "kinematic"]):
-        return "robotics_tamp"
-    elif any(k in t_lower for k in ["sae", "latent", "sparse autoencoder", "interpretability", "grammar", "superposition"]):
-        return "mechanistic_interpretability"
-    elif any(k in t_lower for k in ["diffusion", "tv static", "image", "denoising", "stable diffusion"]):
-        return "multimodal_diffusion"
-    elif any(k in t_lower for k in ["flashattention", "gpu", "pflops", "cuda", "memory", "sram", "kv cache"]):
-        return "hardware_efficiency"
-    elif any(k in t_lower for k in ["r1", "reasoning", "reinforcement", "benchmark", "shock", "o1", "math"]):
-        return "reasoning_models"
-    elif any(k in t_lower for k in ["deepseek-v3", "moe", "mixture of experts", "671b", "fraction"]):
-        return "efficient_architectures"
-    else:
-        return "general_breakthroughs"
+    return classify_content_taxonomy(title=title, tags=tags)
+
 
 
 class YouTubeRetentionAnalytics:

@@ -77,6 +77,8 @@ DEDICATED 5-BEAT MATHEMATICAL FORMULAS (STRICT REQUIREMENT):
 
 DYNAMIC VISUAL METAPHOR, SVO TRIPLES & ENTITIES (STRICT REQUIREMENT):
 - `domain_taxonomy`: Choose exactly one matching domain from:
+  * "multimodal_diffusion" (Diffusion denoising, flow matching, latent trajectories, visual generation, video dynamics)
+  * "hardware_efficiency" (KV cache compression, FlashAttention, quantization FP8/FP4, SRAM/VRAM bandwidth, latency)
   * "robotics_tamp" (Task & Motion Planning, robotic kinematics, C-space manifolds, code synthesis ASTs)
   * "neural_sae" (Sparse Autoencoders, dictionary expansion, polysemantic latents)
   * "neural_attention" (Transformer multi-head Q/K/V routing, attention heatmaps, KV cache)
@@ -130,7 +132,7 @@ Generate the complete JSON specification strictly adhering to this structure:
   "id": "slug_topic_name",
   "title": "Clean Display Title",
   "category": "architecture_breakdown | model_showdown | mechanism_deepdive | benchmark_news",
-  "domain_taxonomy": "robotics_tamp | neural_sae | neural_attention | neural_moe | algorithmic_search | quantitative_benchmark",
+  "domain_taxonomy": "multimodal_diffusion | hardware_efficiency | robotics_tamp | neural_sae | neural_attention | neural_moe | algorithmic_search | quantitative_benchmark",
   "hook_tag": "CATEGORY BADGE TITLE (UPPERCASE)",
   "beats": [
     {{
