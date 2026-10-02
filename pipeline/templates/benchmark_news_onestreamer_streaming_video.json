@@ -1,0 +1,355 @@
+{
+  "id": "onestreamer_streaming_video",
+  "title": "OneStreamer: Streaming Video Intelligence",
+  "category": "benchmark_news",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "BENCHMARK NEWS: STREAMING VIDEO",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "How do AI tools watch long shows and not lose the main plot when there is so much to see in the flow?",
+      "visual_focus": "A timeline of video frames fading into abstract digital memory blocks.",
+      "highlight_words": {
+        "AI models": "#34D399",
+        "digital stream": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Streaming Model",
+        "action_verb": "tracks",
+        "direct_object": "temporal video context",
+        "anchor_word": "stream",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like a scribe trying to take notes in a dark room; you must pick what counts before it fades away.",
+      "visual_focus": "A hand scribbling notes while a film strip rolls by rapidly.",
+      "highlight_words": {
+        "diary": "#F59E0B",
+        "vanishes": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Memory Logic",
+        "action_verb": "compresses",
+        "direct_object": "event sequences",
+        "anchor_word": "pick",
+        "semantic_role": "causal_elimination"
+      }
+    },
+    {
+      "beat_id": 3,
+      "text": "OneStreamer acts like a smart librarian who writes small tags for every part of the film so the model keeps track.",
+      "visual_focus": "A library card system where AI captions are filed into sorted categories.",
+      "highlight_words": {
+        "OneStreamer": "#34D399",
+        "library": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "PHCM System",
+        "action_verb": "indexes",
+        "direct_object": "event summaries",
+        "anchor_word": "library",
+        "semantic_role": "agent_action"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "Instead of watching the whole reel again, it looks at these quick notes to find the truth you need right now.",
+      "visual_focus": "A light beam focusing on small summary cards rather than the full movie stream.",
+      "highlight_words": {
+        "quick notes": "#F59E0B",
+        "sharp": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Proactive Logic",
+        "action_verb": "queries",
+        "direct_object": "factual memory",
+        "anchor_word": "reads",
+        "semantic_role": "state_transition"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "This tech wins the race like a pro and does the hard work while using way less power than the rest.",
+      "visual_focus": "A bar chart where the model bar rises high while the energy cost bar stays low.",
+      "highlight_words": {
+        "top-tier": "#34D399",
+        "fraction": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "OneStreamer-4B",
+        "action_verb": "outperforms",
+        "direct_object": "baseline benchmarks",
+        "anchor_word": "beating",
+        "semantic_role": "metric_evaluation"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse to get the plain truth on how this new code and these smart tools work for you.",
+      "visual_focus": "The Model Verse logo with a clean, tech-inspired animation overlay.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Viewers",
+        "action_verb": "follow",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      }
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{total}} = \\int_{0}^{T} S(t) dt$",
+      "filename": "onestreamer_streaming_video_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Total Stream Content"
+        },
+        {
+          "term": "S(t)",
+          "label": "Streaming Input"
+        }
+      ],
+      "svg_filename": "onestreamer_streaming_video_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(V \\times M) > \\mathcal{O}(M)$",
+      "filename": "onestreamer_streaming_video_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "V",
+          "label": "Raw Video"
+        },
+        {
+          "term": "M",
+          "label": "Condensed Memory"
+        }
+      ],
+      "svg_filename": "onestreamer_streaming_video_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$W_{\\mathrm{c}} = \\mathrm{Caption}(v_{0:t})$",
+      "filename": "onestreamer_streaming_video_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "W_c",
+          "label": "Caption Memory"
+        },
+        {
+          "term": "v",
+          "label": "Video Prefix"
+        }
+      ],
+      "svg_filename": "onestreamer_streaming_video_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$P(y|q, W_{\\mathrm{c}}) \\gg P(y|q, v)$",
+      "filename": "onestreamer_streaming_video_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "P",
+          "label": "Response Probability"
+        },
+        {
+          "term": "q",
+          "label": "Query"
+        }
+      ],
+      "svg_filename": "onestreamer_streaming_video_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\mathrm{Perf} = \\frac{\\text{OneStreamer}}{\\text{Baseline}} > 1.0$",
+      "filename": "onestreamer_streaming_video_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Delta",
+          "label": "Performance Gain"
+        }
+      ],
+      "svg_filename": "onestreamer_streaming_video_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "PERCEPTION",
+          "color": "#38BDF8",
+          "items": [
+            "frames",
+            "pixel_flow"
+          ]
+        },
+        {
+          "name": "MEMORY",
+          "color": "#10B981",
+          "items": [
+            "captions",
+            "factual_history"
+          ]
+        },
+        {
+          "name": "RESPONSE",
+          "color": "#F59E0B",
+          "items": [
+            "proactive_qa",
+            "query"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"event_detected\"",
+        "target_cluster": "MEMORY",
+        "token": "\"event_detected\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'wait'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'skip'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "OneStreamer",
+    "model_a_specs": [
+      "4B Parameters",
+      "PHCM Memory",
+      "PSTL Logic"
+    ],
+    "model_b": "Dense Baseline",
+    "model_b_specs": [
+      "Full Visual Input",
+      "No Captioning",
+      "High Latency"
+    ],
+    "divide_title": "STREAMING VIDEO EFFICIENCY",
+    "model_a_stat": "8/8",
+    "model_a_stat_label": "BEST BENCHMARKS",
+    "model_b_stat": "27.5%",
+    "model_b_stat_label": "ANNOTATED TOKENS",
+    "efficiency_badge": "\u26a1 72.5% LESS STATE SUPERVISION",
+    "benchmarks": [
+      {
+        "name": "Task Coverage",
+        "score_a": "High",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Memory Accuracy",
+        "score_a": "State-of-the-Art",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Efficiency",
+        "score_a": "High",
+        "score_b": "Low"
+      }
+    ],
+    "scale_metric": "1M+",
+    "scale_label": "Training Records",
+    "bottleneck_title": "DENSE VISUAL REDUNDANCY",
+    "bottleneck_desc": "Continuous video overhead",
+    "solution_title": "PROACTIVE HIERARCHICAL MEMORY",
+    "solution_components": "Caption-based factual context",
+    "mechanism_title": "STATE TRANSITION SUPERVISION",
+    "payoff_stat": "27.5%",
+    "payoff_label": "STATE SUPERVISION REDUCTION",
+    "payoff_sub": "Outperforming traditional video methods",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "Streaming Performance",
+    "payoff_base_stat": 60.0,
+    "payoff_base_label": "Baseline",
+    "payoff_delta_badge": "\u26a1 +35% SUCCESS GAIN",
+    "challenger": "OneStreamer",
+    "incumbent": "Dense Video LLMs"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}
