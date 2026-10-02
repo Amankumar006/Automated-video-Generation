@@ -2,180 +2,1592 @@
   "id": "multimodal_flow_architecture",
   "title": "Multimodal Flow: A Unified Continuous Paradigm",
   "category": "mechanism_deepdive",
-  "domain_taxonomy": "neural_attention",
-  "hook_tag": "MULTIMODAL FLOW MECHANICS",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "UNIFIED GENERATIVE MODELING",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Why do AI models struggle to speak and see at once? Old ways chop images into tiny, discrete blocks that break the natural flow.",
-      "visual_focus": "A split screen showing a smooth line for language and a jagged, broken puzzle for images, then merging them.",
+      "text": "Why do we force AI to cut photos into small bits when the real world looks like one long, smooth stream of light to us?",
+      "visual_focus": "A split screen showing pixelated blocks on one side and a smooth, flowing fluid gradient on the other.",
       "highlight_words": {
-        "struggle": "#EF4444",
-        "discrete": "#F59E0B"
+        "continuous stream": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Discrete Tokenizer",
-        "action_verb": "chops",
-        "direct_object": "Continuous Visual Stream",
-        "anchor_word": "chop",
-        "semantic_role": "causal_elimination"
-      }
+        "subject": "Multimodal Flow",
+        "action_verb": "replaces",
+        "direct_object": "discrete image tokens",
+        "anchor_word": "continuous",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "wave_collision",
+      "motif_params": {
+        "signal_a_label": "Discrete Tokenization",
+        "signal_b_label": "Continuous Flow",
+        "result_label": "State Transition",
+        "result_sub": "Fluid Mapping"
+      },
+      "kinetic_action": "wave_pulse",
+      "audio_duration": 6.34,
+      "slot_duration": 6.64,
+      "start": 0.0,
+      "end": 6.34,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.005,
+          "end": 0.22,
+          "duration": 0.215,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.22,
+          "end": 0.375,
+          "duration": 0.155,
+          "frame_ahead_trigger": 0.18
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 0.375,
+          "end": 0.615,
+          "duration": 0.24,
+          "frame_ahead_trigger": 0.335
+        },
+        {
+          "word": "force",
+          "clean_word": "force",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s",
+          "start": 0.615,
+          "end": 0.922,
+          "duration": 0.307,
+          "frame_ahead_trigger": 0.575
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 0.922,
+          "end": 1.195,
+          "duration": 0.273,
+          "frame_ahead_trigger": 0.882
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 1.195,
+          "end": 1.445,
+          "duration": 0.25,
+          "frame_ahead_trigger": 1.155
+        },
+        {
+          "word": "cut",
+          "clean_word": "cut",
+          "phonemes": "k\u02c8\u028ct",
+          "start": 1.445,
+          "end": 1.635,
+          "duration": 0.19,
+          "frame_ahead_trigger": 1.405
+        },
+        {
+          "word": "photos",
+          "clean_word": "photos",
+          "phonemes": "f\u02c8o\u028a\u027eo\u028az",
+          "start": 1.635,
+          "end": 2.025,
+          "duration": 0.39,
+          "frame_ahead_trigger": 1.595
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 2.025,
+          "end": 2.405,
+          "duration": 0.38,
+          "frame_ahead_trigger": 1.985
+        },
+        {
+          "word": "small",
+          "clean_word": "small",
+          "phonemes": "sm\u02c8\u0254\u02d0l",
+          "start": 2.405,
+          "end": 2.58,
+          "duration": 0.175,
+          "frame_ahead_trigger": 2.365
+        },
+        {
+          "word": "bits",
+          "clean_word": "bits",
+          "phonemes": "b\u02c8\u026ats",
+          "start": 2.58,
+          "end": 2.895,
+          "duration": 0.315,
+          "frame_ahead_trigger": 2.54
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 2.895,
+          "end": 3.085,
+          "duration": 0.19,
+          "frame_ahead_trigger": 2.855
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.085,
+          "end": 3.21,
+          "duration": 0.125,
+          "frame_ahead_trigger": 3.045
+        },
+        {
+          "word": "real",
+          "clean_word": "real",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259l",
+          "start": 3.21,
+          "end": 3.47,
+          "duration": 0.26,
+          "frame_ahead_trigger": 3.17
+        },
+        {
+          "word": "world",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 3.47,
+          "end": 3.925,
+          "duration": 0.455,
+          "frame_ahead_trigger": 3.43
+        },
+        {
+          "word": "looks",
+          "clean_word": "looks",
+          "phonemes": "l\u02c8\u028aks",
+          "start": 3.925,
+          "end": 4.09,
+          "duration": 0.165,
+          "frame_ahead_trigger": 3.885
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 4.09,
+          "end": 4.43,
+          "duration": 0.34,
+          "frame_ahead_trigger": 4.05
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 4.43,
+          "end": 4.646,
+          "duration": 0.216,
+          "frame_ahead_trigger": 4.39
+        },
+        {
+          "word": "long,",
+          "clean_word": "long",
+          "phonemes": "l\u02c8\u0254\u014b",
+          "start": 4.646,
+          "end": 4.935,
+          "duration": 0.289,
+          "frame_ahead_trigger": 4.606
+        },
+        {
+          "word": "smooth",
+          "clean_word": "smooth",
+          "phonemes": "sm\u02c8u\u02d0\u00f0",
+          "start": 4.935,
+          "end": 5.22,
+          "duration": 0.285,
+          "frame_ahead_trigger": 4.895
+        },
+        {
+          "word": "stream",
+          "clean_word": "stream",
+          "phonemes": "st\u0279\u02c8i\u02d0m",
+          "start": 5.22,
+          "end": 5.615,
+          "duration": 0.395,
+          "frame_ahead_trigger": 5.18
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 5.615,
+          "end": 5.671,
+          "duration": 0.056,
+          "frame_ahead_trigger": 5.575
+        },
+        {
+          "word": "light",
+          "clean_word": "light",
+          "phonemes": "l\u02c8a\u026at",
+          "start": 5.671,
+          "end": 5.875,
+          "duration": 0.204,
+          "frame_ahead_trigger": 5.631
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 5.875,
+          "end": 6.15,
+          "duration": 0.275,
+          "frame_ahead_trigger": 5.835
+        },
+        {
+          "word": "us?",
+          "clean_word": "us",
+          "phonemes": "\u02cc\u028cs",
+          "start": 6.15,
+          "end": 6.265,
+          "duration": 0.115,
+          "frame_ahead_trigger": 6.11
+        }
+      ]
     },
     {
       "beat_id": 2,
-      "text": "Think of this like trying to map a curvy, colorful sunset using only a rigid grid of Lego bricks. You lose the true shape.",
-      "visual_focus": "A beautiful gradient sunset being pixelated into sharp, jagged blocks, illustrating loss of information.",
+      "text": "Old models act like a paint-by-number set. They turn a soft, gold sunset into stiff, boxy shapes that lose all the grace of light.",
+      "visual_focus": "A hand painting a gradient that abruptly turns into stiff, numbered color blocks.",
       "highlight_words": {
-        "rigid": "#EF4444",
-        "lose": "#EF4444"
+        "paint-by-numbers": "#EF4444"
       },
       "svo_action": {
-        "subject": "Lego Grid",
+        "subject": "Discrete Models",
         "action_verb": "constrains",
-        "direct_object": "Curvy Visual Hue",
+        "direct_object": "visual latent space",
         "anchor_word": "grid",
-        "semantic_role": "state_transition"
-      }
+        "semantic_role": "causal_elimination"
+      },
+      "motif_type": "subspace_vectors",
+      "motif_params": {
+        "title": "Latent Constraints",
+        "sub": "Grid-based Quantization",
+        "vec1_label": "Visual Gradient",
+        "vec2_label": "Token Grid",
+        "angle_label": "Loss of Fidelity",
+        "badge_title": "Constraint",
+        "badge_sub": "Artifacting"
+      },
+      "kinetic_action": "rotation",
+      "audio_duration": 7.06,
+      "slot_duration": 7.36,
+      "start": 6.64,
+      "end": 13.7,
+      "word_timings": [
+        {
+          "word": "Old",
+          "clean_word": "old",
+          "phonemes": "\u02c8o\u028ald",
+          "start": 6.636,
+          "end": 6.931,
+          "duration": 0.295,
+          "frame_ahead_trigger": 6.596
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 6.931,
+          "end": 7.416,
+          "duration": 0.485,
+          "frame_ahead_trigger": 6.891
+        },
+        {
+          "word": "act",
+          "clean_word": "act",
+          "phonemes": "\u02c8\u00e6kt",
+          "start": 7.416,
+          "end": 7.556,
+          "duration": 0.14,
+          "frame_ahead_trigger": 7.376
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.556,
+          "end": 7.921,
+          "duration": 0.365,
+          "frame_ahead_trigger": 7.516
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.921,
+          "end": 8.076,
+          "duration": 0.155,
+          "frame_ahead_trigger": 7.881
+        },
+        {
+          "word": "paint-by-number",
+          "clean_word": "paintbynumber",
+          "phonemes": "p\u02c8e\u026antb\u026an\u02cc\u028cmb\u025a",
+          "start": 8.076,
+          "end": 8.83,
+          "duration": 0.754,
+          "frame_ahead_trigger": 8.036
+        },
+        {
+          "word": "set.",
+          "clean_word": "set",
+          "phonemes": "s\u02c8\u025bt",
+          "start": 8.83,
+          "end": 9.026,
+          "duration": 0.196,
+          "frame_ahead_trigger": 8.79
+        },
+        {
+          "word": "They",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 9.026,
+          "end": 9.296,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.986
+        },
+        {
+          "word": "turn",
+          "clean_word": "turn",
+          "phonemes": "t\u02c8\u025c\u02d0n",
+          "start": 9.296,
+          "end": 9.486,
+          "duration": 0.19,
+          "frame_ahead_trigger": 9.256
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.486,
+          "end": 9.791,
+          "duration": 0.305,
+          "frame_ahead_trigger": 9.446
+        },
+        {
+          "word": "soft,",
+          "clean_word": "soft",
+          "phonemes": "s\u02c8\u0254ft",
+          "start": 9.791,
+          "end": 9.955,
+          "duration": 0.164,
+          "frame_ahead_trigger": 9.751
+        },
+        {
+          "word": "gold",
+          "clean_word": "gold",
+          "phonemes": "\u0261\u02c8o\u028ald",
+          "start": 9.955,
+          "end": 10.321,
+          "duration": 0.366,
+          "frame_ahead_trigger": 9.915
+        },
+        {
+          "word": "sunset",
+          "clean_word": "sunset",
+          "phonemes": "s\u02c8\u028cns\u025bt",
+          "start": 10.321,
+          "end": 10.701,
+          "duration": 0.38,
+          "frame_ahead_trigger": 10.281
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 10.701,
+          "end": 10.916,
+          "duration": 0.215,
+          "frame_ahead_trigger": 10.661
+        },
+        {
+          "word": "stiff,",
+          "clean_word": "stiff",
+          "phonemes": "st\u02c8\u026af",
+          "start": 10.916,
+          "end": 11.286,
+          "duration": 0.37,
+          "frame_ahead_trigger": 10.876
+        },
+        {
+          "word": "boxy",
+          "clean_word": "boxy",
+          "phonemes": "b\u02c8\u0251\u02d0ksi",
+          "start": 11.286,
+          "end": 11.601,
+          "duration": 0.315,
+          "frame_ahead_trigger": 11.246
+        },
+        {
+          "word": "shapes",
+          "clean_word": "shapes",
+          "phonemes": "\u0283\u02c8e\u026aps",
+          "start": 11.601,
+          "end": 12.071,
+          "duration": 0.47,
+          "frame_ahead_trigger": 11.561
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 12.071,
+          "end": 12.211,
+          "duration": 0.14,
+          "frame_ahead_trigger": 12.031
+        },
+        {
+          "word": "lose",
+          "clean_word": "lose",
+          "phonemes": "l\u02c8u\u02d0z",
+          "start": 12.211,
+          "end": 12.576,
+          "duration": 0.365,
+          "frame_ahead_trigger": 12.171
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 12.576,
+          "end": 12.651,
+          "duration": 0.075,
+          "frame_ahead_trigger": 12.536
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.651,
+          "end": 12.841,
+          "duration": 0.19,
+          "frame_ahead_trigger": 12.611
+        },
+        {
+          "word": "grace",
+          "clean_word": "grace",
+          "phonemes": "\u0261\u0279\u02c8e\u026as",
+          "start": 12.841,
+          "end": 13.166,
+          "duration": 0.325,
+          "frame_ahead_trigger": 12.801
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 13.166,
+          "end": 13.316,
+          "duration": 0.15,
+          "frame_ahead_trigger": 13.126
+        },
+        {
+          "word": "light.",
+          "clean_word": "light",
+          "phonemes": "l\u02c8a\u026at",
+          "start": 13.316,
+          "end": 13.556,
+          "duration": 0.24,
+          "frame_ahead_trigger": 13.276
+        }
+      ]
     },
     {
       "beat_id": 3,
-      "text": "Multimodal Flow treats text and pixels as one smooth, continuous river. Scientists align them into shared chunks that keep their spatial, logic order.",
-      "visual_focus": "Text and image data flowing together in a singular, fluid stream within a shared coordinate system.",
+      "text": "This new model treats words and looks like a flowing stream. It lets them mix and blend together on one path to make true sense.",
+      "visual_focus": "Two distinct streams (text and image) merging into one thick, swirling golden ribbon.",
       "highlight_words": {
-        "smooth": "#34D399",
-        "shared": "#38BDF8"
+        "hyperchunks": "#34D399",
+        "shared path": "#34D399"
       },
       "svo_action": {
         "subject": "Flow Backbone",
-        "action_verb": "aligns",
-        "direct_object": "Shared Hyperchunks",
-        "anchor_word": "align",
-        "semantic_role": "agent_action"
-      }
+        "action_verb": "merges",
+        "direct_object": "multimodal embeddings",
+        "anchor_word": "flow",
+        "semantic_role": "state_transition"
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "title": "Flow Backbone Architecture",
+        "sub": "Merging Text and Visual Embedding Streams",
+        "badge_text": "Unified Paradigm"
+      },
+      "kinetic_action": "highlight_path",
+      "audio_duration": 6.57,
+      "slot_duration": 6.87,
+      "start": 14.0,
+      "end": 20.57,
+      "word_timings": [
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 14.007,
+          "end": 14.292,
+          "duration": 0.285,
+          "frame_ahead_trigger": 13.967
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 14.292,
+          "end": 14.487,
+          "duration": 0.195,
+          "frame_ahead_trigger": 14.252
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 14.487,
+          "end": 14.877,
+          "duration": 0.39,
+          "frame_ahead_trigger": 14.447
+        },
+        {
+          "word": "treats",
+          "clean_word": "treats",
+          "phonemes": "t\u0279\u02c8i\u02d0ts",
+          "start": 14.877,
+          "end": 15.205,
+          "duration": 0.328,
+          "frame_ahead_trigger": 14.837
+        },
+        {
+          "word": "words",
+          "clean_word": "words",
+          "phonemes": "w\u02c8\u025c\u02d0dz",
+          "start": 15.205,
+          "end": 15.522,
+          "duration": 0.317,
+          "frame_ahead_trigger": 15.165
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 15.522,
+          "end": 15.737,
+          "duration": 0.215,
+          "frame_ahead_trigger": 15.482
+        },
+        {
+          "word": "looks",
+          "clean_word": "looks",
+          "phonemes": "l\u02c8\u028aks",
+          "start": 15.737,
+          "end": 15.942,
+          "duration": 0.205,
+          "frame_ahead_trigger": 15.697
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 15.942,
+          "end": 16.277,
+          "duration": 0.335,
+          "frame_ahead_trigger": 15.902
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.277,
+          "end": 16.437,
+          "duration": 0.16,
+          "frame_ahead_trigger": 16.237
+        },
+        {
+          "word": "flowing",
+          "clean_word": "flowing",
+          "phonemes": "fl\u02c8o\u028a\u026a\u014b",
+          "start": 16.437,
+          "end": 16.784,
+          "duration": 0.347,
+          "frame_ahead_trigger": 16.397
+        },
+        {
+          "word": "stream.",
+          "clean_word": "stream",
+          "phonemes": "st\u0279\u02c8i\u02d0m",
+          "start": 16.784,
+          "end": 17.202,
+          "duration": 0.418,
+          "frame_ahead_trigger": 16.744
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 17.202,
+          "end": 17.317,
+          "duration": 0.115,
+          "frame_ahead_trigger": 17.162
+        },
+        {
+          "word": "lets",
+          "clean_word": "lets",
+          "phonemes": "l\u02c8\u025bts",
+          "start": 17.317,
+          "end": 17.582,
+          "duration": 0.265,
+          "frame_ahead_trigger": 17.277
+        },
+        {
+          "word": "them",
+          "clean_word": "them",
+          "phonemes": "\u00f0\u02cc\u025bm",
+          "start": 17.582,
+          "end": 17.672,
+          "duration": 0.09,
+          "frame_ahead_trigger": 17.542
+        },
+        {
+          "word": "mix",
+          "clean_word": "mix",
+          "phonemes": "m\u02c8\u026aks",
+          "start": 17.672,
+          "end": 18.067,
+          "duration": 0.395,
+          "frame_ahead_trigger": 17.632
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 18.067,
+          "end": 18.152,
+          "duration": 0.085,
+          "frame_ahead_trigger": 18.027
+        },
+        {
+          "word": "blend",
+          "clean_word": "blend",
+          "phonemes": "bl\u02c8\u025bnd",
+          "start": 18.152,
+          "end": 18.512,
+          "duration": 0.36,
+          "frame_ahead_trigger": 18.112
+        },
+        {
+          "word": "together",
+          "clean_word": "together",
+          "phonemes": "t\u0259\u0261\u02c8\u025b\u00f0\u025a",
+          "start": 18.512,
+          "end": 18.927,
+          "duration": 0.415,
+          "frame_ahead_trigger": 18.472
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 18.927,
+          "end": 19.177,
+          "duration": 0.25,
+          "frame_ahead_trigger": 18.887
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 19.177,
+          "end": 19.289,
+          "duration": 0.112,
+          "frame_ahead_trigger": 19.137
+        },
+        {
+          "word": "path",
+          "clean_word": "path",
+          "phonemes": "p\u02c8\u00e6\u03b8",
+          "start": 19.289,
+          "end": 19.522,
+          "duration": 0.233,
+          "frame_ahead_trigger": 19.249
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 19.522,
+          "end": 19.671,
+          "duration": 0.148,
+          "frame_ahead_trigger": 19.482
+        },
+        {
+          "word": "make",
+          "clean_word": "make",
+          "phonemes": "m\u02c8e\u026ak",
+          "start": 19.671,
+          "end": 20.062,
+          "duration": 0.392,
+          "frame_ahead_trigger": 19.631
+        },
+        {
+          "word": "true",
+          "clean_word": "true",
+          "phonemes": "t\u0279\u02c8u\u02d0",
+          "start": 20.062,
+          "end": 20.152,
+          "duration": 0.09,
+          "frame_ahead_trigger": 20.022
+        },
+        {
+          "word": "sense.",
+          "clean_word": "sense",
+          "phonemes": "s\u02c8\u025bns",
+          "start": 20.152,
+          "end": 20.487,
+          "duration": 0.335,
+          "frame_ahead_trigger": 20.112
+        }
+      ]
     },
     {
       "beat_id": 4,
-      "text": "The model acts like a sculptor. It learns a single vector field that carves meaning from chaos, processing both modalities as one unified signal.",
-      "visual_focus": "A block of marble shifting into a detailed 3D shape, guided by flowing vector arrows representing the model field.",
+      "text": "Think of it as a river guide. It shows the way, letting the brain parts map out colors and words at the same fast time.",
+      "visual_focus": "A central river branching into smaller specialized channels, each labeled 'Vision' or 'Text'.",
       "highlight_words": {
-        "sculptor": "#34D399",
-        "unified": "#38BDF8"
+        "predicting": "#F59E0B",
+        "brain parts": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Vector Field",
-        "action_verb": "carves",
-        "direct_object": "Semantic Latent Shape",
-        "anchor_word": "carves",
+        "subject": "Feed-forward Networks",
+        "action_verb": "processes",
+        "direct_object": "modality-specific chunks",
+        "anchor_word": "handle",
         "semantic_role": "agent_action"
-      }
+      },
+      "motif_type": "branching_outputs",
+      "motif_params": {
+        "in_label": "Flow Backbone",
+        "core_title": "Modality Routing",
+        "core_sub": "Parallel Feed-forward Processing",
+        "card1_title": "Visual Projection",
+        "card1_body": "Spatial Feature Mapping",
+        "card2_title": "Text Projection",
+        "card2_body": "Semantic Embedding Mapping"
+      },
+      "kinetic_action": "branch_expansion",
+      "audio_duration": 6.23,
+      "slot_duration": 6.53,
+      "start": 20.87,
+      "end": 27.1,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 20.878,
+          "end": 21.198,
+          "duration": 0.32,
+          "frame_ahead_trigger": 20.838
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 21.198,
+          "end": 21.313,
+          "duration": 0.115,
+          "frame_ahead_trigger": 21.158
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 21.313,
+          "end": 21.433,
+          "duration": 0.12,
+          "frame_ahead_trigger": 21.273
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 21.433,
+          "end": 21.563,
+          "duration": 0.13,
+          "frame_ahead_trigger": 21.393
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 21.563,
+          "end": 21.698,
+          "duration": 0.135,
+          "frame_ahead_trigger": 21.523
+        },
+        {
+          "word": "river",
+          "clean_word": "river",
+          "phonemes": "\u0279\u02c8\u026av\u025a",
+          "start": 21.698,
+          "end": 22.032,
+          "duration": 0.334,
+          "frame_ahead_trigger": 21.658
+        },
+        {
+          "word": "guide.",
+          "clean_word": "guide",
+          "phonemes": "\u0261\u02c8a\u026ad",
+          "start": 22.032,
+          "end": 22.336,
+          "duration": 0.304,
+          "frame_ahead_trigger": 21.992
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 22.336,
+          "end": 22.498,
+          "duration": 0.162,
+          "frame_ahead_trigger": 22.296
+        },
+        {
+          "word": "shows",
+          "clean_word": "shows",
+          "phonemes": "\u0283\u02c8o\u028az",
+          "start": 22.498,
+          "end": 22.678,
+          "duration": 0.18,
+          "frame_ahead_trigger": 22.458
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.678,
+          "end": 22.958,
+          "duration": 0.28,
+          "frame_ahead_trigger": 22.638
+        },
+        {
+          "word": "way,",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 22.958,
+          "end": 23.073,
+          "duration": 0.115,
+          "frame_ahead_trigger": 22.918
+        },
+        {
+          "word": "letting",
+          "clean_word": "letting",
+          "phonemes": "l\u02c8\u025b\u027e\u026a\u014b",
+          "start": 23.073,
+          "end": 23.443,
+          "duration": 0.37,
+          "frame_ahead_trigger": 23.033
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.443,
+          "end": 23.638,
+          "duration": 0.195,
+          "frame_ahead_trigger": 23.403
+        },
+        {
+          "word": "brain",
+          "clean_word": "brain",
+          "phonemes": "b\u0279\u02c8e\u026an",
+          "start": 23.638,
+          "end": 23.976,
+          "duration": 0.338,
+          "frame_ahead_trigger": 23.598
+        },
+        {
+          "word": "parts",
+          "clean_word": "parts",
+          "phonemes": "p\u02c8\u0251\u02d0\u0279ts",
+          "start": 23.976,
+          "end": 24.443,
+          "duration": 0.467,
+          "frame_ahead_trigger": 23.936
+        },
+        {
+          "word": "map",
+          "clean_word": "map",
+          "phonemes": "m\u02c8\u00e6p",
+          "start": 24.443,
+          "end": 24.668,
+          "duration": 0.225,
+          "frame_ahead_trigger": 24.403
+        },
+        {
+          "word": "out",
+          "clean_word": "out",
+          "phonemes": "\u02c8a\u028at",
+          "start": 24.668,
+          "end": 24.923,
+          "duration": 0.255,
+          "frame_ahead_trigger": 24.628
+        },
+        {
+          "word": "colors",
+          "clean_word": "colors",
+          "phonemes": "k\u02c8\u028cl\u025az",
+          "start": 24.923,
+          "end": 25.293,
+          "duration": 0.37,
+          "frame_ahead_trigger": 24.883
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 25.293,
+          "end": 25.403,
+          "duration": 0.11,
+          "frame_ahead_trigger": 25.253
+        },
+        {
+          "word": "words",
+          "clean_word": "words",
+          "phonemes": "w\u02c8\u025c\u02d0dz",
+          "start": 25.403,
+          "end": 25.733,
+          "duration": 0.33,
+          "frame_ahead_trigger": 25.363
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 25.733,
+          "end": 25.948,
+          "duration": 0.215,
+          "frame_ahead_trigger": 25.693
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 25.948,
+          "end": 26.033,
+          "duration": 0.085,
+          "frame_ahead_trigger": 25.908
+        },
+        {
+          "word": "same",
+          "clean_word": "same",
+          "phonemes": "s\u02c8e\u026am",
+          "start": 26.033,
+          "end": 26.358,
+          "duration": 0.325,
+          "frame_ahead_trigger": 25.993
+        },
+        {
+          "word": "fast",
+          "clean_word": "fast",
+          "phonemes": "f\u02c8\u00e6st",
+          "start": 26.358,
+          "end": 26.648,
+          "duration": 0.29,
+          "frame_ahead_trigger": 26.318
+        },
+        {
+          "word": "time.",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 26.648,
+          "end": 26.953,
+          "duration": 0.305,
+          "frame_ahead_trigger": 26.608
+        }
+      ]
     },
     {
       "beat_id": 5,
-      "text": "This leads to peak performance. With far fewer training steps, it beats older hybrid models, showing that fully continuous flow is the smarter way.",
-      "visual_focus": "A bar chart showing 'Multimodal Flow' rising rapidly, crossing and dwarfing the 'Hybrid Model' baseline bars.",
+      "text": "The result is a clear view of our world. It works much better than old tools while using way less data to learn its craft.",
+      "visual_focus": "A graph line shooting upward, surpassing a flatter, lower-performing baseline benchmark bar.",
       "highlight_words": {
-        "peak": "#34D399",
-        "smarter": "#34D399"
+        "sharper vision": "#34D399"
       },
       "svo_action": {
-        "subject": "Continuous Flow",
+        "subject": "Multimodal Flow",
         "action_verb": "surpasses",
-        "direct_object": "Hybrid Benchmark Scores",
-        "anchor_word": "beats",
+        "direct_object": "hybrid model metrics",
+        "anchor_word": "outperforming",
         "semantic_role": "metric_evaluation"
-      }
+      },
+      "motif_type": "comparative_bars",
+      "motif_params": {
+        "title": "Performance Benchmark",
+        "sub": "Multimodal Flow vs. Hybrid Discrete Models",
+        "contender_a_name": "Standard Discrete Models",
+        "contender_a_score": 0.65,
+        "contender_a_text": "High Data Burden",
+        "contender_b_name": "Multimodal Flow",
+        "contender_b_score": 0.92,
+        "contender_b_text": "Streamline Efficiency",
+        "delta_badge_text": "+40% Improvement",
+        "delta_badge_sub": "Data-to-Fidelity Ratio"
+      },
+      "kinetic_action": "growth_tween",
+      "audio_duration": 6.38,
+      "slot_duration": 6.68,
+      "start": 27.4,
+      "end": 33.78,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 27.407,
+          "end": 27.472,
+          "duration": 0.065,
+          "frame_ahead_trigger": 27.367
+        },
+        {
+          "word": "result",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 27.472,
+          "end": 27.837,
+          "duration": 0.365,
+          "frame_ahead_trigger": 27.432
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 27.837,
+          "end": 27.992,
+          "duration": 0.155,
+          "frame_ahead_trigger": 27.797
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 27.992,
+          "end": 28.197,
+          "duration": 0.205,
+          "frame_ahead_trigger": 27.952
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 28.197,
+          "end": 28.502,
+          "duration": 0.305,
+          "frame_ahead_trigger": 28.157
+        },
+        {
+          "word": "view",
+          "clean_word": "view",
+          "phonemes": "vj\u02c8u\u02d0",
+          "start": 28.502,
+          "end": 28.752,
+          "duration": 0.25,
+          "frame_ahead_trigger": 28.462
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 28.752,
+          "end": 28.85,
+          "duration": 0.098,
+          "frame_ahead_trigger": 28.712
+        },
+        {
+          "word": "our",
+          "clean_word": "our",
+          "phonemes": "\u02cca\u028a\u025a",
+          "start": 28.85,
+          "end": 28.967,
+          "duration": 0.117,
+          "frame_ahead_trigger": 28.81
+        },
+        {
+          "word": "world.",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 28.967,
+          "end": 29.405,
+          "duration": 0.438,
+          "frame_ahead_trigger": 28.927
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 29.405,
+          "end": 29.516,
+          "duration": 0.111,
+          "frame_ahead_trigger": 29.365
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 29.516,
+          "end": 29.817,
+          "duration": 0.301,
+          "frame_ahead_trigger": 29.476
+        },
+        {
+          "word": "much",
+          "clean_word": "much",
+          "phonemes": "m\u02c8\u028ct\u0283",
+          "start": 29.817,
+          "end": 30.122,
+          "duration": 0.305,
+          "frame_ahead_trigger": 29.777
+        },
+        {
+          "word": "better",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 30.122,
+          "end": 30.402,
+          "duration": 0.28,
+          "frame_ahead_trigger": 30.082
+        },
+        {
+          "word": "than",
+          "clean_word": "than",
+          "phonemes": "\u00f0\u0250n",
+          "start": 30.402,
+          "end": 30.532,
+          "duration": 0.13,
+          "frame_ahead_trigger": 30.362
+        },
+        {
+          "word": "old",
+          "clean_word": "old",
+          "phonemes": "\u02c8o\u028ald",
+          "start": 30.532,
+          "end": 30.782,
+          "duration": 0.25,
+          "frame_ahead_trigger": 30.492
+        },
+        {
+          "word": "tools",
+          "clean_word": "tools",
+          "phonemes": "t\u02c8u\u02d0lz",
+          "start": 30.782,
+          "end": 31.117,
+          "duration": 0.335,
+          "frame_ahead_trigger": 30.742
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 31.117,
+          "end": 31.487,
+          "duration": 0.37,
+          "frame_ahead_trigger": 31.077
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 31.487,
+          "end": 31.822,
+          "duration": 0.335,
+          "frame_ahead_trigger": 31.447
+        },
+        {
+          "word": "way",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 31.822,
+          "end": 31.997,
+          "duration": 0.175,
+          "frame_ahead_trigger": 31.782
+        },
+        {
+          "word": "less",
+          "clean_word": "less",
+          "phonemes": "l\u02c8\u025bs",
+          "start": 31.997,
+          "end": 32.352,
+          "duration": 0.355,
+          "frame_ahead_trigger": 31.957
+        },
+        {
+          "word": "data",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 32.352,
+          "end": 32.647,
+          "duration": 0.295,
+          "frame_ahead_trigger": 32.312
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 32.647,
+          "end": 32.752,
+          "duration": 0.105,
+          "frame_ahead_trigger": 32.607
+        },
+        {
+          "word": "learn",
+          "clean_word": "learn",
+          "phonemes": "l\u02c8\u025c\u02d0n",
+          "start": 32.752,
+          "end": 33.167,
+          "duration": 0.415,
+          "frame_ahead_trigger": 32.712
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 33.167,
+          "end": 33.257,
+          "duration": 0.09,
+          "frame_ahead_trigger": 33.127
+        },
+        {
+          "word": "craft.",
+          "clean_word": "craft",
+          "phonemes": "k\u0279\u02c8\u00e6ft",
+          "start": 33.257,
+          "end": 33.567,
+          "duration": 0.31,
+          "frame_ahead_trigger": 33.217
+        }
+      ]
     },
     {
       "beat_id": 6,
-      "text": "Follow The Model Verse for simple explanations of how modern AI actually works.",
-      "visual_focus": "The Model Verse logo appears with a clean, animated, growing geometric node connection.",
+      "text": "Follow The Model Verse for clear and quick talks on how smart machines learn to see the world just like you and I do.",
+      "visual_focus": "The Model Verse logo emerging from a clean, glowing flow field.",
       "highlight_words": {
         "The Model Verse": "#34D399"
       },
       "svo_action": {
-        "subject": "The Model Verse",
-        "action_verb": "guides",
-        "direct_object": "AI Understanding",
+        "subject": "Viewer",
+        "action_verb": "subscribes",
+        "direct_object": "The Model Verse",
         "anchor_word": "Follow",
         "semantic_role": "agent_action"
-      }
+      },
+      "audio_duration": 5.65,
+      "slot_duration": 6.15,
+      "start": 34.08,
+      "end": 39.73,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.091,
+          "end": 34.456,
+          "duration": 0.365,
+          "frame_ahead_trigger": 34.051
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.456,
+          "end": 34.561,
+          "duration": 0.105,
+          "frame_ahead_trigger": 34.416
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.561,
+          "end": 34.941,
+          "duration": 0.38,
+          "frame_ahead_trigger": 34.521
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 34.941,
+          "end": 35.171,
+          "duration": 0.23,
+          "frame_ahead_trigger": 34.901
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.171,
+          "end": 35.351,
+          "duration": 0.18,
+          "frame_ahead_trigger": 35.131
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 35.351,
+          "end": 35.646,
+          "duration": 0.295,
+          "frame_ahead_trigger": 35.311
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 35.646,
+          "end": 35.741,
+          "duration": 0.095,
+          "frame_ahead_trigger": 35.606
+        },
+        {
+          "word": "quick",
+          "clean_word": "quick",
+          "phonemes": "kw\u02c8\u026ak",
+          "start": 35.741,
+          "end": 35.991,
+          "duration": 0.25,
+          "frame_ahead_trigger": 35.701
+        },
+        {
+          "word": "talks",
+          "clean_word": "talks",
+          "phonemes": "t\u02c8\u0254\u02d0ks",
+          "start": 35.991,
+          "end": 36.396,
+          "duration": 0.405,
+          "frame_ahead_trigger": 35.951
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 36.396,
+          "end": 36.441,
+          "duration": 0.045,
+          "frame_ahead_trigger": 36.356
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 36.441,
+          "end": 36.686,
+          "duration": 0.245,
+          "frame_ahead_trigger": 36.401
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 36.686,
+          "end": 37.016,
+          "duration": 0.33,
+          "frame_ahead_trigger": 36.646
+        },
+        {
+          "word": "machines",
+          "clean_word": "machines",
+          "phonemes": "m\u0259\u0283\u02c8i\u02d0nz",
+          "start": 37.016,
+          "end": 37.371,
+          "duration": 0.355,
+          "frame_ahead_trigger": 36.976
+        },
+        {
+          "word": "learn",
+          "clean_word": "learn",
+          "phonemes": "l\u02c8\u025c\u02d0n",
+          "start": 37.371,
+          "end": 37.666,
+          "duration": 0.295,
+          "frame_ahead_trigger": 37.331
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 37.666,
+          "end": 37.791,
+          "duration": 0.125,
+          "frame_ahead_trigger": 37.626
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 37.791,
+          "end": 38.036,
+          "duration": 0.245,
+          "frame_ahead_trigger": 37.751
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.036,
+          "end": 38.091,
+          "duration": 0.055,
+          "frame_ahead_trigger": 37.996
+        },
+        {
+          "word": "world",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 38.091,
+          "end": 38.436,
+          "duration": 0.345,
+          "frame_ahead_trigger": 38.051
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 38.436,
+          "end": 38.641,
+          "duration": 0.205,
+          "frame_ahead_trigger": 38.396
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 38.641,
+          "end": 39.046,
+          "duration": 0.405,
+          "frame_ahead_trigger": 38.601
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 39.046,
+          "end": 39.091,
+          "duration": 0.045,
+          "frame_ahead_trigger": 39.006
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 39.091,
+          "end": 39.176,
+          "duration": 0.085,
+          "frame_ahead_trigger": 39.051
+        },
+        {
+          "word": "I",
+          "clean_word": "i",
+          "phonemes": "\u02c8a\u026a",
+          "start": 39.176,
+          "end": 39.431,
+          "duration": 0.255,
+          "frame_ahead_trigger": 39.136
+        },
+        {
+          "word": "do.",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 39.431,
+          "end": 39.591,
+          "duration": 0.16,
+          "frame_ahead_trigger": 39.391
+        }
+      ]
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$d_{\\mathrm{total}} = d_{\\mathrm{text}} \\cup d_{\\mathrm{visual}}$",
+      "latex": "$d_{\\mathrm{flow}} = \\int_{0}^{1} v(\\mathbf{x}_t, t) dt$",
       "filename": "multimodal_flow_architecture_beat1_formula.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "d_{total}",
-          "label": "Unified Space"
+          "term": "v",
+          "label": "Vector field"
         },
         {
-          "term": "d_{visual}",
-          "label": "Image Dimension"
+          "term": "x_t",
+          "label": "Continuous chunk"
         }
       ],
       "svg_filename": "multimodal_flow_architecture_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(\\text{Tokens}) \\approx \\sum_{i=1}^N \\text{Grid}_i$",
+      "latex": "$\\mathcal{L} = \\| \\mathbf{v}(\\mathbf{x}_t, t) - (\\mathbf{x}_1 - \\mathbf{x}_0) \\|^2$",
       "filename": "multimodal_flow_architecture_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "Grid",
-          "label": "Discrete Quantization"
+          "term": "x_1 - x_0",
+          "label": "Target path"
         }
       ],
       "svg_filename": "multimodal_flow_architecture_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathcal{F}(x, t) = \\nabla \\log p(x_t)$",
+      "latex": "$H = \\{c_1, c_2, \\dots, c_n\\}$",
       "filename": "multimodal_flow_architecture_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\mathcal{F}",
-          "label": "Continuous Flow Field"
-        },
-        {
-          "term": "p(x_t)",
-          "label": "Data Density"
+          "term": "H",
+          "label": "Hyperchunks"
         }
       ],
       "svg_filename": "multimodal_flow_architecture_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathrm{Output} = \\mathrm{JointAttention}(Q, K, V)$",
+      "latex": "$\\mathrm{Attn}(Q, K, V) = \\mathrm{Softmax}(\frac{QK^T}{\\sqrt{d_k}})V$",
       "filename": "multimodal_flow_architecture_beat4_formula.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
           "term": "Q, K, V",
-          "label": "Cross-Modal Weights"
+          "label": "Cross-modal queries"
         }
       ],
       "svg_filename": "multimodal_flow_architecture_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{Gain} = \\frac{\\mathrm{Score}_{MF}}{\\mathrm{Score}_{Hybrid}} > 1$",
+      "latex": "$\\mathrm{Score}_{\\mathrm{MF}} > \\mathrm{Score}_{\\mathrm{Hybrid}}$",
       "filename": "multimodal_flow_architecture_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "Score_{MF}",
-          "label": "Multimodal Flow Result"
+          "term": "Score",
+          "label": "Benchmark accuracy"
         }
       ],
       "svg_filename": "multimodal_flow_architecture_beat5_formula.svg"
@@ -219,41 +1631,41 @@
     }
   ],
   "metadata": {
-    "visual_metaphor": "attention_flow",
+    "visual_metaphor": "semantic_clusters",
     "visual_entities": {
       "clusters": [
         {
-          "name": "TEXT_SPACE",
+          "name": "Language",
           "color": "#38BDF8",
           "items": [
-            "word",
-            "token",
-            "order"
+            "Text",
+            "Tokens",
+            "Chunks"
           ]
         },
         {
-          "name": "VISUAL_SPACE",
+          "name": "Vision",
           "color": "#10B981",
           "items": [
-            "pixel",
-            "structure",
-            "shape"
+            "Pixels",
+            "Images",
+            "Spatial"
           ]
         },
         {
-          "name": "HYPERCHUNKS",
+          "name": "Flow",
           "color": "#F59E0B",
           "items": [
-            "vector",
-            "field",
-            "flow"
+            "Vector",
+            "Field",
+            "Paths"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"multimodal\"",
-        "target_cluster": "HYPERCHUNKS",
-        "token": "\"multimodal\""
+        "label": "Token: \"Flow\"",
+        "target_cluster": "Flow",
+        "token": "\"Flow\""
       },
       "bottleneck_tokens": [
         {
@@ -268,22 +1680,22 @@
     },
     "model_a": "Multimodal Flow",
     "model_a_specs": [
-      "Fully Continuous",
-      "Shared Backbone",
-      "Chunk-Causal"
+      "Continuous Flow",
+      "Hyperchunk Embeddings",
+      "Unified Backbone"
     ],
-    "model_b": "Discrete Hybrids",
+    "model_b": "Hybrid Models",
     "model_b_specs": [
-      "Visual Bottleneck",
-      "Modality-Dependent",
-      "Quantized"
+      "Discrete Tokens",
+      "Modality-Specific",
+      "Fragmented Backbones"
     ],
-    "divide_title": "CONTINUOUS FLOW VS DISCRETE BOTTLENECK",
+    "divide_title": "CONTINUOUS VS DISCRETE DIVIDE",
     "model_a_stat": "82.8",
     "model_a_stat_label": "GENEVAL SCORE",
     "model_b_stat": "75.3",
-    "model_b_stat_label": "BASELINE AVG",
-    "efficiency_badge": "\u26a1 150B TOKENS EFFICIENCY",
+    "model_b_stat_label": "BASELINE SCORE",
+    "efficiency_badge": "\u26a1 150B TOKEN EFFICIENCY",
     "benchmarks": [
       {
         "name": "GenEval",
@@ -293,45 +1705,220 @@
       {
         "name": "VQAv2",
         "score_a": "75.3",
-        "score_b": "72.4"
+        "score_b": "72.0"
       },
       {
         "name": "MMBench",
-        "score_a": "Competitive",
+        "score_a": "High",
         "score_b": "Baseline"
       }
     ],
     "scale_metric": "1.6B",
-    "scale_label": "Parameters Tested",
-    "bottleneck_title": "VISUAL QUANTIZATION BOTTLENECK",
-    "bottleneck_desc": "Information loss from discrete tokenization",
-    "solution_title": "CONTINUOUS CHUNK-BASED EMBEDDING",
-    "solution_components": "Unified Generative Process",
-    "mechanism_title": "FLOW MATCHING VECTOR FIELD",
+    "scale_label": "Total Parameters",
+    "bottleneck_title": "QUANTIZATION BOTTLENECK",
+    "bottleneck_desc": "Fragmented Data Representations",
+    "solution_title": "CONTINUOUS CHUNK FLOW",
+    "solution_components": "Shared Vector Fields",
+    "mechanism_title": "JOINT CROSS-MODAL ATTENTION",
     "payoff_stat": "82.8",
-    "payoff_label": "TOP BENCHMARK PERFORMANCE",
-    "payoff_sub": "Outperforming traditional hybrid and discrete models",
+    "payoff_label": "BENCHMARK PERFORMANCE",
+    "payoff_sub": "Outperforming representative hybrid and discrete models",
     "payoff_hero_stat": 82.8,
     "payoff_hero_label": "Multimodal Flow",
     "payoff_base_stat": 75.3,
-    "payoff_base_label": "Previous Hybrid Best",
-    "payoff_delta_badge": "\u26a1 +9.9% UNIFIED MODELING GAIN",
+    "payoff_base_label": "Discrete Baseline",
+    "payoff_delta_badge": "\u26a1 +7.5% PERFORMANCE GAIN",
     "challenger": "Multimodal Flow",
-    "incumbent": "Representative Hybrids"
+    "incumbent": "Traditional Hybrid Models"
   },
   "entity_registry": [
     {
-      "entity_id": "attention_grid",
-      "entity_type": "attention_grid",
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
       "z_index": 10,
       "initial_position": [
         0.0,
-        0.4,
+        0.0,
         0.0
       ],
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
-      "parameters": {}
+      "parameters": {
+        "model_a_name": "Multimodal Flow",
+        "model_a_score": "82.8",
+        "model_b_name": "Hybrid Models",
+        "model_b_score": "75.3",
+        "delta_label": "\u26a1 150B TOKEN EFFICIENCY"
+      }
     }
-  ]
+  ],
+  "arxiv_id": "2609.40362",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "visual_representation_ablation",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/source/figures/visual_representation_ablation.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/chalkboard_figures/fig_1_visual_representation_ablation.svg",
+      "type": "vector_pdf"
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "multimodal_modeling_paradigms",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/source/figures/multimodal_modeling_paradigms.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/chalkboard_figures/fig_2_multimodal_modeling_paradigms.svg",
+      "type": "vector_pdf"
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "wave5_scaling_2x2",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/source/figures/wave5_scaling_2x2.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.40362/chalkboard_figures/fig_3_wave5_scaling_2x2.svg",
+      "type": "vector_pdf"
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "top_graphs": {
+        "dx": 0.0,
+        "dy": 0.6,
+        "scale_multiplier": 0.736
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.16,
+        "scale_multiplier": 1.15
+      },
+      "transition_arrows": {
+        "dx": 0.0,
+        "dy": -0.08,
+        "scale_multiplier": 1.0
+      },
+      "bottom_graph": {
+        "dx": 0.0,
+        "dy": -0.02,
+        "scale_multiplier": 0.818
+      }
+    },
+    "2": {
+      "hero_vector_diagram": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.839
+      },
+      "ui_elements": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.92,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "coordinate_system": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -2.4,
+        "scale_multiplier": 1.0
+      },
+      "generic_ui_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.857
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.824,
+        "scale_multiplier": 1.0
+      },
+      "text_overlay": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "generic_placeholder_box": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.862
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.678
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.864,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.322
+      },
+      "header_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.96,
+        "scale_multiplier": 1.0
+      },
+      "progress_bars": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.719
+      },
+      "ui_bars": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.761
+      },
+      "generic_card": {
+        "dx": 0.895,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "logo_mark": {
+        "dx": 0.0,
+        "dy": -0.3,
+        "scale_multiplier": 1.322
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "text_url": {
+        "dx": 0.0,
+        "dy": -0.12,
+        "scale_multiplier": 1.0
+      },
+      "brand_text": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.841
+      }
+    }
+  }
 }
