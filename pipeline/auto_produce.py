@@ -14,6 +14,7 @@ import sys
 import json
 import argparse
 from pathlib import Path
+from typing import Optional, Dict, Any, List
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
