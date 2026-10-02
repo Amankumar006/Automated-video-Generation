@@ -548,9 +548,9 @@ class ScriptCustomFlow(VGroup):
 
 class ScriptPaperFigure(VGroup):
     """
-    Renders an authentic vector diagram extracted from the arXiv paper e-print,
-    framed on the 3Blue1Brown chalkboard with a subtle glow border, title banner,
-    and explanatory subtitle.
+    Renders an authentic vector diagram extracted from the arXiv paper e-print.
+    Uses the FULL 9:16 mobile canvas — no tiny caged box. The diagram dominates
+    the screen for maximum readability and visual impact.
     """
     def __init__(
         self,
@@ -558,135 +558,107 @@ class ScriptPaperFigure(VGroup):
         title: str = "OFFICIAL PAPER ARCHITECTURE",
         sub: str = "Authentic vector specification from arXiv source",
         badge_text: str = "PRIMARY ARCHITECTURE",
-        max_width: float = 6.4,
-        max_height: float = 4.2,
+        max_width: float = 7.4,
+        max_height: float = 8.0,
         **kwargs
     ):
         super().__init__(**kwargs)
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=15, color="#38BDF8", weight=MEDIUM).move_to([0, 3.5, 0])
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.1)
+        self.title = Text(title, font=FONT_HELVETICA, font_size=16, color="#38BDF8", weight=BOLD).move_to([0, 5.3, 0])
+        if self.title.width > 7.2:
+            self.title.scale_to_fit_width(7.2)
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.15)
+        if self.sub.width > 7.2:
+            self.sub.scale_to_fit_width(7.2)
 
-        # Outer chassis frame
-        frame_w = max_width + 0.4
-        frame_h = max_height + 0.6
-        self.frame = RoundedRectangle(
-            corner_radius=0.16,
-            width=frame_w,
-            height=frame_h,
-            color="#334155",
-            fill_color="#0D1117",
-            fill_opacity=0.92,
-            stroke_width=2.0
-        ).move_to([0, 0.4, 0])
-
-        # Vector diagram
+        # Vector diagram — fills the hero zone without enclosing frame
         self.fig_mobj = None
         if svg_path and os.path.exists(svg_path):
             try:
                 m = SVGMobject(str(svg_path))
+                # Clamp to safe bounds
                 if m.width > max_width:
                     m.scale_to_fit_width(max_width)
                 if m.height > max_height:
                     m.scale_to_fit_height(max_height)
-                m.move_to(self.frame.get_center())
+                # Scale UP small diagrams so they're clearly visible
+                if m.width < 5.0 and m.height < 4.0:
+                    scale_up = min(max_width / max(m.width, 0.1), max_height / max(m.height, 0.1), 1.5)
+                    m.scale(scale_up)
+                m.move_to([0, 0.0, 0])
                 self.fig_mobj = m
             except Exception as e:
                 print(f"⚠️ Error loading paper figure SVG: {e}")
 
         if not self.fig_mobj:
-            fallback_box = Rectangle(width=max_width - 1.0, height=2.2, color="#38BDF8", stroke_width=1.5).move_to(self.frame.get_center())
-            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color="#38BDF8", weight=MEDIUM).move_to(fallback_box)
+            fallback_box = Rectangle(width=6.0, height=3.5, color="#38BDF8", stroke_width=2.0).move_to([0, 0.0, 0])
+            lbl = Text(title, font=FONT_HELVETICA, font_size=14, color="#38BDF8", weight=BOLD).move_to(fallback_box)
             self.fig_mobj = VGroup(fallback_box, lbl)
 
-        # Bottom badge
-        badge_w = max(2.6, min(5.4, len(badge_text) * 0.16 + 0.6))
-        self.badge_box = RoundedRectangle(
-            corner_radius=0.1,
-            width=badge_w,
-            height=0.45,
-            color="#10B981",
-            fill_color="#064E3B",
-            fill_opacity=0.85,
-            stroke_width=1.5
-        ).next_to(self.frame, DOWN, buff=0.15)
-        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color="#34D399", weight=MEDIUM).move_to(self.badge_box)
-        self.badge = VGroup(self.badge_box, self.badge_txt)
+        # Compatibility stubs — no frame or badge chrome wasting screen space
+        self.frame = VGroup()
+        self.badge = VGroup()
 
-        self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)
+        self.add(self.title, self.sub, self.fig_mobj)
 
 
 class ScriptDynamicBespokeSVG(VGroup):
     """
     Renders a bespoke, beat-specific vector diagram synthesized for the exact
-    narrative script and physical analogy of a beat (e.g. smoothie blender,
-    flickering canvas wireframe, bifurcated dual tracks, anti-bleed barrier, etc.).
-    Framed in signature 3Blue1Brown chalkboard glass-chassis styling with dynamic badges.
+    narrative script and physical analogy of a beat.
+    Uses the FULL 9:16 mobile canvas — no tiny caged box. The diagram dominates
+    the screen for maximum readability and visual impact.
     """
     def __init__(
         self,
         svg_path: Optional[str] = None,
         title: str = "BESPOKE CONCEPT DIAGRAM",
         sub: str = "Procedural vector visualization tailored to narrative beat",
-        badge_text: str = "DYNAMIC BEAT SPECIFICATION",
+        badge_text: str = "",
         accent_color: str = "#38BDF8",
-        max_width: float = 6.2,
-        max_height: float = 3.8,
+        max_width: float = 7.4,
+        max_height: float = 8.0,
         **kwargs
     ):
         super().__init__(**kwargs)
         self.accent_color = accent_color
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=15, color=accent_color, weight=MEDIUM).move_to([0, 3.5, 0])
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.1)
+        self.title = Text(title, font=FONT_HELVETICA, font_size=16, color=accent_color, weight=BOLD).move_to([0, 5.3, 0])
+        if self.title.width > 7.2:
+            self.title.scale_to_fit_width(7.2)
+        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.15)
+        if self.sub.width > 7.2:
+            self.sub.scale_to_fit_width(7.2)
 
-        # Outer chassis frame
-        frame_w = max_width + 0.4
-        frame_h = max_height + 0.6
-        self.frame = RoundedRectangle(
-            corner_radius=0.16,
-            width=frame_w,
-            height=frame_h,
-            color="#334155",
-            fill_color="#0D1117",
-            fill_opacity=0.92,
-            stroke_width=2.0
-        ).move_to([0, 0.4, 0])
-
-        # Vector diagram
+        # Vector diagram — fills the hero zone without enclosing frame
         self.fig_mobj = None
         if svg_path and os.path.exists(svg_path):
             try:
                 m = SVGMobject(str(svg_path))
+                # Clamp to safe bounds
                 if m.width > max_width:
                     m.scale_to_fit_width(max_width)
                 if m.height > max_height:
                     m.scale_to_fit_height(max_height)
-                m.move_to(self.frame.get_center())
+                # Scale UP small diagrams so they're clearly visible
+                if m.width < 5.0 and m.height < 4.0:
+                    scale_up = min(max_width / max(m.width, 0.1), max_height / max(m.height, 0.1), 1.5)
+                    m.scale(scale_up)
+                m.move_to([0, 0.0, 0])
                 self.fig_mobj = m
             except Exception as e:
                 print(f"⚠️ Error loading bespoke SVG: {e}")
 
         if not self.fig_mobj:
-            fallback_box = Rectangle(width=max_width - 1.0, height=2.2, color=accent_color, stroke_width=1.5).move_to(self.frame.get_center())
-            lbl = Text(title, font=FONT_HELVETICA, font_size=12, color=accent_color, weight=MEDIUM).move_to(fallback_box)
+            fallback_box = Rectangle(width=6.0, height=3.5, color=accent_color, stroke_width=2.0).move_to([0, 0.0, 0])
+            lbl = Text(title, font=FONT_HELVETICA, font_size=14, color=accent_color, weight=BOLD).move_to(fallback_box)
             self.fig_mobj = VGroup(fallback_box, lbl)
 
-        # Bottom badge
-        badge_w = max(2.6, min(5.4, len(badge_text) * 0.16 + 0.6))
-        self.badge_box = RoundedRectangle(
-            corner_radius=0.1,
-            width=badge_w,
-            height=0.45,
-            color=accent_color,
-            fill_color="#0F172A",
-            fill_opacity=0.9,
-            stroke_width=1.5
-        ).next_to(self.frame, DOWN, buff=0.15)
-        self.badge_txt = Text(badge_text, font=FONT_HELVETICA, font_size=10, color=accent_color, weight=MEDIUM).move_to(self.badge_box)
-        self.badge = VGroup(self.badge_box, self.badge_txt)
+        # Compatibility stubs — no frame or badge chrome wasting screen space
+        self.frame = VGroup()
+        self.badge = VGroup()
 
-        self.add(self.title, self.sub, self.frame, self.fig_mobj, self.badge)
+        self.add(self.title, self.sub, self.fig_mobj)
 
 
 MOTIF_REGISTRY = {
