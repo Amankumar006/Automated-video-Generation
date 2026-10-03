@@ -2,6 +2,10 @@
 Unit tests for pipeline/json_utils.py robust JSON sanitizer & parser.
 """
 
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import unittest
 from pipeline.json_utils import sanitize_llm_json, robust_json_loads
 

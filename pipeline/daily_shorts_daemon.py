@@ -71,6 +71,7 @@ def evaluate_pedagogical_viability(
     Evaluates candidate trending papers with Gemini to pick the top `count`
     curiosity-inducing, visually teachable papers, aggressively favoring high-velocity
     domains (multimodal_diffusion 1.29x, hardware_efficiency 1.19x).
+    """
     import warnings
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", category=FutureWarning)
