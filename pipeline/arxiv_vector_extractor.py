@@ -80,9 +80,9 @@ def recolor_svg_for_blackboard(raw_svg: str, accent_color: str = "#38BDF8") -> s
     Transforms a standard white-background paper SVG into a signature 3Blue1Brown
     chalkboard asset with high-contrast chalk strokes and luminous accents.
     """
-    # 1. Remove solid white or near-white background rectangles
+    # 1. Remove solid white or near-white background rectangles and paths
     cleaned = re.sub(
-        r'<rect[^>]*fill=\"(?:#ffffff|#fff|white|rgb\(100%,100%,100%\)|#fafafa|#f8f9fa)\".*?/>',
+        r'<(?:rect|path)[^>]*fill=\"(?:#ffffff|#fff|white|rgb\(100%,100%,100%\)|#fafafa|#f8f9fa)\"[^>]*/>',
         '',
         raw_svg,
         flags=re.IGNORECASE
@@ -115,10 +115,44 @@ def recolor_svg_for_blackboard(raw_svg: str, accent_color: str = "#38BDF8") -> s
     return cleaned
 
 
-def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str, Any]]:
+def prepare_image_for_blackboard(img_path: Path, output_path: Path) -> Path:
     """
-    Discovers native vector figures (PDF, EPS, SVG) in the extracted arXiv source,
-    converts them to standalone SVGs, and recolors them for the 3b1b chalkboard.
+    Transforms a light-background paper raster diagram into a chalkboard-friendly asset.
+    If the image has a predominantly white background, converts white to transparent
+    and inverts dark lines/text into chalk white (#E2E8F0).
+    """
+    try:
+        from PIL import Image
+        import numpy as np
+
+        im = Image.open(img_path).convert("RGBA")
+        arr = np.array(im)
+        white_mask = (arr[:, :, 0] > 235) & (arr[:, :, 1] > 235) & (arr[:, :, 2] > 235) & (arr[:, :, 3] > 180)
+        
+        # If >35% of pixels are white, make background transparent for the chalkboard
+        if np.mean(white_mask) > 0.35:
+            arr[white_mask, 3] = 0
+            # Convert dark/black strokes and labels to chalk white (#E2E8F0)
+            dark_mask = (arr[:, :, 0] < 60) & (arr[:, :, 1] < 60) & (arr[:, :, 2] < 60) & (arr[:, :, 3] > 180)
+            arr[dark_mask, 0] = 226
+            arr[dark_mask, 1] = 232
+            arr[dark_mask, 2] = 240
+            out_im = Image.fromarray(arr)
+            out_im.save(output_path, "PNG")
+            return output_path
+        else:
+            im.save(output_path, "PNG")
+            return output_path
+    except Exception as e:
+        print(f"⚠️ Image chalkboard preparation notice for {img_path.name}: {e}")
+        return img_path
+
+
+def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str, Any]]:
+    """
+    Discovers native vector figures (PDF, EPS, SVG) and high-res architecture images
+    in the extracted arXiv source, converts them to standalone chalkboard assets,
+    and recolors them for the 3Blue1Brown carbon chalkboard.
     """
     clean_id = clean_arxiv_id(arxiv_id)
     source_dir = download_arxiv_source(clean_id)
@@ -129,7 +163,7 @@ def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Find candidate figure files
-    candidate_extensions = [".pdf", ".svg", ".eps", ".png"]
+    candidate_extensions = [".pdf", ".svg", ".eps", ".png", ".jpg", ".jpeg"]
     found_files = []
     for root, _, files in os.walk(source_dir):
         for f in files:
@@ -140,21 +174,35 @@ def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str
                     continue
                 found_files.append(Path(root) / f)
 
-    # Sort candidates by file size or heuristic priority
-    # Prefer files in 'fig' or 'figure' folders
+    # Heuristic scoring prioritizing architectural diagrams and overviews
     def figure_score(p: Path) -> int:
         score = 0
         s = str(p).lower()
-        if "fig" in s or "image" in s:
-            score += 50
-        if p.suffix.lower() == ".pdf":
-            score += 30
-        elif p.suffix.lower() == ".svg":
-            score += 25
-        # Prefer moderate sized vector files (avoid tiny icons or giant bitmaps)
+        stem = p.stem.lower()
+
+        # Primary architecture keywords
+        if any(k in stem for k in ["arch", "overview", "framework", "pipeline", "pipelin", "model", "method", "system", "fig1", "fig_1", "figure1", "schematic", "workflow", "stage"]):
+            score += 85
+        elif any(k in s for k in ["fig", "image", "diagram", "stages", "flow"]):
+            score += 45
+
+        # Penalize tiny icon files or giant multi-megabyte bundles
         size = p.stat().st_size
-        if 5000 < size < 1_500_000:
-            score += 20
+        if size < 4000:
+            score -= 50
+        elif size > 6_000_000:
+            score -= 20
+        elif 8000 < size < 1_500_000:
+            score += 25
+
+        # Extension weights
+        ext = p.suffix.lower()
+        if ext == ".svg":
+            score += 35
+        elif ext == ".pdf":
+            score += 30
+        elif ext in [".png", ".jpg", ".jpeg"]:
+            score += 25
         return score
 
     found_files.sort(key=figure_score, reverse=True)
@@ -167,6 +215,7 @@ def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str
 
         ext = p.suffix.lower()
         svg_target = output_dir / f"fig_{fig_idx}_{p.stem}.svg"
+        img_target = output_dir / f"fig_{fig_idx}_{p.stem}.png"
 
         if ext == ".pdf":
             try:
@@ -180,7 +229,9 @@ def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str
                         "stem": p.stem,
                         "source_file": str(p),
                         "svg_path": str(svg_target),
-                        "type": "vector_pdf"
+                        "image_path": None,
+                        "type": "vector_pdf",
+                        "score": figure_score(p)
                     })
                     print(f"   📊 Converted & recolored vector PDF figure: {p.name} -> {svg_target.name}")
                     fig_idx += 1
@@ -197,24 +248,47 @@ def extract_vector_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str
                     "stem": p.stem,
                     "source_file": str(p),
                     "svg_path": str(svg_target),
-                    "type": "native_svg"
+                    "image_path": None,
+                    "type": "native_svg",
+                    "score": figure_score(p)
                 })
                 print(f"   📊 Recolored native SVG figure: {p.name} -> {svg_target.name}")
                 fig_idx += 1
             except Exception as e:
                 print(f"⚠️ Error processing SVG figure {p.name}: {e}")
 
+        elif ext in [".png", ".jpg", ".jpeg"]:
+            try:
+                prepared_path = prepare_image_for_blackboard(p, img_target)
+                extracted_figures.append({
+                    "figure_id": f"fig_{fig_idx}",
+                    "stem": p.stem,
+                    "source_file": str(p),
+                    "svg_path": None,
+                    "image_path": str(prepared_path),
+                    "type": "raster_image",
+                    "score": figure_score(p)
+                })
+                print(f"   🖼️ Prepared chalkboard raster diagram: {p.name} -> {img_target.name}")
+                fig_idx += 1
+            except Exception as e:
+                print(f"⚠️ Error processing image figure {p.name}: {e}")
+
     return extracted_figures
+
+
+# Backward compatibility alias
+extract_vector_figures = extract_paper_figures
 
 
 def get_paper_vector_figure(arxiv_id: Optional[str], index: int = 0) -> Optional[str]:
     """
-    Returns the path to the converted chalkboard SVG figure for the given paper,
+    Returns the path to the converted chalkboard SVG or PNG figure for the given paper,
     or None if unavailable.
     """
     if not arxiv_id:
         return None
-    figs = extract_vector_figures(arxiv_id, max_figures=index + 1)
+    figs = extract_paper_figures(arxiv_id, max_figures=index + 1)
     if figs and len(figs) > index:
-        return figs[index]["svg_path"]
+        return figs[index].get("svg_path") or figs[index].get("image_path")
     return None
