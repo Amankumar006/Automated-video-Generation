@@ -315,6 +315,19 @@ Generate the complete JSON specification strictly adhering to this structure:
     "payoff_delta_badge": "⚡ +56.7% SYNTACTIC RECOVERY GAIN",
     "challenger": "Challenger Name (for benchmark_news)",
     "incumbent": "Incumbent Name (for benchmark_news)"
+  }},
+  "benchmark_comparison": {{
+    "title": "BENCHMARK SHOWDOWN: PRIMARY METRIC",
+    "metric_name": "Throughput or Accuracy",
+    "unit": "TFLOPS | % | tok/s | ms",
+    "contestants": [
+      {{"name": "Our Model", "value": 1180.0, "display_val": "1,180 TFLOPS", "is_hero": true, "color": "#10B981"}},
+      {{"name": "Incumbent SOTA", "value": 660.0, "display_val": "660 TFLOPS", "is_hero": false, "color": "#38BDF8"}},
+      {{"name": "Alternative Baselines", "value": 610.0, "display_val": "610 TFLOPS", "is_hero": false, "color": "#A855F7"}},
+      {{"name": "Standard PyTorch", "value": 240.0, "display_val": "240 TFLOPS", "is_hero": false, "color": "#EF4444"}}
+    ],
+    "delta_badge": "⚡ +78.8% SOTA EFFICIENCY GAIN",
+    "radar_axes": ["Throughput", "VRAM Efficiency", "Accuracy", "Context Length", "Cost Efficiency"]
   }}
 }}
 """

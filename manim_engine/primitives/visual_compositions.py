@@ -55,7 +55,7 @@ class BaseBlueprintComposition(Group):
 
         # Clean top titles formatted for 9:16 mobile canvas
         self.title = CleanText(
-            title.upper()[:32],
+            title.upper()[:48],
             font=FONT_HELVETICA,
             font_size=16,
             color=accent_color,
@@ -65,7 +65,7 @@ class BaseBlueprintComposition(Group):
             self.title.scale_to_fit_width(7.2)
 
         self.sub = CleanText(
-            sub[:65],
+            sub[:80],
             font=FONT_HELVETICA,
             font_size=11,
             color=COLOR_SLATE,
@@ -766,12 +766,33 @@ BLUEPRINT_COMPOSITION_REGISTRY = {
     "official_figure": BlueprintPaperFigure
 }
 
+
 def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] = None) -> BaseBlueprintComposition:
     """
     Factory function to instantiate any composable visual blueprint with provided parameters.
     Falls back gracefully to BlueprintPipelineStages if layout unknown.
     """
     if layout not in BLUEPRINT_COMPOSITION_REGISTRY:
+        if layout in ["horizontal_race_bars", "race_bars", "benchmark_race", "drag_race_bars", "radar_pareto_plot", "radar_plot", "spider_chart", "pareto_frontier", "pareto_tradeoff"]:
+            try:
+                from manim_engine.primitives.showdown_engine import (
+                    BlueprintHorizontalRaceBars,
+                    BlueprintRadarParetoPlot
+                )
+                BLUEPRINT_COMPOSITION_REGISTRY.update({
+                    "horizontal_race_bars": BlueprintHorizontalRaceBars,
+                    "race_bars": BlueprintHorizontalRaceBars,
+                    "benchmark_race": BlueprintHorizontalRaceBars,
+                    "drag_race_bars": BlueprintHorizontalRaceBars,
+                    "radar_pareto_plot": BlueprintRadarParetoPlot,
+                    "radar_plot": BlueprintRadarParetoPlot,
+                    "spider_chart": BlueprintRadarParetoPlot,
+                    "pareto_frontier": BlueprintRadarParetoPlot,
+                    "pareto_tradeoff": BlueprintRadarParetoPlot
+                })
+            except Exception as e:
+                print(f"⚠️ Showdown engine lazy import notice: {e}")
+
         try:
             from manim_engine.primitives.physics_simulations import PHYSICS_SIMULATION_REGISTRY
             BLUEPRINT_COMPOSITION_REGISTRY.update(PHYSICS_SIMULATION_REGISTRY)
