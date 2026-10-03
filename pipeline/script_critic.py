@@ -17,9 +17,13 @@ from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
-load_dotenv(PROJECT_ROOT / ".env")
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", category=FutureWarning)
+    import google.generativeai as genai
 
-import google.generativeai as genai
+from pipeline.json_utils import robust_json_loads
+load_dotenv(PROJECT_ROOT / ".env")
 
 API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 if API_KEY:
@@ -385,7 +389,7 @@ Respond strictly in valid JSON with this exact schema:
                 text = resp.text.strip()
                 if "```json" in text:
                     text = text.split("```json")[1].split("```")[0].strip()
-                return json.loads(text)
+                return robust_json_loads(text)
             except Exception as e:
                 continue
         return None

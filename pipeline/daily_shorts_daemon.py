@@ -20,6 +20,7 @@ sys.path.append(str(PROJECT_ROOT))
 from pipeline.batch_digest import get_trending_digest, record_paper_production, load_history
 from pipeline.auto_produce import auto_produce
 from pipeline.script_critic import ScriptCritic
+from pipeline.json_utils import robust_json_loads
 from pipeline.config import WORKSPACE_ROOT, BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS
 from pipeline.analytics_feedback import (
     retention_analytics,
@@ -70,8 +71,10 @@ def evaluate_pedagogical_viability(
     Evaluates candidate trending papers with Gemini to pick the top `count`
     curiosity-inducing, visually teachable papers, aggressively favoring high-velocity
     domains (multimodal_diffusion 1.29x, hardware_efficiency 1.19x).
-    """
-    import google.generativeai as genai
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=FutureWarning)
+        import google.generativeai as genai
 
     if not candidates:
         return []
@@ -156,7 +159,7 @@ Return ONLY valid JSON matching this schema:
                 generation_config={"response_mime_type": "application/json"}
             )
             if response and response.text:
-                decision = json.loads(response.text.strip())
+                decision = robust_json_loads(response.text.strip())
                 chosen_items = decision.get("selected_papers", [])
                 if not chosen_items and "selected_index" in decision:
                     chosen_items = [decision]

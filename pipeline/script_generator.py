@@ -18,7 +18,12 @@ sys.path.append(str(PROJECT_ROOT))
 
 load_dotenv(PROJECT_ROOT / ".env")
 
-import google.generativeai as genai
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", category=FutureWarning)
+    import google.generativeai as genai
+
+from pipeline.json_utils import robust_json_loads
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
 from scripts.generate_math_svgs import render_math_to_svg
 
@@ -358,15 +363,10 @@ Generate the complete JSON specification strictly adhering to this structure:
     raw_text = response.text.strip()
 
     try:
-        spec = json.loads(raw_text, strict=False)
-    except json.JSONDecodeError:
-        # Auto-heal unescaped LaTeX backslashes (e.g. \alpha, \sum, \tau, \implies)
-        fixed_text = re.sub(r'\\(?![/"\\bfnrtu]|u[0-9a-fA-F]{4})', r'\\\\', raw_text)
-        try:
-            spec = json.loads(fixed_text, strict=False)
-        except json.JSONDecodeError as e:
-            print("Raw LLM output:\n", raw_text)
-            raise RuntimeError(f"Failed to parse LLM JSON: {e}")
+        spec = robust_json_loads(raw_text)
+    except Exception as e:
+        print("Raw LLM output:\n", raw_text)
+        raise RuntimeError(f"Failed to parse LLM JSON: {e}")
 
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
@@ -426,7 +426,7 @@ Return ONLY valid JSON matching this schema:
                     ref_model = genai.GenerativeModel(m_name, generation_config={"response_mime_type": "application/json"})
                     ref_resp = ref_model.generate_content(refine_prompt)
                     if ref_resp and ref_resp.text:
-                        ref_json = json.loads(ref_resp.text.strip())
+                        ref_json = robust_json_loads(ref_resp.text.strip())
                         new_beats = {b["beat_id"]: b["text"] for b in ref_json.get("beats", [])}
                         for b in spec.get("beats", []):
                             bid = b.get("beat_id")
