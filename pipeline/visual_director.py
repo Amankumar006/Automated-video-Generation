@@ -154,6 +154,39 @@ class VisualDirector:
                 "efficiency_label": "O(1) CONSTANT LATENCY"
             })
 
+        # Showdown 1: Horizontal Benchmark Drag-Race Bars
+        if any(k in text for k in ["throughput", "tflops", "race", "speedup", "faster", "benchmark", "leaderboard", "tokens/s", "drag race", "baseline", "outperform", "gflops", "speed"]):
+            candidates.append({
+                "layout": "horizontal_race_bars",
+                "title": f"BENCHMARK RACE: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Hardware throughput and execution speed drag race",
+                "accent_color": "#10B981",
+                "metric_name": "THROUGHPUT",
+                "unit": "TFLOPS",
+                "contestants": [
+                    {"name": f"{subj[:14]} (Ours)", "value": 1180.0, "display_val": "1,180 TFLOPS", "is_hero": True, "color": "#10B981"},
+                    {"name": "Prior SOTA", "value": 660.0, "display_val": "660 TFLOPS", "is_hero": False, "color": "#38BDF8"},
+                    {"name": "cuDNN Native", "value": 610.0, "display_val": "610 TFLOPS", "is_hero": False, "color": "#A855F7"},
+                    {"name": "PyTorch Baseline", "value": 240.0, "display_val": "240 TFLOPS", "is_hero": False, "color": "#EF4444"}
+                ],
+                "delta_badge": "⚡ +78.8% SPEEDUP OVER PRIOR SOTA"
+            })
+
+        # Showdown 2: Radar / Spider Pareto Frontier Tradeoff
+        if any(k in text for k in ["radar", "spider", "pareto", "tradeoff", "trade-off", "frontier", "dimensions", "cost efficiency", "compromise", "multi-dimensional"]):
+            candidates.append({
+                "layout": "radar_pareto_plot",
+                "title": f"PARETO FRONTIER: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Multi-dimensional performance tradeoff across frontier architectures",
+                "accent_color": "#10B981",
+                "axes": ["Throughput", "VRAM Efficiency", "Accuracy", "Context Length", "Cost Efficiency"],
+                "models": [
+                    {"name": f"{subj[:14]} (Ours)", "scores": [0.94, 0.90, 0.92, 0.88, 0.96], "is_hero": True, "color": "#10B981", "fill_opacity": 0.35},
+                    {"name": "Proprietary Incumbent", "scores": [0.62, 0.48, 0.95, 0.85, 0.22], "is_hero": False, "color": "#EF4444", "fill_opacity": 0.20}
+                ],
+                "delta_badge": "⚡ DOMINATES PARETO FRONTIER AT FRACTION OF COST"
+            })
+
         # 5. Mirror / Blur / Contrast / Side-by-Side Comparison
         if any(k in text for k in ["mirror", "reflection", "forget", "blur", "versus", "compare", "traditional", "prior", "baseline", "monolithic"]):
             candidates.append({
@@ -262,34 +295,60 @@ class VisualDirector:
                 continue
 
             # -------------------------------------------------------------
-            # BEAT 5: Empirical Benchmark Evaluation Bars (Default if no blueprint)
+            # BEAT 5: Automated Showdown & Benchmark Visualizer (Visual Engine 5.0)
             # -------------------------------------------------------------
             bp = b.get("visual_blueprint")
-            if b_id == 5 and (not bp or bp.get("layout") in ["comparative_bars", "benchmark_bars"]):
-                b["motif_type"] = "comparative_bars"
-                b["kinetic_action"] = "bar_fill"
-                payoff_stat = spec.get("metadata", {}).get("payoff_hero_stat", 94.0)
-                payoff_base = spec.get("metadata", {}).get("payoff_base_stat", 54.0)
-                score_a = float(payoff_stat) / 100.0 if payoff_stat > 1.0 else float(payoff_stat)
-                score_b = float(payoff_base) / 100.0 if payoff_base > 1.0 else float(payoff_base)
-                
+            if b_id == 5 and (not bp or bp.get("layout") in ["comparative_bars", "benchmark_bars", "horizontal_race_bars", "race_bars", "radar_pareto_plot"]):
                 v_foc = b.get("visual_focus", "")
                 if len(v_foc) > 55:
                     v_foc = v_foc[:55].rsplit(" ", 1)[0]
 
-                b["motif_params"] = {
-                    "title": f"BENCHMARK RESULTS: {topic.upper()[:20]}",
-                    "sub": v_foc or "Empirical evaluation against prior frontier models",
-                    "contender_a_name": f"{topic.upper()[:16].strip()} (OURS)",
-                    "contender_a_score": score_a,
-                    "contender_a_text": f"{payoff_stat}%" if isinstance(payoff_stat, (int, float)) else str(payoff_stat),
-                    "contender_b_name": "PRIOR BASELINE",
-                    "contender_b_score": score_b,
-                    "contender_b_text": f"{payoff_base}%" if isinstance(payoff_base, (int, float)) else str(payoff_base),
-                    "delta_badge_text": "⚡ SOTA PERFORMANCE ADVANTAGE",
-                    "delta_badge_sub": "Significant efficiency and accuracy milestone"
+                from pipeline.benchmark_extractor import BenchmarkExtractor
+                extractor = BenchmarkExtractor()
+                b_comp = extractor.extract_or_fallback(spec)
+
+                b_text = (b.get("text", "") + " " + v_foc).lower()
+                if any(k in b_text for k in ["radar", "spider", "pareto", "tradeoff", "trade-off", "frontier", "dimensions"]):
+                    layout_name = "radar_pareto_plot"
+                    params = {
+                        "title": f"PARETO FRONTIER: {topic.upper()[:18]}",
+                        "sub": v_foc or "Multi-dimensional performance tradeoff across frontier architectures",
+                        "axes": b_comp.radar_axes,
+                        "models": b_comp.radar_models,
+                        "delta_badge": b_comp.delta_badge
+                    }
+                    action = "pulse"
+                else:
+                    layout_name = "horizontal_race_bars"
+                    params = {
+                        "title": b_comp.title,
+                        "sub": v_foc or "Quantitative empirical evaluation against frontier baselines",
+                        "metric_name": b_comp.metric_name,
+                        "unit": b_comp.unit,
+                        "contestants": [
+                            {
+                                "name": c.name,
+                                "value": c.value,
+                                "display_val": c.raw_str,
+                                "is_hero": c.is_hero,
+                                "color": c.color
+                            }
+                            for c in b_comp.contestants
+                        ],
+                        "delta_badge": b_comp.delta_badge
+                    }
+                    action = "bar_fill"
+
+                b["motif_type"] = layout_name
+                b["kinetic_action"] = action
+                b["visual_blueprint"] = {
+                    "layout": layout_name,
+                    "title": params["title"],
+                    "sub": params["sub"],
+                    "params": params
                 }
-                print(f"   ✨ Beat 5: Assigned 'comparative_bars' (Benchmark Payoff)")
+                b["motif_params"] = params
+                print(f"   ✨ Beat 5: Assigned '{layout_name}' (Automated Benchmark Showdown)")
                 continue
 
 
