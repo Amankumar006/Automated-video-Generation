@@ -793,6 +793,20 @@ def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] =
             except Exception as e:
                 print(f"⚠️ Showdown engine lazy import notice: {e}")
 
+        if layout in ["chalkboard_code_block", "code_block", "code_execution_trace", "syntax_code_block", "code_kernel", "ast_code_trace"]:
+            try:
+                from manim_engine.primitives.code_execution_engine import BlueprintChalkboardCodeBlock
+                BLUEPRINT_COMPOSITION_REGISTRY.update({
+                    "chalkboard_code_block": BlueprintChalkboardCodeBlock,
+                    "code_block": BlueprintChalkboardCodeBlock,
+                    "code_execution_trace": BlueprintChalkboardCodeBlock,
+                    "syntax_code_block": BlueprintChalkboardCodeBlock,
+                    "code_kernel": BlueprintChalkboardCodeBlock,
+                    "ast_code_trace": BlueprintChalkboardCodeBlock
+                })
+            except Exception as e:
+                print(f"⚠️ Code execution engine lazy import notice: {e}")
+
         try:
             from manim_engine.primitives.physics_simulations import PHYSICS_SIMULATION_REGISTRY
             BLUEPRINT_COMPOSITION_REGISTRY.update(PHYSICS_SIMULATION_REGISTRY)

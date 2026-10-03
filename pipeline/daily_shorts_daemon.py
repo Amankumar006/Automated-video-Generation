@@ -18,6 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.batch_digest import get_trending_digest, record_paper_production, load_history
+from pipeline.github_trending_fetcher import get_trending_github_digest
 from pipeline.auto_produce import auto_produce
 from pipeline.script_critic import ScriptCritic
 from pipeline.json_utils import robust_json_loads
@@ -213,13 +214,14 @@ class DailyShortsDaemon:
         publish: bool = True,
         target_arxiv: Optional[str] = None,
         target_slot_hour: Optional[int] = None,
-        preferred_taxonomy: Optional[str] = None
+        preferred_taxonomy: Optional[str] = None,
+        source: str = "mixed"
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
-        print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s)")
+        print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s) | Source: {source.upper()}")
         if target_slot_hour is not None and target_slot_hour in SLOT_SCHEDULE:
             slot_info = SLOT_SCHEDULE[target_slot_hour]
             print(f"🎯 Automated Window: {slot_info['slot_name']}")
@@ -255,13 +257,24 @@ class DailyShortsDaemon:
                 }
             }]
         else:
-            # 1. Fetch & score trending papers (with analytics multipliers integrated)
-            print("\n🔍 Step 1: Scanning trending papers from Hugging Face & arXiv...")
-            papers = get_trending_digest(limit=35)
-            unprocessed = [p for p in papers if not p.get("is_processed")]
+            # 1. Fetch & score trending candidates (with analytics multipliers integrated)
+            print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {source.upper()})...")
+            unprocessed = []
+            if source in ["arxiv", "mixed"]:
+                print("   Scanning papers from Hugging Face & arXiv...")
+                papers = get_trending_digest(limit=35)
+                unprocessed.extend([p for p in papers if not p.get("is_processed")])
+
+            if source in ["github", "mixed"]:
+                print("   Scanning viral open-source AI kernels from GitHub Trending...")
+                try:
+                    gh_candidates = get_trending_github_digest(limit=8)
+                    unprocessed.extend(gh_candidates)
+                except Exception as e:
+                    print(f"   ⚠️ GitHub trending fetcher notice: {e}")
 
             if not unprocessed:
-                print("ℹ️ All trending papers for today have already been produced. Daily quota satisfied.")
+                print("ℹ️ All trending candidates for today have already been produced. Daily quota satisfied.")
                 return []
 
             print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
@@ -354,8 +367,14 @@ class DailyShortsDaemon:
             reels_md = []
             for r in reports:
                 ed = r.get("editorial_notes", {})
+                pid = str(r.get("paper_id", ""))
+                if pid.startswith("gh_"):
+                    clean_repo = pid.replace("gh_", "").replace("_", "/")
+                    link_line = f"- **GitHub Repo:** [{clean_repo}](https://github.com/{clean_repo})"
+                else:
+                    link_line = f"- **arXiv ID:** [{pid}](https://arxiv.org/abs/{pid})"
                 reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
-- **arXiv ID:** [{r['paper_id']}](https://arxiv.org/abs/{r['paper_id']})
+{link_line}
 - **Domain Taxonomy:** `{r.get('taxonomy', 'general')}` ({r.get('analytics_multiplier', 1.0):.2f}x velocity)
 - **Category:** `{r['category']}`
 - **Editorial Hook:** *{ed.get('recommended_hook', 'N/A')}*
@@ -413,7 +432,8 @@ class DailyShortsDaemon:
                         dry_run=False,
                         publish=True,
                         target_slot_hour=now.hour,
-                        preferred_taxonomy=pref_tax
+                        preferred_taxonomy=pref_tax,
+                        source="mixed"
                     )
                     last_triggered_hour = now.hour
                 except Exception as e:
@@ -426,6 +446,7 @@ def main():
     parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
+    parser.add_argument("--source", choices=["arxiv", "github", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', or 'mixed' (default: mixed)")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
     parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
@@ -443,7 +464,8 @@ def main():
             publish=False,
             target_arxiv=args.arxiv or None,
             target_slot_hour=args.slot_hour,
-            preferred_taxonomy=args.preferred_taxonomy
+            preferred_taxonomy=args.preferred_taxonomy,
+            source=args.source
         )
     elif args.daemon:
         daemon.start_standing_daemon()
@@ -455,7 +477,8 @@ def main():
             publish=True,
             target_arxiv=args.arxiv or None,
             target_slot_hour=args.slot_hour,
-            preferred_taxonomy=args.preferred_taxonomy
+            preferred_taxonomy=args.preferred_taxonomy,
+            source=args.source
         )
 
 
