@@ -210,6 +210,18 @@ def fetch_arxiv_paper(query: str) -> Optional[Dict[str, Any]]:
     return None
 
 
+# Re-export native arXiv figure extraction and blackboard recoloring engine
+from pipeline.arxiv_vector_extractor import (
+    clean_arxiv_id,
+    download_arxiv_source,
+    extract_paper_figures,
+    extract_vector_figures,
+    recolor_svg_for_blackboard,
+    prepare_image_for_blackboard,
+    get_paper_vector_figure
+)
+
+
 if __name__ == "__main__":
     import sys
     test_id = sys.argv[1] if len(sys.argv) > 1 else "2609.40362"
@@ -218,5 +230,10 @@ if __name__ == "__main__":
         print(f"📄 Found Paper ({res['source']}): {res['title']} ({res['published']})")
         print(f"✍️ Authors: {', '.join(res['authors'])}")
         print(f"📖 Abstract: {res['abstract'][:150]}...")
+        figs = extract_paper_figures(res['arxiv_id'], max_figures=2)
+        if figs:
+            print(f"🖼️ Found {len(figs)} native figures in arXiv source bundle:")
+            for f in figs:
+                print(f"   - {f['figure_id']} ({f['type']}): {f.get('svg_path') or f.get('image_path')}")
     else:
         print("Paper not found.")

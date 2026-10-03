@@ -29,11 +29,11 @@ if API_KEY:
     genai.configure(api_key=API_KEY)
 
 MODEL_FALLBACKS = [
-    os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
-    "gemini-2.5-flash",
+    os.getenv("GEMINI_MODEL_NAME", "gemini-3.8-flash"),
+    "gemini-3.8-flash",
     "gemini-3.1-flash-lite",
-    "gemini-flash-latest",
-    "models/gemini-2.5-flash"
+    "gemini-2.5-flash",
+    "gemini-flash-latest"
 ]
 
 from pipeline.layout_solver import (

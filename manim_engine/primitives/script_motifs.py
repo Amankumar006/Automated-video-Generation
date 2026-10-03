@@ -548,58 +548,32 @@ class ScriptCustomFlow(VGroup):
 
 class ScriptPaperFigure(VGroup):
     """
-    Renders an authentic vector diagram extracted from the arXiv paper e-print.
-    Uses the FULL 9:16 mobile canvas — no tiny caged box. The diagram dominates
-    the screen for maximum readability and visual impact.
+    Renders an authentic vector or raster diagram extracted from the arXiv paper e-print.
+    Inherits unified chalkboard layout from BlueprintPaperFigure with strict safe zones.
     """
-    def __init__(
-        self,
-        svg_path: Optional[str] = None,
-        title: str = "OFFICIAL PAPER ARCHITECTURE",
-        sub: str = "Authentic vector specification from arXiv source",
-        badge_text: str = "PRIMARY ARCHITECTURE",
-        max_width: float = 7.4,
-        max_height: float = 8.0,
-        **kwargs
-    ):
-        super().__init__(**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        from manim_engine.primitives.visual_compositions import BlueprintPaperFigure
+        self.blueprint = BlueprintPaperFigure(*args, **kwargs)
+        self.add(self.blueprint)
 
-        self.title = Text(title, font=FONT_HELVETICA, font_size=16, color="#38BDF8", weight=BOLD).move_to([0, 5.3, 0])
-        if self.title.width > 7.2:
-            self.title.scale_to_fit_width(7.2)
-        self.sub = Text(sub, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=NORMAL).next_to(self.title, DOWN, buff=0.15)
-        if self.sub.width > 7.2:
-            self.sub.scale_to_fit_width(7.2)
+    def get_entrance_animation(self, run_time: float = 1.0):
+        return self.blueprint.get_entrance_animation(run_time=run_time)
 
-        # Vector diagram — fills the hero zone without enclosing frame
-        self.fig_mobj = None
-        if svg_path and os.path.exists(svg_path):
-            try:
-                m = SVGMobject(str(svg_path))
-                # Clamp to safe bounds
-                if m.width > max_width:
-                    m.scale_to_fit_width(max_width)
-                if m.height > max_height:
-                    m.scale_to_fit_height(max_height)
-                # Scale UP small diagrams so they're clearly visible
-                if m.width < 5.0 and m.height < 4.0:
-                    scale_up = min(max_width / max(m.width, 0.1), max_height / max(m.height, 0.1), 1.5)
-                    m.scale(scale_up)
-                m.move_to([0, 0.0, 0])
-                self.fig_mobj = m
-            except Exception as e:
-                print(f"⚠️ Error loading paper figure SVG: {e}")
+    def get_kinetic_animation(self, run_time: float = 1.5):
+        return self.blueprint.get_kinetic_animation(run_time=run_time)
 
-        if not self.fig_mobj:
-            fallback_box = Rectangle(width=6.0, height=3.5, color="#38BDF8", stroke_width=2.0).move_to([0, 0.0, 0])
-            lbl = Text(title, font=FONT_HELVETICA, font_size=14, color="#38BDF8", weight=BOLD).move_to(fallback_box)
-            self.fig_mobj = VGroup(fallback_box, lbl)
+    @property
+    def fig_mobj(self):
+        return self.blueprint.fig_mobj
 
-        # Compatibility stubs — no frame or badge chrome wasting screen space
-        self.frame = VGroup()
-        self.badge = VGroup()
+    @property
+    def title(self):
+        return self.blueprint.title
 
-        self.add(self.title, self.sub, self.fig_mobj)
+    @property
+    def sub(self):
+        return self.blueprint.sub
 
 
 class ScriptDynamicBespokeSVG(VGroup):

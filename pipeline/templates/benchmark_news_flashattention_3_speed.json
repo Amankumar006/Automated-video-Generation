@@ -556,33 +556,28 @@
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "split_flow",
-        "title": "ASYNCHRONOUS OVERLAP",
-        "sub": "Parallelizing memory loading and matrix multiplication.",
-        "accent_color": "#34D399",
+        "layout": "paper_figure",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Two parallel lines showing overlap of calculation and data loadin",
         "params": {
-          "input_label": "DATA STREAM",
-          "router_label": "ASYNC ENGINE",
-          "branch_a_label": "MATH CALC",
-          "branch_a_sub": "COMPUTE",
-          "branch_b_label": "MEM FETCH",
-          "branch_b_sub": "DATA MOVEMENT"
+          "svg_path": null,
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+          "arxiv_id": "2407.08608",
+          "title": "FLASHATTENTION-3 ARCHITECTURE",
+          "sub": "Two parallel lines showing overlap of calculation and data loadin",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
         }
       },
-      "motif_type": "visual_composition",
+      "motif_type": "paper_figure",
       "motif_params": {
-        "layout": "split_flow",
-        "title": "ASYNCHRONOUS OVERLAP",
-        "sub": "Parallelizing memory loading and matrix multiplication.",
-        "accent_color": "#34D399",
-        "input_label": "DATA STREAM",
-        "router_label": "ASYNC ENGINE",
-        "branch_a_label": "MATH CALC",
-        "branch_a_sub": "COMPUTE",
-        "branch_b_label": "MEM FETCH",
-        "branch_b_sub": "DATA MOVEMENT"
+        "svg_path": null,
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+        "arxiv_id": "2407.08608",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Two parallel lines showing overlap of calculation and data loadin",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
       },
-      "kinetic_action": "blueprint_transform",
+      "kinetic_action": "figure_scan",
       "audio_duration": 5.87,
       "slot_duration": 6.17,
       "start": 12.72,
@@ -1714,8 +1709,8 @@
     "1": {
       "hero_visual": {
         "dx": 0.0,
-        "dy": 0.5,
-        "scale_multiplier": 0.85
+        "dy": 0.8,
+        "scale_multiplier": 0.654
       },
       "ui_container": {
         "dx": 0.0,
@@ -1724,7 +1719,7 @@
       },
       "math_formula": {
         "dx": 0.0,
-        "dy": 2.0,
+        "dy": 3.024,
         "scale_multiplier": 1.0
       },
       "grid_ui_element": {
@@ -1735,6 +1730,11 @@
       "header_text": {
         "dx": 0.0,
         "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "subtitle_chip": {
+        "dx": 0.0,
+        "dy": 1.08,
         "scale_multiplier": 1.0
       }
     },
@@ -1853,5 +1853,35 @@
         "scale_multiplier": 1.0
       }
     }
-  }
+  },
+  "arxiv_id": "2407.08608",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "3_stage_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/3_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "pingpong_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/pingpong_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_2_pingpong_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "2_stage_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/2_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_3_2_stage_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    }
+  ]
 }

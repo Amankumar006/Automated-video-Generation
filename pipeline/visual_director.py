@@ -297,28 +297,51 @@ class VisualDirector:
             # BEAT 3: Authentic Paper Figure (if extracted from arXiv)
             # -------------------------------------------------------------
             if paper_figures and b_id == 3:
-                fig_svg = paper_figures[0].get("svg_path")
+                top_fig = paper_figures[0]
+                fig_svg = top_fig.get("svg_path")
+                fig_img = top_fig.get("image_path")
+                arxiv_id = spec.get("arxiv_id") or ""
+
+                # Resolve relative paths if cached
                 if fig_svg and not os.path.exists(fig_svg):
                     rel_match = re.search(r"(public/arxiv_cache/.*)", fig_svg)
                     if rel_match:
-                        local_fig = str(PROJECT_ROOT / rel_match.group(1))
-                        if os.path.exists(local_fig):
-                            fig_svg = local_fig
+                        loc = str(PROJECT_ROOT / rel_match.group(1))
+                        if os.path.exists(loc):
+                            fig_svg = loc
                         else:
                             fig_svg = None
-                    else:
-                        fig_svg = None
 
-                if fig_svg and os.path.exists(fig_svg):
+                if fig_img and not os.path.exists(fig_img):
+                    rel_match = re.search(r"(public/arxiv_cache/.*)", fig_img)
+                    if rel_match:
+                        loc = str(PROJECT_ROOT / rel_match.group(1))
+                        if os.path.exists(loc):
+                            fig_img = loc
+                        else:
+                            fig_img = None
+
+                if (fig_svg and os.path.exists(fig_svg)) or (fig_img and os.path.exists(fig_img)):
+                    topic_core = topic.split(":")[0].strip().upper()
+                    fig_title = f"{topic_core[:18]} ARCHITECTURE"
                     b["motif_type"] = "paper_figure"
-                    b["motif_params"] = {
-                        "svg_path": fig_svg,
-                        "title": f"{topic.upper()[:28]} ARCHITECTURE",
+                    b["visual_blueprint"] = {
+                        "layout": "paper_figure",
+                        "title": fig_title,
                         "sub": b.get("visual_focus", "")[:65] or "Official architectural diagram from arXiv source",
-                        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+                        "params": {
+                            "svg_path": fig_svg,
+                            "image_path": fig_img,
+                            "arxiv_id": arxiv_id,
+                            "title": fig_title,
+                            "sub": b.get("visual_focus", "")[:65] or "Official architectural diagram from arXiv source",
+                            "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+                        }
                     }
+                    b["motif_params"] = b["visual_blueprint"]["params"]
                     b["kinetic_action"] = "figure_scan"
-                    print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(fig_svg)}'")
+                    active_path = fig_svg or fig_img
+                    print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(active_path)}'")
                     continue
 
             # -------------------------------------------------------------

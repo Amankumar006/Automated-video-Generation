@@ -299,15 +299,19 @@ class ScriptDrivenScene(MovingCameraScene):
             math_time = 0.35
             self.display_math_formula(beat_id, run_time=math_time)
 
-            # Resolve SVG asset for paper_figure or bespoke_svg
+            # Resolve SVG / Image asset for paper_figure or bespoke_svg
             if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
                 current_svg = motif_params.get("svg_path") or b.get("svg_path") or b.get("paper_figure_path")
-                if not current_svg or not os.path.exists(current_svg):
-                    if motif_type == "paper_figure" and self.spec.get("paper_figures"):
-                        current_svg = self.spec["paper_figures"][0].get("svg_path")
+                current_img = motif_params.get("image_path") or b.get("image_path")
+                if motif_type == "paper_figure" and self.spec.get("paper_figures"):
+                    first_fig = self.spec["paper_figures"][0]
+                    if not current_svg and first_fig.get("svg_path"):
+                        current_svg = first_fig.get("svg_path")
+                    if not current_img and first_fig.get("image_path"):
+                        current_img = first_fig.get("image_path")
 
-                # If bespoke_svg file missing, synthesize on-the-fly via SVGSynthesizer!
-                if not current_svg or not os.path.exists(current_svg):
+                # If bespoke_svg file missing and no paper figure, synthesize on-the-fly via SVGSynthesizer!
+                if motif_type in ["bespoke_svg", "dynamic_svg"] and (not current_svg or not os.path.exists(current_svg)):
                     try:
                         import re
                         from pipeline.svg_synthesizer import SVGSynthesizer
@@ -322,10 +326,15 @@ class ScriptDrivenScene(MovingCameraScene):
 
                 if current_svg and os.path.exists(current_svg):
                     motif_params["svg_path"] = current_svg
-                    if not motif_params.get("title"):
-                        motif_params["title"] = f"{self.spec.get('title', 'AI')[:22].upper()}: BEAT {beat_id}"
-                    if not motif_params.get("sub"):
-                        motif_params["sub"] = v_focus[:55] or "Dynamic vector diagram tailored to narrative beat"
+                if current_img and os.path.exists(current_img):
+                    motif_params["image_path"] = current_img
+
+                if not motif_params.get("title"):
+                    motif_params["title"] = f"{self.spec.get('title', 'AI')[:22].upper()}: BEAT {beat_id}"
+                if not motif_params.get("sub"):
+                    motif_params["sub"] = v_focus[:55] or "Official architectural diagram tailored to narrative beat"
+                if not motif_params.get("arxiv_id") and self.spec.get("arxiv_id"):
+                    motif_params["arxiv_id"] = self.spec.get("arxiv_id")
 
             from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
 
