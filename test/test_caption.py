@@ -15,6 +15,8 @@ config.frame_height = FRAME_HEIGHT
 config.background_color = BG_CARBON
 
 class TestCaptionScene(Scene):
+    __test__ = False
+
     def construct(self):
         # Background coordinate grid for context
         bg_dots = [Dot(point=[x * 0.95, y * 0.95, 0], radius=0.02, color="#1E293B", fill_opacity=0.35)

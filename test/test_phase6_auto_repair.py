@@ -64,8 +64,9 @@ def test_vlm_critic_patch_generation():
         spec = json.load(f)
 
     # Test audit of an existing keyframe
-    frames_dir = PROJECT_ROOT / "frames_coding_agents_generalized_tamp"
-    test_pngs = sorted(list(frames_dir.glob("*.png")))
+    fixtures_dir = PROJECT_ROOT / "test" / "fixtures" / "frames_coding_agents_generalized_tamp"
+    frames_dir = fixtures_dir if fixtures_dir.exists() else PROJECT_ROOT / "frames_coding_agents_generalized_tamp"
+    test_pngs = sorted(list(frames_dir.glob("*.png"))) if frames_dir.exists() else []
     if test_pngs:
         test_frame = str(test_pngs[0])
         print(f"Auditing keyframe: {Path(test_frame).name}...")

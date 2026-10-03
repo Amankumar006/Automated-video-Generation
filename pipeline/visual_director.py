@@ -187,6 +187,26 @@ class VisualDirector:
                 "delta_badge": "⚡ DOMINATES PARETO FRONTIER AT FRACTION OF COST"
             })
 
+        # Code Execution 1: Chalkboard Syntax Code Block & Live Register
+        if any(k in text for k in ["code", "function", "kernel", "algorithm", "implementation", "loop", "compile", "python", "cuda", "ast", "syntax", "source code", "snippet", "script"]):
+            candidates.append({
+                "layout": "chalkboard_code_block",
+                "title": f"KERNEL IMPLEMENTATION: {subj.upper()[:16]}",
+                "sub": v_focus[:65] or "Core algorithmic loop running directly inside GPU memory",
+                "accent_color": "#38BDF8",
+                "filename": f"{subj.lower()[:12]}_kernel.py",
+                "language": "python",
+                "lines": [
+                    f"def execute_{action.lower()[:10]}(tensor_in):",
+                    f"    state = {subj.lower()[:12]}_cache()",
+                    f"    out = fused_{action.lower()[:10]}_step(tensor_in)",
+                    "    return synchronize(state, out)"
+                ],
+                "highlight_lines": [2, 3],
+                "trace_register": f"⚡ ACTIVE STATE: {obj.upper()[:24]}",
+                "delta_badge": "⚡ ZERO MEMORY COPY OVERHEAD"
+            })
+
         # 5. Mirror / Blur / Contrast / Side-by-Side Comparison
         if any(k in text for k in ["mirror", "reflection", "forget", "blur", "versus", "compare", "traditional", "prior", "baseline", "monolithic"]):
             candidates.append({
@@ -402,6 +422,34 @@ class VisualDirector:
                     active_path = fig_svg or fig_img
                     print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(active_path)}'")
                     continue
+
+            # -------------------------------------------------------------
+            # BEAT 3 or 4: Open-Source Code Kernel (if code_snippet present)
+            # -------------------------------------------------------------
+            code_data = spec.get("code_snippet")
+            if code_data and (b_id == 4 or (b_id == 3 and not paper_figures)):
+                code_filename = code_data.get("filename", "kernel.py")
+                b["motif_type"] = "chalkboard_code_block"
+                b["kinetic_action"] = "pulse"
+                code_params = {
+                    "title": f"KERNEL CODE: {topic.upper()[:18]}",
+                    "sub": b.get("visual_focus", "")[:65] or "Open-source kernel executing inside GPU memory",
+                    "filename": code_filename,
+                    "language": code_data.get("language", "python"),
+                    "lines": code_data.get("lines", []),
+                    "highlight_lines": code_data.get("highlight_lines", [2, 3]),
+                    "trace_register": code_data.get("trace_register", "⚡ ACTIVE STATE TRACE"),
+                    "delta_badge": code_data.get("explanation", "⚡ ZERO OVERHEAD HARDWARE KERNEL")[:52]
+                }
+                b["visual_blueprint"] = {
+                    "layout": "chalkboard_code_block",
+                    "title": code_params["title"],
+                    "sub": code_params["sub"],
+                    "params": code_params
+                }
+                b["motif_params"] = code_params
+                print(f"   ✨ Beat {b_id}: Assigned 'chalkboard_code_block' ({code_filename})")
+                continue
 
             # -------------------------------------------------------------
             # NARRATIVE BEATS (1, 2, 4, and 3 without paper figure):

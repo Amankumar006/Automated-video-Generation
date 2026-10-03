@@ -16,6 +16,8 @@ from manim_engine.primitives.search import DynamicSearchTree, BranchAndBoundLase
 from manim_engine.primitives.metrics import DualMetricGauge
 
 class TestSearchMetricsPrimitivesScene(Scene):
+    __test__ = False
+
     def construct(self):
         self.camera.background_color = "#0A0D14"
 

@@ -328,6 +328,19 @@ Generate the complete JSON specification strictly adhering to this structure:
     ],
     "delta_badge": "⚡ +78.8% SOTA EFFICIENCY GAIN",
     "radar_axes": ["Throughput", "VRAM Efficiency", "Accuracy", "Context Length", "Cost Efficiency"]
+  }},
+  "code_snippet": {{
+    "filename": "core_kernel.py",
+    "language": "python",
+    "lines": [
+      "def execute_step(tensor_in):",
+      "    node = self.root_cache",
+      "    out = fused_forward_pass(tensor_in)",
+      "    return synchronize(node, out)"
+    ],
+    "highlight_lines": [2, 3],
+    "trace_register": "⚡ FUSED HARDWARE KERNEL EXECUTION",
+    "explanation": "Zero memory-copy hardware acceleration"
   }}
 }}
 """
@@ -400,6 +413,13 @@ Generate the complete JSON specification strictly adhering to this structure:
                 "semantic_role": "metric_evaluation"
             }
         })
+
+    # Preserve curated code kernel and repo metadata if supplied by GitHub ingest
+    if arxiv_meta and isinstance(arxiv_meta, dict):
+        if arxiv_meta.get("code_snippet") and (not spec.get("code_snippet") or arxiv_meta.get("repo_metadata")):
+            spec["code_snippet"] = arxiv_meta["code_snippet"]
+        if arxiv_meta.get("repo_metadata"):
+            spec["repo_metadata"] = arxiv_meta["repo_metadata"]
 
     # Autonomous Pedagogy & Simplicity Self-Refinement Loop
     try:
