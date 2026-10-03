@@ -1,0 +1,1653 @@
+{
+  "id": "agspec_retrieval_speculative_decoding",
+  "title": "AgSpec: Pushing the Limits of Retrieval-Based Speculative Decoding in Coding Agent Pipelines",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "CODING AGENT SPEEDUP",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "When your smart tool writes code, your chip sits and waits for hours just to guess the next word in line.",
+      "visual_focus": "A glowing GPU chip with a progress bar stuck at low efficiency.",
+      "highlight_words": {
+        "wastes hours": "#EF4444",
+        "coding agent": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "GPU Chip",
+        "action_verb": "waits",
+        "direct_object": "slow token stream",
+        "anchor_word": "waiting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "GPU BOTTLENECK IN CODING AGENTS",
+        "sub": "Autoregressive generation stalls on sequential token emission",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "GPU Memory Buffer",
+          "active_cell_label": "Idle Wait State",
+          "efficiency_label": "Low Throughput"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "GPU BOTTLENECK IN CODING AGENTS",
+        "sub": "Autoregressive generation stalls on sequential token emission",
+        "accent_color": "#EF4444",
+        "grid_title": "GPU Memory Buffer",
+        "active_cell_label": "Idle Wait State",
+        "efficiency_label": "Low Throughput"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.21,
+      "slot_duration": 5.51,
+      "start": 0.0,
+      "end": 5.21,
+      "word_timings": [
+        {
+          "word": "When",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 0.005,
+          "end": 0.24,
+          "duration": 0.235,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.24,
+          "end": 0.46,
+          "duration": 0.22,
+          "frame_ahead_trigger": 0.2
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 0.46,
+          "end": 0.76,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.42
+        },
+        {
+          "word": "tool",
+          "clean_word": "tool",
+          "phonemes": "t\u02c8u\u02d0l",
+          "start": 0.76,
+          "end": 1.06,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.72
+        },
+        {
+          "word": "writes",
+          "clean_word": "writes",
+          "phonemes": "\u0279\u02c8a\u026ats",
+          "start": 1.06,
+          "end": 1.339,
+          "duration": 0.279,
+          "frame_ahead_trigger": 1.02
+        },
+        {
+          "word": "code,",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 1.339,
+          "end": 1.606,
+          "duration": 0.267,
+          "frame_ahead_trigger": 1.299
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 1.606,
+          "end": 1.735,
+          "duration": 0.129,
+          "frame_ahead_trigger": 1.566
+        },
+        {
+          "word": "chip",
+          "clean_word": "chip",
+          "phonemes": "t\u0283\u02c8\u026ap",
+          "start": 1.735,
+          "end": 2.07,
+          "duration": 0.335,
+          "frame_ahead_trigger": 1.695
+        },
+        {
+          "word": "sits",
+          "clean_word": "sits",
+          "phonemes": "s\u02c8\u026ats",
+          "start": 2.07,
+          "end": 2.36,
+          "duration": 0.29,
+          "frame_ahead_trigger": 2.03
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 2.36,
+          "end": 2.525,
+          "duration": 0.165,
+          "frame_ahead_trigger": 2.32
+        },
+        {
+          "word": "waits",
+          "clean_word": "waits",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 2.525,
+          "end": 2.805,
+          "duration": 0.28,
+          "frame_ahead_trigger": 2.485
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 2.805,
+          "end": 3.045,
+          "duration": 0.24,
+          "frame_ahead_trigger": 2.765
+        },
+        {
+          "word": "hours",
+          "clean_word": "hours",
+          "phonemes": "\u02c8a\u028a\u025az",
+          "start": 3.045,
+          "end": 3.26,
+          "duration": 0.215,
+          "frame_ahead_trigger": 3.005
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 3.26,
+          "end": 3.465,
+          "duration": 0.205,
+          "frame_ahead_trigger": 3.22
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 3.465,
+          "end": 3.71,
+          "duration": 0.245,
+          "frame_ahead_trigger": 3.425
+        },
+        {
+          "word": "guess",
+          "clean_word": "guess",
+          "phonemes": "\u0261\u02c8\u025bs",
+          "start": 3.71,
+          "end": 3.985,
+          "duration": 0.275,
+          "frame_ahead_trigger": 3.67
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.985,
+          "end": 4.07,
+          "duration": 0.085,
+          "frame_ahead_trigger": 3.945
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 4.07,
+          "end": 4.41,
+          "duration": 0.34,
+          "frame_ahead_trigger": 4.03
+        },
+        {
+          "word": "word",
+          "clean_word": "word",
+          "phonemes": "w\u02c8\u025c\u02d0d",
+          "start": 4.41,
+          "end": 4.645,
+          "duration": 0.235,
+          "frame_ahead_trigger": 4.37
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 4.645,
+          "end": 4.715,
+          "duration": 0.07,
+          "frame_ahead_trigger": 4.605
+        },
+        {
+          "word": "line.",
+          "clean_word": "line",
+          "phonemes": "l\u02c8a\u026an",
+          "start": 4.715,
+          "end": 5.075,
+          "duration": 0.36,
+          "frame_ahead_trigger": 4.675
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Like a writer digging through a messy desk for old notes, standard tools fail to find matching code snippets fast.",
+      "visual_focus": "A chaotic pile of paper notes swirling around a search box.",
+      "highlight_words": {
+        "messy desk": "#F59E0B",
+        "fail": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Standard Tool",
+        "action_verb": "searches",
+        "direct_object": "messy text corpus",
+        "anchor_word": "digging",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE RETRIEVAL GAP",
+        "sub": "Standard corpora miss agent emission formats and ongoing session history",
+        "accent_color": "#F59E0B",
+        "params": {
+          "col_a_title": "Standard Retriever",
+          "col_a_stat": "Missing Logs",
+          "col_b_title": "Agent Workspace",
+          "col_b_stat": "Scattered Files"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE RETRIEVAL GAP",
+        "sub": "Standard corpora miss agent emission formats and ongoing session history",
+        "accent_color": "#F59E0B",
+        "col_a_title": "Standard Retriever",
+        "col_a_stat": "Missing Logs",
+        "col_b_title": "Agent Workspace",
+        "col_b_stat": "Scattered Files"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.8,
+      "slot_duration": 6.1,
+      "start": 5.51,
+      "end": 11.31,
+      "word_timings": [
+        {
+          "word": "Like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 5.515,
+          "end": 5.71,
+          "duration": 0.195,
+          "frame_ahead_trigger": 5.475
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 5.71,
+          "end": 5.935,
+          "duration": 0.225,
+          "frame_ahead_trigger": 5.67
+        },
+        {
+          "word": "writer",
+          "clean_word": "writer",
+          "phonemes": "\u0279\u02c8a\u026a\u027e\u025a",
+          "start": 5.935,
+          "end": 6.25,
+          "duration": 0.315,
+          "frame_ahead_trigger": 5.895
+        },
+        {
+          "word": "digging",
+          "clean_word": "digging",
+          "phonemes": "d\u02c8\u026a\u0261\u026a\u014b",
+          "start": 6.25,
+          "end": 6.685,
+          "duration": 0.435,
+          "frame_ahead_trigger": 6.21
+        },
+        {
+          "word": "through",
+          "clean_word": "through",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
+          "start": 6.685,
+          "end": 6.84,
+          "duration": 0.155,
+          "frame_ahead_trigger": 6.645
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.84,
+          "end": 7.01,
+          "duration": 0.17,
+          "frame_ahead_trigger": 6.8
+        },
+        {
+          "word": "messy",
+          "clean_word": "messy",
+          "phonemes": "m\u02c8\u025bsi",
+          "start": 7.01,
+          "end": 7.27,
+          "duration": 0.26,
+          "frame_ahead_trigger": 6.97
+        },
+        {
+          "word": "desk",
+          "clean_word": "desk",
+          "phonemes": "d\u02c8\u025bsk",
+          "start": 7.27,
+          "end": 7.635,
+          "duration": 0.365,
+          "frame_ahead_trigger": 7.23
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 7.635,
+          "end": 7.762,
+          "duration": 0.127,
+          "frame_ahead_trigger": 7.595
+        },
+        {
+          "word": "old",
+          "clean_word": "old",
+          "phonemes": "\u02c8o\u028ald",
+          "start": 7.762,
+          "end": 8.005,
+          "duration": 0.243,
+          "frame_ahead_trigger": 7.722
+        },
+        {
+          "word": "notes,",
+          "clean_word": "notes",
+          "phonemes": "n\u02c8o\u028ats",
+          "start": 8.005,
+          "end": 8.38,
+          "duration": 0.375,
+          "frame_ahead_trigger": 7.965
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 8.38,
+          "end": 8.695,
+          "duration": 0.315,
+          "frame_ahead_trigger": 8.34
+        },
+        {
+          "word": "tools",
+          "clean_word": "tools",
+          "phonemes": "t\u02c8u\u02d0lz",
+          "start": 8.695,
+          "end": 9.115,
+          "duration": 0.42,
+          "frame_ahead_trigger": 8.655
+        },
+        {
+          "word": "fail",
+          "clean_word": "fail",
+          "phonemes": "f\u02c8e\u026al",
+          "start": 9.115,
+          "end": 9.33,
+          "duration": 0.215,
+          "frame_ahead_trigger": 9.075
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 9.33,
+          "end": 9.44,
+          "duration": 0.11,
+          "frame_ahead_trigger": 9.29
+        },
+        {
+          "word": "find",
+          "clean_word": "find",
+          "phonemes": "f\u02c8a\u026and",
+          "start": 9.44,
+          "end": 9.855,
+          "duration": 0.415,
+          "frame_ahead_trigger": 9.4
+        },
+        {
+          "word": "matching",
+          "clean_word": "matching",
+          "phonemes": "m\u02c8\u00e6t\u0283\u026a\u014b",
+          "start": 9.855,
+          "end": 10.33,
+          "duration": 0.475,
+          "frame_ahead_trigger": 9.815
+        },
+        {
+          "word": "code",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 10.33,
+          "end": 10.445,
+          "duration": 0.115,
+          "frame_ahead_trigger": 10.29
+        },
+        {
+          "word": "snippets",
+          "clean_word": "snippets",
+          "phonemes": "sn\u02c8\u026ap\u026ats",
+          "start": 10.445,
+          "end": 10.835,
+          "duration": 0.39,
+          "frame_ahead_trigger": 10.405
+        },
+        {
+          "word": "fast.",
+          "clean_word": "fast",
+          "phonemes": "f\u02c8\u00e6st",
+          "start": 10.835,
+          "end": 11.185,
+          "duration": 0.35,
+          "frame_ahead_trigger": 10.795
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "This tool fixes that snag by pulling clean code straight from your open desk, work files, and huge safe drawers.",
+      "visual_focus": "Three distinct glowing data streams merging into a single organized index.",
+      "highlight_words": {
+        "AgSpec": "#34D399",
+        "active session": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "AgSpec Engine",
+        "action_verb": "gathers",
+        "direct_object": "workspace files",
+        "anchor_word": "pulling",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "AGSPEC ARCHITECTURE",
+        "sub": "Three distinct glowing data streams merging into a single organiz",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/chalkboard_figures/fig_1_design_overview.svg",
+          "image_path": null,
+          "arxiv_id": "2610.01108",
+          "title": "AGSPEC ARCHITECTURE",
+          "sub": "Three distinct glowing data streams merging into a single organiz",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/chalkboard_figures/fig_1_design_overview.svg",
+        "image_path": null,
+        "arxiv_id": "2610.01108",
+        "title": "AGSPEC ARCHITECTURE",
+        "sub": "Three distinct glowing data streams merging into a single organiz",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 6.21,
+      "slot_duration": 6.51,
+      "start": 11.61,
+      "end": 17.82,
+      "word_timings": [
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 11.618,
+          "end": 11.773,
+          "duration": 0.155,
+          "frame_ahead_trigger": 11.578
+        },
+        {
+          "word": "tool",
+          "clean_word": "tool",
+          "phonemes": "t\u02c8u\u02d0l",
+          "start": 11.773,
+          "end": 12.163,
+          "duration": 0.39,
+          "frame_ahead_trigger": 11.733
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 12.163,
+          "end": 12.498,
+          "duration": 0.335,
+          "frame_ahead_trigger": 12.123
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 12.498,
+          "end": 12.794,
+          "duration": 0.296,
+          "frame_ahead_trigger": 12.458
+        },
+        {
+          "word": "snag",
+          "clean_word": "snag",
+          "phonemes": "sn\u02c8\u00e6\u0261",
+          "start": 12.794,
+          "end": 13.118,
+          "duration": 0.324,
+          "frame_ahead_trigger": 12.754
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 13.118,
+          "end": 13.258,
+          "duration": 0.14,
+          "frame_ahead_trigger": 13.078
+        },
+        {
+          "word": "pulling",
+          "clean_word": "pulling",
+          "phonemes": "p\u02c8\u028al\u026a\u014b",
+          "start": 13.258,
+          "end": 13.723,
+          "duration": 0.465,
+          "frame_ahead_trigger": 13.218
+        },
+        {
+          "word": "clean",
+          "clean_word": "clean",
+          "phonemes": "kl\u02c8i\u02d0n",
+          "start": 13.723,
+          "end": 14.083,
+          "duration": 0.36,
+          "frame_ahead_trigger": 13.683
+        },
+        {
+          "word": "code",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 14.083,
+          "end": 14.423,
+          "duration": 0.34,
+          "frame_ahead_trigger": 14.043
+        },
+        {
+          "word": "straight",
+          "clean_word": "straight",
+          "phonemes": "st\u0279\u02c8e\u026at",
+          "start": 14.423,
+          "end": 14.788,
+          "duration": 0.365,
+          "frame_ahead_trigger": 14.383
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 14.788,
+          "end": 14.953,
+          "duration": 0.165,
+          "frame_ahead_trigger": 14.748
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 14.953,
+          "end": 15.143,
+          "duration": 0.19,
+          "frame_ahead_trigger": 14.913
+        },
+        {
+          "word": "open",
+          "clean_word": "open",
+          "phonemes": "\u02c8o\u028ap\u0259n",
+          "start": 15.143,
+          "end": 15.593,
+          "duration": 0.45,
+          "frame_ahead_trigger": 15.103
+        },
+        {
+          "word": "desk,",
+          "clean_word": "desk",
+          "phonemes": "d\u02c8\u025bsk",
+          "start": 15.593,
+          "end": 15.778,
+          "duration": 0.185,
+          "frame_ahead_trigger": 15.553
+        },
+        {
+          "word": "work",
+          "clean_word": "work",
+          "phonemes": "w\u02c8\u025c\u02d0k",
+          "start": 15.778,
+          "end": 16.087,
+          "duration": 0.309,
+          "frame_ahead_trigger": 15.738
+        },
+        {
+          "word": "files,",
+          "clean_word": "files",
+          "phonemes": "f\u02c8a\u026alz",
+          "start": 16.087,
+          "end": 16.528,
+          "duration": 0.441,
+          "frame_ahead_trigger": 16.047
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 16.528,
+          "end": 16.616,
+          "duration": 0.088,
+          "frame_ahead_trigger": 16.488
+        },
+        {
+          "word": "huge",
+          "clean_word": "huge",
+          "phonemes": "hj\u02c8u\u02d0d\u0292",
+          "start": 16.616,
+          "end": 17.073,
+          "duration": 0.457,
+          "frame_ahead_trigger": 16.576
+        },
+        {
+          "word": "safe",
+          "clean_word": "safe",
+          "phonemes": "s\u02c8e\u026af",
+          "start": 17.073,
+          "end": 17.313,
+          "duration": 0.24,
+          "frame_ahead_trigger": 17.033
+        },
+        {
+          "word": "drawers.",
+          "clean_word": "drawers",
+          "phonemes": "d\u0279\u02c8\u0254\u02d0\u0279z",
+          "start": 17.313,
+          "end": 17.733,
+          "duration": 0.42,
+          "frame_ahead_trigger": 17.273
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "It sets a tight draft limit and shifts the length live based on how many tokens pass the final test.",
+      "visual_focus": "A dynamic slider adjusting its length upward and downward in real time.",
+      "highlight_words": {
+        "smart draft limit": "#F59E0B",
+        "updates": "#34D399"
+      },
+      "svo_action": {
+        "subject": "Length Adaptor",
+        "action_verb": "adjusts",
+        "direct_object": "draft token cap",
+        "anchor_word": "updates",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "pipeline_stages",
+        "title": "ADAPTIVE DRAFT LENGTH POLICY",
+        "sub": "Offline profiling paired with online verification feedback",
+        "accent_color": "#F59E0B",
+        "params": {
+          "stage_1_label": "Offline Profiler",
+          "stage_1_sub": "Initial Token Cap",
+          "stage_2_label": "Verification Check",
+          "stage_2_sub": "Accept/Reject Signal",
+          "stage_3_label": "Online Tuner",
+          "stage_3_sub": "Dynamic Length"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "pipeline_stages",
+        "title": "ADAPTIVE DRAFT LENGTH POLICY",
+        "sub": "Offline profiling paired with online verification feedback",
+        "accent_color": "#F59E0B",
+        "stage_1_label": "Offline Profiler",
+        "stage_1_sub": "Initial Token Cap",
+        "stage_2_label": "Verification Check",
+        "stage_2_sub": "Accept/Reject Signal",
+        "stage_3_label": "Online Tuner",
+        "stage_3_sub": "Dynamic Length"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.38,
+      "slot_duration": 5.68,
+      "start": 18.12,
+      "end": 23.49,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 18.116,
+          "end": 18.251,
+          "duration": 0.135,
+          "frame_ahead_trigger": 18.076
+        },
+        {
+          "word": "sets",
+          "clean_word": "sets",
+          "phonemes": "s\u02c8\u025bts",
+          "start": 18.251,
+          "end": 18.546,
+          "duration": 0.295,
+          "frame_ahead_trigger": 18.211
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.546,
+          "end": 18.688,
+          "duration": 0.142,
+          "frame_ahead_trigger": 18.506
+        },
+        {
+          "word": "tight",
+          "clean_word": "tight",
+          "phonemes": "t\u02c8a\u026at",
+          "start": 18.688,
+          "end": 18.974,
+          "duration": 0.286,
+          "frame_ahead_trigger": 18.648
+        },
+        {
+          "word": "draft",
+          "clean_word": "draft",
+          "phonemes": "d\u0279\u02c8\u00e6ft",
+          "start": 18.974,
+          "end": 19.317,
+          "duration": 0.343,
+          "frame_ahead_trigger": 18.934
+        },
+        {
+          "word": "limit",
+          "clean_word": "limit",
+          "phonemes": "l\u02c8\u026am\u026at",
+          "start": 19.317,
+          "end": 19.736,
+          "duration": 0.419,
+          "frame_ahead_trigger": 19.277
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 19.736,
+          "end": 19.881,
+          "duration": 0.145,
+          "frame_ahead_trigger": 19.696
+        },
+        {
+          "word": "shifts",
+          "clean_word": "shifts",
+          "phonemes": "\u0283\u02c8\u026afts",
+          "start": 19.881,
+          "end": 20.236,
+          "duration": 0.355,
+          "frame_ahead_trigger": 19.841
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.236,
+          "end": 20.289,
+          "duration": 0.053,
+          "frame_ahead_trigger": 20.196
+        },
+        {
+          "word": "length",
+          "clean_word": "length",
+          "phonemes": "l\u02c8\u025b\u014b\u03b8",
+          "start": 20.289,
+          "end": 20.606,
+          "duration": 0.317,
+          "frame_ahead_trigger": 20.249
+        },
+        {
+          "word": "live",
+          "clean_word": "live",
+          "phonemes": "l\u02c8a\u026av",
+          "start": 20.606,
+          "end": 20.846,
+          "duration": 0.24,
+          "frame_ahead_trigger": 20.566
+        },
+        {
+          "word": "based",
+          "clean_word": "based",
+          "phonemes": "b\u02c8e\u026ast",
+          "start": 20.846,
+          "end": 21.266,
+          "duration": 0.42,
+          "frame_ahead_trigger": 20.806
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 21.266,
+          "end": 21.401,
+          "duration": 0.135,
+          "frame_ahead_trigger": 21.226
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 21.401,
+          "end": 21.636,
+          "duration": 0.235,
+          "frame_ahead_trigger": 21.361
+        },
+        {
+          "word": "many",
+          "clean_word": "many",
+          "phonemes": "m\u02c8\u025bni",
+          "start": 21.636,
+          "end": 21.996,
+          "duration": 0.36,
+          "frame_ahead_trigger": 21.596
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 21.996,
+          "end": 22.306,
+          "duration": 0.31,
+          "frame_ahead_trigger": 21.956
+        },
+        {
+          "word": "pass",
+          "clean_word": "pass",
+          "phonemes": "p\u02c8\u00e6s",
+          "start": 22.306,
+          "end": 22.596,
+          "duration": 0.29,
+          "frame_ahead_trigger": 22.266
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.596,
+          "end": 22.716,
+          "duration": 0.12,
+          "frame_ahead_trigger": 22.556
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 22.716,
+          "end": 23.036,
+          "duration": 0.32,
+          "frame_ahead_trigger": 22.676
+        },
+        {
+          "word": "test.",
+          "clean_word": "test",
+          "phonemes": "t\u02c8\u025bst",
+          "start": 23.036,
+          "end": 23.376,
+          "duration": 0.34,
+          "frame_ahead_trigger": 22.996
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "This speeds up your code work up to four times faster when you run teams of smart scripts at once.",
+      "visual_focus": "A speed gauge shooting past the four times mark with green success bursts.",
+      "highlight_words": {
+        "four times faster": "#34D399",
+        "coding tasks": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "AgSpec System",
+        "action_verb": "accelerates",
+        "direct_object": "generation throughput",
+        "anchor_word": "accelerates",
+        "semantic_role": "metric_evaluation"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THROUGHPUT MULTIPLIER",
+        "sub": "Up to 4.37x at batch size 1 and 4.76x at batch size 16",
+        "accent_color": "#34D399",
+        "params": {
+          "field_title": "Generation Speedup Vector",
+          "source_label": "Autoregressive Baseline",
+          "target_label": "AgSpec Speculative Drafts",
+          "stream_formula": "\\mathbf{v}_{\\text{speed}} = 4.76 \\times \\mathbf{v}_{\\text{base}}"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THROUGHPUT MULTIPLIER",
+        "sub": "Up to 4.37x at batch size 1 and 4.76x at batch size 16",
+        "accent_color": "#34D399",
+        "field_title": "Generation Speedup Vector",
+        "source_label": "Autoregressive Baseline",
+        "target_label": "AgSpec Speculative Drafts",
+        "stream_formula": "\\mathbf{v}_{\\text{speed}} = 4.76 \\times \\mathbf{v}_{\\text{base}}"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.01,
+      "slot_duration": 5.31,
+      "start": 23.79,
+      "end": 28.81,
+      "word_timings": [
+        {
+          "word": "This",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 23.802,
+          "end": 24.017,
+          "duration": 0.215,
+          "frame_ahead_trigger": 23.762
+        },
+        {
+          "word": "speeds",
+          "clean_word": "speeds",
+          "phonemes": "sp\u02c8i\u02d0dz",
+          "start": 24.017,
+          "end": 24.377,
+          "duration": 0.36,
+          "frame_ahead_trigger": 23.977
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 24.377,
+          "end": 24.512,
+          "duration": 0.135,
+          "frame_ahead_trigger": 24.337
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 24.512,
+          "end": 24.757,
+          "duration": 0.245,
+          "frame_ahead_trigger": 24.472
+        },
+        {
+          "word": "code",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 24.757,
+          "end": 25.057,
+          "duration": 0.3,
+          "frame_ahead_trigger": 24.717
+        },
+        {
+          "word": "work",
+          "clean_word": "work",
+          "phonemes": "w\u02c8\u025c\u02d0k",
+          "start": 25.057,
+          "end": 25.207,
+          "duration": 0.15,
+          "frame_ahead_trigger": 25.017
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 25.207,
+          "end": 25.377,
+          "duration": 0.17,
+          "frame_ahead_trigger": 25.167
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 25.377,
+          "end": 25.562,
+          "duration": 0.185,
+          "frame_ahead_trigger": 25.337
+        },
+        {
+          "word": "four",
+          "clean_word": "four",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279",
+          "start": 25.562,
+          "end": 25.952,
+          "duration": 0.39,
+          "frame_ahead_trigger": 25.522
+        },
+        {
+          "word": "times",
+          "clean_word": "times",
+          "phonemes": "t\u02c8a\u026amz",
+          "start": 25.952,
+          "end": 26.152,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.912
+        },
+        {
+          "word": "faster",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 26.152,
+          "end": 26.607,
+          "duration": 0.455,
+          "frame_ahead_trigger": 26.112
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 26.607,
+          "end": 26.822,
+          "duration": 0.215,
+          "frame_ahead_trigger": 26.567
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 26.822,
+          "end": 26.884,
+          "duration": 0.062,
+          "frame_ahead_trigger": 26.782
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "\u0279\u02c8\u028cn",
+          "start": 26.884,
+          "end": 27.117,
+          "duration": 0.233,
+          "frame_ahead_trigger": 26.844
+        },
+        {
+          "word": "teams",
+          "clean_word": "teams",
+          "phonemes": "t\u02c8i\u02d0mz",
+          "start": 27.117,
+          "end": 27.397,
+          "duration": 0.28,
+          "frame_ahead_trigger": 27.077
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 27.397,
+          "end": 27.477,
+          "duration": 0.08,
+          "frame_ahead_trigger": 27.357
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 27.477,
+          "end": 27.972,
+          "duration": 0.495,
+          "frame_ahead_trigger": 27.437
+        },
+        {
+          "word": "scripts",
+          "clean_word": "scripts",
+          "phonemes": "sk\u0279\u02c8\u026apts",
+          "start": 27.972,
+          "end": 28.317,
+          "duration": 0.345,
+          "frame_ahead_trigger": 27.932
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 28.317,
+          "end": 28.452,
+          "duration": 0.135,
+          "frame_ahead_trigger": 28.277
+        },
+        {
+          "word": "once.",
+          "clean_word": "once",
+          "phonemes": "w\u02c8\u028cns",
+          "start": 28.452,
+          "end": 28.722,
+          "duration": 0.27,
+          "frame_ahead_trigger": 28.412
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for clear tips on how smart tech works every single day in the real world.",
+      "visual_focus": "The Model Verse logo pulsing with a clean mint glow.",
+      "highlight_words": {
+        "The Model Verse": "#34D399"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "frontier AI architectures",
+        "anchor_word": "Follow",
+        "semantic_role": "agent_action"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE MODEL VERSE",
+        "sub": "Simple visual breakdowns of frontier AI research",
+        "accent_color": "#34D399",
+        "params": {
+          "bottom_layer": "Core Mechanisms",
+          "mid_layer": "Everyday Analogies",
+          "top_layer": "The Model Verse"
+        }
+      },
+      "audio_duration": 4.95,
+      "slot_duration": 5.45,
+      "start": 29.11,
+      "end": 34.05,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 29.12,
+          "end": 29.485,
+          "duration": 0.365,
+          "frame_ahead_trigger": 29.08
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.485,
+          "end": 29.59,
+          "duration": 0.105,
+          "frame_ahead_trigger": 29.445
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 29.59,
+          "end": 29.975,
+          "duration": 0.385,
+          "frame_ahead_trigger": 29.55
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 29.975,
+          "end": 30.19,
+          "duration": 0.215,
+          "frame_ahead_trigger": 29.935
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 30.19,
+          "end": 30.345,
+          "duration": 0.155,
+          "frame_ahead_trigger": 30.15
+        },
+        {
+          "word": "clear",
+          "clean_word": "clear",
+          "phonemes": "kl\u02c8\u026a\u0279",
+          "start": 30.345,
+          "end": 30.7,
+          "duration": 0.355,
+          "frame_ahead_trigger": 30.305
+        },
+        {
+          "word": "tips",
+          "clean_word": "tips",
+          "phonemes": "t\u02c8\u026aps",
+          "start": 30.7,
+          "end": 30.915,
+          "duration": 0.215,
+          "frame_ahead_trigger": 30.66
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 30.915,
+          "end": 31.095,
+          "duration": 0.18,
+          "frame_ahead_trigger": 30.875
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 31.095,
+          "end": 31.215,
+          "duration": 0.12,
+          "frame_ahead_trigger": 31.055
+        },
+        {
+          "word": "smart",
+          "clean_word": "smart",
+          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
+          "start": 31.215,
+          "end": 31.595,
+          "duration": 0.38,
+          "frame_ahead_trigger": 31.175
+        },
+        {
+          "word": "tech",
+          "clean_word": "tech",
+          "phonemes": "t\u02c8\u025bk",
+          "start": 31.595,
+          "end": 31.745,
+          "duration": 0.15,
+          "frame_ahead_trigger": 31.555
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 31.745,
+          "end": 32.155,
+          "duration": 0.41,
+          "frame_ahead_trigger": 31.705
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 32.155,
+          "end": 32.425,
+          "duration": 0.27,
+          "frame_ahead_trigger": 32.115
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 32.425,
+          "end": 32.86,
+          "duration": 0.435,
+          "frame_ahead_trigger": 32.385
+        },
+        {
+          "word": "day",
+          "clean_word": "day",
+          "phonemes": "d\u02c8e\u026a",
+          "start": 32.86,
+          "end": 32.989,
+          "duration": 0.128,
+          "frame_ahead_trigger": 32.82
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 32.989,
+          "end": 33.135,
+          "duration": 0.147,
+          "frame_ahead_trigger": 32.949
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.135,
+          "end": 33.355,
+          "duration": 0.22,
+          "frame_ahead_trigger": 33.095
+        },
+        {
+          "word": "real",
+          "clean_word": "real",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259l",
+          "start": 33.355,
+          "end": 33.62,
+          "duration": 0.265,
+          "frame_ahead_trigger": 33.315
+        },
+        {
+          "word": "world.",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 33.62,
+          "end": 33.865,
+          "duration": 0.245,
+          "frame_ahead_trigger": 33.58
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\text{wait}} = N \\times \\Delta t_{\\text{forward}}$",
+      "filename": "agspec_retrieval_speculative_decoding_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{\\text{wait}}",
+          "label": "GPU Idle Time"
+        },
+        {
+          "term": "\\Delta t_{\\text{forward}}",
+          "label": "Token Delay"
+        }
+      ],
+      "svg_filename": "agspec_retrieval_speculative_decoding_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{C}_{\\text{missing}} = \\sum_{i=1}^{M} \\mathbf{1}(\\text{corpus}_i \\notin \\text{agent emissions})$",
+      "filename": "agspec_retrieval_speculative_decoding_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{C}_{\\text{missing}}",
+          "label": "Retrieval Gap"
+        },
+        {
+          "term": "M",
+          "label": "Unmatched Snippets"
+        }
+      ],
+      "svg_filename": "agspec_retrieval_speculative_decoding_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{R}_{\\text{AgSpec}} = \\text{Session} \\cup \\text{Workspace} \\cup \\text{Global}$",
+      "filename": "agspec_retrieval_speculative_decoding_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{R}_{\\text{AgSpec}}",
+          "label": "Unified Corpus"
+        },
+        {
+          "term": "\\text{Workspace}",
+          "label": "Indexed Files"
+        }
+      ],
+      "svg_filename": "agspec_retrieval_speculative_decoding_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$L_{t+1} = \\text{clip}(L_t + \\eta \\cdot (k_{\\text{accepted}} - \\tau_{\\text{target}}))$",
+      "filename": "agspec_retrieval_speculative_decoding_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "L_{t+1}",
+          "label": "Adapted Draft Length"
+        },
+        {
+          "term": "k_{\\text{accepted}}",
+          "label": "Verified Tokens"
+        }
+      ],
+      "svg_filename": "agspec_retrieval_speculative_decoding_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\text{Throughput} = 4.76 \\times \\text{Baseline}$",
+      "filename": "agspec_retrieval_speculative_decoding_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "4.76 \\times",
+          "label": "Max Speedup Gain"
+        },
+        {
+          "term": "\\text{Baseline}",
+          "label": "Autoregressive Rate"
+        }
+      ],
+      "svg_filename": "agspec_retrieval_speculative_decoding_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "SESSION",
+          "color": "#38BDF8",
+          "items": [
+            "Trajectory",
+            "History",
+            "Context"
+          ]
+        },
+        {
+          "name": "WORKSPACE",
+          "color": "#10B981",
+          "items": [
+            "Opened Files",
+            "AST",
+            "Format"
+          ]
+        },
+        {
+          "name": "GLOBAL",
+          "color": "#F59E0B",
+          "items": [
+            "Archives",
+            "Repos",
+            "Snippets"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"def calculate_loss()\"",
+        "target_cluster": "WORKSPACE",
+        "token": "\"def calculate_loss()\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'stalled'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'missed'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "AgSpec Framework",
+    "model_a_specs": [
+      "Session Corpus",
+      "Workspace Indexing",
+      "Adaptive Draft Policy"
+    ],
+    "model_b": "Autoregressive Baseline",
+    "model_b_specs": [
+      "Standard Drafter",
+      "Fixed Length Cap",
+      "Missing Logs"
+    ],
+    "divide_title": "RETRIEVAL VS FIXED DRAUGHT DIVIDE",
+    "model_a_stat": "4.76x",
+    "model_a_stat_label": "MAX THROUGHPUT SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "STANDARD BASELINE",
+    "efficiency_badge": "\u26a1 4.76x GENERATION SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "Batch Size 16 Throughput",
+        "score_a": "4.76x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Batch Size 1 Throughput",
+        "score_a": "4.37x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Multi-Agent Coding",
+        "score_a": "Superior",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "4.76x",
+    "scale_label": "Max Throughput Speedup",
+    "bottleneck_title": "MONOLITHIC RETRIEVAL BOTTLENECK",
+    "bottleneck_desc": "Missing agent formats and fixed draft lengths waste GPU compute.",
+    "solution_title": "AGSPEC MULTI-SOURCE ADAPTIVE PIPELINE",
+    "solution_components": "Session, Workspace & Global Corpus with Dynamic Length Tuning",
+    "mechanism_title": "ADAPTIVE DRAFT LENGTH POLICY",
+    "payoff_stat": "4.76x",
+    "payoff_label": "THROUGHPUT MULTIPLIER",
+    "payoff_sub": "Outperforming traditional retrieval drafters and EAGLE-3",
+    "payoff_hero_stat": 4.76,
+    "payoff_hero_label": "AgSpec Speedup",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Standard Autoregressive",
+    "payoff_delta_badge": "\u26a1 +376% THROUGHPUT GAIN",
+    "challenger": "AgSpec",
+    "incumbent": "EAGLE-3"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "AgSpec Framework",
+        "model_a_score": "4.76x",
+        "model_b_name": "Autoregressive Baseline",
+        "model_b_score": "1.0x",
+        "delta_label": "\u26a1 4.76x GENERATION SPEEDUP"
+      }
+    }
+  ],
+  "arxiv_id": "2610.01108",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "design_overview",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/source/figure/design_overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/chalkboard_figures/fig_1_design_overview.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "unified_patch",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/source/figure/unified_patch.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/chalkboard_figures/fig_2_unified_patch.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 100
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "5_generality",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/source/data/5_generality.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01108/chalkboard_figures/fig_3_5_generality.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 55
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.95
+      },
+      "gpu_buffer_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.856
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.88,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}

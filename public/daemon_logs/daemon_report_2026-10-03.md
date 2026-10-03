@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-03 | **Timestamp:** 2026-10-03 05:32:54 UTC
+**Date:** 2026-10-03 | **Timestamp:** 2026-10-03 06:47:14 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Decoding Looped Transformers Better for (Almost) Free
-- **arXiv ID:** [2610.02185](https://arxiv.org/abs/2610.02185)
-- **Domain Taxonomy:** `hardware_efficiency` (1.36x velocity)
-- **Category:** `benchmark_news`
-- **Editorial Hook:** *What if your AI didn't need more memory, just a tighter loop?*
-- **Everyday Analogy:** *A runner sprinting on a track where each lap improves their fitness, rather than just building a longer track.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_loop_transformers_decoding_benchmark_news.mp4`
+### Reel 1: AgSpec: Pushing the Limits of Retrieval-Based Speculative Decoding in Coding Agent Pipelines
+- **arXiv ID:** [2610.01108](https://arxiv.org/abs/2610.01108)
+- **Domain Taxonomy:** `hardware_efficiency` (1.40x velocity)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *What if your AI coding assistant could 'copy-paste' its own thoughts to generate code 10x faster?*
+- **Everyday Analogy:** *A library researcher who doesn't write new books from scratch but instead photographs entire paragraphs from existing shelves to build a new draft instantly.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_agspec_retrieval_speculative_decoding_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
