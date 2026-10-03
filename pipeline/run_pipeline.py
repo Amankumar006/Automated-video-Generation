@@ -136,7 +136,9 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
       - Sets faststart metadata for immediate YouTube playback
       This mandates the YouTube VP09/AV01 premium codec tier, preventing 480p/720p blurriness!
     """
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    out_dir = os.path.dirname(output_path)
+    if out_dir:
+        os.makedirs(out_dir, exist_ok=True)
     if master_quality:
         cmd = [
             FFMPEG_BIN, "-y",

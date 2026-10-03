@@ -17,8 +17,9 @@ from pipeline.config import (
     ENABLE_BG_MUSIC, DEFAULT_DUCK_GAIN, DEFAULT_NORMAL_GAIN, CUSTOM_BG_MUSIC_PATH
 )
 from scripts.sfx_generator import (
-    create_whoosh, create_click, create_laser_dispatch,
-    create_sub_impact, create_chime
+    load_sfx, generate_all_sfx,
+    create_whoosh, create_click, create_pop, create_glass_ping,
+    create_laser_dispatch, create_sub_impact, create_brand_chime
 )
 from scripts.synth_music_generator import (
     generate_lofi_ambient_soundtrack, mix_master_audio
@@ -111,31 +112,32 @@ def synthesize_audio_for_spec(
     sf.write(narration_out, narration_audio, sr)
     print(f"   Total speech duration: {total_duration:.2f}s")
 
-    # SFX Synthesizer
-    sfx_builders = {
-        "whoosh": create_whoosh,
-        "click": create_click,
-        "laser": create_laser_dispatch,
-        "sub_impact": create_sub_impact,
-        "chime": create_chime
-    }
-
+    # Tactile Foley SFX Synthesizer & Spatial Track Mixer
+    sfx_out = os.path.join(PUBLIC_DIR, f"{spec_id}_sfx_track.wav")
     sfx_track = np.zeros(total_len, dtype=np.float32)
-    
-    # Procedurally align SFX cues to exact acoustic word boundaries
+
+    # Procedurally align SFX cues to exact acoustic word boundaries & Manim visual moments
     domain = spec_data.get("domain_taxonomy", "robotics_tamp")
-    sfx_cues = generate_kinetic_sfx_cues(timing_data, domain_taxonomy=domain)
+    sfx_cues = generate_kinetic_sfx_cues(timing_data, domain_taxonomy=domain, spec=spec_data)
+    print(f"🔊 [Tactile SFX Engine] Mixed {len(sfx_cues)} tactile Foley cues across {len(timing_data)} beats...")
+
     for cue in sfx_cues:
         ts = cue["timestamp"]
         sound_type = cue["sound_type"]
-        vol = cue.get("volume", 0.4)
-        if sound_type in sfx_builders and ts < total_duration:
-            sfx_data = sfx_builders[sound_type]()
+        vol = cue.get("volume", 0.35)
+        if ts < total_duration:
+            sfx_data = load_sfx(sound_type, sr=sr)
             start_idx = int(ts * sr)
             end_idx = min(start_idx + len(sfx_data), total_len)
             avail = end_idx - start_idx
             if avail > 0:
                 sfx_track[start_idx:end_idx] += sfx_data[:avail] * vol
+
+    # Peak normalize sfx_track to prevent harsh transients
+    sfx_peak = np.max(np.abs(sfx_track))
+    if sfx_peak > 0.85:
+        sfx_track = sfx_track * (0.85 / sfx_peak)
+    sf.write(sfx_out, sfx_track, sr)
 
     # Background Soundtrack & Dynamic Ducking
     if enable_music:
@@ -182,6 +184,8 @@ def synthesize_audio_for_spec(
         "master_audio": master_out,
         "narration_audio": narration_out,
         "soundtrack_audio": soundtrack_out if enable_music else "",
+        "sfx_audio": sfx_out,
+        "sfx_cues": sfx_cues,
         "timing_data": timing_data,
         "total_duration": total_duration
     }
