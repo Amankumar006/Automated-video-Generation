@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-03 | **Timestamp:** 2026-10-03 16:38:53 UTC
+**Date:** 2026-10-03 | **Timestamp:** 2026-10-03 18:57:59 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Fewer Tokens, Better Action: GPT-6 Astra Robot Agents with 14% Higher Success Rate but 65% Fewer Tokens
-- **arXiv ID:** [2610.01939](https://arxiv.org/abs/2610.01939)
-- **Domain Taxonomy:** `robotics_tamp` (1.18x velocity)
+### Reel 1: Replacing Large Language Models with Jev Decision Models for Low-Latency Edge Service Orchestration
+- **arXiv ID:** [2609.22753](https://arxiv.org/abs/2609.22753)
+- **Domain Taxonomy:** `hardware_efficiency` (1.28x velocity)
 - **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *What if your robot could think 65% faster by simply forgetting what doesn't matter?*
-- **Everyday Analogy:** *A professional chef preparing a meal by ignoring the clutter on the counter and focusing only on the ingredients that actually end up in the pan.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_pyrua_lean_breakthrough_mechanism_deepdive.mp4`
+- **Editorial Hook:** *What if we could make AI smart enough to talk back instantly by replacing the 'brain' with a lightning-fast shortcut?*
+- **Everyday Analogy:** *Replacing a slow, professional translator with a speed-reading index card system that triggers a pre-recorded response.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_jev_decision_model_optimization_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs

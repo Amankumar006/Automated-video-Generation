@@ -1,0 +1,1967 @@
+{
+  "id": "jev_decision_model_optimization",
+  "title": "Jev Decision Models for Edge Orchestration",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Every time your edge service waits for an LLM to decide where to route a request, you are burning your entire latency budget on overhead.",
+      "visual_focus": "A glowing request packet hitting a wall, showing a massive latency spike.",
+      "highlight_words": {
+        "latency budget": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "LLM",
+        "action_verb": "consumes",
+        "direct_object": "latency budget",
+        "anchor_word": "burning",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE LATENCY TRAP",
+        "sub": "LLM decision overhead at the edge",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE LATENCY TRAP",
+        "sub": "LLM decision overhead at the edge",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.91,
+      "slot_duration": 7.21,
+      "start": 0.0,
+      "end": 6.91,
+      "word_timings": [
+        {
+          "word": "Every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 0.01,
+          "end": 0.26,
+          "duration": 0.25,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 0.26,
+          "end": 0.534,
+          "duration": 0.274,
+          "frame_ahead_trigger": 0.22
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.534,
+          "end": 0.66,
+          "duration": 0.126,
+          "frame_ahead_trigger": 0.494
+        },
+        {
+          "word": "edge",
+          "clean_word": "edge",
+          "phonemes": "\u02c8\u025bd\u0292",
+          "start": 0.66,
+          "end": 0.94,
+          "duration": 0.28,
+          "frame_ahead_trigger": 0.62
+        },
+        {
+          "word": "service",
+          "clean_word": "service",
+          "phonemes": "s\u02c8\u025c\u02d0v\u026as",
+          "start": 0.94,
+          "end": 1.265,
+          "duration": 0.325,
+          "frame_ahead_trigger": 0.9
+        },
+        {
+          "word": "waits",
+          "clean_word": "waits",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 1.265,
+          "end": 1.525,
+          "duration": 0.26,
+          "frame_ahead_trigger": 1.225
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 1.525,
+          "end": 1.75,
+          "duration": 0.225,
+          "frame_ahead_trigger": 1.485
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 1.75,
+          "end": 1.935,
+          "duration": 0.185,
+          "frame_ahead_trigger": 1.71
+        },
+        {
+          "word": "LLM",
+          "clean_word": "llm",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 1.935,
+          "end": 2.36,
+          "duration": 0.425,
+          "frame_ahead_trigger": 1.895
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 2.36,
+          "end": 2.575,
+          "duration": 0.215,
+          "frame_ahead_trigger": 2.32
+        },
+        {
+          "word": "decide",
+          "clean_word": "decide",
+          "phonemes": "d\u1d7bs\u02c8a\u026ad",
+          "start": 2.575,
+          "end": 2.83,
+          "duration": 0.255,
+          "frame_ahead_trigger": 2.535
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 2.83,
+          "end": 3.045,
+          "duration": 0.215,
+          "frame_ahead_trigger": 2.79
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 3.045,
+          "end": 3.235,
+          "duration": 0.19,
+          "frame_ahead_trigger": 3.005
+        },
+        {
+          "word": "route",
+          "clean_word": "route",
+          "phonemes": "\u0279\u02c8a\u028at",
+          "start": 3.235,
+          "end": 3.505,
+          "duration": 0.27,
+          "frame_ahead_trigger": 3.195
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 3.505,
+          "end": 3.68,
+          "duration": 0.175,
+          "frame_ahead_trigger": 3.465
+        },
+        {
+          "word": "request,",
+          "clean_word": "request",
+          "phonemes": "\u0279\u1d7bkw\u02c8\u025bst",
+          "start": 3.68,
+          "end": 4.094,
+          "duration": 0.414,
+          "frame_ahead_trigger": 3.64
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 4.094,
+          "end": 4.22,
+          "duration": 0.126,
+          "frame_ahead_trigger": 4.054
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 4.22,
+          "end": 4.475,
+          "duration": 0.255,
+          "frame_ahead_trigger": 4.18
+        },
+        {
+          "word": "burning",
+          "clean_word": "burning",
+          "phonemes": "b\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 4.475,
+          "end": 4.725,
+          "duration": 0.25,
+          "frame_ahead_trigger": 4.435
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 4.725,
+          "end": 5.05,
+          "duration": 0.325,
+          "frame_ahead_trigger": 4.685
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 5.05,
+          "end": 5.395,
+          "duration": 0.345,
+          "frame_ahead_trigger": 5.01
+        },
+        {
+          "word": "latency",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 5.395,
+          "end": 5.77,
+          "duration": 0.375,
+          "frame_ahead_trigger": 5.355
+        },
+        {
+          "word": "budget",
+          "clean_word": "budget",
+          "phonemes": "b\u02c8\u028cd\u0292\u026at",
+          "start": 5.77,
+          "end": 6.205,
+          "duration": 0.435,
+          "frame_ahead_trigger": 5.73
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 6.205,
+          "end": 6.294,
+          "duration": 0.089,
+          "frame_ahead_trigger": 6.165
+        },
+        {
+          "word": "overhead.",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 6.294,
+          "end": 6.765,
+          "duration": 0.471,
+          "frame_ahead_trigger": 6.254
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of an LLM as a TSA agent who reads your entire life story before checking your ID. It\u2019s overkill for a simple binary decision.",
+      "visual_focus": "An animation of a TSA agent reading a novel instead of checking a passport.",
+      "highlight_words": {
+        "overkill": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "LLM",
+        "action_verb": "reads",
+        "direct_object": "entire life story",
+        "anchor_word": "overkill",
+        "semantic_role": "analogy_setup"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE TSA BOTTLENECK",
+        "sub": "Why LLMs are too slow for edge routing",
+        "accent_color": "#F59E0B",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE TSA BOTTLENECK",
+        "sub": "Why LLMs are too slow for edge routing",
+        "accent_color": "#F59E0B"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.62,
+      "slot_duration": 7.92,
+      "start": 7.21,
+      "end": 14.83,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 7.222,
+          "end": 7.582,
+          "duration": 0.36,
+          "frame_ahead_trigger": 7.182
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.582,
+          "end": 7.614,
+          "duration": 0.032,
+          "frame_ahead_trigger": 7.542
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 7.614,
+          "end": 7.772,
+          "duration": 0.158,
+          "frame_ahead_trigger": 7.574
+        },
+        {
+          "word": "LLM",
+          "clean_word": "llm",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 7.772,
+          "end": 8.232,
+          "duration": 0.46,
+          "frame_ahead_trigger": 7.732
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 8.232,
+          "end": 8.322,
+          "duration": 0.09,
+          "frame_ahead_trigger": 8.192
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.322,
+          "end": 8.527,
+          "duration": 0.205,
+          "frame_ahead_trigger": 8.282
+        },
+        {
+          "word": "TSA",
+          "clean_word": "tsa",
+          "phonemes": "ts\u02c8\u0251\u02d0",
+          "start": 8.527,
+          "end": 8.792,
+          "duration": 0.265,
+          "frame_ahead_trigger": 8.487
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 8.792,
+          "end": 9.202,
+          "duration": 0.41,
+          "frame_ahead_trigger": 8.752
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 9.202,
+          "end": 9.407,
+          "duration": 0.205,
+          "frame_ahead_trigger": 9.162
+        },
+        {
+          "word": "reads",
+          "clean_word": "reads",
+          "phonemes": "\u0279\u02c8i\u02d0dz",
+          "start": 9.407,
+          "end": 9.757,
+          "duration": 0.35,
+          "frame_ahead_trigger": 9.367
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 9.757,
+          "end": 10.062,
+          "duration": 0.305,
+          "frame_ahead_trigger": 9.717
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 10.062,
+          "end": 10.317,
+          "duration": 0.255,
+          "frame_ahead_trigger": 10.022
+        },
+        {
+          "word": "life",
+          "clean_word": "life",
+          "phonemes": "l\u02c8a\u026af",
+          "start": 10.317,
+          "end": 10.637,
+          "duration": 0.32,
+          "frame_ahead_trigger": 10.277
+        },
+        {
+          "word": "story",
+          "clean_word": "story",
+          "phonemes": "st\u02c8\u0254\u02d0\u0279i",
+          "start": 10.637,
+          "end": 11.052,
+          "duration": 0.415,
+          "frame_ahead_trigger": 10.597
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 11.052,
+          "end": 11.402,
+          "duration": 0.35,
+          "frame_ahead_trigger": 11.012
+        },
+        {
+          "word": "checking",
+          "clean_word": "checking",
+          "phonemes": "t\u0283\u02c8\u025bk\u026a\u014b",
+          "start": 11.402,
+          "end": 11.817,
+          "duration": 0.415,
+          "frame_ahead_trigger": 11.362
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 11.817,
+          "end": 11.977,
+          "duration": 0.16,
+          "frame_ahead_trigger": 11.777
+        },
+        {
+          "word": "ID.",
+          "clean_word": "id",
+          "phonemes": "a\u026ad\u02c8i\u02d0",
+          "start": 11.977,
+          "end": 12.313,
+          "duration": 0.336,
+          "frame_ahead_trigger": 11.937
+        },
+        {
+          "word": "It\u2019s",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 12.313,
+          "end": 12.497,
+          "duration": 0.184,
+          "frame_ahead_trigger": 12.273
+        },
+        {
+          "word": "overkill",
+          "clean_word": "overkill",
+          "phonemes": "\u02cco\u028av\u025ak\u02c8\u026al",
+          "start": 12.497,
+          "end": 12.977,
+          "duration": 0.48,
+          "frame_ahead_trigger": 12.457
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 12.977,
+          "end": 13.262,
+          "duration": 0.285,
+          "frame_ahead_trigger": 12.937
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 13.262,
+          "end": 13.375,
+          "duration": 0.113,
+          "frame_ahead_trigger": 13.222
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 13.375,
+          "end": 13.852,
+          "duration": 0.477,
+          "frame_ahead_trigger": 13.335
+        },
+        {
+          "word": "binary",
+          "clean_word": "binary",
+          "phonemes": "b\u02c8a\u026an\u025a\u0279i",
+          "start": 13.852,
+          "end": 14.292,
+          "duration": 0.44,
+          "frame_ahead_trigger": 13.812
+        },
+        {
+          "word": "decision.",
+          "clean_word": "decision",
+          "phonemes": "d\u1d7bs\u02c8\u026a\u0292\u0259n",
+          "start": 14.292,
+          "end": 14.662,
+          "duration": 0.37,
+          "frame_ahead_trigger": 14.252
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter Jev. Instead of a general-purpose model, it uses a specialized API that maps intent fields directly to a pre-compiled, high-speed routing binary.",
+      "visual_focus": "A sleek, fast-moving packet bypassing the LLM and hitting a binary gate.",
+      "highlight_words": {
+        "Jev": "#10B981",
+        "high-speed routing binary": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Jev",
+        "action_verb": "bypasses",
+        "direct_object": "LLM bottleneck",
+        "anchor_word": "Jev",
+        "semantic_role": "mechanism_introduction"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "JEV DECISION MODEL ARCHITECTURE",
+        "sub": "A sleek, fast-moving packet bypassing the LLM and hitting a binar",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/chalkboard_figures/fig_1_system-architecture.svg",
+          "image_path": null,
+          "arxiv_id": "2609.22753",
+          "title": "JEV DECISION MODEL ARCHITECTURE",
+          "sub": "A sleek, fast-moving packet bypassing the LLM and hitting a binar",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/chalkboard_figures/fig_1_system-architecture.svg",
+        "image_path": null,
+        "arxiv_id": "2609.22753",
+        "title": "JEV DECISION MODEL ARCHITECTURE",
+        "sub": "A sleek, fast-moving packet bypassing the LLM and hitting a binar",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 8.09,
+      "slot_duration": 8.39,
+      "start": 15.13,
+      "end": 23.21,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 15.138,
+          "end": 15.383,
+          "duration": 0.245,
+          "frame_ahead_trigger": 15.098
+        },
+        {
+          "word": "Jev.",
+          "clean_word": "jev",
+          "phonemes": "d\u0292\u02c8\u025bv",
+          "start": 15.383,
+          "end": 15.648,
+          "duration": 0.265,
+          "frame_ahead_trigger": 15.343
+        },
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 15.648,
+          "end": 15.998,
+          "duration": 0.35,
+          "frame_ahead_trigger": 15.608
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 15.998,
+          "end": 16.113,
+          "duration": 0.115,
+          "frame_ahead_trigger": 15.958
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.113,
+          "end": 16.283,
+          "duration": 0.17,
+          "frame_ahead_trigger": 16.073
+        },
+        {
+          "word": "general-purpose",
+          "clean_word": "generalpurpose",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u02cc\u00e6lp\u025c\u02d0p\u0259s",
+          "start": 16.283,
+          "end": 17.077,
+          "duration": 0.794,
+          "frame_ahead_trigger": 16.243
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 17.077,
+          "end": 17.458,
+          "duration": 0.381,
+          "frame_ahead_trigger": 17.037
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 17.458,
+          "end": 17.537,
+          "duration": 0.079,
+          "frame_ahead_trigger": 17.418
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 17.537,
+          "end": 17.833,
+          "duration": 0.296,
+          "frame_ahead_trigger": 17.497
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 17.833,
+          "end": 18.023,
+          "duration": 0.19,
+          "frame_ahead_trigger": 17.793
+        },
+        {
+          "word": "specialized",
+          "clean_word": "specialized",
+          "phonemes": "sp\u02c8\u025b\u0283\u0259l\u02cca\u026azd",
+          "start": 18.023,
+          "end": 18.773,
+          "duration": 0.75,
+          "frame_ahead_trigger": 17.983
+        },
+        {
+          "word": "API",
+          "clean_word": "api",
+          "phonemes": "\u02cce\u026ap\u02cci\u02d0\u02c8a\u026a",
+          "start": 18.773,
+          "end": 19.17,
+          "duration": 0.397,
+          "frame_ahead_trigger": 18.733
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 19.17,
+          "end": 19.338,
+          "duration": 0.168,
+          "frame_ahead_trigger": 19.13
+        },
+        {
+          "word": "maps",
+          "clean_word": "maps",
+          "phonemes": "m\u02c8\u00e6ps",
+          "start": 19.338,
+          "end": 19.668,
+          "duration": 0.33,
+          "frame_ahead_trigger": 19.298
+        },
+        {
+          "word": "intent",
+          "clean_word": "intent",
+          "phonemes": "\u026ant\u02c8\u025bnt",
+          "start": 19.668,
+          "end": 19.953,
+          "duration": 0.285,
+          "frame_ahead_trigger": 19.628
+        },
+        {
+          "word": "fields",
+          "clean_word": "fields",
+          "phonemes": "f\u02c8i\u02d0ldz",
+          "start": 19.953,
+          "end": 20.343,
+          "duration": 0.39,
+          "frame_ahead_trigger": 19.913
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 20.343,
+          "end": 20.778,
+          "duration": 0.435,
+          "frame_ahead_trigger": 20.303
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 20.778,
+          "end": 20.968,
+          "duration": 0.19,
+          "frame_ahead_trigger": 20.738
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 20.968,
+          "end": 21.118,
+          "duration": 0.15,
+          "frame_ahead_trigger": 20.928
+        },
+        {
+          "word": "pre-compiled,",
+          "clean_word": "precompiled",
+          "phonemes": "p\u0279\u02cci\u02d0k\u0259mp\u02c8a\u026ald",
+          "start": 21.118,
+          "end": 21.848,
+          "duration": 0.73,
+          "frame_ahead_trigger": 21.078
+        },
+        {
+          "word": "high-speed",
+          "clean_word": "highspeed",
+          "phonemes": "h\u02c8a\u026aspi\u02d0d",
+          "start": 21.848,
+          "end": 22.318,
+          "duration": 0.47,
+          "frame_ahead_trigger": 21.808
+        },
+        {
+          "word": "routing",
+          "clean_word": "routing",
+          "phonemes": "\u0279\u02c8a\u028a\u027e\u026a\u014b",
+          "start": 22.318,
+          "end": 22.713,
+          "duration": 0.395,
+          "frame_ahead_trigger": 22.278
+        },
+        {
+          "word": "binary.",
+          "clean_word": "binary",
+          "phonemes": "b\u02c8a\u026an\u025a\u0279i",
+          "start": 22.713,
+          "end": 23.048,
+          "duration": 0.335,
+          "frame_ahead_trigger": 22.673
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The secret is a lightweight, compiled validator that performs exact-match pattern filtering. It ignores the fluff, extracting only the four required intent fields instantly.",
+      "visual_focus": "A code block highlighting the 'jev_api.predict' function stripping away complexity.",
+      "highlight_words": {
+        "compiled validator": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Validator",
+        "action_verb": "extracts",
+        "direct_object": "intent fields",
+        "anchor_word": "validator",
+        "semantic_role": "technical_deep_dive"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: JEV DECISION MODEL",
+        "sub": "A code block highlighting the 'jev_api.predict' function strippin",
+        "params": {
+          "title": "KERNEL CODE: JEV DECISION MODEL",
+          "sub": "A code block highlighting the 'jev_api.predict' function strippin",
+          "filename": "decision_engine.py",
+          "language": "python",
+          "lines": [
+            "def route_request(request):",
+            "    intent = jev_api.predict(request)",
+            "    if validator.is_valid(intent):",
+            "        return orchestrator.dispatch(intent)",
+            "    return fallback_llm(request)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 FAST-PATH DECISION FLOW",
+          "delta_badge": "Bounded API intent extraction path"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: JEV DECISION MODEL",
+        "sub": "A code block highlighting the 'jev_api.predict' function strippin",
+        "filename": "decision_engine.py",
+        "language": "python",
+        "lines": [
+          "def route_request(request):",
+          "    intent = jev_api.predict(request)",
+          "    if validator.is_valid(intent):",
+          "        return orchestrator.dispatch(intent)",
+          "    return fallback_llm(request)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 FAST-PATH DECISION FLOW",
+        "delta_badge": "Bounded API intent extraction path"
+      },
+      "audio_duration": 9.15,
+      "slot_duration": 9.45,
+      "start": 23.51,
+      "end": 32.67,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.538,
+          "end": 23.663,
+          "duration": 0.125,
+          "frame_ahead_trigger": 23.498
+        },
+        {
+          "word": "secret",
+          "clean_word": "secret",
+          "phonemes": "s\u02c8i\u02d0k\u0279\u1d7bt",
+          "start": 23.663,
+          "end": 24.123,
+          "duration": 0.46,
+          "frame_ahead_trigger": 23.623
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 24.123,
+          "end": 24.228,
+          "duration": 0.105,
+          "frame_ahead_trigger": 24.083
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 24.228,
+          "end": 24.358,
+          "duration": 0.13,
+          "frame_ahead_trigger": 24.188
+        },
+        {
+          "word": "lightweight,",
+          "clean_word": "lightweight",
+          "phonemes": "l\u02c8a\u026atwe\u026at",
+          "start": 24.358,
+          "end": 24.943,
+          "duration": 0.585,
+          "frame_ahead_trigger": 24.318
+        },
+        {
+          "word": "compiled",
+          "clean_word": "compiled",
+          "phonemes": "k\u0259mp\u02c8a\u026ald",
+          "start": 24.943,
+          "end": 25.383,
+          "duration": 0.44,
+          "frame_ahead_trigger": 24.903
+        },
+        {
+          "word": "validator",
+          "clean_word": "validator",
+          "phonemes": "v\u02c8\u00e6l\u1d7bd\u02cce\u026a\u027e\u025a",
+          "start": 25.383,
+          "end": 26.083,
+          "duration": 0.7,
+          "frame_ahead_trigger": 25.343
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 26.083,
+          "end": 26.323,
+          "duration": 0.24,
+          "frame_ahead_trigger": 26.043
+        },
+        {
+          "word": "performs",
+          "clean_word": "performs",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279mz",
+          "start": 26.323,
+          "end": 26.718,
+          "duration": 0.395,
+          "frame_ahead_trigger": 26.283
+        },
+        {
+          "word": "exact-match",
+          "clean_word": "exactmatch",
+          "phonemes": "\u025b\u0261z\u02c8\u00e6ktm\u00e6t\u0283",
+          "start": 26.718,
+          "end": 27.408,
+          "duration": 0.69,
+          "frame_ahead_trigger": 26.678
+        },
+        {
+          "word": "pattern",
+          "clean_word": "pattern",
+          "phonemes": "p\u02c8\u00e6t\u025an",
+          "start": 27.408,
+          "end": 27.773,
+          "duration": 0.365,
+          "frame_ahead_trigger": 27.368
+        },
+        {
+          "word": "filtering.",
+          "clean_word": "filtering",
+          "phonemes": "f\u02c8\u026alt\u025a\u0279\u026a\u014b",
+          "start": 27.773,
+          "end": 28.288,
+          "duration": 0.515,
+          "frame_ahead_trigger": 27.733
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 28.288,
+          "end": 28.453,
+          "duration": 0.165,
+          "frame_ahead_trigger": 28.248
+        },
+        {
+          "word": "ignores",
+          "clean_word": "ignores",
+          "phonemes": "\u026a\u0261n\u02c8\u0254\u02d0\u0279z",
+          "start": 28.453,
+          "end": 28.813,
+          "duration": 0.36,
+          "frame_ahead_trigger": 28.413
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.813,
+          "end": 28.928,
+          "duration": 0.115,
+          "frame_ahead_trigger": 28.773
+        },
+        {
+          "word": "fluff,",
+          "clean_word": "fluff",
+          "phonemes": "fl\u02c8\u028cf",
+          "start": 28.928,
+          "end": 29.261,
+          "duration": 0.333,
+          "frame_ahead_trigger": 28.888
+        },
+        {
+          "word": "extracting",
+          "clean_word": "extracting",
+          "phonemes": "\u025bkst\u0279\u02c8\u00e6kt\u026a\u014b",
+          "start": 29.261,
+          "end": 29.963,
+          "duration": 0.702,
+          "frame_ahead_trigger": 29.221
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 29.963,
+          "end": 30.153,
+          "duration": 0.19,
+          "frame_ahead_trigger": 29.923
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.153,
+          "end": 30.323,
+          "duration": 0.17,
+          "frame_ahead_trigger": 30.113
+        },
+        {
+          "word": "four",
+          "clean_word": "four",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279",
+          "start": 30.323,
+          "end": 30.608,
+          "duration": 0.285,
+          "frame_ahead_trigger": 30.283
+        },
+        {
+          "word": "required",
+          "clean_word": "required",
+          "phonemes": "\u0279\u1d7bkw\u02c8a\u026a\u025ad",
+          "start": 30.608,
+          "end": 31.138,
+          "duration": 0.53,
+          "frame_ahead_trigger": 30.568
+        },
+        {
+          "word": "intent",
+          "clean_word": "intent",
+          "phonemes": "\u026ant\u02c8\u025bnt",
+          "start": 31.138,
+          "end": 31.538,
+          "duration": 0.4,
+          "frame_ahead_trigger": 31.098
+        },
+        {
+          "word": "fields",
+          "clean_word": "fields",
+          "phonemes": "f\u02c8i\u02d0ldz",
+          "start": 31.538,
+          "end": 31.951,
+          "duration": 0.413,
+          "frame_ahead_trigger": 31.498
+        },
+        {
+          "word": "instantly.",
+          "clean_word": "instantly",
+          "phonemes": "\u02c8\u026anst\u0259ntli",
+          "start": 31.951,
+          "end": 32.523,
+          "duration": 0.572,
+          "frame_ahead_trigger": 31.911
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? Jev delivers 4x faster admission latency compared to standard LLMs, keeping your services responsive even under massive, real-world traffic loads.",
+      "visual_focus": "A bar chart showing Jev at 15ms vs LLMs at 65ms and 140ms.",
+      "highlight_words": {
+        "4x faster": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Jev",
+        "action_verb": "outperforms",
+        "direct_object": "LLM latency",
+        "anchor_word": "4x faster",
+        "semantic_role": "benchmark_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: ADMISSION LATENCY",
+        "sub": "A bar chart showing Jev at 15ms vs LLMs at 65ms and",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: ADMISSION LATENCY",
+          "sub": "A bar chart showing Jev at 15ms vs LLMs at 65ms and",
+          "metric_name": "Decision Latency",
+          "unit": "ms",
+          "contestants": [
+            {
+              "name": "Jev",
+              "value": 15.0,
+              "display_val": "15ms",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Small LLM",
+              "value": 65.0,
+              "display_val": "65ms",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Large LLM",
+              "value": 140.0,
+              "display_val": "140ms",
+              "is_hero": false,
+              "color": "#A855F7"
+            }
+          ],
+          "delta_badge": "\u26a1 4x FASTER ADMISSION"
+        }
+      },
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: ADMISSION LATENCY",
+        "sub": "A bar chart showing Jev at 15ms vs LLMs at 65ms and",
+        "metric_name": "Decision Latency",
+        "unit": "ms",
+        "contestants": [
+          {
+            "name": "Jev",
+            "value": 15.0,
+            "display_val": "15ms",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Small LLM",
+            "value": 65.0,
+            "display_val": "65ms",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Large LLM",
+            "value": 140.0,
+            "display_val": "140ms",
+            "is_hero": false,
+            "color": "#A855F7"
+          }
+        ],
+        "delta_badge": "\u26a1 4x FASTER ADMISSION"
+      },
+      "audio_duration": 8.79,
+      "slot_duration": 9.09,
+      "start": 32.97,
+      "end": 41.75,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 32.975,
+          "end": 33.175,
+          "duration": 0.2,
+          "frame_ahead_trigger": 32.935
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 33.175,
+          "end": 33.483,
+          "duration": 0.308,
+          "frame_ahead_trigger": 33.135
+        },
+        {
+          "word": "Jev",
+          "clean_word": "jev",
+          "phonemes": "d\u0292\u02c8\u025bv",
+          "start": 33.483,
+          "end": 33.765,
+          "duration": 0.282,
+          "frame_ahead_trigger": 33.443
+        },
+        {
+          "word": "delivers",
+          "clean_word": "delivers",
+          "phonemes": "d\u1d7bl\u02c8\u026av\u025az",
+          "start": 33.765,
+          "end": 34.217,
+          "duration": 0.451,
+          "frame_ahead_trigger": 33.725
+        },
+        {
+          "word": "4x",
+          "clean_word": "4x",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279 \u02c8\u025bks",
+          "start": 34.217,
+          "end": 34.715,
+          "duration": 0.499,
+          "frame_ahead_trigger": 34.177
+        },
+        {
+          "word": "faster",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 34.715,
+          "end": 35.09,
+          "duration": 0.375,
+          "frame_ahead_trigger": 34.675
+        },
+        {
+          "word": "admission",
+          "clean_word": "admission",
+          "phonemes": "\u0250dm\u02c8\u026a\u0283\u0259n",
+          "start": 35.09,
+          "end": 35.565,
+          "duration": 0.475,
+          "frame_ahead_trigger": 35.05
+        },
+        {
+          "word": "latency",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 35.565,
+          "end": 36.03,
+          "duration": 0.465,
+          "frame_ahead_trigger": 35.525
+        },
+        {
+          "word": "compared",
+          "clean_word": "compared",
+          "phonemes": "k\u0259mp\u02c8\u025b\u0279d",
+          "start": 36.03,
+          "end": 36.565,
+          "duration": 0.535,
+          "frame_ahead_trigger": 35.99
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 36.565,
+          "end": 36.745,
+          "duration": 0.18,
+          "frame_ahead_trigger": 36.525
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 36.745,
+          "end": 37.045,
+          "duration": 0.3,
+          "frame_ahead_trigger": 36.705
+        },
+        {
+          "word": "LLMs,",
+          "clean_word": "llms",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 37.045,
+          "end": 37.659,
+          "duration": 0.614,
+          "frame_ahead_trigger": 37.005
+        },
+        {
+          "word": "keeping",
+          "clean_word": "keeping",
+          "phonemes": "k\u02c8i\u02d0p\u026a\u014b",
+          "start": 37.659,
+          "end": 38.065,
+          "duration": 0.406,
+          "frame_ahead_trigger": 37.619
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 38.065,
+          "end": 38.33,
+          "duration": 0.265,
+          "frame_ahead_trigger": 38.025
+        },
+        {
+          "word": "services",
+          "clean_word": "services",
+          "phonemes": "s\u02c8\u025c\u02d0v\u026as\u1d7bz",
+          "start": 38.33,
+          "end": 38.695,
+          "duration": 0.365,
+          "frame_ahead_trigger": 38.29
+        },
+        {
+          "word": "responsive",
+          "clean_word": "responsive",
+          "phonemes": "\u0279\u1d7bsp\u02c8\u0251\u02d0ns\u026av",
+          "start": 38.695,
+          "end": 39.25,
+          "duration": 0.555,
+          "frame_ahead_trigger": 38.655
+        },
+        {
+          "word": "even",
+          "clean_word": "even",
+          "phonemes": "\u02c8i\u02d0v\u0259n",
+          "start": 39.25,
+          "end": 39.6,
+          "duration": 0.35,
+          "frame_ahead_trigger": 39.21
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 39.6,
+          "end": 39.875,
+          "duration": 0.275,
+          "frame_ahead_trigger": 39.56
+        },
+        {
+          "word": "massive,",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 39.875,
+          "end": 40.355,
+          "duration": 0.48,
+          "frame_ahead_trigger": 39.835
+        },
+        {
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 40.355,
+          "end": 40.91,
+          "duration": 0.555,
+          "frame_ahead_trigger": 40.315
+        },
+        {
+          "word": "traffic",
+          "clean_word": "traffic",
+          "phonemes": "t\u0279\u02c8\u00e6f\u026ak",
+          "start": 40.91,
+          "end": 41.27,
+          "duration": 0.36,
+          "frame_ahead_trigger": 40.87
+        },
+        {
+          "word": "loads.",
+          "clean_word": "loads",
+          "phonemes": "l\u02c8o\u028adz",
+          "start": 41.27,
+          "end": 41.665,
+          "duration": 0.395,
+          "frame_ahead_trigger": 41.23
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop wasting compute on bloated models. Follow The Model Verse for more deep-dives into high-performance AI orchestration.",
+      "visual_focus": "A final summary screen with the Model Verse logo and a subscription prompt.",
+      "highlight_words": {
+        "The Model Verse": "#10B981"
+      },
+      "svo_action": {
+        "subject": "User",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "Follow",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "STAY OPTIMIZED",
+        "sub": "Subscribe for more deep-dives",
+        "accent_color": "#10B981",
+        "params": {}
+      },
+      "audio_duration": 6.72,
+      "slot_duration": 7.22,
+      "start": 42.05,
+      "end": 48.77,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 42.07,
+          "end": 42.39,
+          "duration": 0.32,
+          "frame_ahead_trigger": 42.03
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 42.39,
+          "end": 42.79,
+          "duration": 0.4,
+          "frame_ahead_trigger": 42.35
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 42.79,
+          "end": 43.21,
+          "duration": 0.42,
+          "frame_ahead_trigger": 42.75
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 43.21,
+          "end": 43.395,
+          "duration": 0.185,
+          "frame_ahead_trigger": 43.17
+        },
+        {
+          "word": "bloated",
+          "clean_word": "bloated",
+          "phonemes": "bl\u02c8o\u028a\u027e\u1d7bd",
+          "start": 43.395,
+          "end": 43.91,
+          "duration": 0.515,
+          "frame_ahead_trigger": 43.355
+        },
+        {
+          "word": "models.",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 43.91,
+          "end": 44.319,
+          "duration": 0.41,
+          "frame_ahead_trigger": 43.87
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 44.319,
+          "end": 44.765,
+          "duration": 0.445,
+          "frame_ahead_trigger": 44.279
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 44.765,
+          "end": 44.802,
+          "duration": 0.037,
+          "frame_ahead_trigger": 44.725
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 44.802,
+          "end": 45.145,
+          "duration": 0.343,
+          "frame_ahead_trigger": 44.762
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 45.145,
+          "end": 45.444,
+          "duration": 0.3,
+          "frame_ahead_trigger": 45.105
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 45.444,
+          "end": 45.57,
+          "duration": 0.125,
+          "frame_ahead_trigger": 45.404
+        },
+        {
+          "word": "more",
+          "clean_word": "more",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279",
+          "start": 45.57,
+          "end": 45.935,
+          "duration": 0.365,
+          "frame_ahead_trigger": 45.53
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 45.935,
+          "end": 46.49,
+          "duration": 0.555,
+          "frame_ahead_trigger": 45.895
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 46.49,
+          "end": 46.615,
+          "duration": 0.125,
+          "frame_ahead_trigger": 46.45
+        },
+        {
+          "word": "high-performance",
+          "clean_word": "highperformance",
+          "phonemes": "h\u02c8a\u026ap\u025af\u02cc\u0254\u02d0\u0279m\u0259ns",
+          "start": 46.615,
+          "end": 47.465,
+          "duration": 0.85,
+          "frame_ahead_trigger": 46.575
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 47.465,
+          "end": 47.801,
+          "duration": 0.337,
+          "frame_ahead_trigger": 47.425
+        },
+        {
+          "word": "orchestration.",
+          "clean_word": "orchestration",
+          "phonemes": "\u02cc\u0254\u02d0\u0279k\u1d7bst\u0279\u02c8e\u026a\u0283\u0259n",
+          "start": 47.801,
+          "end": 48.605,
+          "duration": 0.803,
+          "frame_ahead_trigger": 47.761
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$L_{\\mathrm{total}} = L_{\\mathrm{LLM}} + L_{\\mathrm{exec}}$",
+      "filename": "jev_decision_model_optimization_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "L_{LLM}",
+          "label": "Reasoning Latency"
+        },
+        {
+          "term": "L_{exec}",
+          "label": "Execution Latency"
+        }
+      ],
+      "svg_filename": "jev_decision_model_optimization_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$C_{\\mathrm{LLM}} \\approx \\mathcal{O}(d_{\\mathrm{hidden}} \\times N_{\\mathrm{params}})$",
+      "filename": "jev_decision_model_optimization_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "C_{LLM}",
+          "label": "Compute Cost"
+        }
+      ],
+      "svg_filename": "jev_decision_model_optimization_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\Delta L = L_{\\mathrm{LLM}} - L_{\\mathrm{Jev}} \\approx 0.60 \\times L_{\\mathrm{LLM}}$",
+      "filename": "jev_decision_model_optimization_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta L",
+          "label": "Latency Reduction"
+        }
+      ],
+      "svg_filename": "jev_decision_model_optimization_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{Validator}(x) = \\sum_{i=1}^{k} \\mathbf{W}_i x_i + b$",
+      "filename": "jev_decision_model_optimization_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "k",
+          "label": "Bounded Intent Fields"
+        }
+      ],
+      "svg_filename": "jev_decision_model_optimization_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$P(\\mathrm{exact}) = 0.95 \\gg P_{\\mathrm{LLM}} \\approx 0.1$",
+      "filename": "jev_decision_model_optimization_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "P(exact)",
+          "label": "Exact Matching Probability"
+        }
+      ],
+      "svg_filename": "jev_decision_model_optimization_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "EDGE_TASKS",
+          "color": "#38BDF8",
+          "items": [
+            "Admission",
+            "Routing",
+            "Validator"
+          ]
+        },
+        {
+          "name": "MODELS",
+          "color": "#10B981",
+          "items": [
+            "Jev",
+            "LLM",
+            "Orchestrator"
+          ]
+        },
+        {
+          "name": "METRICS",
+          "color": "#F59E0B",
+          "items": [
+            "Latency",
+            "Accuracy",
+            "Load"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Service Request",
+        "target_cluster": "EDGE_TASKS",
+        "token": "{\"cmd\": \"start_ocr\"}"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "LLM Latency",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Compute Waste",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Jev Decision Model",
+    "model_a_specs": [
+      "Bounded API",
+      "Field-specific",
+      "Edge-optimized"
+    ],
+    "model_b": "Standard LLM",
+    "model_b_specs": [
+      "Full Transformer",
+      "Token-by-token",
+      "Compute heavy"
+    ],
+    "divide_title": "LATENCY VS DECISION QUALITY",
+    "model_a_stat": "0.60x",
+    "model_a_stat_label": "LATENCY REDUCTION",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 60% LOWER LATENCY",
+    "benchmarks": [
+      {
+        "name": "Median Latency",
+        "score_a": "60% Lower",
+        "score_b": "High"
+      },
+      {
+        "name": "Accuracy",
+        "score_a": "95%",
+        "score_b": "10% at Load"
+      },
+      {
+        "name": "Throughput",
+        "score_a": "Stable",
+        "score_b": "Degraded"
+      }
+    ],
+    "scale_metric": "8,280",
+    "scale_label": "Verified Requests",
+    "bottleneck_title": "MONOLITHIC BOTTLENECK",
+    "bottleneck_desc": "High token overhead on simple intent classification.",
+    "solution_title": "JEV API INTEGRATION",
+    "solution_components": "Bounded API Contract",
+    "mechanism_title": "SHARED VALIDATOR ROUTING",
+    "payoff_stat": "95%",
+    "payoff_label": "ADMISSION ACCURACY",
+    "payoff_sub": "Sustained performance under high edge load",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "Jev Decision Model",
+    "payoff_base_stat": 10.0,
+    "payoff_base_label": "LLM Orchestration",
+    "payoff_delta_badge": "\u26a1 +85% STABILITY GAIN",
+    "challenger": "Jev Model",
+    "incumbent": "General LLM"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: ADMISSION LATENCY",
+    "metric_name": "Decision Latency",
+    "unit": "ms",
+    "contestants": [
+      {
+        "name": "Jev",
+        "value": 15.0,
+        "display_val": "15ms",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Small LLM",
+        "value": 65.0,
+        "display_val": "65ms",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Large LLM",
+        "value": 140.0,
+        "display_val": "140ms",
+        "is_hero": false,
+        "color": "#A855F7"
+      }
+    ],
+    "delta_badge": "\u26a1 4x FASTER ADMISSION",
+    "radar_axes": [
+      "Latency",
+      "Accuracy",
+      "Load Handling",
+      "Cost",
+      "Throughput"
+    ]
+  },
+  "code_snippet": {
+    "filename": "decision_engine.py",
+    "language": "python",
+    "lines": [
+      "def route_request(request):",
+      "    intent = jev_api.predict(request)",
+      "    if validator.is_valid(intent):",
+      "        return orchestrator.dispatch(intent)",
+      "    return fallback_llm(request)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 FAST-PATH DECISION FLOW",
+    "explanation": "Bounded API intent extraction path"
+  },
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.2,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "Honestly, this was refreshing. The TSA analogy in Beat 2 actually landed because it highlights the inefficiency of using a massive LLM for a simple routing task without sounding like a 'smart drawer' metaphor. I understood exactly what Jev is doing\u2014swapping a heavy inference call for a compiled pattern matcher. It\u2019s technical, direct, and doesn't treat me like I'm five."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Jev Decision Model",
+        "model_a_score": "0.60x",
+        "model_b_name": "Standard LLM",
+        "model_b_score": "1.0x",
+        "delta_label": "\u26a1 60% LOWER LATENCY"
+      }
+    }
+  ],
+  "arxiv_id": "2609.22753",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "system-architecture",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/source/figures/system-architecture.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/chalkboard_figures/fig_1_system-architecture.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "decision-vs-generation",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/source/figures/decision-vs-generation.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/chalkboard_figures/fig_2_decision-vs-generation.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 100
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "huggingface-icon",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/source/figures/arxiv/huggingface-icon.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.22753/chalkboard_figures/fig_3_huggingface-icon.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 100
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 0.75
+      },
+      "generic_saas_grid": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.856
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.864,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.712,
+        "scale_multiplier": 1.1
+      },
+      "saas_leaderboard_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.807
+      },
+      "corporate_benchmark_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.811
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 1.0,
+        "scale_multiplier": 0.55
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.164,
+        "scale_multiplier": 1.15
+      },
+      "architectural_diagram": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "decorative_text_blocks": {
+        "dx": 0.0,
+        "dy": -1.732,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "flow_chart_blocks": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.698
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.624,
+        "scale_multiplier": 1.1
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.15
+      },
+      "table_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.812
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.784,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "logo_container": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.75
+      },
+      "text_block": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.0
+      },
+      "new_mathematical_summary": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}

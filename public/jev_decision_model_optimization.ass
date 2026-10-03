@@ -1,0 +1,43 @@
+[Script Info]
+Title: Jev Decision Models for Edge Orchestration Kinetic Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1440
+PlayResY: 2560
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticPill, Montserrat, 58, &H00FFFFFF, &H0047E0FD, &H00140C08, &HCC080C14, 1, 0, 0, 0, 100, 100, 0, 0, 3, 14, 0, 2, 80, 80, 560, 1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.01,0:00:01.26,KineticPill,,0,0,0,,Every time your edge {\c&H47E0FD&}service{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.26,0:00:02.58,KineticPill,,0,0,0,,waits for an {\c&HF8BD38&}LLM{\c&HFFFFFF&} to
+Dialogue: 0,0:00:02.58,0:00:03.68,KineticPill,,0,0,0,,{\c&H47E0FD&}decide{\c&HFFFFFF&} where to route a
+Dialogue: 0,0:00:03.68,0:00:05.05,KineticPill,,0,0,0,,{\c&HF8BD38&}request{\c&HFFFFFF&}, you are burning your
+Dialogue: 0,0:00:05.05,0:00:06.76,KineticPill,,0,0,0,,entire latency budget on {\c&H47E0FD&}overhead{\c&HFFFFFF&}.
+Dialogue: 0,0:00:07.22,0:00:08.32,KineticPill,,0,0,0,,Think of an {\c&HF8BD38&}LLM{\c&HFFFFFF&} as
+Dialogue: 0,0:00:08.32,0:00:09.76,KineticPill,,0,0,0,,a {\c&H47E0FD&}TSA{\c&HFFFFFF&} agent who reads
+Dialogue: 0,0:00:09.76,0:00:11.40,KineticPill,,0,0,0,,your {\c&HF8BD38&}entire{\c&HFFFFFF&} life story before
+Dialogue: 0,0:00:11.40,0:00:12.31,KineticPill,,0,0,0,,checking your {\c&H47E0FD&}ID{\c&HFFFFFF&}.
+Dialogue: 0,0:00:12.31,0:00:14.66,KineticPill,,0,0,0,,It’s {\c&HF8BD38&}overkill{\c&HFFFFFF&} for a simple binary decision.
+Dialogue: 0,0:00:15.14,0:00:16.28,KineticPill,,0,0,0,,Enter Jev. {\c&HF8BD38&}Instead{\c&HFFFFFF&} of a
+Dialogue: 0,0:00:16.28,0:00:18.02,KineticPill,,0,0,0,,{\c&H47E0FD&}general-purpose{\c&HFFFFFF&} model, it uses a
+Dialogue: 0,0:00:18.02,0:00:19.67,KineticPill,,0,0,0,,specialized {\c&HF8BD38&}API{\c&HFFFFFF&} that maps
+Dialogue: 0,0:00:19.67,0:00:21.12,KineticPill,,0,0,0,,intent fields {\c&H47E0FD&}directly{\c&HFFFFFF&} to a
+Dialogue: 0,0:00:21.12,0:00:23.05,KineticPill,,0,0,0,,{\c&HF8BD38&}pre-compiled{\c&HFFFFFF&}, high-speed routing binary.
+Dialogue: 0,0:00:23.54,0:00:24.94,KineticPill,,0,0,0,,The secret is a {\c&H47E0FD&}lightweight{\c&HFFFFFF&},
+Dialogue: 0,0:00:24.94,0:00:26.72,KineticPill,,0,0,0,,compiled {\c&HF8BD38&}validator{\c&HFFFFFF&} that performs
+Dialogue: 0,0:00:26.72,0:00:28.29,KineticPill,,0,0,0,,{\c&H47E0FD&}exact-match{\c&HFFFFFF&} pattern filtering.
+Dialogue: 0,0:00:28.29,0:00:29.96,KineticPill,,0,0,0,,It ignores the fluff, {\c&HF8BD38&}extracting{\c&HFFFFFF&}
+Dialogue: 0,0:00:29.96,0:00:32.52,KineticPill,,0,0,0,,only the four {\c&H47E0FD&}required{\c&HFFFFFF&} intent fields instantly.
+Dialogue: 0,0:00:32.98,0:00:34.72,KineticPill,,0,0,0,,The result? Jev delivers {\c&H47E0FD&}4x{\c&HFFFFFF&}
+Dialogue: 0,0:00:34.72,0:00:36.56,KineticPill,,0,0,0,,faster {\c&HF8BD38&}admission{\c&HFFFFFF&} latency compared
+Dialogue: 0,0:00:36.56,0:00:38.33,KineticPill,,0,0,0,,to {\c&H47E0FD&}standard{\c&HFFFFFF&} LLMs, keeping your
+Dialogue: 0,0:00:38.33,0:00:40.35,KineticPill,,0,0,0,,services {\c&HF8BD38&}responsive{\c&HFFFFFF&} even under massive,
+Dialogue: 0,0:00:40.35,0:00:41.66,KineticPill,,0,0,0,,{\c&H47E0FD&}real-world{\c&HFFFFFF&} traffic loads.
+Dialogue: 0,0:00:42.07,0:00:43.91,KineticPill,,0,0,0,,Stop {\c&HF8BD38&}wasting{\c&HFFFFFF&} compute on bloated
+Dialogue: 0,0:00:43.91,0:00:45.44,KineticPill,,0,0,0,,{\c&HF8BD38&}models{\c&HFFFFFF&}. Follow The Model Verse
+Dialogue: 0,0:00:45.44,0:00:48.60,KineticPill,,0,0,0,,for more deep-dives into {\c&HF8BD38&}high-performance{\c&HFFFFFF&} AI orchestration.
