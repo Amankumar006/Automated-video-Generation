@@ -11,6 +11,7 @@ import numpy as np
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Tuple
 from manim import *
+from manim.utils.rate_functions import ease_out_cubic, ease_out_back
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
