@@ -112,6 +112,27 @@ def synthesize_audio_for_spec(
     sf.write(narration_out, narration_audio, sr)
     print(f"   Total speech duration: {total_duration:.2f}s")
 
+    # Kinetic Subtitles & Phrase Chunks (SRT & ASS Export)
+    srt_out = os.path.join(PUBLIC_DIR, f"{spec_id}.srt")
+    ass_out = os.path.join(PUBLIC_DIR, f"{spec_id}.ass")
+    caption_chunks = []
+    try:
+        from pipeline.subtitle_generator import generate_phrase_chunks, export_srt, export_ass
+        enriched_beats = []
+        for b in beats:
+            b_copy = dict(b)
+            for td in timing_data:
+                if td["beat_id"] == b.get("beat_id"):
+                    b_copy["word_timings"] = td.get("word_timings", [])
+                    b_copy["start"] = td["start"]
+                    b_copy["end"] = td["end"]
+            enriched_beats.append(b_copy)
+        caption_chunks = generate_phrase_chunks(enriched_beats)
+        export_srt(caption_chunks, srt_out)
+        export_ass(caption_chunks, ass_out, title=spec_data.get("title", spec_id))
+    except Exception as e:
+        print(f"⚠️ Notice generating subtitles: {e}")
+
     # Tactile Foley SFX Synthesizer & Spatial Track Mixer
     sfx_out = os.path.join(PUBLIC_DIR, f"{spec_id}_sfx_track.wav")
     sfx_track = np.zeros(total_len, dtype=np.float32)
@@ -186,6 +207,9 @@ def synthesize_audio_for_spec(
         "soundtrack_audio": soundtrack_out if enable_music else "",
         "sfx_audio": sfx_out,
         "sfx_cues": sfx_cues,
+        "srt_file": srt_out,
+        "ass_file": ass_out,
+        "caption_chunks": caption_chunks,
         "timing_data": timing_data,
         "total_duration": total_duration
     }
