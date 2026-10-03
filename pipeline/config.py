@@ -52,7 +52,7 @@ SAFE_Y_MAX = 5.8
 
 # Audio Configuration
 SAMPLE_RATE = 24000
-DEFAULT_VOICE = "am_adam"
+DEFAULT_VOICE = os.environ.get("KOKORO_VOICE", "am_eric")
 DEFAULT_SPEED = 1.12
 
 # YouTube Publisher Configuration

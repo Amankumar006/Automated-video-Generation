@@ -94,6 +94,64 @@ class TestScriptCritic(unittest.TestCase):
         self.assertLessEqual(report.grade_level, 8.0, "Should be at or below middle school grade level")
         self.assertGreaterEqual(report.overall_score, 8.5, "Should score >= 8.5")
 
+    def test_slop_heavy_script_rejected(self):
+        slop_spec = {
+            "title": "AI Slop Baby Talk",
+            "beats": [
+                {
+                    "beat_id": 1,
+                    "text": "Let's delve into how a smart tool can supercharge your database."
+                },
+                {
+                    "beat_id": 2,
+                    "text": "Imagine huge safe drawers keeping your numbers locked on an open desk."
+                },
+                {
+                    "beat_id": 3,
+                    "text": "This cutting-edge technology will revolutionize the way you work."
+                }
+            ]
+        }
+        report = self.critic.evaluate_script(slop_spec, use_llm=False)
+        self.assertFalse(report.passed, "Slop-heavy baby-talk script must be rejected")
+        self.assertGreater(report.total_slop_cliches, 2, "Should identify multiple slop clichés")
+        self.assertIn("smart tool", report.slop_list)
+        self.assertTrue(any("safe drawer" in s for s in report.slop_list), "Should detect safe drawers in slop list")
+
+    def test_developer_terms_allowed(self):
+        dev_spec = {
+            "title": "Coding Agent Acceleration",
+            "beats": [
+                {
+                    "beat_id": 1,
+                    "text": "Every single time Cursor or Claude writes code for you, your GPU is wasting up to 70% of its compute doing nothing."
+                },
+                {
+                    "beat_id": 2,
+                    "text": "Why? Because LLMs generate code one single token at a time—like a chef waiting for salt before chopping every onion."
+                },
+                {
+                    "beat_id": 3,
+                    "text": "Enter Speculative Decoding. A tiny draft model guesses five lines ahead in a millisecond, while the giant model verifies all five in one pass."
+                },
+                {
+                    "beat_id": 4,
+                    "text": "AgSpec pushes this even further. By pulling matching syntax from your repo AST, token acceptance shoots up by 40%."
+                },
+                {
+                    "beat_id": 5,
+                    "text": "The result? 4x faster coding agents without losing a single drop of benchmark accuracy."
+                },
+                {
+                    "beat_id": 6,
+                    "text": "Follow The Model Verse for daily deep-dives into how AI actually works under the hood."
+                }
+            ]
+        }
+        report = self.critic.evaluate_script(dev_spec, use_llm=False)
+        self.assertEqual(report.total_critical_jargon, 0, "Universal dev terms should not trigger critical jargon penalties")
+        self.assertEqual(report.total_slop_cliches, 0, "Clean technical script should have zero slop")
+        self.assertTrue(report.passed, f"Clean technical dev script with physical analogy should pass, got verdict: {report.summary_verdict}")
 
 if __name__ == "__main__":
     unittest.main()

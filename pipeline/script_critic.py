@@ -38,37 +38,49 @@ MODEL_FALLBACKS = [
 ]
 
 # Curated High-Density Technical Jargon List
+# Note: Standard developer vocabulary (GPU, RAM, tokens, parameter, bandwidth, latency, inference, AST, git)
+# is fully allowed and encouraged when grounded by clear intuition.
 HIGH_DENSITY_JARGON = {
-    # Critical Jargon (-2.0 pts): Pure academic / tensor / hardware math
+    # Critical Jargon (-2.0 pts): Pure unexplained academic / tensor / hardware math
     "critical": [
         "softmax", "swiglu", "flops", "tflops", "eigenvector", "eigenvalue",
-        "polysemantic", "monosemantic", "superposition", "kv-cache", "sram",
+        "polysemantic", "monosemantic", "superposition", "sram",
         "hbm", "hbm3", "latent manifold", "manifolds", "hyperplane", "stochastic",
         "backpropagation", "loss landscape", "u-net", "variational", "markov",
         "differential equation", "score-based", "orthogonal", "bifurcation",
-        "autoregressive", "p-value", "asymptotic", "dimension", "dimensions",
+        "autoregressive", "p-value", "asymptotic",
         "feedforward", "residual stream", "logits", "activation vector", "matrix explosion"
     ],
-    # Moderate Jargon (-0.8 pts): Common in tech, but confusing without context
+    # Moderate Jargon (-0.6 pts): Obscure math/tech terms that need context
     "moderate": [
-        "parameter", "parameters", "bandwidth", "latency", "vector", "vectors",
-        "dot product", "embedding", "embeddings", "token", "tokens", "tensor",
-        "tensors", "quantization", "weights", "weights matrix", "forward pass",
-        "inference", "capacity", "pruning", "checkpoint"
+        "dot product", "embedding", "embeddings", "tensor",
+        "tensors", "quantization", "weights matrix", "forward pass",
+        "pruning", "checkpoint"
     ]
 }
+
+# AI Slop Clichés & Hallucinated Baby-Talk to ban (-2.5 pts each)
+AI_SLOP_CLICHES = [
+    "smart tool", "smart tools", "safe drawer", "safe drawers", "open desk",
+    "delve into", "delving into", "in the realm of", "game changer", "game-changer",
+    "revolutionize the way", "tapestry", "beacon", "testament", "ever-evolving",
+    "furthermore", "moreover", "cutting-edge technology", "let's dive in",
+    "unlock the power", "harness the power", "supercharge your", "magic box"
+]
 
 # Real-World Everyday Metaphors & Sensory Anchors
 EVERYDAY_ANALOGY_ANCHORS = [
     # Visual / Physical everyday phenomena
     "static", "tv static", "snow", "mirror", "steam", "fog", "foggy", "cloud", "clouds",
     "sculptor", "sculpting", "marble", "stone", "dust", "chisel", "rabbit", "cat",
-    "kitchen", "recipe", "chef", "library", "bookshelf", "book", "autocomplete",
+    "kitchen", "recipe", "chef", "salt", "onion", "library", "bookshelf", "book", "autocomplete",
     "phone", "napkin", "scratchpad", "actor", "stage", "improv", "whisper", "echo",
     "puzzle", "traffic", "highway", "sponge", "accordion", "flashlight", "spotlight",
     "water", "pipe", "dam", "funnel", "filter", "sieve", "colander", "train", "wagon",
     "shadow", "magnifying glass", "telescope", "ice cream", "coin toss", "roulette",
-    "director", "movie", "film", "play", "actor", "sea", "ocean", "map", "blueprint", "carve", "chip away"
+    "director", "movie", "film", "play", "actor", "sea", "ocean", "map", "blueprint", "carve", "chip away",
+    # Developer & Operational physical analogies
+    "relay race", "baton", "relay", "assembly line", "factory", "express lane", "cashier", "clerk", "waiter"
 ]
 
 
@@ -134,6 +146,7 @@ class BeatCriticResult:
     grade_level: float
     score: float
     suggestions: List[str]
+    slop_cliches_found: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -153,6 +166,8 @@ class ScriptCriticReport:
     pacing_warnings: List[str]
     llm_evaluation: Optional[Dict[str, Any]] = None
     summary_verdict: str = ""
+    total_slop_cliches: int = 0
+    slop_list: List[str] = field(default_factory=list)
 
 
 class ScriptCritic:
@@ -161,7 +176,7 @@ class ScriptCritic:
     everyday metaphors, and retention suitability.
     """
 
-    def __init__(self, target_grade_level: float = 8.0, min_score: float = 8.0):
+    def __init__(self, target_grade_level: float = 9.0, min_score: float = 8.0):
         self.target_grade_level = target_grade_level
         self.min_score = min_score
 
@@ -190,6 +205,13 @@ class ScriptCritic:
             pattern = r'\b' + re.escape(anchor) + r'\b'
             if re.search(pattern, text_lower):
                 analogies.append(anchor)
+
+        # AI Slop Cliché detection
+        slop_found = []
+        for cl in AI_SLOP_CLICHES:
+            pattern = r'\b' + re.escape(cl) + r'\b'
+            if re.search(pattern, text_lower):
+                slop_found.append(cl)
                 
         reading_ease, grade_level, _, _, _ = compute_flesch_metrics(text)
         
@@ -198,14 +220,17 @@ class ScriptCritic:
         
         # Jargon penalties
         score -= len(crit_found) * 2.0
-        score -= len(mod_found) * 0.7
+        score -= len(mod_found) * 0.5
+        
+        # AI Slop Cliché penalties (-2.5 pts each)
+        score -= len(slop_found) * 2.5
         
         # Analogy reward
         score += min(2.5, len(analogies) * 1.2)
         
         # Grade level penalty (if higher than target grade level)
         if grade_level > self.target_grade_level:
-            score -= (grade_level - self.target_grade_level) * 0.5
+            score -= (grade_level - self.target_grade_level) * 0.4
         elif grade_level <= 7.0:
             score += 0.5
             
@@ -220,9 +245,12 @@ class ScriptCritic:
             
         if crit_found:
             suggestions.append(f"Replace academic jargon: {', '.join(crit_found)} with everyday physical examples.")
+
+        if slop_found:
+            suggestions.append(f"CRITICAL: Remove AI slop / baby-talk: {', '.join(slop_found)}. Use real developer names.")
             
-        if not analogies and beat_id in [2, 3, 4]:
-            suggestions.append("Add a sensory or physical analogy (e.g. mirror, clouds, chef, sculptor).")
+        if not analogies and beat_id == 2:
+            suggestions.append("Add a central sensory or physical analogy (e.g. chef, relay race, mirror, clouds, sculptor).")
             
         score = max(1.0, min(10.0, round(score, 1)))
         
@@ -236,7 +264,8 @@ class ScriptCritic:
             reading_ease=round(reading_ease, 1),
             grade_level=round(grade_level, 1),
             score=score,
-            suggestions=suggestions
+            suggestions=suggestions,
+            slop_cliches_found=slop_found
         )
 
     def evaluate_script(
@@ -255,6 +284,7 @@ class ScriptCritic:
         all_crit_jargon = set()
         all_mod_jargon = set()
         all_analogies = set()
+        all_slop_cliches = set()
         
         for idx, b in enumerate(beats_data):
             b_id = b.get("beat_id", idx + 1)
@@ -266,6 +296,7 @@ class ScriptCritic:
             all_crit_jargon.update(b_res.critical_jargon)
             all_mod_jargon.update(b_res.moderate_jargon)
             all_analogies.update(b_res.analogies_found)
+            all_slop_cliches.update(b_res.slop_cliches_found)
             
         full_text = " ".join(all_text_list)
         total_reading_ease, overall_grade_level, total_words, _, _ = compute_flesch_metrics(full_text)
@@ -281,14 +312,14 @@ class ScriptCritic:
         b1 = analyzed_beats[0] if analyzed_beats else None
         if b1:
             # Check for curiosity hooks: questions, second person, curiosity triggers
-            if any(w in b1.text.lower() for w in ["you", "your", "?", "bizarre", "imagine", "ever", "vanish", "secret"]):
+            if any(w in b1.text.lower() for w in ["you", "your", "?", "bizarre", "imagine", "ever", "vanish", "secret", "waste", "every"]):
                 det_score = min(10.0, det_score + 0.3)
                 
         pacing_warnings = []
         if total_words < 90:
             pacing_warnings.append(f"Script total word count is very short ({total_words} words). Target: 110-135 words.")
-        elif total_words > 155:
-            pacing_warnings.append(f"Script total word count is high ({total_words} words). May exceed 55s at standard pacing.")
+        elif total_words > 165:
+            pacing_warnings.append(f"Script total word count is high ({total_words} words). May exceed 60s at standard pacing.")
 
         llm_eval = None
         final_score = det_score
@@ -303,13 +334,16 @@ class ScriptCritic:
         passed = (
             final_score >= self.min_score and
             overall_grade_level <= (self.target_grade_level + 1.5) and
-            len(all_crit_jargon) == 0
+            len(all_crit_jargon) == 0 and
+            len(all_slop_cliches) == 0
         )
         
         if passed:
-            verdict = "✅ APPROVED: The script is conversational, intuitive, grounded in everyday examples, and easy to follow."
+            verdict = "✅ APPROVED: The script is conversational, intuitive, grounded in everyday examples, and free of AI slop."
         else:
             reasons = []
+            if len(all_slop_cliches) > 0:
+                reasons.append(f"contains {len(all_slop_cliches)} AI slop cliché(s): {', '.join(all_slop_cliches)}")
             if len(all_crit_jargon) > 0:
                 reasons.append(f"contains {len(all_crit_jargon)} heavy jargon term(s): {', '.join(all_crit_jargon)}")
             if overall_grade_level > self.target_grade_level + 1.0:
@@ -333,7 +367,9 @@ class ScriptCritic:
             analogy_list=sorted(list(all_analogies)),
             pacing_warnings=pacing_warnings,
             llm_evaluation=llm_eval,
-            summary_verdict=verdict
+            summary_verdict=verdict,
+            total_slop_cliches=len(all_slop_cliches),
+            slop_list=sorted(list(all_slop_cliches))
         )
 
     def _call_gemini_critic(
@@ -407,10 +443,13 @@ def format_report_markdown(report: ScriptCriticReport) -> str:
         f"| **Flesch-Kincaid Grade Level** | **Grade {report.grade_level}** | $\\le 8.5$ (Middle School) | {'🟢 PASS' if report.grade_level <= 8.5 else '🟡 WARNING' if report.grade_level <= 10.5 else '🔴 FAIL (Too Academic)'} |",
         f"| **Flesch Reading Ease** | **{report.reading_ease} / 100** | $\\ge 60.0$ (Conversational) | {'🟢 PASS' if report.reading_ease >= 60.0 else '🔴 FAIL'} |",
         f"| **Heavy / Academic Jargon** | **{report.total_critical_jargon} terms** | $0$ terms | {'🟢 ZERO JARGON' if report.total_critical_jargon == 0 else '🔴 JARGON DETECTED'} |",
+        f"| **AI Slop Clichés** | **{report.total_slop_cliches} clichés** | $0$ clichés | {'🟢 ZERO SLOP' if report.total_slop_cliches == 0 else '🔴 AI SLOP DETECTED'} |",
         f"| **Everyday Analogies Found** | **{report.total_analogies} anchors** | $\\ge 3$ physical anchors | {'🟢 RICH ANALOGIES' if report.total_analogies >= 3 else '🟡 NEEDS MORE ANALOGIES'} |",
         f"| **Total Word Count** | **{report.total_words} words** | 110 – 140 words | {'🟢 OPTIMAL' if 100 <= report.total_words <= 145 else '🟡 PACING ALERT'} |",
     ]
     
+    if report.slop_list:
+        lines.append(f"\n🚫 **Detected AI Slop Clichés:** `{', '.join(report.slop_list)}`")
     if report.jargon_list:
         lines.append(f"\n⚠️ **Detected Jargon Terms:** `{', '.join(report.jargon_list)}`")
     if report.analogy_list:

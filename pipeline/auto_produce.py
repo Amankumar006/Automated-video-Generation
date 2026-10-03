@@ -19,7 +19,7 @@ from typing import Optional, Dict, Any, List
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from pipeline.config import OUTPUT_DIR, FFMPEG_BIN
+from pipeline.config import OUTPUT_DIR, FFMPEG_BIN, DEFAULT_VOICE
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
 from pipeline.script_generator import generate_script
 from pipeline.audio_synthesizer import synthesize_audio_for_spec
@@ -29,7 +29,7 @@ def auto_produce(
     topic: str = None,
     arxiv: str = None,
     category: str = None,
-    voice: str = "am_adam",
+    voice: str = DEFAULT_VOICE,
     speed: float = None,
     quality: str = "-qm",
     skip_script: bool = False,
@@ -398,7 +398,7 @@ def main():
     parser.add_argument("--arxiv", help="arXiv paper ID or URL (e.g. '2407.08608')")
     parser.add_argument("--template", help="Path to existing spec JSON template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
-    parser.add_argument("--voice", default="am_adam", help="Kokoro voice (default: am_adam)")
+    parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Kokoro voice (default: {DEFAULT_VOICE})")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
