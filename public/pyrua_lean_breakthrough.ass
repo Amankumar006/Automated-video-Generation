@@ -1,0 +1,41 @@
+[Script Info]
+Title: Fewer Tokens, Better Action Kinetic Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1440
+PlayResY: 2560
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticPill, Montserrat, 58, &H00FFFFFF, &H0047E0FD, &H00140C08, &HCC080C14, 1, 0, 0, 0, 100, 100, 0, 0, 3, 14, 0, 2, 80, 80, 560, 1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.01,0:00:01.66,KineticPill,,0,0,0,,Every time your {\c&H47E0FD&}VLM{\c&HFFFFFF&} agent
+Dialogue: 0,0:00:01.66,0:00:03.10,KineticPill,,0,0,0,,{\c&HF8BD38&}controls{\c&HFFFFFF&} a robot, it wastes
+Dialogue: 0,0:00:03.10,0:00:04.63,KineticPill,,0,0,0,,{\c&H47E0FD&}massive{\c&HFFFFFF&} compute by asking for
+Dialogue: 0,0:00:04.63,0:00:07.36,KineticPill,,0,0,0,,a {\c&HF8BD38&}status{\c&HFFFFFF&} update before every single micro-movement.
+Dialogue: 0,0:00:07.82,0:00:09.26,KineticPill,,0,0,0,,It is like a {\c&HF8BD38&}micromanager{\c&HFFFFFF&}
+Dialogue: 0,0:00:09.26,0:00:10.64,KineticPill,,0,0,0,,who {\c&H47E0FD&}demands{\c&HFFFFFF&} a full report
+Dialogue: 0,0:00:10.64,0:00:11.65,KineticPill,,0,0,0,,{\c&HF8BD38&}every{\c&HFFFFFF&} time you move a
+Dialogue: 0,0:00:11.65,0:00:13.48,KineticPill,,0,0,0,,single pixel, {\c&H47E0FD&}ignoring{\c&HFFFFFF&} the actual
+Dialogue: 0,0:00:13.48,0:00:14.03,KineticPill,,0,0,0,,{\c&HF8BD38&}goal{\c&HFFFFFF&} at hand.
+Dialogue: 0,0:00:14.56,0:00:16.29,KineticPill,,0,0,0,,{\c&H47E0FD&}PyRUA-Lean{\c&HFFFFFF&} fixes this by
+Dialogue: 0,0:00:16.29,0:00:18.40,KineticPill,,0,0,0,,shifting to {\c&HF8BD38&}interactive{\c&HFFFFFF&} code execution,
+Dialogue: 0,0:00:18.40,0:00:19.78,KineticPill,,0,0,0,,where the agent {\c&H47E0FD&}writes{\c&HFFFFFF&} Python
+Dialogue: 0,0:00:19.78,0:00:21.44,KineticPill,,0,0,0,,cells that handle local {\c&HF8BD38&}retries{\c&HFFFFFF&}
+Dialogue: 0,0:00:21.44,0:00:22.72,KineticPill,,0,0,0,,and {\c&H47E0FD&}conditional{\c&HFFFFFF&} logic.
+Dialogue: 0,0:00:23.23,0:00:24.83,KineticPill,,0,0,0,,Instead of {\c&HF8BD38&}constant{\c&HFFFFFF&} polling, the
+Dialogue: 0,0:00:24.83,0:00:26.86,KineticPill,,0,0,0,,model only {\c&H47E0FD&}requests{\c&HFFFFFF&} vision feedback
+Dialogue: 0,0:00:26.86,0:00:28.20,KineticPill,,0,0,0,,when the state is {\c&HF8BD38&}uncertain{\c&HFFFFFF&},
+Dialogue: 0,0:00:28.20,0:00:30.55,KineticPill,,0,0,0,,{\c&H47E0FD&}drastically{\c&HFFFFFF&} reducing the token count per task.
+Dialogue: 0,0:00:31.01,0:00:33.04,KineticPill,,0,0,0,,The results are staggering: {\c&H47E0FD&}8.6%{\c&HFFFFFF&}
+Dialogue: 0,0:00:33.04,0:00:34.73,KineticPill,,0,0,0,,higher success rates while {\c&HF8BD38&}slashing{\c&HFFFFFF&}
+Dialogue: 0,0:00:34.73,0:00:36.62,KineticPill,,0,0,0,,input tokens by {\c&H47E0FD&}65%{\c&HFFFFFF&}
+Dialogue: 0,0:00:36.62,0:00:39.01,KineticPill,,0,0,0,,compared to standard {\c&HF8BD38&}tool-calling{\c&HFFFFFF&} baselines.
+Dialogue: 0,0:00:39.41,0:00:40.67,KineticPill,,0,0,0,,{\c&HF8BD38&}Follow{\c&HFFFFFF&} The Model Verse for
+Dialogue: 0,0:00:40.67,0:00:42.34,KineticPill,,0,0,0,,more deep-dives into the {\c&HF8BD38&}architectures{\c&HFFFFFF&}
+Dialogue: 0,0:00:42.34,0:00:44.34,KineticPill,,0,0,0,,that make {\c&HF8BD38&}autonomous{\c&HFFFFFF&} agents actually
+Dialogue: 0,0:00:44.34,0:00:45.68,KineticPill,,0,0,0,,{\c&HF8BD38&}viable{\c&HFFFFFF&} in the real world.

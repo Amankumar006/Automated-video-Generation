@@ -1,0 +1,103 @@
+1
+00:00:00,010 --> 00:00:01,665
+Every time your VLM agent
+
+2
+00:00:01,665 --> 00:00:03,105
+controls a robot, it wastes
+
+3
+00:00:03,105 --> 00:00:04,633
+massive compute by asking for
+
+4
+00:00:04,633 --> 00:00:07,355
+a status update before every single micro-movement.
+
+5
+00:00:07,824 --> 00:00:09,264
+It is like a micromanager
+
+6
+00:00:09,264 --> 00:00:10,644
+who demands a full report
+
+7
+00:00:10,644 --> 00:00:11,654
+every time you move a
+
+8
+00:00:11,654 --> 00:00:13,479
+single pixel, ignoring the actual
+
+9
+00:00:13,479 --> 00:00:14,029
+goal at hand.
+
+10
+00:00:14,556 --> 00:00:16,291
+PyRUA-Lean fixes this by
+
+11
+00:00:16,291 --> 00:00:18,398
+shifting to interactive code execution,
+
+12
+00:00:18,398 --> 00:00:19,781
+where the agent writes Python
+
+13
+00:00:19,781 --> 00:00:21,436
+cells that handle local retries
+
+14
+00:00:21,436 --> 00:00:22,721
+and conditional logic.
+
+15
+00:00:23,225 --> 00:00:24,828
+Instead of constant polling, the
+
+16
+00:00:24,828 --> 00:00:26,860
+model only requests vision feedback
+
+17
+00:00:26,860 --> 00:00:28,205
+when the state is uncertain,
+
+18
+00:00:28,205 --> 00:00:30,555
+drastically reducing the token count per task.
+
+19
+00:00:31,013 --> 00:00:33,038
+The results are staggering: 8.6%
+
+20
+00:00:33,038 --> 00:00:34,728
+higher success rates while slashing
+
+21
+00:00:34,728 --> 00:00:36,618
+input tokens by 65%
+
+22
+00:00:36,618 --> 00:00:39,008
+compared to standard tool-calling baselines.
+
+23
+00:00:39,409 --> 00:00:40,673
+Follow The Model Verse for
+
+24
+00:00:40,673 --> 00:00:42,339
+more deep-dives into the architectures
+
+25
+00:00:42,339 --> 00:00:44,344
+that make autonomous agents actually
+
+26
+00:00:44,344 --> 00:00:45,679
+viable in the real world.

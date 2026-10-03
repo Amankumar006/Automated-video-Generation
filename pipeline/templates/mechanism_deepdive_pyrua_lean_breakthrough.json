@@ -1,0 +1,1868 @@
+{
+  "id": "pyrua_lean_breakthrough",
+  "title": "Fewer Tokens, Better Action",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Every time your VLM agent controls a robot, it wastes massive compute by asking for a status update before every single micro-movement.",
+      "visual_focus": "A robotic arm stuttering as a text stream of redundant 'status?' tokens floods the screen.",
+      "highlight_words": {
+        "wastes massive compute": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "VLM agent",
+        "action_verb": "floods",
+        "direct_object": "compute pipeline",
+        "anchor_word": "wastes",
+        "semantic_role": "inefficiency_trigger"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code",
+        "title": "THE BOTTLENECK",
+        "sub": "Redundant token overhead in VLA policies",
+        "accent_color": "#EF4444",
+        "params": {
+          "animation": "shake"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "chalkboard_code",
+        "title": "THE BOTTLENECK",
+        "sub": "Redundant token overhead in VLA policies",
+        "accent_color": "#EF4444",
+        "animation": "shake"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.51,
+      "slot_duration": 7.81,
+      "start": 0.0,
+      "end": 7.51,
+      "word_timings": [
+        {
+          "word": "Every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 0.01,
+          "end": 0.26,
+          "duration": 0.25,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 0.26,
+          "end": 0.49,
+          "duration": 0.23,
+          "frame_ahead_trigger": 0.22
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.49,
+          "end": 0.735,
+          "duration": 0.245,
+          "frame_ahead_trigger": 0.45
+        },
+        {
+          "word": "VLM",
+          "clean_word": "vlm",
+          "phonemes": "v\u02cci\u02d0\u02cc\u025bl\u02c8\u025bm",
+          "start": 0.735,
+          "end": 1.275,
+          "duration": 0.54,
+          "frame_ahead_trigger": 0.695
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 1.275,
+          "end": 1.665,
+          "duration": 0.39,
+          "frame_ahead_trigger": 1.235
+        },
+        {
+          "word": "controls",
+          "clean_word": "controls",
+          "phonemes": "k\u0259nt\u0279\u02c8o\u028alz",
+          "start": 1.665,
+          "end": 2.16,
+          "duration": 0.495,
+          "frame_ahead_trigger": 1.625
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 2.16,
+          "end": 2.375,
+          "duration": 0.215,
+          "frame_ahead_trigger": 2.12
+        },
+        {
+          "word": "robot,",
+          "clean_word": "robot",
+          "phonemes": "\u0279\u02c8o\u028ab\u0251\u02d0t",
+          "start": 2.375,
+          "end": 2.681,
+          "duration": 0.306,
+          "frame_ahead_trigger": 2.335
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 2.681,
+          "end": 2.784,
+          "duration": 0.103,
+          "frame_ahead_trigger": 2.641
+        },
+        {
+          "word": "wastes",
+          "clean_word": "wastes",
+          "phonemes": "w\u02c8e\u026asts",
+          "start": 2.784,
+          "end": 3.105,
+          "duration": 0.321,
+          "frame_ahead_trigger": 2.744
+        },
+        {
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 3.105,
+          "end": 3.44,
+          "duration": 0.335,
+          "frame_ahead_trigger": 3.065
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 3.44,
+          "end": 3.88,
+          "duration": 0.44,
+          "frame_ahead_trigger": 3.4
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 3.88,
+          "end": 4.11,
+          "duration": 0.23,
+          "frame_ahead_trigger": 3.84
+        },
+        {
+          "word": "asking",
+          "clean_word": "asking",
+          "phonemes": "\u02c8\u00e6sk\u026a\u014b",
+          "start": 4.11,
+          "end": 4.51,
+          "duration": 0.4,
+          "frame_ahead_trigger": 4.07
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 4.51,
+          "end": 4.633,
+          "duration": 0.123,
+          "frame_ahead_trigger": 4.47
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 4.633,
+          "end": 4.765,
+          "duration": 0.132,
+          "frame_ahead_trigger": 4.593
+        },
+        {
+          "word": "status",
+          "clean_word": "status",
+          "phonemes": "st\u02c8\u00e6\u027e\u0259s",
+          "start": 4.765,
+          "end": 5.145,
+          "duration": 0.38,
+          "frame_ahead_trigger": 4.725
+        },
+        {
+          "word": "update",
+          "clean_word": "update",
+          "phonemes": "\u02c8\u028cpde\u026at",
+          "start": 5.145,
+          "end": 5.49,
+          "duration": 0.345,
+          "frame_ahead_trigger": 5.105
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 5.49,
+          "end": 5.875,
+          "duration": 0.385,
+          "frame_ahead_trigger": 5.45
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 5.875,
+          "end": 6.135,
+          "duration": 0.26,
+          "frame_ahead_trigger": 5.835
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 6.135,
+          "end": 6.5,
+          "duration": 0.365,
+          "frame_ahead_trigger": 6.095
+        },
+        {
+          "word": "micro-movement.",
+          "clean_word": "micromovement",
+          "phonemes": "m\u02c8a\u026ak\u0279o\u028am\u02ccu\u02d0vm\u0259nt",
+          "start": 6.5,
+          "end": 7.355,
+          "duration": 0.855,
+          "frame_ahead_trigger": 6.46
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like a micromanager who demands a full report every time you move a single pixel, ignoring the actual goal at hand.",
+      "visual_focus": "A split screen: one side shows a smooth motion path, the other shows a jagged path interrupted by constant 'report' requests.",
+      "highlight_words": {
+        "micromanager": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "micromanager",
+        "action_verb": "interrupts",
+        "direct_object": "execution flow",
+        "anchor_word": "micromanager",
+        "semantic_role": "analogy_definition"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE ANALOGY",
+        "sub": "Chatty agents vs. autonomous primitives",
+        "accent_color": "#F59E0B",
+        "params": {
+          "comparison": "latency"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE ANALOGY",
+        "sub": "Chatty agents vs. autonomous primitives",
+        "accent_color": "#F59E0B",
+        "comparison": "latency"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.42,
+      "slot_duration": 6.72,
+      "start": 7.81,
+      "end": 14.23,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 7.824,
+          "end": 7.904,
+          "duration": 0.08,
+          "frame_ahead_trigger": 7.784
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 7.904,
+          "end": 8.029,
+          "duration": 0.125,
+          "frame_ahead_trigger": 7.864
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 8.029,
+          "end": 8.164,
+          "duration": 0.135,
+          "frame_ahead_trigger": 7.989
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.164,
+          "end": 8.434,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.124
+        },
+        {
+          "word": "micromanager",
+          "clean_word": "micromanager",
+          "phonemes": "m\u02cca\u026ak\u0279o\u028am\u02c8\u00e6n\u026ad\u0292\u025a",
+          "start": 8.434,
+          "end": 9.264,
+          "duration": 0.83,
+          "frame_ahead_trigger": 8.394
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 9.264,
+          "end": 9.349,
+          "duration": 0.085,
+          "frame_ahead_trigger": 9.224
+        },
+        {
+          "word": "demands",
+          "clean_word": "demands",
+          "phonemes": "d\u1d7bm\u02c8\u00e6ndz",
+          "start": 9.349,
+          "end": 9.884,
+          "duration": 0.535,
+          "frame_ahead_trigger": 9.309
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.884,
+          "end": 10.039,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.844
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 10.039,
+          "end": 10.215,
+          "duration": 0.175,
+          "frame_ahead_trigger": 9.999
+        },
+        {
+          "word": "report",
+          "clean_word": "report",
+          "phonemes": "\u0279\u1d7bp\u02c8\u0254\u02d0\u0279t",
+          "start": 10.215,
+          "end": 10.644,
+          "duration": 0.43,
+          "frame_ahead_trigger": 10.175
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 10.644,
+          "end": 10.789,
+          "duration": 0.145,
+          "frame_ahead_trigger": 10.604
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 10.789,
+          "end": 11.069,
+          "duration": 0.28,
+          "frame_ahead_trigger": 10.749
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 11.069,
+          "end": 11.234,
+          "duration": 0.165,
+          "frame_ahead_trigger": 11.029
+        },
+        {
+          "word": "move",
+          "clean_word": "move",
+          "phonemes": "m\u02c8u\u02d0v",
+          "start": 11.234,
+          "end": 11.519,
+          "duration": 0.285,
+          "frame_ahead_trigger": 11.194
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.519,
+          "end": 11.654,
+          "duration": 0.135,
+          "frame_ahead_trigger": 11.479
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 11.654,
+          "end": 12.046,
+          "duration": 0.391,
+          "frame_ahead_trigger": 11.614
+        },
+        {
+          "word": "pixel,",
+          "clean_word": "pixel",
+          "phonemes": "p\u02c8\u026aks\u0259l",
+          "start": 12.046,
+          "end": 12.444,
+          "duration": 0.399,
+          "frame_ahead_trigger": 12.006
+        },
+        {
+          "word": "ignoring",
+          "clean_word": "ignoring",
+          "phonemes": "\u026a\u0261n\u02c8\u0254\u02d0\u0279\u026a\u014b",
+          "start": 12.444,
+          "end": 12.754,
+          "duration": 0.31,
+          "frame_ahead_trigger": 12.404
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.754,
+          "end": 13.054,
+          "duration": 0.3,
+          "frame_ahead_trigger": 12.714
+        },
+        {
+          "word": "actual",
+          "clean_word": "actual",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259l",
+          "start": 13.054,
+          "end": 13.479,
+          "duration": 0.425,
+          "frame_ahead_trigger": 13.014
+        },
+        {
+          "word": "goal",
+          "clean_word": "goal",
+          "phonemes": "\u0261\u02c8o\u028al",
+          "start": 13.479,
+          "end": 13.764,
+          "duration": 0.285,
+          "frame_ahead_trigger": 13.439
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 13.764,
+          "end": 13.775,
+          "duration": 0.011,
+          "frame_ahead_trigger": 13.724
+        },
+        {
+          "word": "hand.",
+          "clean_word": "hand",
+          "phonemes": "h\u02c8\u00e6nd",
+          "start": 13.775,
+          "end": 14.029,
+          "duration": 0.254,
+          "frame_ahead_trigger": 13.735
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "PyRUA-Lean fixes this by shifting to interactive code execution, where the agent writes Python cells that handle local retries and conditional logic.",
+      "visual_focus": "A code block transforming from a list of prompts into a single, clean Python function with an 'if' statement.",
+      "highlight_words": {
+        "interactive code execution": "#10B981"
+      },
+      "svo_action": {
+        "subject": "PyRUA-Lean",
+        "action_verb": "encapsulates",
+        "direct_object": "robot primitives",
+        "anchor_word": "interactive",
+        "semantic_role": "solution_introduction"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "FEWER TOKENS, BETT ARCHITECTURE",
+        "sub": "A code block transforming from a list of prompts into a single, c",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/chalkboard_figures/fig_1_method_red.svg",
+          "image_path": null,
+          "arxiv_id": "2610.01939",
+          "title": "FEWER TOKENS, BETT ARCHITECTURE",
+          "sub": "A code block transforming from a list of prompts into a single, c",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/chalkboard_figures/fig_1_method_red.svg",
+        "image_path": null,
+        "arxiv_id": "2610.01939",
+        "title": "FEWER TOKENS, BETT ARCHITECTURE",
+        "sub": "A code block transforming from a list of prompts into a single, c",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 8.38,
+      "slot_duration": 8.68,
+      "start": 14.53,
+      "end": 22.91,
+      "word_timings": [
+        {
+          "word": "PyRUA-Lean",
+          "clean_word": "pyrualean",
+          "phonemes": "p\u02c8a\u026a rj\u02c8u\u02d0\u00e6 l\u02c8i\u02d0n",
+          "start": 14.556,
+          "end": 15.491,
+          "duration": 0.935,
+          "frame_ahead_trigger": 14.516
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 15.491,
+          "end": 15.871,
+          "duration": 0.38,
+          "frame_ahead_trigger": 15.451
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 15.871,
+          "end": 16.086,
+          "duration": 0.215,
+          "frame_ahead_trigger": 15.831
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 16.086,
+          "end": 16.291,
+          "duration": 0.205,
+          "frame_ahead_trigger": 16.046
+        },
+        {
+          "word": "shifting",
+          "clean_word": "shifting",
+          "phonemes": "\u0283\u02c8\u026aft\u026a\u014b",
+          "start": 16.291,
+          "end": 16.671,
+          "duration": 0.38,
+          "frame_ahead_trigger": 16.251
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 16.671,
+          "end": 16.761,
+          "duration": 0.09,
+          "frame_ahead_trigger": 16.631
+        },
+        {
+          "word": "interactive",
+          "clean_word": "interactive",
+          "phonemes": "\u02cc\u026ant\u025a\u0279\u02c8\u00e6kt\u026av",
+          "start": 16.761,
+          "end": 17.526,
+          "duration": 0.765,
+          "frame_ahead_trigger": 16.721
+        },
+        {
+          "word": "code",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 17.526,
+          "end": 17.706,
+          "duration": 0.18,
+          "frame_ahead_trigger": 17.486
+        },
+        {
+          "word": "execution,",
+          "clean_word": "execution",
+          "phonemes": "\u02cc\u025bks\u026akj\u02c8u\u02d0\u0283\u0259n",
+          "start": 17.706,
+          "end": 18.398,
+          "duration": 0.692,
+          "frame_ahead_trigger": 17.666
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 18.398,
+          "end": 18.611,
+          "duration": 0.213,
+          "frame_ahead_trigger": 18.358
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.611,
+          "end": 18.751,
+          "duration": 0.14,
+          "frame_ahead_trigger": 18.571
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 18.751,
+          "end": 19.196,
+          "duration": 0.445,
+          "frame_ahead_trigger": 18.711
+        },
+        {
+          "word": "writes",
+          "clean_word": "writes",
+          "phonemes": "\u0279\u02c8a\u026ats",
+          "start": 19.196,
+          "end": 19.426,
+          "duration": 0.23,
+          "frame_ahead_trigger": 19.156
+        },
+        {
+          "word": "Python",
+          "clean_word": "python",
+          "phonemes": "p\u02c8a\u026a\u03b8\u0259n",
+          "start": 19.426,
+          "end": 19.781,
+          "duration": 0.355,
+          "frame_ahead_trigger": 19.386
+        },
+        {
+          "word": "cells",
+          "clean_word": "cells",
+          "phonemes": "s\u02c8\u025blz",
+          "start": 19.781,
+          "end": 20.016,
+          "duration": 0.235,
+          "frame_ahead_trigger": 19.741
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 20.016,
+          "end": 20.351,
+          "duration": 0.335,
+          "frame_ahead_trigger": 19.976
+        },
+        {
+          "word": "handle",
+          "clean_word": "handle",
+          "phonemes": "h\u02c8\u00e6nd\u0259l",
+          "start": 20.351,
+          "end": 20.716,
+          "duration": 0.365,
+          "frame_ahead_trigger": 20.311
+        },
+        {
+          "word": "local",
+          "clean_word": "local",
+          "phonemes": "l\u02c8o\u028ak\u0259l",
+          "start": 20.716,
+          "end": 21.066,
+          "duration": 0.35,
+          "frame_ahead_trigger": 20.676
+        },
+        {
+          "word": "retries",
+          "clean_word": "retries",
+          "phonemes": "\u0279\u02c8i\u02d0t\u0279a\u026az",
+          "start": 21.066,
+          "end": 21.436,
+          "duration": 0.37,
+          "frame_ahead_trigger": 21.026
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 21.436,
+          "end": 21.726,
+          "duration": 0.29,
+          "frame_ahead_trigger": 21.396
+        },
+        {
+          "word": "conditional",
+          "clean_word": "conditional",
+          "phonemes": "k\u0259nd\u02c8\u026a\u0283\u0259n\u0259l",
+          "start": 21.726,
+          "end": 22.351,
+          "duration": 0.625,
+          "frame_ahead_trigger": 21.686
+        },
+        {
+          "word": "logic.",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 22.351,
+          "end": 22.721,
+          "duration": 0.37,
+          "frame_ahead_trigger": 22.311
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Instead of constant polling, the model only requests vision feedback when the state is uncertain, drastically reducing the token count per task.",
+      "visual_focus": "A logic gate diagram where the 'uncertainty' branch triggers a vision request, while the 'certain' branch executes primitives directly.",
+      "highlight_words": {
+        "uncertain": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "logic gate",
+        "action_verb": "filters",
+        "direct_object": "vision tokens",
+        "anchor_word": "uncertain",
+        "semantic_role": "mechanism_detail"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: FEWER TOKENS, BETT",
+        "sub": "A logic gate diagram where the 'uncertainty' branch triggers a vi",
+        "params": {
+          "title": "KERNEL CODE: FEWER TOKENS, BETT",
+          "sub": "A logic gate diagram where the 'uncertainty' branch triggers a vi",
+          "filename": "pyrua_engine.py",
+          "language": "python",
+          "lines": [
+            "def act(state):",
+            "    if state.is_uncertain():",
+            "        obs = get_vision_feedback()",
+            "        return model.predict(obs)",
+            "    return run_primitive('grasp')"
+          ],
+          "highlight_lines": [
+            2,
+            3,
+            5
+          ],
+          "trace_register": "\u26a1 SELECTIVE FEEDBACK TRIGGER",
+          "delta_badge": "Executes primitives locally, triggers model only whe"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: FEWER TOKENS, BETT",
+        "sub": "A logic gate diagram where the 'uncertainty' branch triggers a vi",
+        "filename": "pyrua_engine.py",
+        "language": "python",
+        "lines": [
+          "def act(state):",
+          "    if state.is_uncertain():",
+          "        obs = get_vision_feedback()",
+          "        return model.predict(obs)",
+          "    return run_primitive('grasp')"
+        ],
+        "highlight_lines": [
+          2,
+          3,
+          5
+        ],
+        "trace_register": "\u26a1 SELECTIVE FEEDBACK TRIGGER",
+        "delta_badge": "Executes primitives locally, triggers model only whe"
+      },
+      "audio_duration": 7.49,
+      "slot_duration": 7.79,
+      "start": 23.21,
+      "end": 30.7,
+      "word_timings": [
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 23.225,
+          "end": 23.58,
+          "duration": 0.355,
+          "frame_ahead_trigger": 23.185
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 23.58,
+          "end": 23.74,
+          "duration": 0.16,
+          "frame_ahead_trigger": 23.54
+        },
+        {
+          "word": "constant",
+          "clean_word": "constant",
+          "phonemes": "k\u02c8\u0251\u02d0nst\u0259nt",
+          "start": 23.74,
+          "end": 24.313,
+          "duration": 0.573,
+          "frame_ahead_trigger": 23.7
+        },
+        {
+          "word": "polling,",
+          "clean_word": "polling",
+          "phonemes": "p\u02c8o\u028al\u026a\u014b",
+          "start": 24.313,
+          "end": 24.8,
+          "duration": 0.487,
+          "frame_ahead_trigger": 24.273
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.8,
+          "end": 24.828,
+          "duration": 0.028,
+          "frame_ahead_trigger": 24.76
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 24.828,
+          "end": 25.205,
+          "duration": 0.377,
+          "frame_ahead_trigger": 24.788
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 25.205,
+          "end": 25.49,
+          "duration": 0.285,
+          "frame_ahead_trigger": 25.165
+        },
+        {
+          "word": "requests",
+          "clean_word": "requests",
+          "phonemes": "\u0279\u1d7bkw\u02c8\u025bsts",
+          "start": 25.49,
+          "end": 26.16,
+          "duration": 0.67,
+          "frame_ahead_trigger": 25.45
+        },
+        {
+          "word": "vision",
+          "clean_word": "vision",
+          "phonemes": "v\u02c8\u026a\u0292\u0259n",
+          "start": 26.16,
+          "end": 26.355,
+          "duration": 0.195,
+          "frame_ahead_trigger": 26.12
+        },
+        {
+          "word": "feedback",
+          "clean_word": "feedback",
+          "phonemes": "f\u02c8i\u02d0db\u00e6k",
+          "start": 26.355,
+          "end": 26.86,
+          "duration": 0.505,
+          "frame_ahead_trigger": 26.315
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 26.86,
+          "end": 27.05,
+          "duration": 0.19,
+          "frame_ahead_trigger": 26.82
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 27.05,
+          "end": 27.265,
+          "duration": 0.215,
+          "frame_ahead_trigger": 27.01
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 27.265,
+          "end": 27.49,
+          "duration": 0.225,
+          "frame_ahead_trigger": 27.225
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 27.49,
+          "end": 27.71,
+          "duration": 0.22,
+          "frame_ahead_trigger": 27.45
+        },
+        {
+          "word": "uncertain,",
+          "clean_word": "uncertain",
+          "phonemes": "\u028cns\u02c8\u025c\u02d0\u0294n",
+          "start": 27.71,
+          "end": 28.205,
+          "duration": 0.495,
+          "frame_ahead_trigger": 27.67
+        },
+        {
+          "word": "drastically",
+          "clean_word": "drastically",
+          "phonemes": "d\u0279\u02c8\u00e6st\u026akli",
+          "start": 28.205,
+          "end": 28.78,
+          "duration": 0.575,
+          "frame_ahead_trigger": 28.165
+        },
+        {
+          "word": "reducing",
+          "clean_word": "reducing",
+          "phonemes": "\u0279\u1d7bd\u02c8u\u02d0s\u026a\u014b",
+          "start": 28.78,
+          "end": 29.15,
+          "duration": 0.37,
+          "frame_ahead_trigger": 28.74
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.15,
+          "end": 29.365,
+          "duration": 0.215,
+          "frame_ahead_trigger": 29.11
+        },
+        {
+          "word": "token",
+          "clean_word": "token",
+          "phonemes": "t\u02c8o\u028ak\u0259n",
+          "start": 29.365,
+          "end": 29.795,
+          "duration": 0.43,
+          "frame_ahead_trigger": 29.325
+        },
+        {
+          "word": "count",
+          "clean_word": "count",
+          "phonemes": "k\u02c8a\u028ant",
+          "start": 29.795,
+          "end": 30.035,
+          "duration": 0.24,
+          "frame_ahead_trigger": 29.755
+        },
+        {
+          "word": "per",
+          "clean_word": "per",
+          "phonemes": "p\u025c\u02d0",
+          "start": 30.035,
+          "end": 30.2,
+          "duration": 0.165,
+          "frame_ahead_trigger": 29.995
+        },
+        {
+          "word": "task.",
+          "clean_word": "task",
+          "phonemes": "t\u02c8\u00e6sk",
+          "start": 30.2,
+          "end": 30.555,
+          "duration": 0.355,
+          "frame_ahead_trigger": 30.16
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The results are staggering: 8.6% higher success rates while slashing input tokens by 65% compared to standard tool-calling baselines.",
+      "visual_focus": "A bar chart showing PyRUA-Lean at 71.7% success vs 63.1% baseline, with a downward arrow indicating token reduction.",
+      "highlight_words": {
+        "65% fewer tokens": "#10B981"
+      },
+      "svo_action": {
+        "subject": "PyRUA-Lean",
+        "action_verb": "outperforms",
+        "direct_object": "baseline",
+        "anchor_word": "success",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: TASK SUCCESS",
+        "sub": "A bar chart showing PyRUA-Lean at 71.7% success vs",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: TASK SUCCESS",
+          "sub": "A bar chart showing PyRUA-Lean at 71.7% success vs",
+          "metric_name": "Success Rate",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "PyRUA-Lean",
+              "value": 71.7,
+              "display_val": "71.7%",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Tool-Calling Baseline",
+              "value": 63.1,
+              "display_val": "63.1%",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +8.6% ABSOLUTE GAIN"
+        }
+      },
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: TASK SUCCESS",
+        "sub": "A bar chart showing PyRUA-Lean at 71.7% success vs",
+        "metric_name": "Success Rate",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "PyRUA-Lean",
+            "value": 71.7,
+            "display_val": "71.7%",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Tool-Calling Baseline",
+            "value": 63.1,
+            "display_val": "63.1%",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +8.6% ABSOLUTE GAIN"
+      },
+      "audio_duration": 8.11,
+      "slot_duration": 8.41,
+      "start": 31.0,
+      "end": 39.11,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 31.013,
+          "end": 31.218,
+          "duration": 0.205,
+          "frame_ahead_trigger": 30.973
+        },
+        {
+          "word": "results",
+          "clean_word": "results",
+          "phonemes": "\u0279\u026az\u02c8\u028clts",
+          "start": 31.218,
+          "end": 31.643,
+          "duration": 0.425,
+          "frame_ahead_trigger": 31.178
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 31.643,
+          "end": 31.843,
+          "duration": 0.2,
+          "frame_ahead_trigger": 31.603
+        },
+        {
+          "word": "staggering:",
+          "clean_word": "staggering",
+          "phonemes": "st\u02c8\u00e6\u0261\u025a\u0279\u026a\u014b",
+          "start": 31.843,
+          "end": 32.288,
+          "duration": 0.445,
+          "frame_ahead_trigger": 31.803
+        },
+        {
+          "word": "8.6%",
+          "clean_word": "86",
+          "phonemes": "\u02c8e\u026a\u027ei s\u02c8\u026aks",
+          "start": 32.288,
+          "end": 33.038,
+          "duration": 0.75,
+          "frame_ahead_trigger": 32.248
+        },
+        {
+          "word": "higher",
+          "clean_word": "higher",
+          "phonemes": "h\u02c8a\u026a\u025a",
+          "start": 33.038,
+          "end": 33.323,
+          "duration": 0.285,
+          "frame_ahead_trigger": 32.998
+        },
+        {
+          "word": "success",
+          "clean_word": "success",
+          "phonemes": "s\u0259ks\u02c8\u025bs",
+          "start": 33.323,
+          "end": 33.613,
+          "duration": 0.29,
+          "frame_ahead_trigger": 33.283
+        },
+        {
+          "word": "rates",
+          "clean_word": "rates",
+          "phonemes": "\u0279\u02c8e\u026ats",
+          "start": 33.613,
+          "end": 33.988,
+          "duration": 0.375,
+          "frame_ahead_trigger": 33.573
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 33.988,
+          "end": 34.418,
+          "duration": 0.43,
+          "frame_ahead_trigger": 33.948
+        },
+        {
+          "word": "slashing",
+          "clean_word": "slashing",
+          "phonemes": "sl\u02c8\u00e6\u0283\u026a\u014b",
+          "start": 34.418,
+          "end": 34.728,
+          "duration": 0.31,
+          "frame_ahead_trigger": 34.378
+        },
+        {
+          "word": "input",
+          "clean_word": "input",
+          "phonemes": "\u02c8\u026anp\u028at",
+          "start": 34.728,
+          "end": 35.123,
+          "duration": 0.395,
+          "frame_ahead_trigger": 34.688
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 35.123,
+          "end": 35.608,
+          "duration": 0.485,
+          "frame_ahead_trigger": 35.083
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 35.608,
+          "end": 35.808,
+          "duration": 0.2,
+          "frame_ahead_trigger": 35.568
+        },
+        {
+          "word": "65%",
+          "clean_word": "65",
+          "phonemes": "s\u02c8\u026aksti f\u02c8a\u026av",
+          "start": 35.808,
+          "end": 36.618,
+          "duration": 0.81,
+          "frame_ahead_trigger": 35.768
+        },
+        {
+          "word": "compared",
+          "clean_word": "compared",
+          "phonemes": "k\u0259mp\u02c8\u025b\u0279d",
+          "start": 36.618,
+          "end": 37.113,
+          "duration": 0.495,
+          "frame_ahead_trigger": 36.578
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 37.113,
+          "end": 37.338,
+          "duration": 0.225,
+          "frame_ahead_trigger": 37.073
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 37.338,
+          "end": 37.713,
+          "duration": 0.375,
+          "frame_ahead_trigger": 37.298
+        },
+        {
+          "word": "tool-calling",
+          "clean_word": "toolcalling",
+          "phonemes": "t\u02c8u\u02d0lk\u0254\u02d0l\u026a\u014b",
+          "start": 37.713,
+          "end": 38.443,
+          "duration": 0.73,
+          "frame_ahead_trigger": 37.673
+        },
+        {
+          "word": "baselines.",
+          "clean_word": "baselines",
+          "phonemes": "b\u02c8e\u026asla\u026anz",
+          "start": 38.443,
+          "end": 39.008,
+          "duration": 0.565,
+          "frame_ahead_trigger": 38.403
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for more deep-dives into the architectures that make autonomous agents actually viable in the real world.",
+      "visual_focus": "The Model Verse logo appearing over a clean, high-tech robotics lab background.",
+      "highlight_words": {
+        "The Model Verse": "#10B981"
+      },
+      "svo_action": {
+        "subject": "viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "viable",
+        "semantic_role": "outro"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code",
+        "title": "STAY TUNED",
+        "sub": "Deep-dives into AI architecture",
+        "accent_color": "#10B981",
+        "params": {
+          "loop": true
+        }
+      },
+      "audio_duration": 6.46,
+      "slot_duration": 6.96,
+      "start": 39.41,
+      "end": 45.87,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 39.409,
+          "end": 39.734,
+          "duration": 0.325,
+          "frame_ahead_trigger": 39.369
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 39.734,
+          "end": 39.924,
+          "duration": 0.19,
+          "frame_ahead_trigger": 39.694
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 39.924,
+          "end": 40.164,
+          "duration": 0.24,
+          "frame_ahead_trigger": 39.884
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 40.164,
+          "end": 40.454,
+          "duration": 0.29,
+          "frame_ahead_trigger": 40.124
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 40.454,
+          "end": 40.673,
+          "duration": 0.219,
+          "frame_ahead_trigger": 40.414
+        },
+        {
+          "word": "more",
+          "clean_word": "more",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279",
+          "start": 40.673,
+          "end": 41.019,
+          "duration": 0.346,
+          "frame_ahead_trigger": 40.633
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 41.019,
+          "end": 41.374,
+          "duration": 0.355,
+          "frame_ahead_trigger": 40.979
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 41.374,
+          "end": 41.669,
+          "duration": 0.295,
+          "frame_ahead_trigger": 41.334
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 41.669,
+          "end": 41.735,
+          "duration": 0.066,
+          "frame_ahead_trigger": 41.629
+        },
+        {
+          "word": "architectures",
+          "clean_word": "architectures",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
+          "start": 41.735,
+          "end": 42.339,
+          "duration": 0.604,
+          "frame_ahead_trigger": 41.695
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 42.339,
+          "end": 42.724,
+          "duration": 0.385,
+          "frame_ahead_trigger": 42.299
+        },
+        {
+          "word": "make",
+          "clean_word": "make",
+          "phonemes": "m\u02c8e\u026ak",
+          "start": 42.724,
+          "end": 42.814,
+          "duration": 0.09,
+          "frame_ahead_trigger": 42.684
+        },
+        {
+          "word": "autonomous",
+          "clean_word": "autonomous",
+          "phonemes": "\u0254\u02d0t\u02c8\u0251\u02d0n\u0259m\u0259s",
+          "start": 42.814,
+          "end": 43.454,
+          "duration": 0.64,
+          "frame_ahead_trigger": 42.774
+        },
+        {
+          "word": "agents",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 43.454,
+          "end": 43.809,
+          "duration": 0.355,
+          "frame_ahead_trigger": 43.414
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 43.809,
+          "end": 44.344,
+          "duration": 0.535,
+          "frame_ahead_trigger": 43.769
+        },
+        {
+          "word": "viable",
+          "clean_word": "viable",
+          "phonemes": "v\u02c8a\u026a\u0259b\u0259l",
+          "start": 44.344,
+          "end": 44.844,
+          "duration": 0.5,
+          "frame_ahead_trigger": 44.304
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 44.844,
+          "end": 44.989,
+          "duration": 0.145,
+          "frame_ahead_trigger": 44.804
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 44.989,
+          "end": 45.073,
+          "duration": 0.083,
+          "frame_ahead_trigger": 44.949
+        },
+        {
+          "word": "real",
+          "clean_word": "real",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259l",
+          "start": 45.073,
+          "end": 45.479,
+          "duration": 0.407,
+          "frame_ahead_trigger": 45.033
+        },
+        {
+          "word": "world.",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 45.479,
+          "end": 45.679,
+          "duration": 0.2,
+          "frame_ahead_trigger": 45.439
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\mathrm{total}} = \\sum_{i=1}^{n} (v_i + p_i)$",
+      "filename": "pyrua_lean_breakthrough_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "v_i",
+          "label": "Visual tokens"
+        },
+        {
+          "term": "p_i",
+          "label": "Planning overhead"
+        }
+      ],
+      "svg_filename": "pyrua_lean_breakthrough_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N_{\\mathrm{steps}} \\times \\text{latency})$",
+      "filename": "pyrua_lean_breakthrough_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "N_{\\mathrm{steps}}",
+          "label": "Sequence count"
+        }
+      ],
+      "svg_filename": "pyrua_lean_breakthrough_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\pi_{\\mathrm{pyrua}} = \\text{Policy}(s_t) \\cup \\text{Code}(c_t)$",
+      "filename": "pyrua_lean_breakthrough_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "c_t",
+          "label": "Code primitive"
+        }
+      ],
+      "svg_filename": "pyrua_lean_breakthrough_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\Delta \\mathcal{T} = \\sum_{k \\in \\mathcal{S}} \\text{token}_k < \\tau$",
+      "filename": "pyrua_lean_breakthrough_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\tau",
+          "label": "Threshold trigger"
+        }
+      ],
+      "svg_filename": "pyrua_lean_breakthrough_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\text{Succ}_{\\mathrm{PyRUA}} = 71.7\\% > \\text{Succ}_{\\mathrm{Base}}$",
+      "filename": "pyrua_lean_breakthrough_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\text{Succ}",
+          "label": "Task success rate"
+        }
+      ],
+      "svg_filename": "pyrua_lean_breakthrough_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "PLANNING",
+          "color": "#38BDF8",
+          "items": [
+            "VLM",
+            "Inference",
+            "Tokens"
+          ]
+        },
+        {
+          "name": "EXECUTION",
+          "color": "#10B981",
+          "items": [
+            "Code",
+            "Primitives",
+            "Feedback"
+          ]
+        },
+        {
+          "name": "BOTTLENECK",
+          "color": "#F59E0B",
+          "items": [
+            "Latency",
+            "Overhead",
+            "Memory"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Observation\"",
+        "target_cluster": "PLANNING",
+        "token": "\"Observation\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'img_frame'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'state_vec'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "PyRUA-Lean Agent",
+    "model_a_specs": [
+      "Selective Observation",
+      "Primitive Injection",
+      "Python Controller"
+    ],
+    "model_b": "Tool-Calling Baseline",
+    "model_b_specs": [
+      "Constant Inference",
+      "High Token Usage",
+      "Reactive Planner"
+    ],
+    "divide_title": "INFERENCE VS EXECUTION DIVIDE",
+    "model_a_stat": "71.7%",
+    "model_a_stat_label": "AGENT SUCCESS",
+    "model_b_stat": "63.1%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 65% FEWER TOKENS",
+    "benchmarks": [
+      {
+        "name": "LIBERO-PRO",
+        "score_a": "71.7%",
+        "score_b": "63.1%"
+      },
+      {
+        "name": "RoboTwin",
+        "score_a": "High",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Token Efficiency",
+        "score_a": "49% Fewer Calls",
+        "score_b": "Standard"
+      }
+    ],
+    "scale_metric": "65%",
+    "scale_label": "TOKEN REDUCTION",
+    "bottleneck_title": "MONOLITHIC INFERENCE BOTTLENECK",
+    "bottleneck_desc": "Redundant visual feed processing",
+    "solution_title": "INTERACTIVE CODE EXECUTION FRAMEWORK",
+    "solution_components": "Policy + Primitive Composition",
+    "mechanism_title": "CONDITIONAL FEEDBACK LOOP",
+    "payoff_stat": "71.7%",
+    "payoff_label": "TASK SUCCESS",
+    "payoff_sub": "Outperforming traditional tool-calling agents",
+    "payoff_hero_stat": 71.7,
+    "payoff_hero_label": "PyRUA-Lean",
+    "payoff_base_stat": 63.1,
+    "payoff_base_label": "Baseline",
+    "payoff_delta_badge": "\u26a1 +14% SUCCESS RATE GAIN",
+    "challenger": "PyRUA-Lean",
+    "incumbent": "Tool-Calling Baseline"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: TASK SUCCESS",
+    "metric_name": "Success Rate",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "PyRUA-Lean",
+        "value": 71.7,
+        "display_val": "71.7%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Tool-Calling Baseline",
+        "value": 63.1,
+        "display_val": "63.1%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +8.6% ABSOLUTE GAIN",
+    "radar_axes": [
+      "Success Rate",
+      "Token Efficiency",
+      "Call Frequency",
+      "Latency",
+      "Robustness"
+    ]
+  },
+  "code_snippet": {
+    "filename": "pyrua_engine.py",
+    "language": "python",
+    "lines": [
+      "def act(state):",
+      "    if state.is_uncertain():",
+      "        obs = get_vision_feedback()",
+      "        return model.predict(obs)",
+      "    return run_primitive('grasp')"
+    ],
+    "highlight_lines": [
+      2,
+      3,
+      5
+    ],
+    "trace_register": "\u26a1 SELECTIVE FEEDBACK TRIGGER",
+    "explanation": "Executes primitives locally, triggers model only when uncertain"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.2,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually hit. I'm so tired of seeing 'AI agents' that just spam API calls until they hit a rate limit. The micromanager analogy in Beat 2 was solid\u2014it didn't feel like some weird 'safe drawer' metaphor, it actually described the inefficiency of the current polling loop. I understood exactly why PyRUA-Lean is better: it moves the logic to the edge (the robot) instead of waiting for the model to re-process the whole context window for every tiny movement."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "PyRUA-Lean Agent",
+        "model_a_score": "71.7%",
+        "model_b_name": "Tool-Calling Baseline",
+        "model_b_score": "63.1%",
+        "delta_label": "\u26a1 65% FEWER TOKENS"
+      }
+    }
+  ],
+  "arxiv_id": "2610.01939",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "method_red",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/source/figures/method_red.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/chalkboard_figures/fig_1_method_red.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "overview_wide",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/source/figures/overview_wide.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/chalkboard_figures/fig_2_overview_wide.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "case-libero-10swap-t2-s3",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/source/figures/case-libero-10swap-t2-s3.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.01939/chalkboard_figures/fig_3_case-libero-10swap-t2-s3.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 100
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "flowchart_stack": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.876
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 3.064,
+        "scale_multiplier": 1.15
+      },
+      "generic_flowchart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.884
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "corporate_leaderboard_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.814
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.728,
+        "scale_multiplier": 1.0
+      },
+      "leaderboard_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.818
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.7,
+        "scale_multiplier": 0.977
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.536,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.72
+      },
+      "process_flow": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.879
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.064,
+        "scale_multiplier": 1.0
+      },
+      "process_flow_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.884
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.9
+      },
+      "data_container_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.814
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.928,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {}
+  }
+}
