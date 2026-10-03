@@ -1,6 +1,6 @@
 # 📈 The Model Verse — YouTube Performance & Retention Intelligence
 
-**Generated:** 2026-10-03T06:47:15.478569+00:00  
+**Generated:** 2026-10-03T13:15:34.243971+00:00  
 **Videos Analyzed:** 32  
 **Top Domain:** `hardware_efficiency`  
 **Recommended Pacing:** `1.12x` TTS Speed | Hook $\le$ `7.2s`
@@ -12,13 +12,13 @@ The paper selector (`daily_shorts_daemon.py`) automatically scales candidate sel
 
 | Research Domain | Selection Multiplier | Avg Views | Sample Size |
 | :--- | :--- | :--- | :--- |
-| `robotics_tamp` | **0.6x** | 80.0 | 2 videos |
 | `hardware_efficiency` | **1.4x** | 218.2 | 17 videos |
-| `reasoning_models` | **0.6x** | 61.2 | 5 videos |
 | `multimodal_diffusion` | **0.7x** | 109.6 | 5 videos |
+| `reasoning_models` | **0.6x** | 61.2 | 5 videos |
+| `robotics_tamp` | **0.6x** | 80.0 | 2 videos |
 | `general_breakthroughs` | **0.75x** | 117.0 | 1 videos |
-| `mechanistic_interpretability` | **0.6x** | 67.0 | 1 videos |
 | `efficient_architectures` | **0.6x** | 79.0 | 1 videos |
+| `mechanistic_interpretability` | **0.6x** | 67.0 | 1 videos |
 
 ---
 
