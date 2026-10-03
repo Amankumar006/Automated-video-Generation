@@ -3,224 +3,1636 @@
   "title": "ScholarCatalyst: Benchmarking Scientific Intuition",
   "category": "benchmark_news",
   "domain_taxonomy": "quantitative_benchmark",
-  "hook_tag": "RESEARCH RETRIEVAL BENCHMARK",
+  "hook_tag": "SCIENTIFIC BENCHMARK NEWS",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Your RAG system is failing because it treats research like a keyword search, missing the invisible threads that actually connect breakthrough scientific ideas.",
-      "visual_focus": "A massive, chaotic cloud of floating paper icons being filtered by a simple, failing search bar.",
+      "text": "AI can write code, but it fails at scientific discovery. It treats research like a keyword search, missing the deep intuition that defines breakthrough science.",
+      "visual_focus": "A massive, chaotic library of papers collapsing into a single, glowing node.",
       "highlight_words": {
-        "invisible threads": "#EF4444"
+        "scientific discovery": "#10B981"
       },
       "svo_action": {
-        "subject": "RAG system",
-        "action_verb": "misses",
-        "direct_object": "contextual threads",
-        "anchor_word": "failing",
-        "semantic_role": "failure_mode"
+        "subject": "AI",
+        "action_verb": "treats",
+        "direct_object": "research",
+        "anchor_word": "discovery",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "grid_memory",
-        "title": "THE RAG LIMIT",
-        "sub": "Keyword retrieval vs. Semantic intuition",
-        "accent_color": "#EF4444",
+        "layout": "chalkboard_code",
+        "title": "THE INTUITION GAP",
+        "sub": "AI vs Human Research Synthesis",
+        "accent_color": "#10B981",
         "params": {}
-      }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "chalkboard_code",
+        "title": "THE INTUITION GAP",
+        "sub": "AI vs Human Research Synthesis",
+        "accent_color": "#10B981"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.26,
+      "slot_duration": 8.56,
+      "start": 0.0,
+      "end": 8.26,
+      "word_timings": [
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 0.02,
+          "end": 0.43,
+          "duration": 0.41,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "can",
+          "clean_word": "can",
+          "phonemes": "k\u02c8\u00e6n",
+          "start": 0.43,
+          "end": 0.555,
+          "duration": 0.125,
+          "frame_ahead_trigger": 0.39
+        },
+        {
+          "word": "write",
+          "clean_word": "write",
+          "phonemes": "\u0279\u02c8a\u026at",
+          "start": 0.555,
+          "end": 0.795,
+          "duration": 0.24,
+          "frame_ahead_trigger": 0.515
+        },
+        {
+          "word": "code,",
+          "clean_word": "code",
+          "phonemes": "k\u02c8o\u028ad",
+          "start": 0.795,
+          "end": 1.195,
+          "duration": 0.4,
+          "frame_ahead_trigger": 0.755
+        },
+        {
+          "word": "but",
+          "clean_word": "but",
+          "phonemes": "b\u02cc\u028ct",
+          "start": 1.195,
+          "end": 1.415,
+          "duration": 0.22,
+          "frame_ahead_trigger": 1.155
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 1.415,
+          "end": 1.471,
+          "duration": 0.056,
+          "frame_ahead_trigger": 1.375
+        },
+        {
+          "word": "fails",
+          "clean_word": "fails",
+          "phonemes": "f\u02c8e\u026alz",
+          "start": 1.471,
+          "end": 1.8,
+          "duration": 0.329,
+          "frame_ahead_trigger": 1.431
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 1.8,
+          "end": 1.945,
+          "duration": 0.145,
+          "frame_ahead_trigger": 1.76
+        },
+        {
+          "word": "scientific",
+          "clean_word": "scientific",
+          "phonemes": "sa\u026a\u0259nt\u02c8\u026af\u026ak",
+          "start": 1.945,
+          "end": 2.515,
+          "duration": 0.57,
+          "frame_ahead_trigger": 1.905
+        },
+        {
+          "word": "discovery.",
+          "clean_word": "discovery",
+          "phonemes": "d\u026ask\u02c8\u028cv\u025a\u0279i",
+          "start": 2.515,
+          "end": 3.09,
+          "duration": 0.575,
+          "frame_ahead_trigger": 2.475
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 3.09,
+          "end": 3.202,
+          "duration": 0.112,
+          "frame_ahead_trigger": 3.05
+        },
+        {
+          "word": "treats",
+          "clean_word": "treats",
+          "phonemes": "t\u0279\u02c8i\u02d0ts",
+          "start": 3.202,
+          "end": 3.56,
+          "duration": 0.358,
+          "frame_ahead_trigger": 3.162
+        },
+        {
+          "word": "research",
+          "clean_word": "research",
+          "phonemes": "\u0279\u1d7bs\u02c8\u025c\u02d0t\u0283",
+          "start": 3.56,
+          "end": 4.005,
+          "duration": 0.445,
+          "frame_ahead_trigger": 3.52
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 4.005,
+          "end": 4.38,
+          "duration": 0.375,
+          "frame_ahead_trigger": 3.965
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 4.38,
+          "end": 4.485,
+          "duration": 0.105,
+          "frame_ahead_trigger": 4.34
+        },
+        {
+          "word": "keyword",
+          "clean_word": "keyword",
+          "phonemes": "k\u02c8i\u02d0w\u025c\u02d0d",
+          "start": 4.485,
+          "end": 4.945,
+          "duration": 0.46,
+          "frame_ahead_trigger": 4.445
+        },
+        {
+          "word": "search,",
+          "clean_word": "search",
+          "phonemes": "s\u02c8\u025c\u02d0t\u0283",
+          "start": 4.945,
+          "end": 5.155,
+          "duration": 0.21,
+          "frame_ahead_trigger": 4.905
+        },
+        {
+          "word": "missing",
+          "clean_word": "missing",
+          "phonemes": "m\u02c8\u026as\u026a\u014b",
+          "start": 5.155,
+          "end": 5.675,
+          "duration": 0.52,
+          "frame_ahead_trigger": 5.115
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.675,
+          "end": 5.714,
+          "duration": 0.039,
+          "frame_ahead_trigger": 5.635
+        },
+        {
+          "word": "deep",
+          "clean_word": "deep",
+          "phonemes": "d\u02c8i\u02d0p",
+          "start": 5.714,
+          "end": 5.935,
+          "duration": 0.221,
+          "frame_ahead_trigger": 5.674
+        },
+        {
+          "word": "intuition",
+          "clean_word": "intuition",
+          "phonemes": "\u026antu\u02d0\u02c8\u026a\u0283\u0259n",
+          "start": 5.935,
+          "end": 6.56,
+          "duration": 0.625,
+          "frame_ahead_trigger": 5.895
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 6.56,
+          "end": 6.83,
+          "duration": 0.27,
+          "frame_ahead_trigger": 6.52
+        },
+        {
+          "word": "defines",
+          "clean_word": "defines",
+          "phonemes": "d\u1d7bf\u02c8a\u026anz",
+          "start": 6.83,
+          "end": 7.305,
+          "duration": 0.475,
+          "frame_ahead_trigger": 6.79
+        },
+        {
+          "word": "breakthrough",
+          "clean_word": "breakthrough",
+          "phonemes": "b\u0279\u02c8e\u026ak\u03b8\u0279u\u02d0",
+          "start": 7.305,
+          "end": 7.735,
+          "duration": 0.43,
+          "frame_ahead_trigger": 7.265
+        },
+        {
+          "word": "science.",
+          "clean_word": "science",
+          "phonemes": "s\u02c8a\u026a\u0259ns",
+          "start": 7.735,
+          "end": 8.17,
+          "duration": 0.435,
+          "frame_ahead_trigger": 7.695
+        }
+      ]
     },
     {
       "beat_id": 2,
-      "text": "Standard agents act like librarians who only know the Dewey Decimal system, while human scientists act like archivists who know which specific paper sparked an epiphany.",
-      "visual_focus": "Split screen: A rigid, linear library shelf on the left; a complex, interconnected neural web of citations on the right.",
+      "text": "Think of a standard agent as a librarian who only knows the Dewey Decimal system, while a scientist knows which hidden paper actually unlocks the problem.",
+      "visual_focus": "Split screen: A rigid index card system vs. a web of interconnected, glowing research nodes.",
       "highlight_words": {
-        "epiphany": "#F59E0B"
+        "hidden paper": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Agents",
-        "action_verb": "lack",
-        "direct_object": "scientific intuition",
-        "anchor_word": "librarians",
-        "semantic_role": "analogy_contrast"
+        "subject": "Scientist",
+        "action_verb": "unlocks",
+        "direct_object": "problem",
+        "anchor_word": "hidden",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
-        "title": "INTUITION GAP",
-        "sub": "Agentic search vs. Expert insight",
-        "accent_color": "#F59E0B",
+        "title": "LIBRARIAN VS RESEARCHER",
+        "sub": "Search Logic Comparison",
+        "accent_color": "#38BDF8",
         "params": {}
-      }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "LIBRARIAN VS RESEARCHER",
+        "sub": "Search Logic Comparison",
+        "accent_color": "#38BDF8"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.87,
+      "slot_duration": 8.17,
+      "start": 8.56,
+      "end": 16.43,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 8.566,
+          "end": 8.751,
+          "duration": 0.185,
+          "frame_ahead_trigger": 8.526
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 8.751,
+          "end": 8.956,
+          "duration": 0.205,
+          "frame_ahead_trigger": 8.711
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.956,
+          "end": 9.121,
+          "duration": 0.165,
+          "frame_ahead_trigger": 8.916
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 9.121,
+          "end": 9.511,
+          "duration": 0.39,
+          "frame_ahead_trigger": 9.081
+        },
+        {
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 9.511,
+          "end": 9.896,
+          "duration": 0.385,
+          "frame_ahead_trigger": 9.471
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 9.896,
+          "end": 9.991,
+          "duration": 0.095,
+          "frame_ahead_trigger": 9.856
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.991,
+          "end": 10.111,
+          "duration": 0.12,
+          "frame_ahead_trigger": 9.951
+        },
+        {
+          "word": "librarian",
+          "clean_word": "librarian",
+          "phonemes": "la\u026ab\u0279\u02c8\u025b\u0279i\u0259n",
+          "start": 10.111,
+          "end": 10.721,
+          "duration": 0.61,
+          "frame_ahead_trigger": 10.071
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 10.721,
+          "end": 10.881,
+          "duration": 0.16,
+          "frame_ahead_trigger": 10.681
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 10.881,
+          "end": 11.326,
+          "duration": 0.445,
+          "frame_ahead_trigger": 10.841
+        },
+        {
+          "word": "knows",
+          "clean_word": "knows",
+          "phonemes": "n\u02c8o\u028az",
+          "start": 11.326,
+          "end": 11.481,
+          "duration": 0.155,
+          "frame_ahead_trigger": 11.286
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.481,
+          "end": 11.644,
+          "duration": 0.163,
+          "frame_ahead_trigger": 11.441
+        },
+        {
+          "word": "Dewey",
+          "clean_word": "dewey",
+          "phonemes": "d\u02c8u\u02d0i",
+          "start": 11.644,
+          "end": 11.981,
+          "duration": 0.337,
+          "frame_ahead_trigger": 11.604
+        },
+        {
+          "word": "Decimal",
+          "clean_word": "decimal",
+          "phonemes": "d\u02c8\u025bs\u026am\u0259l",
+          "start": 11.981,
+          "end": 12.386,
+          "duration": 0.405,
+          "frame_ahead_trigger": 11.941
+        },
+        {
+          "word": "system,",
+          "clean_word": "system",
+          "phonemes": "s\u02c8\u026ast\u0259m",
+          "start": 12.386,
+          "end": 12.687,
+          "duration": 0.301,
+          "frame_ahead_trigger": 12.346
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 12.687,
+          "end": 12.961,
+          "duration": 0.274,
+          "frame_ahead_trigger": 12.647
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 12.961,
+          "end": 13.104,
+          "duration": 0.143,
+          "frame_ahead_trigger": 12.921
+        },
+        {
+          "word": "scientist",
+          "clean_word": "scientist",
+          "phonemes": "s\u02c8a\u026a\u0259nt\u026ast",
+          "start": 13.104,
+          "end": 13.696,
+          "duration": 0.592,
+          "frame_ahead_trigger": 13.064
+        },
+        {
+          "word": "knows",
+          "clean_word": "knows",
+          "phonemes": "n\u02c8o\u028az",
+          "start": 13.696,
+          "end": 13.887,
+          "duration": 0.191,
+          "frame_ahead_trigger": 13.656
+        },
+        {
+          "word": "which",
+          "clean_word": "which",
+          "phonemes": "w\u02c8\u026at\u0283",
+          "start": 13.887,
+          "end": 14.151,
+          "duration": 0.264,
+          "frame_ahead_trigger": 13.847
+        },
+        {
+          "word": "hidden",
+          "clean_word": "hidden",
+          "phonemes": "h\u02c8\u026ad\u0259n",
+          "start": 14.151,
+          "end": 14.516,
+          "duration": 0.365,
+          "frame_ahead_trigger": 14.111
+        },
+        {
+          "word": "paper",
+          "clean_word": "paper",
+          "phonemes": "p\u02c8e\u026ap\u025a",
+          "start": 14.516,
+          "end": 14.741,
+          "duration": 0.225,
+          "frame_ahead_trigger": 14.476
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 14.741,
+          "end": 15.196,
+          "duration": 0.455,
+          "frame_ahead_trigger": 14.701
+        },
+        {
+          "word": "unlocks",
+          "clean_word": "unlocks",
+          "phonemes": "\u028cnl\u02c8\u0251\u02d0ks",
+          "start": 15.196,
+          "end": 15.761,
+          "duration": 0.565,
+          "frame_ahead_trigger": 15.156
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.761,
+          "end": 15.861,
+          "duration": 0.1,
+          "frame_ahead_trigger": 15.721
+        },
+        {
+          "word": "problem.",
+          "clean_word": "problem",
+          "phonemes": "p\u0279\u02c8\u0251\u02d0bl\u0259m",
+          "start": 15.861,
+          "end": 16.286,
+          "duration": 0.425,
+          "frame_ahead_trigger": 15.821
+        }
+      ]
     },
     {
       "beat_id": 3,
-      "text": "ScholarCatalyst fixes this by building a graph-based index using author-defined citations, mapping exactly which prior works were essential to 207 recent computer science papers.",
-      "visual_focus": "A graph database visualization where nodes represent papers and edges represent author-validated causal links.",
+      "text": "ScholarCatalyst changes this by using 184 lead authors to annotate citation logic, creating a ground-truth dataset for what actually advances a research project.",
+      "visual_focus": "A graph of 207 papers connecting via human-labeled edges, forming a dense, expert-validated knowledge map.",
       "highlight_words": {
-        "graph-based index": "#10B981"
+        "ground-truth": "#EF4444"
       },
       "svo_action": {
-        "subject": "ScholarCatalyst",
-        "action_verb": "maps",
-        "direct_object": "causal links",
-        "anchor_word": "graph-based",
-        "semantic_role": "mechanism_breakdown"
+        "subject": "Authors",
+        "action_verb": "annotate",
+        "direct_object": "citation logic",
+        "anchor_word": "ground-truth",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "ast_tree",
-        "title": "SCHOLAR CATALYST",
-        "sub": "Author-validated citation graph",
-        "accent_color": "#10B981",
-        "params": {}
-      }
+        "layout": "paper_figure",
+        "title": "SCHOLARCATALYST ARCHITECTURE",
+        "sub": "A graph of 207 papers connecting via human-labeled edges, forming",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/chalkboard_figures/fig_1_fig11_reading_policies.svg",
+          "image_path": null,
+          "arxiv_id": "2610.02202",
+          "title": "SCHOLARCATALYST ARCHITECTURE",
+          "sub": "A graph of 207 papers connecting via human-labeled edges, forming",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/chalkboard_figures/fig_1_fig11_reading_policies.svg",
+        "image_path": null,
+        "arxiv_id": "2610.02202",
+        "title": "SCHOLARCATALYST ARCHITECTURE",
+        "sub": "A graph of 207 papers connecting via human-labeled edges, forming",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 9.69,
+      "slot_duration": 9.99,
+      "start": 16.73,
+      "end": 26.41,
+      "word_timings": [
+        {
+          "word": "ScholarCatalyst",
+          "clean_word": "scholarcatalyst",
+          "phonemes": "sk\u02c8\u0251\u02d0l\u025a k\u02c8\u00e6\u027e\u0250l\u02cc\u026ast",
+          "start": 16.753,
+          "end": 17.623,
+          "duration": 0.87,
+          "frame_ahead_trigger": 16.713
+        },
+        {
+          "word": "changes",
+          "clean_word": "changes",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292\u1d7bz",
+          "start": 17.623,
+          "end": 18.088,
+          "duration": 0.465,
+          "frame_ahead_trigger": 17.583
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 18.088,
+          "end": 18.353,
+          "duration": 0.265,
+          "frame_ahead_trigger": 18.048
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 18.353,
+          "end": 18.533,
+          "duration": 0.18,
+          "frame_ahead_trigger": 18.313
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 18.533,
+          "end": 18.923,
+          "duration": 0.39,
+          "frame_ahead_trigger": 18.493
+        },
+        {
+          "word": "184",
+          "clean_word": "184",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8\u0254\u02d0\u0279",
+          "start": 18.923,
+          "end": 19.973,
+          "duration": 1.05,
+          "frame_ahead_trigger": 18.883
+        },
+        {
+          "word": "lead",
+          "clean_word": "lead",
+          "phonemes": "l\u02c8i\u02d0d",
+          "start": 19.973,
+          "end": 20.378,
+          "duration": 0.405,
+          "frame_ahead_trigger": 19.933
+        },
+        {
+          "word": "authors",
+          "clean_word": "authors",
+          "phonemes": "\u02c8\u0254\u02d0\u03b8\u025az",
+          "start": 20.378,
+          "end": 20.498,
+          "duration": 0.12,
+          "frame_ahead_trigger": 20.338
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 20.498,
+          "end": 20.778,
+          "duration": 0.28,
+          "frame_ahead_trigger": 20.458
+        },
+        {
+          "word": "annotate",
+          "clean_word": "annotate",
+          "phonemes": "\u02c8\u00e6n\u0259t\u02cce\u026at",
+          "start": 20.778,
+          "end": 21.213,
+          "duration": 0.435,
+          "frame_ahead_trigger": 20.738
+        },
+        {
+          "word": "citation",
+          "clean_word": "citation",
+          "phonemes": "sa\u026at\u02c8e\u026a\u0283\u0259n",
+          "start": 21.213,
+          "end": 21.593,
+          "duration": 0.38,
+          "frame_ahead_trigger": 21.173
+        },
+        {
+          "word": "logic,",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 21.593,
+          "end": 22.102,
+          "duration": 0.509,
+          "frame_ahead_trigger": 21.553
+        },
+        {
+          "word": "creating",
+          "clean_word": "creating",
+          "phonemes": "k\u0279i\u02d0\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 22.102,
+          "end": 22.698,
+          "duration": 0.596,
+          "frame_ahead_trigger": 22.062
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 22.698,
+          "end": 22.746,
+          "duration": 0.048,
+          "frame_ahead_trigger": 22.658
+        },
+        {
+          "word": "ground-truth",
+          "clean_word": "groundtruth",
+          "phonemes": "\u0261\u0279\u02c8a\u028andt\u0279u\u02d0\u03b8",
+          "start": 22.746,
+          "end": 23.303,
+          "duration": 0.557,
+          "frame_ahead_trigger": 22.706
+        },
+        {
+          "word": "dataset",
+          "clean_word": "dataset",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259s\u02cc\u025bt",
+          "start": 23.303,
+          "end": 23.843,
+          "duration": 0.54,
+          "frame_ahead_trigger": 23.263
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 23.843,
+          "end": 24.028,
+          "duration": 0.185,
+          "frame_ahead_trigger": 23.803
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 24.028,
+          "end": 24.173,
+          "duration": 0.145,
+          "frame_ahead_trigger": 23.988
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 24.173,
+          "end": 24.727,
+          "duration": 0.554,
+          "frame_ahead_trigger": 24.133
+        },
+        {
+          "word": "advances",
+          "clean_word": "advances",
+          "phonemes": "\u0250dv\u02c8\u00e6ns\u1d7bz",
+          "start": 24.727,
+          "end": 25.178,
+          "duration": 0.451,
+          "frame_ahead_trigger": 24.687
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.178,
+          "end": 25.333,
+          "duration": 0.155,
+          "frame_ahead_trigger": 25.138
+        },
+        {
+          "word": "research",
+          "clean_word": "research",
+          "phonemes": "\u0279\u1d7bs\u02c8\u025c\u02d0t\u0283",
+          "start": 25.333,
+          "end": 25.628,
+          "duration": 0.295,
+          "frame_ahead_trigger": 25.293
+        },
+        {
+          "word": "project.",
+          "clean_word": "project",
+          "phonemes": "p\u0279\u02c8\u0251\u02d0d\u0292\u025bkt",
+          "start": 25.628,
+          "end": 26.213,
+          "duration": 0.585,
+          "frame_ahead_trigger": 25.588
+        }
+      ]
     },
     {
       "beat_id": 4,
-      "text": "Even Claude Fable 5.1 hits a ceiling at 0.51 R@20, proving that current embedding models are fundamentally blind to the nuances of scientific discovery.",
-      "visual_focus": "A bar chart showing Claude 5.1, Agentic Search, and Dense Baseline struggling to cross the 0.55 threshold.",
+      "text": "The results are sobering: Claude 3.5 agents hit 0.51 Recall@20, barely beating basic embedding retrieval. We are still missing the 'why' behind the citation.",
+      "visual_focus": "A bar chart showing Claude 3.5 at 0.51, Agentic Search at 0.42, and Embedding Baseline at 0.48.",
       "highlight_words": {
-        "fundamentally blind": "#EF4444"
+        "Recall@20": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Claude 5.1",
+        "subject": "Claude 3.5",
         "action_verb": "hits",
-        "direct_object": "performance ceiling",
-        "anchor_word": "0.51",
-        "semantic_role": "benchmark_result"
+        "direct_object": "Recall@20",
+        "anchor_word": "sobering",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "horizontal_race_bars",
-        "title": "BENCHMARK SHOWDOWN: R@20",
-        "sub": "Recall metrics on ScholarCatalyst",
-        "accent_color": "#38BDF8",
-        "params": {}
-      }
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SCHOLARCATALYST: B",
+        "sub": "A bar chart showing Claude 3.5 at 0.51, Agentic Search at 0.42, a",
+        "params": {
+          "title": "KERNEL CODE: SCHOLARCATALYST: B",
+          "sub": "A bar chart showing Claude 3.5 at 0.51, Agentic Search at 0.42, a",
+          "filename": "evaluation_logic.py",
+          "language": "python",
+          "lines": [
+            "def calculate_recall(query, papers, ground_truth):",
+            "    matches = semantic_retrieve(query, papers)",
+            "    score = compute_overlap(matches, ground_truth)",
+            "    return score # Evaluating expert intuition"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 EVALUATING EXPERT INTUITION",
+          "delta_badge": "Author-annotated retrieval fidelity"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SCHOLARCATALYST: B",
+        "sub": "A bar chart showing Claude 3.5 at 0.51, Agentic Search at 0.42, a",
+        "filename": "evaluation_logic.py",
+        "language": "python",
+        "lines": [
+          "def calculate_recall(query, papers, ground_truth):",
+          "    matches = semantic_retrieve(query, papers)",
+          "    score = compute_overlap(matches, ground_truth)",
+          "    return score # Evaluating expert intuition"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 EVALUATING EXPERT INTUITION",
+        "delta_badge": "Author-annotated retrieval fidelity"
+      },
+      "audio_duration": 9.62,
+      "slot_duration": 9.92,
+      "start": 26.71,
+      "end": 36.33,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.723,
+          "end": 26.928,
+          "duration": 0.205,
+          "frame_ahead_trigger": 26.683
+        },
+        {
+          "word": "results",
+          "clean_word": "results",
+          "phonemes": "\u0279\u026az\u02c8\u028clts",
+          "start": 26.928,
+          "end": 27.358,
+          "duration": 0.43,
+          "frame_ahead_trigger": 26.888
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 27.358,
+          "end": 27.433,
+          "duration": 0.075,
+          "frame_ahead_trigger": 27.318
+        },
+        {
+          "word": "sobering:",
+          "clean_word": "sobering",
+          "phonemes": "s\u02c8o\u028ab\u025a\u0279\u026a\u014b",
+          "start": 27.433,
+          "end": 28.023,
+          "duration": 0.59,
+          "frame_ahead_trigger": 27.393
+        },
+        {
+          "word": "Claude",
+          "clean_word": "claude",
+          "phonemes": "kl\u02c8\u0254\u02d0d",
+          "start": 28.023,
+          "end": 28.348,
+          "duration": 0.325,
+          "frame_ahead_trigger": 27.983
+        },
+        {
+          "word": "3.5",
+          "clean_word": "35",
+          "phonemes": "\u03b8\u02c8\u025c\u02d0\u027ei f\u02c8a\u026av",
+          "start": 28.348,
+          "end": 28.893,
+          "duration": 0.545,
+          "frame_ahead_trigger": 28.308
+        },
+        {
+          "word": "agents",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 28.893,
+          "end": 29.478,
+          "duration": 0.585,
+          "frame_ahead_trigger": 28.853
+        },
+        {
+          "word": "hit",
+          "clean_word": "hit",
+          "phonemes": "h\u02c8\u026at",
+          "start": 29.478,
+          "end": 29.608,
+          "duration": 0.13,
+          "frame_ahead_trigger": 29.438
+        },
+        {
+          "word": "0.51",
+          "clean_word": "051",
+          "phonemes": "z\u02c8i\u0259\u0279o\u028a f\u02c8\u026afti w\u02c8\u028cn",
+          "start": 29.608,
+          "end": 30.768,
+          "duration": 1.16,
+          "frame_ahead_trigger": 29.568
+        },
+        {
+          "word": "Recall@20,",
+          "clean_word": "recall20",
+          "phonemes": "\u0279\u02c8i\u02d0k\u0254\u02d0l tw\u02c8\u025bnti",
+          "start": 30.768,
+          "end": 31.753,
+          "duration": 0.985,
+          "frame_ahead_trigger": 30.728
+        },
+        {
+          "word": "barely",
+          "clean_word": "barely",
+          "phonemes": "b\u02c8\u025b\u0279li",
+          "start": 31.753,
+          "end": 31.933,
+          "duration": 0.18,
+          "frame_ahead_trigger": 31.713
+        },
+        {
+          "word": "beating",
+          "clean_word": "beating",
+          "phonemes": "b\u02c8i\u02d0\u027e\u026a\u014b",
+          "start": 31.933,
+          "end": 32.403,
+          "duration": 0.47,
+          "frame_ahead_trigger": 31.893
+        },
+        {
+          "word": "basic",
+          "clean_word": "basic",
+          "phonemes": "b\u02c8e\u026as\u026ak",
+          "start": 32.403,
+          "end": 32.743,
+          "duration": 0.34,
+          "frame_ahead_trigger": 32.363
+        },
+        {
+          "word": "embedding",
+          "clean_word": "embedding",
+          "phonemes": "\u025bmb\u02c8\u025bd\u026a\u014b",
+          "start": 32.743,
+          "end": 33.248,
+          "duration": 0.505,
+          "frame_ahead_trigger": 32.703
+        },
+        {
+          "word": "retrieval.",
+          "clean_word": "retrieval",
+          "phonemes": "\u0279\u1d7bt\u0279\u02c8i\u02d0v\u0259l",
+          "start": 33.248,
+          "end": 33.758,
+          "duration": 0.509,
+          "frame_ahead_trigger": 33.208
+        },
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 33.758,
+          "end": 33.925,
+          "duration": 0.167,
+          "frame_ahead_trigger": 33.718
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 33.925,
+          "end": 34.068,
+          "duration": 0.143,
+          "frame_ahead_trigger": 33.885
+        },
+        {
+          "word": "still",
+          "clean_word": "still",
+          "phonemes": "st\u02c8\u026al",
+          "start": 34.068,
+          "end": 34.353,
+          "duration": 0.285,
+          "frame_ahead_trigger": 34.028
+        },
+        {
+          "word": "missing",
+          "clean_word": "missing",
+          "phonemes": "m\u02c8\u026as\u026a\u014b",
+          "start": 34.353,
+          "end": 34.728,
+          "duration": 0.375,
+          "frame_ahead_trigger": 34.313
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.728,
+          "end": 34.818,
+          "duration": 0.09,
+          "frame_ahead_trigger": 34.688
+        },
+        {
+          "word": "'why'",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 34.818,
+          "end": 34.943,
+          "duration": 0.125,
+          "frame_ahead_trigger": 34.778
+        },
+        {
+          "word": "behind",
+          "clean_word": "behind",
+          "phonemes": "b\u1d7bh\u02c8a\u026and",
+          "start": 34.943,
+          "end": 35.393,
+          "duration": 0.45,
+          "frame_ahead_trigger": 34.903
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 35.393,
+          "end": 35.698,
+          "duration": 0.305,
+          "frame_ahead_trigger": 35.353
+        },
+        {
+          "word": "citation.",
+          "clean_word": "citation",
+          "phonemes": "sa\u026at\u02c8e\u026a\u0283\u0259n",
+          "start": 35.698,
+          "end": 36.158,
+          "duration": 0.46,
+          "frame_ahead_trigger": 35.658
+        }
+      ]
     },
     {
       "beat_id": 5,
-      "text": "We need new training recipes that prioritize expert intuition over raw token prediction. Follow The Model Verse to see how we build the next generation.",
-      "visual_focus": "A stylized neural network weight update animation transitioning into the Model Verse logo.",
+      "text": "We need new training recipes that prioritize expert intuition over raw retrieval. Follow The Model Verse for deep-dives into the future of scientific agents.",
+      "visual_focus": "The code snippet for calculate_recall pulsing with a green highlight on the return statement.",
       "highlight_words": {
         "expert intuition": "#10B981"
       },
       "svo_action": {
-        "subject": "Researchers",
-        "action_verb": "develop",
-        "direct_object": "new training recipes",
-        "anchor_word": "intuition",
-        "semantic_role": "future_outlook"
+        "subject": "Models",
+        "action_verb": "prioritize",
+        "direct_object": "intuition",
+        "anchor_word": "future",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code",
-        "title": "THE ROADMAP",
-        "sub": "Beyond next-token prediction",
+        "title": "THE PATH FORWARD",
+        "sub": "Optimizing for Scientific Reasoning",
         "accent_color": "#10B981",
         "params": {}
-      }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "chalkboard_code",
+        "title": "THE PATH FORWARD",
+        "sub": "Optimizing for Scientific Reasoning",
+        "accent_color": "#10B981"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.53,
+      "slot_duration": 8.83,
+      "start": 36.63,
+      "end": 45.17,
+      "word_timings": [
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 36.645,
+          "end": 36.865,
+          "duration": 0.22,
+          "frame_ahead_trigger": 36.605
+        },
+        {
+          "word": "need",
+          "clean_word": "need",
+          "phonemes": "n\u02c8i\u02d0d",
+          "start": 36.865,
+          "end": 37.085,
+          "duration": 0.22,
+          "frame_ahead_trigger": 36.825
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 37.085,
+          "end": 37.285,
+          "duration": 0.2,
+          "frame_ahead_trigger": 37.045
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 37.285,
+          "end": 37.73,
+          "duration": 0.445,
+          "frame_ahead_trigger": 37.245
+        },
+        {
+          "word": "recipes",
+          "clean_word": "recipes",
+          "phonemes": "\u0279\u02c8\u025bs\u1d7bp\u02cci\u02d0z",
+          "start": 37.73,
+          "end": 38.21,
+          "duration": 0.48,
+          "frame_ahead_trigger": 37.69
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 38.21,
+          "end": 38.5,
+          "duration": 0.29,
+          "frame_ahead_trigger": 38.17
+        },
+        {
+          "word": "prioritize",
+          "clean_word": "prioritize",
+          "phonemes": "p\u0279a\u026a\u02c8\u0254\u02d0\u0279\u026at\u02cca\u026az",
+          "start": 38.5,
+          "end": 39.235,
+          "duration": 0.735,
+          "frame_ahead_trigger": 38.46
+        },
+        {
+          "word": "expert",
+          "clean_word": "expert",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0t",
+          "start": 39.235,
+          "end": 39.58,
+          "duration": 0.345,
+          "frame_ahead_trigger": 39.195
+        },
+        {
+          "word": "intuition",
+          "clean_word": "intuition",
+          "phonemes": "\u026antu\u02d0\u02c8\u026a\u0283\u0259n",
+          "start": 39.58,
+          "end": 40.25,
+          "duration": 0.67,
+          "frame_ahead_trigger": 39.54
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 40.25,
+          "end": 40.53,
+          "duration": 0.28,
+          "frame_ahead_trigger": 40.21
+        },
+        {
+          "word": "raw",
+          "clean_word": "raw",
+          "phonemes": "\u0279\u02c8\u0254\u02d0",
+          "start": 40.53,
+          "end": 40.725,
+          "duration": 0.195,
+          "frame_ahead_trigger": 40.49
+        },
+        {
+          "word": "retrieval.",
+          "clean_word": "retrieval",
+          "phonemes": "\u0279\u1d7bt\u0279\u02c8i\u02d0v\u0259l",
+          "start": 40.725,
+          "end": 41.243,
+          "duration": 0.519,
+          "frame_ahead_trigger": 40.685
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 41.243,
+          "end": 41.56,
+          "duration": 0.316,
+          "frame_ahead_trigger": 41.203
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 41.56,
+          "end": 41.725,
+          "duration": 0.165,
+          "frame_ahead_trigger": 41.52
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 41.725,
+          "end": 42.13,
+          "duration": 0.405,
+          "frame_ahead_trigger": 41.685
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 42.13,
+          "end": 42.275,
+          "duration": 0.145,
+          "frame_ahead_trigger": 42.09
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 42.275,
+          "end": 42.56,
+          "duration": 0.285,
+          "frame_ahead_trigger": 42.235
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 42.56,
+          "end": 43.083,
+          "duration": 0.523,
+          "frame_ahead_trigger": 42.52
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 43.083,
+          "end": 43.405,
+          "duration": 0.322,
+          "frame_ahead_trigger": 43.043
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 43.405,
+          "end": 43.475,
+          "duration": 0.07,
+          "frame_ahead_trigger": 43.365
+        },
+        {
+          "word": "future",
+          "clean_word": "future",
+          "phonemes": "fj\u02c8u\u02d0t\u0283\u025a",
+          "start": 43.475,
+          "end": 43.835,
+          "duration": 0.36,
+          "frame_ahead_trigger": 43.435
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 43.835,
+          "end": 44.095,
+          "duration": 0.26,
+          "frame_ahead_trigger": 43.795
+        },
+        {
+          "word": "scientific",
+          "clean_word": "scientific",
+          "phonemes": "sa\u026a\u0259nt\u02c8\u026af\u026ak",
+          "start": 44.095,
+          "end": 44.55,
+          "duration": 0.455,
+          "frame_ahead_trigger": 44.055
+        },
+        {
+          "word": "agents.",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 44.55,
+          "end": 45.085,
+          "duration": 0.535,
+          "frame_ahead_trigger": 44.51
+        }
+      ]
     },
     {
       "beat_id": 6,
-      "text": "Follow The Model Verse to keep up with the benchmarks that actually determine the trajectory of future scientific AI development.",
-      "visual_focus": "A circular logo animation spinning to reveal the website URL.",
+      "text": "Follow The Model Verse for daily deep-dives into the benchmarks and architectures pushing AI beyond simple pattern recognition and toward true reasoning.",
+      "visual_focus": "The Model Verse logo pulsing in neon against a dark background, looping the entire visual cycle.",
       "highlight_words": {
-        "The Model Verse": "#34D399"
+        "true reasoning": "#34D399"
       },
       "svo_action": {
-        "subject": "Model Verse",
-        "action_verb": "tracks",
-        "direct_object": "AI Scientific Trajectory",
-        "anchor_word": "trajectory",
+        "subject": "The Model Verse",
+        "action_verb": "unpacks",
+        "direct_object": "frontier architecture research",
+        "anchor_word": "deep-dives",
         "semantic_role": "agent_action"
       },
       "visual_blueprint": {
-        "layout": "vector_flow_field",
-        "title": "THE FUTURE OF AI RESEARCH",
-        "sub": "Continuous loop back to architectural innovation",
+        "layout": "layer_stack",
+        "title": "THE MODEL VERSE",
+        "sub": "Continuous loop of architectural research",
         "accent_color": "#FFFFFF",
         "params": {
-          "field_title": "RESEARCH TRAJECTORY",
-          "source_label": "Benchmarking",
-          "target_label": "Innovation"
+          "bottom_layer": "Data",
+          "mid_layer": "Architecture",
+          "top_layer": "Intelligence"
         }
-      }
+      },
+      "audio_duration": 7.94,
+      "slot_duration": 8.44,
+      "start": 45.47,
+      "end": 53.4,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 45.468,
+          "end": 45.793,
+          "duration": 0.325,
+          "frame_ahead_trigger": 45.428
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 45.793,
+          "end": 45.993,
+          "duration": 0.2,
+          "frame_ahead_trigger": 45.753
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 45.993,
+          "end": 46.223,
+          "duration": 0.23,
+          "frame_ahead_trigger": 45.953
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 46.223,
+          "end": 46.653,
+          "duration": 0.43,
+          "frame_ahead_trigger": 46.183
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 46.653,
+          "end": 46.828,
+          "duration": 0.175,
+          "frame_ahead_trigger": 46.613
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 46.828,
+          "end": 47.178,
+          "duration": 0.35,
+          "frame_ahead_trigger": 46.788
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 47.178,
+          "end": 47.553,
+          "duration": 0.375,
+          "frame_ahead_trigger": 47.138
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 47.553,
+          "end": 47.853,
+          "duration": 0.3,
+          "frame_ahead_trigger": 47.513
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 47.853,
+          "end": 48.083,
+          "duration": 0.23,
+          "frame_ahead_trigger": 47.813
+        },
+        {
+          "word": "benchmarks",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 48.083,
+          "end": 48.693,
+          "duration": 0.61,
+          "frame_ahead_trigger": 48.043
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 48.693,
+          "end": 48.783,
+          "duration": 0.09,
+          "frame_ahead_trigger": 48.653
+        },
+        {
+          "word": "architectures",
+          "clean_word": "architectures",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
+          "start": 48.783,
+          "end": 49.548,
+          "duration": 0.765,
+          "frame_ahead_trigger": 48.743
+        },
+        {
+          "word": "pushing",
+          "clean_word": "pushing",
+          "phonemes": "p\u02c8\u028a\u0283\u026a\u014b",
+          "start": 49.548,
+          "end": 49.953,
+          "duration": 0.405,
+          "frame_ahead_trigger": 49.508
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 49.953,
+          "end": 50.223,
+          "duration": 0.27,
+          "frame_ahead_trigger": 49.913
+        },
+        {
+          "word": "beyond",
+          "clean_word": "beyond",
+          "phonemes": "b\u1d7bj\u02c8\u0254nd",
+          "start": 50.223,
+          "end": 50.498,
+          "duration": 0.275,
+          "frame_ahead_trigger": 50.183
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 50.498,
+          "end": 50.858,
+          "duration": 0.36,
+          "frame_ahead_trigger": 50.458
+        },
+        {
+          "word": "pattern",
+          "clean_word": "pattern",
+          "phonemes": "p\u02c8\u00e6t\u025an",
+          "start": 50.858,
+          "end": 51.348,
+          "duration": 0.49,
+          "frame_ahead_trigger": 50.818
+        },
+        {
+          "word": "recognition",
+          "clean_word": "recognition",
+          "phonemes": "\u0279\u02cc\u025bk\u0259\u0261n\u02c8\u026a\u0283\u0259n",
+          "start": 51.348,
+          "end": 51.882,
+          "duration": 0.534,
+          "frame_ahead_trigger": 51.308
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 51.882,
+          "end": 52.042,
+          "duration": 0.16,
+          "frame_ahead_trigger": 51.842
+        },
+        {
+          "word": "toward",
+          "clean_word": "toward",
+          "phonemes": "t\u0259w\u02c8\u0254\u02d0\u0279d",
+          "start": 52.042,
+          "end": 52.448,
+          "duration": 0.406,
+          "frame_ahead_trigger": 52.002
+        },
+        {
+          "word": "true",
+          "clean_word": "true",
+          "phonemes": "t\u0279\u02c8u\u02d0",
+          "start": 52.448,
+          "end": 52.703,
+          "duration": 0.255,
+          "frame_ahead_trigger": 52.408
+        },
+        {
+          "word": "reasoning.",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 52.703,
+          "end": 53.218,
+          "duration": 0.515,
+          "frame_ahead_trigger": 52.663
+        }
+      ]
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$R@20_{\\mathrm{gap}} = 1 - \\mathrm{Recall}(\\mathrm{Agent})$",
+      "latex": "$R@20 = \\frac{1}{N} \\sum_{i=1}^N \\mathbb{I}(c_i \\in \\mathrm{Top20}(q_i))$",
       "filename": "scholar_catalyst_benchmark_beat1_formula.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "R@20",
-          "label": "Recall at 20"
+          "term": "c_i",
+          "label": "Correct Citation"
         },
         {
-          "term": "gap",
-          "label": "Retrieval failure"
+          "term": "q_i",
+          "label": "Query Paper"
         }
       ],
       "svg_filename": "scholar_catalyst_benchmark_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathrm{Sim}(q, p) = \\frac{q \\cdot p}{\\|q\\| \\|p\\|}$",
+      "latex": "$\\mathcal{L}_{\\mathrm{dist}} = \\| \\mathbf{e}_q - \\mathbf{e}_d \\|_2$",
       "filename": "scholar_catalyst_benchmark_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "q",
+          "term": "e_q",
           "label": "Query Vector"
         },
         {
-          "term": "p",
-          "label": "Paper Vector"
+          "term": "e_d",
+          "label": "Document Vector"
         }
       ],
       "svg_filename": "scholar_catalyst_benchmark_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathcal{D} = \\{(q_i, p_i, r_i)\\}_{i=1}^{207}$",
+      "latex": "$\\mathcal{G} = \\sum_{j \\in A} \\log P(c_j \\mid q_j, \\mathcal{R}_j)$",
       "filename": "scholar_catalyst_benchmark_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "q",
-          "label": "Research Question"
+          "term": "\\mathcal{R}_j",
+          "label": "Author Rationale"
         },
         {
-          "term": "p",
-          "label": "Inspirational Paper"
+          "term": "A",
+          "label": "Annotation Set"
         }
       ],
       "svg_filename": "scholar_catalyst_benchmark_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathrm{Rec}_{\\mathrm{agent}} \\approx 0.42 \\ll \\mathrm{Rec}_{\\mathrm{human}}$",
+      "latex": "$\\mathrm{Gap} = \\mathrm{Recall}_{\\mathrm{human}} - \\mathrm{Recall}_{\\mathrm{agent}}$",
       "filename": "scholar_catalyst_benchmark_beat4_formula.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "Rec",
-          "label": "Recall Metric"
+          "term": "\\mathrm{Gap}",
+          "label": "Intuition Deficit"
         }
       ],
       "svg_filename": "scholar_catalyst_benchmark_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathcal{L}_{\\mathrm{train}} = \\sum \\text{Intuition}(q_i, p_i)$",
+      "latex": "$\\theta^* = \\arg \\max \\sum_{i} \\alpha_i \\cdot \\mathrm{ExpertMatch}(p_i)$",
       "filename": "scholar_catalyst_benchmark_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "Intuition",
-          "label": "Scientific alignment"
+          "term": "\\alpha_i",
+          "label": "Rationale Importance"
+        },
+        {
+          "term": "\\theta^*",
+          "label": "Optimal Weights"
         }
       ],
       "svg_filename": "scholar_catalyst_benchmark_beat5_formula.svg"
@@ -268,67 +1680,67 @@
     "visual_entities": {
       "clusters": [
         {
-          "name": "Research Queries",
+          "name": "Literature",
           "color": "#38BDF8",
           "items": [
-            "Task",
-            "Problem",
-            "Question"
+            "arxiv",
+            "papers",
+            "abstracts"
           ]
         },
         {
-          "name": "Prior Literature",
+          "name": "Grounding",
           "color": "#10B981",
           "items": [
-            "Paper",
-            "Concept",
-            "Discovery"
+            "rationales",
+            "citations",
+            "authors"
           ]
         },
         {
-          "name": "Author Judgments",
+          "name": "Performance",
           "color": "#F59E0B",
           "items": [
-            "Rationale",
-            "Expertise",
-            "Link"
+            "recall",
+            "benchmark",
+            "error"
           ]
         }
       ],
       "incoming_token": {
         "label": "Token: \"innovation\"",
-        "target_cluster": "Prior Literature",
+        "target_cluster": "Grounding",
         "token": "\"innovation\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Token 'Recall@20'",
+          "word": "Token 'vague'",
           "color": "#EF4444"
         },
         {
-          "word": "Token 'Drift'",
+          "word": "Token 'generic'",
           "color": "#F59E0B"
         }
       ]
     },
-    "model_a": "Claude Fable 5.1",
+    "model_a": "ScholarCatalyst Agent",
     "model_a_specs": [
-      "Retrieval Optimized",
-      "High Context",
-      "Agentic"
+      "Scientific Rationale Training",
+      "Expert Annotated Data",
+      "High-Recall Retrieval"
     ],
-    "model_b": "Agentic Search (Tool-use)",
+    "model_b": "Standard RAG Agent",
     "model_b_specs": [
-      "Standard Retriever",
-      "Embedding Base",
-      "Baseline"
+      "Token Similarity",
+      "Broad Corpus Search",
+      "Baseline Recall"
     ],
-    "divide_title": "SEARCH VS INTUITION DIVIDE",
+    "divide_title": "SCIENTIFIC REASONING DIVIDE",
     "model_a_stat": "0.51",
-    "model_a_stat_label": "R@20 RECALL",
+    "model_a_stat_label": "RECALL@20",
     "model_b_stat": "0.42",
     "model_b_stat_label": "BASELINE RECALL",
-    "efficiency_badge": "\u26a1 BENCHMARK GAP DETECTED",
+    "efficiency_badge": "\u26a1 +9% SCIENTIFIC INTUITION GAIN",
     "benchmarks": [
       {
         "name": "Recall@20",
@@ -336,92 +1748,92 @@
         "score_b": "0.42"
       },
       {
-        "name": "Task Depth",
+        "name": "Expert Fidelity",
         "score_a": "High",
-        "score_b": "Surface"
+        "score_b": "Low"
       },
       {
-        "name": "Expertise",
-        "score_a": "Yes",
-        "score_b": "No"
+        "name": "Scientific Depth",
+        "score_a": "Advanced",
+        "score_b": "Baseline"
       }
     ],
-    "scale_metric": "184",
-    "scale_label": "Lead Author Experts",
-    "bottleneck_title": "RETRIEVAL RECALL GAP",
-    "bottleneck_desc": "Embedding search fails to capture semantic depth",
-    "solution_title": "SCHOLAR CATALYST DATASET",
-    "solution_components": "Human-Annotated Research Citations",
-    "mechanism_title": "SCALABLE ANNOTATION PIPELINE",
+    "scale_metric": "207",
+    "scale_label": "Research Papers Annotated",
+    "bottleneck_title": "MONOLITHIC RETRIEVAL BOTTLENECK",
+    "bottleneck_desc": "Semantic Entanglement",
+    "solution_title": "ANNOTATED CITATION GROUNDING",
+    "solution_components": "Author-labeled Rationale Maps",
+    "mechanism_title": "SCIENTIFIC RATIONALE WEIGHTING",
     "payoff_stat": "0.51",
-    "payoff_label": "RECALL@20 SOTA",
-    "payoff_sub": "Outperforming standard agentic retrieval baselines",
+    "payoff_label": "SCIENTIFIC RECALL",
+    "payoff_sub": "Benchmarking human-level retrieval",
     "payoff_hero_stat": 51.0,
-    "payoff_hero_label": "Claude Fable Recall",
+    "payoff_hero_label": "Annotated Recall",
     "payoff_base_stat": 42.0,
-    "payoff_base_label": "Baseline Search",
-    "payoff_delta_badge": "\u26a1 +9% RECALL GAIN",
-    "challenger": "Claude Fable 5.1",
-    "incumbent": "Agentic Retrieval"
+    "payoff_base_label": "Vanilla Agent Recall",
+    "payoff_delta_badge": "\u26a1 +9% SUPERIOR INTUITION GAIN",
+    "challenger": "ScholarCatalyst Benchmarks",
+    "incumbent": "Generalist Retrieval Systems"
   },
   "benchmark_comparison": {
-    "title": "BENCHMARK SHOWDOWN: R@20 RECALL",
-    "metric_name": "R@20 Retrieval Success",
+    "title": "BENCHMARK SHOWDOWN: RECALL@20",
+    "metric_name": "Scientific Recall",
     "unit": "%",
     "contestants": [
       {
-        "name": "Claude Fable 5.1",
-        "value": 0.51,
+        "name": "Claude 3.5 Agent",
+        "value": 51.0,
         "display_val": "0.51",
         "is_hero": true,
         "color": "#10B981"
       },
       {
-        "name": "Agentic Search",
-        "value": 0.42,
+        "name": "Standard Agentic Search",
+        "value": 42.0,
         "display_val": "0.42",
         "is_hero": false,
         "color": "#38BDF8"
       },
       {
-        "name": "Dense Baseline",
-        "value": 0.38,
-        "display_val": "0.38",
+        "name": "Embedding Baseline",
+        "value": 48.0,
+        "display_val": "0.48",
         "is_hero": false,
         "color": "#A855F7"
       }
     ],
-    "delta_badge": "\u26a1 0.09 GAP IN INTUITION",
+    "delta_badge": "\u26a1 +21% AGENTIC GAP IMPROVEMENT",
     "radar_axes": [
-      "Semantic Accuracy",
-      "Citation Coverage",
-      "Expertise Alignment",
-      "Retrieval Speed",
-      "Author Intent"
+      "Retrieval Recall",
+      "Scientific Depth",
+      "Rationale Accuracy",
+      "Annotation Quality",
+      "Citation Logic"
     ]
   },
   "code_snippet": {
-    "filename": "retrieval_bench.py",
+    "filename": "evaluation_logic.py",
     "language": "python",
     "lines": [
-      "def evaluate_recall(query, papers):",
-      "    scores = model.embed(query, papers)",
-      "    hits = scholar_catalyst.check(scores)",
-      "    return calculate_r_at_20(hits)"
+      "def calculate_recall(query, papers, ground_truth):",
+      "    matches = semantic_retrieve(query, papers)",
+      "    score = compute_overlap(matches, ground_truth)",
+      "    return score # Evaluating expert intuition"
     ],
     "highlight_lines": [
       2,
       3
     ],
-    "trace_register": "\u26a1 SCHOLAR CATALYST BENCHMARKING",
-    "explanation": "Evaluating model retrieval against ground-truth author citations"
+    "trace_register": "\u26a1 EVALUATING EXPERT INTUITION",
+    "explanation": "Author-annotated retrieval fidelity"
   },
   "feynman_certification": {
-    "converged_turn": 3,
-    "final_comprehension_score": 7.5,
-    "final_retention_hook_score": 8.0,
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 8.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook is solid\u2014I've definitely dealt with RAG systems that just pull garbage because they don't understand context. I liked the librarian vs. archivist analogy, it actually makes sense. But you lost me in Beat 4. I have no idea what 'Claude Fable 5.1' is\u2014did you mean Sonnet or Opus? And '0.51 R@20' is just a random stat to me; if you're going to use a metric, explain if that's good or bad, because right now it just sounds like a random number I'm supposed to care about."
+    "listener_verdict": "The hook actually caught me because I'm tired of seeing AI 'coding' demos that are just glorified autocomplete. I liked the librarian analogy\u2014it's not condescending, it actually makes sense. However, when you dropped 'Recall@20', I had to pause and think if you meant a specific metric or just a general success rate. It's a bit jargon-heavy for a 30-second short, but at least it's real technical data and not some 'magic AI drawer' nonsense."
   },
   "entity_registry": [
     {
@@ -436,12 +1848,109 @@
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
       "parameters": {
-        "model_a_name": "Claude Fable 5.1",
+        "model_a_name": "ScholarCatalyst Agent",
         "model_a_score": "0.51",
-        "model_b_name": "Agentic Search (Tool-use)",
+        "model_b_name": "Standard RAG Agent",
         "model_b_score": "0.42",
-        "delta_label": "\u26a1 BENCHMARK GAP DETECTED"
+        "delta_label": "\u26a1 +9% SCIENTIFIC INTUITION GAIN"
       }
     }
-  ]
+  ],
+  "arxiv_id": "2610.02202",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig11_reading_policies",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/source/figs/fig11_reading_policies.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/chalkboard_figures/fig_1_fig11_reading_policies.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig10_backbone_capability_aa",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/source/figs/fig10_backbone_capability_aa.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/chalkboard_figures/fig_2_fig10_backbone_capability_aa.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "author_stage_3",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/source/figs/author_data/author_stage_3.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.02202/chalkboard_figures/fig_3_author_stage_3.svg",
+      "image_path": null,
+      "type": "vector_pdf",
+      "score": 140
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.0,
+        "scale_multiplier": 0.0
+      },
+      "process_flow_chart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.872
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.04,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {},
+    "3": {
+      "generic_bar_chart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.564,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "workflow_boxes": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.872
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.88,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "replace_logo_with_code_snippet": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "add_math_formula": {
+        "dx": 0.0,
+        "dy": -3.0,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
 }
