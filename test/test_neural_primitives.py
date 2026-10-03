@@ -24,6 +24,8 @@ from manim_engine.primitives.neural import (
 )
 
 class TestNeuralPrimitivesScene(Scene):
+    __test__ = False
+
     def construct(self):
         self.camera.background_color = "#0A0D14"
 
@@ -48,6 +50,8 @@ class TestNeuralPrimitivesScene(Scene):
 
 
 class TestAttentionAndMoEScene(Scene):
+    __test__ = False
+
     def construct(self):
         self.camera.background_color = "#0A0D14"
 

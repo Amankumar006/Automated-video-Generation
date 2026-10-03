@@ -15,6 +15,8 @@ config.frame_height = FRAME_HEIGHT
 config.background_color = BG_CARBON
 
 class TestKineticCaptionsScene(Scene):
+    __test__ = False
+
     def construct(self):
         bg_dots = [Dot(point=[x * 0.95, y * 0.95, 0], radius=0.02, color="#1E293B", fill_opacity=0.35)
                    for x in range(-4, 5) for y in range(-7, 8)]

@@ -68,7 +68,7 @@ class ContrastiveHypersphere(VGroup):
 
 
 class ScoreBasedDiffusionField(VGroup):
-    """
+    r"""
     Vector field visualizing learned score vectors \nabla_x \log p_t(x)
     driving noisy Gaussian particles toward data manifold modes.
     """

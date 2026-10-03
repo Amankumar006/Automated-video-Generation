@@ -22,6 +22,8 @@ from manim_engine.primitives.robotics import (
 )
 
 class TestRoboticsPrimitivesScene(Scene):
+    __test__ = False
+
     def construct(self):
         # Configure 9:16 vertical view
         self.camera.background_color = "#0A0D14"
@@ -54,6 +56,8 @@ class TestRoboticsPrimitivesScene(Scene):
 
 
 class TestASTAndSandboxScene(Scene):
+    __test__ = False
+
     def construct(self):
         self.camera.background_color = "#0A0D14"
 

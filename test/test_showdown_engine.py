@@ -190,6 +190,8 @@ def test_visual_director_beat_5_showdown_assignment():
 
 class TestHorizontalRaceBarsScene(Scene):
     """Renders high-CTR Horizontal Benchmark Drag-Race Bars."""
+    __test__ = False
+
     def construct(self):
         # 1. Chalkboard canvas
         dots = VGroup(*[
@@ -239,6 +241,8 @@ class TestHorizontalRaceBarsScene(Scene):
 
 class TestRadarParetoPlotScene(Scene):
     """Renders Multi-Axis Radar / Spider Pareto Frontier Plot."""
+    __test__ = False
+
     def construct(self):
         # 1. Chalkboard canvas
         dots = VGroup(*[
