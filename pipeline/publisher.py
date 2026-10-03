@@ -30,7 +30,11 @@ SCOPES = [
     "https://www.googleapis.com/auth/youtube"
 ]
 
-def get_authenticated_service(client_secrets_file: str = YOUTUBE_CLIENT_SECRETS_PATH, token_file: str = YOUTUBE_TOKEN_PATH):
+def get_authenticated_service(
+    client_secrets_file: str = YOUTUBE_CLIENT_SECRETS_PATH,
+    token_file: str = YOUTUBE_TOKEN_PATH,
+    interactive: bool = True
+):
     """Authenticates and returns an authorized YouTube API service object."""
     from googleapiclient.discovery import build
     from google.oauth2.credentials import Credentials
@@ -56,6 +60,9 @@ def get_authenticated_service(client_secrets_file: str = YOUTUBE_CLIENT_SECRETS_
                 creds = None
 
         if not creds:
+            if not interactive:
+                raise RuntimeError("Non-interactive mode: YouTube credentials not available or expired.")
+
             # Check if running in a headless or CI environment
             is_headless = (
                 os.environ.get("CI") == "true" or

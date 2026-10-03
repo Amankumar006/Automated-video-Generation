@@ -117,35 +117,45 @@ class YouTubeRetentionAnalytics:
 
     def _ensure_client(self):
         if self.youtube is None:
-            self.youtube = get_authenticated_service()
+            try:
+                self.youtube = get_authenticated_service(interactive=False)
+            except Exception as e:
+                print(f"ℹ️ YouTube API authentication bypassed ({e}). Analytics running in offline mode.")
+                self.youtube = None
 
     def fetch_channel_videos_performance(self, max_results: int = 50) -> List[Dict[str, Any]]:
         """Pulls all uploaded shorts with real-time view counts, engagement, and retention metrics."""
         self._ensure_client()
-
-        # 1. Fetch Uploads Playlist
-        channel_resp = self.youtube.channels().list(mine=True, part="contentDetails,statistics").execute()
-        if not channel_resp.get("items"):
-            return []
-        channel = channel_resp["items"][0]
-        uploads_id = channel["contentDetails"]["relatedPlaylists"]["uploads"]
-
-        # 2. Fetch Playlist Video IDs
-        playlist_resp = self.youtube.playlistItems().list(
-            playlistId=uploads_id,
-            part="snippet,contentDetails",
-            maxResults=max_results
-        ).execute()
-
-        video_ids = [item["contentDetails"]["videoId"] for item in playlist_resp.get("items", [])]
-        if not video_ids:
+        if not self.youtube:
             return []
 
-        # 3. Batch Fetch Video Statistics & Content Details
-        videos_resp = self.youtube.videos().list(
-            id=",".join(video_ids),
-            part="snippet,statistics,contentDetails,status"
-        ).execute()
+        try:
+            # 1. Fetch Uploads Playlist
+            channel_resp = self.youtube.channels().list(mine=True, part="contentDetails,statistics").execute()
+            if not channel_resp.get("items"):
+                return []
+            channel = channel_resp["items"][0]
+            uploads_id = channel["contentDetails"]["relatedPlaylists"]["uploads"]
+
+            # 2. Fetch Playlist Video IDs
+            playlist_resp = self.youtube.playlistItems().list(
+                playlistId=uploads_id,
+                part="snippet,contentDetails",
+                maxResults=max_results
+            ).execute()
+
+            video_ids = [item["contentDetails"]["videoId"] for item in playlist_resp.get("items", [])]
+            if not video_ids:
+                return []
+
+            # 3. Batch Fetch Video Statistics & Content Details
+            videos_resp = self.youtube.videos().list(
+                id=",".join(video_ids),
+                part="snippet,statistics,contentDetails,status"
+            ).execute()
+        except Exception as e:
+            print(f"⚠️ YouTube API query failed ({e}). Returning empty records.")
+            return []
 
         now = datetime.datetime.now(datetime.timezone.utc)
         video_records = []
@@ -245,11 +255,14 @@ class YouTubeRetentionAnalytics:
         """
         if not video_records:
             return {
+                "channel_total_videos_analyzed": 0,
                 "category_multipliers": {},
-                "top_performing_taxonomy": "robotics_tamp",
+                "taxonomy_breakdown": {},
+                "top_performing_taxonomy": "hardware_efficiency",
                 "recommended_tts_speed": 1.12,
                 "recommended_hook_duration_s": 7.0,
-                "summary": "No video data available yet. Using defaults."
+                "summary": "No video data available yet. Using defaults.",
+                "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat()
             }
 
         # Aggregate by taxonomy
@@ -323,7 +336,16 @@ class YouTubeRetentionAnalytics:
         print("=======================================================\n")
 
         records = self.fetch_channel_videos_performance()
-        print(f"📥 Queried {len(records)} videos from YouTube Data API.")
+        if not records and LEDGER_PATH.exists():
+            try:
+                with open(LEDGER_PATH, "r", encoding="utf-8") as f:
+                    cached_ledger = json.load(f)
+                    records = cached_ledger.get("videos", [])
+                    print(f"ℹ️ Loaded {len(records)} cached video records from {LEDGER_PATH.name}.")
+            except Exception as e:
+                print(f"⚠️ Could not load cached ledger: {e}")
+
+        print(f"📥 Processed {len(records)} videos for retention intelligence.")
 
         intelligence = self.analyze_performance_and_pacing(records)
         print(f"🎯 Top Performing Research Domain: {intelligence['top_performing_taxonomy'].upper()}")
