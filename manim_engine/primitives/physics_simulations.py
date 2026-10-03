@@ -107,12 +107,12 @@ class SimulationVectorField(BaseBlueprintComposition):
         tgt_lbl = CleanText(target_label[:20].upper(), font=FONT_HELVETICA, font_size=9, color=COLOR_MINT, weight=BOLD).move_to(tgt_capsule)
         tgt_grp = VGroup(tgt_capsule, tgt_lbl)
 
-        # 5. Math Vector Velocity Chip (Placed cleanly below grid)
+        # 5. Math Vector Velocity Chip (Placed cleanly at bottom of grid)
         vel_chip = RoundedRectangle(
-            corner_radius=0.1, width=3.4, height=0.5,
+            corner_radius=0.1, width=3.4, height=0.45,
             color=COLOR_SLATE, fill_color=COLOR_PANEL_BG, fill_opacity=0.92, stroke_width=1.5
-        ).move_to([0, -3.8, 0])
-        vel_txt = CleanText(stream_formula[:28], font=FONT_HELVETICA, font_size=11, color=COLOR_WHITE, weight=BOLD).move_to(vel_chip)
+        ).move_to([0, -2.35, 0])
+        vel_txt = CleanText(stream_formula[:28], font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE, weight=BOLD).move_to(vel_chip)
         vel_grp = VGroup(vel_chip, vel_txt)
         self.grid_plane = grid_plane
         self.src_grp = src_grp
@@ -302,23 +302,23 @@ class SimulationAttentionPrism(BaseBlueprintComposition):
 
         # 1. Incoming Token Laser Beam (top-down)
         self.in_beam = Line(
-            start=[0, 3.6, 0], end=[0, 1.8, 0],
-            color=COLOR_WHITE, stroke_width=6.0
+            start=[0, 3.2, 0], end=[0, 1.8, 0],
+            color=COLOR_WHITE, stroke_width=5.0
         )
-        in_lbl = CleanText(token_label[:20].upper(), font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE, weight=BOLD).next_to(self.in_beam, UP, buff=0.12)
+        in_lbl = CleanText(token_label[:20].upper(), font=FONT_HELVETICA, font_size=9, color=COLOR_WHITE, weight=BOLD).next_to(self.in_beam, UP, buff=0.1)
 
         # 2. Translucent Optical Prism (Hexagonal Glass Core)
         self.prism = RegularPolygon(
-            n=6, radius=0.85, color=COLOR_CYAN,
-            fill_color="#0F172A", fill_opacity=0.90, stroke_width=2.5
-        ).move_to([0, 1.0, 0])
-        prism_lbl = CleanText("Q/K/V", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD).move_to(self.prism)
+            n=6, radius=0.75, color=COLOR_CYAN,
+            fill_color="#0F172A", fill_opacity=0.90, stroke_width=2.2
+        ).move_to([0, 1.1, 0])
+        prism_lbl = CleanText("Q/K/V", font=FONT_HELVETICA, font_size=11, color=COLOR_CYAN, weight=BOLD).move_to(self.prism)
 
-        # 3. Attention Correlation Heatmap (3x3 grid, centered at y = -1.6)
+        # 3. Attention Correlation Heatmap (3x3 grid, compact layout)
         self.heatmap = VGroup()
-        grid_start_x = -0.9
-        grid_start_y = -0.8
-        cell_size = 0.9
+        grid_start_x = -0.75
+        grid_start_y = -0.15
+        cell_size = 0.72
         heat_vals = [
             [0.9, 0.2, 0.4],
             [0.1, 0.85, 0.3],
@@ -335,18 +335,18 @@ class SimulationAttentionPrism(BaseBlueprintComposition):
                 cell = Square(side_length=cell_size, color=COLOR_DARK_SLATE, stroke_width=1.2, fill_color=col, fill_opacity=0.88).move_to(
                     [col_centers[c], grid_start_y - r * cell_size, 0]
                 )
-                txt = CleanText(f"{val:.1f}", font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE if val > 0.5 else COLOR_SLATE).move_to(cell)
+                txt = CleanText(f"{val:.1f}", font=FONT_HELVETICA, font_size=9, color=COLOR_WHITE if val > 0.5 else COLOR_SLATE).move_to(cell)
                 self.heatmap.add(VGroup(cell, txt))
 
         # Refracted Output Beams landing directly on top of each heatmap column
-        self.beam_q = Line(start=[0, 0.8, 0], end=[col_centers[0], grid_start_y + 0.5, 0], color=COLOR_CYAN, stroke_width=4.0)
-        self.beam_k = Line(start=[0, 0.8, 0], end=[col_centers[1], grid_start_y + 0.5, 0], color=COLOR_AMBER, stroke_width=4.0)
-        self.beam_v = Line(start=[0, 0.8, 0], end=[col_centers[2], grid_start_y + 0.5, 0], color=COLOR_MINT, stroke_width=4.0)
+        self.beam_q = Line(start=[0, 0.85, 0], end=[col_centers[0], grid_start_y + 0.45, 0], color=COLOR_CYAN, stroke_width=3.5)
+        self.beam_k = Line(start=[0, 0.85, 0], end=[col_centers[1], grid_start_y + 0.45, 0], color=COLOR_AMBER, stroke_width=3.5)
+        self.beam_v = Line(start=[0, 0.85, 0], end=[col_centers[2], grid_start_y + 0.45, 0], color=COLOR_MINT, stroke_width=3.5)
         self.refracted_beams = VGroup(self.beam_q, self.beam_k, self.beam_v)
 
         # Clean bottom title badge
-        mat_badge = RoundedRectangle(corner_radius=0.1, width=3.4, height=0.45, color=COLOR_AMBER, fill_color=COLOR_PANEL_BG, fill_opacity=0.92, stroke_width=1.5).move_to([0, -3.45, 0])
-        mat_txt = CleanText(matrix_title[:24].upper(), font=FONT_HELVETICA, font_size=10, color=COLOR_AMBER, weight=BOLD).move_to(mat_badge)
+        mat_badge = RoundedRectangle(corner_radius=0.1, width=3.2, height=0.42, color=COLOR_AMBER, fill_color=COLOR_PANEL_BG, fill_opacity=0.92, stroke_width=1.5).next_to(self.heatmap, DOWN, buff=0.22)
+        mat_txt = CleanText(matrix_title[:24].upper(), font=FONT_HELVETICA, font_size=9, color=COLOR_AMBER, weight=BOLD).move_to(mat_badge)
         mat_grp = VGroup(mat_badge, mat_txt)
         self.in_lbl = in_lbl
         self.prism_lbl = prism_lbl

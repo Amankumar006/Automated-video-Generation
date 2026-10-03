@@ -260,9 +260,9 @@ def main():
         raise ValueError(f"Unsupported category '{category}'. Available: {list(CATEGORY_SCENE_MAP.keys())}")
 
     if not args.legacy_engine:
-        scene_file = "manim_engine/scenes/dynamic_scene.py"
-        scene_class = "DynamicCompositeScene"
-        engine_label = "Visual Engine 2.0 Dynamic Compiler"
+        scene_file = "manim_engine/scenes/script_driven_scene.py"
+        scene_class = "ScriptDrivenScene"
+        engine_label = "Visual Engine Script-Driven Compiler"
     else:
         scene_info = CATEGORY_SCENE_MAP[category]
         scene_file = scene_info["file"]

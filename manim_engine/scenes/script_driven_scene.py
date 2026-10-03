@@ -60,6 +60,9 @@ class ScriptDrivenScene(MovingCameraScene):
         self.current_formula_mobj = None
         self.setup_header()
 
+        # 3.5 Setup Synchronized Kinetic Subtitle Pill
+        self.setup_kinetic_captions()
+
         # 4. Choreograph Each Beat with Script-Driven Visuals
         self.play_script_driven_choreography()
 
@@ -104,6 +107,66 @@ class ScriptDrivenScene(MovingCameraScene):
         ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.add(self.header_group)
+
+    def setup_kinetic_captions(self):
+        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.45."""
+        try:
+            from pipeline.subtitle_generator import generate_phrase_chunks
+            self.caption_chunks = generate_phrase_chunks(self.spec.get("beats", []))
+        except Exception as e:
+            print(f"⚠️ Kinetic subtitle setup notice: {e}")
+            self.caption_chunks = []
+
+        self.caption_container = VGroup().move_to([0, -3.45, 0])
+        self.add(self.caption_container)
+
+        if not self.caption_chunks:
+            return
+
+        self.current_caption_idx = -1
+
+        def update_caption(mob, dt):
+            t = self.renderer.time
+            matched = False
+            for i, c in enumerate(self.caption_chunks):
+                if c["start"] <= t < c["end"]:
+                    matched = True
+                    if self.current_caption_idx != i:
+                        self.current_caption_idx = i
+                        raw_text = c["text"]
+                        highlight = c.get("highlight_word", "")
+                        h_color = c.get("highlight_color", "#FDE047")
+                        t2c = {highlight: h_color} if highlight and highlight in raw_text else {}
+
+                        txt = Text(
+                            raw_text,
+                            font=FONT_HELVETICA,
+                            font_size=19,
+                            weight=BOLD,
+                            color=WHITE,
+                            t2c=t2c
+                        )
+                        if txt.width > 6.0:
+                            txt.scale_to_fit_width(6.0)
+                        pill_w = min(6.5, txt.width + 0.65)
+                        pill_h = 0.72
+                        bg = RoundedRectangle(
+                            corner_radius=0.18,
+                            width=pill_w,
+                            height=pill_h,
+                            fill_color="#080C14",
+                            fill_opacity=0.92,
+                            stroke_color="#334155",
+                            stroke_width=1.4
+                        )
+                        mob.become(VGroup(bg, txt).move_to([0, -3.45, 0]))
+                    break
+
+            if not matched and self.current_caption_idx != -1:
+                self.current_caption_idx = -1
+                mob.become(VGroup())
+
+        self.caption_container.add_updater(update_caption)
 
     def get_beat_duration(self, beat_id: int, default_dur: float = 6.0) -> float:
         """Calculates duration allotted to the specific beat."""
@@ -264,8 +327,12 @@ class ScriptDrivenScene(MovingCameraScene):
                     if not motif_params.get("sub"):
                         motif_params["sub"] = v_focus[:55] or "Dynamic vector diagram tailored to narrative beat"
 
+            from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
+
             # 2. Instantiate Parameterized Script Motif
-            motif = create_script_motif(motif_type, motif_params).move_to([0, 0.4, 0])
+            motif = create_script_motif(motif_type, motif_params)
+            if not isinstance(motif, BaseBlueprintComposition):
+                motif.move_to([0, 0.65, 0])
 
             # 3. Entrance: Whole Diagram visible within 1.0s (Progressive Build)
             enter_time = min(1.0, duration * 0.22)
@@ -386,9 +453,16 @@ class ScriptDrivenScene(MovingCameraScene):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
         duration = self.get_beat_duration(6, 4.5)
         fadeout_math_time = 0.3
+        fadeouts = []
         if self.current_formula_mobj:
-            self.play(FadeOut(self.current_formula_mobj), run_time=fadeout_math_time)
+            fadeouts.append(FadeOut(self.current_formula_mobj))
             self.current_formula_mobj = None
+        if hasattr(self, "caption_container") and self.caption_container:
+            self.caption_container.clear_updaters()
+            fadeouts.append(FadeOut(self.caption_container))
+            self.caption_container = None
+        if fadeouts:
+            self.play(*fadeouts, run_time=fadeout_math_time)
         else:
             fadeout_math_time = 0.0
 
