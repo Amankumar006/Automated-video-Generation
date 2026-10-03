@@ -316,8 +316,10 @@ class DailyShortsDaemon:
                 from pipeline.script_generator import generate_script
                 spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
                 audit = self.critic.evaluate_script(spec, use_llm=False)
-                print(f"   📊 Pedagogical Score: {audit.overall_score}/10 | Grade Level: {audit.grade_level}")
-                print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon}")
+                print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon} | Slop Cliches: {audit.total_slop_cliches}")
+                if spec.get("feynman_certification"):
+                    cert = spec["feynman_certification"]
+                    print(f"   🎓 Feynman Socratic Audit: Comprehension {cert.get('final_comprehension_score')}/10 | Hook {cert.get('final_retention_hook_score')}/10 | Slop Eliminated: {cert.get('ai_slop_eliminated')}")
                 print(f"   ✅ Quality Gate Passed: {audit.passed}")
                 reports.append({
                     "paper": top_paper,

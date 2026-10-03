@@ -18,7 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import (
-    FONT_HELVETICA, FFMPEG_BIN, OUTPUT_DIR,
+    FONT_HELVETICA, FFMPEG_BIN, OUTPUT_DIR, DEFAULT_VOICE,
     BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS,
     BROADCAST_CRF, BROADCAST_MAXRATE, BROADCAST_BUFSIZE
 )
@@ -246,7 +246,7 @@ def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
     parser.add_argument("--topic", required=True, help="Topic ID (e.g. deepseek-v3, deepseek_vs_gpt4, kv_cache)")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
-    parser.add_argument("--voice", default="am_adam", help="Kokoro TTS voice (default: am_adam)")
+    parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Kokoro TTS voice (default: {DEFAULT_VOICE})")
     parser.add_argument("--speed", type=float, default=1.12, help="Speech speed (default: 1.12)")
     parser.add_argument("--quality", default="-qm", choices=["-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")

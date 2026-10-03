@@ -41,31 +41,34 @@ SCRIPT_DIRECTIVES = """
 You are the Lead AI Research Director and Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
 Your job is to craft high-retention, educational short scripts explaining frontier AI architectures and mechanisms.
 
-Aesthetic & Pedagogical Philosophy (The Feynman & 3Blue1Brown Standard):
-- Explain complex AI through everyday physical intuition: use simple, relatable words that a curious 14-year-old immediately understands.
-- STRICTLY ZERO ACADEMIC JARGON in spoken narration: Never speak words like 'Softmax', 'SwiGLU', 'eigenvectors', 'quadratic matrix explosion', 'residual manifolds', or 'loss landscape'.
-- MANDATORY EVERYDAY ANALOGIES: Ground every abstract mechanism in a tangible real-world comparison (e.g. TV static, a foggy mirror clearing up, spotting shapes in clouds, a sculptor chipping marble, an autocomplete guessing game, a library card catalog, a prism bending sunlight).
-- READABILITY & SIMPLICITY (Strict Grade 6-8 Standard):
-  * Use simple 1-to-2 syllable conversational words (e.g. cut, build, test, fix, learn, shape, pick, clean, map, trace, steer).
-  * Ban multi-syllable buzzwords: NEVER say 'orchestration', 'competence-aware', 'effectively', 'subsequently', 'multimodal optimization', or 'bootstrapping'.
-  * Keep sentences short (average 10-14 words).
+Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Feynman):
+- Ground abstract AI in real developer tools and crisp physical analogies:
+  * Name REAL tools, models, frameworks, and hardware: Cursor, Claude 3.5, ChatGPT, PyTorch, vLLM, H100, Hopper, Python, Git.
+  * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation, AST, KV cache.
+  * NEVER use dumbed-down AI slop or baby-talk metaphors: strictly ban 'smart tool', 'safe drawers', 'open desk', 'magic box'. Real developers and curious students cringe at these!
+  * Ground the abstract bottleneck in ONE vivid, relatable physical analogy: (e.g. a chef waiting between ingredients, a relay race baton pass, highway traffic jams, TV static, chipping marble, library card catalog).
+- AVOID UNEXPLAINED ACADEMIC JARGON:
+  * Don't drop raw unexplained math like 'asynchronous GEMM warp specialization' or 'non-convex loss topology'.
+  * Instead, state what it physically does: 'threads run side-by-side without stalling each other'.
+- Pacing: Exactly 6 beats. Each beat MUST be 20 to 26 words maximum (around 7-9 seconds of natural, conversational speech).
 - DUAL-CADENCE SENTENCE STRUCTURE (Sync with Visual Action):
   * Every beat should follow a dual-cadence rhythm: [Setup Clause] + [Action Trigger Clause].
   * The [Action Trigger Clause] contains the `anchor_word` where on-screen physical action fires.
 - Auditory-Visual Complementarity: The voiceover carries relatable intuition and metaphors; the chalkboard screen illustrates the living geometry, physical fields, and mechanical state.
-- Pacing: Exactly 6 beats. Each beat MUST be 20 to 26 words maximum (around 7-9 seconds of natural, conversational speech).
 
-The 6-Beat Narrative Arc & Curiosity-Gap Hooks:
-1. Beat 1 (Hook / The Everyday Mystery, 0-5s):
-   Use one of these three Curiosity-Gap Archetypes:
-   - Archetype A (The Paradox): A mind-bending contradiction (e.g. 'Why does your 70-billion parameter model crumble on a 5-year-old's riddle?').
-   - Archetype B (The Scale Shock): A shocking hidden inefficiency (e.g. 'Every single second, your GPU wastes 90% of its memory doing pure busywork.').
-   - Archetype C (The Secret Mechanism): A hidden physical analogy (e.g. 'Inside every modern AI lies a tiny optical trick that nobody talks about.').
-2. Beat 2 (The Relatable Analogy, 5-13s): Anchor the mechanism in a daily-life experience (e.g., staring at clouds to spot a rabbit, or an autocomplete game).
-3. Beat 3 (The Behind-the-Scenes Trick, 13-21s): How scientists taught it this skill using an everyday process (e.g., slowly fogging up a mirror, or practicing on millions of examples).
-4. Beat 4 (The Physical Mechanism, 21-29s): The concrete step-by-step action (e.g., like a sculptor chipping away dust, scraping off unwanted noise layer by layer).
-5. Beat 5 (The Payoff / Creation, 29-37s): The final reveal or performance triumph (e.g., 50 tiny cleaning steps carving stunning art out of chaos).
-6. Beat 6 (Minimalist Brand Outro, 37-41s): 'Follow The Model Verse for simple explanations of how modern AI actually works.' (Always promote The Model Verse).
+The 6-Beat Narrative Arc:
+1. Beat 1 (Hook, 0-5s): Start with a bold, high-stakes curiosity loop or shocking inefficiency.
+   Example: 'Every time Cursor or Claude writes code for you, your GPU is wasting up to 70% of its compute doing absolutely nothing.'
+2. Beat 2 (The Visceral Problem / Analogy, 5-13s): Explain WHY this bottleneck happens using ONE clear, relatable physical analogy.
+   Example: 'Why? Because LLMs generate code one token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion.'
+3. Beat 3 (The Core Breakthrough Mechanism, 13-21s): Introduce the actual architectural innovation simply and cleanly.
+   Example: 'Enter Speculative Decoding: a tiny draft model guesses five lines ahead in a millisecond, and the giant model verifies all five in a single pass.'
+4. Beat 4 (The Technical Deep-Dive / Paper Innovation, 21-29s): Explain the paper's specific secret sauce with real developer terms.
+   Example: 'This paper supercharges it by pulling matching syntax directly from your repo\'s AST and git history, shooting draft acceptance up by 40%.'
+5. Beat 5 (Empirical Victory / Benchmark Payoff, 29-37s): Deliver the concrete payoff with numbers.
+   Example: 'The result? 4x faster coding agents without losing a single drop of benchmark accuracy.'
+6. Beat 6 (Takeaway / Seamless Loop, 37-41s): Crisp outro that naturally loops back to Beat 1.
+   Example: 'Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.'
 
 Highlight Words Rules:
 - For each beat, select 1 to 3 critical technical keywords from the beat text to highlight.
@@ -421,57 +424,55 @@ Generate the complete JSON specification strictly adhering to this structure:
         if arxiv_meta.get("repo_metadata"):
             spec["repo_metadata"] = arxiv_meta["repo_metadata"]
 
-    # Autonomous Pedagogy & Simplicity Self-Refinement Loop
+    # 2-Agent Socratic Feynman Dialogue Engine (TechScriptwriter + Curious Novice Listener)
     try:
+        from pipeline.feynman_dialogue_engine import feynman_socratic_loop
         from pipeline.script_critic import ScriptCritic
-        critic = ScriptCritic(target_grade_level=8.0, min_score=8.0)
-        audit = critic.evaluate_script(spec, use_llm=False)
-        if not audit.passed or audit.grade_level > 8.5:
-            print(f"🔄 Script Grade Level ({audit.grade_level}) exceeds Grade 8.0 or score ({audit.overall_score}) below threshold. Self-refining beats...")
-            refine_prompt = f"""You are the Lead Scriptwriter for 'The Model Verse'.
-The current script scored Grade {audit.grade_level} reading level (target: Grade 6.0 to 8.0).
-Audit verdict: {audit.summary_verdict}
+        
+        print("\n🎓 Launching 2-Agent Socratic Feynman Dialogue Engine (Writer + Novice Listener)...")
+        paper_context_data = {
+            "title": spec.get("title", topic),
+            "summary": spec.get("beats", [{}])[0].get("text", "") if spec.get("beats") else topic,
+            "abstract": (arxiv_meta.get("abstract", "") if arxiv_meta else "") or context or topic,
+            "arxiv_id": (arxiv_meta.get("arxiv_id", "") if arxiv_meta else "") or (arxiv_meta.get("id", "") if arxiv_meta else ""),
+            "category": spec.get("category", category or "mechanism_deepdive"),
+            "domain": spec.get("domain_taxonomy", "hardware_efficiency"),
+            "solution_title": spec.get("metadata", {}).get("solution_title", ""),
+            "benchmark_stats": spec.get("benchmark_comparison", {}),
+            "code_snippet": spec.get("code_snippet", {}).get("lines", []) if spec.get("code_snippet") else ""
+        }
+        if isinstance(paper_context_data["code_snippet"], list):
+            paper_context_data["code_snippet"] = "\n".join(paper_context_data["code_snippet"])
 
-Current beats:
-{json.dumps([{"beat_id": b["beat_id"], "text": b["text"]} for b in spec.get("beats", [])], indent=2)}
+        vetted_script, socratic_transcript = feynman_socratic_loop.run_socratic_loop(
+            paper_data=paper_context_data,
+            verbose=True
+        )
 
-Rewrite the 'text' for each beat to make it MUCH SIMPLER:
-1. Use short 1-to-2 syllable conversational words (e.g. cut, build, test, fix, learn, shape, pick, clean, map, trace).
-2. Keep sentences short and direct (average 10-14 words).
-3. Strictly keep every everyday physical analogy (e.g. sculptor, marble, library, cloud, mirror).
-4. Strictly ZERO academic jargon or buzzwords (no 'orchestration', 'competence-aware', 'effectively', 'bootstrap', 'optimization').
-5. 20-25 words per beat.
+        if vetted_script and vetted_script.get("beats"):
+            vetted_beats = vetted_script["beats"]
+            for idx, approved_beat in enumerate(vetted_beats):
+                if idx < len(spec["beats"]):
+                    spec["beats"][idx]["text"] = approved_beat.get("text", spec["beats"][idx]["text"])
+                    if approved_beat.get("visual_focus"):
+                        spec["beats"][idx]["visual_focus"] = approved_beat["visual_focus"]
+                    if approved_beat.get("highlight_words"):
+                        spec["beats"][idx]["highlight_words"] = approved_beat["highlight_words"]
+                    if approved_beat.get("svo_action"):
+                        spec["beats"][idx]["svo_action"] = approved_beat["svo_action"]
+                    if approved_beat.get("visual_blueprint"):
+                        spec["beats"][idx]["visual_blueprint"] = approved_beat["visual_blueprint"]
 
-Return ONLY valid JSON matching this schema:
-{{
-  "beats": [
-    {{"beat_id": 1, "text": "..."}},
-    {{"beat_id": 2, "text": "..."}},
-    {{"beat_id": 3, "text": "..."}},
-    {{"beat_id": 4, "text": "..."}},
-    {{"beat_id": 5, "text": "..."}},
-    {{"beat_id": 6, "text": "..."}}
-  ]
-}}
-"""
-            for m_name in candidate_models:
-                try:
-                    ref_model = genai.GenerativeModel(m_name, generation_config={"response_mime_type": "application/json"})
-                    ref_resp = ref_model.generate_content(refine_prompt)
-                    if ref_resp and ref_resp.text:
-                        ref_json = robust_json_loads(ref_resp.text.strip())
-                        new_beats = {b["beat_id"]: b["text"] for b in ref_json.get("beats", [])}
-                        for b in spec.get("beats", []):
-                            bid = b.get("beat_id")
-                            if bid in new_beats:
-                                b["text"] = new_beats[bid]
-                        audit_new = critic.evaluate_script(spec, use_llm=False)
-                        print(f"✅ Auto-Refinement Successful: Grade Level {audit_new.grade_level} | Pedagogical Score: {audit_new.overall_score}/10 | Passed: {audit_new.passed}")
-                        break
-                except Exception as ref_err:
-                    continue
+            spec["feynman_certification"] = vetted_script.get("feynman_certification", {})
+            cert = spec["feynman_certification"]
+            print(f"🎉 Socratic Consensus Applied: Comprehension {cert.get('final_comprehension_score')}/10 | Hook {cert.get('final_retention_hook_score')}/10 | Slop Eliminated: {cert.get('ai_slop_eliminated')}")
+
+        # Final safety audit with ScriptCritic
+        critic = ScriptCritic(target_grade_level=8.5, min_score=8.0)
+        final_audit = critic.evaluate_script(spec, use_llm=False)
+        print(f"📋 Final Pedagogical Audit: Score {final_audit.overall_score}/10 | Grade {final_audit.grade_level} | Slop Cliches: {final_audit.total_slop_cliches} | Passed: {final_audit.passed}")
     except Exception as e:
-        print(f"⚠️ Warning: Script self-refinement skipped: {e}")
+        print(f"⚠️ Warning: Socratic Feynman loop encountered an issue, falling back: {e}")
 
     # Enrich with Declarative Visual Scene Graph (VSG)
     try:
