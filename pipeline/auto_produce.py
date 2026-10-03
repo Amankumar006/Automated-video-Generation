@@ -371,7 +371,18 @@ def auto_produce(
             print(f"🔒 PRIVACY STATUS: {privacy.upper()}")
             print("=======================================================\n")
         else:
-            upload_short(final_output, metadata, privacy_status=privacy)
+            try:
+                upload_short(final_output, metadata, privacy_status=privacy)
+            except Exception as e:
+                print(f"\n⚠️ YouTube automated upload skipped or failed: {e}")
+                print(f"💡 The produced broadcast video is saved and ready at:\n   {final_output}")
+                meta_dump_path = Path(final_output).with_suffix(".youtube_metadata.json")
+                try:
+                    with open(meta_dump_path, "w", encoding="utf-8") as mf:
+                        json.dump(metadata, mf, indent=2)
+                    print(f"📄 Saved YouTube metadata for manual upload to:\n   {meta_dump_path}")
+                except Exception:
+                    pass
 
     print("\n=======================================================")
     print("🎉 AUTONOMOUS VIDEO PRODUCTION COMPLETE!")

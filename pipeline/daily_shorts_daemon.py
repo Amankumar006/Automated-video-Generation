@@ -332,31 +332,36 @@ class DailyShortsDaemon:
             # Production (Script + Critic + 1440p60 Manim + Thumbnail + YouTube)
             pacing = get_recommended_pacing()
             rec_speed = pacing.get("tts_speed", 1.12)
-            video_out = auto_produce(
-                arxiv=arxiv_id,
-                category=category,
-                speed=rec_speed,
-                quality=self.quality,
-                publish=publish,
-                privacy=self.privacy,
-                paper_meta=top_paper
-            )
+            try:
+                video_out = auto_produce(
+                    arxiv=arxiv_id,
+                    category=category,
+                    speed=rec_speed,
+                    quality=self.quality,
+                    publish=publish,
+                    privacy=self.privacy,
+                    paper_meta=top_paper
+                )
+            except Exception as prod_err:
+                print(f"⚠️ Production error for {arxiv_id}: {prod_err}")
+                video_out = None
 
-            record_paper_production(arxiv_id, title, category, video_out)
+            if video_out:
+                record_paper_production(arxiv_id, title, category, video_out)
 
-            report_item = {
-                "reel_index": idx + 1,
-                "timestamp": timestamp,
-                "paper_id": arxiv_id,
-                "title": title,
-                "category": category,
-                "taxonomy": top_paper.get("taxonomy", "general"),
-                "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
-                "video_path": video_out,
-                "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
-                "editorial_notes": notes
-            }
-            reports.append(report_item)
+                report_item = {
+                    "reel_index": idx + 1,
+                    "timestamp": timestamp,
+                    "paper_id": arxiv_id,
+                    "title": title,
+                    "category": category,
+                    "taxonomy": top_paper.get("taxonomy", "general"),
+                    "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
+                    "video_path": video_out,
+                    "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
+                    "editorial_notes": notes
+                }
+                reports.append(report_item)
 
         # 4. Generate Daily Production Log Report
         if not dry_run and reports:

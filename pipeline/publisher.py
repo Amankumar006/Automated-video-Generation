@@ -56,6 +56,20 @@ def get_authenticated_service(client_secrets_file: str = YOUTUBE_CLIENT_SECRETS_
                 creds = None
 
         if not creds:
+            # Check if running in a headless or CI environment
+            is_headless = (
+                os.environ.get("CI") == "true" or
+                os.environ.get("GITHUB_ACTIONS") == "true" or
+                (not os.environ.get("DISPLAY") and sys.platform.startswith("linux"))
+            )
+            if is_headless:
+                raise RuntimeError(
+                    f"❌ YouTube OAuth token expired or missing in headless CI environment.\n"
+                    f"Cannot open local browser for interactive login on GitHub Actions.\n"
+                    f"Please re-authenticate locally and update the YOUTUBE_TOKEN_JSON_BASE64 repository secret:\n"
+                    f"  cat pipeline/youtube_token.json | base64 | pbcopy"
+                )
+
             if not os.path.exists(client_secrets_file):
                 raise FileNotFoundError(
                     f"❌ YouTube client secrets file not found at: {client_secrets_file}\n\n"
