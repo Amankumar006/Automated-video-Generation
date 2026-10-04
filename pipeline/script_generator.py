@@ -173,8 +173,19 @@ Authors: {', '.join(arxiv_meta.get('authors', []))}
 Abstract: {arxiv_meta['abstract']}
 """
 
+    # Retention Genome Memory Injection (Engine 7.0)
+    genome_prompt_addon = ""
+    try:
+        from pipeline.retention_genome import retention_genome
+        genome_directives = retention_genome.get_evolutionary_directives()
+        genome_prompt_addon = genome_directives.get("directives_prompt_injection", "")
+    except Exception:
+        pass
+
     prompt = f"""
 {SCRIPT_DIRECTIVES}
+
+{genome_prompt_addon}
 
 Topic Request: {topic}
 {cat_hint}

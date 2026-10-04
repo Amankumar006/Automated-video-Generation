@@ -285,13 +285,24 @@ class VisualDirector:
         }
         candidates.append(pipeline_cand)
 
-        # Select first candidate not already used in this video
-        for cand in candidates:
+        # Score and sort candidates using Retention Genome evolutionary multipliers (Engine 7.0)
+        try:
+            from pipeline.retention_genome import retention_genome
+            sorted_candidates = sorted(
+                candidates,
+                key=lambda c: retention_genome.get_blueprint_multiplier(c.get("layout", "")),
+                reverse=True
+            )
+        except Exception:
+            sorted_candidates = candidates
+
+        # Select highest-retention candidate not already used in this video
+        for cand in sorted_candidates:
             if cand["layout"] not in used:
                 return cand
 
         # If all candidates used, fallback to the top match
-        return candidates[0]
+        return sorted_candidates[0]
 
     def prepare_storyboard_for_spec(self, spec: Dict[str, Any]) -> Dict[str, Any]:
         """
