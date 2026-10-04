@@ -1,0 +1,44 @@
+[Script Info]
+Title: Honeycomb: Constant-Size Scene Memory Kinetic Captions
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1440
+PlayResY: 2560
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: KineticPill, Montserrat, 58, &H00FFFFFF, &H0047E0FD, &H00140C08, &HCC080C14, 1, 0, 0, 0, 100, 100, 0, 0, 3, 14, 0, 2, 80, 80, 560, 1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.62,KineticPill,,0,0,0,,Video world models {\c&H47E0FD&}usually{\c&HFFFFFF&}
+Dialogue: 0,0:00:01.62,0:00:03.51,KineticPill,,0,0,0,,choke on {\c&HF8BD38&}long-horizon{\c&HFFFFFF&} generation
+Dialogue: 0,0:00:03.51,0:00:05.13,KineticPill,,0,0,0,,{\c&H47E0FD&}because{\c&HFFFFFF&} their memory usage grows
+Dialogue: 0,0:00:05.13,0:00:06.73,KineticPill,,0,0,0,,linearly, {\c&HF8BD38&}eventually{\c&HFFFFFF&} crashing your
+Dialogue: 0,0:00:06.73,0:00:09.29,KineticPill,,0,0,0,,{\c&H47E0FD&}VRAM{\c&HFFFFFF&} with redundant, bloated latent feature tensors.
+Dialogue: 0,0:00:09.71,0:00:11.14,KineticPill,,0,0,0,,{\c&H47E0FD&}Imagine{\c&HFFFFFF&} trying to store every
+Dialogue: 0,0:00:11.14,0:00:12.13,KineticPill,,0,0,0,,{\c&HF8BD38&}page{\c&HFFFFFF&} of a book in
+Dialogue: 0,0:00:12.13,0:00:13.83,KineticPill,,0,0,0,,a single folder; {\c&H47E0FD&}eventually{\c&HFFFFFF&}, the
+Dialogue: 0,0:00:13.83,0:00:15.01,KineticPill,,0,0,0,,{\c&HF8BD38&}folder{\c&HFFFFFF&} bursts. That is how
+Dialogue: 0,0:00:15.01,0:00:17.34,KineticPill,,0,0,0,,{\c&H47E0FD&}standard{\c&HFFFFFF&} video models handle scene history.
+Dialogue: 0,0:00:17.80,0:00:19.67,KineticPill,,0,0,0,,Enter {\c&H47E0FD&}Honeycomb{\c&HFFFFFF&}. It uses HexMemory,
+Dialogue: 0,0:00:19.67,0:00:21.32,KineticPill,,0,0,0,,a low-rank {\c&HF8BD38&}representation{\c&HFFFFFF&}
+Dialogue: 0,0:00:21.32,0:00:22.93,KineticPill,,0,0,0,,that compresses the entire {\c&H47E0FD&}3D{\c&HFFFFFF&}
+Dialogue: 0,0:00:22.93,0:00:24.48,KineticPill,,0,0,0,,scene into {\c&HF8BD38&}exactly{\c&HFFFFFF&} six fixed
+Dialogue: 0,0:00:24.48,0:00:26.32,KineticPill,,0,0,0,,spatial and {\c&H47E0FD&}spatiotemporal{\c&HFFFFFF&} planes.
+Dialogue: 0,0:00:26.73,0:00:28.39,KineticPill,,0,0,0,,The writer warps {\c&HF8BD38&}existing{\c&HFFFFFF&} planes
+Dialogue: 0,0:00:28.39,0:00:29.58,KineticPill,,0,0,0,,to match new {\c&H47E0FD&}chunks{\c&HFFFFFF&}, then
+Dialogue: 0,0:00:29.58,0:00:30.91,KineticPill,,0,0,0,,fuses them with a {\c&HF8BD38&}learned{\c&HFFFFFF&}
+Dialogue: 0,0:00:30.91,0:00:32.72,KineticPill,,0,0,0,,residual {\c&H47E0FD&}correction{\c&HFFFFFF&}, keeping the total
+Dialogue: 0,0:00:32.72,0:00:34.63,KineticPill,,0,0,0,,memory {\c&HF8BD38&}footprint{\c&HFFFFFF&} perfectly constant.
+Dialogue: 0,0:00:35.09,0:00:37.07,KineticPill,,0,0,0,,The result? A {\c&H47E0FD&}16x{\c&HFFFFFF&} reduction
+Dialogue: 0,0:00:37.07,0:00:38.65,KineticPill,,0,0,0,,in {\c&HF8BD38&}VRAM{\c&HFFFFFF&} usage compared to
+Dialogue: 0,0:00:38.65,0:00:40.51,KineticPill,,0,0,0,,{\c&H47E0FD&}SOTA{\c&HFFFFFF&}, maintaining perfect revisit
+Dialogue: 0,0:00:40.51,0:00:42.19,KineticPill,,0,0,0,,{\c&HF8BD38&}consistency{\c&HFFFFFF&} without the overhead
+Dialogue: 0,0:00:42.19,0:00:44.44,KineticPill,,0,0,0,,of {\c&H47E0FD&}re-processing{\c&HFFFFFF&} the entire video history.
+Dialogue: 0,0:00:44.89,0:00:46.25,KineticPill,,0,0,0,,{\c&HF8BD38&}Follow{\c&HFFFFFF&} The Model Verse for
+Dialogue: 0,0:00:46.25,0:00:48.15,KineticPill,,0,0,0,,daily deep-dives into the {\c&HF8BD38&}architectures{\c&HFFFFFF&}
+Dialogue: 0,0:00:48.15,0:00:49.98,KineticPill,,0,0,0,,that make {\c&HF8BD38&}long-horizon{\c&HFFFFFF&} generation
+Dialogue: 0,0:00:49.98,0:00:51.73,KineticPill,,0,0,0,,actually feasible. Stay {\c&HF8BD38&}efficient{\c&HFFFFFF&}.

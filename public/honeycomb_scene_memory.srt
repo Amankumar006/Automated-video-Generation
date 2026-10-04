@@ -1,0 +1,115 @@
+1
+00:00:00,000 --> 00:00:01,625
+Video world models usually
+
+2
+00:00:01,625 --> 00:00:03,510
+choke on long-horizon generation
+
+3
+00:00:03,510 --> 00:00:05,128
+because their memory usage grows
+
+4
+00:00:05,128 --> 00:00:06,731
+linearly, eventually crashing your
+
+5
+00:00:06,731 --> 00:00:09,295
+VRAM with redundant, bloated latent feature tensors.
+
+6
+00:00:09,707 --> 00:00:11,137
+Imagine trying to store every
+
+7
+00:00:11,137 --> 00:00:12,127
+page of a book in
+
+8
+00:00:12,127 --> 00:00:13,827
+a single folder; eventually, the
+
+9
+00:00:13,827 --> 00:00:15,012
+folder bursts. That is how
+
+10
+00:00:15,012 --> 00:00:17,337
+standard video models handle scene history.
+
+11
+00:00:17,805 --> 00:00:19,670
+Enter Honeycomb. It uses HexMemory,
+
+12
+00:00:19,670 --> 00:00:21,320
+a low-rank representation
+
+13
+00:00:21,320 --> 00:00:22,935
+that compresses the entire 3D
+
+14
+00:00:22,935 --> 00:00:24,480
+scene into exactly six fixed
+
+15
+00:00:24,480 --> 00:00:26,325
+spatial and spatiotemporal planes.
+
+16
+00:00:26,733 --> 00:00:28,393
+The writer warps existing planes
+
+17
+00:00:28,393 --> 00:00:29,577
+to match new chunks, then
+
+18
+00:00:29,577 --> 00:00:30,908
+fuses them with a learned
+
+19
+00:00:30,908 --> 00:00:32,718
+residual correction, keeping the total
+
+20
+00:00:32,718 --> 00:00:34,633
+memory footprint perfectly constant.
+
+21
+00:00:35,087 --> 00:00:37,067
+The result? A 16x reduction
+
+22
+00:00:37,067 --> 00:00:38,646
+in VRAM usage compared to
+
+23
+00:00:38,646 --> 00:00:40,512
+SOTA, maintaining perfect revisit
+
+24
+00:00:40,512 --> 00:00:42,187
+consistency without the overhead
+
+25
+00:00:42,187 --> 00:00:44,442
+of re-processing the entire video history.
+
+26
+00:00:44,892 --> 00:00:46,247
+Follow The Model Verse for
+
+27
+00:00:46,247 --> 00:00:48,152
+daily deep-dives into the architectures
+
+28
+00:00:48,152 --> 00:00:49,977
+that make long-horizon generation
+
+29
+00:00:49,977 --> 00:00:51,732
+actually feasible. Stay efficient.
