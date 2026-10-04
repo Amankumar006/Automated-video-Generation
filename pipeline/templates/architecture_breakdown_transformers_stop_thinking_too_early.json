@@ -1,0 +1,1994 @@
+{
+  "id": "transformers_stop_thinking_too_early",
+  "title": "Transformers Stop Thinking Too Early",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "ARCHITECTURE BREAKDOWN: EARLY EXIT",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Your LLM is hallucinating logic because it stops thinking way too early. It\u2019s essentially a sprinter who quits the race after the first ten meters.",
+      "visual_focus": "A runner on a track suddenly stopping mid-stride while the finish line is far in the distance.",
+      "highlight_words": {
+        "stops thinking": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "LLM",
+        "action_verb": "abandons",
+        "direct_object": "logical reasoning",
+        "anchor_word": "quits",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE REASONING GAP",
+        "sub": "Models fail to utilize full depth for long-range dependencies",
+        "accent_color": "#34D399",
+        "params": {
+          "bottom_layer": "Active Processing",
+          "mid_layer": "Idle Weights",
+          "top_layer": "Unused Potential"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "layer_stack",
+        "title": "THE REASONING GAP",
+        "sub": "Models fail to utilize full depth for long-range dependencies",
+        "accent_color": "#34D399",
+        "bottom_layer": "Active Processing",
+        "mid_layer": "Idle Weights",
+        "top_layer": "Unused Potential"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.57,
+      "slot_duration": 7.87,
+      "start": 0.0,
+      "end": 7.57,
+      "word_timings": [
+        {
+          "word": "Your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.025,
+          "end": 0.18,
+          "duration": 0.155,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "LLM",
+          "clean_word": "llm",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 0.18,
+          "end": 0.795,
+          "duration": 0.615,
+          "frame_ahead_trigger": 0.14
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 0.795,
+          "end": 0.793,
+          "duration": -0.002,
+          "frame_ahead_trigger": 0.755
+        },
+        {
+          "word": "hallucinating",
+          "clean_word": "hallucinating",
+          "phonemes": "h\u0250l\u02c8u\u02d0s\u1d7bn\u02cce\u026a\u027e\u026a\u014b",
+          "start": 0.793,
+          "end": 1.505,
+          "duration": 0.712,
+          "frame_ahead_trigger": 0.753
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 1.505,
+          "end": 2.1,
+          "duration": 0.595,
+          "frame_ahead_trigger": 1.465
+        },
+        {
+          "word": "because",
+          "clean_word": "because",
+          "phonemes": "b\u026ak\u02c8\u028cz",
+          "start": 2.1,
+          "end": 2.39,
+          "duration": 0.29,
+          "frame_ahead_trigger": 2.06
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 2.39,
+          "end": 2.565,
+          "duration": 0.175,
+          "frame_ahead_trigger": 2.35
+        },
+        {
+          "word": "stops",
+          "clean_word": "stops",
+          "phonemes": "st\u02c8\u0251\u02d0ps",
+          "start": 2.565,
+          "end": 2.84,
+          "duration": 0.275,
+          "frame_ahead_trigger": 2.525
+        },
+        {
+          "word": "thinking",
+          "clean_word": "thinking",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk\u026a\u014b",
+          "start": 2.84,
+          "end": 3.225,
+          "duration": 0.385,
+          "frame_ahead_trigger": 2.8
+        },
+        {
+          "word": "way",
+          "clean_word": "way",
+          "phonemes": "w\u02c8e\u026a",
+          "start": 3.225,
+          "end": 3.465,
+          "duration": 0.24,
+          "frame_ahead_trigger": 3.185
+        },
+        {
+          "word": "too",
+          "clean_word": "too",
+          "phonemes": "t\u02c8u\u02d0",
+          "start": 3.465,
+          "end": 3.7,
+          "duration": 0.235,
+          "frame_ahead_trigger": 3.425
+        },
+        {
+          "word": "early.",
+          "clean_word": "early",
+          "phonemes": "\u02c8\u025c\u02d0li",
+          "start": 3.7,
+          "end": 3.974,
+          "duration": 0.274,
+          "frame_ahead_trigger": 3.66
+        },
+        {
+          "word": "It\u2019s",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 3.974,
+          "end": 4.139,
+          "duration": 0.165,
+          "frame_ahead_trigger": 3.934
+        },
+        {
+          "word": "essentially",
+          "clean_word": "essentially",
+          "phonemes": "\u1d7bs\u02c8\u025bn\u0283\u0259li",
+          "start": 4.139,
+          "end": 4.715,
+          "duration": 0.576,
+          "frame_ahead_trigger": 4.099
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 4.715,
+          "end": 4.797,
+          "duration": 0.082,
+          "frame_ahead_trigger": 4.675
+        },
+        {
+          "word": "sprinter",
+          "clean_word": "sprinter",
+          "phonemes": "sp\u0279\u02c8\u026ant\u025a",
+          "start": 4.797,
+          "end": 5.24,
+          "duration": 0.443,
+          "frame_ahead_trigger": 4.757
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 5.24,
+          "end": 5.41,
+          "duration": 0.17,
+          "frame_ahead_trigger": 5.2
+        },
+        {
+          "word": "quits",
+          "clean_word": "quits",
+          "phonemes": "kw\u02c8\u026ats",
+          "start": 5.41,
+          "end": 5.815,
+          "duration": 0.405,
+          "frame_ahead_trigger": 5.37
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.815,
+          "end": 5.925,
+          "duration": 0.11,
+          "frame_ahead_trigger": 5.775
+        },
+        {
+          "word": "race",
+          "clean_word": "race",
+          "phonemes": "\u0279\u02c8e\u026as",
+          "start": 5.925,
+          "end": 6.19,
+          "duration": 0.265,
+          "frame_ahead_trigger": 5.885
+        },
+        {
+          "word": "after",
+          "clean_word": "after",
+          "phonemes": "\u02c8\u00e6ft\u025a",
+          "start": 6.19,
+          "end": 6.365,
+          "duration": 0.175,
+          "frame_ahead_trigger": 6.15
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 6.365,
+          "end": 6.55,
+          "duration": 0.185,
+          "frame_ahead_trigger": 6.325
+        },
+        {
+          "word": "first",
+          "clean_word": "first",
+          "phonemes": "f\u02c8\u025c\u02d0st",
+          "start": 6.55,
+          "end": 6.87,
+          "duration": 0.32,
+          "frame_ahead_trigger": 6.51
+        },
+        {
+          "word": "ten",
+          "clean_word": "ten",
+          "phonemes": "t\u02c8\u025bn",
+          "start": 6.87,
+          "end": 7.07,
+          "duration": 0.2,
+          "frame_ahead_trigger": 6.83
+        },
+        {
+          "word": "meters.",
+          "clean_word": "meters",
+          "phonemes": "m\u02c8i\u02d0\u027e\u025az",
+          "start": 7.07,
+          "end": 7.485,
+          "duration": 0.415,
+          "frame_ahead_trigger": 7.03
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Why? Because the residual stream loses coherence. Like a relay race where the baton is dropped, the model\u2019s internal state degrades before reaching the final layers.",
+      "visual_focus": "A glowing stream of data packets (the residual stream) fading from bright white to dim grey as it moves through transformer blocks.",
+      "highlight_words": {
+        "residual stream": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "residual stream",
+        "action_verb": "loses",
+        "direct_object": "coherence",
+        "anchor_word": "degrades",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "SIGNAL DEGRADATION",
+        "sub": "Information entropy increases across deep transformer layers",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "neural_activation_wave",
+        "title": "SIGNAL DEGRADATION",
+        "sub": "Information entropy increases across deep transformer layers",
+        "accent_color": "#38BDF8"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.28,
+      "slot_duration": 8.58,
+      "start": 7.87,
+      "end": 16.15,
+      "word_timings": [
+        {
+          "word": "Why?",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 7.893,
+          "end": 8.128,
+          "duration": 0.235,
+          "frame_ahead_trigger": 7.853
+        },
+        {
+          "word": "Because",
+          "clean_word": "because",
+          "phonemes": "b\u026ak\u02c8\u028cz",
+          "start": 8.128,
+          "end": 8.463,
+          "duration": 0.335,
+          "frame_ahead_trigger": 8.088
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.463,
+          "end": 8.535,
+          "duration": 0.071,
+          "frame_ahead_trigger": 8.423
+        },
+        {
+          "word": "residual",
+          "clean_word": "residual",
+          "phonemes": "\u0279\u1d7bs\u02c8\u026ad\u0292u\u02d0\u0259l",
+          "start": 8.535,
+          "end": 9.043,
+          "duration": 0.509,
+          "frame_ahead_trigger": 8.495
+        },
+        {
+          "word": "stream",
+          "clean_word": "stream",
+          "phonemes": "st\u0279\u02c8i\u02d0m",
+          "start": 9.043,
+          "end": 9.508,
+          "duration": 0.465,
+          "frame_ahead_trigger": 9.003
+        },
+        {
+          "word": "loses",
+          "clean_word": "loses",
+          "phonemes": "l\u02c8u\u02d0z\u1d7bz",
+          "start": 9.508,
+          "end": 9.873,
+          "duration": 0.365,
+          "frame_ahead_trigger": 9.468
+        },
+        {
+          "word": "coherence.",
+          "clean_word": "coherence",
+          "phonemes": "ko\u028ah\u02c8\u026a\u0279\u0259ns",
+          "start": 9.873,
+          "end": 10.405,
+          "duration": 0.531,
+          "frame_ahead_trigger": 9.833
+        },
+        {
+          "word": "Like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 10.405,
+          "end": 10.668,
+          "duration": 0.264,
+          "frame_ahead_trigger": 10.365
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.668,
+          "end": 10.823,
+          "duration": 0.155,
+          "frame_ahead_trigger": 10.628
+        },
+        {
+          "word": "relay",
+          "clean_word": "relay",
+          "phonemes": "\u0279\u02c8i\u02d0le\u026a",
+          "start": 10.823,
+          "end": 11.298,
+          "duration": 0.475,
+          "frame_ahead_trigger": 10.783
+        },
+        {
+          "word": "race",
+          "clean_word": "race",
+          "phonemes": "\u0279\u02c8e\u026as",
+          "start": 11.298,
+          "end": 11.588,
+          "duration": 0.29,
+          "frame_ahead_trigger": 11.258
+        },
+        {
+          "word": "where",
+          "clean_word": "where",
+          "phonemes": "w\u02c8\u025b\u0279",
+          "start": 11.588,
+          "end": 11.708,
+          "duration": 0.12,
+          "frame_ahead_trigger": 11.548
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.708,
+          "end": 11.808,
+          "duration": 0.1,
+          "frame_ahead_trigger": 11.668
+        },
+        {
+          "word": "baton",
+          "clean_word": "baton",
+          "phonemes": "b\u0250t\u02c8\u0251\u02d0n",
+          "start": 11.808,
+          "end": 12.088,
+          "duration": 0.28,
+          "frame_ahead_trigger": 11.768
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 12.088,
+          "end": 12.333,
+          "duration": 0.245,
+          "frame_ahead_trigger": 12.048
+        },
+        {
+          "word": "dropped,",
+          "clean_word": "dropped",
+          "phonemes": "d\u0279\u02c8\u0251\u02d0pt",
+          "start": 12.333,
+          "end": 12.663,
+          "duration": 0.33,
+          "frame_ahead_trigger": 12.293
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.663,
+          "end": 12.756,
+          "duration": 0.092,
+          "frame_ahead_trigger": 12.623
+        },
+        {
+          "word": "model\u2019s",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 12.756,
+          "end": 13.183,
+          "duration": 0.428,
+          "frame_ahead_trigger": 12.716
+        },
+        {
+          "word": "internal",
+          "clean_word": "internal",
+          "phonemes": "\u026ant\u02c8\u025c\u02d0n\u0259l",
+          "start": 13.183,
+          "end": 13.588,
+          "duration": 0.405,
+          "frame_ahead_trigger": 13.143
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 13.588,
+          "end": 13.938,
+          "duration": 0.35,
+          "frame_ahead_trigger": 13.548
+        },
+        {
+          "word": "degrades",
+          "clean_word": "degrades",
+          "phonemes": "d\u1d7b\u0261\u0279\u02c8e\u026adz",
+          "start": 13.938,
+          "end": 14.503,
+          "duration": 0.565,
+          "frame_ahead_trigger": 13.898
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 14.503,
+          "end": 14.868,
+          "duration": 0.365,
+          "frame_ahead_trigger": 14.463
+        },
+        {
+          "word": "reaching",
+          "clean_word": "reaching",
+          "phonemes": "\u0279\u02c8i\u02d0t\u0283\u026a\u014b",
+          "start": 14.868,
+          "end": 15.303,
+          "duration": 0.435,
+          "frame_ahead_trigger": 14.828
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.303,
+          "end": 15.393,
+          "duration": 0.09,
+          "frame_ahead_trigger": 15.263
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 15.393,
+          "end": 15.648,
+          "duration": 0.255,
+          "frame_ahead_trigger": 15.353
+        },
+        {
+          "word": "layers.",
+          "clean_word": "layers",
+          "phonemes": "l\u02c8e\u026a\u025az",
+          "start": 15.648,
+          "end": 16.068,
+          "duration": 0.42,
+          "frame_ahead_trigger": 15.608
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "The fix isn't more training; it's a rank-8 LoRA patch acting as a signal booster. We inject this bridge into an early layer to refresh the signal.",
+      "visual_focus": "A small green box (LoRA) inserted between two transformer layers, boosting the signal intensity of the passing data stream.",
+      "highlight_words": {
+        "LoRA patch": "#10B981"
+      },
+      "svo_action": {
+        "subject": "LoRA patch",
+        "action_verb": "amplifies",
+        "direct_object": "hidden states",
+        "anchor_word": "booster",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "TRANSFORMERS STOP  ARCHITECTURE",
+        "sub": "A small green box (LoRA) inserted between two transformer layers,",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.png",
+          "arxiv_id": "2609.36585",
+          "title": "TRANSFORMERS STOP  ARCHITECTURE",
+          "sub": "A small green box (LoRA) inserted between two transformer layers,",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.png",
+        "arxiv_id": "2609.36585",
+        "title": "TRANSFORMERS STOP  ARCHITECTURE",
+        "sub": "A small green box (LoRA) inserted between two transformer layers,",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 7.81,
+      "slot_duration": 8.11,
+      "start": 16.45,
+      "end": 24.26,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.476,
+          "end": 16.586,
+          "duration": 0.11,
+          "frame_ahead_trigger": 16.436
+        },
+        {
+          "word": "fix",
+          "clean_word": "fix",
+          "phonemes": "f\u02c8\u026aks",
+          "start": 16.586,
+          "end": 16.806,
+          "duration": 0.22,
+          "frame_ahead_trigger": 16.546
+        },
+        {
+          "word": "isn't",
+          "clean_word": "isnt",
+          "phonemes": "\u02c8\u026asnt",
+          "start": 16.806,
+          "end": 17.246,
+          "duration": 0.44,
+          "frame_ahead_trigger": 16.766
+        },
+        {
+          "word": "more",
+          "clean_word": "more",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279",
+          "start": 17.246,
+          "end": 17.391,
+          "duration": 0.145,
+          "frame_ahead_trigger": 17.206
+        },
+        {
+          "word": "training;",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 17.391,
+          "end": 17.851,
+          "duration": 0.46,
+          "frame_ahead_trigger": 17.351
+        },
+        {
+          "word": "it's",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 17.851,
+          "end": 18.036,
+          "duration": 0.185,
+          "frame_ahead_trigger": 17.811
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.036,
+          "end": 18.281,
+          "duration": 0.245,
+          "frame_ahead_trigger": 17.996
+        },
+        {
+          "word": "rank-8",
+          "clean_word": "rank8",
+          "phonemes": "\u0279\u02c8\u00e6\u014bk \u02c8e\u026at",
+          "start": 18.281,
+          "end": 18.756,
+          "duration": 0.475,
+          "frame_ahead_trigger": 18.241
+        },
+        {
+          "word": "LoRA",
+          "clean_word": "lora",
+          "phonemes": "l\u02c8o\u028a \u0279\u02c8\u0251\u02d0",
+          "start": 18.756,
+          "end": 19.176,
+          "duration": 0.42,
+          "frame_ahead_trigger": 18.716
+        },
+        {
+          "word": "patch",
+          "clean_word": "patch",
+          "phonemes": "p\u02c8\u00e6t\u0283",
+          "start": 19.176,
+          "end": 19.476,
+          "duration": 0.3,
+          "frame_ahead_trigger": 19.136
+        },
+        {
+          "word": "acting",
+          "clean_word": "acting",
+          "phonemes": "\u02c8\u00e6kt\u026a\u014b",
+          "start": 19.476,
+          "end": 19.936,
+          "duration": 0.46,
+          "frame_ahead_trigger": 19.436
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 19.936,
+          "end": 19.987,
+          "duration": 0.051,
+          "frame_ahead_trigger": 19.896
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 19.987,
+          "end": 20.191,
+          "duration": 0.204,
+          "frame_ahead_trigger": 19.947
+        },
+        {
+          "word": "signal",
+          "clean_word": "signal",
+          "phonemes": "s\u02c8\u026a\u0261n\u0259l",
+          "start": 20.191,
+          "end": 20.621,
+          "duration": 0.43,
+          "frame_ahead_trigger": 20.151
+        },
+        {
+          "word": "booster.",
+          "clean_word": "booster",
+          "phonemes": "b\u02c8u\u02d0st\u025a",
+          "start": 20.621,
+          "end": 20.934,
+          "duration": 0.313,
+          "frame_ahead_trigger": 20.581
+        },
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 20.934,
+          "end": 21.196,
+          "duration": 0.262,
+          "frame_ahead_trigger": 20.894
+        },
+        {
+          "word": "inject",
+          "clean_word": "inject",
+          "phonemes": "\u026and\u0292\u02c8\u025bkt",
+          "start": 21.196,
+          "end": 21.481,
+          "duration": 0.285,
+          "frame_ahead_trigger": 21.156
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 21.481,
+          "end": 21.701,
+          "duration": 0.22,
+          "frame_ahead_trigger": 21.441
+        },
+        {
+          "word": "bridge",
+          "clean_word": "bridge",
+          "phonemes": "b\u0279\u02c8\u026ad\u0292",
+          "start": 21.701,
+          "end": 22.191,
+          "duration": 0.49,
+          "frame_ahead_trigger": 21.661
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 22.191,
+          "end": 22.361,
+          "duration": 0.17,
+          "frame_ahead_trigger": 22.151
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 22.361,
+          "end": 22.551,
+          "duration": 0.19,
+          "frame_ahead_trigger": 22.321
+        },
+        {
+          "word": "early",
+          "clean_word": "early",
+          "phonemes": "\u02c8\u025c\u02d0li",
+          "start": 22.551,
+          "end": 22.741,
+          "duration": 0.19,
+          "frame_ahead_trigger": 22.511
+        },
+        {
+          "word": "layer",
+          "clean_word": "layer",
+          "phonemes": "l\u02c8e\u026a\u025a",
+          "start": 22.741,
+          "end": 23.052,
+          "duration": 0.311,
+          "frame_ahead_trigger": 22.701
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.052,
+          "end": 23.196,
+          "duration": 0.144,
+          "frame_ahead_trigger": 23.012
+        },
+        {
+          "word": "refresh",
+          "clean_word": "refresh",
+          "phonemes": "\u0279\u1d7bf\u0279\u02c8\u025b\u0283",
+          "start": 23.196,
+          "end": 23.671,
+          "duration": 0.475,
+          "frame_ahead_trigger": 23.156
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.671,
+          "end": 23.721,
+          "duration": 0.05,
+          "frame_ahead_trigger": 23.631
+        },
+        {
+          "word": "signal.",
+          "clean_word": "signal",
+          "phonemes": "s\u02c8\u026a\u0261n\u0259l",
+          "start": 23.721,
+          "end": 24.111,
+          "duration": 0.39,
+          "frame_ahead_trigger": 23.681
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "By adding this LoRA bridge, the model effectively loops its computation, allowing frozen weights to re-read the context and extend reasoning chains indefinitely.",
+      "visual_focus": "A loop animation showing data cycling back through the LoRA bridge, with accuracy metrics climbing on a side graph.",
+      "highlight_words": {
+        "frozen weights": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "LoRA bridge",
+        "action_verb": "enables",
+        "direct_object": "recurrent reasoning",
+        "anchor_word": "loops",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: TRANSFORMERS STOP ",
+        "sub": "A loop animation showing data cycling back through the LoRA bridg",
+        "params": {
+          "title": "KERNEL CODE: TRANSFORMERS STOP ",
+          "sub": "A loop animation showing data cycling back through the LoRA bridg",
+          "filename": "lora_relay.py",
+          "language": "python",
+          "lines": [
+            "def forward_chain(x):",
+            "    h = base_model(x)",
+            "    # Inject rank-8 identity bridge",
+            "    return h + lora_patch(h)"
+          ],
+          "highlight_lines": [
+            3
+          ],
+          "trace_register": "\u26a1 RELAY BRIDGE ACTIVATED",
+          "delta_badge": "Injects reasoning signal into middle layers"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: TRANSFORMERS STOP ",
+        "sub": "A loop animation showing data cycling back through the LoRA bridg",
+        "filename": "lora_relay.py",
+        "language": "python",
+        "lines": [
+          "def forward_chain(x):",
+          "    h = base_model(x)",
+          "    # Inject rank-8 identity bridge",
+          "    return h + lora_patch(h)"
+        ],
+        "highlight_lines": [
+          3
+        ],
+        "trace_register": "\u26a1 RELAY BRIDGE ACTIVATED",
+        "delta_badge": "Injects reasoning signal into middle layers"
+      },
+      "audio_duration": 8.77,
+      "slot_duration": 9.07,
+      "start": 24.56,
+      "end": 33.33,
+      "word_timings": [
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 24.574,
+          "end": 24.869,
+          "duration": 0.295,
+          "frame_ahead_trigger": 24.534
+        },
+        {
+          "word": "adding",
+          "clean_word": "adding",
+          "phonemes": "\u02c8\u00e6d\u026a\u014b",
+          "start": 24.869,
+          "end": 25.019,
+          "duration": 0.15,
+          "frame_ahead_trigger": 24.829
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 25.019,
+          "end": 25.204,
+          "duration": 0.185,
+          "frame_ahead_trigger": 24.979
+        },
+        {
+          "word": "LoRA",
+          "clean_word": "lora",
+          "phonemes": "l\u02c8o\u028a \u0279\u02c8\u0251\u02d0",
+          "start": 25.204,
+          "end": 25.699,
+          "duration": 0.495,
+          "frame_ahead_trigger": 25.164
+        },
+        {
+          "word": "bridge,",
+          "clean_word": "bridge",
+          "phonemes": "b\u0279\u02c8\u026ad\u0292",
+          "start": 25.699,
+          "end": 26.14,
+          "duration": 0.441,
+          "frame_ahead_trigger": 25.659
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.14,
+          "end": 26.252,
+          "duration": 0.112,
+          "frame_ahead_trigger": 26.1
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 26.252,
+          "end": 26.644,
+          "duration": 0.392,
+          "frame_ahead_trigger": 26.212
+        },
+        {
+          "word": "effectively",
+          "clean_word": "effectively",
+          "phonemes": "\u026af\u02c8\u025bkt\u026avli",
+          "start": 26.644,
+          "end": 27.219,
+          "duration": 0.575,
+          "frame_ahead_trigger": 26.604
+        },
+        {
+          "word": "loops",
+          "clean_word": "loops",
+          "phonemes": "l\u02c8u\u02d0ps",
+          "start": 27.219,
+          "end": 27.539,
+          "duration": 0.32,
+          "frame_ahead_trigger": 27.179
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 27.539,
+          "end": 27.734,
+          "duration": 0.195,
+          "frame_ahead_trigger": 27.499
+        },
+        {
+          "word": "computation,",
+          "clean_word": "computation",
+          "phonemes": "k\u02cc\u0251\u02d0mpju\u02d0t\u02c8e\u026a\u0283\u0259n",
+          "start": 27.734,
+          "end": 28.601,
+          "duration": 0.868,
+          "frame_ahead_trigger": 27.694
+        },
+        {
+          "word": "allowing",
+          "clean_word": "allowing",
+          "phonemes": "\u0250l\u02c8a\u028a\u026a\u014b",
+          "start": 28.601,
+          "end": 28.914,
+          "duration": 0.312,
+          "frame_ahead_trigger": 28.561
+        },
+        {
+          "word": "frozen",
+          "clean_word": "frozen",
+          "phonemes": "f\u0279\u02c8o\u028az\u0259n",
+          "start": 28.914,
+          "end": 29.484,
+          "duration": 0.57,
+          "frame_ahead_trigger": 28.874
+        },
+        {
+          "word": "weights",
+          "clean_word": "weights",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 29.484,
+          "end": 29.789,
+          "duration": 0.305,
+          "frame_ahead_trigger": 29.444
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 29.789,
+          "end": 29.989,
+          "duration": 0.2,
+          "frame_ahead_trigger": 29.749
+        },
+        {
+          "word": "re-read",
+          "clean_word": "reread",
+          "phonemes": "\u0279\u1d7b\u0279\u02c8i\u02d0d",
+          "start": 29.989,
+          "end": 30.389,
+          "duration": 0.4,
+          "frame_ahead_trigger": 29.949
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.389,
+          "end": 30.448,
+          "duration": 0.059,
+          "frame_ahead_trigger": 30.349
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 30.448,
+          "end": 30.909,
+          "duration": 0.461,
+          "frame_ahead_trigger": 30.408
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 30.909,
+          "end": 31.219,
+          "duration": 0.31,
+          "frame_ahead_trigger": 30.869
+        },
+        {
+          "word": "extend",
+          "clean_word": "extend",
+          "phonemes": "\u025bkst\u02c8\u025bnd",
+          "start": 31.219,
+          "end": 31.564,
+          "duration": 0.345,
+          "frame_ahead_trigger": 31.179
+        },
+        {
+          "word": "reasoning",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 31.564,
+          "end": 32.214,
+          "duration": 0.65,
+          "frame_ahead_trigger": 31.524
+        },
+        {
+          "word": "chains",
+          "clean_word": "chains",
+          "phonemes": "t\u0283\u02c8e\u026anz",
+          "start": 32.214,
+          "end": 32.544,
+          "duration": 0.33,
+          "frame_ahead_trigger": 32.174
+        },
+        {
+          "word": "indefinitely.",
+          "clean_word": "indefinitely",
+          "phonemes": "\u026and\u02c8\u025bf\u026an\u0259tli",
+          "start": 32.544,
+          "end": 33.189,
+          "duration": 0.645,
+          "frame_ahead_trigger": 32.504
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The results are staggering: Qwen3-8B jumps from 15.5% to 99% accuracy on complex chains. We\u2019ve unlocked the hidden compute already sitting in your GPU.",
+      "visual_focus": "A bar chart showing a massive spike from 15.5% to 99% as the LoRA patch is toggled on.",
+      "highlight_words": {
+        "99% accuracy": "#10B981"
+      },
+      "svo_action": {
+        "subject": "LoRA patch",
+        "action_verb": "drives",
+        "direct_object": "benchmark performance",
+        "anchor_word": "staggering",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK SHOWDOWN",
+        "sub": "Accuracy gain on 24-line reasoning chains",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "Baseline",
+          "col_a_stat": "15.5%",
+          "col_b_title": "LoRA-Patched",
+          "col_b_stat": "99.0%"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK SHOWDOWN",
+        "sub": "Accuracy gain on 24-line reasoning chains",
+        "accent_color": "#34D399",
+        "col_a_title": "Baseline",
+        "col_a_stat": "15.5%",
+        "col_b_title": "LoRA-Patched",
+        "col_b_stat": "99.0%"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 9.9,
+      "slot_duration": 10.2,
+      "start": 33.63,
+      "end": 43.53,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.637,
+          "end": 33.842,
+          "duration": 0.205,
+          "frame_ahead_trigger": 33.597
+        },
+        {
+          "word": "results",
+          "clean_word": "results",
+          "phonemes": "\u0279\u026az\u02c8\u028clts",
+          "start": 33.842,
+          "end": 34.144,
+          "duration": 0.303,
+          "frame_ahead_trigger": 33.802
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 34.144,
+          "end": 34.272,
+          "duration": 0.127,
+          "frame_ahead_trigger": 34.104
+        },
+        {
+          "word": "staggering:",
+          "clean_word": "staggering",
+          "phonemes": "st\u02c8\u00e6\u0261\u025a\u0279\u026a\u014b",
+          "start": 34.272,
+          "end": 34.753,
+          "duration": 0.482,
+          "frame_ahead_trigger": 34.232
+        },
+        {
+          "word": "Qwen3-8B",
+          "clean_word": "qwen38b",
+          "phonemes": "kj\u02c8u\u02d0w\u02c8\u025bn \u03b8\u02c8\u025c\u02d0\u027ei \u02c8e\u026at b\u02c8i\u02d0",
+          "start": 34.753,
+          "end": 36.052,
+          "duration": 1.298,
+          "frame_ahead_trigger": 34.713
+        },
+        {
+          "word": "jumps",
+          "clean_word": "jumps",
+          "phonemes": "d\u0292\u02c8\u028cmps",
+          "start": 36.052,
+          "end": 36.497,
+          "duration": 0.445,
+          "frame_ahead_trigger": 36.012
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 36.497,
+          "end": 36.647,
+          "duration": 0.15,
+          "frame_ahead_trigger": 36.457
+        },
+        {
+          "word": "15.5%",
+          "clean_word": "155",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad f\u02c8\u026afti f\u02c8a\u026av",
+          "start": 36.647,
+          "end": 37.877,
+          "duration": 1.23,
+          "frame_ahead_trigger": 36.607
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 37.877,
+          "end": 38.067,
+          "duration": 0.19,
+          "frame_ahead_trigger": 37.837
+        },
+        {
+          "word": "99%",
+          "clean_word": "99",
+          "phonemes": "n\u02c8a\u026anti n\u02c8a\u026an",
+          "start": 38.067,
+          "end": 38.707,
+          "duration": 0.64,
+          "frame_ahead_trigger": 38.027
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 38.707,
+          "end": 39.102,
+          "duration": 0.395,
+          "frame_ahead_trigger": 38.667
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 39.102,
+          "end": 39.342,
+          "duration": 0.24,
+          "frame_ahead_trigger": 39.062
+        },
+        {
+          "word": "complex",
+          "clean_word": "complex",
+          "phonemes": "k\u02c8\u0251\u02d0mpl\u025bks",
+          "start": 39.342,
+          "end": 39.867,
+          "duration": 0.525,
+          "frame_ahead_trigger": 39.302
+        },
+        {
+          "word": "chains.",
+          "clean_word": "chains",
+          "phonemes": "t\u0283\u02c8e\u026anz",
+          "start": 39.867,
+          "end": 40.132,
+          "duration": 0.265,
+          "frame_ahead_trigger": 39.827
+        },
+        {
+          "word": "We\u2019ve",
+          "clean_word": "weve",
+          "phonemes": "w\u02c8i\u02d0v",
+          "start": 40.132,
+          "end": 40.438,
+          "duration": 0.306,
+          "frame_ahead_trigger": 40.092
+        },
+        {
+          "word": "unlocked",
+          "clean_word": "unlocked",
+          "phonemes": "\u028cnl\u02c8\u0251\u02d0kt",
+          "start": 40.438,
+          "end": 40.787,
+          "duration": 0.349,
+          "frame_ahead_trigger": 40.398
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.787,
+          "end": 41.007,
+          "duration": 0.22,
+          "frame_ahead_trigger": 40.747
+        },
+        {
+          "word": "hidden",
+          "clean_word": "hidden",
+          "phonemes": "h\u02c8\u026ad\u0259n",
+          "start": 41.007,
+          "end": 41.252,
+          "duration": 0.245,
+          "frame_ahead_trigger": 40.967
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 41.252,
+          "end": 41.787,
+          "duration": 0.535,
+          "frame_ahead_trigger": 41.212
+        },
+        {
+          "word": "already",
+          "clean_word": "already",
+          "phonemes": "\u0254\u02d0l\u0279\u02c8\u025bdi",
+          "start": 41.787,
+          "end": 42.227,
+          "duration": 0.44,
+          "frame_ahead_trigger": 41.747
+        },
+        {
+          "word": "sitting",
+          "clean_word": "sitting",
+          "phonemes": "s\u02c8\u026a\u027e\u026a\u014b",
+          "start": 42.227,
+          "end": 42.417,
+          "duration": 0.19,
+          "frame_ahead_trigger": 42.187
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 42.417,
+          "end": 42.507,
+          "duration": 0.09,
+          "frame_ahead_trigger": 42.377
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 42.507,
+          "end": 42.697,
+          "duration": 0.19,
+          "frame_ahead_trigger": 42.467
+        },
+        {
+          "word": "GPU.",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 42.697,
+          "end": 43.382,
+          "duration": 0.685,
+          "frame_ahead_trigger": 42.657
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop letting your models quit early. Follow The Model Verse for daily deep-dives into the mechanics of high-performance AI.",
+      "visual_focus": "The Model Verse logo appearing over a clean, dark-mode terminal interface.",
+      "highlight_words": {
+        "The Model Verse": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "User",
+        "action_verb": "follow",
+        "direct_object": "The Model Verse",
+        "anchor_word": "deep-dives",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "STAY TUNED",
+        "sub": "Engineering the future of LLM inference",
+        "accent_color": "#38BDF8",
+        "params": {
+          "input_1_label": "Research",
+          "input_2_label": "Code",
+          "input_3_label": "Architecture",
+          "fused_label": "Deep Dive"
+        }
+      },
+      "audio_duration": 6.29,
+      "slot_duration": 6.79,
+      "start": 43.83,
+      "end": 50.12,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 43.84,
+          "end": 44.155,
+          "duration": 0.315,
+          "frame_ahead_trigger": 43.8
+        },
+        {
+          "word": "letting",
+          "clean_word": "letting",
+          "phonemes": "l\u02c8\u025b\u027e\u026a\u014b",
+          "start": 44.155,
+          "end": 44.53,
+          "duration": 0.375,
+          "frame_ahead_trigger": 44.115
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 44.53,
+          "end": 44.66,
+          "duration": 0.13,
+          "frame_ahead_trigger": 44.49
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 44.66,
+          "end": 45.135,
+          "duration": 0.475,
+          "frame_ahead_trigger": 44.62
+        },
+        {
+          "word": "quit",
+          "clean_word": "quit",
+          "phonemes": "kw\u02c8\u026at",
+          "start": 45.135,
+          "end": 45.37,
+          "duration": 0.235,
+          "frame_ahead_trigger": 45.095
+        },
+        {
+          "word": "early.",
+          "clean_word": "early",
+          "phonemes": "\u02c8\u025c\u02d0li",
+          "start": 45.37,
+          "end": 45.644,
+          "duration": 0.273,
+          "frame_ahead_trigger": 45.33
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 45.644,
+          "end": 46.115,
+          "duration": 0.472,
+          "frame_ahead_trigger": 45.604
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 46.115,
+          "end": 46.135,
+          "duration": 0.02,
+          "frame_ahead_trigger": 46.075
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 46.135,
+          "end": 46.515,
+          "duration": 0.38,
+          "frame_ahead_trigger": 46.095
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 46.515,
+          "end": 46.791,
+          "duration": 0.276,
+          "frame_ahead_trigger": 46.475
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 46.791,
+          "end": 46.94,
+          "duration": 0.149,
+          "frame_ahead_trigger": 46.751
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 46.94,
+          "end": 47.38,
+          "duration": 0.44,
+          "frame_ahead_trigger": 46.9
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 47.38,
+          "end": 47.91,
+          "duration": 0.53,
+          "frame_ahead_trigger": 47.34
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 47.91,
+          "end": 48.105,
+          "duration": 0.195,
+          "frame_ahead_trigger": 47.87
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 48.105,
+          "end": 48.295,
+          "duration": 0.19,
+          "frame_ahead_trigger": 48.065
+        },
+        {
+          "word": "mechanics",
+          "clean_word": "mechanics",
+          "phonemes": "m\u1d7bk\u02c8\u00e6n\u026aks",
+          "start": 48.295,
+          "end": 48.7,
+          "duration": 0.405,
+          "frame_ahead_trigger": 48.255
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 48.7,
+          "end": 48.845,
+          "duration": 0.145,
+          "frame_ahead_trigger": 48.66
+        },
+        {
+          "word": "high-performance",
+          "clean_word": "highperformance",
+          "phonemes": "h\u02c8a\u026ap\u025af\u02cc\u0254\u02d0\u0279m\u0259ns",
+          "start": 48.845,
+          "end": 49.54,
+          "duration": 0.695,
+          "frame_ahead_trigger": 48.805
+        },
+        {
+          "word": "AI.",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 49.54,
+          "end": 49.96,
+          "duration": 0.42,
+          "frame_ahead_trigger": 49.5
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N_{\\mathrm{effective}} < N_{\\mathrm{total}}$",
+      "filename": "transformers_stop_thinking_too_early_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Layers processed"
+        }
+      ],
+      "svg_filename": "transformers_stop_thinking_too_early_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{P} = \\prod_{i=k}^{L} \\mathrm{Attn}_i(x)$",
+      "filename": "transformers_stop_thinking_too_early_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "P",
+          "label": "Propagation path"
+        }
+      ],
+      "svg_filename": "transformers_stop_thinking_too_early_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$h_{out} = W x + B A x$",
+      "filename": "transformers_stop_thinking_too_early_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "B, A",
+          "label": "Low rank adapters"
+        }
+      ],
+      "svg_filename": "transformers_stop_thinking_too_early_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\Delta L = \\sum_{j=1}^{M} \\mathrm{Head}_j(h_{j-1})$",
+      "filename": "transformers_stop_thinking_too_early_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "M",
+          "label": "Relay depth"
+        }
+      ],
+      "svg_filename": "transformers_stop_thinking_too_early_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Acc}_{\\mathrm{final}} \\approx 0.99$",
+      "filename": "transformers_stop_thinking_too_early_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Acc",
+          "label": "Exact accuracy"
+        }
+      ],
+      "svg_filename": "transformers_stop_thinking_too_early_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "MODEL",
+          "color": "#38BDF8",
+          "items": [
+            "Weights",
+            "Layers",
+            "Attn"
+          ]
+        },
+        {
+          "name": "LORA",
+          "color": "#10B981",
+          "items": [
+            "Adapter",
+            "Rank",
+            "Patch"
+          ]
+        },
+        {
+          "name": "METRIC",
+          "color": "#F59E0B",
+          "items": [
+            "Accuracy",
+            "Depth",
+            "Chain"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Input",
+        "target_cluster": "MODEL",
+        "token": "Code Line"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Identity",
+          "color": "#EF4444"
+        },
+        {
+          "word": "State",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Qwen-8B + LoRA",
+    "model_a_specs": [
+      "Rank-8",
+      "Early Layer",
+      "Frozen Base"
+    ],
+    "model_b": "Base Transformer",
+    "model_b_specs": [
+      "Default",
+      "Standard",
+      "Fixed Depth"
+    ],
+    "divide_title": "REASONING DEPTH DIVIDE",
+    "model_a_stat": "99%",
+    "model_a_stat_label": "ACCURACY",
+    "model_b_stat": "15%",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 +83.5% ACCURACY GAIN",
+    "benchmarks": [
+      {
+        "name": "Long Chain Success",
+        "score_a": "99%",
+        "score_b": "15%"
+      },
+      {
+        "name": "Layer Efficiency",
+        "score_a": "Optimized",
+        "score_b": "Stagnant"
+      },
+      {
+        "name": "Patch Cost",
+        "score_a": "Tiny",
+        "score_b": "N/A"
+      }
+    ],
+    "scale_metric": "60+",
+    "scale_label": "Lines Resolved",
+    "bottleneck_title": "BATON DROP BOTTLENECK",
+    "bottleneck_desc": "Entangled Reasoning Failure",
+    "solution_title": "LORA SIGNAL BOOSTER",
+    "solution_components": "Rank-8 Intervention",
+    "mechanism_title": "SEQUENTIAL RELAY",
+    "payoff_stat": "99%",
+    "payoff_label": "SUCCESS RATE",
+    "payoff_sub": "Outperforming Base Models via tiny edits",
+    "payoff_hero_stat": 99.0,
+    "payoff_hero_label": "LoRA Patched",
+    "payoff_base_stat": 15.5,
+    "payoff_base_label": "Dense Base",
+    "payoff_delta_badge": "\u26a1 +83.5% REASONING RECOVERY",
+    "challenger": "LoRA Patch",
+    "incumbent": "Base Transformer"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: ACCURACY",
+    "metric_name": "Success Rate",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "LoRA Patch",
+        "value": 99.0,
+        "display_val": "99%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Base Model",
+        "value": 15.5,
+        "display_val": "15.5%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +83.5% ACCURACY GAIN",
+    "radar_axes": [
+      "Accuracy",
+      "Efficiency",
+      "Chain Length",
+      "Recovery",
+      "Patch Cost"
+    ]
+  },
+  "code_snippet": {
+    "filename": "lora_relay.py",
+    "language": "python",
+    "lines": [
+      "def forward_chain(x):",
+      "    h = base_model(x)",
+      "    # Inject rank-8 identity bridge",
+      "    return h + lora_patch(h)"
+    ],
+    "highlight_lines": [
+      3
+    ],
+    "trace_register": "\u26a1 RELAY BRIDGE ACTIVATED",
+    "explanation": "Injects reasoning signal into middle layers"
+  },
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 7.5,
+    "final_retention_hook_score": 8.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is solid\u2014I definitely care about why my models hallucinate. I liked the sprinter analogy, but you lost me in Beat 2 and 3. 'Residual stream' is a term I've heard, but you didn't explain why it's 'dropping the baton' or how a LoRA patch\u2014which is usually for fine-tuning\u2014is suddenly acting as a 'signal booster' in inference. It sounds like you're describing a recurrent architecture or a specific inference-time intervention, but the terminology feels a bit hand-wavy."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "arxiv_id": "2609.36585",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig_accuracy_std",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/source/figs/fig_accuracy_std.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_1_fig_accuracy_std.png",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig_relay_std",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/source/figs/fig_relay_std.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_2_fig_relay_std.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_2_fig_relay_std.png",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig_reach_loop",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/source/figs/fig_reach_loop.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_3_fig_reach_loop.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.36585/chalkboard_figures/fig_3_fig_reach_loop.png",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.892
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.888,
+        "scale_multiplier": 1.0
+      },
+      "remove_caption_box": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "replace_stop_marker": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.2
+      },
+      "stop_marker": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.884
+      }
+    },
+    "2": {
+      "text_box_clutter": {
+        "dx": 0.0,
+        "dy": 0.968,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.42,
+        "scale_multiplier": 1.15
+      },
+      "intrusive_text_box": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.5,
+        "scale_multiplier": 1.15
+      },
+      "data_plots": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.753
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.824,
+        "scale_multiplier": 1.0
+      },
+      "research_plots": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.752
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -2.0,
+        "scale_multiplier": 0.88
+      },
+      "code_snippet_block": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.815
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.96,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "comparison_cards": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.535
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.7,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "logo_container": {
+        "dx": 0.0,
+        "dy": -0.3,
+        "scale_multiplier": 0.722
+      },
+      "terminal_interface_overlay": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}
