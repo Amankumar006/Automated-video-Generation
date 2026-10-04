@@ -29,7 +29,7 @@ def auto_produce(
     topic: str = None,
     arxiv: str = None,
     category: str = None,
-    voice: str = DEFAULT_VOICE,
+    voice: str = None,
     speed: float = None,
     quality: str = "-qm",
     skip_script: bool = False,
@@ -39,8 +39,70 @@ def auto_produce(
     dry_run_publish: bool = False,
     enable_music: bool = True,
     legacy_engine: bool = False,
-    paper_meta: Optional[Dict[str, Any]] = None
+    paper_meta: Optional[Dict[str, Any]] = None,
+    provider: Optional[str] = None,
+    language: Optional[str] = None,
+    skip_repair: bool = False
 ) -> str:
+    if language in ("both", "all", "dual"):
+        print("\n=======================================================")
+        print("🌐 DUAL-LANGUAGE PRODUCTION ENGINE: ENGLISH + HINDI")
+        print("=======================================================\n")
+        print("▶️ [1/2] Producing English Short (ElevenLabs / Eric)...")
+        res_en = auto_produce(
+            topic=topic,
+            arxiv=arxiv,
+            category=category,
+            voice=voice,
+            speed=speed,
+            quality=quality,
+            skip_script=skip_script,
+            template=template,
+            publish=publish,
+            privacy=privacy,
+            dry_run_publish=dry_run_publish,
+            enable_music=enable_music,
+            legacy_engine=legacy_engine,
+            paper_meta=paper_meta,
+            provider="elevenlabs",
+            language="en",
+            skip_repair=skip_repair
+        )
+        # Locate the template generated or used by the English pass
+        hi_template = template
+        if not hi_template and res_en:
+            p_stem = Path(res_en).stem
+            for cand in sorted(templates_dir.glob("*.json"), key=os.path.getmtime, reverse=True):
+                c_stem = cand.stem
+                cand_id = c_stem.replace("architecture_breakdown_", "").replace("mechanism_deepdive_", "").replace("model_showdown_", "").replace("benchmark_news_", "")
+                if cand_id and cand_id in p_stem:
+                    hi_template = str(cand)
+                    print(f"📄 Reusing English visual blueprint template for Hindi pass: {cand.name}")
+                    break
+
+        print("\n▶️ [2/2] Producing Hindi Short (Sarvam AI / Shubh)...")
+        res_hi = auto_produce(
+            topic=topic,
+            arxiv=arxiv,
+            category=category,
+            voice=None,
+            speed=speed,
+            quality=quality,
+            skip_script=skip_script,
+            template=hi_template,
+            publish=publish,
+            privacy=privacy,
+            dry_run_publish=dry_run_publish,
+            enable_music=enable_music,
+            legacy_engine=legacy_engine,
+            paper_meta=paper_meta,
+            provider="sarvam",
+            language="hi",
+            skip_repair=skip_repair
+        )
+        print("\n🎉 Both English and Hindi videos produced and processed successfully!")
+        return json.dumps({"en": res_en, "hi": res_hi})
+
     print("\n=======================================================")
     print("🚀 THE MODEL VERSE — AUTONOMOUS SHORT VIDEO PRODUCER")
     print("=======================================================\n")
@@ -134,6 +196,15 @@ def auto_produce(
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("repo_metadata"):
         spec["repo_metadata"] = arxiv_meta["repo_metadata"]
 
+    # Step 2.4: Localize script into Hindi/Hinglish if requested
+    if language in ("hi", "hindi") and spec.get("language") != "hi":
+        from pipeline.hindi_localizer import localize_spec_to_hindi
+        print(f"\n🇮🇳 Step 2.4: Localizing script into Conversational Hindi/Hinglish...")
+        spec = localize_spec_to_hindi(spec)
+        template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
+        with open(template_path, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
+
     # Step 2.5: Script Pedagogy & Comprehensibility Audit
     print(f"\n🎙️ Step 2.5: Running Script Pedagogy & Comprehensibility Audit...")
     from pipeline.script_critic import ScriptCritic
@@ -174,11 +245,23 @@ def auto_produce(
     print(f"\n🎯 Title: {spec['title']}")
     print(f"📂 Category: {resolved_category.upper()}")
     print(f"🧩 Engine: {engine_label}")
-    print(f"🎙️ Narration: Kokoro ({voice}) at {speed}x speed")
+    resolved_lang = language or spec.get("language") or "en"
+    if not publish and provider is None and not os.environ.get("TTS_PROVIDER"):
+        resolved_prov = "kokoro"
+    else:
+        resolved_prov = provider or spec.get("tts_provider") or ("auto" if publish else "kokoro")
+    print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {voice or 'default'}) at {speed}x speed")
 
     # Step 3: Synthesize Audio & Procedural SFX
     print("\n🎙️ Step 3: Synthesizing neural audio narration, procedural SFX, and ambient soundtrack...")
-    audio_results = synthesize_audio_for_spec(spec, voice=voice, speed=speed, enable_music=enable_music)
+    audio_results = synthesize_audio_for_spec(
+        spec,
+        voice=voice,
+        speed=speed,
+        enable_music=enable_music,
+        provider=resolved_prov,
+        language=resolved_lang
+    )
     master_audio = audio_results["master_audio"]
     audio_duration = audio_results.get("total_duration", 40.0)
     timing_data = audio_results.get("timing_data", [])
@@ -233,11 +316,14 @@ def auto_produce(
         avg_score = audit_report.get('average_score', 0.0)
         print(f"   📊 Initial VLM Quality Score: {avg_score:.2f}/10.0")
 
-        # Self-Healing Loop if score < 8.5
-        needs_repair = not audit_report.get("passed_quality_gate", True)
+        # Self-Healing Loop if score < 8.5 (and not skip_repair)
+        needs_repair = (not audit_report.get("passed_quality_gate", True)) and (not skip_repair)
         repair_iteration = 0
         max_repair_iterations = 2
         patches_applied = False
+
+        if skip_repair:
+            print("   ℹ️ VLM Critic self-healing bypassed (--skip-repair specified).")
 
         while needs_repair and repair_iteration < max_repair_iterations:
             repair_iteration += 1
@@ -409,14 +495,17 @@ def main():
     parser.add_argument("--arxiv", help="arXiv paper ID or URL (e.g. '2407.08608')")
     parser.add_argument("--template", help="Path to existing spec JSON template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
-    parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Kokoro voice (default: {DEFAULT_VOICE})")
+    parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--lang", "--language", dest="lang", choices=["en", "hi", "both", "all"], default="en", help="Narration language code: 'en' (ElevenLabs), 'hi' (Sarvam AI), or 'both' (dual-production)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
+    parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")
     args = parser.parse_args()
 
     if not args.topic and not args.arxiv and not args.template:
@@ -444,7 +533,10 @@ def main():
         publish=args.publish,
         privacy=args.privacy,
         dry_run_publish=args.dry_run_publish,
-        enable_music=not args.no_music
+        enable_music=not args.no_music,
+        provider=args.provider,
+        language=args.lang,
+        skip_repair=args.skip_repair
     )
 
 if __name__ == "__main__":

@@ -5,14 +5,18 @@ The Model Verse — Configuration & Design Tokens
 import os
 import shutil
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Paths (Dynamic for local macOS and cloud Linux)
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(WORKSPACE_ROOT / ".env")
+
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg") or "/Users/amankumar/bin/ffmpeg"
 KOKORO_MODEL_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "kokoro-v1.0.onnx")
 KOKORO_VOICES_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "voices-v1.0.bin")
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
+GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL_NAME", "gemini-flash-latest")
 
 # Typography & Visual Design Tokens
 FONT_HELVETICA = "Helvetica"
@@ -54,6 +58,43 @@ SAFE_Y_MAX = 5.8
 SAMPLE_RATE = 24000
 DEFAULT_VOICE = os.environ.get("KOKORO_VOICE", "am_eric")
 DEFAULT_SPEED = 1.12
+DEFAULT_TTS_PROVIDER = os.environ.get("TTS_PROVIDER", "kokoro")
+TTS_CACHE_DIR = os.path.join(PUBLIC_DIR, "audio_cache")
+
+# ElevenLabs Configuration (English Neural Voice)
+ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY", "")
+ELEVENLABS_VOICE_ID = os.environ.get("ELEVENLABS_VOICE_ID", "cjVigY5qzO86Huf0OWal")  # Eric
+ELEVENLABS_MODEL_ID = os.environ.get("ELEVENLABS_MODEL_ID", "eleven_multilingual_v2")
+ELEVENLABS_VOICES = {
+    "eric": "cjVigY5qzO86Huf0OWal",
+    "adam": "pNInz6obpgDQGcFmaJgB",
+    "alice": "Xb7hH8MSUJpSbSDYk0k2",
+    "brian": "nPczCjzI2devNBz1zQrb",
+    "daniel": "onwK4e9ZLuTAKqWW03F9",
+    "charlie": "IKne3meq5aSn9XLyUdCD",
+    "roger": "CwhRBWXzGAHq8TQ4Fs17",
+    "sarah": "EXAVITQu4vr4xnSDxMaL",
+    "liam": "TX3LPaxmHKxFdv7VOQHJ",
+    "george": "JBFqnCBsd6RMkjVDRZzb",
+    "laura": "FGY2WhTYpPnrIDTdsKH5",
+    "will": "bIHbv24MWmeRgasZH58o",
+    "jessica": "cgSgspJ2msm6clMCkdW9",
+    "bella": "hpp4J3VqNfWAUOO0d1Us",
+    "chris": "iP95p4xoKVk53GoZ742B",
+    "lily": "pFZP5JQG7iQjIQuC4Bku",
+    "bill": "pqHfZKP75CvOlQylNhV4",
+}
+
+# Sarvam AI Configuration (Hindi Neural Voice)
+SARVAM_API_KEY = os.environ.get("SARVAM_API_KEY", "")
+SARVAM_SPEAKER = os.environ.get("SARVAM_SPEAKER", "shubh")
+SARVAM_MODEL = os.environ.get("SARVAM_MODEL", "bulbul:v3")
+SARVAM_SPEAKERS = [
+    "shubh", "aditya", "ritu", "priya", "neha", "rahul", "pooja",
+    "rohan", "simran", "kavya", "amit", "dev", "ishita", "shreya",
+    "ratan", "varun", "manan", "sumit", "roopa", "kabir", "aayan",
+    "ashutosh", "advait", "meera"
+]
 
 # YouTube Publisher Configuration
 YOUTUBE_CLIENT_SECRETS_PATH = os.environ.get(

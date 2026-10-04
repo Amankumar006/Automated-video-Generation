@@ -246,8 +246,10 @@ def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
     parser.add_argument("--topic", required=True, help="Topic ID (e.g. deepseek-v3, deepseek_vs_gpt4, kv_cache)")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
-    parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Kokoro TTS voice (default: {DEFAULT_VOICE})")
-    parser.add_argument("--speed", type=float, default=1.12, help="Speech speed (default: 1.12)")
+    parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
+    parser.add_argument("--speed", type=float, default=None, help="Speech speed (default: 1.12)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--lang", "--language", dest="lang", default=None, help="Narration language code (en or hi)")
     parser.add_argument("--quality", default="-qm", choices=["-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")
     parser.add_argument("--no-music", action="store_true", help="Disable background synth soundtrack")
@@ -269,12 +271,15 @@ def main():
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"
 
+    resolved_lang = args.lang or spec.get("language") or "en"
+    resolved_prov = args.provider or spec.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
+
     print("\n=======================================================")
     print(f"⚡ THE MODEL VERSE — MULTI-CATEGORY PRODUCTION ENGINE")
     print(f"🎯 Topic: {spec.get('title', args.topic)}")
     print(f"📂 Category: {category.upper()}")
     print(f"🧩 Engine: {engine_label}")
-    print(f"🎙️ Voice: Kokoro ({args.voice}) + Lo-Fi Ambient Synth + SFX")
+    print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {args.voice or 'default'}) + Ambient Synth + SFX")
     print("=======================================================\n")
 
     # Step 1: Synthesize Audio & SFX
@@ -282,7 +287,9 @@ def main():
         spec,
         voice=args.voice,
         speed=args.speed,
-        enable_music=not args.no_music
+        enable_music=not args.no_music,
+        provider=resolved_prov,
+        language=resolved_lang
     )
     master_audio = audio_results["master_audio"]
     timing_data = audio_results.get("timing_data", [])
