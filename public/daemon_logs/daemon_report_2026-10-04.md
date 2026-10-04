@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 11:18:11 UTC
+**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 14:37:18 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: SemanTok: Predictable Semantic Tokens for Efficient Autoregressive Video Generation
-- **arXiv ID:** [2610.00686](https://arxiv.org/abs/2610.00686)
-- **Domain Taxonomy:** `multimodal_diffusion` (0.71x velocity)
+### Reel 1: Transformers Stop Thinking Too Early, and a Tiny LoRA Fixes It
+- **arXiv ID:** [2609.36585](https://arxiv.org/abs/2609.36585)
+- **Domain Taxonomy:** `multimodal_diffusion` (0.72x velocity)
 - **Category:** `architecture_breakdown`
-- **Editorial Hook:** *Why does your AI video generator struggle to keep track of a moving object?*
-- **Everyday Analogy:** *A library archive: comparing searching through a pile of loose, disorganized papers versus a perfectly indexed card catalog.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_semantok_video_gen_architecture_breakdown.mp4`
+- **Editorial Hook:** *What if your AI is actually 'bored' and skipping the hard thinking steps?*
+- **Everyday Analogy:** *A student reading a dense textbook who skips the middle chapters vs. one who uses a bookmark to focus on deep processing.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_transformers_stop_thinking_too_early_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
