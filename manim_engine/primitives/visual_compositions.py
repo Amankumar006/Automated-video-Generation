@@ -654,16 +654,33 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
         arxiv_id: Optional[str] = None,
         badge_text: str = "ARXIV PUBLICATION FIGURE",
         accent_color: str = COLOR_CYAN,
-        max_width: float = 6.8,
-        max_height: float = 4.4,
+        max_width: float = 7.5,
+        max_height: float = 5.0,
         **kwargs
     ):
         super().__init__(title=title, sub=sub, accent_color=accent_color, **kwargs)
 
         fig_mobj = None
 
-        # 1. Try vector SVG first
-        if svg_path and os.path.exists(svg_path):
+        # 1. Prioritize high-resolution raster image (350 DPI master asset)
+        if image_path and os.path.exists(image_path):
+            try:
+                im = ImageMobject(str(image_path))
+                if im.width > max_width:
+                    im.scale_to_fit_width(max_width)
+                if im.height > max_height:
+                    im.scale_to_fit_height(max_height)
+                # Scale up small diagrams so they are crisp and prominent
+                if im.width < 5.2 and im.height < 3.2:
+                    scale_factor = min(max_width / max(im.width, 0.1), max_height / max(im.height, 0.1), 1.5)
+                    im.scale(scale_factor)
+                im.move_to([0, 0.9, 0])
+                fig_mobj = im
+            except Exception as e:
+                print(f"⚠️ Error loading paper figure image: {e}")
+
+        # 2. Try vector SVG as fallback
+        if not fig_mobj and svg_path and os.path.exists(svg_path):
             try:
                 m = SVGMobject(str(svg_path))
                 if m.width > max_width:
@@ -671,7 +688,7 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
                 if m.height > max_height:
                     m.scale_to_fit_height(max_height)
                 # Scale up small diagrams so they are crisp and prominent
-                if m.width < 4.8 and m.height < 3.0:
+                if m.width < 5.2 and m.height < 3.2:
                     scale_factor = min(max_width / max(m.width, 0.1), max_height / max(m.height, 0.1), 1.5)
                     m.scale(scale_factor)
                 m.move_to([0, 0.9, 0])
@@ -679,37 +696,24 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
             except Exception as e:
                 print(f"⚠️ Error loading paper figure SVG: {e}")
 
-        # 2. Try high-resolution raster image (PNG/JPG)
-        if not fig_mobj and image_path and os.path.exists(image_path):
-            try:
-                im = ImageMobject(str(image_path))
-                if im.width > max_width:
-                    im.scale_to_fit_width(max_width)
-                if im.height > max_height:
-                    im.scale_to_fit_height(max_height)
-                im.move_to([0, 0.9, 0])
-                fig_mobj = im
-            except Exception as e:
-                print(f"⚠️ Error loading paper figure image: {e}")
-
         # 3. Fallback placeholder if neither exists
         if not fig_mobj:
             box = RoundedRectangle(corner_radius=0.18, width=6.2, height=3.6, color=accent_color, stroke_width=2).move_to([0, 0.9, 0])
             lbl = CleanText(title[:28], font_size=13, color=accent_color, weight=BOLD).move_to(box)
             fig_mobj = Group(box, lbl)
 
-        # Subtle chassis behind figure
-        chassis_w = min(max(fig_mobj.width + 0.35, 5.8), 7.2)
-        chassis_h = min(max(fig_mobj.height + 0.35, 3.2), 4.8)
+        # Subtle chassis behind figure with dynamic hugging and accent stroke
+        chassis_w = min(max(fig_mobj.width + 0.45, 5.8), 7.8)
+        chassis_h = max(fig_mobj.height + 0.45, 2.2)
         self.chassis = RoundedRectangle(
             corner_radius=0.15,
             width=chassis_w,
             height=chassis_h,
             color=COLOR_DARK_SLATE,
-            stroke_width=1.5,
+            stroke_width=1.8,
             fill_color=COLOR_PANEL_BG,
-            fill_opacity=0.85
-        ).move_to([0, 0.9, 0])
+            fill_opacity=0.88
+        ).move_to(fig_mobj.get_center())
 
         # Bottom citation badge (safe at y = -2.1, well above subtitles at y = -3.45)
         raw_b = badge_text.strip().upper()
