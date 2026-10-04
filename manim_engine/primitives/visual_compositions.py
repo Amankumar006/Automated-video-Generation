@@ -150,6 +150,11 @@ class BlueprintSplitFlow(BaseBlueprintComposition):
         arrow_a = CurvedArrow(router_diamond.get_left() + DOWN * 0.1, branch_a_box.get_top(), radius=2.5, color=branch_a_color, stroke_width=4.0)
         arrow_b = CurvedArrow(router_diamond.get_right() + DOWN * 0.1, branch_b_box.get_top(), radius=-2.5, color=branch_b_color, stroke_width=4.0)
 
+        self.in_node = in_node
+        self.router_node = router_node
+        self.branch_a_group = branch_a_group
+        self.branch_b_group = branch_b_group
+
         self.content_group.add(in_node, in_arrow, router_node, arrow_a, arrow_b, branch_a_group, branch_b_group)
         self.kinetic_elements.add(router_node, arrow_a, arrow_b)
         self.add(self.title, self.sub, self.content_group)
@@ -212,6 +217,11 @@ class BlueprintPipelineStages(BaseBlueprintComposition):
         # Connecting vertical arrows
         arrow_1 = Arrow(start=stage_groups[0].get_bottom(), end=stage_groups[1].get_top(), color=COLOR_WHITE, buff=0.1, stroke_width=4.0)
         arrow_2 = Arrow(start=stage_groups[1].get_bottom(), end=stage_groups[2].get_top(), color=COLOR_MINT, buff=0.1, stroke_width=4.0)
+
+        self.stage_groups = stage_groups
+        self.stage_1_group = stage_groups[0] if len(stage_groups) > 0 else None
+        self.stage_2_group = stage_groups[1] if len(stage_groups) > 1 else None
+        self.stage_3_group = stage_groups[2] if len(stage_groups) > 2 else None
 
         self.content_group.add(arrow_1, arrow_2)
         self.kinetic_elements.add(stage_groups[1], arrow_1, arrow_2)
@@ -279,6 +289,10 @@ class BlueprintGridMemory(BaseBlueprintComposition):
         eff_txt = CleanText(efficiency_label[:20], font=FONT_HELVETICA, font_size=9, color=COLOR_AMBER, weight=BOLD).move_to(eff_badge)
 
         badge_group = VGroup(hit_badge, hit_txt, eff_badge, eff_txt)
+
+        self.cells = cells
+        self.hit_cell = hit_cell
+        self.active_cell = hit_cell
 
         self.content_group.add(chassis, header, cells, badge_group)
         self.kinetic_elements.add(hit_cell, badge_group)
@@ -426,6 +440,10 @@ class BlueprintTreeHierarchy(BaseBlueprintComposition):
         # Pruned badge on left
         pruned_box = RoundedRectangle(corner_radius=0.1, width=2.4, height=0.5, color=COLOR_CORAL, fill_color="#450A0A", fill_opacity=0.9, stroke_width=1.5).next_to(node_left, DOWN, buff=0.4)
         pruned_txt = CleanText(pruned_label[:16].upper(), font=FONT_HELVETICA, font_size=8, color=COLOR_CORAL, weight=BOLD).move_to(pruned_box)
+
+        self.root_node = root_grp
+        self.optimal_group = leaf_grp
+        self.pruned_group = VGroup(node_left, txt_l, edge_l, pruned_box, pruned_txt)
 
         self.content_group.add(root_grp, edge_l, node_left, txt_l, pruned_box, pruned_txt, edge_r, node_right, txt_r, edge_leaf_1, leaf_1, txt_leaf_1, edge_leaf_2, leaf_grp)
         self.kinetic_elements.add(leaf_grp, edge_leaf_2)

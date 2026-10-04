@@ -40,20 +40,23 @@ from manim_engine.primitives.script_motifs import (
     MOTIF_REGISTRY,
     create_script_motif
 )
+from manim_engine.controllers import SpotlightStagingController, KineticCameraController
 
 
 class ScriptDrivenScene(MovingCameraScene):
     """
-    Intelligent Script-Driven Visual Engine (Visual Engine 3.1).
+    Intelligent Script-Driven Visual Engine (Visual Engine 7.0).
     Directly binds bespoke vector designs and procedural geometric motifs to voiceover beats,
-    with continuous 3Blue1Brown-style camera breathing and ambient micro-motion to eliminate
-    static dead screens while narrations speak.
+    with cognitive spotlight staging (100% focal illumination / 20% background dimming)
+    and continuous kinetic camera breathing with punch-in zooms to eliminate static screens.
     """
 
     def construct(self):
-        # 1. Load active specification
+        # 1. Load active specification & controllers
         self.spec = self.load_spec()
         self.scheduler = KineticScheduler(self.spec)
+        self.spotlight_controller = SpotlightStagingController()
+        self.kinetic_camera = KineticCameraController()
 
         # 2. Setup 3b1b Chalkboard Canvas (#0A0D14 + dot matrix lattice)
         self.setup_chalkboard()
@@ -91,16 +94,17 @@ class ScriptDrivenScene(MovingCameraScene):
         return spec_data
 
     def setup_chalkboard(self):
-        """Constructs the signature 3Blue1Brown carbon chalkboard with dot matrix lattice."""
+        """Constructs the signature 3Blue1Brown carbon chalkboard with dot matrix lattice (Depth Layer 1)."""
         self.camera.background_color = "#0A0D14"
         dots = VGroup()
         for x in np.arange(-3.6, 3.7, 0.9):
             for y in np.arange(-6.0, 6.1, 0.9):
                 dots.add(Dot(point=[x, y, 0], radius=0.016, color="#2D3748", fill_opacity=0.35))
+        dots.set_z_index(-10)
         self.add(dots)
 
     def setup_header(self):
-        """Places subtle brand watermark in the topmost safe zone."""
+        """Places subtle brand watermark in the topmost safe zone (Depth Layer 3)."""
         hook_tag = self.spec.get("hook_tag", "AI BREAKTHROUGH").upper()
         watermark = VGroup(
             Text("THE MODEL VERSE", font_size=11, font=FONT_HELVETICA, color="#10B981", weight=BOLD),
@@ -108,10 +112,11 @@ class ScriptDrivenScene(MovingCameraScene):
             Text(hook_tag, font_size=10, font=FONT_HELVETICA, color="#94A3B8", weight=MEDIUM)
         ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
         self.header_group = watermark
+        self.header_group.set_z_index(50)
         self.add(self.header_group)
 
     def setup_kinetic_captions(self):
-        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.45."""
+        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.45 (Depth Layer 3)."""
         try:
             from pipeline.subtitle_generator import generate_phrase_chunks
             self.caption_chunks = generate_phrase_chunks(self.spec.get("beats", []))
@@ -120,6 +125,7 @@ class ScriptDrivenScene(MovingCameraScene):
             self.caption_chunks = []
 
         self.caption_container = VGroup().move_to([0, -3.45, 0])
+        self.caption_container.set_z_index(60)
         self.add(self.caption_container)
 
         if not self.caption_chunks:
@@ -244,6 +250,7 @@ class ScriptDrivenScene(MovingCameraScene):
                     tray_group.add(chip)
                     break
 
+        tray_group.set_z_index(70)
         tray_group.move_to([0, -4.5, 0])
 
         if self.current_formula_mobj:
@@ -361,6 +368,7 @@ class ScriptDrivenScene(MovingCameraScene):
 
             if not isinstance(motif, BaseBlueprintComposition):
                 motif.move_to([0, 0.65, 0])
+            motif.set_z_index(10)
 
             # 3. Entrance: Whole Diagram visible within 1.0s (Progressive Build)
             enter_time = min(1.0, duration * 0.22)
@@ -369,8 +377,34 @@ class ScriptDrivenScene(MovingCameraScene):
             else:
                 self.play(FadeIn(motif, scale=0.96), run_time=enter_time)
 
-            # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming)
+            # 3.5 Cognitive Spotlight Staging (Visual Engine 7.0)
+            # Active focal target is 100% bright/saturated; inactive background dims to 20%
+            try:
+                self.spotlight_controller.apply_spotlight(
+                    scene=self,
+                    motif=motif,
+                    svo_action=b.get("svo_action"),
+                    highlight_words=b.get("highlight_words"),
+                    run_time=min(0.45, duration * 0.1),
+                    dim_opacity=0.20
+                )
+            except Exception as e:
+                print(f"⚠️ Spotlight staging notice: {e}")
+
+            # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming) & Dynamic Punch-in Zoom
             action_time = min(1.8, duration * 0.32)
+            svo_data = b.get("svo_action")
+            if beat_id in (1, 5) or (svo_data and svo_data.get("anchor_word")):
+                try:
+                    self.kinetic_camera.punch_in_zoom(
+                        scene=self,
+                        target_point=motif.get_center(),
+                        zoom_factor=0.92,
+                        run_time=min(0.45, action_time * 0.35)
+                    )
+                except Exception as e:
+                    print(f"⚠️ Punch-in zoom notice: {e}")
+
             try:
                 if hasattr(motif, "get_kinetic_animation"):
                     self.play(motif.get_kinetic_animation(run_time=action_time))
@@ -414,9 +448,9 @@ class ScriptDrivenScene(MovingCameraScene):
             if remaining > 0.05:
                 self.play_ambient_micro_motion(motif, motif_type, remaining)
 
-            # 6. Clean Exit & Seamless Camera Reset
-            reset_cam = self.camera.frame.animate(run_time=exit_time, rate_func=smooth).set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_cam, run_time=exit_time)
+            # 6. Clean Exit & Seamless Camera Reset via Kinetic Camera Controller
+            self.kinetic_camera.reset_framing(self, run_time=exit_time)
+            self.play(FadeOut(motif, shift=DOWN * 0.15), run_time=exit_time)
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
@@ -430,9 +464,12 @@ class ScriptDrivenScene(MovingCameraScene):
 
         anims = []
 
-        # 1. Subtle Continuous 2.5% Camera Drift / Slow Push-In (Linear rate func)
+        # 1. Subtle Continuous 2.5% Camera Drift / Slow Push-In via Kinetic Camera Controller
         anims.append(
-            self.camera.frame.animate(rate_func=linear, run_time=remaining_time).scale(0.975).shift(UP * 0.08)
+            self.kinetic_camera.get_ambient_drift_animation(
+                camera_frame=self.camera.frame,
+                duration=remaining_time
+            )
         )
 
         # 2. Contextual Traveling Energy & Shimmer on the Active Motif

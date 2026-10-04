@@ -196,6 +196,9 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
             if is_hero and not self.hero_row:
                 self.hero_row = row_group
 
+        self.hero_bar = self.hero_row
+        self.competitor_bars = [r for r in self.tracks_group if r != self.hero_row]
+
         self.content_group.add(self.tracks_group)
 
         # Bottom Victory Delta Badge at y = -2.1 (strictly above subtitles at y = -3.45)

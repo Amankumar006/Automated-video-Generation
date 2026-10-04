@@ -38,10 +38,13 @@ genai.configure(api_key=API_KEY)
 CATEGORIES = ["architecture_breakdown", "model_showdown", "mechanism_deepdive", "benchmark_news"]
 
 SCRIPT_DIRECTIVES = """
-You are the Lead AI Research Director and Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
-Your job is to craft high-retention, educational short scripts explaining frontier AI architectures and mechanisms.
+You are the Lead Creative Director & Principal Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
+Your job is to craft high-retention, educational short scripts explaining frontier AI architectures as an INTELLECTUAL THRILLER.
 
-Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Feynman):
+Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
+- STRICTLY BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
+  * NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
+  * The first 3 seconds must be an ABSURD PARADOX or PATTERN INTERRUPT that stops the viewer from swiping away.
 - Ground abstract AI in real developer tools and crisp physical analogies:
   * Name REAL tools, models, frameworks, and hardware: Cursor, Claude 3.5, ChatGPT, PyTorch, vLLM, H100, Hopper, Python, Git.
   * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation, AST, KV cache.
@@ -50,25 +53,29 @@ Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Feynman):
 - AVOID UNEXPLAINED ACADEMIC JARGON:
   * Don't drop raw unexplained math like 'asynchronous GEMM warp specialization' or 'non-convex loss topology'.
   * Instead, state what it physically does: 'threads run side-by-side without stalling each other'.
-- Pacing: Exactly 6 beats. Each beat MUST be 20 to 26 words maximum (around 7-9 seconds of natural, conversational speech).
+- Pacing: Exactly 6 beats (125-155 words total).
 - DUAL-CADENCE SENTENCE STRUCTURE (Sync with Visual Action):
   * Every beat should follow a dual-cadence rhythm: [Setup Clause] + [Action Trigger Clause].
   * The [Action Trigger Clause] contains the `anchor_word` where on-screen physical action fires.
 - Auditory-Visual Complementarity: The voiceover carries relatable intuition and metaphors; the chalkboard screen illustrates the living geometry, physical fields, and mechanical state.
 
-The 6-Beat Narrative Arc:
-1. Beat 1 (Hook, 0-5s): Start with a bold, high-stakes curiosity loop or shocking inefficiency.
-   Example: 'Every time Cursor or Claude writes code for you, your GPU is wasting up to 70% of its compute doing absolutely nothing.'
-2. Beat 2 (The Visceral Problem / Analogy, 5-13s): Explain WHY this bottleneck happens using ONE clear, relatable physical analogy.
-   Example: 'Why? Because LLMs generate code one token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion.'
-3. Beat 3 (The Core Breakthrough Mechanism, 13-21s): Introduce the actual architectural innovation simply and cleanly.
-   Example: 'Enter Speculative Decoding: a tiny draft model guesses five lines ahead in a millisecond, and the giant model verifies all five in a single pass.'
-4. Beat 4 (The Technical Deep-Dive / Paper Innovation, 21-29s): Explain the paper's specific secret sauce with real developer terms.
-   Example: 'This paper supercharges it by pulling matching syntax directly from your repo\'s AST and git history, shooting draft acceptance up by 40%.'
-5. Beat 5 (Empirical Victory / Benchmark Payoff, 29-37s): Deliver the concrete payoff with numbers.
-   Example: 'The result? 4x faster coding agents without losing a single drop of benchmark accuracy.'
-6. Beat 6 (Takeaway / Seamless Loop, 37-41s): Crisp outro that naturally loops back to Beat 1.
-   Example: 'Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.'
+The 4-Act Intellectual Thriller Narrative Arc:
+1. ACT 1: Absurd Paradox / Pattern Interrupt Hook (Beat 1, 0-3s, 12-18 words):
+   * Start with a bold, high-stakes curiosity loop or shocking inefficiency. No textbook greetings!
+   * Example: 'Every single time Cursor or Claude writes code for you, your GPU wastes up to 70% of its compute doing nothing.'
+2. ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
+   * Personify the villain/bottleneck and explain WHY it happens using ONE clear, relatable physical analogy.
+   * Example: 'Why? Because LLMs generate code one single token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion.'
+3. ACT 3: The Eureka Geometric Mechanism (Beats 3 & 4, 15-40s):
+   * Beat 3 (The Eureka Pivot, 20-25 words): Introduce the actual architectural innovation simply and cleanly.
+     Example: 'Enter Speculative Decoding: a tiny draft model guesses five lines ahead in a millisecond, and the giant model verifies all five in a single pass.'
+   * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): Explain the paper's specific secret sauce with real developer terms.
+     Example: 'This paper supercharges it by pulling matching syntax directly from your repo\'s AST and git history, shooting draft acceptance up by 40%.'
+4. ACT 4: The Paradigm Shift / Open Loop (Beats 5 & 6, 40-50s):
+   * Beat 5 (Empirical Victory Payoff, 18-24 words): Deliver the concrete payoff with numbers.
+     Example: 'The result? 4x faster coding agents without losing a single drop of benchmark accuracy.'
+   * Beat 6 (Paradigm Shift & Seamless Loop, 15-20 words): Crisp outro that naturally loops back to Beat 1.
+     Example: 'Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.'
 
 Highlight Words Rules:
 - For each beat, select 1 to 3 critical technical keywords from the beat text to highlight.
@@ -481,6 +488,16 @@ Generate the complete JSON specification strictly adhering to this structure:
         print(f"📋 Final Pedagogical Audit: Score {final_audit.overall_score}/10 | Grade {final_audit.grade_level} | Slop Cliches: {final_audit.total_slop_cliches} | Passed: {final_audit.passed}")
     except Exception as e:
         print(f"⚠️ Warning: Socratic Feynman loop encountered an issue, falling back: {e}")
+
+    # Intellectual Thriller Narrative Engine & Script Rewrite Pass (Engine 7.0)
+    try:
+        from pipeline.intellectual_thriller_engine import intellectual_thriller_engine
+        print("\n🎬 Applying Intellectual Thriller Narrative Rewrite (Engine 7.0)...")
+        spec = intellectual_thriller_engine.rewrite_script_to_thriller(spec, paper_meta=arxiv_meta, use_llm=False)
+        thriller_audit = intellectual_thriller_engine.audit_thriller_compliance(spec)
+        print(f"   ⚡ Thriller Compliance Score: {thriller_audit['score']}/10 | Hook Passed: {thriller_audit['hook_passed']} | {thriller_audit['verdict']}")
+    except Exception as e:
+        print(f"⚠️ Warning: Intellectual Thriller Engine notice: {e}")
 
     # Enrich with Declarative Visual Scene Graph (VSG)
     try:
