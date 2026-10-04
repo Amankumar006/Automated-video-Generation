@@ -241,31 +241,15 @@ def generate_kinetic_sfx_cues(
         is_outro = (beat_id == 6 or beat_id == total_beats or "Follow The Model Verse" in td.get("text", ""))
 
         if not is_outro:
-            # 1. Formula Reveal: Crystal glass ping when LaTeX snaps into lower tray
+            # 1. Motif & Scene Transition Whoosh: exactly synchronized with visual scene cut and entrance!
             raw_cues.append({
-                "timestamp": round(beat_start + 0.02, 3),
-                "sound_type": "glass_ping",
-                "volume": 0.28,
-                "reason": f"beat_{beat_id}_formula_snap"
-            })
-
-            # 2. Motif Entrance: Aerodynamic whoosh/swish when diagram enters (after math_time = 0.35s)
-            raw_cues.append({
-                "timestamp": round(beat_start + 0.35, 3),
+                "timestamp": round(beat_start + 0.05, 3),
                 "sound_type": "whoosh",
-                "volume": 0.24,
-                "reason": f"beat_{beat_id}_motif_entrance"
-            })
-
-            # 3. Progressive Component Pop: Soft interface pop as nodes/cards draw
-            raw_cues.append({
-                "timestamp": round(beat_start + 0.62, 3),
-                "sound_type": "pop",
                 "volume": 0.22,
-                "reason": f"beat_{beat_id}_entity_pop"
+                "reason": f"beat_{beat_id}_transition_entrance"
             })
 
-            # 4. Focal Kinetic Action / Word Anchor Trigger
+            # 2. Focal Kinetic Action / Word Anchor Trigger: synchronized with spoken anchor word
             action_time = round(beat_start + 1.35, 3)
             # If anchor word exists in word timings, snap to it
             anchor_word = b_spec.get("anchor_word") or b_spec.get("action_verb")

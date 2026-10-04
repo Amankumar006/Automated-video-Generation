@@ -340,7 +340,9 @@ class DailyShortsDaemon:
                     quality=self.quality,
                     publish=publish,
                     privacy=self.privacy,
-                    paper_meta=top_paper
+                    paper_meta=top_paper,
+                    provider="elevenlabs",
+                    voice="eric"
                 )
             except Exception as prod_err:
                 print(f"⚠️ Production error for {arxiv_id}: {prod_err}")

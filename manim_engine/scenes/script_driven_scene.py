@@ -188,8 +188,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     return float(b["duration"])
         return default_dur
 
-    def display_math_formula(self, beat_id: int, run_time: float = 0.5):
-        """Displays synchronized mathematical formula or key principle badge in the lower tray."""
+    def _build_formula_tray_mobject(self, beat_id: int) -> VGroup:
+        """Constructs the math formula or key concept badge for the given beat."""
         formulas = self.spec.get("math_formulas", [])
         matching_formula = None
         for f in formulas:
@@ -252,7 +252,11 @@ class ScriptDrivenScene(MovingCameraScene):
 
         tray_group.set_z_index(70)
         tray_group.move_to([0, -4.5, 0])
+        return tray_group
 
+    def display_math_formula(self, beat_id: int, run_time: float = 0.35):
+        """Displays synchronized mathematical formula or key principle badge in the lower tray."""
+        tray_group = self._build_formula_tray_mobject(beat_id)
         if self.current_formula_mobj:
             self.play(ReplacementTransform(self.current_formula_mobj, tray_group), run_time=run_time)
         else:
@@ -262,7 +266,7 @@ class ScriptDrivenScene(MovingCameraScene):
     def play_script_driven_choreography(self):
         """
         Executes sequential beat-by-beat visual storytelling using tailored procedural motifs
-        and custom vector artwork that directly explains the narration.
+        and custom vector artwork that directly explains the narration, locked to millisecond audio timestamps.
         """
         beats = self.spec.get("beats", [])
         total_beats = len(beats)
@@ -301,12 +305,13 @@ class ScriptDrivenScene(MovingCameraScene):
                 else:
                     motif_type = "visual_composition"
 
+            # Strict audio-synchronous timing anchors
+            expected_start = float(b.get("start", self.renderer.time))
+            expected_end = expected_start + duration
+            if self.renderer.time < expected_start:
+                self.wait(expected_start - self.renderer.time)
 
-            print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' (Allotted: {duration:.2f}s)...")
-
-            # 1. Update lower math/concept tray
-            math_time = 0.35
-            self.display_math_formula(beat_id, run_time=math_time)
+            print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' [Target: {expected_start:.2f}s -> {expected_end:.2f}s | Dur: {duration:.2f}s]...")
 
             # Resolve SVG / Image asset for paper_figure or bespoke_svg
             if motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"]:
@@ -346,7 +351,7 @@ class ScriptDrivenScene(MovingCameraScene):
 
             from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
 
-            # 2. Instantiate Visual: Check for Bespoke Synthesized Module (Visual Engine 6.0)
+            # Instantiate Visual: Check for Bespoke Synthesized Module (Visual Engine 6.0)
             spec_clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "short")).lower()
             bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
             motif = None
@@ -370,87 +375,106 @@ class ScriptDrivenScene(MovingCameraScene):
                 motif.move_to([0, 0.65, 0])
             motif.set_z_index(10)
 
-            # 3. Entrance: Whole Diagram visible within 1.0s (Progressive Build)
-            enter_time = min(1.0, duration * 0.22)
-            if hasattr(motif, "get_entrance_animation"):
-                self.play(motif.get_entrance_animation(run_time=enter_time))
+            # 1 & 2. Construct Tray & Prepare Synchronous Entrance
+            tray_group = self._build_formula_tray_mobject(beat_id)
+            if self.current_formula_mobj:
+                formula_anim = ReplacementTransform(self.current_formula_mobj, tray_group)
             else:
-                self.play(FadeIn(motif, scale=0.96), run_time=enter_time)
+                formula_anim = FadeIn(tray_group, shift=UP * 0.2)
+            self.current_formula_mobj = tray_group
 
-            # 3.5 Cognitive Spotlight Staging (Visual Engine 7.0)
-            # Active focal target is 100% bright/saturated; inactive background dims to 20%
+            enter_time = min(0.85, duration * 0.20)
+            if hasattr(motif, "get_entrance_animation"):
+                motif_enter = motif.get_entrance_animation(run_time=enter_time)
+            else:
+                motif_enter = FadeIn(motif, scale=0.96, run_time=enter_time)
+
+            # Cognitive Spotlight Staging (Visual Engine 7.0)
+            # Prepared concurrently with entrance so it never adds dead pauses!
+            spotlight_anims = []
             try:
-                self.spotlight_controller.apply_spotlight(
+                spotlight_anims = self.spotlight_controller.apply_spotlight(
                     scene=self,
                     motif=motif,
                     svo_action=b.get("svo_action"),
                     highlight_words=b.get("highlight_words"),
-                    run_time=min(0.45, duration * 0.1),
-                    dim_opacity=0.20
+                    run_time=enter_time,
+                    dim_opacity=0.55,
+                    play_now=False
                 )
             except Exception as e:
                 print(f"⚠️ Spotlight staging notice: {e}")
 
-            # 4. Focal Kinetic Action (Sweeping, Pulsing, Transforming) & Dynamic Punch-in Zoom
-            action_time = min(1.8, duration * 0.32)
+            entrance_group = [motif_enter, formula_anim]
+            if spotlight_anims:
+                entrance_group.extend(spotlight_anims)
+            self.play(*entrance_group, run_time=enter_time)
+
+            # 3. Focal Kinetic Action & Concurrent Punch-In Zoom
+            action_time = min(1.3, duration * 0.26)
             svo_data = b.get("svo_action")
+            punch_anim = None
             if beat_id in (1, 5) or (svo_data and svo_data.get("anchor_word")):
                 try:
-                    self.kinetic_camera.punch_in_zoom(
-                        scene=self,
+                    punch_anim = self.kinetic_camera.get_punch_in_animation(
+                        camera_frame=self.camera.frame,
                         target_point=motif.get_center(),
-                        zoom_factor=0.92,
-                        run_time=min(0.45, action_time * 0.35)
+                        zoom_factor=0.94,
+                        run_time=action_time
                     )
                 except Exception as e:
                     print(f"⚠️ Punch-in zoom notice: {e}")
 
             try:
                 if hasattr(motif, "get_kinetic_animation"):
-                    self.play(motif.get_kinetic_animation(run_time=action_time))
+                    kinetic_anim = motif.get_kinetic_animation(run_time=action_time)
                 elif motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "fig_mobj") and motif.fig_mobj:
-                    self.play(motif.fig_mobj.animate.scale(1.03), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = motif.fig_mobj.animate(rate_func=there_and_back, run_time=action_time).scale(1.03)
                 elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
-                    self.play(motif.needle.animate.shift(LEFT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
-                    self.play(motif.needle.animate.shift(RIGHT * 0.9), run_time=action_time * 0.5, rate_func=there_and_back)
+                    kinetic_anim = motif.needle.animate(rate_func=there_and_back, run_time=action_time).shift(RIGHT * 0.5)
                 elif motif_type == "wave_collision" and hasattr(motif, "wave_c"):
-                    self.play(motif.wave_c.animate.set_color("#FF2A55"), run_time=action_time * 0.5)
-                    self.play(motif.wave_c.animate.set_color("#EF4444"), run_time=action_time * 0.5)
+                    kinetic_anim = motif.wave_c.animate(run_time=action_time).set_color("#FF2A55")
                 elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
                     badge_grp = VGroup(motif.badge_box, motif.badge_txt, motif.badge_sub) if hasattr(motif, "badge_txt") else motif.badge_box
-                    self.play(motif.angle_arc.animate.set_color("#34D399"), badge_grp.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.angle_arc.animate(rate_func=there_and_back, run_time=action_time).set_color("#34D399"), badge_grp.animate(rate_func=there_and_back, run_time=action_time).scale(1.04))
                 elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1"):
-                    self.play(motif.out_beam1.animate.set_stroke(width=8.0), motif.out_beam2.animate.set_stroke(width=8.0), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.out_beam1.animate(rate_func=there_and_back, run_time=action_time).set_stroke(width=8.0), motif.out_beam2.animate(rate_func=there_and_back, run_time=action_time).set_stroke(width=8.0))
                 elif motif_type == "branching_outputs" and hasattr(motif, "card1"):
-                    self.play(motif.card1.animate.scale(1.05), motif.card2.animate.scale(1.05), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.card1.animate(rate_func=there_and_back, run_time=action_time).scale(1.05), motif.card2.animate(rate_func=there_and_back, run_time=action_time).scale(1.05))
                 elif motif_type == "tree_search" and hasattr(motif, "c1"):
-                    self.play(motif.c1.animate.scale(1.06), motif.c2.animate.set_stroke(color="#991B1B"), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.c1.animate(rate_func=there_and_back, run_time=action_time).scale(1.06), motif.c2.animate(rate_func=there_and_back, run_time=action_time).set_stroke(color="#991B1B"))
                 elif motif_type == "diffusion_denoise" and hasattr(motif, "dots1"):
-                    self.play(motif.dots1.animate.set_opacity(0.3), motif.shape3.animate.scale(1.15), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.dots1.animate(rate_func=there_and_back, run_time=action_time).set_opacity(0.3), motif.shape3.animate(rate_func=there_and_back, run_time=action_time).scale(1.15))
                 elif motif_type == "attention_routing" and hasattr(motif, "lasers"):
-                    self.play(motif.lasers.animate.set_stroke(width=6.0, color="#34D399"), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = motif.lasers.animate(rate_func=there_and_back, run_time=action_time).set_stroke(width=6.0, color="#34D399")
                 elif motif_type == "memory_buffer" and hasattr(motif, "slots"):
-                    self.play(motif.slots.animate.set_stroke(color="#34D399"), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = motif.slots.animate(rate_func=there_and_back, run_time=action_time).set_stroke(color="#34D399")
                 elif motif_type == "comparative_bars" and hasattr(motif, "fill_bar_a"):
-                    self.play(motif.fill_bar_a.animate.scale(1.03), motif.badge.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = AnimationGroup(motif.fill_bar_a.animate(rate_func=there_and_back, run_time=action_time).scale(1.03), motif.badge.animate(rate_func=there_and_back, run_time=action_time).scale(1.04))
                 elif hasattr(motif, "box2"):
-                    self.play(motif.box2.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = motif.box2.animate(rate_func=there_and_back, run_time=action_time).scale(1.04)
                 else:
-                    self.play(motif.animate.scale(1.02), rate_func=there_and_back, run_time=action_time)
+                    kinetic_anim = motif.animate(rate_func=there_and_back, run_time=action_time).scale(1.02)
+
+                action_anims = [kinetic_anim]
+                if punch_anim:
+                    action_anims.append(punch_anim)
+                self.play(*action_anims, run_time=action_time)
             except Exception as e:
                 print(f"⚠️ Kinetic action warning for {motif_type}: {e}")
                 self.wait(action_time)
 
-            # 5. Continuous 3b1b Camera Breathing & Ambient Micro-Motion (Eliminating Dead Screens)
-            exit_time = 0.35
-            used_time = math_time + enter_time + action_time + exit_time
-            remaining = max(0.05, duration - used_time)
+            # 4. Continuous Ambient Micro-Motion (Strict Clock Alignment)
+            exit_time = 0.30
+            time_before_exit = expected_end - exit_time
+            remaining = max(0.0, time_before_exit - self.renderer.time)
             if remaining > 0.05:
                 self.play_ambient_micro_motion(motif, motif_type, remaining)
 
-            # 6. Clean Exit & Seamless Camera Reset via Kinetic Camera Controller
-            self.kinetic_camera.reset_framing(self, run_time=exit_time)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), run_time=exit_time)
+            # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
+            actual_exit = max(0.15, expected_end - self.renderer.time)
+            reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
+            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_anim, run_time=actual_exit)
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """

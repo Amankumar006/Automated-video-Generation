@@ -23,7 +23,7 @@ class KineticCameraController:
     def __init__(
         self,
         default_zoom_factor: float = 0.975,
-        punch_in_factor: float = 0.88,
+        punch_in_factor: float = 0.94,
         drift_vector: np.ndarray = np.array([0.0, 0.08, 0.0])
     ):
         self.default_zoom_factor = default_zoom_factor
@@ -46,6 +46,30 @@ class KineticCameraController:
 
         return camera_frame.animate(rate_func=linear, run_time=duration).scale(s_factor).shift(s_vec)
 
+    def get_punch_in_animation(
+        self,
+        camera_frame: Mobject,
+        target_point: Optional[np.ndarray] = None,
+        zoom_factor: Optional[float] = None,
+        run_time: float = 0.45
+    ) -> Animation:
+        """
+        Returns dynamic punch-in camera zoom animation to be played concurrently with focal actions.
+        """
+        z_factor = zoom_factor if zoom_factor is not None else self.punch_in_factor
+        t_pt = target_point if target_point is not None else ORIGIN
+        return camera_frame.animate(rate_func=smooth, run_time=run_time).scale(z_factor).move_to(t_pt * 0.4)
+
+    def get_reset_animation(
+        self,
+        camera_frame: Mobject,
+        run_time: float = 0.35
+    ) -> Animation:
+        """
+        Returns framing reset animation to be played concurrently with motif exit.
+        """
+        return camera_frame.animate(rate_func=smooth, run_time=run_time).set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
+
     def punch_in_zoom(
         self,
         scene: MovingCameraScene,
@@ -57,13 +81,13 @@ class KineticCameraController:
         Performs a dynamic punch-in camera zoom towards a focal target point
         when a high-impact narrative anchor word fires.
         """
-        z_factor = zoom_factor if zoom_factor is not None else self.punch_in_factor
-        t_pt = target_point if target_point is not None else ORIGIN
-
         scene.play(
-            scene.camera.frame.animate(rate_func=smooth, run_time=run_time)
-            .scale(z_factor)
-            .move_to(t_pt * 0.4), # proportional bias towards target
+            self.get_punch_in_animation(
+                camera_frame=scene.camera.frame,
+                target_point=target_point,
+                zoom_factor=zoom_factor,
+                run_time=run_time
+            ),
             run_time=run_time
         )
 
@@ -76,9 +100,10 @@ class KineticCameraController:
         Smoothly restores camera framing to the standard 9:16 mobile canvas dimensions.
         """
         scene.play(
-            scene.camera.frame.animate(rate_func=smooth, run_time=run_time)
-            .set(width=FRAME_WIDTH, height=FRAME_HEIGHT)
-            .move_to(ORIGIN),
+            self.get_reset_animation(
+                camera_frame=scene.camera.frame,
+                run_time=run_time
+            ),
             run_time=run_time
         )
 

@@ -317,3 +317,66 @@ def test_synthesize_audio_for_spec_integration(tmp_path):
         assert len(result["timing_data"]) == 2
         assert result["timing_data"][0]["provider"] == "elevenlabs"
         assert os.path.exists(result["master_audio"])
+
+
+def test_default_tts_provider_is_elevenlabs():
+    from pipeline.config import DEFAULT_TTS_PROVIDER, DEFAULT_VOICE
+    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "auto")
+    assert DEFAULT_VOICE in ("eric", "am_eric")
+
+    router = UnifiedVoiceRouter()
+    with patch.object(router.elevenlabs, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "elevenlabs", "voice_id": "eric"})):
+        audio, sr, meta = router.synthesize_beat(
+            text="Testing default ElevenLabs routing",
+            language="en"
+        )
+        assert meta["provider"] == "elevenlabs"
+        assert meta["voice_id"] == "eric"
+
+
+def test_kinetic_sfx_cues_synchronized_transitions():
+    from pipeline.aligner import generate_kinetic_sfx_cues
+
+    timing_data = [
+        {
+            "beat_id": 1,
+            "start": 0.0,
+            "duration": 5.0,
+            "text": "Hook beat text",
+            "word_timings": [{"clean_word": "paradox", "frame_ahead_trigger": 1.25}]
+        },
+        {
+            "beat_id": 2,
+            "start": 5.0,
+            "duration": 6.0,
+            "text": "Mechanism breakdown text",
+            "word_timings": [{"clean_word": "bottleneck", "frame_ahead_trigger": 6.40}]
+        },
+        {
+            "beat_id": 3,
+            "start": 11.0,
+            "duration": 7.0,
+            "text": "Geometric mechanism text",
+            "word_timings": []
+        },
+        {
+            "beat_id": 4,
+            "start": 18.0,
+            "duration": 5.0,
+            "text": "Outro: Follow The Model Verse",
+            "word_timings": []
+        }
+    ]
+
+    cues = generate_kinetic_sfx_cues(timing_data)
+    # Beat 1 transition entrance cue must be at 0.05s (synchronized with visual entrance)
+    beat_1_cues = [c for c in cues if "beat_1" in c["reason"]]
+    assert any(c["sound_type"] == "whoosh" and c["timestamp"] == 0.05 for c in beat_1_cues)
+    # There should NOT be any premature glass_ping or delayed 0.35s whoosh
+    assert not any(c["sound_type"] == "glass_ping" for c in beat_1_cues)
+    assert not any(c["sound_type"] == "whoosh" and c["timestamp"] == 0.35 for c in beat_1_cues)
+
+    # Beat 2 transition entrance cue must be at 5.05s (exactly matching Beat 2 scene start)
+    beat_2_cues = [c for c in cues if "beat_2" in c["reason"]]
+    assert any(c["sound_type"] == "whoosh" and c["timestamp"] == 5.05 for c in beat_2_cues)
+

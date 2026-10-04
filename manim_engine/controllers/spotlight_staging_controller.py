@@ -18,7 +18,7 @@ class SpotlightStagingController:
     illuminating the focal mechanism while dimming peripheral geometry to 20% opacity.
     """
 
-    def __init__(self, default_dim_opacity: float = 0.20):
+    def __init__(self, default_dim_opacity: float = 0.55):
         self.default_dim_opacity = default_dim_opacity
         self.active_halo: Optional[Mobject] = None
 
@@ -168,15 +168,16 @@ class SpotlightStagingController:
         motif: Mobject,
         svo_action: Optional[Dict[str, Any]] = None,
         highlight_words: Optional[Dict[str, Any]] = None,
-        run_time: float = 0.5,
-        dim_opacity: Optional[float] = None
-    ):
+        run_time: float = 0.45,
+        dim_opacity: Optional[float] = None,
+        play_now: bool = True
+    ) -> List[Animation]:
         """
-        Applies spotlight staging directly on the given scene.
+        Applies spotlight staging directly on the given scene or returns animations.
         """
         focal, bg = self.identify_focal_and_background(motif, svo_action, highlight_words)
         if not focal or not bg:
-            return
+            return []
 
         anims = self.build_spotlight_animations(
             focal_elements=focal,
@@ -185,8 +186,9 @@ class SpotlightStagingController:
             dim_opacity=dim_opacity
         )
 
-        if anims:
+        if anims and play_now:
             scene.play(*anims)
+        return anims
 
 
 # Global singleton instance
