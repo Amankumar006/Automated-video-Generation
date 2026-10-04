@@ -135,6 +135,9 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
     if len(title) > 65:
         title = title[:60].rsplit(" ", 1)[0] + " #Shorts"
 
+    if spec.get("language") in ("hi", "hindi") and "(Hindi)" not in title:
+        title = title.replace(" #Shorts", " (Hindi) #Shorts")
+
     # 2. Chapter timestamps from beats
     chapter_lines = []
     for b in spec.get("beats", []):
@@ -235,7 +238,8 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
         "tags": base_tags[:20],
         "category_id": YOUTUBE_DEFAULT_CATEGORY,
         "pinned_comment": pinned_comment,
-        "privacy_status": "unlisted"
+        "privacy_status": "unlisted",
+        "language": spec.get("language", "en")
     }
 
 
@@ -268,8 +272,8 @@ def upload_short(
             "description": metadata["description"],
             "tags": metadata["tags"],
             "categoryId": metadata.get("category_id", YOUTUBE_DEFAULT_CATEGORY),
-            "defaultLanguage": "en",
-            "defaultAudioLanguage": "en"
+            "defaultLanguage": "hi" if metadata.get("language") in ("hi", "hindi") else "en",
+            "defaultAudioLanguage": "hi" if metadata.get("language") in ("hi", "hindi") else "en"
         },
         "status": {
             "privacyStatus": privacy_status,

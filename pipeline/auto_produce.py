@@ -43,6 +43,51 @@ def auto_produce(
     provider: Optional[str] = None,
     language: Optional[str] = None
 ) -> str:
+    if language in ("both", "all", "dual"):
+        print("\n=======================================================")
+        print("🌐 DUAL-LANGUAGE PRODUCTION ENGINE: ENGLISH + HINDI")
+        print("=======================================================\n")
+        print("▶️ [1/2] Producing English Short (ElevenLabs / Eric)...")
+        res_en = auto_produce(
+            topic=topic,
+            arxiv=arxiv,
+            category=category,
+            voice=voice,
+            speed=speed,
+            quality=quality,
+            skip_script=skip_script,
+            template=template,
+            publish=publish,
+            privacy=privacy,
+            dry_run_publish=dry_run_publish,
+            enable_music=enable_music,
+            legacy_engine=legacy_engine,
+            paper_meta=paper_meta,
+            provider="elevenlabs",
+            language="en"
+        )
+        print("\n▶️ [2/2] Producing Hindi Short (Sarvam AI / Shubh)...")
+        res_hi = auto_produce(
+            topic=topic,
+            arxiv=arxiv,
+            category=category,
+            voice=None,
+            speed=speed,
+            quality=quality,
+            skip_script=skip_script,
+            template=template,
+            publish=publish,
+            privacy=privacy,
+            dry_run_publish=dry_run_publish,
+            enable_music=enable_music,
+            legacy_engine=legacy_engine,
+            paper_meta=paper_meta,
+            provider="sarvam",
+            language="hi"
+        )
+        print("\n🎉 Both English and Hindi videos produced and processed successfully!")
+        return json.dumps({"en": res_en, "hi": res_hi})
+
     print("\n=======================================================")
     print("🚀 THE MODEL VERSE — AUTONOMOUS SHORT VIDEO PRODUCER")
     print("=======================================================\n")
@@ -135,6 +180,15 @@ def auto_produce(
             spec["code_snippet"] = arxiv_meta["code_snippet"]
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("repo_metadata"):
         spec["repo_metadata"] = arxiv_meta["repo_metadata"]
+
+    # Step 2.4: Localize script into Hindi/Hinglish if requested
+    if language in ("hi", "hindi") and spec.get("language") != "hi":
+        from pipeline.hindi_localizer import localize_spec_to_hindi
+        print(f"\n🇮🇳 Step 2.4: Localizing script into Conversational Hindi/Hinglish...")
+        spec = localize_spec_to_hindi(spec)
+        template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
+        with open(template_path, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
 
     # Step 2.5: Script Pedagogy & Comprehensibility Audit
     print(f"\n🎙️ Step 2.5: Running Script Pedagogy & Comprehensibility Audit...")
@@ -423,7 +477,7 @@ def main():
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
     parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
-    parser.add_argument("--lang", "--language", dest="lang", default="en", help="Narration language code (en or hi)")
+    parser.add_argument("--lang", "--language", dest="lang", choices=["en", "hi", "both", "all"], default="en", help="Narration language code: 'en' (ElevenLabs), 'hi' (Sarvam AI), or 'both' (dual-production)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
