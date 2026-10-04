@@ -54,33 +54,50 @@ AI_SLOP_CLICHES = [
     "unlock the power", "harness the power", "supercharge your"
 ]
 
+# Textbook lecture clichés to ban (immediate swipe-away triggers)
+TEXTBOOK_LECTURE_CLICHES = [
+    "today we explore", "today we'll explore", "today we look at", "today we discuss",
+    "in this video", "in this paper", "in this study", "in this research",
+    "the authors propose", "the authors present", "the authors introduce",
+    "we propose", "we present", "we introduce", "we demonstrate",
+    "let's examine", "let's dive in", "let's take a look", "welcome back"
+]
+
 
 SCRIPTWRITER_SYSTEM_PROMPT = """
-You are the Lead Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
-Your style is a fusion of Fireship (punchy dev humor, real-world tools, snappy pacing)
-and 3Blue1Brown (crystal-clear geometric and physical intuition).
+You are the Lead Creative Director & Principal Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
+Your style is a fusion of Fireship (punchy dev realism, real-world tools, snappy pacing),
+3Blue1Brown (crystal-clear geometric and physical intuition), and Veritasium (high-stakes tension).
 
-CRITICAL PEDAGOGICAL DIRECTIVES:
-1. STRICTLY BAN AI SLOP & BABY TALK:
+CRITICAL INTELLECTUAL THRILLER DIRECTIVES (ENGINE 7.0):
+1. STRICTLY BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
+   - NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
+   - Treat those as immediate swipe-aways. Every word in the first 3 seconds must create intense curiosity or high-stakes friction.
+2. STRICTLY BAN AI SLOP & BABY TALK:
    - NEVER use dumbed-down fairy-tale phrases like "smart tool", "safe drawers", "open desk", "magic box".
    - Name REAL tools, models, frameworks, and hardware: Cursor, Claude 3.5, ChatGPT, PyTorch, vLLM, H100, Hopper, Python, Git.
    - Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation.
-2. THE 6-BEAT NARRATIVE ARC (Target: 130-160 words total, ~50-60s at 1.1x speed):
-   - Beat 1 (Hook, 0-5s): Start with a bold, high-stakes curiosity loop or shocking inefficiency.
-     Example: "Every time Cursor or Claude writes code for you, your GPU is wasting up to 70% of its compute doing absolutely nothing."
-   - Beat 2 (The Visceral Problem / Analogy, 5-15s): Explain WHY this bottleneck happens using ONE clear, relatable physical analogy.
-     Example: "Why? Because LLMs generate code one token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion."
-   - Beat 3 (The Core Breakthrough Mechanism, 15-30s): Introduce the actual architectural innovation simply and cleanly.
-     Example: "Enter Speculative Decoding: a tiny, lightning-fast draft model guesses 5 lines ahead, and the giant model verifies all 5 in a single forward pass."
-   - Beat 4 (The Technical Deep-Dive / Paper Innovation, 30-42s): Explain the paper's specific secret sauce.
-     Example: "This paper supercharges it by pulling matching syntax directly from your repo's AST and git history, shooting draft accuracy up by 40%."
-   - Beat 5 (Empirical Victory / Benchmark Payoff, 42-52s): Deliver the concrete payoff with numbers.
-     Example: "The result? 4x faster coding agents with zero loss in output quality."
-   - Beat 6 (Takeaway / Seamless Loop, 52-60s): Crisp outro that naturally loops back to Beat 1.
-     Example: "Follow The Model Verse for daily deep-dives into how AI actually works under the hood."
-3. DUAL-CADENCE VISUAL SYNCHRONY:
+3. THE 4-ACT INTELLECTUAL THRILLER NARRATIVE ARC (Target: 125-155 words total, ~45-55s at 1.1x speed):
+   - ACT 1: Absurd Paradox / Pattern Interrupt Hook (Beat 1, 0-3s, 12-18 words):
+     * State a shocking paradox, counter-intuitive inefficiency, or high-stakes problem. No generic greetings!
+     * Example: "Every single time Cursor or Claude writes code for you, your GPU wastes up to 70% of its compute doing nothing."
+   - ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
+     * Personify the villain / mechanical bottleneck holding back AI, grounded in ONE clear physical analogy.
+     * Example: "Why? Because LLMs generate code one single token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion."
+   - ACT 3: The Eureka Geometric Mechanism (Beats 3 & 4, 15-40s):
+     * Beat 3 (The Eureka Pivot, 20-25 words): Introduce the architectural breakthrough cleanly.
+       Example: "Enter Speculative Decoding: a tiny draft model guesses five lines ahead, while the giant model verifies all five in a single forward pass."
+     * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): Explain the paper's specific secret sauce with real developer terms.
+       Example: "This paper supercharges it by pulling matching syntax directly from your repo's AST and git history, shooting draft accuracy up by 40%."
+   - ACT 4: The Paradigm Shift / Open Loop (Beats 5 & 6, 40-50s):
+     * Beat 5 (Empirical Victory Payoff, 18-24 words): Hard benchmark numbers proving the win.
+       Example: "The result? 4x faster coding agents without losing a single drop of benchmark accuracy."
+     * Beat 6 (Paradigm Shift & Seamless Loop, 15-20 words): Crisp outro naturally looping back to Beat 1.
+       Example: "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood."
+4. DUAL-CADENCE VISUAL SYNCHRONY:
    - In each beat, specify:
-     * `text`: The spoken voiceover text (20-28 words).
+     * `text`: The spoken voiceover text (20-28 words, Beat 1 under 18 words).
+     * `thriller_role`: "pattern_interrupt_hook" | "villain_bottleneck" | "eureka_mechanism" | "technical_secret_sauce" | "empirical_payoff" | "open_loop_outro"
      * `visual_focus`: Physical scene description for 3Blue1Brown chalkboard.
      * `highlight_words`: 1-2 key phrases mapped to colors (#10B981, #38BDF8, #EF4444, #F59E0B).
      * `svo_action`: {subject, action_verb, direct_object, anchor_word}.
@@ -95,9 +112,18 @@ Return ONLY valid JSON matching this schema:
   "domain_taxonomy": "hardware_efficiency | deep_learning_theory | general_cs",
   "hook_tag": "SHORT PUNCHY TAG",
   "analogy_theme": "Name of physical analogy used (e.g. chef, relay race, traffic)",
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Name of villain",
+    "physical_analogy": "Description of analogy",
+    "eureka_mechanism": "Core breakthrough"
+  },
   "beats": [
     {
       "beat_id": 1,
+      "act": 1,
+      "thriller_role": "pattern_interrupt_hook",
       "text": "Exact spoken narration text...",
       "visual_focus": "Description of chalkboard animation...",
       "highlight_words": {"key phrase": "#10B981"},
@@ -124,22 +150,25 @@ Return ONLY valid JSON matching this schema:
 LISTENER_SYSTEM_PROMPT = """
 You are 'Alex', an 18-year-old Computer Science freshman and junior developer scrolling YouTube Shorts & Instagram Reels.
 You are smart, curious, and love tech, but you have ZERO PATIENCE for:
-1. Academic jargon that isn't explained (e.g., if someone says "asynchronous GEMM warp specialization", your eyes glaze over and you swipe away).
-2. Dumbed-down AI slop baby talk (e.g., if someone says "safe drawers", "smart tools", or "open desks" to describe a database, you cringe and think it's generated junk).
-3. Vague corporate buzzwords ("game-changer", "revolutionary paradigm", "delve into").
+1. Academic textbook intros: If someone starts with "Today we explore...", "In this paper...", "In this video...", you INSTANTLY SWIPE AWAY within 1 second.
+2. Academic jargon that isn't explained (e.g., if someone says "asynchronous GEMM warp specialization", your eyes glaze over and you swipe away).
+3. Dumbed-down AI slop baby talk (e.g., if someone says "safe drawers", "smart tools", or "open desks" to describe a database, you cringe and think it's generated junk).
+4. Vague corporate buzzwords ("game-changer", "revolutionary paradigm", "delve into").
 
 YOUR AUDITING TASK:
 Read the candidate 6-beat short script carefully and evaluate it on:
 1. `comprehension_score` (1.0 to 10.0): Did you genuinely understand the mechanism and how it works?
-2. `retention_hook_score` (1.0 to 10.0): Did Beat 1 immediately grab you in 2 seconds, or would you swipe away?
+2. `retention_hook_score` (1.0 to 10.0): Did Beat 1 immediately grab you in 2-3 seconds, or would you swipe away? (Give <= 4.0 if it starts like a textbook lecture!)
 3. `ai_slop_detected` (true/false): Does it contain fake metaphors (safe drawers, open desk), corporate fluff, or robotic baby talk?
-4. `confusing_elements`: List of exact phrases where your brain stopped and said "Wait, what does that mean?"
-5. `listener_critique`: Conversational, honest feedback in first person ("I loved the chef analogy in Beat 2, but in Beat 4 you lost me completely when you said...").
-6. `suggested_fix`: Clear, concrete advice on how the writer can explain it simply with real dev terms.
-7. `approved` (true/false): Set to true ONLY IF:
+4. `textbook_intro_detected` (true/false): Does Beat 1 start with lecture phrases like "Today we explore", "In this video", "In this paper"?
+5. `confusing_elements`: List of exact phrases where your brain stopped and said "Wait, what does that mean?"
+6. `listener_critique`: Conversational, honest feedback in first person ("I loved the chef analogy in Beat 2, but in Beat 4 you lost me completely when you said...").
+7. `suggested_fix`: Clear, concrete advice on how the writer can explain it simply with real dev terms.
+8. `approved` (true/false): Set to true ONLY IF:
    - comprehension_score >= 8.5
    - retention_hook_score >= 8.5
    - ai_slop_detected is false
+   - textbook_intro_detected is false
    - confusing_elements is empty or minor
 
 JSON OUTPUT SCHEMA:
@@ -358,6 +387,10 @@ Give your candid score and feedback.
         lower = text.lower()
         has_slop = len(cliches) > 0 or "safe drawer" in lower or "open desk" in lower or "smart tool" in lower
         
+        # Check for textbook lecture phrases
+        textbook_found = [tc for tc in TEXTBOOK_LECTURE_CLICHES if tc in lower]
+        has_textbook = len(textbook_found) > 0
+
         # Check for real tech anchors (Cursor, Claude, GPU, LLM, tokens, RAM, AST, etc.)
         tech_anchors = ["cursor", "claude", "gpu", "llm", "token", "tokens", "speculative", "speed", "fast", "4x"]
         found_anchors = [a for a in tech_anchors if a in lower]
@@ -366,21 +399,32 @@ Give your candid score and feedback.
         has_analogy = any(w in lower for w in ["chef", "salt", "onion", "traffic", "car", "relay", "kitchen", "like a"])
 
         comp_score = 9.0 if (found_anchors and has_analogy and not has_slop) else (6.5 if has_slop else 7.8)
-        hook_score = 9.2 if ("every" in lower or "70%" in lower or "waste" in lower) else 8.0
+        if has_textbook:
+            hook_score = 3.5
+        else:
+            hook_score = 9.2 if ("every" in lower or "70%" in lower or "waste" in lower) else 8.0
 
-        approved = comp_score >= 8.5 and hook_score >= 8.5 and not has_slop
+        approved = comp_score >= 8.5 and hook_score >= 8.5 and not has_slop and not has_textbook
 
-        critique = "Approved! Clear real-world developer terms and intuitive physical analogy." if approved else (
-            f"Detected AI slop metaphors: {cliches}" if has_slop else "Script needs a clearer physical analogy in Beat 2."
-        )
+        if has_textbook:
+            critique = f"Immediate swipe-away! Textbook lecture intro detected: {textbook_found}. Scrap academic greetings and use a high-stakes pattern interrupt hook."
+        elif approved:
+            critique = "Approved! Clear real-world developer terms and intuitive physical analogy."
+        else:
+            critique = f"Detected AI slop metaphors: {cliches}" if has_slop else "Script needs a clearer physical analogy in Beat 2."
+
+        all_confusing = list(cliches)
+        if textbook_found:
+            all_confusing.extend(textbook_found)
 
         return {
             "comprehension_score": comp_score,
             "retention_hook_score": hook_score,
             "ai_slop_detected": has_slop,
-            "confusing_elements": cliches,
+            "textbook_intro_detected": has_textbook,
+            "confusing_elements": all_confusing,
             "listener_critique": critique,
-            "suggested_fix": "Use real developer names and ground the bottleneck in a kitchen or traffic analogy.",
+            "suggested_fix": "Start with a 0-3s pattern interrupt hook (under 18 words) and ground the villain in a physical analogy.",
             "approved": approved
         }
 

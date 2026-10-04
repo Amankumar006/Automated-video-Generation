@@ -68,6 +68,16 @@ AI_SLOP_CLICHES = [
     "unlock the power", "harness the power", "supercharge your", "magic box"
 ]
 
+# Textbook lecture clichés to ban (-3.0 pts each, immediate swipe-away)
+TEXTBOOK_LECTURE_CLICHES = [
+    "today we explore", "today we'll explore", "today we look at", "today we discuss",
+    "in this video", "in this paper", "in this study", "in this research",
+    "the authors propose", "the authors present", "the authors introduce",
+    "we propose", "we present", "we introduce", "we demonstrate",
+    "let's examine", "let's dive in", "let's take a look", "welcome back",
+    "this paper presents", "this study investigates"
+]
+
 # Real-World Everyday Metaphors & Sensory Anchors
 EVERYDAY_ANALOGY_ANCHORS = [
     # Visual / Physical everyday phenomena
@@ -147,6 +157,7 @@ class BeatCriticResult:
     score: float
     suggestions: List[str]
     slop_cliches_found: List[str] = field(default_factory=list)
+    textbook_cliches_found: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -168,6 +179,8 @@ class ScriptCriticReport:
     summary_verdict: str = ""
     total_slop_cliches: int = 0
     slop_list: List[str] = field(default_factory=list)
+    total_textbook_cliches: int = 0
+    textbook_list: List[str] = field(default_factory=list)
 
 
 class ScriptCritic:
@@ -212,6 +225,13 @@ class ScriptCritic:
             pattern = r'\b' + re.escape(cl) + r'\b'
             if re.search(pattern, text_lower):
                 slop_found.append(cl)
+
+        # Textbook Lecture Cliché detection (-3.0 pts each, immediate swipe-away)
+        textbook_found = []
+        for tc in TEXTBOOK_LECTURE_CLICHES:
+            pattern = r'\b' + re.escape(tc) + r'\b'
+            if re.search(pattern, text_lower):
+                textbook_found.append(tc)
                 
         reading_ease, grade_level, _, _, _ = compute_flesch_metrics(text)
         
@@ -224,6 +244,9 @@ class ScriptCritic:
         
         # AI Slop Cliché penalties (-2.5 pts each)
         score -= len(slop_found) * 2.5
+
+        # Textbook Lecture Cliché penalties (-3.0 pts each)
+        score -= len(textbook_found) * 3.0
         
         # Analogy reward
         score += min(2.5, len(analogies) * 1.2)
@@ -248,6 +271,9 @@ class ScriptCritic:
 
         if slop_found:
             suggestions.append(f"CRITICAL: Remove AI slop / baby-talk: {', '.join(slop_found)}. Use real developer names.")
+
+        if textbook_found:
+            suggestions.append(f"CRITICAL: Scrap textbook lecture cliches: {', '.join(textbook_found)}. Use an absurd paradox or pattern interrupt hook!")
             
         if not analogies and beat_id == 2:
             suggestions.append("Add a central sensory or physical analogy (e.g. chef, relay race, mirror, clouds, sculptor).")
@@ -265,7 +291,8 @@ class ScriptCritic:
             grade_level=round(grade_level, 1),
             score=score,
             suggestions=suggestions,
-            slop_cliches_found=slop_found
+            slop_cliches_found=slop_found,
+            textbook_cliches_found=textbook_found
         )
 
     def evaluate_script(
@@ -285,6 +312,7 @@ class ScriptCritic:
         all_mod_jargon = set()
         all_analogies = set()
         all_slop_cliches = set()
+        all_textbook_cliches = set()
         
         for idx, b in enumerate(beats_data):
             b_id = b.get("beat_id", idx + 1)
@@ -297,6 +325,7 @@ class ScriptCritic:
             all_mod_jargon.update(b_res.moderate_jargon)
             all_analogies.update(b_res.analogies_found)
             all_slop_cliches.update(b_res.slop_cliches_found)
+            all_textbook_cliches.update(b_res.textbook_cliches_found)
             
         full_text = " ".join(all_text_list)
         total_reading_ease, overall_grade_level, total_words, _, _ = compute_flesch_metrics(full_text)
@@ -335,13 +364,16 @@ class ScriptCritic:
             final_score >= self.min_score and
             overall_grade_level <= (self.target_grade_level + 2.0) and
             len(all_crit_jargon) == 0 and
-            len(all_slop_cliches) == 0
+            len(all_slop_cliches) == 0 and
+            len(all_textbook_cliches) == 0
         )
         
         if passed:
             verdict = "✅ APPROVED: The script is conversational, intuitive, grounded in everyday examples, and free of AI slop."
         else:
             reasons = []
+            if len(all_textbook_cliches) > 0:
+                reasons.append(f"contains {len(all_textbook_cliches)} textbook lecture cliché(s): {', '.join(all_textbook_cliches)}")
             if len(all_slop_cliches) > 0:
                 reasons.append(f"contains {len(all_slop_cliches)} AI slop cliché(s): {', '.join(all_slop_cliches)}")
             if len(all_crit_jargon) > 0:
@@ -369,7 +401,9 @@ class ScriptCritic:
             llm_evaluation=llm_eval,
             summary_verdict=verdict,
             total_slop_cliches=len(all_slop_cliches),
-            slop_list=sorted(list(all_slop_cliches))
+            slop_list=sorted(list(all_slop_cliches)),
+            total_textbook_cliches=len(all_textbook_cliches),
+            textbook_list=sorted(list(all_textbook_cliches))
         )
 
     def _call_gemini_critic(
