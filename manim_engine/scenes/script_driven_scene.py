@@ -265,8 +265,8 @@ class ScriptDrivenScene(MovingCameraScene):
             b_text = b.get("text", "")
             v_focus = b.get("visual_focus", "")
 
-            # Skip outro beat, handled separately in play_brand_outro
-            if beat_id >= 6 or "Follow The Model Verse" in b_text or beat_id == total_beats:
+            # Skip final outro beat, handled separately in play_brand_outro
+            if beat_id == total_beats:
                 continue
 
             duration = self.get_beat_duration(beat_id, 6.5)
@@ -480,7 +480,8 @@ class ScriptDrivenScene(MovingCameraScene):
 
     def play_brand_outro(self):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
-        duration = self.get_beat_duration(6, 4.5)
+        total_beats = len(self.spec.get("beats", []))
+        duration = self.get_beat_duration(total_beats, 4.5)
         fadeout_math_time = 0.3
         fadeouts = []
         if self.current_formula_mobj:
