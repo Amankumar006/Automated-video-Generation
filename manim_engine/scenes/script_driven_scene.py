@@ -8,6 +8,8 @@ monolithic templates and circular score gauges.
 import os
 import sys
 import json
+import re
+import importlib.util
 import numpy as np
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Tuple
@@ -263,8 +265,8 @@ class ScriptDrivenScene(MovingCameraScene):
             b_text = b.get("text", "")
             v_focus = b.get("visual_focus", "")
 
-            # Skip outro beat, handled separately in play_brand_outro
-            if beat_id >= 6 or "Follow The Model Verse" in b_text or beat_id == total_beats:
+            # Skip final outro beat, handled separately in play_brand_outro
+            if beat_id == total_beats:
                 continue
 
             duration = self.get_beat_duration(beat_id, 6.5)
@@ -313,7 +315,6 @@ class ScriptDrivenScene(MovingCameraScene):
                 # If bespoke_svg file missing and no paper figure, synthesize on-the-fly via SVGSynthesizer!
                 if motif_type in ["bespoke_svg", "dynamic_svg"] and (not current_svg or not os.path.exists(current_svg)):
                     try:
-                        import re
                         from pipeline.svg_synthesizer import SVGSynthesizer
                         clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "topic")).lower()
                         topic = self.spec.get("title", clean_id)
@@ -338,8 +339,26 @@ class ScriptDrivenScene(MovingCameraScene):
 
             from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
 
-            # 2. Instantiate Parameterized Script Motif
-            motif = create_script_motif(motif_type, motif_params)
+            # 2. Instantiate Visual: Check for Bespoke Synthesized Module (Visual Engine 6.0)
+            spec_clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "short")).lower()
+            bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
+            motif = None
+
+            if bespoke_module_path.exists():
+                try:
+                    mod_name = f"bespoke_{spec_clean_id}_beat_{beat_id}"
+                    spec_import = importlib.util.spec_from_file_location(mod_name, str(bespoke_module_path))
+                    mod = importlib.util.module_from_spec(spec_import)
+                    spec_import.loader.exec_module(mod)
+                    if hasattr(mod, "BespokeBeatVisual"):
+                        motif = mod.BespokeBeatVisual()
+                        print(f"   ✨ [Visual Engine 6.0] Successfully loaded bespoke visual from {bespoke_module_path.name}")
+                except Exception as e:
+                    print(f"⚠️ Error loading bespoke visual for Beat {beat_id}: {e}. Falling back to motif registry.")
+
+            if motif is None:
+                motif = create_script_motif(motif_type, motif_params)
+
             if not isinstance(motif, BaseBlueprintComposition):
                 motif.move_to([0, 0.65, 0])
 
@@ -364,7 +383,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     self.play(motif.wave_c.animate.set_color("#FF2A55"), run_time=action_time * 0.5)
                     self.play(motif.wave_c.animate.set_color("#EF4444"), run_time=action_time * 0.5)
                 elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
-                    self.play(motif.angle_arc.animate.set_color("#34D399"), motif.badge_box.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                    badge_grp = VGroup(motif.badge_box, motif.badge_txt, motif.badge_sub) if hasattr(motif, "badge_txt") else motif.badge_box
+                    self.play(motif.angle_arc.animate.set_color("#34D399"), badge_grp.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1"):
                     self.play(motif.out_beam1.animate.set_stroke(width=8.0), motif.out_beam2.animate.set_stroke(width=8.0), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "branching_outputs" and hasattr(motif, "card1"):
@@ -460,7 +480,8 @@ class ScriptDrivenScene(MovingCameraScene):
 
     def play_brand_outro(self):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
-        duration = self.get_beat_duration(6, 4.5)
+        total_beats = len(self.spec.get("beats", []))
+        duration = self.get_beat_duration(total_beats, 4.5)
         fadeout_math_time = 0.3
         fadeouts = []
         if self.current_formula_mobj:

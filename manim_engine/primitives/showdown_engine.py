@@ -430,7 +430,7 @@ class BlueprintRadarParetoPlot(BaseBlueprintComposition):
             FadeIn(self.labels_group)
         ]
         for poly_cont in self.polygon_group:
-            anims.append(GrowFromCenter(poly_cont, rate_func=ease_out_cubic))
+            anims.append(GrowFromPoint(poly_cont, point=self.center_pt, rate_func=ease_out_cubic))
         anims.append(FadeIn(self.badge, shift=UP * 0.15, rate_func=ease_out_back))
         return AnimationGroup(*anims, run_time=run_time)
 
@@ -438,7 +438,7 @@ class BlueprintRadarParetoPlot(BaseBlueprintComposition):
         """Focal kinetic action: Hero Pareto polygon gently pulses along its frontier."""
         if self.hero_polygon:
             return AnimationGroup(
-                self.hero_polygon.animate.scale(1.04),
+                self.hero_polygon.animate.scale(1.04, about_point=self.center_pt),
                 self.badge.animate.scale(1.05).set_color(COLOR_GOLD),
                 run_time=run_time
             )

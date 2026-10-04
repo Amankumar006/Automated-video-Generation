@@ -669,7 +669,14 @@ def create_script_motif(motif_type: str, params: Optional[Dict[str, Any]] = None
 
     # 1. Composable Visual Blueprint Routing (Visual Engine 4.0)
     if motif_type == "visual_composition":
-        layout = clean_params.get("layout", "pipeline_stages")
+        layout = clean_params.get("layout")
+        if not layout:
+            if "lines" in clean_params or "filename" in clean_params:
+                layout = "chalkboard_code_block"
+            elif "models" in clean_params or "metrics" in clean_params:
+                layout = "horizontal_race_bars"
+            else:
+                layout = "pipeline_stages"
         return create_blueprint_composition(layout, clean_params)
     elif motif_type in BLUEPRINT_COMPOSITION_REGISTRY:
         return create_blueprint_composition(motif_type, clean_params)

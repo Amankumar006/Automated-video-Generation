@@ -109,7 +109,7 @@ Return ONLY valid JSON matching this schema:
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "grid_memory | horizontal_race_bars | chalkboard_code | ast_tree",
+        "layout": "vector_flow_field | neural_activation_wave | attention_prism_refraction | optimization_landscape | horizontal_race_bars | radar_pareto_plot | chalkboard_code_block | grid_memory | split_flow | layer_stack | convergence_funnel | catalog_routing | tree_hierarchy | projection_rays | barrier_separation | side_by_side | paper_figure",
         "title": "HEADLINE",
         "sub": "Subtext explaining the graphic",
         "accent_color": "#10B981",
@@ -262,7 +262,7 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "visual_focus": "Sequential token generation ladder showing single word emits followed by long idle wait states.",
                     "highlight_words": {"one single token": "#F59E0B", "stops to ask": "#EF4444"},
                     "svo_action": {"subject": "LLM Decoder", "action_verb": "delays", "direct_object": "sequential tokens", "anchor_word": "stops", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "grid_memory", "title": "SEQUENTIAL TOKEN BOTTLENECK", "sub": "Autoregressive generation loads full weights per token", "accent_color": "#F59E0B", "params": {}}
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SEQUENTIAL TOKEN BOTTLENECK", "sub": "Autoregressive generation loads full weights per token", "accent_color": "#F59E0B", "params": {}}
                 },
                 {
                     "beat_id": 3,
@@ -270,7 +270,7 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "visual_focus": "Dual parallel pipelines showing fast speculative draft branch feeding a single verification forward pass.",
                     "highlight_words": {"Speculative Decoding": "#10B981", "verifies all five": "#38BDF8"},
                     "svo_action": {"subject": "Draft Model", "action_verb": "speculates", "direct_object": "token candidates", "anchor_word": "verifies", "semantic_role": "mechanism"},
-                    "visual_blueprint": {"layout": "horizontal_race_bars", "title": "SPECULATIVE PARALLEL PIPELINE", "sub": "Multi-token verification in single forward pass", "accent_color": "#10B981", "params": {}}
+                    "visual_blueprint": {"layout": "split_flow", "title": "SPECULATIVE PARALLEL PIPELINE", "sub": "Multi-token verification in single forward pass", "accent_color": "#10B981", "params": {}}
                 },
                 {
                     "beat_id": 4,
@@ -278,7 +278,7 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "visual_focus": "Syntax-highlighted code execution block extracting AST subtrees and auto-filling speculative candidate tokens.",
                     "highlight_words": {"AST and git history": "#38BDF8", "acceptance shoots up": "#10B981"},
                     "svo_action": {"subject": "AgSpec Engine", "action_verb": "retrieves", "direct_object": "repo syntax", "anchor_word": "shoots", "semantic_role": "innovation"},
-                    "visual_blueprint": {"layout": "chalkboard_code", "title": "AST SYNTAX RETRIEVAL", "sub": "Live AST extraction boosting speculative acceptance", "accent_color": "#38BDF8", "params": {}}
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "AST SYNTAX RETRIEVAL", "sub": "Live AST extraction boosting speculative acceptance", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 5,
@@ -294,7 +294,7 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "visual_focus": "Brand chalkboard logo with glowing cyan rings, subscribe badge, and loop transition arrow.",
                     "highlight_words": {"The Model Verse": "#10B981", "under the hood": "#38BDF8"},
                     "svo_action": {"subject": "Viewer", "action_verb": "follows", "direct_object": "The Model Verse", "anchor_word": "daily", "semantic_role": "loop"},
-                    "visual_blueprint": {"layout": "grid_memory", "title": "THE MODEL VERSE", "sub": "Daily AI Architecture & Research Breakdowns", "accent_color": "#10B981", "params": {}}
+                    "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily AI Architecture & Research Breakdowns", "accent_color": "#10B981", "params": {}}
                 }
             ]
         }

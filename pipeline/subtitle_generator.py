@@ -66,8 +66,8 @@ def generate_phrase_chunks(
 
     for b in beats:
         beat_id = b.get("beat_id", 1)
-        # Skip outro brand beat if desired, or include it cleanly
-        is_outro = (beat_id >= 6 or "Follow The Model Verse" in b.get("text", ""))
+        # Only the final beat is the outro brand beat
+        is_outro = (beat_id == len(beats))
         words = b.get("word_timings", [])
         if not words:
             continue

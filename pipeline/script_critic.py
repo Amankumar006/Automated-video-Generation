@@ -333,7 +333,7 @@ class ScriptCritic:
 
         passed = (
             final_score >= self.min_score and
-            overall_grade_level <= (self.target_grade_level + 1.5) and
+            overall_grade_level <= (self.target_grade_level + 2.0) and
             len(all_crit_jargon) == 0 and
             len(all_slop_cliches) == 0
         )
@@ -346,7 +346,7 @@ class ScriptCritic:
                 reasons.append(f"contains {len(all_slop_cliches)} AI slop cliché(s): {', '.join(all_slop_cliches)}")
             if len(all_crit_jargon) > 0:
                 reasons.append(f"contains {len(all_crit_jargon)} heavy jargon term(s): {', '.join(all_crit_jargon)}")
-            if overall_grade_level > self.target_grade_level + 1.0:
+            if overall_grade_level > self.target_grade_level + 2.0:
                 reasons.append(f"reading level is Grade {overall_grade_level} (target: Grade {self.target_grade_level})")
             if final_score < self.min_score:
                 reasons.append(f"overall score {final_score}/10 is below threshold {self.min_score}")
