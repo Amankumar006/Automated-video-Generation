@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 16:59:36 UTC
+**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 18:56:49 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: OTRetarget: Joint Robot and Object Motion Retargeting via Optimal Transport
-- **arXiv ID:** [2609.36602](https://arxiv.org/abs/2609.36602)
-- **Domain Taxonomy:** `robotics_tamp` (1.84x velocity)
-- **Category:** `benchmark_news`
-- **Editorial Hook:** *How do you teach a robot to dance, run, or climb like a human without teaching it every move from scratch?*
-- **Everyday Analogy:** *A puppeteer using a control bar where every tug on a string is translated by a 'geometry translator' to match the unique size and limb-length of a different marionette.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_otretarget_joint_motion_optimal_transport_benchmark_news.mp4`
+### Reel 1: E-MoE: Enhanced Mixture-of-Experts for Non-Factorized Diffusion Language Models
+- **arXiv ID:** [2609.37533](https://arxiv.org/abs/2609.37533)
+- **Domain Taxonomy:** `efficient_architectures` (0.60x velocity)
+- **Category:** `architecture_breakdown`
+- **Editorial Hook:** *What if your AI didn't have to guess one word at a time, but could build the whole picture at once?*
+- **Everyday Analogy:** *Instead of painting a portrait pixel-by-pixel, imagine an artist who sketches the entire outline simultaneously and then fills in the color—this is the 'non-factorized' leap in diffusion models.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_e_moe_diffusion_breakdown_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
