@@ -41,7 +41,8 @@ def auto_produce(
     legacy_engine: bool = False,
     paper_meta: Optional[Dict[str, Any]] = None,
     provider: Optional[str] = None,
-    language: Optional[str] = None
+    language: Optional[str] = None,
+    skip_repair: bool = False
 ) -> str:
     if language in ("both", "all", "dual"):
         print("\n=======================================================")
@@ -64,8 +65,21 @@ def auto_produce(
             legacy_engine=legacy_engine,
             paper_meta=paper_meta,
             provider="elevenlabs",
-            language="en"
+            language="en",
+            skip_repair=skip_repair
         )
+        # Locate the template generated or used by the English pass
+        hi_template = template
+        if not hi_template and res_en:
+            p_stem = Path(res_en).stem
+            for cand in sorted(templates_dir.glob("*.json"), key=os.path.getmtime, reverse=True):
+                c_stem = cand.stem
+                cand_id = c_stem.replace("architecture_breakdown_", "").replace("mechanism_deepdive_", "").replace("model_showdown_", "").replace("benchmark_news_", "")
+                if cand_id and cand_id in p_stem:
+                    hi_template = str(cand)
+                    print(f"📄 Reusing English visual blueprint template for Hindi pass: {cand.name}")
+                    break
+
         print("\n▶️ [2/2] Producing Hindi Short (Sarvam AI / Shubh)...")
         res_hi = auto_produce(
             topic=topic,
@@ -75,7 +89,7 @@ def auto_produce(
             speed=speed,
             quality=quality,
             skip_script=skip_script,
-            template=template,
+            template=hi_template,
             publish=publish,
             privacy=privacy,
             dry_run_publish=dry_run_publish,
@@ -83,7 +97,8 @@ def auto_produce(
             legacy_engine=legacy_engine,
             paper_meta=paper_meta,
             provider="sarvam",
-            language="hi"
+            language="hi",
+            skip_repair=skip_repair
         )
         print("\n🎉 Both English and Hindi videos produced and processed successfully!")
         return json.dumps({"en": res_en, "hi": res_hi})
@@ -298,11 +313,14 @@ def auto_produce(
         avg_score = audit_report.get('average_score', 0.0)
         print(f"   📊 Initial VLM Quality Score: {avg_score:.2f}/10.0")
 
-        # Self-Healing Loop if score < 8.5
-        needs_repair = not audit_report.get("passed_quality_gate", True)
+        # Self-Healing Loop if score < 8.5 (and not skip_repair)
+        needs_repair = (not audit_report.get("passed_quality_gate", True)) and (not skip_repair)
         repair_iteration = 0
         max_repair_iterations = 2
         patches_applied = False
+
+        if skip_repair:
+            print("   ℹ️ VLM Critic self-healing bypassed (--skip-repair specified).")
 
         while needs_repair and repair_iteration < max_repair_iterations:
             repair_iteration += 1
@@ -484,6 +502,7 @@ def main():
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
+    parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")
     args = parser.parse_args()
 
     if not args.topic and not args.arxiv and not args.template:
@@ -513,7 +532,8 @@ def main():
         dry_run_publish=args.dry_run_publish,
         enable_music=not args.no_music,
         provider=args.provider,
-        language=args.lang
+        language=args.lang,
+        skip_repair=args.skip_repair
     )
 
 if __name__ == "__main__":

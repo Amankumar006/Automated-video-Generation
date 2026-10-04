@@ -16,6 +16,7 @@ KOKORO_MODEL_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "kokoro-v1.0.onnx")
 KOKORO_VOICES_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "voices-v1.0.bin")
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
+GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL_NAME", "gemini-flash-latest")
 
 # Typography & Visual Design Tokens
 FONT_HELVETICA = "Helvetica"
