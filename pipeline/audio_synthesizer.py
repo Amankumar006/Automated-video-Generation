@@ -46,27 +46,47 @@ def ensure_kokoro_models():
 
 def synthesize_audio_for_spec(
     spec_data: dict,
-    voice: str = DEFAULT_VOICE,
-    speed: float = DEFAULT_SPEED,
+    voice: Optional[str] = None,
+    speed: Optional[float] = None,
     enable_music: bool = ENABLE_BG_MUSIC,
     duck_gain: float = DEFAULT_DUCK_GAIN,
     normal_gain: float = DEFAULT_NORMAL_GAIN,
-    custom_music_path: Optional[str] = None
+    custom_music_path: Optional[str] = None,
+    provider: Optional[str] = None,
+    language: Optional[str] = None
 ) -> dict:
     """
-    Synthesizes speech, procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
+    Synthesizes speech using the unified neural voice router (ElevenLabs, Sarvam AI, Kokoro fallback),
+    generates procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
     Returns: {"master_audio": str, "narration_audio": str, "soundtrack_audio": str, "timing_data": list, "total_duration": float}
     """
+    from pipeline.voice_engine import UnifiedVoiceRouter
+
     os.makedirs(PUBLIC_DIR, exist_ok=True)
     spec_id = spec_data.get("id", "short")
     narration_out = os.path.join(PUBLIC_DIR, f"{spec_id}_narration.wav")
     soundtrack_out = os.path.join(PUBLIC_DIR, f"{spec_id}_soundtrack.wav")
     master_out = os.path.join(PUBLIC_DIR, f"{spec_id}_master_audio.wav")
 
-    print(f"🎙️ Synthesizing narration for '{spec_data.get('title', spec_id)}' (Voice: {voice}, Speed: {speed})...")
-    ensure_kokoro_models()
-    kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
-    aligner = AcousticForcedAligner(tokenizer=kokoro.tokenizer)
+    lang = language or spec_data.get("language") or spec_data.get("lang") or "en"
+    prov = provider or spec_data.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
+    effective_speed = speed if speed is not None else DEFAULT_SPEED
+    effective_voice = voice or spec_data.get("voice")
+
+    print(f"🎙️ Synthesizing narration for '{spec_data.get('title', spec_id)}' (Provider: {prov}, Lang: {lang}, Voice: {effective_voice or 'default'}, Speed: {effective_speed}x)...")
+
+    router = UnifiedVoiceRouter()
+    
+    # Initialize acoustic aligner (using Kokoro tokenizer if available for phonetic precision)
+    tokenizer = None
+    try:
+        if os.path.exists(KOKORO_MODEL_PATH) and os.path.exists(KOKORO_VOICES_PATH):
+            kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
+            tokenizer = kokoro.tokenizer
+    except Exception:
+        tokenizer = None
+    aligner = AcousticForcedAligner(tokenizer=tokenizer)
+
     sr = SAMPLE_RATE
     all_audio = []
     current_time = 0.0
@@ -75,7 +95,13 @@ def synthesize_audio_for_spec(
     beats = spec_data.get("beats", [])
     for beat in beats:
         text = beat["text"]
-        samples, _ = kokoro.create(text, voice=voice, speed=speed, lang="en-us")
+        samples, sr, meta = router.synthesize_beat(
+            text=text,
+            voice=effective_voice,
+            speed=effective_speed,
+            language=lang,
+            provider=prov
+        )
         dur = len(samples) / sr
         start = current_time
         end = start + dur
@@ -97,9 +123,13 @@ def synthesize_audio_for_spec(
             "end": round(end, 2),
             "duration": round(dur, 2),
             "slot_duration": round(dur + pause_dur, 2),
-            "word_timings": word_timings
+            "word_timings": word_timings,
+            "provider": meta.get("provider", "tts"),
+            "model": meta.get("model", ""),
+            "voice": meta.get("voice_id") or meta.get("speaker") or meta.get("voice")
         })
-        print(f"   Beat {beat['beat_id']} [{start:.2f}s -> {end:.2f}s | Slot: {dur + pause_dur:.2f}s | Words: {len(word_timings)}]: \"{text[:45]}...\"")
+        provider_badge = meta.get("provider", "tts").upper()
+        print(f"   Beat {beat['beat_id']} [{start:.2f}s -> {end:.2f}s | {provider_badge} | Words: {len(word_timings)}]: \"{text[:45]}...\"")
         all_audio.append(samples)
         # Breath pause between beats
         pause = np.zeros(int(pause_dur * sr), dtype=np.float32)
@@ -110,7 +140,7 @@ def synthesize_audio_for_spec(
     total_len = len(narration_audio)
     total_duration = total_len / sr
     sf.write(narration_out, narration_audio, sr)
-    print(f"   Total speech duration: {total_duration:.2f}s")
+    print(f"   Total speech duration: {total_duration:.2f}s (Cache hits: {router.cache.stats['hits']})")
 
     # Kinetic Subtitles & Phrase Chunks (SRT & ASS Export)
     srt_out = os.path.join(PUBLIC_DIR, f"{spec_id}.srt")

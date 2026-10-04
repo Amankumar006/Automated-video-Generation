@@ -1,0 +1,1905 @@
+{
+  "id": "flashattention_3_breakdown",
+  "title": "FlashAttention-3: Asynchronous Hardware Mastery",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "MECHANISM DEEPDIVE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Your H100 GPU is idling. Even with FlashAttention-2, you're only hitting 35% utilization. You're paying for a supercar but driving it in a school zone.",
+      "visual_focus": "A glowing H100 chip with a pulsing red bar at 35% capacity.",
+      "highlight_words": {
+        "35% utilization": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "GPU",
+        "action_verb": "wastes",
+        "direct_object": "compute cycles",
+        "anchor_word": "idling",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE H100 BOTTLENECK",
+        "sub": "Current hardware utilization vs theoretical peak",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE H100 BOTTLENECK",
+        "sub": "Current hardware utilization vs theoretical peak",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 9.54,
+      "slot_duration": 9.84,
+      "start": 0.0,
+      "end": 9.54,
+      "word_timings": [
+        {
+          "word": "Your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.025,
+          "end": 0.185,
+          "duration": 0.16,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "H100",
+          "clean_word": "h100",
+          "phonemes": "\u02c8e\u026at\u0283 w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad",
+          "start": 0.185,
+          "end": 1.18,
+          "duration": 0.995,
+          "frame_ahead_trigger": 0.145
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 1.18,
+          "end": 1.86,
+          "duration": 0.68,
+          "frame_ahead_trigger": 1.14
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 1.86,
+          "end": 1.944,
+          "duration": 0.084,
+          "frame_ahead_trigger": 1.82
+        },
+        {
+          "word": "idling.",
+          "clean_word": "idling",
+          "phonemes": "\u02c8a\u026adl\u026a\u014b",
+          "start": 1.944,
+          "end": 2.318,
+          "duration": 0.373,
+          "frame_ahead_trigger": 1.904
+        },
+        {
+          "word": "Even",
+          "clean_word": "even",
+          "phonemes": "\u02c8i\u02d0v\u0259n",
+          "start": 2.318,
+          "end": 2.6,
+          "duration": 0.282,
+          "frame_ahead_trigger": 2.278
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 2.6,
+          "end": 2.87,
+          "duration": 0.27,
+          "frame_ahead_trigger": 2.56
+        },
+        {
+          "word": "FlashAttention-2,",
+          "clean_word": "flashattention2",
+          "phonemes": "fl\u02c8\u00e6\u0283 \u0250t\u02c8\u025bn\u0283\u0259n t\u02c8u\u02d0",
+          "start": 2.87,
+          "end": 3.81,
+          "duration": 0.94,
+          "frame_ahead_trigger": 2.83
+        },
+        {
+          "word": "you're",
+          "clean_word": "youre",
+          "phonemes": "j\u02c8\u0254\u02d0\u0279",
+          "start": 3.81,
+          "end": 4.1,
+          "duration": 0.29,
+          "frame_ahead_trigger": 3.77
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 4.1,
+          "end": 4.365,
+          "duration": 0.265,
+          "frame_ahead_trigger": 4.06
+        },
+        {
+          "word": "hitting",
+          "clean_word": "hitting",
+          "phonemes": "h\u02c8\u026a\u027e\u026a\u014b",
+          "start": 4.365,
+          "end": 4.64,
+          "duration": 0.275,
+          "frame_ahead_trigger": 4.325
+        },
+        {
+          "word": "35%",
+          "clean_word": "35",
+          "phonemes": "\u03b8\u02c8\u025c\u02d0\u027ei f\u02c8a\u026av",
+          "start": 4.64,
+          "end": 5.265,
+          "duration": 0.625,
+          "frame_ahead_trigger": 4.6
+        },
+        {
+          "word": "utilization.",
+          "clean_word": "utilization",
+          "phonemes": "j\u02ccu\u02d0\u027e\u026al\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 5.265,
+          "end": 6.17,
+          "duration": 0.905,
+          "frame_ahead_trigger": 5.225
+        },
+        {
+          "word": "You're",
+          "clean_word": "youre",
+          "phonemes": "j\u02c8\u0254\u02d0\u0279",
+          "start": 6.17,
+          "end": 6.423,
+          "duration": 0.253,
+          "frame_ahead_trigger": 6.13
+        },
+        {
+          "word": "paying",
+          "clean_word": "paying",
+          "phonemes": "p\u02c8e\u026a\u026a\u014b",
+          "start": 6.423,
+          "end": 6.745,
+          "duration": 0.322,
+          "frame_ahead_trigger": 6.383
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 6.745,
+          "end": 6.895,
+          "duration": 0.15,
+          "frame_ahead_trigger": 6.705
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.895,
+          "end": 7.22,
+          "duration": 0.325,
+          "frame_ahead_trigger": 6.855
+        },
+        {
+          "word": "supercar",
+          "clean_word": "supercar",
+          "phonemes": "s\u02c8u\u02d0p\u025ak\u02cc\u0251\u02d0\u0279",
+          "start": 7.22,
+          "end": 7.66,
+          "duration": 0.44,
+          "frame_ahead_trigger": 7.18
+        },
+        {
+          "word": "but",
+          "clean_word": "but",
+          "phonemes": "b\u02cc\u028ct",
+          "start": 7.66,
+          "end": 7.965,
+          "duration": 0.305,
+          "frame_ahead_trigger": 7.62
+        },
+        {
+          "word": "driving",
+          "clean_word": "driving",
+          "phonemes": "d\u0279\u02c8a\u026av\u026a\u014b",
+          "start": 7.965,
+          "end": 8.28,
+          "duration": 0.315,
+          "frame_ahead_trigger": 7.925
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 8.28,
+          "end": 8.405,
+          "duration": 0.125,
+          "frame_ahead_trigger": 8.24
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 8.405,
+          "end": 8.605,
+          "duration": 0.2,
+          "frame_ahead_trigger": 8.365
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.605,
+          "end": 8.85,
+          "duration": 0.245,
+          "frame_ahead_trigger": 8.565
+        },
+        {
+          "word": "school",
+          "clean_word": "school",
+          "phonemes": "sk\u02c8u\u02d0l",
+          "start": 8.85,
+          "end": 9.12,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.81
+        },
+        {
+          "word": "zone.",
+          "clean_word": "zone",
+          "phonemes": "z\u02c8o\u028an",
+          "start": 9.12,
+          "end": 9.355,
+          "duration": 0.235,
+          "frame_ahead_trigger": 9.08
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Why? Because standard kernels force the same threads to fetch data AND do math. It\u2019s like a chef who stops cooking to run to the grocery store.",
+      "visual_focus": "Split-screen: One chef running back and forth versus a kitchen line.",
+      "highlight_words": {
+        "fetch data": "#38BDF8",
+        "do math": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Threads",
+        "action_verb": "bottleneck",
+        "direct_object": "memory bandwidth",
+        "anchor_word": "grocery store",
+        "semantic_role": "analogy_setup"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE CONTEXT SWITCH TAX",
+        "sub": "Why interleaved tasks kill performance",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE CONTEXT SWITCH TAX",
+        "sub": "Why interleaved tasks kill performance",
+        "accent_color": "#38BDF8"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.21,
+      "slot_duration": 7.51,
+      "start": 9.84,
+      "end": 17.05,
+      "word_timings": [
+        {
+          "word": "Why?",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 9.851,
+          "end": 10.161,
+          "duration": 0.31,
+          "frame_ahead_trigger": 9.811
+        },
+        {
+          "word": "Because",
+          "clean_word": "because",
+          "phonemes": "b\u026ak\u02c8\u028cz",
+          "start": 10.161,
+          "end": 10.431,
+          "duration": 0.27,
+          "frame_ahead_trigger": 10.121
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 10.431,
+          "end": 10.786,
+          "duration": 0.355,
+          "frame_ahead_trigger": 10.391
+        },
+        {
+          "word": "kernels",
+          "clean_word": "kernels",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259lz",
+          "start": 10.786,
+          "end": 11.251,
+          "duration": 0.465,
+          "frame_ahead_trigger": 10.746
+        },
+        {
+          "word": "force",
+          "clean_word": "force",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s",
+          "start": 11.251,
+          "end": 11.641,
+          "duration": 0.39,
+          "frame_ahead_trigger": 11.211
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.641,
+          "end": 11.707,
+          "duration": 0.066,
+          "frame_ahead_trigger": 11.601
+        },
+        {
+          "word": "same",
+          "clean_word": "same",
+          "phonemes": "s\u02c8e\u026am",
+          "start": 11.707,
+          "end": 11.901,
+          "duration": 0.194,
+          "frame_ahead_trigger": 11.667
+        },
+        {
+          "word": "threads",
+          "clean_word": "threads",
+          "phonemes": "\u03b8\u0279\u02c8\u025bdz",
+          "start": 11.901,
+          "end": 12.376,
+          "duration": 0.475,
+          "frame_ahead_trigger": 11.861
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 12.376,
+          "end": 12.531,
+          "duration": 0.155,
+          "frame_ahead_trigger": 12.336
+        },
+        {
+          "word": "fetch",
+          "clean_word": "fetch",
+          "phonemes": "f\u02c8\u025bt\u0283",
+          "start": 12.531,
+          "end": 12.836,
+          "duration": 0.305,
+          "frame_ahead_trigger": 12.491
+        },
+        {
+          "word": "data",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 12.836,
+          "end": 12.996,
+          "duration": 0.16,
+          "frame_ahead_trigger": 12.796
+        },
+        {
+          "word": "AND",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 12.996,
+          "end": 13.311,
+          "duration": 0.315,
+          "frame_ahead_trigger": 12.956
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 13.311,
+          "end": 13.453,
+          "duration": 0.142,
+          "frame_ahead_trigger": 13.271
+        },
+        {
+          "word": "math.",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 13.453,
+          "end": 13.671,
+          "duration": 0.218,
+          "frame_ahead_trigger": 13.413
+        },
+        {
+          "word": "It\u2019s",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 13.671,
+          "end": 13.835,
+          "duration": 0.164,
+          "frame_ahead_trigger": 13.631
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 13.835,
+          "end": 14.071,
+          "duration": 0.236,
+          "frame_ahead_trigger": 13.795
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 14.071,
+          "end": 14.346,
+          "duration": 0.275,
+          "frame_ahead_trigger": 14.031
+        },
+        {
+          "word": "chef",
+          "clean_word": "chef",
+          "phonemes": "\u0283\u02c8\u025bf",
+          "start": 14.346,
+          "end": 14.481,
+          "duration": 0.135,
+          "frame_ahead_trigger": 14.306
+        },
+        {
+          "word": "who",
+          "clean_word": "who",
+          "phonemes": "h\u02c8u\u02d0",
+          "start": 14.481,
+          "end": 14.726,
+          "duration": 0.245,
+          "frame_ahead_trigger": 14.441
+        },
+        {
+          "word": "stops",
+          "clean_word": "stops",
+          "phonemes": "st\u02c8\u0251\u02d0ps",
+          "start": 14.726,
+          "end": 15.126,
+          "duration": 0.4,
+          "frame_ahead_trigger": 14.686
+        },
+        {
+          "word": "cooking",
+          "clean_word": "cooking",
+          "phonemes": "k\u02c8\u028ak\u026a\u014b",
+          "start": 15.126,
+          "end": 15.396,
+          "duration": 0.27,
+          "frame_ahead_trigger": 15.086
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.396,
+          "end": 15.596,
+          "duration": 0.2,
+          "frame_ahead_trigger": 15.356
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "\u0279\u02c8\u028cn",
+          "start": 15.596,
+          "end": 15.701,
+          "duration": 0.105,
+          "frame_ahead_trigger": 15.556
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.701,
+          "end": 15.976,
+          "duration": 0.275,
+          "frame_ahead_trigger": 15.661
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.976,
+          "end": 16.051,
+          "duration": 0.075,
+          "frame_ahead_trigger": 15.936
+        },
+        {
+          "word": "grocery",
+          "clean_word": "grocery",
+          "phonemes": "\u0261\u0279\u02c8o\u028as\u025a\u0279i",
+          "start": 16.051,
+          "end": 16.661,
+          "duration": 0.61,
+          "frame_ahead_trigger": 16.011
+        },
+        {
+          "word": "store.",
+          "clean_word": "store",
+          "phonemes": "st\u02c8\u0254\u02d0\u0279",
+          "start": 16.661,
+          "end": 16.891,
+          "duration": 0.23,
+          "frame_ahead_trigger": 16.621
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "FlashAttention-3 solves this with warp-specialization. We split the threads: one group acts as a dedicated courier for data, while the others stay locked on math.",
+      "visual_focus": "Animation showing a 'Warp' splitting into two colors: Blue (Load) and Green (Compute).",
+      "highlight_words": {
+        "warp-specialization": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Warp",
+        "action_verb": "decouples",
+        "direct_object": "data movement",
+        "anchor_word": "specialized",
+        "semantic_role": "mechanism_intro"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Animation showing a 'Warp' splitting into two colors: Blue (Load)",
+        "params": {
+          "svg_path": null,
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+          "arxiv_id": "2407.08608",
+          "title": "FLASHATTENTION-3 ARCHITECTURE",
+          "sub": "Animation showing a 'Warp' splitting into two colors: Blue (Load)",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": null,
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+        "arxiv_id": "2407.08608",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Animation showing a 'Warp' splitting into two colors: Blue (Load)",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 8.32,
+      "slot_duration": 8.62,
+      "start": 17.35,
+      "end": 25.67,
+      "word_timings": [
+        {
+          "word": "FlashAttention-3",
+          "clean_word": "flashattention3",
+          "phonemes": "fl\u02c8\u00e6\u0283 \u0250t\u02c8\u025bn\u0283\u0259n \u03b8\u0279\u02c8i\u02d0",
+          "start": 17.407,
+          "end": 18.452,
+          "duration": 1.045,
+          "frame_ahead_trigger": 17.367
+        },
+        {
+          "word": "solves",
+          "clean_word": "solves",
+          "phonemes": "s\u02c8\u0251\u02d0lvz",
+          "start": 18.452,
+          "end": 18.807,
+          "duration": 0.355,
+          "frame_ahead_trigger": 18.412
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 18.807,
+          "end": 19.122,
+          "duration": 0.315,
+          "frame_ahead_trigger": 18.767
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 19.122,
+          "end": 19.235,
+          "duration": 0.113,
+          "frame_ahead_trigger": 19.082
+        },
+        {
+          "word": "warp-specialization.",
+          "clean_word": "warpspecialization",
+          "phonemes": "w\u02cc\u0254\u02d0\u0279psp\u026a\u0283\u0259l\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 19.235,
+          "end": 20.31,
+          "duration": 1.075,
+          "frame_ahead_trigger": 19.195
+        },
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 20.31,
+          "end": 20.492,
+          "duration": 0.182,
+          "frame_ahead_trigger": 20.27
+        },
+        {
+          "word": "split",
+          "clean_word": "split",
+          "phonemes": "spl\u02c8\u026at",
+          "start": 20.492,
+          "end": 20.717,
+          "duration": 0.225,
+          "frame_ahead_trigger": 20.452
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.717,
+          "end": 20.872,
+          "duration": 0.155,
+          "frame_ahead_trigger": 20.677
+        },
+        {
+          "word": "threads:",
+          "clean_word": "threads",
+          "phonemes": "\u03b8\u0279\u02c8\u025bdz",
+          "start": 20.872,
+          "end": 21.297,
+          "duration": 0.425,
+          "frame_ahead_trigger": 20.832
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 21.297,
+          "end": 21.439,
+          "duration": 0.143,
+          "frame_ahead_trigger": 21.257
+        },
+        {
+          "word": "group",
+          "clean_word": "group",
+          "phonemes": "\u0261\u0279\u02c8u\u02d0p",
+          "start": 21.439,
+          "end": 21.647,
+          "duration": 0.207,
+          "frame_ahead_trigger": 21.399
+        },
+        {
+          "word": "acts",
+          "clean_word": "acts",
+          "phonemes": "\u02c8\u00e6kts",
+          "start": 21.647,
+          "end": 22.112,
+          "duration": 0.465,
+          "frame_ahead_trigger": 21.607
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 22.112,
+          "end": 22.138,
+          "duration": 0.026,
+          "frame_ahead_trigger": 22.072
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 22.138,
+          "end": 22.322,
+          "duration": 0.184,
+          "frame_ahead_trigger": 22.098
+        },
+        {
+          "word": "dedicated",
+          "clean_word": "dedicated",
+          "phonemes": "d\u02c8\u025bd\u1d7bk\u02cce\u026a\u027e\u1d7bd",
+          "start": 22.322,
+          "end": 22.922,
+          "duration": 0.6,
+          "frame_ahead_trigger": 22.282
+        },
+        {
+          "word": "courier",
+          "clean_word": "courier",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279i\u025a",
+          "start": 22.922,
+          "end": 23.262,
+          "duration": 0.34,
+          "frame_ahead_trigger": 22.882
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 23.262,
+          "end": 23.492,
+          "duration": 0.23,
+          "frame_ahead_trigger": 23.222
+        },
+        {
+          "word": "data,",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 23.492,
+          "end": 23.827,
+          "duration": 0.335,
+          "frame_ahead_trigger": 23.452
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 23.827,
+          "end": 24.147,
+          "duration": 0.32,
+          "frame_ahead_trigger": 23.787
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.147,
+          "end": 24.242,
+          "duration": 0.095,
+          "frame_ahead_trigger": 24.107
+        },
+        {
+          "word": "others",
+          "clean_word": "others",
+          "phonemes": "\u02c8\u028c\u00f0\u025az",
+          "start": 24.242,
+          "end": 24.587,
+          "duration": 0.345,
+          "frame_ahead_trigger": 24.202
+        },
+        {
+          "word": "stay",
+          "clean_word": "stay",
+          "phonemes": "st\u02c8e\u026a",
+          "start": 24.587,
+          "end": 24.767,
+          "duration": 0.18,
+          "frame_ahead_trigger": 24.547
+        },
+        {
+          "word": "locked",
+          "clean_word": "locked",
+          "phonemes": "l\u02c8\u0251\u02d0kt",
+          "start": 24.767,
+          "end": 25.137,
+          "duration": 0.37,
+          "frame_ahead_trigger": 24.727
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 25.137,
+          "end": 25.257,
+          "duration": 0.12,
+          "frame_ahead_trigger": 25.097
+        },
+        {
+          "word": "math.",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 25.257,
+          "end": 25.472,
+          "duration": 0.215,
+          "frame_ahead_trigger": 25.217
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "By using the Tensor Memory Accelerator, these couriers move data asynchronously. The math units never wait; they just consume the stream of tensors as they arrive.",
+      "visual_focus": "TMA unit moving blocks into SMEM while Tensor Cores process the previous block.",
+      "highlight_words": {
+        "asynchronously": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "TMA",
+        "action_verb": "streams",
+        "direct_object": "tensors",
+        "anchor_word": "asynchronously",
+        "semantic_role": "technical_deep_dive"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: FLASHATTENTION-3: ",
+        "sub": "TMA unit moving blocks into SMEM while Tensor Cores process the p",
+        "params": {
+          "title": "KERNEL CODE: FLASHATTENTION-3: ",
+          "sub": "TMA unit moving blocks into SMEM while Tensor Cores process the p",
+          "filename": "flash_attention_kernel.cu",
+          "language": "cpp",
+          "lines": [
+            "__global__ void flash_attention_async(...) {",
+            "  // Warp-specialized TMA load",
+            "  tma_load_async(gmem_ptr, smem_ptr);",
+            "  // Interleaved Compute",
+            "  matmul_warp_specialized(smem_ptr);",
+            "}"
+          ],
+          "highlight_lines": [
+            3,
+            5
+          ],
+          "trace_register": "\u26a1 ASYNC TMA PIPELINING",
+          "delta_badge": "Overlapping memory movement with compute"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: FLASHATTENTION-3: ",
+        "sub": "TMA unit moving blocks into SMEM while Tensor Cores process the p",
+        "filename": "flash_attention_kernel.cu",
+        "language": "cpp",
+        "lines": [
+          "__global__ void flash_attention_async(...) {",
+          "  // Warp-specialized TMA load",
+          "  tma_load_async(gmem_ptr, smem_ptr);",
+          "  // Interleaved Compute",
+          "  matmul_warp_specialized(smem_ptr);",
+          "}"
+        ],
+        "highlight_lines": [
+          3,
+          5
+        ],
+        "trace_register": "\u26a1 ASYNC TMA PIPELINING",
+        "delta_badge": "Overlapping memory movement with compute"
+      },
+      "audio_duration": 8.32,
+      "slot_duration": 8.62,
+      "start": 25.97,
+      "end": 34.29,
+      "word_timings": [
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 25.982,
+          "end": 26.137,
+          "duration": 0.155,
+          "frame_ahead_trigger": 25.942
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 26.137,
+          "end": 26.542,
+          "duration": 0.405,
+          "frame_ahead_trigger": 26.097
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.542,
+          "end": 26.727,
+          "duration": 0.185,
+          "frame_ahead_trigger": 26.502
+        },
+        {
+          "word": "Tensor",
+          "clean_word": "tensor",
+          "phonemes": "t\u02c8\u025bns\u025a",
+          "start": 26.727,
+          "end": 26.972,
+          "duration": 0.245,
+          "frame_ahead_trigger": 26.687
+        },
+        {
+          "word": "Memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 26.972,
+          "end": 27.367,
+          "duration": 0.395,
+          "frame_ahead_trigger": 26.932
+        },
+        {
+          "word": "Accelerator,",
+          "clean_word": "accelerator",
+          "phonemes": "\u0250ks\u02c8\u025bl\u025a\u0279\u02cce\u026a\u027e\u025a",
+          "start": 27.367,
+          "end": 28.082,
+          "duration": 0.715,
+          "frame_ahead_trigger": 27.327
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 28.082,
+          "end": 28.477,
+          "duration": 0.395,
+          "frame_ahead_trigger": 28.042
+        },
+        {
+          "word": "couriers",
+          "clean_word": "couriers",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u026a\u0279z",
+          "start": 28.477,
+          "end": 28.792,
+          "duration": 0.315,
+          "frame_ahead_trigger": 28.437
+        },
+        {
+          "word": "move",
+          "clean_word": "move",
+          "phonemes": "m\u02c8u\u02d0v",
+          "start": 28.792,
+          "end": 29.112,
+          "duration": 0.32,
+          "frame_ahead_trigger": 28.752
+        },
+        {
+          "word": "data",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 29.112,
+          "end": 29.397,
+          "duration": 0.285,
+          "frame_ahead_trigger": 29.072
+        },
+        {
+          "word": "asynchronously.",
+          "clean_word": "asynchronously",
+          "phonemes": "\u0250s\u02c8\u026a\u014bk\u0279\u0259n\u0259sli",
+          "start": 29.397,
+          "end": 30.297,
+          "duration": 0.9,
+          "frame_ahead_trigger": 29.357
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.297,
+          "end": 30.306,
+          "duration": 0.01,
+          "frame_ahead_trigger": 30.257
+        },
+        {
+          "word": "math",
+          "clean_word": "math",
+          "phonemes": "m\u02c8\u00e6\u03b8",
+          "start": 30.306,
+          "end": 30.612,
+          "duration": 0.305,
+          "frame_ahead_trigger": 30.266
+        },
+        {
+          "word": "units",
+          "clean_word": "units",
+          "phonemes": "j\u02c8u\u02d0n\u026ats",
+          "start": 30.612,
+          "end": 30.987,
+          "duration": 0.375,
+          "frame_ahead_trigger": 30.572
+        },
+        {
+          "word": "never",
+          "clean_word": "never",
+          "phonemes": "n\u02c8\u025bv\u025a",
+          "start": 30.987,
+          "end": 31.287,
+          "duration": 0.3,
+          "frame_ahead_trigger": 30.947
+        },
+        {
+          "word": "wait;",
+          "clean_word": "wait",
+          "phonemes": "w\u02c8e\u026at",
+          "start": 31.287,
+          "end": 31.526,
+          "duration": 0.24,
+          "frame_ahead_trigger": 31.247
+        },
+        {
+          "word": "they",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 31.526,
+          "end": 31.802,
+          "duration": 0.275,
+          "frame_ahead_trigger": 31.486
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 31.802,
+          "end": 32.077,
+          "duration": 0.275,
+          "frame_ahead_trigger": 31.762
+        },
+        {
+          "word": "consume",
+          "clean_word": "consume",
+          "phonemes": "k\u0259ns\u02c8u\u02d0m",
+          "start": 32.077,
+          "end": 32.407,
+          "duration": 0.33,
+          "frame_ahead_trigger": 32.037
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 32.407,
+          "end": 32.637,
+          "duration": 0.23,
+          "frame_ahead_trigger": 32.367
+        },
+        {
+          "word": "stream",
+          "clean_word": "stream",
+          "phonemes": "st\u0279\u02c8i\u02d0m",
+          "start": 32.637,
+          "end": 32.957,
+          "duration": 0.32,
+          "frame_ahead_trigger": 32.597
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 32.957,
+          "end": 33.022,
+          "duration": 0.065,
+          "frame_ahead_trigger": 32.917
+        },
+        {
+          "word": "tensors",
+          "clean_word": "tensors",
+          "phonemes": "t\u02c8\u025bns\u025az",
+          "start": 33.022,
+          "end": 33.427,
+          "duration": 0.405,
+          "frame_ahead_trigger": 32.982
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 33.427,
+          "end": 33.587,
+          "duration": 0.16,
+          "frame_ahead_trigger": 33.387
+        },
+        {
+          "word": "they",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 33.587,
+          "end": 33.812,
+          "duration": 0.225,
+          "frame_ahead_trigger": 33.547
+        },
+        {
+          "word": "arrive.",
+          "clean_word": "arrive",
+          "phonemes": "\u025a\u0279\u02c8a\u026av",
+          "start": 33.812,
+          "end": 34.077,
+          "duration": 0.265,
+          "frame_ahead_trigger": 33.772
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 1.2 Petaflops of throughput. That\u2019s an 81% gain over previous methods, pushing your H100 to 75% real-world efficiency.",
+      "visual_focus": "Bar chart showing FlashAttention-3 hitting 1200 TFLOPS vs 660 TFLOPS.",
+      "highlight_words": {
+        "1.2 Petaflops": "#10B981"
+      },
+      "svo_action": {
+        "subject": "FlashAttention-3",
+        "action_verb": "crushes",
+        "direct_object": "benchmarks",
+        "anchor_word": "efficiency",
+        "semantic_role": "empirical_victory"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "Bar chart showing FlashAttention-3 hitting 1200 TFLOPS",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+          "sub": "Bar chart showing FlashAttention-3 hitting 1200 TFLOPS",
+          "metric_name": "Throughput",
+          "unit": "TFLOPS",
+          "contestants": [
+            {
+              "name": "FlashAttention-3",
+              "value": 1200.0,
+              "display_val": "1,200 TFLOPS",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "FlashAttention-2",
+              "value": 660.0,
+              "display_val": "660 TFLOPS",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Standard PyTorch",
+              "value": 240.0,
+              "display_val": "240 TFLOPS",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +81.8% SOTA EFFICIENCY GAIN"
+        }
+      },
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "Bar chart showing FlashAttention-3 hitting 1200 TFLOPS",
+        "metric_name": "Throughput",
+        "unit": "TFLOPS",
+        "contestants": [
+          {
+            "name": "FlashAttention-3",
+            "value": 1200.0,
+            "display_val": "1,200 TFLOPS",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "FlashAttention-2",
+            "value": 660.0,
+            "display_val": "660 TFLOPS",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Standard PyTorch",
+            "value": 240.0,
+            "display_val": "240 TFLOPS",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +81.8% SOTA EFFICIENCY GAIN"
+      },
+      "audio_duration": 8.62,
+      "slot_duration": 8.92,
+      "start": 34.59,
+      "end": 43.21,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.607,
+          "end": 34.822,
+          "duration": 0.215,
+          "frame_ahead_trigger": 34.567
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 34.822,
+          "end": 35.132,
+          "duration": 0.31,
+          "frame_ahead_trigger": 34.782
+        },
+        {
+          "word": "1.2",
+          "clean_word": "12",
+          "phonemes": "tw\u02c8\u025blv",
+          "start": 35.132,
+          "end": 35.437,
+          "duration": 0.305,
+          "frame_ahead_trigger": 35.092
+        },
+        {
+          "word": "Petaflops",
+          "clean_word": "petaflops",
+          "phonemes": "p\u02c8\u025b\u027e\u0250fl\u02cc\u0251\u02d0ps",
+          "start": 35.437,
+          "end": 36.227,
+          "duration": 0.79,
+          "frame_ahead_trigger": 35.397
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 36.227,
+          "end": 36.387,
+          "duration": 0.16,
+          "frame_ahead_trigger": 36.187
+        },
+        {
+          "word": "throughput.",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 36.387,
+          "end": 36.779,
+          "duration": 0.392,
+          "frame_ahead_trigger": 36.347
+        },
+        {
+          "word": "That\u2019s",
+          "clean_word": "thats",
+          "phonemes": "\u00f0\u02c8\u00e6ts",
+          "start": 36.779,
+          "end": 37.073,
+          "duration": 0.294,
+          "frame_ahead_trigger": 36.739
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 37.073,
+          "end": 37.197,
+          "duration": 0.124,
+          "frame_ahead_trigger": 37.033
+        },
+        {
+          "word": "81%",
+          "clean_word": "81",
+          "phonemes": "\u02c8e\u026a\u027ei w\u02c8\u028cn",
+          "start": 37.197,
+          "end": 37.802,
+          "duration": 0.605,
+          "frame_ahead_trigger": 37.157
+        },
+        {
+          "word": "gain",
+          "clean_word": "gain",
+          "phonemes": "\u0261\u02c8e\u026an",
+          "start": 37.802,
+          "end": 38.002,
+          "duration": 0.2,
+          "frame_ahead_trigger": 37.762
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 38.002,
+          "end": 38.352,
+          "duration": 0.35,
+          "frame_ahead_trigger": 37.962
+        },
+        {
+          "word": "previous",
+          "clean_word": "previous",
+          "phonemes": "p\u0279\u02c8i\u02d0vi\u0259s",
+          "start": 38.352,
+          "end": 38.922,
+          "duration": 0.57,
+          "frame_ahead_trigger": 38.312
+        },
+        {
+          "word": "methods,",
+          "clean_word": "methods",
+          "phonemes": "m\u02c8\u025b\u03b8\u0259dz",
+          "start": 38.922,
+          "end": 39.302,
+          "duration": 0.38,
+          "frame_ahead_trigger": 38.882
+        },
+        {
+          "word": "pushing",
+          "clean_word": "pushing",
+          "phonemes": "p\u02c8\u028a\u0283\u026a\u014b",
+          "start": 39.302,
+          "end": 39.762,
+          "duration": 0.46,
+          "frame_ahead_trigger": 39.262
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 39.762,
+          "end": 39.832,
+          "duration": 0.071,
+          "frame_ahead_trigger": 39.722
+        },
+        {
+          "word": "H100",
+          "clean_word": "h100",
+          "phonemes": "\u02c8e\u026at\u0283 w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad",
+          "start": 39.832,
+          "end": 40.857,
+          "duration": 1.024,
+          "frame_ahead_trigger": 39.792
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 40.857,
+          "end": 41.032,
+          "duration": 0.175,
+          "frame_ahead_trigger": 40.817
+        },
+        {
+          "word": "75%",
+          "clean_word": "75",
+          "phonemes": "s\u02c8\u025bv\u0259nti f\u02c8a\u026av",
+          "start": 41.032,
+          "end": 41.942,
+          "duration": 0.91,
+          "frame_ahead_trigger": 40.992
+        },
+        {
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 41.942,
+          "end": 42.537,
+          "duration": 0.595,
+          "frame_ahead_trigger": 41.902
+        },
+        {
+          "word": "efficiency.",
+          "clean_word": "efficiency",
+          "phonemes": "\u026af\u02c8\u026a\u0283\u0259nsi",
+          "start": 42.537,
+          "end": 43.062,
+          "duration": 0.525,
+          "frame_ahead_trigger": 42.497
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop wasting your GPU cycles. Follow The Model Verse to master the hardware-software interface that defines modern AI performance.",
+      "visual_focus": "Logo overlay with a call to action.",
+      "highlight_words": {
+        "The Model Verse": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "You",
+        "action_verb": "follow",
+        "direct_object": "The Model Verse",
+        "anchor_word": "master",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep dives into AI engineering",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "audio_duration": 7.25,
+      "slot_duration": 7.75,
+      "start": 43.51,
+      "end": 50.76,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 43.52,
+          "end": 43.835,
+          "duration": 0.315,
+          "frame_ahead_trigger": 43.48
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 43.835,
+          "end": 44.38,
+          "duration": 0.545,
+          "frame_ahead_trigger": 43.795
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 44.38,
+          "end": 44.436,
+          "duration": 0.055,
+          "frame_ahead_trigger": 44.34
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 44.436,
+          "end": 45.11,
+          "duration": 0.675,
+          "frame_ahead_trigger": 44.396
+        },
+        {
+          "word": "cycles.",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 45.11,
+          "end": 45.566,
+          "duration": 0.456,
+          "frame_ahead_trigger": 45.07
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 45.566,
+          "end": 45.975,
+          "duration": 0.409,
+          "frame_ahead_trigger": 45.526
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 45.975,
+          "end": 46.1,
+          "duration": 0.125,
+          "frame_ahead_trigger": 45.935
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 46.1,
+          "end": 46.37,
+          "duration": 0.27,
+          "frame_ahead_trigger": 46.06
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 46.37,
+          "end": 46.76,
+          "duration": 0.39,
+          "frame_ahead_trigger": 46.33
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 46.76,
+          "end": 46.905,
+          "duration": 0.145,
+          "frame_ahead_trigger": 46.72
+        },
+        {
+          "word": "master",
+          "clean_word": "master",
+          "phonemes": "m\u02c8\u00e6st\u025a",
+          "start": 46.905,
+          "end": 47.15,
+          "duration": 0.245,
+          "frame_ahead_trigger": 46.865
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 47.15,
+          "end": 47.275,
+          "duration": 0.125,
+          "frame_ahead_trigger": 47.11
+        },
+        {
+          "word": "hardware-software",
+          "clean_word": "hardwaresoftware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279s\u02cc\u0254ftw\u025b\u0279",
+          "start": 47.275,
+          "end": 48.18,
+          "duration": 0.905,
+          "frame_ahead_trigger": 47.235
+        },
+        {
+          "word": "interface",
+          "clean_word": "interface",
+          "phonemes": "\u02c8\u026ant\u025af\u02cce\u026as",
+          "start": 48.18,
+          "end": 48.7,
+          "duration": 0.52,
+          "frame_ahead_trigger": 48.14
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 48.7,
+          "end": 48.96,
+          "duration": 0.26,
+          "frame_ahead_trigger": 48.66
+        },
+        {
+          "word": "defines",
+          "clean_word": "defines",
+          "phonemes": "d\u1d7bf\u02c8a\u026anz",
+          "start": 48.96,
+          "end": 49.388,
+          "duration": 0.428,
+          "frame_ahead_trigger": 48.92
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 49.388,
+          "end": 49.695,
+          "duration": 0.307,
+          "frame_ahead_trigger": 49.348
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 49.695,
+          "end": 50.095,
+          "duration": 0.4,
+          "frame_ahead_trigger": 49.655
+        },
+        {
+          "word": "performance.",
+          "clean_word": "performance",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279m\u0259ns",
+          "start": 50.095,
+          "end": 50.68,
+          "duration": 0.585,
+          "frame_ahead_trigger": 50.055
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\mathrm{total}} = T_{\\mathrm{compute}} + T_{\\mathrm{memory}} + T_{\\mathrm{stall}}$",
+      "filename": "flashattention_3_breakdown_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{\\mathrm{stall}}",
+          "label": "Idle GPU Cycles"
+        }
+      ],
+      "svg_filename": "flashattention_3_breakdown_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N^2 \\cdot d)$",
+      "filename": "flashattention_3_breakdown_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "N^2",
+          "label": "Sequence Length Squared"
+        }
+      ],
+      "svg_filename": "flashattention_3_breakdown_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$S_{\\mathrm{overlap}} = \\mathrm{max}(T_{\\mathrm{compute}}, T_{\\mathrm{tma}})$",
+      "filename": "flashattention_3_breakdown_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "T_{\\mathrm{tma}}",
+          "label": "Tensor Memory Access Time"
+        }
+      ],
+      "svg_filename": "flashattention_3_breakdown_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$x_{fp8} = \\mathrm{quantize}(x_{fp16}, \\beta)$",
+      "filename": "flashattention_3_breakdown_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\beta",
+          "label": "Scaling Factor"
+        }
+      ],
+      "svg_filename": "flashattention_3_breakdown_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\frac{E_{\\mathrm{baseline}}}{E_{\\mathrm{FA3}}} \\approx 2.6$",
+      "filename": "flashattention_3_breakdown_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "E",
+          "label": "Numerical Error"
+        }
+      ],
+      "svg_filename": "flashattention_3_breakdown_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "COMPUTE",
+          "color": "#38BDF8",
+          "items": [
+            "TFLOPS",
+            "Warp",
+            "Tensor Core"
+          ]
+        },
+        {
+          "name": "MEMORY",
+          "color": "#10B981",
+          "items": [
+            "HBM",
+            "SRAM",
+            "TMA"
+          ]
+        },
+        {
+          "name": "PRECISION",
+          "color": "#F59E0B",
+          "items": [
+            "FP8",
+            "FP16",
+            "Error"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token Block",
+        "target_cluster": "COMPUTE",
+        "token": "QKV_Matrix"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Stall",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Latency",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "FlashAttention-3",
+    "model_a_specs": [
+      "Asynchronous TMA",
+      "FP8 Support",
+      "H100 Optimized"
+    ],
+    "model_b": "FlashAttention-2",
+    "model_b_specs": [
+      "Synchronous Kernels",
+      "FP16 Baseline",
+      "H100 Baseline"
+    ],
+    "divide_title": "ASYNC VS SYNC EXECUTION",
+    "model_a_stat": "1.2 PFLOPs",
+    "model_a_stat_label": "PEAK THROUGHPUT",
+    "model_b_stat": "35% Utilization",
+    "model_b_stat_label": "H100 UTILIZATION",
+    "efficiency_badge": "\u26a1 2x SOTA THROUGHPUT",
+    "benchmarks": [
+      {
+        "name": "FP16 TFLOPS",
+        "score_a": "740",
+        "score_b": "450"
+      },
+      {
+        "name": "Numerical Error",
+        "score_a": "1.0x",
+        "score_b": "2.6x"
+      },
+      {
+        "name": "Utilization",
+        "score_a": "75%",
+        "score_b": "35%"
+      }
+    ],
+    "scale_metric": "1.2",
+    "scale_label": "PFLOPs/s FP8",
+    "bottleneck_title": "MEMORY STALL BOTTLENECK",
+    "bottleneck_desc": "Sequential Kernel Execution",
+    "solution_title": "WARP-SPECIALIZED PIPELINING",
+    "solution_components": "TMA & Tensor Cores",
+    "mechanism_title": "ASYNC DATA-COMPUTE OVERLAP",
+    "payoff_stat": "1.2 PFLOPs",
+    "payoff_label": "PEAK PERFORMANCE",
+    "payoff_sub": "Outperforming standard H100 benchmarks",
+    "payoff_hero_stat": 740.0,
+    "payoff_hero_label": "FP16 Throughput",
+    "payoff_base_stat": 300.0,
+    "payoff_base_label": "Baseline Throughput",
+    "payoff_delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN",
+    "challenger": "FlashAttention-3",
+    "incumbent": "FlashAttention-2"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+    "metric_name": "Throughput",
+    "unit": "TFLOPS",
+    "contestants": [
+      {
+        "name": "FlashAttention-3",
+        "value": 1200.0,
+        "display_val": "1,200 TFLOPS",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "FlashAttention-2",
+        "value": 660.0,
+        "display_val": "660 TFLOPS",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Standard PyTorch",
+        "value": 240.0,
+        "display_val": "240 TFLOPS",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +81.8% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "Latency",
+      "Memory Bandwidth",
+      "Precision",
+      "Utilization"
+    ]
+  },
+  "code_snippet": {
+    "filename": "flash_attention_kernel.cu",
+    "language": "cpp",
+    "lines": [
+      "__global__ void flash_attention_async(...) {",
+      "  // Warp-specialized TMA load",
+      "  tma_load_async(gmem_ptr, smem_ptr);",
+      "  // Interleaved Compute",
+      "  matmul_warp_specialized(smem_ptr);",
+      "}"
+    ],
+    "highlight_lines": [
+      3,
+      5
+    ],
+    "trace_register": "\u26a1 ASYNC TMA PIPELINING",
+    "explanation": "Overlapping memory movement with compute"
+  },
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 7.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is fire\u2014I definitely feel the pain of paying for H100s and not using them. The chef analogy in Beat 2 is actually solid and not cringe. However, you lost me at 'warp-specialization.' You didn't explain what a warp is, so I'm just nodding along without actually knowing the mechanism. Also, you mention the Tensor Memory Accelerator (TMA) in Beat 4, but don't explain why that's different from standard memory access, which is the whole point of the speedup."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "arxiv_id": "2407.08608",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "3_stage_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/3_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "pingpong_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/pingpong_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_2_pingpong_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "2_stage_pipelining",
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/2_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_3_2_stage_pipelining.png",
+      "type": "raster_image",
+      "score": 135
+    }
+  ],
+  "script_driven_visuals": true
+}

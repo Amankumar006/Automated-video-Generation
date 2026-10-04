@@ -29,7 +29,7 @@ def auto_produce(
     topic: str = None,
     arxiv: str = None,
     category: str = None,
-    voice: str = DEFAULT_VOICE,
+    voice: str = None,
     speed: float = None,
     quality: str = "-qm",
     skip_script: bool = False,
@@ -39,7 +39,9 @@ def auto_produce(
     dry_run_publish: bool = False,
     enable_music: bool = True,
     legacy_engine: bool = False,
-    paper_meta: Optional[Dict[str, Any]] = None
+    paper_meta: Optional[Dict[str, Any]] = None,
+    provider: Optional[str] = None,
+    language: Optional[str] = None
 ) -> str:
     print("\n=======================================================")
     print("🚀 THE MODEL VERSE — AUTONOMOUS SHORT VIDEO PRODUCER")
@@ -174,11 +176,20 @@ def auto_produce(
     print(f"\n🎯 Title: {spec['title']}")
     print(f"📂 Category: {resolved_category.upper()}")
     print(f"🧩 Engine: {engine_label}")
-    print(f"🎙️ Narration: Kokoro ({voice}) at {speed}x speed")
+    resolved_lang = language or spec.get("language") or "en"
+    resolved_prov = provider or spec.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
+    print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {voice or 'default'}) at {speed}x speed")
 
     # Step 3: Synthesize Audio & Procedural SFX
     print("\n🎙️ Step 3: Synthesizing neural audio narration, procedural SFX, and ambient soundtrack...")
-    audio_results = synthesize_audio_for_spec(spec, voice=voice, speed=speed, enable_music=enable_music)
+    audio_results = synthesize_audio_for_spec(
+        spec,
+        voice=voice,
+        speed=speed,
+        enable_music=enable_music,
+        provider=resolved_prov,
+        language=resolved_lang
+    )
     master_audio = audio_results["master_audio"]
     audio_duration = audio_results.get("total_duration", 40.0)
     timing_data = audio_results.get("timing_data", [])
@@ -409,8 +420,10 @@ def main():
     parser.add_argument("--arxiv", help="arXiv paper ID or URL (e.g. '2407.08608')")
     parser.add_argument("--template", help="Path to existing spec JSON template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
-    parser.add_argument("--voice", default=DEFAULT_VOICE, help=f"Kokoro voice (default: {DEFAULT_VOICE})")
+    parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--lang", "--language", dest="lang", default="en", help="Narration language code (en or hi)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
@@ -444,7 +457,9 @@ def main():
         publish=args.publish,
         privacy=args.privacy,
         dry_run_publish=args.dry_run_publish,
-        enable_music=not args.no_music
+        enable_music=not args.no_music,
+        provider=args.provider,
+        language=args.lang
     )
 
 if __name__ == "__main__":
