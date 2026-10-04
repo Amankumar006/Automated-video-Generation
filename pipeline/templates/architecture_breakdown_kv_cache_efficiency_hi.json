@@ -1,0 +1,1970 @@
+{
+  "id": "kv_cache_efficiency_hi",
+  "title": "Unlocking KV Cache Latency (Hindi)",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "ARCHITECTURE BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Jab bhi long-context LLM run karte ho, fragmented KV cache GPU ki VRAM ka 80% waste kar deta hai. Isse performance bahut slow ho jati hai.",
+      "visual_focus": "A memory bar chart showing massive gaps of empty space between allocated blocks.",
+      "highlight_words": {
+        "fragmented KV cache": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Fragmented cache",
+        "action_verb": "shreds",
+        "direct_object": "VRAM",
+        "anchor_word": "wasting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "MEMORY FRAGMENTATION",
+        "sub": "Standard allocation leads to massive overhead",
+        "accent_color": "#EF4444",
+        "params": {
+          "fragmentation_ratio": 0.8
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "MEMORY FRAGMENTATION",
+        "sub": "Standard allocation leads to massive overhead",
+        "accent_color": "#EF4444",
+        "fragmentation_ratio": 0.8
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 9.27,
+      "slot_duration": 9.57,
+      "start": 0.0,
+      "end": 9.27,
+      "word_timings": [
+        {
+          "word": "Jab",
+          "clean_word": "jab",
+          "phonemes": "d\u0292\u02c8\u00e6b",
+          "start": 0.125,
+          "end": 0.455,
+          "duration": 0.33,
+          "frame_ahead_trigger": 0.085
+        },
+        {
+          "word": "bhi",
+          "clean_word": "bhi",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 0.455,
+          "end": 0.66,
+          "duration": 0.205,
+          "frame_ahead_trigger": 0.415
+        },
+        {
+          "word": "long-context",
+          "clean_word": "longcontext",
+          "phonemes": "l\u02c8\u0254\u014bk\u0254nt\u02cc\u025bkst",
+          "start": 0.66,
+          "end": 1.366,
+          "duration": 0.706,
+          "frame_ahead_trigger": 0.62
+        },
+        {
+          "word": "LLM",
+          "clean_word": "llm",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 1.366,
+          "end": 1.88,
+          "duration": 0.514,
+          "frame_ahead_trigger": 1.326
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "\u0279\u02c8\u028cn",
+          "start": 1.88,
+          "end": 2.06,
+          "duration": 0.18,
+          "frame_ahead_trigger": 1.84
+        },
+        {
+          "word": "karte",
+          "clean_word": "karte",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279t",
+          "start": 2.06,
+          "end": 2.365,
+          "duration": 0.305,
+          "frame_ahead_trigger": 2.02
+        },
+        {
+          "word": "ho,",
+          "clean_word": "ho",
+          "phonemes": "h\u02c8o\u028a",
+          "start": 2.365,
+          "end": 2.663,
+          "duration": 0.298,
+          "frame_ahead_trigger": 2.325
+        },
+        {
+          "word": "fragmented",
+          "clean_word": "fragmented",
+          "phonemes": "f\u0279\u00e6\u0261m\u02c8\u025bnt\u026ad",
+          "start": 2.663,
+          "end": 3.285,
+          "duration": 0.622,
+          "frame_ahead_trigger": 2.623
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 3.285,
+          "end": 3.745,
+          "duration": 0.46,
+          "frame_ahead_trigger": 3.245
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 3.745,
+          "end": 3.96,
+          "duration": 0.215,
+          "frame_ahead_trigger": 3.705
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 3.96,
+          "end": 4.745,
+          "duration": 0.785,
+          "frame_ahead_trigger": 3.92
+        },
+        {
+          "word": "ki",
+          "clean_word": "ki",
+          "phonemes": "k\u02c8a\u026a",
+          "start": 4.745,
+          "end": 4.895,
+          "duration": 0.15,
+          "frame_ahead_trigger": 4.705
+        },
+        {
+          "word": "VRAM",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 4.895,
+          "end": 5.295,
+          "duration": 0.4,
+          "frame_ahead_trigger": 4.855
+        },
+        {
+          "word": "ka",
+          "clean_word": "ka",
+          "phonemes": "k\u02c8\u0251\u02d0",
+          "start": 5.295,
+          "end": 5.415,
+          "duration": 0.12,
+          "frame_ahead_trigger": 5.255
+        },
+        {
+          "word": "80%",
+          "clean_word": "80",
+          "phonemes": "\u02c8e\u026a\u027ei",
+          "start": 5.415,
+          "end": 5.73,
+          "duration": 0.315,
+          "frame_ahead_trigger": 5.375
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 5.73,
+          "end": 6.065,
+          "duration": 0.335,
+          "frame_ahead_trigger": 5.69
+        },
+        {
+          "word": "kar",
+          "clean_word": "kar",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279",
+          "start": 6.065,
+          "end": 6.435,
+          "duration": 0.37,
+          "frame_ahead_trigger": 6.025
+        },
+        {
+          "word": "deta",
+          "clean_word": "deta",
+          "phonemes": "d\u026at\u02c8\u00e6",
+          "start": 6.435,
+          "end": 6.575,
+          "duration": 0.14,
+          "frame_ahead_trigger": 6.395
+        },
+        {
+          "word": "hai.",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 6.575,
+          "end": 6.865,
+          "duration": 0.29,
+          "frame_ahead_trigger": 6.535
+        },
+        {
+          "word": "Isse",
+          "clean_word": "isse",
+          "phonemes": "\u02c8\u026as",
+          "start": 6.865,
+          "end": 7.005,
+          "duration": 0.14,
+          "frame_ahead_trigger": 6.825
+        },
+        {
+          "word": "performance",
+          "clean_word": "performance",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279m\u0259ns",
+          "start": 7.005,
+          "end": 7.665,
+          "duration": 0.66,
+          "frame_ahead_trigger": 6.965
+        },
+        {
+          "word": "bahut",
+          "clean_word": "bahut",
+          "phonemes": "b\u02c8\u00e6h\u028ct",
+          "start": 7.665,
+          "end": 8.02,
+          "duration": 0.355,
+          "frame_ahead_trigger": 7.625
+        },
+        {
+          "word": "slow",
+          "clean_word": "slow",
+          "phonemes": "sl\u02c8o\u028a",
+          "start": 8.02,
+          "end": 8.26,
+          "duration": 0.24,
+          "frame_ahead_trigger": 7.98
+        },
+        {
+          "word": "ho",
+          "clean_word": "ho",
+          "phonemes": "h\u02c8o\u028a",
+          "start": 8.26,
+          "end": 8.52,
+          "duration": 0.26,
+          "frame_ahead_trigger": 8.22
+        },
+        {
+          "word": "jati",
+          "clean_word": "jati",
+          "phonemes": "d\u0292\u02c8\u00e6\u027ei",
+          "start": 8.52,
+          "end": 8.79,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.48
+        },
+        {
+          "word": "hai.",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 8.79,
+          "end": 9.035,
+          "duration": 0.245,
+          "frame_ahead_trigger": 8.75
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Ye static memory allocation bilkul us hotel jaisa hai, jo half-empty rooms kisi ko nahi deta, aur guests lobby mein wait karte reh jate hain.",
+      "visual_focus": "A hotel floor plan where rooms are locked and guests are stuck in a queue.",
+      "highlight_words": {
+        "static memory": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Static allocation",
+        "action_verb": "blocks",
+        "direct_object": "throughput",
+        "anchor_word": "wait",
+        "semantic_role": "analogy_setup"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE HOTEL ANALOGY",
+        "sub": "Static vs Dynamic allocation",
+        "accent_color": "#F59E0B",
+        "params": {
+          "animation_speed": "slow"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE HOTEL ANALOGY",
+        "sub": "Static vs Dynamic allocation",
+        "accent_color": "#F59E0B",
+        "animation_speed": "slow"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.73,
+      "slot_duration": 7.03,
+      "start": 9.57,
+      "end": 16.31,
+      "word_timings": [
+        {
+          "word": "Ye",
+          "clean_word": "ye",
+          "phonemes": "j\u02c8i\u02d0",
+          "start": 9.575,
+          "end": 9.8,
+          "duration": 0.225,
+          "frame_ahead_trigger": 9.535
+        },
+        {
+          "word": "static",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 9.8,
+          "end": 10.065,
+          "duration": 0.265,
+          "frame_ahead_trigger": 9.76
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 10.065,
+          "end": 10.455,
+          "duration": 0.39,
+          "frame_ahead_trigger": 10.025
+        },
+        {
+          "word": "allocation",
+          "clean_word": "allocation",
+          "phonemes": "\u02cc\u00e6l\u0259k\u02c8e\u026a\u0283\u0259n",
+          "start": 10.455,
+          "end": 10.84,
+          "duration": 0.385,
+          "frame_ahead_trigger": 10.415
+        },
+        {
+          "word": "bilkul",
+          "clean_word": "bilkul",
+          "phonemes": "b\u02c8\u026alk\u028cl",
+          "start": 10.84,
+          "end": 11.255,
+          "duration": 0.415,
+          "frame_ahead_trigger": 10.8
+        },
+        {
+          "word": "us",
+          "clean_word": "us",
+          "phonemes": "\u02cc\u028cs",
+          "start": 11.255,
+          "end": 11.395,
+          "duration": 0.14,
+          "frame_ahead_trigger": 11.215
+        },
+        {
+          "word": "hotel",
+          "clean_word": "hotel",
+          "phonemes": "ho\u028at\u02c8\u025bl",
+          "start": 11.395,
+          "end": 11.675,
+          "duration": 0.28,
+          "frame_ahead_trigger": 11.355
+        },
+        {
+          "word": "jaisa",
+          "clean_word": "jaisa",
+          "phonemes": "d\u0292\u02c8e\u026as\u0259",
+          "start": 11.675,
+          "end": 12.045,
+          "duration": 0.37,
+          "frame_ahead_trigger": 11.635
+        },
+        {
+          "word": "hai,",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 12.045,
+          "end": 12.235,
+          "duration": 0.19,
+          "frame_ahead_trigger": 12.005
+        },
+        {
+          "word": "jo",
+          "clean_word": "jo",
+          "phonemes": "d\u0292\u02c8o\u028a",
+          "start": 12.235,
+          "end": 12.465,
+          "duration": 0.23,
+          "frame_ahead_trigger": 12.195
+        },
+        {
+          "word": "half-empty",
+          "clean_word": "halfempty",
+          "phonemes": "h\u02c8\u00e6f\u025bmpti",
+          "start": 12.465,
+          "end": 12.79,
+          "duration": 0.325,
+          "frame_ahead_trigger": 12.425
+        },
+        {
+          "word": "rooms",
+          "clean_word": "rooms",
+          "phonemes": "\u0279\u02c8u\u02d0mz",
+          "start": 12.79,
+          "end": 13.055,
+          "duration": 0.265,
+          "frame_ahead_trigger": 12.75
+        },
+        {
+          "word": "kisi",
+          "clean_word": "kisi",
+          "phonemes": "k\u02c8\u026asi",
+          "start": 13.055,
+          "end": 13.38,
+          "duration": 0.325,
+          "frame_ahead_trigger": 13.015
+        },
+        {
+          "word": "ko",
+          "clean_word": "ko",
+          "phonemes": "k\u02c8o\u028a",
+          "start": 13.38,
+          "end": 13.46,
+          "duration": 0.08,
+          "frame_ahead_trigger": 13.34
+        },
+        {
+          "word": "nahi",
+          "clean_word": "nahi",
+          "phonemes": "n\u02c8\u0251\u02d0ha\u026a",
+          "start": 13.46,
+          "end": 13.827,
+          "duration": 0.368,
+          "frame_ahead_trigger": 13.42
+        },
+        {
+          "word": "deta,",
+          "clean_word": "deta",
+          "phonemes": "d\u026at\u02c8\u00e6",
+          "start": 13.827,
+          "end": 14.15,
+          "duration": 0.322,
+          "frame_ahead_trigger": 13.787
+        },
+        {
+          "word": "aur",
+          "clean_word": "aur",
+          "phonemes": "\u02c8\u0254\u02d0\u0279",
+          "start": 14.15,
+          "end": 14.239,
+          "duration": 0.089,
+          "frame_ahead_trigger": 14.11
+        },
+        {
+          "word": "guests",
+          "clean_word": "guests",
+          "phonemes": "\u0261\u02c8\u025bsts",
+          "start": 14.239,
+          "end": 14.63,
+          "duration": 0.391,
+          "frame_ahead_trigger": 14.199
+        },
+        {
+          "word": "lobby",
+          "clean_word": "lobby",
+          "phonemes": "l\u02c8\u0251\u02d0bi",
+          "start": 14.63,
+          "end": 14.8,
+          "duration": 0.17,
+          "frame_ahead_trigger": 14.59
+        },
+        {
+          "word": "mein",
+          "clean_word": "mein",
+          "phonemes": "m\u02c8e\u026an",
+          "start": 14.8,
+          "end": 15.01,
+          "duration": 0.21,
+          "frame_ahead_trigger": 14.76
+        },
+        {
+          "word": "wait",
+          "clean_word": "wait",
+          "phonemes": "w\u02c8e\u026at",
+          "start": 15.01,
+          "end": 15.285,
+          "duration": 0.275,
+          "frame_ahead_trigger": 14.97
+        },
+        {
+          "word": "karte",
+          "clean_word": "karte",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279t",
+          "start": 15.285,
+          "end": 15.47,
+          "duration": 0.185,
+          "frame_ahead_trigger": 15.245
+        },
+        {
+          "word": "reh",
+          "clean_word": "reh",
+          "phonemes": "\u0279\u02c8\u025b",
+          "start": 15.47,
+          "end": 15.705,
+          "duration": 0.235,
+          "frame_ahead_trigger": 15.43
+        },
+        {
+          "word": "jate",
+          "clean_word": "jate",
+          "phonemes": "d\u0292\u02c8e\u026at",
+          "start": 15.705,
+          "end": 15.97,
+          "duration": 0.265,
+          "frame_ahead_trigger": 15.665
+        },
+        {
+          "word": "hain.",
+          "clean_word": "hain",
+          "phonemes": "h\u02c8e\u026an",
+          "start": 15.97,
+          "end": 16.16,
+          "duration": 0.19,
+          "frame_ahead_trigger": 15.93
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Paged Attention ka solution simple hai: ye KV cache ko OS virtual memory jaisa treat karta hai, non-contiguous blocks ko page table se map karke.",
+      "visual_focus": "A pointer diagram showing a logical sequence mapping to scattered physical memory blocks.",
+      "highlight_words": {
+        "Paged Attention": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Paged Attention",
+        "action_verb": "maps",
+        "direct_object": "non-contiguous blocks",
+        "anchor_word": "virtualization",
+        "semantic_role": "mechanism_reveal"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+        "params": {
+          "title": "KERNEL CODE: UNLOCKING KV CACHE",
+          "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+          "filename": "paged_cache.py",
+          "language": "python",
+          "lines": [
+            "def paged_attention(query, key_cache, value_cache):",
+            "    block_table = get_page_table(seq_id)",
+            "    out = flash_attention_kernel(query, block_table)",
+            "    return out"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+        "filename": "paged_cache.py",
+        "language": "python",
+        "lines": [
+          "def paged_attention(query, key_cache, value_cache):",
+          "    block_table = get_page_table(seq_id)",
+          "    out = flash_attention_kernel(query, block_table)",
+          "    return out"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 8.13,
+      "slot_duration": 8.43,
+      "start": 16.61,
+      "end": 24.73,
+      "word_timings": [
+        {
+          "word": "Paged",
+          "clean_word": "paged",
+          "phonemes": "p\u02c8e\u026ad\u0292d",
+          "start": 16.615,
+          "end": 16.97,
+          "duration": 0.355,
+          "frame_ahead_trigger": 16.575
+        },
+        {
+          "word": "Attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 16.97,
+          "end": 17.305,
+          "duration": 0.335,
+          "frame_ahead_trigger": 16.93
+        },
+        {
+          "word": "ka",
+          "clean_word": "ka",
+          "phonemes": "k\u02c8\u0251\u02d0",
+          "start": 17.305,
+          "end": 17.515,
+          "duration": 0.21,
+          "frame_ahead_trigger": 17.265
+        },
+        {
+          "word": "solution",
+          "clean_word": "solution",
+          "phonemes": "s\u0259l\u02c8u\u02d0\u0283\u0259n",
+          "start": 17.515,
+          "end": 18.03,
+          "duration": 0.515,
+          "frame_ahead_trigger": 17.475
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 18.03,
+          "end": 18.338,
+          "duration": 0.308,
+          "frame_ahead_trigger": 17.99
+        },
+        {
+          "word": "hai:",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 18.338,
+          "end": 18.535,
+          "duration": 0.197,
+          "frame_ahead_trigger": 18.298
+        },
+        {
+          "word": "ye",
+          "clean_word": "ye",
+          "phonemes": "j\u02c8i\u02d0",
+          "start": 18.535,
+          "end": 18.75,
+          "duration": 0.215,
+          "frame_ahead_trigger": 18.495
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 18.75,
+          "end": 19.13,
+          "duration": 0.38,
+          "frame_ahead_trigger": 18.71
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 19.13,
+          "end": 19.27,
+          "duration": 0.14,
+          "frame_ahead_trigger": 19.09
+        },
+        {
+          "word": "ko",
+          "clean_word": "ko",
+          "phonemes": "k\u02c8o\u028a",
+          "start": 19.27,
+          "end": 19.56,
+          "duration": 0.29,
+          "frame_ahead_trigger": 19.23
+        },
+        {
+          "word": "OS",
+          "clean_word": "os",
+          "phonemes": "\u02cco\u028a\u02c8\u025bs",
+          "start": 19.56,
+          "end": 19.715,
+          "duration": 0.155,
+          "frame_ahead_trigger": 19.52
+        },
+        {
+          "word": "virtual",
+          "clean_word": "virtual",
+          "phonemes": "v\u02c8\u025c\u02d0t\u0283u\u02d0\u0259l",
+          "start": 19.715,
+          "end": 20.365,
+          "duration": 0.65,
+          "frame_ahead_trigger": 19.675
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 20.365,
+          "end": 20.69,
+          "duration": 0.325,
+          "frame_ahead_trigger": 20.325
+        },
+        {
+          "word": "jaisa",
+          "clean_word": "jaisa",
+          "phonemes": "d\u0292\u02c8e\u026as\u0259",
+          "start": 20.69,
+          "end": 20.935,
+          "duration": 0.245,
+          "frame_ahead_trigger": 20.65
+        },
+        {
+          "word": "treat",
+          "clean_word": "treat",
+          "phonemes": "t\u0279\u02c8i\u02d0t",
+          "start": 20.935,
+          "end": 21.305,
+          "duration": 0.37,
+          "frame_ahead_trigger": 20.895
+        },
+        {
+          "word": "karta",
+          "clean_word": "karta",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279\u027e\u0259",
+          "start": 21.305,
+          "end": 21.636,
+          "duration": 0.331,
+          "frame_ahead_trigger": 21.265
+        },
+        {
+          "word": "hai,",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 21.636,
+          "end": 21.885,
+          "duration": 0.249,
+          "frame_ahead_trigger": 21.596
+        },
+        {
+          "word": "non-contiguous",
+          "clean_word": "noncontiguous",
+          "phonemes": "n\u02cc\u0251\u02d0\u014bk\u0259nt\u02c8\u026a\u0261ju\u02d0\u0259s",
+          "start": 21.885,
+          "end": 22.67,
+          "duration": 0.785,
+          "frame_ahead_trigger": 21.845
+        },
+        {
+          "word": "blocks",
+          "clean_word": "blocks",
+          "phonemes": "bl\u02c8\u0251\u02d0ks",
+          "start": 22.67,
+          "end": 23.01,
+          "duration": 0.34,
+          "frame_ahead_trigger": 22.63
+        },
+        {
+          "word": "ko",
+          "clean_word": "ko",
+          "phonemes": "k\u02c8o\u028a",
+          "start": 23.01,
+          "end": 23.211,
+          "duration": 0.201,
+          "frame_ahead_trigger": 22.97
+        },
+        {
+          "word": "page",
+          "clean_word": "page",
+          "phonemes": "p\u02c8e\u026ad\u0292",
+          "start": 23.211,
+          "end": 23.507,
+          "duration": 0.295,
+          "frame_ahead_trigger": 23.171
+        },
+        {
+          "word": "table",
+          "clean_word": "table",
+          "phonemes": "t\u02c8e\u026ab\u0259l",
+          "start": 23.507,
+          "end": 23.815,
+          "duration": 0.309,
+          "frame_ahead_trigger": 23.467
+        },
+        {
+          "word": "se",
+          "clean_word": "se",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 23.815,
+          "end": 23.985,
+          "duration": 0.17,
+          "frame_ahead_trigger": 23.775
+        },
+        {
+          "word": "map",
+          "clean_word": "map",
+          "phonemes": "m\u02c8\u00e6p",
+          "start": 23.985,
+          "end": 24.295,
+          "duration": 0.31,
+          "frame_ahead_trigger": 23.945
+        },
+        {
+          "word": "karke.",
+          "clean_word": "karke",
+          "phonemes": "k\u02c8\u0251\u02d0\u0279k",
+          "start": 24.295,
+          "end": 24.54,
+          "duration": 0.245,
+          "frame_ahead_trigger": 24.255
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Kernel logic mein block table check karo aur flash attention run karo. Contiguous memory buffers ki zarurat hi khatam ho jati hai.",
+      "visual_focus": "Code snippet of the paged_attention function highlighting the block_table lookup.",
+      "highlight_words": {
+        "block_table": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Kernel",
+        "action_verb": "executes",
+        "direct_object": "flash attention",
+        "anchor_word": "eliminate",
+        "semantic_role": "technical_deep_dive"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "Code snippet of the paged_attention function highlighting the blo",
+        "params": {
+          "title": "KERNEL CODE: UNLOCKING KV CACHE",
+          "sub": "Code snippet of the paged_attention function highlighting the blo",
+          "filename": "paged_cache.py",
+          "language": "python",
+          "lines": [
+            "def paged_attention(query, key_cache, value_cache):",
+            "    block_table = get_page_table(seq_id)",
+            "    out = flash_attention_kernel(query, block_table)",
+            "    return out"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "Code snippet of the paged_attention function highlighting the blo",
+        "filename": "paged_cache.py",
+        "language": "python",
+        "lines": [
+          "def paged_attention(query, key_cache, value_cache):",
+          "    block_table = get_page_table(seq_id)",
+          "    out = flash_attention_kernel(query, block_table)",
+          "    return out"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 5.57,
+      "slot_duration": 5.87,
+      "start": 25.03,
+      "end": 30.6,
+      "word_timings": [
+        {
+          "word": "Kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 25.081,
+          "end": 25.476,
+          "duration": 0.395,
+          "frame_ahead_trigger": 25.041
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 25.476,
+          "end": 25.646,
+          "duration": 0.17,
+          "frame_ahead_trigger": 25.436
+        },
+        {
+          "word": "mein",
+          "clean_word": "mein",
+          "phonemes": "m\u02c8e\u026an",
+          "start": 25.646,
+          "end": 25.871,
+          "duration": 0.225,
+          "frame_ahead_trigger": 25.606
+        },
+        {
+          "word": "block",
+          "clean_word": "block",
+          "phonemes": "bl\u02c8\u0251\u02d0k",
+          "start": 25.871,
+          "end": 26.116,
+          "duration": 0.245,
+          "frame_ahead_trigger": 25.831
+        },
+        {
+          "word": "table",
+          "clean_word": "table",
+          "phonemes": "t\u02c8e\u026ab\u0259l",
+          "start": 26.116,
+          "end": 26.391,
+          "duration": 0.275,
+          "frame_ahead_trigger": 26.076
+        },
+        {
+          "word": "check",
+          "clean_word": "check",
+          "phonemes": "t\u0283\u02c8\u025bk",
+          "start": 26.391,
+          "end": 26.546,
+          "duration": 0.155,
+          "frame_ahead_trigger": 26.351
+        },
+        {
+          "word": "karo",
+          "clean_word": "karo",
+          "phonemes": "k\u02c8\u00e6\u0279o\u028a",
+          "start": 26.546,
+          "end": 26.819,
+          "duration": 0.273,
+          "frame_ahead_trigger": 26.506
+        },
+        {
+          "word": "aur",
+          "clean_word": "aur",
+          "phonemes": "\u02c8\u0254\u02d0\u0279",
+          "start": 26.819,
+          "end": 27.061,
+          "duration": 0.242,
+          "frame_ahead_trigger": 26.779
+        },
+        {
+          "word": "flash",
+          "clean_word": "flash",
+          "phonemes": "fl\u02c8\u00e6\u0283",
+          "start": 27.061,
+          "end": 27.276,
+          "duration": 0.215,
+          "frame_ahead_trigger": 27.021
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 27.276,
+          "end": 27.476,
+          "duration": 0.2,
+          "frame_ahead_trigger": 27.236
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "\u0279\u02c8\u028cn",
+          "start": 27.476,
+          "end": 27.726,
+          "duration": 0.25,
+          "frame_ahead_trigger": 27.436
+        },
+        {
+          "word": "karo.",
+          "clean_word": "karo",
+          "phonemes": "k\u02c8\u00e6\u0279o\u028a",
+          "start": 27.726,
+          "end": 27.856,
+          "duration": 0.13,
+          "frame_ahead_trigger": 27.686
+        },
+        {
+          "word": "Contiguous",
+          "clean_word": "contiguous",
+          "phonemes": "k\u0259nt\u02c8\u026a\u0261ju\u02d0\u0259s",
+          "start": 27.856,
+          "end": 28.381,
+          "duration": 0.525,
+          "frame_ahead_trigger": 27.816
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 28.381,
+          "end": 28.651,
+          "duration": 0.27,
+          "frame_ahead_trigger": 28.341
+        },
+        {
+          "word": "buffers",
+          "clean_word": "buffers",
+          "phonemes": "b\u02c8\u028cf\u025az",
+          "start": 28.651,
+          "end": 28.911,
+          "duration": 0.26,
+          "frame_ahead_trigger": 28.611
+        },
+        {
+          "word": "ki",
+          "clean_word": "ki",
+          "phonemes": "k\u02c8a\u026a",
+          "start": 28.911,
+          "end": 29.036,
+          "duration": 0.125,
+          "frame_ahead_trigger": 28.871
+        },
+        {
+          "word": "zarurat",
+          "clean_word": "zarurat",
+          "phonemes": "z\u02c8\u0251\u02d0\u0279\u0279\u028a\u0279\u0279\u02cc\u00e6t",
+          "start": 29.036,
+          "end": 29.496,
+          "duration": 0.46,
+          "frame_ahead_trigger": 28.996
+        },
+        {
+          "word": "hi",
+          "clean_word": "hi",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 29.496,
+          "end": 29.591,
+          "duration": 0.095,
+          "frame_ahead_trigger": 29.456
+        },
+        {
+          "word": "khatam",
+          "clean_word": "khatam",
+          "phonemes": "k\u02c8\u0251\u02d0\u027e\u00e6m",
+          "start": 29.591,
+          "end": 29.981,
+          "duration": 0.39,
+          "frame_ahead_trigger": 29.551
+        },
+        {
+          "word": "ho",
+          "clean_word": "ho",
+          "phonemes": "h\u02c8o\u028a",
+          "start": 29.981,
+          "end": 30.171,
+          "duration": 0.19,
+          "frame_ahead_trigger": 29.941
+        },
+        {
+          "word": "jati",
+          "clean_word": "jati",
+          "phonemes": "d\u0292\u02c8\u00e6\u027ei",
+          "start": 30.171,
+          "end": 30.316,
+          "duration": 0.145,
+          "frame_ahead_trigger": 30.131
+        },
+        {
+          "word": "hai.",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 30.316,
+          "end": 30.491,
+          "duration": 0.175,
+          "frame_ahead_trigger": 30.276
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "Iska fayda? 300% throughput boost. Hardware pe 400 tokens per second tak pohch jate ho, jahan HF implementation sirf 100 pe atak jata hai.",
+      "visual_focus": "A bar chart comparing 400 tok/s vs 100 tok/s with a lightning bolt badge.",
+      "highlight_words": {
+        "300% throughput gain": "#10B981"
+      },
+      "svo_action": {
+        "subject": "vLLM",
+        "action_verb": "delivers",
+        "direct_object": "400 tok/s",
+        "anchor_word": "gain",
+        "semantic_role": "empirical_victory"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+          "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+          "metric_name": "Tokens Per Second",
+          "unit": "tok/s",
+          "contestants": [
+            {
+              "name": "vLLM Paged",
+              "value": 400.0,
+              "display_val": "400 tok/s",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Standard HF",
+              "value": 100.0,
+              "display_val": "100 tok/s",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN"
+        }
+      },
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+        "metric_name": "Tokens Per Second",
+        "unit": "tok/s",
+        "contestants": [
+          {
+            "name": "vLLM Paged",
+            "value": 400.0,
+            "display_val": "400 tok/s",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Standard HF",
+            "value": 100.0,
+            "display_val": "100 tok/s",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN"
+      },
+      "audio_duration": 7.93,
+      "slot_duration": 8.23,
+      "start": 30.9,
+      "end": 38.83,
+      "word_timings": [
+        {
+          "word": "Iska",
+          "clean_word": "iska",
+          "phonemes": "\u02c8\u026ask\u0259",
+          "start": 30.913,
+          "end": 31.143,
+          "duration": 0.23,
+          "frame_ahead_trigger": 30.873
+        },
+        {
+          "word": "fayda?",
+          "clean_word": "fayda",
+          "phonemes": "f\u02c8e\u026ad\u0259",
+          "start": 31.143,
+          "end": 31.416,
+          "duration": 0.273,
+          "frame_ahead_trigger": 31.103
+        },
+        {
+          "word": "300%",
+          "clean_word": "300",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0h\u02c8\u028cnd\u0279\u026ad",
+          "start": 31.416,
+          "end": 31.963,
+          "duration": 0.547,
+          "frame_ahead_trigger": 31.376
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 31.963,
+          "end": 32.428,
+          "duration": 0.465,
+          "frame_ahead_trigger": 31.923
+        },
+        {
+          "word": "boost.",
+          "clean_word": "boost",
+          "phonemes": "b\u02c8u\u02d0st",
+          "start": 32.428,
+          "end": 32.643,
+          "duration": 0.215,
+          "frame_ahead_trigger": 32.388
+        },
+        {
+          "word": "Hardware",
+          "clean_word": "hardware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279",
+          "start": 32.643,
+          "end": 33.078,
+          "duration": 0.435,
+          "frame_ahead_trigger": 32.603
+        },
+        {
+          "word": "pe",
+          "clean_word": "pe",
+          "phonemes": "p\u02c8i\u02d0",
+          "start": 33.078,
+          "end": 33.245,
+          "duration": 0.168,
+          "frame_ahead_trigger": 33.038
+        },
+        {
+          "word": "400",
+          "clean_word": "400",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279h\u02c8\u028cnd\u0279\u026ad",
+          "start": 33.245,
+          "end": 33.863,
+          "duration": 0.617,
+          "frame_ahead_trigger": 33.205
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 33.863,
+          "end": 34.168,
+          "duration": 0.305,
+          "frame_ahead_trigger": 33.823
+        },
+        {
+          "word": "per",
+          "clean_word": "per",
+          "phonemes": "p\u025c\u02d0",
+          "start": 34.168,
+          "end": 34.303,
+          "duration": 0.135,
+          "frame_ahead_trigger": 34.128
+        },
+        {
+          "word": "second",
+          "clean_word": "second",
+          "phonemes": "s\u02c8\u025bk\u0259nd",
+          "start": 34.303,
+          "end": 34.713,
+          "duration": 0.41,
+          "frame_ahead_trigger": 34.263
+        },
+        {
+          "word": "tak",
+          "clean_word": "tak",
+          "phonemes": "t\u02c8\u00e6k",
+          "start": 34.713,
+          "end": 34.858,
+          "duration": 0.145,
+          "frame_ahead_trigger": 34.673
+        },
+        {
+          "word": "pohch",
+          "clean_word": "pohch",
+          "phonemes": "p\u02c8o\u028at\u0283",
+          "start": 34.858,
+          "end": 35.113,
+          "duration": 0.255,
+          "frame_ahead_trigger": 34.818
+        },
+        {
+          "word": "jate",
+          "clean_word": "jate",
+          "phonemes": "d\u0292\u02c8e\u026at",
+          "start": 35.113,
+          "end": 35.478,
+          "duration": 0.365,
+          "frame_ahead_trigger": 35.073
+        },
+        {
+          "word": "ho,",
+          "clean_word": "ho",
+          "phonemes": "h\u02c8o\u028a",
+          "start": 35.478,
+          "end": 35.633,
+          "duration": 0.155,
+          "frame_ahead_trigger": 35.438
+        },
+        {
+          "word": "jahan",
+          "clean_word": "jahan",
+          "phonemes": "d\u0292\u02c8\u00e6h\u00e6n",
+          "start": 35.633,
+          "end": 35.898,
+          "duration": 0.265,
+          "frame_ahead_trigger": 35.593
+        },
+        {
+          "word": "HF",
+          "clean_word": "hf",
+          "phonemes": "\u02cce\u026at\u0283\u02c8\u025bf",
+          "start": 35.898,
+          "end": 36.283,
+          "duration": 0.385,
+          "frame_ahead_trigger": 35.858
+        },
+        {
+          "word": "implementation",
+          "clean_word": "implementation",
+          "phonemes": "\u02cc\u026ampl\u026am\u0259nt\u02c8e\u026a\u0283\u0259n",
+          "start": 36.283,
+          "end": 36.918,
+          "duration": 0.635,
+          "frame_ahead_trigger": 36.243
+        },
+        {
+          "word": "sirf",
+          "clean_word": "sirf",
+          "phonemes": "s\u02c8\u025c\u02d0f",
+          "start": 36.918,
+          "end": 37.288,
+          "duration": 0.37,
+          "frame_ahead_trigger": 36.878
+        },
+        {
+          "word": "100",
+          "clean_word": "100",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad",
+          "start": 37.288,
+          "end": 37.858,
+          "duration": 0.57,
+          "frame_ahead_trigger": 37.248
+        },
+        {
+          "word": "pe",
+          "clean_word": "pe",
+          "phonemes": "p\u02c8i\u02d0",
+          "start": 37.858,
+          "end": 37.956,
+          "duration": 0.098,
+          "frame_ahead_trigger": 37.818
+        },
+        {
+          "word": "atak",
+          "clean_word": "atak",
+          "phonemes": "\u02c8\u00e6\u027e\u00e6k",
+          "start": 37.956,
+          "end": 38.213,
+          "duration": 0.257,
+          "frame_ahead_trigger": 37.916
+        },
+        {
+          "word": "jata",
+          "clean_word": "jata",
+          "phonemes": "d\u0292\u02c8\u0251\u02d0\u027e\u0259",
+          "start": 38.213,
+          "end": 38.478,
+          "duration": 0.265,
+          "frame_ahead_trigger": 38.173
+        },
+        {
+          "word": "hai.",
+          "clean_word": "hai",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 38.478,
+          "end": 38.688,
+          "duration": 0.21,
+          "frame_ahead_trigger": 38.438
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "VRAM waste mat karo. Modern AI architectures ki engineering samajhne ke liye The Model Verse ko follow karein.",
+      "visual_focus": "Logo animation for The Model Verse with a subscribe call to action.",
+      "highlight_words": {
+        "The Model Verse": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "User",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "subscribe",
+        "semantic_role": "loop_outro"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dives into AI architecture",
+        "accent_color": "#38BDF8",
+        "params": {
+          "loop": true
+        }
+      },
+      "audio_duration": 5.5,
+      "slot_duration": 6.0,
+      "start": 39.13,
+      "end": 44.62,
+      "word_timings": [
+        {
+          "word": "VRAM",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 39.273,
+          "end": 39.438,
+          "duration": 0.165,
+          "frame_ahead_trigger": 39.233
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 39.438,
+          "end": 39.781,
+          "duration": 0.343,
+          "frame_ahead_trigger": 39.398
+        },
+        {
+          "word": "mat",
+          "clean_word": "mat",
+          "phonemes": "m\u02c8\u00e6t",
+          "start": 39.781,
+          "end": 39.903,
+          "duration": 0.122,
+          "frame_ahead_trigger": 39.741
+        },
+        {
+          "word": "karo.",
+          "clean_word": "karo",
+          "phonemes": "k\u02c8\u00e6\u0279o\u028a",
+          "start": 39.903,
+          "end": 40.128,
+          "duration": 0.225,
+          "frame_ahead_trigger": 39.863
+        },
+        {
+          "word": "Modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 40.128,
+          "end": 40.468,
+          "duration": 0.34,
+          "frame_ahead_trigger": 40.088
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 40.468,
+          "end": 40.818,
+          "duration": 0.35,
+          "frame_ahead_trigger": 40.428
+        },
+        {
+          "word": "architectures",
+          "clean_word": "architectures",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
+          "start": 40.818,
+          "end": 41.478,
+          "duration": 0.66,
+          "frame_ahead_trigger": 40.778
+        },
+        {
+          "word": "ki",
+          "clean_word": "ki",
+          "phonemes": "k\u02c8a\u026a",
+          "start": 41.478,
+          "end": 41.708,
+          "duration": 0.23,
+          "frame_ahead_trigger": 41.438
+        },
+        {
+          "word": "engineering",
+          "clean_word": "engineering",
+          "phonemes": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279\u026a\u014b",
+          "start": 41.708,
+          "end": 42.268,
+          "duration": 0.56,
+          "frame_ahead_trigger": 41.668
+        },
+        {
+          "word": "samajhne",
+          "clean_word": "samajhne",
+          "phonemes": "s\u02c8\u00e6m\u00e6d\u0292hn",
+          "start": 42.268,
+          "end": 42.653,
+          "duration": 0.385,
+          "frame_ahead_trigger": 42.228
+        },
+        {
+          "word": "ke",
+          "clean_word": "ke",
+          "phonemes": "k\u02c8i\u02d0",
+          "start": 42.653,
+          "end": 42.843,
+          "duration": 0.19,
+          "frame_ahead_trigger": 42.613
+        },
+        {
+          "word": "liye",
+          "clean_word": "liye",
+          "phonemes": "l\u02c8\u026aa\u026a",
+          "start": 42.843,
+          "end": 43.023,
+          "duration": 0.18,
+          "frame_ahead_trigger": 42.803
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 43.023,
+          "end": 43.113,
+          "duration": 0.09,
+          "frame_ahead_trigger": 42.983
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 43.113,
+          "end": 43.538,
+          "duration": 0.425,
+          "frame_ahead_trigger": 43.073
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 43.538,
+          "end": 43.673,
+          "duration": 0.135,
+          "frame_ahead_trigger": 43.498
+        },
+        {
+          "word": "ko",
+          "clean_word": "ko",
+          "phonemes": "k\u02c8o\u028a",
+          "start": 43.673,
+          "end": 43.888,
+          "duration": 0.215,
+          "frame_ahead_trigger": 43.633
+        },
+        {
+          "word": "follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 43.888,
+          "end": 44.253,
+          "duration": 0.365,
+          "frame_ahead_trigger": 43.848
+        },
+        {
+          "word": "karein.",
+          "clean_word": "karein",
+          "phonemes": "k\u02c8\u025b\u0279\u026an",
+          "start": 44.253,
+          "end": 44.488,
+          "duration": 0.235,
+          "frame_ahead_trigger": 44.213
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{model}} = 4096 \\to \\mathcal{O}(N^2)$",
+      "filename": "kv_cache_efficiency_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Sequence Length"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathrm{Latency} \\propto \\sum_{t=1}^{T} t$",
+      "filename": "kv_cache_efficiency_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Token Index"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{K} \\in \\mathbb{R}^{n \\times d}, \\mathbf{V} \\in \\mathbb{R}^{n \\times d}$",
+      "filename": "kv_cache_efficiency_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "n",
+          "label": "Stored Tokens"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{BlockSize} = \\frac{\\mathrm{TotalVRAM}}{\\mathrm{Fragmentation}}$",
+      "filename": "kv_cache_efficiency_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "BlockSize",
+          "label": "Paged Partition"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = \\frac{T_{\\mathrm{naive}}}{T_{\\mathrm{paged}}} = 4.0$",
+      "filename": "kv_cache_efficiency_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Speedup",
+          "label": "Performance Ratio"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Compute",
+          "color": "#38BDF8",
+          "items": [
+            "H100",
+            "CUDA",
+            "Warp"
+          ]
+        },
+        {
+          "name": "Memory",
+          "color": "#10B981",
+          "items": [
+            "VRAM",
+            "KV-Cache",
+            "Page"
+          ]
+        },
+        {
+          "name": "Latency",
+          "color": "#F59E0B",
+          "items": [
+            "Stall",
+            "Thrash",
+            "Bus"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"System\"",
+        "target_cluster": "Memory",
+        "token": "\"System\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'thrash'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'stall'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "vLLM PagedAttention",
+    "model_a_specs": [
+      "Non-contiguous memory",
+      "Zero-copy",
+      "Page Tables"
+    ],
+    "model_b": "Standard HuggingFace",
+    "model_b_specs": [
+      "Contiguous VRAM",
+      "High Fragmentation",
+      "Slow"
+    ],
+    "divide_title": "CACHING ARCHITECTURE DIVIDE",
+    "model_a_stat": "4x",
+    "model_a_stat_label": "THROUGHPUT BOOST",
+    "model_b_stat": "1x",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 4x COMPUTE EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "Token Throughput",
+        "score_a": "4x",
+        "score_b": "1x"
+      },
+      {
+        "name": "Memory Efficiency",
+        "score_a": "98%",
+        "score_b": "60%"
+      }
+    ],
+    "scale_metric": "4x",
+    "scale_label": "THROUGHPUT GAIN",
+    "bottleneck_title": "MONOLITHIC KV CACHE BOTTLENECK",
+    "bottleneck_desc": "Continuous memory constraints leading to O(N^2) search overhead",
+    "solution_title": "PAGED ATTENTION VIRTUALIZATION",
+    "solution_components": "Non-contiguous block memory mapping",
+    "mechanism_title": "VIRTUAL MEMORY MAPPING",
+    "payoff_stat": "400%",
+    "payoff_label": "THROUGHPUT",
+    "payoff_sub": "Outperforming standard VRAM management",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "Paged Efficiency",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Standard Cache",
+    "payoff_delta_badge": "\u26a1 +300% GENERATION SPEEDUP",
+    "challenger": "vLLM",
+    "incumbent": "Standard Transformer"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+    "metric_name": "Tokens Per Second",
+    "unit": "tok/s",
+    "contestants": [
+      {
+        "name": "vLLM Paged",
+        "value": 400.0,
+        "display_val": "400 tok/s",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Standard HF",
+        "value": 100.0,
+        "display_val": "100 tok/s",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Latency",
+      "Page Mapping",
+      "Scalability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "paged_cache.py",
+    "language": "python",
+    "lines": [
+      "def paged_attention(query, key_cache, value_cache):",
+      "    block_table = get_page_table(seq_id)",
+      "    out = flash_attention_kernel(query, block_table)",
+      "    return out"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+    "explanation": "Zero memory-copy hardware acceleration"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is solid\u2014mentioning VRAM shredding immediately caught my attention because I've definitely hit OOM errors while playing with local LLMs. I liked the hotel analogy in Beat 2; it wasn't patronizing, it actually explained the fragmentation issue well. Beat 4 was the only part where I had to pause, but since you mentioned 'page tables' and 'kernel logic,' it felt like actual dev talk rather than marketing fluff. It's a good breakdown."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.9
+      },
+      "matrix_grid": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.849
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.896,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.0,
+        "scale_multiplier": 1.2
+      },
+      "benchmark_table": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.808
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.008,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 0.5
+      },
+      "process_flowchart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.96,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "replace_flowchart_with_code_editor": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "remove_step_cards": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "generic_flow_chart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.87
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.92,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "generic_flowchart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.872
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.0
+      },
+      "ui_card_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.808
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.2,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "logo_mark": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.85
+      },
+      "call_to_action_layer": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    }
+  },
+  "language": "hi",
+  "lang": "hi",
+  "tts_provider": "sarvam",
+  "voice": "shubh"
+}

@@ -1,0 +1,1839 @@
+{
+  "id": "deepseek_r1_architecture",
+  "title": "DeepSeek-R1 Architecture Breakdown",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "algorithmic_search",
+  "hook_tag": "ARCHITECTURE BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Most LLMs are just glorified autocomplete. DeepSeek-R1 breaks the mold by forcing the model to generate a full reasoning trace before outputting a final answer.",
+      "visual_focus": "A standard transformer block transitioning into a recursive loop of tokens.",
+      "highlight_words": {
+        "reasoning trace": "#10B981"
+      },
+      "svo_action": {
+        "subject": "DeepSeek-R1",
+        "action_verb": "generates",
+        "direct_object": "reasoning trace",
+        "anchor_word": "reasoning",
+        "semantic_role": "process_initiation"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "THE REASONING TRACE",
+        "sub": "Moving beyond simple token prediction",
+        "accent_color": "#10B981",
+        "params": {}
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "neural_activation_wave",
+        "title": "THE REASONING TRACE",
+        "sub": "Moving beyond simple token prediction",
+        "accent_color": "#10B981"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.79,
+      "slot_duration": 9.09,
+      "start": 0.0,
+      "end": 8.79,
+      "word_timings": [
+        {
+          "word": "Most",
+          "clean_word": "most",
+          "phonemes": "m\u02c8o\u028ast",
+          "start": 0.005,
+          "end": 0.35,
+          "duration": 0.345,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "LLMs",
+          "clean_word": "llms",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 0.35,
+          "end": 0.825,
+          "duration": 0.475,
+          "frame_ahead_trigger": 0.31
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 0.825,
+          "end": 0.96,
+          "duration": 0.135,
+          "frame_ahead_trigger": 0.785
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 0.96,
+          "end": 1.155,
+          "duration": 0.195,
+          "frame_ahead_trigger": 0.92
+        },
+        {
+          "word": "glorified",
+          "clean_word": "glorified",
+          "phonemes": "\u0261l\u02c8\u0254\u02d0\u0279\u1d7bf\u02cca\u026ad",
+          "start": 1.155,
+          "end": 1.79,
+          "duration": 0.635,
+          "frame_ahead_trigger": 1.115
+        },
+        {
+          "word": "autocomplete.",
+          "clean_word": "autocomplete",
+          "phonemes": "\u02cc\u0254\u02d0\u027eo\u028ak\u0259mpl\u02c8i\u02d0t",
+          "start": 1.79,
+          "end": 2.521,
+          "duration": 0.731,
+          "frame_ahead_trigger": 1.75
+        },
+        {
+          "word": "DeepSeek-R1",
+          "clean_word": "deepseekr1",
+          "phonemes": "d\u02c8i\u02d0p s\u02c8i\u02d0k \u02c8\u0251\u02d0\u0279 w\u02c8\u028cn",
+          "start": 2.521,
+          "end": 3.595,
+          "duration": 1.074,
+          "frame_ahead_trigger": 2.481
+        },
+        {
+          "word": "breaks",
+          "clean_word": "breaks",
+          "phonemes": "b\u0279\u02c8e\u026aks",
+          "start": 3.595,
+          "end": 3.84,
+          "duration": 0.245,
+          "frame_ahead_trigger": 3.555
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.84,
+          "end": 4.005,
+          "duration": 0.165,
+          "frame_ahead_trigger": 3.8
+        },
+        {
+          "word": "mold",
+          "clean_word": "mold",
+          "phonemes": "m\u02c8o\u028ald",
+          "start": 4.005,
+          "end": 4.298,
+          "duration": 0.293,
+          "frame_ahead_trigger": 3.965
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 4.298,
+          "end": 4.485,
+          "duration": 0.187,
+          "frame_ahead_trigger": 4.258
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 4.485,
+          "end": 4.9,
+          "duration": 0.415,
+          "frame_ahead_trigger": 4.445
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.9,
+          "end": 4.989,
+          "duration": 0.089,
+          "frame_ahead_trigger": 4.86
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 4.989,
+          "end": 5.34,
+          "duration": 0.351,
+          "frame_ahead_trigger": 4.949
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 5.34,
+          "end": 5.485,
+          "duration": 0.145,
+          "frame_ahead_trigger": 5.3
+        },
+        {
+          "word": "generate",
+          "clean_word": "generate",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u02cce\u026at",
+          "start": 5.485,
+          "end": 6.01,
+          "duration": 0.525,
+          "frame_ahead_trigger": 5.445
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.01,
+          "end": 6.115,
+          "duration": 0.105,
+          "frame_ahead_trigger": 5.97
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 6.115,
+          "end": 6.34,
+          "duration": 0.225,
+          "frame_ahead_trigger": 6.075
+        },
+        {
+          "word": "reasoning",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 6.34,
+          "end": 6.81,
+          "duration": 0.47,
+          "frame_ahead_trigger": 6.3
+        },
+        {
+          "word": "trace",
+          "clean_word": "trace",
+          "phonemes": "t\u0279\u02c8e\u026as",
+          "start": 6.81,
+          "end": 7.15,
+          "duration": 0.34,
+          "frame_ahead_trigger": 6.77
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 7.15,
+          "end": 7.456,
+          "duration": 0.306,
+          "frame_ahead_trigger": 7.11
+        },
+        {
+          "word": "outputting",
+          "clean_word": "outputting",
+          "phonemes": "a\u028atp\u02c8\u028a\u027e\u026a\u014b",
+          "start": 7.456,
+          "end": 7.965,
+          "duration": 0.509,
+          "frame_ahead_trigger": 7.416
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.965,
+          "end": 8.045,
+          "duration": 0.08,
+          "frame_ahead_trigger": 7.925
+        },
+        {
+          "word": "final",
+          "clean_word": "final",
+          "phonemes": "f\u02c8a\u026an\u0259l",
+          "start": 8.045,
+          "end": 8.485,
+          "duration": 0.44,
+          "frame_ahead_trigger": 8.005
+        },
+        {
+          "word": "answer.",
+          "clean_word": "answer",
+          "phonemes": "\u02c8\u00e6ns\u025a",
+          "start": 8.485,
+          "end": 8.64,
+          "duration": 0.155,
+          "frame_ahead_trigger": 8.445
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Think of it like a grandmaster playing chess; they don't just move a piece, they simulate the entire game tree in their head before acting.",
+      "visual_focus": "A branching tree diagram expanding from a single node, representing possible move sequences.",
+      "highlight_words": {
+        "game tree": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Grandmaster",
+        "action_verb": "simulates",
+        "direct_object": "game tree",
+        "anchor_word": "simulate",
+        "semantic_role": "cognitive_analogy"
+      },
+      "visual_blueprint": {
+        "layout": "tree_hierarchy",
+        "title": "SEARCH SPACE",
+        "sub": "Simulating outcomes before commitment",
+        "accent_color": "#F59E0B",
+        "params": {
+          "root_label": "Input Prompt",
+          "optimal_label": "Valid Chain-of-Thought",
+          "pruned_label": "Incorrect Heuristics"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "tree_hierarchy",
+        "title": "SEARCH SPACE",
+        "sub": "Simulating outcomes before commitment",
+        "accent_color": "#F59E0B",
+        "root_label": "Input Prompt",
+        "optimal_label": "Valid Chain-of-Thought",
+        "pruned_label": "Incorrect Heuristics"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.42,
+      "slot_duration": 6.72,
+      "start": 9.09,
+      "end": 15.51,
+      "word_timings": [
+        {
+          "word": "Think",
+          "clean_word": "think",
+          "phonemes": "\u03b8\u02c8\u026a\u014bk",
+          "start": 9.119,
+          "end": 9.324,
+          "duration": 0.205,
+          "frame_ahead_trigger": 9.079
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 9.324,
+          "end": 9.439,
+          "duration": 0.115,
+          "frame_ahead_trigger": 9.284
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 9.439,
+          "end": 9.594,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.399
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 9.594,
+          "end": 9.714,
+          "duration": 0.12,
+          "frame_ahead_trigger": 9.554
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.714,
+          "end": 9.976,
+          "duration": 0.261,
+          "frame_ahead_trigger": 9.674
+        },
+        {
+          "word": "grandmaster",
+          "clean_word": "grandmaster",
+          "phonemes": "\u0261\u0279\u02c8\u00e6ndm\u00e6st\u025a",
+          "start": 9.976,
+          "end": 10.529,
+          "duration": 0.554,
+          "frame_ahead_trigger": 9.936
+        },
+        {
+          "word": "playing",
+          "clean_word": "playing",
+          "phonemes": "pl\u02c8e\u026a\u026a\u014b",
+          "start": 10.529,
+          "end": 10.944,
+          "duration": 0.415,
+          "frame_ahead_trigger": 10.489
+        },
+        {
+          "word": "chess;",
+          "clean_word": "chess",
+          "phonemes": "t\u0283\u02c8\u025bs",
+          "start": 10.944,
+          "end": 11.134,
+          "duration": 0.19,
+          "frame_ahead_trigger": 10.904
+        },
+        {
+          "word": "they",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 11.134,
+          "end": 11.285,
+          "duration": 0.151,
+          "frame_ahead_trigger": 11.094
+        },
+        {
+          "word": "don't",
+          "clean_word": "dont",
+          "phonemes": "d\u02c8o\u028ant",
+          "start": 11.285,
+          "end": 11.559,
+          "duration": 0.274,
+          "frame_ahead_trigger": 11.245
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 11.559,
+          "end": 11.884,
+          "duration": 0.325,
+          "frame_ahead_trigger": 11.519
+        },
+        {
+          "word": "move",
+          "clean_word": "move",
+          "phonemes": "m\u02c8u\u02d0v",
+          "start": 11.884,
+          "end": 12.174,
+          "duration": 0.29,
+          "frame_ahead_trigger": 11.844
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 12.174,
+          "end": 12.292,
+          "duration": 0.118,
+          "frame_ahead_trigger": 12.134
+        },
+        {
+          "word": "piece,",
+          "clean_word": "piece",
+          "phonemes": "p\u02c8i\u02d0s",
+          "start": 12.292,
+          "end": 12.609,
+          "duration": 0.317,
+          "frame_ahead_trigger": 12.252
+        },
+        {
+          "word": "they",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 12.609,
+          "end": 12.695,
+          "duration": 0.086,
+          "frame_ahead_trigger": 12.569
+        },
+        {
+          "word": "simulate",
+          "clean_word": "simulate",
+          "phonemes": "s\u02c8\u026amj\u028al\u02cce\u026at",
+          "start": 12.695,
+          "end": 13.199,
+          "duration": 0.504,
+          "frame_ahead_trigger": 12.655
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 13.199,
+          "end": 13.444,
+          "duration": 0.245,
+          "frame_ahead_trigger": 13.159
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 13.444,
+          "end": 13.809,
+          "duration": 0.365,
+          "frame_ahead_trigger": 13.404
+        },
+        {
+          "word": "game",
+          "clean_word": "game",
+          "phonemes": "\u0261\u02c8e\u026am",
+          "start": 13.809,
+          "end": 13.954,
+          "duration": 0.145,
+          "frame_ahead_trigger": 13.769
+        },
+        {
+          "word": "tree",
+          "clean_word": "tree",
+          "phonemes": "t\u0279\u02c8i\u02d0",
+          "start": 13.954,
+          "end": 14.124,
+          "duration": 0.17,
+          "frame_ahead_trigger": 13.914
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 14.124,
+          "end": 14.357,
+          "duration": 0.233,
+          "frame_ahead_trigger": 14.084
+        },
+        {
+          "word": "their",
+          "clean_word": "their",
+          "phonemes": "\u00f0\u025b\u0279",
+          "start": 14.357,
+          "end": 14.524,
+          "duration": 0.167,
+          "frame_ahead_trigger": 14.317
+        },
+        {
+          "word": "head",
+          "clean_word": "head",
+          "phonemes": "h\u02c8\u025bd",
+          "start": 14.524,
+          "end": 14.739,
+          "duration": 0.215,
+          "frame_ahead_trigger": 14.484
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 14.739,
+          "end": 15.014,
+          "duration": 0.275,
+          "frame_ahead_trigger": 14.699
+        },
+        {
+          "word": "acting.",
+          "clean_word": "acting",
+          "phonemes": "\u02c8\u00e6kt\u026a\u014b",
+          "start": 15.014,
+          "end": 15.364,
+          "duration": 0.35,
+          "frame_ahead_trigger": 14.974
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "The breakthrough is applying Reinforcement Learning directly to these hidden tokens. It rewards the model for the quality of its logic, not just the result.",
+      "visual_focus": "A gradient descent plot where the loss function is tied to the internal reasoning tokens.",
+      "highlight_words": {
+        "Reinforcement Learning": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "RL objective",
+        "action_verb": "optimizes",
+        "direct_object": "reasoning tokens",
+        "anchor_word": "rewards",
+        "semantic_role": "optimization_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+        "sub": "A gradient descent plot where the loss function is tied to the in",
+        "params": {
+          "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+          "sub": "A gradient descent plot where the loss function is tied to the in",
+          "filename": "reasoning_kernel.py",
+          "language": "python",
+          "lines": [
+            "def route_and_reason(hidden_states):",
+            "    expert_mask = get_router_gate(hidden_states)",
+            "    paths = parallel_beam_search(hidden_states)",
+            "    return prune_and_aggregate(paths, expert_mask)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 DYNAMIC EXPERT ACTIVATION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+        "sub": "A gradient descent plot where the loss function is tied to the in",
+        "filename": "reasoning_kernel.py",
+        "language": "python",
+        "lines": [
+          "def route_and_reason(hidden_states):",
+          "    expert_mask = get_router_gate(hidden_states)",
+          "    paths = parallel_beam_search(hidden_states)",
+          "    return prune_and_aggregate(paths, expert_mask)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 DYNAMIC EXPERT ACTIVATION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 8.06,
+      "slot_duration": 8.36,
+      "start": 15.81,
+      "end": 23.87,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.831,
+          "end": 15.931,
+          "duration": 0.1,
+          "frame_ahead_trigger": 15.791
+        },
+        {
+          "word": "breakthrough",
+          "clean_word": "breakthrough",
+          "phonemes": "b\u0279\u02c8e\u026ak\u03b8\u0279u\u02d0",
+          "start": 15.931,
+          "end": 16.496,
+          "duration": 0.565,
+          "frame_ahead_trigger": 15.891
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 16.496,
+          "end": 16.611,
+          "duration": 0.115,
+          "frame_ahead_trigger": 16.456
+        },
+        {
+          "word": "applying",
+          "clean_word": "applying",
+          "phonemes": "\u0250pl\u02c8a\u026a\u026a\u014b",
+          "start": 16.611,
+          "end": 17.021,
+          "duration": 0.41,
+          "frame_ahead_trigger": 16.571
+        },
+        {
+          "word": "Reinforcement",
+          "clean_word": "reinforcement",
+          "phonemes": "\u0279\u02cci\u02d0\u026anf\u02c8\u0254\u02d0\u0279sm\u0259nt",
+          "start": 17.021,
+          "end": 17.946,
+          "duration": 0.925,
+          "frame_ahead_trigger": 16.981
+        },
+        {
+          "word": "Learning",
+          "clean_word": "learning",
+          "phonemes": "l\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 17.946,
+          "end": 18.391,
+          "duration": 0.445,
+          "frame_ahead_trigger": 17.906
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 18.391,
+          "end": 18.837,
+          "duration": 0.446,
+          "frame_ahead_trigger": 18.351
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 18.837,
+          "end": 18.976,
+          "duration": 0.139,
+          "frame_ahead_trigger": 18.797
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 18.976,
+          "end": 19.306,
+          "duration": 0.33,
+          "frame_ahead_trigger": 18.936
+        },
+        {
+          "word": "hidden",
+          "clean_word": "hidden",
+          "phonemes": "h\u02c8\u026ad\u0259n",
+          "start": 19.306,
+          "end": 19.676,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.266
+        },
+        {
+          "word": "tokens.",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 19.676,
+          "end": 20.061,
+          "duration": 0.385,
+          "frame_ahead_trigger": 19.636
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 20.061,
+          "end": 20.236,
+          "duration": 0.175,
+          "frame_ahead_trigger": 20.021
+        },
+        {
+          "word": "rewards",
+          "clean_word": "rewards",
+          "phonemes": "\u0279\u1d7bw\u02c8\u0254\u02d0\u0279dz",
+          "start": 20.236,
+          "end": 20.673,
+          "duration": 0.438,
+          "frame_ahead_trigger": 20.196
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.673,
+          "end": 20.821,
+          "duration": 0.147,
+          "frame_ahead_trigger": 20.633
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 20.821,
+          "end": 21.156,
+          "duration": 0.335,
+          "frame_ahead_trigger": 20.781
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 21.156,
+          "end": 21.361,
+          "duration": 0.205,
+          "frame_ahead_trigger": 21.116
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.361,
+          "end": 21.446,
+          "duration": 0.085,
+          "frame_ahead_trigger": 21.321
+        },
+        {
+          "word": "quality",
+          "clean_word": "quality",
+          "phonemes": "kw\u02c8\u0254l\u1d7b\u027ei",
+          "start": 21.446,
+          "end": 21.961,
+          "duration": 0.515,
+          "frame_ahead_trigger": 21.406
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 21.961,
+          "end": 22.061,
+          "duration": 0.1,
+          "frame_ahead_trigger": 21.921
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 22.061,
+          "end": 22.151,
+          "duration": 0.09,
+          "frame_ahead_trigger": 22.021
+        },
+        {
+          "word": "logic,",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 22.151,
+          "end": 22.677,
+          "duration": 0.527,
+          "frame_ahead_trigger": 22.111
+        },
+        {
+          "word": "not",
+          "clean_word": "not",
+          "phonemes": "n\u02c8\u0251\u02d0t",
+          "start": 22.677,
+          "end": 23.056,
+          "duration": 0.378,
+          "frame_ahead_trigger": 22.637
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 23.056,
+          "end": 23.261,
+          "duration": 0.205,
+          "frame_ahead_trigger": 23.016
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.261,
+          "end": 23.351,
+          "duration": 0.09,
+          "frame_ahead_trigger": 23.221
+        },
+        {
+          "word": "result.",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 23.351,
+          "end": 23.791,
+          "duration": 0.44,
+          "frame_ahead_trigger": 23.311
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Under the hood, it utilizes a Mixture of Experts architecture, routing tokens through specialized layers to keep compute costs manageable during long reasoning chains.",
+      "visual_focus": "A router gate directing data flow to specific expert nodes in a sparse MoE layer.",
+      "highlight_words": {
+        "Mixture of Experts": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Router gate",
+        "action_verb": "routes",
+        "direct_object": "hidden states",
+        "anchor_word": "specialized",
+        "semantic_role": "compute_efficiency"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+        "sub": "A router gate directing data flow to specific expert nodes in a s",
+        "params": {
+          "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+          "sub": "A router gate directing data flow to specific expert nodes in a s",
+          "filename": "reasoning_kernel.py",
+          "language": "python",
+          "lines": [
+            "def route_and_reason(hidden_states):",
+            "    expert_mask = get_router_gate(hidden_states)",
+            "    paths = parallel_beam_search(hidden_states)",
+            "    return prune_and_aggregate(paths, expert_mask)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 DYNAMIC EXPERT ACTIVATION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: DEEPSEEK-R1 ARCHIT",
+        "sub": "A router gate directing data flow to specific expert nodes in a s",
+        "filename": "reasoning_kernel.py",
+        "language": "python",
+        "lines": [
+          "def route_and_reason(hidden_states):",
+          "    expert_mask = get_router_gate(hidden_states)",
+          "    paths = parallel_beam_search(hidden_states)",
+          "    return prune_and_aggregate(paths, expert_mask)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 DYNAMIC EXPERT ACTIVATION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 8.81,
+      "slot_duration": 9.11,
+      "start": 24.17,
+      "end": 32.99,
+      "word_timings": [
+        {
+          "word": "Under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 24.185,
+          "end": 24.475,
+          "duration": 0.29,
+          "frame_ahead_trigger": 24.145
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.475,
+          "end": 24.545,
+          "duration": 0.07,
+          "frame_ahead_trigger": 24.435
+        },
+        {
+          "word": "hood,",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 24.545,
+          "end": 24.8,
+          "duration": 0.255,
+          "frame_ahead_trigger": 24.505
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 24.8,
+          "end": 24.915,
+          "duration": 0.115,
+          "frame_ahead_trigger": 24.76
+        },
+        {
+          "word": "utilizes",
+          "clean_word": "utilizes",
+          "phonemes": "j\u02c8u\u02d0\u027e\u026al\u02cca\u026az\u1d7bz",
+          "start": 24.915,
+          "end": 25.505,
+          "duration": 0.59,
+          "frame_ahead_trigger": 24.875
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.505,
+          "end": 25.775,
+          "duration": 0.27,
+          "frame_ahead_trigger": 25.465
+        },
+        {
+          "word": "Mixture",
+          "clean_word": "mixture",
+          "phonemes": "m\u02c8\u026akst\u0283\u025a",
+          "start": 25.775,
+          "end": 26.17,
+          "duration": 0.395,
+          "frame_ahead_trigger": 25.735
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 26.17,
+          "end": 26.295,
+          "duration": 0.125,
+          "frame_ahead_trigger": 26.13
+        },
+        {
+          "word": "Experts",
+          "clean_word": "experts",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0ts",
+          "start": 26.295,
+          "end": 26.805,
+          "duration": 0.51,
+          "frame_ahead_trigger": 26.255
+        },
+        {
+          "word": "architecture,",
+          "clean_word": "architecture",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
+          "start": 26.805,
+          "end": 27.505,
+          "duration": 0.701,
+          "frame_ahead_trigger": 26.765
+        },
+        {
+          "word": "routing",
+          "clean_word": "routing",
+          "phonemes": "\u0279\u02c8a\u028a\u027e\u026a\u014b",
+          "start": 27.505,
+          "end": 28.0,
+          "duration": 0.494,
+          "frame_ahead_trigger": 27.465
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 28.0,
+          "end": 28.405,
+          "duration": 0.405,
+          "frame_ahead_trigger": 27.96
+        },
+        {
+          "word": "through",
+          "clean_word": "through",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
+          "start": 28.405,
+          "end": 28.62,
+          "duration": 0.215,
+          "frame_ahead_trigger": 28.365
+        },
+        {
+          "word": "specialized",
+          "clean_word": "specialized",
+          "phonemes": "sp\u02c8\u025b\u0283\u0259l\u02cca\u026azd",
+          "start": 28.62,
+          "end": 29.235,
+          "duration": 0.615,
+          "frame_ahead_trigger": 28.58
+        },
+        {
+          "word": "layers",
+          "clean_word": "layers",
+          "phonemes": "l\u02c8e\u026a\u025az",
+          "start": 29.235,
+          "end": 29.574,
+          "duration": 0.339,
+          "frame_ahead_trigger": 29.195
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 29.574,
+          "end": 29.855,
+          "duration": 0.281,
+          "frame_ahead_trigger": 29.534
+        },
+        {
+          "word": "keep",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 29.855,
+          "end": 29.995,
+          "duration": 0.14,
+          "frame_ahead_trigger": 29.815
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 29.995,
+          "end": 30.48,
+          "duration": 0.485,
+          "frame_ahead_trigger": 29.955
+        },
+        {
+          "word": "costs",
+          "clean_word": "costs",
+          "phonemes": "k\u02c8\u0254sts",
+          "start": 30.48,
+          "end": 30.84,
+          "duration": 0.36,
+          "frame_ahead_trigger": 30.44
+        },
+        {
+          "word": "manageable",
+          "clean_word": "manageable",
+          "phonemes": "m\u02c8\u00e6n\u026ad\u0292\u0259b\u0259l",
+          "start": 30.84,
+          "end": 31.49,
+          "duration": 0.65,
+          "frame_ahead_trigger": 30.8
+        },
+        {
+          "word": "during",
+          "clean_word": "during",
+          "phonemes": "d\u02c8\u028a\u0279\u0279\u026a\u014b",
+          "start": 31.49,
+          "end": 31.71,
+          "duration": 0.22,
+          "frame_ahead_trigger": 31.45
+        },
+        {
+          "word": "long",
+          "clean_word": "long",
+          "phonemes": "l\u02c8\u0254\u014b",
+          "start": 31.71,
+          "end": 32.06,
+          "duration": 0.35,
+          "frame_ahead_trigger": 31.67
+        },
+        {
+          "word": "reasoning",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 32.06,
+          "end": 32.52,
+          "duration": 0.46,
+          "frame_ahead_trigger": 32.02
+        },
+        {
+          "word": "chains.",
+          "clean_word": "chains",
+          "phonemes": "t\u0283\u02c8e\u026anz",
+          "start": 32.52,
+          "end": 32.895,
+          "duration": 0.375,
+          "frame_ahead_trigger": 32.48
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A 95% accuracy rate on complex reasoning benchmarks, significantly outperforming incumbent models while maintaining strict control over token generation latency.",
+      "visual_focus": "A bar chart comparing DeepSeek-R1 against SOTA models with a prominent delta badge.",
+      "highlight_words": {
+        "95% accuracy": "#10B981"
+      },
+      "svo_action": {
+        "subject": "DeepSeek-R1",
+        "action_verb": "surpasses",
+        "direct_object": "incumbent SOTA",
+        "anchor_word": "accuracy",
+        "semantic_role": "performance_benchmark"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK SHOWDOWN",
+        "sub": "Reasoning accuracy comparison",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "DeepSeek-R1",
+          "col_a_stat": "95%",
+          "col_b_title": "Baseline Models",
+          "col_b_stat": "62%"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK SHOWDOWN",
+        "sub": "Reasoning accuracy comparison",
+        "accent_color": "#34D399",
+        "col_a_title": "DeepSeek-R1",
+        "col_a_stat": "95%",
+        "col_b_title": "Baseline Models",
+        "col_b_stat": "62%"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 10.24,
+      "slot_duration": 10.54,
+      "start": 33.29,
+      "end": 43.53,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.305,
+          "end": 33.415,
+          "duration": 0.109,
+          "frame_ahead_trigger": 33.265
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 33.415,
+          "end": 33.8,
+          "duration": 0.386,
+          "frame_ahead_trigger": 33.375
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 33.8,
+          "end": 33.99,
+          "duration": 0.19,
+          "frame_ahead_trigger": 33.76
+        },
+        {
+          "word": "95%",
+          "clean_word": "95",
+          "phonemes": "n\u02c8a\u026anti f\u02c8a\u026av",
+          "start": 33.99,
+          "end": 34.655,
+          "duration": 0.665,
+          "frame_ahead_trigger": 33.95
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 34.655,
+          "end": 35.19,
+          "duration": 0.535,
+          "frame_ahead_trigger": 34.615
+        },
+        {
+          "word": "rate",
+          "clean_word": "rate",
+          "phonemes": "\u0279\u02c8e\u026at",
+          "start": 35.19,
+          "end": 35.48,
+          "duration": 0.29,
+          "frame_ahead_trigger": 35.15
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 35.48,
+          "end": 35.7,
+          "duration": 0.22,
+          "frame_ahead_trigger": 35.44
+        },
+        {
+          "word": "complex",
+          "clean_word": "complex",
+          "phonemes": "k\u02c8\u0251\u02d0mpl\u025bks",
+          "start": 35.7,
+          "end": 36.155,
+          "duration": 0.455,
+          "frame_ahead_trigger": 35.66
+        },
+        {
+          "word": "reasoning",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 36.155,
+          "end": 36.595,
+          "duration": 0.44,
+          "frame_ahead_trigger": 36.115
+        },
+        {
+          "word": "benchmarks,",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 36.595,
+          "end": 37.31,
+          "duration": 0.715,
+          "frame_ahead_trigger": 36.555
+        },
+        {
+          "word": "significantly",
+          "clean_word": "significantly",
+          "phonemes": "s\u026a\u0261n\u02c8\u026af\u026ak\u0259ntli",
+          "start": 37.31,
+          "end": 37.99,
+          "duration": 0.68,
+          "frame_ahead_trigger": 37.27
+        },
+        {
+          "word": "outperforming",
+          "clean_word": "outperforming",
+          "phonemes": "a\u028atp\u025af\u02c8\u0254\u02d0\u0279m\u026a\u014b",
+          "start": 37.99,
+          "end": 38.725,
+          "duration": 0.735,
+          "frame_ahead_trigger": 37.95
+        },
+        {
+          "word": "incumbent",
+          "clean_word": "incumbent",
+          "phonemes": "\u026a\u014bk\u02c8\u028cmb\u0259nt",
+          "start": 38.725,
+          "end": 39.345,
+          "duration": 0.62,
+          "frame_ahead_trigger": 38.685
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 39.345,
+          "end": 39.865,
+          "duration": 0.52,
+          "frame_ahead_trigger": 39.305
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 39.865,
+          "end": 39.98,
+          "duration": 0.115,
+          "frame_ahead_trigger": 39.825
+        },
+        {
+          "word": "maintaining",
+          "clean_word": "maintaining",
+          "phonemes": "me\u026ant\u02c8e\u026an\u026a\u014b",
+          "start": 39.98,
+          "end": 40.695,
+          "duration": 0.715,
+          "frame_ahead_trigger": 39.94
+        },
+        {
+          "word": "strict",
+          "clean_word": "strict",
+          "phonemes": "st\u0279\u02c8\u026akt",
+          "start": 40.695,
+          "end": 41.08,
+          "duration": 0.385,
+          "frame_ahead_trigger": 40.655
+        },
+        {
+          "word": "control",
+          "clean_word": "control",
+          "phonemes": "k\u0259nt\u0279\u02c8o\u028al",
+          "start": 41.08,
+          "end": 41.52,
+          "duration": 0.44,
+          "frame_ahead_trigger": 41.04
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 41.52,
+          "end": 41.795,
+          "duration": 0.275,
+          "frame_ahead_trigger": 41.48
+        },
+        {
+          "word": "token",
+          "clean_word": "token",
+          "phonemes": "t\u02c8o\u028ak\u0259n",
+          "start": 41.795,
+          "end": 42.09,
+          "duration": 0.295,
+          "frame_ahead_trigger": 41.755
+        },
+        {
+          "word": "generation",
+          "clean_word": "generation",
+          "phonemes": "d\u0292\u02cc\u025bn\u025a\u0279\u02c8e\u026a\u0283\u0259n",
+          "start": 42.09,
+          "end": 42.84,
+          "duration": 0.75,
+          "frame_ahead_trigger": 42.05
+        },
+        {
+          "word": "latency.",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 42.84,
+          "end": 43.365,
+          "duration": 0.525,
+          "frame_ahead_trigger": 42.8
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how AI actually works under the hood.",
+      "visual_focus": "The Model Verse logo appearing over a clean, dark-mode terminal interface.",
+      "highlight_words": {
+        "The Model Verse": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "deep-dives",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "THE MODEL VERSE",
+        "sub": "Engineering-first AI analysis",
+        "accent_color": "#FFFFFF",
+        "params": {
+          "input_1_label": "Research Papers",
+          "input_2_label": "Git Repos",
+          "input_3_label": "Engineer Insight",
+          "fused_label": "Model Verse"
+        }
+      },
+      "audio_duration": 4.33,
+      "slot_duration": 4.83,
+      "start": 43.83,
+      "end": 48.16,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 43.885,
+          "end": 44.17,
+          "duration": 0.285,
+          "frame_ahead_trigger": 43.845
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 44.17,
+          "end": 44.365,
+          "duration": 0.195,
+          "frame_ahead_trigger": 44.13
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 44.365,
+          "end": 44.605,
+          "duration": 0.24,
+          "frame_ahead_trigger": 44.325
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 44.605,
+          "end": 44.895,
+          "duration": 0.29,
+          "frame_ahead_trigger": 44.565
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 44.895,
+          "end": 45.215,
+          "duration": 0.32,
+          "frame_ahead_trigger": 44.855
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 45.215,
+          "end": 45.36,
+          "duration": 0.145,
+          "frame_ahead_trigger": 45.175
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 45.36,
+          "end": 45.86,
+          "duration": 0.5,
+          "frame_ahead_trigger": 45.32
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 45.86,
+          "end": 46.185,
+          "duration": 0.325,
+          "frame_ahead_trigger": 45.82
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 46.185,
+          "end": 46.395,
+          "duration": 0.21,
+          "frame_ahead_trigger": 46.145
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 46.395,
+          "end": 46.652,
+          "duration": 0.257,
+          "frame_ahead_trigger": 46.355
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 46.652,
+          "end": 47.14,
+          "duration": 0.488,
+          "frame_ahead_trigger": 46.612
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 47.14,
+          "end": 47.495,
+          "duration": 0.355,
+          "frame_ahead_trigger": 47.1
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 47.495,
+          "end": 47.74,
+          "duration": 0.245,
+          "frame_ahead_trigger": 47.455
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 47.74,
+          "end": 47.84,
+          "duration": 0.1,
+          "frame_ahead_trigger": 47.7
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 47.84,
+          "end": 48.01,
+          "duration": 0.17,
+          "frame_ahead_trigger": 47.8
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$C_{\\mathrm{total}} = \\sum_{t=1}^{T} \\alpha_t \\cdot \\mathrm{FLOPs}_t$",
+      "filename": "deepseek_r1_architecture_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "C_{\\mathrm{total}}",
+          "label": "Compute Budget"
+        },
+        {
+          "term": "\\alpha_t",
+          "label": "Reasoning Penalty"
+        }
+      ],
+      "svg_filename": "deepseek_r1_architecture_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(L^2) \\to \\mathcal{O}(L_{reason} + L_{gen})$",
+      "filename": "deepseek_r1_architecture_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "L_{reason}",
+          "label": "Deliberation Tokens"
+        },
+        {
+          "term": "L_{gen}",
+          "label": "Completion Tokens"
+        }
+      ],
+      "svg_filename": "deepseek_r1_architecture_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{L}_{RL} = \\mathbb{E}[\\log \\pi(y|x) \\cdot (R - b)]$",
+      "filename": "deepseek_r1_architecture_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "R",
+          "label": "Logical Reward"
+        },
+        {
+          "term": "b",
+          "label": "Baseline Value"
+        }
+      ],
+      "svg_filename": "deepseek_r1_architecture_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{TopK}(x) = \\mathrm{Softmax}(W_r x)$",
+      "filename": "deepseek_r1_architecture_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "W_r",
+          "label": "Router Weight"
+        },
+        {
+          "term": "x",
+          "label": "Activation"
+        }
+      ],
+      "svg_filename": "deepseek_r1_architecture_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Accuracy}_{R1} = 0.95$",
+      "filename": "deepseek_r1_architecture_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "0.95",
+          "label": "Math Benchmark"
+        }
+      ],
+      "svg_filename": "deepseek_r1_architecture_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Logic",
+          "color": "#38BDF8",
+          "items": [
+            "branching",
+            "pruning",
+            "CoT"
+          ]
+        },
+        {
+          "name": "Compute",
+          "color": "#10B981",
+          "items": [
+            "H100",
+            "MoE",
+            "FLOPs"
+          ]
+        },
+        {
+          "name": "Reward",
+          "color": "#F59E0B",
+          "items": [
+            "Policy",
+            "Gradient",
+            "RL"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Thinking...\"",
+        "target_cluster": "Logic",
+        "token": "\"Thinking...\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'wrong_path'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'loop_err'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "DeepSeek-R1",
+    "model_a_specs": [
+      "MoE Backbone",
+      "RLHF Pipeline",
+      "671B params"
+    ],
+    "model_b": "GPT-4o",
+    "model_b_specs": [
+      "Dense Architecture",
+      "Fine-tuned",
+      "Human Feedback"
+    ],
+    "divide_title": "REASONING VS DENSE PREDICTION",
+    "model_a_stat": "95%",
+    "model_a_stat_label": "MATH BENCHMARK",
+    "model_b_stat": "62%",
+    "model_b_stat_label": "MATH BENCHMARK",
+    "efficiency_badge": "\u26a1 10x INFERENCE EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "Math",
+        "score_a": "95%",
+        "score_b": "62%"
+      },
+      {
+        "name": "Code",
+        "score_a": "92%",
+        "score_b": "88%"
+      },
+      {
+        "name": "Logic",
+        "score_a": "High",
+        "score_b": "Medium"
+      }
+    ],
+    "scale_metric": "671B",
+    "scale_label": "Total Parameters",
+    "bottleneck_title": "REASONING BOTTLENECK",
+    "bottleneck_desc": "Sequential Token Prediction Error",
+    "solution_title": "CHAIN-OF-THOUGHT REINFORCEMENT",
+    "solution_components": "Monosemantic Reward Signal",
+    "mechanism_title": "DYNAMIC ROUTING ACTIVATION",
+    "payoff_stat": "95%",
+    "payoff_label": "TASK SUCCESS",
+    "payoff_sub": "Outperforming standard models",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "Sparse MoE Latents",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +56.7% LOGIC RECOVERY",
+    "challenger": "DeepSeek-R1",
+    "incumbent": "OpenAI O1"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: REASONING ACCURACY",
+    "metric_name": "Accuracy",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "DeepSeek-R1",
+        "value": 95.0,
+        "display_val": "95.0%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Incumbent SOTA",
+        "value": 89.0,
+        "display_val": "89.0%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Alternative Baselines",
+        "value": 62.0,
+        "display_val": "62.0%",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Standard PyTorch",
+        "value": 40.0,
+        "display_val": "40.0%",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +6.7% SOTA REASONING GAIN",
+    "radar_axes": [
+      "Reasoning",
+      "Math",
+      "Coding",
+      "Latency",
+      "Cost"
+    ]
+  },
+  "code_snippet": {
+    "filename": "reasoning_kernel.py",
+    "language": "python",
+    "lines": [
+      "def route_and_reason(hidden_states):",
+      "    expert_mask = get_router_gate(hidden_states)",
+      "    paths = parallel_beam_search(hidden_states)",
+      "    return prune_and_aggregate(paths, expert_mask)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 DYNAMIC EXPERT ACTIVATION",
+    "explanation": "Zero memory-copy hardware acceleration"
+  },
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.0,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is solid\u2014calling LLMs 'glorified autocomplete' is a classic dev trope that hits home. I actually liked the chess analogy in Beat 2; it\u2019s a standard comparison but it works for explaining chain-of-thought. You didn't use any of that 'digital brain' or 'smart assistant' cringe, which I appreciate. My only gripe is that Beat 4 mentions 'specialized layers' without explaining how the routing actually happens, but for a 60-second short, it's acceptable."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "search_tree",
+      "entity_type": "search_tree",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        1.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "branch_bound_laser",
+      "entity_type": "branch_bound",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}

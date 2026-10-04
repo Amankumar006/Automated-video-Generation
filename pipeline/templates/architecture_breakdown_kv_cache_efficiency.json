@@ -1,0 +1,1948 @@
+{
+  "id": "kv_cache_efficiency",
+  "title": "Unlocking KV Cache Latency",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "ARCHITECTURE BREAKDOWN",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Every time you run a long-context LLM, your VRAM is being shredded by fragmented KV cache, wasting up to 80% of your precious GPU memory.",
+      "visual_focus": "A memory bar chart showing massive gaps of empty space between allocated blocks.",
+      "highlight_words": {
+        "fragmented KV cache": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Fragmented cache",
+        "action_verb": "shreds",
+        "direct_object": "VRAM",
+        "anchor_word": "wasting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "MEMORY FRAGMENTATION",
+        "sub": "Standard allocation leads to massive overhead",
+        "accent_color": "#EF4444",
+        "params": {
+          "fragmentation_ratio": 0.8
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "MEMORY FRAGMENTATION",
+        "sub": "Standard allocation leads to massive overhead",
+        "accent_color": "#EF4444",
+        "fragmentation_ratio": 0.8
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 9.29,
+      "slot_duration": 9.59,
+      "start": 0.0,
+      "end": 9.29,
+      "word_timings": [
+        {
+          "word": "Every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 0.0,
+          "end": 0.245,
+          "duration": 0.245,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 0.245,
+          "end": 0.69,
+          "duration": 0.445,
+          "frame_ahead_trigger": 0.205
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.69,
+          "end": 0.8,
+          "duration": 0.11,
+          "frame_ahead_trigger": 0.65
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "\u0279\u02c8\u028cn",
+          "start": 0.8,
+          "end": 1.11,
+          "duration": 0.31,
+          "frame_ahead_trigger": 0.76
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 1.11,
+          "end": 1.36,
+          "duration": 0.25,
+          "frame_ahead_trigger": 1.07
+        },
+        {
+          "word": "long-context",
+          "clean_word": "longcontext",
+          "phonemes": "l\u02c8\u0254\u014bk\u0254nt\u02cc\u025bkst",
+          "start": 1.36,
+          "end": 2.14,
+          "duration": 0.78,
+          "frame_ahead_trigger": 1.32
+        },
+        {
+          "word": "LLM,",
+          "clean_word": "llm",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 2.14,
+          "end": 2.627,
+          "duration": 0.487,
+          "frame_ahead_trigger": 2.1
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 2.627,
+          "end": 2.76,
+          "duration": 0.133,
+          "frame_ahead_trigger": 2.587
+        },
+        {
+          "word": "VRAM",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 2.76,
+          "end": 3.09,
+          "duration": 0.33,
+          "frame_ahead_trigger": 2.72
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 3.09,
+          "end": 3.175,
+          "duration": 0.085,
+          "frame_ahead_trigger": 3.05
+        },
+        {
+          "word": "being",
+          "clean_word": "being",
+          "phonemes": "b\u02c8i\u02d0\u026a\u014b",
+          "start": 3.175,
+          "end": 3.565,
+          "duration": 0.39,
+          "frame_ahead_trigger": 3.135
+        },
+        {
+          "word": "shredded",
+          "clean_word": "shredded",
+          "phonemes": "\u0283\u0279\u02c8\u025bd\u1d7bd",
+          "start": 3.565,
+          "end": 4.085,
+          "duration": 0.52,
+          "frame_ahead_trigger": 3.525
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 4.085,
+          "end": 4.33,
+          "duration": 0.245,
+          "frame_ahead_trigger": 4.045
+        },
+        {
+          "word": "fragmented",
+          "clean_word": "fragmented",
+          "phonemes": "f\u0279\u00e6\u0261m\u02c8\u025bnt\u026ad",
+          "start": 4.33,
+          "end": 4.99,
+          "duration": 0.66,
+          "frame_ahead_trigger": 4.29
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 4.99,
+          "end": 5.435,
+          "duration": 0.445,
+          "frame_ahead_trigger": 4.95
+        },
+        {
+          "word": "cache,",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 5.435,
+          "end": 5.66,
+          "duration": 0.225,
+          "frame_ahead_trigger": 5.395
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 5.66,
+          "end": 6.25,
+          "duration": 0.59,
+          "frame_ahead_trigger": 5.62
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 6.25,
+          "end": 6.51,
+          "duration": 0.26,
+          "frame_ahead_trigger": 6.21
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 6.51,
+          "end": 6.675,
+          "duration": 0.165,
+          "frame_ahead_trigger": 6.47
+        },
+        {
+          "word": "80%",
+          "clean_word": "80",
+          "phonemes": "\u02c8e\u026a\u027ei",
+          "start": 6.675,
+          "end": 6.97,
+          "duration": 0.295,
+          "frame_ahead_trigger": 6.635
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 6.97,
+          "end": 7.068,
+          "duration": 0.098,
+          "frame_ahead_trigger": 6.93
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 7.068,
+          "end": 7.17,
+          "duration": 0.102,
+          "frame_ahead_trigger": 7.028
+        },
+        {
+          "word": "precious",
+          "clean_word": "precious",
+          "phonemes": "p\u0279\u02c8\u025b\u0283\u0259s",
+          "start": 7.17,
+          "end": 7.605,
+          "duration": 0.435,
+          "frame_ahead_trigger": 7.13
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 7.605,
+          "end": 8.47,
+          "duration": 0.865,
+          "frame_ahead_trigger": 7.565
+        },
+        {
+          "word": "memory.",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 8.47,
+          "end": 8.945,
+          "duration": 0.475,
+          "frame_ahead_trigger": 8.43
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "Why? Because static memory allocation is like a hotel that refuses to rent out half-empty rooms, forcing guests to wait in the lobby forever.",
+      "visual_focus": "A hotel floor plan where rooms are locked and guests are stuck in a queue.",
+      "highlight_words": {
+        "static memory": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Static allocation",
+        "action_verb": "blocks",
+        "direct_object": "throughput",
+        "anchor_word": "wait",
+        "semantic_role": "analogy_setup"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE HOTEL ANALOGY",
+        "sub": "Static vs Dynamic allocation",
+        "accent_color": "#F59E0B",
+        "params": {
+          "animation_speed": "slow"
+        }
+      },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE HOTEL ANALOGY",
+        "sub": "Static vs Dynamic allocation",
+        "accent_color": "#F59E0B",
+        "animation_speed": "slow"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.71,
+      "slot_duration": 8.01,
+      "start": 9.59,
+      "end": 17.3,
+      "word_timings": [
+        {
+          "word": "Why?",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 9.588,
+          "end": 9.743,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.548
+        },
+        {
+          "word": "Because",
+          "clean_word": "because",
+          "phonemes": "b\u026ak\u02c8\u028cz",
+          "start": 9.743,
+          "end": 10.142,
+          "duration": 0.399,
+          "frame_ahead_trigger": 9.703
+        },
+        {
+          "word": "static",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 10.142,
+          "end": 10.608,
+          "duration": 0.466,
+          "frame_ahead_trigger": 10.102
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 10.608,
+          "end": 10.903,
+          "duration": 0.295,
+          "frame_ahead_trigger": 10.568
+        },
+        {
+          "word": "allocation",
+          "clean_word": "allocation",
+          "phonemes": "\u02cc\u00e6l\u0259k\u02c8e\u026a\u0283\u0259n",
+          "start": 10.903,
+          "end": 11.518,
+          "duration": 0.615,
+          "frame_ahead_trigger": 10.863
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 11.518,
+          "end": 11.738,
+          "duration": 0.22,
+          "frame_ahead_trigger": 11.478
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 11.738,
+          "end": 11.983,
+          "duration": 0.245,
+          "frame_ahead_trigger": 11.698
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.983,
+          "end": 12.143,
+          "duration": 0.16,
+          "frame_ahead_trigger": 11.943
+        },
+        {
+          "word": "hotel",
+          "clean_word": "hotel",
+          "phonemes": "ho\u028at\u02c8\u025bl",
+          "start": 12.143,
+          "end": 12.488,
+          "duration": 0.345,
+          "frame_ahead_trigger": 12.103
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 12.488,
+          "end": 12.718,
+          "duration": 0.23,
+          "frame_ahead_trigger": 12.448
+        },
+        {
+          "word": "refuses",
+          "clean_word": "refuses",
+          "phonemes": "\u0279\u1d7bfj\u02c8u\u02d0z\u1d7bz",
+          "start": 12.718,
+          "end": 13.353,
+          "duration": 0.635,
+          "frame_ahead_trigger": 12.678
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 13.353,
+          "end": 13.448,
+          "duration": 0.095,
+          "frame_ahead_trigger": 13.313
+        },
+        {
+          "word": "rent",
+          "clean_word": "rent",
+          "phonemes": "\u0279\u02c8\u025bnt",
+          "start": 13.448,
+          "end": 13.623,
+          "duration": 0.175,
+          "frame_ahead_trigger": 13.408
+        },
+        {
+          "word": "out",
+          "clean_word": "out",
+          "phonemes": "\u02c8a\u028at",
+          "start": 13.623,
+          "end": 13.907,
+          "duration": 0.284,
+          "frame_ahead_trigger": 13.583
+        },
+        {
+          "word": "half-empty",
+          "clean_word": "halfempty",
+          "phonemes": "h\u02c8\u00e6f\u025bmpti",
+          "start": 13.907,
+          "end": 14.343,
+          "duration": 0.436,
+          "frame_ahead_trigger": 13.867
+        },
+        {
+          "word": "rooms,",
+          "clean_word": "rooms",
+          "phonemes": "\u0279\u02c8u\u02d0mz",
+          "start": 14.343,
+          "end": 14.708,
+          "duration": 0.365,
+          "frame_ahead_trigger": 14.303
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 14.708,
+          "end": 15.238,
+          "duration": 0.53,
+          "frame_ahead_trigger": 14.668
+        },
+        {
+          "word": "guests",
+          "clean_word": "guests",
+          "phonemes": "\u0261\u02c8\u025bsts",
+          "start": 15.238,
+          "end": 15.403,
+          "duration": 0.165,
+          "frame_ahead_trigger": 15.198
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.403,
+          "end": 15.693,
+          "duration": 0.29,
+          "frame_ahead_trigger": 15.363
+        },
+        {
+          "word": "wait",
+          "clean_word": "wait",
+          "phonemes": "w\u02c8e\u026at",
+          "start": 15.693,
+          "end": 16.033,
+          "duration": 0.34,
+          "frame_ahead_trigger": 15.653
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 16.033,
+          "end": 16.122,
+          "duration": 0.089,
+          "frame_ahead_trigger": 15.993
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.122,
+          "end": 16.263,
+          "duration": 0.141,
+          "frame_ahead_trigger": 16.082
+        },
+        {
+          "word": "lobby",
+          "clean_word": "lobby",
+          "phonemes": "l\u02c8\u0251\u02d0bi",
+          "start": 16.263,
+          "end": 16.638,
+          "duration": 0.375,
+          "frame_ahead_trigger": 16.223
+        },
+        {
+          "word": "forever.",
+          "clean_word": "forever",
+          "phonemes": "f\u025a\u0279\u02c8\u025bv\u025a",
+          "start": 16.638,
+          "end": 16.953,
+          "duration": 0.315,
+          "frame_ahead_trigger": 16.598
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter Paged Attention: it treats your KV cache like OS virtual memory, mapping non-contiguous blocks to physical VRAM using a clever page table system.",
+      "visual_focus": "A pointer diagram showing a logical sequence mapping to scattered physical memory blocks.",
+      "highlight_words": {
+        "Paged Attention": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Paged Attention",
+        "action_verb": "maps",
+        "direct_object": "non-contiguous blocks",
+        "anchor_word": "virtualization",
+        "semantic_role": "mechanism_reveal"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+        "params": {
+          "title": "KERNEL CODE: UNLOCKING KV CACHE",
+          "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+          "filename": "paged_cache.py",
+          "language": "python",
+          "lines": [
+            "def paged_attention(query, key_cache, value_cache):",
+            "    block_table = get_page_table(seq_id)",
+            "    out = flash_attention_kernel(query, block_table)",
+            "    return out"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "A pointer diagram showing a logical sequence mapping to scattered",
+        "filename": "paged_cache.py",
+        "language": "python",
+        "lines": [
+          "def paged_attention(query, key_cache, value_cache):",
+          "    block_table = get_page_table(seq_id)",
+          "    out = flash_attention_kernel(query, block_table)",
+          "    return out"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 10.45,
+      "slot_duration": 10.75,
+      "start": 17.6,
+      "end": 28.05,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 17.607,
+          "end": 17.927,
+          "duration": 0.32,
+          "frame_ahead_trigger": 17.567
+        },
+        {
+          "word": "Paged",
+          "clean_word": "paged",
+          "phonemes": "p\u02c8e\u026ad\u0292d",
+          "start": 17.927,
+          "end": 18.372,
+          "duration": 0.445,
+          "frame_ahead_trigger": 17.887
+        },
+        {
+          "word": "Attention:",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 18.372,
+          "end": 18.962,
+          "duration": 0.59,
+          "frame_ahead_trigger": 18.332
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 18.962,
+          "end": 19.05,
+          "duration": 0.088,
+          "frame_ahead_trigger": 18.922
+        },
+        {
+          "word": "treats",
+          "clean_word": "treats",
+          "phonemes": "t\u0279\u02c8i\u02d0ts",
+          "start": 19.05,
+          "end": 19.517,
+          "duration": 0.467,
+          "frame_ahead_trigger": 19.01
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 19.517,
+          "end": 19.672,
+          "duration": 0.155,
+          "frame_ahead_trigger": 19.477
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 19.672,
+          "end": 20.167,
+          "duration": 0.495,
+          "frame_ahead_trigger": 19.632
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 20.167,
+          "end": 20.402,
+          "duration": 0.235,
+          "frame_ahead_trigger": 20.127
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 20.402,
+          "end": 20.777,
+          "duration": 0.375,
+          "frame_ahead_trigger": 20.362
+        },
+        {
+          "word": "OS",
+          "clean_word": "os",
+          "phonemes": "\u02cco\u028a\u02c8\u025bs",
+          "start": 20.777,
+          "end": 21.202,
+          "duration": 0.425,
+          "frame_ahead_trigger": 20.737
+        },
+        {
+          "word": "virtual",
+          "clean_word": "virtual",
+          "phonemes": "v\u02c8\u025c\u02d0t\u0283u\u02d0\u0259l",
+          "start": 21.202,
+          "end": 21.87,
+          "duration": 0.668,
+          "frame_ahead_trigger": 21.162
+        },
+        {
+          "word": "memory,",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 21.87,
+          "end": 22.329,
+          "duration": 0.459,
+          "frame_ahead_trigger": 21.83
+        },
+        {
+          "word": "mapping",
+          "clean_word": "mapping",
+          "phonemes": "m\u02c8\u00e6p\u026a\u014b",
+          "start": 22.329,
+          "end": 22.647,
+          "duration": 0.318,
+          "frame_ahead_trigger": 22.289
+        },
+        {
+          "word": "non-contiguous",
+          "clean_word": "noncontiguous",
+          "phonemes": "n\u02cc\u0251\u02d0\u014bk\u0259nt\u02c8\u026a\u0261ju\u02d0\u0259s",
+          "start": 22.647,
+          "end": 23.812,
+          "duration": 1.165,
+          "frame_ahead_trigger": 22.607
+        },
+        {
+          "word": "blocks",
+          "clean_word": "blocks",
+          "phonemes": "bl\u02c8\u0251\u02d0ks",
+          "start": 23.812,
+          "end": 24.297,
+          "duration": 0.485,
+          "frame_ahead_trigger": 23.772
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 24.297,
+          "end": 24.432,
+          "duration": 0.135,
+          "frame_ahead_trigger": 24.257
+        },
+        {
+          "word": "physical",
+          "clean_word": "physical",
+          "phonemes": "f\u02c8\u026az\u026ak\u0259l",
+          "start": 24.432,
+          "end": 24.972,
+          "duration": 0.54,
+          "frame_ahead_trigger": 24.392
+        },
+        {
+          "word": "VRAM",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 24.972,
+          "end": 25.337,
+          "duration": 0.365,
+          "frame_ahead_trigger": 24.932
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 25.337,
+          "end": 25.805,
+          "duration": 0.468,
+          "frame_ahead_trigger": 25.297
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.805,
+          "end": 25.942,
+          "duration": 0.137,
+          "frame_ahead_trigger": 25.765
+        },
+        {
+          "word": "clever",
+          "clean_word": "clever",
+          "phonemes": "kl\u02c8\u025bv\u025a",
+          "start": 25.942,
+          "end": 26.412,
+          "duration": 0.47,
+          "frame_ahead_trigger": 25.902
+        },
+        {
+          "word": "page",
+          "clean_word": "page",
+          "phonemes": "p\u02c8e\u026ad\u0292",
+          "start": 26.412,
+          "end": 26.852,
+          "duration": 0.44,
+          "frame_ahead_trigger": 26.372
+        },
+        {
+          "word": "table",
+          "clean_word": "table",
+          "phonemes": "t\u02c8e\u026ab\u0259l",
+          "start": 26.852,
+          "end": 27.237,
+          "duration": 0.385,
+          "frame_ahead_trigger": 26.812
+        },
+        {
+          "word": "system.",
+          "clean_word": "system",
+          "phonemes": "s\u02c8\u026ast\u0259m",
+          "start": 27.237,
+          "end": 27.707,
+          "duration": 0.47,
+          "frame_ahead_trigger": 27.197
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The kernel logic is simple: query the block table, execute the flash attention kernel, and eliminate the need for contiguous memory buffers entirely.",
+      "visual_focus": "Code snippet of the paged_attention function highlighting the block_table lookup.",
+      "highlight_words": {
+        "block_table": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Kernel",
+        "action_verb": "executes",
+        "direct_object": "flash attention",
+        "anchor_word": "eliminate",
+        "semantic_role": "technical_deep_dive"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "Code snippet of the paged_attention function highlighting the blo",
+        "params": {
+          "title": "KERNEL CODE: UNLOCKING KV CACHE",
+          "sub": "Code snippet of the paged_attention function highlighting the blo",
+          "filename": "paged_cache.py",
+          "language": "python",
+          "lines": [
+            "def paged_attention(query, key_cache, value_cache):",
+            "    block_table = get_page_table(seq_id)",
+            "    out = flash_attention_kernel(query, block_table)",
+            "    return out"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+          "delta_badge": "Zero memory-copy hardware acceleration"
+        }
+      },
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: UNLOCKING KV CACHE",
+        "sub": "Code snippet of the paged_attention function highlighting the blo",
+        "filename": "paged_cache.py",
+        "language": "python",
+        "lines": [
+          "def paged_attention(query, key_cache, value_cache):",
+          "    block_table = get_page_table(seq_id)",
+          "    out = flash_attention_kernel(query, block_table)",
+          "    return out"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+        "delta_badge": "Zero memory-copy hardware acceleration"
+      },
+      "audio_duration": 8.78,
+      "slot_duration": 9.08,
+      "start": 28.35,
+      "end": 37.12,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.416,
+          "end": 28.501,
+          "duration": 0.085,
+          "frame_ahead_trigger": 28.376
+        },
+        {
+          "word": "kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 28.501,
+          "end": 29.001,
+          "duration": 0.5,
+          "frame_ahead_trigger": 28.461
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 29.001,
+          "end": 29.511,
+          "duration": 0.51,
+          "frame_ahead_trigger": 28.961
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 29.511,
+          "end": 29.552,
+          "duration": 0.041,
+          "frame_ahead_trigger": 29.471
+        },
+        {
+          "word": "simple:",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 29.552,
+          "end": 29.97,
+          "duration": 0.418,
+          "frame_ahead_trigger": 29.512
+        },
+        {
+          "word": "query",
+          "clean_word": "query",
+          "phonemes": "kw\u02c8i\u0259\u0279i",
+          "start": 29.97,
+          "end": 30.386,
+          "duration": 0.416,
+          "frame_ahead_trigger": 29.93
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 30.386,
+          "end": 30.509,
+          "duration": 0.122,
+          "frame_ahead_trigger": 30.346
+        },
+        {
+          "word": "block",
+          "clean_word": "block",
+          "phonemes": "bl\u02c8\u0251\u02d0k",
+          "start": 30.509,
+          "end": 30.771,
+          "duration": 0.263,
+          "frame_ahead_trigger": 30.469
+        },
+        {
+          "word": "table,",
+          "clean_word": "table",
+          "phonemes": "t\u02c8e\u026ab\u0259l",
+          "start": 30.771,
+          "end": 31.286,
+          "duration": 0.515,
+          "frame_ahead_trigger": 30.731
+        },
+        {
+          "word": "execute",
+          "clean_word": "execute",
+          "phonemes": "\u02c8\u025bks\u1d7bkj\u02ccu\u02d0t",
+          "start": 31.286,
+          "end": 31.871,
+          "duration": 0.585,
+          "frame_ahead_trigger": 31.246
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 31.871,
+          "end": 32.086,
+          "duration": 0.215,
+          "frame_ahead_trigger": 31.831
+        },
+        {
+          "word": "flash",
+          "clean_word": "flash",
+          "phonemes": "fl\u02c8\u00e6\u0283",
+          "start": 32.086,
+          "end": 32.362,
+          "duration": 0.276,
+          "frame_ahead_trigger": 32.046
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 32.362,
+          "end": 32.861,
+          "duration": 0.499,
+          "frame_ahead_trigger": 32.322
+        },
+        {
+          "word": "kernel,",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 32.861,
+          "end": 33.266,
+          "duration": 0.405,
+          "frame_ahead_trigger": 32.821
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 33.266,
+          "end": 33.371,
+          "duration": 0.105,
+          "frame_ahead_trigger": 33.226
+        },
+        {
+          "word": "eliminate",
+          "clean_word": "eliminate",
+          "phonemes": "\u1d7bl\u02c8\u026am\u1d7bn\u02cce\u026at",
+          "start": 33.371,
+          "end": 34.136,
+          "duration": 0.765,
+          "frame_ahead_trigger": 33.331
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.136,
+          "end": 34.236,
+          "duration": 0.1,
+          "frame_ahead_trigger": 34.096
+        },
+        {
+          "word": "need",
+          "clean_word": "need",
+          "phonemes": "n\u02c8i\u02d0d",
+          "start": 34.236,
+          "end": 34.566,
+          "duration": 0.33,
+          "frame_ahead_trigger": 34.196
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 34.566,
+          "end": 34.861,
+          "duration": 0.295,
+          "frame_ahead_trigger": 34.526
+        },
+        {
+          "word": "contiguous",
+          "clean_word": "contiguous",
+          "phonemes": "k\u0259nt\u02c8\u026a\u0261ju\u02d0\u0259s",
+          "start": 34.861,
+          "end": 35.576,
+          "duration": 0.715,
+          "frame_ahead_trigger": 34.821
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 35.576,
+          "end": 35.941,
+          "duration": 0.365,
+          "frame_ahead_trigger": 35.536
+        },
+        {
+          "word": "buffers",
+          "clean_word": "buffers",
+          "phonemes": "b\u02c8\u028cf\u025az",
+          "start": 35.941,
+          "end": 36.248,
+          "duration": 0.307,
+          "frame_ahead_trigger": 35.901
+        },
+        {
+          "word": "entirely.",
+          "clean_word": "entirely",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025ali",
+          "start": 36.248,
+          "end": 36.786,
+          "duration": 0.538,
+          "frame_ahead_trigger": 36.208
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A massive 300% throughput gain, pushing your hardware to 400 tokens per second while standard HF implementations stall at just 100.",
+      "visual_focus": "A bar chart comparing 400 tok/s vs 100 tok/s with a lightning bolt badge.",
+      "highlight_words": {
+        "300% throughput gain": "#10B981"
+      },
+      "svo_action": {
+        "subject": "vLLM",
+        "action_verb": "delivers",
+        "direct_object": "400 tok/s",
+        "anchor_word": "gain",
+        "semantic_role": "empirical_victory"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+          "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+          "metric_name": "Tokens Per Second",
+          "unit": "tok/s",
+          "contestants": [
+            {
+              "name": "vLLM Paged",
+              "value": 400.0,
+              "display_val": "400 tok/s",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Standard HF",
+              "value": 100.0,
+              "display_val": "100 tok/s",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN"
+        }
+      },
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart comparing 400 tok/s vs 100 tok/s with a",
+        "metric_name": "Tokens Per Second",
+        "unit": "tok/s",
+        "contestants": [
+          {
+            "name": "vLLM Paged",
+            "value": 400.0,
+            "display_val": "400 tok/s",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Standard HF",
+            "value": 100.0,
+            "display_val": "100 tok/s",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN"
+      },
+      "audio_duration": 8.87,
+      "slot_duration": 9.17,
+      "start": 37.42,
+      "end": 46.29,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.488,
+          "end": 37.568,
+          "duration": 0.08,
+          "frame_ahead_trigger": 37.448
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 37.568,
+          "end": 37.883,
+          "duration": 0.315,
+          "frame_ahead_trigger": 37.528
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 37.883,
+          "end": 38.122,
+          "duration": 0.239,
+          "frame_ahead_trigger": 37.843
+        },
+        {
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 38.122,
+          "end": 38.458,
+          "duration": 0.336,
+          "frame_ahead_trigger": 38.082
+        },
+        {
+          "word": "300%",
+          "clean_word": "300",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0h\u02c8\u028cnd\u0279\u026ad",
+          "start": 38.458,
+          "end": 39.128,
+          "duration": 0.67,
+          "frame_ahead_trigger": 38.418
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 39.128,
+          "end": 39.573,
+          "duration": 0.445,
+          "frame_ahead_trigger": 39.088
+        },
+        {
+          "word": "gain,",
+          "clean_word": "gain",
+          "phonemes": "\u0261\u02c8e\u026an",
+          "start": 39.573,
+          "end": 39.833,
+          "duration": 0.26,
+          "frame_ahead_trigger": 39.533
+        },
+        {
+          "word": "pushing",
+          "clean_word": "pushing",
+          "phonemes": "p\u02c8\u028a\u0283\u026a\u014b",
+          "start": 39.833,
+          "end": 40.118,
+          "duration": 0.285,
+          "frame_ahead_trigger": 39.793
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 40.118,
+          "end": 40.308,
+          "duration": 0.19,
+          "frame_ahead_trigger": 40.078
+        },
+        {
+          "word": "hardware",
+          "clean_word": "hardware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279",
+          "start": 40.308,
+          "end": 40.818,
+          "duration": 0.51,
+          "frame_ahead_trigger": 40.268
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 40.818,
+          "end": 40.921,
+          "duration": 0.103,
+          "frame_ahead_trigger": 40.778
+        },
+        {
+          "word": "400",
+          "clean_word": "400",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279h\u02c8\u028cnd\u0279\u026ad",
+          "start": 40.921,
+          "end": 41.613,
+          "duration": 0.692,
+          "frame_ahead_trigger": 40.881
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 41.613,
+          "end": 41.983,
+          "duration": 0.37,
+          "frame_ahead_trigger": 41.573
+        },
+        {
+          "word": "per",
+          "clean_word": "per",
+          "phonemes": "p\u025c\u02d0",
+          "start": 41.983,
+          "end": 42.203,
+          "duration": 0.22,
+          "frame_ahead_trigger": 41.943
+        },
+        {
+          "word": "second",
+          "clean_word": "second",
+          "phonemes": "s\u02c8\u025bk\u0259nd",
+          "start": 42.203,
+          "end": 42.548,
+          "duration": 0.345,
+          "frame_ahead_trigger": 42.163
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 42.548,
+          "end": 42.763,
+          "duration": 0.215,
+          "frame_ahead_trigger": 42.508
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 42.763,
+          "end": 43.188,
+          "duration": 0.425,
+          "frame_ahead_trigger": 42.723
+        },
+        {
+          "word": "HF",
+          "clean_word": "hf",
+          "phonemes": "\u02cce\u026at\u0283\u02c8\u025bf",
+          "start": 43.188,
+          "end": 43.728,
+          "duration": 0.54,
+          "frame_ahead_trigger": 43.148
+        },
+        {
+          "word": "implementations",
+          "clean_word": "implementations",
+          "phonemes": "\u02cc\u026ampl\u026am\u0259nt\u02c8e\u026a\u0283\u0259nz",
+          "start": 43.728,
+          "end": 44.565,
+          "duration": 0.837,
+          "frame_ahead_trigger": 43.688
+        },
+        {
+          "word": "stall",
+          "clean_word": "stall",
+          "phonemes": "st\u02c8\u0254\u02d0l",
+          "start": 44.565,
+          "end": 44.833,
+          "duration": 0.268,
+          "frame_ahead_trigger": 44.525
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 44.833,
+          "end": 44.983,
+          "duration": 0.15,
+          "frame_ahead_trigger": 44.793
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 44.983,
+          "end": 45.253,
+          "duration": 0.27,
+          "frame_ahead_trigger": 44.943
+        },
+        {
+          "word": "100.",
+          "clean_word": "100",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad",
+          "start": 45.253,
+          "end": 45.938,
+          "duration": 0.685,
+          "frame_ahead_trigger": 45.213
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop wasting your VRAM. Follow The Model Verse for daily deep-dives into the architecture that actually powers modern AI.",
+      "visual_focus": "Logo animation for The Model Verse with a subscribe call to action.",
+      "highlight_words": {
+        "The Model Verse": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "User",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "subscribe",
+        "semantic_role": "loop_outro"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dives into AI architecture",
+        "accent_color": "#38BDF8",
+        "params": {
+          "loop": true
+        }
+      },
+      "audio_duration": 7.01,
+      "slot_duration": 7.51,
+      "start": 46.59,
+      "end": 53.61,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 46.623,
+          "end": 46.903,
+          "duration": 0.28,
+          "frame_ahead_trigger": 46.583
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 46.903,
+          "end": 47.473,
+          "duration": 0.57,
+          "frame_ahead_trigger": 46.863
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 47.473,
+          "end": 47.606,
+          "duration": 0.132,
+          "frame_ahead_trigger": 47.433
+        },
+        {
+          "word": "VRAM.",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 47.606,
+          "end": 47.894,
+          "duration": 0.289,
+          "frame_ahead_trigger": 47.566
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 47.894,
+          "end": 48.299,
+          "duration": 0.404,
+          "frame_ahead_trigger": 47.854
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 48.299,
+          "end": 48.493,
+          "duration": 0.194,
+          "frame_ahead_trigger": 48.259
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 48.493,
+          "end": 48.758,
+          "duration": 0.265,
+          "frame_ahead_trigger": 48.453
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 48.758,
+          "end": 49.078,
+          "duration": 0.32,
+          "frame_ahead_trigger": 48.718
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 49.078,
+          "end": 49.228,
+          "duration": 0.15,
+          "frame_ahead_trigger": 49.038
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 49.228,
+          "end": 49.708,
+          "duration": 0.48,
+          "frame_ahead_trigger": 49.188
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 49.708,
+          "end": 50.223,
+          "duration": 0.515,
+          "frame_ahead_trigger": 49.668
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 50.223,
+          "end": 50.538,
+          "duration": 0.315,
+          "frame_ahead_trigger": 50.183
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 50.538,
+          "end": 50.668,
+          "duration": 0.13,
+          "frame_ahead_trigger": 50.498
+        },
+        {
+          "word": "architecture",
+          "clean_word": "architecture",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
+          "start": 50.668,
+          "end": 51.358,
+          "duration": 0.69,
+          "frame_ahead_trigger": 50.628
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 51.358,
+          "end": 51.653,
+          "duration": 0.295,
+          "frame_ahead_trigger": 51.318
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 51.653,
+          "end": 52.133,
+          "duration": 0.48,
+          "frame_ahead_trigger": 51.613
+        },
+        {
+          "word": "powers",
+          "clean_word": "powers",
+          "phonemes": "p\u02c8a\u028a\u025az",
+          "start": 52.133,
+          "end": 52.468,
+          "duration": 0.335,
+          "frame_ahead_trigger": 52.093
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 52.468,
+          "end": 52.888,
+          "duration": 0.42,
+          "frame_ahead_trigger": 52.428
+        },
+        {
+          "word": "AI.",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 52.888,
+          "end": 53.268,
+          "duration": 0.38,
+          "frame_ahead_trigger": 52.848
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{model}} = 4096 \\to \\mathcal{O}(N^2)$",
+      "filename": "kv_cache_efficiency_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Sequence Length"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathrm{Latency} \\propto \\sum_{t=1}^{T} t$",
+      "filename": "kv_cache_efficiency_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Token Index"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{K} \\in \\mathbb{R}^{n \\times d}, \\mathbf{V} \\in \\mathbb{R}^{n \\times d}$",
+      "filename": "kv_cache_efficiency_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "n",
+          "label": "Stored Tokens"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathrm{BlockSize} = \\frac{\\mathrm{TotalVRAM}}{\\mathrm{Fragmentation}}$",
+      "filename": "kv_cache_efficiency_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "BlockSize",
+          "label": "Paged Partition"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = \\frac{T_{\\mathrm{naive}}}{T_{\\mathrm{paged}}} = 4.0$",
+      "filename": "kv_cache_efficiency_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Speedup",
+          "label": "Performance Ratio"
+        }
+      ],
+      "svg_filename": "kv_cache_efficiency_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Compute",
+          "color": "#38BDF8",
+          "items": [
+            "H100",
+            "CUDA",
+            "Warp"
+          ]
+        },
+        {
+          "name": "Memory",
+          "color": "#10B981",
+          "items": [
+            "VRAM",
+            "KV-Cache",
+            "Page"
+          ]
+        },
+        {
+          "name": "Latency",
+          "color": "#F59E0B",
+          "items": [
+            "Stall",
+            "Thrash",
+            "Bus"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"System\"",
+        "target_cluster": "Memory",
+        "token": "\"System\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'thrash'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'stall'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "vLLM PagedAttention",
+    "model_a_specs": [
+      "Non-contiguous memory",
+      "Zero-copy",
+      "Page Tables"
+    ],
+    "model_b": "Standard HuggingFace",
+    "model_b_specs": [
+      "Contiguous VRAM",
+      "High Fragmentation",
+      "Slow"
+    ],
+    "divide_title": "CACHING ARCHITECTURE DIVIDE",
+    "model_a_stat": "4x",
+    "model_a_stat_label": "THROUGHPUT BOOST",
+    "model_b_stat": "1x",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 4x COMPUTE EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "Token Throughput",
+        "score_a": "4x",
+        "score_b": "1x"
+      },
+      {
+        "name": "Memory Efficiency",
+        "score_a": "98%",
+        "score_b": "60%"
+      }
+    ],
+    "scale_metric": "4x",
+    "scale_label": "THROUGHPUT GAIN",
+    "bottleneck_title": "MONOLITHIC KV CACHE BOTTLENECK",
+    "bottleneck_desc": "Continuous memory constraints leading to O(N^2) search overhead",
+    "solution_title": "PAGED ATTENTION VIRTUALIZATION",
+    "solution_components": "Non-contiguous block memory mapping",
+    "mechanism_title": "VIRTUAL MEMORY MAPPING",
+    "payoff_stat": "400%",
+    "payoff_label": "THROUGHPUT",
+    "payoff_sub": "Outperforming standard VRAM management",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "Paged Efficiency",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Standard Cache",
+    "payoff_delta_badge": "\u26a1 +300% GENERATION SPEEDUP",
+    "challenger": "vLLM",
+    "incumbent": "Standard Transformer"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+    "metric_name": "Tokens Per Second",
+    "unit": "tok/s",
+    "contestants": [
+      {
+        "name": "vLLM Paged",
+        "value": 400.0,
+        "display_val": "400 tok/s",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Standard HF",
+        "value": 100.0,
+        "display_val": "100 tok/s",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +300% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Latency",
+      "Page Mapping",
+      "Scalability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "paged_cache.py",
+    "language": "python",
+    "lines": [
+      "def paged_attention(query, key_cache, value_cache):",
+      "    block_table = get_page_table(seq_id)",
+      "    out = flash_attention_kernel(query, block_table)",
+      "    return out"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+    "explanation": "Zero memory-copy hardware acceleration"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is solid\u2014mentioning VRAM shredding immediately caught my attention because I've definitely hit OOM errors while playing with local LLMs. I liked the hotel analogy in Beat 2; it wasn't patronizing, it actually explained the fragmentation issue well. Beat 4 was the only part where I had to pause, but since you mentioned 'page tables' and 'kernel logic,' it felt like actual dev talk rather than marketing fluff. It's a good breakdown."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.9
+      },
+      "matrix_grid": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.849
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.896,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.0,
+        "scale_multiplier": 1.2
+      },
+      "benchmark_table": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.808
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.008,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.2,
+        "scale_multiplier": 0.5
+      },
+      "process_flowchart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.861
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.96,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "replace_flowchart_with_code_editor": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      },
+      "remove_step_cards": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "generic_flow_chart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.87
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.92,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "generic_flowchart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.872
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 0.0
+      },
+      "ui_card_container": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.808
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.2,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "logo_mark": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 0.85
+      },
+      "call_to_action_layer": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}

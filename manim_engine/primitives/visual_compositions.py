@@ -771,51 +771,59 @@ BLUEPRINT_COMPOSITION_REGISTRY = {
 }
 
 
+def _register_extended_blueprints():
+    """Dynamically register showdown, code execution, and physics primitives into the registry."""
+    # 1. Showdown Engine
+    try:
+        from manim_engine.primitives.showdown_engine import (
+            BlueprintHorizontalRaceBars,
+            BlueprintRadarParetoPlot
+        )
+        BLUEPRINT_COMPOSITION_REGISTRY.update({
+            "horizontal_race_bars": BlueprintHorizontalRaceBars,
+            "race_bars": BlueprintHorizontalRaceBars,
+            "benchmark_race": BlueprintHorizontalRaceBars,
+            "drag_race_bars": BlueprintHorizontalRaceBars,
+            "radar_pareto_plot": BlueprintRadarParetoPlot,
+            "radar_plot": BlueprintRadarParetoPlot,
+            "spider_chart": BlueprintRadarParetoPlot,
+            "pareto_frontier": BlueprintRadarParetoPlot,
+            "pareto_tradeoff": BlueprintRadarParetoPlot
+        })
+    except Exception:
+        pass
+
+    # 2. Code Execution Engine
+    try:
+        from manim_engine.primitives.code_execution_engine import BlueprintChalkboardCodeBlock
+        BLUEPRINT_COMPOSITION_REGISTRY.update({
+            "chalkboard_code_block": BlueprintChalkboardCodeBlock,
+            "chalkboard_code": BlueprintChalkboardCodeBlock,
+            "code_block": BlueprintChalkboardCodeBlock,
+            "code_execution_trace": BlueprintChalkboardCodeBlock,
+            "syntax_code_block": BlueprintChalkboardCodeBlock,
+            "code_kernel": BlueprintChalkboardCodeBlock,
+            "ast_code_trace": BlueprintChalkboardCodeBlock,
+            "ast_tree": BlueprintChalkboardCodeBlock
+        })
+    except Exception:
+        pass
+
+    # 3. Physics Simulations
+    try:
+        from manim_engine.primitives.physics_simulations import PHYSICS_SIMULATION_REGISTRY
+        BLUEPRINT_COMPOSITION_REGISTRY.update(PHYSICS_SIMULATION_REGISTRY)
+    except Exception:
+        pass
+
+
 def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] = None) -> BaseBlueprintComposition:
     """
     Factory function to instantiate any composable visual blueprint with provided parameters.
     Falls back gracefully to BlueprintPipelineStages if layout unknown.
     """
     if layout not in BLUEPRINT_COMPOSITION_REGISTRY:
-        if layout in ["horizontal_race_bars", "race_bars", "benchmark_race", "drag_race_bars", "radar_pareto_plot", "radar_plot", "spider_chart", "pareto_frontier", "pareto_tradeoff"]:
-            try:
-                from manim_engine.primitives.showdown_engine import (
-                    BlueprintHorizontalRaceBars,
-                    BlueprintRadarParetoPlot
-                )
-                BLUEPRINT_COMPOSITION_REGISTRY.update({
-                    "horizontal_race_bars": BlueprintHorizontalRaceBars,
-                    "race_bars": BlueprintHorizontalRaceBars,
-                    "benchmark_race": BlueprintHorizontalRaceBars,
-                    "drag_race_bars": BlueprintHorizontalRaceBars,
-                    "radar_pareto_plot": BlueprintRadarParetoPlot,
-                    "radar_plot": BlueprintRadarParetoPlot,
-                    "spider_chart": BlueprintRadarParetoPlot,
-                    "pareto_frontier": BlueprintRadarParetoPlot,
-                    "pareto_tradeoff": BlueprintRadarParetoPlot
-                })
-            except Exception as e:
-                print(f"⚠️ Showdown engine lazy import notice: {e}")
-
-        if layout in ["chalkboard_code_block", "code_block", "code_execution_trace", "syntax_code_block", "code_kernel", "ast_code_trace"]:
-            try:
-                from manim_engine.primitives.code_execution_engine import BlueprintChalkboardCodeBlock
-                BLUEPRINT_COMPOSITION_REGISTRY.update({
-                    "chalkboard_code_block": BlueprintChalkboardCodeBlock,
-                    "code_block": BlueprintChalkboardCodeBlock,
-                    "code_execution_trace": BlueprintChalkboardCodeBlock,
-                    "syntax_code_block": BlueprintChalkboardCodeBlock,
-                    "code_kernel": BlueprintChalkboardCodeBlock,
-                    "ast_code_trace": BlueprintChalkboardCodeBlock
-                })
-            except Exception as e:
-                print(f"⚠️ Code execution engine lazy import notice: {e}")
-
-        try:
-            from manim_engine.primitives.physics_simulations import PHYSICS_SIMULATION_REGISTRY
-            BLUEPRINT_COMPOSITION_REGISTRY.update(PHYSICS_SIMULATION_REGISTRY)
-        except Exception:
-            pass
+        _register_extended_blueprints()
 
     cls = BLUEPRINT_COMPOSITION_REGISTRY.get(layout, BlueprintPipelineStages)
     clean_params = dict(params) if params else {}
@@ -828,3 +836,6 @@ def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] =
             return cls(title=clean_params.get("title", "ARCHITECTURAL OVERVIEW"))
         except Exception:
             return BlueprintPipelineStages()
+
+# Populate extended registries on module load
+_register_extended_blueprints()

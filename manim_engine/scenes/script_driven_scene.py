@@ -8,6 +8,8 @@ monolithic templates and circular score gauges.
 import os
 import sys
 import json
+import re
+import importlib.util
 import numpy as np
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Tuple
@@ -313,7 +315,6 @@ class ScriptDrivenScene(MovingCameraScene):
                 # If bespoke_svg file missing and no paper figure, synthesize on-the-fly via SVGSynthesizer!
                 if motif_type in ["bespoke_svg", "dynamic_svg"] and (not current_svg or not os.path.exists(current_svg)):
                     try:
-                        import re
                         from pipeline.svg_synthesizer import SVGSynthesizer
                         clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "topic")).lower()
                         topic = self.spec.get("title", clean_id)
@@ -338,8 +339,26 @@ class ScriptDrivenScene(MovingCameraScene):
 
             from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
 
-            # 2. Instantiate Parameterized Script Motif
-            motif = create_script_motif(motif_type, motif_params)
+            # 2. Instantiate Visual: Check for Bespoke Synthesized Module (Visual Engine 6.0)
+            spec_clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "short")).lower()
+            bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
+            motif = None
+
+            if bespoke_module_path.exists():
+                try:
+                    mod_name = f"bespoke_{spec_clean_id}_beat_{beat_id}"
+                    spec_import = importlib.util.spec_from_file_location(mod_name, str(bespoke_module_path))
+                    mod = importlib.util.module_from_spec(spec_import)
+                    spec_import.loader.exec_module(mod)
+                    if hasattr(mod, "BespokeBeatVisual"):
+                        motif = mod.BespokeBeatVisual()
+                        print(f"   ✨ [Visual Engine 6.0] Successfully loaded bespoke visual from {bespoke_module_path.name}")
+                except Exception as e:
+                    print(f"⚠️ Error loading bespoke visual for Beat {beat_id}: {e}. Falling back to motif registry.")
+
+            if motif is None:
+                motif = create_script_motif(motif_type, motif_params)
+
             if not isinstance(motif, BaseBlueprintComposition):
                 motif.move_to([0, 0.65, 0])
 

@@ -461,7 +461,15 @@ Generate the complete JSON specification strictly adhering to this structure:
                     if approved_beat.get("svo_action"):
                         spec["beats"][idx]["svo_action"] = approved_beat["svo_action"]
                     if approved_beat.get("visual_blueprint"):
-                        spec["beats"][idx]["visual_blueprint"] = approved_beat["visual_blueprint"]
+                        existing_bp = spec["beats"][idx].get("visual_blueprint")
+                        if not existing_bp or existing_bp.get("layout") in ("pipeline_stages", "default", None):
+                            spec["beats"][idx]["visual_blueprint"] = approved_beat["visual_blueprint"]
+                        else:
+                            # Preserve rich existing layout, updating titles/subs if available
+                            if approved_beat["visual_blueprint"].get("title"):
+                                spec["beats"][idx]["visual_blueprint"]["title"] = approved_beat["visual_blueprint"]["title"]
+                            if approved_beat["visual_blueprint"].get("sub"):
+                                spec["beats"][idx]["visual_blueprint"]["sub"] = approved_beat["visual_blueprint"]["sub"]
 
             spec["feynman_certification"] = vetted_script.get("feynman_certification", {})
             cert = spec["feynman_certification"]
