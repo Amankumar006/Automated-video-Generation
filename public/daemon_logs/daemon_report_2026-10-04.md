@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 16:21:47 UTC
+**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 16:59:36 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Ego2Act: Evaluating Goal-Directed Manipulation in Egocentric Video Generation
-- **arXiv ID:** [2610.01092](https://arxiv.org/abs/2610.01092)
-- **Domain Taxonomy:** `robotics_tamp` (1.80x velocity)
+### Reel 1: OTRetarget: Joint Robot and Object Motion Retargeting via Optimal Transport
+- **arXiv ID:** [2609.36602](https://arxiv.org/abs/2609.36602)
+- **Domain Taxonomy:** `robotics_tamp` (1.84x velocity)
 - **Category:** `benchmark_news`
-- **Editorial Hook:** *What if your AI assistant didn't just 'know' how to move, but could simulate the laws of physics before it ever touched an object?*
-- **Everyday Analogy:** *A professional gymnast mentally rehearsing a routine by visualizing every muscle movement before stepping onto the mat.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_ego2act_benchmark_benchmark_news.mp4`
+- **Editorial Hook:** *How do you teach a robot to dance, run, or climb like a human without teaching it every move from scratch?*
+- **Everyday Analogy:** *A puppeteer using a control bar where every tug on a string is translated by a 'geometry translator' to match the unique size and limb-length of a different marionette.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_otretarget_joint_motion_optimal_transport_benchmark_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
