@@ -100,11 +100,21 @@ jobs:
       - name: Configure Credentials
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          SARVAM_API_KEY: ${{ secrets.SARVAM_API_KEY }}
           YOUTUBE_TOKEN_JSON_BASE64: ${{ secrets.YOUTUBE_TOKEN_JSON_BASE64 }}
           YOUTUBE_CLIENT_SECRETS_BASE64: ${{ secrets.YOUTUBE_CLIENT_SECRETS_BASE64 }}
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
           echo "GEMINI_MODEL_NAME=gemini-3.1-flash-lite" >> .env
+
+          if [ -n "$ELEVENLABS_API_KEY" ]; then
+            echo "ELEVENLABS_API_KEY=$ELEVENLABS_API_KEY" >> .env
+          fi
+
+          if [ -n "$SARVAM_API_KEY" ]; then
+            echo "SARVAM_API_KEY=$SARVAM_API_KEY" >> .env
+          fi
 
           if [ -n "$YOUTUBE_TOKEN_JSON_BASE64" ]; then
             echo "$YOUTUBE_TOKEN_JSON_BASE64" | base64 -d > pipeline/youtube_token.json
@@ -117,6 +127,8 @@ jobs:
       - name: Run Daily Shorts Daemon
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          SARVAM_API_KEY: ${{ secrets.SARVAM_API_KEY }}
           PYTHONUNBUFFERED: "1"
         run: |
           COUNT="${{ github.event.inputs.count || '1' }}"
