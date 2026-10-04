@@ -58,7 +58,7 @@ SAFE_Y_MAX = 5.8
 SAMPLE_RATE = 24000
 DEFAULT_VOICE = os.environ.get("KOKORO_VOICE", "am_eric")
 DEFAULT_SPEED = 1.12
-DEFAULT_TTS_PROVIDER = os.environ.get("TTS_PROVIDER", "auto")
+DEFAULT_TTS_PROVIDER = os.environ.get("TTS_PROVIDER", "kokoro")
 TTS_CACHE_DIR = os.path.join(PUBLIC_DIR, "audio_cache")
 
 # ElevenLabs Configuration (English Neural Voice)

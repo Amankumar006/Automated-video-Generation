@@ -246,7 +246,10 @@ def auto_produce(
     print(f"📂 Category: {resolved_category.upper()}")
     print(f"🧩 Engine: {engine_label}")
     resolved_lang = language or spec.get("language") or "en"
-    resolved_prov = provider or spec.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
+    if not publish and provider is None and not os.environ.get("TTS_PROVIDER"):
+        resolved_prov = "kokoro"
+    else:
+        resolved_prov = provider or spec.get("tts_provider") or ("auto" if publish else "kokoro")
     print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {voice or 'default'}) at {speed}x speed")
 
     # Step 3: Synthesize Audio & Procedural SFX
