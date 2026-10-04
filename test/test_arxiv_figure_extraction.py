@@ -91,8 +91,10 @@ class PaperFigureVectorScene(Scene):
         self.add(watermark)
 
         # 3. Authentic Vector Paper Figure Composition
+        img_path = PROJECT_ROOT / "public" / "arxiv_cache" / "2407.08608" / "chalkboard_figures" / "fig_4_flash3_h100_causal_False_hdim_128_fwd_speed.png"
         svg_path = PROJECT_ROOT / "public" / "arxiv_cache" / "2407.08608" / "chalkboard_figures" / "fig_4_flash3_h100_causal_False_hdim_128_fwd_speed.svg"
         comp = BlueprintPaperFigure(
+            image_path=str(img_path),
             svg_path=str(svg_path),
             arxiv_id="2407.08608",
             title="H100 FORWARD SPEED BENCHMARK",
@@ -157,4 +159,41 @@ def test_blueprint_paper_figure_composition():
     assert bottom_y >= -2.5
     # Subtitles are at y = -3.45, buffer is >= 0.9 units
     assert bottom_y - (-3.45) > 0.8
+
+
+def test_extract_paper_figures_high_res():
+    """Verifies that figures are extracted at high resolution (>=2000px width) with valid image paths."""
+    from pipeline.arxiv_vector_extractor import extract_paper_figures
+    from PIL import Image
+
+    figs = extract_paper_figures("2407.08608", max_figures=3)
+    assert len(figs) >= 1
+    for f in figs:
+        img_path = f.get("image_path")
+        assert img_path is not None, f"Figure {f['figure_id']} missing image_path"
+        assert os.path.exists(img_path), f"File does not exist: {img_path}"
+        with Image.open(img_path) as im:
+            # Must be high resolution to prevent video blurriness
+            assert im.width >= 2000, f"Image {img_path} width {im.width} is below high-res threshold 2000"
+
+
+def test_figure_contrast_and_readability():
+    """Verifies that extracted figures have high contrast and no invisible black-on-dark text."""
+    from pipeline.arxiv_vector_extractor import extract_paper_figures
+    from PIL import Image
+    import numpy as np
+
+    figs = extract_paper_figures("2407.08608", max_figures=2)
+    for f in figs:
+        img_path = f.get("image_path")
+        with Image.open(img_path) as im:
+            arr = np.array(im.convert("RGBA"))
+            # Check visible pixels
+            visible = arr[:, :, 3] > 50
+            assert np.any(visible), "Figure has no visible pixels"
+            # In either chalkboard or studio plate mode, text and lines should have high contrast
+            # Average brightness of visible pixels must be bright (> 120) or cleanly framed
+            mean_lum = np.mean(0.299 * arr[visible, 0] + 0.587 * arr[visible, 1] + 0.114 * arr[visible, 2])
+            assert mean_lum > 120, f"Mean luminance {mean_lum} is too low, risk of dark-on-dark invisible text"
+
 

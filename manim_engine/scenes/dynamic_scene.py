@@ -259,23 +259,26 @@ class DynamicCompositeScene(Scene):
         )
         return budget["pre_wait"], budget["action_run_time"], budget["post_wait"]
 
-    def get_arxiv_vector_figure(self, index: int = 0) -> Optional[SVGMobject]:
-        """Loads and prepares native chalkboard-recolored arXiv vector figure if available."""
+    def get_arxiv_vector_figure(self, index: int = 0) -> Optional[Mobject]:
+        """Loads and prepares native chalkboard-recolored arXiv vector or raster figure if available."""
         arxiv_id = self.raw_spec.get("arxiv_id") or self.storyboard.metadata.get("arxiv_id")
         if not arxiv_id:
             return None
-        svg_path = get_paper_vector_figure(arxiv_id, index=index)
-        if not svg_path or not os.path.exists(svg_path):
+        fig_path = get_paper_vector_figure(arxiv_id, index=index)
+        if not fig_path or not os.path.exists(fig_path):
             return None
         try:
-            mobj = SVGMobject(svg_path)
+            if fig_path.lower().endswith(".svg"):
+                mobj = SVGMobject(fig_path)
+            else:
+                mobj = ImageMobject(fig_path)
             if mobj.width > 5.8:
                 mobj.scale_to_fit_width(5.8)
             if mobj.height > 4.5:
                 mobj.scale_to_fit_height(4.5)
             return mobj
         except Exception as e:
-            print(f"⚠️ Could not load vector figure SVGMobject: {e}")
+            print(f"⚠️ Could not load vector/raster figure Mobject: {e}")
             return None
 
     # =========================================================================
