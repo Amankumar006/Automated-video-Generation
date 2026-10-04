@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 07:10:12 UTC
+**Date:** 2026-10-04 | **Timestamp:** 2026-10-04 11:18:11 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Honeycomb: Constant-Size Scene Memory Representation for Video World Models
-- **arXiv ID:** [2609.37690](https://arxiv.org/abs/2609.37690)
-- **Domain Taxonomy:** `multimodal_diffusion` (0.67x velocity)
+### Reel 1: SemanTok: Predictable Semantic Tokens for Efficient Autoregressive Video Generation
+- **arXiv ID:** [2610.00686](https://arxiv.org/abs/2610.00686)
+- **Domain Taxonomy:** `multimodal_diffusion` (0.71x velocity)
 - **Category:** `architecture_breakdown`
-- **Editorial Hook:** *How do AI models watch long videos without running out of 'brain space'?*
-- **Everyday Analogy:** *A painter who creates a long mural but only has a single fixed-size canvas to hold the entire story.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_honeycomb_scene_memory_architecture_breakdown.mp4`
+- **Editorial Hook:** *Why does your AI video generator struggle to keep track of a moving object?*
+- **Everyday Analogy:** *A library archive: comparing searching through a pile of loose, disorganized papers versus a perfectly indexed card catalog.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_semantok_video_gen_architecture_breakdown.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
