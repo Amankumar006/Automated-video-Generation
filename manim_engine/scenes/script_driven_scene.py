@@ -383,7 +383,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     self.play(motif.wave_c.animate.set_color("#FF2A55"), run_time=action_time * 0.5)
                     self.play(motif.wave_c.animate.set_color("#EF4444"), run_time=action_time * 0.5)
                 elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
-                    self.play(motif.angle_arc.animate.set_color("#34D399"), motif.badge_box.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
+                    badge_grp = VGroup(motif.badge_box, motif.badge_txt, motif.badge_sub) if hasattr(motif, "badge_txt") else motif.badge_box
+                    self.play(motif.angle_arc.animate.set_color("#34D399"), badge_grp.animate.scale(1.04), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1"):
                     self.play(motif.out_beam1.animate.set_stroke(width=8.0), motif.out_beam2.animate.set_stroke(width=8.0), rate_func=there_and_back, run_time=action_time)
                 elif motif_type == "branching_outputs" and hasattr(motif, "card1"):

@@ -81,6 +81,37 @@ class ASTSecurityValidator(ast.NodeVisitor):
                     f"Forbidden LaTeX class: '.{attr_name}()'. "
                     f"Use CleanText with Unicode math symbols instead."
                 )
+
+        # Catch graph-dot misalignment patterns
+        if isinstance(node.func, ast.Attribute) and node.func.attr == "scale":
+            if isinstance(node.func.value, ast.Attribute) and node.func.value.attr == "animate":
+                target = node.func.value.value
+                target_name = target.attr if isinstance(target, ast.Attribute) else (target.id if isinstance(target, ast.Name) else "")
+                if target_name in ("nodes", "loop_nodes", "expert_nodes", "tree_nodes", "dots", "tokens", "markers", "points", "vertices"):
+                    has_about = any(kw.arg in ("about_point", "about_edge") for kw in node.keywords)
+                    if not has_about:
+                        self.errors.append(
+                            f"Graph misalignment risk: Calling '{target_name}.animate.scale()' on a group of nodes/dots/tokens shifts their positions and detaches them from branch lines or curves. Pulse individual dots via list comprehension '*[d.animate.scale(...) for d in self.{target_name}]' or scale the connected tree/graph group together."
+                        )
+
+        if isinstance(node.func, ast.Attribute) and node.func.attr == "shift":
+            if isinstance(node.func.value, ast.Attribute) and node.func.value.attr == "animate":
+                target = node.func.value.value
+                target_name = target.attr if isinstance(target, ast.Attribute) else (target.id if isinstance(target, ast.Name) else "")
+                if target_name in ("path", "curve", "manifold", "loop_path", "branch_line"):
+                    self.errors.append(
+                        f"Graph misalignment risk: Calling '{target_name}.animate.shift()' without moving attached dots/tokens detaches the curve from its points. Shift both together via 'VGroup(self.{target_name}, self.tokens).animate.shift(...)/'."
+                    )
+
+        if isinstance(node.func, ast.Name) and node.func.id == "Rotate":
+            if node.args:
+                first_arg = node.args[0]
+                first_name = first_arg.attr if isinstance(first_arg, ast.Attribute) else (first_arg.id if isinstance(first_arg, ast.Name) else "")
+                if first_name in ("loop_nodes", "nodes", "dots", "tokens"):
+                    self.errors.append(
+                        f"Graph misalignment risk: Calling 'Rotate({first_name})' rotates dots independently of their connecting path line. Rotate both together via 'Rotate(VGroup(self.loop_path, self.{first_name}))'."
+                    )
+
         self.generic_visit(node)
 
     def visit_ClassDef(self, node: ast.ClassDef):
@@ -156,6 +187,20 @@ def validate_code_in_process(code_str: str) -> Tuple[bool, Optional[str]]:
             return False, f"Visual width ({width:.2f}) exceeds 9:16 safe-zone limit {MAX_VISUAL_WIDTH}"
         if height > MAX_VISUAL_HEIGHT:
             return False, f"Visual height ({height:.2f}) exceeds 9:16 safe-zone limit {MAX_VISUAL_HEIGHT}"
+
+        # Check for text overflowing container boxes
+        from manim import Text, Rectangle, RoundedRectangle, Ellipse, Circle
+        for subm in visual.submobjects:
+            if hasattr(subm, "submobjects") and len(subm.submobjects) >= 2:
+                containers = [m for m in subm.submobjects if isinstance(m, (Rectangle, RoundedRectangle, Ellipse, Circle))]
+                texts = [m for m in subm.submobjects if isinstance(m, (Text, CleanText))]
+                if containers and texts:
+                    cont = containers[0]
+                    for txt in texts:
+                        dist = np.linalg.norm(txt.get_center() - cont.get_center())
+                        if dist < max(cont.width, cont.height) * 0.4:
+                            if txt.width > cont.width - 0.05:
+                                return False, f"Container overflow: Text '{getattr(txt, 'text', 'label')}' width ({txt.width:.2f}) exceeds box width ({cont.width:.2f}). Scale text or widen container."
 
         # Test animation execution
         scene = Scene()

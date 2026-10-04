@@ -66,6 +66,19 @@ CRITICAL DESIGN PRINCIPLES:
    - Screen height is 16.0 units (Y from -8.0 to +8.0). Keep visual height <= 7.0 units.
    - Center your visual around `ORIGIN + UP * 0.8` so bottom subtitles and top headers don't collide.
 
+6. ZERO TEXT OVERFLOW INVARIANT (MANDATORY):
+   - If placing text inside any box, badge, pill, card, or ellipse: The container MUST be strictly wider and taller than the text with at least 0.3 units margin.
+   - Always pass `max_width=container.width - 0.4` to `CleanText` or call `text.scale_to_fit_width(container.width - 0.4)`.
+   - If a label is wide (e.g. > 15 characters), either use a smaller `font_size` (18-20) or wrap/scale it so it NEVER overflows its parent or container boundaries.
+
+7. ZERO GRAPH & CONNECTED NODES MISALIGNMENT INVARIANT (MANDATORY):
+   - When animating trees, networks, graphs, circular loops, or coordinate axes:
+     - NEVER animate `self.nodes.animate.scale(...)` across a VGroup of multiple dots! Scaling a group of dots shifts their positions outward, disconnecting them from their branch lines!
+     - To pulse dots in place without moving them, pulse each dot individually: `AnimationGroup(*[d.animate.scale(1.2) for d in self.nodes])`.
+     - If transforming or scaling a connected graph/tree, scale BOTH the lines and dots together: `self.tree_group.animate.scale(1.05)`.
+     - When rotating or moving connected nodes along a curve, circular loop, or path: ALWAYS animate BOTH the path line and the nodes together (`VGroup(self.loop_path, self.loop_nodes).animate...`), or move dots strictly along the path with `point_from_proportion`.
+     - When scaling a radar or radial plot, ALWAYS pass `about_point=self.center_point` so vertices stay pinned to the axis spokes.
+
 CODE INTERFACE CONTRACT:
 You must return executable Python code defining exactly this class:
 
