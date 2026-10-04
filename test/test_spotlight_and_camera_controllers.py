@@ -138,6 +138,38 @@ class TestSpotlightAndCameraControllers(unittest.TestCase):
         self.assertEqual(sandwich["header"].z_index, 50)
         self.assertEqual(sandwich["captions"].z_index, 60)
 
+    def test_kinetic_camera_punch_in_and_reset_animations(self):
+        """Kinetic camera must return animation objects for parallel, non-blocking execution."""
+        mock_frame = Square()
+        punch_anim = self.camera.get_punch_in_animation(
+            camera_frame=mock_frame,
+            target_point=np.array([1.0, 2.0, 0.0]),
+            zoom_factor=0.94,
+            run_time=0.45
+        )
+        self.assertTrue(hasattr(punch_anim, "build") or isinstance(punch_anim, Animation))
+
+        reset_anim = self.camera.get_reset_animation(
+            camera_frame=mock_frame,
+            run_time=0.30
+        )
+        self.assertTrue(hasattr(reset_anim, "build") or isinstance(reset_anim, Animation))
+
+    def test_spotlight_staging_play_now_false_returns_anims(self):
+        """Spotlight staging with play_now=False must return animations without blocking the scene clock."""
+        focal_dot = Dot()
+        bg_dot = Dot()
+        motif = VGroup(focal_dot, bg_dot)
+        anims = self.spotlight.apply_spotlight(
+            scene=None,
+            motif=motif,
+            run_time=0.45,
+            dim_opacity=0.55,
+            play_now=False
+        )
+        self.assertIsInstance(anims, list)
+
 
 if __name__ == "__main__":
     unittest.main()
+

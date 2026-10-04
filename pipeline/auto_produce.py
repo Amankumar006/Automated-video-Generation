@@ -259,17 +259,17 @@ def auto_produce(
     print(f"📂 Category: {resolved_category.upper()}")
     print(f"🧩 Engine: {engine_label}")
     resolved_lang = language or spec.get("language") or "en"
-    if not publish and provider is None and not os.environ.get("TTS_PROVIDER"):
-        resolved_prov = "kokoro"
-    else:
-        resolved_prov = provider or spec.get("tts_provider") or ("auto" if publish else "kokoro")
-    print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {voice or 'default'}) at {speed}x speed")
+    resolved_prov = provider or spec.get("tts_provider") or os.environ.get("TTS_PROVIDER") or "elevenlabs"
+    if resolved_prov == "auto":
+        resolved_prov = "sarvam" if resolved_lang in ("hi", "hindi") else "elevenlabs"
+    resolved_voice = voice or spec.get("voice") or ("eric" if resolved_prov == "elevenlabs" else None)
+    print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {resolved_voice or 'default'}) at {speed}x speed")
 
     # Step 3: Synthesize Audio & Procedural SFX
     print("\n🎙️ Step 3: Synthesizing neural audio narration, procedural SFX, and ambient soundtrack...")
     audio_results = synthesize_audio_for_spec(
         spec,
-        voice=voice,
+        voice=resolved_voice,
         speed=speed,
         enable_music=enable_music,
         provider=resolved_prov,
