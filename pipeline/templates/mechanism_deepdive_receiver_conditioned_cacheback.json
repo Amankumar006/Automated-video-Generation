@@ -1,0 +1,1772 @@
+{
+  "id": "receiver_conditioned_cacheback",
+  "title": "Receiver-Conditioned Latent Communication",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_sae",
+  "hook_tag": "AGENT SYNC BOTTLENECK",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Multi-agent systems are currently choking to death on their own KV caches, wasting gigabytes of VRAM on irrelevant data.",
+      "visual_focus": "A glowing neural network node overflowing with red data packets, causing a system crash animation.",
+      "highlight_words": {
+        "KV caches": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "KV caches",
+        "action_verb": "choke",
+        "direct_object": "multi-agent systems",
+        "anchor_word": "wasting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE MEMORY LEAK",
+        "sub": "KV cache bloat in multi-agent coordination",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "KV CACHE SATURATION",
+          "active_cell_label": "Redundant Tokens",
+          "efficiency_label": "High Latency"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE MEMORY LEAK",
+        "sub": "KV cache bloat in multi-agent coordination",
+        "accent_color": "#EF4444",
+        "grid_title": "KV CACHE SATURATION",
+        "active_cell_label": "Redundant Tokens",
+        "efficiency_label": "High Latency"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.78,
+      "slot_duration": 7.08,
+      "start": 0.0,
+      "end": 6.78,
+      "word_timings": [
+        {
+          "word": "Multi-agent",
+          "clean_word": "multiagent",
+          "phonemes": "m\u02cc\u028clt\u026a\u02c8e\u026ad\u0292\u0259nt",
+          "start": 0.03,
+          "end": 0.825,
+          "duration": 0.795,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "systems",
+          "clean_word": "systems",
+          "phonemes": "s\u02c8\u026ast\u0259mz",
+          "start": 0.825,
+          "end": 1.25,
+          "duration": 0.425,
+          "frame_ahead_trigger": 0.785
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 1.25,
+          "end": 1.375,
+          "duration": 0.125,
+          "frame_ahead_trigger": 1.21
+        },
+        {
+          "word": "currently",
+          "clean_word": "currently",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u0259ntli",
+          "start": 1.375,
+          "end": 1.955,
+          "duration": 0.58,
+          "frame_ahead_trigger": 1.335
+        },
+        {
+          "word": "choking",
+          "clean_word": "choking",
+          "phonemes": "t\u0283\u02c8o\u028ak\u026a\u014b",
+          "start": 1.955,
+          "end": 2.26,
+          "duration": 0.305,
+          "frame_ahead_trigger": 1.915
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 2.26,
+          "end": 2.49,
+          "duration": 0.23,
+          "frame_ahead_trigger": 2.22
+        },
+        {
+          "word": "death",
+          "clean_word": "death",
+          "phonemes": "d\u02c8\u025b\u03b8",
+          "start": 2.49,
+          "end": 2.815,
+          "duration": 0.325,
+          "frame_ahead_trigger": 2.45
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 2.815,
+          "end": 2.88,
+          "duration": 0.065,
+          "frame_ahead_trigger": 2.775
+        },
+        {
+          "word": "their",
+          "clean_word": "their",
+          "phonemes": "\u00f0\u025b\u0279",
+          "start": 2.88,
+          "end": 3.1,
+          "duration": 0.22,
+          "frame_ahead_trigger": 2.84
+        },
+        {
+          "word": "own",
+          "clean_word": "own",
+          "phonemes": "\u02c8o\u028an",
+          "start": 3.1,
+          "end": 3.275,
+          "duration": 0.175,
+          "frame_ahead_trigger": 3.06
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 3.275,
+          "end": 3.74,
+          "duration": 0.465,
+          "frame_ahead_trigger": 3.235
+        },
+        {
+          "word": "caches,",
+          "clean_word": "caches",
+          "phonemes": "k\u02c8\u00e6\u0283\u1d7bz",
+          "start": 3.74,
+          "end": 4.01,
+          "duration": 0.27,
+          "frame_ahead_trigger": 3.7
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 4.01,
+          "end": 4.52,
+          "duration": 0.51,
+          "frame_ahead_trigger": 3.97
+        },
+        {
+          "word": "gigabytes",
+          "clean_word": "gigabytes",
+          "phonemes": "\u0261\u02c8\u026a\u0261\u0259b\u02cca\u026ats",
+          "start": 4.52,
+          "end": 5.08,
+          "duration": 0.56,
+          "frame_ahead_trigger": 4.48
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 5.08,
+          "end": 5.139,
+          "duration": 0.059,
+          "frame_ahead_trigger": 5.04
+        },
+        {
+          "word": "VRAM",
+          "clean_word": "vram",
+          "phonemes": "v\u0279\u02c8\u00e6m",
+          "start": 5.139,
+          "end": 5.408,
+          "duration": 0.269,
+          "frame_ahead_trigger": 5.099
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 5.408,
+          "end": 5.569,
+          "duration": 0.161,
+          "frame_ahead_trigger": 5.368
+        },
+        {
+          "word": "irrelevant",
+          "clean_word": "irrelevant",
+          "phonemes": "\u026a\u0279\u02c8\u025bl\u1d7bv\u0259nt",
+          "start": 5.569,
+          "end": 6.13,
+          "duration": 0.561,
+          "frame_ahead_trigger": 5.529
+        },
+        {
+          "word": "data.",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 6.13,
+          "end": 6.43,
+          "duration": 0.3,
+          "frame_ahead_trigger": 6.09
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "It is like a librarian dumping an entire archive onto your desk instead of the one specific book you actually need.",
+      "visual_focus": "A split screen showing a massive library shelf collapsing onto a tiny desk.",
+      "highlight_words": {
+        "entire archive": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Librarian",
+        "action_verb": "dumps",
+        "direct_object": "archive",
+        "anchor_word": "bloat",
+        "semantic_role": "analogy_climax"
+      },
+      "visual_blueprint": {
+        "layout": "side_by_side",
+        "title": "THE LIBRARIAN PARADOX",
+        "sub": "Communication overhead vs. information density",
+        "accent_color": "#F59E0B",
+        "params": {}
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "side_by_side",
+        "title": "THE LIBRARIAN PARADOX",
+        "sub": "Communication overhead vs. information density",
+        "accent_color": "#F59E0B"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.48,
+      "slot_duration": 5.78,
+      "start": 7.08,
+      "end": 12.56,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 7.115,
+          "end": 7.295,
+          "duration": 0.18,
+          "frame_ahead_trigger": 7.075
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 7.295,
+          "end": 7.305,
+          "duration": 0.01,
+          "frame_ahead_trigger": 7.255
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.305,
+          "end": 7.54,
+          "duration": 0.235,
+          "frame_ahead_trigger": 7.265
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.54,
+          "end": 7.71,
+          "duration": 0.17,
+          "frame_ahead_trigger": 7.5
+        },
+        {
+          "word": "librarian",
+          "clean_word": "librarian",
+          "phonemes": "la\u026ab\u0279\u02c8\u025b\u0279i\u0259n",
+          "start": 7.71,
+          "end": 8.23,
+          "duration": 0.52,
+          "frame_ahead_trigger": 7.67
+        },
+        {
+          "word": "dumping",
+          "clean_word": "dumping",
+          "phonemes": "d\u02c8\u028cmp\u026a\u014b",
+          "start": 8.23,
+          "end": 8.59,
+          "duration": 0.36,
+          "frame_ahead_trigger": 8.19
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 8.59,
+          "end": 8.635,
+          "duration": 0.044,
+          "frame_ahead_trigger": 8.55
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 8.635,
+          "end": 9.04,
+          "duration": 0.406,
+          "frame_ahead_trigger": 8.595
+        },
+        {
+          "word": "archive",
+          "clean_word": "archive",
+          "phonemes": "\u02c8\u0251\u02d0\u0279ka\u026av",
+          "start": 9.04,
+          "end": 9.24,
+          "duration": 0.2,
+          "frame_ahead_trigger": 9.0
+        },
+        {
+          "word": "onto",
+          "clean_word": "onto",
+          "phonemes": "\u02c8\u0251\u02d0nt\u028a",
+          "start": 9.24,
+          "end": 9.655,
+          "duration": 0.415,
+          "frame_ahead_trigger": 9.2
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 9.655,
+          "end": 9.774,
+          "duration": 0.119,
+          "frame_ahead_trigger": 9.615
+        },
+        {
+          "word": "desk",
+          "clean_word": "desk",
+          "phonemes": "d\u02c8\u025bsk",
+          "start": 9.774,
+          "end": 9.96,
+          "duration": 0.186,
+          "frame_ahead_trigger": 9.734
+        },
+        {
+          "word": "instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 9.96,
+          "end": 10.38,
+          "duration": 0.42,
+          "frame_ahead_trigger": 9.92
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 10.38,
+          "end": 10.49,
+          "duration": 0.11,
+          "frame_ahead_trigger": 10.34
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 10.49,
+          "end": 10.534,
+          "duration": 0.043,
+          "frame_ahead_trigger": 10.45
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 10.534,
+          "end": 10.78,
+          "duration": 0.247,
+          "frame_ahead_trigger": 10.494
+        },
+        {
+          "word": "specific",
+          "clean_word": "specific",
+          "phonemes": "sp\u0259s\u02c8\u026af\u026ak",
+          "start": 10.78,
+          "end": 11.18,
+          "duration": 0.4,
+          "frame_ahead_trigger": 10.74
+        },
+        {
+          "word": "book",
+          "clean_word": "book",
+          "phonemes": "b\u02c8\u028ak",
+          "start": 11.18,
+          "end": 11.38,
+          "duration": 0.2,
+          "frame_ahead_trigger": 11.14
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 11.38,
+          "end": 11.55,
+          "duration": 0.17,
+          "frame_ahead_trigger": 11.34
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 11.55,
+          "end": 11.958,
+          "duration": 0.408,
+          "frame_ahead_trigger": 11.51
+        },
+        {
+          "word": "need.",
+          "clean_word": "need",
+          "phonemes": "n\u02c8i\u02d0d",
+          "start": 11.958,
+          "end": 12.195,
+          "duration": 0.237,
+          "frame_ahead_trigger": 11.918
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter CacheBack: the receiver sends a tiny request mask, forcing the sender to filter its KV cache before transmission begins.",
+      "visual_focus": "A geometric filter narrowing a stream of light particles into a precise, high-density beam.",
+      "highlight_words": {
+        "CacheBack": "#10B981",
+        "filter": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "CacheBack",
+        "action_verb": "filters",
+        "direct_object": "KV cache",
+        "anchor_word": "precision",
+        "semantic_role": "mechanism_reveal"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "RECEIVER-CONDITION ARCHITECTURE",
+        "sub": "A geometric filter narrowing a stream of light particles into a p",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.png",
+          "arxiv_id": "2609.32046",
+          "title": "RECEIVER-CONDITION ARCHITECTURE",
+          "sub": "A geometric filter narrowing a stream of light particles into a p",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.png",
+        "arxiv_id": "2609.32046",
+        "title": "RECEIVER-CONDITION ARCHITECTURE",
+        "sub": "A geometric filter narrowing a stream of light particles into a p",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 6.69,
+      "slot_duration": 6.99,
+      "start": 12.86,
+      "end": 19.55,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 12.885,
+          "end": 13.14,
+          "duration": 0.255,
+          "frame_ahead_trigger": 12.845
+        },
+        {
+          "word": "CacheBack:",
+          "clean_word": "cacheback",
+          "phonemes": "k\u02c8\u00e6\u0283 b\u02c8\u00e6k",
+          "start": 13.14,
+          "end": 13.65,
+          "duration": 0.51,
+          "frame_ahead_trigger": 13.1
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 13.65,
+          "end": 13.76,
+          "duration": 0.109,
+          "frame_ahead_trigger": 13.61
+        },
+        {
+          "word": "receiver",
+          "clean_word": "receiver",
+          "phonemes": "\u0279\u1d7bs\u02c8i\u02d0v\u025a",
+          "start": 13.76,
+          "end": 14.2,
+          "duration": 0.44,
+          "frame_ahead_trigger": 13.72
+        },
+        {
+          "word": "sends",
+          "clean_word": "sends",
+          "phonemes": "s\u02c8\u025bndz",
+          "start": 14.2,
+          "end": 14.56,
+          "duration": 0.36,
+          "frame_ahead_trigger": 14.16
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 14.56,
+          "end": 14.64,
+          "duration": 0.08,
+          "frame_ahead_trigger": 14.52
+        },
+        {
+          "word": "tiny",
+          "clean_word": "tiny",
+          "phonemes": "t\u02c8a\u026ani",
+          "start": 14.64,
+          "end": 15.09,
+          "duration": 0.45,
+          "frame_ahead_trigger": 14.6
+        },
+        {
+          "word": "request",
+          "clean_word": "request",
+          "phonemes": "\u0279\u1d7bkw\u02c8\u025bst",
+          "start": 15.09,
+          "end": 15.48,
+          "duration": 0.39,
+          "frame_ahead_trigger": 15.05
+        },
+        {
+          "word": "mask,",
+          "clean_word": "mask",
+          "phonemes": "m\u02c8\u00e6sk",
+          "start": 15.48,
+          "end": 15.785,
+          "duration": 0.305,
+          "frame_ahead_trigger": 15.44
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 15.785,
+          "end": 16.06,
+          "duration": 0.275,
+          "frame_ahead_trigger": 15.745
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.06,
+          "end": 16.31,
+          "duration": 0.25,
+          "frame_ahead_trigger": 16.02
+        },
+        {
+          "word": "sender",
+          "clean_word": "sender",
+          "phonemes": "s\u02c8\u025bnd\u025a",
+          "start": 16.31,
+          "end": 16.565,
+          "duration": 0.255,
+          "frame_ahead_trigger": 16.27
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 16.565,
+          "end": 16.705,
+          "duration": 0.14,
+          "frame_ahead_trigger": 16.525
+        },
+        {
+          "word": "filter",
+          "clean_word": "filter",
+          "phonemes": "f\u02c8\u026alt\u025a",
+          "start": 16.705,
+          "end": 17.08,
+          "duration": 0.375,
+          "frame_ahead_trigger": 16.665
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 17.08,
+          "end": 17.22,
+          "duration": 0.14,
+          "frame_ahead_trigger": 17.04
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 17.22,
+          "end": 17.605,
+          "duration": 0.385,
+          "frame_ahead_trigger": 17.18
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 17.605,
+          "end": 17.99,
+          "duration": 0.385,
+          "frame_ahead_trigger": 17.565
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 17.99,
+          "end": 18.33,
+          "duration": 0.34,
+          "frame_ahead_trigger": 17.95
+        },
+        {
+          "word": "transmission",
+          "clean_word": "transmission",
+          "phonemes": "t\u0279\u00e6nsm\u02c8\u026a\u0283\u0259n",
+          "start": 18.33,
+          "end": 18.89,
+          "duration": 0.56,
+          "frame_ahead_trigger": 18.29
+        },
+        {
+          "word": "begins.",
+          "clean_word": "begins",
+          "phonemes": "b\u026a\u0261\u02c8\u026anz",
+          "start": 18.89,
+          "end": 19.28,
+          "duration": 0.39,
+          "frame_ahead_trigger": 18.85
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The kernel uses attention weights to mask the sender's keys, discarding 75% of useless state without a single training step.",
+      "visual_focus": "Code snippet highlighting the `receiver_attn > threshold` operation against a matrix multiplication grid.",
+      "highlight_words": {
+        "attention weights": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Kernel",
+        "action_verb": "masks",
+        "direct_object": "sender keys",
+        "anchor_word": "efficiency",
+        "semantic_role": "technical_implementation"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: RECEIVER-CONDITION",
+        "sub": "Code snippet highlighting the `receiver_attn > threshold` operati",
+        "params": {
+          "title": "KERNEL CODE: RECEIVER-CONDITION",
+          "sub": "Code snippet highlighting the `receiver_attn > threshold` operati",
+          "filename": "cacheback_kernel.py",
+          "language": "python",
+          "lines": [
+            "def get_receiver_mask(receiver_attn, sender_keys):",
+            "    mask = (receiver_attn > threshold).float()",
+            "    return sender_keys * mask",
+            " # Apply receiver-side latent gating"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 DYNAMIC LATENT FILTERING",
+          "delta_badge": "Receiver weights determine cache transmission"
+        }
+      },
+      "thriller_role": "technical_secret_sauce",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: RECEIVER-CONDITION",
+        "sub": "Code snippet highlighting the `receiver_attn > threshold` operati",
+        "filename": "cacheback_kernel.py",
+        "language": "python",
+        "lines": [
+          "def get_receiver_mask(receiver_attn, sender_keys):",
+          "    mask = (receiver_attn > threshold).float()",
+          "    return sender_keys * mask",
+          " # Apply receiver-side latent gating"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 DYNAMIC LATENT FILTERING",
+        "delta_badge": "Receiver weights determine cache transmission"
+      },
+      "audio_duration": 7.2,
+      "slot_duration": 7.5,
+      "start": 19.85,
+      "end": 27.05,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 19.913,
+          "end": 20.008,
+          "duration": 0.095,
+          "frame_ahead_trigger": 19.873
+        },
+        {
+          "word": "kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 20.008,
+          "end": 20.483,
+          "duration": 0.475,
+          "frame_ahead_trigger": 19.968
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 20.483,
+          "end": 20.718,
+          "duration": 0.235,
+          "frame_ahead_trigger": 20.443
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 20.718,
+          "end": 21.288,
+          "duration": 0.57,
+          "frame_ahead_trigger": 20.678
+        },
+        {
+          "word": "weights",
+          "clean_word": "weights",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 21.288,
+          "end": 21.566,
+          "duration": 0.279,
+          "frame_ahead_trigger": 21.248
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 21.566,
+          "end": 21.768,
+          "duration": 0.201,
+          "frame_ahead_trigger": 21.526
+        },
+        {
+          "word": "mask",
+          "clean_word": "mask",
+          "phonemes": "m\u02c8\u00e6sk",
+          "start": 21.768,
+          "end": 22.083,
+          "duration": 0.315,
+          "frame_ahead_trigger": 21.728
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.083,
+          "end": 22.117,
+          "duration": 0.035,
+          "frame_ahead_trigger": 22.043
+        },
+        {
+          "word": "sender's",
+          "clean_word": "senders",
+          "phonemes": "s\u02c8\u025bnd\u025az",
+          "start": 22.117,
+          "end": 22.573,
+          "duration": 0.455,
+          "frame_ahead_trigger": 22.077
+        },
+        {
+          "word": "keys,",
+          "clean_word": "keys",
+          "phonemes": "k\u02c8i\u02d0z",
+          "start": 22.573,
+          "end": 22.779,
+          "duration": 0.206,
+          "frame_ahead_trigger": 22.533
+        },
+        {
+          "word": "discarding",
+          "clean_word": "discarding",
+          "phonemes": "d\u026ask\u02c8\u0251\u02d0\u0279d\u026a\u014b",
+          "start": 22.779,
+          "end": 23.358,
+          "duration": 0.579,
+          "frame_ahead_trigger": 22.739
+        },
+        {
+          "word": "75%",
+          "clean_word": "75",
+          "phonemes": "s\u02c8\u025bv\u0259nti f\u02c8a\u026av",
+          "start": 23.358,
+          "end": 24.138,
+          "duration": 0.78,
+          "frame_ahead_trigger": 23.318
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 24.138,
+          "end": 24.243,
+          "duration": 0.105,
+          "frame_ahead_trigger": 24.098
+        },
+        {
+          "word": "useless",
+          "clean_word": "useless",
+          "phonemes": "j\u02c8u\u02d0sl\u0259s",
+          "start": 24.243,
+          "end": 24.698,
+          "duration": 0.455,
+          "frame_ahead_trigger": 24.203
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 24.698,
+          "end": 25.039,
+          "duration": 0.341,
+          "frame_ahead_trigger": 24.658
+        },
+        {
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 25.039,
+          "end": 25.448,
+          "duration": 0.409,
+          "frame_ahead_trigger": 24.999
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.448,
+          "end": 25.593,
+          "duration": 0.145,
+          "frame_ahead_trigger": 25.408
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 25.593,
+          "end": 25.928,
+          "duration": 0.335,
+          "frame_ahead_trigger": 25.553
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "t\u0279\u02c8e\u026an\u026a\u014b",
+          "start": 25.928,
+          "end": 26.448,
+          "duration": 0.52,
+          "frame_ahead_trigger": 25.888
+        },
+        {
+          "word": "step.",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 26.448,
+          "end": 26.693,
+          "duration": 0.245,
+          "frame_ahead_trigger": 26.408
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 3.2x faster task completion and a 14.7% accuracy jump on FanOutQA. Pure, unadulterated hardware efficiency.",
+      "visual_focus": "A bar chart showing CacheBack soaring past the baseline text communication benchmark.",
+      "highlight_words": {
+        "3.2x faster": "#10B981"
+      },
+      "svo_action": {
+        "subject": "CacheBack",
+        "action_verb": "outperforms",
+        "direct_object": "text communication",
+        "anchor_word": "benchmark",
+        "semantic_role": "empirical_victory"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "AGENT LATENCY SHOWDOWN",
+        "sub": "Task Completion Time (x Faster)",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "Text Baseline",
+          "col_a_stat": "1x Speed",
+          "col_b_title": "CacheBack",
+          "col_b_stat": "3.2x Speed"
+        }
+      },
+      "thriller_role": "empirical_payoff",
+      "act": 4,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "AGENT LATENCY SHOWDOWN",
+        "sub": "Task Completion Time (x Faster)",
+        "accent_color": "#34D399",
+        "col_a_title": "Text Baseline",
+        "col_a_stat": "1x Speed",
+        "col_b_title": "CacheBack",
+        "col_b_stat": "3.2x Speed"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.68,
+      "slot_duration": 8.98,
+      "start": 27.35,
+      "end": 36.03,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 27.416,
+          "end": 27.611,
+          "duration": 0.195,
+          "frame_ahead_trigger": 27.376
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 27.611,
+          "end": 27.926,
+          "duration": 0.315,
+          "frame_ahead_trigger": 27.571
+        },
+        {
+          "word": "3.2x",
+          "clean_word": "32x",
+          "phonemes": "\u03b8\u02c8\u025c\u02d0\u027ei t\u02c8u\u02d0 \u02c8\u025bks",
+          "start": 27.926,
+          "end": 28.806,
+          "duration": 0.88,
+          "frame_ahead_trigger": 27.886
+        },
+        {
+          "word": "faster",
+          "clean_word": "faster",
+          "phonemes": "f\u02c8\u00e6st\u025a",
+          "start": 28.806,
+          "end": 29.016,
+          "duration": 0.21,
+          "frame_ahead_trigger": 28.766
+        },
+        {
+          "word": "task",
+          "clean_word": "task",
+          "phonemes": "t\u02c8\u00e6sk",
+          "start": 29.016,
+          "end": 29.391,
+          "duration": 0.375,
+          "frame_ahead_trigger": 28.976
+        },
+        {
+          "word": "completion",
+          "clean_word": "completion",
+          "phonemes": "k\u0259mpl\u02c8i\u02d0\u0283\u0259n",
+          "start": 29.391,
+          "end": 29.931,
+          "duration": 0.54,
+          "frame_ahead_trigger": 29.351
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 29.931,
+          "end": 30.077,
+          "duration": 0.146,
+          "frame_ahead_trigger": 29.891
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 30.077,
+          "end": 30.281,
+          "duration": 0.204,
+          "frame_ahead_trigger": 30.037
+        },
+        {
+          "word": "14.7%",
+          "clean_word": "147",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei s\u02c8\u025bv\u0259n",
+          "start": 30.281,
+          "end": 31.576,
+          "duration": 1.295,
+          "frame_ahead_trigger": 30.241
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 31.576,
+          "end": 32.116,
+          "duration": 0.54,
+          "frame_ahead_trigger": 31.536
+        },
+        {
+          "word": "jump",
+          "clean_word": "jump",
+          "phonemes": "d\u0292\u02c8\u028cmp",
+          "start": 32.116,
+          "end": 32.556,
+          "duration": 0.44,
+          "frame_ahead_trigger": 32.076
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 32.556,
+          "end": 32.632,
+          "duration": 0.076,
+          "frame_ahead_trigger": 32.516
+        },
+        {
+          "word": "FanOutQA.",
+          "clean_word": "fanoutqa",
+          "phonemes": "f\u02c8\u00e6n \u02c8a\u028at kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 32.632,
+          "end": 33.471,
+          "duration": 0.839,
+          "frame_ahead_trigger": 32.592
+        },
+        {
+          "word": "Pure,",
+          "clean_word": "pure",
+          "phonemes": "pj\u02c8\u028a\u0279",
+          "start": 33.471,
+          "end": 33.876,
+          "duration": 0.405,
+          "frame_ahead_trigger": 33.431
+        },
+        {
+          "word": "unadulterated",
+          "clean_word": "unadulterated",
+          "phonemes": "\u028cn\u0250d\u02c8\u028clt\u025a\u0279\u02cce\u026a\u027e\u1d7bd",
+          "start": 33.876,
+          "end": 34.721,
+          "duration": 0.845,
+          "frame_ahead_trigger": 33.836
+        },
+        {
+          "word": "hardware",
+          "clean_word": "hardware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279",
+          "start": 34.721,
+          "end": 35.246,
+          "duration": 0.525,
+          "frame_ahead_trigger": 34.681
+        },
+        {
+          "word": "efficiency.",
+          "clean_word": "efficiency",
+          "phonemes": "\u026af\u02c8\u026a\u0283\u0259nsi",
+          "start": 35.246,
+          "end": 35.666,
+          "duration": 0.42,
+          "frame_ahead_trigger": 35.206
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into the hardware-software stack that actually powers the future of AI.",
+      "visual_focus": "A fast-paced montage of GPU clusters and neural network layers zooming into a single token.",
+      "highlight_words": {
+        "The Model Verse": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "future",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE MODEL VERSE",
+        "sub": "Engineering the future of AI",
+        "accent_color": "#34D399",
+        "params": {
+          "bottom_layer": "Transformers",
+          "mid_layer": "State-Space Models",
+          "top_layer": "Receiver-Conditioned Latents"
+        }
+      },
+      "thriller_role": "open_loop_outro",
+      "act": 4,
+      "audio_duration": 5.53,
+      "slot_duration": 6.03,
+      "start": 36.33,
+      "end": 41.86,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 36.405,
+          "end": 36.635,
+          "duration": 0.23,
+          "frame_ahead_trigger": 36.365
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 36.635,
+          "end": 36.895,
+          "duration": 0.26,
+          "frame_ahead_trigger": 36.595
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 36.895,
+          "end": 37.26,
+          "duration": 0.365,
+          "frame_ahead_trigger": 36.855
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 37.26,
+          "end": 37.385,
+          "duration": 0.125,
+          "frame_ahead_trigger": 37.22
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 37.385,
+          "end": 37.68,
+          "duration": 0.295,
+          "frame_ahead_trigger": 37.345
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 37.68,
+          "end": 37.86,
+          "duration": 0.18,
+          "frame_ahead_trigger": 37.64
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 37.86,
+          "end": 38.35,
+          "duration": 0.49,
+          "frame_ahead_trigger": 37.82
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 38.35,
+          "end": 38.55,
+          "duration": 0.2,
+          "frame_ahead_trigger": 38.31
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.55,
+          "end": 38.74,
+          "duration": 0.19,
+          "frame_ahead_trigger": 38.51
+        },
+        {
+          "word": "hardware-software",
+          "clean_word": "hardwaresoftware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279s\u02cc\u0254ftw\u025b\u0279",
+          "start": 38.74,
+          "end": 39.415,
+          "duration": 0.675,
+          "frame_ahead_trigger": 38.7
+        },
+        {
+          "word": "stack",
+          "clean_word": "stack",
+          "phonemes": "st\u02c8\u00e6k",
+          "start": 39.415,
+          "end": 39.735,
+          "duration": 0.32,
+          "frame_ahead_trigger": 39.375
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 39.735,
+          "end": 39.915,
+          "duration": 0.18,
+          "frame_ahead_trigger": 39.695
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 39.915,
+          "end": 40.408,
+          "duration": 0.493,
+          "frame_ahead_trigger": 39.875
+        },
+        {
+          "word": "powers",
+          "clean_word": "powers",
+          "phonemes": "p\u02c8a\u028a\u025az",
+          "start": 40.408,
+          "end": 40.71,
+          "duration": 0.302,
+          "frame_ahead_trigger": 40.368
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.71,
+          "end": 40.793,
+          "duration": 0.083,
+          "frame_ahead_trigger": 40.67
+        },
+        {
+          "word": "future",
+          "clean_word": "future",
+          "phonemes": "fj\u02c8u\u02d0t\u0283\u025a",
+          "start": 40.793,
+          "end": 41.115,
+          "duration": 0.322,
+          "frame_ahead_trigger": 40.753
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 41.115,
+          "end": 41.315,
+          "duration": 0.2,
+          "frame_ahead_trigger": 41.075
+        },
+        {
+          "word": "AI.",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 41.315,
+          "end": 41.565,
+          "duration": 0.25,
+          "frame_ahead_trigger": 41.275
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$C_{\\mathrm{total}} = \\sum_{i=1}^n \\mathrm{KV}_i > \\mathrm{VRAM}_{\\mathrm{limit}}$",
+      "filename": "receiver_conditioned_cacheback_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "KV_i",
+          "label": "Agent i cache"
+        },
+        {
+          "term": "VRAM_{limit}",
+          "label": "GPU ceiling"
+        }
+      ],
+      "svg_filename": "receiver_conditioned_cacheback_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N_s \\times A_r) \\xrightarrow{\\text{cost}} \\infty$",
+      "filename": "receiver_conditioned_cacheback_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "N_s",
+          "label": "Context length"
+        },
+        {
+          "term": "A_r",
+          "label": "Receiving agents"
+        }
+      ],
+      "svg_filename": "receiver_conditioned_cacheback_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\tilde{K} = \\mathrm{Mask}(A_r, K_s) \\odot K_s$",
+      "filename": "receiver_conditioned_cacheback_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "A_r",
+          "label": "Receiver weights"
+        },
+        {
+          "term": "K_s",
+          "label": "Sender keys"
+        }
+      ],
+      "svg_filename": "receiver_conditioned_cacheback_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$g = \\sigma(W_q Q_r K_s^T) > \\tau$",
+      "filename": "receiver_conditioned_cacheback_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "g",
+          "label": "Gating function"
+        },
+        {
+          "term": "\\tau",
+          "label": "Threshold"
+        }
+      ],
+      "svg_filename": "receiver_conditioned_cacheback_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\mathrm{Latency} = \\frac{T_{\\text{text}}}{T_{\\text{CacheBack}}} \\approx 3.2$",
+      "filename": "receiver_conditioned_cacheback_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "T",
+          "label": "Task duration"
+        }
+      ],
+      "svg_filename": "receiver_conditioned_cacheback_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "TEXT_BASE",
+          "color": "#EF4444",
+          "items": [
+            "JSON",
+            "String",
+            "Decoding"
+          ]
+        },
+        {
+          "name": "LATENT_SPACE",
+          "color": "#34D399",
+          "items": [
+            "Attention",
+            "Keys",
+            "Values"
+          ]
+        },
+        {
+          "name": "GATE_LOGIC",
+          "color": "#F59E0B",
+          "items": [
+            "Threshold",
+            "Masking",
+            "Filter"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Context\"",
+        "target_cluster": "LATENT_SPACE",
+        "token": "\"Context\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'redundant'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'full_cache'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "CacheBack Agents",
+    "model_a_specs": [
+      "Training-free",
+      "Attention-Gated",
+      "94% Cache Reduction"
+    ],
+    "model_b": "Text Communication",
+    "model_b_specs": [
+      "KV Cache Linear Growth",
+      "High Latency",
+      "O(N) Complexity"
+    ],
+    "divide_title": "LATENT VS TEXTUAL COMMUNICATION",
+    "model_a_stat": "3.2x",
+    "model_a_stat_label": "LATENCY SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE LATENCY",
+    "efficiency_badge": "\u26a1 94% CACHEBACK",
+    "benchmarks": [
+      {
+        "name": "Task Completion",
+        "score_a": "3.2x",
+        "score_b": "1x"
+      },
+      {
+        "name": "State Reduction",
+        "score_a": "75%",
+        "score_b": "0%"
+      },
+      {
+        "name": "Accuracy",
+        "score_a": "+14.7pt",
+        "score_b": "Base"
+      }
+    ],
+    "scale_metric": "94%",
+    "scale_label": "CACHEBACK REDUCTION",
+    "bottleneck_title": "MONOLITHIC KV BOTTLENECK",
+    "bottleneck_desc": "Redundant linear cache overhead",
+    "solution_title": "RECEIVER-CONDITIONED FILTER",
+    "solution_components": "Attention-Gated Latent Masking",
+    "mechanism_title": "TRAINING-FREE ACTIVATION GATE",
+    "payoff_stat": "94%",
+    "payoff_label": "MEMORY RECOVERY",
+    "payoff_sub": "Near-instant multi-agent consensus",
+    "payoff_hero_stat": 94.0,
+    "payoff_hero_label": "Cache Recovery",
+    "payoff_base_stat": 0.0,
+    "payoff_base_label": "Standard KV Cache",
+    "payoff_delta_badge": "\u26a1 +3.2X TASK SPEEDUP",
+    "challenger": "CacheBack",
+    "incumbent": "Text Communication"
+  },
+  "benchmark_comparison": {
+    "title": "AGENT LATENCY SHOWDOWN",
+    "metric_name": "Task Completion Time (x Faster)",
+    "unit": "x Speedup",
+    "contestants": [
+      {
+        "name": "CacheBack",
+        "value": 3.2,
+        "display_val": "3.2x",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "Baseline Text",
+        "value": 1.0,
+        "display_val": "1.0x",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +220% EFFICIENCY GAIN",
+    "radar_axes": [
+      "Latency",
+      "Memory Efficiency",
+      "Task Accuracy",
+      "Communication Overhead",
+      "Context Window"
+    ]
+  },
+  "code_snippet": {
+    "filename": "cacheback_kernel.py",
+    "language": "python",
+    "lines": [
+      "def get_receiver_mask(receiver_attn, sender_keys):",
+      "    mask = (receiver_attn > threshold).float()",
+      "    return sender_keys * mask",
+      " # Apply receiver-side latent gating"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 DYNAMIC LATENT FILTERING",
+    "explanation": "Receiver weights determine cache transmission"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "Finally, a tech video that doesn't treat me like a toddler. The hook was aggressive and hit a real pain point\u2014everyone knows KV cache bloat is killing multi-agent performance right now. The librarian analogy in Beat 2 was actually useful because it framed the problem without being cringe or 'safe-drawer' level patronizing. I understood exactly how the mask works in Beat 4 without needing a PhD in architecture."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "acts": {
+      "act_1_hook": {
+        "beat": 1,
+        "role": "pattern_interrupt_hook"
+      },
+      "act_2_villain": {
+        "beat": 2,
+        "role": "villain_bottleneck",
+        "analogy": "chef waiting for salt"
+      },
+      "act_3_eureka": {
+        "beats": [
+          3,
+          4
+        ],
+        "role": "eureka_mechanism"
+      },
+      "act_4_paradigm_shift": {
+        "beats": [
+          5,
+          6
+        ],
+        "role": "paradigm_shift_open_loop"
+      }
+    }
+  },
+  "entity_registry": [
+    {
+      "entity_id": "sae_constellation",
+      "entity_type": "sae_constellation",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "arxiv_id": "2609.32046",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "cacheback-overview",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/source/plots/cacheback-overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_1_cacheback-overview.png",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "communication-overview",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/source/plots/communication-overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_2_communication-overview.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_2_communication-overview.png",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "request-frontiers-recall-text8b-log-x-no-question-only-compact",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/source/request-frontiers-recall-text8b-log-x-no-question-only-compact.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_3_request-frontiers-recall-text8b-log-x-no-question-only-compact.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.32046/chalkboard_figures/fig_3_request-frontiers-recall-text8b-log-x-no-question-only-compact.png",
+      "type": "vector_pdf",
+      "score": 135
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "saas_text_box": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual_node": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.86,
+        "scale_multiplier": 1.0
+      },
+      "hero_node": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.15
+      },
+      "ui_text_box": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 0.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.7,
+        "scale_multiplier": 1.15
+      },
+      "saas_ui_card": {
+        "dx": 0.0,
+        "dy": 0.8,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 0.803
+      },
+      "benchmark_chart": {
+        "dx": 0.76,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "block_diagram": {
+        "dx": -0.598,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 3.856,
+        "scale_multiplier": 1.0
+      }
+    },
+    "4": {
+      "saas_button_violator": {
+        "dx": 0.0,
+        "dy": 0.448,
+        "scale_multiplier": 1.0
+      },
+      "matrix_grid": {
+        "dx": 0.0,
+        "dy": -0.2,
+        "scale_multiplier": 1.1
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 4.79,
+        "scale_multiplier": 1.05
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.75,
+        "scale_multiplier": 1.05
+      },
+      "distracting_card": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {},
+    "6": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.15
+      }
+    }
+  }
+}
