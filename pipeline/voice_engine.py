@@ -35,7 +35,7 @@ import requests
 
 from pipeline.config import (
     SAMPLE_RATE, PUBLIC_DIR, TTS_CACHE_DIR, DEFAULT_SPEED,
-    KOKORO_MODEL_PATH, KOKORO_VOICES_PATH, DEFAULT_VOICE,
+    KOKORO_MODEL_PATH, KOKORO_VOICES_PATH, DEFAULT_VOICE, DEFAULT_KOKORO_VOICE,
     ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_VOICES,
     SARVAM_API_KEY, SARVAM_SPEAKER, SARVAM_MODEL, SARVAM_SPEAKERS,
     DEFAULT_TTS_PROVIDER
@@ -390,6 +390,27 @@ class KokoroVoiceProvider(BaseVoiceProvider):
     Acts as a resilient fallback when online services are unavailable.
     """
 
+    # Mapping common friendly names / ElevenLabs voices to valid Kokoro voice IDs
+    VOICE_MAP: Dict[str, str] = {
+        "eric": "am_eric",
+        "adam": "am_adam",
+        "alice": "bf_alice",
+        "bella": "af_bella",
+        "daniel": "bm_daniel",
+        "george": "bm_george",
+        "jessica": "af_jessica",
+        "liam": "am_liam",
+        "lily": "bf_lily",
+        "michael": "am_michael",
+        "nicole": "af_nicole",
+        "nova": "af_nova",
+        "river": "af_river",
+        "sarah": "af_sarah",
+        "sky": "af_sky",
+        "emma": "bf_emma",
+        "isabella": "bf_isabella",
+    }
+
     def __init__(self):
         self._kokoro = None
 
@@ -401,6 +422,38 @@ class KokoroVoiceProvider(BaseVoiceProvider):
             self._kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
         return self._kokoro
 
+    def resolve_voice(self, voice_name: Optional[str]) -> str:
+        """Resolves any voice name or ElevenLabs alias to a guaranteed valid Kokoro voice ID."""
+        kokoro = self._ensure_model()
+        available_voices = set(kokoro.get_voices())
+
+        if not voice_name:
+            if DEFAULT_KOKORO_VOICE in available_voices:
+                return DEFAULT_KOKORO_VOICE
+            return "am_eric" if "am_eric" in available_voices else (list(available_voices)[0] if available_voices else "am_adam")
+
+        clean = voice_name.lower().strip()
+        # Direct match in Kokoro
+        if clean in available_voices:
+            return clean
+
+        # Map through alias dictionary
+        mapped = self.VOICE_MAP.get(clean)
+        if mapped and mapped in available_voices:
+            return mapped
+
+        # Try prefix matching (e.g. "eric" -> "am_eric" or "af_eric")
+        for prefix in ("am_", "af_", "bm_", "bf_"):
+            prefixed = f"{prefix}{clean}"
+            if prefixed in available_voices:
+                return prefixed
+
+        # If DEFAULT_KOKORO_VOICE is valid
+        if DEFAULT_KOKORO_VOICE in available_voices:
+            return DEFAULT_KOKORO_VOICE
+
+        return "am_eric" if "am_eric" in available_voices else list(available_voices)[0]
+
     def synthesize(
         self,
         text: str,
@@ -409,7 +462,7 @@ class KokoroVoiceProvider(BaseVoiceProvider):
         language: str = "en"
     ) -> Tuple[np.ndarray, int, Dict[str, Any]]:
         kokoro = self._ensure_model()
-        v = voice or DEFAULT_VOICE
+        v = self.resolve_voice(voice)
         s = float(speed) if speed is not None else DEFAULT_SPEED
         lang = "en-us" if language.lower().startswith("en") else "hi"
 
@@ -526,8 +579,8 @@ class UnifiedVoiceRouter:
                 f"⚠️ [Voice Router] Provider '{target_provider}' encountered error: {exc}. "
                 f"Falling back transparently to Kokoro ONNX offline speech synthesis!"
             )
-            # Seamless fallback to Kokoro
-            fallback_voice = DEFAULT_VOICE
+            # Seamless fallback to Kokoro with automatic voice name resolution
+            fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
             audio, sr, meta = self.kokoro.synthesize(
                 text=clean_text,
                 voice=fallback_voice,
