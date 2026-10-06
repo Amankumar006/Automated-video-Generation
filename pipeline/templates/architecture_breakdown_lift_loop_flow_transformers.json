@@ -3,112 +3,106 @@
   "title": "LiFT: Loop Flow Transformers",
   "category": "architecture_breakdown",
   "domain_taxonomy": "neural_attention",
-  "hook_tag": "ARCHITECTURE BREAKDOWN",
+  "hook_tag": "LOOP FLOW TRANSFORMERS",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Your diffusion model is wasting 52% of its compute because it tries to finish the masterpiece in one single, massive forward pass.",
-      "visual_focus": "A massive, static neural block shattering under its own weight.",
+      "text": "Your current Diffusion Transformer is fundamentally broken: it wastes massive parameter counts just to reach a single, static image output.",
+      "visual_focus": "A massive, static neural network block collapsing under its own weight.",
       "highlight_words": {
-        "wasting 52%": "#EF4444"
+        "fundamentally broken": "#EF4444"
       },
       "svo_action": {
-        "subject": "Diffusion model",
+        "subject": "Diffusion Transformer",
         "action_verb": "wastes",
-        "direct_object": "compute",
-        "anchor_word": "wasting",
+        "direct_object": "parameter counts",
+        "anchor_word": "wastes",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "comparison_side_by_side",
-        "title": "THE COMPUTE PARADOX",
-        "sub": "Single-pass inefficiency vs. iterative refinement",
+        "layout": "layer_stack",
+        "title": "THE PARAMETER TRAP",
+        "sub": "Static depth limits scaling",
         "accent_color": "#EF4444",
-        "params": {
-          "col_a_title": "Standard DiT",
-          "col_a_stat": "50% Waste",
-          "col_b_title": "LiFT Strategy",
-          "col_b_stat": "0% Waste"
-        }
+        "params": {}
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "comparison_side_by_side",
-        "title": "THE COMPUTE PARADOX",
-        "sub": "Single-pass inefficiency vs. iterative refinement",
-        "accent_color": "#EF4444",
-        "col_a_title": "Standard DiT",
-        "col_a_stat": "50% Waste",
-        "col_b_title": "LiFT Strategy",
-        "col_b_stat": "0% Waste"
+        "layout": "layer_stack",
+        "title": "THE PARAMETER TRAP",
+        "sub": "Static depth limits scaling",
+        "accent_color": "#EF4444"
       },
       "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 2,
       "text": "Why? Because LLMs generate code one single token at a time\u2014like a world-class chef who stops to ask you for salt before chopping every onion.",
-      "visual_focus": "A bloated, oversized weight matrix struggling to move through a narrow data pipe.",
+      "visual_focus": "A long, redundant assembly line of identical model layers.",
       "highlight_words": {
         "one single token": "#F59E0B",
         "stops to ask": "#EF4444"
       },
       "svo_action": {
-        "subject": "Parameter bloat",
-        "action_verb": "chokes",
-        "direct_object": "inference",
-        "anchor_word": "bloat",
-        "semantic_role": "bottleneck"
+        "subject": "Fixed-depth architecture",
+        "action_verb": "forces",
+        "direct_object": "redundant computation",
+        "anchor_word": "assembly line",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "optimization_landscape",
-        "title": "THE PARAMETER WALL",
-        "sub": "Memory bandwidth bottlenecking throughput",
+        "layout": "vector_flow_field",
+        "title": "THE REDUNDANCY BOTTLENECK",
+        "sub": "Linear scaling hits a wall",
         "accent_color": "#EF4444",
         "params": {
-          "landscape_title": "Energy Basin Stagnation",
-          "optima_label": "Target Global Minimum"
+          "field_title": "Redundant Trajectories",
+          "source_label": "Start",
+          "target_label": "End",
+          "stream_formula": "v(t) = constant"
         }
       },
       "thriller_role": "villain_bottleneck",
       "act": 2,
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "optimization_landscape",
-        "title": "THE PARAMETER WALL",
-        "sub": "Memory bandwidth bottlenecking throughput",
+        "layout": "vector_flow_field",
+        "title": "THE REDUNDANCY BOTTLENECK",
+        "sub": "Linear scaling hits a wall",
         "accent_color": "#EF4444",
-        "landscape_title": "Energy Basin Stagnation",
-        "optima_label": "Target Global Minimum"
+        "field_title": "Redundant Trajectories",
+        "source_label": "Start",
+        "target_label": "End",
+        "stream_formula": "v(t) = constant"
       },
       "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 3,
-      "text": "Enter LiFT: Loop Flow Transformers. It replaces static layers with a shared DiT core that loops, refining the image along a continuous depth coordinate.",
-      "visual_focus": "A single DiT block spinning in a loop, with a vector path tracing a straight line toward the target image.",
+      "text": "Enter LiFT: Loop Flow Transformers. Instead of fixed layers, it loops a shared DiT core, regressing toward a continuous path of flow-matching targets.",
+      "visual_focus": "A single block looping back into itself, refining a vector field.",
       "highlight_words": {
-        "LiFT": "#10B981",
-        "continuous depth": "#38BDF8"
+        "Loop Flow Transformers": "#10B981"
       },
       "svo_action": {
         "subject": "LiFT",
         "action_verb": "loops",
-        "direct_object": "DiT core",
-        "anchor_word": "loops",
-        "semantic_role": "mechanism_pivot"
+        "direct_object": "shared DiT core",
+        "anchor_word": "continuous path",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "paper_figure",
         "title": "LIFT ARCHITECTURE",
-        "sub": "A single DiT block spinning in a loop, with a vector path tracing",
+        "sub": "A single block looping back into itself, refining a vector field.",
         "params": {
           "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.svg",
           "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.png",
           "arxiv_id": "2610.05538",
           "title": "LIFT ARCHITECTURE",
-          "sub": "A single DiT block spinning in a loop, with a vector path tracing",
+          "sub": "A single block looping back into itself, refining a vector field.",
           "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
         }
       },
@@ -120,74 +114,74 @@
         "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.png",
         "arxiv_id": "2610.05538",
         "title": "LIFT ARCHITECTURE",
-        "sub": "A single DiT block spinning in a loop, with a vector path tracing",
+        "sub": "A single block looping back into itself, refining a vector field.",
         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
       },
       "kinetic_action": "figure_scan"
     },
     {
       "beat_id": 4,
-      "text": "By training on regression targets along a straight path, the model doesn't need retraining to loop deeper; it simply computes until the image converges.",
-      "visual_focus": "A regression line connecting initial noise to the final image, with discrete steps mapping to the continuous coordinate.",
+      "text": "By indexing targets via a continuous depth coordinate, the model iterates far beyond its training depth without needing a single parameter update.",
+      "visual_focus": "A coordinate graph showing the model sliding along a smooth, learned trajectory.",
       "highlight_words": {
-        "regression targets": "#F59E0B"
+        "continuous depth coordinate": "#38BDF8"
       },
       "svo_action": {
-        "subject": "Regression",
-        "action_verb": "maps",
-        "direct_object": "depth",
-        "anchor_word": "regression",
-        "semantic_role": "technical_detail"
+        "subject": "Continuous depth",
+        "action_verb": "enables",
+        "direct_object": "infinite iteration",
+        "anchor_word": "indexing",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "layer_stack",
-        "title": "STRAIGHT-PATH REGRESSION",
-        "sub": "Mapping depth to convergence",
+        "layout": "grid_memory",
+        "title": "THE DEPTH COORDINATE",
+        "sub": "Mapping inference to flow",
         "accent_color": "#38BDF8",
         "params": {
-          "bottom_layer": "T=0",
-          "mid_layer": "T=N",
-          "top_layer": "T=\u221e"
+          "grid_title": "Computation Depth Map",
+          "active_cell_label": "Depth (t)",
+          "efficiency_label": "Shared Parameters"
         }
       },
       "thriller_role": "technical_secret_sauce",
       "act": 3,
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "layer_stack",
-        "title": "STRAIGHT-PATH REGRESSION",
-        "sub": "Mapping depth to convergence",
+        "layout": "grid_memory",
+        "title": "THE DEPTH COORDINATE",
+        "sub": "Mapping inference to flow",
         "accent_color": "#38BDF8",
-        "bottom_layer": "T=0",
-        "mid_layer": "T=N",
-        "top_layer": "T=\u221e"
+        "grid_title": "Computation Depth Map",
+        "active_cell_label": "Depth (t)",
+        "efficiency_label": "Shared Parameters"
       },
       "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 5,
-      "text": "The result? A smaller LiFT-L/2 model beats a massive DiT-XL/2 baseline, slashing inference FLOPs by 52% while dropping FID scores by 3.34 points.",
-      "visual_focus": "A bar chart showing LiFT rising while the XL baseline collapses in cost.",
+      "text": "The result? LiFT-L/2 crushes the dense DiT-XL/2 baseline, slashing inference FLOPs by 52% while actually improving FID scores by 3.34 points.",
+      "visual_focus": "A bar chart showing LiFT lower and faster than the baseline.",
       "highlight_words": {
-        "52% fewer FLOPs": "#10B981"
+        "52% fewer FLOPs": "#F59E0B"
       },
       "svo_action": {
-        "subject": "LiFT-L/2",
-        "action_verb": "outperforms",
-        "direct_object": "DiT-XL/2",
-        "anchor_word": "outperforms",
-        "semantic_role": "benchmark_victory"
+        "subject": "LiFT",
+        "action_verb": "crushes",
+        "direct_object": "dense baselines",
+        "anchor_word": "efficiency",
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "comparison_side_by_side",
         "title": "BENCHMARK DOMINANCE",
-        "sub": "Efficiency vs. Quality",
+        "sub": "Higher quality, lower cost",
         "accent_color": "#34D399",
         "params": {
-          "col_a_title": "Compute Cost",
-          "col_a_stat": "-52% FLOPs",
-          "col_b_title": "Visual Quality",
-          "col_b_stat": "3.34 FID Gain"
+          "col_a_title": "Dense DiT",
+          "col_a_stat": "Baseline",
+          "col_b_title": "LiFT",
+          "col_b_stat": "52% Savings"
         }
       },
       "thriller_role": "empirical_payoff",
@@ -196,36 +190,39 @@
       "motif_params": {
         "layout": "comparison_side_by_side",
         "title": "BENCHMARK DOMINANCE",
-        "sub": "Efficiency vs. Quality",
+        "sub": "Higher quality, lower cost",
         "accent_color": "#34D399",
-        "col_a_title": "Compute Cost",
-        "col_a_stat": "-52% FLOPs",
-        "col_b_title": "Visual Quality",
-        "col_b_stat": "3.34 FID Gain"
+        "col_a_title": "Dense DiT",
+        "col_a_stat": "Baseline",
+        "col_b_title": "LiFT",
+        "col_b_stat": "52% Savings"
       },
       "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 6,
-      "text": "Stop scaling parameters and start scaling depth. Follow The Model Verse for the deep-dive on how we break the compute wall.",
-      "visual_focus": "The Model Verse logo emerging from the recursive loop animation.",
+      "text": "Follow The Model Verse to see how we break the compute-scaling wall for good.",
+      "visual_focus": "A rapid zoom-out of the neural architecture.",
       "highlight_words": {
-        "scaling depth": "#38BDF8"
+        "The Model Verse": "#10B981"
       },
       "svo_action": {
-        "subject": "User",
-        "action_verb": "follows",
-        "direct_object": "The Model Verse",
+        "subject": "The Model Verse",
+        "action_verb": "dismantles",
+        "direct_object": "scaling walls",
         "anchor_word": "scaling",
-        "semantic_role": "call_to_action"
+        "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "convergence_funnel",
         "title": "THE MODEL VERSE",
-        "sub": "Engineering the future",
-        "accent_color": "#38BDF8",
+        "sub": "Deep-dive into AI reality",
+        "accent_color": "#34D399",
         "params": {
-          "loop": true
+          "input_1_label": "Math",
+          "input_2_label": "Code",
+          "input_3_label": "Physics",
+          "fused_label": "Insight"
         }
       },
       "thriller_role": "open_loop_outro",
@@ -235,134 +232,81 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$C_{\\mathrm{total}} = \\sum_{i=1}^{T} \\phi(x_i, \\theta)$",
+      "latex": "$C = N \\times L \\times d^2$",
       "filename": "lift_loop_flow_transformers_beat1_formula.svg",
       "fontsize": 24,
-      "color": "#38BDF8",
+      "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "C_{\\mathrm{total}}",
-          "label": "Total Compute"
-        },
-        {
-          "term": "\\phi",
-          "label": "Diffusion Step"
+          "term": "C",
+          "label": "Compute cost"
         }
       ],
       "svg_filename": "lift_loop_flow_transformers_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\Delta x_t \\approx \\frac{1}{T} (x_{\\mathrm{target}} - x_t)$",
+      "latex": "$\\mathcal{L} = \\| \\phi(x_t, t) - \\hat{x} \\|^2$",
       "filename": "lift_loop_flow_transformers_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "\\Delta x_t",
-          "label": "Step Size"
-        },
-        {
-          "term": "T",
-          "label": "Steps Remaining"
+          "term": "x_t",
+          "label": "Noisy latents"
         }
       ],
       "svg_filename": "lift_loop_flow_transformers_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathbf{h}_{t+1} = \\mathrm{DiT}(\\mathbf{h}_t, \\tau)$",
+      "latex": "$\\theta_{shared} = \\theta_{DiT}$",
       "filename": "lift_loop_flow_transformers_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\tau",
-          "label": "Depth Coordinate"
-        },
-        {
-          "term": "\\mathrm{DiT}",
-          "label": "Shared Core"
+          "term": "theta",
+          "label": "Shared weights"
         }
       ],
       "svg_filename": "lift_loop_flow_transformers_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathcal{L} = \\| \\hat{x} - \\mathrm{path}(\\tau) \\|^2$",
+      "latex": "$y = f(x; t_{depth})$",
       "filename": "lift_loop_flow_transformers_beat4_formula.svg",
       "fontsize": 24,
-      "color": "#F59E0B",
+      "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "\\hat{x}",
-          "label": "Estimate"
-        },
-        {
-          "term": "\\tau",
-          "label": "Continuous Depth"
+          "term": "t_{depth}",
+          "label": "Continuous coordinate"
         }
       ],
       "svg_filename": "lift_loop_flow_transformers_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{FLOPs}_{\\mathrm{LiFT}} = 0.48 \\times \\mathrm{FLOPs}_{\\mathrm{Dense}}$",
+      "latex": "$\\Delta_{FLOPs} = 1 - \\frac{FLOPs_{LiFT}}{FLOPs_{Dense}} = 0.52$",
       "filename": "lift_loop_flow_transformers_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "0.48",
-          "label": "Efficiency Gain"
+          "term": "0.52",
+          "label": "Relative reduction"
         }
       ],
       "svg_filename": "lift_loop_flow_transformers_beat5_formula.svg"
     }
   ],
-  "sfx_cues": [
-    {
-      "timestamp": 0.8,
-      "sound_type": "sub_impact",
-      "volume": 0.45
-    },
-    {
-      "timestamp": 5.2,
-      "sound_type": "whoosh",
-      "volume": 0.35
-    },
-    {
-      "timestamp": 13.5,
-      "sound_type": "whoosh",
-      "volume": 0.35
-    },
-    {
-      "timestamp": 21.5,
-      "sound_type": "sub_impact",
-      "volume": 0.4
-    },
-    {
-      "timestamp": 29.5,
-      "sound_type": "sub_impact",
-      "volume": 0.5
-    },
-    {
-      "timestamp": 37.0,
-      "sound_type": "whoosh",
-      "volume": 0.35
-    },
-    {
-      "timestamp": 38.0,
-      "sound_type": "chime",
-      "volume": 0.4
-    }
-  ],
   "feynman_certification": {
     "converged_turn": 1,
-    "final_comprehension_score": 9.5,
+    "final_comprehension_score": 8.8,
     "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "This actually slapped. You hit me with a hard stat in the first 2 seconds, which is exactly how you keep me from scrolling. I love that you didn't use any 'digital brain' or 'smart assistant' metaphors\u2014you just talked about FLOPs and architecture. It\u2019s rare to see a breakdown that actually explains the 'why' (parameter bloat) before the 'how' (looping the core)."
+    "listener_verdict": "The hook is killer\u2014calling out the inefficiency of current DiTs immediately caught my attention. I actually liked the sculptor analogy; it wasn't patronizing, it just illustrated the 'fixed-depth' problem well. I understood the loop mechanism, but 'continuous depth coordinate' sounds a bit like hand-wavy math jargon. I get that it's iterating, but how does it know when to stop? Is it a learned scalar or just a time-step index?"
   },
   "thriller_metadata": {
     "engine_version": "7.0",
