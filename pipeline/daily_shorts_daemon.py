@@ -332,6 +332,8 @@ class DailyShortsDaemon:
             # Production (Script + Critic + 1440p60 Manim + Thumbnail + YouTube)
             pacing = get_recommended_pacing()
             rec_speed = pacing.get("tts_speed", 1.12)
+            active_prov = os.environ.get("TTS_PROVIDER", "auto")
+            active_voice = os.environ.get("ELEVENLABS_VOICE", "eric")
             try:
                 video_out = auto_produce(
                     arxiv=arxiv_id,
@@ -341,11 +343,13 @@ class DailyShortsDaemon:
                     publish=publish,
                     privacy=self.privacy,
                     paper_meta=top_paper,
-                    provider="elevenlabs",
-                    voice="eric"
+                    provider=active_prov,
+                    voice=active_voice
                 )
             except Exception as prod_err:
                 print(f"⚠️ Production error for {arxiv_id}: {prod_err}")
+                import traceback
+                traceback.print_exc()
                 video_out = None
 
             if video_out:
@@ -480,7 +484,7 @@ def main():
         daemon.start_standing_daemon()
     else:
         # Default to running cycle with specified count
-        daemon.run_daily_cycle(
+        produced = daemon.run_daily_cycle(
             count=args.count,
             dry_run=False,
             publish=True,
@@ -489,6 +493,9 @@ def main():
             preferred_taxonomy=args.preferred_taxonomy,
             source=args.source
         )
+        if not produced:
+            print("❌ Production cycle completed with 0 reels produced. Marking run as failed.")
+            sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -380,3 +380,36 @@ def test_kinetic_sfx_cues_synchronized_transitions():
     beat_2_cues = [c for c in cues if "beat_2" in c["reason"]]
     assert any(c["sound_type"] == "whoosh" and c["timestamp"] == 5.05 for c in beat_2_cues)
 
+
+def test_kokoro_voice_provider_resolve_voice():
+    from pipeline.voice_engine import KokoroVoiceProvider
+    p = KokoroVoiceProvider()
+
+    # Friendly name 'eric' should resolve to 'am_eric'
+    assert p.resolve_voice("eric") == "am_eric"
+    assert p.resolve_voice("adam") == "am_adam"
+    assert p.resolve_voice("bella") == "af_bella"
+    assert p.resolve_voice("alice") == "bf_alice"
+    # Exact Kokoro voice name should remain exact
+    assert p.resolve_voice("am_eric") == "am_eric"
+    # None should resolve to a valid default Kokoro voice
+    assert p.resolve_voice(None) in ("am_eric", "am_adam")
+
+
+def test_unified_voice_router_fallback_maps_eric_to_am_eric(tmp_path):
+    router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
+    # Simulate ElevenLabs quota failure
+    with patch.object(router.elevenlabs, "synthesize", side_effect=VoiceQuotaExceededError("Quota exceeded")):
+        dummy_audio = np.zeros(24000, dtype=np.float32)
+        with patch.object(router.kokoro, "synthesize", return_value=(dummy_audio, 24000, {"provider": "kokoro", "voice": "am_eric"})) as mock_kokoro:
+            audio, sr, meta = router.synthesize_beat(
+                text="Testing fallback from ElevenLabs to Kokoro",
+                voice="eric",
+                provider="elevenlabs"
+            )
+            mock_kokoro.assert_called_once()
+            _, kwargs = mock_kokoro.call_args
+            assert kwargs["voice"] == "am_eric"
+            assert meta["fallback_from"] == "elevenlabs"
+
+

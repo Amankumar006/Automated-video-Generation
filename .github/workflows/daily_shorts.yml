@@ -107,7 +107,7 @@ jobs:
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
           echo "GEMINI_MODEL_NAME=gemini-3.1-flash-lite" >> .env
-          echo "TTS_PROVIDER=elevenlabs" >> .env
+          echo "TTS_PROVIDER=auto" >> .env
           echo "ELEVENLABS_VOICE=eric" >> .env
 
           if [ -n "$ELEVENLABS_API_KEY" ]; then
