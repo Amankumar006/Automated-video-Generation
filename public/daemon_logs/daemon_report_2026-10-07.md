@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-07 | **Timestamp:** 2026-10-07 05:33:03 UTC
+**Date:** 2026-10-07 | **Timestamp:** 2026-10-07 07:29:48 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: TRACE: Rollout-Guided Quantization-Aware Training for FP4 Reinforcement Learning of MoE Language Models
-- **arXiv ID:** [2610.07767](https://arxiv.org/abs/2610.07767)
-- **Domain Taxonomy:** `hardware_efficiency` (1.17x velocity)
+### Reel 1: HLA: Expressive Hybrid Linear Attention via Chunk-Wise Dynamic Mixing
+- **arXiv ID:** [2610.05842](https://arxiv.org/abs/2610.05842)
+- **Domain Taxonomy:** `hardware_efficiency` (1.16x velocity)
 - **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *How can we teach AI to think faster by forgetting the tiny details?*
-- **Everyday Analogy:** *Downscaling a high-resolution 4K photo into a mosaic of bold, primary-colored tiles without losing the shape of the image.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_trace_fp4_rl_moe_mechanism_deepdive.mp4`
+- **Editorial Hook:** *What if your AI's memory could expand and contract like a breathing lung to process infinite data?*
+- **Everyday Analogy:** *A library archive that automatically compresses old books into tiny, high-density microfilm when the shelves get full.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_hla_hybrid_linear_attention_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
