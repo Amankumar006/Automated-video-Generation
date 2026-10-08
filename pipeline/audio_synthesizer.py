@@ -139,6 +139,29 @@ def synthesize_audio_for_spec(
     narration_audio = np.concatenate(all_audio)
     total_len = len(narration_audio)
     total_duration = total_len / sr
+
+    # Dead-Air Audio Compression (skills/yt-edit/deadair.py)
+    try:
+        from pipeline.audio_generator import compress_dead_air
+        deadair_res = compress_dead_air(
+            audio_source=narration_audio,
+            cues=timing_data,
+            floor_ms=250.0,
+            target_gap_ms=150.0,
+            sample_rate=sr
+        )
+        if deadair_res.get("cuts_count", 0) > 0:
+            comp_seg = deadair_res["audio"]
+            comp_samples = np.array(comp_seg.get_array_of_samples(), dtype=np.float32) / 32767.0
+            if len(comp_samples) > 0:
+                narration_audio = comp_samples
+                total_len = len(narration_audio)
+                total_duration = total_len / sr
+                timing_data = deadair_res["adjusted_cues"]
+                print(f"✂️ [Dead-Air Compression] Tightened {deadair_res['cuts_count']} gaps: removed {deadair_res['time_saved_s']}s dead air ({deadair_res['original_duration_s']}s -> {deadair_res['compressed_duration_s']}s)")
+    except Exception as e_deadair:
+        print(f"⚠️ Notice applying dead-air compression: {e_deadair}")
+
     sf.write(narration_out, narration_audio, sr)
     print(f"   Total speech duration: {total_duration:.2f}s (Cache hits: {router.cache.stats['hits']})")
 
