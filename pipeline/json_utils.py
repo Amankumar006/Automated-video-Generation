@@ -6,7 +6,7 @@ and markdown fences produced by LLMs (Gemini, Claude, GPT).
 
 import json
 import re
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
 try:
     import dirtyjson
@@ -33,17 +33,22 @@ def sanitize_llm_json(raw: str) -> str:
 
     # 1. Strip markdown code fence if present
     if "```" in text:
-        m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+        m = re.search(r"```(?:json)?\s*([\{\[][\s\S]*?[\]\}])\s*```", text)
         if m:
             text = m.group(1).strip()
         else:
             text = re.sub(r"^```(?:json)?\s*", "", text)
             text = re.sub(r"\s*```$", "", text).strip()
 
-    # Find the outermost { and }
+    # Find the outermost { / } or [ / ]
+    first_bracket = text.find("[")
+    last_bracket = text.rfind("]")
     first_brace = text.find("{")
     last_brace = text.rfind("}")
-    if first_brace != -1 and last_brace != -1 and last_brace > first_brace:
+
+    if first_bracket != -1 and last_bracket != -1 and last_bracket > first_bracket and (first_brace == -1 or first_bracket < first_brace):
+        text = text[first_bracket:last_bracket + 1]
+    elif first_brace != -1 and last_brace != -1 and last_brace > first_brace:
         text = text[first_brace:last_brace + 1]
 
     # 2. Character-by-character scan inside JSON string literals
@@ -130,18 +135,42 @@ def sanitize_llm_json(raw: str) -> str:
     # 3. Remove trailing commas before } or ]
     sanitized = re.sub(r",\s*([\]}])", r"\1", sanitized)
 
-    # 4. Auto-balance unmatched brackets/braces if truncated
-    open_curly = sanitized.count("{") - sanitized.count("}")
-    open_square = sanitized.count("[") - sanitized.count("]")
-    if open_square > 0:
-        sanitized += "]" * open_square
-    if open_curly > 0:
-        sanitized += "}" * open_curly
+    # 4. Auto-balance unmatched brackets/braces if truncated using stack tracking
+    stack = []
+    in_s = False
+    esc = False
+    for ch in sanitized:
+        if esc:
+            esc = False
+            continue
+        if ch == "\\":
+            esc = True
+            continue
+        if ch == '"':
+            in_s = not in_s
+            continue
+        if not in_s:
+            if ch in "{[":
+                stack.append(ch)
+            elif ch == "}":
+                if stack and stack[-1] == "{":
+                    stack.pop()
+            elif ch == "]":
+                if stack and stack[-1] == "[":
+                    stack.pop()
+    for opener in reversed(stack):
+        if opener == "{":
+            sanitized += "}"
+        elif opener == "[":
+            sanitized += "]"
 
     return sanitized
 
 
-def robust_json_loads(raw: str, fallback_defaults: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+def robust_json_loads(
+    raw: str,
+    fallback_defaults: Optional[Union[Dict[str, Any], List[Any]]] = None,
+) -> Union[Dict[str, Any], List[Any]]:
     """
     Attempts to decode a JSON string using progressive error-recovery:
     1. Standard json.loads(..., strict=False)

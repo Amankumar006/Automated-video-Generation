@@ -36,13 +36,13 @@ DEFAULT_GENOME: Dict[str, Any] = {
             "score": 9.0,
             "avg_3s_retention": 82.5,
             "sample_count": 5,
-            "description": "Shocking compute waste, paradoxical inefficiency, or inverted expectations (e.g. GPU wastes 70% compute)."
+            "description": "Shocking compute waste, paradoxical inefficiency, or inverted expectations directly from the paper."
         },
         "shock_metric": {
             "score": 8.5,
             "avg_3s_retention": 79.0,
             "sample_count": 4,
-            "description": "Explosive benchmark disparity or order-of-magnitude leap (e.g. 10x faster or $100M compute cost)."
+            "description": "Explosive benchmark disparity or order-of-magnitude leap (e.g. 10x faster or major efficiency gain)."
         },
         "villain_first": {
             "score": 8.2,
@@ -54,7 +54,7 @@ DEFAULT_GENOME: Dict[str, Any] = {
             "score": 8.4,
             "avg_3s_retention": 78.0,
             "sample_count": 3,
-            "description": "Revealing hidden mechanics behind everyday developer tools (Cursor, Claude, PyTorch)."
+            "description": "Revealing hidden mechanics behind complex algorithms and architectures."
         },
         "textbook_lecture": {
             "score": 2.0,
@@ -115,7 +115,7 @@ DEFAULT_GENOME: Dict[str, Any] = {
         }
     },
     "physical_analogies": {
-        "chef_waiting_for_salt": {"score": 9.2, "sample_count": 4, "status": "elite"},
+        "assembly_line_stall": {"score": 9.2, "sample_count": 4, "status": "elite"},
         "relay_race_baton_drop": {"score": 8.7, "sample_count": 3, "status": "active"},
         "highway_traffic_bottleneck": {"score": 8.5, "sample_count": 3, "status": "active"},
         "sculpting_marble": {"score": 8.3, "sample_count": 2, "status": "active"},

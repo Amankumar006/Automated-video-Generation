@@ -21,6 +21,8 @@ def sanitize_latex(latex_str: str) -> str:
     cleaned = re.sub(r'\\underbrace\{([^}]+)\}(?:_\{[^}]+\})?', r'\1', cleaned)
     # Strip \overbrace{...}^{...} or \overbrace{...}
     cleaned = re.sub(r'\\overbrace\{([^}]+)\}(?:\^\{[^}]+\})?', r'\1', cleaned)
+    # Strip TeX delimiter sizing macros unsupported by Matplotlib MathText (\big, \Big, \bigg, \Bigg)
+    cleaned = re.sub(r'\\(?:big|Big|bigg|Bigg)[lrm]?', '', cleaned)
     # Replace \mathbb{R} with \mathbf{R}
     cleaned = re.sub(r'\\mathbb\{([A-Za-z])\}', r'\\mathbf{\1}', cleaned)
     # Replace unsupported arrows with standard mathtext equivalents

@@ -84,21 +84,21 @@ class TestIntellectualThrillerEngine(unittest.TestCase):
             "thriller_metadata": {
                 "engine_version": "7.0",
                 "narrative_style": "intellectual_thriller",
-                "villain_entity": "Sequential Token Serialization",
-                "physical_analogy": "chef waiting for salt before chopping onion"
+                "villain_entity": "Sequential Token Bottleneck",
+                "physical_analogy": "traffic stall on a single lane bridge"
             },
             "beats": [
                 {
                     "beat_id": 1,
                     "act": 1,
                     "thriller_role": "pattern_interrupt_hook",
-                    "text": "Every single time Cursor or Claude writes code for you, your GPU wastes up to 70% of its compute doing nothing."
+                    "text": "Standard large language models waste up to 70% of their inference cycles stalling on memory bandwidth."
                 },
                 {
                     "beat_id": 2,
                     "act": 2,
                     "thriller_role": "villain_bottleneck",
-                    "text": "Why? Because LLMs generate code one single token at a time—like a world-class chef who stops to ask you for salt before chopping every onion."
+                    "text": "The culprit? Sequential token generation creates a traffic jam where powerful compute cores sit idle waiting for memory."
                 },
                 {
                     "beat_id": 3,
@@ -184,13 +184,75 @@ class TestIntellectualThrillerEngine(unittest.TestCase):
         self.assertIn(rewritten["beats"][0]["thriller_role"], "pattern_interrupt_hook")
         self.assertEqual(rewritten["beats"][0]["act"], 1)
 
-        # Beat 2 must have a physical analogy
+        # Beat 2 must retain the authentic villain / bottleneck
         b2_text = rewritten["beats"][1]["text"]
-        self.assertTrue(any(w in b2_text.lower() for w in ["like a", "chef", "onion", "salt"]))
+        self.assertTrue(any(w in b2_text.lower() for w in ["bottleneck", "io", "slow", "memory", "quadratic", "like a", "wall", "stall"]))
         self.assertEqual(rewritten["beats"][1]["thriller_role"], "villain_bottleneck")
         self.assertEqual(rewritten["beats"][1]["act"], 2)
 
+        # STRICT GROUND TRUTH: Ensure zero fabrication of Cursor, Claude, or chef
+        self.assertNotIn("cursor", b1_text.lower())
+        self.assertNotIn("claude", b1_text.lower())
+        self.assertNotIn("chef", b2_text.lower())
+
         # Compliance audit must pass
+        audit = self.engine.audit_thriller_compliance(rewritten)
+        self.assertTrue(audit["passed"])
+        self.assertGreaterEqual(audit["score"], 8.0)
+
+    def test_robotics_paper_preserves_ground_truth(self):
+        """Robotics papers must retain authentic robotics terminology and NEVER hallucinate Cursor, Claude, or chefs."""
+        robotics_spec = {
+            "title": "RobotWorld: Benchmarking Embodied Agents in Physical Simulation",
+            "category": "mechanism_deepdive",
+            "domain_taxonomy": "robotics_tamp",
+            "beats": [
+                {
+                    "beat_id": 1,
+                    "text": "Humanoid robots struggle with real-world physics because simulation models fail to transfer."
+                },
+                {
+                    "beat_id": 2,
+                    "text": "The bottleneck? Physical contact dynamics stall current reinforcement learning policies."
+                },
+                {
+                    "beat_id": 3,
+                    "text": "Enter RobotWorld: a benchmark simulating high-fidelity tactile and kinematic interactions."
+                },
+                {
+                    "beat_id": 4,
+                    "text": "Under the hood, GPU-accelerated rigid-body physics computes thousands of contact steps per second."
+                },
+                {
+                    "beat_id": 5,
+                    "text": "The result? 10x faster agent convergence across 50 diverse manipulation tasks."
+                },
+                {
+                    "beat_id": 6,
+                    "text": "Follow The Model Verse for daily deep-dives into modern robotics and AI."
+                }
+            ]
+        }
+        paper_meta = {
+            "title": "RobotWorld: Benchmarking Embodied Agents",
+            "abstract": "We introduce RobotWorld, a high-fidelity physical simulation benchmark for embodied AI agents."
+        }
+        rewritten = self.engine.rewrite_script_to_thriller(robotics_spec, paper_meta=paper_meta, use_llm=False)
+        b1_text = rewritten["beats"][0]["text"].lower()
+        b2_text = rewritten["beats"][1]["text"].lower()
+
+        # Must NOT contain fabricated developer or kitchen analogies
+        self.assertNotIn("cursor", b1_text)
+        self.assertNotIn("claude", b1_text)
+        self.assertNotIn("gpu wastes", b1_text)
+        self.assertNotIn("chef", b2_text)
+        self.assertNotIn("onion", b2_text)
+        self.assertNotIn("salt", b2_text)
+
+        # Must preserve robotics domain grounding
+        self.assertTrue(any(w in b1_text for w in ["robot", "physics", "simulation", "struggle", "humanoid"]))
+        self.assertTrue(any(w in b2_text for w in ["bottleneck", "contact", "dynamics", "stall", "policies", "physical"]))
+
         audit = self.engine.audit_thriller_compliance(rewritten)
         self.assertTrue(audit["passed"])
         self.assertGreaterEqual(audit["score"], 8.0)

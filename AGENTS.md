@@ -175,3 +175,15 @@ python3 pipeline/daily_shorts_daemon.py --dry-run --count 1
 # Run the standing 5-slot pre-peak upload daemon in background
 python3 pipeline/daily_shorts_daemon.py --daemon
 ```
+
+
+---
+## Project Aether (v2) Instructions
+All agents working on Project Aether must refer to the foundational documentation located in `project-aether-docs/`. 
+All new video generation architectures must follow the Aether v2 specifications detailed in `project-aether-docs/architecture.md`.
+
+**Agent Skills Policy:** 
+If new external agent skills are needed (e.g., interacting with new APIs or tooling discovered on https://www.skills.sh/), agents are instructed to retrieve the logic, adapt it, and save it in the `.gemini/config/skills` standard format as `SKILL.md` files.
+
+**Dream-RSI Meta-Learning Protocol:**
+All agents developing meta-learning, routing, or repair optimization components must adhere to the **Dream-RSI** framework (arXiv:2609.14858v1). Accumulated generation episodes must be structured as replayable discovery trees so that policy optimization can be executed offline through simulation ("dreaming") before committing to expensive online rollouts.
