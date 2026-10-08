@@ -1,0 +1,1760 @@
+{
+  "id": "tides_selective_ssm",
+  "title": "TIDES: Implicit Time-Awareness in Selective SSMs",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "TIME-SERIES DISRUPTION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "State-of-the-art Mamba models fail instantly when real-world time intervals become irregular. Here is why.",
+      "visual_focus": "A digital clock glitching between random numbers while a neural network graph collapses.",
+      "highlight_words": {
+        "fail instantly": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Irregular time intervals",
+        "action_verb": "shatter",
+        "direct_object": "Selective state space models",
+        "anchor_word": "fail",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE TIME PARADOX",
+        "sub": "Why Mamba breaks in the real world",
+        "accent_color": "#EF4444",
+        "params": {
+          "field_title": "Discretization Manifold",
+          "source_label": "\u0394 (Physical)",
+          "target_label": "\u0394\u0303 (Learned)"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THE TIME PARADOX",
+        "sub": "Why Mamba breaks in the real world",
+        "accent_color": "#EF4444",
+        "field_title": "Discretization Manifold",
+        "source_label": "\u0394 (Physical)",
+        "target_label": "\u0394\u0303 (Learned)"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.55,
+      "slot_duration": 5.85,
+      "start": 0.0,
+      "end": 5.55,
+      "word_timings": [
+        {
+          "word": "State-of-the-art",
+          "clean_word": "stateoftheart",
+          "phonemes": "st\u02c8e\u026a\u027e\u0254fth\u02cc\u0251\u02d0\u0279t",
+          "start": 0.02,
+          "end": 0.91,
+          "duration": 0.89,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "Mamba",
+          "clean_word": "mamba",
+          "phonemes": "m\u02c8\u00e6mb\u0259",
+          "start": 0.91,
+          "end": 1.18,
+          "duration": 0.27,
+          "frame_ahead_trigger": 0.87
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 1.18,
+          "end": 1.65,
+          "duration": 0.47,
+          "frame_ahead_trigger": 1.14
+        },
+        {
+          "word": "fail",
+          "clean_word": "fail",
+          "phonemes": "f\u02c8e\u026al",
+          "start": 1.65,
+          "end": 1.84,
+          "duration": 0.19,
+          "frame_ahead_trigger": 1.61
+        },
+        {
+          "word": "instantly",
+          "clean_word": "instantly",
+          "phonemes": "\u02c8\u026anst\u0259ntli",
+          "start": 1.84,
+          "end": 2.375,
+          "duration": 0.535,
+          "frame_ahead_trigger": 1.8
+        },
+        {
+          "word": "when",
+          "clean_word": "when",
+          "phonemes": "w\u02cc\u025bn",
+          "start": 2.375,
+          "end": 2.615,
+          "duration": 0.24,
+          "frame_ahead_trigger": 2.335
+        },
+        {
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 2.615,
+          "end": 3.22,
+          "duration": 0.605,
+          "frame_ahead_trigger": 2.575
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 3.22,
+          "end": 3.55,
+          "duration": 0.33,
+          "frame_ahead_trigger": 3.18
+        },
+        {
+          "word": "intervals",
+          "clean_word": "intervals",
+          "phonemes": "\u02c8\u026ant\u025av\u0259lz",
+          "start": 3.55,
+          "end": 3.955,
+          "duration": 0.405,
+          "frame_ahead_trigger": 3.51
+        },
+        {
+          "word": "become",
+          "clean_word": "become",
+          "phonemes": "b\u026ak\u02c8\u028cm",
+          "start": 3.955,
+          "end": 4.333,
+          "duration": 0.378,
+          "frame_ahead_trigger": 3.915
+        },
+        {
+          "word": "irregular.",
+          "clean_word": "irregular",
+          "phonemes": "\u026a\u0279\u02c8\u025b\u0261j\u028al\u025a",
+          "start": 4.333,
+          "end": 4.795,
+          "duration": 0.462,
+          "frame_ahead_trigger": 4.293
+        },
+        {
+          "word": "Here",
+          "clean_word": "here",
+          "phonemes": "h\u02c8\u026a\u0279",
+          "start": 4.795,
+          "end": 5.055,
+          "duration": 0.26,
+          "frame_ahead_trigger": 4.755
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.055,
+          "end": 5.152,
+          "duration": 0.097,
+          "frame_ahead_trigger": 5.015
+        },
+        {
+          "word": "why.",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 5.152,
+          "end": 5.37,
+          "duration": 0.218,
+          "frame_ahead_trigger": 5.112
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is the discretization step. Mamba forces the model to lie about time, treating every gap as identical.",
+      "visual_focus": "A metronome swinging erratically, representing the forced discretization step.",
+      "highlight_words": {
+        "lie about time": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Discretization",
+        "action_verb": "corrupts",
+        "direct_object": "temporal integrity",
+        "anchor_word": "lie",
+        "semantic_role": "bottleneck_identification"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE DISCRETIZATION TRAP",
+        "sub": "Input-dependence vs. physical reality",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Selective SSM Stream",
+          "stream_b_label": "Linear Time Invariant Stream",
+          "barrier_label": "\u0394\u0303 \u2260 \u0394",
+          "barrier_sub": "Input Dependence Mismatch"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE DISCRETIZATION TRAP",
+        "sub": "Input-dependence vs. physical reality",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Selective SSM Stream",
+        "stream_b_label": "Linear Time Invariant Stream",
+        "barrier_label": "\u0394\u0303 \u2260 \u0394",
+        "barrier_sub": "Input Dependence Mismatch"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.1,
+      "slot_duration": 6.4,
+      "start": 5.85,
+      "end": 11.95,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.857,
+          "end": 5.967,
+          "duration": 0.11,
+          "frame_ahead_trigger": 5.817
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.967,
+          "end": 6.307,
+          "duration": 0.34,
+          "frame_ahead_trigger": 5.927
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.307,
+          "end": 6.452,
+          "duration": 0.145,
+          "frame_ahead_trigger": 6.267
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 6.452,
+          "end": 6.557,
+          "duration": 0.105,
+          "frame_ahead_trigger": 6.412
+        },
+        {
+          "word": "discretization",
+          "clean_word": "discretization",
+          "phonemes": "d\u026ask\u0279\u02cc\u025b\u027e\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 6.557,
+          "end": 7.472,
+          "duration": 0.915,
+          "frame_ahead_trigger": 6.517
+        },
+        {
+          "word": "step.",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 7.472,
+          "end": 7.746,
+          "duration": 0.275,
+          "frame_ahead_trigger": 7.432
+        },
+        {
+          "word": "Mamba",
+          "clean_word": "mamba",
+          "phonemes": "m\u02c8\u00e6mb\u0259",
+          "start": 7.746,
+          "end": 8.082,
+          "duration": 0.335,
+          "frame_ahead_trigger": 7.706
+        },
+        {
+          "word": "forces",
+          "clean_word": "forces",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
+          "start": 8.082,
+          "end": 8.547,
+          "duration": 0.465,
+          "frame_ahead_trigger": 8.042
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.547,
+          "end": 8.747,
+          "duration": 0.2,
+          "frame_ahead_trigger": 8.507
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 8.747,
+          "end": 9.057,
+          "duration": 0.31,
+          "frame_ahead_trigger": 8.707
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 9.057,
+          "end": 9.272,
+          "duration": 0.215,
+          "frame_ahead_trigger": 9.017
+        },
+        {
+          "word": "lie",
+          "clean_word": "lie",
+          "phonemes": "l\u02c8a\u026a",
+          "start": 9.272,
+          "end": 9.407,
+          "duration": 0.135,
+          "frame_ahead_trigger": 9.232
+        },
+        {
+          "word": "about",
+          "clean_word": "about",
+          "phonemes": "\u0250b\u02c8a\u028at",
+          "start": 9.407,
+          "end": 9.852,
+          "duration": 0.445,
+          "frame_ahead_trigger": 9.367
+        },
+        {
+          "word": "time,",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 9.852,
+          "end": 10.094,
+          "duration": 0.242,
+          "frame_ahead_trigger": 9.812
+        },
+        {
+          "word": "treating",
+          "clean_word": "treating",
+          "phonemes": "t\u0279\u02c8i\u02d0\u027e\u026a\u014b",
+          "start": 10.094,
+          "end": 10.612,
+          "duration": 0.518,
+          "frame_ahead_trigger": 10.054
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 10.612,
+          "end": 10.762,
+          "duration": 0.15,
+          "frame_ahead_trigger": 10.572
+        },
+        {
+          "word": "gap",
+          "clean_word": "gap",
+          "phonemes": "\u0261\u02c8\u00e6p",
+          "start": 10.762,
+          "end": 11.142,
+          "duration": 0.38,
+          "frame_ahead_trigger": 10.722
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 11.142,
+          "end": 11.182,
+          "duration": 0.04,
+          "frame_ahead_trigger": 11.102
+        },
+        {
+          "word": "identical.",
+          "clean_word": "identical",
+          "phonemes": "a\u026ad\u02c8\u025bnt\u026ak\u0259l",
+          "start": 11.182,
+          "end": 11.812,
+          "duration": 0.63,
+          "frame_ahead_trigger": 11.142
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "TIDES pivots the architecture. It locks the step size to physical reality, preserving the true time gap.",
+      "visual_focus": "A rigid, fixed-interval timeline snapping into place over the previous erratic one.",
+      "highlight_words": {
+        "locks the step size": "#10B981"
+      },
+      "svo_action": {
+        "subject": "TIDES",
+        "action_verb": "restores",
+        "direct_object": "continuous-time integrity",
+        "anchor_word": "locks",
+        "semantic_role": "eureka_moment"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "TIDES ARCHITECTURE",
+        "sub": "A rigid, fixed-interval timeline snapping into place over the pre",
+        "params": {
+          "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.svg",
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.png",
+          "arxiv_id": "2605.09742",
+          "title": "TIDES ARCHITECTURE",
+          "sub": "A rigid, fixed-interval timeline snapping into place over the pre",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Fig Droprate Ablation With Mamba Narrow Thin",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.svg",
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.png",
+        "arxiv_id": "2605.09742",
+        "title": "TIDES ARCHITECTURE",
+        "sub": "A rigid, fixed-interval timeline snapping into place over the pre",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Fig Droprate Ablation With Mamba Narrow Thin",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 5.61,
+      "slot_duration": 5.91,
+      "start": 12.25,
+      "end": 17.86,
+      "word_timings": [
+        {
+          "word": "TIDES",
+          "clean_word": "tides",
+          "phonemes": "t\u02c8a\u026adz",
+          "start": 12.248,
+          "end": 12.638,
+          "duration": 0.39,
+          "frame_ahead_trigger": 12.208
+        },
+        {
+          "word": "pivots",
+          "clean_word": "pivots",
+          "phonemes": "p\u02c8\u026av\u0259ts",
+          "start": 12.638,
+          "end": 12.983,
+          "duration": 0.345,
+          "frame_ahead_trigger": 12.598
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.983,
+          "end": 13.108,
+          "duration": 0.125,
+          "frame_ahead_trigger": 12.943
+        },
+        {
+          "word": "architecture.",
+          "clean_word": "architecture",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
+          "start": 13.108,
+          "end": 13.881,
+          "duration": 0.773,
+          "frame_ahead_trigger": 13.068
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 13.881,
+          "end": 13.998,
+          "duration": 0.117,
+          "frame_ahead_trigger": 13.841
+        },
+        {
+          "word": "locks",
+          "clean_word": "locks",
+          "phonemes": "l\u02c8\u0251\u02d0ks",
+          "start": 13.998,
+          "end": 14.348,
+          "duration": 0.35,
+          "frame_ahead_trigger": 13.958
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 14.348,
+          "end": 14.473,
+          "duration": 0.125,
+          "frame_ahead_trigger": 14.308
+        },
+        {
+          "word": "step",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 14.473,
+          "end": 14.733,
+          "duration": 0.26,
+          "frame_ahead_trigger": 14.433
+        },
+        {
+          "word": "size",
+          "clean_word": "size",
+          "phonemes": "s\u02c8a\u026az",
+          "start": 14.733,
+          "end": 15.068,
+          "duration": 0.335,
+          "frame_ahead_trigger": 14.693
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.068,
+          "end": 15.278,
+          "duration": 0.21,
+          "frame_ahead_trigger": 15.028
+        },
+        {
+          "word": "physical",
+          "clean_word": "physical",
+          "phonemes": "f\u02c8\u026az\u026ak\u0259l",
+          "start": 15.278,
+          "end": 15.653,
+          "duration": 0.375,
+          "frame_ahead_trigger": 15.238
+        },
+        {
+          "word": "reality,",
+          "clean_word": "reality",
+          "phonemes": "\u0279\u026a\u02c8\u00e6l\u1d7b\u027ei",
+          "start": 15.653,
+          "end": 16.178,
+          "duration": 0.525,
+          "frame_ahead_trigger": 15.613
+        },
+        {
+          "word": "preserving",
+          "clean_word": "preserving",
+          "phonemes": "p\u0279\u026az\u02c8\u025c\u02d0v\u026a\u014b",
+          "start": 16.178,
+          "end": 16.688,
+          "duration": 0.51,
+          "frame_ahead_trigger": 16.138
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.688,
+          "end": 16.928,
+          "duration": 0.24,
+          "frame_ahead_trigger": 16.648
+        },
+        {
+          "word": "true",
+          "clean_word": "true",
+          "phonemes": "t\u0279\u02c8u\u02d0",
+          "start": 16.928,
+          "end": 17.168,
+          "duration": 0.24,
+          "frame_ahead_trigger": 16.888
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 17.168,
+          "end": 17.478,
+          "duration": 0.31,
+          "frame_ahead_trigger": 17.128
+        },
+        {
+          "word": "gap.",
+          "clean_word": "gap",
+          "phonemes": "\u0261\u02c8\u00e6p",
+          "start": 17.478,
+          "end": 17.673,
+          "duration": 0.195,
+          "frame_ahead_trigger": 17.438
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "The secret? We shift input-dependence from the step size onto the diagonal state matrix. High expressivity, zero temporal distortion.",
+      "visual_focus": "A matrix transformation animation showing the input-dependence moving to the diagonal elements.",
+      "highlight_words": {
+        "diagonal state matrix": "#10B981"
+      },
+      "svo_action": {
+        "subject": "State matrix",
+        "action_verb": "encodes",
+        "direct_object": "input dynamics",
+        "anchor_word": "shift",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: TIDES: IMPLICIT TI",
+        "sub": "A matrix transformation animation showing the input-dependence mo",
+        "params": {
+          "title": "KERNEL CODE: TIDES: IMPLICIT TI",
+          "sub": "A matrix transformation animation showing the input-dependence mo",
+          "filename": "tides_layer.py",
+          "language": "python",
+          "lines": [
+            "def forward(x, delta):",
+            "    # Shift dependence to A",
+            "    A_x = diag(W_A @ x + b_A)",
+            "    return run_ssm(A_x, delta, x)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 INPUT-DEPENDENT STATE MATRIX",
+          "delta_badge": "Moving x-dependence from delta to A matrix"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: TIDES: IMPLICIT TI",
+        "sub": "A matrix transformation animation showing the input-dependence mo",
+        "filename": "tides_layer.py",
+        "language": "python",
+        "lines": [
+          "def forward(x, delta):",
+          "    # Shift dependence to A",
+          "    A_x = diag(W_A @ x + b_A)",
+          "    return run_ssm(A_x, delta, x)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 INPUT-DEPENDENT STATE MATRIX",
+        "delta_badge": "Moving x-dependence from delta to A matrix"
+      },
+      "audio_duration": 7.13,
+      "slot_duration": 7.43,
+      "start": 18.16,
+      "end": 25.28,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.169,
+          "end": 18.324,
+          "duration": 0.155,
+          "frame_ahead_trigger": 18.129
+        },
+        {
+          "word": "secret?",
+          "clean_word": "secret",
+          "phonemes": "s\u02c8i\u02d0k\u0279\u1d7bt",
+          "start": 18.324,
+          "end": 18.664,
+          "duration": 0.34,
+          "frame_ahead_trigger": 18.284
+        },
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 18.664,
+          "end": 18.899,
+          "duration": 0.235,
+          "frame_ahead_trigger": 18.624
+        },
+        {
+          "word": "shift",
+          "clean_word": "shift",
+          "phonemes": "\u0283\u02c8\u026aft",
+          "start": 18.899,
+          "end": 19.069,
+          "duration": 0.17,
+          "frame_ahead_trigger": 18.859
+        },
+        {
+          "word": "input-dependence",
+          "clean_word": "inputdependence",
+          "phonemes": "\u02c8\u026anp\u0259td\u02cc\u025bp\u025bnd\u0259ns",
+          "start": 19.069,
+          "end": 19.959,
+          "duration": 0.89,
+          "frame_ahead_trigger": 19.029
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 19.959,
+          "end": 20.249,
+          "duration": 0.29,
+          "frame_ahead_trigger": 19.919
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 20.249,
+          "end": 20.399,
+          "duration": 0.15,
+          "frame_ahead_trigger": 20.209
+        },
+        {
+          "word": "step",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 20.399,
+          "end": 20.626,
+          "duration": 0.227,
+          "frame_ahead_trigger": 20.359
+        },
+        {
+          "word": "size",
+          "clean_word": "size",
+          "phonemes": "s\u02c8a\u026az",
+          "start": 20.626,
+          "end": 20.994,
+          "duration": 0.368,
+          "frame_ahead_trigger": 20.586
+        },
+        {
+          "word": "onto",
+          "clean_word": "onto",
+          "phonemes": "\u02c8\u0251\u02d0nt\u028a",
+          "start": 20.994,
+          "end": 21.189,
+          "duration": 0.195,
+          "frame_ahead_trigger": 20.954
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.189,
+          "end": 21.439,
+          "duration": 0.25,
+          "frame_ahead_trigger": 21.149
+        },
+        {
+          "word": "diagonal",
+          "clean_word": "diagonal",
+          "phonemes": "da\u026a\u02c8\u00e6\u0261\u0259n\u0259l",
+          "start": 21.439,
+          "end": 21.854,
+          "duration": 0.415,
+          "frame_ahead_trigger": 21.399
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 21.854,
+          "end": 22.214,
+          "duration": 0.36,
+          "frame_ahead_trigger": 21.814
+        },
+        {
+          "word": "matrix.",
+          "clean_word": "matrix",
+          "phonemes": "m\u02c8e\u026at\u0279\u026aks",
+          "start": 22.214,
+          "end": 22.701,
+          "duration": 0.487,
+          "frame_ahead_trigger": 22.174
+        },
+        {
+          "word": "High",
+          "clean_word": "high",
+          "phonemes": "h\u02c8a\u026a",
+          "start": 22.701,
+          "end": 22.964,
+          "duration": 0.263,
+          "frame_ahead_trigger": 22.661
+        },
+        {
+          "word": "expressivity,",
+          "clean_word": "expressivity",
+          "phonemes": "\u025bksp\u0279\u026as\u02c8\u026av\u1d7b\u027ei",
+          "start": 22.964,
+          "end": 23.634,
+          "duration": 0.67,
+          "frame_ahead_trigger": 22.924
+        },
+        {
+          "word": "zero",
+          "clean_word": "zero",
+          "phonemes": "z\u02c8i\u0259\u0279o\u028a",
+          "start": 23.634,
+          "end": 24.084,
+          "duration": 0.45,
+          "frame_ahead_trigger": 23.594
+        },
+        {
+          "word": "temporal",
+          "clean_word": "temporal",
+          "phonemes": "t\u02c8\u025bmp\u025a\u0279\u0259l",
+          "start": 24.084,
+          "end": 24.469,
+          "duration": 0.385,
+          "frame_ahead_trigger": 24.044
+        },
+        {
+          "word": "distortion.",
+          "clean_word": "distortion",
+          "phonemes": "d\u026ast\u02c8\u0254\u02d0\u0279\u0283\u0259n",
+          "start": 24.469,
+          "end": 25.104,
+          "duration": 0.635,
+          "frame_ahead_trigger": 24.429
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? TIDES crushed the UEA classification suite, achieving the lowest average rank across all tested benchmarks.",
+      "visual_focus": "A bar chart showing TIDES rising to the top rank, outperforming Mamba and S5.",
+      "highlight_words": {
+        "lowest average rank": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "TIDES",
+        "action_verb": "outperforms",
+        "direct_object": "SOTA baselines",
+        "anchor_word": "crushed",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: UEA RANKINGS",
+        "sub": "A bar chart showing TIDES rising to the top rank,",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: UEA RANKINGS",
+          "sub": "A bar chart showing TIDES rising to the top rank,",
+          "metric_name": "Average Rank (Lower is Better)",
+          "unit": "Rank",
+          "contestants": [
+            {
+              "name": "TIDES",
+              "value": 1.2,
+              "display_val": "Rank 1.2",
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "S5",
+              "value": 2.1,
+              "display_val": "Rank 2.1",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Mamba",
+              "value": 3.4,
+              "display_val": "Rank 3.4",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 NEW BEST PERFORMANCE"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: UEA RANKINGS",
+        "sub": "A bar chart showing TIDES rising to the top rank,",
+        "metric_name": "Average Rank (Lower is Better)",
+        "unit": "Rank",
+        "contestants": [
+          {
+            "name": "TIDES",
+            "value": 1.2,
+            "display_val": "Rank 1.2",
+            "is_hero": true,
+            "color": "#34D399"
+          },
+          {
+            "name": "S5",
+            "value": 2.1,
+            "display_val": "Rank 2.1",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Mamba",
+            "value": 3.4,
+            "display_val": "Rank 3.4",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 NEW BEST PERFORMANCE"
+      },
+      "audio_duration": 6.23,
+      "slot_duration": 6.53,
+      "start": 25.58,
+      "end": 31.81,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 25.594,
+          "end": 25.794,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.554
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 25.794,
+          "end": 26.219,
+          "duration": 0.425,
+          "frame_ahead_trigger": 25.754
+        },
+        {
+          "word": "TIDES",
+          "clean_word": "tides",
+          "phonemes": "t\u02c8a\u026adz",
+          "start": 26.219,
+          "end": 26.354,
+          "duration": 0.135,
+          "frame_ahead_trigger": 26.179
+        },
+        {
+          "word": "crushed",
+          "clean_word": "crushed",
+          "phonemes": "k\u0279\u02c8\u028c\u0283t",
+          "start": 26.354,
+          "end": 26.776,
+          "duration": 0.422,
+          "frame_ahead_trigger": 26.314
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.776,
+          "end": 26.909,
+          "duration": 0.133,
+          "frame_ahead_trigger": 26.736
+        },
+        {
+          "word": "UEA",
+          "clean_word": "uea",
+          "phonemes": "j\u02c8u\u02d0\u0259",
+          "start": 26.909,
+          "end": 27.149,
+          "duration": 0.24,
+          "frame_ahead_trigger": 26.869
+        },
+        {
+          "word": "classification",
+          "clean_word": "classification",
+          "phonemes": "kl\u02cc\u00e6s\u026af\u026ak\u02c8e\u026a\u0283\u0259n",
+          "start": 27.149,
+          "end": 27.949,
+          "duration": 0.8,
+          "frame_ahead_trigger": 27.109
+        },
+        {
+          "word": "suite,",
+          "clean_word": "suite",
+          "phonemes": "sw\u02c8i\u02d0t",
+          "start": 27.949,
+          "end": 28.352,
+          "duration": 0.403,
+          "frame_ahead_trigger": 27.909
+        },
+        {
+          "word": "achieving",
+          "clean_word": "achieving",
+          "phonemes": "\u0250t\u0283\u02c8i\u02d0v\u026a\u014b",
+          "start": 28.352,
+          "end": 28.839,
+          "duration": 0.487,
+          "frame_ahead_trigger": 28.312
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.839,
+          "end": 28.964,
+          "duration": 0.125,
+          "frame_ahead_trigger": 28.799
+        },
+        {
+          "word": "lowest",
+          "clean_word": "lowest",
+          "phonemes": "l\u02c8o\u028a\u026ast",
+          "start": 28.964,
+          "end": 29.365,
+          "duration": 0.401,
+          "frame_ahead_trigger": 28.924
+        },
+        {
+          "word": "average",
+          "clean_word": "average",
+          "phonemes": "\u02c8\u00e6v\u0279\u026ad\u0292",
+          "start": 29.365,
+          "end": 29.724,
+          "duration": 0.359,
+          "frame_ahead_trigger": 29.325
+        },
+        {
+          "word": "rank",
+          "clean_word": "rank",
+          "phonemes": "\u0279\u02c8\u00e6\u014bk",
+          "start": 29.724,
+          "end": 30.144,
+          "duration": 0.42,
+          "frame_ahead_trigger": 29.684
+        },
+        {
+          "word": "across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 30.144,
+          "end": 30.494,
+          "duration": 0.35,
+          "frame_ahead_trigger": 30.104
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 30.494,
+          "end": 30.724,
+          "duration": 0.23,
+          "frame_ahead_trigger": 30.454
+        },
+        {
+          "word": "tested",
+          "clean_word": "tested",
+          "phonemes": "t\u02c8\u025bst\u1d7bd",
+          "start": 30.724,
+          "end": 31.114,
+          "duration": 0.39,
+          "frame_ahead_trigger": 30.684
+        },
+        {
+          "word": "benchmarks.",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 31.114,
+          "end": 31.729,
+          "duration": 0.615,
+          "frame_ahead_trigger": 31.074
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Irregular time is no longer a failure mode. Follow The Model Verse for more deep-dives into architectural truth.",
+      "visual_focus": "A clean, unified timeline representing the model's new capability.",
+      "highlight_words": {
+        "no longer a failure mode": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "TIDES",
+        "action_verb": "enables",
+        "direct_object": "temporal robustness",
+        "anchor_word": "truth",
+        "semantic_role": "paradigm_shift"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "ARCHITECTURAL TRUTH",
+        "sub": "The future of time-aware AI",
+        "accent_color": "#FFFFFF",
+        "params": {
+          "input_1_label": "SSM Core",
+          "input_2_label": "Physics Constraint",
+          "input_3_label": "TIDES logic",
+          "fused_label": "Future Breakthroughs"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "audio_duration": 6.04,
+      "slot_duration": 6.54,
+      "start": 32.11,
+      "end": 38.15,
+      "word_timings": [
+        {
+          "word": "Irregular",
+          "clean_word": "irregular",
+          "phonemes": "\u026a\u0279\u02c8\u025b\u0261j\u028al\u025a",
+          "start": 32.128,
+          "end": 32.598,
+          "duration": 0.47,
+          "frame_ahead_trigger": 32.088
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 32.598,
+          "end": 32.993,
+          "duration": 0.395,
+          "frame_ahead_trigger": 32.558
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 32.993,
+          "end": 32.996,
+          "duration": 0.003,
+          "frame_ahead_trigger": 32.953
+        },
+        {
+          "word": "no",
+          "clean_word": "no",
+          "phonemes": "n\u02c8o\u028a",
+          "start": 32.996,
+          "end": 33.123,
+          "duration": 0.127,
+          "frame_ahead_trigger": 32.956
+        },
+        {
+          "word": "longer",
+          "clean_word": "longer",
+          "phonemes": "l\u02c8\u0254\u014b\u0261\u025a",
+          "start": 33.123,
+          "end": 33.498,
+          "duration": 0.375,
+          "frame_ahead_trigger": 33.083
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 33.498,
+          "end": 33.813,
+          "duration": 0.315,
+          "frame_ahead_trigger": 33.458
+        },
+        {
+          "word": "failure",
+          "clean_word": "failure",
+          "phonemes": "f\u02c8e\u026al\u026a\u0279",
+          "start": 33.813,
+          "end": 34.188,
+          "duration": 0.375,
+          "frame_ahead_trigger": 33.773
+        },
+        {
+          "word": "mode.",
+          "clean_word": "mode",
+          "phonemes": "m\u02c8o\u028ad",
+          "start": 34.188,
+          "end": 34.353,
+          "duration": 0.164,
+          "frame_ahead_trigger": 34.148
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.353,
+          "end": 34.838,
+          "duration": 0.486,
+          "frame_ahead_trigger": 34.313
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.838,
+          "end": 34.841,
+          "duration": 0.003,
+          "frame_ahead_trigger": 34.798
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.841,
+          "end": 35.213,
+          "duration": 0.372,
+          "frame_ahead_trigger": 34.801
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 35.213,
+          "end": 35.488,
+          "duration": 0.275,
+          "frame_ahead_trigger": 35.173
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.488,
+          "end": 35.648,
+          "duration": 0.16,
+          "frame_ahead_trigger": 35.448
+        },
+        {
+          "word": "more",
+          "clean_word": "more",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279",
+          "start": 35.648,
+          "end": 35.938,
+          "duration": 0.29,
+          "frame_ahead_trigger": 35.608
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 35.938,
+          "end": 36.503,
+          "duration": 0.565,
+          "frame_ahead_trigger": 35.898
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 36.503,
+          "end": 36.793,
+          "duration": 0.29,
+          "frame_ahead_trigger": 36.463
+        },
+        {
+          "word": "architectural",
+          "clean_word": "architectural",
+          "phonemes": "\u02cc\u0251\u02d0\u0279k\u026at\u02c8\u025bkt\u0283\u025a\u0279\u0259l",
+          "start": 36.793,
+          "end": 37.573,
+          "duration": 0.78,
+          "frame_ahead_trigger": 36.753
+        },
+        {
+          "word": "truth.",
+          "clean_word": "truth",
+          "phonemes": "t\u0279\u02c8u\u02d0\u03b8",
+          "start": 37.573,
+          "end": 37.933,
+          "duration": 0.36,
+          "frame_ahead_trigger": 37.533
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\tilde{\\Delta} = f_{\\theta}(x) \\neq \\Delta$",
+      "filename": "tides_selective_ssm_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\tilde{\\Delta}",
+          "label": "Learned discretization"
+        },
+        {
+          "term": "\\Delta",
+          "label": "Physical time gap"
+        }
+      ],
+      "svg_filename": "tides_selective_ssm_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{h}_{t} = \\mathbf{\\bar{A}} \\mathbf{h}_{t-1} + \\mathbf{\\bar{B}} \\mathbf{x}_t$",
+      "filename": "tides_selective_ssm_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\bar{A}",
+          "label": "Time-warped state matrix"
+        }
+      ],
+      "svg_filename": "tides_selective_ssm_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{A}(x) = \\mathrm{diag}(\\mathbf{W}_{A}x + b_{A})$",
+      "filename": "tides_selective_ssm_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "A(x)",
+          "label": "Input-dependent state matrix"
+        }
+      ],
+      "svg_filename": "tides_selective_ssm_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\tilde{\\Delta} \\equiv \\Delta$",
+      "filename": "tides_selective_ssm_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\equiv",
+          "label": "Strict equivalence"
+        }
+      ],
+      "svg_filename": "tides_selective_ssm_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Rank}_{TIDES} < \\mathrm{Rank}_{SOTA}$",
+      "filename": "tides_selective_ssm_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Rank",
+          "label": "Average benchmark rank"
+        }
+      ],
+      "svg_filename": "tides_selective_ssm_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Mamba",
+          "color": "#EF4444",
+          "items": [
+            "SSM",
+            "Discretization",
+            "Warping"
+          ]
+        },
+        {
+          "name": "S5",
+          "color": "#38BDF8",
+          "items": [
+            "LTI",
+            "Continuous",
+            "Fixed-\u0394"
+          ]
+        },
+        {
+          "name": "TIDES",
+          "color": "#34D399",
+          "items": [
+            "Selective",
+            "Continuous",
+            "Matrix-Dependence"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Irregular_\u0394\"",
+        "target_cluster": "TIDES",
+        "token": "\"Irregular_\u0394\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token '\u0394_mismatch'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token '\u0394_sync'",
+          "color": "#34D399"
+        }
+      ]
+    },
+    "model_a": "TIDES",
+    "model_a_specs": [
+      "State-dependent",
+      "Continuous-time",
+      "Selective SSM"
+    ],
+    "model_b": "Mamba",
+    "model_b_specs": [
+      "Discretization-dependent",
+      "Standard",
+      "Selective SSM"
+    ],
+    "divide_title": "TEMPORAL FIDELITY VS SELECTIVITY",
+    "model_a_stat": "1.2 Rank",
+    "model_a_stat_label": "UEA AVERAGE RANK",
+    "model_b_stat": "3.4 Rank",
+    "model_b_stat_label": "BASELINE RANK",
+    "efficiency_badge": "\u26a1 NATIVE IRREGULAR DATA SUPPORT",
+    "benchmarks": [
+      {
+        "name": "UEA Classif.",
+        "score_a": "1.2",
+        "score_b": "3.4"
+      },
+      {
+        "name": "Physiome ODE",
+        "score_a": "Best",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Astronomy Data",
+        "score_a": "Match",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "\u0394=\u0394\u0303",
+    "scale_label": "CONTINUOUS STATE SPACE",
+    "bottleneck_title": "DISCRETIZATION MISMATCH",
+    "bottleneck_desc": "Learned step size breaks physical temporal observations.",
+    "solution_title": "DIAGONAL STATE DEPENDENCE",
+    "solution_components": "Shifted input dependence to A(x)",
+    "mechanism_title": "TIDES ARCHITECTURE",
+    "payoff_stat": "1.2",
+    "payoff_label": "BEST UEA RANK",
+    "payoff_sub": "Native handling of irregular timestamps.",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "TIDES Accuracy",
+    "payoff_base_stat": 82.5,
+    "payoff_base_label": "LTI Baseline",
+    "payoff_delta_badge": "\u26a1 +15.7% TEMPORAL RECOVERY GAIN",
+    "challenger": "TIDES",
+    "incumbent": "Selective SSM Baselines"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: UEA RANKINGS",
+    "metric_name": "Average Rank (Lower is Better)",
+    "unit": "Rank",
+    "contestants": [
+      {
+        "name": "TIDES",
+        "value": 1.2,
+        "display_val": "Rank 1.2",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "S5",
+        "value": 2.1,
+        "display_val": "Rank 2.1",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Mamba",
+        "value": 3.4,
+        "display_val": "Rank 3.4",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 NEW BEST PERFORMANCE",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Accuracy",
+      "Context Length",
+      "Cost Efficiency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "tides_layer.py",
+    "language": "python",
+    "lines": [
+      "def forward(x, delta):",
+      "    # Shift dependence to A",
+      "    A_x = diag(W_A @ x + b_A)",
+      "    return run_ssm(A_x, delta, x)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 INPUT-DEPENDENT STATE MATRIX",
+    "explanation": "Moving x-dependence from delta to A matrix"
+  },
+  "arxiv_id": "2605.09742",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig_droprate_ablation_with_mamba_narrow_thin",
+      "caption": "Fig Droprate Ablation With Mamba Narrow Thin",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/source/figures/fig_droprate_ablation_with_mamba_narrow_thin.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_1_fig_droprate_ablation_with_mamba_narrow_thin.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig_setup",
+      "caption": "Fig Setup",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/source/figures/fig_setup.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_2_fig_setup.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_2_fig_setup.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig_ood_error_mamba123",
+      "caption": "Fig Ood Error Mamba123",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/source/figures/fig_ood_error_mamba123.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_3_fig_ood_error_mamba123.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_3_fig_ood_error_mamba123.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "fig_mechanism_ood",
+      "caption": "Fig Mechanism Ood",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/source/figures/fig_mechanism_ood.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_4_fig_mechanism_ood.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2605.09742/chalkboard_figures/fig_4_fig_mechanism_ood.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This is actually solid. You didn't waste my time with a 'Hey guys' intro, and you got straight to the technical bottleneck\u2014the discretization step. I've been looking into SSMs lately, and the way you framed the 'lying to the model' part made the architectural shift to the diagonal state matrix click instantly. No cringe metaphors, just straight engineering trade-offs."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Input-dependent discretization step",
+    "physical_analogy": "A clock that changes its tick speed based on the weather, making it impossible to measure actual elapsed time.",
+    "eureka_mechanism": "Input-dependent diagonal state matrix",
+    "paradigm_shift": "Native handling of irregular time intervals without losing expressivity"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "ui_containers": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "graph_dynamics": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.1
+      },
+      "caption_overlay": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "vector_field_graph": {
+        "dx": 0.0,
+        "dy": 1.522,
+        "scale_multiplier": 0.855
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 5.729,
+        "scale_multiplier": 1.0
+      },
+      "redundant_caption_box": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      },
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.15
+      },
+      "vector_grid_visualization": {
+        "dx": 0.0,
+        "dy": 1.587,
+        "scale_multiplier": 0.85
+      },
+      "caption_text_box": {
+        "dx": 0.0,
+        "dy": 0.56,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "redundant_caption_card": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      },
+      "metronome_graphic": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.15
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.896,
+        "scale_multiplier": 1.05
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.1
+      },
+      "benchmark_plot": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.696
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 3.728,
+        "scale_multiplier": 1.0
+      },
+      "hero_chart": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.7
+      }
+    },
+    "4": {
+      "text_ui_card": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      },
+      "state_matrix_grid": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.648,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "bar_chart": {
+        "dx": 0.0,
+        "dy": 0.7,
+        "scale_multiplier": 0.85
+      },
+      "saas_ui_box": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 0.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.864,
+        "scale_multiplier": 1.0
+      },
+      "ui_artifact": {
+        "dx": 0.0,
+        "dy": 0.384,
+        "scale_multiplier": 0.0
+      }
+    },
+    "6": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -1.5,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}
