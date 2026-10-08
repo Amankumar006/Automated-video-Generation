@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-08 | **Timestamp:** 2026-10-08 12:15:45 UTC
+**Date:** 2026-10-08 | **Timestamp:** 2026-10-08 16:06:28 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: TIDES: Implicit Time-Awareness in Selective State Space Models
-- **arXiv ID:** [2605.09742](https://arxiv.org/abs/2605.09742)
-- **Domain Taxonomy:** `hardware_efficiency` (1.07x velocity)
+### Reel 1: STEPQuant: When and Where Errors Matter in Delta-Rule Recurrent State Quantization
+- **arXiv ID:** [2609.38169](https://arxiv.org/abs/2609.38169)
+- **Domain Taxonomy:** `hardware_efficiency` (1.04x velocity)
 - **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *Why does your AI 'forget' the passage of time, and how can we fix the 'time-warp' inside its brain?*
-- **Everyday Analogy:** *A metronome that keeps speeding up or slowing down without the listener knowing, causing the music to lose its rhythm.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_tides_ssm_mechanism_mechanism_deepdive.mp4`
+- **Editorial Hook:** *Why do AI models get 'forgetful' as they get longer—and how can we shrink their memory without losing a single thought?*
+- **Everyday Analogy:** *Compressing a giant, sprawling library book into a tiny, high-density QR code that only expands when you look at a specific page.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_stepquant_recurrent_quantization_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
