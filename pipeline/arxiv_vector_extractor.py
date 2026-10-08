@@ -59,7 +59,9 @@ def download_arxiv_source(arxiv_id: str) -> Optional[Path]:
         print(f"⚠️ Failed to download arXiv e-print bundle: {e}")
         return None
 
-    tar_path = paper_dir / f"{clean_id}_source.tar.gz"
+    safe_id = clean_id.replace('/', '_')
+    tar_path = paper_dir / f"{safe_id}_source.tar.gz"
+    tar_path.parent.mkdir(parents=True, exist_ok=True)
     tar_path.write_bytes(content)
 
     try:
@@ -71,7 +73,8 @@ def download_arxiv_source(arxiv_id: str) -> Optional[Path]:
         print(f"⚠️ Tarball extraction failed (might be standalone PDF): {e}")
         # If source is a single PDF directly
         if content[:4] == b"%PDF":
-            pdf_path = source_dir / f"{clean_id}.pdf"
+            pdf_path = source_dir / f"{safe_id}.pdf"
+            pdf_path.parent.mkdir(parents=True, exist_ok=True)
             pdf_path.write_bytes(content)
             return source_dir
         return None
@@ -177,13 +180,29 @@ def prepare_image_for_blackboard(
             ymax = min(h, ymax + pad_y)
             im = im.crop((xmin, ymin, xmax, ymax))
 
-        # 2. Super-sample to high resolution (>= min_width)
+        # 2. Super-sample to high resolution (>= min_width) with safety bounds
         cur_w, cur_h = im.size
+        cur_w = max(cur_w, 1)
+        cur_h = max(cur_h, 1)
+
+        target_w = cur_w
+        target_h = cur_h
         if cur_w < min_width:
-            scale = max(min_width / max(cur_w, 1), 1.0)
-            new_w = int(cur_w * scale)
-            new_h = int(cur_h * scale)
-            im = im.resize((new_w, new_h), Image.Resampling.LANCZOS)
+            scale = max(min_width / cur_w, 1.0)
+            target_w = int(cur_w * scale)
+            target_h = int(cur_h * scale)
+
+        # Prevent unbounded memory explosion on extreme aspect ratios
+        max_dim = 4096
+        if max(target_w, target_h) > max_dim:
+            downscale = max_dim / max(target_w, target_h)
+            target_w = max(1, int(target_w * downscale))
+            target_h = max(1, int(target_h * downscale))
+
+        if (target_w, target_h) != (im.size[0], im.size[1]):
+            target_w = max(1, target_w)
+            target_h = max(1, target_h)
+            im = im.resize((target_w, target_h), Image.Resampling.LANCZOS)
 
         # 3. Analyze whether diagram contains colored fills (architecture boxes)
         arr = np.array(im).astype(float)
@@ -259,7 +278,8 @@ def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str,
             ext = Path(f).suffix.lower()
             if ext in candidate_extensions:
                 # Exclude full paper PDFs if named like arxiv id
-                if f == f"{clean_id}.pdf":
+                safe_id = clean_id.replace('/', '_')
+                if f in (f"{clean_id}.pdf", f"{safe_id}.pdf"):
                     continue
                 found_files.append(Path(root) / f)
 
@@ -323,12 +343,16 @@ def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str,
                     recolored = recolor_svg_for_blackboard(raw_svg)
                     svg_target.write_text(recolored, encoding="utf-8")
 
+                    caption = p.stem.replace("_", " ").title()
                     extracted_figures.append({
                         "figure_id": f"fig_{fig_idx}",
                         "stem": p.stem,
+                        "caption": caption,
+                        "page_num": 0,
                         "source_file": str(p),
                         "svg_path": str(svg_target),
                         "image_path": str(prepared_path),
+                        "original_type": "pdf",
                         "type": "vector_pdf",
                         "score": figure_score(p)
                     })
@@ -342,16 +366,39 @@ def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str,
                 raw_svg = p.read_text(encoding="utf-8", errors="ignore")
                 recolored = recolor_svg_for_blackboard(raw_svg)
                 svg_target.write_text(recolored, encoding="utf-8")
+
+                # Render high-res 350 DPI raster for native SVG to guarantee dual vector and raster assets
+                prepared_path = None
+                try:
+                    svg_doc = pymupdf.open(stream=recolored.encode("utf-8"), filetype="svg")
+                    if len(svg_doc) > 0:
+                        pix = svg_doc[0].get_pixmap(dpi=350, alpha=True)
+                        raw_high_res = Image.frombytes("RGBA", [pix.width, pix.height], pix.samples)
+                        prepared_path = str(prepare_image_for_blackboard(raw_high_res, img_target))
+                except Exception as e_raster:
+                    try:
+                        svg_doc = pymupdf.open(p)
+                        if len(svg_doc) > 0:
+                            pix = svg_doc[0].get_pixmap(dpi=350, alpha=True)
+                            raw_high_res = Image.frombytes("RGBA", [pix.width, pix.height], pix.samples)
+                            prepared_path = str(prepare_image_for_blackboard(raw_high_res, img_target))
+                    except Exception:
+                        prepared_path = None
+
+                caption = p.stem.replace("_", " ").title()
                 extracted_figures.append({
                     "figure_id": f"fig_{fig_idx}",
                     "stem": p.stem,
+                    "caption": caption,
+                    "page_num": 0,
                     "source_file": str(p),
                     "svg_path": str(svg_target),
-                    "image_path": None,
+                    "image_path": prepared_path,
+                    "original_type": "svg",
                     "type": "native_svg",
                     "score": figure_score(p)
                 })
-                print(f"   📊 Recolored native SVG figure: {p.name} -> {svg_target.name}")
+                print(f"   📊 Processed native SVG figure: {p.name} -> SVG + {img_target.name if prepared_path else 'No Raster'}")
                 fig_idx += 1
             except Exception as e:
                 print(f"⚠️ Error processing SVG figure {p.name}: {e}")
@@ -359,12 +406,16 @@ def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str,
         elif ext in [".png", ".jpg", ".jpeg"]:
             try:
                 prepared_path = prepare_image_for_blackboard(p, img_target)
+                caption = p.stem.replace("_", " ").title()
                 extracted_figures.append({
                     "figure_id": f"fig_{fig_idx}",
                     "stem": p.stem,
+                    "caption": caption,
+                    "page_num": 0,
                     "source_file": str(p),
                     "svg_path": None,
                     "image_path": str(prepared_path),
+                    "original_type": ext.lstrip("."),
                     "type": "raster_image",
                     "score": figure_score(p)
                 })

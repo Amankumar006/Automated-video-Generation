@@ -522,6 +522,30 @@ Generate the complete JSON specification strictly adhering to this structure:
             }
         })
 
+    # Ingest arXiv ID and extract/preserve paper figures
+    arxiv_id = None
+    if arxiv_meta and isinstance(arxiv_meta, dict):
+        arxiv_id = arxiv_meta.get("arxiv_id") or arxiv_meta.get("id")
+    if not arxiv_id and spec.get("arxiv_id"):
+        arxiv_id = spec.get("arxiv_id")
+
+    if arxiv_id:
+        from pipeline.arxiv_vector_extractor import clean_arxiv_id, extract_paper_figures
+        clean_arxiv = clean_arxiv_id(str(arxiv_id))
+        spec["arxiv_id"] = clean_arxiv
+        if arxiv_meta and arxiv_meta.get("paper_figures"):
+            spec["paper_figures"] = arxiv_meta["paper_figures"]
+            print(f"📊 Transferred {len(spec['paper_figures'])} paper figures from arxiv_meta into spec['paper_figures']")
+        elif not spec.get("paper_figures"):
+            try:
+                print(f"📊 Ingesting paper figures for arXiv '{clean_arxiv}' into script spec...")
+                figs = extract_paper_figures(clean_arxiv, max_figures=5)
+                if figs:
+                    spec["paper_figures"] = figs
+                    print(f"   ✅ Successfully extracted {len(figs)} paper figures into spec['paper_figures']")
+            except Exception as e_figs:
+                print(f"⚠️ Figure extraction notice in script_generator: {e_figs}")
+
     # Preserve curated code kernel and repo metadata if supplied by GitHub ingest
     if arxiv_meta and isinstance(arxiv_meta, dict):
         if arxiv_meta.get("code_snippet") and (not spec.get("code_snippet") or arxiv_meta.get("repo_metadata")):

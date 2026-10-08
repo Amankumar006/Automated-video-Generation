@@ -316,7 +316,19 @@ class VisualDirector:
         clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
         topic = spec.get("title", clean_id)
         beats = spec.get("beats", [])
-        paper_figures = spec.get("paper_figures", [])
+        paper_figures = [f for f in spec.get("paper_figures", []) if isinstance(f, dict)]
+        if not paper_figures and spec.get("arxiv_id"):
+            try:
+                from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
+                clean_id = clean_arxiv_id(str(spec["arxiv_id"]))
+                print(f"   ℹ️ VisualDirector fallback: lazily extracting paper figures for arXiv '{clean_id}'...")
+                extracted = extract_paper_figures(clean_id, max_figures=5)
+                paper_figures = [f for f in extracted if isinstance(f, dict)]
+                if paper_figures:
+                    spec["paper_figures"] = paper_figures
+            except Exception as e_figs:
+                print(f"⚠️ VisualDirector fallback figure extraction notice: {e_figs}")
+
         used_layouts = set()
 
         print(f"\n🎬 [VisualDirector 4.0] Designing Script-Driven Visual Storyboard for '{topic}'...")
@@ -389,28 +401,36 @@ class VisualDirector:
             # -------------------------------------------------------------
             if paper_figures and b_id == 3:
                 top_fig = paper_figures[0]
+                if not isinstance(top_fig, dict):
+                    top_fig = {}
                 fig_svg = top_fig.get("svg_path")
                 fig_img = top_fig.get("image_path")
                 arxiv_id = spec.get("arxiv_id") or ""
 
                 # Resolve relative paths if cached
                 if fig_svg and not os.path.exists(fig_svg):
-                    rel_match = re.search(r"(public/arxiv_cache/.*)", fig_svg)
-                    if rel_match:
-                        loc = str(PROJECT_ROOT / rel_match.group(1))
-                        if os.path.exists(loc):
-                            fig_svg = loc
-                        else:
-                            fig_svg = None
+                    if (PROJECT_ROOT / fig_svg).exists():
+                        fig_svg = str(PROJECT_ROOT / fig_svg)
+                    else:
+                        rel_match = re.search(r"(public/arxiv_cache/.*)", fig_svg)
+                        if rel_match:
+                            loc = str(PROJECT_ROOT / rel_match.group(1))
+                            if os.path.exists(loc):
+                                fig_svg = loc
+                            else:
+                                fig_svg = None
 
                 if fig_img and not os.path.exists(fig_img):
-                    rel_match = re.search(r"(public/arxiv_cache/.*)", fig_img)
-                    if rel_match:
-                        loc = str(PROJECT_ROOT / rel_match.group(1))
-                        if os.path.exists(loc):
-                            fig_img = loc
-                        else:
-                            fig_img = None
+                    if (PROJECT_ROOT / fig_img).exists():
+                        fig_img = str(PROJECT_ROOT / fig_img)
+                    else:
+                        rel_match = re.search(r"(public/arxiv_cache/.*)", fig_img)
+                        if rel_match:
+                            loc = str(PROJECT_ROOT / rel_match.group(1))
+                            if os.path.exists(loc):
+                                fig_img = loc
+                            else:
+                                fig_img = None
 
                 if (fig_svg and os.path.exists(fig_svg)) or (fig_img and os.path.exists(fig_img)):
                     topic_core = topic.split(":")[0].strip().upper()
@@ -426,11 +446,14 @@ class VisualDirector:
                             "arxiv_id": arxiv_id,
                             "title": fig_title,
                             "sub": b.get("visual_focus", "")[:65] or "Official architectural diagram from arXiv source",
-                            "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+                            "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+                            "caption": top_fig.get("caption", "Architecture Overview"),
+                            "preferred_renderer": "vector" if fig_svg else "raster"
                         }
                     }
                     b["motif_params"] = b["visual_blueprint"]["params"]
                     b["kinetic_action"] = "figure_scan"
+                    used_layouts.add("paper_figure")
                     active_path = fig_svg or fig_img
                     print(f"   ✨ Beat 3: Assigned Authentic arXiv Paper Diagram '{os.path.basename(active_path)}'")
                     continue

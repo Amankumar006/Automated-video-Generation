@@ -266,7 +266,7 @@ def main():
     arxiv_meta = None
     if args.arxiv:
         print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
-        arxiv_meta = fetch_arxiv_paper(args.arxiv)
+        arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
         if not arxiv_meta:
             raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
         topic = args.topic or arxiv_meta["title"]
@@ -287,6 +287,35 @@ def main():
         template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
     else:
         spec, template_path = load_template(topic)
+
+    # Ingest / bind native arXiv paper figures
+    target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
+    if target_arxiv_id:
+        from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
+        clean_id = clean_arxiv_id(str(target_arxiv_id))
+        spec["arxiv_id"] = clean_id
+        if not spec.get("paper_figures"):
+            if arxiv_meta and arxiv_meta.get("paper_figures"):
+                spec["paper_figures"] = arxiv_meta["paper_figures"]
+                print(f"📊 Transferred {len(spec['paper_figures'])} paper figures from arXiv metadata into spec['paper_figures'].")
+            else:
+                print(f"\n📊 Ingesting native paper figures for arXiv '{clean_id}'...")
+                try:
+                    figs = extract_paper_figures(clean_id, max_figures=5)
+                    if figs:
+                        spec["paper_figures"] = figs
+                        print(f"   ✅ Successfully extracted {len(figs)} paper figures to public/arxiv_cache/{clean_id}/ and spec['paper_figures']")
+                    else:
+                        print(f"   ℹ️ No candidate paper figures found for arXiv '{clean_id}'")
+                except Exception as e_figs:
+                    print(f"⚠️ arXiv figure extraction notice: {e_figs}")
+        else:
+            print(f"📊 Spec already contains {len(spec['paper_figures'])} paper figures.")
+
+        # Persist updated spec before storyboard preparation
+        with open(template_path, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
+
     category = args.category or spec.get("category")
     if category not in CATEGORY_SCENE_MAP:
         raise ValueError(f"Unsupported category '{category}'. Available: {list(CATEGORY_SCENE_MAP.keys())}")

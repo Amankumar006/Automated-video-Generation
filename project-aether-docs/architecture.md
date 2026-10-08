@@ -174,3 +174,12 @@ To scale production without cost exhaustion, Aether incorporates four state-of-t
 1. **Commercial Model Limitations:** Commercial closed APIs (Veo, Runway, Kling) do not expose raw depth/normal ControlNet tensors. The Shot Compiler solves this by converting 3D previs into photorealistic first/last frame pairs, relying on the model for interpolation while preserving geometry.
 2. **Open-Weights Complement:** For shots requiring absolute mathematical adherence to camera paths or limb poses, Aether routes workloads to local/cloud ComfyUI instances running CogVideoX / HunyuanVideo with specialized ControlNet nodes.
 3. **Hybrid Verification:** High-speed temporal anomalies (e.g., a 3-frame glitch) are invisible to standard VLM calls. Aether combines OpenCV optical flow and frame differential metrics with VLM semantic reasoning.
+
+---
+
+## 6. Operational Status & API Budget Activation Protocol
+1. **Standby Architectural Readiness:** Project Aether v2 has been fully implemented, verified, and test-covered (394+ automated tests passing across state graph, complexity planner, shot compiler, critic council, surgical repair, and Dream-RSI teacher engine).
+2. **Budget-Contingent Live Deployment:** Commercial generative video endpoints (Google Veo 3.1, Kling 3.0, Runway Gen-4.5) and dedicated cloud GPU clusters (H100/A100 instances for ComfyUI / CogVideoX / HunyuanVideo) require active API budgets and compute funding. Consequently, Aether is held in **Standby / Simulation Readiness Mode** and runs via deterministic dry-run verification (`python3 -m aether.director --dry-run`).
+3. **Active Production Workhorse:** Daily automated video generation for The Model Verse is currently handled by **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)**, which operates at zero API credit cost using local Ollama Cloud models (`gpt-oss:120b:cloud`), offline Kokoro TTS, and deterministic Manim 2D chalkboard rendering.
+4. **Activation Path:** Once API budgets and cloud compute are allocated, Aether will be activated directly via `python3 -m aether.director --brief "<premise>" --run-now` and will consume The Model Verse educational assets via [`aether/shared_contract.py`](../aether/shared_contract.py).
+

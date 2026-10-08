@@ -52,3 +52,12 @@ Following the breakthrough methodology of **Dream-RSI** (Zheng et al., 2026):
 2. **Offline Dreaming Protocol:** The system treats completed generation and repair episodes as an evolving **Replay Simulator Pool**. 
 3. **Zero-API-Cost Policy Refinement:** Candidate exploration policies, complexity thresholds, and model routing heuristics are evaluated by replaying trajectories across pre-recorded discovery trees.
 4. **Pareto Evaluation:** Policies are ranked on a Pareto curve balancing solution quality, total work (API probe cost), and parallel execution speedup. Only policies demonstrably superior in simulation are redeployed online.
+
+---
+
+## 7. Current Project Phase & Production Operational Strategy
+* **Phase Status:** Phase 10 Complete (Autonomous Director & Multi-Engine Shared Contract Integration).
+* **Budget Protocol:** Because external commercial video generation APIs (Veo 3.1, Kling 3.0, Runway Gen-4.5) and cloud GPU clusters require active token/compute budgets, live generative rendering is currently parked in **Standby / Simulation Readiness**.
+* **Daily Production Focus:** Active daily short video production is maintained by **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)** at zero external API cost.
+* **Resumption Trigger:** Aether live production execution will be triggered upon allocation of dedicated commercial video API credits and GPU compute budget.
+

@@ -1,0 +1,530 @@
+{
+  "id": "robotworld_mechanism",
+  "title": "RobotWorld: Embodied Benchmark Unleashes Real\u2011Contact Physics",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "robotics_tamp",
+  "hook_tag": "SIM\u2011REALITY GAP",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "In a flawless sim, a robot lifts a mug. In reality, it drops it. Every single time.",
+      "visual_focus": "split_flow visual of sim robot lifting mug vs real robot dropping mug",
+      "highlight_words": {
+        "drops it": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Simulation",
+        "action_verb": "contradicts",
+        "direct_object": "reality",
+        "anchor_word": "paradox",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "SIM VS REAL",
+        "sub": "Mug lift paradox",
+        "accent_color": "#38BDF8",
+        "params": {
+          "field_title": "Contact Flow Divergence",
+          "source_label": "Ideal Motion",
+          "target_label": "Stalled Motion",
+          "stream_formula": "$|\\mathcal{E}| = 100$"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1
+    },
+    {
+      "beat_id": 2,
+      "text": "The contact bottleneck turns every fingertip into a full\u2011body physics solve, choking the CPU like a rush\u2011hour intersection, blocking the scheduler and stalling every subsequent limb.",
+      "visual_focus": "traffic_jam analogy overlay on CPU usage chart",
+      "highlight_words": {
+        "Contact Bottleneck": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Contact",
+        "action_verb": "chokes",
+        "direct_object": "CPU",
+        "anchor_word": "traffic jam",
+        "semantic_role": "obstacle"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "CPU JAM",
+        "sub": "Full-body solves per fingertip",
+        "accent_color": "#38BDF8",
+        "params": {
+          "layer_label": "Contact Computation Layer",
+          "wave_type": "Quadratic Explosion"
+        }
+      },
+      "thriller_role": "villain_introduction",
+      "act": 2
+    },
+    {
+      "beat_id": 3,
+      "text": "The breakthrough: a hierarchical contact graph that organizes tiny patches into a tree, like folders in a file system for each robot limb.",
+      "visual_focus": "tree diagram of hierarchical contact graph resembling file system",
+      "highlight_words": {
+        "Hierarchical Contact Graph": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Graph",
+        "action_verb": "organizes",
+        "direct_object": "contact patches",
+        "anchor_word": "folders",
+        "semantic_role": "structure"
+      },
+      "visual_blueprint": {
+        "layout": "tree_hierarchy",
+        "title": "CONTACT TREE",
+        "sub": "Folder\u2011like patches per limb",
+        "accent_color": "#38BDF8",
+        "params": {
+          "root_label": "World Root",
+          "optimal_label": "Sparse Force Path",
+          "pruned_label": "Redundant Contacts"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3
+    },
+    {
+      "beat_id": 4,
+      "text": "Solver walks the tree bottom\u2011up, resolves physics locally at leaf patches, then aggregates forces upward, pruning irrelevant branches for the current timestep.",
+      "visual_focus": "bottom\u2011up traversal animation highlighting leaf solves and upward aggregation",
+      "highlight_words": {
+        "bottom\u2011up traversal": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Solver",
+        "action_verb": "aggregates",
+        "direct_object": "forces",
+        "anchor_word": "prunes",
+        "semantic_role": "computation"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "TRAVERSAL",
+        "sub": "Leaf to root aggregation",
+        "accent_color": "#38BDF8",
+        "params": {
+          "input_label": "Contact Clusters",
+          "router_label": "Impedance Gate",
+          "branch_a_label": "Pass",
+          "branch_a_sub": "g_i > \u03c4",
+          "branch_b_label": "Block",
+          "branch_b_sub": "g_i \u2264 \u03c4"
+        }
+      },
+      "thriller_role": "secret_sauce",
+      "act": 3
+    },
+    {
+      "beat_id": 5,
+      "text": "RobotWorld reaches 86% task success\u2014outpacing MuJoCo\u2019s 62% and Gym\u2019s 55%\u2014a 24% boost on identical hardware in the standard benchmark suite.",
+      "visual_focus": "bar chart comparing success rates: RobotWorld, MuJoCo, Gym",
+      "highlight_words": {
+        "86%": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "RobotWorld",
+        "action_verb": "achieves",
+        "direct_object": "86% success",
+        "anchor_word": "boost",
+        "semantic_role": "performance"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "SUCCESS RATES",
+        "sub": "Benchmark breakout",
+        "accent_color": "#38BDF8",
+        "params": {
+          "col_a_title": "Baseline",
+          "col_a_stat": "62% Success",
+          "col_b_title": "RobotWorld",
+          "col_b_stat": "86% Success"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4
+    },
+    {
+      "beat_id": 6,
+      "text": "Next time a robot drops a mug, remember the hidden contact tree that could have saved it.",
+      "visual_focus": "closing loop animation returning to mug drop scene, overlaying contact tree ghost",
+      "highlight_words": {
+        "contact tree": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "remembers",
+        "direct_object": "contact tree",
+        "anchor_word": "loop",
+        "semantic_role": "recall"
+      },
+      "visual_blueprint": {
+        "layout": "projection_rays",
+        "title": "REMINDER",
+        "sub": "Tree that catches mugs",
+        "accent_color": "#10B981",
+        "params": {}
+      },
+      "thriller_role": "paradigm_loop",
+      "act": 4
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$|\\mathcal{E}| = 100$",
+      "filename": "robotworld_mechanism_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "|\\mathcal{E}|",
+          "label": "Number of benchmark environments"
+        }
+      ],
+      "svg_filename": "robotworld_mechanism_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(C^{2})$",
+      "filename": "robotworld_mechanism_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "C",
+          "label": "Contact points per scene"
+        }
+      ],
+      "svg_filename": "robotworld_mechanism_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{F}=\\mathbf{T}\\,\\mathbf{z}$",
+      "filename": "robotworld_mechanism_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{F}",
+          "label": "Projected force vector"
+        },
+        {
+          "term": "\\mathbf{T}",
+          "label": "Sparse tree matrix"
+        }
+      ],
+      "svg_filename": "robotworld_mechanism_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$g_{i}=\\sigma(\\mathbf{W}_{g}\\,\\boldsymbol{\\phi}_{i})$",
+      "filename": "robotworld_mechanism_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "g_{i}",
+          "label": "Gate activation for contact i"
+        },
+        {
+          "term": "\\mathbf{W}_{g}",
+          "label": "Learned gate weights"
+        }
+      ],
+      "svg_filename": "robotworld_mechanism_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$S_{\\text{RW}} = 0.86$",
+      "filename": "robotworld_mechanism_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "S_{\\text{RW}}",
+          "label": "Success rate on RobotWorld benchmark"
+        }
+      ],
+      "svg_filename": "robotworld_mechanism_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "reasoning_tree",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "CONTACT_CLUSTERS",
+          "color": "#38BDF8",
+          "items": [
+            "Hand",
+            "Foot",
+            "Object"
+          ]
+        },
+        {
+          "name": "PHYSICS_MODULES",
+          "color": "#10B981",
+          "items": [
+            "RigidBody",
+            "Friction",
+            "Latency"
+          ]
+        },
+        {
+          "name": "PERFORMANCE_METRICS",
+          "color": "#F59E0B",
+          "items": [
+            "SuccessRate",
+            "Latency",
+            "Throughput"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"grasp\"",
+        "target_cluster": "CONTACT_CLUSTERS",
+        "token": "\"grasp\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Contact Overload",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Friction Spike",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "DeepMind TAMP",
+    "model_a_specs": [
+      "Contact\u2011aware planner",
+      "Physics\u2011augmented RL",
+      "Hierarchical reasoning"
+    ],
+    "model_b": "Baseline MuJoCo",
+    "model_b_specs": [
+      "Standard dynamics",
+      "No latency modeling",
+      "Flat policy"
+    ],
+    "divide_title": "PHYSICS VS POLICY DIVIDE",
+    "model_a_stat": "86%",
+    "model_a_stat_label": "TASK SUCCESS",
+    "model_b_stat": "62%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 3\u00d7 SIMULATION SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "Pick\u2011and\u2011Place",
+        "score_a": "86%",
+        "score_b": "62%"
+      },
+      {
+        "name": "Dynamic Balance",
+        "score_a": "3\u00d7",
+        "score_b": "1\u00d7"
+      },
+      {
+        "name": "Contact Richness",
+        "score_a": "High",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "100",
+    "scale_label": "PHOTOREALISTIC WORLDS",
+    "bottleneck_title": "CONTACT OVERLOAD BOTTLENECK",
+    "bottleneck_desc": "Quadratic Collision Explosion",
+    "solution_title": "HIERARCHICAL CONTACT GRAPH",
+    "solution_components": "Sparse Tree + Modular Clusters",
+    "mechanism_title": "GATED IMPEDANCE LAYER",
+    "payoff_stat": "86%",
+    "payoff_label": "SUCCESS RATE",
+    "payoff_sub": "Outperforming Conventional Simulators",
+    "payoff_hero_stat": 86.0,
+    "payoff_hero_label": "RobotWorld Success",
+    "payoff_base_stat": 62.0,
+    "payoff_base_label": "Baseline Success",
+    "payoff_delta_badge": "\u26a1 +24% SUCCESS GAIN",
+    "challenger": "DeepMind RobotWorld",
+    "incumbent": "MuJoCo Standard"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: SUCCESS RATE",
+    "metric_name": "Success %",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "RobotWorld",
+        "value": 86.0,
+        "display_val": "86%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "MuJoCo Baseline",
+        "value": 62.0,
+        "display_val": "62%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "OpenAI Gym",
+        "value": 55.0,
+        "display_val": "55%",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Custom PyBullet",
+        "value": 48.0,
+        "display_val": "48%",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +24% SUCCESS GAIN",
+    "radar_axes": [
+      "Success",
+      "Latency",
+      "Contact Fidelity",
+      "Generalization",
+      "Compute Cost"
+    ]
+  },
+  "code_snippet": {
+    "filename": "core_kernel.py",
+    "language": "python",
+    "lines": [
+      "def execute_step(tensor_in):",
+      "    node = self.root_cache",
+      "    out = fused_forward_pass(tensor_in)",
+      "    return synchronize(node, out)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 FUSED HARDWARE KERNEL EXECUTION",
+    "explanation": "Zero memory\u2011copy hardware acceleration"
+  },
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 8.6,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The opening hook nailed me \u2013 I instantly pictured a perfect sim vs a real robot fumble, so I kept watching. Beats 2\u20114 kept the momentum with a clear visual (file\u2011system tree) and a step\u2011by\u2011step of the algorithm. The only hiccup was a couple of buzzier terms like \u201cfull\u2011body physics solve\u201d and \u201ccontact bottleneck\u201d that weren\u2019t explained in plain language, which made me pause for a second."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Contact Bottleneck",
+    "physical_analogy": "traffic jam at a city intersection",
+    "eureka_mechanism": "Hierarchical Contact Graph",
+    "paradigm_shift": "Selective, tree\u2011structured physics solves lift simulation throughput 24% higher"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "coupled_canvas",
+      "entity_type": "coupled_canvas",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "title": "RobotWorld: Embodied Benchmark Unleashes Real\u2011Contact Physics"
+      }
+    },
+    {
+      "entity_id": "robot_arm",
+      "entity_type": "kinematic_arm",
+      "z_index": 15,
+      "initial_position": [
+        0.0,
+        -2.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "link_lengths": [
+          1.5,
+          1.2
+        ]
+      }
+    },
+    {
+      "entity_id": "ast_tree",
+      "entity_type": "ast_tree",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        2.8,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "sandbox_pod",
+      "entity_type": "sandbox_pod",
+      "z_index": 14,
+      "initial_position": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

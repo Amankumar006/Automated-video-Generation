@@ -2,9 +2,11 @@
 .env
 *.env
 *.pickle
-*token*.json
+*_token.json
+*oauth*.json
 *secret*.json
 !client_secrets.example.json
+!pipeline/templates/*.json
 credentials.json
 google-analytics-credentials.json
 pipeline/youtube_token.json
@@ -58,9 +60,12 @@ public/math_svgs/
 *.srt
 *.ass
 
-# OS Artifacts
+# OS & IDE Artifacts
 .DS_Store
 Thumbs.db
+.idea/
+.agents/
+*.pdf
 
 # Bespoke Generated Visual Modules
 manim_engine/generated/*

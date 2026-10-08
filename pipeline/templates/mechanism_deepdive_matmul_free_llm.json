@@ -1,0 +1,1464 @@
+{
+  "id": "matmul_free_llm",
+  "title": "Scalable MatMul-free Language Modeling",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "HARDWARE REVOLUTION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Modern LLMs are suffocating under the weight of billions of redundant matrix multiplications.",
+      "visual_focus": "A glowing matrix grid collapsing into a single point of light.",
+      "highlight_words": {
+        "suffocating": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Matrix Multiplication",
+        "action_verb": "chokes",
+        "direct_object": "LLM performance",
+        "anchor_word": "suffocating",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE MATMUL PARADOX",
+        "sub": "Why your hardware is lying to you.",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "GPU MEMORY STALL",
+          "active_cell_label": "MATMUL_STALL",
+          "efficiency_label": "LATENCY"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "audio_duration": 5.1,
+      "slot_duration": 5.4,
+      "start": 0.0,
+      "end": 5.1,
+      "word_timings": [
+        {
+          "word": "Modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 0.015,
+          "end": 0.35,
+          "duration": 0.335,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "LLMs",
+          "clean_word": "llms",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 0.35,
+          "end": 0.894,
+          "duration": 0.544,
+          "frame_ahead_trigger": 0.31
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 0.894,
+          "end": 1.06,
+          "duration": 0.166,
+          "frame_ahead_trigger": 0.854
+        },
+        {
+          "word": "suffocating",
+          "clean_word": "suffocating",
+          "phonemes": "s\u02c8\u028cf\u0259k\u02cce\u026a\u027e\u026a\u014b",
+          "start": 1.06,
+          "end": 1.715,
+          "duration": 0.655,
+          "frame_ahead_trigger": 1.02
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 1.715,
+          "end": 2.01,
+          "duration": 0.295,
+          "frame_ahead_trigger": 1.675
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 2.01,
+          "end": 2.1,
+          "duration": 0.09,
+          "frame_ahead_trigger": 1.97
+        },
+        {
+          "word": "weight",
+          "clean_word": "weight",
+          "phonemes": "w\u02c8e\u026at",
+          "start": 2.1,
+          "end": 2.385,
+          "duration": 0.285,
+          "frame_ahead_trigger": 2.06
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 2.385,
+          "end": 2.51,
+          "duration": 0.125,
+          "frame_ahead_trigger": 2.345
+        },
+        {
+          "word": "billions",
+          "clean_word": "billions",
+          "phonemes": "b\u02c8\u026ali\u0259nz",
+          "start": 2.51,
+          "end": 3.005,
+          "duration": 0.495,
+          "frame_ahead_trigger": 2.47
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 3.005,
+          "end": 3.037,
+          "duration": 0.032,
+          "frame_ahead_trigger": 2.965
+        },
+        {
+          "word": "redundant",
+          "clean_word": "redundant",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
+          "start": 3.037,
+          "end": 3.635,
+          "duration": 0.598,
+          "frame_ahead_trigger": 2.997
+        },
+        {
+          "word": "matrix",
+          "clean_word": "matrix",
+          "phonemes": "m\u02c8e\u026at\u0279\u026aks",
+          "start": 3.635,
+          "end": 4.075,
+          "duration": 0.44,
+          "frame_ahead_trigger": 3.595
+        },
+        {
+          "word": "multiplications.",
+          "clean_word": "multiplications",
+          "phonemes": "m\u02cc\u028clt\u026apl\u026ak\u02c8e\u026a\u0283\u0259nz",
+          "start": 4.075,
+          "end": 5.015,
+          "duration": 0.94,
+          "frame_ahead_trigger": 4.035
+        }
+      ],
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE MATMUL PARADOX",
+        "sub": "Why your hardware is lying to you.",
+        "accent_color": "#EF4444",
+        "grid_title": "GPU MEMORY STALL",
+        "active_cell_label": "MATMUL_STALL",
+        "efficiency_label": "LATENCY"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 2,
+      "text": "MatMul is a toll-booth bottleneck, forcing GPUs to stall while waiting for high-precision floating-point fetches.",
+      "visual_focus": "A traffic jam of data packets stuck at a gate.",
+      "highlight_words": {
+        "toll-booth": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "MatMul",
+        "action_verb": "stalls",
+        "direct_object": "GPU throughput",
+        "anchor_word": "bottleneck",
+        "semantic_role": "conflict_definition"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE COMPUTE WALL",
+        "sub": "Memory bandwidth is the enemy.",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "the_villain_bottleneck",
+      "act": 2,
+      "audio_duration": 6.04,
+      "slot_duration": 6.34,
+      "start": 5.4,
+      "end": 11.44,
+      "word_timings": [
+        {
+          "word": "MatMul",
+          "clean_word": "matmul",
+          "phonemes": "m\u02c8\u00e6t m\u02c8\u028cl",
+          "start": 5.414,
+          "end": 5.934,
+          "duration": 0.52,
+          "frame_ahead_trigger": 5.374
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.934,
+          "end": 6.029,
+          "duration": 0.095,
+          "frame_ahead_trigger": 5.894
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.029,
+          "end": 6.154,
+          "duration": 0.125,
+          "frame_ahead_trigger": 5.989
+        },
+        {
+          "word": "toll-booth",
+          "clean_word": "tollbooth",
+          "phonemes": "t\u02c8o\u028albu\u02d0\u03b8",
+          "start": 6.154,
+          "end": 6.611,
+          "duration": 0.457,
+          "frame_ahead_trigger": 6.114
+        },
+        {
+          "word": "bottleneck,",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 6.611,
+          "end": 7.184,
+          "duration": 0.573,
+          "frame_ahead_trigger": 6.571
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 7.184,
+          "end": 7.514,
+          "duration": 0.33,
+          "frame_ahead_trigger": 7.144
+        },
+        {
+          "word": "GPUs",
+          "clean_word": "gpus",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 7.514,
+          "end": 8.299,
+          "duration": 0.785,
+          "frame_ahead_trigger": 7.474
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 8.299,
+          "end": 8.509,
+          "duration": 0.21,
+          "frame_ahead_trigger": 8.259
+        },
+        {
+          "word": "stall",
+          "clean_word": "stall",
+          "phonemes": "st\u02c8\u0254\u02d0l",
+          "start": 8.509,
+          "end": 8.719,
+          "duration": 0.21,
+          "frame_ahead_trigger": 8.469
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 8.719,
+          "end": 9.004,
+          "duration": 0.285,
+          "frame_ahead_trigger": 8.679
+        },
+        {
+          "word": "waiting",
+          "clean_word": "waiting",
+          "phonemes": "w\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 9.004,
+          "end": 9.304,
+          "duration": 0.3,
+          "frame_ahead_trigger": 8.964
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 9.304,
+          "end": 9.644,
+          "duration": 0.34,
+          "frame_ahead_trigger": 9.264
+        },
+        {
+          "word": "high-precision",
+          "clean_word": "highprecision",
+          "phonemes": "h\u02c8a\u026ap\u0279\u026as\u02cc\u026a\u0292\u0259n",
+          "start": 9.644,
+          "end": 10.314,
+          "duration": 0.67,
+          "frame_ahead_trigger": 9.604
+        },
+        {
+          "word": "floating-point",
+          "clean_word": "floatingpoint",
+          "phonemes": "fl\u02c8o\u028a\u027e\u026a\u014bp\u02cc\u0254\u026ant",
+          "start": 10.314,
+          "end": 11.059,
+          "duration": 0.745,
+          "frame_ahead_trigger": 10.274
+        },
+        {
+          "word": "fetches.",
+          "clean_word": "fetches",
+          "phonemes": "f\u02c8\u025bt\u0283\u1d7bz",
+          "start": 11.059,
+          "end": 11.349,
+          "duration": 0.29,
+          "frame_ahead_trigger": 11.019
+        }
+      ],
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "split_flow",
+        "title": "THE COMPUTE WALL",
+        "sub": "Memory bandwidth is the enemy.",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 3,
+      "text": "The solution? Binary Kernel Projection. We strip weights to bits, turning heavy multiplication into simple bitwise operations.",
+      "visual_focus": "Floating point numbers shattering into clean binary 0s and 1s.",
+      "highlight_words": {
+        "Binary Kernel Projection": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Binary Projection",
+        "action_verb": "simplifies",
+        "direct_object": "compute logic",
+        "anchor_word": "bitwise",
+        "semantic_role": "solution_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SCALABLE MATMUL-FR",
+        "sub": "Floating point numbers shattering into clean binary 0s and 1s.",
+        "params": {
+          "title": "KERNEL CODE: SCALABLE MATMUL-FR",
+          "sub": "Floating point numbers shattering into clean binary 0s and 1s.",
+          "filename": "kernels.py",
+          "language": "python",
+          "lines": [
+            "def binary_activation(x, w):",
+            "    # Replace MatMul with bitwise add",
+            "    return popcount(x ^ w)",
+            "output = binary_activation(input_tensor, weights)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 BINARY KERNEL EXECUTION",
+          "delta_badge": "Bitwise XOR + Popcount optimization"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "audio_duration": 6.76,
+      "slot_duration": 7.06,
+      "start": 11.74,
+      "end": 18.5,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.761,
+          "end": 11.886,
+          "duration": 0.125,
+          "frame_ahead_trigger": 11.721
+        },
+        {
+          "word": "solution?",
+          "clean_word": "solution",
+          "phonemes": "s\u0259l\u02c8u\u02d0\u0283\u0259n",
+          "start": 11.886,
+          "end": 12.426,
+          "duration": 0.54,
+          "frame_ahead_trigger": 11.846
+        },
+        {
+          "word": "Binary",
+          "clean_word": "binary",
+          "phonemes": "b\u02c8a\u026an\u025a\u0279i",
+          "start": 12.426,
+          "end": 12.856,
+          "duration": 0.43,
+          "frame_ahead_trigger": 12.386
+        },
+        {
+          "word": "Kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 12.856,
+          "end": 13.196,
+          "duration": 0.34,
+          "frame_ahead_trigger": 12.816
+        },
+        {
+          "word": "Projection.",
+          "clean_word": "projection",
+          "phonemes": "p\u0279\u0259d\u0292\u02c8\u025bk\u0283\u0259n",
+          "start": 13.196,
+          "end": 13.796,
+          "duration": 0.6,
+          "frame_ahead_trigger": 13.156
+        },
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 13.796,
+          "end": 13.961,
+          "duration": 0.165,
+          "frame_ahead_trigger": 13.756
+        },
+        {
+          "word": "strip",
+          "clean_word": "strip",
+          "phonemes": "st\u0279\u02c8\u026ap",
+          "start": 13.961,
+          "end": 14.391,
+          "duration": 0.43,
+          "frame_ahead_trigger": 13.921
+        },
+        {
+          "word": "weights",
+          "clean_word": "weights",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 14.391,
+          "end": 14.561,
+          "duration": 0.17,
+          "frame_ahead_trigger": 14.351
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 14.561,
+          "end": 14.776,
+          "duration": 0.215,
+          "frame_ahead_trigger": 14.521
+        },
+        {
+          "word": "bits,",
+          "clean_word": "bits",
+          "phonemes": "b\u02c8\u026ats",
+          "start": 14.776,
+          "end": 15.011,
+          "duration": 0.235,
+          "frame_ahead_trigger": 14.736
+        },
+        {
+          "word": "turning",
+          "clean_word": "turning",
+          "phonemes": "t\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 15.011,
+          "end": 15.356,
+          "duration": 0.345,
+          "frame_ahead_trigger": 14.971
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 15.356,
+          "end": 15.681,
+          "duration": 0.325,
+          "frame_ahead_trigger": 15.316
+        },
+        {
+          "word": "multiplication",
+          "clean_word": "multiplication",
+          "phonemes": "m\u02cc\u028clt\u026apl\u026ak\u02c8e\u026a\u0283\u0259n",
+          "start": 15.681,
+          "end": 16.581,
+          "duration": 0.9,
+          "frame_ahead_trigger": 15.641
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 16.581,
+          "end": 16.801,
+          "duration": 0.22,
+          "frame_ahead_trigger": 16.541
+        },
+        {
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 16.801,
+          "end": 17.291,
+          "duration": 0.49,
+          "frame_ahead_trigger": 16.761
+        },
+        {
+          "word": "bitwise",
+          "clean_word": "bitwise",
+          "phonemes": "b\u02c8\u026atwa\u026az",
+          "start": 17.291,
+          "end": 17.666,
+          "duration": 0.375,
+          "frame_ahead_trigger": 17.251
+        },
+        {
+          "word": "operations.",
+          "clean_word": "operations",
+          "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
+          "start": 17.666,
+          "end": 18.416,
+          "duration": 0.75,
+          "frame_ahead_trigger": 17.626
+        }
+      ],
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SCALABLE MATMUL-FR",
+        "sub": "Floating point numbers shattering into clean binary 0s and 1s.",
+        "filename": "kernels.py",
+        "language": "python",
+        "lines": [
+          "def binary_activation(x, w):",
+          "    # Replace MatMul with bitwise add",
+          "    return popcount(x ^ w)",
+          "output = binary_activation(input_tensor, weights)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 BINARY KERNEL EXECUTION",
+        "delta_badge": "Bitwise XOR + Popcount optimization"
+      }
+    },
+    {
+      "beat_id": 4,
+      "text": "By leveraging XOR and popcount, we bypass floating-point units entirely, achieving brain-like efficiency at just 13 watts.",
+      "visual_focus": "A logic gate diagram highlighting XOR operations.",
+      "highlight_words": {
+        "XOR": "#10B981",
+        "popcount": "#10B981"
+      },
+      "svo_action": {
+        "subject": "XOR logic",
+        "action_verb": "bypasses",
+        "direct_object": "floating-point units",
+        "anchor_word": "efficiency",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "pipeline_stages",
+        "title": "SCALABLE MATMUL-FREE: XOR LOGIC",
+        "sub": "A logic gate diagram highlighting XOR operations.",
+        "accent_color": "#38BDF8",
+        "stage_1_label": "STAGE 1: XOR LOGIC",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: BYPASSES ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: FLOATING-POINT UNI",
+        "stage_3_sub": "Target reconstructed state"
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "audio_duration": 7.13,
+      "slot_duration": 7.43,
+      "start": 18.8,
+      "end": 25.92,
+      "word_timings": [
+        {
+          "word": "By",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 18.814,
+          "end": 18.979,
+          "duration": 0.165,
+          "frame_ahead_trigger": 18.774
+        },
+        {
+          "word": "leveraging",
+          "clean_word": "leveraging",
+          "phonemes": "l\u02c8\u025bv\u025a\u0279\u026ad\u0292\u026a\u014b",
+          "start": 18.979,
+          "end": 19.639,
+          "duration": 0.66,
+          "frame_ahead_trigger": 18.939
+        },
+        {
+          "word": "XOR",
+          "clean_word": "xor",
+          "phonemes": "z\u02c8\u0254\u02d0\u0279",
+          "start": 19.639,
+          "end": 19.849,
+          "duration": 0.21,
+          "frame_ahead_trigger": 19.599
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 19.849,
+          "end": 20.219,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.809
+        },
+        {
+          "word": "popcount,",
+          "clean_word": "popcount",
+          "phonemes": "p\u02c8\u0251\u02d0pka\u028ant",
+          "start": 20.219,
+          "end": 20.682,
+          "duration": 0.463,
+          "frame_ahead_trigger": 20.179
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 20.682,
+          "end": 20.939,
+          "duration": 0.257,
+          "frame_ahead_trigger": 20.642
+        },
+        {
+          "word": "bypass",
+          "clean_word": "bypass",
+          "phonemes": "b\u02c8a\u026ap\u00e6s",
+          "start": 20.939,
+          "end": 21.264,
+          "duration": 0.325,
+          "frame_ahead_trigger": 20.899
+        },
+        {
+          "word": "floating-point",
+          "clean_word": "floatingpoint",
+          "phonemes": "fl\u02c8o\u028a\u027e\u026a\u014bp\u02cc\u0254\u026ant",
+          "start": 21.264,
+          "end": 21.989,
+          "duration": 0.725,
+          "frame_ahead_trigger": 21.224
+        },
+        {
+          "word": "units",
+          "clean_word": "units",
+          "phonemes": "j\u02c8u\u02d0n\u026ats",
+          "start": 21.989,
+          "end": 22.534,
+          "duration": 0.545,
+          "frame_ahead_trigger": 21.949
+        },
+        {
+          "word": "entirely,",
+          "clean_word": "entirely",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025ali",
+          "start": 22.534,
+          "end": 23.003,
+          "duration": 0.469,
+          "frame_ahead_trigger": 22.494
+        },
+        {
+          "word": "achieving",
+          "clean_word": "achieving",
+          "phonemes": "\u0250t\u0283\u02c8i\u02d0v\u026a\u014b",
+          "start": 23.003,
+          "end": 23.464,
+          "duration": 0.461,
+          "frame_ahead_trigger": 22.963
+        },
+        {
+          "word": "brain-like",
+          "clean_word": "brainlike",
+          "phonemes": "b\u0279\u02c8e\u026anla\u026ak",
+          "start": 23.464,
+          "end": 24.094,
+          "duration": 0.63,
+          "frame_ahead_trigger": 23.424
+        },
+        {
+          "word": "efficiency",
+          "clean_word": "efficiency",
+          "phonemes": "\u026af\u02c8\u026a\u0283\u0259nsi",
+          "start": 24.094,
+          "end": 24.659,
+          "duration": 0.565,
+          "frame_ahead_trigger": 24.054
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 24.659,
+          "end": 24.701,
+          "duration": 0.043,
+          "frame_ahead_trigger": 24.619
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 24.701,
+          "end": 25.134,
+          "duration": 0.432,
+          "frame_ahead_trigger": 24.661
+        },
+        {
+          "word": "13",
+          "clean_word": "13",
+          "phonemes": "\u03b8\u02c8\u025c\u02d0ti\u02d0n",
+          "start": 25.134,
+          "end": 25.494,
+          "duration": 0.36,
+          "frame_ahead_trigger": 25.094
+        },
+        {
+          "word": "watts.",
+          "clean_word": "watts",
+          "phonemes": "w\u02c8\u0251\u02d0ts",
+          "start": 25.494,
+          "end": 25.834,
+          "duration": 0.34,
+          "frame_ahead_trigger": 25.454
+        }
+      ],
+      "motif_type": "visual_composition",
+      "kinetic_action": "blueprint_transform",
+      "motif_params": {
+        "layout": "pipeline_stages",
+        "title": "SCALABLE MATMUL-FREE: XOR LOGIC",
+        "sub": "A logic gate diagram highlighting XOR operations.",
+        "accent_color": "#38BDF8",
+        "stage_1_label": "STAGE 1: XOR LOGIC",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: BYPASSES ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: FLOATING-POINT UNI",
+        "stage_3_sub": "Target reconstructed state"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "The result: 61% less memory usage and 10x lower inference overhead for billion-parameter models.",
+      "visual_focus": "Bar charts showing massive reduction in memory consumption.",
+      "highlight_words": {
+        "61%": "#3B82F6",
+        "10x": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "The architecture",
+        "action_verb": "slashes",
+        "direct_object": "overhead",
+        "anchor_word": "10x",
+        "semantic_role": "empirical_proof"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: MEMORY USAGE",
+        "sub": "Bar charts showing massive reduction in memory",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: MEMORY USAGE",
+          "sub": "Bar charts showing massive reduction in memory",
+          "metric_name": "Memory Usage",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "MatMul-free",
+              "value": 39.0,
+              "display_val": "39%",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Standard Transformer",
+              "value": 100.0,
+              "display_val": "100%",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +61% MEMORY SAVINGS"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "audio_duration": 5.91,
+      "slot_duration": 6.21,
+      "start": 26.22,
+      "end": 32.13,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.234,
+          "end": 26.434,
+          "duration": 0.2,
+          "frame_ahead_trigger": 26.194
+        },
+        {
+          "word": "result:",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 26.434,
+          "end": 26.814,
+          "duration": 0.38,
+          "frame_ahead_trigger": 26.394
+        },
+        {
+          "word": "61%",
+          "clean_word": "61",
+          "phonemes": "s\u02c8\u026aksti w\u02c8\u028cn",
+          "start": 26.814,
+          "end": 27.419,
+          "duration": 0.605,
+          "frame_ahead_trigger": 26.774
+        },
+        {
+          "word": "less",
+          "clean_word": "less",
+          "phonemes": "l\u02c8\u025bs",
+          "start": 27.419,
+          "end": 27.579,
+          "duration": 0.16,
+          "frame_ahead_trigger": 27.379
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 27.579,
+          "end": 27.949,
+          "duration": 0.37,
+          "frame_ahead_trigger": 27.539
+        },
+        {
+          "word": "usage",
+          "clean_word": "usage",
+          "phonemes": "j\u02c8u\u02d0s\u026ad\u0292",
+          "start": 27.949,
+          "end": 28.534,
+          "duration": 0.585,
+          "frame_ahead_trigger": 27.909
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 28.534,
+          "end": 28.611,
+          "duration": 0.077,
+          "frame_ahead_trigger": 28.494
+        },
+        {
+          "word": "10x",
+          "clean_word": "10x",
+          "phonemes": "t\u02c8\u025bn \u02c8\u025bks",
+          "start": 28.611,
+          "end": 29.124,
+          "duration": 0.513,
+          "frame_ahead_trigger": 28.571
+        },
+        {
+          "word": "lower",
+          "clean_word": "lower",
+          "phonemes": "l\u02c8o\u028a\u025a",
+          "start": 29.124,
+          "end": 29.364,
+          "duration": 0.24,
+          "frame_ahead_trigger": 29.084
+        },
+        {
+          "word": "inference",
+          "clean_word": "inference",
+          "phonemes": "\u02c8\u026anf\u025a\u0279\u0259ns",
+          "start": 29.364,
+          "end": 29.764,
+          "duration": 0.4,
+          "frame_ahead_trigger": 29.324
+        },
+        {
+          "word": "overhead",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 29.764,
+          "end": 30.349,
+          "duration": 0.585,
+          "frame_ahead_trigger": 29.724
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 30.349,
+          "end": 30.602,
+          "duration": 0.253,
+          "frame_ahead_trigger": 30.309
+        },
+        {
+          "word": "billion-parameter",
+          "clean_word": "billionparameter",
+          "phonemes": "b\u02c8\u026ali\u0259np\u02cc\u00e6\u0279\u0259m\u02cci\u02d0\u027e\u025a",
+          "start": 30.602,
+          "end": 31.614,
+          "duration": 1.012,
+          "frame_ahead_trigger": 30.562
+        },
+        {
+          "word": "models.",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 31.614,
+          "end": 32.039,
+          "duration": 0.425,
+          "frame_ahead_trigger": 31.574
+        }
+      ],
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: MEMORY USAGE",
+        "sub": "Bar charts showing massive reduction in memory",
+        "metric_name": "Memory Usage",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "MatMul-free",
+            "value": 39.0,
+            "display_val": "39%",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Standard Transformer",
+            "value": 100.0,
+            "display_val": "100%",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +61% MEMORY SAVINGS"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how we strip AI down to its fundamental physics.",
+      "visual_focus": "A clean, minimalist logo animation.",
+      "highlight_words": {
+        "fundamental physics": "#8B5CF6"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explores",
+        "direct_object": "AI physics",
+        "anchor_word": "deep-dives",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "THE MODEL VERSE",
+        "sub": "The future is bitwise.",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "Theory",
+          "input_2_label": "Hardware",
+          "input_3_label": "Code",
+          "fused_label": "EFFICIENT_AI"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "audio_duration": 4.86,
+      "slot_duration": 5.36,
+      "start": 32.43,
+      "end": 37.3,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 32.433,
+          "end": 32.753,
+          "duration": 0.32,
+          "frame_ahead_trigger": 32.393
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 32.753,
+          "end": 32.948,
+          "duration": 0.195,
+          "frame_ahead_trigger": 32.713
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 32.948,
+          "end": 33.188,
+          "duration": 0.24,
+          "frame_ahead_trigger": 32.908
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 33.188,
+          "end": 33.478,
+          "duration": 0.29,
+          "frame_ahead_trigger": 33.148
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 33.478,
+          "end": 33.618,
+          "duration": 0.14,
+          "frame_ahead_trigger": 33.438
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 33.618,
+          "end": 33.943,
+          "duration": 0.325,
+          "frame_ahead_trigger": 33.578
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 33.943,
+          "end": 34.428,
+          "duration": 0.485,
+          "frame_ahead_trigger": 33.903
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 34.428,
+          "end": 34.668,
+          "duration": 0.24,
+          "frame_ahead_trigger": 34.388
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 34.668,
+          "end": 34.868,
+          "duration": 0.2,
+          "frame_ahead_trigger": 34.628
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 34.868,
+          "end": 35.128,
+          "duration": 0.26,
+          "frame_ahead_trigger": 34.828
+        },
+        {
+          "word": "strip",
+          "clean_word": "strip",
+          "phonemes": "st\u0279\u02c8\u026ap",
+          "start": 35.128,
+          "end": 35.298,
+          "duration": 0.17,
+          "frame_ahead_trigger": 35.088
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 35.298,
+          "end": 35.603,
+          "duration": 0.305,
+          "frame_ahead_trigger": 35.258
+        },
+        {
+          "word": "down",
+          "clean_word": "down",
+          "phonemes": "d\u02c8a\u028an",
+          "start": 35.603,
+          "end": 35.898,
+          "duration": 0.295,
+          "frame_ahead_trigger": 35.563
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 35.898,
+          "end": 36.043,
+          "duration": 0.145,
+          "frame_ahead_trigger": 35.858
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 36.043,
+          "end": 36.158,
+          "duration": 0.115,
+          "frame_ahead_trigger": 36.003
+        },
+        {
+          "word": "fundamental",
+          "clean_word": "fundamental",
+          "phonemes": "f\u02cc\u028cnd\u0259m\u02c8\u025bnt\u0259l",
+          "start": 36.158,
+          "end": 36.798,
+          "duration": 0.64,
+          "frame_ahead_trigger": 36.118
+        },
+        {
+          "word": "physics.",
+          "clean_word": "physics",
+          "phonemes": "f\u02c8\u026az\u026aks",
+          "start": 36.798,
+          "end": 37.203,
+          "duration": 0.405,
+          "frame_ahead_trigger": 36.758
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{model}} = 2.7 \\times 10^9 \\to \\mathrm{MatMul} \\approx 0$",
+      "filename": "matmul_free_llm_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "d_{\\mathrm{model}}",
+          "label": "Model Size"
+        },
+        {
+          "term": "\\mathrm{MatMul}",
+          "label": "Multiplication Cost"
+        }
+      ],
+      "svg_filename": "matmul_free_llm_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N^2) \\gg \\mathcal{O}(N)$",
+      "filename": "matmul_free_llm_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{O}(N^2)",
+          "label": "Dense Matrix Complexity"
+        },
+        {
+          "term": "\\mathcal{O}(N)",
+          "label": "Linear Scaling"
+        }
+      ],
+      "svg_filename": "matmul_free_llm_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$Y = \\mathrm{sign}(X) \\odot W_{\\mathrm{bin}}$",
+      "filename": "matmul_free_llm_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Y",
+          "label": "Layer Output"
+        },
+        {
+          "term": "W_{\\mathrm{bin}}",
+          "label": "Binary Weights"
+        }
+      ],
+      "svg_filename": "matmul_free_llm_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{C}_{\\mathrm{HW}} = \\sum_{i=1}^k \\mathrm{PopCount}(x_i \\oplus w_i)$",
+      "filename": "matmul_free_llm_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{PopCount}",
+          "label": "Hardware Bit Operation"
+        },
+        {
+          "term": "\\oplus",
+          "label": "XOR Gate"
+        }
+      ],
+      "svg_filename": "matmul_free_llm_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Efficiency} = \\frac{\\mathrm{Memory}_{\\mathrm{base}}}{\\mathrm{Memory}_{\\mathrm{free}}} = 10.0$",
+      "filename": "matmul_free_llm_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{Memory}_{\\mathrm{free}}",
+          "label": "Optimized Memory"
+        }
+      ],
+      "svg_filename": "matmul_free_llm_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "DENSE",
+          "color": "#EF4444",
+          "items": [
+            "Matrix",
+            "VRAM",
+            "MatMul"
+          ]
+        },
+        {
+          "name": "SPARSE",
+          "color": "#34D399",
+          "items": [
+            "Bits",
+            "FPGA",
+            "Add"
+          ]
+        },
+        {
+          "name": "CORE",
+          "color": "#F59E0B",
+          "items": [
+            "Kernel",
+            "Speed",
+            "Logic"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"compute\"",
+        "target_cluster": "SPARSE",
+        "token": "\"compute\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'matmul'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'vram'",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    "model_a": "Standard Transformer",
+    "model_a_specs": [
+      "Dense Matrices",
+      "High Latency",
+      "O(N^2) Cost"
+    ],
+    "model_b": "MatMul-free LLM",
+    "model_b_specs": [
+      "Binary Kernels",
+      "Low Latency",
+      "O(N) Scaling"
+    ],
+    "divide_title": "DENSE VS BINARY ARCHITECTURE",
+    "model_a_stat": "100%",
+    "model_a_stat_label": "BASELINE MEMORY",
+    "model_b_stat": "10%",
+    "model_b_stat_label": "OPTIMIZED MEMORY",
+    "efficiency_badge": "\u26a1 10x INFERENCE SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "Training Memory",
+        "score_a": "100%",
+        "score_b": "39%"
+      },
+      {
+        "name": "Inference Latency",
+        "score_a": "1x",
+        "score_b": "10x"
+      },
+      {
+        "name": "Scaling",
+        "score_a": "Linear",
+        "score_b": "Sub-linear"
+      }
+    ],
+    "scale_metric": "2.7B",
+    "scale_label": "Parameter Scale",
+    "bottleneck_title": "MONOLITHIC MATMUL BOTTLENECK",
+    "bottleneck_desc": "Expensive matrix multiplications stalling memory throughput",
+    "solution_title": "BINARY KERNEL PROJECTION",
+    "solution_components": "Bit-level additive operations",
+    "mechanism_title": "STRUCTURED BINARY ACTIVATION",
+    "payoff_stat": "10x",
+    "payoff_label": "SPEEDUP",
+    "payoff_sub": "Outperforming dense Transformer baselines at scale",
+    "payoff_hero_stat": 98.2,
+    "payoff_hero_label": "MatMul-free Efficiency",
+    "payoff_base_stat": 41.5,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +61% MEMORY SAVINGS",
+    "challenger": "MatMul-free LLM",
+    "incumbent": "Standard Transformer"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: MEMORY USAGE",
+    "metric_name": "Memory Usage",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "MatMul-free",
+        "value": 39.0,
+        "display_val": "39%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Standard Transformer",
+        "value": 100.0,
+        "display_val": "100%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +61% MEMORY SAVINGS",
+    "radar_axes": [
+      "Speed",
+      "Memory",
+      "Accuracy",
+      "Scale"
+    ]
+  },
+  "code_snippet": {
+    "filename": "kernels.py",
+    "language": "python",
+    "lines": [
+      "def binary_activation(x, w):",
+      "    # Replace MatMul with bitwise add",
+      "    return popcount(x ^ w)",
+      "output = binary_activation(input_tensor, weights)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 BINARY KERNEL EXECUTION",
+    "explanation": "Bitwise XOR + Popcount optimization"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually slapped. You didn't start with 'Hey guys, today we're looking at...' and you didn't treat me like I'm five. Mentioning XOR and popcount immediately told me you actually know how the hardware works. It\u2019s rare to see a script that respects the viewer's intelligence instead of just saying 'AI is magic'."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Matrix Multiplication (MatMul)",
+    "physical_analogy": "A massive, clogged highway where every single data packet requires a toll-booth inspection before moving forward.",
+    "eureka_mechanism": "Binary Kernel Projection",
+    "paradigm_shift": "Moving from floating-point arithmetic to bitwise logic for brain-like efficiency."
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Standard Transformer",
+        "model_a_score": "100%",
+        "model_b_name": "MatMul-free LLM",
+        "model_b_score": "10%",
+        "delta_label": "\u26a1 10x INFERENCE SPEEDUP"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}

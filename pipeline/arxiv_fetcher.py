@@ -13,7 +13,11 @@ import time
 import html
 import urllib.request
 import xml.etree.ElementTree as ET
+from pathlib import Path
 from typing import Dict, Optional, List, Any
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+CACHE_BASE_DIR = PROJECT_ROOT / "public" / "arxiv_cache"
 
 
 def extract_arxiv_id(query: str) -> str:
@@ -175,39 +179,153 @@ def _fetch_from_semanticscholar(arxiv_id: str) -> Optional[Dict[str, Any]]:
     return None
 
 
-def fetch_arxiv_paper(query: str) -> Optional[Dict[str, Any]]:
+def _fetch_from_local_source(arxiv_id: str) -> Optional[Dict[str, Any]]:
+    """Recovers paper metadata from local source bundle (.tex files) if present."""
+    source_dir = CACHE_BASE_DIR / arxiv_id / "source"
+    if not source_dir.exists() or not any(source_dir.iterdir()):
+        return None
+
+    title = None
+    abstract = None
+    authors = []
+
+    # 1. Search for title and abstract in .tex files
+    for tex_path in source_dir.rglob("*.tex"):
+        try:
+            content = tex_path.read_text(encoding="utf-8", errors="ignore")
+            if not title:
+                m_title = re.search(r"\\title(?:\[[^\]]*\])?\{([^}]+)\}", content)
+                if m_title:
+                    raw_t = m_title.group(1).replace("\n", " ").replace("\\\\", " ").strip()
+                    clean_t = re.sub(r"\\[a-zA-Z]+\{?", "", raw_t).replace("}", "").strip()
+                    if clean_t:
+                        title = " ".join(clean_t.split())
+
+            if not abstract:
+                m_abs = re.search(r"\\begin\{abstract\}(.*?)\\end\{abstract\}", content, re.DOTALL)
+                if m_abs:
+                    clean_a = re.sub(r"\\[a-zA-Z]+\{?", "", m_abs.group(1)).replace("}", "").strip()
+                    if clean_a:
+                        abstract = " ".join(clean_a.split())
+        except Exception:
+            continue
+
+    # 2. Check dedicated abstract file if present
+    if not abstract:
+        for abs_file in source_dir.rglob("*abstract*.tex"):
+            try:
+                txt = abs_file.read_text(encoding="utf-8", errors="ignore")
+                clean_a = re.sub(r"\\[a-zA-Z]+\{?", "", txt).replace("}", "").strip()
+                if clean_a:
+                    abstract = " ".join(clean_a.split())
+                    break
+            except Exception:
+                continue
+
+    if not title and not abstract:
+        return None
+
+    return {
+        "arxiv_id": arxiv_id,
+        "title": title or f"arXiv Paper {arxiv_id}",
+        "abstract": abstract or f"Extracted from local arXiv source cache for {arxiv_id}.",
+        "authors": authors or ["arXiv Contributor"],
+        "published": "",
+        "url": f"https://arxiv.org/abs/{arxiv_id}",
+        "source": "local_source"
+    }
+
+
+def _fetch_from_local_cache(arxiv_id: str) -> Optional[Dict[str, Any]]:
+    """Checks local cache for metadata.json or source bundle."""
+    paper_dir = CACHE_BASE_DIR / arxiv_id
+    meta_file = paper_dir / "metadata.json"
+    if meta_file.exists():
+        try:
+            cached = json.loads(meta_file.read_text(encoding="utf-8"))
+            if cached.get("arxiv_id") and cached.get("title"):
+                return cached
+        except Exception:
+            pass
+
+    # Fallback to source directory inspection
+    return _fetch_from_local_source(arxiv_id)
+
+
+def fetch_arxiv_paper(
+    query: str,
+    extract_figures: bool = True,
+    max_figures: int = 5
+) -> Optional[Dict[str, Any]]:
     """
     Fetches paper metadata from arXiv given an ID or arXiv URL using a resilient
     multi-tier failover cascade to guarantee 100% availability even under arXiv API rate limits:
+      Tier 0: Local Cache Lookup (public/arxiv_cache/<id>/metadata.json or source/)
       Tier 1: Hugging Face Daily Papers API
       Tier 2: Direct arXiv HTML Dublin Core Meta Tags
       Tier 3: Official arXiv Export API (with retry)
       Tier 4: Semantic Scholar Graph API
+      Tier 5: Local Source Fallback
+
+    When extract_figures=True, automatically invokes extract_paper_figures() and
+    populates res['paper_figures'].
     """
-    arxiv_id = extract_arxiv_id(query)
+    from pipeline.arxiv_vector_extractor import clean_arxiv_id, extract_paper_figures
 
-    # Tier 1: Hugging Face API
-    res = _fetch_from_huggingface(arxiv_id)
-    if res:
-        return res
+    raw_id = extract_arxiv_id(query)
+    arxiv_id = clean_arxiv_id(raw_id)
+    paper_dir = CACHE_BASE_DIR / arxiv_id
 
-    # Tier 2: Direct arXiv HTML meta tags
-    res = _fetch_from_arxiv_html(arxiv_id)
-    if res:
-        return res
+    # Tier 0: Local cache check (offline/CI resilience)
+    res = _fetch_from_local_cache(arxiv_id)
 
-    # Tier 3: Official arXiv API
-    res = _fetch_from_arxiv_api(arxiv_id)
-    if res:
-        return res
+    # If not cached locally, query remote tiers
+    if not res:
+        # Tier 1: Hugging Face API
+        res = _fetch_from_huggingface(arxiv_id)
 
-    # Tier 4: Semantic Scholar
-    res = _fetch_from_semanticscholar(arxiv_id)
-    if res:
-        return res
+        # Tier 2: Direct arXiv HTML meta tags
+        if not res:
+            res = _fetch_from_arxiv_html(arxiv_id)
 
-    print(f"⚠️ All metadata ingestion tiers exhausted for arXiv ID '{arxiv_id}'")
-    return None
+        # Tier 3: Official arXiv API
+        if not res:
+            res = _fetch_from_arxiv_api(arxiv_id)
+
+        # Tier 4: Semantic Scholar
+        if not res:
+            res = _fetch_from_semanticscholar(arxiv_id)
+
+        # Save successful metadata to local cache
+        if res:
+            try:
+                paper_dir.mkdir(parents=True, exist_ok=True)
+                clean_meta = {k: v for k, v in res.items() if k != "paper_figures"}
+                (paper_dir / "metadata.json").write_text(json.dumps(clean_meta, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+
+    # Tier 5: Local source fallback if network tiers failed
+    if not res:
+        res = _fetch_from_local_source(arxiv_id)
+
+    if not res:
+        print(f"⚠️ All metadata ingestion tiers exhausted for arXiv ID '{arxiv_id}'")
+        return None
+
+    # Automatically extract and bind paper figures
+    if extract_figures:
+        clean_id = res.get("arxiv_id") or arxiv_id
+        try:
+            figs = extract_paper_figures(clean_id, max_figures=max_figures)
+            res["paper_figures"] = figs or []
+        except Exception as e_figs:
+            print(f"⚠️ Figure extraction notice: {e_figs}")
+            res["paper_figures"] = []
+    elif "paper_figures" not in res:
+        res["paper_figures"] = []
+
+    return res
 
 
 # Re-export native arXiv figure extraction and blackboard recoloring engine
@@ -225,12 +343,12 @@ from pipeline.arxiv_vector_extractor import (
 if __name__ == "__main__":
     import sys
     test_id = sys.argv[1] if len(sys.argv) > 1 else "2609.40362"
-    res = fetch_arxiv_paper(test_id)
+    res = fetch_arxiv_paper(test_id, extract_figures=True)
     if res:
         print(f"📄 Found Paper ({res['source']}): {res['title']} ({res['published']})")
         print(f"✍️ Authors: {', '.join(res['authors'])}")
         print(f"📖 Abstract: {res['abstract'][:150]}...")
-        figs = extract_paper_figures(res['arxiv_id'], max_figures=2)
+        figs = res.get("paper_figures", [])
         if figs:
             print(f"🖼️ Found {len(figs)} native figures in arXiv source bundle:")
             for f in figs:

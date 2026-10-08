@@ -1,0 +1,1513 @@
+{
+  "id": "differential_transformer",
+  "title": "Differential Transformer Deep Dive",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "NOISE\u2011FREE ATTENTION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Transformers waste half their attention on filler words\u2014like reading a novel while the pages are stuck together.",
+      "visual_focus": "Split-screen: chaotic attention heatmap on left, empty heatmap on right.",
+      "highlight_words": {
+        "waste half their attention": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Transformers",
+        "action_verb": "waste",
+        "direct_object": "attention on filler words",
+        "anchor_word": "waste",
+        "semantic_role": "resource_drain"
+      },
+      "visual_blueprint": {
+        "layout": "attention_prism_refraction",
+        "title": "ATTENTION WASTE",
+        "sub": "Filler tokens swamp the matrix",
+        "accent_color": "#38BDF8",
+        "params": {
+          "token_label": "Query Token",
+          "matrix_title": "Full Softmax Matrix"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "attention_prism_refraction",
+        "title": "ATTENTION WASTE",
+        "sub": "Filler tokens swamp the matrix",
+        "accent_color": "#38BDF8",
+        "token_label": "Query Token",
+        "matrix_title": "Full Softmax Matrix"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.48,
+      "slot_duration": 5.78,
+      "start": 0.0,
+      "end": 5.48,
+      "word_timings": [
+        {
+          "word": "Transformers",
+          "clean_word": "transformers",
+          "phonemes": "t\u0279\u00e6nsf\u02c8\u0254\u02d0\u0279m\u025az",
+          "start": 0.02,
+          "end": 0.655,
+          "duration": 0.635,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 0.655,
+          "end": 0.945,
+          "duration": 0.29,
+          "frame_ahead_trigger": 0.615
+        },
+        {
+          "word": "half",
+          "clean_word": "half",
+          "phonemes": "h\u02c8\u00e6f",
+          "start": 0.945,
+          "end": 1.245,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.905
+        },
+        {
+          "word": "their",
+          "clean_word": "their",
+          "phonemes": "\u00f0\u025b\u0279",
+          "start": 1.245,
+          "end": 1.435,
+          "duration": 0.19,
+          "frame_ahead_trigger": 1.205
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 1.435,
+          "end": 1.849,
+          "duration": 0.414,
+          "frame_ahead_trigger": 1.395
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 1.849,
+          "end": 1.98,
+          "duration": 0.131,
+          "frame_ahead_trigger": 1.809
+        },
+        {
+          "word": "filler",
+          "clean_word": "filler",
+          "phonemes": "f\u02c8\u026al\u025a",
+          "start": 1.98,
+          "end": 2.275,
+          "duration": 0.295,
+          "frame_ahead_trigger": 1.94
+        },
+        {
+          "word": "words\u2014like",
+          "clean_word": "wordslike",
+          "phonemes": "w\u02c8\u025c\u02d0dsla\u026ak",
+          "start": 2.275,
+          "end": 2.935,
+          "duration": 0.66,
+          "frame_ahead_trigger": 2.235
+        },
+        {
+          "word": "reading",
+          "clean_word": "reading",
+          "phonemes": "\u0279\u02c8i\u02d0d\u026a\u014b",
+          "start": 2.935,
+          "end": 3.12,
+          "duration": 0.185,
+          "frame_ahead_trigger": 2.895
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 3.12,
+          "end": 3.32,
+          "duration": 0.2,
+          "frame_ahead_trigger": 3.08
+        },
+        {
+          "word": "novel",
+          "clean_word": "novel",
+          "phonemes": "n\u02c8\u0251\u02d0v\u0259l",
+          "start": 3.32,
+          "end": 3.79,
+          "duration": 0.47,
+          "frame_ahead_trigger": 3.28
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 3.79,
+          "end": 3.945,
+          "duration": 0.155,
+          "frame_ahead_trigger": 3.75
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.945,
+          "end": 4.1,
+          "duration": 0.155,
+          "frame_ahead_trigger": 3.905
+        },
+        {
+          "word": "pages",
+          "clean_word": "pages",
+          "phonemes": "p\u02c8e\u026ad\u0292\u1d7bz",
+          "start": 4.1,
+          "end": 4.59,
+          "duration": 0.49,
+          "frame_ahead_trigger": 4.06
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 4.59,
+          "end": 4.7,
+          "duration": 0.11,
+          "frame_ahead_trigger": 4.55
+        },
+        {
+          "word": "stuck",
+          "clean_word": "stuck",
+          "phonemes": "st\u02c8\u028ck",
+          "start": 4.7,
+          "end": 4.96,
+          "duration": 0.26,
+          "frame_ahead_trigger": 4.66
+        },
+        {
+          "word": "together.",
+          "clean_word": "together",
+          "phonemes": "t\u0259\u0261\u02c8\u025b\u00f0\u025a",
+          "start": 4.96,
+          "end": 5.345,
+          "duration": 0.385,
+          "frame_ahead_trigger": 4.92
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is a congested highway of irrelevant tokens, every compute lane stuck in a traffic jam.",
+      "visual_focus": "Illustrated highway filled with cars labeled \"token\"; traffic is at a standstill.",
+      "highlight_words": {
+        "congested highway": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Irrelevant tokens",
+        "action_verb": "congest",
+        "direct_object": "compute lanes",
+        "anchor_word": "congest",
+        "semantic_role": "bottleneck"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "TOKEN JAM",
+        "sub": "Compute lanes choke on noise",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "Attention Score Grid",
+          "active_cell_label": "Score i,j",
+          "efficiency_label": "O(N^2)"
+        }
+      },
+      "thriller_role": "villain_introduction",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "TOKEN JAM",
+        "sub": "Compute lanes choke on noise",
+        "accent_color": "#EF4444",
+        "grid_title": "Attention Score Grid",
+        "active_cell_label": "Score i,j",
+        "efficiency_label": "O(N^2)"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.14,
+      "slot_duration": 5.44,
+      "start": 5.78,
+      "end": 10.92,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.803,
+          "end": 5.903,
+          "duration": 0.1,
+          "frame_ahead_trigger": 5.763
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.903,
+          "end": 6.218,
+          "duration": 0.315,
+          "frame_ahead_trigger": 5.863
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.218,
+          "end": 6.313,
+          "duration": 0.095,
+          "frame_ahead_trigger": 6.178
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.313,
+          "end": 6.433,
+          "duration": 0.12,
+          "frame_ahead_trigger": 6.273
+        },
+        {
+          "word": "congested",
+          "clean_word": "congested",
+          "phonemes": "k\u0259nd\u0292\u02c8\u025bst\u1d7bd",
+          "start": 6.433,
+          "end": 7.173,
+          "duration": 0.74,
+          "frame_ahead_trigger": 6.393
+        },
+        {
+          "word": "highway",
+          "clean_word": "highway",
+          "phonemes": "h\u02c8a\u026awe\u026a",
+          "start": 7.173,
+          "end": 7.513,
+          "duration": 0.34,
+          "frame_ahead_trigger": 7.133
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 7.513,
+          "end": 7.57,
+          "duration": 0.057,
+          "frame_ahead_trigger": 7.473
+        },
+        {
+          "word": "irrelevant",
+          "clean_word": "irrelevant",
+          "phonemes": "\u026a\u0279\u02c8\u025bl\u1d7bv\u0259nt",
+          "start": 7.57,
+          "end": 8.168,
+          "duration": 0.598,
+          "frame_ahead_trigger": 7.53
+        },
+        {
+          "word": "tokens,",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 8.168,
+          "end": 8.534,
+          "duration": 0.366,
+          "frame_ahead_trigger": 8.128
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 8.534,
+          "end": 8.773,
+          "duration": 0.239,
+          "frame_ahead_trigger": 8.494
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 8.773,
+          "end": 9.258,
+          "duration": 0.485,
+          "frame_ahead_trigger": 8.733
+        },
+        {
+          "word": "lane",
+          "clean_word": "lane",
+          "phonemes": "l\u02c8e\u026an",
+          "start": 9.258,
+          "end": 9.551,
+          "duration": 0.293,
+          "frame_ahead_trigger": 9.218
+        },
+        {
+          "word": "stuck",
+          "clean_word": "stuck",
+          "phonemes": "st\u02c8\u028ck",
+          "start": 9.551,
+          "end": 9.823,
+          "duration": 0.272,
+          "frame_ahead_trigger": 9.511
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 9.823,
+          "end": 9.978,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.783
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.978,
+          "end": 10.163,
+          "duration": 0.185,
+          "frame_ahead_trigger": 9.938
+        },
+        {
+          "word": "traffic",
+          "clean_word": "traffic",
+          "phonemes": "t\u0279\u02c8\u00e6f\u026ak",
+          "start": 10.163,
+          "end": 10.513,
+          "duration": 0.35,
+          "frame_ahead_trigger": 10.123
+        },
+        {
+          "word": "jam.",
+          "clean_word": "jam",
+          "phonemes": "d\u0292\u02c8\u00e6m",
+          "start": 10.513,
+          "end": 10.783,
+          "duration": 0.27,
+          "frame_ahead_trigger": 10.473
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "Eureka: Differential attention\u2014run a vanilla head and a biased head, then subtract the two.",
+      "visual_focus": "Two parallel attention matrices appear, a subtraction animation reveals the residual map.",
+      "highlight_words": {
+        "Differential attention": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Differential attention",
+        "action_verb": "subtracts",
+        "direct_object": "biased scores",
+        "anchor_word": "subtracts",
+        "semantic_role": "signal_extraction"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: DIFFERENTIAL TRANS",
+        "sub": "Two parallel attention matrices appear, a subtraction animation r",
+        "params": {
+          "title": "KERNEL CODE: DIFFERENTIAL TRANS",
+          "sub": "Two parallel attention matrices appear, a subtraction animation r",
+          "filename": "diff_attention.py",
+          "language": "python",
+          "lines": [
+            "def differential_attention(q, k, beta):",
+            "    a1 = torch.softmax(q @ k.T, dim=-1)",
+            "    a2 = torch.softmax(q @ k.T + beta, dim=-1)",
+            "    delta = a1 - a2",
+            "    return torch.topk(F.relu(delta), k=64, dim=-1).indices"
+          ],
+          "highlight_lines": [
+            2,
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 DIFFERENTIAL ATTENTION KERNEL",
+          "delta_badge": "Two softmax passes then element\u2011wise subtraction yie"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: DIFFERENTIAL TRANS",
+        "sub": "Two parallel attention matrices appear, a subtraction animation r",
+        "filename": "diff_attention.py",
+        "language": "python",
+        "lines": [
+          "def differential_attention(q, k, beta):",
+          "    a1 = torch.softmax(q @ k.T, dim=-1)",
+          "    a2 = torch.softmax(q @ k.T + beta, dim=-1)",
+          "    delta = a1 - a2",
+          "    return torch.topk(F.relu(delta), k=64, dim=-1).indices"
+        ],
+        "highlight_lines": [
+          2,
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 DIFFERENTIAL ATTENTION KERNEL",
+        "delta_badge": "Two softmax passes then element\u2011wise subtraction yie"
+      },
+      "audio_duration": 4.44,
+      "slot_duration": 4.74,
+      "start": 11.22,
+      "end": 15.66,
+      "word_timings": [
+        {
+          "word": "Eureka:",
+          "clean_word": "eureka",
+          "phonemes": "ju\u02d0\u0279\u02c8i\u02d0k\u0250",
+          "start": 11.239,
+          "end": 11.709,
+          "duration": 0.47,
+          "frame_ahead_trigger": 11.199
+        },
+        {
+          "word": "Differential",
+          "clean_word": "differential",
+          "phonemes": "d\u02cc\u026af\u025a\u0279\u02c8\u025bn\u0283\u0259l",
+          "start": 11.709,
+          "end": 12.214,
+          "duration": 0.505,
+          "frame_ahead_trigger": 11.669
+        },
+        {
+          "word": "attention\u2014run",
+          "clean_word": "attentionrun",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n\u0279\u02cc\u028cn",
+          "start": 12.214,
+          "end": 12.899,
+          "duration": 0.685,
+          "frame_ahead_trigger": 12.174
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 12.899,
+          "end": 13.054,
+          "duration": 0.155,
+          "frame_ahead_trigger": 12.859
+        },
+        {
+          "word": "vanilla",
+          "clean_word": "vanilla",
+          "phonemes": "v\u0250n\u02c8\u026al\u0259",
+          "start": 13.054,
+          "end": 13.434,
+          "duration": 0.38,
+          "frame_ahead_trigger": 13.014
+        },
+        {
+          "word": "head",
+          "clean_word": "head",
+          "phonemes": "h\u02c8\u025bd",
+          "start": 13.434,
+          "end": 13.699,
+          "duration": 0.265,
+          "frame_ahead_trigger": 13.394
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 13.699,
+          "end": 13.779,
+          "duration": 0.08,
+          "frame_ahead_trigger": 13.659
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 13.779,
+          "end": 13.914,
+          "duration": 0.135,
+          "frame_ahead_trigger": 13.739
+        },
+        {
+          "word": "biased",
+          "clean_word": "biased",
+          "phonemes": "b\u02c8a\u026a\u0259st",
+          "start": 13.914,
+          "end": 14.304,
+          "duration": 0.39,
+          "frame_ahead_trigger": 13.874
+        },
+        {
+          "word": "head,",
+          "clean_word": "head",
+          "phonemes": "h\u02c8\u025bd",
+          "start": 14.304,
+          "end": 14.549,
+          "duration": 0.245,
+          "frame_ahead_trigger": 14.264
+        },
+        {
+          "word": "then",
+          "clean_word": "then",
+          "phonemes": "\u00f0\u02c8\u025bn",
+          "start": 14.549,
+          "end": 14.779,
+          "duration": 0.23,
+          "frame_ahead_trigger": 14.509
+        },
+        {
+          "word": "subtract",
+          "clean_word": "subtract",
+          "phonemes": "s\u028cbt\u0279\u02c8\u00e6kt",
+          "start": 14.779,
+          "end": 15.174,
+          "duration": 0.395,
+          "frame_ahead_trigger": 14.739
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.174,
+          "end": 15.339,
+          "duration": 0.165,
+          "frame_ahead_trigger": 15.134
+        },
+        {
+          "word": "two.",
+          "clean_word": "two",
+          "phonemes": "t\u02c8u\u02d0",
+          "start": 15.339,
+          "end": 15.514,
+          "duration": 0.175,
+          "frame_ahead_trigger": 15.299
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Technical: two softmax heads, a learned bias \u03b2 on the second, ReLU clipping, top\u2011k keep, no extra matmul.",
+      "visual_focus": "Chalkboard\u2011style code snippet showing softmax, bias addition, subtraction, ReLU, torch.topk.",
+      "highlight_words": {
+        "learned bias \u03b2": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Second head",
+        "action_verb": "adds",
+        "direct_object": "bias \u03b2",
+        "anchor_word": "adds",
+        "semantic_role": "parameter_modulation"
+      },
+      "visual_blueprint": {
+        "layout": "pipeline_stages",
+        "title": "DIFFERENTIAL TRANSFO: SECOND HEAD",
+        "sub": "Chalkboard\u2011style code snippet showing softmax, bias addition, sub",
+        "accent_color": "#38BDF8",
+        "stage_1_label": "STAGE 1: SECOND HEAD",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: ADDS ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: BIAS \u0392",
+        "stage_3_sub": "Target reconstructed state"
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "pipeline_stages",
+        "title": "DIFFERENTIAL TRANSFO: SECOND HEAD",
+        "sub": "Chalkboard\u2011style code snippet showing softmax, bias addition, sub",
+        "accent_color": "#38BDF8",
+        "stage_1_label": "STAGE 1: SECOND HEAD",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: ADDS ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: BIAS \u0392",
+        "stage_3_sub": "Target reconstructed state"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.06,
+      "slot_duration": 6.36,
+      "start": 15.96,
+      "end": 22.02,
+      "word_timings": [
+        {
+          "word": "Technical:",
+          "clean_word": "technical",
+          "phonemes": "t\u02c8\u025bkn\u026ak\u0259l",
+          "start": 15.986,
+          "end": 16.461,
+          "duration": 0.475,
+          "frame_ahead_trigger": 15.946
+        },
+        {
+          "word": "two",
+          "clean_word": "two",
+          "phonemes": "t\u02c8u\u02d0",
+          "start": 16.461,
+          "end": 16.671,
+          "duration": 0.21,
+          "frame_ahead_trigger": 16.421
+        },
+        {
+          "word": "softmax",
+          "clean_word": "softmax",
+          "phonemes": "s\u02c8\u0254ftm\u00e6ks",
+          "start": 16.671,
+          "end": 17.156,
+          "duration": 0.485,
+          "frame_ahead_trigger": 16.631
+        },
+        {
+          "word": "heads,",
+          "clean_word": "heads",
+          "phonemes": "h\u02c8\u025bdz",
+          "start": 17.156,
+          "end": 17.476,
+          "duration": 0.32,
+          "frame_ahead_trigger": 17.116
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 17.476,
+          "end": 17.756,
+          "duration": 0.28,
+          "frame_ahead_trigger": 17.436
+        },
+        {
+          "word": "learned",
+          "clean_word": "learned",
+          "phonemes": "l\u02c8\u025c\u02d0nd",
+          "start": 17.756,
+          "end": 18.031,
+          "duration": 0.275,
+          "frame_ahead_trigger": 17.716
+        },
+        {
+          "word": "bias",
+          "clean_word": "bias",
+          "phonemes": "b\u02c8a\u026a\u0259s",
+          "start": 18.031,
+          "end": 18.311,
+          "duration": 0.28,
+          "frame_ahead_trigger": 17.991
+        },
+        {
+          "word": "\u03b2",
+          "clean_word": "\u03b2",
+          "phonemes": "b\u02c8e\u026a\u027e\u0259",
+          "start": 18.311,
+          "end": 18.677,
+          "duration": 0.365,
+          "frame_ahead_trigger": 18.271
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 18.677,
+          "end": 18.816,
+          "duration": 0.14,
+          "frame_ahead_trigger": 18.637
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.816,
+          "end": 18.971,
+          "duration": 0.155,
+          "frame_ahead_trigger": 18.776
+        },
+        {
+          "word": "second,",
+          "clean_word": "second",
+          "phonemes": "s\u02c8\u025bk\u0259nd",
+          "start": 18.971,
+          "end": 19.266,
+          "duration": 0.295,
+          "frame_ahead_trigger": 18.931
+        },
+        {
+          "word": "ReLU",
+          "clean_word": "relu",
+          "phonemes": "\u0279\u02cci\u02d0 l\u02c8u\u02d0",
+          "start": 19.266,
+          "end": 19.806,
+          "duration": 0.54,
+          "frame_ahead_trigger": 19.226
+        },
+        {
+          "word": "clipping,",
+          "clean_word": "clipping",
+          "phonemes": "kl\u02c8\u026ap\u026a\u014b",
+          "start": 19.806,
+          "end": 20.191,
+          "duration": 0.385,
+          "frame_ahead_trigger": 19.766
+        },
+        {
+          "word": "top\u2011k",
+          "clean_word": "topk",
+          "phonemes": "t\u02c8\u0251\u02d0pk",
+          "start": 20.191,
+          "end": 20.656,
+          "duration": 0.465,
+          "frame_ahead_trigger": 20.151
+        },
+        {
+          "word": "keep,",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 20.656,
+          "end": 20.911,
+          "duration": 0.255,
+          "frame_ahead_trigger": 20.616
+        },
+        {
+          "word": "no",
+          "clean_word": "no",
+          "phonemes": "n\u02c8o\u028a",
+          "start": 20.911,
+          "end": 21.186,
+          "duration": 0.275,
+          "frame_ahead_trigger": 20.871
+        },
+        {
+          "word": "extra",
+          "clean_word": "extra",
+          "phonemes": "\u02c8\u025bkst\u0279\u0259",
+          "start": 21.186,
+          "end": 21.516,
+          "duration": 0.33,
+          "frame_ahead_trigger": 21.146
+        },
+        {
+          "word": "matmul.",
+          "clean_word": "matmul",
+          "phonemes": "m\u02c8\u00e6tm\u028cl",
+          "start": 21.516,
+          "end": 21.871,
+          "duration": 0.355,
+          "frame_ahead_trigger": 21.476
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "Result: Perplexity down 2.3% on WikiText\u2011103, activation spikes shrink, and context length doubles with unchanged latency.",
+      "visual_focus": "Bar graph of perplexity comparison, line chart of activation magnitude, timeline showing doubled context.",
+      "highlight_words": {
+        "Perplexity down 2.3%": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Diff Transformer",
+        "action_verb": "reduces",
+        "direct_object": "perplexity and activation spikes",
+        "anchor_word": "reduces",
+        "semantic_role": "performance_gain"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: PERPLEXITY",
+        "sub": "Bar graph of perplexity comparison, line chart of",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: PERPLEXITY",
+          "sub": "Bar graph of perplexity comparison, line chart of",
+          "metric_name": "Perplexity Reduction",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "Diff Transformer",
+              "value": 2.3,
+              "display_val": "2.3% \u2193",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Standard Transformer",
+              "value": 0.0,
+              "display_val": "0% \u2193",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +2.3% PPL DROP"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: PERPLEXITY",
+        "sub": "Bar graph of perplexity comparison, line chart of",
+        "metric_name": "Perplexity Reduction",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "Diff Transformer",
+            "value": 2.3,
+            "display_val": "2.3% \u2193",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Standard Transformer",
+            "value": 0.0,
+            "display_val": "0% \u2193",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +2.3% PPL DROP"
+      },
+      "audio_duration": 7.98,
+      "slot_duration": 8.28,
+      "start": 22.32,
+      "end": 30.3,
+      "word_timings": [
+        {
+          "word": "Result:",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 22.33,
+          "end": 22.735,
+          "duration": 0.405,
+          "frame_ahead_trigger": 22.29
+        },
+        {
+          "word": "Perplexity",
+          "clean_word": "perplexity",
+          "phonemes": "p\u025apl\u02c8\u025bks\u1d7b\u027ei",
+          "start": 22.735,
+          "end": 23.365,
+          "duration": 0.63,
+          "frame_ahead_trigger": 22.695
+        },
+        {
+          "word": "down",
+          "clean_word": "down",
+          "phonemes": "d\u02c8a\u028an",
+          "start": 23.365,
+          "end": 23.56,
+          "duration": 0.195,
+          "frame_ahead_trigger": 23.325
+        },
+        {
+          "word": "2.3%",
+          "clean_word": "23",
+          "phonemes": "tw\u02c8\u025bnti \u03b8\u0279\u02c8i\u02d0",
+          "start": 23.56,
+          "end": 24.3,
+          "duration": 0.74,
+          "frame_ahead_trigger": 23.52
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 24.3,
+          "end": 24.51,
+          "duration": 0.21,
+          "frame_ahead_trigger": 24.26
+        },
+        {
+          "word": "WikiText\u2011103,",
+          "clean_word": "wikitext103",
+          "phonemes": "w\u02c8\u026aki t\u02c8\u025bkst w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad \u03b8\u0279\u02c8i\u02d0",
+          "start": 24.51,
+          "end": 26.153,
+          "duration": 1.643,
+          "frame_ahead_trigger": 24.47
+        },
+        {
+          "word": "activation",
+          "clean_word": "activation",
+          "phonemes": "\u02cc\u00e6kt\u026av\u02c8e\u026a\u0283\u0259n",
+          "start": 26.153,
+          "end": 26.84,
+          "duration": 0.687,
+          "frame_ahead_trigger": 26.113
+        },
+        {
+          "word": "spikes",
+          "clean_word": "spikes",
+          "phonemes": "sp\u02c8a\u026aks",
+          "start": 26.84,
+          "end": 27.16,
+          "duration": 0.32,
+          "frame_ahead_trigger": 26.8
+        },
+        {
+          "word": "shrink,",
+          "clean_word": "shrink",
+          "phonemes": "\u0283\u0279\u02c8\u026a\u014bk",
+          "start": 27.16,
+          "end": 27.43,
+          "duration": 0.27,
+          "frame_ahead_trigger": 27.12
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 27.43,
+          "end": 27.765,
+          "duration": 0.335,
+          "frame_ahead_trigger": 27.39
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 27.765,
+          "end": 28.165,
+          "duration": 0.4,
+          "frame_ahead_trigger": 27.725
+        },
+        {
+          "word": "length",
+          "clean_word": "length",
+          "phonemes": "l\u02c8\u025b\u014b\u03b8",
+          "start": 28.165,
+          "end": 28.405,
+          "duration": 0.24,
+          "frame_ahead_trigger": 28.125
+        },
+        {
+          "word": "doubles",
+          "clean_word": "doubles",
+          "phonemes": "d\u02c8\u028cb\u0259lz",
+          "start": 28.405,
+          "end": 28.855,
+          "duration": 0.45,
+          "frame_ahead_trigger": 28.365
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 28.855,
+          "end": 29.04,
+          "duration": 0.185,
+          "frame_ahead_trigger": 28.815
+        },
+        {
+          "word": "unchanged",
+          "clean_word": "unchanged",
+          "phonemes": "\u028cnt\u0283\u02c8e\u026and\u0292d",
+          "start": 29.04,
+          "end": 29.68,
+          "duration": 0.64,
+          "frame_ahead_trigger": 29.0
+        },
+        {
+          "word": "latency.",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 29.68,
+          "end": 30.14,
+          "duration": 0.46,
+          "frame_ahead_trigger": 29.64
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Next time your model drowns in filler, remember differential subtraction\u2014follow The Model Verse for more hacks.",
+      "visual_focus": "Looping arrow rewinds to the traffic\u2011jam visual, subtle rewind effect.",
+      "highlight_words": {
+        "differential subtraction": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Differential subtraction",
+        "action_verb": "rescues",
+        "direct_object": "models",
+        "anchor_word": "rescues",
+        "semantic_role": "solution_loop"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "FULL CIRCLE",
+        "sub": "From jam to clean attention",
+        "accent_color": "#38BDF8",
+        "params": {
+          "col_a_title": "Before Subtraction",
+          "col_a_stat": "High Noise",
+          "col_b_title": "After Diff",
+          "col_b_stat": "Sparse Signal"
+        }
+      },
+      "thriller_role": "outro_loop",
+      "act": 4,
+      "audio_duration": 5.5,
+      "slot_duration": 6.0,
+      "start": 30.6,
+      "end": 36.1,
+      "word_timings": [
+        {
+          "word": "Next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 30.609,
+          "end": 30.954,
+          "duration": 0.345,
+          "frame_ahead_trigger": 30.569
+        },
+        {
+          "word": "time",
+          "clean_word": "time",
+          "phonemes": "t\u02c8a\u026am",
+          "start": 30.954,
+          "end": 31.099,
+          "duration": 0.145,
+          "frame_ahead_trigger": 30.914
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 31.099,
+          "end": 31.309,
+          "duration": 0.21,
+          "frame_ahead_trigger": 31.059
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 31.309,
+          "end": 31.694,
+          "duration": 0.385,
+          "frame_ahead_trigger": 31.269
+        },
+        {
+          "word": "drowns",
+          "clean_word": "drowns",
+          "phonemes": "d\u0279\u02c8a\u028anz",
+          "start": 31.694,
+          "end": 32.069,
+          "duration": 0.375,
+          "frame_ahead_trigger": 31.654
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 32.069,
+          "end": 32.25,
+          "duration": 0.181,
+          "frame_ahead_trigger": 32.029
+        },
+        {
+          "word": "filler,",
+          "clean_word": "filler",
+          "phonemes": "f\u02c8\u026al\u025a",
+          "start": 32.25,
+          "end": 32.529,
+          "duration": 0.279,
+          "frame_ahead_trigger": 32.21
+        },
+        {
+          "word": "remember",
+          "clean_word": "remember",
+          "phonemes": "\u0279\u1d7bm\u02c8\u025bmb\u025a",
+          "start": 32.529,
+          "end": 32.914,
+          "duration": 0.385,
+          "frame_ahead_trigger": 32.489
+        },
+        {
+          "word": "differential",
+          "clean_word": "differential",
+          "phonemes": "d\u02cc\u026af\u025a\u0279\u02c8\u025bn\u0283\u0259l",
+          "start": 32.914,
+          "end": 33.579,
+          "duration": 0.665,
+          "frame_ahead_trigger": 32.874
+        },
+        {
+          "word": "subtraction\u2014follow",
+          "clean_word": "subtractionfollow",
+          "phonemes": "s\u028cbt\u0279\u02c8\u00e6k\u0283\u0259nf\u02cc\u0251\u02d0lo\u028a",
+          "start": 33.579,
+          "end": 34.634,
+          "duration": 1.055,
+          "frame_ahead_trigger": 33.539
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.634,
+          "end": 34.632,
+          "duration": -0.001,
+          "frame_ahead_trigger": 34.594
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.632,
+          "end": 34.994,
+          "duration": 0.361,
+          "frame_ahead_trigger": 34.592
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 34.994,
+          "end": 35.274,
+          "duration": 0.28,
+          "frame_ahead_trigger": 34.954
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.274,
+          "end": 35.479,
+          "duration": 0.206,
+          "frame_ahead_trigger": 35.234
+        },
+        {
+          "word": "more",
+          "clean_word": "more",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279",
+          "start": 35.479,
+          "end": 35.834,
+          "duration": 0.354,
+          "frame_ahead_trigger": 35.439
+        },
+        {
+          "word": "hacks.",
+          "clean_word": "hacks",
+          "phonemes": "h\u02c8\u00e6ks",
+          "start": 35.834,
+          "end": 36.009,
+          "duration": 0.175,
+          "frame_ahead_trigger": 35.794
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$N = 8{,}192 \\quad\\Rightarrow\\quad N^{2}=67{,}108{,}864\\text{ pairwise scores}$",
+      "filename": "differential_transformer_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Sequence length (tokens)"
+        },
+        {
+          "term": "N^{2}",
+          "label": "Total attention pairs"
+        }
+      ],
+      "svg_filename": "differential_transformer_beat1_scale.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N^{2})\\;\\text{time \\& memory complexity of dense softmax}$",
+      "filename": "differential_transformer_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Token count"
+        }
+      ],
+      "svg_filename": "differential_transformer_beat2_bottleneck.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\Delta A = \\operatorname{softmax}(QK^{\\top}) \\; - \\; \\operatorname{softmax}(QK^{\\top}+\\beta)$",
+      "filename": "differential_transformer_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "QK^{\\top}",
+          "label": "Query\u2011Key similarity matrix"
+        },
+        {
+          "term": "\\beta",
+          "label": "Bias term for second softmax"
+        }
+      ],
+      "svg_filename": "differential_transformer_beat3_architecture.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$S = \\operatorname{TopK}\\bigl(\\operatorname{ReLU}(\\Delta A),\\;k\\bigr)$",
+      "filename": "differential_transformer_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\Delta A",
+          "label": "Differential attention scores"
+        },
+        {
+          "term": "k",
+          "label": "Top\u2011k sparsity budget"
+        }
+      ],
+      "svg_filename": "differential_transformer_beat4_mechanism.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta\\!\\mathrm{PPL}=\\mathrm{PPL}_{\\text{baseline}}-\\mathrm{PPL}_{\\text{Diff}}=2.3\\%$",
+      "filename": "differential_transformer_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta\\!\\mathrm{PPL}",
+          "label": "Relative perplexity reduction"
+        },
+        {
+          "term": "2.3\\%",
+          "label": "Observed gain on benchmark"
+        }
+      ],
+      "svg_filename": "differential_transformer_beat5_payoff.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "RELEVANT",
+          "color": "#38BDF8",
+          "items": [
+            "topic",
+            "entity",
+            "keyword"
+          ]
+        },
+        {
+          "name": "IRRELEVANT",
+          "color": "#EF4444",
+          "items": [
+            "stopword",
+            "punctuation",
+            "noise"
+          ]
+        },
+        {
+          "name": "DIFF_SIGNAL",
+          "color": "#34D399",
+          "items": [
+            "delta",
+            "sparse",
+            "focus"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"quantum\"",
+        "target_cluster": "RELEVANT",
+        "token": "\"quantum\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'the'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token ','",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Diff Transformer",
+    "model_a_specs": [
+      "Differential Attention",
+      "Sparse Top\u2011k Gating",
+      "Reduced Activation Outliers"
+    ],
+    "model_b": "Standard Transformer",
+    "model_b_specs": [
+      "Dense Softmax",
+      "Quadratic Complexity",
+      "No Subtraction"
+    ],
+    "divide_title": "ATTENTION vs DIFFERENTIAL",
+    "model_a_stat": "2.3% \u2193 PPL",
+    "model_a_stat_label": "PERPLEXITY REDUCTION",
+    "model_b_stat": "0% \u2193 PPL",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 +30% ACTIVATION STABILITY",
+    "benchmarks": [
+      {
+        "name": "WikiText\u2011103",
+        "score_a": "2.3% \u2193",
+        "score_b": "0%"
+      },
+      {
+        "name": "Long Context (32K)",
+        "score_a": "2\u00d7 longer",
+        "score_b": "1\u00d7"
+      },
+      {
+        "name": "Hallucination QA",
+        "score_a": "\u221245% errors",
+        "score_b": "baseline"
+      }
+    ],
+    "scale_metric": "8,192",
+    "scale_label": "MAX CONTEXT TOKENS",
+    "bottleneck_title": "QUADRATIC BOTTLENECK",
+    "bottleneck_desc": "All\u2011to\u2011all Score Matrix",
+    "solution_title": "DIFFERENTIAL ATTENTION",
+    "solution_components": "Parallel Softmax & Subtraction",
+    "mechanism_title": "SPARSE GATING",
+    "payoff_stat": "2.3%",
+    "payoff_label": "PERPLEXITY DROP",
+    "payoff_sub": "Across language modeling benchmarks",
+    "payoff_hero_stat": 2.3,
+    "payoff_hero_label": "Perplexity Reduction",
+    "payoff_base_stat": 0,
+    "payoff_base_label": "Baseline",
+    "payoff_delta_badge": "\u26a1 +2.3% PPL DROP",
+    "challenger": "",
+    "incumbent": ""
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: PERPLEXITY",
+    "metric_name": "Perplexity Reduction",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "Diff Transformer",
+        "value": 2.3,
+        "display_val": "2.3% \u2193",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Standard Transformer",
+        "value": 0.0,
+        "display_val": "0% \u2193",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +2.3% PPL DROP",
+    "radar_axes": [
+      "Perplexity",
+      "Activation Outliers",
+      "Context Length",
+      "Robustness",
+      "Compute"
+    ]
+  },
+  "code_snippet": {
+    "filename": "diff_attention.py",
+    "language": "python",
+    "lines": [
+      "def differential_attention(q, k, beta):",
+      "    a1 = torch.softmax(q @ k.T, dim=-1)",
+      "    a2 = torch.softmax(q @ k.T + beta, dim=-1)",
+      "    delta = a1 - a2",
+      "    return torch.topk(F.relu(delta), k=64, dim=-1).indices"
+    ],
+    "highlight_lines": [
+      2,
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 DIFFERENTIAL ATTENTION KERNEL",
+    "explanation": "Two softmax passes then element\u2011wise subtraction yields a sparse attention map"
+  },
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 9.1,
+    "final_retention_hook_score": 8.7,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook in Beat\u202f1 grabbed me \u2013 I instantly wondered how you could mute filler words in a transformer. Beats\u202f2\u20114 explained the idea clearly enough that I could picture the two heads, the bias, subtraction, ReLU clipping and top\u2011k selection. Beat\u202f5 gave solid numbers, which helped me see the impact. The only thing that tripped me up was the quick mention of a \u201ctiny learned bias \u03b2\u201d without saying what it actually does, and the phrase \u201ctwo parallel attention heads\u201d felt a bit abstract without a tiny example."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Irrelevant Token Jam",
+    "physical_analogy": "Highway traffic jam where each compute lane is clogged by unnecessary cars",
+    "eureka_mechanism": "Differential Attention Subtraction",
+    "paradigm_shift": "Sparse, noise\u2011free attention that doubles effective context without extra compute"
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}

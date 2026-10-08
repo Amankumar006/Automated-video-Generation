@@ -50,7 +50,9 @@ class BaseBlueprintComposition(Group):
         accent_color: str = COLOR_CYAN,
         **kwargs
     ):
-        super().__init__(**kwargs)
+        # Filter kwargs to only those accepted by Mobject to avoid unexpected keyword errors
+        mobject_kwargs = {k: v for k, v in kwargs.items() if k in ("color", "name", "dim", "target", "z_index")}
+        super().__init__(**mobject_kwargs)
         self.accent_color = accent_color
 
         # Clean top titles formatted for 9:16 mobile canvas
@@ -762,6 +764,8 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
         accent_color: str = COLOR_CYAN,
         max_width: float = 7.5,
         max_height: float = 5.0,
+        caption: Optional[str] = None,
+        preferred_renderer: Optional[str] = None,
         **kwargs
     ):
         super().__init__(title=title, sub=sub, accent_color=accent_color, **kwargs)
@@ -937,10 +941,14 @@ def create_blueprint_composition(layout: str, params: Optional[Dict[str, Any]] =
     try:
         return cls(**clean_params)
     except Exception as e:
-        print(f"⚠️ Error creating composition for layout '{layout}': {e}. Falling back with defaults.")
+        print(f"⚠️ Error creating composition for layout '{layout}': {e}. Falling back with filtered parameters.")
         try:
-            return cls(title=clean_params.get("title", "ARCHITECTURAL OVERVIEW"))
-        except Exception:
+            import inspect
+            sig = inspect.signature(cls)
+            filtered = {k: v for k, v in clean_params.items() if k in sig.parameters}
+            return cls(**filtered)
+        except Exception as e2:
+            print(f"⚠️ Secondary fallback failed: {e2}. Falling back to default stages.")
             return BlueprintPipelineStages()
 
 # Populate extended registries on module load
