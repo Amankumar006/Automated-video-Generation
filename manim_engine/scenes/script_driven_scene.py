@@ -102,7 +102,8 @@ class ScriptDrivenScene(MovingCameraScene):
             for y in np.arange(-6.0, 6.1, 0.9):
                 dots.add(Dot(point=[x, y, 0], radius=0.016, color="#2D3748", fill_opacity=0.35))
         dots.set_z_index(-10)
-        self.add(dots)
+        self.dots = dots
+        self.add(self.dots)
 
     def setup_header(self):
         """Places subtle brand watermark in the topmost safe zone (Depth Layer 3)."""
@@ -567,7 +568,14 @@ class ScriptDrivenScene(MovingCameraScene):
             # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
             actual_exit = max(0.15, expected_end - self.renderer.time)
             reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_anim, run_time=actual_exit)
+            exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
+            if self.current_formula_mobj:
+                exit_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
+            self.play(*exit_anims, reset_anim, run_time=actual_exit)
+            self.remove(motif)
+            if self.current_formula_mobj:
+                self.remove(self.current_formula_mobj)
+                self.current_formula_mobj = None
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
@@ -638,19 +646,24 @@ class ScriptDrivenScene(MovingCameraScene):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
         total_beats = len(self.spec.get("beats", []))
         duration = self.get_beat_duration(total_beats, 4.5)
-        fadeout_math_time = 0.3
-        fadeouts = []
-        if self.current_formula_mobj:
-            fadeouts.append(FadeOut(self.current_formula_mobj))
-            self.current_formula_mobj = None
+        # 1. Cleanly purge ALL lingering vector mobjects from prior beats (except background dots & header)
+        persistent = {getattr(self, "dots", None), getattr(self, "header_group", None)}
+        lingering = [m for m in list(self.mobjects) if m not in persistent and m is not None]
+
         if hasattr(self, "caption_container") and self.caption_container:
-            self.caption_container.clear_updaters()
-            fadeouts.append(FadeOut(self.caption_container))
-            self.caption_container = None
-        if fadeouts:
-            self.play(*fadeouts, run_time=fadeout_math_time)
-        else:
-            fadeout_math_time = 0.0
+            try:
+                self.caption_container.clear_updaters()
+            except Exception:
+                pass
+
+        purge_time = 0.25 if lingering else 0.0
+        if lingering:
+            self.play(*[FadeOut(m) for m in lingering], run_time=purge_time)
+            for m in lingering:
+                self.remove(m)
+
+        self.current_formula_mobj = None
+        self.caption_container = None
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(
             logo_title="THE MODEL VERSE",
@@ -667,7 +680,7 @@ class ScriptDrivenScene(MovingCameraScene):
         self.play(FadeIn(sub, shift=UP * 0.1), run_time=intro_sub_time)
 
         # Micro-drift during outro narration & music
-        used_so_far = fadeout_math_time + intro_logo_time + intro_sub_time + exit_time
+        used_so_far = purge_time + intro_logo_time + intro_sub_time + exit_time
         outro_hold = max(0.5, duration - used_so_far)
         self.play(
             self.camera.frame.animate(rate_func=linear).scale(0.985).shift(UP * 0.05),

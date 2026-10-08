@@ -77,10 +77,7 @@ def create_formula_halo_pulse(
     ).move_to(target_mobject.get_center())
     halo.set_z_index(target_mobject.z_index + 1)
 
-    pulse_anim = AnimationGroup(
-        halo.animate(rate_func=ease_out_cubic, run_time=run_time).scale(1.22).set_stroke(opacity=0.0, width=0.5),
-        target_mobject.animate(rate_func=there_and_back, run_time=run_time).scale(1.04)
-    )
+    pulse_anim = halo.animate(rate_func=ease_out_cubic, run_time=run_time).scale(1.22).set_stroke(opacity=0.0, width=0.5)
     return halo, pulse_anim
 
 
