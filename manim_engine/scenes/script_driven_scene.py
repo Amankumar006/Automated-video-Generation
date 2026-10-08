@@ -115,6 +115,10 @@ class ScriptDrivenScene(MovingCameraScene):
         ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.header_group.set_z_index(50)
+        def update_header(mob, dt):
+            cam_center = self.camera.frame.get_center()
+            mob.move_to([cam_center[0], cam_center[1] + 7.1, 0])
+        self.header_group.add_updater(update_header)
         self.add(self.header_group)
 
     def setup_kinetic_captions(self):
@@ -169,7 +173,8 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_color="#334155",
                             stroke_width=1.4
                         )
-                        mob.become(VGroup(bg, txt).move_to([0, -3.45, 0]))
+                        cam_center = self.camera.frame.get_center()
+                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.45, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
@@ -481,43 +486,36 @@ class ScriptDrivenScene(MovingCameraScene):
                 entrance_group.extend(particle_anims)
             self.play(*entrance_group, run_time=enter_time)
 
-            # 3. Focal Kinetic Action & Aggressive 3Blue1Brown Camera Zooms (Visual Engine 7.5)
+            # 3. Focal Kinetic Action & Cinematic Camera Staging (Cinematic Engine 8.0)
             action_time = min(1.3, duration * 0.26)
-            svo_data = b.get("svo_action")
-            punch_anim = None
-            if beat_id in (3, 4):
-                # Aggressive 3Blue1Brown focus zoom (22% zoom) locking onto formula derivation
+            camera_action_anim = None
+
+            if beat_id == 5:
+                # Climax Peak: High-energy snap zoom framing the empirical victory / SOTA delta badge
                 try:
-                    punch_anim = self.kinetic_camera.get_formula_focus_animation(
-                        camera_frame=self.camera.frame,
-                        formula_point=tray_group.get_center(),
-                        zoom_factor=0.78,
-                        run_time=action_time
-                    )
-                except Exception as e:
-                    print(f"⚠️ Formula focus zoom notice: {e}")
-            elif beat_id == 5:
-                # High-energy snap zoom (25% zoom) framing empirical victory / SOTA delta badge
-                try:
-                    punch_anim = self.kinetic_camera.get_hero_metric_snap_animation(
+                    camera_action_anim = self.kinetic_camera.get_hero_metric_snap_animation(
                         camera_frame=self.camera.frame,
                         target_point=motif.get_center(),
-                        zoom_factor=0.74,
+                        zoom_factor=0.76,
                         run_time=action_time
                     )
                 except Exception as e:
                     print(f"⚠️ Hero metric snap notice: {e}")
-            elif beat_id in (1, 2) or (svo_data and svo_data.get("anchor_word")):
-                # Snappy punch-in zoom (18% zoom) on pattern interrupt or bottleneck reveal
+            elif beat_id == 3 and motif_type in ["pipeline_stages", "split_flow", "branching_outputs"]:
+                # Lateral Tracking Dolly: Smooth camera tracking pan across pipeline stages (Left to Right)
                 try:
-                    punch_anim = self.kinetic_camera.get_punch_in_animation(
+                    camera_action_anim = self.kinetic_camera.get_lateral_tracking_animation(
                         camera_frame=self.camera.frame,
-                        target_point=motif.get_center(),
-                        zoom_factor=0.82,
+                        start_x=-0.8,
+                        end_x=0.8,
+                        y=0.0,
                         run_time=action_time
                     )
                 except Exception as e:
-                    print(f"⚠️ Punch-in zoom notice: {e}")
+                    print(f"⚠️ Lateral tracking dolly notice: {e}")
+            else:
+                # Beats 1, 2, 4 maintain visual stability without repetitive zoom pulsing
+                camera_action_anim = None
 
             try:
                 if hasattr(motif, "get_kinetic_animation"):
@@ -551,8 +549,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     kinetic_anim = motif.animate(rate_func=there_and_back, run_time=action_time).scale(1.02)
 
                 action_anims = [kinetic_anim]
-                if punch_anim:
-                    action_anims.append(punch_anim)
+                if camera_action_anim:
+                    action_anims.append(camera_action_anim)
                 self.play(*action_anims, run_time=action_time)
             except Exception as e:
                 print(f"⚠️ Kinetic action warning for {motif_type}: {e}")
@@ -567,11 +565,16 @@ class ScriptDrivenScene(MovingCameraScene):
 
             # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
             actual_exit = max(0.15, expected_end - self.renderer.time)
-            reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
             exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
             if self.current_formula_mobj:
                 exit_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
-            self.play(*exit_anims, reset_anim, run_time=actual_exit)
+            
+            # Only reset camera framing if the camera actually moved or zoomed
+            if camera_action_anim is not None or beat_id == 5:
+                reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
+                exit_anims.append(reset_anim)
+
+            self.play(*exit_anims, run_time=actual_exit)
             self.remove(motif)
             if self.current_formula_mobj:
                 self.remove(self.current_formula_mobj)

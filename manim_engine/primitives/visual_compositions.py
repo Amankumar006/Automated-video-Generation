@@ -28,6 +28,7 @@ sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
 from manim_engine.primitives.typography import CleanText
+from manim_engine.primitives.isometric import create_isometric_slab, create_isometric_layer_stack
 
 # Standard 3b1b Palette
 COLOR_CYAN = "#38BDF8"
@@ -225,9 +226,19 @@ class BlueprintPipelineStages(BaseBlueprintComposition):
         self.stage_2_group = stage_groups[1] if len(stage_groups) > 1 else None
         self.stage_3_group = stage_groups[2] if len(stage_groups) > 2 else None
 
+        self.arrow_1 = arrow_1
+        self.arrow_2 = arrow_2
+
         self.content_group.add(arrow_1, arrow_2)
         self.kinetic_elements.add(stage_groups[1], arrow_1, arrow_2)
         self.add(self.title, self.sub, self.content_group)
+
+    def get_kinetic_animation(self, run_time: float = 1.5) -> Animation:
+        """Sequential packet flow across pipeline stages with glowing flash highlights."""
+        anim1 = self.arrow_1.animate(rate_func=there_and_back, run_time=run_time * 0.45).set_stroke(color=COLOR_CYAN, width=6.0)
+        anim2 = self.stage_2_group.animate(rate_func=there_and_back, run_time=run_time * 0.5).scale(1.03)
+        anim3 = self.arrow_2.animate(rate_func=there_and_back, run_time=run_time * 0.45).set_stroke(color=COLOR_MINT, width=6.0)
+        return AnimationGroup(anim1, anim2, anim3, lag_ratio=0.3)
 
 
 class BlueprintGridMemory(BaseBlueprintComposition):
@@ -295,10 +306,20 @@ class BlueprintGridMemory(BaseBlueprintComposition):
         self.cells = cells
         self.hit_cell = hit_cell
         self.active_cell = hit_cell
+        self.badge_group = badge_group
 
         self.content_group.add(chassis, header, cells, badge_group)
         self.kinetic_elements.add(hit_cell, badge_group)
         self.add(self.title, self.sub, self.content_group)
+
+    def get_kinetic_animation(self, run_time: float = 1.5) -> Animation:
+        """Matrix cell laser flash and query hit activation."""
+        if self.hit_cell:
+            hit_rect = self.hit_cell[0]
+            anim1 = hit_rect.animate(rate_func=there_and_back, run_time=run_time * 0.5).set_fill(color=COLOR_MINT, opacity=1.0).set_stroke(color=COLOR_WHITE, width=4.0)
+            anim2 = self.badge_group.animate(rate_func=there_and_back, run_time=run_time * 0.5).scale(1.04)
+            return AnimationGroup(anim1, anim2, lag_ratio=0.2)
+        return super().get_kinetic_animation(run_time=run_time)
 
 
 class BlueprintProjectionRays(BaseBlueprintComposition):
@@ -454,8 +475,8 @@ class BlueprintTreeHierarchy(BaseBlueprintComposition):
 
 class BlueprintLayerStack(BaseBlueprintComposition):
     """
-    Stacked transparent layers: Hierarchical abstraction levels building to output.
-    Perfect for: Deep representations, layered judgments (Jev), multi-stage embeddings.
+    Stacked 2.5D Isometric Layers: Authentic axonometric projection showing
+    hierarchical abstraction levels building to output.
     """
     def __init__(
         self,
@@ -467,37 +488,34 @@ class BlueprintLayerStack(BaseBlueprintComposition):
     ):
         super().__init__(accent_color=accent_color, **kwargs)
 
-        layers_info = [
-            (bottom_layer, COLOR_SLATE, -1.8, 5.6),
-            (mid_layer, accent_color, 0.3, 6.0),
-            (top_layer, COLOR_MINT, 2.4, 6.4),
+        layers_data = [
+            (bottom_layer, COLOR_SLATE, -0.2),
+            (mid_layer, accent_color, 0.0),
+            (top_layer, COLOR_MINT, 0.2),
         ]
 
-        layer_groups = []
-        for idx, (lbl, col, y_pos, w) in enumerate(layers_info):
-            # Isometric perspective trapezoid slab
-            slab = Polygon(
-                [-w / 2, y_pos - 0.4, 0],
-                [w / 2, y_pos - 0.4, 0],
-                [w / 2 - 0.6, y_pos + 0.5, 0],
-                [-w / 2 + 0.6, y_pos + 0.5, 0],
-                color=col,
-                fill_color=col,
-                fill_opacity=0.25,
-                stroke_width=2.5
-            )
-            txt = CleanText(lbl[:28].upper(), font=FONT_HELVETICA, font_size=11, color=col, weight=BOLD).move_to(slab)
-            grp = VGroup(slab, txt)
-            layer_groups.append(grp)
-            self.content_group.add(grp)
+        stack_grp, proj_rays = create_isometric_layer_stack(
+            layers_data=layers_data,
+            width=5.2,
+            height=1.8,
+            thickness=0.3,
+            spacing=1.75,
+            base_y=-1.8
+        )
 
-        # Vertical ascending connectors
-        conn_1 = Line(start=layer_groups[0].get_top(), end=layer_groups[1].get_bottom(), color=COLOR_WHITE, stroke_width=2.5)
-        conn_2 = Line(start=layer_groups[1].get_top(), end=layer_groups[2].get_bottom(), color=COLOR_MINT, stroke_width=3.5)
+        self.stack_group = stack_grp
+        self.proj_rays = proj_rays
+        self.layer_groups = [stack_grp[i] for i in range(len(stack_grp))]
 
-        self.content_group.add(conn_1, conn_2)
-        self.kinetic_elements.add(layer_groups[2], conn_2)
+        self.content_group.add(stack_grp, proj_rays)
+        self.kinetic_elements.add(stack_grp[-1], proj_rays)
         self.add(self.title, self.sub, self.content_group)
+
+    def get_kinetic_animation(self, run_time: float = 1.5) -> Animation:
+        """Ascending vertical projection beam kinetics into top synthesized tier."""
+        ray_flash = self.proj_rays.animate(rate_func=there_and_back, run_time=run_time * 0.5).set_stroke(color=COLOR_WHITE, width=3.5, opacity=1.0)
+        top_pulse = self.stack_group[-1].animate(rate_func=there_and_back, run_time=run_time * 0.6).scale(1.04)
+        return AnimationGroup(ray_flash, top_pulse, lag_ratio=0.3)
 
 
 class BlueprintConvergenceFunnel(BaseBlueprintComposition):
