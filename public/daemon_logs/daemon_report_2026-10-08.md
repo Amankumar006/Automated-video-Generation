@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-08 | **Timestamp:** 2026-10-08 07:45:06 UTC
+**Date:** 2026-10-08 | **Timestamp:** 2026-10-08 12:15:45 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: DLoop: Looped Speculative Decoding
-- **arXiv ID:** [2610.07659](https://arxiv.org/abs/2610.07659)
-- **Domain Taxonomy:** `hardware_efficiency` (1.10x velocity)
+### Reel 1: TIDES: Implicit Time-Awareness in Selective State Space Models
+- **arXiv ID:** [2605.09742](https://arxiv.org/abs/2605.09742)
+- **Domain Taxonomy:** `hardware_efficiency` (1.07x velocity)
 - **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *What if your AI assistant could 'think' in two speeds at once to speak twice as fast?*
-- **Everyday Analogy:** *A courtroom stenographer drafting a transcript in shorthand, while a senior editor instantly validates or corrects the shorthand at the end of each sentence.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_dloop_speculative_decoding_mechanism_deepdive.mp4`
+- **Editorial Hook:** *Why does your AI 'forget' the passage of time, and how can we fix the 'time-warp' inside its brain?*
+- **Everyday Analogy:** *A metronome that keeps speeding up or slowing down without the listener knowing, causing the music to lose its rhythm.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_tides_ssm_mechanism_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
