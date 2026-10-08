@@ -1,0 +1,386 @@
+{
+  "id": "lift_loop_flow_transformers",
+  "title": "LiFT: Loop Flow Transformers",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "LOOP FLOW TRANSFORMERS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Your current Diffusion Transformer is fundamentally broken: it wastes massive parameter counts just to reach a single, static image output.",
+      "visual_focus": "A massive, static neural network block collapsing under its own weight.",
+      "highlight_words": {
+        "fundamentally broken": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Diffusion Transformer",
+        "action_verb": "wastes",
+        "direct_object": "parameter counts",
+        "anchor_word": "wastes",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE PARAMETER TRAP",
+        "sub": "Static depth limits scaling",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "layer_stack",
+        "title": "THE PARAMETER TRAP",
+        "sub": "Static depth limits scaling",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 2,
+      "text": "Why? Because LLMs generate code one single token at a time\u2014like a world-class chef who stops to ask you for salt before chopping every onion.",
+      "visual_focus": "A long, redundant assembly line of identical model layers.",
+      "highlight_words": {
+        "one single token": "#F59E0B",
+        "stops to ask": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Fixed-depth architecture",
+        "action_verb": "forces",
+        "direct_object": "redundant computation",
+        "anchor_word": "assembly line",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE REDUNDANCY BOTTLENECK",
+        "sub": "Linear scaling hits a wall",
+        "accent_color": "#EF4444",
+        "params": {
+          "field_title": "Redundant Trajectories",
+          "source_label": "Start",
+          "target_label": "End",
+          "stream_formula": "v(t) = constant"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THE REDUNDANCY BOTTLENECK",
+        "sub": "Linear scaling hits a wall",
+        "accent_color": "#EF4444",
+        "field_title": "Redundant Trajectories",
+        "source_label": "Start",
+        "target_label": "End",
+        "stream_formula": "v(t) = constant"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter LiFT: Loop Flow Transformers. Instead of fixed layers, it loops a shared DiT core, regressing toward a continuous path of flow-matching targets.",
+      "visual_focus": "A single block looping back into itself, refining a vector field.",
+      "highlight_words": {
+        "Loop Flow Transformers": "#10B981"
+      },
+      "svo_action": {
+        "subject": "LiFT",
+        "action_verb": "loops",
+        "direct_object": "shared DiT core",
+        "anchor_word": "continuous path",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "LIFT ARCHITECTURE",
+        "sub": "A single block looping back into itself, refining a vector field.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.png",
+          "arxiv_id": "2610.05538",
+          "title": "LIFT ARCHITECTURE",
+          "sub": "A single block looping back into itself, refining a vector field.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.png",
+        "arxiv_id": "2610.05538",
+        "title": "LIFT ARCHITECTURE",
+        "sub": "A single block looping back into itself, refining a vector field.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan"
+    },
+    {
+      "beat_id": 4,
+      "text": "By indexing targets via a continuous depth coordinate, the model iterates far beyond its training depth without needing a single parameter update.",
+      "visual_focus": "A coordinate graph showing the model sliding along a smooth, learned trajectory.",
+      "highlight_words": {
+        "continuous depth coordinate": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Continuous depth",
+        "action_verb": "enables",
+        "direct_object": "infinite iteration",
+        "anchor_word": "indexing",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE DEPTH COORDINATE",
+        "sub": "Mapping inference to flow",
+        "accent_color": "#38BDF8",
+        "params": {
+          "grid_title": "Computation Depth Map",
+          "active_cell_label": "Depth (t)",
+          "efficiency_label": "Shared Parameters"
+        }
+      },
+      "thriller_role": "technical_secret_sauce",
+      "act": 3,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE DEPTH COORDINATE",
+        "sub": "Mapping inference to flow",
+        "accent_color": "#38BDF8",
+        "grid_title": "Computation Depth Map",
+        "active_cell_label": "Depth (t)",
+        "efficiency_label": "Shared Parameters"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? LiFT-L/2 crushes the dense DiT-XL/2 baseline, slashing inference FLOPs by 52% while actually improving FID scores by 3.34 points.",
+      "visual_focus": "A bar chart showing LiFT lower and faster than the baseline.",
+      "highlight_words": {
+        "52% fewer FLOPs": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "LiFT",
+        "action_verb": "crushes",
+        "direct_object": "dense baselines",
+        "anchor_word": "efficiency",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK DOMINANCE",
+        "sub": "Higher quality, lower cost",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "Dense DiT",
+          "col_a_stat": "Baseline",
+          "col_b_title": "LiFT",
+          "col_b_stat": "52% Savings"
+        }
+      },
+      "thriller_role": "empirical_payoff",
+      "act": 4,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "BENCHMARK DOMINANCE",
+        "sub": "Higher quality, lower cost",
+        "accent_color": "#34D399",
+        "col_a_title": "Dense DiT",
+        "col_a_stat": "Baseline",
+        "col_b_title": "LiFT",
+        "col_b_stat": "52% Savings"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse to see how we break the compute-scaling wall for good.",
+      "visual_focus": "A rapid zoom-out of the neural architecture.",
+      "highlight_words": {
+        "The Model Verse": "#10B981"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "dismantles",
+        "direct_object": "scaling walls",
+        "anchor_word": "scaling",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dive into AI reality",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "Math",
+          "input_2_label": "Code",
+          "input_3_label": "Physics",
+          "fused_label": "Insight"
+        }
+      },
+      "thriller_role": "open_loop_outro",
+      "act": 4
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$C = N \\times L \\times d^2$",
+      "filename": "lift_loop_flow_transformers_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "C",
+          "label": "Compute cost"
+        }
+      ],
+      "svg_filename": "lift_loop_flow_transformers_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{L} = \\| \\phi(x_t, t) - \\hat{x} \\|^2$",
+      "filename": "lift_loop_flow_transformers_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "x_t",
+          "label": "Noisy latents"
+        }
+      ],
+      "svg_filename": "lift_loop_flow_transformers_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\theta_{shared} = \\theta_{DiT}$",
+      "filename": "lift_loop_flow_transformers_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "theta",
+          "label": "Shared weights"
+        }
+      ],
+      "svg_filename": "lift_loop_flow_transformers_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$y = f(x; t_{depth})$",
+      "filename": "lift_loop_flow_transformers_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "t_{depth}",
+          "label": "Continuous coordinate"
+        }
+      ],
+      "svg_filename": "lift_loop_flow_transformers_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta_{FLOPs} = 1 - \\frac{FLOPs_{LiFT}}{FLOPs_{Dense}} = 0.52$",
+      "filename": "lift_loop_flow_transformers_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "0.52",
+          "label": "Relative reduction"
+        }
+      ],
+      "svg_filename": "lift_loop_flow_transformers_beat5_formula.svg"
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook is killer\u2014calling out the inefficiency of current DiTs immediately caught my attention. I actually liked the sculptor analogy; it wasn't patronizing, it just illustrated the 'fixed-depth' problem well. I understood the loop mechanism, but 'continuous depth coordinate' sounds a bit like hand-wavy math jargon. I get that it's iterating, but how does it know when to stop? Is it a learned scalar or just a time-step index?"
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "acts": {
+      "act_1_hook": {
+        "beat": 1,
+        "role": "pattern_interrupt_hook"
+      },
+      "act_2_villain": {
+        "beat": 2,
+        "role": "villain_bottleneck",
+        "analogy": "chef waiting for salt"
+      },
+      "act_3_eureka": {
+        "beats": [
+          3,
+          4
+        ],
+        "role": "eureka_mechanism"
+      },
+      "act_4_paradigm_shift": {
+        "beats": [
+          5,
+          6
+        ],
+        "role": "paradigm_shift_open_loop"
+      }
+    }
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "arxiv_id": "2610.05538",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "imagenet_qualitative_comparison",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/source/figures/experiments/imagenet_qualitative_comparison.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_1_imagenet_qualitative_comparison.png",
+      "type": "vector_pdf",
+      "score": 110
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "depth_conditioning_curves",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/source/figures/experiments/depth_conditioning_curves.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_2_depth_conditioning_curves.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_2_depth_conditioning_curves.png",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "target_budgets",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/source/figures/experiments/target_budgets.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_3_target_budgets.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.05538/chalkboard_figures/fig_3_target_budgets.png",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "script_driven_visuals": true
+}
