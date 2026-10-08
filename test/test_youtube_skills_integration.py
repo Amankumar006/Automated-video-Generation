@@ -372,3 +372,89 @@ def test_youtube_publisher_metadata_integration():
     assert "chars" in lint
     assert "score" in lint
     assert lint["chars"] <= MOBILE_SHORTS_MAX_CHARS
+
+
+def test_high_scoring_hook_gating_strong_band():
+    """Verify generated candidate hooks achieve STRONG band scores (>= 72) and gate properly."""
+    topic = "FlashAttention-3"
+    meta = {"payoff_stat": "1.2 PFLOPS", "scale_metric": "50%"}
+    candidates = generate_hook_candidates(topic=topic, metadata=meta)
+
+    winner, win_eval, all_evals = gate_and_select_best_hook(candidates)
+    assert win_eval["verdict"] >= 72
+    assert win_eval["band"] == "STRONG"
+    assert win_eval["formula"] in ("The Question", "The Statistic", "The Warning")
+    assert winner.startswith(("Why", "Over", "Do not"))
+
+
+def test_load_transcript_cues_and_compression(tmp_path):
+    """Verify loading cues from .srt transcript and executing dead-air detection."""
+    from pipeline.audio_generator import load_transcript_cues
+    srt_content = """1
+00:00:00,000 --> 00:00:01,000
+First spoken cue in the short.
+
+2
+00:00:01,600 --> 00:00:02,500
+Second spoken cue after 600ms gap.
+"""
+    srt_file = tmp_path / "test_transcript.srt"
+    srt_file.write_text(srt_content, encoding="utf-8")
+
+    cues = load_transcript_cues(srt_file)
+    assert len(cues) == 2
+    assert cues[0]["start"] == 0.0
+    assert cues[0]["end"] == 1.0
+    assert cues[1]["start"] == 1.6
+
+    cuts = detect_dead_air_gaps(cues, floor_ms=250.0, target_gap_ms=150.0)
+    assert len(cuts) == 1
+    assert cuts[0]["gap_duration_ms"] == pytest.approx(600.0)
+    assert cuts[0]["excess_ms"] == pytest.approx(450.0)
+
+
+def test_adjust_cue_timestamps_multi_cut_slot_durations():
+    """Verify sequential cuts recompute slot_duration accurately without cumulative corruption."""
+    cues = [
+        {"start": 0.0, "end": 1.0, "slot_duration": 1.6},
+        {"start": 1.6, "end": 2.6, "slot_duration": 1.6},
+        {"start": 3.2, "end": 4.2, "slot_duration": 1.5}
+    ]
+    # Gaps are:
+    # 0 -> 1: 1.6 - 1.0 = 0.6s (600ms, excess 450ms)
+    # 1 -> 2: 3.2 - 2.6 = 0.6s (600ms, excess 450ms)
+    cuts = detect_dead_air_gaps(cues, floor_ms=250.0, target_gap_ms=150.0)
+    assert len(cuts) == 2
+
+    adjusted = adjust_cue_timestamps(cues, cuts)
+    assert len(adjusted) == 3
+    # Cue 0: unchanged start/end, slot_duration = adjusted[1]["start"] - adjusted[0]["start"] = 1.15 - 0.0 = 1.15s
+    assert adjusted[0]["start"] == 0.0
+    assert adjusted[0]["end"] == 1.0
+    assert adjusted[0]["slot_duration"] == pytest.approx(1.15, abs=0.01)
+
+    # Cue 1: start 1.15s, end 2.15s, slot_duration = adjusted[2]["start"] - adjusted[1]["start"] = 2.30 - 1.15 = 1.15s
+    assert adjusted[1]["start"] == pytest.approx(1.15, abs=0.01)
+    assert adjusted[1]["end"] == pytest.approx(2.15, abs=0.01)
+    assert adjusted[1]["slot_duration"] == pytest.approx(1.15, abs=0.01)
+
+    # Cue 2: shifted by total excess (0.45 + 0.45 = 0.9s): 3.2 - 0.9 = 2.30s, end 3.30s
+    assert adjusted[2]["start"] == pytest.approx(2.30, abs=0.01)
+    assert adjusted[2]["end"] == pytest.approx(3.30, abs=0.01)
+    assert adjusted[2]["slot_duration"] == pytest.approx(1.00, abs=0.01)
+
+
+def test_optimize_title_boundary_extremes():
+    """Verify optimize_title_for_mobile handles extreme boundaries without crashing or overflowing."""
+    # Extremely small max_chars
+    t_tiny = optimize_title_for_mobile("Hello World #Shorts", max_chars=5)
+    assert len(t_tiny) <= 5
+
+    # Long unbroken string without spaces
+    unbroken = "SuperLongUnbrokenStringWithoutAnySpacesInsideItToTestBoundaryTrimming"
+    t_unbroken = optimize_title_for_mobile(unbroken, max_chars=30)
+    assert len(t_unbroken) <= 30
+    assert not t_unbroken.endswith(("-", ":", ","))
+
+    # Empty string
+    assert optimize_title_for_mobile("", max_chars=50) == ""

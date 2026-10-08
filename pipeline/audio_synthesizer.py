@@ -158,6 +158,14 @@ def synthesize_audio_for_spec(
                 total_len = len(narration_audio)
                 total_duration = total_len / sr
                 timing_data = deadair_res["adjusted_cues"]
+                for b in spec_data.get("beats", []):
+                    for td in timing_data:
+                        if td["beat_id"] == b.get("beat_id"):
+                            b["start"] = td["start"]
+                            b["end"] = td["end"]
+                            b["duration"] = td.get("duration", round(td["end"] - td["start"], 2))
+                            if "word_timings" in td:
+                                b["word_timings"] = td["word_timings"]
                 print(f"✂️ [Dead-Air Compression] Tightened {deadair_res['cuts_count']} gaps: removed {deadair_res['time_saved_s']}s dead air ({deadair_res['original_duration_s']}s -> {deadair_res['compressed_duration_s']}s)")
     except Exception as e_deadair:
         print(f"⚠️ Notice applying dead-air compression: {e_deadair}")

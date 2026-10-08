@@ -165,14 +165,28 @@ def optimize_title_for_mobile(
     t_clean = re.sub(r"#shorts\b", "", t, flags=re.I).strip()
 
     tag = " #Shorts" if has_shorts else ""
-    available_chars = max_chars - len(tag)
+    available_chars = max(0, max_chars - len(tag))
 
     if len(t_clean) > available_chars:
-        # Trim at word boundary
-        trimmed = t_clean[:available_chars].rsplit(" ", 1)[0].rstrip(":, -")
-        t_clean = trimmed
+        # If available_chars is too small to fit anything with the tag, drop the tag if needed
+        if available_chars < 5 and max_chars >= 5:
+            tag = ""
+            available_chars = max_chars
 
-    return f"{t_clean}{tag}".strip()
+        if available_chars > 0:
+            sliced = t_clean[:available_chars]
+            if " " in sliced:
+                trimmed = sliced.rsplit(" ", 1)[0].rstrip(":, -")
+            else:
+                trimmed = sliced.rstrip(":, -")
+            t_clean = trimmed
+        else:
+            t_clean = t_clean[:max_chars]
+
+    res = f"{t_clean}{tag}".strip()
+    if len(res) > max_chars:
+        res = res[:max_chars].rstrip(":, -")
+    return res
 
 
 # Delegate core publishing operations to pipeline/publisher.py
@@ -206,3 +220,38 @@ def generate_shorts_metadata(
 
     meta["title_lint"] = lint_report
     return meta
+
+
+def main():
+    import argparse
+    import json
+    parser = argparse.ArgumentParser(description="The Model Verse — YouTube Shorts Title Linter & Publisher")
+    parser.add_argument("--title", help="Video title to lint or optimize")
+    parser.add_argument("--thumb", help="Optional thumbnail text to check duplicate words")
+    parser.add_argument("--optimize", action="store_true", help="Auto-optimize title to fit mobile Shorts cutoff")
+    parser.add_argument("--max-chars", type=int, default=MOBILE_SHORTS_MAX_CHARS, help="Max title characters (default: 50)")
+    parser.add_argument("--json", action="store_true", help="Output JSON result")
+    args = parser.parse_args()
+
+    if not args.title:
+        parser.error("--title is required.")
+
+    title = args.title
+    if args.optimize:
+        title = optimize_title_for_mobile(title, max_chars=args.max_chars)
+
+    report = lint_title(title, thumbnail_text=args.thumb, max_mobile_chars=args.max_chars)
+    if args.json:
+        print(json.dumps(report, indent=2))
+    else:
+        print(f"\n  Title: \"{report['title']}\"")
+        print(f"  Length: {report['chars']} chars | Score: {report['score']}/100 | Passed: {report['passed']}")
+        for kind, msg in report["issues"]:
+            print(f"    ❌ [{kind}] {msg}")
+        for msg in report["good"]:
+            print(f"    ✅ {msg}")
+        print()
+
+
+if __name__ == "__main__":
+    main()

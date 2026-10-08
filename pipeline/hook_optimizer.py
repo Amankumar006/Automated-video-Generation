@@ -154,29 +154,29 @@ def generate_hook_candidates(
 
     clean_topic = topic.split(":")[0].strip()
 
-    # 1. The Statistic archetype
+    # 1. The Statistic archetype (numbers, address, stakes, curiosity)
     candidates.append(
-        f"Over {metric} of your GPU cycles waste time waiting on memory before {clean_topic} fixes it."
+        f"Over {metric} of your GPU memory is wasted before you see how {clean_topic} actually fixes it."
     )
-    # 2. The Mistake / Address archetype
+    # 2. The Question archetype (curiosity trigger, stakes, address)
     candidates.append(
-        f"You are probably wasting your compute scaling parameters when {clean_topic} solves the real bottleneck."
+        f"Why do {metric} of your GPU cycles waste compute before {clean_topic} fixes the bottleneck?"
     )
-    # 3. Contrarian Flip archetype
+    # 3. The Warning archetype (urgency, cost, concrete metric)
     candidates.append(
-        f"Everyone says your neural network needs more layers, but {clean_topic} proves that advice wrong."
+        f"Do not train your next model before you see how {clean_topic} cuts {metric} of your memory waste."
     )
-    # 4. The Warning archetype
+    # 4. The Mistake / Address archetype (common error viewer makes)
     candidates.append(
-        f"Do not train your next model until you see why standard attention breaks under heavy load."
+        f"You are probably making the mistake of wasting compute before you test {clean_topic}."
     )
-    # 5. The Question archetype
+    # 5. Contrarian Flip archetype (challenge conventional advice)
     candidates.append(
-        f"Why do your LLM inference kernels stall out before hitting peak GPU performance?"
+        f"Everyone tells you your model needs more compute, but {clean_topic} proves that advice actually wrong."
     )
-    # 6. The Proof / Superlative archetype
+    # 6. The Superlative / Proof archetype (single breakthrough)
     candidates.append(
-        f"This one architectural shift in {clean_topic} cut latency by {metric} without losing accuracy."
+        f"This 1 breakthrough in {clean_topic} stops your GPU from wasting compute before you run out of memory."
     )
 
     # Deduplicate while preserving order

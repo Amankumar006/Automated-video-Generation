@@ -532,6 +532,9 @@ Generate the complete JSON specification strictly adhering to this structure:
         spec = intellectual_thriller_engine.rewrite_script_to_thriller(spec, paper_meta=arxiv_meta, use_llm=True)
         thriller_audit = intellectual_thriller_engine.audit_thriller_compliance(spec)
         print(f"   ⚡ Thriller Compliance Score: {thriller_audit['score']}/10 | Hook Passed: {thriller_audit['hook_passed']} | {thriller_audit['verdict']}")
+    except Exception as e:
+        print(f"⚠️ Warning: Intellectual Thriller Engine notice: {e}")
+
     # YouTube Agent Skill: Hook Scoring Gating (skills/yt-script/hookscore.py)
     try:
         from pipeline.hook_optimizer import optimize_script_hook

@@ -29,6 +29,43 @@ DEFAULT_MIN_MOMENTUM_GAP_MS = 120.0
 DEFAULT_MAX_MOMENTUM_GAP_MS = 180.0
 
 
+def parse_transcript_timestamp(s: str) -> float:
+    s = s.strip().replace(",", ".")
+    p = s.split(":")
+    if len(p) == 3:
+        return int(p[0]) * 3600 + int(p[1]) * 60 + float(p[2])
+    elif len(p) == 2:
+        return int(p[0]) * 60 + float(p[1])
+    return float(s)
+
+
+def load_transcript_cues(path: Union[str, Path]) -> List[Dict[str, Any]]:
+    """
+    Loads timestamped cues from .srt, .vtt, or Whisper .json transcripts.
+    Directly compatible with skills/yt-edit/deadair.py.
+    """
+    p = Path(path)
+    if not p.exists():
+        raise FileNotFoundError(f"Transcript file not found: {p}")
+    raw = p.read_text(encoding="utf-8", errors="replace")
+    if p.suffix.lower() == ".json":
+        import json
+        d = json.loads(raw)
+        segs = d.get("segments", d if isinstance(d, list) else [])
+        return [{"start": float(s["start"]), "end": float(s["end"]), "text": (s.get("text") or "").strip()} for s in segs]
+
+    cues: List[List[Any]] = []
+    cur: Optional[List[Any]] = None
+    for line in raw.splitlines():
+        m = re.match(r"\s*(\d[\d:.,]+)\s*-->\s*(\d[\d:.,]+)", line)
+        if m:
+            cur = [parse_transcript_timestamp(m.group(1)), parse_transcript_timestamp(m.group(2)), []]
+            cues.append(cur)
+        elif cur is not None and line.strip() and not line.strip().isdigit():
+            cur[2].append(line.strip())
+    return [{"start": round(a, 3), "end": round(b, 3), "text": " ".join(t)} for a, b, t in cues if t]
+
+
 def detect_dead_air_gaps(
     cues: List[Dict[str, Any]],
     floor_ms: float = DEFAULT_DEAD_AIR_FLOOR_MS,
@@ -95,14 +132,20 @@ def adjust_cue_timestamps(
         for j in range(idx, len(adjusted)):
             adjusted[j]["start"] = round(max(0.0, float(adjusted[j]["start"]) - excess_s), 3)
             adjusted[j]["end"] = round(max(0.0, float(adjusted[j]["end"]) - excess_s), 3)
-            if "slot_duration" in adjusted[j]:
-                adjusted[j]["slot_duration"] = round(adjusted[j]["end"] - adjusted[j]["start"] + (cut["target_gap_ms"] / 1000.0), 3)
 
             # Adjust fine-grained word timings if present
             if "word_timings" in adjusted[j] and isinstance(adjusted[j]["word_timings"], list):
                 for w in adjusted[j]["word_timings"]:
                     w["start"] = round(max(0.0, float(w.get("start", 0.0)) - excess_s), 3)
                     w["end"] = round(max(0.0, float(w.get("end", 0.0)) - excess_s), 3)
+
+    # Recompute slot_duration accurately for each cue after all shifts
+    for k in range(len(adjusted)):
+        if "slot_duration" in adjusted[k]:
+            if k + 1 < len(adjusted):
+                adjusted[k]["slot_duration"] = round(float(adjusted[k+1]["start"]) - float(adjusted[k]["start"]), 3)
+            else:
+                adjusted[k]["slot_duration"] = round(float(adjusted[k]["end"]) - float(adjusted[k]["start"]), 3)
 
     return adjusted
 
@@ -125,6 +168,10 @@ def compress_dead_air(
     """
     # Clamp target gap to recommended high-momentum band
     target_gap_ms = max(DEFAULT_MIN_MOMENTUM_GAP_MS, min(DEFAULT_MAX_MOMENTUM_GAP_MS, target_gap_ms))
+
+    # Parse transcript path if cues is passed as string or Path
+    if isinstance(cues, (str, Path)):
+        cues = load_transcript_cues(cues)
 
     # Load into AudioSegment
     if isinstance(audio_source, AudioSegment):
@@ -149,6 +196,10 @@ def compress_dead_air(
     else:
         raise ValueError(f"Unsupported audio source type: {type(audio_source)}")
 
+    # Ensure mono audio to prevent channel interleaving mismatch in downstream pipelines
+    if segment.channels > 1:
+        segment = segment.set_channels(1)
+
     orig_dur_s = len(segment) / 1000.0
 
     if cues and len(cues) >= 2:
@@ -158,8 +209,10 @@ def compress_dead_air(
             # Gaps already tight
             if output_path:
                 segment.export(str(output_path), format="wav")
+            raw_samples = np.array(segment.get_array_of_samples(), dtype=np.float32) / 32767.0
             return {
                 "audio": segment,
+                "waveform": raw_samples,
                 "output_path": str(output_path) if output_path else None,
                 "original_duration_s": orig_dur_s,
                 "compressed_duration_s": orig_dur_s,
@@ -173,8 +226,8 @@ def compress_dead_air(
         pieces = []
         cur_pos_ms = 0
         for cut in cuts:
-            c_start = int(cut["cut_start_ms"])
-            c_end = int(cut["cut_end_ms"])
+            c_start = max(0, min(len(segment), int(cut["cut_start_ms"])))
+            c_end = max(0, min(len(segment), int(cut["cut_end_ms"])))
             # Append audio up to the cut start
             if c_start > cur_pos_ms:
                 pieces.append(segment[cur_pos_ms:c_start])
@@ -196,8 +249,10 @@ def compress_dead_air(
             os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
             compressed_audio.export(str(output_path), format="wav")
 
+        comp_samples = np.array(compressed_audio.get_array_of_samples(), dtype=np.float32) / 32767.0
         return {
             "audio": compressed_audio,
+            "waveform": comp_samples,
             "output_path": str(output_path) if output_path else None,
             "original_duration_s": round(orig_dur_s, 3),
             "compressed_duration_s": round(comp_dur_s, 3),
@@ -267,8 +322,10 @@ def compress_dead_air(
             os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
             compressed_audio.export(str(output_path), format="wav")
 
+        comp_samples = np.array(compressed_audio.get_array_of_samples(), dtype=np.float32) / 32767.0
         return {
             "audio": compressed_audio,
+            "waveform": comp_samples,
             "output_path": str(output_path) if output_path else None,
             "original_duration_s": round(orig_dur_s, 3),
             "compressed_duration_s": round(comp_dur_s, 3),
@@ -293,3 +350,57 @@ def synthesize_and_compress_audio(
     from pipeline.audio_synthesizer import synthesize_audio_for_spec
     result = synthesize_audio_for_spec(spec_data, **synthesis_kwargs)
     return result
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="The Model Verse — Dead-Air Audio Compression CLI")
+    parser.add_argument("audio", help="Input audio WAV file or transcript file")
+    parser.add_argument("--cues", help="Optional cues/transcript file (.srt, .vtt, .json)")
+    parser.add_argument("--floor", type=float, default=DEFAULT_DEAD_AIR_FLOOR_MS, help="Silence floor in ms (default: 250)")
+    parser.add_argument("--target-gap", type=float, default=DEFAULT_TARGET_GAP_MS, help="Target gap in ms (default: 150)")
+    parser.add_argument("--out", help="Output compressed WAV path")
+    parser.add_argument("--json", action="store_true", help="Print JSON result")
+    args = parser.parse_args()
+
+    cues_data = None
+    if args.cues:
+        cues_data = load_transcript_cues(args.cues)
+    elif args.audio.endswith((".srt", ".vtt", ".json")):
+        # Pure transcript inspection mode (like skills/yt-edit/deadair.py)
+        cues_data = load_transcript_cues(args.audio)
+        cuts = detect_dead_air_gaps(cues_data, floor_ms=args.floor, target_gap_ms=args.target_gap)
+        total_excess_s = sum(c["excess_ms"] for c in cuts) / 1000.0
+        if args.json:
+            import json
+            print(json.dumps({"cuts": cuts, "cuts_count": len(cuts), "excess_seconds": total_excess_s}, indent=2))
+        else:
+            print(f"✂️ Found {len(cuts)} dead-air gaps (> {args.floor}ms): would save {total_excess_s:.2f}s")
+            for c in cuts:
+                print(f"   Cue {c['cue_index']}: {c['gap_duration_ms']:.1f}ms gap -> cut {c['excess_ms']:.1f}ms to {c['target_gap_ms']:.1f}ms")
+        return
+
+    res = compress_dead_air(
+        audio_source=args.audio,
+        cues=cues_data,
+        floor_ms=args.floor,
+        target_gap_ms=args.target_gap,
+        output_path=args.out
+    )
+    if args.json:
+        import json
+        print(json.dumps({
+            "original_duration_s": res["original_duration_s"],
+            "compressed_duration_s": res["compressed_duration_s"],
+            "time_saved_s": res["time_saved_s"],
+            "cuts_count": res["cuts_count"],
+            "cuts": res["cuts"]
+        }, indent=2))
+    else:
+        print(f"✂️ Compressed {res['cuts_count']} gaps: {res['original_duration_s']:.2f}s -> {res['compressed_duration_s']:.2f}s (saved {res['time_saved_s']:.2f}s)")
+        if res.get("output_path"):
+            print(f"   Output saved: {res['output_path']}")
+
+
+if __name__ == "__main__":
+    main()
