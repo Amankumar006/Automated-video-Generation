@@ -1,0 +1,1864 @@
+{
+  "id": "slimwise_moe_serving",
+  "title": "SlimWise: Decoupling MoE Serving",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_moe",
+  "hook_tag": "MOE SERVING ARCHITECTURE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Your Mixture-of-Experts model is wasting 80% of its memory bandwidth just moving weights that never actually fire during decoding.",
+      "visual_focus": "A glowing neural network where 90% of the nodes are dim, but the memory bus is glowing red-hot with data traffic.",
+      "highlight_words": {
+        "memory bandwidth": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "MoE models",
+        "action_verb": "waste",
+        "direct_object": "memory bandwidth",
+        "anchor_word": "wasting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE BANDWIDTH TRAP",
+        "sub": "Expert weight traffic exceeds compute capacity",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "EXPERT POOL TRAFFIC",
+          "active_cell_label": "ACTIVE EXPERT",
+          "efficiency_label": "GPU BANDWIDTH STALL"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE BANDWIDTH TRAP",
+        "sub": "Expert weight traffic exceeds compute capacity",
+        "accent_color": "#EF4444",
+        "grid_title": "EXPERT POOL TRAFFIC",
+        "active_cell_label": "ACTIVE EXPERT",
+        "efficiency_label": "GPU BANDWIDTH STALL"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 7.25,
+      "slot_duration": 7.55,
+      "start": 0.0,
+      "end": 7.25,
+      "word_timings": [
+        {
+          "word": "Your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.01,
+          "end": 0.25,
+          "duration": 0.24,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "Mixture-of-Experts",
+          "clean_word": "mixtureofexperts",
+          "phonemes": "m\u02c8\u026akst\u0283\u025a\u0279\u026a\u02cc\u0251\u02d0f \u02c8\u025bksp\u025c\u02d0ts",
+          "start": 0.25,
+          "end": 1.48,
+          "duration": 1.23,
+          "frame_ahead_trigger": 0.21
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 1.48,
+          "end": 1.85,
+          "duration": 0.37,
+          "frame_ahead_trigger": 1.44
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 1.85,
+          "end": 2.025,
+          "duration": 0.175,
+          "frame_ahead_trigger": 1.81
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 2.025,
+          "end": 2.355,
+          "duration": 0.33,
+          "frame_ahead_trigger": 1.985
+        },
+        {
+          "word": "80%",
+          "clean_word": "80",
+          "phonemes": "\u02c8e\u026a\u027ei",
+          "start": 2.355,
+          "end": 2.805,
+          "duration": 0.45,
+          "frame_ahead_trigger": 2.315
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 2.805,
+          "end": 2.809,
+          "duration": 0.004,
+          "frame_ahead_trigger": 2.765
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 2.809,
+          "end": 2.965,
+          "duration": 0.156,
+          "frame_ahead_trigger": 2.769
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 2.965,
+          "end": 3.39,
+          "duration": 0.425,
+          "frame_ahead_trigger": 2.925
+        },
+        {
+          "word": "bandwidth",
+          "clean_word": "bandwidth",
+          "phonemes": "b\u02c8\u00e6ndw\u026ad\u03b8",
+          "start": 3.39,
+          "end": 3.852,
+          "duration": 0.462,
+          "frame_ahead_trigger": 3.35
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 3.852,
+          "end": 4.125,
+          "duration": 0.273,
+          "frame_ahead_trigger": 3.812
+        },
+        {
+          "word": "moving",
+          "clean_word": "moving",
+          "phonemes": "m\u02c8u\u02d0v\u026a\u014b",
+          "start": 4.125,
+          "end": 4.525,
+          "duration": 0.4,
+          "frame_ahead_trigger": 4.085
+        },
+        {
+          "word": "weights",
+          "clean_word": "weights",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 4.525,
+          "end": 4.91,
+          "duration": 0.385,
+          "frame_ahead_trigger": 4.485
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 4.91,
+          "end": 5.185,
+          "duration": 0.275,
+          "frame_ahead_trigger": 4.87
+        },
+        {
+          "word": "never",
+          "clean_word": "never",
+          "phonemes": "n\u02c8\u025bv\u025a",
+          "start": 5.185,
+          "end": 5.47,
+          "duration": 0.285,
+          "frame_ahead_trigger": 5.145
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 5.47,
+          "end": 5.855,
+          "duration": 0.385,
+          "frame_ahead_trigger": 5.43
+        },
+        {
+          "word": "fire",
+          "clean_word": "fire",
+          "phonemes": "f\u02c8a\u026a\u025a",
+          "start": 5.855,
+          "end": 6.195,
+          "duration": 0.34,
+          "frame_ahead_trigger": 5.815
+        },
+        {
+          "word": "during",
+          "clean_word": "during",
+          "phonemes": "d\u02c8\u028a\u0279\u0279\u026a\u014b",
+          "start": 6.195,
+          "end": 6.69,
+          "duration": 0.495,
+          "frame_ahead_trigger": 6.155
+        },
+        {
+          "word": "decoding.",
+          "clean_word": "decoding",
+          "phonemes": "d\u1d7bk\u02c8o\u028ad\u026a\u014b",
+          "start": 6.69,
+          "end": 7.09,
+          "duration": 0.4,
+          "frame_ahead_trigger": 6.65
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "text": "It\u2019s like a librarian sprinting to a massive, distant warehouse to fetch a thousand books, just to read one single sentence.",
+      "visual_focus": "A split screen showing a librarian running through a massive library aisle vs. a tiny desk with one book.",
+      "highlight_words": {
+        "massive, distant warehouse": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Librarian",
+        "action_verb": "fetches",
+        "direct_object": "unnecessary weights",
+        "anchor_word": "sprinting",
+        "semantic_role": "analogy_setup"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE I/O BOTTLENECK",
+        "sub": "Fetching unused expert weights kills latency",
+        "accent_color": "#38BDF8",
+        "params": {
+          "input_label": "FULL MOE MODEL",
+          "router_label": "PHASE DISPATCHER",
+          "branch_a_label": "PREFILL (COMPUTE)",
+          "branch_a_sub": "DENSE ACCESS",
+          "branch_b_label": "DECODE (MEMORY)",
+          "branch_b_sub": "PRUNED ACCESS"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "split_flow",
+        "title": "THE I/O BOTTLENECK",
+        "sub": "Fetching unused expert weights kills latency",
+        "accent_color": "#38BDF8",
+        "input_label": "FULL MOE MODEL",
+        "router_label": "PHASE DISPATCHER",
+        "branch_a_label": "PREFILL (COMPUTE)",
+        "branch_a_sub": "DENSE ACCESS",
+        "branch_b_label": "DECODE (MEMORY)",
+        "branch_b_sub": "PRUNED ACCESS"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 6.08,
+      "slot_duration": 6.38,
+      "start": 7.55,
+      "end": 13.63,
+      "word_timings": [
+        {
+          "word": "It\u2019s",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 7.568,
+          "end": 7.688,
+          "duration": 0.12,
+          "frame_ahead_trigger": 7.528
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.688,
+          "end": 8.008,
+          "duration": 0.32,
+          "frame_ahead_trigger": 7.648
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.008,
+          "end": 8.128,
+          "duration": 0.12,
+          "frame_ahead_trigger": 7.968
+        },
+        {
+          "word": "librarian",
+          "clean_word": "librarian",
+          "phonemes": "la\u026ab\u0279\u02c8\u025b\u0279i\u0259n",
+          "start": 8.128,
+          "end": 8.638,
+          "duration": 0.51,
+          "frame_ahead_trigger": 8.088
+        },
+        {
+          "word": "sprinting",
+          "clean_word": "sprinting",
+          "phonemes": "sp\u0279\u02c8\u026ant\u026a\u014b",
+          "start": 8.638,
+          "end": 9.163,
+          "duration": 0.525,
+          "frame_ahead_trigger": 8.598
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 9.163,
+          "end": 9.318,
+          "duration": 0.155,
+          "frame_ahead_trigger": 9.123
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.318,
+          "end": 9.458,
+          "duration": 0.14,
+          "frame_ahead_trigger": 9.278
+        },
+        {
+          "word": "massive,",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 9.458,
+          "end": 9.848,
+          "duration": 0.39,
+          "frame_ahead_trigger": 9.418
+        },
+        {
+          "word": "distant",
+          "clean_word": "distant",
+          "phonemes": "d\u02c8\u026ast\u0259nt",
+          "start": 9.848,
+          "end": 10.193,
+          "duration": 0.345,
+          "frame_ahead_trigger": 9.808
+        },
+        {
+          "word": "warehouse",
+          "clean_word": "warehouse",
+          "phonemes": "w\u02c8\u025b\u0279ha\u028as",
+          "start": 10.193,
+          "end": 10.588,
+          "duration": 0.395,
+          "frame_ahead_trigger": 10.153
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 10.588,
+          "end": 10.718,
+          "duration": 0.13,
+          "frame_ahead_trigger": 10.548
+        },
+        {
+          "word": "fetch",
+          "clean_word": "fetch",
+          "phonemes": "f\u02c8\u025bt\u0283",
+          "start": 10.718,
+          "end": 11.023,
+          "duration": 0.305,
+          "frame_ahead_trigger": 10.678
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.023,
+          "end": 11.138,
+          "duration": 0.115,
+          "frame_ahead_trigger": 10.983
+        },
+        {
+          "word": "thousand",
+          "clean_word": "thousand",
+          "phonemes": "\u03b8\u02c8a\u028az\u0259nd",
+          "start": 11.138,
+          "end": 11.463,
+          "duration": 0.325,
+          "frame_ahead_trigger": 11.098
+        },
+        {
+          "word": "books,",
+          "clean_word": "books",
+          "phonemes": "b\u02c8\u028aks",
+          "start": 11.463,
+          "end": 11.938,
+          "duration": 0.475,
+          "frame_ahead_trigger": 11.423
+        },
+        {
+          "word": "just",
+          "clean_word": "just",
+          "phonemes": "d\u0292\u02c8\u028cst",
+          "start": 11.938,
+          "end": 12.138,
+          "duration": 0.2,
+          "frame_ahead_trigger": 11.898
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 12.138,
+          "end": 12.273,
+          "duration": 0.135,
+          "frame_ahead_trigger": 12.098
+        },
+        {
+          "word": "read",
+          "clean_word": "read",
+          "phonemes": "\u0279\u02c8i\u02d0d",
+          "start": 12.273,
+          "end": 12.548,
+          "duration": 0.275,
+          "frame_ahead_trigger": 12.233
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 12.548,
+          "end": 12.783,
+          "duration": 0.235,
+          "frame_ahead_trigger": 12.508
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 12.783,
+          "end": 13.138,
+          "duration": 0.355,
+          "frame_ahead_trigger": 12.743
+        },
+        {
+          "word": "sentence.",
+          "clean_word": "sentence",
+          "phonemes": "s\u02c8\u025bnt\u0259ns",
+          "start": 13.138,
+          "end": 13.538,
+          "duration": 0.4,
+          "frame_ahead_trigger": 13.098
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "text": "SlimWise solves this by decoupling the phases: use the full model for prefill, then switch to a pruned expert pool for decoding.",
+      "visual_focus": "A two-stage pipeline: 'Full Prefill' transitions into a 'Pruned Decode' stage with a clean handoff.",
+      "highlight_words": {
+        "decoupling the phases": "#10B981"
+      },
+      "svo_action": {
+        "subject": "SlimWise",
+        "action_verb": "decouples",
+        "direct_object": "inference phases",
+        "anchor_word": "decoupling",
+        "semantic_role": "mechanism_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "SLIMWISE ARCHITECTURE",
+        "sub": "A two-stage pipeline: 'Full Prefill' transitions into a 'Pruned D",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.png",
+          "arxiv_id": "2609.34117",
+          "title": "SLIMWISE ARCHITECTURE",
+          "sub": "A two-stage pipeline: 'Full Prefill' transitions into a 'Pruned D",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.png",
+        "arxiv_id": "2609.34117",
+        "title": "SLIMWISE ARCHITECTURE",
+        "sub": "A two-stage pipeline: 'Full Prefill' transitions into a 'Pruned D",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION"
+      },
+      "kinetic_action": "figure_scan",
+      "audio_duration": 6.83,
+      "slot_duration": 7.13,
+      "start": 13.93,
+      "end": 20.76,
+      "word_timings": [
+        {
+          "word": "SlimWise",
+          "clean_word": "slimwise",
+          "phonemes": "sl\u02c8\u026am w\u02c8a\u026az",
+          "start": 13.948,
+          "end": 14.549,
+          "duration": 0.6,
+          "frame_ahead_trigger": 13.908
+        },
+        {
+          "word": "solves",
+          "clean_word": "solves",
+          "phonemes": "s\u02c8\u0251\u02d0lvz",
+          "start": 14.549,
+          "end": 15.013,
+          "duration": 0.465,
+          "frame_ahead_trigger": 14.509
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 15.013,
+          "end": 15.238,
+          "duration": 0.225,
+          "frame_ahead_trigger": 14.973
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 15.238,
+          "end": 15.393,
+          "duration": 0.155,
+          "frame_ahead_trigger": 15.198
+        },
+        {
+          "word": "decoupling",
+          "clean_word": "decoupling",
+          "phonemes": "d\u1d7bk\u02c8\u028cpl\u026a\u014b",
+          "start": 15.393,
+          "end": 15.958,
+          "duration": 0.565,
+          "frame_ahead_trigger": 15.353
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 15.958,
+          "end": 15.968,
+          "duration": 0.01,
+          "frame_ahead_trigger": 15.918
+        },
+        {
+          "word": "phases:",
+          "clean_word": "phases",
+          "phonemes": "f\u02c8e\u026az\u1d7bz",
+          "start": 15.968,
+          "end": 16.338,
+          "duration": 0.37,
+          "frame_ahead_trigger": 15.928
+        },
+        {
+          "word": "use",
+          "clean_word": "use",
+          "phonemes": "j\u02c8u\u02d0s",
+          "start": 16.338,
+          "end": 16.623,
+          "duration": 0.285,
+          "frame_ahead_trigger": 16.298
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.623,
+          "end": 16.833,
+          "duration": 0.21,
+          "frame_ahead_trigger": 16.583
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 16.833,
+          "end": 16.951,
+          "duration": 0.117,
+          "frame_ahead_trigger": 16.793
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 16.951,
+          "end": 17.368,
+          "duration": 0.418,
+          "frame_ahead_trigger": 16.911
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 17.368,
+          "end": 17.583,
+          "duration": 0.215,
+          "frame_ahead_trigger": 17.328
+        },
+        {
+          "word": "prefill,",
+          "clean_word": "prefill",
+          "phonemes": "p\u0279\u026af\u02c8\u026al",
+          "start": 17.583,
+          "end": 17.923,
+          "duration": 0.34,
+          "frame_ahead_trigger": 17.543
+        },
+        {
+          "word": "then",
+          "clean_word": "then",
+          "phonemes": "\u00f0\u02c8\u025bn",
+          "start": 17.923,
+          "end": 18.113,
+          "duration": 0.19,
+          "frame_ahead_trigger": 17.883
+        },
+        {
+          "word": "switch",
+          "clean_word": "switch",
+          "phonemes": "sw\u02c8\u026at\u0283",
+          "start": 18.113,
+          "end": 18.448,
+          "duration": 0.335,
+          "frame_ahead_trigger": 18.073
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 18.448,
+          "end": 18.708,
+          "duration": 0.26,
+          "frame_ahead_trigger": 18.408
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.708,
+          "end": 18.807,
+          "duration": 0.099,
+          "frame_ahead_trigger": 18.668
+        },
+        {
+          "word": "pruned",
+          "clean_word": "pruned",
+          "phonemes": "p\u0279\u02c8u\u02d0nd",
+          "start": 18.807,
+          "end": 19.189,
+          "duration": 0.382,
+          "frame_ahead_trigger": 18.767
+        },
+        {
+          "word": "expert",
+          "clean_word": "expert",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0t",
+          "start": 19.189,
+          "end": 19.578,
+          "duration": 0.389,
+          "frame_ahead_trigger": 19.149
+        },
+        {
+          "word": "pool",
+          "clean_word": "pool",
+          "phonemes": "p\u02c8u\u02d0l",
+          "start": 19.578,
+          "end": 19.899,
+          "duration": 0.32,
+          "frame_ahead_trigger": 19.538
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 19.899,
+          "end": 20.173,
+          "duration": 0.275,
+          "frame_ahead_trigger": 19.859
+        },
+        {
+          "word": "decoding.",
+          "clean_word": "decoding",
+          "phonemes": "d\u1d7bk\u02c8o\u028ad\u026a\u014b",
+          "start": 20.173,
+          "end": 20.608,
+          "duration": 0.435,
+          "frame_ahead_trigger": 20.133
+        }
+      ]
+    },
+    {
+      "beat_id": 4,
+      "text": "Instead of copying data, it points the decoder directly to the existing KV cache memory addresses, eliminating the overhead of cache conversion.",
+      "visual_focus": "A memory pointer animation showing the decoder accessing the pre-existing KV cache buffer without a copy operation.",
+      "highlight_words": {
+        "points the decoder": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Pointer",
+        "action_verb": "references",
+        "direct_object": "KV cache",
+        "anchor_word": "points",
+        "semantic_role": "technical_clarification"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SLIMWISE: DECOUPLI",
+        "sub": "A memory pointer animation showing the decoder accessing the pre-",
+        "params": {
+          "title": "KERNEL CODE: SLIMWISE: DECOUPLI",
+          "sub": "A memory pointer animation showing the decoder accessing the pre-",
+          "filename": "slimwise_serving.py",
+          "language": "python",
+          "lines": [
+            "def serve_moe_step(expert_pool, kv_cache):",
+            "    # Prefill Phase (Full)",
+            "    cache = compute_prefill(full_model)",
+            "    # Decode Phase (Pruned)",
+            "    return decode_with_pruned(cache, expert_pool.subset())"
+          ],
+          "highlight_lines": [
+            4,
+            5
+          ],
+          "trace_register": "\u26a1 PHASE-AWARE KERNEL DISPATCH",
+          "delta_badge": "Decoupling prefill and decode compute graphs"
+        }
+      },
+      "thriller_role": "technical_secret_sauce",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SLIMWISE: DECOUPLI",
+        "sub": "A memory pointer animation showing the decoder accessing the pre-",
+        "filename": "slimwise_serving.py",
+        "language": "python",
+        "lines": [
+          "def serve_moe_step(expert_pool, kv_cache):",
+          "    # Prefill Phase (Full)",
+          "    cache = compute_prefill(full_model)",
+          "    # Decode Phase (Pruned)",
+          "    return decode_with_pruned(cache, expert_pool.subset())"
+        ],
+        "highlight_lines": [
+          4,
+          5
+        ],
+        "trace_register": "\u26a1 PHASE-AWARE KERNEL DISPATCH",
+        "delta_badge": "Decoupling prefill and decode compute graphs"
+      },
+      "audio_duration": 7.66,
+      "slot_duration": 7.96,
+      "start": 21.06,
+      "end": 28.72,
+      "word_timings": [
+        {
+          "word": "Instead",
+          "clean_word": "instead",
+          "phonemes": "\u026anst\u02c8\u025bd",
+          "start": 21.07,
+          "end": 21.425,
+          "duration": 0.355,
+          "frame_ahead_trigger": 21.03
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 21.425,
+          "end": 21.65,
+          "duration": 0.225,
+          "frame_ahead_trigger": 21.385
+        },
+        {
+          "word": "copying",
+          "clean_word": "copying",
+          "phonemes": "k\u02c8\u0251\u02d0p\u026a\u026a\u014b",
+          "start": 21.65,
+          "end": 22.065,
+          "duration": 0.415,
+          "frame_ahead_trigger": 21.61
+        },
+        {
+          "word": "data,",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 22.065,
+          "end": 22.355,
+          "duration": 0.29,
+          "frame_ahead_trigger": 22.025
+        },
+        {
+          "word": "it",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 22.355,
+          "end": 22.485,
+          "duration": 0.13,
+          "frame_ahead_trigger": 22.315
+        },
+        {
+          "word": "points",
+          "clean_word": "points",
+          "phonemes": "p\u02c8\u0254\u026ants",
+          "start": 22.485,
+          "end": 22.875,
+          "duration": 0.39,
+          "frame_ahead_trigger": 22.445
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.875,
+          "end": 22.985,
+          "duration": 0.11,
+          "frame_ahead_trigger": 22.835
+        },
+        {
+          "word": "decoder",
+          "clean_word": "decoder",
+          "phonemes": "d\u1d7bk\u02c8o\u028ad\u025a",
+          "start": 22.985,
+          "end": 23.465,
+          "duration": 0.48,
+          "frame_ahead_trigger": 22.945
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 23.465,
+          "end": 23.955,
+          "duration": 0.49,
+          "frame_ahead_trigger": 23.425
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.955,
+          "end": 24.135,
+          "duration": 0.18,
+          "frame_ahead_trigger": 23.915
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.135,
+          "end": 24.21,
+          "duration": 0.075,
+          "frame_ahead_trigger": 24.095
+        },
+        {
+          "word": "existing",
+          "clean_word": "existing",
+          "phonemes": "\u025b\u0261z\u02c8\u026ast\u026a\u014b",
+          "start": 24.21,
+          "end": 24.7,
+          "duration": 0.49,
+          "frame_ahead_trigger": 24.17
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 24.7,
+          "end": 25.26,
+          "duration": 0.56,
+          "frame_ahead_trigger": 24.66
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 25.26,
+          "end": 25.42,
+          "duration": 0.16,
+          "frame_ahead_trigger": 25.22
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 25.42,
+          "end": 25.72,
+          "duration": 0.3,
+          "frame_ahead_trigger": 25.38
+        },
+        {
+          "word": "addresses,",
+          "clean_word": "addresses",
+          "phonemes": "\u0250d\u0279\u02c8\u025bs\u1d7bz",
+          "start": 25.72,
+          "end": 26.287,
+          "duration": 0.567,
+          "frame_ahead_trigger": 25.68
+        },
+        {
+          "word": "eliminating",
+          "clean_word": "eliminating",
+          "phonemes": "\u1d7bl\u02c8\u026am\u1d7bn\u02cce\u026a\u027e\u026a\u014b",
+          "start": 26.287,
+          "end": 26.965,
+          "duration": 0.678,
+          "frame_ahead_trigger": 26.247
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.965,
+          "end": 27.205,
+          "duration": 0.24,
+          "frame_ahead_trigger": 26.925
+        },
+        {
+          "word": "overhead",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 27.205,
+          "end": 27.635,
+          "duration": 0.43,
+          "frame_ahead_trigger": 27.165
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 27.635,
+          "end": 27.755,
+          "duration": 0.12,
+          "frame_ahead_trigger": 27.595
+        },
+        {
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 27.755,
+          "end": 28.06,
+          "duration": 0.305,
+          "frame_ahead_trigger": 27.715
+        },
+        {
+          "word": "conversion.",
+          "clean_word": "conversion",
+          "phonemes": "k\u0259nv\u02c8\u025c\u02d0\u0292\u0259n",
+          "start": 28.06,
+          "end": 28.555,
+          "duration": 0.495,
+          "frame_ahead_trigger": 28.02
+        }
+      ]
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 1.81x higher throughput on Qwen-35B, maintaining accuracy by distilling the decoder to handle the pruned expert subset.",
+      "visual_focus": "A bar chart showing SlimWise (181 tok/s) towering over the Baseline (100 tok/s).",
+      "highlight_words": {
+        "1.81x higher throughput": "#10B981"
+      },
+      "svo_action": {
+        "subject": "SlimWise",
+        "action_verb": "delivers",
+        "direct_object": "1.81x throughput",
+        "anchor_word": "throughput",
+        "semantic_role": "benchmark_validation"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THROUGHPUT SHOWDOWN",
+        "sub": "Tokens per second comparison",
+        "accent_color": "#34D399",
+        "params": {
+          "col_a_title": "BASE MOE",
+          "col_a_stat": "1.0x",
+          "col_b_title": "SLIMWISE",
+          "col_b_stat": "1.8x"
+        }
+      },
+      "thriller_role": "empirical_payoff",
+      "act": 4,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THROUGHPUT SHOWDOWN",
+        "sub": "Tokens per second comparison",
+        "accent_color": "#34D399",
+        "col_a_title": "BASE MOE",
+        "col_a_stat": "1.0x",
+        "col_b_title": "SLIMWISE",
+        "col_b_stat": "1.8x"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 8.23,
+      "slot_duration": 8.53,
+      "start": 29.02,
+      "end": 37.25,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.029,
+          "end": 29.234,
+          "duration": 0.205,
+          "frame_ahead_trigger": 28.989
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 29.234,
+          "end": 29.479,
+          "duration": 0.245,
+          "frame_ahead_trigger": 29.194
+        },
+        {
+          "word": "1.81x",
+          "clean_word": "181x",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei w\u02c8\u028cn \u02c8\u025bks",
+          "start": 29.479,
+          "end": 30.934,
+          "duration": 1.455,
+          "frame_ahead_trigger": 29.439
+        },
+        {
+          "word": "higher",
+          "clean_word": "higher",
+          "phonemes": "h\u02c8a\u026a\u025a",
+          "start": 30.934,
+          "end": 31.079,
+          "duration": 0.145,
+          "frame_ahead_trigger": 30.894
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 31.079,
+          "end": 31.649,
+          "duration": 0.57,
+          "frame_ahead_trigger": 31.039
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 31.649,
+          "end": 31.834,
+          "duration": 0.185,
+          "frame_ahead_trigger": 31.609
+        },
+        {
+          "word": "Qwen-35B,",
+          "clean_word": "qwen35b",
+          "phonemes": "kj\u02c8u\u02d0w\u02c8\u025bn \u03b8\u02c8\u025c\u02d0\u027ei f\u02c8a\u026av b\u02c8i\u02d0",
+          "start": 31.834,
+          "end": 33.148,
+          "duration": 1.315,
+          "frame_ahead_trigger": 31.794
+        },
+        {
+          "word": "maintaining",
+          "clean_word": "maintaining",
+          "phonemes": "me\u026ant\u02c8e\u026an\u026a\u014b",
+          "start": 33.148,
+          "end": 33.689,
+          "duration": 0.54,
+          "frame_ahead_trigger": 33.108
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 33.689,
+          "end": 34.264,
+          "duration": 0.575,
+          "frame_ahead_trigger": 33.649
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 34.264,
+          "end": 34.404,
+          "duration": 0.14,
+          "frame_ahead_trigger": 34.224
+        },
+        {
+          "word": "distilling",
+          "clean_word": "distilling",
+          "phonemes": "d\u026ast\u02c8\u026al\u026a\u014b",
+          "start": 34.404,
+          "end": 34.829,
+          "duration": 0.425,
+          "frame_ahead_trigger": 34.364
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.829,
+          "end": 34.951,
+          "duration": 0.122,
+          "frame_ahead_trigger": 34.789
+        },
+        {
+          "word": "decoder",
+          "clean_word": "decoder",
+          "phonemes": "d\u1d7bk\u02c8o\u028ad\u025a",
+          "start": 34.951,
+          "end": 35.339,
+          "duration": 0.388,
+          "frame_ahead_trigger": 34.911
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 35.339,
+          "end": 35.574,
+          "duration": 0.235,
+          "frame_ahead_trigger": 35.299
+        },
+        {
+          "word": "handle",
+          "clean_word": "handle",
+          "phonemes": "h\u02c8\u00e6nd\u0259l",
+          "start": 35.574,
+          "end": 35.844,
+          "duration": 0.27,
+          "frame_ahead_trigger": 35.534
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 35.844,
+          "end": 36.034,
+          "duration": 0.19,
+          "frame_ahead_trigger": 35.804
+        },
+        {
+          "word": "pruned",
+          "clean_word": "pruned",
+          "phonemes": "p\u0279\u02c8u\u02d0nd",
+          "start": 36.034,
+          "end": 36.314,
+          "duration": 0.28,
+          "frame_ahead_trigger": 35.994
+        },
+        {
+          "word": "expert",
+          "clean_word": "expert",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0t",
+          "start": 36.314,
+          "end": 36.784,
+          "duration": 0.47,
+          "frame_ahead_trigger": 36.274
+        },
+        {
+          "word": "subset.",
+          "clean_word": "subset",
+          "phonemes": "s\u02c8\u028cbs\u025bt",
+          "start": 36.784,
+          "end": 37.114,
+          "duration": 0.33,
+          "frame_ahead_trigger": 36.744
+        }
+      ]
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how we break the memory wall of modern AI inference.",
+      "visual_focus": "The Model Verse logo pulsing with a data-stream animation.",
+      "highlight_words": {
+        "break the memory wall": "#38BDF8"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "deep-dives",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "THE MODEL VERSE",
+        "sub": "Engineering the future of AI",
+        "accent_color": "#34D399",
+        "params": {
+          "input_label": "QUERY",
+          "hidden_label": "ARCHITECTURAL DEPTH",
+          "output_label": "MODEL VERSE"
+        }
+      },
+      "thriller_role": "open_loop_outro",
+      "act": 4,
+      "audio_duration": 5.18,
+      "slot_duration": 5.68,
+      "start": 37.55,
+      "end": 42.74,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 37.613,
+          "end": 37.898,
+          "duration": 0.285,
+          "frame_ahead_trigger": 37.573
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.898,
+          "end": 38.108,
+          "duration": 0.21,
+          "frame_ahead_trigger": 37.858
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 38.108,
+          "end": 38.455,
+          "duration": 0.347,
+          "frame_ahead_trigger": 38.068
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 38.455,
+          "end": 38.758,
+          "duration": 0.303,
+          "frame_ahead_trigger": 38.415
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 38.758,
+          "end": 38.933,
+          "duration": 0.175,
+          "frame_ahead_trigger": 38.718
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 38.933,
+          "end": 39.263,
+          "duration": 0.33,
+          "frame_ahead_trigger": 38.893
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 39.263,
+          "end": 39.773,
+          "duration": 0.51,
+          "frame_ahead_trigger": 39.223
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 39.773,
+          "end": 39.968,
+          "duration": 0.195,
+          "frame_ahead_trigger": 39.733
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.968,
+          "end": 40.258,
+          "duration": 0.29,
+          "frame_ahead_trigger": 39.928
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 40.258,
+          "end": 40.349,
+          "duration": 0.09,
+          "frame_ahead_trigger": 40.218
+        },
+        {
+          "word": "break",
+          "clean_word": "break",
+          "phonemes": "b\u0279\u02c8e\u026ak",
+          "start": 40.349,
+          "end": 40.608,
+          "duration": 0.26,
+          "frame_ahead_trigger": 40.309
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.608,
+          "end": 40.763,
+          "duration": 0.155,
+          "frame_ahead_trigger": 40.568
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 40.763,
+          "end": 41.138,
+          "duration": 0.374,
+          "frame_ahead_trigger": 40.723
+        },
+        {
+          "word": "wall",
+          "clean_word": "wall",
+          "phonemes": "w\u02c8\u0254\u02d0l",
+          "start": 41.138,
+          "end": 41.403,
+          "duration": 0.266,
+          "frame_ahead_trigger": 41.098
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 41.403,
+          "end": 41.553,
+          "duration": 0.15,
+          "frame_ahead_trigger": 41.363
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 41.553,
+          "end": 41.788,
+          "duration": 0.235,
+          "frame_ahead_trigger": 41.513
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 41.788,
+          "end": 42.158,
+          "duration": 0.37,
+          "frame_ahead_trigger": 41.748
+        },
+        {
+          "word": "inference.",
+          "clean_word": "inference",
+          "phonemes": "\u02c8\u026anf\u025a\u0279\u0259ns",
+          "start": 42.158,
+          "end": 42.663,
+          "duration": 0.505,
+          "frame_ahead_trigger": 42.118
+        }
+      ]
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\mathrm{wait}} = \\sum_{i \\in \\mathrm{Idle}} \\omega_i$",
+      "filename": "slimwise_moe_serving_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{wait}",
+          "label": "GPU Stall Time"
+        },
+        {
+          "term": "omega_i",
+          "label": "Idle Expert Weight"
+        }
+      ],
+      "svg_filename": "slimwise_moe_serving_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{L}_{total} = \\alpha \\mathcal{L}_{pre} + (1-\\alpha) \\mathcal{L}_{dec}$",
+      "filename": "slimwise_moe_serving_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "L_{pre}",
+          "label": "Prefill Loss"
+        },
+        {
+          "term": "alpha",
+          "label": "Phase Indicator"
+        }
+      ],
+      "svg_filename": "slimwise_moe_serving_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\hat{E} = \\arg \\min_{E'} \\| W_{full} - W_{pruned} \\|$",
+      "filename": "slimwise_moe_serving_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "E'",
+          "label": "Pruned Expert Set"
+        },
+        {
+          "term": "W",
+          "label": "Weight Matrix"
+        }
+      ],
+      "svg_filename": "slimwise_moe_serving_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\theta_{distill} = \\theta_{base} + \\eta \\nabla \\mathcal{L}_{KL}(K, V)$",
+      "filename": "slimwise_moe_serving_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "K, V",
+          "label": "KV Cache Tensors"
+        },
+        {
+          "term": "L_{KL}",
+          "label": "KL Divergence"
+        }
+      ],
+      "svg_filename": "slimwise_moe_serving_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = \\frac{\\mathrm{Tokens}_{Slim}}{\\mathrm{Tokens}_{Base}} \\approx 1.81$",
+      "filename": "slimwise_moe_serving_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "1.81",
+          "label": "Throughput Gain"
+        }
+      ],
+      "svg_filename": "slimwise_moe_serving_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "COMPUTE-BOUND",
+          "color": "#38BDF8",
+          "items": [
+            "Prefill",
+            "GEMM",
+            "Dense"
+          ]
+        },
+        {
+          "name": "MEMORY-BOUND",
+          "color": "#EF4444",
+          "items": [
+            "Decode",
+            "KV Cache",
+            "Weights"
+          ]
+        },
+        {
+          "name": "SLIMWISE",
+          "color": "#34D399",
+          "items": [
+            "Pruning",
+            "Distillation",
+            "Handoff"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"System\"",
+        "target_cluster": "SLIMWISE",
+        "token": "\"System\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "ExpertLoad",
+          "color": "#EF4444"
+        },
+        {
+          "word": "VRAM_Traffic",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "SlimWise MoE",
+    "model_a_specs": [
+      "Training-free Handoff",
+      "KV Cache Reuse",
+      "Pruned Decoding"
+    ],
+    "model_b": "Monolithic MoE",
+    "model_b_specs": [
+      "Full Weight Loading",
+      "High Memory Latency",
+      "Uniform Serving"
+    ],
+    "divide_title": "PHASE-AWARE SERVING DIVIDE",
+    "model_a_stat": "1.81x",
+    "model_a_stat_label": "THROUGHPUT GAIN",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE",
+    "efficiency_badge": "\u26a1 +81% SERVING EFFICIENCY",
+    "benchmarks": [
+      {
+        "name": "Qwen-35B-A3B",
+        "score_a": "1.81x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Accuracy Retention",
+        "score_a": "99.2%",
+        "score_b": "100%"
+      },
+      {
+        "name": "Expert Traffic",
+        "score_a": "50% Reduction",
+        "score_b": "0%"
+      }
+    ],
+    "scale_metric": "50%",
+    "scale_label": "EXPERT PRUNING RATIO",
+    "bottleneck_title": "MONOLITHIC SERVING BOTTLENECK",
+    "bottleneck_desc": "Excessive memory traffic due to forced expert-load in decoding.",
+    "solution_title": "PHASE-DECOUPLED ARCHITECTURE",
+    "solution_components": "Dynamic Handoff Kernel",
+    "mechanism_title": "KV-CACHE DISTILLATION",
+    "payoff_stat": "1.81x",
+    "payoff_label": "DECODE THROUGHPUT",
+    "payoff_sub": "Outperforming naive expert pruning baselines",
+    "payoff_hero_stat": 1.81,
+    "payoff_hero_label": "SlimWise Throughput",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +81% DECODE SPEEDUP",
+    "challenger": "SlimWise",
+    "incumbent": "vLLM Standard MoE"
+  },
+  "benchmark_comparison": {
+    "title": "THROUGHPUT SHOWDOWN",
+    "metric_name": "Throughput",
+    "unit": "tokens/s",
+    "contestants": [
+      {
+        "name": "SlimWise",
+        "value": 181.0,
+        "display_val": "181 tok/s",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Baseline MoE",
+        "value": 100.0,
+        "display_val": "100 tok/s",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Naive Pruning",
+        "value": 110.0,
+        "display_val": "110 tok/s",
+        "is_hero": false,
+        "color": "#A855F7"
+      }
+    ],
+    "delta_badge": "\u26a1 +81% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Accuracy",
+      "Context Length",
+      "Cost Efficiency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "slimwise_serving.py",
+    "language": "python",
+    "lines": [
+      "def serve_moe_step(expert_pool, kv_cache):",
+      "    # Prefill Phase (Full)",
+      "    cache = compute_prefill(full_model)",
+      "    # Decode Phase (Pruned)",
+      "    return decode_with_pruned(cache, expert_pool.subset())"
+    ],
+    "highlight_lines": [
+      4,
+      5
+    ],
+    "trace_register": "\u26a1 PHASE-AWARE KERNEL DISPATCH",
+    "explanation": "Decoupling prefill and decode compute graphs"
+  },
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "Finally, a tech video that doesn't treat me like a toddler. The hook hit hard because memory bandwidth is actually the biggest bottleneck I deal with when running local LLMs. The librarian analogy in Beat 2 was actually helpful for visualizing the overhead, and you didn't waste time with 'hey guys' or 'in this video'. Beat 4 was the best part\u2014explaining the pointer logic to the KV cache is exactly the kind of low-level detail I look for."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "acts": {
+      "act_1_hook": {
+        "beat": 1,
+        "role": "pattern_interrupt_hook"
+      },
+      "act_2_villain": {
+        "beat": 2,
+        "role": "villain_bottleneck",
+        "analogy": "chef waiting for salt"
+      },
+      "act_3_eureka": {
+        "beats": [
+          3,
+          4
+        ],
+        "role": "eureka_mechanism"
+      },
+      "act_4_paradigm_shift": {
+        "beats": [
+          5,
+          6
+        ],
+        "role": "paradigm_shift_open_loop"
+      }
+    }
+  },
+  "entity_registry": [
+    {
+      "entity_id": "moe_lattice",
+      "entity_type": "moe_lattice",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "arxiv_id": "2609.34117",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig1a_overview",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/source/figures/fig1a_overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_1_fig1a_overview.png",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig1b_tradeoff",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/source/figures/fig1b_tradeoff.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_2_fig1b_tradeoff.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_2_fig1b_tradeoff.png",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig2b_pd_throughput",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/source/figures/fig2b_pd_throughput.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_3_fig2b_pd_throughput.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2609.34117/chalkboard_figures/fig_3_fig2b_pd_throughput.png",
+      "type": "vector_pdf",
+      "score": 135
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "linear_node_array": {
+        "dx": 0.0,
+        "dy": -0.5,
+        "scale_multiplier": 1.029
+      },
+      "text_box_violation": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 3.392,
+        "scale_multiplier": 1.0
+      },
+      "text_card": {
+        "dx": 0.0,
+        "dy": 0.4,
+        "scale_multiplier": 1.0
+      },
+      "expert_nodes": {
+        "dx": 0.0,
+        "dy": 0.5,
+        "scale_multiplier": 1.03
+      }
+    },
+    "2": {
+      "kv_cache_grid": {
+        "dx": 0.265,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "text_callout": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.52,
+        "scale_multiplier": 1.0
+      }
+    },
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 0.716
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 4.452,
+        "scale_multiplier": 1.1
+      },
+      "architectural_diagram_card": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.692
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.7,
+        "scale_multiplier": 1.1
+      },
+      "decoder_box": {
+        "dx": 0.0,
+        "dy": 0.267,
+        "scale_multiplier": 1.0
+      },
+      "pointer_arrow": {
+        "dx": 0.0,
+        "dy": 0.075,
+        "scale_multiplier": 1.0
+      },
+      "distracting_label": {
+        "dx": 0.0,
+        "dy": 1.088,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.376,
+        "scale_multiplier": 1.0
+      }
+    },
+    "5": {
+      "text_capsule_badge": {
+        "dx": 0.0,
+        "dy": 0.448,
+        "scale_multiplier": 0.0
+      },
+      "bar_chart": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.05
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.52,
+        "scale_multiplier": 1.0
+      }
+    },
+    "6": {
+      "branding_icon": {
+        "dx": 0.0,
+        "dy": 0.2,
+        "scale_multiplier": 1.15
+      }
+    }
+  }
+}
