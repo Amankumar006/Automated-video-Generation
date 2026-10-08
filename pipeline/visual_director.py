@@ -188,7 +188,8 @@ class VisualDirector:
             })
 
         # Code Execution 1: Chalkboard Syntax Code Block & Live Register
-        if any(k in text for k in ["code", "function", "kernel", "algorithm", "implementation", "loop", "compile", "python", "cuda", "ast", "syntax", "source code", "snippet", "script"]):
+        # Dedicated to Beat 3 or 4 when explaining the kernel implementation
+        if (beat_id in [3, 4] or beat_id is None) and any(k in text for k in ["function", "kernel", "algorithm", "implementation", "compile", "python", "cuda", "syntax", "source code", "snippet"]):
             candidates.append({
                 "layout": "chalkboard_code_block",
                 "title": f"KERNEL IMPLEMENTATION: {subj.upper()[:16]}",
@@ -328,8 +329,7 @@ class VisualDirector:
             # -------------------------------------------------------------
             # BEAT 5: Automated Showdown & Benchmark Visualizer (Visual Engine 5.0)
             # -------------------------------------------------------------
-            bp = b.get("visual_blueprint")
-            if b_id == 5 and (not bp or bp.get("layout") in ["comparative_bars", "benchmark_bars", "horizontal_race_bars", "race_bars", "radar_pareto_plot"]):
+            if b_id == 5:
                 v_foc = b.get("visual_focus", "")
                 if len(v_foc) > 55:
                     v_foc = v_foc[:55].rsplit(" ", 1)[0]
@@ -379,6 +379,7 @@ class VisualDirector:
                     "params": params
                 }
                 b["motif_params"] = params
+                used_layouts.add(layout_name)
                 print(f"   ✨ Beat 5: Assigned '{layout_name}' (Automated Benchmark Showdown)")
                 continue
 
@@ -438,7 +439,7 @@ class VisualDirector:
             # BEAT 3 or 4: Open-Source Code Kernel (if code_snippet present)
             # -------------------------------------------------------------
             code_data = spec.get("code_snippet")
-            if code_data and (b_id == 4 or (b_id == 3 and not paper_figures)):
+            if code_data and "chalkboard_code_block" not in used_layouts and (b_id == 4 or (b_id == 3 and not paper_figures)):
                 code_filename = code_data.get("filename", "kernel.py")
                 b["motif_type"] = "chalkboard_code_block"
                 b["kinetic_action"] = "pulse"
@@ -459,6 +460,7 @@ class VisualDirector:
                     "params": code_params
                 }
                 b["motif_params"] = code_params
+                used_layouts.add("chalkboard_code_block")
                 print(f"   ✨ Beat {b_id}: Assigned 'chalkboard_code_block' ({code_filename})")
                 continue
 
@@ -467,8 +469,9 @@ class VisualDirector:
             # Composable Visual Blueprint (Visual Engine 4.0)
             # -------------------------------------------------------------
             blueprint = b.get("visual_blueprint")
-            if not blueprint or not isinstance(blueprint, dict) or not blueprint.get("layout"):
+            if not blueprint or not isinstance(blueprint, dict) or not blueprint.get("layout") or blueprint.get("layout") in used_layouts:
                 blueprint = self.synthesize_visual_blueprint(b, topic, b_id, used_layouts=used_layouts)
+                b["visual_blueprint"] = blueprint
 
             layout = blueprint.get("layout", "pipeline_stages")
             used_layouts.add(layout)

@@ -601,54 +601,142 @@ class BlueprintCatalogRouting(BaseBlueprintComposition):
 
 class BlueprintSideBySideComparison(BaseBlueprintComposition):
     """
-    Direct dual-column contrast: Two opposing approaches compared side-by-side.
-    Perfect for: Dense vs Sparse, Monolithic vs Modular, Brute Force vs Structured.
+    Direct dual-column contrast: Two opposing architectures compared side-by-side with
+    properly aligned telemetry gauges, technical specs, and dynamic metrics.
+    Eliminates crude cartoon X/checkmarks and empty placeholder voids.
     """
     def __init__(
         self,
-        col_a_title: str = "TRADITIONAL APPROACH",
-        col_a_stat: str = "High Latency & Bloat",
-        col_b_title: str = "BREAKTHROUGH DESIGN",
-        col_b_stat: str = "Linear Cost & Precision",
+        col_a_title: str = "BASELINE ARCHITECTURE",
+        col_a_stat: str = "1.0x Compute / Full FP16",
+        col_a_tag: str = "BASELINE",
+        col_a_metric_lbl: str = "RESOURCE LOAD: 100%",
+        col_a_ratio: float = 1.0,
+        col_b_title: str = "OPTIMIZED ARCHITECTURE",
+        col_b_stat: str = "0.1x Compute / Ternary Ops",
+        col_b_tag: str = "PROPOSED SOTA",
+        col_b_metric_lbl: str = "RESOURCE LOAD: 10%",
+        col_b_ratio: float = 0.15,
+        col_a_specs: Optional[List[str]] = None,
+        col_b_specs: Optional[List[str]] = None,
         accent_color: str = COLOR_MINT,
         **kwargs
     ):
         super().__init__(accent_color=accent_color, **kwargs)
 
-        # Left Column (Traditional / Negative)
-        col_a_box = RoundedRectangle(corner_radius=0.16, width=3.3, height=4.6, color=COLOR_CORAL, fill_color=COLOR_PANEL_BG, fill_opacity=0.92, stroke_width=2.5).move_to([-1.85, 0.4, 0])
-        col_a_t = CleanText(col_a_title[:20].upper(), font=FONT_HELVETICA, font_size=11, color=COLOR_CORAL, weight=BOLD).move_to(col_a_box.get_top() + DOWN * 0.4)
-        col_a_cross = VGroup(
-            Line(start=[-2.3, 0.8, 0], end=[-1.4, -0.1, 0], color=COLOR_CORAL, stroke_width=4.0),
-            Line(start=[-1.4, 0.8, 0], end=[-2.3, -0.1, 0], color=COLOR_CORAL, stroke_width=4.0)
-        )
-        col_a_s = CleanText(col_a_stat[:32], font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE)
+        specs_a = col_a_specs or ["Dense Matrix Multiplication", "Memory Bandwidth Bound", "High Precision Floats"]
+        specs_b = col_b_specs or ["Zero MatMul Kernel", "Bandwidth Unconstrained", "Bitwise / Ternary Logic"]
+
+        # Left Column (Traditional / Baseline)
+        col_a_box = RoundedRectangle(
+            corner_radius=0.16, width=3.35, height=4.6,
+            color="#334155", fill_color=COLOR_PANEL_BG, fill_opacity=0.92, stroke_width=2.0
+        ).move_to([-1.85, 0.45, 0])
+        col_a_tag_m = CleanText(col_a_tag.upper()[:18], font=FONT_HELVETICA, font_size=8, color="#94A3B8", weight=BOLD).move_to(col_a_box.get_top() + DOWN * 0.32)
+        col_a_t = CleanText(col_a_title[:18].upper(), font=FONT_HELVETICA, font_size=11, color=COLOR_CORAL, weight=BOLD).next_to(col_a_tag_m, DOWN, buff=0.10)
+        if col_a_t.width > 2.9:
+            col_a_t.scale_to_fit_width(2.9)
+
+        # Baseline Technical Schematic: 3x3 Continuous FP16 Weight Matrix
+        matrix_a_cells = [
+            ["+0.82", "-1.41", "+0.35"],
+            ["-0.92", "+2.10", "-0.44"],
+            ["+1.05", "-0.18", "+0.88"]
+        ]
+        grid_a = VGroup()
+        for r_idx, row in enumerate(matrix_a_cells):
+            for c_idx, val in enumerate(row):
+                cell_box = RoundedRectangle(corner_radius=0.04, width=0.72, height=0.28, color="#475569", fill_color="#0F172A", fill_opacity=0.9, stroke_width=1.0)
+                cell_txt = CleanText(val, font=FONT_HELVETICA, font_size=7.5, color=COLOR_WHITE if "+" in val else "#FCA5A5")
+                cell_txt.move_to(cell_box)
+                cell = VGroup(cell_box, cell_txt).move_to([-2.6 + c_idx * 0.75, 1.45 - r_idx * 0.32, 0])
+                grid_a.add(cell)
+
+        op_a_badge = CleanText("OP: FP16 TENSOR MULTIPLY (MAC)", font=FONT_HELVETICA, font_size=7.5, color=COLOR_CORAL, weight=BOLD).move_to([-1.85, 0.35, 0])
+
+        # Baseline telemetry bar
+        bar_a_bg = RoundedRectangle(corner_radius=0.06, width=2.7, height=0.24, color="#1E293B", fill_color="#0F172A", fill_opacity=0.9, stroke_width=1.0).move_to([-1.85, -0.05, 0])
+        fill_w_a = max(0.3, min(2.6, 2.7 * col_a_ratio))
+        bar_a_fill = RoundedRectangle(corner_radius=0.06, width=fill_w_a, height=0.20, color=COLOR_CORAL, fill_color=COLOR_CORAL, fill_opacity=0.88, stroke_width=0).move_to(bar_a_bg.get_center()).align_to(bar_a_bg, LEFT).shift(RIGHT * 0.05)
+        bar_a_lbl = CleanText(col_a_metric_lbl[:24], font=FONT_HELVETICA, font_size=8, color="#F87171", weight=BOLD).next_to(bar_a_bg, DOWN, buff=0.10)
+        bar_a_grp = VGroup(bar_a_bg, bar_a_fill, bar_a_lbl)
+
+        # Baseline feature specs
+        specs_a_grp = VGroup()
+        for idx, spec_text in enumerate(specs_a[:2]):
+            dot = Dot(radius=0.03, color=COLOR_CORAL)
+            t = CleanText(spec_text[:28], font=FONT_HELVETICA, font_size=8, color=COLOR_SLATE)
+            if t.width > 2.4:
+                t.scale_to_fit_width(2.4)
+            row = VGroup(dot, t).arrange(RIGHT, buff=0.10).move_to([-1.85, -0.65 - 0.32 * idx, 0])
+            specs_a_grp.add(row)
+
+        col_a_s = CleanText(col_a_stat[:28], font=FONT_HELVETICA, font_size=9, color=COLOR_WHITE, weight=BOLD)
         if col_a_s.width > 2.8:
             col_a_s.scale_to_fit_width(2.8)
-        col_a_s.move_to(col_a_box.get_bottom() + UP * 0.6)
-        grp_a = VGroup(col_a_box, col_a_t, col_a_cross, col_a_s)
+        stat_a_pill = RoundedRectangle(corner_radius=0.08, width=col_a_s.width + 0.35, height=0.32, color="#334155", fill_color="#1E293B", fill_opacity=0.85, stroke_width=1.0).move_to([-1.85, col_a_box.get_bottom()[1] + 0.40, 0])
+        col_a_s.move_to(stat_a_pill)
+        grp_a = VGroup(col_a_box, col_a_tag_m, col_a_t, grid_a, op_a_badge, bar_a_grp, specs_a_grp, stat_a_pill, col_a_s)
 
-        # Right Column (Breakthrough / Positive)
-        col_b_box = RoundedRectangle(corner_radius=0.16, width=3.3, height=4.6, color=accent_color, fill_color="#064E3B", fill_opacity=0.92, stroke_width=3.0).move_to([1.85, 0.4, 0])
-        col_b_t = CleanText(col_b_title[:20].upper(), font=FONT_HELVETICA, font_size=11, color=accent_color, weight=BOLD).move_to(col_b_box.get_top() + DOWN * 0.4)
-        # Checkmark
-        col_b_check = VGroup(
-            Line(start=[1.4, 0.3, 0], end=[1.7, 0.0, 0], color=accent_color, stroke_width=5.0),
-            Line(start=[1.7, 0.0, 0], end=[2.3, 0.8, 0], color=accent_color, stroke_width=5.0)
-        )
-        col_b_s = CleanText(col_b_stat[:32], font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE, weight=BOLD)
+        # Right Column (Breakthrough / Optimized)
+        col_b_box = RoundedRectangle(
+            corner_radius=0.16, width=3.35, height=4.6,
+            color=accent_color, fill_color="#052E26", fill_opacity=0.92, stroke_width=2.5
+        ).move_to([1.85, 0.45, 0])
+        col_b_tag_m = CleanText(col_b_tag.upper()[:18], font=FONT_HELVETICA, font_size=8, color=accent_color, weight=BOLD).move_to(col_b_box.get_top() + DOWN * 0.32)
+        col_b_t = CleanText(col_b_title[:18].upper(), font=FONT_HELVETICA, font_size=11, color=COLOR_WHITE, weight=BOLD).next_to(col_b_tag_m, DOWN, buff=0.10)
+        if col_b_t.width > 2.9:
+            col_b_t.scale_to_fit_width(2.9)
+
+        # Optimized Technical Schematic: 3x3 Discrete Ternary BitLinear Matrix {-1, 0, +1}
+        matrix_b_cells = [
+            ["+1", " 0", "-1"],
+            [" 0", "+1", " 0"],
+            ["-1", " 0", "+1"]
+        ]
+        grid_b = VGroup()
+        for r_idx, row in enumerate(matrix_b_cells):
+            for c_idx, val in enumerate(row):
+                cell_box = RoundedRectangle(corner_radius=0.04, width=0.72, height=0.28, color="#065F46", fill_color="#022C22", fill_opacity=0.95, stroke_width=1.0)
+                cell_color = accent_color if "+1" in val else ("#94A3B8" if "0" in val else "#38BDF8")
+                cell_txt = CleanText(val.strip(), font=FONT_HELVETICA, font_size=8, color=cell_color, weight=BOLD)
+                cell_txt.move_to(cell_box)
+                cell = VGroup(cell_box, cell_txt).move_to([1.1 + c_idx * 0.75, 1.45 - r_idx * 0.32, 0])
+                grid_b.add(cell)
+
+        op_b_badge = CleanText("OP: BITWISE ADDITION ONLY (ADD)", font=FONT_HELVETICA, font_size=7.5, color=accent_color, weight=BOLD).move_to([1.85, 0.35, 0])
+
+        # Efficient telemetry bar
+        bar_b_bg = RoundedRectangle(corner_radius=0.06, width=2.7, height=0.24, color="#064E3B", fill_color="#022C22", fill_opacity=0.9, stroke_width=1.0).move_to([1.85, -0.05, 0])
+        fill_w_b = max(0.25, min(2.6, 2.7 * col_b_ratio))
+        bar_b_fill = RoundedRectangle(corner_radius=0.06, width=fill_w_b, height=0.20, color=accent_color, fill_color=accent_color, fill_opacity=0.95, stroke_width=0).move_to(bar_b_bg.get_center()).align_to(bar_b_bg, LEFT).shift(RIGHT * 0.05)
+        bar_b_lbl = CleanText(col_b_metric_lbl[:24], font=FONT_HELVETICA, font_size=8, color=accent_color, weight=BOLD).next_to(bar_b_bg, DOWN, buff=0.10)
+        bar_b_grp = VGroup(bar_b_bg, bar_b_fill, bar_b_lbl)
+
+        # Proposed SOTA feature specs
+        specs_b_grp = VGroup()
+        for idx, spec_text in enumerate(specs_b[:2]):
+            dot = Dot(radius=0.03, color=accent_color)
+            t = CleanText(spec_text[:28], font=FONT_HELVETICA, font_size=8, color="#A7F3D0")
+            if t.width > 2.4:
+                t.scale_to_fit_width(2.4)
+            row = VGroup(dot, t).arrange(RIGHT, buff=0.10).move_to([1.85, -0.65 - 0.32 * idx, 0])
+            specs_b_grp.add(row)
+
+        col_b_s = CleanText(col_b_stat[:28], font=FONT_HELVETICA, font_size=9, color=COLOR_WHITE, weight=BOLD)
         if col_b_s.width > 2.8:
             col_b_s.scale_to_fit_width(2.8)
-        col_b_s.move_to(col_b_box.get_bottom() + UP * 0.6)
-        grp_b = VGroup(col_b_box, col_b_t, col_b_check, col_b_s)
+        stat_b_pill = RoundedRectangle(corner_radius=0.08, width=col_b_s.width + 0.35, height=0.32, color=accent_color, fill_color="#064E3B", fill_opacity=0.9, stroke_width=1.2).move_to([1.85, col_b_box.get_bottom()[1] + 0.40, 0])
+        col_b_s.move_to(stat_b_pill)
+        grp_b = VGroup(col_b_box, col_b_tag_m, col_b_t, grid_b, op_b_badge, bar_b_grp, specs_b_grp, stat_b_pill, col_b_s)
 
-        # VS divider pill
-        vs_pill = RoundedRectangle(corner_radius=0.1, width=0.9, height=0.5, color=COLOR_WHITE, fill_color="#0F172A", fill_opacity=0.95, stroke_width=1.5).move_to([0, 0.4, 0])
-        vs_txt = CleanText("VS", font=FONT_HELVETICA, font_size=10, color=COLOR_WHITE, weight=BOLD).move_to(vs_pill)
+        # Center VS divider pill
+        vs_pill = RoundedRectangle(corner_radius=0.1, width=0.8, height=0.45, color="#475569", fill_color="#0F172A", fill_opacity=0.95, stroke_width=1.5).move_to([0, 0.45, 0])
+        vs_txt = CleanText("VS", font=FONT_HELVETICA, font_size=10, color="#38BDF8", weight=BOLD).move_to(vs_pill)
         vs_grp = VGroup(vs_pill, vs_txt)
 
         self.content_group.add(grp_a, grp_b, vs_grp)
-        self.kinetic_elements.add(grp_b, col_b_check)
+        self.kinetic_elements.add(grp_b, bar_b_fill, stat_b_pill)
         self.add(self.title, self.sub, self.content_group)
 
 

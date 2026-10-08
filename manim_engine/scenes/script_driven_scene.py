@@ -282,23 +282,79 @@ class ScriptDrivenScene(MovingCameraScene):
 
             duration = self.get_beat_duration(beat_id, 6.5)
             motif_type = b.get("motif_type")
-            motif_params = b.get("motif_params", {})
+            motif_params = dict(b.get("motif_params", {}))
             kinetic_action = b.get("kinetic_action", "pulse")
 
-            # Force Upgrade: Never render legacy repetitive canned motifs!
+            from manim_engine.primitives.visual_compositions import BLUEPRINT_COMPOSITION_REGISTRY
+
+            # Visual Engine 4.0: Unpack visual_blueprint as the primary driver for bespoke composition
+            visual_blueprint = b.get("visual_blueprint")
+            if visual_blueprint and isinstance(visual_blueprint, dict):
+                bp_layout = visual_blueprint.get("layout")
+                motif_type = "visual_composition"
+                motif_params["layout"] = bp_layout
+                if visual_blueprint.get("title"):
+                    motif_params["title"] = visual_blueprint["title"]
+                if visual_blueprint.get("sub"):
+                    motif_params["sub"] = visual_blueprint["sub"]
+                if visual_blueprint.get("accent_color"):
+                    motif_params["accent_color"] = visual_blueprint["accent_color"]
+                if "params" in visual_blueprint and isinstance(visual_blueprint["params"], dict):
+                    motif_params.update(visual_blueprint["params"])
+
+            # Auto-enrich benchmark layouts with paper's empirical ground truth
+            bm = self.spec.get("benchmark_comparison", {})
+            curr_layout = motif_params.get("layout")
+            if curr_layout in ["horizontal_race_bars", "benchmark_race", "race_bars", "comparative_bars"]:
+                motif_params["layout"] = "horizontal_race_bars"
+                if not motif_params.get("contestants") and bm.get("contestants"):
+                    motif_params["contestants"] = bm["contestants"]
+                if not motif_params.get("metric_name") and bm.get("metric_name"):
+                    motif_params["metric_name"] = bm["metric_name"]
+                if not motif_params.get("unit") and bm.get("unit"):
+                    motif_params["unit"] = bm["unit"]
+                if not motif_params.get("delta_badge") and bm.get("delta_badge"):
+                    motif_params["delta_badge"] = bm["delta_badge"]
+                if not motif_params.get("title") and bm.get("title"):
+                    motif_params["title"] = bm["title"]
+
+            # Force Upgrade: Never render legacy repetitive canned motifs or generic placeholder cards!
             canned_legacy = [
                 "prism_disentangler", "attention_routing", "tree_search",
                 "memory_buffer", "custom_flow", "branching_outputs",
                 "wave_collision", "radio_tuner", "subspace_vectors", "diffusion_denoise"
             ]
 
-            from manim_engine.primitives.visual_compositions import BLUEPRINT_COMPOSITION_REGISTRY
-
             # Visual Engine 4.0: Composable Visual Blueprint (First-class citizen)
-            if motif_type == "visual_composition" or motif_type in BLUEPRINT_COMPOSITION_REGISTRY:
+            if beat_id == 5:
+                # Beat 5 is the empirical victory / payoff beat.
+                # Always elevate generic placeholders or comparison cards to authentic benchmark race bars!
+                if not visual_blueprint or curr_layout in ["comparative_bars", "benchmark_bars", "comparison_side_by_side", None] or not motif_params.get("contestants"):
+                    from pipeline.benchmark_extractor import BenchmarkExtractor
+                    b_comp = BenchmarkExtractor().extract_or_fallback(self.spec)
+                    motif_type = "visual_composition"
+                    motif_params["layout"] = "horizontal_race_bars"
+                    motif_params["contestants"] = [
+                        {
+                            "name": c.name,
+                            "value": c.value,
+                            "display_val": c.raw_str,
+                            "is_hero": c.is_hero,
+                            "color": c.color
+                        }
+                        for c in b_comp.contestants
+                    ]
+                    motif_params["metric_name"] = b_comp.metric_name
+                    motif_params["unit"] = b_comp.unit
+                    motif_params["delta_badge"] = b_comp.delta_badge
+                    if not motif_params.get("title") or motif_params.get("title") in ["THE PERFORMANCE GAP", "ARCHITECTURAL OVERVIEW"]:
+                        motif_params["title"] = b_comp.title
+                    if not motif_params.get("sub"):
+                        motif_params["sub"] = "Quantitative empirical evaluation against frontier baselines"
+                else:
+                    motif_type = "visual_composition"
+            elif motif_type == "visual_composition" or motif_type in BLUEPRINT_COMPOSITION_REGISTRY:
                 pass
-            elif beat_id == 5 and (not b.get("visual_blueprint") or b.get("visual_blueprint", {}).get("layout") in ["comparative_bars", "benchmark_bars"]):
-                motif_type = "comparative_bars"
             elif motif_type in canned_legacy or not motif_type or motif_type not in MOTIF_REGISTRY:
                 if beat_id == 3 and self.spec.get("paper_figures"):
                     motif_type = "paper_figure"

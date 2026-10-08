@@ -68,36 +68,27 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
         if max_val <= 0:
             max_val = 1.0
 
-        # Blueprint Carbon Chassis Card
-        self.chassis = RoundedRectangle(
-            corner_radius=0.18,
-            width=7.2,
-            height=4.6,
-            stroke_color="#1E293B",
-            stroke_width=1.5,
-            fill_color="#080C14",
-            fill_opacity=0.72
-        ).move_to([0, 0.85, 0])
-        self.content_group.add(self.chassis)
+        # Chalkboard Origin Baseline Axis (pure 3b1b mathematical aesthetic, zero SaaS card container)
+        self.chassis = VGroup()
 
-        # Sub-header inside chassis: Metric name badge
+        # Sub-header: Metric name badge centered cleanly
         metric_badge_txt = CleanText(
             f"MEASURED METRIC: {self.metric_name.upper()} ({self.unit})",
-            font_size=11,
+            font_size=10.5,
             color=COLOR_CYAN,
             weight=BOLD
         )
         metric_badge_bg = RoundedRectangle(
-            corner_radius=0.10,
-            width=metric_badge_txt.width + 0.4,
-            height=0.32,
+            corner_radius=0.08,
+            width=metric_badge_txt.width + 0.35,
+            height=0.30,
             stroke_color="#0284C7",
             stroke_width=1.0,
             fill_color="#082F49",
             fill_opacity=0.6
         )
         metric_badge_txt.move_to(metric_badge_bg)
-        metric_badge = Group(metric_badge_bg, metric_badge_txt).move_to([0, 2.65, 0])
+        metric_badge = Group(metric_badge_bg, metric_badge_txt).move_to([0, 2.35, 0])
         self.content_group.add(metric_badge)
 
         # Race tracks container
@@ -108,7 +99,13 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
 
         track_max_width = 3.65
         row_height = 0.72
-        y_starts = [1.85, 0.95, 0.05, -0.85]  # Cleanly distributed inside chassis [-1.2, 2.8]
+        n_contestants = len(self.contestant_data)
+        if n_contestants <= 2:
+            y_starts = [1.35, 0.45]
+        elif n_contestants == 3:
+            y_starts = [1.50, 0.70, -0.10]
+        else:
+            y_starts = [1.60, 0.90, 0.20, -0.50]
 
         rank_colors = [COLOR_GOLD, "#CBD5E1", "#D97706", "#64748B"]
 
@@ -122,41 +119,41 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
 
             # 1. Rank Badge (#1, #2, #3, #4)
             rank_col = rank_colors[min(idx, len(rank_colors) - 1)]
-            rank_txt = CleanText(f"#{idx+1}", font_size=14, color=rank_col, weight=BOLD)
+            rank_txt = CleanText(f"#{idx+1}", font_size=13, color=rank_col, weight=BOLD)
             rank_pill = RoundedRectangle(
-                corner_radius=0.08,
-                width=0.48,
-                height=0.36,
+                corner_radius=0.06,
+                width=0.46,
+                height=0.32,
                 color=rank_col,
                 stroke_width=1.2,
                 fill_color="#0F172A",
                 fill_opacity=0.85
-            ).move_to([-3.1, y_pos + 0.12, 0])
+            ).move_to([-3.05, y_pos + 0.10, 0])
             rank_txt.move_to(rank_pill)
             rank_badge = Group(rank_pill, rank_txt)
 
             # 2. Model Name
             name_col = COLOR_WHITE if is_hero else "#CBD5E1"
-            name_txt = CleanText(name[:18], font_size=13, color=name_col, weight=BOLD if is_hero else MEDIUM)
-            name_txt.next_to(rank_pill, RIGHT, buff=0.25).shift(UP * 0.02)
-            if name_txt.width > 2.2:
-                name_txt.scale_to_fit_width(2.2)
+            name_txt = CleanText(name[:26], font_size=12, color=name_col, weight=BOLD if is_hero else MEDIUM)
+            name_txt.next_to(rank_pill, RIGHT, buff=0.20).shift(UP * 0.02)
+            if name_txt.width > 2.35:
+                name_txt.scale_to_fit_width(2.35)
 
             # 3. Bar Background Slot
             bar_track_bg = RoundedRectangle(
-                corner_radius=0.06,
+                corner_radius=0.04,
                 width=track_max_width,
                 height=0.24,
                 stroke_color="#1E293B",
                 stroke_width=1.0,
                 fill_color="#0F172A",
-                fill_opacity=0.9
-            ).move_to([-0.1, y_pos - 0.20, 0])
+                fill_opacity=0.85
+            ).move_to([-0.1, y_pos - 0.18, 0])
 
             # 4. Racing Fill Bar: explicitly aligned to bar_track_bg on Y, then left-aligned
             target_width = max(0.25, track_max_width * (val / max_val))
             fill_bar = RoundedRectangle(
-                corner_radius=0.06,
+                corner_radius=0.04,
                 width=target_width,
                 height=0.24,
                 stroke_color=bar_color,
@@ -165,33 +162,26 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
                 fill_opacity=0.95 if is_hero else 0.80
             ).move_to(bar_track_bg).align_to(bar_track_bg, LEFT)
 
-            # 5. Glowing Leading Tip Particle
-            tip = Dot(
-                point=fill_bar.get_right() + RIGHT * 0.02,
-                radius=0.06 if is_hero else 0.045,
-                color=COLOR_WHITE,
-                fill_opacity=1.0
-            )
-            halo = Dot(
-                point=tip.get_center(),
-                radius=0.12 if is_hero else 0.08,
-                color=bar_color,
-                fill_opacity=0.45
-            )
-            tip_group = Group(halo, tip)
-
-            # 6. Value Display
+            # 5. Clean Value Display
             val_col = COLOR_WHITE if is_hero else COLOR_SLATE
-            val_txt = CleanText(display_val[:16], font_size=12, color=val_col, weight=BOLD if is_hero else MEDIUM)
-            val_txt.next_to(bar_track_bg, RIGHT, buff=0.22)
+            val_txt = CleanText(display_val[:16], font_size=11.5, color=val_col, weight=BOLD if is_hero else MEDIUM)
+            val_txt.next_to(bar_track_bg, RIGHT, buff=0.20)
             if val_txt.width > 1.3:
                 val_txt.scale_to_fit_width(1.3)
 
-            # Assemble Row
-            row_group = Group(rank_badge, name_txt, bar_track_bg, fill_bar, tip_group, val_txt)
+            # 6. Leading Edge Tip Indicator
+            tip_dot = Dot(
+                point=fill_bar.get_right(),
+                radius=0.04,
+                color=COLOR_WHITE if is_hero else bar_color,
+                fill_opacity=0.90
+            )
+            self.bar_tips.append(tip_dot)
+
+            # Assemble Row (Clean mathematical bars with particle tip)
+            row_group = Group(rank_badge, name_txt, bar_track_bg, fill_bar, tip_dot, val_txt)
             self.tracks_group.add(row_group)
             self.bars.append(fill_bar)
-            self.bar_tips.append(tip_group)
 
             if is_hero and not self.hero_row:
                 self.hero_row = row_group
@@ -201,19 +191,20 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
 
         self.content_group.add(self.tracks_group)
 
-        # Bottom Victory Delta Badge at y = -2.1 (strictly above subtitles at y = -3.45)
+        # Bottom Victory Delta Badge at y = -0.9 (strictly within safe zone [-1.5, 2.5], above subtitles at y = -3.45)
+        delta_y = -0.75 if n_contestants <= 2 else (-0.95 if n_contestants == 3 else -1.15)
         badge_txt = CleanText(self.delta_str[:52], font_size=9.5, color="#10B981", weight=BOLD)
         badge_pill = RoundedRectangle(
-            corner_radius=0.12,
-            width=badge_txt.width + 0.5,
-            height=0.34,
+            corner_radius=0.10,
+            width=badge_txt.width + 0.45,
+            height=0.32,
             color="#10B981",
-            stroke_width=1.3,
+            stroke_width=1.2,
             fill_color="#064E3B",
             fill_opacity=0.75
         )
         badge_txt.move_to(badge_pill)
-        self.badge = Group(badge_pill, badge_txt).move_to([0, -2.1, 0])
+        self.badge = Group(badge_pill, badge_txt).move_to([0, delta_y, 0])
         self.content_group.add(self.badge)
 
         self.kinetic_elements.add(self.tracks_group, self.badge)
@@ -221,16 +212,13 @@ class BlueprintHorizontalRaceBars(BaseBlueprintComposition):
 
     def get_entrance_animation(self, run_time: float = 1.0) -> Animation:
         """
-        Progressive drag-race entrance: Chassis appears, then bars expand horizontally
-        from 0 to full target width simultaneously like an animated horsepower race.
+        Progressive drag-race entrance: Bars expand horizontally from left to right.
         """
-        anims = [FadeIn(self.title, shift=DOWN * 0.15), FadeIn(self.sub, shift=DOWN * 0.15), FadeIn(self.chassis, scale=0.98)]
+        anims = [FadeIn(self.title, shift=DOWN * 0.15), FadeIn(self.sub, shift=DOWN * 0.15)]
         for bar in self.bars:
             anims.append(GrowFromEdge(bar, LEFT, rate_func=ease_out_cubic))
-        for tip in self.bar_tips:
-            anims.append(FadeIn(tip, scale=0.5, rate_func=ease_out_cubic))
-        anims.append(FadeIn(self.tracks_group, shift=RIGHT * 0.1))
-        anims.append(FadeIn(self.badge, shift=UP * 0.15, rate_func=ease_out_back))
+        anims.append(FadeIn(self.tracks_group, shift=RIGHT * 0.08))
+        anims.append(FadeIn(self.badge, shift=UP * 0.12, rate_func=ease_out_back))
         return AnimationGroup(*anims, run_time=run_time)
 
     def get_kinetic_animation(self, run_time: float = 1.8) -> Animation:

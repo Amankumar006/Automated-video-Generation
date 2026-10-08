@@ -167,7 +167,7 @@ def auto_produce(
             print("⚠️ Existing template not found. Generating fresh script...")
 
     if not spec:
-        print(f"🧠 Step 2: Generating script with Gemini 2.5 Flash for '{topic}'...")
+        print(f"🧠 Step 2: Generating brand-new script directly from paper for '{topic}'...")
         spec = generate_script(
             topic=topic,
             category=category,

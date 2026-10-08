@@ -23,6 +23,8 @@ from pipeline.config import (
     BROADCAST_CRF, BROADCAST_MAXRATE, BROADCAST_BUFSIZE
 )
 from pipeline.audio_synthesizer import synthesize_audio_for_spec
+from pipeline.arxiv_fetcher import fetch_arxiv_paper
+from pipeline.script_generator import generate_script
 
 CATEGORY_SCENE_MAP = {
     "architecture_breakdown": {
@@ -244,22 +246,61 @@ def extract_frames(video_path: str, output_dir: str, category: str = "architectu
 
 def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
-    parser.add_argument("--topic", required=True, help="Topic ID (e.g. deepseek-v3, deepseek_vs_gpt4, kv_cache)")
+    parser.add_argument("--topic", default=None, help="Topic ID or title")
+    parser.add_argument("--arxiv", default=None, help="arXiv paper ID or URL to ingest and generate fresh script")
+    parser.add_argument("--fresh", action="store_true", help="Always generate a fresh script from paper instead of using cached template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=None, help="Speech speed (default: 1.12)")
     parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
     parser.add_argument("--lang", "--language", dest="lang", default=None, help="Narration language code (en or hi)")
-    parser.add_argument("--quality", default="-qm", choices=["-ql", "-qm", "-qh"], help="Manim render quality")
+    parser.add_argument("--quality", default="-qm", choices=["ql", "qm", "qh", "-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")
     parser.add_argument("--no-music", action="store_true", help="Disable background synth soundtrack")
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
     args = parser.parse_args()
 
-    spec, template_path = load_template(args.topic)
+    if not args.topic and not args.arxiv:
+        parser.error("Either --topic or --arxiv must be provided.")
+
+    arxiv_meta = None
+    if args.arxiv:
+        print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
+        arxiv_meta = fetch_arxiv_paper(args.arxiv)
+        if not arxiv_meta:
+            raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
+        topic = args.topic or arxiv_meta["title"]
+        print(f"📄 Paper Ingested: {arxiv_meta['title']}")
+    else:
+        topic = args.topic
+
+    templates_dir = PROJECT_ROOT / "pipeline" / "templates"
+    templates_dir.mkdir(parents=True, exist_ok=True)
+
+    if args.fresh or args.arxiv:
+        print(f"🧠 Generating brand-new script for '{topic}' directly from paper...")
+        spec = generate_script(
+            topic=topic,
+            category=args.category,
+            arxiv_meta=arxiv_meta
+        )
+        template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
+    else:
+        spec, template_path = load_template(topic)
     category = args.category or spec.get("category")
     if category not in CATEGORY_SCENE_MAP:
         raise ValueError(f"Unsupported category '{category}'. Available: {list(CATEGORY_SCENE_MAP.keys())}")
+
+    # Design Script-Driven Visual Storyboard (Visual Engine 4.0 / 5.0)
+    print(f"\n🎨 Designing bespoke script-driven visual storyboard...")
+    try:
+        from pipeline.visual_director import VisualDirector
+        visual_director = VisualDirector()
+        spec = visual_director.prepare_storyboard_for_spec(spec)
+        with open(template_path, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
+    except Exception as e_vd:
+        print(f"⚠️ Visual Director notice: {e_vd}")
 
     if not args.legacy_engine:
         scene_file = "manim_engine/scenes/script_driven_scene.py"
@@ -327,6 +368,20 @@ def main():
     # Step 4: Extract Keyframes
     frames_dir = str(PROJECT_ROOT / f"frames_{spec['id']}")
     extract_frames(final_output, frames_dir, category=category, spec=spec)
+
+    # Step 5: Master Multimodal Vision Critic & Visual Diversity Gatekeeping
+    print("\n=======================================================")
+    print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
+    print("=======================================================\n")
+    try:
+        from pipeline.vlm_critic import vlm_critic
+        audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
+        status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
+        print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
+        if audit_report.get("diversity_violations"):
+            print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
+    except Exception as e_vlm:
+        print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
 
 if __name__ == "__main__":
     main()

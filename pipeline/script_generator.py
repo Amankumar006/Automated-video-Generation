@@ -21,19 +21,25 @@ load_dotenv(PROJECT_ROOT / ".env")
 import warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore", category=FutureWarning)
-    import google.generativeai as genai
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        genai = None
 
 from pipeline.json_utils import robust_json_loads
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
 from scripts.generate_math_svgs import render_math_to_svg
+from pipeline.ollama_client import OllamaClient
 
 API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 MODEL_NAME = os.getenv("GEMINI_MODEL_NAME", "gemini-flash-latest")
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "gemini" if API_KEY else "ollama").lower()
 
-if not API_KEY:
-    raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY is not configured in .env")
-
-genai.configure(api_key=API_KEY)
+if API_KEY and genai is not None:
+    try:
+        genai.configure(api_key=API_KEY)
+    except Exception as e:
+        print(f"⚠️ Warning: genai.configure failed: {e}")
 
 CATEGORIES = ["architecture_breakdown", "model_showdown", "mechanism_deepdive", "benchmark_news"]
 
@@ -42,17 +48,29 @@ You are the Lead Creative Director & Principal Technical Scriptwriter for 'The M
 Your job is to craft high-retention, educational short scripts explaining frontier AI architectures as an INTELLECTUAL THRILLER.
 
 Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
+- FRESH SCRIPT MANDATE — NEVER PRE-DECIDE OR RECYCLE:
+  * READ THE PAPER ANEW EVERY SINGLE TIME.
+  * Do NOT recycle previous scripts, canned analogies, or pre-decided formulas.
+  * Every script must be crafted fresh directly from the authentic problem, exact mechanisms, and real empirical data of THIS specific paper.
+- STRICT GROUND TRUTH REQUIREMENT:
+  * Every fact, system component, mechanical bottleneck, and metric MUST be derived directly from the provided paper details (title and abstract).
+  * NEVER hallucinate unrelated tools or frameworks (e.g. do NOT mention Cursor or Claude unless the paper is about coding assistants; do NOT use universal chef analogies).
+  * If the paper is about robotics, focus on robotics kinematics/simulation; if about video/diffusion, focus on temporal consistency/denoising; if about hardware, focus on memory bandwidth/SRAM.
+- REQUIRED RELATABLE DOMAIN HUMOR & FIRESHIP SARCASM:
+  * Inject smart, wry, relatable developer humor highlighting the authentic irony or frustration behind the paper's core challenge.
+  * Point out the real-world absurdity (e.g., in robotics: AI solving differential equations but getting defeated by an egg; in hardware: spending millions on GPUs that sit idling waiting on RAM; in vision: melting data centers to draw hands with eleven fingers).
+  * Keep the humor dry, sharp, and grounded directly in the paper's actual friction—never silly slapstick.
 - STRICTLY BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
   * NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
-  * The first 3 seconds must be an ABSURD PARADOX or PATTERN INTERRUPT that stops the viewer from swiping away.
-- Ground abstract AI in real developer tools and crisp physical analogies:
-  * Name REAL tools, models, frameworks, and hardware: Cursor, Claude 3.5, ChatGPT, PyTorch, vLLM, H100, Hopper, Python, Git.
-  * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation, AST, KV cache.
+  * The first 3 seconds must be an ABSURD PARADOX or PATTERN INTERRUPT grounded in the paper that stops the viewer from swiping away.
+- Ground abstract AI in real developer tools and crisp physical analogies relevant to the paper:
+  * Name REAL models, frameworks, and hardware when appropriate.
+  * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation.
   * NEVER use dumbed-down AI slop or baby-talk metaphors: strictly ban 'smart tool', 'safe drawers', 'open desk', 'magic box'. Real developers and curious students cringe at these!
-  * Ground the abstract bottleneck in ONE vivid, relatable physical analogy: (e.g. a chef waiting between ingredients, a relay race baton pass, highway traffic jams, TV static, chipping marble, library card catalog).
+  * Ground the abstract bottleneck in ONE vivid, relatable physical analogy fitting the actual challenge.
 - AVOID UNEXPLAINED ACADEMIC JARGON:
-  * Don't drop raw unexplained math like 'asynchronous GEMM warp specialization' or 'non-convex loss topology'.
-  * Instead, state what it physically does: 'threads run side-by-side without stalling each other'.
+  * Don't drop raw unexplained math without intuition.
+  * State what it physically does.
 - Pacing: Exactly 6 beats (125-155 words total).
 - DUAL-CADENCE SENTENCE STRUCTURE (Sync with Visual Action):
   * Every beat should follow a dual-cadence rhythm: [Setup Clause] + [Action Trigger Clause].
@@ -61,19 +79,18 @@ Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
 
 The 4-Act Intellectual Thriller Narrative Arc:
 1. ACT 1: Absurd Paradox / Pattern Interrupt Hook (Beat 1, 0-3s, 12-18 words):
-   * Start with a bold, high-stakes curiosity loop or shocking inefficiency. No textbook greetings!
-   * Example: 'Every single time Cursor or Claude writes code for you, your GPU wastes up to 70% of its compute doing nothing.'
+   * Start with a bold, high-stakes curiosity loop or shocking inefficiency from the paper. No textbook greetings!
+   * Illustrative Grounded Examples (DO NOT COPY VERBATIM; DRAFT SPECIFICALLY FOR THE PAPER):
+     - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar room."
+     - Hardware: "Standard attention kernels waste over half their execution cycles waiting on HBM memory transfers."
+     - Diffusion: "Generating 10 seconds of high-fidelity video used to require hundreds of repetitive diffusion passes."
 2. ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
    * Personify the villain/bottleneck and explain WHY it happens using ONE clear, relatable physical analogy.
-   * Example: 'Why? Because LLMs generate code one single token at a time—like a world-class chef who stops to ask you for salt before chopping every single onion.'
 3. ACT 3: The Eureka Geometric Mechanism (Beats 3 & 4, 15-40s):
    * Beat 3 (The Eureka Pivot, 20-25 words): Introduce the actual architectural innovation simply and cleanly.
-     Example: 'Enter Speculative Decoding: a tiny draft model guesses five lines ahead in a millisecond, and the giant model verifies all five in a single pass.'
    * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): Explain the paper's specific secret sauce with real developer terms.
-     Example: 'This paper supercharges it by pulling matching syntax directly from your repo\'s AST and git history, shooting draft acceptance up by 40%.'
 4. ACT 4: The Paradigm Shift / Open Loop (Beats 5 & 6, 40-50s):
-   * Beat 5 (Empirical Victory Payoff, 18-24 words): Deliver the concrete payoff with numbers.
-     Example: 'The result? 4x faster coding agents without losing a single drop of benchmark accuracy.'
+   * Beat 5 (Empirical Victory Payoff, 18-24 words): Deliver the concrete payoff with numbers from the paper.
    * Beat 6 (Paradigm Shift & Seamless Loop, 15-20 words): Crisp outro that naturally loops back to Beat 1.
      Example: 'Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.'
 
@@ -143,9 +160,37 @@ DEDICATED FULL-SCREEN VISUAL BLUEPRINTS (CRITICAL ARCHITECTURAL DIRECTIVE):
     params: {"input_1_label": "...", "input_2_label": "...", "input_3_label": "...", "fused_label": "..."}
   * "catalog_routing": For library card catalogs, indexing desks, hash map lookups, or dispatching to specialized drawers.
     params: {"index_label": "...", "drawer_a_label": "...", "drawer_b_label": "...", "drawer_c_label": "..."}
-  * "comparison_side_by_side": For contrasting two opposing approaches side-by-side (e.g. Traditional Flawed vs Breakthrough).
-    params: {"col_a_title": "...", "col_a_stat": "...", "col_b_title": "...", "col_b_stat": "..."}
+  * "horizontal_race_bars": For performance benchmarks, speedup comparisons, throughput (TFLOPS), power (Watts), or memory footprint.
+    params: {
+      "metric_name": "...",
+      "unit": "...",
+      "contestants": [
+        {"name": "Our Model", "value": 13.0, "display_val": "13W / 0.1x RAM", "is_hero": true, "color": "#34D399"},
+        {"name": "Incumbent Baseline", "value": 350.0, "display_val": "350W / 1.0x RAM", "is_hero": false, "color": "#EF4444"}
+      ],
+      "delta_badge": "⚡ ..."
+    }
+  * "radar_pareto_plot": For multi-dimensional Pareto frontier comparisons (speed, memory, accuracy, cost).
+    params: {
+      "axes": ["Throughput", "VRAM Efficiency", "Accuracy", "Context Length", "Cost Efficiency"],
+      "models": [
+        {"name": "Our Model", "scores": [0.95, 0.90, 0.92, 0.85, 0.98], "is_hero": true, "color": "#34D399"},
+        {"name": "Baseline", "scores": [0.50, 0.40, 0.90, 0.80, 0.25], "is_hero": false, "color": "#EF4444"}
+      ],
+      "delta_badge": "⚡ ..."
+    }
+  * "comparison_side_by_side": For contrasting two opposing architectures side-by-side with full feature specs and telemetry gauges (NOT for empirical benchmark bars; use horizontal_race_bars for benchmarks).
+    params: {
+      "col_a_title": "...", "col_a_stat": "...", "col_b_title": "...", "col_b_stat": "...",
+      "col_a_specs": ["...", "..."], "col_b_specs": ["...", "..."]
+    }
 - NEVER reuse the same blueprint layout across beats in the same video. Every beat must have its own distinct visual layout!
+- BEAT 5 CLIMAX MANDATE: Beat 5 must NEVER end with generic empty boxes or placeholder cards. It MUST deliver the paper's genuine empirical payoff:
+  * If quantitative throughput/memory/latency/power: use "horizontal_race_bars" with actual named contestants and real units.
+  * If multi-metric tradeoff: use "radar_pareto_plot".
+  * If mathematical or state-space convergence: use "optimization_landscape" or "vector_flow_field".
+  * If executable implementation: use "chalkboard_code_block".
+- STRICT BAN ON CARTOON X AND CHECKMARKS: Never draw crude red 'X' and green checkmark boxes like cheap clickbait. All visuals must feature real scientific hardware telemetry, mathematical equations, and technical flow mechanics!
 """
 
 def generate_script(
@@ -157,11 +202,6 @@ def generate_script(
     """
     Invokes Gemini 2.5 Flash to generate a 6-beat JSON template with SVO alignment.
     """
-    model = genai.GenerativeModel(
-        MODEL_NAME,
-        generation_config={"response_mime_type": "application/json"}
-    )
-
     cat_hint = f"Target Category: {category}" if category else "Choose the best matching category from: architecture_breakdown, model_showdown, mechanism_deepdive, benchmark_news."
 
     paper_context = ""
@@ -213,7 +253,7 @@ Generate the complete JSON specification strictly adhering to this structure:
         "semantic_role": "agent_action | state_transition | causal_elimination | metric_evaluation"
       }},
       "visual_blueprint": {{
-        "layout": "vector_flow_field | neural_activation_wave | attention_prism_refraction | optimization_landscape | split_flow | pipeline_stages | grid_memory | projection_rays | barrier_separation | tree_hierarchy | layer_stack | convergence_funnel | catalog_routing | comparison_side_by_side",
+        "layout": "horizontal_race_bars | radar_pareto_plot | chalkboard_code_block | vector_flow_field | neural_activation_wave | attention_prism_refraction | optimization_landscape | split_flow | pipeline_stages | grid_memory | projection_rays | barrier_separation | tree_hierarchy | layer_stack | convergence_funnel | catalog_routing | paper_figure | comparison_side_by_side",
         "title": "CLEAR UPPERCASE CONCEPT TITLE",
         "sub": "Concise 1-line description of visual structure",
         "accent_color": "#38BDF8",
@@ -367,53 +407,100 @@ Generate the complete JSON specification strictly adhering to this structure:
 """
 
     import time
-    candidate_models = [
-        MODEL_NAME,
-        "gemini-3.1-flash-lite",
-        "gemini-3.5-flash-lite",
-        "gemini-3.1-flash-lite-preview",
-        "gemma-4-31b-it"
-    ]
-    # Remove duplicates preserving order
-    seen = set()
-    candidate_models = [m for m in candidate_models if not (m in seen or seen.add(m))]
 
     response = None
     last_err = None
+    raw_text = None
+    spec = None
 
-    for m_idx, current_model_name in enumerate(candidate_models):
-        print(f"🧠 Attempting script generation with model: '{current_model_name}'...")
+    active_api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    active_provider = os.getenv("LLM_PROVIDER", "gemini" if active_api_key else "ollama").lower()
+    use_ollama = (active_provider == "ollama") or (not active_api_key) or (genai is None)
+
+    if use_ollama:
+        print("🧠 Routing script generation to Ollama Cloud (default: 'gpt-oss:120b:cloud')...")
+        ollama = OllamaClient()
         try:
-            curr_model = genai.GenerativeModel(
-                current_model_name,
-                generation_config={"response_mime_type": "application/json"}
+            ollama_res = ollama.generate_completion(
+                prompt=prompt,
+                model="gpt-oss:120b:cloud",
+                format="json",
             )
-            response = curr_model.generate_content(prompt)
-            if response and response.text:
-                print(f"✅ Script generated successfully using '{current_model_name}'")
-                break
+            spec = ollama_res.to_dict() if hasattr(ollama_res, "to_dict") else dict(ollama_res)
+            raw_text = ollama_res.text
+            print(f"✅ Script generated successfully using Ollama Cloud model '{ollama_res.model}'")
         except Exception as e:
+            print(f"⚠️ Ollama script generation failed: {e}")
             last_err = e
-            err_msg = str(e)
-            if "ResourceExhausted" in err_msg or "429" in err_msg or "404" in err_msg or "limit: 20" in err_msg:
-                print(f"⚠️ Quota/Availability limit on '{current_model_name}'. Falling back to next available model...")
-                time.sleep(2)
-                continue
-            else:
-                print(f"⚠️ Error on '{current_model_name}': {e}. Trying fallback...")
-                time.sleep(2)
-                continue
+    else:
+        candidate_models = [
+            MODEL_NAME,
+            "gemini-3.1-flash-lite",
+            "gemini-3.5-flash-lite",
+            "gemini-3.1-flash-lite-preview",
+            "gemma-4-31b-it"
+        ]
+        # Remove duplicates preserving order
+        seen = set()
+        candidate_models = [m for m in candidate_models if not (m in seen or seen.add(m))]
 
-    if not response or not response.text:
-        raise RuntimeError(f"Failed to generate script from Gemini across all candidate models. Last error: {last_err}")
+        for m_idx, current_model_name in enumerate(candidate_models):
+            print(f"🧠 Attempting script generation with model: '{current_model_name}'...")
+            try:
+                curr_model = genai.GenerativeModel(
+                    current_model_name,
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                response = curr_model.generate_content(prompt)
+                if response and response.text:
+                    raw_text = response.text.strip()
+                    try:
+                        spec = robust_json_loads(raw_text)
+                        print(f"✅ Script generated successfully using '{current_model_name}'")
+                        break
+                    except Exception as json_err:
+                        print(f"⚠️ Failed to parse JSON from '{current_model_name}': {json_err}. Trying fallback...")
+            except Exception as e:
+                last_err = e
+                err_msg = str(e)
+                if "ResourceExhausted" in err_msg or "429" in err_msg:
+                    print(f"⚠️ Quota exhausted ({err_msg}) on '{current_model_name}'. Immediately routing to Ollama Cloud...")
+                    break
+                elif "404" in err_msg or "limit: 20" in err_msg:
+                    print(f"⚠️ Quota/Availability limit on '{current_model_name}'. Falling back to next available model...")
+                    time.sleep(1)
+                    continue
+                else:
+                    print(f"⚠️ Error on '{current_model_name}': {e}. Trying fallback...")
+                    time.sleep(1)
+                    continue
 
-    raw_text = response.text.strip()
+        # If Gemini exhausted quota, failed, or produced unparseable output, fallback to Ollama Cloud
+        if spec is None:
+            print("⚠️ Gemini unavailable or quota exhausted. Seamlessly routing to Ollama Cloud ('gpt-oss:120b:cloud')...")
+            try:
+                ollama = OllamaClient()
+                ollama_res = ollama.generate_completion(
+                    prompt=prompt,
+                    model="gpt-oss:120b:cloud",
+                    format="json",
+                )
+                spec = ollama_res.to_dict() if hasattr(ollama_res, "to_dict") else dict(ollama_res)
+                raw_text = ollama_res.text
+                print(f"✅ Script generated successfully via Ollama Cloud fallback model '{ollama_res.model}'")
+            except Exception as e:
+                raise RuntimeError(
+                    f"Failed to generate script from both Gemini and Ollama Cloud. Gemini error: {last_err}, Ollama error: {e}"
+                )
 
-    try:
-        spec = robust_json_loads(raw_text)
-    except Exception as e:
-        print("Raw LLM output:\n", raw_text)
-        raise RuntimeError(f"Failed to parse LLM JSON: {e}")
+    if spec is None:
+        if not raw_text:
+            raise RuntimeError(f"Failed to generate script across all candidate models. Last error: {last_err}")
+        try:
+            spec = robust_json_loads(raw_text)
+        except Exception as e:
+            print("Raw LLM output:\n", raw_text)
+            raise RuntimeError(f"Failed to parse LLM JSON: {e}")
 
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
@@ -504,7 +591,7 @@ Generate the complete JSON specification strictly adhering to this structure:
     try:
         from pipeline.intellectual_thriller_engine import intellectual_thriller_engine
         print("\n🎬 Applying Intellectual Thriller Narrative Rewrite (Engine 7.0)...")
-        spec = intellectual_thriller_engine.rewrite_script_to_thriller(spec, paper_meta=arxiv_meta, use_llm=False)
+        spec = intellectual_thriller_engine.rewrite_script_to_thriller(spec, paper_meta=arxiv_meta, use_llm=True)
         thriller_audit = intellectual_thriller_engine.audit_thriller_compliance(spec)
         print(f"   ⚡ Thriller Compliance Score: {thriller_audit['score']}/10 | Hook Passed: {thriller_audit['hook_passed']} | {thriller_audit['verdict']}")
     except Exception as e:
@@ -548,7 +635,9 @@ Generate the complete JSON specification strictly adhering to this structure:
     # Save to templates directory
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
-    out_file = templates_dir / f"{spec['category']}_{clean_id}.json"
+    cat_slug = spec.get("category") or category or "mechanism_deepdive"
+    spec["category"] = cat_slug
+    out_file = templates_dir / f"{cat_slug}_{clean_id}.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(spec, f, indent=2)
 

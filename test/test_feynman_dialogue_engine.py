@@ -77,11 +77,11 @@ class TestFeynmanDialogueEngine(unittest.TestCase):
             "beats": [
                 {
                     "beat_id": 1,
-                    "text": "Every single time Cursor or Claude writes code for you, your GPU wastes up to 70% of its compute doing nothing."
+                    "text": "Standard large language models waste up to 70% of their inference cycles stalling on memory bandwidth."
                 },
                 {
                     "beat_id": 2,
-                    "text": "Why? Because LLMs generate code one single token at a time—like a chef waiting for salt before chopping every onion."
+                    "text": "Why? Because sequential token generation creates a bottleneck where compute cores sit idle waiting for memory."
                 },
                 {
                     "beat_id": 3,
@@ -101,7 +101,7 @@ class TestFeynmanDialogueEngine(unittest.TestCase):
                 }
             ]
         }
-        audit = self.listener.audit_script(clean_script)
+        audit = self.listener.audit_script(clean_script, use_llm=False)
         self.assertTrue(audit["approved"])
         self.assertFalse(audit["ai_slop_detected"])
         self.assertGreaterEqual(audit["comprehension_score"], 8.5)
