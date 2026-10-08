@@ -406,101 +406,15 @@ Generate the complete JSON specification strictly adhering to this structure:
 }}
 """
 
-    import time
+    from pipeline.llm_router import llm_router
 
-    response = None
-    last_err = None
-    raw_text = None
-    spec = None
-
-    active_api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-    active_provider = os.getenv("LLM_PROVIDER", "gemini" if active_api_key else "ollama").lower()
-    use_ollama = (active_provider == "ollama") or (not active_api_key) or (genai is None)
-
-    if use_ollama:
-        print("🧠 Routing script generation to Ollama Cloud (default: 'gpt-oss:120b:cloud')...")
-        ollama = OllamaClient()
-        try:
-            ollama_res = ollama.generate_completion(
-                prompt=prompt,
-                model="gpt-oss:120b:cloud",
-                format="json",
-            )
-            spec = ollama_res.to_dict() if hasattr(ollama_res, "to_dict") else dict(ollama_res)
-            raw_text = ollama_res.text
-            print(f"✅ Script generated successfully using Ollama Cloud model '{ollama_res.model}'")
-        except Exception as e:
-            print(f"⚠️ Ollama script generation failed: {e}")
-            last_err = e
-    else:
-        candidate_models = [
-            MODEL_NAME,
-            "gemini-3.1-flash-lite",
-            "gemini-3.5-flash-lite",
-            "gemini-3.1-flash-lite-preview",
-            "gemma-4-31b-it"
-        ]
-        # Remove duplicates preserving order
-        seen = set()
-        candidate_models = [m for m in candidate_models if not (m in seen or seen.add(m))]
-
-        for m_idx, current_model_name in enumerate(candidate_models):
-            print(f"🧠 Attempting script generation with model: '{current_model_name}'...")
-            try:
-                curr_model = genai.GenerativeModel(
-                    current_model_name,
-                    generation_config={"response_mime_type": "application/json"}
-                )
-                response = curr_model.generate_content(prompt)
-                if response and response.text:
-                    raw_text = response.text.strip()
-                    try:
-                        spec = robust_json_loads(raw_text)
-                        print(f"✅ Script generated successfully using '{current_model_name}'")
-                        break
-                    except Exception as json_err:
-                        print(f"⚠️ Failed to parse JSON from '{current_model_name}': {json_err}. Trying fallback...")
-            except Exception as e:
-                last_err = e
-                err_msg = str(e)
-                if "ResourceExhausted" in err_msg or "429" in err_msg:
-                    print(f"⚠️ Quota exhausted ({err_msg}) on '{current_model_name}'. Immediately routing to Ollama Cloud...")
-                    break
-                elif "404" in err_msg or "limit: 20" in err_msg:
-                    print(f"⚠️ Quota/Availability limit on '{current_model_name}'. Falling back to next available model...")
-                    time.sleep(1)
-                    continue
-                else:
-                    print(f"⚠️ Error on '{current_model_name}': {e}. Trying fallback...")
-                    time.sleep(1)
-                    continue
-
-        # If Gemini exhausted quota, failed, or produced unparseable output, fallback to Ollama Cloud
-        if spec is None:
-            print("⚠️ Gemini unavailable or quota exhausted. Seamlessly routing to Ollama Cloud ('gpt-oss:120b:cloud')...")
-            try:
-                ollama = OllamaClient()
-                ollama_res = ollama.generate_completion(
-                    prompt=prompt,
-                    model="gpt-oss:120b:cloud",
-                    format="json",
-                )
-                spec = ollama_res.to_dict() if hasattr(ollama_res, "to_dict") else dict(ollama_res)
-                raw_text = ollama_res.text
-                print(f"✅ Script generated successfully via Ollama Cloud fallback model '{ollama_res.model}'")
-            except Exception as e:
-                raise RuntimeError(
-                    f"Failed to generate script from both Gemini and Ollama Cloud. Gemini error: {last_err}, Ollama error: {e}"
-                )
-
-    if spec is None:
-        if not raw_text:
-            raise RuntimeError(f"Failed to generate script across all candidate models. Last error: {last_err}")
-        try:
-            spec = robust_json_loads(raw_text)
-        except Exception as e:
-            print("Raw LLM output:\n", raw_text)
-            raise RuntimeError(f"Failed to parse LLM JSON: {e}")
+    spec, provider_used = llm_router.route_script_generation(
+        prompt=prompt,
+        topic=topic,
+        category=category,
+        arxiv_meta=arxiv_meta
+    )
+    print(f"✅ Script generated successfully via provider '{provider_used}'")
 
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
