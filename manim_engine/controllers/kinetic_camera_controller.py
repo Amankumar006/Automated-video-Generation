@@ -1,9 +1,11 @@
 """
-The Model Verse — Kinetic Camera Controller & Multi-Layer Depth Coordinator (Engine 7.0)
+The Model Verse — Kinetic Camera Controller & Multi-Layer Depth Coordinator (Engine 7.5)
 Eliminates static frames via:
-  1. Continuous 3Blue1Brown-style camera breathing and ambient drift.
-  2. Dynamic punch-in zooms on high-impact anchor words (e.g. 70% compute waste, 4x speedup).
-  3. Multi-Layer Depth Sandwich coordination (Ambient Backdrop, Geometric Core, Kinetic Typography HUD).
+  1. Aggressive 3Blue1Brown-style camera zooms (18% - 25% focal shifts on equations & hero stats).
+  2. Formula focus zooms that guide the viewer's eye straight into mathematical derivations.
+  3. Dynamic punch-in zooms on high-impact anchor words (e.g. 70% compute waste, 4x speedup).
+  4. Continuous organic camera breathing and sinusoidal ambient drift.
+  5. Multi-Layer Depth Sandwich coordination (Ambient Backdrop, Geometric Core, Kinetic Typography HUD).
 """
 
 from typing import Optional, List, Dict, Any, Tuple
@@ -16,15 +18,15 @@ from pipeline.config import FRAME_WIDTH, FRAME_HEIGHT
 class KineticCameraController:
     """
     Kinetic Camera Controller that choreographs camera motion and multi-layer depth.
-    Ensures zero static dead screens by orchestrating micro-motion, punch-in zooms,
+    Ensures zero static dead screens by orchestrating micro-motion, aggressive punch-in zooms,
     and fluid camera breathing throughout narrations.
     """
 
     def __init__(
         self,
-        default_zoom_factor: float = 0.975,
-        punch_in_factor: float = 0.94,
-        drift_vector: np.ndarray = np.array([0.0, 0.08, 0.0])
+        default_zoom_factor: float = 0.94,
+        punch_in_factor: float = 0.82,
+        drift_vector: np.ndarray = np.array([0.0, 0.12, 0.0])
     ):
         self.default_zoom_factor = default_zoom_factor
         self.punch_in_factor = punch_in_factor
@@ -54,11 +56,41 @@ class KineticCameraController:
         run_time: float = 0.45
     ) -> Animation:
         """
-        Returns dynamic punch-in camera zoom animation to be played concurrently with focal actions.
+        Returns aggressive punch-in camera zoom animation (18%-20% zoom)
+        panning close to focal actions.
         """
         z_factor = zoom_factor if zoom_factor is not None else self.punch_in_factor
         t_pt = target_point if target_point is not None else ORIGIN
-        return camera_frame.animate(rate_func=smooth, run_time=run_time).scale(z_factor).move_to(t_pt * 0.4)
+        # Move camera 70% of the way toward target for bold 3Blue1Brown focal clarity
+        return camera_frame.animate(rate_func=smooth, run_time=run_time).scale(z_factor).move_to(t_pt * 0.70)
+
+    def get_formula_focus_animation(
+        self,
+        camera_frame: Mobject,
+        formula_point: Optional[np.ndarray] = None,
+        zoom_factor: float = 0.78,
+        run_time: float = 0.55
+    ) -> Animation:
+        """
+        Aggressive 3Blue1Brown focus zoom (22% zoom-in) locking onto mathematical equations
+        or architectural principles during the Eureka and Deepdive beats.
+        """
+        f_pt = formula_point if formula_point is not None else np.array([0.0, -3.8, 0.0])
+        return camera_frame.animate(rate_func=smooth, run_time=run_time).scale(zoom_factor).move_to(f_pt * 0.65)
+
+    def get_hero_metric_snap_animation(
+        self,
+        camera_frame: Mobject,
+        target_point: Optional[np.ndarray] = None,
+        zoom_factor: float = 0.75,
+        run_time: float = 0.45
+    ) -> Animation:
+        """
+        High-energy snap zoom (25% zoom-in) framing empirical benchmark victories,
+        SOTA speedup numbers, or accuracy delta badges.
+        """
+        t_pt = target_point if target_point is not None else np.array([0.0, 0.2, 0.0])
+        return camera_frame.animate(rate_func=rush_into, run_time=run_time).scale(zoom_factor).move_to(t_pt * 0.80)
 
     def get_reset_animation(
         self,
