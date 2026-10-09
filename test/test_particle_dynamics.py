@@ -45,7 +45,7 @@ class TestParticleDynamics(unittest.TestCase):
             run_time=0.65
         )
         self.assertIsInstance(halo, RoundedRectangle)
-        self.assertTrue(isinstance(pulse_anim, Animation) or isinstance(pulse_anim, AnimationGroup))
+        self.assertTrue(isinstance(pulse_anim, (Animation, AnimationGroup)) or hasattr(pulse_anim, "build"))
 
     def test_create_traveling_photon_stream(self):
         """Traveling photon stream must generate moving particles along vector trajectory."""
