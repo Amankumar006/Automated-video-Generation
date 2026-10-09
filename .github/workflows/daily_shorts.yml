@@ -102,13 +102,23 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           SARVAM_API_KEY: ${{ secrets.SARVAM_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           YOUTUBE_TOKEN_JSON_BASE64: ${{ secrets.YOUTUBE_TOKEN_JSON_BASE64 }}
           YOUTUBE_CLIENT_SECRETS_BASE64: ${{ secrets.YOUTUBE_CLIENT_SECRETS_BASE64 }}
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
-          echo "GEMINI_MODEL_NAME=gemini-3.1-flash-lite" >> .env
+          echo "GEMINI_MODEL_NAME=gemini-2.5-flash" >> .env
           echo "TTS_PROVIDER=auto" >> .env
           echo "ELEVENLABS_VOICE=eric" >> .env
+
+          if [ -n "$GROQ_API_KEY" ]; then
+            echo "GROQ_API_KEY=$GROQ_API_KEY" >> .env
+          fi
+
+          if [ -n "$OPENROUTER_API_KEY" ]; then
+            echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY" >> .env
+          fi
 
           if [ -n "$ELEVENLABS_API_KEY" ]; then
             echo "ELEVENLABS_API_KEY=$ELEVENLABS_API_KEY" >> .env

@@ -481,10 +481,13 @@ class LLMRouter:
 
     def __init__(self) -> None:
         self.gemini_models = [
-            os.getenv("GEMINI_MODEL_NAME", "gemini-3.1-flash-lite"),
-            "gemini-3.1-flash-lite",
+            os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
             "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
             "gemini-flash-latest",
+            "gemini-3.1-flash-lite",
         ]
         self.groq_models = [
             "llama-3.3-70b-versatile",
@@ -548,7 +551,21 @@ class LLMRouter:
                         return parsed
             except Exception as e:
                 err_msg = str(e)
-                if is_quota_error(e) or "resourceexhausted" in err_msg.lower() or "429" in err_msg:
+                msg_lower = err_msg.lower()
+                is_model_specific = (
+                    "model:" in msg_lower
+                    or "quota_dimensions" in msg_lower
+                    or "limit: 500" in msg_lower
+                    or "limit: 20" in msg_lower
+                    or "404" in msg_lower
+                )
+                if is_model_specific:
+                    logger.warning(
+                        f"⚠️ [LLMRouter] Model-specific quota exceeded on '{model_name}'. "
+                        f"Cascading to next available Gemini model..."
+                    )
+                    continue
+                elif is_quota_error(e) or "resourceexhausted" in msg_lower or "429" in err_msg:
                     quota_tracker.record_exhausted("gemini", f"Quota error on {model_name}: {err_msg}")
                     quota_tracker.record_exhausted("gemini_vision", f"Quota error on {model_name}: {err_msg}")
                     logger.warning(f"🚫 [LLMRouter] Gemini quota exhausted on '{model_name}'. Breaking Gemini cascade.")
@@ -556,9 +573,9 @@ class LLMRouter:
                 else:
                     logger.warning(f"⚠️ [LLMRouter] Gemini error on '{model_name}': {e}. Trying next model...")
 
-        # If all Gemini models failed in this attempt, mark exhausted
-        quota_tracker.record_exhausted("gemini", "All Gemini models failed")
-        quota_tracker.record_exhausted("gemini_vision", "All Gemini models failed")
+        # If all Gemini models failed or were exhausted in this attempt, mark exhausted
+        quota_tracker.record_exhausted("gemini", "All Gemini models failed or exhausted")
+        quota_tracker.record_exhausted("gemini_vision", "All Gemini models failed or exhausted")
         return None
 
     def call_groq(self, prompt: str) -> Optional[Dict[str, Any]]:
