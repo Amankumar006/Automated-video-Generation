@@ -1,0 +1,1845 @@
+{
+  "id": "revit_depth_programmed_experts",
+  "title": "reViT: Recurrent Vision Transformers with Depth-Programmed Experts",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_moe",
+  "hook_tag": "MEMORY COLLAPSE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do 50% of your GPU cycles waste compute before reViT fixes the bottleneck?",
+      "visual_focus": "A tower of identical blocks collapsing into a single, glowing unit.",
+      "highlight_words": {
+        "one block": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Recurrent architecture",
+        "action_verb": "shatters",
+        "direct_object": "redundant layers",
+        "anchor_word": "stack",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE REDUNDANCY TRAP",
+        "sub": "Why store what you can compute?",
+        "accent_color": "#EF4444",
+        "params": {
+          "col_a_title": "Standard ViT-B (Dense)",
+          "col_a_stat": "86M Params",
+          "col_b_title": "Naive Recurrent ViT",
+          "col_b_stat": "22M Params",
+          "col_a_specs": [
+            "12 Unshared Physical FFNs",
+            "70% Weight Redundancy",
+            "Excessive VRAM Footprint"
+          ],
+          "col_b_specs": [
+            "1 Shared Physical Block",
+            "Severe Expressivity Loss",
+            "Degraded Accuracy"
+          ]
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 73,
+      "hook_band": "STRONG",
+      "hook_formula": "The Question",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE REDUNDANCY TRAP",
+        "sub": "Why store what you can compute?",
+        "accent_color": "#EF4444",
+        "col_a_title": "Standard ViT-B (Dense)",
+        "col_a_stat": "86M Params",
+        "col_b_title": "Naive Recurrent ViT",
+        "col_b_stat": "22M Params",
+        "col_a_specs": [
+          "12 Unshared Physical FFNs",
+          "70% Weight Redundancy",
+          "Excessive VRAM Footprint"
+        ],
+        "col_b_specs": [
+          "1 Shared Physical Block",
+          "Severe Expressivity Loss",
+          "Degraded Accuracy"
+        ]
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 4.86,
+      "duration": 4.86,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.01,
+          "end": 0.17,
+          "duration": 0.16,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.335,
+          "duration": 0.165,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "50%",
+          "clean_word": "50",
+          "phonemes": "f\u02c8\u026afti",
+          "start": 0.335,
+          "end": 0.635,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.295
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 0.635,
+          "end": 0.805,
+          "duration": 0.17,
+          "frame_ahead_trigger": 0.595
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.805,
+          "end": 0.91,
+          "duration": 0.105,
+          "frame_ahead_trigger": 0.765
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 0.91,
+          "end": 1.49,
+          "duration": 0.58,
+          "frame_ahead_trigger": 0.87
+        },
+        {
+          "word": "cycles",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 1.49,
+          "end": 1.885,
+          "duration": 0.395,
+          "frame_ahead_trigger": 1.45
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 1.885,
+          "end": 2.22,
+          "duration": 0.335,
+          "frame_ahead_trigger": 1.845
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 2.22,
+          "end": 2.63,
+          "duration": 0.41,
+          "frame_ahead_trigger": 2.18
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 2.63,
+          "end": 2.98,
+          "duration": 0.35,
+          "frame_ahead_trigger": 2.59
+        },
+        {
+          "word": "reViT",
+          "clean_word": "revit",
+          "phonemes": "\u0279\u02cci\u02d0 v\u02c8a\u026a t\u02c8i\u02d0",
+          "start": 2.98,
+          "end": 3.79,
+          "duration": 0.81,
+          "frame_ahead_trigger": 2.94
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 3.79,
+          "end": 4.125,
+          "duration": 0.335,
+          "frame_ahead_trigger": 3.75
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.125,
+          "end": 4.149,
+          "duration": 0.024,
+          "frame_ahead_trigger": 4.085
+        },
+        {
+          "word": "bottleneck?",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 4.149,
+          "end": 4.685,
+          "duration": 0.536,
+          "frame_ahead_trigger": 4.109
+        }
+      ],
+      "audio_duration": 4.86,
+      "slot_duration": 5.01
+    },
+    {
+      "beat_id": 2,
+      "text": "Static depth is the villain. You pay the full parameter cost for every layer, bloating your model into a storage nightmare.",
+      "visual_focus": "A massive, heavy server rack struggling under the weight of redundant weight matrices.",
+      "highlight_words": {
+        "storage nightmare": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Static depth",
+        "action_verb": "drains",
+        "direct_object": "memory capacity",
+        "anchor_word": "bloating",
+        "semantic_role": "problem_definition"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE WEIGHT PENALTY",
+        "sub": "Static depth = wasted parameters",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Early Edge Latents (Depth 1)",
+          "stream_b_label": "High-Order Semantic Latents (Depth 12)",
+          "barrier_label": "Static FFN Parameter Barrier",
+          "barrier_sub": "Rigid single-weight bottleneck forbids layer specialization"
+        }
+      },
+      "thriller_role": "villain_and_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE WEIGHT PENALTY",
+        "sub": "Static depth = wasted parameters",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Early Edge Latents (Depth 1)",
+        "stream_b_label": "High-Order Semantic Latents (Depth 12)",
+        "barrier_label": "Static FFN Parameter Barrier",
+        "barrier_sub": "Rigid single-weight bottleneck forbids layer specialization"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.01,
+      "end": 10.8,
+      "duration": 5.78,
+      "word_timings": [
+        {
+          "word": "Static",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 5.024,
+          "end": 5.434,
+          "duration": 0.41,
+          "frame_ahead_trigger": 5.134
+        },
+        {
+          "word": "depth",
+          "clean_word": "depth",
+          "phonemes": "d\u02c8\u025bp\u03b8",
+          "start": 5.434,
+          "end": 5.659,
+          "duration": 0.225,
+          "frame_ahead_trigger": 5.544
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.659,
+          "end": 5.869,
+          "duration": 0.21,
+          "frame_ahead_trigger": 5.769
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.869,
+          "end": 5.873,
+          "duration": 0.004,
+          "frame_ahead_trigger": 5.979
+        },
+        {
+          "word": "villain.",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.873,
+          "end": 6.191,
+          "duration": 0.318,
+          "frame_ahead_trigger": 5.983
+        },
+        {
+          "word": "You",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 6.191,
+          "end": 6.351,
+          "duration": 0.159,
+          "frame_ahead_trigger": 6.301
+        },
+        {
+          "word": "pay",
+          "clean_word": "pay",
+          "phonemes": "p\u02c8e\u026a",
+          "start": 6.351,
+          "end": 6.649,
+          "duration": 0.298,
+          "frame_ahead_trigger": 6.461
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 6.649,
+          "end": 6.669,
+          "duration": 0.02,
+          "frame_ahead_trigger": 6.759
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 6.669,
+          "end": 6.799,
+          "duration": 0.13,
+          "frame_ahead_trigger": 6.779
+        },
+        {
+          "word": "parameter",
+          "clean_word": "parameter",
+          "phonemes": "p\u025a\u0279\u02c8\u00e6m\u026a\u027e\u025a",
+          "start": 6.799,
+          "end": 7.379,
+          "duration": 0.58,
+          "frame_ahead_trigger": 6.909
+        },
+        {
+          "word": "cost",
+          "clean_word": "cost",
+          "phonemes": "k\u02c8\u0254st",
+          "start": 7.379,
+          "end": 7.634,
+          "duration": 0.255,
+          "frame_ahead_trigger": 7.489
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 7.634,
+          "end": 7.749,
+          "duration": 0.115,
+          "frame_ahead_trigger": 7.744
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 7.749,
+          "end": 8.059,
+          "duration": 0.31,
+          "frame_ahead_trigger": 7.859
+        },
+        {
+          "word": "layer,",
+          "clean_word": "layer",
+          "phonemes": "l\u02c8e\u026a\u025a",
+          "start": 8.059,
+          "end": 8.324,
+          "duration": 0.265,
+          "frame_ahead_trigger": 8.169
+        },
+        {
+          "word": "bloating",
+          "clean_word": "bloating",
+          "phonemes": "bl\u02c8o\u028a\u027e\u026a\u014b",
+          "start": 8.324,
+          "end": 8.819,
+          "duration": 0.495,
+          "frame_ahead_trigger": 8.434
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 8.819,
+          "end": 9.004,
+          "duration": 0.185,
+          "frame_ahead_trigger": 8.929
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 9.004,
+          "end": 9.349,
+          "duration": 0.345,
+          "frame_ahead_trigger": 9.114
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 9.349,
+          "end": 9.514,
+          "duration": 0.165,
+          "frame_ahead_trigger": 9.459
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.514,
+          "end": 9.674,
+          "duration": 0.16,
+          "frame_ahead_trigger": 9.624
+        },
+        {
+          "word": "storage",
+          "clean_word": "storage",
+          "phonemes": "st\u02c8\u0254\u02d0\u0279\u026ad\u0292",
+          "start": 9.674,
+          "end": 10.224,
+          "duration": 0.55,
+          "frame_ahead_trigger": 9.784
+        },
+        {
+          "word": "nightmare.",
+          "clean_word": "nightmare",
+          "phonemes": "n\u02c8a\u026atm\u025b\u0279",
+          "start": 10.224,
+          "end": 10.649,
+          "duration": 0.425,
+          "frame_ahead_trigger": 10.334
+        }
+      ],
+      "audio_duration": 5.78,
+      "slot_duration": 5.94
+    },
+    {
+      "beat_id": 3,
+      "text": "ReViT ditches the stack. It uses a single recurrent block that morphs its internal logic based on a depth coordinate.",
+      "visual_focus": "A single block shifting colors and shapes as a depth slider moves.",
+      "highlight_words": {
+        "recurrent block": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "ReViT",
+        "action_verb": "morphs",
+        "direct_object": "internal logic",
+        "anchor_word": "recurrent",
+        "semantic_role": "solution_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "REVIT ARCHITECTURE",
+        "sub": "A single block shifting colors and shapes as a depth slider moves",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.png",
+          "arxiv_id": "2610.12448",
+          "title": "REVIT ARCHITECTURE",
+          "sub": "A single block shifting colors and shapes as a depth slider moves",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Method V5B",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.png",
+        "arxiv_id": "2610.12448",
+        "title": "REVIT ARCHITECTURE",
+        "sub": "A single block shifting colors and shapes as a depth slider moves",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Method V5B",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 10.95,
+      "end": 17.37,
+      "duration": 6.42,
+      "word_timings": [
+        {
+          "word": "ReViT",
+          "clean_word": "revit",
+          "phonemes": "\u0279\u02cci\u02d0 v\u02c8a\u026a t\u02c8i\u02d0",
+          "start": 10.96,
+          "end": 11.65,
+          "duration": 0.69,
+          "frame_ahead_trigger": 11.22
+        },
+        {
+          "word": "ditches",
+          "clean_word": "ditches",
+          "phonemes": "d\u02c8\u026at\u0283\u1d7bz",
+          "start": 11.65,
+          "end": 11.985,
+          "duration": 0.335,
+          "frame_ahead_trigger": 11.91
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 11.985,
+          "end": 12.165,
+          "duration": 0.18,
+          "frame_ahead_trigger": 12.245
+        },
+        {
+          "word": "stack.",
+          "clean_word": "stack",
+          "phonemes": "st\u02c8\u00e6k",
+          "start": 12.165,
+          "end": 12.385,
+          "duration": 0.22,
+          "frame_ahead_trigger": 12.425
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 12.385,
+          "end": 12.487,
+          "duration": 0.102,
+          "frame_ahead_trigger": 12.645
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 12.487,
+          "end": 12.83,
+          "duration": 0.343,
+          "frame_ahead_trigger": 12.747
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 12.83,
+          "end": 13.105,
+          "duration": 0.275,
+          "frame_ahead_trigger": 13.09
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 13.105,
+          "end": 13.405,
+          "duration": 0.3,
+          "frame_ahead_trigger": 13.365
+        },
+        {
+          "word": "recurrent",
+          "clean_word": "recurrent",
+          "phonemes": "\u0279\u1d7bk\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 13.405,
+          "end": 13.895,
+          "duration": 0.49,
+          "frame_ahead_trigger": 13.665
+        },
+        {
+          "word": "block",
+          "clean_word": "block",
+          "phonemes": "bl\u02c8\u0251\u02d0k",
+          "start": 13.895,
+          "end": 14.225,
+          "duration": 0.33,
+          "frame_ahead_trigger": 14.155
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 14.225,
+          "end": 14.37,
+          "duration": 0.145,
+          "frame_ahead_trigger": 14.485
+        },
+        {
+          "word": "morphs",
+          "clean_word": "morphs",
+          "phonemes": "m\u02c8\u0254\u02d0\u0279fz",
+          "start": 14.37,
+          "end": 14.71,
+          "duration": 0.34,
+          "frame_ahead_trigger": 14.63
+        },
+        {
+          "word": "its",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 14.71,
+          "end": 14.955,
+          "duration": 0.245,
+          "frame_ahead_trigger": 14.97
+        },
+        {
+          "word": "internal",
+          "clean_word": "internal",
+          "phonemes": "\u026ant\u02c8\u025c\u02d0n\u0259l",
+          "start": 14.955,
+          "end": 15.335,
+          "duration": 0.38,
+          "frame_ahead_trigger": 15.215
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 15.335,
+          "end": 15.7,
+          "duration": 0.365,
+          "frame_ahead_trigger": 15.595
+        },
+        {
+          "word": "based",
+          "clean_word": "based",
+          "phonemes": "b\u02c8e\u026ast",
+          "start": 15.7,
+          "end": 16.105,
+          "duration": 0.405,
+          "frame_ahead_trigger": 15.96
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 16.105,
+          "end": 16.202,
+          "duration": 0.097,
+          "frame_ahead_trigger": 16.365
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.202,
+          "end": 16.345,
+          "duration": 0.143,
+          "frame_ahead_trigger": 16.462
+        },
+        {
+          "word": "depth",
+          "clean_word": "depth",
+          "phonemes": "d\u02c8\u025bp\u03b8",
+          "start": 16.345,
+          "end": 16.56,
+          "duration": 0.215,
+          "frame_ahead_trigger": 16.605
+        },
+        {
+          "word": "coordinate.",
+          "clean_word": "coordinate",
+          "phonemes": "ko\u028a\u02c8\u0254\u02d0\u0279d\u1d7bn\u0259t",
+          "start": 16.56,
+          "end": 17.22,
+          "duration": 0.66,
+          "frame_ahead_trigger": 16.82
+        }
+      ],
+      "audio_duration": 6.42,
+      "slot_duration": 6.57
+    },
+    {
+      "beat_id": 4,
+      "text": "We store a tiny expert bank. A router blends these weights using a normalized coordinate, defining a trajectory through parameter space.",
+      "visual_focus": "A convex combination of weight matrices converging into a single active layer.",
+      "highlight_words": {
+        "expert bank": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Router",
+        "action_verb": "blends",
+        "direct_object": "expert weights",
+        "anchor_word": "trajectory",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: REVIT: RECURRENT V",
+        "sub": "A convex combination of weight matrices converging into a single ",
+        "params": {
+          "title": "KERNEL CODE: REVIT: RECURRENT V",
+          "sub": "A convex combination of weight matrices converging into a single ",
+          "filename": "depth_programmed_ffn.py",
+          "language": "python",
+          "lines": [
+            "def get_depth_ffn(t_norm, expert_bank, router):",
+            "alpha = torch.softmax(router(t_norm), dim=-1)",
+            "merged_w1 = torch.einsum('k,koi->oi', alpha, expert_bank.w1)",
+            "merged_w2 = torch.einsum('k,koi->oi', alpha, expert_bank.w2)",
+            "return FusedFFN(merged_w1, merged_w2)"
+          ],
+          "highlight_lines": [
+            2,
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 CONVEX WEIGHT-SPACE FUSION AT DEPTH t",
+          "delta_badge": "Weight-space merging beats token dispatch and output"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: REVIT: RECURRENT V",
+        "sub": "A convex combination of weight matrices converging into a single ",
+        "filename": "depth_programmed_ffn.py",
+        "language": "python",
+        "lines": [
+          "def get_depth_ffn(t_norm, expert_bank, router):",
+          "alpha = torch.softmax(router(t_norm), dim=-1)",
+          "merged_w1 = torch.einsum('k,koi->oi', alpha, expert_bank.w1)",
+          "merged_w2 = torch.einsum('k,koi->oi', alpha, expert_bank.w2)",
+          "return FusedFFN(merged_w1, merged_w2)"
+        ],
+        "highlight_lines": [
+          2,
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 CONVEX WEIGHT-SPACE FUSION AT DEPTH t",
+        "delta_badge": "Weight-space merging beats token dispatch and output"
+      },
+      "start": 17.52,
+      "end": 24.51,
+      "duration": 7.0,
+      "word_timings": [
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 17.527,
+          "end": 17.687,
+          "duration": 0.16,
+          "frame_ahead_trigger": 17.937
+        },
+        {
+          "word": "store",
+          "clean_word": "store",
+          "phonemes": "st\u02c8\u0254\u02d0\u0279",
+          "start": 17.687,
+          "end": 17.997,
+          "duration": 0.31,
+          "frame_ahead_trigger": 18.097
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 17.997,
+          "end": 18.082,
+          "duration": 0.085,
+          "frame_ahead_trigger": 18.407
+        },
+        {
+          "word": "tiny",
+          "clean_word": "tiny",
+          "phonemes": "t\u02c8a\u026ani",
+          "start": 18.082,
+          "end": 18.437,
+          "duration": 0.355,
+          "frame_ahead_trigger": 18.492
+        },
+        {
+          "word": "expert",
+          "clean_word": "expert",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0t",
+          "start": 18.437,
+          "end": 18.742,
+          "duration": 0.305,
+          "frame_ahead_trigger": 18.847
+        },
+        {
+          "word": "bank.",
+          "clean_word": "bank",
+          "phonemes": "b\u02c8\u00e6\u014bk",
+          "start": 18.742,
+          "end": 19.087,
+          "duration": 0.345,
+          "frame_ahead_trigger": 19.152
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 19.087,
+          "end": 19.238,
+          "duration": 0.151,
+          "frame_ahead_trigger": 19.497
+        },
+        {
+          "word": "router",
+          "clean_word": "router",
+          "phonemes": "\u0279\u02c8a\u028a\u027e\u025a",
+          "start": 19.238,
+          "end": 19.497,
+          "duration": 0.259,
+          "frame_ahead_trigger": 19.648
+        },
+        {
+          "word": "blends",
+          "clean_word": "blends",
+          "phonemes": "bl\u02c8\u025bndz",
+          "start": 19.497,
+          "end": 19.857,
+          "duration": 0.36,
+          "frame_ahead_trigger": 19.907
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 19.857,
+          "end": 20.147,
+          "duration": 0.29,
+          "frame_ahead_trigger": 20.267
+        },
+        {
+          "word": "weights",
+          "clean_word": "weights",
+          "phonemes": "w\u02c8e\u026ats",
+          "start": 20.147,
+          "end": 20.357,
+          "duration": 0.21,
+          "frame_ahead_trigger": 20.557
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 20.357,
+          "end": 20.857,
+          "duration": 0.5,
+          "frame_ahead_trigger": 20.767
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 20.857,
+          "end": 21.012,
+          "duration": 0.155,
+          "frame_ahead_trigger": 21.267
+        },
+        {
+          "word": "normalized",
+          "clean_word": "normalized",
+          "phonemes": "n\u02c8\u0254\u02d0\u0279m\u0259l\u02cca\u026azd",
+          "start": 21.012,
+          "end": 21.657,
+          "duration": 0.645,
+          "frame_ahead_trigger": 21.422
+        },
+        {
+          "word": "coordinate,",
+          "clean_word": "coordinate",
+          "phonemes": "ko\u028a\u02c8\u0254\u02d0\u0279d\u1d7bn\u0259t",
+          "start": 21.657,
+          "end": 22.207,
+          "duration": 0.55,
+          "frame_ahead_trigger": 22.067
+        },
+        {
+          "word": "defining",
+          "clean_word": "defining",
+          "phonemes": "d\u1d7bf\u02c8a\u026an\u026a\u014b",
+          "start": 22.207,
+          "end": 22.752,
+          "duration": 0.545,
+          "frame_ahead_trigger": 22.617
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 22.752,
+          "end": 22.811,
+          "duration": 0.059,
+          "frame_ahead_trigger": 23.162
+        },
+        {
+          "word": "trajectory",
+          "clean_word": "trajectory",
+          "phonemes": "t\u0279\u0259d\u0292\u02c8\u025bkt\u025a\u0279i",
+          "start": 22.811,
+          "end": 23.332,
+          "duration": 0.521,
+          "frame_ahead_trigger": 23.221
+        },
+        {
+          "word": "through",
+          "clean_word": "through",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
+          "start": 23.332,
+          "end": 23.617,
+          "duration": 0.285,
+          "frame_ahead_trigger": 23.742
+        },
+        {
+          "word": "parameter",
+          "clean_word": "parameter",
+          "phonemes": "p\u025a\u0279\u02c8\u00e6m\u026a\u027e\u025a",
+          "start": 23.617,
+          "end": 24.067,
+          "duration": 0.45,
+          "frame_ahead_trigger": 24.027
+        },
+        {
+          "word": "space.",
+          "clean_word": "space",
+          "phonemes": "sp\u02c8e\u026as",
+          "start": 24.067,
+          "end": 24.422,
+          "duration": 0.355,
+          "frame_ahead_trigger": 24.477
+        }
+      ],
+      "audio_duration": 7.0,
+      "slot_duration": 7.14
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 70% fewer parameters with zero accuracy loss, matching DeiT III while fitting comfortably in your pocket.",
+      "visual_focus": "A bar chart showing massive parameter reduction vs. stable accuracy metrics.",
+      "highlight_words": {
+        "70% fewer": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "ReViT",
+        "action_verb": "matches",
+        "direct_object": "DeiT III accuracy",
+        "anchor_word": "victory",
+        "semantic_role": "empirical_proof"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: STORAGE VS ACCURACY",
+        "sub": "A bar chart showing massive parameter reduction vs.",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: STORAGE VS ACCURACY",
+          "sub": "A bar chart showing massive parameter reduction vs.",
+          "metric_name": "Stored Parameters",
+          "unit": "M Params",
+          "contestants": [
+            {
+              "name": "reViT-B/16 (Ours)",
+              "value": 26.0,
+              "display_val": "26M (83.8% Acc)",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "DeiT III-B/16 Baseline",
+              "value": 86.0,
+              "display_val": "86M (83.8% Acc)",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "DINOv2-B/16 Reference",
+              "value": 86.0,
+              "display_val": "86M (Distill Ref)",
+              "is_hero": false,
+              "color": "#A855F7"
+            },
+            {
+              "name": "Naive Recurrent ViT",
+              "value": 22.0,
+              "display_val": "22M (78.2% Acc)",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 3.3x PARAMETER COMPRESSION"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: STORAGE VS ACCURACY",
+        "sub": "A bar chart showing massive parameter reduction vs.",
+        "metric_name": "Stored Parameters",
+        "unit": "M Params",
+        "contestants": [
+          {
+            "name": "reViT-B/16 (Ours)",
+            "value": 26.0,
+            "display_val": "26M (83.8% Acc)",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "DeiT III-B/16 Baseline",
+            "value": 86.0,
+            "display_val": "86M (83.8% Acc)",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "DINOv2-B/16 Reference",
+            "value": 86.0,
+            "display_val": "86M (Distill Ref)",
+            "is_hero": false,
+            "color": "#A855F7"
+          },
+          {
+            "name": "Naive Recurrent ViT",
+            "value": 22.0,
+            "display_val": "22M (78.2% Acc)",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 3.3x PARAMETER COMPRESSION"
+      },
+      "start": 24.66,
+      "end": 31.47,
+      "duration": 6.81,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.674,
+          "end": 24.874,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.234
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 24.874,
+          "end": 25.194,
+          "duration": 0.32,
+          "frame_ahead_trigger": 25.434
+        },
+        {
+          "word": "70%",
+          "clean_word": "70",
+          "phonemes": "s\u02c8\u025bv\u0259nti",
+          "start": 25.194,
+          "end": 25.629,
+          "duration": 0.435,
+          "frame_ahead_trigger": 25.754
+        },
+        {
+          "word": "fewer",
+          "clean_word": "fewer",
+          "phonemes": "fj\u02c8u\u02d0\u025a",
+          "start": 25.629,
+          "end": 25.969,
+          "duration": 0.34,
+          "frame_ahead_trigger": 26.189
+        },
+        {
+          "word": "parameters",
+          "clean_word": "parameters",
+          "phonemes": "p\u025a\u0279\u02c8\u00e6m\u026a\u027e\u025az",
+          "start": 25.969,
+          "end": 26.514,
+          "duration": 0.545,
+          "frame_ahead_trigger": 26.529
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 26.514,
+          "end": 26.639,
+          "duration": 0.125,
+          "frame_ahead_trigger": 27.074
+        },
+        {
+          "word": "zero",
+          "clean_word": "zero",
+          "phonemes": "z\u02c8i\u0259\u0279o\u028a",
+          "start": 26.639,
+          "end": 26.969,
+          "duration": 0.33,
+          "frame_ahead_trigger": 27.199
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 26.969,
+          "end": 27.574,
+          "duration": 0.605,
+          "frame_ahead_trigger": 27.529
+        },
+        {
+          "word": "loss,",
+          "clean_word": "loss",
+          "phonemes": "l\u02c8\u0254s",
+          "start": 27.574,
+          "end": 27.754,
+          "duration": 0.18,
+          "frame_ahead_trigger": 28.134
+        },
+        {
+          "word": "matching",
+          "clean_word": "matching",
+          "phonemes": "m\u02c8\u00e6t\u0283\u026a\u014b",
+          "start": 27.754,
+          "end": 28.074,
+          "duration": 0.32,
+          "frame_ahead_trigger": 28.314
+        },
+        {
+          "word": "DeiT",
+          "clean_word": "deit",
+          "phonemes": "d\u02c8e\u026a t\u02c8i\u02d0",
+          "start": 28.074,
+          "end": 28.699,
+          "duration": 0.625,
+          "frame_ahead_trigger": 28.634
+        },
+        {
+          "word": "III",
+          "clean_word": "iii",
+          "phonemes": "\u0279\u02cco\u028am\u0259n \u03b8\u0279\u02c8i\u02d0",
+          "start": 28.699,
+          "end": 29.413,
+          "duration": 0.714,
+          "frame_ahead_trigger": 29.259
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 29.413,
+          "end": 29.784,
+          "duration": 0.371,
+          "frame_ahead_trigger": 29.973
+        },
+        {
+          "word": "fitting",
+          "clean_word": "fitting",
+          "phonemes": "f\u02c8\u026a\u027e\u026a\u014b",
+          "start": 29.784,
+          "end": 29.994,
+          "duration": 0.21,
+          "frame_ahead_trigger": 30.344
+        },
+        {
+          "word": "comfortably",
+          "clean_word": "comfortably",
+          "phonemes": "k\u02c8\u028cmft\u0259bli",
+          "start": 29.994,
+          "end": 30.619,
+          "duration": 0.625,
+          "frame_ahead_trigger": 30.554
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 30.619,
+          "end": 30.804,
+          "duration": 0.185,
+          "frame_ahead_trigger": 31.179
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 30.804,
+          "end": 30.969,
+          "duration": 0.165,
+          "frame_ahead_trigger": 31.364
+        },
+        {
+          "word": "pocket.",
+          "clean_word": "pocket",
+          "phonemes": "p\u02c8\u0251\u02d0k\u026at",
+          "start": 30.969,
+          "end": 31.309,
+          "duration": 0.34,
+          "frame_ahead_trigger": 31.529
+        }
+      ],
+      "audio_duration": 6.81,
+      "slot_duration": 6.96
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse to see how we break the memory wall. What layer will we collapse next?",
+      "visual_focus": "The model architecture folding into a single, elegant point.",
+      "highlight_words": {
+        "memory wall": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "collapses",
+        "direct_object": "the memory wall",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE NEXT COLLAPSE",
+        "sub": "Subscribe for more",
+        "accent_color": "#38BDF8",
+        "params": {
+          "input_label": "Single reViT Checkpoint",
+          "router_label": "Normalized Coordinate Resampler",
+          "branch_a_label": "Edge Deployment (6 Passes)",
+          "branch_a_sub": "0.5x FLOPs / Low Latency",
+          "branch_b_label": "Server Deployment (16 Passes)",
+          "branch_b_sub": "1.3x FLOPs / Maximum Fidelity"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 31.62,
+      "end": 36.23,
+      "duration": 4.61,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 31.679,
+          "end": 31.964,
+          "duration": 0.285,
+          "frame_ahead_trigger": 32.389
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 31.964,
+          "end": 32.159,
+          "duration": 0.195,
+          "frame_ahead_trigger": 32.674
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 32.159,
+          "end": 32.527,
+          "duration": 0.368,
+          "frame_ahead_trigger": 32.869
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 32.527,
+          "end": 32.789,
+          "duration": 0.262,
+          "frame_ahead_trigger": 33.237
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 32.789,
+          "end": 33.069,
+          "duration": 0.28,
+          "frame_ahead_trigger": 33.499
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 33.069,
+          "end": 33.163,
+          "duration": 0.093,
+          "frame_ahead_trigger": 33.779
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 33.163,
+          "end": 33.274,
+          "duration": 0.112,
+          "frame_ahead_trigger": 33.873
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 33.274,
+          "end": 33.489,
+          "duration": 0.215,
+          "frame_ahead_trigger": 33.984
+        },
+        {
+          "word": "break",
+          "clean_word": "break",
+          "phonemes": "b\u0279\u02c8e\u026ak",
+          "start": 33.489,
+          "end": 33.964,
+          "duration": 0.475,
+          "frame_ahead_trigger": 34.199
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.964,
+          "end": 33.957,
+          "duration": -0.007,
+          "frame_ahead_trigger": 34.674
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 33.957,
+          "end": 34.328,
+          "duration": 0.371,
+          "frame_ahead_trigger": 34.667
+        },
+        {
+          "word": "wall.",
+          "clean_word": "wall",
+          "phonemes": "w\u02c8\u0254\u02d0l",
+          "start": 34.328,
+          "end": 34.579,
+          "duration": 0.251,
+          "frame_ahead_trigger": 35.038
+        },
+        {
+          "word": "What",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 34.579,
+          "end": 34.744,
+          "duration": 0.165,
+          "frame_ahead_trigger": 35.289
+        },
+        {
+          "word": "layer",
+          "clean_word": "layer",
+          "phonemes": "l\u02c8e\u026a\u025a",
+          "start": 34.744,
+          "end": 35.069,
+          "duration": 0.325,
+          "frame_ahead_trigger": 35.454
+        },
+        {
+          "word": "will",
+          "clean_word": "will",
+          "phonemes": "w\u02c8\u026al",
+          "start": 35.069,
+          "end": 35.284,
+          "duration": 0.215,
+          "frame_ahead_trigger": 35.779
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 35.284,
+          "end": 35.409,
+          "duration": 0.125,
+          "frame_ahead_trigger": 35.994
+        },
+        {
+          "word": "collapse",
+          "clean_word": "collapse",
+          "phonemes": "k\u0259l\u02c8\u00e6ps",
+          "start": 35.409,
+          "end": 35.924,
+          "duration": 0.515,
+          "frame_ahead_trigger": 36.119
+        },
+        {
+          "word": "next?",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 35.924,
+          "end": 36.129,
+          "duration": 0.205,
+          "frame_ahead_trigger": 36.634
+        }
+      ],
+      "audio_duration": 4.61,
+      "slot_duration": 4.61
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{M}_{\\mathrm{dense}} = \\{ \\Theta_l \\}_{l=1}^{12}, \\quad \\sum_{l=1}^{12} |\\Theta_l| = 86 \\times 10^6$",
+      "filename": "revit_depth_programmed_experts_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\Theta_l",
+          "label": "Layer-Specific Weight Tensors"
+        },
+        {
+          "term": "86 \\times 10^6",
+          "label": "Monolithic Parameter Count"
+        }
+      ],
+      "svg_filename": "revit_depth_programmed_experts_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{z}_{l} = \\mathrm{Block}(\\mathbf{z}_{l-1}; \\Theta_{\\mathrm{static}}) \\implies \\mathrm{Rank}(\\mathbf{z}_L) \\ll \\mathrm{Rank}_{\\mathrm{dense}}$",
+      "filename": "revit_depth_programmed_experts_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\Theta_{\\mathrm{static}}",
+          "label": "Inflexible Reused Parameters"
+        },
+        {
+          "term": "\\mathrm{Rank}(\\mathbf{z}_L)",
+          "label": "Collapsed Feature Expressivity"
+        }
+      ],
+      "svg_filename": "revit_depth_programmed_experts_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{W}_{\\mathrm{FFN}}(t) = \\sum_{k=1}^K \\alpha_k(t) \\mathbf{E}_k, \\quad t = \\frac{l-1}{L-1} \\in [0, 1]$",
+      "filename": "revit_depth_programmed_experts_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "t",
+          "label": "Normalized Continuous Depth"
+        },
+        {
+          "term": "\\mathbf{E}_k",
+          "label": "Shared Physical Expert Bank"
+        }
+      ],
+      "svg_filename": "revit_depth_programmed_experts_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\boldsymbol{\\alpha}(t) = \\mathrm{Softmax}(\\mathbf{W}_g \\phi(t)), \\quad \\sum_{k=1}^8 \\alpha_k(t) = 1$",
+      "filename": "revit_depth_programmed_experts_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\boldsymbol{\\alpha}(t)",
+          "label": "Convex Merging Coefficients"
+        },
+        {
+          "term": "\\phi(t)",
+          "label": "Coordinate Positional Basis"
+        }
+      ],
+      "svg_filename": "revit_depth_programmed_experts_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\Theta_{\\mathrm{storage}} = -70.4\\%, \\quad \\mathrm{Top1}(\\mathrm{reViT}) = 83.8\\% \\approx \\mathrm{Top1}(\\mathrm{DeiT\\text{-}III})$",
+      "filename": "revit_depth_programmed_experts_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "-70.4\\%",
+          "label": "Stored Parameter Reduction"
+        },
+        {
+          "term": "83.8\\%",
+          "label": "Matched ImageNet-1k Accuracy"
+        }
+      ],
+      "svg_filename": "revit_depth_programmed_experts_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 4.8,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 12.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 20.4,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 28.6,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 36.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Expert Bank",
+          "color": "#38BDF8",
+          "items": [
+            "Expert 1",
+            "Expert 4",
+            "Expert 8"
+          ]
+        },
+        {
+          "name": "Weight Trajectory",
+          "color": "#10B981",
+          "items": [
+            "t=0.0 Initial",
+            "t=0.5 Mid-Layer",
+            "t=1.0 Semantic"
+          ]
+        },
+        {
+          "name": "Recurrent Loop",
+          "color": "#F59E0B",
+          "items": [
+            "Pass 1",
+            "Pass 6",
+            "Pass 12"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Depth Coordinate: t=0.42",
+        "target_cluster": "Weight Trajectory",
+        "token": "t=0.42"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Dense ViT 86M Storage",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token-Dispatch FLOP Penalty",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "reViT-B/16 (Ours)",
+    "model_a_specs": [
+      "1 Recurrent Transformer Block",
+      "8-Expert Depth-Programmed Bank",
+      "26M Stored Parameters"
+    ],
+    "model_b": "DeiT III-B / DINOv2 Teacher",
+    "model_b_specs": [
+      "12 Statically Unrolled Layers",
+      "12 Separate Dense FFNs",
+      "86M Stored Parameters"
+    ],
+    "divide_title": "WEIGHT-SPACE MERGING VS DENSE STACK",
+    "model_a_stat": "26M",
+    "model_a_stat_label": "STORED PARAMETERS (-70%)",
+    "model_b_stat": "86M",
+    "model_b_stat_label": "STANDARD DENSE FOOTPRINT",
+    "efficiency_badge": "\u26a1 -70% PARAMS AT MATCHED ACCURACY",
+    "benchmarks": [
+      {
+        "name": "ImageNet-1k Top-1",
+        "score_a": "83.8%",
+        "score_b": "83.8%"
+      },
+      {
+        "name": "Stored Weight Footprint",
+        "score_a": "26M",
+        "score_b": "86M"
+      },
+      {
+        "name": "DINOv2 Linear Probe Retained",
+        "score_a": "~100%",
+        "score_b": "Teacher Ref"
+      }
+    ],
+    "scale_metric": "70%",
+    "scale_label": "Stored Parameter Reduction",
+    "bottleneck_title": "RECURRENT EXPRESSIVITY COLLAPSE",
+    "bottleneck_desc": "Static Weights Starve High-Depth Transformations",
+    "solution_title": "DEPTH-PROGRAMMED WEIGHT MERGING",
+    "solution_components": "Continuous Depth Coordinate & 8 Shared Experts",
+    "mechanism_title": "CONVEX PARAMETER TRAJECTORY INTERPOLATION",
+    "payoff_stat": "-70%",
+    "payoff_label": "STORAGE FOOTPRINT SAVED",
+    "payoff_sub": "Matching DeiT-III and DINOv2 downstream vision accuracy",
+    "payoff_hero_stat": 83.8,
+    "payoff_hero_label": "reViT-B/16 (26M Params)",
+    "payoff_base_stat": 83.8,
+    "payoff_base_label": "DeiT III-B/16 (86M Params)",
+    "payoff_delta_badge": "\u26a1 IDENTICAL ACCURACY WITH 3.3x LESS STORAGE",
+    "challenger": "reViT-B/16",
+    "incumbent": "DeiT III-B / DINOv2-B"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: STORAGE VS ACCURACY",
+    "metric_name": "Stored Parameters",
+    "unit": "M Params",
+    "contestants": [
+      {
+        "name": "reViT-B/16 (Ours)",
+        "value": 26.0,
+        "display_val": "26M (83.8% Acc)",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "DeiT III-B/16 Baseline",
+        "value": 86.0,
+        "display_val": "86M (83.8% Acc)",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "DINOv2-B/16 Reference",
+        "value": 86.0,
+        "display_val": "86M (Distill Ref)",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Naive Recurrent ViT",
+        "value": 22.0,
+        "display_val": "22M (78.2% Acc)",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 3.3x PARAMETER COMPRESSION",
+    "radar_axes": [
+      "ImageNet Accuracy",
+      "Storage Efficiency",
+      "FLOP Efficiency",
+      "Transfer Versatility",
+      "Elastic Scalability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "depth_programmed_ffn.py",
+    "language": "python",
+    "lines": [
+      "def get_depth_ffn(t_norm, expert_bank, router):",
+      "alpha = torch.softmax(router(t_norm), dim=-1)",
+      "merged_w1 = torch.einsum('k,koi->oi', alpha, expert_bank.w1)",
+      "merged_w2 = torch.einsum('k,koi->oi', alpha, expert_bank.w2)",
+      "return FusedFFN(merged_w1, merged_w2)"
+    ],
+    "highlight_lines": [
+      2,
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 CONVEX WEIGHT-SPACE FUSION AT DEPTH t",
+    "explanation": "Weight-space merging beats token dispatch and output mixtures with zero runtime FLOP penalty"
+  },
+  "arxiv_id": "2610.12448",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "method_v5b",
+      "caption": "Method V5B",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/source/figures/method_v5b.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_1_method_v5b.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "method_v5a",
+      "caption": "Method V5A",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/source/figures/method_v5a.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_2_method_v5a.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_2_method_v5a.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "method_v6c_selector",
+      "caption": "Method V6C Selector",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/source/figures/method_v6c_selector.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_3_method_v6c_selector.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_3_method_v6c_selector.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "fig1_brand_v2_amberseq",
+      "caption": "Fig1 Brand V2 Amberseq",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/source/figures/fig1_brand_v2_amberseq.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_4_fig1_brand_v2_amberseq.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_4_fig1_brand_v2_amberseq.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "fig9_depth_adaptation",
+      "caption": "Fig9 Depth Adaptation",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/source/figures/fig9_depth_adaptation.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_5_fig9_depth_adaptation.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12448/chalkboard_figures/fig_5_fig9_depth_adaptation.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.2,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually slapped. You didn't waste my time with 'Today we're going to learn about' and you didn't treat me like a toddler with 'smart drawers' metaphors. The concept of weight reuse via a router/depth index is clear enough that I can visualize the architecture without needing a diagram. It feels like a real dev talking to another dev."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Static Depth Redundancy",
+    "physical_analogy": "A skyscraper where every floor is a carbon copy of the lobby, wasting massive structural space.",
+    "eureka_mechanism": "Depth-Programmed Expert Mixture",
+    "paradigm_shift": "Recurrent weight-space merging allows one block to simulate infinite depth."
+  },
+  "hook_gating": {
+    "selected_hook": "Why do 50% of your GPU cycles waste compute before reViT fixes the bottleneck?",
+    "verdict": 73,
+    "band": "STRONG",
+    "formula": "The Question",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 76,
+      "STAKES": 88,
+      "CURIOSITY": 76,
+      "BREVITY": 100
+    },
+    "weakest_property": "SPECIFICITY",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Why do 50% of your GPU cycles waste compute before reViT fixes the bottleneck?",
+        "verdict": 73,
+        "band": "STRONG",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Do not train your next model before you see how reViT cuts 50% of your memory waste.",
+        "verdict": 71,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Over 50% of your GPU memory is wasted before you see how reViT actually fixes it.",
+        "verdict": 70,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "This 1 breakthrough in reViT stops your GPU from wasting compute before you run out of memory.",
+        "verdict": 59,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "You are probably making the mistake of wasting compute before you test reViT.",
+        "verdict": 55,
+        "band": "WORKABLE",
+        "formula": "The Mistake"
+      },
+      {
+        "hook": "Everyone tells you your model needs more compute, but reViT proves that advice actually wrong.",
+        "verdict": 45,
+        "band": "WEAK",
+        "formula": "Contrarian Flip"
+      },
+      {
+        "hook": "Why stack dozens of identical transformer layers when one block can do the heavy lifting?",
+        "verdict": 38,
+        "band": "WEAK",
+        "formula": "The Question"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "moe_lattice",
+      "entity_type": "moe_lattice",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}
