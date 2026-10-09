@@ -10,6 +10,7 @@ from manim_engine.primitives.script_motifs import ScriptDynamicBespokeSVG, MOTIF
 
 def test_svg_synthesizer_procedural():
     synth = SVGSynthesizer()
+    synth.api_key = None  # Explicitly exercise procedural generation without network dependency
     beat = {
         "beat_id": 2,
         "text": "Imagine blending fruit into a smoothie",
