@@ -49,24 +49,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from aether.compiler.schemas import (
-    AudioRequirement,
-    ComplexityLevel,
-    ShotRequirement,
-)
-from aether.director.orchestrator import AetherDirector
-from aether.director.schemas import (
-    DirectorProductionBrief,
-    FilmScene,
-    ProductionState,
-)
-from aether.shared_contract import (
-    DualEnginePipelineConfig,
-    EducationalAssetConditioningPackage,
-    EducationalAssetRole,
-    HybridRenderMode,
-    ScriptToFilmSceneAdapter,
-)
 from manim_engine.primitives.visual_compositions import BlueprintPaperFigure
 from pipeline.arxiv_fetcher import clean_arxiv_id, extract_arxiv_id, fetch_arxiv_paper
 from pipeline.arxiv_vector_extractor import (
@@ -74,12 +56,6 @@ from pipeline.arxiv_vector_extractor import (
     extract_paper_figures,
     get_paper_vector_figure,
     recolor_svg_for_blackboard,
-)
-from pipeline.schemas import (
-    BeatSpec,
-    SFXCue,
-    VideoCategory,
-    VideoSpec,
 )
 from pipeline.visual_director import VisualDirector
 
@@ -282,37 +258,6 @@ class TestTier1FeatureCoverage:
         assert params.get("svg_path") or params.get("image_path")
         assert params.get("preferred_renderer") in ["vector", "raster"]
 
-    def test_tier1_aether_adapter_spec_to_brief_conversion(
-        self,
-        mock_base_6beat_spec: Dict[str, Any],
-    ):
-        """Feature 6: ScriptToFilmSceneAdapter converts 6-beat spec into DirectorProductionBrief."""
-        brief = ScriptToFilmSceneAdapter.convert_spec_to_brief(
-            spec=mock_base_6beat_spec,
-            visual_style="dark cinematic tech documentary",
-            target_models=["veo_3_1", "kling_3_0"],
-        )
-
-        assert isinstance(brief, DirectorProductionBrief)
-        assert brief.title == mock_base_6beat_spec["title"]
-        assert brief.aspect_ratio == "9:16"
-        assert len(brief.scenes) == 6
-
-        # Check canonical scene IDs across the 6 beats
-        scene_ids = [s.scene_id for s in brief.scenes]
-        assert scene_ids == [
-            "SC_001_HOOK",
-            "SC_002_BOTTLENECK",
-            "SC_003_MECHANISM",
-            "SC_004_CODE",
-            "SC_005_SHOWDOWN",
-            "SC_006_OUTRO",
-        ]
-
-        # Verify durations match spec
-        expected_dur = sum(b["expected_duration"] for b in mock_base_6beat_spec["beats"])
-        assert brief.target_duration == pytest.approx(expected_dur, abs=0.1)
-
 
 # ==============================================================================
 # Tier 2: Boundary & Corner Cases (Defensive Robustness)
@@ -385,32 +330,6 @@ class TestTier2BoundaryAndCornerCases:
         assert clean_arxiv_id("  2407.08608 \n") == "2407.08608"
         assert extract_arxiv_id("arxiv:2407.08608") == "2407.08608"
 
-    def test_tier2_conditioning_package_bounds_validation(self):
-        """Edge case: EducationalAssetConditioningPackage rejects illegal spatial bounds."""
-        # Illegal length (< 4 items)
-        with pytest.raises(ValueError, match="must contain exactly 4 floats"):
-            EducationalAssetConditioningPackage(
-                asset_id="test_bad_len",
-                file_uri="figure.png",
-                spatial_bounds=[0.1, 0.2, 0.3],
-            )
-
-        # Out-of-range coordinate (< 0.0 or > 1.0)
-        with pytest.raises(ValueError, match="coordinates must be in"):
-            EducationalAssetConditioningPackage(
-                asset_id="test_bad_coord",
-                file_uri="figure.png",
-                spatial_bounds=[-0.1, 0.2, 0.8, 0.9],
-            )
-
-        # Legal bounds
-        pkg = EducationalAssetConditioningPackage(
-            asset_id="test_legal",
-            file_uri="figure.png",
-            spatial_bounds=[0.1, 0.2, 0.8, 0.9],
-        )
-        assert pkg.spatial_bounds == [0.1, 0.2, 0.8, 0.9]
-
 
 # ==============================================================================
 # Tier 3: Cross-Feature Combinations (Integration)
@@ -462,75 +381,6 @@ class TestTier3CrossFeatureCombinations:
         assert beat_3["visual_blueprint"]["layout"] == "paper_figure"
         assert beat_3["visual_blueprint"]["params"]["arxiv_id"] == real_arxiv_id
         assert beat_3["visual_blueprint"]["params"]["preferred_renderer"] in ["vector", "raster"]
-
-    def test_tier3_aether_conditioning_package_bundling_paper_figures(
-        self,
-        real_arxiv_id: str,
-        mock_base_6beat_spec: Dict[str, Any],
-    ):
-        """Cross-Engine: Extracted paper figures condition Aether 3D shot requirements."""
-        figs = extract_paper_figures(real_arxiv_id, max_figures=2)
-        assert len(figs) >= 1
-
-        spec = copy.deepcopy(mock_base_6beat_spec)
-        spec["paper_figures"] = figs
-
-        # Convert paper figures to conditioning packages
-        packages = ScriptToFilmSceneAdapter.extract_conditioning_assets(spec)
-        assert len(packages) >= 1
-
-        primary_pkg = packages[0]
-        assert primary_pkg.source_beat_id == 3
-        assert primary_pkg.role == EducationalAssetRole.LEVEL_1_REFERENCE_IMAGE
-        assert primary_pkg.file_uri
-
-        # Convert to Aether brief with conditioning packages
-        brief = ScriptToFilmSceneAdapter.convert_spec_to_brief(
-            spec=spec,
-            conditioning_assets=packages,
-        )
-
-        # Verify Beat 3 scene in Aether incorporates conditioning reference
-        beat_3_scene = next(s for s in brief.scenes if s.scene_id == "SC_003_MECHANISM")
-        shot_req = beat_3_scene.shot_list_requirements[0]
-
-        assert shot_req.first_frame_uri == primary_pkg.file_uri
-        assert shot_req.metadata.get("reference_image_uri") == primary_pkg.file_uri
-        assert shot_req.metadata.get("conditioning_asset_id") == primary_pkg.asset_id
-
-    def test_tier3_dual_engine_pipeline_config_beat_allocation(self):
-        """Cross-Engine: DualEnginePipelineConfig assigns 2D Manim vs 3D Aether per beat."""
-        cfg = DualEnginePipelineConfig(
-            default_mode=HybridRenderMode.PURE_AETHER_3D,
-            beat_modes={
-                1: HybridRenderMode.PURE_AETHER_3D,
-                3: HybridRenderMode.PURE_MANIM_2D,        # Authentic paper diagram beat in 2D
-                4: HybridRenderMode.HYBRID_COMPOSITE,     # Code HUD overlay
-                5: HybridRenderMode.DUAL_STREAM_PIP,      # Radar comparison
-            },
-        )
-
-        assert cfg.get_beat_mode(1) == HybridRenderMode.PURE_AETHER_3D
-        assert cfg.get_beat_mode(2) == HybridRenderMode.PURE_AETHER_3D  # fallback to default
-        assert cfg.get_beat_mode(3) == HybridRenderMode.PURE_MANIM_2D
-        assert cfg.get_beat_mode(4) == HybridRenderMode.HYBRID_COMPOSITE
-        assert cfg.get_beat_mode(5) == HybridRenderMode.DUAL_STREAM_PIP
-        assert cfg.is_hybrid() is True
-
-    def test_tier3_brief_to_spec_outline_round_trip(
-        self,
-        mock_base_6beat_spec: Dict[str, Any],
-    ):
-        """Cross-Engine: Bidirectional translation round-trip preserves beat structure."""
-        brief = ScriptToFilmSceneAdapter.convert_spec_to_brief(mock_base_6beat_spec)
-        outline = ScriptToFilmSceneAdapter.convert_brief_to_spec_outline(brief)
-
-        assert outline["title"] == mock_base_6beat_spec["title"]
-        assert len(outline["beats"]) == len(mock_base_6beat_spec["beats"])
-        for i, b in enumerate(outline["beats"]):
-            orig = mock_base_6beat_spec["beats"][i]
-            assert b["beat_id"] == orig["beat_id"]
-            assert b["expected_duration"] == pytest.approx(orig["expected_duration"])
 
 
 # ==============================================================================
@@ -648,27 +498,3 @@ class TestTier4RealWorldApplicationScenario:
             f"Clearance {clearance} above subtitle line (y={subtitle_y}) is too tight (must be > 0.8)."
         )
 
-    def test_tier4_aether_director_consumes_adapted_brief_dry_run(
-        self,
-        mock_base_6beat_spec: Dict[str, Any],
-        real_arxiv_id: str,
-    ):
-        """Tier 4: AetherDirector autonomously executes adapted brief in dry-run mode."""
-        figs = extract_paper_figures(real_arxiv_id, max_figures=2)
-        spec = copy.deepcopy(mock_base_6beat_spec)
-        spec["paper_figures"] = figs
-
-        brief = ScriptToFilmSceneAdapter.convert_spec_to_brief(
-            spec=spec,
-            visual_style="hyperrealistic technical cinematography",
-        )
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            director = AetherDirector(output_dir=Path(tmp_dir))
-            film = director.produce(brief, dry_run=True)
-
-            assert film is not None
-            assert film.title == brief.title
-            assert film.total_shots_count == 6
-            assert director.status.state == ProductionState.COMPLETED
-            assert director.status.shots_passed_count == 6

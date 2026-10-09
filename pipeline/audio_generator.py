@@ -22,6 +22,15 @@ from pydub.silence import detect_silence
 import numpy as np
 import soundfile as sf
 
+SKILLS_YT_EDIT_DIR = PROJECT_ROOT / "skills" / "yt-edit"
+if str(SKILLS_YT_EDIT_DIR) not in sys.path:
+    sys.path.insert(0, str(SKILLS_YT_EDIT_DIR))
+
+try:
+    import deadair
+except ImportError:
+    deadair = None
+
 # Default pacing constants
 DEFAULT_DEAD_AIR_FLOOR_MS = 250.0       # Gaps > 250ms are flagged as dead air
 DEFAULT_TARGET_GAP_MS = 150.0          # Tightened to rapid momentum band (~120-180ms)
@@ -30,6 +39,11 @@ DEFAULT_MAX_MOMENTUM_GAP_MS = 180.0
 
 
 def parse_transcript_timestamp(s: str) -> float:
+    if deadair is not None:
+        try:
+            return float(deadair.parse_ts(s))
+        except Exception:
+            pass
     s = s.strip().replace(",", ".")
     p = s.split(":")
     if len(p) == 3:
@@ -42,11 +56,18 @@ def parse_transcript_timestamp(s: str) -> float:
 def load_transcript_cues(path: Union[str, Path]) -> List[Dict[str, Any]]:
     """
     Loads timestamped cues from .srt, .vtt, or Whisper .json transcripts.
-    Directly compatible with skills/yt-edit/deadair.py.
+    Directly delegates to skills/yt-edit/deadair.py for cues parsing.
     """
     p = Path(path)
     if not p.exists():
         raise FileNotFoundError(f"Transcript file not found: {p}")
+    if deadair is not None:
+        try:
+            raw_cues = deadair.load(str(p))
+            return [{"start": round(float(a), 3), "end": round(float(b), 3), "text": t} for a, b, t in raw_cues]
+        except Exception:
+            pass
+
     raw = p.read_text(encoding="utf-8", errors="replace")
     if p.suffix.lower() == ".json":
         import json

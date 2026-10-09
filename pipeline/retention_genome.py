@@ -5,6 +5,7 @@ hooks, visual blueprints, physical analogies, and pacing across generations.
 """
 
 import os
+import re
 import sys
 import json
 import datetime
@@ -246,9 +247,11 @@ class RetentionGenomeLedger:
         blueprints = self.genome.get("visual_blueprints", {})
         if layout in blueprints:
             return blueprints[layout].get("multiplier", 1.0)
-        # Check partial case-insensitive match
+        # Check partial case-insensitive match (with and without underscores/prefixes)
+        layout_norm = re.sub(r"[^a-zA-Z0-9]", "", layout).lower()
         for k, v in blueprints.items():
-            if k.lower() == layout.lower() or layout.lower() in k.lower():
+            k_norm = re.sub(r"[^a-zA-Z0-9]", "", k).lower()
+            if k_norm == layout_norm or layout_norm in k_norm or k_norm in layout_norm:
                 return v.get("multiplier", 1.0)
         return 1.0
 

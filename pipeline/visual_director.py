@@ -189,7 +189,7 @@ class VisualDirector:
 
         # Code Execution 1: Chalkboard Syntax Code Block & Live Register
         # Dedicated to Beat 3 or 4 when explaining the kernel implementation
-        if (beat_id in [3, 4] or beat_id is None) and any(k in text for k in ["function", "kernel", "algorithm", "implementation", "compile", "python", "cuda", "syntax", "source code", "snippet"]):
+        if (beat_id in [3, 4, 5] or beat_id is None) and any(k in (text + " " + topic.lower()) for k in ["function", "kernel", "algorithm", "implementation", "compile", "python", "cuda", "syntax", "source code", "snippet"]):
             candidates.append({
                 "layout": "chalkboard_code_block",
                 "title": f"KERNEL IMPLEMENTATION: {subj.upper()[:16]}",
