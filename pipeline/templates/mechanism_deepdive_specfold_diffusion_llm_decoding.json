@@ -1,0 +1,1728 @@
+{
+  "id": "specfold_diffusion_llm_decoding",
+  "title": "SpecFold: Multi-Branch Speculative Folding",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "DIFFUSION SPEEDUP",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do 1.64x of your GPU cycles waste compute before SpecFold fixes the bottleneck?",
+      "visual_focus": "A split-screen showing identical neural activation maps flickering in red.",
+      "highlight_words": {
+        "waste massive compute": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Redundancy",
+        "action_verb": "chokes",
+        "direct_object": "Diffusion throughput",
+        "anchor_word": "waste",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "tree_hierarchy",
+        "title": "COMPUTATIONAL REDUNDANCY",
+        "sub": "The hidden cost of speculative branches",
+        "accent_color": "#38BDF8",
+        "params": {
+          "root_label": "Parent Token Block",
+          "optimal_label": "Unmasked Tokens (Delta)",
+          "pruned_label": "Redundant Cloned Tokens"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 76,
+      "hook_band": "STRONG",
+      "hook_formula": "The Question",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "tree_hierarchy",
+        "title": "COMPUTATIONAL REDUNDANCY",
+        "sub": "The hidden cost of speculative branches",
+        "accent_color": "#38BDF8",
+        "root_label": "Parent Token Block",
+        "optimal_label": "Unmasked Tokens (Delta)",
+        "pruned_label": "Redundant Cloned Tokens"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.57,
+      "duration": 5.57,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.01,
+          "end": 0.17,
+          "duration": 0.16,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.29,
+          "duration": 0.12,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "1.64x",
+          "clean_word": "164x",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad s\u02c8\u026aksti f\u02c8\u0254\u02d0\u0279 \u02c8\u025bks",
+          "start": 0.29,
+          "end": 1.78,
+          "duration": 1.49,
+          "frame_ahead_trigger": 0.25
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 1.78,
+          "end": 1.819,
+          "duration": 0.039,
+          "frame_ahead_trigger": 1.74
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 1.819,
+          "end": 1.97,
+          "duration": 0.151,
+          "frame_ahead_trigger": 1.779
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 1.97,
+          "end": 2.485,
+          "duration": 0.515,
+          "frame_ahead_trigger": 1.93
+        },
+        {
+          "word": "cycles",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 2.485,
+          "end": 2.765,
+          "duration": 0.28,
+          "frame_ahead_trigger": 2.445
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 2.765,
+          "end": 3.07,
+          "duration": 0.305,
+          "frame_ahead_trigger": 2.725
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 3.07,
+          "end": 3.56,
+          "duration": 0.49,
+          "frame_ahead_trigger": 3.03
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 3.56,
+          "end": 3.78,
+          "duration": 0.22,
+          "frame_ahead_trigger": 3.52
+        },
+        {
+          "word": "SpecFold",
+          "clean_word": "specfold",
+          "phonemes": "sp\u02c8\u025bk f\u02c8o\u028ald",
+          "start": 3.78,
+          "end": 4.43,
+          "duration": 0.65,
+          "frame_ahead_trigger": 3.74
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 4.43,
+          "end": 4.69,
+          "duration": 0.26,
+          "frame_ahead_trigger": 4.39
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.69,
+          "end": 4.81,
+          "duration": 0.12,
+          "frame_ahead_trigger": 4.65
+        },
+        {
+          "word": "bottleneck?",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 4.81,
+          "end": 5.26,
+          "duration": 0.45,
+          "frame_ahead_trigger": 4.77
+        }
+      ],
+      "audio_duration": 5.57,
+      "slot_duration": 5.72
+    },
+    {
+      "beat_id": 2,
+      "text": "It is an assembly line nightmare: every branch re-computes the entire state, ignoring that most tokens never change.",
+      "visual_focus": "Animation of an assembly line where workers rebuild the same engine frame repeatedly.",
+      "highlight_words": {
+        "re-computes": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Draft branches",
+        "action_verb": "duplicate",
+        "direct_object": "Parent hidden states",
+        "anchor_word": "nightmare",
+        "semantic_role": "problem_definition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE REDUNDANCY TRAP",
+        "sub": "Why branches are burning cycles",
+        "accent_color": "#EF4444",
+        "params": {
+          "col_a_title": "BRUTE-FORCE VERIFICATION",
+          "col_a_stat": "92% REDUNDANT",
+          "col_b_title": "ACTUAL NEW INFORMATION",
+          "col_b_stat": "8% NOVEL TOKENS",
+          "col_a_specs": [
+            "Full Matrix MatMul",
+            "Duplicated KV Cache",
+            "SRAM Overflow"
+          ],
+          "col_b_specs": [
+            "Sparse Unmasked Indices",
+            "Parent State Preservation",
+            "Delta-Only Updates"
+          ]
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE REDUNDANCY TRAP",
+        "sub": "Why branches are burning cycles",
+        "accent_color": "#EF4444",
+        "col_a_title": "BRUTE-FORCE VERIFICATION",
+        "col_a_stat": "92% REDUNDANT",
+        "col_b_title": "ACTUAL NEW INFORMATION",
+        "col_b_stat": "8% NOVEL TOKENS",
+        "col_a_specs": [
+          "Full Matrix MatMul",
+          "Duplicated KV Cache",
+          "SRAM Overflow"
+        ],
+        "col_b_specs": [
+          "Sparse Unmasked Indices",
+          "Parent State Preservation",
+          "Delta-Only Updates"
+        ]
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.72,
+      "end": 11.41,
+      "duration": 5.7,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 5.733,
+          "end": 5.923,
+          "duration": 0.19,
+          "frame_ahead_trigger": 5.843
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.923,
+          "end": 5.94,
+          "duration": 0.017,
+          "frame_ahead_trigger": 6.033
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 5.94,
+          "end": 6.003,
+          "duration": 0.063,
+          "frame_ahead_trigger": 6.05
+        },
+        {
+          "word": "assembly",
+          "clean_word": "assembly",
+          "phonemes": "\u0250s\u02c8\u025bmbli",
+          "start": 6.003,
+          "end": 6.473,
+          "duration": 0.47,
+          "frame_ahead_trigger": 6.113
+        },
+        {
+          "word": "line",
+          "clean_word": "line",
+          "phonemes": "l\u02c8a\u026an",
+          "start": 6.473,
+          "end": 6.743,
+          "duration": 0.27,
+          "frame_ahead_trigger": 6.583
+        },
+        {
+          "word": "nightmare:",
+          "clean_word": "nightmare",
+          "phonemes": "n\u02c8a\u026atm\u025b\u0279",
+          "start": 6.743,
+          "end": 7.128,
+          "duration": 0.385,
+          "frame_ahead_trigger": 6.853
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 7.128,
+          "end": 7.468,
+          "duration": 0.34,
+          "frame_ahead_trigger": 7.238
+        },
+        {
+          "word": "branch",
+          "clean_word": "branch",
+          "phonemes": "b\u0279\u02c8\u00e6nt\u0283",
+          "start": 7.468,
+          "end": 7.788,
+          "duration": 0.32,
+          "frame_ahead_trigger": 7.578
+        },
+        {
+          "word": "re-computes",
+          "clean_word": "recomputes",
+          "phonemes": "\u0279\u02cci\u02d0k\u0259mpj\u02c8u\u02d0ts",
+          "start": 7.788,
+          "end": 8.423,
+          "duration": 0.635,
+          "frame_ahead_trigger": 7.898
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.423,
+          "end": 8.608,
+          "duration": 0.185,
+          "frame_ahead_trigger": 8.533
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 8.608,
+          "end": 8.873,
+          "duration": 0.265,
+          "frame_ahead_trigger": 8.718
+        },
+        {
+          "word": "state,",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 8.873,
+          "end": 9.246,
+          "duration": 0.373,
+          "frame_ahead_trigger": 8.983
+        },
+        {
+          "word": "ignoring",
+          "clean_word": "ignoring",
+          "phonemes": "\u026a\u0261n\u02c8\u0254\u02d0\u0279\u026a\u014b",
+          "start": 9.246,
+          "end": 9.683,
+          "duration": 0.437,
+          "frame_ahead_trigger": 9.356
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 9.683,
+          "end": 9.983,
+          "duration": 0.3,
+          "frame_ahead_trigger": 9.793
+        },
+        {
+          "word": "most",
+          "clean_word": "most",
+          "phonemes": "m\u02c8o\u028ast",
+          "start": 9.983,
+          "end": 10.198,
+          "duration": 0.215,
+          "frame_ahead_trigger": 10.093
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 10.198,
+          "end": 10.583,
+          "duration": 0.385,
+          "frame_ahead_trigger": 10.308
+        },
+        {
+          "word": "never",
+          "clean_word": "never",
+          "phonemes": "n\u02c8\u025bv\u025a",
+          "start": 10.583,
+          "end": 10.938,
+          "duration": 0.355,
+          "frame_ahead_trigger": 10.693
+        },
+        {
+          "word": "change.",
+          "clean_word": "change",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292",
+          "start": 10.938,
+          "end": 11.313,
+          "duration": 0.375,
+          "frame_ahead_trigger": 11.048
+        }
+      ],
+      "audio_duration": 5.7,
+      "slot_duration": 5.84
+    },
+    {
+      "beat_id": 3,
+      "text": "SpecFold pivots the architecture by using token-level residual gating to identify exactly which tokens actually changed.",
+      "visual_focus": "A gate icon snapping shut on redundant data paths while allowing unique tokens to pass.",
+      "highlight_words": {
+        "residual gating": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "SpecFold",
+        "action_verb": "gates",
+        "direct_object": "Redundant computation",
+        "anchor_word": "pivots",
+        "semantic_role": "solution_discovery"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "SPECFOLD ARCHITECTURE",
+        "sub": "A gate icon snapping shut on redundant data paths while allowing ",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.png",
+          "arxiv_id": "2610.04875",
+          "title": "SPECFOLD ARCHITECTURE",
+          "sub": "A gate icon snapping shut on redundant data paths while allowing ",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Specfold Bscan All Models",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.png",
+        "arxiv_id": "2610.04875",
+        "title": "SPECFOLD ARCHITECTURE",
+        "sub": "A gate icon snapping shut on redundant data paths while allowing ",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Specfold Bscan All Models",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 11.56,
+      "end": 18.67,
+      "duration": 7.1,
+      "word_timings": [
+        {
+          "word": "SpecFold",
+          "clean_word": "specfold",
+          "phonemes": "sp\u02c8\u025bk f\u02c8o\u028ald",
+          "start": 11.594,
+          "end": 12.204,
+          "duration": 0.61,
+          "frame_ahead_trigger": 11.854
+        },
+        {
+          "word": "pivots",
+          "clean_word": "pivots",
+          "phonemes": "p\u02c8\u026av\u0259ts",
+          "start": 12.204,
+          "end": 12.644,
+          "duration": 0.44,
+          "frame_ahead_trigger": 12.464
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.644,
+          "end": 12.699,
+          "duration": 0.055,
+          "frame_ahead_trigger": 12.904
+        },
+        {
+          "word": "architecture",
+          "clean_word": "architecture",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
+          "start": 12.699,
+          "end": 13.394,
+          "duration": 0.695,
+          "frame_ahead_trigger": 12.959
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 13.394,
+          "end": 13.564,
+          "duration": 0.17,
+          "frame_ahead_trigger": 13.654
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 13.564,
+          "end": 13.939,
+          "duration": 0.375,
+          "frame_ahead_trigger": 13.824
+        },
+        {
+          "word": "token-level",
+          "clean_word": "tokenlevel",
+          "phonemes": "t\u02c8o\u028ak\u0259nl\u02cc\u025bv\u0259l",
+          "start": 13.939,
+          "end": 14.564,
+          "duration": 0.625,
+          "frame_ahead_trigger": 14.199
+        },
+        {
+          "word": "residual",
+          "clean_word": "residual",
+          "phonemes": "\u0279\u1d7bs\u02c8\u026ad\u0292u\u02d0\u0259l",
+          "start": 14.564,
+          "end": 15.259,
+          "duration": 0.695,
+          "frame_ahead_trigger": 14.824
+        },
+        {
+          "word": "gating",
+          "clean_word": "gating",
+          "phonemes": "\u0261\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 15.259,
+          "end": 15.659,
+          "duration": 0.4,
+          "frame_ahead_trigger": 15.519
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 15.659,
+          "end": 15.789,
+          "duration": 0.13,
+          "frame_ahead_trigger": 15.919
+        },
+        {
+          "word": "identify",
+          "clean_word": "identify",
+          "phonemes": "a\u026ad\u02c8\u025bnt\u1d7bf\u02cca\u026a",
+          "start": 15.789,
+          "end": 16.459,
+          "duration": 0.67,
+          "frame_ahead_trigger": 16.049
+        },
+        {
+          "word": "exactly",
+          "clean_word": "exactly",
+          "phonemes": "\u025b\u0261z\u02c8\u00e6ktli",
+          "start": 16.459,
+          "end": 16.784,
+          "duration": 0.325,
+          "frame_ahead_trigger": 16.719
+        },
+        {
+          "word": "which",
+          "clean_word": "which",
+          "phonemes": "w\u02c8\u026at\u0283",
+          "start": 16.784,
+          "end": 17.099,
+          "duration": 0.315,
+          "frame_ahead_trigger": 17.044
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 17.099,
+          "end": 17.439,
+          "duration": 0.34,
+          "frame_ahead_trigger": 17.359
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 17.439,
+          "end": 18.124,
+          "duration": 0.685,
+          "frame_ahead_trigger": 17.699
+        },
+        {
+          "word": "changed.",
+          "clean_word": "changed",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292d",
+          "start": 18.124,
+          "end": 18.539,
+          "duration": 0.415,
+          "frame_ahead_trigger": 18.384
+        }
+      ],
+      "audio_duration": 7.1,
+      "slot_duration": 7.26
+    },
+    {
+      "beat_id": 4,
+      "text": "A custom Triton kernel then skips redundant dot products, injecting parent states directly into the sparse execution pipeline.",
+      "visual_focus": "Code snippet showing a Triton kernel function call bypassing heavy matrix operations.",
+      "highlight_words": {
+        "Triton kernel": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Triton kernel",
+        "action_verb": "injects",
+        "direct_object": "Parent states",
+        "anchor_word": "sparse",
+        "semantic_role": "technical_implementation"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SPECFOLD: MULTI-BR",
+        "sub": "Code snippet showing a Triton kernel function call bypassing heav",
+        "params": {
+          "title": "KERNEL CODE: SPECFOLD: MULTI-BR",
+          "sub": "Code snippet showing a Triton kernel function call bypassing heav",
+          "filename": "specfold_kernel.py",
+          "language": "python",
+          "lines": [
+            "@triton.jit",
+            "def folded_sparse_verify_kernel(Q, K_parent, V_parent, Mask):",
+            "if Mask[tl.program_id(0)] == 0:",
+            "return  # Reuse parent cached activation directly",
+            "acc = tl.dot(Q_delta, K_parent)",
+            "tl.store(Out_delta, acc)"
+          ],
+          "highlight_lines": [
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 ZERO-COPY MULTI-BRANCH EXECUTION",
+          "delta_badge": "Selective delta computation bypassing duplicated par"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SPECFOLD: MULTI-BR",
+        "sub": "Code snippet showing a Triton kernel function call bypassing heav",
+        "filename": "specfold_kernel.py",
+        "language": "python",
+        "lines": [
+          "@triton.jit",
+          "def folded_sparse_verify_kernel(Q, K_parent, V_parent, Mask):",
+          "if Mask[tl.program_id(0)] == 0:",
+          "return  # Reuse parent cached activation directly",
+          "acc = tl.dot(Q_delta, K_parent)",
+          "tl.store(Out_delta, acc)"
+        ],
+        "highlight_lines": [
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 ZERO-COPY MULTI-BRANCH EXECUTION",
+        "delta_badge": "Selective delta computation bypassing duplicated par"
+      },
+      "start": 18.82,
+      "end": 25.92,
+      "duration": 7.1,
+      "word_timings": [
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.833,
+          "end": 18.908,
+          "duration": 0.075,
+          "frame_ahead_trigger": 19.243
+        },
+        {
+          "word": "custom",
+          "clean_word": "custom",
+          "phonemes": "k\u02c8\u028cst\u0259m",
+          "start": 18.908,
+          "end": 19.363,
+          "duration": 0.455,
+          "frame_ahead_trigger": 19.318
+        },
+        {
+          "word": "Triton",
+          "clean_word": "triton",
+          "phonemes": "t\u0279\u02c8a\u026at\u0259n",
+          "start": 19.363,
+          "end": 19.728,
+          "duration": 0.365,
+          "frame_ahead_trigger": 19.773
+        },
+        {
+          "word": "kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 19.728,
+          "end": 20.158,
+          "duration": 0.43,
+          "frame_ahead_trigger": 20.138
+        },
+        {
+          "word": "then",
+          "clean_word": "then",
+          "phonemes": "\u00f0\u02c8\u025bn",
+          "start": 20.158,
+          "end": 20.383,
+          "duration": 0.225,
+          "frame_ahead_trigger": 20.568
+        },
+        {
+          "word": "skips",
+          "clean_word": "skips",
+          "phonemes": "sk\u02c8\u026aps",
+          "start": 20.383,
+          "end": 20.728,
+          "duration": 0.345,
+          "frame_ahead_trigger": 20.793
+        },
+        {
+          "word": "redundant",
+          "clean_word": "redundant",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
+          "start": 20.728,
+          "end": 21.243,
+          "duration": 0.515,
+          "frame_ahead_trigger": 21.138
+        },
+        {
+          "word": "dot",
+          "clean_word": "dot",
+          "phonemes": "d\u02c8\u0251\u02d0t",
+          "start": 21.243,
+          "end": 21.503,
+          "duration": 0.26,
+          "frame_ahead_trigger": 21.653
+        },
+        {
+          "word": "products,",
+          "clean_word": "products",
+          "phonemes": "p\u0279\u02c8\u0251\u02d0d\u028ckts",
+          "start": 21.503,
+          "end": 22.063,
+          "duration": 0.56,
+          "frame_ahead_trigger": 21.913
+        },
+        {
+          "word": "injecting",
+          "clean_word": "injecting",
+          "phonemes": "\u026and\u0292\u02c8\u025bkt\u026a\u014b",
+          "start": 22.063,
+          "end": 22.583,
+          "duration": 0.52,
+          "frame_ahead_trigger": 22.473
+        },
+        {
+          "word": "parent",
+          "clean_word": "parent",
+          "phonemes": "p\u02c8\u025b\u0279\u0259nt",
+          "start": 22.583,
+          "end": 22.988,
+          "duration": 0.405,
+          "frame_ahead_trigger": 22.993
+        },
+        {
+          "word": "states",
+          "clean_word": "states",
+          "phonemes": "st\u02c8e\u026ats",
+          "start": 22.988,
+          "end": 23.358,
+          "duration": 0.37,
+          "frame_ahead_trigger": 23.398
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 23.358,
+          "end": 23.788,
+          "duration": 0.43,
+          "frame_ahead_trigger": 23.768
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 23.788,
+          "end": 24.109,
+          "duration": 0.321,
+          "frame_ahead_trigger": 24.198
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.109,
+          "end": 24.278,
+          "duration": 0.169,
+          "frame_ahead_trigger": 24.519
+        },
+        {
+          "word": "sparse",
+          "clean_word": "sparse",
+          "phonemes": "sp\u02c8\u0251\u02d0\u0279s",
+          "start": 24.278,
+          "end": 24.518,
+          "duration": 0.24,
+          "frame_ahead_trigger": 24.688
+        },
+        {
+          "word": "execution",
+          "clean_word": "execution",
+          "phonemes": "\u02cc\u025bks\u026akj\u02c8u\u02d0\u0283\u0259n",
+          "start": 24.518,
+          "end": 25.363,
+          "duration": 0.845,
+          "frame_ahead_trigger": 24.928
+        },
+        {
+          "word": "pipeline.",
+          "clean_word": "pipeline",
+          "phonemes": "p\u02c8a\u026apla\u026an",
+          "start": 25.363,
+          "end": 25.778,
+          "duration": 0.415,
+          "frame_ahead_trigger": 25.773
+        }
+      ],
+      "audio_duration": 7.1,
+      "slot_duration": 7.25
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A 1.99x speedup over vanilla decoding, crushing existing benchmarks by nearly 64 percent.",
+      "visual_focus": "Bar chart showing SpecFold towering over vanilla and Spiffy benchmarks.",
+      "highlight_words": {
+        "1.99x speedup": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "SpecFold",
+        "action_verb": "outperforms",
+        "direct_object": "Vanilla decoding",
+        "anchor_word": "speedup",
+        "semantic_role": "empirical_validation"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "DIFFUSION LANGUAGE MODEL SPECULATION THROUGHPUT",
+        "sub": "Bar chart showing SpecFold towering over vanilla and",
+        "params": {
+          "title": "DIFFUSION LANGUAGE MODEL SPECULATION THROUGHPUT",
+          "sub": "Bar chart showing SpecFold towering over vanilla and",
+          "metric_name": "Throughput Speedup",
+          "unit": "x Speedup",
+          "contestants": [
+            {
+              "name": "SpecFold (Ours)",
+              "value": 1.99,
+              "display_val": "1.99x Speedup",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Spiffy DLLM",
+              "value": 1.21,
+              "display_val": "1.21x Speedup",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Vanilla Decoding",
+              "value": 1.0,
+              "display_val": "1.00x Baseline",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +1.64x FASTER THAN SPIFFY"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "DIFFUSION LANGUAGE MODEL SPECULATION THROUGHPUT",
+        "sub": "Bar chart showing SpecFold towering over vanilla and",
+        "metric_name": "Throughput Speedup",
+        "unit": "x Speedup",
+        "contestants": [
+          {
+            "name": "SpecFold (Ours)",
+            "value": 1.99,
+            "display_val": "1.99x Speedup",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Spiffy DLLM",
+            "value": 1.21,
+            "display_val": "1.21x Speedup",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Vanilla Decoding",
+            "value": 1.0,
+            "display_val": "1.00x Baseline",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +1.64x FASTER THAN SPIFFY"
+      },
+      "start": 26.07,
+      "end": 32.83,
+      "duration": 6.76,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.082,
+          "end": 26.302,
+          "duration": 0.22,
+          "frame_ahead_trigger": 26.642
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 26.302,
+          "end": 26.567,
+          "duration": 0.265,
+          "frame_ahead_trigger": 26.862
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 26.567,
+          "end": 26.722,
+          "duration": 0.155,
+          "frame_ahead_trigger": 27.127
+        },
+        {
+          "word": "1.99x",
+          "clean_word": "199x",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad n\u02c8a\u026anti n\u02c8a\u026an \u02c8\u025bks",
+          "start": 26.722,
+          "end": 28.317,
+          "duration": 1.595,
+          "frame_ahead_trigger": 27.282
+        },
+        {
+          "word": "speedup",
+          "clean_word": "speedup",
+          "phonemes": "sp\u02c8i\u02d0d\u028cp",
+          "start": 28.317,
+          "end": 28.677,
+          "duration": 0.36,
+          "frame_ahead_trigger": 28.877
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 28.677,
+          "end": 28.937,
+          "duration": 0.26,
+          "frame_ahead_trigger": 29.237
+        },
+        {
+          "word": "vanilla",
+          "clean_word": "vanilla",
+          "phonemes": "v\u0250n\u02c8\u026al\u0259",
+          "start": 28.937,
+          "end": 29.278,
+          "duration": 0.341,
+          "frame_ahead_trigger": 29.497
+        },
+        {
+          "word": "decoding,",
+          "clean_word": "decoding",
+          "phonemes": "d\u1d7bk\u02c8o\u028ad\u026a\u014b",
+          "start": 29.278,
+          "end": 29.802,
+          "duration": 0.524,
+          "frame_ahead_trigger": 29.838
+        },
+        {
+          "word": "crushing",
+          "clean_word": "crushing",
+          "phonemes": "k\u0279\u02c8\u028c\u0283\u026a\u014b",
+          "start": 29.802,
+          "end": 30.062,
+          "duration": 0.26,
+          "frame_ahead_trigger": 30.362
+        },
+        {
+          "word": "existing",
+          "clean_word": "existing",
+          "phonemes": "\u025b\u0261z\u02c8\u026ast\u026a\u014b",
+          "start": 30.062,
+          "end": 30.492,
+          "duration": 0.43,
+          "frame_ahead_trigger": 30.622
+        },
+        {
+          "word": "benchmarks",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 30.492,
+          "end": 31.132,
+          "duration": 0.64,
+          "frame_ahead_trigger": 31.052
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 31.132,
+          "end": 31.337,
+          "duration": 0.205,
+          "frame_ahead_trigger": 31.692
+        },
+        {
+          "word": "nearly",
+          "clean_word": "nearly",
+          "phonemes": "n\u02c8\u026a\u0279li",
+          "start": 31.337,
+          "end": 31.602,
+          "duration": 0.265,
+          "frame_ahead_trigger": 31.897
+        },
+        {
+          "word": "64",
+          "clean_word": "64",
+          "phonemes": "s\u02c8\u026aksti f\u02c8\u0254\u02d0\u0279",
+          "start": 31.602,
+          "end": 32.317,
+          "duration": 0.715,
+          "frame_ahead_trigger": 32.162
+        },
+        {
+          "word": "percent.",
+          "clean_word": "percent",
+          "phonemes": "p\u025as\u02c8\u025bnt",
+          "start": 32.317,
+          "end": 32.677,
+          "duration": 0.36,
+          "frame_ahead_trigger": 32.877
+        }
+      ],
+      "audio_duration": 6.76,
+      "slot_duration": 6.91
+    },
+    {
+      "beat_id": 6,
+      "text": "Efficiency is the new frontier. Follow The Model Verse for daily deep-dives into how modern AI works.",
+      "visual_focus": "Logo animation of The Model Verse with a neural network background.",
+      "highlight_words": {
+        "new frontier": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI architecture",
+        "anchor_word": "frontier",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "tree_hierarchy",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dives into AI mechanics",
+        "accent_color": "#34D399",
+        "params": {
+          "root_label": "Diffusion Language Model",
+          "optimal_label": "SpecFold Parallel Paths",
+          "pruned_label": "Zero-Overhead Branches"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 32.98,
+      "end": 38.6,
+      "duration": 5.61,
+      "word_timings": [
+        {
+          "word": "Efficiency",
+          "clean_word": "efficiency",
+          "phonemes": "\u026af\u02c8\u026a\u0283\u0259nsi",
+          "start": 33.0,
+          "end": 33.605,
+          "duration": 0.605,
+          "frame_ahead_trigger": 33.71
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 33.605,
+          "end": 33.65,
+          "duration": 0.045,
+          "frame_ahead_trigger": 34.315
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 33.65,
+          "end": 33.77,
+          "duration": 0.12,
+          "frame_ahead_trigger": 34.36
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 33.77,
+          "end": 34.07,
+          "duration": 0.3,
+          "frame_ahead_trigger": 34.48
+        },
+        {
+          "word": "frontier.",
+          "clean_word": "frontier",
+          "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
+          "start": 34.07,
+          "end": 34.477,
+          "duration": 0.407,
+          "frame_ahead_trigger": 34.78
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.477,
+          "end": 35.005,
+          "duration": 0.528,
+          "frame_ahead_trigger": 35.187
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 35.005,
+          "end": 35.009,
+          "duration": 0.004,
+          "frame_ahead_trigger": 35.715
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 35.009,
+          "end": 35.515,
+          "duration": 0.506,
+          "frame_ahead_trigger": 35.719
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 35.515,
+          "end": 35.72,
+          "duration": 0.205,
+          "frame_ahead_trigger": 36.225
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.72,
+          "end": 36.005,
+          "duration": 0.285,
+          "frame_ahead_trigger": 36.43
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 36.005,
+          "end": 36.295,
+          "duration": 0.29,
+          "frame_ahead_trigger": 36.715
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 36.295,
+          "end": 36.84,
+          "duration": 0.546,
+          "frame_ahead_trigger": 37.005
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 36.84,
+          "end": 37.12,
+          "duration": 0.279,
+          "frame_ahead_trigger": 37.55
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 37.12,
+          "end": 37.372,
+          "duration": 0.252,
+          "frame_ahead_trigger": 37.83
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 37.372,
+          "end": 37.775,
+          "duration": 0.403,
+          "frame_ahead_trigger": 38.082
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 37.775,
+          "end": 38.17,
+          "duration": 0.395,
+          "frame_ahead_trigger": 38.485
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 38.17,
+          "end": 38.495,
+          "duration": 0.325,
+          "frame_ahead_trigger": 38.88
+        }
+      ],
+      "audio_duration": 5.61,
+      "slot_duration": 5.62
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{B} = \\{B_{\\mathrm{main}}\\} \\cup \\{B_{\\mathrm{draft}}^{(1)}, \\dots, B_{\\mathrm{draft}}^{(K)}\\}$",
+      "filename": "specfold_diffusion_llm_decoding_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "B_{\\mathrm{main}}",
+          "label": "Main Verification Branch"
+        },
+        {
+          "term": "B_{\\mathrm{draft}}^{(k)}",
+          "label": "Parallel Speculative Drafts"
+        }
+      ],
+      "svg_filename": "specfold_diffusion_llm_decoding_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{H}_t^{(k)} \\approx \\mathbf{H}_t^{(\\mathrm{parent})} \\quad \\forall t \\notin \\mathcal{M}^{(k)}$",
+      "filename": "specfold_diffusion_llm_decoding_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{H}_t^{(k)}",
+          "label": "Draft Branch Latent"
+        },
+        {
+          "term": "\\mathcal{M}^{(k)}",
+          "label": "Unmasked Delta Indices"
+        }
+      ],
+      "svg_filename": "specfold_diffusion_llm_decoding_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{H}^{(k)} = \\mathbf{H}^{(\\mathrm{parent})} + \\mathbf{G}_t \\odot \\Delta \\mathbf{H}^{(k)}$",
+      "filename": "specfold_diffusion_llm_decoding_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{G}_t",
+          "label": "Token Residual Gate"
+        },
+        {
+          "term": "\\Delta \\mathbf{H}^{(k)}",
+          "label": "Sparse Delta Update"
+        }
+      ],
+      "svg_filename": "specfold_diffusion_llm_decoding_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbf{Y}_{\\mathrm{fold}} = \\mathrm{Attn}(\\mathbf{Q}_{\\Delta}, \\mathbf{K}_{\\mathrm{parent}}, \\mathbf{V}_{\\mathrm{parent}}) + \\mathrm{FFN}(\\Delta \\mathbf{H})$",
+      "filename": "specfold_diffusion_llm_decoding_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{Q}_{\\Delta}",
+          "label": "Sparse Delta Query"
+        },
+        {
+          "term": "\\mathbf{K}_{\\mathrm{parent}}",
+          "label": "Reused Parent Keys"
+        }
+      ],
+      "svg_filename": "specfold_diffusion_llm_decoding_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = \\frac{\\mathcal{T}_{\\mathrm{SpecFold}}}{\\mathcal{T}_{\\mathrm{Vanilla}}} = 1.99\\times \\quad (1.64\\times \\text{ vs Spiffy})$",
+      "filename": "specfold_diffusion_llm_decoding_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{T}_{\\mathrm{SpecFold}}",
+          "label": "SpecFold Throughput"
+        },
+        {
+          "term": "\\mathcal{T}_{\\mathrm{Vanilla}}",
+          "label": "Baseline DLLM Throughput"
+        }
+      ],
+      "svg_filename": "specfold_diffusion_llm_decoding_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 4.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 12.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 20.0,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 28.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 35.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 37.5,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "PARENT_TOKENS",
+          "color": "#38BDF8",
+          "items": [
+            "Context_0",
+            "Context_1",
+            "Context_2"
+          ]
+        },
+        {
+          "name": "UNMASKED_DELTA",
+          "color": "#10B981",
+          "items": [
+            "Delta_Mask_A",
+            "Delta_Mask_B"
+          ]
+        },
+        {
+          "name": "REDUNDANT_STATES",
+          "color": "#EF4444",
+          "items": [
+            "Dup_State_1",
+            "Dup_State_2"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"Unmasked_Pos\"",
+        "target_cluster": "UNMASKED_DELTA",
+        "token": "\"Unmasked_Pos\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'Cloned_K'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'Cloned_V'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "SpecFold (Folded Verification)",
+    "model_a_specs": [
+      "Multi-Branch Folding",
+      "Token Residual Gating",
+      "Fused Triton Kernel"
+    ],
+    "model_b": "Spiffy / Vanilla DLLM",
+    "model_b_specs": [
+      "Temporal Caching Only",
+      "Redundant Multi-Branch Passes",
+      "Full Attention Recompute"
+    ],
+    "divide_title": "MULTI-BRANCH REDUNDANCY BOTTLENECK",
+    "model_a_stat": "1.99x",
+    "model_a_stat_label": "MAX THROUGHPUT SPEEDUP",
+    "model_b_stat": "1.00x",
+    "model_b_stat_label": "VANILLA DLLM BASELINE",
+    "efficiency_badge": "\u26a1 UP TO 1.99x THROUGHPUT",
+    "benchmarks": [
+      {
+        "name": "Throughput vs Vanilla",
+        "score_a": "1.99x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Throughput vs Spiffy",
+        "score_a": "1.64x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Task Accuracy",
+        "score_a": "Parity",
+        "score_b": "Parity"
+      }
+    ],
+    "scale_metric": "K Branches",
+    "scale_label": "Speculative Draft Paths",
+    "bottleneck_title": "MULTI-BRANCH REDUNDANCY",
+    "bottleneck_desc": "Identical Parent States Recalculated Across Drafts",
+    "solution_title": "MULTI-BRANCH FOLDING",
+    "solution_components": "Residual Gating + Triton Execution",
+    "mechanism_title": "FOLDED ATTENTION AND FFN",
+    "payoff_stat": "1.99x",
+    "payoff_label": "END-TO-END SPEEDUP",
+    "payoff_sub": "Preserving Full Accuracy Across 5 Benchmarks",
+    "payoff_hero_stat": 1.99,
+    "payoff_hero_label": "SpecFold",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Vanilla DLLM",
+    "payoff_delta_badge": "\u26a1 +99% THROUGHPUT SPEEDUP",
+    "challenger": "SpecFold",
+    "incumbent": "Spiffy DLLM"
+  },
+  "benchmark_comparison": {
+    "title": "DIFFUSION LANGUAGE MODEL SPECULATION THROUGHPUT",
+    "metric_name": "Throughput Speedup",
+    "unit": "x Speedup",
+    "contestants": [
+      {
+        "name": "SpecFold (Ours)",
+        "value": 1.99,
+        "display_val": "1.99x Speedup",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Spiffy DLLM",
+        "value": 1.21,
+        "display_val": "1.21x Speedup",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Vanilla Decoding",
+        "value": 1.0,
+        "display_val": "1.00x Baseline",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +1.64x FASTER THAN SPIFFY",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Accuracy",
+      "Kernel Fusion",
+      "Branch Scaling"
+    ]
+  },
+  "code_snippet": {
+    "filename": "specfold_kernel.py",
+    "language": "python",
+    "lines": [
+      "@triton.jit",
+      "def folded_sparse_verify_kernel(Q, K_parent, V_parent, Mask):",
+      "if Mask[tl.program_id(0)] == 0:",
+      "return  # Reuse parent cached activation directly",
+      "acc = tl.dot(Q_delta, K_parent)",
+      "tl.store(Out_delta, acc)"
+    ],
+    "highlight_lines": [
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 ZERO-COPY MULTI-BRANCH EXECUTION",
+    "explanation": "Selective delta computation bypassing duplicated parent activations"
+  },
+  "arxiv_id": "2610.04875",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "specfold_bscan_all_models",
+      "caption": "Specfold Bscan All Models",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/source/Figures/specfold_bscan_all_models.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_1_specfold_bscan_all_models.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "specfold_delta_sweep_nld_8b",
+      "caption": "Specfold Delta Sweep Nld 8B",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/source/Figures/specfold_delta_sweep_nld_8b.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_2_specfold_delta_sweep_nld_8b.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_2_specfold_delta_sweep_nld_8b.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "specfold",
+      "caption": "Specfold",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/source/Figures/specfold.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_3_specfold.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_3_specfold.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "specfold_bscan_nld_3b",
+      "caption": "Specfold Bscan Nld 3B",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/source/Figures/specfold_bscan_nld_3b.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_4_specfold_bscan_nld_3b.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_4_specfold_bscan_nld_3b.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "percall_bscan_nld_3b_denseonly",
+      "caption": "Percall Bscan Nld 3B Denseonly",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/source/Figures/percall_bscan_nld_3b_denseonly.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_5_percall_bscan_nld_3b_denseonly.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.04875/chalkboard_figures/fig_5_percall_bscan_nld_3b_denseonly.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually slapped. You didn't waste my time with 'Today we're going to talk about' or some cringe metaphor about 'digital filing cabinets.' You went straight for the pain point\u2014compute cycles\u2014and explained the fix using actual dev terminology like Triton kernels and sparse execution. I understood exactly why it's faster without feeling like I was being talked down to."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Multi-branch computational redundancy",
+    "physical_analogy": "A redundant assembly line where every worker rebuilds the entire car just to change one bolt.",
+    "eureka_mechanism": "Token-level residual gating",
+    "paradigm_shift": "Sparse execution via folded attention and FFN"
+  },
+  "hook_gating": {
+    "selected_hook": "Why do 1.64x of your GPU cycles waste compute before SpecFold fixes the bottleneck?",
+    "verdict": 76,
+    "band": "STRONG",
+    "formula": "The Question",
+    "properties": {
+      "SPECIFICITY": 68,
+      "ADDRESS": 76,
+      "STAKES": 88,
+      "CURIOSITY": 76,
+      "BREVITY": 100
+    },
+    "weakest_property": "SPECIFICITY",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Why do 1.64x of your GPU cycles waste compute before SpecFold fixes the bottleneck?",
+        "verdict": 76,
+        "band": "STRONG",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Over 1.64x of your GPU memory is wasted before you see how SpecFold actually fixes it.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not train your next model before you see how SpecFold cuts 1.64x of your memory waste.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "This 1 breakthrough in SpecFold stops your GPU from wasting compute before you run out of memory.",
+        "verdict": 60,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "You are probably making the mistake of wasting compute before you test SpecFold.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Mistake"
+      },
+      {
+        "hook": "Everyone tells you your model needs more compute, but SpecFold proves that advice actually wrong.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "Contrarian Flip"
+      },
+      {
+        "hook": "Diffusion models waste massive compute cycles re-calculating identical hidden states across every single speculative branch.",
+        "verdict": 33,
+        "band": "WEAK",
+        "formula": "The Insider"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "SpecFold (Folded Verification)",
+        "model_a_score": "1.99x",
+        "model_b_name": "Spiffy / Vanilla DLLM",
+        "model_b_score": "1.00x",
+        "delta_label": "\u26a1 UP TO 1.99x THROUGHPUT"
+      }
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": -0.6,
+        "scale_multiplier": 0.855
+      },
+      "tree_diagram": {
+        "dx": -0.059,
+        "dy": 0.0,
+        "scale_multiplier": 0.796
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.912,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.369,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": -1.231,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}
