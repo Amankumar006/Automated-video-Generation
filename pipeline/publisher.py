@@ -132,11 +132,23 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
             clean_t = clean_t[:39] + "..."
         title = f"{clean_t} Explained #Shorts"
 
-    if len(title) > 65:
-        title = title[:60].rsplit(" ", 1)[0] + " #Shorts"
-
     if spec.get("language") in ("hi", "hindi") and "(Hindi)" not in title:
         title = title.replace(" #Shorts", " (Hindi) #Shorts")
+
+    # Mobile Title Linting & Truncation Guard (skills/yt-package/title.py)
+    title_lint_report = None
+    try:
+        from pipeline.youtube_publisher import lint_title, optimize_title_for_mobile
+        if len(title) > 50:
+            title = optimize_title_for_mobile(title, max_chars=50)
+        title_lint_report = lint_title(title)
+        if not title_lint_report["passed"]:
+            title = optimize_title_for_mobile(title, max_chars=48)
+            title_lint_report = lint_title(title)
+        print(f"📱 [Mobile Title Lint] ({title_lint_report['chars']} chars, score {title_lint_report['score']}/100): \"{title}\"")
+    except Exception as e_lint:
+        if len(title) > 50:
+            title = title[:45].rsplit(" ", 1)[0] + " #Shorts"
 
     # 2. Chapter timestamps from beats
     chapter_lines = []
@@ -239,7 +251,8 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
         "category_id": YOUTUBE_DEFAULT_CATEGORY,
         "pinned_comment": pinned_comment,
         "privacy_status": "unlisted",
-        "language": spec.get("language", "en")
+        "language": spec.get("language", "en"),
+        "title_lint": title_lint_report
     }
 
 

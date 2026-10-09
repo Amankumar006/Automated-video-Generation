@@ -41,6 +41,7 @@ from pipeline.config import (
     DEFAULT_TTS_PROVIDER
 )
 from pipeline.text_normalizer import normalize_narration_text
+from pipeline.quota_tracker import quota_tracker, is_quota_error
 
 logger = logging.getLogger("voice_engine")
 if not logger.handlers:
@@ -49,6 +50,22 @@ if not logger.handlers:
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)
+
+
+def sanitize_audio_samples(audio: np.ndarray, target_sr: int = SAMPLE_RATE) -> np.ndarray:
+    """Guarantees full 24kHz float32 mono audio with zero NaNs, Infs, or clipping distortions."""
+    if not isinstance(audio, np.ndarray):
+        audio = np.array(audio, dtype=np.float32)
+    if audio.size == 0:
+        return np.zeros(int(target_sr * 0.5), dtype=np.float32)
+    if audio.ndim > 1:
+        if audio.shape[0] <= 2 and audio.shape[0] < audio.shape[1]:
+            audio = np.mean(audio, axis=0)
+        else:
+            audio = np.mean(audio, axis=-1)
+    clean = np.nan_to_num(audio, nan=0.0, posinf=0.99, neginf=-0.99).astype(np.float32)
+    np.clip(clean, -1.0, 1.0, out=clean)
+    return clean.flatten()
 
 
 class VoiceEngineError(Exception):
@@ -231,14 +248,19 @@ class ElevenLabsVoiceProvider(BaseVoiceProvider):
         try:
             resp = requests.post(url, headers=headers, json=payload, timeout=20.0)
         except Exception as e:
+            if is_quota_error(e):
+                raise VoiceQuotaExceededError(f"ElevenLabs rate/quota limit reached: {e}")
             raise VoiceEngineError(f"ElevenLabs network request failed: {e}")
 
-        if resp.status_code == 401:
-            raise VoiceAuthError(f"ElevenLabs authorization failed (401): {resp.text}")
-        elif resp.status_code == 402:
-            raise VoiceQuotaExceededError(f"ElevenLabs credit limit exceeded (402): {resp.text}")
-        elif resp.status_code == 429:
-            raise VoiceQuotaExceededError(f"ElevenLabs rate limit exceeded (429): {resp.text}")
+        resp_text_lower = resp.text.lower()
+        if (
+            resp.status_code in (401, 402, 429)
+            or is_quota_error(resp.text)
+            or is_quota_error(resp.status_code)
+        ):
+            if resp.status_code == 401 and not is_quota_error(resp.text):
+                raise VoiceAuthError(f"ElevenLabs authorization failed (401): {resp.text}")
+            raise VoiceQuotaExceededError(f"ElevenLabs quota/credit limit exceeded ({resp.status_code}): {resp.text}")
         elif resp.status_code != 200:
             raise VoiceEngineError(f"ElevenLabs API error (status {resp.status_code}): {resp.text[:200]}")
 
@@ -328,6 +350,8 @@ class SarvamVoiceProvider(BaseVoiceProvider):
         try:
             resp = requests.post(url, headers=headers, json=payload, timeout=20.0)
         except Exception as e:
+            if is_quota_error(e):
+                raise VoiceQuotaExceededError(f"Sarvam AI rate/quota limit reached: {e}")
             raise VoiceEngineError(f"Sarvam AI network request failed: {e}")
 
         # Fallback to bulbul:v1 schema if 400 bad request
@@ -347,11 +371,18 @@ class SarvamVoiceProvider(BaseVoiceProvider):
             try:
                 resp = requests.post(url, headers=headers, json=alt_payload, timeout=20.0)
             except Exception as e:
+                if is_quota_error(e):
+                    raise VoiceQuotaExceededError(f"Sarvam AI rate/quota limit reached: {e}")
                 raise VoiceEngineError(f"Sarvam AI retry failed: {e}")
 
-        if resp.status_code == 401:
-            raise VoiceAuthError(f"Sarvam AI authorization failed (401): {resp.text}")
-        elif resp.status_code in (402, 429):
+        resp_text_lower = resp.text.lower()
+        if (
+            resp.status_code in (401, 402, 429)
+            or is_quota_error(resp.text)
+            or is_quota_error(resp.status_code)
+        ):
+            if resp.status_code == 401 and not is_quota_error(resp.text):
+                raise VoiceAuthError(f"Sarvam AI authorization failed (401): {resp.text}")
             raise VoiceQuotaExceededError(f"Sarvam AI credit or rate limit exceeded ({resp.status_code}): {resp.text}")
         elif resp.status_code != 200:
             raise VoiceEngineError(f"Sarvam AI API error (status {resp.status_code}): {resp.text[:200]}")
@@ -548,7 +579,26 @@ class UnifiedVoiceRouter:
             logger.info(f"💾 [Audio Cache Hit] (0 credits spent) for \"{clean_text[:40]}...\"")
             return audio, sr, meta
 
-        # 2. Synthesize via primary provider with automatic fallback
+        # 2. Check Quota Health Tracker: if primary provider is already exhausted, skip directly to Kokoro
+        if target_provider in ("elevenlabs", "sarvam") and not quota_tracker.is_healthy(target_provider):
+            logger.info(
+                f"⏩ [VoiceRouter] Provider '{target_provider}' is marked EXHAUSTED in QuotaTracker. "
+                f"Immediately cascading to Kokoro ONNX offline synthesis."
+            )
+            fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
+            audio, sr, meta = self.kokoro.synthesize(
+                text=clean_text,
+                voice=fallback_voice,
+                speed=active_speed,
+                language=lang_norm
+            )
+            audio = sanitize_audio_samples(audio, sr)
+            meta["fallback_from"] = target_provider
+            meta["fallback_reason"] = f"Provider '{target_provider}' previously marked exhausted"
+            self.cache.put(cache_key, audio, sr, meta)
+            return audio, sr, meta
+
+        # 3. Synthesize via primary provider with automatic fallback
         try:
             if target_provider == "elevenlabs":
                 logger.info(f"🎙️ [ElevenLabs] Synthesizing beat with voice '{resolved_voice}', speed {active_speed:.2f}x...")
@@ -558,6 +608,7 @@ class UnifiedVoiceRouter:
                     speed=active_speed,
                     language=lang_norm
                 )
+                quota_tracker.record_success("elevenlabs")
             elif target_provider == "sarvam":
                 logger.info(f"🎙️ [Sarvam AI] Synthesizing Hindi beat with speaker '{resolved_voice}', pace {active_speed:.2f}x...")
                 audio, sr, meta = self.sarvam.synthesize(
@@ -566,6 +617,7 @@ class UnifiedVoiceRouter:
                     speed=active_speed,
                     language=lang_norm
                 )
+                quota_tracker.record_success("sarvam")
             else:
                 logger.info(f"🎙️ [Kokoro ONNX] Synthesizing offline beat with voice '{resolved_voice}'...")
                 audio, sr, meta = self.kokoro.synthesize(
@@ -574,23 +626,41 @@ class UnifiedVoiceRouter:
                     speed=active_speed,
                     language=lang_norm
                 )
+            audio = sanitize_audio_samples(audio, sr)
         except (VoiceQuotaExceededError, VoiceAuthError, VoiceEngineError, Exception) as exc:
-            logger.warning(
-                f"⚠️ [Voice Router] Provider '{target_provider}' encountered error: {exc}. "
-                f"Falling back transparently to Kokoro ONNX offline speech synthesis!"
-            )
-            # Seamless fallback to Kokoro with automatic voice name resolution
-            fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
-            audio, sr, meta = self.kokoro.synthesize(
-                text=clean_text,
-                voice=fallback_voice,
-                speed=active_speed,
-                language="en-us"
-            )
-            meta["fallback_from"] = target_provider
-            meta["fallback_reason"] = str(exc)
+            if target_provider in ("elevenlabs", "sarvam"):
+                err_msg = str(exc)
+                if (
+                    is_quota_error(exc)
+                    or "quota_exceeded" in err_msg.lower()
+                    or "429" in err_msg
+                    or "402" in err_msg
+                    or "401" in err_msg
+                ):
+                    quota_tracker.record_exhausted(target_provider, f"TTS quota exhausted: {err_msg}")
+                else:
+                    quota_tracker.record_exhausted(target_provider, f"TTS provider failure: {err_msg}")
 
-        # 3. Cache the newly synthesized audio
+                logger.warning(
+                    f"⚠️ [Voice Router] Provider '{target_provider}' encountered error: {exc}. "
+                    f"Falling back transparently to Kokoro ONNX offline speech synthesis!"
+                )
+                # Seamless fallback to Kokoro with automatic voice name resolution
+                fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
+                audio, sr, meta = self.kokoro.synthesize(
+                    text=clean_text,
+                    voice=fallback_voice,
+                    speed=active_speed,
+                    language=lang_norm
+                )
+                audio = sanitize_audio_samples(audio, sr)
+                meta["fallback_from"] = target_provider
+                meta["fallback_reason"] = str(exc)
+            else:
+                # If target_provider is already kokoro, re-raise because there is no lower offline tier
+                raise exc
+
+        # 4. Cache the newly synthesized audio
         self.cache.put(cache_key, audio, sr, meta)
 
         return audio, sr, meta

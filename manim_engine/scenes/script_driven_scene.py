@@ -41,6 +41,7 @@ from manim_engine.primitives.script_motifs import (
     create_script_motif
 )
 from manim_engine.controllers import SpotlightStagingController, KineticCameraController
+from manim_engine.primitives.particles import create_formula_sparkle_burst, create_formula_halo_pulse
 
 
 class ScriptDrivenScene(MovingCameraScene):
@@ -101,7 +102,8 @@ class ScriptDrivenScene(MovingCameraScene):
             for y in np.arange(-6.0, 6.1, 0.9):
                 dots.add(Dot(point=[x, y, 0], radius=0.016, color="#2D3748", fill_opacity=0.35))
         dots.set_z_index(-10)
-        self.add(dots)
+        self.dots = dots
+        self.add(self.dots)
 
     def setup_header(self):
         """Places subtle brand watermark in the topmost safe zone (Depth Layer 3)."""
@@ -113,6 +115,10 @@ class ScriptDrivenScene(MovingCameraScene):
         ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.header_group.set_z_index(50)
+        def update_header(mob, dt):
+            cam_center = self.camera.frame.get_center()
+            mob.move_to([cam_center[0], cam_center[1] + 7.1, 0])
+        self.header_group.add_updater(update_header)
         self.add(self.header_group)
 
     def setup_kinetic_captions(self):
@@ -167,7 +173,8 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_color="#334155",
                             stroke_width=1.4
                         )
-                        mob.become(VGroup(bg, txt).move_to([0, -3.45, 0]))
+                        cam_center = self.camera.frame.get_center()
+                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.45, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
@@ -461,25 +468,54 @@ class ScriptDrivenScene(MovingCameraScene):
             except Exception as e:
                 print(f"⚠️ Spotlight staging notice: {e}")
 
+            # Formula Luminous Sparkle Burst & Neon Halo (Visual Engine 7.5)
+            particle_anims = []
+            try:
+                if len(tray_group) > 0 and beat_id in [3, 4, 5]:
+                    burst_pts, burst_anim = create_formula_sparkle_burst(tray_group, color="#38BDF8", run_time=enter_time)
+                    halo_box, halo_anim = create_formula_halo_pulse(tray_group, color="#38BDF8", run_time=enter_time)
+                    self.add(burst_pts, halo_box)
+                    particle_anims = [burst_anim, halo_anim]
+            except Exception as e_p:
+                print(f"⚠️ Particle entrance notice: {e_p}")
+
             entrance_group = [motif_enter, formula_anim]
             if spotlight_anims:
                 entrance_group.extend(spotlight_anims)
+            if particle_anims:
+                entrance_group.extend(particle_anims)
             self.play(*entrance_group, run_time=enter_time)
 
-            # 3. Focal Kinetic Action & Concurrent Punch-In Zoom
+            # 3. Focal Kinetic Action & Cinematic Camera Staging (Cinematic Engine 8.0)
             action_time = min(1.3, duration * 0.26)
-            svo_data = b.get("svo_action")
-            punch_anim = None
-            if beat_id in (1, 5) or (svo_data and svo_data.get("anchor_word")):
+            camera_action_anim = None
+
+            if beat_id == 5:
+                # Climax Peak: High-energy snap zoom framing the empirical victory / SOTA delta badge
                 try:
-                    punch_anim = self.kinetic_camera.get_punch_in_animation(
+                    camera_action_anim = self.kinetic_camera.get_hero_metric_snap_animation(
                         camera_frame=self.camera.frame,
                         target_point=motif.get_center(),
-                        zoom_factor=0.94,
+                        zoom_factor=0.76,
                         run_time=action_time
                     )
                 except Exception as e:
-                    print(f"⚠️ Punch-in zoom notice: {e}")
+                    print(f"⚠️ Hero metric snap notice: {e}")
+            elif beat_id == 3 and motif_type in ["pipeline_stages", "split_flow", "branching_outputs"]:
+                # Lateral Tracking Dolly: Smooth camera tracking pan across pipeline stages (Left to Right)
+                try:
+                    camera_action_anim = self.kinetic_camera.get_lateral_tracking_animation(
+                        camera_frame=self.camera.frame,
+                        start_x=-0.8,
+                        end_x=0.8,
+                        y=0.0,
+                        run_time=action_time
+                    )
+                except Exception as e:
+                    print(f"⚠️ Lateral tracking dolly notice: {e}")
+            else:
+                # Beats 1, 2, 4 maintain visual stability without repetitive zoom pulsing
+                camera_action_anim = None
 
             try:
                 if hasattr(motif, "get_kinetic_animation"):
@@ -513,8 +549,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     kinetic_anim = motif.animate(rate_func=there_and_back, run_time=action_time).scale(1.02)
 
                 action_anims = [kinetic_anim]
-                if punch_anim:
-                    action_anims.append(punch_anim)
+                if camera_action_anim:
+                    action_anims.append(camera_action_anim)
                 self.play(*action_anims, run_time=action_time)
             except Exception as e:
                 print(f"⚠️ Kinetic action warning for {motif_type}: {e}")
@@ -529,8 +565,20 @@ class ScriptDrivenScene(MovingCameraScene):
 
             # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
             actual_exit = max(0.15, expected_end - self.renderer.time)
-            reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
-            self.play(FadeOut(motif, shift=DOWN * 0.15), reset_anim, run_time=actual_exit)
+            exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
+            if self.current_formula_mobj:
+                exit_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
+            
+            # Only reset camera framing if the camera actually moved or zoomed
+            if camera_action_anim is not None or beat_id == 5:
+                reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
+                exit_anims.append(reset_anim)
+
+            self.play(*exit_anims, run_time=actual_exit)
+            self.remove(motif)
+            if self.current_formula_mobj:
+                self.remove(self.current_formula_mobj)
+                self.current_formula_mobj = None
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
@@ -544,11 +592,13 @@ class ScriptDrivenScene(MovingCameraScene):
 
         anims = []
 
-        # 1. Subtle Continuous 2.5% Camera Drift / Slow Push-In via Kinetic Camera Controller
+        # 1. Continuous Organic Camera Breathing (6% dynamic glide)
         anims.append(
             self.kinetic_camera.get_ambient_drift_animation(
                 camera_frame=self.camera.frame,
-                duration=remaining_time
+                duration=remaining_time,
+                scale_factor=0.94,
+                shift_vector=np.array([0.0, 0.12, 0.0])
             )
         )
 
@@ -557,40 +607,40 @@ class ScriptDrivenScene(MovingCameraScene):
             if hasattr(motif, "get_ambient_animation"):
                 anims.append(motif.get_ambient_animation(run_time=remaining_time))
             elif motif_type == "wave_collision" and hasattr(motif, "wave_c"):
-                anims.append(motif.wave_c.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=5.8, color="#F43F5E"))
+                anims.append(motif.wave_c.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.2, color="#F43F5E"))
             elif motif_type == "radio_tuner" and hasattr(motif, "needle"):
-                anims.append(motif.needle.animate(rate_func=there_and_back, run_time=remaining_time).shift(RIGHT * 0.18))
+                anims.append(motif.needle.animate(rate_func=there_and_back, run_time=remaining_time).shift(RIGHT * 0.28))
             elif motif_type == "subspace_vectors" and hasattr(motif, "angle_arc"):
-                anims.append(motif.angle_arc.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#10B981", width=5.0))
+                anims.append(motif.angle_arc.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#10B981", width=5.5))
             elif motif_type == "prism_disentangler" and hasattr(motif, "out_beam1") and hasattr(motif, "out_beam2"):
-                anims.append(motif.out_beam1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.5, color="#67E8F9"))
-                anims.append(motif.out_beam2.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.5, color="#FBBF24"))
+                anims.append(motif.out_beam1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=7.5, color="#67E8F9"))
+                anims.append(motif.out_beam2.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=7.5, color="#FBBF24"))
             elif motif_type == "branching_outputs" and hasattr(motif, "card1") and hasattr(motif, "card2"):
-                anims.append(motif.card1.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
-                anims.append(motif.card2.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+                anims.append(motif.card1.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.05))
+                anims.append(motif.card2.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.05))
             elif motif_type == "tree_search" and hasattr(motif, "c1"):
-                anims.append(motif.c1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#FBBF24", width=3.5))
+                anims.append(motif.c1.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#FBBF24", width=4.5))
             elif motif_type == "diffusion_denoise" and hasattr(motif, "shape3"):
-                anims.append(motif.shape3.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.04))
+                anims.append(motif.shape3.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.08))
             elif motif_type == "attention_routing" and hasattr(motif, "lasers"):
-                anims.append(motif.lasers.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=6.0, color="#6EE7B7"))
+                anims.append(motif.lasers.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(width=7.0, color="#6EE7B7"))
             elif motif_type == "memory_buffer" and hasattr(motif, "slots"):
-                anims.append(motif.slots.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#34D399", width=3.5))
+                anims.append(motif.slots.animate(rate_func=there_and_back, run_time=remaining_time).set_stroke(color="#34D399", width=4.5))
             elif motif_type == "comparative_bars" and hasattr(motif, "fill_bar_a"):
-                anims.append(motif.fill_bar_a.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+                anims.append(motif.fill_bar_a.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.05))
             elif motif_type in ["paper_figure", "bespoke_svg", "dynamic_svg"] and hasattr(motif, "fig_mobj") and motif.fig_mobj:
-                anims.append(motif.fig_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+                anims.append(motif.fig_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.04))
             elif hasattr(motif, "badge"):
-                anims.append(motif.badge.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.02))
+                anims.append(motif.badge.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.04))
             else:
-                anims.append(motif.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.018))
+                anims.append(motif.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.04))
         except Exception as e:
             print(f"⚠️ Ambient micro-motion note for {motif_type}: {e}")
 
-        # 3. Soft ambient pulse on lower concept/formula tray
+        # 3. Dynamic ambient pulse on lower concept/formula tray
         if self.current_formula_mobj:
             anims.append(
-                self.current_formula_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.012)
+                self.current_formula_mobj.animate(rate_func=there_and_back, run_time=remaining_time).scale(1.035)
             )
 
         self.play(*anims, run_time=remaining_time)
@@ -599,19 +649,24 @@ class ScriptDrivenScene(MovingCameraScene):
         """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
         total_beats = len(self.spec.get("beats", []))
         duration = self.get_beat_duration(total_beats, 4.5)
-        fadeout_math_time = 0.3
-        fadeouts = []
-        if self.current_formula_mobj:
-            fadeouts.append(FadeOut(self.current_formula_mobj))
-            self.current_formula_mobj = None
+        # 1. Cleanly purge ALL lingering vector mobjects from prior beats (except background dots & header)
+        persistent = {getattr(self, "dots", None), getattr(self, "header_group", None)}
+        lingering = [m for m in list(self.mobjects) if m not in persistent and m is not None]
+
         if hasattr(self, "caption_container") and self.caption_container:
-            self.caption_container.clear_updaters()
-            fadeouts.append(FadeOut(self.caption_container))
-            self.caption_container = None
-        if fadeouts:
-            self.play(*fadeouts, run_time=fadeout_math_time)
-        else:
-            fadeout_math_time = 0.0
+            try:
+                self.caption_container.clear_updaters()
+            except Exception:
+                pass
+
+        purge_time = 0.25 if lingering else 0.0
+        if lingering:
+            self.play(*[FadeOut(m) for m in lingering], run_time=purge_time)
+            for m in lingering:
+                self.remove(m)
+
+        self.current_formula_mobj = None
+        self.caption_container = None
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(
             logo_title="THE MODEL VERSE",
@@ -628,7 +683,7 @@ class ScriptDrivenScene(MovingCameraScene):
         self.play(FadeIn(sub, shift=UP * 0.1), run_time=intro_sub_time)
 
         # Micro-drift during outro narration & music
-        used_so_far = fadeout_math_time + intro_logo_time + intro_sub_time + exit_time
+        used_so_far = purge_time + intro_logo_time + intro_sub_time + exit_time
         outro_hold = max(0.5, duration - used_so_far)
         self.play(
             self.camera.frame.animate(rate_func=linear).scale(0.985).shift(UP * 0.05),
