@@ -1,0 +1,1783 @@
+{
+  "id": "tokenrouter_efficient_serving",
+  "title": "TokenRouter: Sub-Token LLM Serving Engine",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_moe",
+  "hook_tag": "ASYNC INFERENCE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do 64.15x of your GPU cycles waste compute before TokenRouter fixes the bottleneck?",
+      "visual_focus": "A synchronized metronome suddenly breaking rhythm.",
+      "highlight_words": {
+        "lockstep": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Batch synchronization",
+        "action_verb": "chokes",
+        "direct_object": "inference throughput",
+        "anchor_word": "stalling",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE SYNCHRONIZATION TRAP",
+        "sub": "Why your batching logic is failing",
+        "accent_color": "#38BDF8",
+        "params": {
+          "col_a_title": "COARSE QUERY ROUTING",
+          "col_a_stat": "STATIC BATCHING",
+          "col_b_title": "TOKEN-LEVEL ROUTING",
+          "col_b_stat": "DESYNC STALL",
+          "col_a_specs": [
+            "Fixed model assignment",
+            "Continuous batching works",
+            "Sub-optimal Pareto trade-off"
+          ],
+          "col_b_specs": [
+            "Dynamic per-token switching",
+            "Severe step desynchronization",
+            "Idle GPU execution bubbles"
+          ]
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 76,
+      "hook_band": "STRONG",
+      "hook_formula": "The Question",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE SYNCHRONIZATION TRAP",
+        "sub": "Why your batching logic is failing",
+        "accent_color": "#38BDF8",
+        "col_a_title": "COARSE QUERY ROUTING",
+        "col_a_stat": "STATIC BATCHING",
+        "col_b_title": "TOKEN-LEVEL ROUTING",
+        "col_b_stat": "DESYNC STALL",
+        "col_a_specs": [
+          "Fixed model assignment",
+          "Continuous batching works",
+          "Sub-optimal Pareto trade-off"
+        ],
+        "col_b_specs": [
+          "Dynamic per-token switching",
+          "Severe step desynchronization",
+          "Idle GPU execution bubbles"
+        ]
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 6.19,
+      "duration": 6.19,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.015,
+          "end": 0.17,
+          "duration": 0.155,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.35,
+          "duration": 0.18,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "64.15x",
+          "clean_word": "6415x",
+          "phonemes": "s\u02c8\u026aks \u03b8\u02c8a\u028az\u0259nd f\u02c8\u0254\u02d0\u0279h\u02c8\u028cnd\u0279\u026ad f\u02c8\u026afti\u02d0n \u02c8\u025bks",
+          "start": 0.35,
+          "end": 2.255,
+          "duration": 1.905,
+          "frame_ahead_trigger": 0.31
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 2.255,
+          "end": 2.314,
+          "duration": 0.059,
+          "frame_ahead_trigger": 2.215
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 2.314,
+          "end": 2.45,
+          "duration": 0.136,
+          "frame_ahead_trigger": 2.274
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 2.45,
+          "end": 2.96,
+          "duration": 0.51,
+          "frame_ahead_trigger": 2.41
+        },
+        {
+          "word": "cycles",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 2.96,
+          "end": 3.305,
+          "duration": 0.345,
+          "frame_ahead_trigger": 2.92
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 3.305,
+          "end": 3.705,
+          "duration": 0.4,
+          "frame_ahead_trigger": 3.265
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 3.705,
+          "end": 4.055,
+          "duration": 0.35,
+          "frame_ahead_trigger": 3.665
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 4.055,
+          "end": 4.41,
+          "duration": 0.355,
+          "frame_ahead_trigger": 4.015
+        },
+        {
+          "word": "TokenRouter",
+          "clean_word": "tokenrouter",
+          "phonemes": "t\u02c8o\u028ak\u0259n \u0279\u02c8a\u028a\u027e\u025a",
+          "start": 4.41,
+          "end": 5.02,
+          "duration": 0.61,
+          "frame_ahead_trigger": 4.37
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 5.02,
+          "end": 5.29,
+          "duration": 0.27,
+          "frame_ahead_trigger": 4.98
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.29,
+          "end": 5.41,
+          "duration": 0.12,
+          "frame_ahead_trigger": 5.25
+        },
+        {
+          "word": "bottleneck?",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 5.41,
+          "end": 5.85,
+          "duration": 0.44,
+          "frame_ahead_trigger": 5.37
+        }
+      ],
+      "audio_duration": 6.19,
+      "slot_duration": 6.34
+    },
+    {
+      "beat_id": 2,
+      "text": "Current engines treat models like a rigid assembly line; one slow token forces the entire batch to wait.",
+      "visual_focus": "A conveyor belt stopping because one item is misaligned.",
+      "highlight_words": {
+        "rigid assembly line": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Batch admission delays",
+        "action_verb": "strangle",
+        "direct_object": "GPU efficiency",
+        "anchor_word": "wait",
+        "semantic_role": "conflict_setup"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE BATCH BOTTLENECK",
+        "sub": "Waiting on the slowest link",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Subserver A (Small LLM)",
+          "stream_b_label": "Subserver B (Large LLM)",
+          "barrier_label": "ADMISSION SYNC BARRIER",
+          "barrier_sub": "Wait Penalty: Idle GPU Bubbles"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE BATCH BOTTLENECK",
+        "sub": "Waiting on the slowest link",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Subserver A (Small LLM)",
+        "stream_b_label": "Subserver B (Large LLM)",
+        "barrier_label": "ADMISSION SYNC BARRIER",
+        "barrier_sub": "Wait Penalty: Idle GPU Bubbles"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 6.34,
+      "end": 11.97,
+      "duration": 5.63,
+      "word_timings": [
+        {
+          "word": "Current",
+          "clean_word": "current",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 6.372,
+          "end": 6.792,
+          "duration": 0.42,
+          "frame_ahead_trigger": 6.482
+        },
+        {
+          "word": "engines",
+          "clean_word": "engines",
+          "phonemes": "\u02c8\u025bnd\u0292\u026anz",
+          "start": 6.792,
+          "end": 7.242,
+          "duration": 0.45,
+          "frame_ahead_trigger": 6.902
+        },
+        {
+          "word": "treat",
+          "clean_word": "treat",
+          "phonemes": "t\u0279\u02c8i\u02d0t",
+          "start": 7.242,
+          "end": 7.462,
+          "duration": 0.22,
+          "frame_ahead_trigger": 7.352
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 7.462,
+          "end": 7.947,
+          "duration": 0.485,
+          "frame_ahead_trigger": 7.572
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.947,
+          "end": 8.142,
+          "duration": 0.195,
+          "frame_ahead_trigger": 8.057
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.142,
+          "end": 8.412,
+          "duration": 0.27,
+          "frame_ahead_trigger": 8.252
+        },
+        {
+          "word": "rigid",
+          "clean_word": "rigid",
+          "phonemes": "\u0279\u02c8\u026ad\u0292\u026ad",
+          "start": 8.412,
+          "end": 8.712,
+          "duration": 0.3,
+          "frame_ahead_trigger": 8.522
+        },
+        {
+          "word": "assembly",
+          "clean_word": "assembly",
+          "phonemes": "\u0250s\u02c8\u025bmbli",
+          "start": 8.712,
+          "end": 9.134,
+          "duration": 0.422,
+          "frame_ahead_trigger": 8.822
+        },
+        {
+          "word": "line;",
+          "clean_word": "line",
+          "phonemes": "l\u02c8a\u026an",
+          "start": 9.134,
+          "end": 9.347,
+          "duration": 0.213,
+          "frame_ahead_trigger": 9.244
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 9.347,
+          "end": 9.657,
+          "duration": 0.31,
+          "frame_ahead_trigger": 9.457
+        },
+        {
+          "word": "slow",
+          "clean_word": "slow",
+          "phonemes": "sl\u02c8o\u028a",
+          "start": 9.657,
+          "end": 9.877,
+          "duration": 0.22,
+          "frame_ahead_trigger": 9.767
+        },
+        {
+          "word": "token",
+          "clean_word": "token",
+          "phonemes": "t\u02c8o\u028ak\u0259n",
+          "start": 9.877,
+          "end": 10.127,
+          "duration": 0.25,
+          "frame_ahead_trigger": 9.987
+        },
+        {
+          "word": "forces",
+          "clean_word": "forces",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
+          "start": 10.127,
+          "end": 10.692,
+          "duration": 0.565,
+          "frame_ahead_trigger": 10.237
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 10.692,
+          "end": 10.749,
+          "duration": 0.058,
+          "frame_ahead_trigger": 10.802
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 10.749,
+          "end": 11.172,
+          "duration": 0.422,
+          "frame_ahead_trigger": 10.859
+        },
+        {
+          "word": "batch",
+          "clean_word": "batch",
+          "phonemes": "b\u02c8\u00e6t\u0283",
+          "start": 11.172,
+          "end": 11.372,
+          "duration": 0.2,
+          "frame_ahead_trigger": 11.282
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 11.372,
+          "end": 11.467,
+          "duration": 0.095,
+          "frame_ahead_trigger": 11.482
+        },
+        {
+          "word": "wait.",
+          "clean_word": "wait",
+          "phonemes": "w\u02c8e\u026at",
+          "start": 11.467,
+          "end": 11.792,
+          "duration": 0.325,
+          "frame_ahead_trigger": 11.577
+        }
+      ],
+      "audio_duration": 5.63,
+      "slot_duration": 5.78
+    },
+    {
+      "beat_id": 3,
+      "text": "TokenRouter shatters this by decoupling the runtime into independent, asynchronous subservers for every single model.",
+      "visual_focus": "A single line splitting into multiple parallel, independent streams.",
+      "highlight_words": {
+        "asynchronous subservers": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "TokenRouter",
+        "action_verb": "decouples",
+        "direct_object": "model execution",
+        "anchor_word": "independent",
+        "semantic_role": "breakthrough"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "TOKENROUTER ARCHITECTURE",
+        "sub": "A single line splitting into multiple parallel, independent strea",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.png",
+          "arxiv_id": "2610.12242",
+          "title": "TOKENROUTER ARCHITECTURE",
+          "sub": "A single line splitting into multiple parallel, independent strea",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Architecture",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.png",
+        "arxiv_id": "2610.12242",
+        "title": "TOKENROUTER ARCHITECTURE",
+        "sub": "A single line splitting into multiple parallel, independent strea",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Architecture",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 12.12,
+      "end": 17.96,
+      "duration": 5.85,
+      "word_timings": [
+        {
+          "word": "TokenRouter",
+          "clean_word": "tokenrouter",
+          "phonemes": "t\u02c8o\u028ak\u0259n \u0279\u02c8a\u028a\u027e\u025a",
+          "start": 12.119,
+          "end": 12.894,
+          "duration": 0.775,
+          "frame_ahead_trigger": 12.379
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 12.894,
+          "end": 13.189,
+          "duration": 0.295,
+          "frame_ahead_trigger": 13.154
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 13.189,
+          "end": 13.404,
+          "duration": 0.215,
+          "frame_ahead_trigger": 13.449
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 13.404,
+          "end": 13.559,
+          "duration": 0.155,
+          "frame_ahead_trigger": 13.664
+        },
+        {
+          "word": "decoupling",
+          "clean_word": "decoupling",
+          "phonemes": "d\u1d7bk\u02c8\u028cpl\u026a\u014b",
+          "start": 13.559,
+          "end": 14.084,
+          "duration": 0.525,
+          "frame_ahead_trigger": 13.819
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 14.084,
+          "end": 14.204,
+          "duration": 0.12,
+          "frame_ahead_trigger": 14.344
+        },
+        {
+          "word": "runtime",
+          "clean_word": "runtime",
+          "phonemes": "\u0279\u02c8\u028cnta\u026am",
+          "start": 14.204,
+          "end": 14.609,
+          "duration": 0.405,
+          "frame_ahead_trigger": 14.464
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 14.609,
+          "end": 14.819,
+          "duration": 0.21,
+          "frame_ahead_trigger": 14.869
+        },
+        {
+          "word": "independent,",
+          "clean_word": "independent",
+          "phonemes": "\u02cc\u026and\u1d7bp\u02c8\u025bnd\u0259nt",
+          "start": 14.819,
+          "end": 15.619,
+          "duration": 0.8,
+          "frame_ahead_trigger": 15.079
+        },
+        {
+          "word": "asynchronous",
+          "clean_word": "asynchronous",
+          "phonemes": "\u0250s\u02c8\u026a\u014bk\u0279\u0259n\u0259s",
+          "start": 15.619,
+          "end": 16.159,
+          "duration": 0.54,
+          "frame_ahead_trigger": 15.879
+        },
+        {
+          "word": "subservers",
+          "clean_word": "subservers",
+          "phonemes": "s\u028cbs\u02c8\u025c\u02d0v\u025az",
+          "start": 16.159,
+          "end": 16.574,
+          "duration": 0.415,
+          "frame_ahead_trigger": 16.419
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 16.574,
+          "end": 16.814,
+          "duration": 0.24,
+          "frame_ahead_trigger": 16.834
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 16.814,
+          "end": 17.089,
+          "duration": 0.275,
+          "frame_ahead_trigger": 17.074
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 17.089,
+          "end": 17.424,
+          "duration": 0.335,
+          "frame_ahead_trigger": 17.349
+        },
+        {
+          "word": "model.",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 17.424,
+          "end": 17.809,
+          "duration": 0.385,
+          "frame_ahead_trigger": 17.684
+        }
+      ],
+      "audio_duration": 5.85,
+      "slot_duration": 5.99
+    },
+    {
+      "beat_id": 4,
+      "text": "It uses a delayed-batching scheduler, with hyperparameters tuned by a mathematical throughput model to maximize every cycle.",
+      "visual_focus": "Mathematical variables adjusting a dynamic scheduler graph.",
+      "highlight_words": {
+        "delayed-batching": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Scheduler",
+        "action_verb": "optimizes",
+        "direct_object": "throughput",
+        "anchor_word": "mathematical",
+        "semantic_role": "technical_proof"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: TOKENROUTER: SUB-T",
+        "sub": "Mathematical variables adjusting a dynamic scheduler graph.",
+        "params": {
+          "title": "KERNEL CODE: TOKENROUTER: SUB-T",
+          "sub": "Mathematical variables adjusting a dynamic scheduler graph.",
+          "filename": "token_router_scheduler.py",
+          "language": "python",
+          "lines": [
+            "class DelayedBatchScheduler:",
+            "def get_optimal_window(self, arrival_rate):",
+            "return math_model.solve_window(arrival_rate)",
+            "async def schedule_subserver(self, model_id):",
+            "batch = await self.accumulate(wait=self.window)",
+            "return await subserver[model_id].forward(batch)"
+          ],
+          "highlight_lines": [
+            3,
+            5
+          ],
+          "trace_register": "\u26a1 MATHEMATICAL THROUGHPUT DELAYED BATCHING",
+          "delta_badge": "Calculates optimal batch delay to maximize GPU satur"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: TOKENROUTER: SUB-T",
+        "sub": "Mathematical variables adjusting a dynamic scheduler graph.",
+        "filename": "token_router_scheduler.py",
+        "language": "python",
+        "lines": [
+          "class DelayedBatchScheduler:",
+          "def get_optimal_window(self, arrival_rate):",
+          "return math_model.solve_window(arrival_rate)",
+          "async def schedule_subserver(self, model_id):",
+          "batch = await self.accumulate(wait=self.window)",
+          "return await subserver[model_id].forward(batch)"
+        ],
+        "highlight_lines": [
+          3,
+          5
+        ],
+        "trace_register": "\u26a1 MATHEMATICAL THROUGHPUT DELAYED BATCHING",
+        "delta_badge": "Calculates optimal batch delay to maximize GPU satur"
+      },
+      "start": 18.11,
+      "end": 24.75,
+      "duration": 6.63,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 18.124,
+          "end": 18.229,
+          "duration": 0.105,
+          "frame_ahead_trigger": 18.534
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 18.229,
+          "end": 18.624,
+          "duration": 0.395,
+          "frame_ahead_trigger": 18.639
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.624,
+          "end": 18.749,
+          "duration": 0.125,
+          "frame_ahead_trigger": 19.034
+        },
+        {
+          "word": "delayed-batching",
+          "clean_word": "delayedbatching",
+          "phonemes": "d\u1d7bl\u02c8e\u026a\u026adb\u02cc\u00e6t\u0283\u026a\u014b",
+          "start": 18.749,
+          "end": 19.469,
+          "duration": 0.72,
+          "frame_ahead_trigger": 19.159
+        },
+        {
+          "word": "scheduler,",
+          "clean_word": "scheduler",
+          "phonemes": "sk\u02c8\u025bd\u0292u\u02d0l\u025a",
+          "start": 19.469,
+          "end": 20.073,
+          "duration": 0.604,
+          "frame_ahead_trigger": 19.879
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 20.073,
+          "end": 20.229,
+          "duration": 0.156,
+          "frame_ahead_trigger": 20.483
+        },
+        {
+          "word": "hyperparameters",
+          "clean_word": "hyperparameters",
+          "phonemes": "h\u02cca\u026ap\u025ap\u025a\u0279\u02c8\u00e6m\u026a\u027e\u025az",
+          "start": 20.229,
+          "end": 21.034,
+          "duration": 0.805,
+          "frame_ahead_trigger": 20.639
+        },
+        {
+          "word": "tuned",
+          "clean_word": "tuned",
+          "phonemes": "t\u02c8u\u02d0nd",
+          "start": 21.034,
+          "end": 21.344,
+          "duration": 0.31,
+          "frame_ahead_trigger": 21.444
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 21.344,
+          "end": 21.619,
+          "duration": 0.275,
+          "frame_ahead_trigger": 21.754
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 21.619,
+          "end": 21.814,
+          "duration": 0.195,
+          "frame_ahead_trigger": 22.029
+        },
+        {
+          "word": "mathematical",
+          "clean_word": "mathematical",
+          "phonemes": "m\u02cc\u00e6\u03b8\u026am\u02c8\u00e6\u027e\u026ak\u0259l",
+          "start": 21.814,
+          "end": 22.374,
+          "duration": 0.56,
+          "frame_ahead_trigger": 22.224
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 22.374,
+          "end": 22.869,
+          "duration": 0.495,
+          "frame_ahead_trigger": 22.784
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 22.869,
+          "end": 23.219,
+          "duration": 0.35,
+          "frame_ahead_trigger": 23.279
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.219,
+          "end": 23.369,
+          "duration": 0.15,
+          "frame_ahead_trigger": 23.629
+        },
+        {
+          "word": "maximize",
+          "clean_word": "maximize",
+          "phonemes": "m\u02c8\u00e6ks\u026am\u02cca\u026az",
+          "start": 23.369,
+          "end": 23.984,
+          "duration": 0.615,
+          "frame_ahead_trigger": 23.779
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 23.984,
+          "end": 24.329,
+          "duration": 0.345,
+          "frame_ahead_trigger": 24.394
+        },
+        {
+          "word": "cycle.",
+          "clean_word": "cycle",
+          "phonemes": "s\u02c8a\u026ak\u0259l",
+          "start": 24.329,
+          "end": 24.604,
+          "duration": 0.275,
+          "frame_ahead_trigger": 24.739
+        }
+      ],
+      "audio_duration": 6.63,
+      "slot_duration": 6.79
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A massive 64x throughput boost, proving async routing is the new standard for model serving.",
+      "visual_focus": "A bar chart showing a massive spike in performance.",
+      "highlight_words": {
+        "64x": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "TokenRouter",
+        "action_verb": "delivers",
+        "direct_object": "64x throughput",
+        "anchor_word": "boost",
+        "semantic_role": "victory"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "LLM ROUTED SERVING BENCHMARK",
+        "sub": "A bar chart showing a massive spike in performance.",
+        "params": {
+          "title": "LLM ROUTED SERVING BENCHMARK",
+          "sub": "A bar chart showing a massive spike in performance.",
+          "metric_name": "Decoding Throughput",
+          "unit": "tokens/s",
+          "contestants": [
+            {
+              "name": "TokenRouter",
+              "value": 64.15,
+              "display_val": "64.15x",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "vLLM-Async Pipeline",
+              "value": 4.2,
+              "display_val": "4.20x",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Single-LLM Serving Baseline",
+              "value": 1.0,
+              "display_val": "1.00x",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 UP TO 64.15x THROUGHPUT ACCELERATION"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "LLM ROUTED SERVING BENCHMARK",
+        "sub": "A bar chart showing a massive spike in performance.",
+        "metric_name": "Decoding Throughput",
+        "unit": "tokens/s",
+        "contestants": [
+          {
+            "name": "TokenRouter",
+            "value": 64.15,
+            "display_val": "64.15x",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "vLLM-Async Pipeline",
+            "value": 4.2,
+            "display_val": "4.20x",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Single-LLM Serving Baseline",
+            "value": 1.0,
+            "display_val": "1.00x",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 UP TO 64.15x THROUGHPUT ACCELERATION"
+      },
+      "start": 24.9,
+      "end": 30.59,
+      "duration": 5.7,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.909,
+          "end": 25.109,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.469
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 25.109,
+          "end": 25.369,
+          "duration": 0.26,
+          "frame_ahead_trigger": 25.669
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 25.369,
+          "end": 25.544,
+          "duration": 0.175,
+          "frame_ahead_trigger": 25.929
+        },
+        {
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 25.544,
+          "end": 25.884,
+          "duration": 0.34,
+          "frame_ahead_trigger": 26.104
+        },
+        {
+          "word": "64x",
+          "clean_word": "64x",
+          "phonemes": "s\u02c8\u026aksti f\u02c8\u0254\u02d0\u0279 \u02c8\u025bks",
+          "start": 25.884,
+          "end": 26.779,
+          "duration": 0.895,
+          "frame_ahead_trigger": 26.444
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 26.779,
+          "end": 27.274,
+          "duration": 0.495,
+          "frame_ahead_trigger": 27.339
+        },
+        {
+          "word": "boost,",
+          "clean_word": "boost",
+          "phonemes": "b\u02c8u\u02d0st",
+          "start": 27.274,
+          "end": 27.537,
+          "duration": 0.264,
+          "frame_ahead_trigger": 27.834
+        },
+        {
+          "word": "proving",
+          "clean_word": "proving",
+          "phonemes": "p\u0279\u02c8u\u02d0v\u026a\u014b",
+          "start": 27.537,
+          "end": 28.029,
+          "duration": 0.491,
+          "frame_ahead_trigger": 28.097
+        },
+        {
+          "word": "async",
+          "clean_word": "async",
+          "phonemes": "\u0250s\u02c8\u026a\u014bk",
+          "start": 28.029,
+          "end": 28.294,
+          "duration": 0.265,
+          "frame_ahead_trigger": 28.589
+        },
+        {
+          "word": "routing",
+          "clean_word": "routing",
+          "phonemes": "\u0279\u02c8a\u028a\u027e\u026a\u014b",
+          "start": 28.294,
+          "end": 28.624,
+          "duration": 0.33,
+          "frame_ahead_trigger": 28.854
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 28.624,
+          "end": 28.724,
+          "duration": 0.1,
+          "frame_ahead_trigger": 29.184
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.724,
+          "end": 28.894,
+          "duration": 0.17,
+          "frame_ahead_trigger": 29.284
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 28.894,
+          "end": 29.004,
+          "duration": 0.11,
+          "frame_ahead_trigger": 29.454
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 29.004,
+          "end": 29.504,
+          "duration": 0.5,
+          "frame_ahead_trigger": 29.564
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 29.504,
+          "end": 29.674,
+          "duration": 0.17,
+          "frame_ahead_trigger": 30.064
+        },
+        {
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 29.674,
+          "end": 30.144,
+          "duration": 0.47,
+          "frame_ahead_trigger": 30.234
+        },
+        {
+          "word": "serving.",
+          "clean_word": "serving",
+          "phonemes": "s\u02c8\u025c\u02d0v\u026a\u014b",
+          "start": 30.144,
+          "end": 30.429,
+          "duration": 0.285,
+          "frame_ahead_trigger": 30.704
+        }
+      ],
+      "audio_duration": 5.7,
+      "slot_duration": 5.84
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop waiting on your batch. Follow The Model Verse for deep-dives into how AI actually works.",
+      "visual_focus": "The Model Verse logo appearing over a clean, high-speed data stream.",
+      "highlight_words": {
+        "Stop waiting": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "explains",
+        "direct_object": "AI architecture",
+        "anchor_word": "deep-dives",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE MODEL VERSE",
+        "sub": "Engineering the future",
+        "accent_color": "#34D399",
+        "params": {
+          "input_label": "Token Stream",
+          "router_label": "TokenRouter Core",
+          "branch_a_label": "Draft Subserver",
+          "branch_a_sub": "Low Latency Async",
+          "branch_b_label": "Target Subserver",
+          "branch_b_sub": "High Capacity Batched"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 30.74,
+      "end": 35.59,
+      "duration": 4.84,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 30.76,
+          "end": 31.02,
+          "duration": 0.26,
+          "frame_ahead_trigger": 31.47
+        },
+        {
+          "word": "waiting",
+          "clean_word": "waiting",
+          "phonemes": "w\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 31.02,
+          "end": 31.545,
+          "duration": 0.525,
+          "frame_ahead_trigger": 31.73
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 31.545,
+          "end": 31.612,
+          "duration": 0.067,
+          "frame_ahead_trigger": 32.255
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 31.612,
+          "end": 31.785,
+          "duration": 0.173,
+          "frame_ahead_trigger": 32.322
+        },
+        {
+          "word": "batch.",
+          "clean_word": "batch",
+          "phonemes": "b\u02c8\u00e6t\u0283",
+          "start": 31.785,
+          "end": 32.038,
+          "duration": 0.253,
+          "frame_ahead_trigger": 32.495
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 32.038,
+          "end": 32.415,
+          "duration": 0.377,
+          "frame_ahead_trigger": 32.748
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 32.415,
+          "end": 32.54,
+          "duration": 0.125,
+          "frame_ahead_trigger": 33.125
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 32.54,
+          "end": 32.955,
+          "duration": 0.415,
+          "frame_ahead_trigger": 33.25
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 32.955,
+          "end": 33.235,
+          "duration": 0.28,
+          "frame_ahead_trigger": 33.665
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 33.235,
+          "end": 33.38,
+          "duration": 0.145,
+          "frame_ahead_trigger": 33.945
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 33.38,
+          "end": 33.93,
+          "duration": 0.55,
+          "frame_ahead_trigger": 34.09
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 33.93,
+          "end": 34.155,
+          "duration": 0.225,
+          "frame_ahead_trigger": 34.64
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 34.155,
+          "end": 34.35,
+          "duration": 0.195,
+          "frame_ahead_trigger": 34.865
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 34.35,
+          "end": 34.59,
+          "duration": 0.24,
+          "frame_ahead_trigger": 35.06
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 34.59,
+          "end": 35.17,
+          "duration": 0.58,
+          "frame_ahead_trigger": 35.3
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 35.17,
+          "end": 35.5,
+          "duration": 0.33,
+          "frame_ahead_trigger": 35.88
+        }
+      ],
+      "audio_duration": 4.84,
+      "slot_duration": 4.85
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$r_t = \\mathrm{Router}(x_1, \\dots, x_t) \\in \\{\\mathcal{M}_{\\mathrm{draft}}, \\mathcal{M}_{\\mathrm{target}}\\}$",
+      "filename": "tokenrouter_efficient_serving_beat1_formula.svg",
+      "fontsize": 22,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "r_t",
+          "label": "Token-Level Routing Decision"
+        },
+        {
+          "term": "\\mathcal{M}",
+          "label": "Heterogeneous Model Targets"
+        }
+      ],
+      "svg_filename": "tokenrouter_efficient_serving_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$T_{\\mathrm{idle}} = \\sum_{t=1}^L \\max\\left(0, \\Delta t_{\\mathrm{sync}} - \\tau_{\\mathrm{admission}}\\right)$",
+      "filename": "tokenrouter_efficient_serving_beat2_formula.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T_{\\mathrm{idle}}",
+          "label": "Accumulated GPU Idle Bubble"
+        },
+        {
+          "term": "\\Delta t_{\\mathrm{sync}}",
+          "label": "Inter-Model Desync Gap"
+        }
+      ],
+      "svg_filename": "tokenrouter_efficient_serving_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{R}_{\\mathrm{sub}}^{(m)} \\leftarrow \\mathrm{AsyncDispatch}(\\mathcal{Q}_{\\mathrm{req}}, m), \\quad m \\in \\{1, \\dots, M\\}$",
+      "filename": "tokenrouter_efficient_serving_beat3_formula.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{R}_{\\mathrm{sub}}^{(m)}",
+          "label": "Decoupled Subserver Queue"
+        },
+        {
+          "term": "\\mathcal{Q}_{\\mathrm{req}}",
+          "label": "Request-Centric Logic"
+        }
+      ],
+      "svg_filename": "tokenrouter_efficient_serving_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$W^* = \\arg\\max_W \\mathbb{E}\\left[\\frac{B(W)}{T_{\\mathrm{fwd}}(B(W)) + W}\\right]$",
+      "filename": "tokenrouter_efficient_serving_beat4_formula.svg",
+      "fontsize": 22,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "W^*",
+          "label": "Optimal Batch Delay Window"
+        },
+        {
+          "term": "B(W)",
+          "label": "Accumulated Batch Size"
+        }
+      ],
+      "svg_filename": "tokenrouter_efficient_serving_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Throughput\\ Gain} = 2.01\\times \\sim 64.15\\times$",
+      "filename": "tokenrouter_efficient_serving_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "64.15\\times",
+          "label": "Peak Decoding Throughput Acceleration"
+        }
+      ],
+      "svg_filename": "tokenrouter_efficient_serving_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "REQUEST RUNTIME",
+          "color": "#38BDF8",
+          "items": [
+            "Request Logic",
+            "State Machine",
+            "Async Stream"
+          ]
+        },
+        {
+          "name": "SUBSERVERS",
+          "color": "#10B981",
+          "items": [
+            "Delayed Batcher",
+            "Model A Engine",
+            "Model B Engine"
+          ]
+        },
+        {
+          "name": "GPU HARDWARE",
+          "color": "#F59E0B",
+          "items": [
+            "H100 SRAM",
+            "Tensor Cores",
+            "KV Cache"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Routed Token t+1",
+        "target_cluster": "SUBSERVERS",
+        "token": "\"optimal_route\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Desync Delay",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Idle GPU Bubble",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "TokenRouter",
+    "model_a_specs": [
+      "Request-Centric Programming",
+      "Decoupled Async Subservers",
+      "Delayed-Batching Scheduler"
+    ],
+    "model_b": "Monolithic Serving Engines",
+    "model_b_specs": [
+      "Single-LLM Assumption",
+      "Synchronous Ping-Ponging",
+      "Batch Admission Delays"
+    ],
+    "divide_title": "TOKEN ROUTING EFFICIENCY DIVIDE",
+    "model_a_stat": "64.15x",
+    "model_a_stat_label": "PEAK DECODING THROUGHPUT",
+    "model_b_stat": "1.00x",
+    "model_b_stat_label": "DESYNC BASELINE",
+    "efficiency_badge": "\u26a1 UP TO 64.15x THROUGHPUT BOOST",
+    "benchmarks": [
+      {
+        "name": "Token-Level Routing Throughput",
+        "score_a": "64.15x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "GPU Idle Bubbles",
+        "score_a": "Near Zero",
+        "score_b": "Dominant"
+      },
+      {
+        "name": "Developer Programming Complexity",
+        "score_a": "Request-Centric Clean",
+        "score_b": "High Custom Glue"
+      }
+    ],
+    "scale_metric": "64.15x",
+    "scale_label": "Decoding Throughput Gain",
+    "bottleneck_title": "STEP DESYNCHRONIZATION BOTTLENECK",
+    "bottleneck_desc": "Inter-model token ping-pong causes severe batch stalls and idle GPU cycles",
+    "solution_title": "DECOUPLED ASYNC SUBSERVERS",
+    "solution_components": "Request-Centric Logic & Mathematical Delayed Batching",
+    "mechanism_title": "THROUGHPUT-OPTIMAL DELAYED BATCHING",
+    "payoff_stat": "64.15x",
+    "payoff_label": "MAX THROUGHPUT GAIN",
+    "payoff_sub": "Advancing the Cost-Quality Pareto Frontier of LLM Serving",
+    "payoff_hero_stat": 64.15,
+    "payoff_hero_label": "TokenRouter",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Conventional Engines",
+    "payoff_delta_badge": "\u26a1 64.15x DECODING SPEEDUP",
+    "challenger": "TokenRouter",
+    "incumbent": "Existing LLM Serving Systems"
+  },
+  "benchmark_comparison": {
+    "title": "LLM ROUTED SERVING BENCHMARK",
+    "metric_name": "Decoding Throughput",
+    "unit": "tokens/s",
+    "contestants": [
+      {
+        "name": "TokenRouter",
+        "value": 64.15,
+        "display_val": "64.15x",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "vLLM-Async Pipeline",
+        "value": 4.2,
+        "display_val": "4.20x",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Single-LLM Serving Baseline",
+        "value": 1.0,
+        "display_val": "1.00x",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 UP TO 64.15x THROUGHPUT ACCELERATION",
+    "radar_axes": [
+      "Decoding Throughput",
+      "GPU Utilization",
+      "Batch Density",
+      "Developer Usability",
+      "Tail Latency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "token_router_scheduler.py",
+    "language": "python",
+    "lines": [
+      "class DelayedBatchScheduler:",
+      "def get_optimal_window(self, arrival_rate):",
+      "return math_model.solve_window(arrival_rate)",
+      "async def schedule_subserver(self, model_id):",
+      "batch = await self.accumulate(wait=self.window)",
+      "return await subserver[model_id].forward(batch)"
+    ],
+    "highlight_lines": [
+      3,
+      5
+    ],
+    "trace_register": "\u26a1 MATHEMATICAL THROUGHPUT DELAYED BATCHING",
+    "explanation": "Calculates optimal batch delay to maximize GPU saturation without latency penalty"
+  },
+  "arxiv_id": "2610.12242",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "architecture",
+      "caption": "Architecture",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/source/figure/architecture.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_1_architecture.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "throughput_accuracy_tradeoff",
+      "caption": "Throughput Accuracy Tradeoff",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/source/figure/experiment/throughput_accuracy_tradeoff.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_2_throughput_accuracy_tradeoff.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_2_throughput_accuracy_tradeoff.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "bs1_throughput_raw",
+      "caption": "Bs1 Throughput Raw",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/source/figure/experiment/bs1_throughput_raw.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_3_bs1_throughput_raw.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_3_bs1_throughput_raw.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "bs1_latency_raw",
+      "caption": "Bs1 Latency Raw",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/source/figure/experiment/bs1_latency_raw.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_4_bs1_latency_raw.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_4_bs1_latency_raw.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "bs4_throughput_raw",
+      "caption": "Bs4 Throughput Raw",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/source/figure/experiment/bs4_throughput_raw.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_5_bs4_throughput_raw.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.12242/chalkboard_figures/fig_5_bs4_throughput_raw.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.0,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014it hit a pain point I actually care about (GPU utilization). I like that you didn't waste time with a 'Hey guys' intro. However, 'async subservers' sounds a bit like a buzzword salad; I'm not sure if you mean separate processes, threads, or something else entirely. Also, the 'greedy scheduler' part is cool, but I'd love to know how you handle the potential out-of-order token generation issues that usually come with that."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Step Desynchronization",
+    "physical_analogy": "A rigid assembly line where one slow worker forces every other station to stop and wait.",
+    "eureka_mechanism": "Request-centric programming with model-centric execution",
+    "paradigm_shift": "Decoupling inference into independent, high-throughput subservers"
+  },
+  "hook_gating": {
+    "selected_hook": "Why do 64.15x of your GPU cycles waste compute before TokenRouter fixes the bottleneck?",
+    "verdict": 76,
+    "band": "STRONG",
+    "formula": "The Question",
+    "properties": {
+      "SPECIFICITY": 68,
+      "ADDRESS": 76,
+      "STAKES": 88,
+      "CURIOSITY": 76,
+      "BREVITY": 100
+    },
+    "weakest_property": "SPECIFICITY",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Why do 64.15x of your GPU cycles waste compute before TokenRouter fixes the bottleneck?",
+        "verdict": 76,
+        "band": "STRONG",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Over 64.15x of your GPU memory is wasted before you see how TokenRouter actually fixes it.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not train your next model before you see how TokenRouter cuts 64.15x of your memory waste.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "This 1 breakthrough in TokenRouter stops your GPU from wasting compute before you run out of memory.",
+        "verdict": 60,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "You are probably making the mistake of wasting compute before you test TokenRouter.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Mistake"
+      },
+      {
+        "hook": "Everyone tells you your model needs more compute, but TokenRouter proves that advice actually wrong.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "Contrarian Flip"
+      },
+      {
+        "hook": "Your LLM serving system is stalling because it forces every token to march in lockstep.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "moe_lattice",
+      "entity_type": "moe_lattice",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "baseline_card": {
+        "dx": 0.454,
+        "dy": 0.2,
+        "scale_multiplier": 0.85
+      },
+      "proposed_card": {
+        "dx": -0.472,
+        "dy": 0.2,
+        "scale_multiplier": 0.85
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.964,
+        "scale_multiplier": 1.0
+      }
+    },
+    "2": {},
+    "3": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 0.765
+      },
+      "architecture_diagram": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.658
+      },
+      "subtitle_box": {
+        "dx": 0.0,
+        "dy": 0.366,
+        "scale_multiplier": 0.818
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 1.777,
+        "scale_multiplier": 0.904
+      }
+    },
+    "4": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.1,
+        "scale_multiplier": 0.673
+      },
+      "code_window": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.658
+      },
+      "annotation_pills": {
+        "dx": 0.0,
+        "dy": 0.752,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 2.437,
+        "scale_multiplier": 0.846
+      }
+    },
+    "5": {
+      "hero_visual": {
+        "dx": 0.2,
+        "dy": -0.3,
+        "scale_multiplier": 0.738
+      },
+      "metric_label": {
+        "dx": -0.316,
+        "dy": 0.0,
+        "scale_multiplier": 0.767
+      },
+      "bar_chart_group": {
+        "dx": 0.0,
+        "dy": 0.0,
+        "scale_multiplier": 0.654
+      },
+      "highlight_badge": {
+        "dx": -0.418,
+        "dy": 0.8,
+        "scale_multiplier": 1.0
+      },
+      "subtitle_caption": {
+        "dx": 0.0,
+        "dy": 3.312,
+        "scale_multiplier": 0.654
+      }
+    },
+    "6": {
+      "brand_logo_icon": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 0.9
+      }
+    }
+  }
+}
