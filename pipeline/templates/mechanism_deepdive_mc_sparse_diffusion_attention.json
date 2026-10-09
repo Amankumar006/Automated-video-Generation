@@ -1,0 +1,1771 @@
+{
+  "id": "mc_sparse_diffusion_attention",
+  "title": "MC-Sparse: Closing the Dense-Sparse Gap in Diffusion Transformers",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "LATENCY KILLER",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do 50% of your GPU cycles waste compute before MC-Sparse fixes the bottleneck?",
+      "visual_focus": "A flickering video frame glitching into static.",
+      "highlight_words": {
+        "burn massive compute": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Diffusion models",
+        "action_verb": "waste",
+        "direct_object": "compute cycles",
+        "anchor_word": "denoising",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE DIFFUSION PARADOX",
+        "sub": "Redundant computation at scale",
+        "accent_color": "#EF4444",
+        "params": {
+          "col_a_title": "Full Dense Attention",
+          "col_a_stat": "O(L^2) VRAM / Severe Latency",
+          "col_b_title": "Naive Block Sparsity",
+          "col_b_stat": "Degraded Geometry / Visual Artifacts",
+          "col_a_specs": [
+            "Exact token interactions",
+            "Prohibitive quadratic compute",
+            "Bottlenecks 3D and video scaling"
+          ],
+          "col_b_specs": [
+            "Rigid block pruning",
+            "Discards critical fine details",
+            "Degrades generation fidelity"
+          ]
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 76,
+      "hook_band": "STRONG",
+      "hook_formula": "The Question",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE DIFFUSION PARADOX",
+        "sub": "Redundant computation at scale",
+        "accent_color": "#EF4444",
+        "col_a_title": "Full Dense Attention",
+        "col_a_stat": "O(L^2) VRAM / Severe Latency",
+        "col_b_title": "Naive Block Sparsity",
+        "col_b_stat": "Degraded Geometry / Visual Artifacts",
+        "col_a_specs": [
+          "Exact token interactions",
+          "Prohibitive quadratic compute",
+          "Bottlenecks 3D and video scaling"
+        ],
+        "col_b_specs": [
+          "Rigid block pruning",
+          "Discards critical fine details",
+          "Degrades generation fidelity"
+        ]
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.1,
+      "duration": 5.1,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.01,
+          "end": 0.17,
+          "duration": 0.16,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.335,
+          "duration": 0.165,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "50%",
+          "clean_word": "50",
+          "phonemes": "f\u02c8\u026afti",
+          "start": 0.335,
+          "end": 0.635,
+          "duration": 0.3,
+          "frame_ahead_trigger": 0.295
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 0.635,
+          "end": 0.8,
+          "duration": 0.165,
+          "frame_ahead_trigger": 0.595
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.8,
+          "end": 0.91,
+          "duration": 0.11,
+          "frame_ahead_trigger": 0.76
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 0.91,
+          "end": 1.685,
+          "duration": 0.775,
+          "frame_ahead_trigger": 0.87
+        },
+        {
+          "word": "cycles",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 1.685,
+          "end": 2.075,
+          "duration": 0.39,
+          "frame_ahead_trigger": 1.645
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 2.075,
+          "end": 2.24,
+          "duration": 0.165,
+          "frame_ahead_trigger": 2.035
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 2.24,
+          "end": 2.82,
+          "duration": 0.58,
+          "frame_ahead_trigger": 2.2
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 2.82,
+          "end": 3.12,
+          "duration": 0.3,
+          "frame_ahead_trigger": 2.78
+        },
+        {
+          "word": "MC-Sparse",
+          "clean_word": "mcsparse",
+          "phonemes": "\u02cc\u025bms\u02c8i\u02d0 sp\u02c8\u0251\u02d0\u0279s",
+          "start": 3.12,
+          "end": 3.84,
+          "duration": 0.72,
+          "frame_ahead_trigger": 3.08
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 3.84,
+          "end": 4.24,
+          "duration": 0.4,
+          "frame_ahead_trigger": 3.8
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.24,
+          "end": 4.261,
+          "duration": 0.021,
+          "frame_ahead_trigger": 4.2
+        },
+        {
+          "word": "bottleneck?",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 4.261,
+          "end": 4.805,
+          "duration": 0.544,
+          "frame_ahead_trigger": 4.221
+        }
+      ],
+      "audio_duration": 5.1,
+      "slot_duration": 5.25
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is naive sparse attention. It blindly discards tokens, losing critical context and turning high-fidelity video into blurry, incoherent noise.",
+      "visual_focus": "A library shelf collapsing as books are thrown out.",
+      "highlight_words": {
+        "blindly discards": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Sparse attention",
+        "action_verb": "destroys",
+        "direct_object": "context",
+        "anchor_word": "incoherent",
+        "semantic_role": "bottleneck_identification"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE INFORMATION GAP",
+        "sub": "Discarding tokens kills fidelity",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Rigid 64x64 GPU Tile Warps",
+          "stream_b_label": "Delicate 3D Geometry Tokens",
+          "barrier_label": "Coarse Pruning Penalty",
+          "barrier_sub": "Lost Attention Energy Residual"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE INFORMATION GAP",
+        "sub": "Discarding tokens kills fidelity",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Rigid 64x64 GPU Tile Warps",
+        "stream_b_label": "Delicate 3D Geometry Tokens",
+        "barrier_label": "Coarse Pruning Penalty",
+        "barrier_sub": "Lost Attention Energy Residual"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.25,
+      "end": 13.59,
+      "duration": 8.34,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.259,
+          "end": 5.344,
+          "duration": 0.085,
+          "frame_ahead_trigger": 5.369
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.344,
+          "end": 5.669,
+          "duration": 0.325,
+          "frame_ahead_trigger": 5.454
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.669,
+          "end": 5.784,
+          "duration": 0.115,
+          "frame_ahead_trigger": 5.779
+        },
+        {
+          "word": "naive",
+          "clean_word": "naive",
+          "phonemes": "na\u026a\u02c8i\u02d0v",
+          "start": 5.784,
+          "end": 6.184,
+          "duration": 0.4,
+          "frame_ahead_trigger": 5.894
+        },
+        {
+          "word": "sparse",
+          "clean_word": "sparse",
+          "phonemes": "sp\u02c8\u0251\u02d0\u0279s",
+          "start": 6.184,
+          "end": 6.614,
+          "duration": 0.43,
+          "frame_ahead_trigger": 6.294
+        },
+        {
+          "word": "attention.",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 6.614,
+          "end": 7.069,
+          "duration": 0.455,
+          "frame_ahead_trigger": 6.724
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 7.069,
+          "end": 7.182,
+          "duration": 0.113,
+          "frame_ahead_trigger": 7.179
+        },
+        {
+          "word": "blindly",
+          "clean_word": "blindly",
+          "phonemes": "bl\u02c8a\u026andli",
+          "start": 7.182,
+          "end": 7.579,
+          "duration": 0.396,
+          "frame_ahead_trigger": 7.292
+        },
+        {
+          "word": "discards",
+          "clean_word": "discards",
+          "phonemes": "d\u026ask\u02c8\u0251\u02d0\u0279dz",
+          "start": 7.579,
+          "end": 8.174,
+          "duration": 0.595,
+          "frame_ahead_trigger": 7.689
+        },
+        {
+          "word": "tokens,",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 8.174,
+          "end": 8.759,
+          "duration": 0.585,
+          "frame_ahead_trigger": 8.284
+        },
+        {
+          "word": "losing",
+          "clean_word": "losing",
+          "phonemes": "l\u02c8u\u02d0z\u026a\u014b",
+          "start": 8.759,
+          "end": 9.149,
+          "duration": 0.39,
+          "frame_ahead_trigger": 8.869
+        },
+        {
+          "word": "critical",
+          "clean_word": "critical",
+          "phonemes": "k\u0279\u02c8\u026a\u027e\u026ak\u0259l",
+          "start": 9.149,
+          "end": 9.644,
+          "duration": 0.495,
+          "frame_ahead_trigger": 9.259
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 9.644,
+          "end": 10.129,
+          "duration": 0.485,
+          "frame_ahead_trigger": 9.754
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 10.129,
+          "end": 10.309,
+          "duration": 0.18,
+          "frame_ahead_trigger": 10.239
+        },
+        {
+          "word": "turning",
+          "clean_word": "turning",
+          "phonemes": "t\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 10.309,
+          "end": 10.779,
+          "duration": 0.47,
+          "frame_ahead_trigger": 10.419
+        },
+        {
+          "word": "high-fidelity",
+          "clean_word": "highfidelity",
+          "phonemes": "h\u02cca\u026af\u1d7bd\u02c8\u025bl\u1d7b\u027ei",
+          "start": 10.779,
+          "end": 11.479,
+          "duration": 0.7,
+          "frame_ahead_trigger": 10.889
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 11.479,
+          "end": 11.909,
+          "duration": 0.43,
+          "frame_ahead_trigger": 11.589
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 11.909,
+          "end": 12.154,
+          "duration": 0.245,
+          "frame_ahead_trigger": 12.019
+        },
+        {
+          "word": "blurry,",
+          "clean_word": "blurry",
+          "phonemes": "bl\u02c8\u025c\u02d0\u0279i",
+          "start": 12.154,
+          "end": 12.539,
+          "duration": 0.385,
+          "frame_ahead_trigger": 12.264
+        },
+        {
+          "word": "incoherent",
+          "clean_word": "incoherent",
+          "phonemes": "\u026a\u014bko\u028ah\u02c8\u026a\u0279\u0259nt",
+          "start": 12.539,
+          "end": 13.236,
+          "duration": 0.697,
+          "frame_ahead_trigger": 12.649
+        },
+        {
+          "word": "noise.",
+          "clean_word": "noise",
+          "phonemes": "n\u02c8\u0254\u026az",
+          "start": 13.236,
+          "end": 13.519,
+          "duration": 0.283,
+          "frame_ahead_trigger": 13.346
+        }
+      ],
+      "audio_duration": 8.34,
+      "slot_duration": 8.49
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter MC-Sparse. It caches metadata of vital interactions, mapping what matters before the heavy lifting begins.",
+      "visual_focus": "A glowing map overlaying the noisy diffusion latent.",
+      "highlight_words": {
+        "MC-Sparse": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "MC-Sparse",
+        "action_verb": "maps",
+        "direct_object": "critical interactions",
+        "anchor_word": "caching",
+        "semantic_role": "solution_introduction"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "MC-SPARSE ARCHITECTURE",
+        "sub": "A glowing map overlaying the noisy diffusion latent.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.png",
+          "arxiv_id": "2610.06801",
+          "title": "MC-SPARSE ARCHITECTURE",
+          "sub": "A glowing map overlaying the noisy diffusion latent.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Mcsparse Overview Revised V2",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.png",
+        "arxiv_id": "2610.06801",
+        "title": "MC-SPARSE ARCHITECTURE",
+        "sub": "A glowing map overlaying the noisy diffusion latent.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Mcsparse Overview Revised V2",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 13.74,
+      "end": 19.78,
+      "duration": 6.04,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 13.75,
+          "end": 14.025,
+          "duration": 0.275,
+          "frame_ahead_trigger": 14.01
+        },
+        {
+          "word": "MC-Sparse.",
+          "clean_word": "mcsparse",
+          "phonemes": "\u02cc\u025bms\u02c8i\u02d0 sp\u02c8\u0251\u02d0\u0279s",
+          "start": 14.025,
+          "end": 14.884,
+          "duration": 0.859,
+          "frame_ahead_trigger": 14.285
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 14.884,
+          "end": 14.998,
+          "duration": 0.113,
+          "frame_ahead_trigger": 15.144
+        },
+        {
+          "word": "caches",
+          "clean_word": "caches",
+          "phonemes": "k\u02c8\u00e6\u0283\u1d7bz",
+          "start": 14.998,
+          "end": 15.27,
+          "duration": 0.272,
+          "frame_ahead_trigger": 15.258
+        },
+        {
+          "word": "metadata",
+          "clean_word": "metadata",
+          "phonemes": "m\u02cc\u025b\u027e\u0259d\u02c8e\u026a\u027e\u0259",
+          "start": 15.27,
+          "end": 15.99,
+          "duration": 0.72,
+          "frame_ahead_trigger": 15.53
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 15.99,
+          "end": 16.085,
+          "duration": 0.095,
+          "frame_ahead_trigger": 16.25
+        },
+        {
+          "word": "vital",
+          "clean_word": "vital",
+          "phonemes": "v\u02c8a\u026a\u027e\u0259l",
+          "start": 16.085,
+          "end": 16.515,
+          "duration": 0.43,
+          "frame_ahead_trigger": 16.345
+        },
+        {
+          "word": "interactions,",
+          "clean_word": "interactions",
+          "phonemes": "\u02cc\u026ant\u025a\u0279\u02c8\u00e6k\u0283\u0259nz",
+          "start": 16.515,
+          "end": 17.21,
+          "duration": 0.695,
+          "frame_ahead_trigger": 16.775
+        },
+        {
+          "word": "mapping",
+          "clean_word": "mapping",
+          "phonemes": "m\u02c8\u00e6p\u026a\u014b",
+          "start": 17.21,
+          "end": 17.59,
+          "duration": 0.38,
+          "frame_ahead_trigger": 17.47
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 17.59,
+          "end": 17.87,
+          "duration": 0.28,
+          "frame_ahead_trigger": 17.85
+        },
+        {
+          "word": "matters",
+          "clean_word": "matters",
+          "phonemes": "m\u02c8\u00e6\u027e\u025az",
+          "start": 17.87,
+          "end": 18.115,
+          "duration": 0.245,
+          "frame_ahead_trigger": 18.13
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 18.115,
+          "end": 18.455,
+          "duration": 0.34,
+          "frame_ahead_trigger": 18.375
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.455,
+          "end": 18.575,
+          "duration": 0.12,
+          "frame_ahead_trigger": 18.715
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 18.575,
+          "end": 18.925,
+          "duration": 0.35,
+          "frame_ahead_trigger": 18.835
+        },
+        {
+          "word": "lifting",
+          "clean_word": "lifting",
+          "phonemes": "l\u02c8\u026aft\u026a\u014b",
+          "start": 18.925,
+          "end": 19.35,
+          "duration": 0.425,
+          "frame_ahead_trigger": 19.185
+        },
+        {
+          "word": "begins.",
+          "clean_word": "begins",
+          "phonemes": "b\u026a\u0261\u02c8\u026anz",
+          "start": 19.35,
+          "end": 19.705,
+          "duration": 0.355,
+          "frame_ahead_trigger": 19.61
+        }
+      ],
+      "audio_duration": 6.04,
+      "slot_duration": 6.19
+    },
+    {
+      "beat_id": 4,
+      "text": "It organizes queries into tile-aligned groups and stores residuals, reusing exact attention probabilities to skip redundant matrix operations.",
+      "visual_focus": "Matrix blocks snapping into optimized, aligned grids.",
+      "highlight_words": {
+        "tile-aligned": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "The architecture",
+        "action_verb": "bypasses",
+        "direct_object": "redundant GEMM",
+        "anchor_word": "residuals",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: MC-SPARSE: CLOSING",
+        "sub": "Matrix blocks snapping into optimized, aligned grids.",
+        "params": {
+          "title": "KERNEL CODE: MC-SPARSE: CLOSING",
+          "sub": "Matrix blocks snapping into optimized, aligned grids.",
+          "filename": "mc_sparse_kernel.py",
+          "language": "python",
+          "lines": [
+            "def mc_sparse_attention(q, k, v, cache, step):",
+            "if step % cache_stride == 0:",
+            "groups, kv_idx, residual = profile_dense_interactions(q, k, v)",
+            "cache.store(groups, kv_idx, residual)",
+            "return fused_sparse_gemm(q, k, v, cache.indices) + cache.residual"
+          ],
+          "highlight_lines": [
+            3,
+            5
+          ],
+          "trace_register": "\u26a1 TILE-ALIGNED SPARSE GPU CACHE KERNEL",
+          "delta_badge": "Zero training required; reuses interaction metadata "
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: MC-SPARSE: CLOSING",
+        "sub": "Matrix blocks snapping into optimized, aligned grids.",
+        "filename": "mc_sparse_kernel.py",
+        "language": "python",
+        "lines": [
+          "def mc_sparse_attention(q, k, v, cache, step):",
+          "if step % cache_stride == 0:",
+          "groups, kv_idx, residual = profile_dense_interactions(q, k, v)",
+          "cache.store(groups, kv_idx, residual)",
+          "return fused_sparse_gemm(q, k, v, cache.indices) + cache.residual"
+        ],
+        "highlight_lines": [
+          3,
+          5
+        ],
+        "trace_register": "\u26a1 TILE-ALIGNED SPARSE GPU CACHE KERNEL",
+        "delta_badge": "Zero training required; reuses interaction metadata "
+      },
+      "start": 19.93,
+      "end": 28.06,
+      "duration": 8.13,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 19.937,
+          "end": 20.042,
+          "duration": 0.105,
+          "frame_ahead_trigger": 20.347
+        },
+        {
+          "word": "organizes",
+          "clean_word": "organizes",
+          "phonemes": "\u02c8\u0254\u02d0\u0279\u0261\u0259n\u02cca\u026az\u1d7bz",
+          "start": 20.042,
+          "end": 20.692,
+          "duration": 0.65,
+          "frame_ahead_trigger": 20.452
+        },
+        {
+          "word": "queries",
+          "clean_word": "queries",
+          "phonemes": "kw\u02c8i\u0259\u0279\u026az",
+          "start": 20.692,
+          "end": 21.122,
+          "duration": 0.43,
+          "frame_ahead_trigger": 21.102
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 21.122,
+          "end": 21.362,
+          "duration": 0.24,
+          "frame_ahead_trigger": 21.532
+        },
+        {
+          "word": "tile-aligned",
+          "clean_word": "tilealigned",
+          "phonemes": "t\u02c8\u026ali\u02d0l\u02cca\u026and",
+          "start": 21.362,
+          "end": 22.047,
+          "duration": 0.685,
+          "frame_ahead_trigger": 21.772
+        },
+        {
+          "word": "groups",
+          "clean_word": "groups",
+          "phonemes": "\u0261\u0279\u02c8u\u02d0ps",
+          "start": 22.047,
+          "end": 22.572,
+          "duration": 0.525,
+          "frame_ahead_trigger": 22.457
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 22.572,
+          "end": 22.657,
+          "duration": 0.085,
+          "frame_ahead_trigger": 22.982
+        },
+        {
+          "word": "stores",
+          "clean_word": "stores",
+          "phonemes": "st\u02c8\u0254\u02d0\u0279z",
+          "start": 22.657,
+          "end": 23.057,
+          "duration": 0.4,
+          "frame_ahead_trigger": 23.067
+        },
+        {
+          "word": "residuals,",
+          "clean_word": "residuals",
+          "phonemes": "\u0279\u1d7bs\u02c8\u026ad\u0292u\u02d0\u0259lz",
+          "start": 23.057,
+          "end": 23.656,
+          "duration": 0.599,
+          "frame_ahead_trigger": 23.467
+        },
+        {
+          "word": "reusing",
+          "clean_word": "reusing",
+          "phonemes": "\u0279i\u02d0j\u02c8u\u02d0z\u026a\u014b",
+          "start": 23.656,
+          "end": 24.207,
+          "duration": 0.551,
+          "frame_ahead_trigger": 24.066
+        },
+        {
+          "word": "exact",
+          "clean_word": "exact",
+          "phonemes": "\u025b\u0261z\u02c8\u00e6kt",
+          "start": 24.207,
+          "end": 24.517,
+          "duration": 0.31,
+          "frame_ahead_trigger": 24.617
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 24.517,
+          "end": 25.052,
+          "duration": 0.535,
+          "frame_ahead_trigger": 24.927
+        },
+        {
+          "word": "probabilities",
+          "clean_word": "probabilities",
+          "phonemes": "p\u0279\u02cc\u0251\u02d0b\u0259b\u02c8\u026al\u1d7b\u027eiz",
+          "start": 25.052,
+          "end": 25.887,
+          "duration": 0.835,
+          "frame_ahead_trigger": 25.462
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 25.887,
+          "end": 26.057,
+          "duration": 0.17,
+          "frame_ahead_trigger": 26.297
+        },
+        {
+          "word": "skip",
+          "clean_word": "skip",
+          "phonemes": "sk\u02c8\u026ap",
+          "start": 26.057,
+          "end": 26.142,
+          "duration": 0.085,
+          "frame_ahead_trigger": 26.467
+        },
+        {
+          "word": "redundant",
+          "clean_word": "redundant",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
+          "start": 26.142,
+          "end": 26.732,
+          "duration": 0.59,
+          "frame_ahead_trigger": 26.552
+        },
+        {
+          "word": "matrix",
+          "clean_word": "matrix",
+          "phonemes": "m\u02c8e\u026at\u0279\u026aks",
+          "start": 26.732,
+          "end": 27.237,
+          "duration": 0.505,
+          "frame_ahead_trigger": 27.142
+        },
+        {
+          "word": "operations.",
+          "clean_word": "operations",
+          "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
+          "start": 27.237,
+          "end": 27.967,
+          "duration": 0.73,
+          "frame_ahead_trigger": 27.647
+        }
+      ],
+      "audio_duration": 8.13,
+      "slot_duration": 8.28
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A 1.8x speedup on video and 2.32x on 3D assets, with zero visible quality degradation.",
+      "visual_focus": "Side-by-side comparison showing identical high-fidelity outputs.",
+      "highlight_words": {
+        "2.32x speedup": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "MC-Sparse",
+        "action_verb": "delivers",
+        "direct_object": "massive acceleration",
+        "anchor_word": "fidelity",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "DIFFUSION TRANSFORMER SPEEDUP BENCHMARK",
+        "sub": "Side-by-side comparison showing identical",
+        "params": {
+          "title": "DIFFUSION TRANSFORMER SPEEDUP BENCHMARK",
+          "sub": "Side-by-side comparison showing identical",
+          "metric_name": "Denoising Speedup Factor",
+          "unit": "x Baseline",
+          "contestants": [
+            {
+              "name": "MC-Sparse (3D Generation)",
+              "value": 2.32,
+              "display_val": "2.32x",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "MC-Sparse (Minimax-H3 Video)",
+              "value": 1.8,
+              "display_val": "1.80x",
+              "is_hero": true,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Prior Sparse Baselines",
+              "value": 1.25,
+              "display_val": "1.25x",
+              "is_hero": false,
+              "color": "#F59E0B"
+            },
+            {
+              "name": "Dense Attention Baseline",
+              "value": 1.0,
+              "display_val": "1.00x",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +132% GENERATION SPEEDUP"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "DIFFUSION TRANSFORMER SPEEDUP BENCHMARK",
+        "sub": "Side-by-side comparison showing identical",
+        "metric_name": "Denoising Speedup Factor",
+        "unit": "x Baseline",
+        "contestants": [
+          {
+            "name": "MC-Sparse (3D Generation)",
+            "value": 2.32,
+            "display_val": "2.32x",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "MC-Sparse (Minimax-H3 Video)",
+            "value": 1.8,
+            "display_val": "1.80x",
+            "is_hero": true,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Prior Sparse Baselines",
+            "value": 1.25,
+            "display_val": "1.25x",
+            "is_hero": false,
+            "color": "#F59E0B"
+          },
+          {
+            "name": "Dense Attention Baseline",
+            "value": 1.0,
+            "display_val": "1.00x",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +132% GENERATION SPEEDUP"
+      },
+      "start": 28.21,
+      "end": 35.31,
+      "duration": 7.1,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.215,
+          "end": 28.415,
+          "duration": 0.2,
+          "frame_ahead_trigger": 28.775
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 28.415,
+          "end": 28.67,
+          "duration": 0.255,
+          "frame_ahead_trigger": 28.975
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 28.67,
+          "end": 28.83,
+          "duration": 0.16,
+          "frame_ahead_trigger": 29.23
+        },
+        {
+          "word": "1.8x",
+          "clean_word": "18x",
+          "phonemes": "\u02c8e\u026ati\u02d0n \u02c8\u025bks",
+          "start": 28.83,
+          "end": 29.505,
+          "duration": 0.675,
+          "frame_ahead_trigger": 29.39
+        },
+        {
+          "word": "speedup",
+          "clean_word": "speedup",
+          "phonemes": "sp\u02c8i\u02d0d\u028cp",
+          "start": 29.505,
+          "end": 29.95,
+          "duration": 0.445,
+          "frame_ahead_trigger": 30.065
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 29.95,
+          "end": 30.065,
+          "duration": 0.115,
+          "frame_ahead_trigger": 30.51
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 30.065,
+          "end": 30.325,
+          "duration": 0.26,
+          "frame_ahead_trigger": 30.625
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 30.325,
+          "end": 30.61,
+          "duration": 0.285,
+          "frame_ahead_trigger": 30.885
+        },
+        {
+          "word": "2.32x",
+          "clean_word": "232x",
+          "phonemes": "t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad \u03b8\u02c8\u025c\u02d0\u027ei t\u02c8u\u02d0 \u02c8\u025bks",
+          "start": 30.61,
+          "end": 32.17,
+          "duration": 1.56,
+          "frame_ahead_trigger": 31.17
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 32.17,
+          "end": 32.34,
+          "duration": 0.17,
+          "frame_ahead_trigger": 32.73
+        },
+        {
+          "word": "3D",
+          "clean_word": "3d",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0 d\u02c8i\u02d0",
+          "start": 32.34,
+          "end": 32.69,
+          "duration": 0.35,
+          "frame_ahead_trigger": 32.9
+        },
+        {
+          "word": "assets,",
+          "clean_word": "assets",
+          "phonemes": "\u02c8\u00e6s\u025bts",
+          "start": 32.69,
+          "end": 33.15,
+          "duration": 0.46,
+          "frame_ahead_trigger": 33.25
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 33.15,
+          "end": 33.305,
+          "duration": 0.155,
+          "frame_ahead_trigger": 33.71
+        },
+        {
+          "word": "zero",
+          "clean_word": "zero",
+          "phonemes": "z\u02c8i\u0259\u0279o\u028a",
+          "start": 33.305,
+          "end": 33.655,
+          "duration": 0.35,
+          "frame_ahead_trigger": 33.865
+        },
+        {
+          "word": "visible",
+          "clean_word": "visible",
+          "phonemes": "v\u02c8\u026az\u1d7bb\u0259l",
+          "start": 33.655,
+          "end": 34.02,
+          "duration": 0.365,
+          "frame_ahead_trigger": 34.215
+        },
+        {
+          "word": "quality",
+          "clean_word": "quality",
+          "phonemes": "kw\u02c8\u0254l\u1d7b\u027ei",
+          "start": 34.02,
+          "end": 34.46,
+          "duration": 0.44,
+          "frame_ahead_trigger": 34.58
+        },
+        {
+          "word": "degradation.",
+          "clean_word": "degradation",
+          "phonemes": "d\u1d7b\u0261\u0279\u0250d\u02c8e\u026a\u0283\u0259n",
+          "start": 34.46,
+          "end": 35.125,
+          "duration": 0.665,
+          "frame_ahead_trigger": 35.02
+        }
+      ],
+      "audio_duration": 7.1,
+      "slot_duration": 7.25
+    },
+    {
+      "beat_id": 6,
+      "text": "Stop wasting cycles. Follow The Model Verse for daily deep-dives into how modern AI actually works.",
+      "visual_focus": "The Model Verse logo pulsing with a data stream.",
+      "highlight_words": {
+        "The Model Verse": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "You",
+        "action_verb": "master",
+        "direct_object": "AI architecture",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "projection_rays",
+        "title": "THE MODEL VERSE",
+        "sub": "Engineering the future",
+        "accent_color": "#F59E0B",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 35.46,
+      "end": 41.05,
+      "duration": 5.59,
+      "word_timings": [
+        {
+          "word": "Stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 35.484,
+          "end": 35.739,
+          "duration": 0.255,
+          "frame_ahead_trigger": 36.194
+        },
+        {
+          "word": "wasting",
+          "clean_word": "wasting",
+          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
+          "start": 35.739,
+          "end": 36.264,
+          "duration": 0.525,
+          "frame_ahead_trigger": 36.449
+        },
+        {
+          "word": "cycles.",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 36.264,
+          "end": 36.674,
+          "duration": 0.41,
+          "frame_ahead_trigger": 36.974
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 36.674,
+          "end": 37.072,
+          "duration": 0.398,
+          "frame_ahead_trigger": 37.384
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.072,
+          "end": 37.199,
+          "duration": 0.127,
+          "frame_ahead_trigger": 37.782
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 37.199,
+          "end": 37.534,
+          "duration": 0.335,
+          "frame_ahead_trigger": 37.909
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 37.534,
+          "end": 37.744,
+          "duration": 0.21,
+          "frame_ahead_trigger": 38.244
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 37.744,
+          "end": 38.024,
+          "duration": 0.28,
+          "frame_ahead_trigger": 38.454
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 38.024,
+          "end": 38.314,
+          "duration": 0.29,
+          "frame_ahead_trigger": 38.734
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 38.314,
+          "end": 38.989,
+          "duration": 0.675,
+          "frame_ahead_trigger": 39.024
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 38.989,
+          "end": 39.114,
+          "duration": 0.125,
+          "frame_ahead_trigger": 39.699
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.114,
+          "end": 39.372,
+          "duration": 0.257,
+          "frame_ahead_trigger": 39.824
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 39.372,
+          "end": 39.769,
+          "duration": 0.398,
+          "frame_ahead_trigger": 40.082
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 39.769,
+          "end": 40.083,
+          "duration": 0.314,
+          "frame_ahead_trigger": 40.479
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 40.083,
+          "end": 40.629,
+          "duration": 0.546,
+          "frame_ahead_trigger": 40.793
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 40.629,
+          "end": 40.959,
+          "duration": 0.33,
+          "frame_ahead_trigger": 41.339
+        }
+      ],
+      "audio_duration": 5.59,
+      "slot_duration": 5.59
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{O}(L^2 \\cdot d) \\implies \\mathbf{A} \\in \\mathbb{R}^{L \\times L}$",
+      "filename": "mc_sparse_diffusion_attention_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "L",
+          "label": "Sequence Length (Video / 3D)"
+        },
+        {
+          "term": "\\mathbf{A}",
+          "label": "Quadratic Attention Map"
+        }
+      ],
+      "svg_filename": "mc_sparse_diffusion_attention_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\Delta \\mathbf{O} = \\mathrm{Softmax}\\left(\\frac{\\mathbf{Q}\\mathbf{K}^T}{\\sqrt{d}}\\right)\\mathbf{V} - \\mathbf{S}_{\\mathrm{block}} \\odot \\mathbf{V}$",
+      "filename": "mc_sparse_diffusion_attention_beat2_formula.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\Delta \\mathbf{O}",
+          "label": "Lost Attention Energy"
+        },
+        {
+          "term": "\\mathbf{S}_{\\mathrm{block}}",
+          "label": "Rigid Block Sparsity Mask"
+        }
+      ],
+      "svg_filename": "mc_sparse_diffusion_attention_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{G}_q = \\mathrm{TileAlign}(\\mathbf{Q}) \\quad \\cup \\quad \\mathcal{I}_{kv} \\subset \\{1, \\dots, L\\}$",
+      "filename": "mc_sparse_diffusion_attention_beat3_formula.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{G}_q",
+          "label": "Tile-Aligned Query Groups"
+        },
+        {
+          "term": "\\mathcal{I}_{kv}",
+          "label": "Point-wise KV Token Indices"
+        }
+      ],
+      "svg_filename": "mc_sparse_diffusion_attention_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbf{O}_t \\approx \\mathbf{O}_{\\mathrm{sparse}}(\\mathcal{I}_{kv}) + \\mathbf{R}_{\\mathrm{cached}}$",
+      "filename": "mc_sparse_diffusion_attention_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{R}_{\\mathrm{cached}}",
+          "label": "Cached Dense-Sparse Residual"
+        },
+        {
+          "term": "\\mathbf{O}_t",
+          "label": "Reconstructed Denoising Output"
+        }
+      ],
+      "svg_filename": "mc_sparse_diffusion_attention_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup}_{3\\mathrm{D}} = 2.32\\times, \\quad \\mathrm{Speedup}_{\\mathrm{Video}} = 1.80\\times$",
+      "filename": "mc_sparse_diffusion_attention_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "2.32\\times",
+          "label": "3D Generation Latency Cut"
+        },
+        {
+          "term": "1.80\\times",
+          "label": "Minimax-H3 Denoising Speedup"
+        }
+      ],
+      "svg_filename": "mc_sparse_diffusion_attention_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 4.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 12.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 19.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 27.0,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 35.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 36.5,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "QUERY_TILES",
+          "color": "#38BDF8",
+          "items": [
+            "q_tile_0",
+            "q_tile_1",
+            "q_tile_2"
+          ]
+        },
+        {
+          "name": "SPARSE_KV_INDICES",
+          "color": "#10B981",
+          "items": [
+            "kv_exact_12",
+            "kv_exact_89",
+            "kv_exact_402"
+          ]
+        },
+        {
+          "name": "METADATA_CACHE",
+          "color": "#F59E0B",
+          "items": [
+            "query_groups",
+            "kv_indices",
+            "residuals"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Attention Query Vector",
+        "target_cluster": "QUERY_TILES",
+        "token": "Q_patch_104"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Coarse Pruning Mask",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Uncached Denoising Step",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "MC-Sparse Attention",
+    "model_a_specs": [
+      "Tile-aligned query clustering",
+      "Point-wise individual KV selection",
+      "Residual & index metadata caching"
+    ],
+    "model_b": "Dense / Block Sparse Baselines",
+    "model_b_specs": [
+      "O(L^2) dense memory saturation",
+      "Rigid block-level grouping constraints",
+      "Quality degradation at high sparsity"
+    ],
+    "divide_title": "DENSE FIDELITY VS SPARSE LATENCY DIVIDE",
+    "model_a_stat": "2.32x",
+    "model_a_stat_label": "3D DENOISING SPEEDUP",
+    "model_b_stat": "1.00x",
+    "model_b_stat_label": "DENSE BASELINE RUNTIME",
+    "efficiency_badge": "\u26a1 2.32x TRAINING-FREE SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "3D Asset Generation",
+        "score_a": "2.32x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Minimax-H3 Video Denoising",
+        "score_a": "1.80x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Visual Quality Retention",
+        "score_a": "High Fidelity",
+        "score_b": "Degraded / Heavy Compute"
+      }
+    ],
+    "scale_metric": "2.32x",
+    "scale_label": "Max Denoising Speedup",
+    "bottleneck_title": "RIGID BLOCK-TILING COMPRESSION GAP",
+    "bottleneck_desc": "Discarded token contributions and inaccurate interaction grouping",
+    "solution_title": "META-CACHED SPARSE ATTENTION",
+    "solution_components": "Tile-Aligned Query Groups & Residual Metadata Cache",
+    "mechanism_title": "TIMESTEP RESIDUAL CACHING",
+    "payoff_stat": "2.32x",
+    "payoff_label": "SYNTHESIS ACCELERATION",
+    "payoff_sub": "Negligible Quality Loss Across Video and 3D Asset Models",
+    "payoff_hero_stat": 2.32,
+    "payoff_hero_label": "MC-Sparse Acceleration",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Dense Diffusion Baseline",
+    "payoff_delta_badge": "\u26a1 +132% SPEEDUP WITHOUT FINE-TUNING",
+    "challenger": "MC-Sparse Attention",
+    "incumbent": "Dense Diffusion Transformer"
+  },
+  "benchmark_comparison": {
+    "title": "DIFFUSION TRANSFORMER SPEEDUP BENCHMARK",
+    "metric_name": "Denoising Speedup Factor",
+    "unit": "x Baseline",
+    "contestants": [
+      {
+        "name": "MC-Sparse (3D Generation)",
+        "value": 2.32,
+        "display_val": "2.32x",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "MC-Sparse (Minimax-H3 Video)",
+        "value": 1.8,
+        "display_val": "1.80x",
+        "is_hero": true,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Prior Sparse Baselines",
+        "value": 1.25,
+        "display_val": "1.25x",
+        "is_hero": false,
+        "color": "#F59E0B"
+      },
+      {
+        "name": "Dense Attention Baseline",
+        "value": 1.0,
+        "display_val": "1.00x",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +132% GENERATION SPEEDUP",
+    "radar_axes": [
+      "Denoising Speed",
+      "VRAM Efficiency",
+      "Fidelity Preservation",
+      "Long-Sequence Scalability",
+      "Training-Free Portability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "mc_sparse_kernel.py",
+    "language": "python",
+    "lines": [
+      "def mc_sparse_attention(q, k, v, cache, step):",
+      "if step % cache_stride == 0:",
+      "groups, kv_idx, residual = profile_dense_interactions(q, k, v)",
+      "cache.store(groups, kv_idx, residual)",
+      "return fused_sparse_gemm(q, k, v, cache.indices) + cache.residual"
+    ],
+    "highlight_lines": [
+      3,
+      5
+    ],
+    "trace_register": "\u26a1 TILE-ALIGNED SPARSE GPU CACHE KERNEL",
+    "explanation": "Zero training required; reuses interaction metadata and residuals across diffusion steps"
+  },
+  "arxiv_id": "2610.06801",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "mcsparse_overview_revised_v2",
+      "caption": "Mcsparse Overview Revised V2",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/source/figures/mcsparse_overview_revised_v2.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_1_mcsparse_overview_revised_v2.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "geo_vis_comparison",
+      "caption": "Geo Vis Comparison",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/source/figures/geo_vis_comparison.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_2_geo_vis_comparison.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_2_geo_vis_comparison.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "video_comparison",
+      "caption": "Video Comparison",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/source/figures/video_comparison.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_3_video_comparison.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_3_video_comparison.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "sources_of_gap_visual",
+      "caption": "Sources Of Gap Visual",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/source/figures/sources_of_gap_visual.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_4_sources_of_gap_visual.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_4_sources_of_gap_visual.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "residual_stability",
+      "caption": "Residual Stability",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/source/figures/residual_stability.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_5_residual_stability.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.06801/chalkboard_figures/fig_5_residual_stability.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014it immediately called out the inefficiency of diffusion models, which is a pain point I actually care about. I didn't swipe because you didn't start with 'Today we're going to talk about.' Beat 4 was the best part because you actually mentioned GEMM operations, which makes it feel like a real dev video and not some marketing fluff. My only gripe is that 'caching metadata' in Beat 3 is a bit vague\u2014it sounds like you're just saving a list, but I assume you're actually caching attention maps or indices. Be more specific there."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Naive Sparse Attention",
+    "physical_analogy": "A librarian burning books to save shelf space, only to realize they destroyed the index.",
+    "eureka_mechanism": "Meta-Cached Sparse Attention",
+    "paradigm_shift": "Achieving dense-level fidelity at sparse-level speeds"
+  },
+  "hook_gating": {
+    "selected_hook": "Why do 50% of your GPU cycles waste compute before MC-Sparse fixes the bottleneck?",
+    "verdict": 76,
+    "band": "STRONG",
+    "formula": "The Question",
+    "properties": {
+      "SPECIFICITY": 68,
+      "ADDRESS": 76,
+      "STAKES": 88,
+      "CURIOSITY": 76,
+      "BREVITY": 100
+    },
+    "weakest_property": "SPECIFICITY",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Why do 50% of your GPU cycles waste compute before MC-Sparse fixes the bottleneck?",
+        "verdict": 76,
+        "band": "STRONG",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Over 50% of your GPU memory is wasted before you see how MC-Sparse actually fixes it.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Do not train your next model before you see how MC-Sparse cuts 50% of your memory waste.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "This 1 breakthrough in MC-Sparse stops your GPU from wasting compute before you run out of memory.",
+        "verdict": 60,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "You are probably making the mistake of wasting compute before you test MC-Sparse.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Mistake"
+      },
+      {
+        "hook": "Everyone tells you your model needs more compute, but MC-Sparse proves that advice actually wrong.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "Contrarian Flip"
+      },
+      {
+        "hook": "Diffusion models burn massive compute cycles re-calculating identical patterns in every single denoising step.",
+        "verdict": 30,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "layout_overrides": {
+    "1": {
+      "comparison_cards": {
+        "dx": 0.0,
+        "dy": 0.3,
+        "scale_multiplier": 0.695
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": 0.528,
+        "scale_multiplier": 1.05
+      }
+    },
+    "2": {
+      "hero_visual": {
+        "dx": 0.0,
+        "dy": 0.369,
+        "scale_multiplier": 1.0
+      },
+      "math_formula": {
+        "dx": 0.0,
+        "dy": -1.231,
+        "scale_multiplier": 1.0
+      }
+    }
+  }
+}
