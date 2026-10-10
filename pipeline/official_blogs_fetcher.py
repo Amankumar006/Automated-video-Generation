@@ -102,11 +102,13 @@ OFFICIAL_LAB_FEEDS: Dict[str, Dict[str, Any]] = {
 
 
 def clean_html_text(raw_html: str) -> str:
-    """Strips HTML tags, collapses whitespace, and unescapes HTML entities."""
+    """Strips HTML tags, collapses whitespace, and unescapes HTML entities, preserving CDATA contents."""
     if not raw_html:
         return ""
+    # Unwrap CDATA blocks before stripping tags so inner content is preserved
+    text = re.sub(r"<!\[CDATA\[(.*?)\]\]>", r"\1", raw_html, flags=re.DOTALL)
     # Replace block level elements with space
-    text = re.sub(r"<(?:p|div|br|hr|h[1-6]|li|tr|blockquote)[^>]*>", " ", raw_html, flags=re.IGNORECASE)
+    text = re.sub(r"<(?:p|div|br|hr|h[1-6]|li|tr|blockquote)[^>]*>", " ", text, flags=re.IGNORECASE)
     # Remove remaining inline tags without extra whitespace
     text = re.sub(r"<[^>]+>", "", text)
     # Unescape HTML entities (&amp;, &lt;, etc.)
@@ -117,7 +119,7 @@ def clean_html_text(raw_html: str) -> str:
 
 
 def parse_pubdate_to_iso(date_str: str) -> str:
-    """Parses RFC 822/2822 or ISO 8601 date strings into a clean ISO YYYY-MM-DD format."""
+    """Parses RFC 822/2822, ISO 8601, or natural date strings into a clean ISO YYYY-MM-DD format."""
     if not date_str:
         return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
 
@@ -141,6 +143,21 @@ def parse_pubdate_to_iso(date_str: str) -> str:
             return parsed_tuple.strftime("%Y-%m-%d")
     except Exception:
         pass
+
+    # Try natural human date formats (e.g. 'Oct 6, 2026', 'October 6, 2026')
+    for fmt in (
+        "%b %d, %Y",
+        "%B %d, %Y",
+        "%d %b %Y",
+        "%d %B %Y",
+        "%Y/%m/%d",
+        "%m/%d/%Y",
+    ):
+        try:
+            dt = datetime.datetime.strptime(date_str, fmt)
+            return dt.strftime("%Y-%m-%d")
+        except Exception:
+            pass
 
     # Default fallback
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
@@ -166,13 +183,15 @@ def extract_verified_key_facts(text: str) -> Dict[str, Any]:
     - Pricing: e.g. $1.10 / 1M tokens, free tier, $20/month
     - Release Tiers: API, ChatGPT Plus, Free, Team, Enterprise
     - Availability: Web, API, Google AI Studio, Vertex AI, Open Weights
+    - Steps: Command line commands or sequential launch steps
     """
     facts: Dict[str, Any] = {
         "benchmarks": {},
         "speedups": [],
         "pricing": [],
         "release_tiers": [],
-        "availability": []
+        "availability": [],
+        "steps": []
     }
 
     # 1. Benchmarks: Support both "[Benchmark]: [Score]" and "[Score] on/in [Benchmark]"
@@ -253,6 +272,28 @@ def extract_verified_key_facts(text: str) -> Dict[str, Any]:
     if avail:
         facts["availability"] = list(dict.fromkeys(avail))[:4]
 
+    # 6. Action & Quickstart Steps (CLI commands, installation, numbered launch steps)
+    steps = []
+    cmd_matches = re.findall(
+        r"\b(?:pip|npm|uv pip|bun|cargo|git|docker)\s+(?:install|run|clone|add)[^\n.,;`]+",
+        text,
+        re.IGNORECASE
+    )
+    for cmd in cmd_matches:
+        steps.append(cmd.strip().strip("`"))
+
+    step_matches = re.findall(
+        r"(?:Step\s+\d+[:.]?\s*|\b\d+\.\s+)([A-Z][^.\n]{8,65}(?:\.|$))",
+        text
+    )
+    for sm in step_matches:
+        clean_step = sm.strip()
+        if clean_step and clean_step not in steps:
+            steps.append(clean_step)
+
+    if steps:
+        facts["steps"] = list(dict.fromkeys(steps))[:4]
+
     return facts
 
 
@@ -308,6 +349,7 @@ class OfficialBlogRecord:
         facts_summary = self._format_facts_summary()
         return {
             "id": clean_id,
+            "arxiv_id": clean_id,
             "title": self.title,
             "recommended_category": self.category,
             "category": self.category,
@@ -346,6 +388,8 @@ class OfficialBlogRecord:
             parts.append(f"Tiers: {', '.join(self.key_facts['release_tiers'])}")
         if self.key_facts.get("availability"):
             parts.append(f"Availability: {', '.join(self.key_facts['availability'])}")
+        if self.key_facts.get("steps"):
+            parts.append(f"Steps: {', '.join(self.key_facts['steps'])}")
         return "; ".join(parts) if parts else "Verified official launch"
 
 
@@ -363,7 +407,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["24% faster latency than o1-mini"],
             "pricing": ["$1.10 / 1M input tokens", "$4.40 / 1M output tokens"],
             "release_tiers": ["API", "ChatGPT Plus", "Team", "Pro"],
-            "availability": ["Developer API", "ChatGPT"]
+            "availability": ["Developer API", "ChatGPT"],
+            "steps": ["1. Select o3-mini in model selector", "2. Configure reasoning effort (low/medium/high)", "3. Query via API or ChatGPT Plus"]
         },
         canonical_url="https://openai.com/news/o3-mini",
         domain_taxonomy="reasoning_models",
@@ -384,7 +429,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["Sub-second initial token latency in instantaneous mode"],
             "pricing": ["$3.00 / 1M input tokens", "$15.00 / 1M output tokens"],
             "release_tiers": ["API", "Claude.ai Free", "Claude Pro", "Team", "Enterprise"],
-            "availability": ["Claude API", "Amazon Bedrock", "Google Cloud Vertex AI", "Claude.ai"]
+            "availability": ["Claude API", "Amazon Bedrock", "Google Cloud Vertex AI", "Claude.ai"],
+            "steps": ["1. Access via Claude 3.7 Sonnet API or Claude.ai", "2. Install Claude Code CLI: npm install -g @anthropic-ai/claude-code", "3. Enable extended thinking budget in API request"]
         },
         canonical_url="https://www.anthropic.com/news/claude-3-7-sonnet",
         domain_taxonomy="reasoning_models",
@@ -405,7 +451,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["3.2x faster time-to-first-token compared to Gemini 1.5 Pro"],
             "pricing": ["$0.10 / 1M input tokens", "$0.40 / 1M output tokens"],
             "release_tiers": ["Google AI Studio Free Tier", "Pay-as-you-go API", "Vertex AI Enterprise"],
-            "availability": ["Google AI Studio", "Google Cloud Vertex AI", "Gemini Live API"]
+            "availability": ["Google AI Studio", "Google Cloud Vertex AI", "Gemini Live API"],
+            "steps": ["1. Open Google AI Studio", "2. Obtain Gemini 2.5 Flash API Key", "3. Call generate_content or Live API"]
         },
         canonical_url="https://blog.google/technology/ai/gemini-2-5-flash",
         domain_taxonomy="multimodal_diffusion",
@@ -426,7 +473,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["3x fewer LLM roundtrips via direct Python code actions"],
             "pricing": ["100% Free Open Source (Apache 2.0 License)"],
             "release_tiers": ["smolagents on PyPI", "Hugging Face Spaces"],
-            "availability": ["pip install smolagents", "Hugging Face Hub"]
+            "availability": ["pip install smolagents", "Hugging Face Hub"],
+            "steps": ["pip install smolagents", "Initialize CodeAgent with model", "Run multi-modal Python execution tasks"]
         },
         canonical_url="https://huggingface.co/blog/smolagents",
         domain_taxonomy="efficient_architectures",
@@ -447,7 +495,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["Reduces task scaffolding and planning time by 60%"],
             "pricing": ["Included in GitHub Copilot Business & Enterprise subscriptions"],
             "release_tiers": ["Copilot Individual", "Copilot Business", "Copilot Enterprise"],
-            "availability": ["GitHub Next Technical Preview", "GitHub.com"]
+            "availability": ["GitHub Next Technical Preview", "GitHub.com"],
+            "steps": ["1. Open issue on GitHub repository", "2. Click 'Open in Workspace'", "3. Review AI-proposed specification and files"]
         },
         canonical_url="https://github.blog/news-insights/product-news/github-copilot-workspace/",
         domain_taxonomy="hardware_efficiency",
@@ -468,7 +517,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["2x faster inference latency than GPT-4o"],
             "pricing": ["$0.15 / 1M input tokens", "$0.60 / 1M output tokens"],
             "release_tiers": ["Free Tier", "ChatGPT Plus", "Team", "API Tier 1-5"],
-            "availability": ["ChatGPT", "Developer API"]
+            "availability": ["ChatGPT", "Developer API"],
+            "steps": ["1. Select gpt-4o-mini endpoint", "2. Send multimodal prompt with text/images", "3. Receive low-latency streaming completion"]
         },
         canonical_url="https://openai.com/news/gpt-4o-mini",
         domain_taxonomy="reasoning_models",
@@ -489,7 +539,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["Autonomous multi-step cross-application workflow execution"],
             "pricing": ["Standard Claude 3.5 Sonnet API rates"],
             "release_tiers": ["Public Beta API", "Amazon Bedrock", "Google Cloud Vertex AI"],
-            "availability": ["Anthropic API", "Amazon Bedrock"]
+            "availability": ["Anthropic API", "Amazon Bedrock"],
+            "steps": ["1. Enable computer-use-2024-10-22 beta header", "2. Provide screen resolution and screenshot in tool_result", "3. Execute proposed OS mouse/keyboard actions"]
         },
         canonical_url="https://www.anthropic.com/news/3-5-models-and-computer-use",
         domain_taxonomy="reasoning_models",
@@ -510,7 +561,8 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
             "speedups": ["50% higher accuracy on biomolecular interactions"],
             "pricing": ["Free non-commercial research server; open model weights"],
             "release_tiers": ["AlphaFold Server", "Open Model Weights"],
-            "availability": ["AlphaFold Server", "GitHub"]
+            "availability": ["AlphaFold Server", "GitHub"],
+            "steps": ["1. Open AlphaFold Server", "2. Input protein, DNA, RNA, or ligand sequence", "3. Download predicted 3D biomolecular complex structure"]
         },
         canonical_url="https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-may-2024/",
         domain_taxonomy="reasoning_models",
@@ -546,6 +598,16 @@ class OfficialBlogsFetcher:
         except Exception:
             return False
 
+    @staticmethod
+    def _get_child_tag(elem: Any, valid_names: List[str]) -> Optional[Any]:
+        """Finds child element whose local name matches any valid name (case-insensitive)."""
+        valid_set = {n.lower() for n in valid_names}
+        for child in elem:
+            local = child.tag.split("}")[-1].lower()
+            if local in valid_set:
+                return child
+        return None
+
     def parse_feed_xml(
         self,
         xml_text: str,
@@ -555,30 +617,40 @@ class OfficialBlogsFetcher:
     ) -> List[OfficialBlogRecord]:
         """
         Parses an RSS 2.0 or Atom XML feed into structured OfficialBlogRecord items.
-        Handles namespace stripping and disparate feed tag conventions gracefully.
+        Preserves XML namespace bindings and navigates local tag names gracefully.
         """
         if not xml_text or not xml_text.strip():
             return []
 
-        records: List[OfficialBlogRecord] = []
-
+        root = None
         try:
-            # Strip XML default namespace declarations to simplify XPath querying
-            cleaned_xml = re.sub(r'\sxmlns(?::\w+)?="[^"]+"', '', xml_text)
-            root = ET.fromstring(cleaned_xml)
-        except Exception as e:
-            # If standard XML parsing fails, attempt regex extraction fallback
+            root = ET.fromstring(xml_text)
+        except Exception:
+            try:
+                # Strip default xmlns if standard parse failed (without breaking prefixed namespaces)
+                cleaned_xml = re.sub(r'\sxmlns="[^"]+"', '', xml_text, count=1)
+                root = ET.fromstring(cleaned_xml)
+            except Exception:
+                return self._parse_feed_regex_fallback(xml_text, provider, prefix, default_taxonomy)
+
+        if root is None:
             return self._parse_feed_regex_fallback(xml_text, provider, prefix, default_taxonomy)
 
-        # 1. RSS 2.0 structure: <channel><item>...</item></channel>
-        items = root.findall(".//item")
+        # Locate item or entry tags regardless of XML namespace
+        items = [
+            e for e in root.iter()
+            if e.tag.split("}")[-1].lower() in ("item", "entry")
+        ]
+
         if not items:
-            # 2. Atom structure: <feed><entry>...</entry></feed>
-            items = root.findall(".//entry")
+            return self._parse_feed_regex_fallback(xml_text, provider, prefix, default_taxonomy)
+
+        records: List[OfficialBlogRecord] = []
+        seen_slugs = set()
 
         for item in items:
             # Extract title
-            title_elem = item.find("title")
+            title_elem = self._get_child_tag(item, ["title"])
             raw_title = title_elem.text if (title_elem is not None and title_elem.text) else ""
             clean_title = clean_html_text(raw_title)
             if not clean_title or len(clean_title) < 5:
@@ -586,23 +658,23 @@ class OfficialBlogsFetcher:
 
             # Extract link / canonical URL
             link = ""
-            link_elem = item.find("link")
+            link_elem = self._get_child_tag(item, ["link"])
             if link_elem is not None:
                 link = link_elem.get("href") or link_elem.text or ""
             if not link:
-                guid_elem = item.find("guid")
+                guid_elem = self._get_child_tag(item, ["guid", "id"])
                 if guid_elem is not None and (guid_elem.text or "").startswith("http"):
                     link = guid_elem.text
 
             # Validate official lab domain
             if not self.validate_official_domain(link):
                 # Fallback to provider primary website if link is relative or third-party
-                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower(), {}).get('allowed_domains', ['openai.com'])[0]}"
+                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower().replace(' ', '_'), {}).get('allowed_domains', ['openai.com'])[0]}"
 
             # Extract summary / description
             summary = ""
             for tag in ["description", "summary", "content", "encoded"]:
-                elem = item.find(tag)
+                elem = self._get_child_tag(item, [tag])
                 if elem is not None and elem.text:
                     summary = clean_html_text(elem.text)
                     if summary:
@@ -614,8 +686,8 @@ class OfficialBlogsFetcher:
 
             # Extract pubDate / updated
             pubdate = ""
-            for tag in ["pubDate", "published", "updated", "date"]:
-                elem = item.find(tag)
+            for tag in ["pubdate", "published", "updated", "date"]:
+                elem = self._get_child_tag(item, [tag])
                 if elem is not None and elem.text:
                     pubdate = parse_pubdate_to_iso(elem.text)
                     break
@@ -631,6 +703,9 @@ class OfficialBlogsFetcher:
 
             # Generate unique prefixed ID
             slug = slugify_title(clean_title)
+            if slug in seen_slugs:
+                slug = f"{slug}_{len(seen_slugs)+1}"
+            seen_slugs.add(slug)
             record_id = f"{prefix}_{slug}"
 
             record = OfficialBlogRecord(
@@ -646,6 +721,75 @@ class OfficialBlogsFetcher:
                 tags=[provider.lower(), taxonomy]
             )
             records.append(record)
+
+        return records
+
+    def parse_html_announcements(
+        self,
+        html_text: str,
+        provider: str,
+        prefix: str,
+        default_taxonomy: str = "tech_news"
+    ) -> List[OfficialBlogRecord]:
+        """Parses HTML announcement pages (e.g. anthropic.com/news) when RSS/Atom XML is absent."""
+        if not html_text or not html_text.strip():
+            return []
+
+        records: List[OfficialBlogRecord] = []
+        domain_cfg = OFFICIAL_LAB_FEEDS.get(provider.lower().replace(" ", "_"), {})
+        allowed_domains = domain_cfg.get("allowed_domains", ["anthropic.com"])
+        primary_domain = allowed_domains[0]
+        base_domain = f"https://www.{primary_domain}" if not primary_domain.startswith("http") else primary_domain
+
+        # Extract articles/links: e.g. /news/<slug> or full official links
+        pattern = r'<a[^>]+href=["\']((?:/news/|/blog/|/index/)[a-zA-Z0-9\-_/]+)["\'][^>]*>(.*?)</a>'
+        articles = re.findall(pattern, html_text, re.DOTALL | re.IGNORECASE)
+        seen_urls = set()
+
+        for href, inner in articles:
+            full_url = href if href.startswith("http") else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+
+            if full_url in seen_urls or not self.validate_official_domain(full_url):
+                continue
+            seen_urls.add(full_url)
+
+            # Extract date
+            t_match = re.search(r'<time[^>]*>(.*?)</time>', inner, re.DOTALL | re.IGNORECASE)
+            date_str = clean_html_text(t_match.group(1)) if t_match else ""
+            pubdate = parse_pubdate_to_iso(date_str) if date_str else datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+
+            # Strip time and meta tags to isolate title
+            clean_inner = re.sub(r'<time[^>]*>.*?</time>', '', inner, flags=re.DOTALL | re.IGNORECASE)
+            clean_inner = re.sub(r'<div[^>]*meta[^>]*>.*?</div>', '', clean_inner, flags=re.DOTALL | re.IGNORECASE)
+            clean_inner = clean_html_text(clean_inner)
+            clean_inner = re.sub(r'^(?:Announcements|Science|Research|Company|Product|News)\s+', '', clean_inner, flags=re.IGNORECASE).strip()
+
+            if not clean_inner or len(clean_inner) < 6:
+                continue
+
+            sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", clean_inner) if s.strip()]
+            title = sentences[0] if sentences else clean_inner
+            if len(title) > 95 and sentences:
+                title = title[:95].rsplit(" ", 1)[0]
+            summary = " ".join(sentences[1:3]) if len(sentences) > 1 else clean_inner
+
+            facts = extract_verified_key_facts(clean_inner)
+            category, taxonomy = classify_blog_content(title, summary, default_taxonomy)
+            slug = slugify_title(title)
+            record_id = f"{prefix}_{slug}"
+
+            records.append(OfficialBlogRecord(
+                id=record_id,
+                title=title,
+                provider=provider,
+                published_date=pubdate,
+                summary=summary[:320],
+                category=category,
+                key_facts=facts,
+                canonical_url=full_url,
+                domain_taxonomy=taxonomy,
+                tags=[provider.lower(), taxonomy]
+            ))
 
         return records
 
@@ -674,7 +818,7 @@ class OfficialBlogsFetcher:
             summary = clean_html_text(d_match.group(1)) if d_match else clean_title
 
             if not self.validate_official_domain(link):
-                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower(), {}).get('allowed_domains', ['openai.com'])[0]}"
+                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower().replace(' ', '_'), {}).get('allowed_domains', ['openai.com'])[0]}"
 
             facts = extract_verified_key_facts(f"{clean_title} {summary}")
             category, taxonomy = classify_blog_content(clean_title, summary, default_taxonomy)
@@ -695,8 +839,8 @@ class OfficialBlogsFetcher:
             ))
         return records
 
-    def fetch_provider_feed(self, provider_key: str) -> List[OfficialBlogRecord]:
-        """Fetches and parses the official feed for a specific provider."""
+    def fetch_provider_feed(self, provider_key: str, max_items: int = 25) -> List[OfficialBlogRecord]:
+        """Fetches and parses the official feed or announcement page for a specific provider."""
         cfg = OFFICIAL_LAB_FEEDS.get(provider_key)
         if not cfg:
             return []
@@ -709,7 +853,7 @@ class OfficialBlogsFetcher:
         urls_to_try = [cfg["feed_url"]] + cfg.get("fallback_urls", [])
         headers = {
             "User-Agent": "TheModelVerse-Pipeline/2.0 (contact@themodelverse.ai; +https://themodelverse.ai)",
-            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, */*"
+            "Accept": "application/rss+xml, application/atom+xml, application/xml, text/xml, text/html, */*"
         }
 
         for url in urls_to_try:
@@ -723,8 +867,16 @@ class OfficialBlogsFetcher:
                     prefix=cfg["prefix"],
                     default_taxonomy=cfg.get("default_taxonomy", "tech_news")
                 )
+                if not records:
+                    # Attempt HTML announcements parsing if XML returned no records
+                    records = self.parse_html_announcements(
+                        raw_content,
+                        provider=cfg["provider"],
+                        prefix=cfg["prefix"],
+                        default_taxonomy=cfg.get("default_taxonomy", "tech_news")
+                    )
                 if records:
-                    return records
+                    return records[:max_items]
             except Exception:
                 # Silently proceed to fallback url or cached registry
                 continue
@@ -733,7 +885,7 @@ class OfficialBlogsFetcher:
         prefix = cfg["prefix"]
         return [rec for rec in self.cache.values() if rec.id.startswith(prefix) or rec.provider == cfg["provider"]]
 
-    def fetch_all_feeds(self, offline_only: Optional[bool] = None) -> List[OfficialBlogRecord]:
+    def fetch_all_feeds(self, offline_only: Optional[bool] = None, max_per_provider: int = 25) -> List[OfficialBlogRecord]:
         """
         Ingests official posts from all 5 labs, deduplicates, and caches records.
         If network fetching is unavailable or fails, returns curated offline registry.
@@ -745,7 +897,7 @@ class OfficialBlogsFetcher:
         if not use_offline:
             for p_key in OFFICIAL_LAB_FEEDS:
                 try:
-                    p_records = self.fetch_provider_feed(p_key)
+                    p_records = self.fetch_provider_feed(p_key, max_items=max_per_provider)
                     all_records.extend(p_records)
                 except Exception as e:
                     print(f"⚠️ Notice while fetching official feed for {p_key}: {e}")
@@ -762,26 +914,28 @@ class OfficialBlogsFetcher:
         return all_records
 
     def get_blog(self, blog_id: str) -> Optional[OfficialBlogRecord]:
-        """Fetches a specific blog record by ID (e.g. 'blog_openai_o3_mini' or 'blog_claude_3_7_sonnet')."""
+        """Fetches a specific blog record by ID (e.g. 'blog_openai_o3_mini' or 'blog_claude_3_7_sonnet') or canonical URL."""
         if not blog_id:
             return None
         norm_id = blog_id.strip().lower()
         if norm_id in self.cache:
             return self.cache[norm_id]
 
-        # Check with or without prefix
+        # Check with or without prefix or matching canonical URL
         for k, v in self.cache.items():
             if k == norm_id or k.endswith(f"_{norm_id}") or norm_id.endswith(f"_{k}"):
+                return v
+            if v.canonical_url.lower() == norm_id or v.canonical_url.lower().rstrip("/") == norm_id.rstrip("/"):
                 return v
 
         return None
 
     def find_blog(self, query: str) -> Optional[OfficialBlogRecord]:
-        """Fuzzy/keyword lookup for blog posts (e.g. 'o3-mini', 'claude 3.7', 'gemini 2.5', 'smolagents')."""
+        """Fuzzy/keyword lookup for blog posts (e.g. 'o3-mini', 'claude 3.7', 'gemini 2.5', 'smolagents') or direct URL."""
         if not query:
             return None
 
-        # Try exact ID match first
+        # Try exact ID match or canonical URL match first
         rec = self.get_blog(query)
         if rec:
             return rec
@@ -793,7 +947,7 @@ class OfficialBlogsFetcher:
         best_score = 0
 
         for r_id, r in self.cache.items():
-            target_str = f"{r.id} {r.title} {r.provider} {' '.join(r.tags)}".lower()
+            target_str = f"{r.id} {r.title} {r.provider} {r.canonical_url} {' '.join(r.tags)}".lower()
             score = sum(1 for tok in tokens if tok in target_str)
             if score > best_score:
                 best_score = score

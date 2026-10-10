@@ -21,6 +21,8 @@ CACHE_BASE_DIR = PROJECT_ROOT / "public" / "arxiv_cache"
 def clean_arxiv_id(query: str) -> str:
     """Normalizes an arXiv query or URL into a clean ID."""
     query = query.strip()
+    if any(query.startswith(p) for p in ("perk_", "gh_", "blog_", "news_")):
+        return query
     match = re.search(r"(\d{4}\.\d{4,5}(?:v\d+)?)", query)
     if match:
         return match.group(1)

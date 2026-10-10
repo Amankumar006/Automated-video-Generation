@@ -163,12 +163,12 @@ def evaluate_pedagogical_viability(
 
     prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI and developer tools.
 
-Review these top {len(cand_summaries)} trending AI papers and tech perks from today:
+Review these top {len(cand_summaries)} trending AI papers, official lab announcements, and tech perks from today:
 {chr(10).join(cand_summaries)}
 
 Select the {target_count} BEST and MOST DIVERSE topics for 45-second educational animated Shorts.
 Criteria:
-1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks).
+1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks, major AI model releases).
 2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static, VIP all-access badge)?
 3. High Production Value: Can the concepts be visualized with dynamic 3b1b animations (e.g. wave collisions, streaming KV buffers, pipeline stages, workflow routing)?{bias_desc}
 

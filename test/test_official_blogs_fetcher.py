@@ -399,3 +399,143 @@ def test_non_arxiv_ids_bypass_extract_paper_figures():
     assert extract_paper_figures("news_deepmind_gemini") == []
     assert extract_paper_figures("perk_microsoft_founders_hub") == []
     assert extract_paper_figures("gh_sgl_project_sglang") == []
+
+
+# ==============================================================================
+# 9. Deep Edge-Case Verification: CDATA, Prefixed XML, HTML News, Steps, Dates
+# ==============================================================================
+
+def test_clean_html_text_preserves_cdata_blocks():
+    """Validates that clean_html_text preserves text inside CDATA blocks rather than erasing them."""
+    cdata_input = "<![CDATA[Sophos cuts threat investigation time by 96% with OpenAI Daybreak]]>"
+    cleaned = clean_html_text(cdata_input)
+    assert cleaned == "Sophos cuts threat investigation time by 96% with OpenAI Daybreak"
+
+    nested_html = "<![CDATA[<h3>Introducing o3-mini</h3><p>Fast reasoning</p>]]>"
+    cleaned_nested = clean_html_text(nested_html)
+    assert cleaned_nested == "Introducing o3-mini Fast reasoning"
+
+
+def test_parse_rss_with_cdata_title_and_prefixed_tags():
+    """
+    Validates parsing of live-format RSS feeds where titles are wrapped in CDATA
+    and elements contain XML namespace prefixes (e.g. atom:link, dc:creator).
+    Ensures XML parser does not fail with unbound prefix errors or wipe out titles.
+    """
+    live_style_rss = """<?xml version="1.0" encoding="UTF-8"?>
+    <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+      <channel>
+        <title><![CDATA[OpenAI News]]></title>
+        <link>https://openai.com/news</link>
+        <atom:link href="https://openai.com/news/rss.xml" rel="self" type="application/rss+xml"/>
+        <item>
+          <title><![CDATA[Sophos cuts threat investigation time by 96% with OpenAI Daybreak]]></title>
+          <description><![CDATA[Discover how Sophos uses OpenAI’s Daybreak to cut cyber-threat investigation time by 96% and automate 52% of MDR cases.]]></description>
+          <link>https://openai.com/index/sophos</link>
+          <guid isPermaLink="true">https://openai.com/index/sophos</guid>
+          <pubDate>Fri, 09 Oct 2026 07:00:00 GMT</pubDate>
+          <dc:creator><![CDATA[OpenAI Team]]></dc:creator>
+        </item>
+      </channel>
+    </rss>
+    """
+    fetcher = OfficialBlogsFetcher()
+    records = fetcher.parse_feed_xml(live_style_rss, provider="OpenAI", prefix="blog_openai")
+
+    assert len(records) == 1
+    rec = records[0]
+    assert rec.title == "Sophos cuts threat investigation time by 96% with OpenAI Daybreak"
+    assert "96%" in rec.summary
+    assert rec.id.startswith("blog_openai_sophos")
+    assert rec.canonical_url == "https://openai.com/index/sophos"
+    assert rec.published_date == "2026-10-09"
+
+
+def test_parse_html_announcements_anthropic():
+    """Validates HTML announcements parsing for labs without working RSS XML (e.g. anthropic.com/news)."""
+    sample_anthropic_html = """
+    <html>
+      <body>
+        <main>
+          <a href="/news/claude-frontier-academy" class="item">
+            <time>Oct 2, 2026</time>
+            <h4>Anthropic invests $100 million to train 10,000 engineers and tackle the enterprise AI talent gap</h4>
+          </a>
+          <a href="/news/cyber-verification-program" class="item">
+            <div class="meta"><span class="tag">Announcements</span><time>Oct 6, 2026</time></div>
+            <span class="title">Expanding the Cyber Verification Program</span>
+          </a>
+        </main>
+      </body>
+    </html>
+    """
+    fetcher = OfficialBlogsFetcher()
+    records = fetcher.parse_html_announcements(sample_anthropic_html, provider="Anthropic", prefix="blog_anthropic")
+
+    assert len(records) == 2
+    rec1 = records[0]
+    assert "Anthropic invests" in rec1.title
+    assert rec1.canonical_url == "https://www.anthropic.com/news/claude-frontier-academy"
+    assert rec1.published_date == "2026-10-02"
+    assert rec1.provider == "Anthropic"
+
+    rec2 = records[1]
+    assert "Cyber Verification" in rec2.title
+    assert rec2.canonical_url == "https://www.anthropic.com/news/cyber-verification-program"
+    assert rec2.published_date == "2026-10-06"
+
+
+def test_parse_pubdate_to_iso_natural_dates():
+    """Validates natural human date formats conversion to ISO."""
+    assert parse_pubdate_to_iso("Oct 6, 2026") == "2026-10-06"
+    assert parse_pubdate_to_iso("September 23, 2026") == "2026-09-23"
+    assert parse_pubdate_to_iso("02 Oct 2026") == "2026-10-02"
+    assert parse_pubdate_to_iso("2025-01-31") == "2025-01-31"
+    assert parse_pubdate_to_iso("Fri, 31 Jan 2025 18:00:00 GMT") == "2025-01-31"
+
+
+def test_extract_verified_key_facts_steps():
+    """Validates extraction of quickstart commands and launch steps."""
+    text = (
+        "To get started, run `pip install smolagents` in your environment. "
+        "Step 1: Obtain your API key from the developer console. "
+        "Step 2: Initialize the CodeAgent with tool definitions."
+    )
+    facts = extract_verified_key_facts(text)
+    assert "steps" in facts
+    assert any("pip install smolagents" in s for s in facts["steps"])
+    assert any("Obtain your API key" in s for s in facts["steps"])
+
+
+def test_canonical_url_lookup_in_get_blog_and_find_blog():
+    """Validates looking up blog records by canonical link URL."""
+    fetcher = OfficialBlogsFetcher()
+    rec1 = fetcher.get_blog("https://openai.com/news/o3-mini")
+    assert rec1 is not None
+    assert rec1.id == "blog_openai_o3_mini"
+
+    rec2 = fetcher.find_blog("https://www.anthropic.com/news/claude-3-7-sonnet")
+    assert rec2 is not None
+    assert rec2.id == "blog_claude_3_7_sonnet"
+
+
+def test_candidate_spec_contains_arxiv_id_and_steps():
+    """Validates that candidate specification adheres to pipeline schema with arxiv_id and steps."""
+    rec = VERIFIED_OFFICIAL_BLOGS_REGISTRY["blog_openai_o3_mini"]
+    spec = rec.to_candidate_spec()
+
+    assert spec["id"] == "blog_openai_o3_mini"
+    assert spec["arxiv_id"] == "blog_openai_o3_mini"
+    assert "Steps:" in spec["abstract"]
+    assert "Select o3-mini in model selector" in spec["abstract"]
+
+
+def test_extract_arxiv_id_bypasses_non_arxiv_prefixes():
+    """Validates that extract_arxiv_id and clean_arxiv_id return non-arXiv IDs untouched."""
+    from pipeline.arxiv_fetcher import extract_arxiv_id
+    from pipeline.arxiv_vector_extractor import clean_arxiv_id
+
+    for test_id in ["blog_openai_o3_mini", "blog_deepmind_gemini_2_5_flash", "news_claude", "perk_azure", "gh_vllm"]:
+        assert extract_arxiv_id(test_id) == test_id
+        assert clean_arxiv_id(test_id) == test_id
+

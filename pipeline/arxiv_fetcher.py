@@ -23,6 +23,8 @@ CACHE_BASE_DIR = PROJECT_ROOT / "public" / "arxiv_cache"
 def extract_arxiv_id(query: str) -> str:
     """Extracts clean arXiv ID from URL or raw ID string."""
     query = query.strip()
+    if any(query.startswith(p) for p in ("blog_", "news_", "perk_", "gh_")):
+        return query
     # Match patterns like https://arxiv.org/abs/2412.19437 or 2412.19437v1
     match = re.search(r"(\d{4}\.\d{4,5}(?:v\d+)?)", query)
     if match:
