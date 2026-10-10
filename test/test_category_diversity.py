@@ -212,3 +212,81 @@ def test_record_perk_production_history(tmp_path, monkeypatch):
     assert saved["category"] == test_cat
     assert saved["status"] == "completed"
 
+
+def test_daemon_preferred_taxonomy_targeting(monkeypatch):
+    """Validates that DailyShortsDaemon correctly applies preferred_taxonomy='developer_perks'."""
+    monkeypatch.setenv("GEMINI_API_KEY", "")
+    monkeypatch.setattr("pipeline.script_generator.generate_script", _mock_spec)
+    daemon = DailyShortsDaemon()
+    candidates = [
+        {
+            "id": "cand_hw",
+            "title": "Hardware paper",
+            "taxonomy": "hardware_efficiency",
+            "recommended_category": "mechanism_deepdive",
+            "analytics_multiplier": 1.19,
+            "impact_score": 90.0,
+            "abstract": "..."
+        },
+        {
+            "id": "cand_perk",
+            "title": "Anthropic Claude Team Program",
+            "taxonomy": "developer_perks",
+            "recommended_category": "developer_perks",
+            "analytics_multiplier": 1.25,
+            "impact_score": 85.0,
+            "abstract": "..."
+        }
+    ]
+    # Under preferred_taxonomy="developer_perks", cand_perk must be chosen over cand_hw
+    selected = evaluate_pedagogical_viability(candidates, count=1, preferred_taxonomy="developer_perks")
+    assert len(selected) == 1
+    assert selected[0]["id"] == "cand_perk"
+    assert selected[0]["taxonomy"] == "developer_perks"
+
+
+def test_run_pipeline_bypasses_arxiv_figure_extraction_for_perks(monkeypatch):
+    """Validates that run_pipeline bypasses arXiv figure extraction when processing perk IDs."""
+    import sys
+    from pipeline.run_pipeline import main as run_pipeline_main
+    from unittest.mock import MagicMock
+
+    mock_spec = {
+        "id": "test_perk_spec",
+        "title": "Anthropic Claude Team Program",
+        "category": "developer_perks",
+        "arxiv_id": "perk_anthropic_startup_program",
+        "beats": [
+            {
+                "beat_id": 1,
+                "text": "Every founder burns cloud runway before discovering verified perks.",
+                "duration": 5.0
+            }
+        ]
+    }
+
+    mock_audio = {
+        "master_audio": "/tmp/mock_audio.wav",
+        "timing_data": [{"beat_id": 1, "duration": 5.0, "slot_duration": 5.0, "start": 0.0, "end": 5.0, "word_timings": []}]
+    }
+
+    figure_extraction_called = False
+    def mock_extract_figures(*args, **kwargs):
+        nonlocal figure_extraction_called
+        figure_extraction_called = True
+        return []
+
+    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--perk", "anthropic_startup_program", "--dry-run"])
+    monkeypatch.setattr("pipeline.run_pipeline.generate_script", lambda **kwargs: mock_spec)
+    monkeypatch.setattr("pipeline.run_pipeline.synthesize_audio_for_spec", lambda *args, **kwargs: mock_audio)
+    monkeypatch.setattr("pipeline.arxiv_vector_extractor.extract_paper_figures", mock_extract_figures)
+    monkeypatch.setattr("pipeline.run_pipeline.render_scene", lambda *args, **kwargs: None)
+
+    try:
+        run_pipeline_main()
+    except SystemExit:
+        pass
+
+    assert figure_extraction_called is False, "extract_paper_figures should NOT be called for perk IDs"
+
+

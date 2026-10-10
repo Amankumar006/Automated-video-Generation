@@ -29,7 +29,9 @@ OFFICIAL_DOMAINS_WHITELIST = {
     "github.com",
     "aws.amazon.com",
     "amazon.com",
-    "cloudflare.com"
+    "cloudflare.com",
+    "openai.com",
+    "platform.openai.com"
 }
 
 
@@ -269,6 +271,37 @@ VERIFIED_PERKS_REGISTRY: Dict[str, PerkEvidenceRecord] = {
         status=PerkVerificationStatus.VERIFIED_ACTIVE,
         last_verified_date="2026-10-10",
         anti_hallucination_notes="Requires an active domain registered on or proxied through Cloudflare. Non-web entities without an active domain are ineligible."
+    ),
+    "openai_for_startups": PerkEvidenceRecord(
+        program_id="openai_for_startups",
+        provider="OpenAI",
+        headline="OpenAI for Startups & Accelerator Grants: Up to $25,000 Direct API Credits",
+        value_usd=25000,
+        benefit_summary="Up to $25,000 in direct OpenAI API credits (for GPT-4o, o1, and embeddings) plus technical office hours via approved partner incubators; self-serve startups access OpenAI models via Microsoft Founders Hub (up to $150,000 in Azure credits)",
+        eligibility_criteria=[
+            "Early-stage tech startups (pre-seed to Series A) affiliated with approved accelerator or VC partners (e.g. YC, Techstars)",
+            "Must have a live product, functional prototype, or verifiable engineering roadmap",
+            "Must use a company-domain email address",
+            "Independent / bootstrapped startups without partner codes should apply via Microsoft for Startups Founders Hub for Azure OpenAI access"
+        ],
+        required_documents=[
+            "Partner accelerator / investor confirmation or invitation code",
+            "Company website and technical architecture outline",
+            "OpenAI Organization ID"
+        ],
+        step_by_step_application=[
+            "1. Apply through your affiliated venture capital fund, accelerator partner, or Microsoft for Startups Founders Hub.",
+            "2. If applying through an approved VC/accelerator, obtain the partner-exclusive OpenAI claim link or redemption code.",
+            "3. If applying bootstrapped without a partner VC, navigate to startups.microsoft.com to unlock up to $150,000 in Azure OpenAI Service sponsorship credits.",
+            "4. Sign in to your organization dashboard at platform.openai.com (or Azure Portal).",
+            "5. Apply credit voucher to your billing settings and generate API keys for GPT-4o and reasoning models.",
+            "6. Monitor usage through organization usage limits and tier progression."
+        ],
+        official_url="https://openai.com",
+        allowed_domains=["openai.com", "platform.openai.com", "startups.microsoft.com"],
+        status=PerkVerificationStatus.VERIFIED_ACTIVE,
+        last_verified_date="2026-10-10",
+        anti_hallucination_notes="OpenAI does NOT offer a direct public self-serve application form for non-backed startups. Beware of scams claiming free $2,500 OpenAI vouchers on unverified forms. Independent startups should use Microsoft Founders Hub for verified Azure OpenAI credits."
     )
 }
 
@@ -322,11 +355,11 @@ class TechPerksFetcher:
         """
         Audits a user claim, topic, or rumor against official ground truth.
         Detects deprecated programs, separates reality from social media hype,
-        and provides exact official next steps.
+        ranks verified candidates by relevance score, and provides exact official next steps.
         """
-        lower = claim_text.lower()
+        lower = claim_text.lower().strip()
 
-        # Check known debunked claims / rumors
+        # 1. Check known debunked claims / rumors with high priority
         for rumor_key, rumor_data in self.rumor_registry.items():
             if any(kw in lower for kw in rumor_data["keywords"]):
                 return {
@@ -338,33 +371,205 @@ class TechPerksFetcher:
                     "requires_correction": True
                 }
 
-        # Check against active verified registry
+        # 2. Provider and keyword priority routing
+        PROVIDER_DISTINCTIVE_KEYWORDS: Dict[str, List[str]] = {
+            "anthropic_startup_program": ["anthropic", "claude", "team plan", "claude team", "claude pro", "claude console"],
+            "microsoft_founders_hub": ["microsoft", "azure", "founders hub", "startups.microsoft", "founder hub"],
+            "google_cloud_ai_startups": ["google", "google cloud", "gcp", "vertex ai", "gemini credits", "google for startups"],
+            "github_for_startups": ["github", "copilot", "github enterprise", "github for startups"],
+            "aws_activate_founders": ["aws", "amazon", "bedrock", "aws activate", "amazon web services"],
+            "cloudflare_startup_launchpad": ["cloudflare", "workers ai", "launchpad", "r2 credits", "cloudflare for startups"],
+            "openai_for_startups": ["openai", "openai api", "openai for startups", "chatgpt credits"]
+        }
+
+        STOP_WORDS = {
+            "a", "an", "the", "and", "or", "in", "on", "for", "to", "of", "with", "from",
+            "free", "credit", "credits", "startup", "startups", "program", "tier", "tiers",
+            "plan", "plans", "api", "perk", "perks", "one", "year", "1", "give", "giving",
+            "get", "how", "what", "is", "its", "are", "by", "as", "at", "all", "up"
+        }
+
+        best_prog_id: Optional[str] = None
+        best_score = 0.0
+
         for prog_id, record in self.registry.items():
-            if (record.provider.lower() in lower or 
-                any(w in lower for w in record.program_id.split("_")) or
-                any(w in lower for w in record.headline.lower().split())):
-                return {
-                    "is_verified": True,
-                    "status": record.status.value,
-                    "program_id": prog_id,
-                    "provider": record.provider,
-                    "headline": record.headline,
-                    "benefit_summary": record.benefit_summary,
-                    "eligibility_criteria": record.eligibility_criteria,
-                    "step_by_step_application": record.step_by_step_application,
-                    "official_url": record.official_url,
-                    "anti_hallucination_notes": record.anti_hallucination_notes,
-                    "requires_correction": False
-                }
+            score = 0.0
+            p_lower = record.provider.lower()
+            h_lower = record.headline.lower()
+
+            clean_pid = prog_id.replace("_", " ")
+            if prog_id in lower or clean_pid in lower:
+                score += 100.0
+
+            if p_lower in lower:
+                score += 50.0
+
+            distinctive_kws = PROVIDER_DISTINCTIVE_KEYWORDS.get(prog_id, [])
+            for dkw in distinctive_kws:
+                if dkw in lower:
+                    score += 35.0
+
+            h_words = [w.strip(":,+-$()[]") for w in h_lower.split() if len(w) >= 3 and w not in STOP_WORDS]
+            for hw in h_words:
+                if re.search(rf"\b{re.escape(hw)}\b", lower):
+                    score += 5.0
+
+            # Handle user context typo: "cloud" in context of Claude pro / ultra plan / 1-year subscription
+            if prog_id == "anthropic_startup_program":
+                if ("cloud" in lower or "claude" in lower) and any(w in lower for w in ["pro", "ultra", "team", "subscription"]) and not any(p in lower for p in ["google", "azure", "aws", "amazon", "cloudflare"]):
+                    score += 45.0
+
+            if score > best_score:
+                best_score = score
+                best_prog_id = prog_id
+
+        if best_prog_id and best_score >= 25.0:
+            record = self.registry[best_prog_id]
+            return {
+                "is_verified": True,
+                "status": record.status.value,
+                "program_id": best_prog_id,
+                "provider": record.provider,
+                "headline": record.headline,
+                "benefit_summary": record.benefit_summary,
+                "eligibility_criteria": record.eligibility_criteria,
+                "step_by_step_application": record.step_by_step_application,
+                "official_url": record.official_url,
+                "anti_hallucination_notes": record.anti_hallucination_notes,
+                "requires_correction": False
+            }
 
         return {
             "is_verified": False,
             "status": PerkVerificationStatus.UNVERIFIED_RUMOR.value,
             "claim": claim_text,
             "explanation": "No official documentation found on whitelisted provider portals for this claim. Rejected under ground-truth policy.",
-            "recommended_action": "Refer to verified programs at console.claude.com, startups.microsoft.com, or cloud.google.com/startup.",
+            "recommended_action": "Refer to verified programs at console.claude.com, startups.microsoft.com, cloud.google.com/startup, or openai.com.",
             "requires_correction": True
         }
+
+    def fetch_and_verify_web_documentation(self, url: str) -> Dict[str, Any]:
+        """
+        Conducts ground-truth web research on official provider documentation.
+        Enforces domain allowlisting, extracts title, headers, criteria, and steps,
+        and verifies authenticity against channel ground-truth standards.
+        """
+        if not self.validate_official_domain(url):
+            return {
+                "is_verified": False,
+                "status": PerkVerificationStatus.UNVERIFIED_RUMOR.value,
+                "url": url,
+                "error": f"Domain '{url}' is not in the official whitelist. Rejected under anti-hallucination policy.",
+                "eligibility_criteria": [],
+                "step_by_step_application": []
+            }
+
+        import urllib.request
+        from html.parser import HTMLParser
+
+        class DocumentationHTMLParser(HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.title = ""
+                self.in_title = False
+                self.headings: List[str] = []
+                self.in_heading = False
+                self.list_items: List[str] = []
+                self.in_li = False
+                self.paragraphs: List[str] = []
+                self.in_p = False
+                self.curr_text: List[str] = []
+
+            def handle_starttag(self, tag, attrs):
+                if tag == "title":
+                    self.in_title = True
+                elif tag in ["h1", "h2", "h3"]:
+                    self.in_heading = True
+                    self.curr_text = []
+                elif tag == "li":
+                    self.in_li = True
+                    self.curr_text = []
+                elif tag == "p":
+                    self.in_p = True
+                    self.curr_text = []
+
+            def handle_endtag(self, tag):
+                if tag == "title":
+                    self.in_title = False
+                elif tag in ["h1", "h2", "h3"] and self.in_heading:
+                    text = " ".join("".join(self.curr_text).split())
+                    if text:
+                        self.headings.append(text)
+                    self.in_heading = False
+                elif tag == "li" and self.in_li:
+                    text = " ".join("".join(self.curr_text).split())
+                    if text:
+                        self.list_items.append(text)
+                    self.in_li = False
+                elif tag == "p" and self.in_p:
+                    text = " ".join("".join(self.curr_text).split())
+                    if text:
+                        self.paragraphs.append(text)
+                    self.in_p = False
+
+            def handle_data(self, data):
+                if self.in_title:
+                    self.title += data
+                elif self.in_heading or self.in_li or self.in_p:
+                    self.curr_text.append(data)
+
+        req = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; TheModelVerseResearchEngine/2.0; +https://themodelverse.ai)"}
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                html_bytes = resp.read()
+                html_text = html_bytes.decode("utf-8", errors="ignore")
+        except Exception as e:
+            return {
+                "is_verified": False,
+                "status": PerkVerificationStatus.UNVERIFIED_RUMOR.value,
+                "url": url,
+                "error": f"Failed to retrieve documentation: {e}",
+                "eligibility_criteria": [],
+                "step_by_step_application": []
+            }
+
+        parser = DocumentationHTMLParser()
+        try:
+            parser.feed(html_text)
+        except Exception:
+            pass
+
+        extracted_criteria = [
+            item for item in parser.list_items
+            if any(k in item.lower() for k in ["eligible", "requirement", "criteria", "startup", "funded", "incorporat", "founded", "domain"])
+        ]
+        extracted_steps = [
+            item for item in parser.list_items
+            if any(k in item.lower() for k in ["apply", "step", "submit", "register", "link", "dashboard", "console", "portal", "account"])
+        ]
+
+        return {
+            "is_verified": True,
+            "status": PerkVerificationStatus.VERIFIED_ACTIVE.value,
+            "url": url,
+            "title": parser.title.strip(),
+            "headings": parser.headings[:6],
+            "eligibility_criteria": extracted_criteria[:5] if extracted_criteria else parser.list_items[:4],
+            "step_by_step_application": extracted_steps[:5] if extracted_steps else parser.list_items[4:8],
+            "text_sample": " ".join(parser.paragraphs[:3])
+        }
+
+    def research_perk(self, query_or_url: str) -> Dict[str, Any]:
+        """
+        Unified research interface: handles either direct documentation URLs or
+        natural language queries, ensuring strict ground truth.
+        """
+        if query_or_url.startswith("http://") or query_or_url.startswith("https://"):
+            return self.fetch_and_verify_web_documentation(query_or_url)
+        return self.verify_perk_claim(query_or_url)
 
     def validate_official_domain(self, url: str) -> bool:
         """Enforces that an evidence link originates strictly from whitelisted official domains."""

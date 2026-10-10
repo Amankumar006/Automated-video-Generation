@@ -321,7 +321,7 @@ def main():
 
     # Ingest / bind native arXiv paper figures
     target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
-    if target_arxiv_id:
+    if target_arxiv_id and not str(target_arxiv_id).startswith("perk_") and not str(target_arxiv_id).startswith("gh_"):
         from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
         clean_id = clean_arxiv_id(str(target_arxiv_id))
         spec["arxiv_id"] = clean_id
