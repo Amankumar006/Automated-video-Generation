@@ -44,8 +44,10 @@ def auto_produce(
     language: Optional[str] = None,
     skip_repair: bool = False,
     publish_instagram: bool = False,
-    publish_x: bool = False
+    publish_x: bool = False,
+    publish_linkedin: bool = False
 ) -> str:
+
 
     if language in ("both", "all", "dual"):
         print("\n=======================================================")
@@ -71,7 +73,8 @@ def auto_produce(
             language="en",
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
-            publish_x=publish_x
+            publish_x=publish_x,
+            publish_linkedin=publish_linkedin
         )
         # Locate the template generated or used by the English pass
         hi_template = template
@@ -105,8 +108,10 @@ def auto_produce(
             language="hi",
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
-            publish_x=publish_x
+            publish_x=publish_x,
+            publish_linkedin=publish_linkedin
         )
+
 
         print("\n🎉 Both English and Hindi videos produced and processed successfully!")
         return json.dumps({"en": res_en, "hi": res_hi})
@@ -540,8 +545,30 @@ def auto_produce(
             except Exception as e_x:
                 print(f"\n⚠️ X automated publish skipped or failed: {e_x}")
 
+    # Step 10: Automated LinkedIn Video Distribution
+    should_publish_li = publish_linkedin or (publish and os.getenv("PUBLISH_LINKEDIN", "false").lower() == "true")
+    if should_publish_li or dry_run_publish:
+        from pipeline.linkedin_copy_generator import generate_linkedin_post
+        from pipeline.linkedin_publisher import linkedin_publisher
+        print("\n💼 Step 10: LinkedIn automated video distribution...")
+        li_post = generate_linkedin_post(spec)
+        if dry_run_publish:
+            print("\n=======================================================")
+            print("🔍 LINKEDIN POST PREVIEW (DRY-RUN)")
+            print("=======================================================\n")
+            print(f"🪝 HOOK:\n{li_post['hook']}\n")
+            print(f"📝 COMMENTARY:\n{li_post['commentary']}\n")
+            print(f"💬 FIRST COMMENT:\n{li_post['first_comment']}\n")
+            print("=======================================================\n")
+        elif should_publish_li:
+            try:
+                linkedin_publisher.publish_video(final_output, spec)
+            except Exception as e_li:
+                print(f"\n⚠️ LinkedIn automated publish skipped or failed: {e_li}")
+
     print("\n=======================================================")
     print("🎉 AUTONOMOUS VIDEO PRODUCTION COMPLETE!")
+
 
     print(f"🎥 Video: {final_output}")
     print(f"🖼️ Frames: {frames_dir}/")
@@ -575,6 +602,7 @@ def main():
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
     parser.add_argument("--publish-instagram", action="store_true", help="Also publish produced video as an Instagram Reel via Meta Graph API")
     parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Also publish produced video as a 4-tweet thread to X (Twitter)")
+    parser.add_argument("--publish-linkedin", action="store_true", help="Also publish produced video as a post to LinkedIn")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
@@ -611,7 +639,8 @@ def main():
         language=args.lang,
         skip_repair=args.skip_repair,
         publish_instagram=args.publish_instagram,
-        publish_x=args.publish_x
+        publish_x=args.publish_x,
+        publish_linkedin=args.publish_linkedin
     )
 
 
