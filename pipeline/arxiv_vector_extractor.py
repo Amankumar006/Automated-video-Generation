@@ -36,6 +36,8 @@ def download_arxiv_source(arxiv_id: str) -> Optional[Path]:
     Returns the Path to the extracted source folder.
     """
     clean_id = clean_arxiv_id(arxiv_id)
+    if any(str(clean_id).startswith(p) for p in ("perk_", "gh_", "blog_", "news_")):
+        return None
     paper_dir = CACHE_BASE_DIR / clean_id
     source_dir = paper_dir / "source"
 
@@ -263,6 +265,8 @@ def extract_paper_figures(arxiv_id: str, max_figures: int = 5) -> List[Dict[str,
     and recolors them for the 3Blue1Brown carbon chalkboard.
     """
     clean_id = clean_arxiv_id(arxiv_id)
+    if any(str(clean_id).startswith(p) for p in ("perk_", "gh_", "blog_", "news_")):
+        return []
     source_dir = download_arxiv_source(clean_id)
     if not source_dir:
         return []
