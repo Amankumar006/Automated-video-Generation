@@ -469,3 +469,162 @@ def test_slot_schedule_has_5_daily_upload_windows():
     assert 12 in SLOT_SCHEDULE
     assert 16 in SLOT_SCHEDULE
     assert len(SLOT_SCHEDULE) == 5
+
+
+# ==============================================================================
+# 6. Deep Candidate Resolution & Robustness Tests
+# ==============================================================================
+
+def test_fetch_candidates_for_pillar_deep_pagination_perks():
+    """
+    Validates that when the top 5 perks are already in history,
+    fetch_candidates_for_pillar continues looking deeper and retrieves the
+    remaining unprocessed perks from the registry instead of returning empty.
+    """
+    from pipeline.tech_perks_fetcher import tech_perks_fetcher
+    all_perks = tech_perks_fetcher.get_trending_perks_digest(limit=10)
+    assert len(all_perks) >= 6, "Expected at least 6 verified perks in registry"
+
+    # Put top 5 in history
+    history = {
+        "processed_papers": {p["id"]: {"title": p["title"], "status": "completed"} for p in all_perks[:5]}
+    }
+
+    res = fetch_candidates_for_pillar("perks", limit=5, history=history)
+    assert len(res) >= 1
+    # Verify all returned candidates are actually unprocessed
+    assert all(r["id"] not in history["processed_papers"] for r in res)
+
+
+def test_fetch_candidates_for_pillar_deep_pagination_blogs():
+    """
+    Validates that when the top 10 official blogs are already in history,
+    fetch_candidates_for_pillar retrieves subsequent unprocessed blog drops
+    from the registry rather than prematurely concluding blogs are exhausted.
+    """
+    from pipeline.official_blogs_fetcher import get_official_blogs_digest
+    all_blogs = get_official_blogs_digest(limit=25)
+    assert len(all_blogs) > 10, "Expected >10 official blogs in registry"
+
+    history = {
+        "processed_papers": {b["id"]: {"title": b["title"], "status": "completed"} for b in all_blogs[:10]}
+    }
+
+    res = fetch_candidates_for_pillar("blogs", limit=10, history=history)
+    assert len(res) > 0
+    assert all(r["id"] not in history["processed_papers"] for r in res)
+
+
+def test_daemon_run_daily_cycle_fallback_when_all_perks_exhausted_in_registry(monkeypatch):
+    """
+    Validates that when ALL verified perks from the registry are exhausted in history,
+    the daemon gracefully falls back to the next pillar (blogs or arxiv) without stalling.
+    """
+    from pipeline.tech_perks_fetcher import tech_perks_fetcher
+    all_perks = tech_perks_fetcher.get_all_verified_perks()
+
+    exhausted_history = {
+        "processed_papers": {
+            p.to_candidate_spec()["id"]: {
+                "title": p.headline,
+                "category": "developer_perks",
+                "source": "perks",
+                "produced_at": "2026-10-10T12:00:00+00:00",
+                "status": "completed"
+            }
+            for p in all_perks
+        }
+    }
+
+    # Add an arxiv entry as the latest so rotation attempts perks first
+    exhausted_history["processed_papers"]["2610.11287"] = {
+        "title": "Latest Arxiv",
+        "category": "mechanism_deepdive",
+        "source": "arxiv",
+        "produced_at": "2026-10-10T15:00:00+00:00",
+        "status": "completed"
+    }
+
+    monkeypatch.setattr("pipeline.daily_shorts_daemon.load_history", lambda: exhausted_history)
+    monkeypatch.setattr("pipeline.script_generator.generate_script", _mock_generated_script)
+    monkeypatch.setenv("GEMINI_API_KEY", "")
+
+    daemon = DailyShortsDaemon()
+    res = daemon.run_daily_cycle(count=1, dry_run=True, source="mixed")
+    assert len(res) == 1
+    # Perks had highest rotation priority but was fully exhausted, so fallback selected blogs
+    assert res[0]["source"] == "blogs"
+
+
+def test_classify_history_entry_pillar_github():
+    """Validates that GitHub repositories are classified as 'github' and do not pollute the 'arxiv' pillar."""
+    assert classify_history_entry_pillar("gh_vllm_project_vllm", {"category": "mechanism_deepdive"}) == "github"
+    assert classify_history_entry_pillar("repo_123", {"source": "github"}) == "github"
+    assert classify_history_entry_pillar("repo_123", {"source": "github_api"}) == "github"
+
+    # Ensure a github entry in history does not affect arxiv's latest timestamp
+    history_with_github = {
+        "processed_papers": {
+            "gh_vllm_project_vllm": {
+                "title": "vLLM",
+                "category": "mechanism_deepdive",
+                "source": "github",
+                "produced_at": "2026-10-10T20:00:00+00:00",
+                "status": "completed"
+            },
+            "2610.11287": {
+                "title": "Arxiv Paper",
+                "category": "mechanism_deepdive",
+                "produced_at": "2026-10-10T14:00:00+00:00",
+                "status": "completed"
+            }
+        }
+    }
+    order = get_content_rotation_order(history_with_github)
+    # Arxiv was produced at 14:00 (not 20:00!), so blogs and perks (which have never been produced) come first
+    assert order == ["blogs", "perks", "arxiv"]
+
+
+def test_evaluate_pedagogical_viability_handles_missing_abstract_gracefully(monkeypatch):
+    """Validates that candidate specifications with missing or None abstracts do not crash pedagogical evaluation."""
+    candidates = [
+        {
+            "id": "cand_missing_abstract",
+            "title": "Candidate Without Abstract",
+            "category": "mechanism_deepdive",
+            "taxonomy": "hardware_efficiency",
+            "impact_score": 95.0,
+            # No abstract key!
+        },
+        {
+            "id": "cand_none_abstract",
+            "title": "Candidate With None Abstract",
+            "category": "tech_news",
+            "taxonomy": "reasoning_models",
+            "impact_score": 90.0,
+            "abstract": None,
+        }
+    ]
+
+    # Test under fallback mode (no GEMINI_API_KEY)
+    monkeypatch.setenv("GEMINI_API_KEY", "")
+    res = evaluate_pedagogical_viability(candidates, count=1)
+    assert len(res) == 1
+    assert res[0]["id"] == "cand_missing_abstract"
+
+
+def test_official_blogs_fetcher_offline_resilience(monkeypatch):
+    """Validates that candidate discovery works smoothly even when external RSS feeds are unreachable."""
+    from pipeline.official_blogs_fetcher import official_blogs_fetcher
+
+    # Force network requests to raise URLError
+    import urllib.error
+    def mock_urlopen(*args, **kwargs):
+        raise urllib.error.URLError("Simulated network down")
+
+    monkeypatch.setattr("urllib.request.urlopen", mock_urlopen)
+
+    candidates = fetch_candidates_for_pillar("blogs", limit=5)
+    assert len(candidates) > 0
+    assert all(c["id"].startswith("blog_") for c in candidates)
+

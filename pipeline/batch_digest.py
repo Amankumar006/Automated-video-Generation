@@ -78,6 +78,8 @@ def record_paper_production(arxiv_id: str, title: str, category: str, video_path
             source = "perks"
         elif clean_lower.startswith(("blog_", "news_")) or cat_lower in ("tech_news", "official_blogs", "lab_release"):
             source = "blogs"
+        elif clean_lower.startswith("gh_") or "github" in cat_lower:
+            source = "github"
         else:
             source = "arxiv"
     history["processed_papers"][clean_id] = {

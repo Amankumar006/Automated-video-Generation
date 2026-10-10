@@ -93,12 +93,14 @@ def parse_iso_datetime(dt_str: Optional[str]) -> Optional[datetime.datetime]:
 
 
 def classify_history_entry_pillar(paper_id: str, record: Dict[str, Any]) -> str:
-    """Classifies a history or candidate record into one of the 3 primary pillars: 'arxiv', 'blogs', or 'perks'."""
+    """Classifies a history or candidate record into one of the content pillars: 'arxiv', 'blogs', 'perks', or 'github'."""
     src = str(record.get("source", "")).lower()
     if src in ("perks", "verified_perks"):
         return "perks"
     if src in ("blogs", "news", "official_blogs"):
         return "blogs"
+    if src in ("github", "github_api", "curated_trending"):
+        return "github"
     if src in ("arxiv", "hf"):
         return "arxiv"
 
@@ -110,6 +112,8 @@ def classify_history_entry_pillar(paper_id: str, record: Dict[str, Any]) -> str:
         return "perks"
     if clean_id.startswith(("blog_", "news_")) or cat in ("tech_news", "official_blogs", "lab_release"):
         return "blogs"
+    if clean_id.startswith("gh_") or "github" in cat:
+        return "github"
     if cat == "model_showdown" and not re.match(r"^\d{4}\.\d{4,5}", clean_id):
         return "blogs"
 
@@ -186,21 +190,21 @@ def fetch_candidates_for_pillar(
     proc_ids = set(history.get("processed_papers", {}).keys())
 
     if pillar == "arxiv":
-        papers = get_trending_digest(limit=max(limit, 35))
-        return [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids]
+        papers = get_trending_digest(limit=max(limit * 3, 50))
+        return [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids][:limit]
 
     elif pillar in ("blogs", "news"):
-        blog_candidates = get_official_blogs_digest(limit=limit)
-        return [b for b in blog_candidates if b["id"] not in proc_ids]
+        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100))
+        return [b for b in blog_candidates if b["id"] not in proc_ids][:limit]
 
     elif pillar == "perks":
         from pipeline.tech_perks_fetcher import get_verified_perks_digest
-        perk_candidates = get_verified_perks_digest(limit=limit)
-        return [p for p in perk_candidates if p["id"] not in proc_ids]
+        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50))
+        return [p for p in perk_candidates if p["id"] not in proc_ids][:limit]
 
     elif pillar == "github":
-        gh_candidates = get_trending_github_digest(limit=limit)
-        return [g for g in gh_candidates if g["id"] not in proc_ids]
+        gh_candidates = get_trending_github_digest(limit=max(limit * 5, 30))
+        return [g for g in gh_candidates if g["id"] not in proc_ids][:limit]
 
     return []
 
@@ -279,12 +283,15 @@ def evaluate_pedagogical_viability(
     for i, c in enumerate(candidates[:num_eval]):
         tax = c.get("taxonomy", "general_breakthroughs")
         mult = c.get("analytics_multiplier", 1.0)
+        c_title = c.get("title", "Untitled Candidate")
+        c_id = c.get("id", f"candidate_{i+1}")
+        c_abs = str(c.get("abstract") or "")[:250]
         cand_summaries.append(
-            f"[{i+1}] Title: {c['title']}\n"
-            f"    arXiv: {c['id']}\n"
+            f"[{i+1}] Title: {c_title}\n"
+            f"    Candidate ID: {c_id}\n"
             f"    Domain Taxonomy: {tax} (Audience Velocity Multiplier: {mult:.2f}x)\n"
             f"    Category: {c.get('recommended_category', 'mechanism_deepdive')}\n"
-            f"    Abstract: {c['abstract'][:250]}..."
+            f"    Abstract: {c_abs}..."
         )
 
     # Query dynamic retention multipliers from analytics feedback
@@ -489,6 +496,12 @@ class DailyShortsDaemon:
                     print(f"   • {PILLAR_DISPLAY_NAMES.get(p, p)}: Last produced: {last_time_str}")
                 print(f"   🎯 Content Rotation Priority Order: {' -> '.join([p.upper() for p in rotation_order])}")
 
+                overall_max_hist_dt = None
+                for pid, pdata in processed_papers.items():
+                    p_dt = parse_iso_datetime(pdata.get("produced_at"))
+                    if p_dt and (overall_max_hist_dt is None or p_dt > overall_max_hist_dt):
+                        overall_max_hist_dt = p_dt
+
                 selected_papers = []
                 selected_ids = set()
                 # Deep copy of history for multi-reel cycles so each reel in this cycle rotates to next pillar
@@ -522,7 +535,10 @@ class DailyShortsDaemon:
                         selected_papers.append(chosen_candidate)
                         selected_ids.add(chosen_candidate["id"])
                         print(f"   Reel {reel_idx + 1}/{count} assigned to [{chosen_pillar.upper()}]: {chosen_candidate['title']} ({chosen_candidate['id']})")
-                        simulated_ts = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(seconds=reel_idx + 1)).isoformat()
+                        base_now = datetime.datetime.now(datetime.timezone.utc)
+                        if overall_max_hist_dt and overall_max_hist_dt > base_now:
+                            base_now = overall_max_hist_dt
+                        simulated_ts = (base_now + datetime.timedelta(seconds=reel_idx + 1)).isoformat()
                         working_history["processed_papers"][chosen_candidate["id"]] = {
                             "title": chosen_candidate["title"],
                             "category": chosen_candidate.get("recommended_category", "general"),
