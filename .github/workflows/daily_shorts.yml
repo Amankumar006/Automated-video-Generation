@@ -59,6 +59,17 @@ on:
         required: false
         default: true
         type: boolean
+      source:
+        description: 'Candidate source: mixed (auto-rotates between academic mechanism deep dives, official lab drops, and developer perks), arxiv, blogs, perks'
+        required: false
+        default: 'mixed'
+        type: choice
+        options:
+          - mixed
+          - arxiv
+          - blogs
+          - perks
+          - github
 
 jobs:
   produce-short:
@@ -162,8 +173,9 @@ jobs:
           ARXIV_ID="${{ github.event.inputs.arxiv_id || '' }}"
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           PUBLISH_INSTAGRAM="${{ github.event.inputs.publish_instagram }}"
+          SOURCE="${{ github.event.inputs.source || 'mixed' }}"
 
-          EXTRA_ARGS=""
+          EXTRA_ARGS="--source $SOURCE"
           if [ -n "$ARXIV_ID" ]; then
             EXTRA_ARGS="$EXTRA_ARGS --arxiv $ARXIV_ID"
           fi

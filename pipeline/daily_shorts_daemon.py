@@ -6,6 +6,7 @@ and uploads to YouTube Shorts as Unlisted for 1-click review.
 """
 
 import os
+import re
 import sys
 import json
 import time
@@ -62,6 +63,150 @@ SLOT_SCHEDULE: Dict[int, Dict[str, Any]] = {
         "description": "Top breakthrough paper across high-performing categories"
     }
 }
+
+
+# 3 Core Channel Content Pillars for Autonomous Daily Rotation:
+# (1) Academic mechanism deep dives ('arxiv')
+# (2) Official AI lab releases ('blogs' / 'news')
+# (3) Actionable developer perks and startup credits ('perks')
+CONTENT_PILLARS = ["arxiv", "blogs", "perks"]
+
+PILLAR_DISPLAY_NAMES: Dict[str, str] = {
+    "arxiv": "Academic Mechanism Deep Dives (arXiv / HF)",
+    "blogs": "Official AI Lab Releases & Tech News (OpenAI, Anthropic, Google DeepMind, HF)",
+    "perks": "Actionable Developer Perks & Startup Credits (Anthropic, Microsoft, Google, AWS)"
+}
+
+
+def parse_iso_datetime(dt_str: Optional[str]) -> Optional[datetime.datetime]:
+    """Parses ISO-8601 or RFC datetime string into a UTC timezone-aware datetime object."""
+    if not dt_str:
+        return None
+    try:
+        clean_str = dt_str.strip().replace("Z", "+00:00")
+        dt = datetime.datetime.fromisoformat(clean_str)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+        return dt
+    except Exception:
+        return None
+
+
+def classify_history_entry_pillar(paper_id: str, record: Dict[str, Any]) -> str:
+    """Classifies a history or candidate record into one of the content pillars: 'arxiv', 'blogs', 'perks', or 'github'."""
+    src = str(record.get("source", "")).lower()
+    if src in ("perks", "verified_perks"):
+        return "perks"
+    if src in ("blogs", "news", "official_blogs"):
+        return "blogs"
+    if src in ("github", "github_api", "curated_trending"):
+        return "github"
+    if src in ("arxiv", "hf"):
+        return "arxiv"
+
+    clean_id = str(paper_id).lower()
+    cat = str(record.get("category", "")).lower()
+    tax = str(record.get("taxonomy", "")).lower()
+
+    if clean_id.startswith("perk_") or cat in ("developer_perks", "startup_credits", "perks") or tax == "developer_perks":
+        return "perks"
+    if clean_id.startswith(("blog_", "news_")) or cat in ("tech_news", "official_blogs", "lab_release"):
+        return "blogs"
+    if clean_id.startswith("gh_") or "github" in cat:
+        return "github"
+    if cat == "model_showdown" and not re.match(r"^\d{4}\.\d{4,5}", clean_id):
+        return "blogs"
+
+    return "arxiv"
+
+
+def get_content_rotation_order(
+    history: Optional[Dict[str, Any]] = None,
+    pillars: Optional[List[str]] = None
+) -> List[str]:
+    """
+    Inspects production history in digest_history.json to determine the least-recently produced
+    content categories among ('arxiv', 'blogs', 'perks') to ensure balanced alternating coverage.
+
+    Returns pillars ordered from least-recently produced (highest priority for next production)
+    to most-recently produced.
+    """
+    if history is None:
+        history = load_history()
+
+    if pillars is None:
+        pillars = list(CONTENT_PILLARS)
+
+    processed_papers = history.get("processed_papers", {})
+
+    latest_timestamps: Dict[str, Optional[datetime.datetime]] = {p: None for p in pillars}
+    overall_latest_time: Optional[datetime.datetime] = None
+    overall_latest_pillar: Optional[str] = None
+
+    for pid, data in processed_papers.items():
+        pillar = classify_history_entry_pillar(pid, data)
+        if pillar not in latest_timestamps:
+            continue
+
+        raw_ts = data.get("produced_at")
+        dt = parse_iso_datetime(raw_ts)
+        if dt:
+            if latest_timestamps[pillar] is None or dt > latest_timestamps[pillar]:
+                latest_timestamps[pillar] = dt
+            if overall_latest_time is None or dt > overall_latest_time:
+                overall_latest_time = dt
+                overall_latest_pillar = pillar
+
+    canonical_cycle = ["arxiv", "blogs", "perks"]
+
+    start_idx = 0
+    if overall_latest_pillar in canonical_cycle:
+        start_idx = (canonical_cycle.index(overall_latest_pillar) + 1) % len(canonical_cycle)
+
+    cycle_tiebreaker = {
+        canonical_cycle[(start_idx + i) % len(canonical_cycle)]: i
+        for i in range(len(canonical_cycle))
+    }
+
+    def sort_key(p: str):
+        ts = latest_timestamps[p]
+        ts_val = ts.timestamp() if ts is not None else float("-inf")
+        tiebreak = cycle_tiebreaker.get(p, 99)
+        return (ts_val, tiebreak)
+
+    sorted_pillars = sorted(pillars, key=sort_key)
+    return sorted_pillars
+
+
+def fetch_candidates_for_pillar(
+    pillar: str,
+    limit: int = 10,
+    history: Optional[Dict[str, Any]] = None
+) -> List[Dict[str, Any]]:
+    """Fetches candidate specifications for a specific content pillar, filtering out processed items."""
+    if history is None:
+        history = load_history()
+
+    proc_ids = set(history.get("processed_papers", {}).keys())
+
+    if pillar == "arxiv":
+        papers = get_trending_digest(limit=max(limit * 3, 50))
+        return [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids][:limit]
+
+    elif pillar in ("blogs", "news"):
+        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100))
+        return [b for b in blog_candidates if b["id"] not in proc_ids][:limit]
+
+    elif pillar == "perks":
+        from pipeline.tech_perks_fetcher import get_verified_perks_digest
+        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50))
+        return [p for p in perk_candidates if p["id"] not in proc_ids][:limit]
+
+    elif pillar == "github":
+        gh_candidates = get_trending_github_digest(limit=max(limit * 5, 30))
+        return [g for g in gh_candidates if g["id"] not in proc_ids][:limit]
+
+    return []
 
 
 def evaluate_pedagogical_viability(
@@ -138,12 +283,15 @@ def evaluate_pedagogical_viability(
     for i, c in enumerate(candidates[:num_eval]):
         tax = c.get("taxonomy", "general_breakthroughs")
         mult = c.get("analytics_multiplier", 1.0)
+        c_title = c.get("title", "Untitled Candidate")
+        c_id = c.get("id", f"candidate_{i+1}")
+        c_abs = str(c.get("abstract") or "")[:250]
         cand_summaries.append(
-            f"[{i+1}] Title: {c['title']}\n"
-            f"    arXiv: {c['id']}\n"
+            f"[{i+1}] Title: {c_title}\n"
+            f"    Candidate ID: {c_id}\n"
             f"    Domain Taxonomy: {tax} (Audience Velocity Multiplier: {mult:.2f}x)\n"
             f"    Category: {c.get('recommended_category', 'mechanism_deepdive')}\n"
-            f"    Abstract: {c['abstract'][:250]}..."
+            f"    Abstract: {c_abs}..."
         )
 
     # Query dynamic retention multipliers from analytics feedback
@@ -330,62 +478,103 @@ class DailyShortsDaemon:
                 }
             }]
         else:
-            # 1. Fetch & score trending candidates (with analytics multipliers integrated)
-            print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {source.upper()})...")
-            unprocessed = []
-            if source in ["arxiv", "mixed"]:
-                print("   Scanning papers from Hugging Face & arXiv...")
-                papers = get_trending_digest(limit=35)
-                unprocessed.extend([p for p in papers if not p.get("is_processed")])
+            normalized_source = (source or "mixed").lower()
+            if normalized_source in ("mixed", "auto"):
+                print(f"\n🔄 Step 1: Content Diversification Rotation (Source: {normalized_source.upper()})...")
+                history = load_history()
+                rotation_order = get_content_rotation_order(history)
 
-            if source in ["github", "mixed"]:
-                print("   Scanning viral open-source AI kernels from GitHub Trending...")
-                try:
-                    gh_candidates = get_trending_github_digest(limit=8)
-                    unprocessed.extend(gh_candidates)
-                except Exception as e:
-                    print(f"   ⚠️ GitHub trending fetcher notice: {e}")
+                print("   Recent Production History Inspection by Content Pillar:")
+                processed_papers = history.get("processed_papers", {})
+                for p in CONTENT_PILLARS:
+                    last_time_str = "Never (Queued as high-priority drop)"
+                    for pid, pdata in processed_papers.items():
+                        if classify_history_entry_pillar(pid, pdata) == p:
+                            pts = pdata.get("produced_at", "")
+                            if last_time_str == "Never (Queued as high-priority drop)" or pts > last_time_str:
+                                last_time_str = pts
+                    print(f"   • {PILLAR_DISPLAY_NAMES.get(p, p)}: Last produced: {last_time_str}")
+                print(f"   🎯 Content Rotation Priority Order: {' -> '.join([p.upper() for p in rotation_order])}")
 
-            if source in ["perks", "mixed"]:
-                print("   Scanning verified developer tech perks and startup credit programs...")
-                try:
-                    from pipeline.tech_perks_fetcher import get_verified_perks_digest
-                    perk_candidates = get_verified_perks_digest(limit=6)
-                    history = load_history()
-                    proc_ids = set(history.get("processed_papers", {}).keys())
-                    unprocessed.extend([p for p in perk_candidates if p["id"] not in proc_ids])
-                except Exception as e:
-                    print(f"   ⚠️ Tech perks fetcher notice: {e}")
+                overall_max_hist_dt = None
+                for pid, pdata in processed_papers.items():
+                    p_dt = parse_iso_datetime(pdata.get("produced_at"))
+                    if p_dt and (overall_max_hist_dt is None or p_dt > overall_max_hist_dt):
+                        overall_max_hist_dt = p_dt
 
-            if source in ["blogs", "news", "mixed"]:
-                print("   Scanning official AI lab announcements & blogs (OpenAI, Anthropic, DeepMind, HF, GitHub)...")
-                try:
-                    from pipeline.official_blogs_fetcher import get_official_blogs_digest
-                    blog_candidates = get_official_blogs_digest(limit=8)
-                    history = load_history()
-                    proc_ids = set(history.get("processed_papers", {}).keys())
-                    unprocessed.extend([b for b in blog_candidates if b["id"] not in proc_ids])
-                except Exception as e:
-                    print(f"   ⚠️ Official blogs fetcher notice: {e}")
+                selected_papers = []
+                selected_ids = set()
+                # Deep copy of history for multi-reel cycles so each reel in this cycle rotates to next pillar
+                working_history = json.loads(json.dumps(history))
 
-            if preferred_category:
-                unprocessed = (
-                    [p for p in unprocessed if p.get("recommended_category") == preferred_category or p.get("category") == preferred_category] +
-                    [p for p in unprocessed if p.get("recommended_category") != preferred_category and p.get("category") != preferred_category]
+                for reel_idx in range(count):
+                    curr_rotation = get_content_rotation_order(working_history)
+                    chosen_candidate = None
+                    chosen_pillar = None
+
+                    for target_pillar in curr_rotation:
+                        pool = fetch_candidates_for_pillar(target_pillar, limit=10, history=working_history)
+                        available_candidates = [c for c in pool if c["id"] not in selected_ids]
+                        if preferred_category:
+                            matching = [c for c in available_candidates if c.get("recommended_category") == preferred_category or c.get("category") == preferred_category]
+                            if matching:
+                                available_candidates = matching
+
+                        if available_candidates:
+                            evaluated = evaluate_pedagogical_viability(
+                                available_candidates,
+                                count=1,
+                                preferred_taxonomy=preferred_taxonomy
+                            )
+                            if evaluated:
+                                chosen_candidate = evaluated[0]
+                                chosen_pillar = target_pillar
+                                break
+
+                    if chosen_candidate:
+                        selected_papers.append(chosen_candidate)
+                        selected_ids.add(chosen_candidate["id"])
+                        print(f"   Reel {reel_idx + 1}/{count} assigned to [{chosen_pillar.upper()}]: {chosen_candidate['title']} ({chosen_candidate['id']})")
+                        base_now = datetime.datetime.now(datetime.timezone.utc)
+                        if overall_max_hist_dt and overall_max_hist_dt > base_now:
+                            base_now = overall_max_hist_dt
+                        simulated_ts = (base_now + datetime.timedelta(seconds=reel_idx + 1)).isoformat()
+                        working_history["processed_papers"][chosen_candidate["id"]] = {
+                            "title": chosen_candidate["title"],
+                            "category": chosen_candidate.get("recommended_category", "general"),
+                            "source": chosen_pillar,
+                            "produced_at": simulated_ts,
+                            "status": "completed"
+                        }
+                    else:
+                        print(f"   ⚠️ No unprocessed candidates found across any content pillars for reel {reel_idx + 1}.")
+                        break
+
+                if not selected_papers:
+                    print("ℹ️ All trending candidates across all content pillars have already been produced. Daily quota satisfied.")
+                    return []
+
+            else:
+                target_pillar = "blogs" if normalized_source == "news" else normalized_source
+                print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {target_pillar.upper()})...")
+                unprocessed = fetch_candidates_for_pillar(target_pillar, limit=35 if target_pillar == "arxiv" else 10)
+
+                if preferred_category:
+                    unprocessed = (
+                        [p for p in unprocessed if p.get("recommended_category") == preferred_category or p.get("category") == preferred_category] +
+                        [p for p in unprocessed if p.get("recommended_category") != preferred_category and p.get("category") != preferred_category]
+                    )
+
+                if not unprocessed:
+                    print(f"ℹ️ All candidates for source '{target_pillar}' have already been produced. Quota satisfied.")
+                    return []
+
+                print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
+                selected_papers = evaluate_pedagogical_viability(
+                    unprocessed,
+                    count=count,
+                    preferred_taxonomy=preferred_taxonomy
                 )
-
-            if not unprocessed:
-                print("ℹ️ All trending candidates for today have already been produced. Daily quota satisfied.")
-                return []
-
-            print(f"   Found {len(unprocessed)} unprocessed candidates. Selecting top {count} pedagogical breakthroughs...")
-
-            # 2. Select top candidates using pedagogical viability filter calibrated to audience analytics
-            selected_papers = evaluate_pedagogical_viability(
-                unprocessed,
-                count=count,
-                preferred_taxonomy=preferred_taxonomy
-            )
         print(f"\n🏆 Selected {len(selected_papers)} Breakthrough Papers for Today's Reels Quota:")
         for idx, p in enumerate(selected_papers):
             notes = p.get("editorial_notes", {})
@@ -412,6 +601,8 @@ class DailyShortsDaemon:
             print(f"   arXiv: {arxiv_id} | Category: {category.upper()}")
             print("-" * 70)
 
+            cand_source = classify_history_entry_pillar(arxiv_id, top_paper)
+
             if dry_run:
                 print("🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
                 from pipeline.script_generator import generate_script
@@ -426,6 +617,7 @@ class DailyShortsDaemon:
                     "paper": top_paper,
                     "spec": spec,
                     "audit": audit,
+                    "source": cand_source,
                     "status": "dry_run_success"
                 })
                 continue
@@ -455,7 +647,7 @@ class DailyShortsDaemon:
                 video_out = None
 
             if video_out:
-                record_paper_production(arxiv_id, title, category, video_out)
+                record_paper_production(arxiv_id, title, category, video_out, source=cand_source)
 
                 report_item = {
                     "reel_index": idx + 1,
@@ -463,6 +655,7 @@ class DailyShortsDaemon:
                     "paper_id": arxiv_id,
                     "title": title,
                     "category": category,
+                    "source": cand_source,
                     "taxonomy": top_paper.get("taxonomy", "general"),
                     "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
                     "video_path": video_out,
@@ -483,18 +676,19 @@ class DailyShortsDaemon:
             for r in reports:
                 ed = r.get("editorial_notes", {})
                 pid = str(r.get("paper_id", ""))
+                r_source = r.get("source") or classify_history_entry_pillar(pid, {"category": r.get("category", "")})
                 if pid.startswith("gh_"):
                     clean_repo = pid.replace("gh_", "").replace("_", "/")
                     link_line = f"- **GitHub Repo:** [{clean_repo}](https://github.com/{clean_repo})"
                 elif pid.startswith("perk_"):
-                    perk_meta = r.get("editorial_notes", {})
-                    link_line = f"- **Verified Program:** {r['title']}"
+                    link_line = f"- **Verified Perk:** {r['title']}"
                 elif pid.startswith("blog_") or pid.startswith("news_"):
-                    link_line = f"- **Official Blog Announcement:** {r['title']}"
+                    link_line = f"- **Official Lab Drop:** {r['title']}"
                 else:
                     link_line = f"- **arXiv ID:** [{pid}](https://arxiv.org/abs/{pid})"
                 reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
 {link_line}
+- **Content Pillar:** `{r_source}`
 - **Domain Taxonomy:** `{r.get('taxonomy', 'general')}` ({r.get('analytics_multiplier', 1.0):.2f}x velocity)
 - **Category:** `{r['category']}`
 - **Editorial Hook:** *{ed.get('recommended_hook', 'N/A')}*
@@ -566,7 +760,7 @@ def main():
     parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
-    parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', 'perks', 'blogs', 'news', or 'mixed' (default: mixed)")
+    parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed", "auto"], default="mixed", help="Candidate source: 'mixed' (auto-rotate between arxiv, blogs, perks), 'arxiv', 'blogs', 'perks', 'github', or 'auto' (default: mixed)")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
     parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "developer_perks", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
