@@ -72,6 +72,12 @@ TAXONOMY_KEYWORDS: Dict[str, List[str]] = {
         "test-time compute", "search space", "tree search", "math reasoning", "aime",
         "gpqa", "deepseek-r1", "grpo", "rlhf", "self-rewarding", "corrgrpo", "reward program",
         "shock", "jev"
+    ],
+    "developer_perks": [
+        "startup program", "free credits", "cloud credits", "api credits", "founders hub",
+        "aws activate", "google for startups", "claude team", "copilot", "developer perks",
+        "free tier", "grant", "subsidy", "tier", "subscription", "startup tier", "credits",
+        "free subscription"
     ]
 }
 
@@ -496,14 +502,17 @@ retention_analytics = YouTubeRetentionAnalytics()
 
 def get_performance_category_bias() -> Dict[str, float]:
     """Helper to retrieve category weights for batch digest paper selection."""
+    biases = {}
     if LEDGER_PATH.exists():
         try:
             with open(LEDGER_PATH, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                return data.get("intelligence", {}).get("category_multipliers", {})
+                biases = dict(data.get("intelligence", {}).get("category_multipliers", {}))
         except Exception:
             pass
-    return {}
+    if "developer_perks" not in biases:
+        biases["developer_perks"] = 1.25
+    return biases
 
 def get_recommended_pacing() -> Dict[str, Any]:
     """Helper to retrieve dynamic pacing settings for script generator and audio synthesizer."""

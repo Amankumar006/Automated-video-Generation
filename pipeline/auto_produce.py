@@ -175,9 +175,12 @@ def auto_produce(
         )
         template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
 
-    # Step 2.3: Extract native arXiv chalkboard-recolored vector figures (skip GitHub code repositories)
+    # Step 2.3: Extract native arXiv chalkboard-recolored vector figures (skip GitHub code repositories and perks)
     arxiv_id_to_fetch = spec.get("arxiv_id") or arxiv or (arxiv_meta.get("id") if arxiv_meta else None)
-    if arxiv_id_to_fetch and not str(arxiv_id_to_fetch).startswith("gh_") and not spec.get("paper_figures"):
+    if (arxiv_id_to_fetch and 
+        not str(arxiv_id_to_fetch).startswith("gh_") and 
+        not str(arxiv_id_to_fetch).startswith("perk_") and 
+        not spec.get("paper_figures")):
         spec["arxiv_id"] = arxiv_id_to_fetch
         try:
             from pipeline.arxiv_vector_extractor import extract_vector_figures
@@ -189,12 +192,14 @@ def auto_produce(
         except Exception as e:
             print(f"   ℹ️ arXiv figure extraction notice: {e}")
 
-    # Ensure code kernel from metadata is preserved in spec for Manim director
+    # Ensure code kernel or perk metadata from metadata is preserved in spec for Manim director
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("code_snippet"):
         if not spec.get("code_snippet") or arxiv_meta.get("repo_metadata"):
             spec["code_snippet"] = arxiv_meta["code_snippet"]
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("repo_metadata"):
         spec["repo_metadata"] = arxiv_meta["repo_metadata"]
+    if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("perk_metadata"):
+        spec["perk_metadata"] = arxiv_meta["perk_metadata"]
 
     # Step 2.4: Localize script into Hindi/Hinglish if requested
     if language in ("hi", "hindi") and spec.get("language") != "hi":

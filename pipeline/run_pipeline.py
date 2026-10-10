@@ -46,6 +46,16 @@ CATEGORY_SCENE_MAP = {
         "file": "manim_engine/scenes/benchmark_scene.py",
         "class": "BenchmarkNewsScene",
         "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+    },
+    "developer_perks": {
+        "file": "manim_engine/scenes/benchmark_scene.py",
+        "class": "BenchmarkNewsScene",
+        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+    },
+    "tech_news": {
+        "file": "manim_engine/scenes/benchmark_scene.py",
+        "class": "BenchmarkNewsScene",
+        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
     }
 }
 
@@ -248,6 +258,7 @@ def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
     parser.add_argument("--topic", default=None, help="Topic ID or title")
     parser.add_argument("--arxiv", default=None, help="arXiv paper ID or URL to ingest and generate fresh script")
+    parser.add_argument("--perk", default=None, help="Verified developer perk program ID (e.g. 'anthropic_startup_program', 'microsoft_founders_hub')")
     parser.add_argument("--fresh", action="store_true", help="Always generate a fresh script from paper instead of using cached template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
@@ -261,14 +272,30 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
     args = parser.parse_args()
 
-    if args.dry_run and not args.topic and not args.arxiv:
+    if args.dry_run and not args.topic and not args.arxiv and not args.perk:
         args.topic = "speculative_decoding"
 
-    if not args.topic and not args.arxiv:
-        parser.error("Either --topic or --arxiv must be provided.")
+    if not args.topic and not args.arxiv and not args.perk:
+        parser.error("Either --topic, --arxiv, or --perk must be provided.")
 
     arxiv_meta = None
-    if args.arxiv:
+    if args.perk:
+        print(f"🎁 Ingesting ground-truth developer perk '{args.perk}'...")
+        from pipeline.tech_perks_fetcher import tech_perks_fetcher
+        perk_rec = tech_perks_fetcher.get_verified_perk(args.perk)
+        if not perk_rec:
+            audit = tech_perks_fetcher.verify_perk_claim(args.perk)
+            if not audit.get("is_verified"):
+                raise ValueError(f"Perk claim '{args.perk}' is unverified: {audit.get('explanation')}")
+            perk_rec = tech_perks_fetcher.get_verified_perk(audit.get("program_id", ""))
+        if not perk_rec:
+            raise RuntimeError(f"Could not retrieve verified perk details for '{args.perk}'")
+        cand = perk_rec.to_candidate_spec()
+        topic = args.topic or cand["title"]
+        args.category = args.category or "developer_perks"
+        arxiv_meta = cand
+        print(f"✅ Verified Perk Ingested: {cand['title']}")
+    elif args.arxiv:
         print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
         arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
         if not arxiv_meta:
@@ -281,8 +308,8 @@ def main():
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.fresh or args.arxiv:
-        print(f"🧠 Generating brand-new script for '{topic}' directly from paper...")
+    if args.fresh or args.arxiv or args.perk:
+        print(f"🧠 Generating brand-new script for '{topic}' directly from source...")
         spec = generate_script(
             topic=topic,
             category=args.category,
