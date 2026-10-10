@@ -378,6 +378,19 @@ def main():
     except Exception as e_vd:
         print(f"⚠️ Visual Director notice: {e_vd}")
 
+    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0)
+    print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
+    try:
+        from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
+        for idx, beat in enumerate(spec.get("beats", [])):
+            b_id = beat.get("beat_id", idx + 1)
+            # Prioritize authentic arXiv figures for Beat 3 if available
+            if b_id == 3 and spec.get("paper_figures"):
+                continue
+            bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+    except Exception as e_synth:
+        print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+
     if not args.legacy_engine:
         scene_file = "manim_engine/scenes/script_driven_scene.py"
         scene_class = "ScriptDrivenScene"

@@ -807,5 +807,318 @@ class LLMRouter:
         )
         return fallback_spec, "deterministic_fallback"
 
+    def call_gemini_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None
+    ) -> Optional[str]:
+        """Invokes primary Gemini API for raw text/code generation, cascading across models."""
+        sg_mod = sys.modules.get("pipeline.script_generator")
+        active_genai = getattr(sg_mod, "genai", None) if sg_mod is not None else None
+        if active_genai is None and (sg_mod is None or not hasattr(sg_mod, "genai")):
+            active_genai = genai
+
+        if not quota_tracker.is_healthy("gemini"):
+            logger.info("⏩ [LLMRouter] Gemini is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
+            return None
+
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not api_key or active_genai is None:
+            logger.info("ℹ️ [LLMRouter] Gemini API key not present or genai not installed. Skipping.")
+            return None
+
+        try:
+            if hasattr(active_genai, "configure"):
+                active_genai.configure(api_key=api_key)
+        except Exception as e:
+            logger.warning(f"⚠️ [LLMRouter] genai.configure failed: {e}")
+            return None
+
+        models_to_try = [
+            os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
+            "gemini-2.5-flash",
+            "gemini-2.5-flash-lite",
+            "gemini-2.0-flash",
+            "gemini-1.5-flash",
+            "gemini-flash-latest",
+        ]
+        unique_models: List[str] = []
+        for m in models_to_try:
+            if m not in unique_models:
+                unique_models.append(m)
+
+        for model_name in unique_models:
+            try:
+                logger.info(f"🧠 [LLMRouter] Attempting Gemini text generation model '{model_name}'...")
+                if system_instruction:
+                    model = active_genai.GenerativeModel(
+                        model_name,
+                        system_instruction=system_instruction
+                    )
+                else:
+                    model = active_genai.GenerativeModel(model_name)
+                resp = model.generate_content(prompt)
+                if resp and resp.text:
+                    quota_tracker.record_success("gemini")
+                    logger.info(f"✅ [LLMRouter] Gemini text generation succeeded via '{model_name}'")
+                    return resp.text.strip()
+            except Exception as e:
+                err_msg = str(e)
+                msg_lower = err_msg.lower()
+                is_model_specific = (
+                    "model:" in msg_lower
+                    or "quota_dimensions" in msg_lower
+                    or "limit: 500" in msg_lower
+                    or "limit: 20" in msg_lower
+                    or "404" in msg_lower
+                )
+                if is_model_specific:
+                    logger.warning(
+                        f"⚠️ [LLMRouter] Model-specific quota exceeded on '{model_name}'. "
+                        f"Cascading to next available Gemini model..."
+                    )
+                    continue
+                elif is_quota_error(e) or "resourceexhausted" in msg_lower or "429" in err_msg:
+                    logger.warning(
+                        f"⚠️ [LLMRouter] Gemini quota error on '{model_name}': {err_msg}. "
+                        f"Trying next Gemini model..."
+                    )
+                    continue
+                else:
+                    logger.warning(f"⚠️ [LLMRouter] Gemini error on '{model_name}': {e}. Trying next model...")
+                    continue
+
+        quota_tracker.record_exhausted("gemini", "All Gemini models failed or exhausted")
+        return None
+
+    def call_groq_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None
+    ) -> Optional[str]:
+        """Invokes secondary Groq endpoint for raw text/code generation."""
+        if not quota_tracker.is_healthy("groq"):
+            logger.info("⏩ [LLMRouter] Groq is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
+            return None
+
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return None
+
+        url = "https://api.groq.com/openai/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+
+        messages = []
+        if system_instruction:
+            messages.append({"role": "system", "content": system_instruction})
+        messages.append({"role": "user", "content": prompt})
+
+        for model_name in self.groq_models:
+            try:
+                logger.info(f"🧠 [LLMRouter] Attempting Groq text generation model '{model_name}'...")
+                payload = {
+                    "model": model_name,
+                    "messages": messages,
+                    "temperature": 0.2
+                }
+                resp = requests.post(url, headers=headers, json=payload, timeout=25.0)
+                if is_quota_error(resp.status_code) or is_quota_error(resp.text):
+                    quota_tracker.record_exhausted("groq", f"Status {resp.status_code}: {resp.text}")
+                    break
+
+                if resp.status_code == 200:
+                    try:
+                        data = resp.json()
+                    except Exception:
+                        data = {}
+                    choices = data.get("choices") if isinstance(data, dict) else None
+                    content = choices[0].get("message", {}).get("content", "") if choices and isinstance(choices[0], dict) else ""
+                    if content:
+                        quota_tracker.record_success("groq")
+                        logger.info(f"✅ [LLMRouter] Groq text generation succeeded via '{model_name}'")
+                        return content.strip()
+                else:
+                    logger.warning(f"⚠️ [LLMRouter] Groq HTTP {resp.status_code}: {resp.text[:120]}")
+            except Exception as e:
+                if is_quota_error(e):
+                    quota_tracker.record_exhausted("groq", str(e))
+                    break
+                logger.warning(f"⚠️ [LLMRouter] Groq exception on '{model_name}': {e}")
+
+        quota_tracker.record_exhausted("groq", "All Groq models failed or unavailable")
+        return None
+
+    def call_openrouter_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None
+    ) -> Optional[str]:
+        """Invokes tertiary OpenRouter endpoint for raw text/code generation."""
+        if not quota_tracker.is_healthy("openrouter"):
+            logger.info("⏩ [LLMRouter] OpenRouter is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
+            return None
+
+        api_key = os.getenv("OPENROUTER_API_KEY")
+        if not api_key:
+            return None
+
+        url = "https://openrouter.ai/api/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://themodelverse.in",
+            "X-Title": "The Model Verse Shorts"
+        }
+
+        messages = []
+        if system_instruction:
+            messages.append({"role": "system", "content": system_instruction})
+        messages.append({"role": "user", "content": prompt})
+
+        for model_name in self.openrouter_models:
+            try:
+                logger.info(f"🧠 [LLMRouter] Attempting OpenRouter text generation model '{model_name}'...")
+                payload = {
+                    "model": model_name,
+                    "messages": messages
+                }
+                resp = requests.post(url, headers=headers, json=payload, timeout=30.0)
+                if is_quota_error(resp.status_code) or is_quota_error(resp.text):
+                    quota_tracker.record_exhausted("openrouter", f"Status {resp.status_code}: {resp.text}")
+                    break
+
+                if resp.status_code == 200:
+                    try:
+                        data = resp.json()
+                    except Exception:
+                        data = {}
+                    choices = data.get("choices") if isinstance(data, dict) else None
+                    content = choices[0].get("message", {}).get("content", "") if choices and isinstance(choices[0], dict) else ""
+                    if content:
+                        quota_tracker.record_success("openrouter")
+                        logger.info(f"✅ [LLMRouter] OpenRouter text generation succeeded via '{model_name}'")
+                        return content.strip()
+                else:
+                    logger.warning(f"⚠️ [LLMRouter] OpenRouter HTTP {resp.status_code}: {resp.text[:120]}")
+            except Exception as e:
+                if is_quota_error(e):
+                    quota_tracker.record_exhausted("openrouter", str(e))
+                    break
+                logger.warning(f"⚠️ [LLMRouter] OpenRouter exception on '{model_name}': {e}")
+
+        quota_tracker.record_exhausted("openrouter", "All OpenRouter models failed or unavailable")
+        return None
+
+    def call_ollama_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None
+    ) -> Optional[str]:
+        """Invokes Ollama Cloud models for raw text/code generation."""
+        sg_mod = sys.modules.get("pipeline.script_generator")
+        active_ollama_cls = getattr(sg_mod, "OllamaClient", None) if sg_mod is not None else None
+        if active_ollama_cls is None:
+            active_ollama_cls = OllamaClient
+
+        if not quota_tracker.is_healthy("ollama"):
+            logger.info("⏩ [LLMRouter] Ollama is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
+            return None
+
+        ollama = active_ollama_cls(models=self.ollama_models)
+
+        for candidate_model in self.ollama_models:
+            try:
+                logger.info(f"🧠 [LLMRouter] Attempting Ollama Cloud text generation model '{candidate_model}'...")
+                res = ollama.generate_completion(
+                    prompt=prompt,
+                    model=candidate_model,
+                    system=system_instruction,
+                    format=None,
+                    fallback_on_error=False,
+                )
+                if res:
+                    txt = getattr(res, "text", None) or (res.get("response") if isinstance(res, dict) else str(res))
+                    if txt and str(txt).strip():
+                        quota_tracker.record_success("ollama")
+                        logger.info(f"✅ [LLMRouter] Ollama Cloud text generation succeeded via '{candidate_model}'")
+                        return str(txt).strip()
+            except Exception as e:
+                if is_quota_error(e):
+                    logger.warning(f"🚫 [LLMRouter] Ollama quota error on '{candidate_model}': {e}")
+                    quota_tracker.record_exhausted("ollama", str(e))
+                    break
+                if isinstance(e, requests.exceptions.ConnectionError):
+                    logger.warning(f"⚠️ [LLMRouter] Ollama host connection error ({e}). Breaking candidate cascade.")
+                    quota_tracker.record_exhausted("ollama", f"Ollama connection refused: {e}")
+                    break
+                logger.warning(f"⚠️ [LLMRouter] Ollama Cloud candidate '{candidate_model}' error: {e}. Trying next...")
+
+        quota_tracker.record_exhausted("ollama", "All Ollama models failed or unavailable")
+        return None
+
+    def generate_text_with_cascade(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None
+    ) -> Optional[str]:
+        """
+        Cascades text/code generation across:
+        Gemini -> Groq -> OpenRouter -> Ollama Cloud.
+        Catches 429 and quota exhaustion and seamlessly fails over to healthy providers.
+        """
+        provider_pref = os.getenv("LLM_PROVIDER", "").lower()
+
+        # If user explicitly specified a provider preference, try it first
+        if provider_pref == "ollama":
+            res = self.call_ollama_text(prompt, system_instruction)
+            if res:
+                return res
+        elif provider_pref == "groq":
+            res = self.call_groq_text(prompt, system_instruction)
+            if res:
+                return res
+        elif provider_pref == "openrouter":
+            res = self.call_openrouter_text(prompt, system_instruction)
+            if res:
+                return res
+
+        # 1. Primary: Gemini (if not already tried)
+        if provider_pref not in ("ollama", "groq", "openrouter"):
+            res = self.call_gemini_text(prompt, system_instruction)
+            if res:
+                return res
+
+        # 2. Secondary: Groq (if not already tried)
+        if provider_pref != "groq":
+            res = self.call_groq_text(prompt, system_instruction)
+            if res:
+                return res
+
+        # 3. Tertiary: OpenRouter (if not already tried)
+        if provider_pref != "openrouter":
+            res = self.call_openrouter_text(prompt, system_instruction)
+            if res:
+                return res
+
+        # 4. Quaternary: Ollama Cloud (if not already tried)
+        if provider_pref != "ollama":
+            res = self.call_ollama_text(prompt, system_instruction)
+            if res:
+                return res
+
+        logger.warning("⚡ [LLMRouter] All providers failed or quota exhausted for text/code generation.")
+        return None
+
 
 llm_router = LLMRouter()
+
+
+def generate_text_with_cascade(
+    prompt: str,
+    system_instruction: Optional[str] = None
+) -> Optional[str]:
+    """Module-level function forwarding to llm_router.generate_text_with_cascade."""
+    return llm_router.generate_text_with_cascade(prompt, system_instruction=system_instruction)

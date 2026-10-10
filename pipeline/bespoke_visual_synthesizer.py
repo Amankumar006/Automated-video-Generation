@@ -23,14 +23,22 @@ load_dotenv(PROJECT_ROOT / ".env")
 import warnings
 with warnings.catch_warnings():
     warnings.simplefilter("ignore", category=FutureWarning)
-    import google.generativeai as genai
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        genai = None
 
 from pipeline.config import GEMINI_MODEL_NAME
 from pipeline.code_sandbox import validate_synthesized_visual_code
+from pipeline.llm_router import llm_router, generate_text_with_cascade
+from pipeline.quota_tracker import quota_tracker
 
 API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
-if API_KEY:
-    genai.configure(api_key=API_KEY)
+if API_KEY and genai:
+    try:
+        genai.configure(api_key=API_KEY)
+    except Exception:
+        pass
 
 GENERATED_VISUALS_DIR = PROJECT_ROOT / "manim_engine" / "generated"
 GENERATED_VISUALS_DIR.mkdir(parents=True, exist_ok=True)
@@ -115,8 +123,9 @@ Return ONLY valid python code enclosed in ```python ... ```.
 class BespokeVisualSynthesizer:
     """Autonomous Engine that synthesizes bespoke Manim visual code per beat."""
 
-    def __init__(self, model_name: Optional[str] = None):
+    def __init__(self, model_name: Optional[str] = None, router: Optional[Any] = None):
         self.model_name = model_name or GEMINI_MODEL_NAME or "gemini-flash-latest"
+        self.router = router or llm_router
 
     def synthesize_visual_for_beat(
         self,
@@ -147,9 +156,9 @@ class BespokeVisualSynthesizer:
         prompt = self._construct_synthesis_prompt(spec, beat, beat_idx)
 
         print(f"\n🎨 [Bespoke Visual Synthesizer] Generating custom Manim visual for Beat {beat_id} ('{spec.get('title', spec_id)}')...")
-        raw_code = self._call_gemini(prompt)
+        raw_code = self._generate_code(prompt)
         if not raw_code:
-            print(f"   ⚠️ Gemini synthesis returned empty response for Beat {beat_id}.")
+            print(f"   ⚠️ Visual synthesis returned empty response for Beat {beat_id}.")
             return None
 
         clean_code = self._extract_python_code(raw_code)
@@ -233,25 +242,25 @@ REPAIR INSTRUCTIONS:
 
 Return ONLY the corrected Python code enclosed in ```python ... ```.
 """
-        raw_repaired = self._call_gemini(repair_prompt)
+        raw_repaired = self._generate_code(repair_prompt)
         if raw_repaired:
             return self._extract_python_code(raw_repaired)
         return failing_code
 
     def _call_gemini(self, prompt: str) -> Optional[str]:
-        if not API_KEY:
-            return None
-        try:
-            model = genai.GenerativeModel(
-                self.model_name,
-                system_instruction=BESPOKE_SYNTHESIZER_SYSTEM_PROMPT
-            )
-            resp = model.generate_content(prompt)
-            if resp and resp.text:
-                return resp.text.strip()
-        except Exception as e:
-            print(f"⚠️ Bespoke synthesizer Gemini call notice: {e}")
-        return None
+        """Backward-compatible alias for OmniRoute code generation."""
+        return self._generate_code(prompt)
+
+    def _generate_code(self, prompt: str) -> Optional[str]:
+        """
+        Synthesizes visual code via OmniRoute cascade across Gemini, Groq, OpenRouter, and Ollama.
+        Catches 429 quota exhaustion and seamlessly falls over to healthy models/providers.
+        """
+        active_router = getattr(self, "router", None) or llm_router
+        return active_router.generate_text_with_cascade(
+            prompt=prompt,
+            system_instruction=BESPOKE_SYNTHESIZER_SYSTEM_PROMPT
+        )
 
     def _extract_python_code(self, response_text: str) -> str:
         match = re.search(r"```(?:python)?\s*(.*?)\s*```", response_text, re.DOTALL)
