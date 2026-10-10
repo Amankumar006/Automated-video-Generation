@@ -168,8 +168,9 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
     chapters_block = "\n".join(chapter_lines) if chapter_lines else "0:00 - Introduction\n0:30 - Deep Dive"
 
     # 3. Core summary paragraph
-    b1_text = spec.get("beats", [{}])[0].get("text", "")
-    b5_text = spec.get("beats", [{}])[-2].get("text", "") if len(spec.get("beats", [])) >= 2 else ""
+    beats = spec.get("beats") or []
+    b1_text = beats[0].get("text", "") if len(beats) > 0 else ""
+    b5_text = beats[-2].get("text", "") if len(beats) >= 2 else ""
 
     import re
     arxiv_url = spec.get("arxiv_url") or spec.get("metadata", {}).get("arxiv_url")
@@ -401,10 +402,12 @@ def main():
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
     parser.add_argument("--instagram", action="store_true", help="Also publish as Instagram Reel via Meta Graph API")
     parser.add_argument("--x", "--twitter", dest="publish_x", action="store_true", help="Also publish as 4-tweet video thread to X (Twitter)")
+    parser.add_argument("--linkedin", action="store_true", help="Also publish as video post to LinkedIn")
     parser.add_argument("--dry-run", action="store_true", help="Print generated metadata, title, description, and tags without uploading")
 
     parser.add_argument("--auth-only", action="store_true", help="Run interactive OAuth2 flow and exit")
     args = parser.parse_args()
+
 
     if args.auth_only:
         print("🔐 Authenticating with YouTube Data API...")
@@ -476,6 +479,17 @@ def main():
                 print(tw)
             print("\n=======================================================\n")
 
+        if args.linkedin:
+            from pipeline.linkedin_copy_generator import generate_linkedin_post
+            li_post = generate_linkedin_post(spec)
+            print("=======================================================")
+            print("🔍 LINKEDIN POST PREVIEW (DRY-RUN)")
+            print("=======================================================")
+            print(f"🪝 HOOK:\n{li_post['hook']}\n")
+            print(f"📝 COMMENTARY:\n{li_post['commentary']}\n")
+            print(f"💬 FIRST COMMENT (WITH EXTERNAL LINKS):\n{li_post['first_comment']}\n")
+            print("=======================================================\n")
+
         if not args.video:
             print("💡 Tip: Provide --video <path.mp4> to execute live upload.")
         return
@@ -499,6 +513,15 @@ def main():
             x_publisher.publish_video_thread(video_path, spec)
         except Exception as e_x:
             print(f"⚠️ X publication skipped or failed: {e_x}")
+
+    if args.linkedin:
+        from pipeline.linkedin_publisher import linkedin_publisher
+        print("\n💼 Cross-posting to LinkedIn...")
+        try:
+            linkedin_publisher.publish_video(video_path, spec)
+        except Exception as e_li:
+            print(f"⚠️ LinkedIn publication skipped or failed: {e_li}")
+
 
 
 

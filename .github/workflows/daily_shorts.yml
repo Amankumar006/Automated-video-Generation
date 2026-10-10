@@ -64,6 +64,11 @@ on:
         required: false
         default: true
         type: boolean
+      publish_linkedin:
+        description: 'Cross-post to LinkedIn'
+        required: false
+        default: true
+        type: boolean
       source:
 
         description: 'Candidate source: mixed (auto-rotates between academic mechanism deep dives, official lab drops, and developer perks), arxiv, blogs, perks'
@@ -136,6 +141,9 @@ jobs:
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
           TWITTER_CLIENT_ID: ${{ secrets.TWITTER_CLIENT_ID }}
           TWITTER_CLIENT_SECRET: ${{ secrets.TWITTER_CLIENT_SECRET }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
           echo "GEMINI_MODEL_NAME=gemini-2.5-flash" >> .env
@@ -172,6 +180,12 @@ jobs:
             echo "TWITTER_CLIENT_SECRET=$TWITTER_CLIENT_SECRET" >> .env
           fi
 
+          if [ -n "$LINKEDIN_ACCESS_TOKEN" ]; then
+            echo "LINKEDIN_ACCESS_TOKEN=$LINKEDIN_ACCESS_TOKEN" >> .env
+            echo "LINKEDIN_CLIENT_ID=$LINKEDIN_CLIENT_ID" >> .env
+            echo "LINKEDIN_CLIENT_SECRET=$LINKEDIN_CLIENT_SECRET" >> .env
+          fi
+
           if [ -n "$YOUTUBE_TOKEN_JSON_BASE64" ]; then
             echo "$YOUTUBE_TOKEN_JSON_BASE64" | base64 -d > pipeline/youtube_token.json
           fi
@@ -191,6 +205,9 @@ jobs:
           TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
           TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
         run: |
           COUNT="${{ github.event.inputs.count || '1' }}"
@@ -199,6 +216,7 @@ jobs:
           PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
           PUBLISH_INSTAGRAM="${{ github.event.inputs.publish_instagram }}"
           PUBLISH_X="${{ github.event.inputs.publish_x }}"
+          PUBLISH_LINKEDIN="${{ github.event.inputs.publish_linkedin }}"
           SOURCE="${{ github.event.inputs.source || 'mixed' }}"
 
           EXTRA_ARGS="--source $SOURCE"
@@ -214,6 +232,11 @@ jobs:
           # Enable X (Twitter) cross-posting by default on scheduled runs, or when input is true
           if [ "$PUBLISH_X" != "false" ] && [ -n "$TWITTER_API_KEY" ]; then
             EXTRA_ARGS="$EXTRA_ARGS --publish-x"
+          fi
+
+          # Enable LinkedIn cross-posting by default on scheduled runs, or when input is true
+          if [ "$PUBLISH_LINKEDIN" != "false" ] && [ -n "$LINKEDIN_ACCESS_TOKEN" ]; then
+            EXTRA_ARGS="$EXTRA_ARGS --publish-linkedin"
           fi
 
 

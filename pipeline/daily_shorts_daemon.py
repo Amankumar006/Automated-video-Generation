@@ -384,7 +384,8 @@ class DailyShortsDaemon:
         quality: str = "-qh",
         privacy: str = "public",
         publish_instagram: bool = False,
-        publish_x: bool = False
+        publish_x: bool = False,
+        publish_linkedin: bool = False
     ):
         if quality and not quality.startswith("-"):
             self.quality = f"-{quality}"
@@ -393,6 +394,7 @@ class DailyShortsDaemon:
         self.privacy = privacy
         self.publish_instagram = publish_instagram or (os.getenv("PUBLISH_INSTAGRAM", "false").lower() == "true")
         self.publish_x = publish_x or (os.getenv("PUBLISH_TWITTER", os.getenv("PUBLISH_X", "false")).lower() == "true")
+        self.publish_linkedin = publish_linkedin or (os.getenv("PUBLISH_LINKEDIN", "false").lower() == "true")
         self.critic = ScriptCritic()
 
 
@@ -647,7 +649,8 @@ class DailyShortsDaemon:
                     provider=active_prov,
                     voice=active_voice,
                     publish_instagram=self.publish_instagram,
-                    publish_x=self.publish_x
+                    publish_x=self.publish_x,
+                    publish_linkedin=self.publish_linkedin
                 )
 
             except Exception as prod_err:
@@ -781,6 +784,7 @@ def main():
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--publish-instagram", action="store_true", help="Cross-post produced videos to Instagram Reels via Meta Graph API")
     parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Cross-post produced videos to X (Twitter) as a 4-tweet thread")
+    parser.add_argument("--publish-linkedin", action="store_true", help="Cross-post produced videos to LinkedIn")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
     args = parser.parse_args()
@@ -789,7 +793,8 @@ def main():
         quality=args.quality,
         privacy=args.privacy,
         publish_instagram=args.publish_instagram,
-        publish_x=args.publish_x
+        publish_x=args.publish_x,
+        publish_linkedin=args.publish_linkedin
     )
 
 

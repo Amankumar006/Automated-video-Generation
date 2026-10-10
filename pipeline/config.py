@@ -125,9 +125,22 @@ TWITTER_CLIENT_SECRET = os.environ.get("TWITTER_CLIENT_SECRET", "")
 TWITTER_API_BASE_URL = "https://api.twitter.com"
 TWITTER_UPLOAD_BASE_URL = "https://upload.twitter.com/1.1/media/upload.json"
 
+# LinkedIn REST API Configuration (OAuth 2.0 & Posts API)
+LINKEDIN_CLIENT_ID = os.environ.get("LINKEDIN_CLIENT_ID", "")
+LINKEDIN_CLIENT_SECRET = os.environ.get("LINKEDIN_CLIENT_SECRET", "")
+LINKEDIN_ACCESS_TOKEN = os.environ.get("LINKEDIN_ACCESS_TOKEN", "")
+LINKEDIN_REDIRECT_URI = os.environ.get("LINKEDIN_REDIRECT_URI", "http://localhost:8080/callback")
+LINKEDIN_TOKEN_PATH = os.environ.get(
+    "LINKEDIN_TOKEN_PATH",
+    str(WORKSPACE_ROOT / "pipeline" / "linkedin_token.json")
+)
+LINKEDIN_API_VERSION = os.environ.get("LINKEDIN_API_VERSION", "202601")
+LINKEDIN_API_BASE_URL = "https://api.linkedin.com"
+
 # Background Music & Dynamic Ducking
 ENABLE_BG_MUSIC = True
 DEFAULT_DUCK_GAIN = 0.10    # -20 dB during speech
 DEFAULT_NORMAL_GAIN = 0.32  # -10 dB during pauses & outro
 CUSTOM_BG_MUSIC_PATH = str(WORKSPACE_ROOT / "public" / "audio" / "bg_music.wav")
+
 
