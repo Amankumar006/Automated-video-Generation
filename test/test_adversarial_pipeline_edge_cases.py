@@ -215,9 +215,10 @@ class TestExtremeImageAspectRatios:
         res = prepare_image_for_blackboard(img, out_path)
         assert res.exists()
         with Image.open(res) as out_im:
-            # Observes unbounded vertical scaling:
-            # The height expands to 22,000 pixels even though vertical canvas is only 1920px.
-            assert out_im.height > 10000, f"Height was unexpectedly constrained: {out_im.height}"
+            # Observes bounded vertical scaling:
+            # The height is safely clamped at <= 4096px to prevent memory exhaustion.
+            assert out_im.height <= 4096, f"Height exceeded safe dimension limit: {out_im.height}"
+            assert out_im.height >= 400
 
     def test_tiny_1x1_image(self, tmp_path):
         """1x1 pixel image edge case."""

@@ -15,23 +15,33 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+SKILLS_YT_PACKAGE_DIR = PROJECT_ROOT / "skills" / "yt-package"
+if str(SKILLS_YT_PACKAGE_DIR) not in sys.path:
+    sys.path.insert(0, str(SKILLS_YT_PACKAGE_DIR))
+
+try:
+    import title as title_skill
+except ImportError:
+    title_skill = None
+
 # Mobile Shorts constraints
 MOBILE_SHORTS_MAX_CHARS = 50
 MOBILE_SHORTS_OPTIMAL_CHARS = 45
 DESKTOP_SEARCH_MAX_CHARS = 60
 HARD_LIMIT_CHARS = 100
 
-VAGUE_BUZZWORDS: Set[str] = {
+_BASE_VAGUE = title_skill.VAGUE if title_skill is not None else {
     "amazing", "incredible", "insane", "crazy", "huge", "massive",
     "ultimate", "best", "powerful", "secret", "revolutionary",
-    "mindblowing", "epic", "perfect", "complete", "everything", "gamechanger"
+    "mindblowing", "epic", "perfect", "complete", "everything"
 }
+VAGUE_BUZZWORDS: Set[str] = set(_BASE_VAGUE) | {"gamechanger"}
 
-STOP_WORDS: Set[str] = {
+_BASE_STOP = title_skill.STOP if title_skill is not None else {
     "the", "a", "an", "of", "for", "to", "in", "on", "and", "or",
-    "is", "are", "with", "your", "you", "my", "i", "this", "that", "it",
-    "we", "our", "us", "video", "today", "here"
+    "is", "are", "with", "your", "you", "my", "i", "this", "that", "it"
 }
+STOP_WORDS: Set[str] = set(_BASE_STOP) | {"we", "our", "us", "video", "today", "here"}
 
 CURIOSITY_TRIGGERS: Set[str] = {
     "how", "why", "what", "which", "vs", "shock", "shocks", "broke",
@@ -41,6 +51,11 @@ CURIOSITY_TRIGGERS: Set[str] = {
 
 
 def words(text: str) -> List[str]:
+    if title_skill is not None:
+        try:
+            return title_skill.words(text)
+        except Exception:
+            pass
     return re.findall(r"[a-z0-9']+", text.lower())
 
 

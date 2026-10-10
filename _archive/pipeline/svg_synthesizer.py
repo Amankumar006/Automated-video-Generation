@@ -12,7 +12,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 BEAT_SVGS_DIR = PROJECT_ROOT / "public" / "beat_svgs"
 BEAT_SVGS_DIR.mkdir(parents=True, exist_ok=True)
 

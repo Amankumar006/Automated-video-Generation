@@ -387,19 +387,6 @@ class ScriptDrivenScene(MovingCameraScene):
                     if not current_img and first_fig.get("image_path"):
                         current_img = first_fig.get("image_path")
 
-                # If bespoke_svg file missing and no paper figure, synthesize on-the-fly via SVGSynthesizer!
-                if motif_type in ["bespoke_svg", "dynamic_svg"] and (not current_svg or not os.path.exists(current_svg)):
-                    try:
-                        from pipeline.svg_synthesizer import SVGSynthesizer
-                        clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "topic")).lower()
-                        topic = self.spec.get("title", clean_id)
-                        synth = SVGSynthesizer()
-                        synth_path = synth.synthesize_beat_svg(b, topic, clean_id, beat_id)
-                        if synth_path and synth_path.exists():
-                            current_svg = str(synth_path)
-                    except Exception as e:
-                        print(f"⚠️ On-the-fly SVG synthesis notice: {e}")
-
                 if current_svg and os.path.exists(current_svg):
                     motif_params["svg_path"] = current_svg
                 if current_img and os.path.exists(current_img):
