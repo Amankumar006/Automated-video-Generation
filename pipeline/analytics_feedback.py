@@ -512,6 +512,8 @@ def get_performance_category_bias() -> Dict[str, float]:
             pass
     if "developer_perks" not in biases:
         biases["developer_perks"] = 1.25
+    if "tech_news" not in biases:
+        biases["tech_news"] = 1.25
     return biases
 
 def get_recommended_pacing() -> Dict[str, Any]:

@@ -267,16 +267,18 @@ def main():
     parser.add_argument("--lang", "--language", dest="lang", default=None, help="Narration language code (en or hi)")
     parser.add_argument("--quality", default="-qm", choices=["ql", "qm", "qh", "-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")
+    parser.add_argument("--blog", type=str, default="", help="Specific official blog post or tech news ID (e.g. blog_openai_o3_mini)")
+    parser.add_argument("--news", type=str, default="", help="Alias for --blog")
     parser.add_argument("--no-music", action="store_true", help="Disable background synth soundtrack")
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
     args = parser.parse_args()
 
-    if args.dry_run and not args.topic and not args.arxiv and not args.perk:
+    if args.dry_run and not args.topic and not args.arxiv and not args.perk and not args.blog and not args.news:
         args.topic = "speculative_decoding"
 
-    if not args.topic and not args.arxiv and not args.perk:
-        parser.error("Either --topic, --arxiv, or --perk must be provided.")
+    if not args.topic and not args.arxiv and not args.perk and not args.blog and not args.news:
+        parser.error("Either --topic, --arxiv, --perk, or --blog/--news must be provided.")
 
     arxiv_meta = None
     if args.perk:
@@ -295,6 +297,20 @@ def main():
         args.category = args.category or "developer_perks"
         arxiv_meta = cand
         print(f"✅ Verified Perk Ingested: {cand['title']}")
+    elif args.blog or args.news:
+        target_blog_id = args.blog or args.news
+        print(f"📰 Ingesting official blog / tech news '{target_blog_id}'...")
+        from pipeline.official_blogs_fetcher import official_blogs_fetcher
+        blog_rec = official_blogs_fetcher.get_blog(target_blog_id)
+        if not blog_rec:
+            blog_rec = official_blogs_fetcher.find_blog(target_blog_id)
+        if not blog_rec:
+            raise RuntimeError(f"Could not retrieve official blog details for '{target_blog_id}'")
+        cand = blog_rec.to_candidate_spec()
+        topic = args.topic or cand["title"]
+        args.category = args.category or cand.get("category", "tech_news")
+        arxiv_meta = cand
+        print(f"✅ Official Blog Ingested: {cand['title']} ({blog_rec.provider})")
     elif args.arxiv:
         print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
         arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
@@ -308,7 +324,7 @@ def main():
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.fresh or args.arxiv or args.perk:
+    if args.fresh or args.arxiv or args.perk or args.blog or args.news:
         print(f"🧠 Generating brand-new script for '{topic}' directly from source...")
         spec = generate_script(
             topic=topic,
@@ -321,7 +337,7 @@ def main():
 
     # Ingest / bind native arXiv paper figures
     target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
-    if target_arxiv_id and not str(target_arxiv_id).startswith("perk_") and not str(target_arxiv_id).startswith("gh_"):
+    if target_arxiv_id and not any(str(target_arxiv_id).startswith(p) for p in ("perk_", "gh_", "blog_", "news_")):
         from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
         clean_id = clean_arxiv_id(str(target_arxiv_id))
         spec["arxiv_id"] = clean_id

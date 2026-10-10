@@ -290,3 +290,45 @@ def test_run_pipeline_bypasses_arxiv_figure_extraction_for_perks(monkeypatch):
     assert figure_extraction_called is False, "extract_paper_figures should NOT be called for perk IDs"
 
 
+def test_run_pipeline_bypasses_arxiv_figure_extraction_for_blogs(monkeypatch):
+    """Validates that run_pipeline.py completely bypasses extract_paper_figures when invoked with --blog."""
+    from pipeline.run_pipeline import main as run_pipeline_main
+
+    mock_spec = {
+        "id": "blog_openai_o3_mini",
+        "title": "OpenAI o3-mini: High-Speed STEM Reasoning Model",
+        "category": "tech_news",
+        "beats": [
+            {
+                "beat_id": 1,
+                "text": "Every engineer burns tokens before seeing new reasoning benchmarks.",
+                "duration": 5.0
+            }
+        ]
+    }
+
+    mock_audio = {
+        "master_audio": "/tmp/mock_audio.wav",
+        "timing_data": [{"beat_id": 1, "duration": 5.0, "slot_duration": 5.0, "start": 0.0, "end": 5.0, "word_timings": []}]
+    }
+
+    figure_extraction_called = False
+    def mock_extract_figures(*args, **kwargs):
+        nonlocal figure_extraction_called
+        figure_extraction_called = True
+        return []
+
+    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--blog", "blog_openai_o3_mini", "--dry-run"])
+    monkeypatch.setattr("pipeline.run_pipeline.generate_script", lambda **kwargs: mock_spec)
+    monkeypatch.setattr("pipeline.run_pipeline.synthesize_audio_for_spec", lambda *args, **kwargs: mock_audio)
+    monkeypatch.setattr("pipeline.arxiv_vector_extractor.extract_paper_figures", mock_extract_figures)
+    monkeypatch.setattr("pipeline.run_pipeline.render_scene", lambda *args, **kwargs: None)
+
+    try:
+        run_pipeline_main()
+    except SystemExit:
+        pass
+
+    assert figure_extraction_called is False, "extract_paper_figures should NOT be called for blog IDs"
+
+

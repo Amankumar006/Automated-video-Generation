@@ -19,6 +19,7 @@ sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.batch_digest import get_trending_digest, record_paper_production, load_history
 from pipeline.github_trending_fetcher import get_trending_github_digest
+from pipeline.official_blogs_fetcher import get_official_blogs_digest, official_blogs_fetcher
 from pipeline.auto_produce import auto_produce
 from pipeline.script_critic import ScriptCritic
 from pipeline.json_utils import robust_json_loads
@@ -162,12 +163,12 @@ def evaluate_pedagogical_viability(
 
     prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI and developer tools.
 
-Review these top {len(cand_summaries)} trending AI papers and tech perks from today:
+Review these top {len(cand_summaries)} trending AI papers, official lab announcements, and tech perks from today:
 {chr(10).join(cand_summaries)}
 
 Select the {target_count} BEST and MOST DIVERSE topics for 45-second educational animated Shorts.
 Criteria:
-1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks).
+1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks, major AI model releases).
 2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static, VIP all-access badge)?
 3. High Production Value: Can the concepts be visualized with dynamic 3b1b animations (e.g. wave collisions, streaming KV buffers, pipeline stages, workflow routing)?{bias_desc}
 
@@ -245,6 +246,8 @@ class DailyShortsDaemon:
         publish: bool = True,
         target_arxiv: Optional[str] = None,
         target_perk: Optional[str] = None,
+        target_blog: Optional[str] = None,
+        target_news: Optional[str] = None,
         target_slot_hour: Optional[int] = None,
         preferred_taxonomy: Optional[str] = None,
         preferred_category: Optional[str] = None,
@@ -286,6 +289,17 @@ class DailyShortsDaemon:
                 print(f"⚠️ Could not resolve verified developer perk: {target_perk}")
                 return []
             selected_papers = [perk_rec.to_candidate_spec()]
+        elif target_blog or target_news:
+            target_id = target_blog or target_news
+            print(f"\n📰 Direct Target Official Blog / News Specified: {target_id}")
+            from pipeline.official_blogs_fetcher import official_blogs_fetcher
+            blog_rec = official_blogs_fetcher.get_blog(target_id)
+            if not blog_rec:
+                blog_rec = official_blogs_fetcher.find_blog(target_id)
+            if not blog_rec:
+                print(f"⚠️ Could not resolve official blog post: {target_id}")
+                return []
+            selected_papers = [blog_rec.to_candidate_spec()]
         elif target_arxiv:
             print(f"\n🎯 Direct Target Paper Specified: {target_arxiv}")
             from pipeline.arxiv_fetcher import fetch_arxiv_paper
@@ -341,6 +355,17 @@ class DailyShortsDaemon:
                     unprocessed.extend([p for p in perk_candidates if p["id"] not in proc_ids])
                 except Exception as e:
                     print(f"   ⚠️ Tech perks fetcher notice: {e}")
+
+            if source in ["blogs", "news", "mixed"]:
+                print("   Scanning official AI lab announcements & blogs (OpenAI, Anthropic, DeepMind, HF, GitHub)...")
+                try:
+                    from pipeline.official_blogs_fetcher import get_official_blogs_digest
+                    blog_candidates = get_official_blogs_digest(limit=8)
+                    history = load_history()
+                    proc_ids = set(history.get("processed_papers", {}).keys())
+                    unprocessed.extend([b for b in blog_candidates if b["id"] not in proc_ids])
+                except Exception as e:
+                    print(f"   ⚠️ Official blogs fetcher notice: {e}")
 
             if preferred_category:
                 unprocessed = (
@@ -462,6 +487,8 @@ class DailyShortsDaemon:
                 elif pid.startswith("perk_"):
                     perk_meta = r.get("editorial_notes", {})
                     link_line = f"- **Verified Program:** {r['title']}"
+                elif pid.startswith("blog_") or pid.startswith("news_"):
+                    link_line = f"- **Official Blog Announcement:** {r['title']}"
                 else:
                     link_line = f"- **arXiv ID:** [{pid}](https://arxiv.org/abs/{pid})"
                 reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
@@ -537,12 +564,14 @@ def main():
     parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
-    parser.add_argument("--source", choices=["arxiv", "github", "perks", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', 'perks', or 'mixed' (default: mixed)")
+    parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', 'perks', 'blogs', 'news', or 'mixed' (default: mixed)")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
     parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "developer_perks", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
-    parser.add_argument("--category", type=str, default="", help="Preferred category override (e.g. developer_perks, architecture_breakdown, model_showdown)")
+    parser.add_argument("--category", type=str, default="", help="Preferred category override (e.g. developer_perks, architecture_breakdown, model_showdown, tech_news)")
     parser.add_argument("--perk", type=str, default="", help="Specific verified developer perk ID to produce (e.g. anthropic_startup_program, microsoft_founders_hub)")
+    parser.add_argument("--blog", type=str, default="", help="Specific official blog post ID to produce (e.g. blog_openai_o3_mini, blog_claude_3_7_sonnet)")
+    parser.add_argument("--news", type=str, default="", help="Alias for --blog")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
@@ -557,6 +586,7 @@ def main():
             publish=False,
             target_arxiv=args.arxiv or None,
             target_perk=args.perk or None,
+            target_blog=args.blog or args.news or None,
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
@@ -572,6 +602,7 @@ def main():
             publish=True,
             target_arxiv=args.arxiv or None,
             target_perk=args.perk or None,
+            target_blog=args.blog or args.news or None,
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
