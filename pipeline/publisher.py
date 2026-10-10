@@ -399,6 +399,7 @@ def main():
     parser.add_argument("--spec", help="Path to spec JSON template with metadata & chapters")
     parser.add_argument("--title", help="Optional title override")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
+    parser.add_argument("--instagram", action="store_true", help="Also publish as Instagram Reel via Meta Graph API")
     parser.add_argument("--dry-run", action="store_true", help="Print generated metadata, title, description, and tags without uploading")
     parser.add_argument("--auth-only", action="store_true", help="Run interactive OAuth2 flow and exit")
     args = parser.parse_args()
@@ -441,18 +442,40 @@ def main():
     if args.dry_run or not args.video:
         print("\n=======================================================")
         print("🔍 YOUTUBE SHORTS METADATA PREVIEW (DRY-RUN)")
-        print("=======================================================\n")
+        print("=======================================================")
         print(f"🎯 TITLE ({len(metadata['title'])} chars):\n{metadata['title']}\n")
         print(f"📝 DESCRIPTION:\n{metadata['description']}\n")
         print(f"🏷️ TAGS ({len(metadata['tags'])}):\n{', '.join(metadata['tags'])}\n")
         print(f"💬 PINNED COMMENT:\n{metadata['pinned_comment']}\n")
         print(f"🔒 PRIVACY STATUS: {args.privacy.upper()}")
         print("=======================================================\n")
+
+        if args.instagram:
+            from pipeline.instagram_caption_generator import generate_instagram_post, format_full_caption_with_hashtags
+            ig_post = generate_instagram_post(spec)
+            print("=======================================================")
+            print("🔍 INSTAGRAM REELS PREVIEW (DRY-RUN)")
+            print("=======================================================")
+            print(f"🪝 HOOK:\n{ig_post['hook']}\n")
+            print(f"📝 CAPTION:\n{format_full_caption_with_hashtags(ig_post)}\n")
+            print(f"💬 FIRST COMMENT:\n{ig_post['first_comment']}\n")
+            print("=======================================================\n")
+
         if not args.video:
             print("💡 Tip: Provide --video <path.mp4> to execute live upload.")
         return
 
     upload_short(video_path, metadata, privacy_status=args.privacy)
+
+    if args.instagram:
+        from pipeline.instagram_caption_generator import generate_instagram_post
+        from pipeline.instagram_publisher import instagram_publisher
+        print("\n📸 Cross-posting to Instagram Reels...")
+        ig_post_data = generate_instagram_post(spec)
+        try:
+            instagram_publisher.publish_reel(video_path, ig_post_data)
+        except Exception as e_ig:
+            print(f"⚠️ Instagram publication skipped or failed: {e_ig}")
 
 
 if __name__ == "__main__":
