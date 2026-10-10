@@ -83,7 +83,7 @@ def evaluate_pedagogical_viability(
 
     target_count = min(count, len(candidates))
 
-    # Helper function for deterministic fallback
+    # Helper function for deterministic fallback with category diversity balancing
     def get_fallback_candidates() -> List[Dict[str, Any]]:
         def candidate_priority(c):
             tax = c.get("taxonomy", "")
@@ -93,7 +93,38 @@ def evaluate_pedagogical_viability(
             return (is_pref, is_high_velocity, c.get("impact_score", 0))
 
         sorted_cands = sorted(candidates, key=candidate_priority, reverse=True)
-        return sorted_cands[:target_count]
+        if target_count <= 1:
+            return sorted_cands[:target_count]
+
+        # Multi-candidate selection with category & taxonomy diversity balancing
+        selected = []
+        seen_categories = set()
+        seen_taxonomies = set()
+        pool = list(sorted_cands)
+
+        # 1. First pick the top ranked candidate
+        first = pool.pop(0)
+        selected.append(first)
+        seen_categories.add(first.get("recommended_category") or first.get("category", "general"))
+        seen_taxonomies.add(first.get("taxonomy", "general"))
+
+        # 2. Pick subsequent candidates favoring diverse categories and taxonomies
+        for c in list(pool):
+            if len(selected) >= target_count:
+                break
+            c_cat = c.get("recommended_category") or c.get("category", "general")
+            c_tax = c.get("taxonomy", "general")
+            if (c_cat not in seen_categories or c_tax not in seen_taxonomies) and (c.get("analytics_multiplier", 1.0) >= 1.0 or not any(p.get("analytics_multiplier", 1.0) >= 1.0 for p in pool)):
+                selected.append(c)
+                seen_categories.add(c_cat)
+                seen_taxonomies.add(c_tax)
+                pool.remove(c)
+
+        # 3. Fill remaining quota if needed
+        while len(selected) < target_count and pool:
+            selected.append(pool.pop(0))
+
+        return selected
 
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
@@ -120,25 +151,25 @@ def evaluate_pedagogical_viability(
     if category_biases:
         bias_str = ", ".join([f"{k}: {v}x multiplier" for k, v in category_biases.items()])
         bias_desc = f"""
-4. CRITICAL AUDIENCE ENGAGEMENT ALIGNMENT (MANDATORY):
-   - Real-time YouTube analytics reveals that 'multimodal_diffusion' (1.29x multiplier) and 'hardware_efficiency' (1.19x multiplier, 3,347+ views, peak velocity 14.55 views/hour) are our top viral growth drivers on YouTube Shorts.
-   - Conversely, 'reasoning_models' and 'mechanistic_interpretability' (~0.60x multiplier) are currently suffering steep audience drop-offs on YouTube Shorts.
+4. CRITICAL AUDIENCE ENGAGEMENT ALIGNMENT & DIVERSITY DIRECTIVE:
+   - Real-time YouTube analytics reveals top velocity drivers: 'multimodal_diffusion' (1.29x), 'developer_perks' (1.25x), 'hardware_efficiency' (1.19x).
    - Live category multipliers: [{bias_str}].
-   - MANDATORY DIRECTIVE: You MUST AGGRESSIVELY FAVOR candidates in 'multimodal_diffusion' and 'hardware_efficiency'. Unless no viable candidate exists, at least 80% of selections MUST come from these two winning categories."""
+   - MULTI-CATEGORY ROTATION: In addition to hardware and diffusion breakthroughs, actively incorporate actionable developer tech perks, model showdowns, and benchmark news to maximize audience breadth across developers, founders, and students.
+   - DIVERSITY REQUIREMENT: Ensure variety across selected topics; avoid selecting multiple consecutive videos on identical sub-topics or narrow architecture breakdowns."""
 
     if preferred_taxonomy:
         bias_desc += f"\n5. TARGET UPLOAD WINDOW FOCUS: This automated upload window specifically targets '{preferred_taxonomy.upper()}'. Prioritize the best candidate in '{preferred_taxonomy}'."
 
-    prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI.
+    prompt = f"""You are the Executive Creative Director of 'The Model Verse', a premier YouTube Shorts channel creating 3Blue1Brown-style chalkboard animations about cutting-edge AI and developer tools.
 
-Review these top {len(cand_summaries)} trending AI papers from today:
+Review these top {len(cand_summaries)} trending AI papers and tech perks from today:
 {chr(10).join(cand_summaries)}
 
-Select the {target_count} BEST and MOST DIVERSE papers for 45-second educational animated Shorts.
+Select the {target_count} BEST and MOST DIVERSE topics for 45-second educational animated Shorts.
 Criteria:
-1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits).
-2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static)?
-3. High Production Value: Can the concepts be visualized with dynamic 3b1b animations (e.g. wave collisions, streaming KV buffers, noise-to-latent diffusion trajectories)?{bias_desc}
+1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks).
+2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static, VIP all-access badge)?
+3. High Production Value: Can the concepts be visualized with dynamic 3b1b animations (e.g. wave collisions, streaming KV buffers, pipeline stages, workflow routing)?{bias_desc}
 
 Return ONLY valid JSON matching this schema:
 {{
@@ -213,8 +244,10 @@ class DailyShortsDaemon:
         dry_run: bool = False,
         publish: bool = True,
         target_arxiv: Optional[str] = None,
+        target_perk: Optional[str] = None,
         target_slot_hour: Optional[int] = None,
         preferred_taxonomy: Optional[str] = None,
+        preferred_category: Optional[str] = None,
         source: str = "mixed"
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
@@ -230,6 +263,8 @@ class DailyShortsDaemon:
                 preferred_taxonomy = slot_info["preferred_taxonomy"]
         if preferred_taxonomy:
             print(f"📈 Analytics Category Bias: Aggressively prioritizing '{preferred_taxonomy.upper()}'")
+        if preferred_category:
+            print(f"🎯 Preferred Category Focus: '{preferred_category.upper()}'")
         print("=" * 80)
 
         # 0. Poll YouTube Analytics & Refresh Performance Multipliers
@@ -239,17 +274,40 @@ class DailyShortsDaemon:
         except Exception as e:
             print(f"   ⚠️ Could not refresh retention ledger: {e}")
 
-        if target_arxiv:
+        if target_perk:
+            print(f"\n🎁 Direct Target Developer Perk Specified: {target_perk}")
+            from pipeline.tech_perks_fetcher import tech_perks_fetcher
+            perk_rec = tech_perks_fetcher.get_verified_perk(target_perk)
+            if not perk_rec:
+                audit = tech_perks_fetcher.verify_perk_claim(target_perk)
+                if audit.get("is_verified"):
+                    perk_rec = tech_perks_fetcher.get_verified_perk(audit.get("program_id", ""))
+            if not perk_rec:
+                print(f"⚠️ Could not resolve verified developer perk: {target_perk}")
+                return []
+            selected_papers = [perk_rec.to_candidate_spec()]
+        elif target_arxiv:
             print(f"\n🎯 Direct Target Paper Specified: {target_arxiv}")
             from pipeline.arxiv_fetcher import fetch_arxiv_paper
+            from pipeline.batch_digest import score_and_classify_paper
             p_data = fetch_arxiv_paper(target_arxiv)
             if not p_data:
                 print(f"⚠️ Could not fetch metadata for arXiv ID: {target_arxiv}")
                 return []
+            classified = score_and_classify_paper({
+                "id": p_data["arxiv_id"],
+                "title": p_data["title"],
+                "abstract": p_data.get("abstract", ""),
+                "upvotes": 0
+            })
+            cat = preferred_category or classified.get("recommended_category", "mechanism_deepdive")
             selected_papers = [{
                 "title": p_data["title"],
                 "id": p_data["arxiv_id"],
-                "recommended_category": "mechanism_deepdive",
+                "recommended_category": cat,
+                "category": cat,
+                "taxonomy": classified.get("taxonomy", "general"),
+                "analytics_multiplier": classified.get("analytics_multiplier", 1.0),
                 "abstract": p_data.get("abstract", ""),
                 "editorial_notes": {
                     "recommended_hook": f"How {p_data['title']} works under the hood",
@@ -272,6 +330,23 @@ class DailyShortsDaemon:
                     unprocessed.extend(gh_candidates)
                 except Exception as e:
                     print(f"   ⚠️ GitHub trending fetcher notice: {e}")
+
+            if source in ["perks", "mixed"]:
+                print("   Scanning verified developer tech perks and startup credit programs...")
+                try:
+                    from pipeline.tech_perks_fetcher import get_verified_perks_digest
+                    perk_candidates = get_verified_perks_digest(limit=6)
+                    history = load_history()
+                    proc_ids = set(history.get("processed_papers", {}).keys())
+                    unprocessed.extend([p for p in perk_candidates if p["id"] not in proc_ids])
+                except Exception as e:
+                    print(f"   ⚠️ Tech perks fetcher notice: {e}")
+
+            if preferred_category:
+                unprocessed = (
+                    [p for p in unprocessed if p.get("recommended_category") == preferred_category or p.get("category") == preferred_category] +
+                    [p for p in unprocessed if p.get("recommended_category") != preferred_category and p.get("category") != preferred_category]
+                )
 
             if not unprocessed:
                 print("ℹ️ All trending candidates for today have already been produced. Daily quota satisfied.")
@@ -384,6 +459,9 @@ class DailyShortsDaemon:
                 if pid.startswith("gh_"):
                     clean_repo = pid.replace("gh_", "").replace("_", "/")
                     link_line = f"- **GitHub Repo:** [{clean_repo}](https://github.com/{clean_repo})"
+                elif pid.startswith("perk_"):
+                    perk_meta = r.get("editorial_notes", {})
+                    link_line = f"- **Verified Program:** {r['title']}"
                 else:
                     link_line = f"- **arXiv ID:** [{pid}](https://arxiv.org/abs/{pid})"
                 reels_md.append(f"""### Reel {r['reel_index']}: {r['title']}
@@ -459,10 +537,12 @@ def main():
     parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
-    parser.add_argument("--source", choices=["arxiv", "github", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', or 'mixed' (default: mixed)")
+    parser.add_argument("--source", choices=["arxiv", "github", "perks", "mixed"], default="mixed", help="Candidate source: 'arxiv', 'github', 'perks', or 'mixed' (default: mixed)")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
-    parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
+    parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "developer_perks", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
+    parser.add_argument("--category", type=str, default="", help="Preferred category override (e.g. developer_perks, architecture_breakdown, model_showdown)")
+    parser.add_argument("--perk", type=str, default="", help="Specific verified developer perk ID to produce (e.g. anthropic_startup_program, microsoft_founders_hub)")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
@@ -476,8 +556,10 @@ def main():
             dry_run=True,
             publish=False,
             target_arxiv=args.arxiv or None,
+            target_perk=args.perk or None,
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
+            preferred_category=args.category or None,
             source=args.source
         )
     elif args.daemon:
@@ -489,8 +571,10 @@ def main():
             dry_run=False,
             publish=True,
             target_arxiv=args.arxiv or None,
+            target_perk=args.perk or None,
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
+            preferred_category=args.category or None,
             source=args.source
         )
         if not produced:

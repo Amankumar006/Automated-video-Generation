@@ -317,10 +317,11 @@ class VisualDirector:
         topic = spec.get("title", clean_id)
         beats = spec.get("beats", [])
         paper_figures = [f for f in spec.get("paper_figures", []) if isinstance(f, dict)]
-        if not paper_figures and spec.get("arxiv_id"):
+        arxiv_target = spec.get("arxiv_id")
+        if not paper_figures and arxiv_target and not str(arxiv_target).startswith("perk_") and not str(arxiv_target).startswith("gh_"):
             try:
                 from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
-                clean_id = clean_arxiv_id(str(spec["arxiv_id"]))
+                clean_id = clean_arxiv_id(str(arxiv_target))
                 print(f"   ℹ️ VisualDirector fallback: lazily extracting paper figures for arXiv '{clean_id}'...")
                 extracted = extract_paper_figures(clean_id, max_figures=5)
                 paper_figures = [f for f in extracted if isinstance(f, dict)]
