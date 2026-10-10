@@ -67,13 +67,23 @@ def save_history(history: Dict[str, Any]):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
 
-def record_paper_production(arxiv_id: str, title: str, category: str, video_path: str):
+def record_paper_production(arxiv_id: str, title: str, category: str, video_path: str, source: Optional[str] = None):
     """Logs a completed paper production to history."""
     history = load_history()
     clean_id = extract_arxiv_id(arxiv_id)
+    if not source:
+        clean_lower = clean_id.lower()
+        cat_lower = category.lower()
+        if clean_lower.startswith("perk_") or cat_lower in ("developer_perks", "startup_credits", "perks"):
+            source = "perks"
+        elif clean_lower.startswith(("blog_", "news_")) or cat_lower in ("tech_news", "official_blogs", "lab_release"):
+            source = "blogs"
+        else:
+            source = "arxiv"
     history["processed_papers"][clean_id] = {
         "title": title,
         "category": category,
+        "source": source,
         "produced_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "video_path": video_path,
         "status": "completed"
