@@ -1,29 +1,29 @@
 # 📈 The Model Verse — YouTube Performance & Retention Intelligence
 
-**Generated:** 2026-10-10T14:43:53.266064+00:00  
-**Videos Analyzed:** 50 | **Autopsies Performed:** 15  
+**Generated:** 2026-10-10T15:00:49.369259+00:00  
+**Videos Analyzed:** 50 | **Autopsies Performed:** 16  
 **Top Domain:** `mechanistic_interpretability`  
 **Recommended Pacing:** `1.12x` TTS Speed | Hook $\le$ `7.2s`
 
 ---
 
-## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 134)
+## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 137)
 The autonomous pipeline continuously evolves these visual and narrative recipes based on real viewer drop-offs:
 
 | Visual Blueprint | Evolutionary Multiplier | Avg Retention | Win/Loss Track | Action Directive |
 | :--- | :--- | :--- | :--- | :--- |
-| `bespoke_code` | **1.5x** | 58.81% | 1533W / 138L | Auto-discovered layout. |
-| `comparison_side_by_side` | **1.5x** | 48.47% | 98W / 0L | Auto-discovered layout. |
-| `chalkboard_code_block` | **1.5x** | 63.29% | 306W / 0L | Auto-discovered layout. |
-| `barrier_separation` | **1.5x** | 70.75% | 109W / 0L | Auto-discovered layout. |
-| `tree_hierarchy` | **1.5x** | 63.07% | 76W / 0L | Auto-discovered layout. |
-| `ast_tree` | **1.5x** | 66.11% | 68W / 0L | Auto-discovered layout. |
-| `chalkboard_code` | **1.5x** | 53.7% | 170W / 0L | Auto-discovered layout. |
-| `horizontal_race_bars` | **1.5x** | 61.1% | 217W / 0L | Auto-discovered layout. |
-| `paper_figure` | **1.5x** | 67.08% | 120W / 0L | Auto-discovered layout. |
-| `convergence_funnel` | **1.5x** | 58.96% | 61W / 0L | Auto-discovered layout. |
-| `side_by_side` | **1.5x** | 48.07% | 30W / 0L | Auto-discovered layout. |
-| `split_flow` | **1.5x** | 77.06% | 39W / 0L | Auto-discovered layout. |
+| `bespoke_code` | **1.5x** | 58.81% | 1560W / 142L | Auto-discovered layout. |
+| `chalkboard_code_block` | **1.5x** | 63.19% | 314W / 0L | Auto-discovered layout. |
+| `barrier_separation` | **1.5x** | 71.41% | 111W / 0L | Auto-discovered layout. |
+| `tree_hierarchy` | **1.5x** | 63.09% | 77W / 0L | Auto-discovered layout. |
+| `ast_tree` | **1.5x** | 66.13% | 70W / 0L | Auto-discovered layout. |
+| `chalkboard_code` | **1.5x** | 53.7% | 175W / 0L | Auto-discovered layout. |
+| `horizontal_race_bars` | **1.5x** | 60.92% | 225W / 0L | Auto-discovered layout. |
+| `paper_figure` | **1.5x** | 67.4% | 125W / 0L | Auto-discovered layout. |
+| `convergence_funnel` | **1.5x** | 58.99% | 64W / 0L | Auto-discovered layout. |
+| `side_by_side` | **1.5x** | 48.07% | 31W / 0L | Auto-discovered layout. |
+| `split_flow` | **1.5x** | 76.31% | 43W / 0L | Auto-discovered layout. |
+| `comparison_side_by_side` | **1.47x** | 48.46% | 99W / 1L | Auto-discovered layout. |
 | `BlueprintHorizontalRaceBars` | **1.3x** | 78.5% | 6W / 0L | PRIORITIZE for Act 4 benchmark showdown. |
 | `catalog_routing` | **1.3x** | 70.1% | 6W / 0L | Auto-discovered layout. |
 | `BlueprintSplitFlow` | **1.25x** | 76.0% | 5W / 1L | EXCELLENT for bifurcated flows, dual-pass verification, or router dispatch. |
@@ -34,7 +34,7 @@ The autonomous pipeline continuously evolves these visual and narrative recipes 
 | `vector_flow_field` | **0.92x** | 50.0% | 0W / 1L | Auto-discovered layout. |
 | `layer_stack` | **0.76x** | 50.0% | 0W / 3L | Auto-discovered layout. |
 | `generic_sine_wave` | **0.5x** | 46.0% | 0W / 4L | BANNED: Flat generic animation trigger. Causes immediate cognitive drop-off. |
-| `grid_memory` | **0.45x** | 58.28% | 71W / 52L | Auto-discovered layout. |
+| `grid_memory` | **0.45x** | 58.28% | 73W / 54L | Auto-discovered layout. |
 
 **Top Performing Hook Archetype:** `ARCHITECTURE_BREAKDOWN` — *Auto-discovered hook archetype: architecture_breakdown*
 
@@ -112,6 +112,6 @@ The paper selector (`daily_shorts_daemon.py`) automatically scales candidate sel
 
 ## 🧠 Algorithmic Action Directives
 1. **Prioritize mechanistic_interpretability**: Audience engagement is highest here; prioritize papers with concrete programmatic or physical analogies.
-2. **Prioritize High-Retention Blueprints**: Favor `bespoke_code, comparison_side_by_side, chalkboard_code_block` in visual storyboarding.
+2. **Prioritize High-Retention Blueprints**: Favor `bespoke_code, chalkboard_code_block, barrier_separation` in visual storyboarding.
 3. **Dynamic TTS Pacing**: Set narration delivery speed to `1.12x` to minimize early swipe-away drop-off.
 4. **Hook Target**: Cap the opening hook beat at `7.2s` before transitioning into the physical analogy.
