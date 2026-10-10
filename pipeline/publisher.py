@@ -400,7 +400,9 @@ def main():
     parser.add_argument("--title", help="Optional title override")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
     parser.add_argument("--instagram", action="store_true", help="Also publish as Instagram Reel via Meta Graph API")
+    parser.add_argument("--x", "--twitter", dest="publish_x", action="store_true", help="Also publish as 4-tweet video thread to X (Twitter)")
     parser.add_argument("--dry-run", action="store_true", help="Print generated metadata, title, description, and tags without uploading")
+
     parser.add_argument("--auth-only", action="store_true", help="Run interactive OAuth2 flow and exit")
     args = parser.parse_args()
 
@@ -461,6 +463,19 @@ def main():
             print(f"💬 FIRST COMMENT:\n{ig_post['first_comment']}\n")
             print("=======================================================\n")
 
+        if args.publish_x:
+            from pipeline.x_thread_generator import generate_x_thread, calculate_tweet_length
+            x_tweets = generate_x_thread(spec)
+            print("=======================================================")
+            print("🔍 X (TWITTER) THREAD PREVIEW (DRY-RUN)")
+            print("=======================================================")
+            for i, tw in enumerate(x_tweets, 1):
+                eff_len = calculate_tweet_length(tw)
+                attached = " [📹 Attached Video]" if i == 1 else ""
+                print(f"\n--- TWEET {i}/4 ({eff_len}/280 chars){attached} ---")
+                print(tw)
+            print("\n=======================================================\n")
+
         if not args.video:
             print("💡 Tip: Provide --video <path.mp4> to execute live upload.")
         return
@@ -476,6 +491,15 @@ def main():
             instagram_publisher.publish_reel(video_path, ig_post_data)
         except Exception as e_ig:
             print(f"⚠️ Instagram publication skipped or failed: {e_ig}")
+
+    if args.publish_x:
+        from pipeline.x_publisher import x_publisher
+        print("\n🧵 Cross-posting to X (Twitter) as a 4-tweet video thread...")
+        try:
+            x_publisher.publish_video_thread(video_path, spec)
+        except Exception as e_x:
+            print(f"⚠️ X publication skipped or failed: {e_x}")
+
 
 
 if __name__ == "__main__":
