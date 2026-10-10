@@ -43,8 +43,10 @@ def auto_produce(
     provider: Optional[str] = None,
     language: Optional[str] = None,
     skip_repair: bool = False,
-    publish_instagram: bool = False
+    publish_instagram: bool = False,
+    publish_x: bool = False
 ) -> str:
+
     if language in ("both", "all", "dual"):
         print("\n=======================================================")
         print("🌐 DUAL-LANGUAGE PRODUCTION ENGINE: ENGLISH + HINDI")
@@ -67,7 +69,9 @@ def auto_produce(
             paper_meta=paper_meta,
             provider="elevenlabs",
             language="en",
-            skip_repair=skip_repair
+            skip_repair=skip_repair,
+            publish_instagram=publish_instagram,
+            publish_x=publish_x
         )
         # Locate the template generated or used by the English pass
         hi_template = template
@@ -99,8 +103,11 @@ def auto_produce(
             paper_meta=paper_meta,
             provider="sarvam",
             language="hi",
-            skip_repair=skip_repair
+            skip_repair=skip_repair,
+            publish_instagram=publish_instagram,
+            publish_x=publish_x
         )
+
         print("\n🎉 Both English and Hindi videos produced and processed successfully!")
         return json.dumps({"en": res_en, "hi": res_hi})
 
@@ -510,8 +517,32 @@ def auto_produce(
             except Exception as e_ig:
                 print(f"\n⚠️ Instagram automated publish skipped or failed: {e_ig}")
 
+    # Step 9: Automated X (Twitter) Video Thread Distribution
+    should_publish_x = publish_x or (publish and os.getenv("PUBLISH_TWITTER", os.getenv("PUBLISH_X", "false")).lower() == "true")
+    if should_publish_x or dry_run_publish:
+        from pipeline.x_thread_generator import generate_x_thread, calculate_tweet_length
+        from pipeline.x_publisher import x_publisher
+        print("\n🧵 Step 9: X (Twitter) 4-tweet video thread automated distribution...")
+        x_tweets = generate_x_thread(spec)
+        if dry_run_publish:
+            print("\n=======================================================")
+            print("🔍 X (TWITTER) THREAD PREVIEW (DRY-RUN)")
+            print("=======================================================\n")
+            for i, tw in enumerate(x_tweets, 1):
+                eff_len = calculate_tweet_length(tw)
+                attached = " [📹 Attached Video]" if i == 1 else ""
+                print(f"--- TWEET {i}/4 ({eff_len}/280 chars){attached} ---")
+                print(f"{tw}\n")
+            print("=======================================================\n")
+        elif should_publish_x:
+            try:
+                x_publisher.publish_video_thread(final_output, spec)
+            except Exception as e_x:
+                print(f"\n⚠️ X automated publish skipped or failed: {e_x}")
+
     print("\n=======================================================")
     print("🎉 AUTONOMOUS VIDEO PRODUCTION COMPLETE!")
+
     print(f"🎥 Video: {final_output}")
     print(f"🖼️ Frames: {frames_dir}/")
     print("=======================================================\n")
@@ -543,6 +574,7 @@ def main():
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
     parser.add_argument("--publish-instagram", action="store_true", help="Also publish produced video as an Instagram Reel via Meta Graph API")
+    parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Also publish produced video as a 4-tweet thread to X (Twitter)")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
@@ -578,8 +610,10 @@ def main():
         provider=args.provider,
         language=args.lang,
         skip_repair=args.skip_repair,
-        publish_instagram=args.publish_instagram
+        publish_instagram=args.publish_instagram,
+        publish_x=args.publish_x
     )
+
 
 if __name__ == "__main__":
     main()

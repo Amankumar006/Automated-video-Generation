@@ -115,8 +115,19 @@ INSTAGRAM_API_VERSION = os.environ.get("INSTAGRAM_API_VERSION", "v21.0")
 INSTAGRAM_GRAPH_URL = f"https://graph.facebook.com/{INSTAGRAM_API_VERSION}"
 INSTAGRAM_RUPLOAD_URL = f"https://rupload.facebook.com/ig-video-upload/{INSTAGRAM_API_VERSION}"
 
+# Twitter / X API Configuration (OAuth 1.0a User Context & API v2)
+TWITTER_API_KEY = os.environ.get("TWITTER_API_KEY", "")
+TWITTER_API_SECRET = os.environ.get("TWITTER_API_SECRET", "")
+TWITTER_ACCESS_TOKEN = os.environ.get("TWITTER_ACCESS_TOKEN", "")
+TWITTER_ACCESS_TOKEN_SECRET = os.environ.get("TWITTER_ACCESS_TOKEN_SECRET", "")
+TWITTER_CLIENT_ID = os.environ.get("TWITTER_CLIENT_ID", "")
+TWITTER_CLIENT_SECRET = os.environ.get("TWITTER_CLIENT_SECRET", "")
+TWITTER_API_BASE_URL = "https://api.twitter.com"
+TWITTER_UPLOAD_BASE_URL = "https://upload.twitter.com/1.1/media/upload.json"
+
 # Background Music & Dynamic Ducking
 ENABLE_BG_MUSIC = True
 DEFAULT_DUCK_GAIN = 0.10    # -20 dB during speech
 DEFAULT_NORMAL_GAIN = 0.32  # -10 dB during pauses & outro
 CUSTOM_BG_MUSIC_PATH = str(WORKSPACE_ROOT / "public" / "audio" / "bg_music.wav")
+
