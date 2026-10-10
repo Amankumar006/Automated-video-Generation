@@ -108,6 +108,13 @@ YOUTUBE_TOKEN_PATH = os.environ.get(
 )
 YOUTUBE_DEFAULT_CATEGORY = "28"  # Science & Technology
 
+# Instagram Meta Graph API Configuration
+INSTAGRAM_ACCOUNT_ID = os.environ.get("INSTAGRAM_ACCOUNT_ID", "17841425926885618")
+INSTAGRAM_ACCESS_TOKEN = os.environ.get("INSTAGRAM_ACCESS_TOKEN", "")
+INSTAGRAM_API_VERSION = os.environ.get("INSTAGRAM_API_VERSION", "v21.0")
+INSTAGRAM_GRAPH_URL = f"https://graph.facebook.com/{INSTAGRAM_API_VERSION}"
+INSTAGRAM_RUPLOAD_URL = f"https://rupload.facebook.com/ig-video-upload/{INSTAGRAM_API_VERSION}"
+
 # Background Music & Dynamic Ducking
 ENABLE_BG_MUSIC = True
 DEFAULT_DUCK_GAIN = 0.10    # -20 dB during speech

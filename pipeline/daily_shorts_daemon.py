@@ -231,12 +231,13 @@ Return ONLY valid JSON matching this schema:
 class DailyShortsDaemon:
     """Autonomous scheduler and engine for daily AI Shorts production."""
 
-    def __init__(self, quality: str = "-qh", privacy: str = "public"):
+    def __init__(self, quality: str = "-qh", privacy: str = "public", publish_instagram: bool = False):
         if quality and not quality.startswith("-"):
             self.quality = f"-{quality}"
         else:
             self.quality = quality or "-qh"
         self.privacy = privacy
+        self.publish_instagram = publish_instagram or (os.getenv("PUBLISH_INSTAGRAM", "false").lower() == "true")
         self.critic = ScriptCritic()
 
     def run_daily_cycle(
@@ -444,7 +445,8 @@ class DailyShortsDaemon:
                     privacy=self.privacy,
                     paper_meta=top_paper,
                     provider=active_prov,
-                    voice=active_voice
+                    voice=active_voice,
+                    publish_instagram=self.publish_instagram
                 )
             except Exception as prod_err:
                 print(f"⚠️ Production error for {arxiv_id}: {prod_err}")
@@ -573,11 +575,12 @@ def main():
     parser.add_argument("--blog", type=str, default="", help="Specific official blog post ID to produce (e.g. blog_openai_o3_mini, blog_claude_3_7_sonnet)")
     parser.add_argument("--news", type=str, default="", help="Alias for --blog")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
+    parser.add_argument("--publish-instagram", action="store_true", help="Cross-post produced videos to Instagram Reels via Meta Graph API")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
     args = parser.parse_args()
 
-    daemon = DailyShortsDaemon(quality=args.quality, privacy=args.privacy)
+    daemon = DailyShortsDaemon(quality=args.quality, privacy=args.privacy, publish_instagram=args.publish_instagram)
 
     if args.dry_run:
         daemon.run_daily_cycle(

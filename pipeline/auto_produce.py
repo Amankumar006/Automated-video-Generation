@@ -42,7 +42,8 @@ def auto_produce(
     paper_meta: Optional[Dict[str, Any]] = None,
     provider: Optional[str] = None,
     language: Optional[str] = None,
-    skip_repair: bool = False
+    skip_repair: bool = False,
+    publish_instagram: bool = False
 ) -> str:
     if language in ("both", "all", "dual"):
         print("\n=======================================================")
@@ -488,6 +489,27 @@ def auto_produce(
                 except Exception:
                     pass
 
+    # Step 8: Automated Instagram Reels Distribution
+    should_publish_ig = publish_instagram or (publish and os.getenv("PUBLISH_INSTAGRAM", "false").lower() == "true")
+    if should_publish_ig or dry_run_publish:
+        from pipeline.instagram_caption_generator import generate_instagram_post, format_full_caption_with_hashtags
+        from pipeline.instagram_publisher import instagram_publisher
+        print("\n📸 Step 8: Instagram Reels automated distribution...")
+        ig_post = generate_instagram_post(spec)
+        if dry_run_publish:
+            print("\n=======================================================")
+            print("🔍 INSTAGRAM REELS PREVIEW (DRY-RUN)")
+            print("=======================================================\n")
+            print(f"🪝 HOOK: {ig_post['hook']}")
+            print(f"📝 CAPTION:\n{format_full_caption_with_hashtags(ig_post)}\n")
+            print(f"💬 FIRST COMMENT: {ig_post['first_comment']}")
+            print("=======================================================\n")
+        elif should_publish_ig:
+            try:
+                instagram_publisher.publish_reel(final_output, ig_post)
+            except Exception as e_ig:
+                print(f"\n⚠️ Instagram automated publish skipped or failed: {e_ig}")
+
     print("\n=======================================================")
     print("🎉 AUTONOMOUS VIDEO PRODUCTION COMPLETE!")
     print(f"🎥 Video: {final_output}")
@@ -520,6 +542,7 @@ def main():
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
     parser.add_argument("--publish", action="store_true", help="Upload produced video to YouTube Shorts")
+    parser.add_argument("--publish-instagram", action="store_true", help="Also publish produced video as an Instagram Reel via Meta Graph API")
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
@@ -554,7 +577,8 @@ def main():
         enable_music=not args.no_music,
         provider=args.provider,
         language=args.lang,
-        skip_repair=args.skip_repair
+        skip_repair=args.skip_repair,
+        publish_instagram=args.publish_instagram
     )
 
 if __name__ == "__main__":
