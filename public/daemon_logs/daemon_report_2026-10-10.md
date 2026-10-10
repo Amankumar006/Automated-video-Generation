@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-10 | **Timestamp:** 2026-10-10 06:28:14 UTC
+**Date:** 2026-10-10 | **Timestamp:** 2026-10-10 07:27:23 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Opera: A Verbal Critic Framework for Long-horizon Coding Agents
-- **arXiv ID:** [2609.33987](https://arxiv.org/abs/2609.33987)
-- **Domain Taxonomy:** `robotics_tamp` (1.86x velocity)
+### Reel 1: U-Space: Uncovering When and Why Uncertainty Arises in Language Models
+- **arXiv ID:** [2610.09087](https://arxiv.org/abs/2610.09087)
+- **Domain Taxonomy:** `mechanistic_interpretability` (1.55x velocity)
 - **Category:** `benchmark_news`
-- **Editorial Hook:** *Why do coding agents get dumber the longer they work, and can a 'verbal critic' fix their mid-project burnout?*
-- **Everyday Analogy:** *A mountain climber receiving corrections from a ground-based guide who only speaks up when the climber is truly veering off-course.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_opera_verbal_critic_coding_agents_benchmark_news.mp4`
+- **Editorial Hook:** *Ever wonder if your AI is lying, or just genuinely confused?*
+- **Everyday Analogy:** *A dimmer switch on a lightbulb that flickers right before the filament burns out.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_u_space_uncertainty_quantification_benchmark_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
