@@ -1,29 +1,29 @@
 # 📈 The Model Verse — YouTube Performance & Retention Intelligence
 
-**Generated:** 2026-10-10T11:23:09.401245+00:00  
+**Generated:** 2026-10-10T14:43:53.266064+00:00  
 **Videos Analyzed:** 50 | **Autopsies Performed:** 15  
 **Top Domain:** `mechanistic_interpretability`  
 **Recommended Pacing:** `1.12x` TTS Speed | Hook $\le$ `7.2s`
 
 ---
 
-## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 131)
+## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 134)
 The autonomous pipeline continuously evolves these visual and narrative recipes based on real viewer drop-offs:
 
 | Visual Blueprint | Evolutionary Multiplier | Avg Retention | Win/Loss Track | Action Directive |
 | :--- | :--- | :--- | :--- | :--- |
-| `bespoke_code` | **1.5x** | 53.71% | 1506W / 134L | Auto-discovered layout. |
-| `comparison_side_by_side` | **1.5x** | 48.48% | 97W / 0L | Auto-discovered layout. |
-| `chalkboard_code_block` | **1.5x** | 60.75% | 300W / 0L | Auto-discovered layout. |
-| `barrier_separation` | **1.5x** | 69.18% | 107W / 0L | Auto-discovered layout. |
-| `tree_hierarchy` | **1.5x** | 63.05% | 75W / 0L | Auto-discovered layout. |
-| `ast_tree` | **1.5x** | 66.05% | 66W / 0L | Auto-discovered layout. |
-| `chalkboard_code` | **1.5x** | 53.71% | 165W / 0L | Auto-discovered layout. |
-| `horizontal_race_bars` | **1.5x** | 62.49% | 210W / 0L | Auto-discovered layout. |
-| `paper_figure` | **1.5x** | 64.07% | 116W / 0L | Auto-discovered layout. |
-| `convergence_funnel` | **1.5x** | 58.83% | 58W / 0L | Auto-discovered layout. |
-| `side_by_side` | **1.5x** | 48.07% | 29W / 0L | Auto-discovered layout. |
-| `split_flow` | **1.5x** | 76.35% | 36W / 0L | Auto-discovered layout. |
+| `bespoke_code` | **1.5x** | 58.81% | 1533W / 138L | Auto-discovered layout. |
+| `comparison_side_by_side` | **1.5x** | 48.47% | 98W / 0L | Auto-discovered layout. |
+| `chalkboard_code_block` | **1.5x** | 63.29% | 306W / 0L | Auto-discovered layout. |
+| `barrier_separation` | **1.5x** | 70.75% | 109W / 0L | Auto-discovered layout. |
+| `tree_hierarchy` | **1.5x** | 63.07% | 76W / 0L | Auto-discovered layout. |
+| `ast_tree` | **1.5x** | 66.11% | 68W / 0L | Auto-discovered layout. |
+| `chalkboard_code` | **1.5x** | 53.7% | 170W / 0L | Auto-discovered layout. |
+| `horizontal_race_bars` | **1.5x** | 61.1% | 217W / 0L | Auto-discovered layout. |
+| `paper_figure` | **1.5x** | 67.08% | 120W / 0L | Auto-discovered layout. |
+| `convergence_funnel` | **1.5x** | 58.96% | 61W / 0L | Auto-discovered layout. |
+| `side_by_side` | **1.5x** | 48.07% | 30W / 0L | Auto-discovered layout. |
+| `split_flow` | **1.5x** | 77.06% | 39W / 0L | Auto-discovered layout. |
 | `BlueprintHorizontalRaceBars` | **1.3x** | 78.5% | 6W / 0L | PRIORITIZE for Act 4 benchmark showdown. |
 | `catalog_routing` | **1.3x** | 70.1% | 6W / 0L | Auto-discovered layout. |
 | `BlueprintSplitFlow` | **1.25x** | 76.0% | 5W / 1L | EXCELLENT for bifurcated flows, dual-pass verification, or router dispatch. |
@@ -34,7 +34,7 @@ The autonomous pipeline continuously evolves these visual and narrative recipes 
 | `vector_flow_field` | **0.92x** | 50.0% | 0W / 1L | Auto-discovered layout. |
 | `layer_stack` | **0.76x** | 50.0% | 0W / 3L | Auto-discovered layout. |
 | `generic_sine_wave` | **0.5x** | 46.0% | 0W / 4L | BANNED: Flat generic animation trigger. Causes immediate cognitive drop-off. |
-| `grid_memory` | **0.45x** | 58.28% | 69W / 50L | Auto-discovered layout. |
+| `grid_memory` | **0.45x** | 58.28% | 71W / 52L | Auto-discovered layout. |
 
 **Top Performing Hook Archetype:** `ARCHITECTURE_BREAKDOWN` — *Auto-discovered hook archetype: architecture_breakdown*
 
@@ -45,10 +45,10 @@ The paper selector (`daily_shorts_daemon.py`) automatically scales candidate sel
 
 | Research Domain | Selection Multiplier | Avg Views | Sample Size |
 | :--- | :--- | :--- | :--- |
-| `hardware_efficiency` | **1.03x** | 370.3 | 35 videos |
 | `robotics_tamp` | **1.41x** | 504.5 | 8 videos |
-| `multimodal_diffusion` | **0.6x** | 64.5 | 4 videos |
+| `hardware_efficiency` | **1.03x** | 370.3 | 35 videos |
 | `mechanistic_interpretability` | **1.53x** | 547.0 | 1 videos |
+| `multimodal_diffusion` | **0.6x** | 64.5 | 4 videos |
 | `reasoning_models` | **0.6x** | 61.0 | 2 videos |
 
 ---

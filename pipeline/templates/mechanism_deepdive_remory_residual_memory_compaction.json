@@ -1,0 +1,1774 @@
+{
+  "id": "remory_residual_memory_compaction",
+  "title": "REMORY: Learning Residual Memory for Context Compaction",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "CONTEXT COMPACTION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Why do 50% of your GPU cycles waste compute before REMORY fixes the bottleneck?",
+      "visual_focus": "A blueprint fading into a pile of rubble",
+      "highlight_words": {
+        "hallucinating": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "LLM",
+        "action_verb": "fails",
+        "direct_object": "context",
+        "anchor_word": "hallucinating",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "comparison_side_by_side",
+        "title": "THE CONTEXT COLLAPSE",
+        "sub": "Finite windows destroy long-horizon reasoning",
+        "accent_color": "#EF4444",
+        "params": {
+          "col_a_title": "FULL EXECUTION TRACE",
+          "col_a_stat": "100% TOKENS",
+          "col_b_title": "TEXT-ONLY SUMMARY",
+          "col_b_stat": "LOSS OF STATE",
+          "col_a_specs": [
+            "Unbounded Context Growth",
+            "Exact Environment Return",
+            "High KV-Cache Footprint"
+          ],
+          "col_b_specs": [
+            "Aggressive Information Loss",
+            "Purged Error Callstacks",
+            "Catastrophic Tool Loops"
+          ]
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 76,
+      "hook_band": "STRONG",
+      "hook_formula": "The Question",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "comparison_side_by_side",
+        "title": "THE CONTEXT COLLAPSE",
+        "sub": "Finite windows destroy long-horizon reasoning",
+        "accent_color": "#EF4444",
+        "col_a_title": "FULL EXECUTION TRACE",
+        "col_a_stat": "100% TOKENS",
+        "col_b_title": "TEXT-ONLY SUMMARY",
+        "col_b_stat": "LOSS OF STATE",
+        "col_a_specs": [
+          "Unbounded Context Growth",
+          "Exact Environment Return",
+          "High KV-Cache Footprint"
+        ],
+        "col_b_specs": [
+          "Aggressive Information Loss",
+          "Purged Error Callstacks",
+          "Catastrophic Tool Loops"
+        ]
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 4.82,
+      "duration": 4.82,
+      "word_timings": [
+        {
+          "word": "Why",
+          "clean_word": "why",
+          "phonemes": "w\u02c8a\u026a",
+          "start": 0.01,
+          "end": 0.17,
+          "duration": 0.16,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "do",
+          "clean_word": "do",
+          "phonemes": "d\u02c8u\u02d0",
+          "start": 0.17,
+          "end": 0.485,
+          "duration": 0.315,
+          "frame_ahead_trigger": 0.13
+        },
+        {
+          "word": "50%",
+          "clean_word": "50",
+          "phonemes": "f\u02c8\u026afti",
+          "start": 0.485,
+          "end": 0.805,
+          "duration": 0.32,
+          "frame_ahead_trigger": 0.445
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 0.805,
+          "end": 0.832,
+          "duration": 0.027,
+          "frame_ahead_trigger": 0.765
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.832,
+          "end": 1.015,
+          "duration": 0.183,
+          "frame_ahead_trigger": 0.792
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 1.015,
+          "end": 1.685,
+          "duration": 0.67,
+          "frame_ahead_trigger": 0.975
+        },
+        {
+          "word": "cycles",
+          "clean_word": "cycles",
+          "phonemes": "s\u02c8a\u026ak\u0259lz",
+          "start": 1.685,
+          "end": 2.115,
+          "duration": 0.43,
+          "frame_ahead_trigger": 1.645
+        },
+        {
+          "word": "waste",
+          "clean_word": "waste",
+          "phonemes": "w\u02c8e\u026ast",
+          "start": 2.115,
+          "end": 2.455,
+          "duration": 0.34,
+          "frame_ahead_trigger": 2.075
+        },
+        {
+          "word": "compute",
+          "clean_word": "compute",
+          "phonemes": "k\u0259mpj\u02c8u\u02d0t",
+          "start": 2.455,
+          "end": 2.885,
+          "duration": 0.43,
+          "frame_ahead_trigger": 2.415
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 2.885,
+          "end": 3.165,
+          "duration": 0.28,
+          "frame_ahead_trigger": 2.845
+        },
+        {
+          "word": "REMORY",
+          "clean_word": "remory",
+          "phonemes": "\u0279\u1d7bm\u02c8\u0254\u02d0\u0279i",
+          "start": 3.165,
+          "end": 3.645,
+          "duration": 0.48,
+          "frame_ahead_trigger": 3.125
+        },
+        {
+          "word": "fixes",
+          "clean_word": "fixes",
+          "phonemes": "f\u02c8\u026aks\u1d7bz",
+          "start": 3.645,
+          "end": 3.875,
+          "duration": 0.23,
+          "frame_ahead_trigger": 3.605
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.875,
+          "end": 4.065,
+          "duration": 0.19,
+          "frame_ahead_trigger": 3.835
+        },
+        {
+          "word": "bottleneck?",
+          "clean_word": "bottleneck",
+          "phonemes": "b\u02c8\u0251\u02d0t\u0259ln\u02cc\u025bk",
+          "start": 4.065,
+          "end": 4.635,
+          "duration": 0.57,
+          "frame_ahead_trigger": 4.025
+        }
+      ],
+      "audio_duration": 4.82,
+      "slot_duration": 4.97
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is the 'Summary Gap'. Textual summaries lose the structural integrity required for complex, long-horizon decision making.",
+      "visual_focus": "A data stream snapping under pressure",
+      "highlight_words": {
+        "Summary Gap": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Summary",
+        "action_verb": "leaks",
+        "direct_object": "information",
+        "anchor_word": "Gap",
+        "semantic_role": "bottleneck_identification"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE SUMMARY GAP",
+        "sub": "Information loss at the bottleneck",
+        "accent_color": "#EF4444",
+        "params": {
+          "input_label": "Execution History H",
+          "router_label": "Text Compactor",
+          "branch_a_label": "Textual Summary S",
+          "branch_a_sub": "Preserved Coarse Goals",
+          "branch_b_label": "Discarded Callstacks",
+          "branch_b_sub": "Vanished Tool Arguments"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "split_flow",
+        "title": "THE SUMMARY GAP",
+        "sub": "Information loss at the bottleneck",
+        "accent_color": "#EF4444",
+        "input_label": "Execution History H",
+        "router_label": "Text Compactor",
+        "branch_a_label": "Textual Summary S",
+        "branch_a_sub": "Preserved Coarse Goals",
+        "branch_b_label": "Discarded Callstacks",
+        "branch_b_sub": "Vanished Tool Arguments"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 4.97,
+      "end": 11.73,
+      "duration": 6.76,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 4.976,
+          "end": 5.071,
+          "duration": 0.095,
+          "frame_ahead_trigger": 5.086
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.071,
+          "end": 5.386,
+          "duration": 0.315,
+          "frame_ahead_trigger": 5.181
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.386,
+          "end": 5.541,
+          "duration": 0.155,
+          "frame_ahead_trigger": 5.496
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.541,
+          "end": 5.626,
+          "duration": 0.085,
+          "frame_ahead_trigger": 5.651
+        },
+        {
+          "word": "'Summary",
+          "clean_word": "summary",
+          "phonemes": "s\u02c8\u028cm\u025a\u0279i",
+          "start": 5.626,
+          "end": 6.101,
+          "duration": 0.475,
+          "frame_ahead_trigger": 5.736
+        },
+        {
+          "word": "Gap'.",
+          "clean_word": "gap",
+          "phonemes": "\u0261\u02c8\u00e6p",
+          "start": 6.101,
+          "end": 6.222,
+          "duration": 0.121,
+          "frame_ahead_trigger": 6.211
+        },
+        {
+          "word": "Textual",
+          "clean_word": "textual",
+          "phonemes": "t\u02c8\u025bkst\u0283u\u02d0\u0259l",
+          "start": 6.222,
+          "end": 6.741,
+          "duration": 0.519,
+          "frame_ahead_trigger": 6.332
+        },
+        {
+          "word": "summaries",
+          "clean_word": "summaries",
+          "phonemes": "s\u02c8\u028cm\u025a\u0279iz",
+          "start": 6.741,
+          "end": 7.256,
+          "duration": 0.515,
+          "frame_ahead_trigger": 6.851
+        },
+        {
+          "word": "lose",
+          "clean_word": "lose",
+          "phonemes": "l\u02c8u\u02d0z",
+          "start": 7.256,
+          "end": 7.523,
+          "duration": 0.266,
+          "frame_ahead_trigger": 7.366
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 7.523,
+          "end": 7.666,
+          "duration": 0.144,
+          "frame_ahead_trigger": 7.633
+        },
+        {
+          "word": "structural",
+          "clean_word": "structural",
+          "phonemes": "st\u0279\u02c8\u028ckt\u0283\u025a\u0279\u0259l",
+          "start": 7.666,
+          "end": 8.276,
+          "duration": 0.61,
+          "frame_ahead_trigger": 7.776
+        },
+        {
+          "word": "integrity",
+          "clean_word": "integrity",
+          "phonemes": "\u026ant\u02c8\u025b\u0261\u0279\u1d7b\u027ei",
+          "start": 8.276,
+          "end": 8.856,
+          "duration": 0.58,
+          "frame_ahead_trigger": 8.386
+        },
+        {
+          "word": "required",
+          "clean_word": "required",
+          "phonemes": "\u0279\u1d7bkw\u02c8a\u026a\u025ad",
+          "start": 8.856,
+          "end": 9.311,
+          "duration": 0.454,
+          "frame_ahead_trigger": 8.966
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 9.311,
+          "end": 9.491,
+          "duration": 0.181,
+          "frame_ahead_trigger": 9.421
+        },
+        {
+          "word": "complex,",
+          "clean_word": "complex",
+          "phonemes": "k\u02c8\u0251\u02d0mpl\u025bks",
+          "start": 9.491,
+          "end": 10.056,
+          "duration": 0.565,
+          "frame_ahead_trigger": 9.601
+        },
+        {
+          "word": "long-horizon",
+          "clean_word": "longhorizon",
+          "phonemes": "l\u02cc\u0254\u014bh\u025a\u0279\u02c8a\u026az\u0259n",
+          "start": 10.056,
+          "end": 10.761,
+          "duration": 0.705,
+          "frame_ahead_trigger": 10.166
+        },
+        {
+          "word": "decision",
+          "clean_word": "decision",
+          "phonemes": "d\u1d7bs\u02c8\u026a\u0292\u0259n",
+          "start": 10.761,
+          "end": 11.186,
+          "duration": 0.425,
+          "frame_ahead_trigger": 10.871
+        },
+        {
+          "word": "making.",
+          "clean_word": "making",
+          "phonemes": "m\u02c8e\u026ak\u026a\u014b",
+          "start": 11.186,
+          "end": 11.586,
+          "duration": 0.4,
+          "frame_ahead_trigger": 11.296
+        }
+      ],
+      "audio_duration": 6.76,
+      "slot_duration": 6.91
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter REMORY. It treats memory as a residual connection, splicing soft tokens directly after the summary to restore latent signals.",
+      "visual_focus": "Tokens snapping into a sequence",
+      "highlight_words": {
+        "REMORY": "#10B981"
+      },
+      "svo_action": {
+        "subject": "REMORY",
+        "action_verb": "injects",
+        "direct_object": "latent_signals",
+        "anchor_word": "residual",
+        "semantic_role": "architectural_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "REMORY ARCHITECTURE",
+        "sub": "Tokens snapping into a sequence",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.png",
+          "arxiv_id": "2610.11287",
+          "title": "REMORY ARCHITECTURE",
+          "sub": "Tokens snapping into a sequence",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Headline Benchmarks",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.png",
+        "arxiv_id": "2610.11287",
+        "title": "REMORY ARCHITECTURE",
+        "sub": "Tokens snapping into a sequence",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Headline Benchmarks",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 11.88,
+      "end": 19.07,
+      "duration": 7.19,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 11.894,
+          "end": 12.214,
+          "duration": 0.32,
+          "frame_ahead_trigger": 12.154
+        },
+        {
+          "word": "REMORY.",
+          "clean_word": "remory",
+          "phonemes": "\u0279\u1d7bm\u02c8\u0254\u02d0\u0279i",
+          "start": 12.214,
+          "end": 12.624,
+          "duration": 0.41,
+          "frame_ahead_trigger": 12.474
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 12.624,
+          "end": 12.737,
+          "duration": 0.112,
+          "frame_ahead_trigger": 12.884
+        },
+        {
+          "word": "treats",
+          "clean_word": "treats",
+          "phonemes": "t\u0279\u02c8i\u02d0ts",
+          "start": 12.737,
+          "end": 13.184,
+          "duration": 0.447,
+          "frame_ahead_trigger": 12.997
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 13.184,
+          "end": 13.419,
+          "duration": 0.235,
+          "frame_ahead_trigger": 13.444
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 13.419,
+          "end": 13.689,
+          "duration": 0.27,
+          "frame_ahead_trigger": 13.679
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 13.689,
+          "end": 13.799,
+          "duration": 0.11,
+          "frame_ahead_trigger": 13.949
+        },
+        {
+          "word": "residual",
+          "clean_word": "residual",
+          "phonemes": "\u0279\u1d7bs\u02c8\u026ad\u0292u\u02d0\u0259l",
+          "start": 13.799,
+          "end": 14.389,
+          "duration": 0.59,
+          "frame_ahead_trigger": 14.059
+        },
+        {
+          "word": "connection,",
+          "clean_word": "connection",
+          "phonemes": "k\u0259n\u02c8\u025bk\u0283\u0259n",
+          "start": 14.389,
+          "end": 14.928,
+          "duration": 0.539,
+          "frame_ahead_trigger": 14.649
+        },
+        {
+          "word": "splicing",
+          "clean_word": "splicing",
+          "phonemes": "spl\u02c8a\u026as\u026a\u014b",
+          "start": 14.928,
+          "end": 15.489,
+          "duration": 0.561,
+          "frame_ahead_trigger": 15.188
+        },
+        {
+          "word": "soft",
+          "clean_word": "soft",
+          "phonemes": "s\u02c8\u0254ft",
+          "start": 15.489,
+          "end": 15.719,
+          "duration": 0.23,
+          "frame_ahead_trigger": 15.749
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 15.719,
+          "end": 16.194,
+          "duration": 0.475,
+          "frame_ahead_trigger": 15.979
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 16.194,
+          "end": 16.704,
+          "duration": 0.51,
+          "frame_ahead_trigger": 16.454
+        },
+        {
+          "word": "after",
+          "clean_word": "after",
+          "phonemes": "\u02c8\u00e6ft\u025a",
+          "start": 16.704,
+          "end": 16.909,
+          "duration": 0.205,
+          "frame_ahead_trigger": 16.964
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.909,
+          "end": 17.074,
+          "duration": 0.165,
+          "frame_ahead_trigger": 17.169
+        },
+        {
+          "word": "summary",
+          "clean_word": "summary",
+          "phonemes": "s\u02c8\u028cm\u025a\u0279i",
+          "start": 17.074,
+          "end": 17.439,
+          "duration": 0.365,
+          "frame_ahead_trigger": 17.334
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 17.439,
+          "end": 17.729,
+          "duration": 0.29,
+          "frame_ahead_trigger": 17.699
+        },
+        {
+          "word": "restore",
+          "clean_word": "restore",
+          "phonemes": "\u0279\u1d7bst\u02c8\u0254\u02d0\u0279",
+          "start": 17.729,
+          "end": 18.009,
+          "duration": 0.28,
+          "frame_ahead_trigger": 17.989
+        },
+        {
+          "word": "latent",
+          "clean_word": "latent",
+          "phonemes": "l\u02c8e\u026at\u0259nt",
+          "start": 18.009,
+          "end": 18.514,
+          "duration": 0.505,
+          "frame_ahead_trigger": 18.269
+        },
+        {
+          "word": "signals.",
+          "clean_word": "signals",
+          "phonemes": "s\u02c8\u026a\u0261n\u0259lz",
+          "start": 18.514,
+          "end": 18.974,
+          "duration": 0.46,
+          "frame_ahead_trigger": 18.774
+        }
+      ],
+      "audio_duration": 7.19,
+      "slot_duration": 7.34
+    },
+    {
+      "beat_id": 4,
+      "text": "The network generates these tokens conditioned on the summary, acting as a frozen LLM's missing link to the full history.",
+      "visual_focus": "A frozen model weight matrix updating",
+      "highlight_words": {
+        "conditioned": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Network",
+        "action_verb": "approximates",
+        "direct_object": "continuation",
+        "anchor_word": "conditioned",
+        "semantic_role": "mechanism_explanation"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: REMORY: LEARNING R",
+        "sub": "A frozen model weight matrix updating",
+        "params": {
+          "title": "KERNEL CODE: REMORY: LEARNING R",
+          "sub": "A frozen model weight matrix updating",
+          "filename": "remory_residual.py",
+          "language": "python",
+          "lines": [
+            "def forward_compacted_context(history_ids, summary_ids):",
+            "soft_memory_tokens = memory_network(history_ids, summary_ids)",
+            "spliced_input = torch.cat([summary_ids, soft_memory_tokens], dim=1)",
+            "return frozen_llm.generate(spliced_input)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 SEQUENCE RESIDUAL CONCATENATION",
+          "delta_badge": "Conditioning frozen LLM generation on concatenated s"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: REMORY: LEARNING R",
+        "sub": "A frozen model weight matrix updating",
+        "filename": "remory_residual.py",
+        "language": "python",
+        "lines": [
+          "def forward_compacted_context(history_ids, summary_ids):",
+          "soft_memory_tokens = memory_network(history_ids, summary_ids)",
+          "spliced_input = torch.cat([summary_ids, soft_memory_tokens], dim=1)",
+          "return frozen_llm.generate(spliced_input)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 SEQUENCE RESIDUAL CONCATENATION",
+        "delta_badge": "Conditioning frozen LLM generation on concatenated s"
+      },
+      "start": 19.22,
+      "end": 25.62,
+      "duration": 6.4,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 19.243,
+          "end": 19.353,
+          "duration": 0.11,
+          "frame_ahead_trigger": 19.653
+        },
+        {
+          "word": "network",
+          "clean_word": "network",
+          "phonemes": "n\u02c8\u025btw\u025c\u02d0k",
+          "start": 19.353,
+          "end": 19.728,
+          "duration": 0.375,
+          "frame_ahead_trigger": 19.763
+        },
+        {
+          "word": "generates",
+          "clean_word": "generates",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u02cce\u026ats",
+          "start": 19.728,
+          "end": 20.483,
+          "duration": 0.755,
+          "frame_ahead_trigger": 20.138
+        },
+        {
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 20.483,
+          "end": 20.723,
+          "duration": 0.24,
+          "frame_ahead_trigger": 20.893
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 20.723,
+          "end": 21.113,
+          "duration": 0.39,
+          "frame_ahead_trigger": 21.133
+        },
+        {
+          "word": "conditioned",
+          "clean_word": "conditioned",
+          "phonemes": "k\u0259nd\u02c8\u026a\u0283\u0259nd",
+          "start": 21.113,
+          "end": 21.753,
+          "duration": 0.64,
+          "frame_ahead_trigger": 21.523
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 21.753,
+          "end": 21.883,
+          "duration": 0.13,
+          "frame_ahead_trigger": 22.163
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.883,
+          "end": 21.993,
+          "duration": 0.11,
+          "frame_ahead_trigger": 22.293
+        },
+        {
+          "word": "summary,",
+          "clean_word": "summary",
+          "phonemes": "s\u02c8\u028cm\u025a\u0279i",
+          "start": 21.993,
+          "end": 22.378,
+          "duration": 0.385,
+          "frame_ahead_trigger": 22.403
+        },
+        {
+          "word": "acting",
+          "clean_word": "acting",
+          "phonemes": "\u02c8\u00e6kt\u026a\u014b",
+          "start": 22.378,
+          "end": 22.723,
+          "duration": 0.345,
+          "frame_ahead_trigger": 22.788
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 22.723,
+          "end": 22.818,
+          "duration": 0.095,
+          "frame_ahead_trigger": 23.133
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 22.818,
+          "end": 22.978,
+          "duration": 0.16,
+          "frame_ahead_trigger": 23.228
+        },
+        {
+          "word": "frozen",
+          "clean_word": "frozen",
+          "phonemes": "f\u0279\u02c8o\u028az\u0259n",
+          "start": 22.978,
+          "end": 23.383,
+          "duration": 0.405,
+          "frame_ahead_trigger": 23.388
+        },
+        {
+          "word": "LLM's",
+          "clean_word": "llms",
+          "phonemes": "\u02cc\u025bl\u02cc\u025bl\u02c8\u025bm",
+          "start": 23.383,
+          "end": 23.918,
+          "duration": 0.535,
+          "frame_ahead_trigger": 23.793
+        },
+        {
+          "word": "missing",
+          "clean_word": "missing",
+          "phonemes": "m\u02c8\u026as\u026a\u014b",
+          "start": 23.918,
+          "end": 24.278,
+          "duration": 0.36,
+          "frame_ahead_trigger": 24.328
+        },
+        {
+          "word": "link",
+          "clean_word": "link",
+          "phonemes": "l\u02c8\u026a\u014bk",
+          "start": 24.278,
+          "end": 24.628,
+          "duration": 0.35,
+          "frame_ahead_trigger": 24.688
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 24.628,
+          "end": 24.688,
+          "duration": 0.06,
+          "frame_ahead_trigger": 25.038
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.688,
+          "end": 24.763,
+          "duration": 0.075,
+          "frame_ahead_trigger": 25.098
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 24.763,
+          "end": 25.098,
+          "duration": 0.335,
+          "frame_ahead_trigger": 25.173
+        },
+        {
+          "word": "history.",
+          "clean_word": "history",
+          "phonemes": "h\u02c8\u026ast\u025a\u0279i",
+          "start": 25.098,
+          "end": 25.458,
+          "duration": 0.36,
+          "frame_ahead_trigger": 25.508
+        }
+      ],
+      "audio_duration": 6.4,
+      "slot_duration": 6.55
+    },
+    {
+      "beat_id": 5,
+      "text": "Results? 94.8% accuracy using only 5.2% of the context, effectively stopping those infinite tool-use loops cold.",
+      "visual_focus": "A bar chart spiking to 94.8%",
+      "highlight_words": {
+        "94.8%": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "REMORY",
+        "action_verb": "crushes",
+        "direct_object": "baseline",
+        "anchor_word": "accuracy",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: SUMMHAY COMPACTION",
+        "sub": "A bar chart spiking to 94.8%",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: SUMMHAY COMPACTION",
+          "sub": "A bar chart spiking to 94.8%",
+          "metric_name": "Joint Retrieval & Insight Score",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "Uncompressed Full Context",
+              "value": 96.0,
+              "display_val": "96.0% (100% Context)",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "REMORY (Qwen3.8-27B)",
+              "value": 94.8,
+              "display_val": "94.8% (5.2% Context)",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "REMORY (GLM-5.3-Flash)",
+              "value": 92.5,
+              "display_val": "92.5% (5.2% Context)",
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "Text-Only Summary Baseline",
+              "value": 68.4,
+              "display_val": "68.4% (3.5% Context)",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +26.4% OVER TEXT SUMMARY BASELINE"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: SUMMHAY COMPACTION",
+        "sub": "A bar chart spiking to 94.8%",
+        "metric_name": "Joint Retrieval & Insight Score",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "Uncompressed Full Context",
+            "value": 96.0,
+            "display_val": "96.0% (100% Context)",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "REMORY (Qwen3.8-27B)",
+            "value": 94.8,
+            "display_val": "94.8% (5.2% Context)",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "REMORY (GLM-5.3-Flash)",
+            "value": 92.5,
+            "display_val": "92.5% (5.2% Context)",
+            "is_hero": true,
+            "color": "#34D399"
+          },
+          {
+            "name": "Text-Only Summary Baseline",
+            "value": 68.4,
+            "display_val": "68.4% (3.5% Context)",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +26.4% OVER TEXT SUMMARY BASELINE"
+      },
+      "start": 25.77,
+      "end": 33.65,
+      "duration": 7.87,
+      "word_timings": [
+        {
+          "word": "Results?",
+          "clean_word": "results",
+          "phonemes": "\u0279\u026az\u02c8\u028clts",
+          "start": 25.783,
+          "end": 26.253,
+          "duration": 0.47,
+          "frame_ahead_trigger": 26.343
+        },
+        {
+          "word": "94.8%",
+          "clean_word": "948",
+          "phonemes": "n\u02c8a\u026anh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei \u02c8e\u026at",
+          "start": 26.253,
+          "end": 27.753,
+          "duration": 1.5,
+          "frame_ahead_trigger": 26.813
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 27.753,
+          "end": 28.238,
+          "duration": 0.485,
+          "frame_ahead_trigger": 28.313
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 28.238,
+          "end": 28.693,
+          "duration": 0.455,
+          "frame_ahead_trigger": 28.798
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 28.693,
+          "end": 29.003,
+          "duration": 0.31,
+          "frame_ahead_trigger": 29.253
+        },
+        {
+          "word": "5.2%",
+          "clean_word": "52",
+          "phonemes": "f\u02c8\u026afti t\u02c8u\u02d0",
+          "start": 29.003,
+          "end": 29.743,
+          "duration": 0.74,
+          "frame_ahead_trigger": 29.563
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 29.743,
+          "end": 29.785,
+          "duration": 0.041,
+          "frame_ahead_trigger": 30.303
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 29.785,
+          "end": 29.848,
+          "duration": 0.064,
+          "frame_ahead_trigger": 30.345
+        },
+        {
+          "word": "context,",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 29.848,
+          "end": 30.481,
+          "duration": 0.632,
+          "frame_ahead_trigger": 30.408
+        },
+        {
+          "word": "effectively",
+          "clean_word": "effectively",
+          "phonemes": "\u026af\u02c8\u025bkt\u026avli",
+          "start": 30.481,
+          "end": 31.083,
+          "duration": 0.603,
+          "frame_ahead_trigger": 31.041
+        },
+        {
+          "word": "stopping",
+          "clean_word": "stopping",
+          "phonemes": "st\u02c8\u0251\u02d0p\u026a\u014b",
+          "start": 31.083,
+          "end": 31.443,
+          "duration": 0.36,
+          "frame_ahead_trigger": 31.643
+        },
+        {
+          "word": "those",
+          "clean_word": "those",
+          "phonemes": "\u00f0\u02c8o\u028az",
+          "start": 31.443,
+          "end": 31.815,
+          "duration": 0.371,
+          "frame_ahead_trigger": 32.003
+        },
+        {
+          "word": "infinite",
+          "clean_word": "infinite",
+          "phonemes": "\u02c8\u026anf\u026an\u0259t",
+          "start": 31.815,
+          "end": 32.208,
+          "duration": 0.394,
+          "frame_ahead_trigger": 32.375
+        },
+        {
+          "word": "tool-use",
+          "clean_word": "tooluse",
+          "phonemes": "t\u02c8u\u02d0lu\u02d0s",
+          "start": 32.208,
+          "end": 32.742,
+          "duration": 0.534,
+          "frame_ahead_trigger": 32.768
+        },
+        {
+          "word": "loops",
+          "clean_word": "loops",
+          "phonemes": "l\u02c8u\u02d0ps",
+          "start": 32.742,
+          "end": 33.063,
+          "duration": 0.321,
+          "frame_ahead_trigger": 33.302
+        },
+        {
+          "word": "cold.",
+          "clean_word": "cold",
+          "phonemes": "k\u02c8o\u028ald",
+          "start": 33.063,
+          "end": 33.438,
+          "duration": 0.375,
+          "frame_ahead_trigger": 33.623
+        }
+      ],
+      "audio_duration": 7.87,
+      "slot_duration": 8.03
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "The Model Verse logo",
+      "highlight_words": {
+        "Model Verse": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "masters",
+        "direct_object": "architecture",
+        "anchor_word": "deep-dives",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "THE MODEL VERSE",
+        "sub": "Master the architecture",
+        "accent_color": "#34D399",
+        "params": {
+          "stage_1_label": "Compacted Context Ready",
+          "stage_2_label": "Zero Repeat Tool Loops",
+          "stage_3_label": "High-Fidelity Agent Execution"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 33.8,
+      "end": 38.51,
+      "duration": 4.71,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 33.795,
+          "end": 34.115,
+          "duration": 0.32,
+          "frame_ahead_trigger": 34.505
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.115,
+          "end": 34.33,
+          "duration": 0.215,
+          "frame_ahead_trigger": 34.825
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.33,
+          "end": 34.55,
+          "duration": 0.22,
+          "frame_ahead_trigger": 35.04
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 34.55,
+          "end": 34.84,
+          "duration": 0.29,
+          "frame_ahead_trigger": 35.26
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 34.84,
+          "end": 35.155,
+          "duration": 0.315,
+          "frame_ahead_trigger": 35.55
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 35.155,
+          "end": 35.305,
+          "duration": 0.15,
+          "frame_ahead_trigger": 35.865
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 35.305,
+          "end": 35.775,
+          "duration": 0.47,
+          "frame_ahead_trigger": 36.015
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 35.775,
+          "end": 36.14,
+          "duration": 0.365,
+          "frame_ahead_trigger": 36.485
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 36.14,
+          "end": 36.22,
+          "duration": 0.08,
+          "frame_ahead_trigger": 36.85
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 36.22,
+          "end": 36.715,
+          "duration": 0.495,
+          "frame_ahead_trigger": 36.93
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 36.715,
+          "end": 36.968,
+          "duration": 0.253,
+          "frame_ahead_trigger": 37.425
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 36.968,
+          "end": 37.515,
+          "duration": 0.547,
+          "frame_ahead_trigger": 37.678
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 37.515,
+          "end": 37.865,
+          "duration": 0.35,
+          "frame_ahead_trigger": 38.225
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 37.865,
+          "end": 38.11,
+          "duration": 0.245,
+          "frame_ahead_trigger": 38.575
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.11,
+          "end": 38.146,
+          "duration": 0.035,
+          "frame_ahead_trigger": 38.82
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 38.146,
+          "end": 38.35,
+          "duration": 0.205,
+          "frame_ahead_trigger": 38.856
+        }
+      ],
+      "audio_duration": 4.71,
+      "slot_duration": 4.71
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$|\\mathcal{H}| \\gg L_{\\mathrm{ctx}} \\implies \\mathcal{S} = \\mathrm{Summarize}(\\mathcal{H})$",
+      "filename": "remory_residual_memory_compaction_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{H}",
+          "label": "Full History Trace"
+        },
+        {
+          "term": "\\mathcal{S}",
+          "label": "Lossy Text Summary"
+        }
+      ],
+      "svg_filename": "remory_residual_memory_compaction_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{D}_{\\mathrm{KL}}\\!\\left(P(\\mathbf{y} \\mid \\mathcal{H}) \\parallel P(\\mathbf{y} \\mid \\mathcal{S})\\right) > \\epsilon_{\\mathrm{loss}}$",
+      "filename": "remory_residual_memory_compaction_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "P(\\mathbf{y} \\mid \\mathcal{H})",
+          "label": "Ideal Uncompressed Policy"
+        },
+        {
+          "term": "P(\\mathbf{y} \\mid \\mathcal{S})",
+          "label": "Summary Policy Divergence"
+        }
+      ],
+      "svg_filename": "remory_residual_memory_compaction_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{M} = \\mathcal{G}_{\\theta}(\\mathcal{H}, \\mathcal{S}), \\quad |\\mathbf{M}| = K \\ll |\\mathcal{H}|$",
+      "filename": "remory_residual_memory_compaction_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{M}",
+          "label": "Soft Memory Tokens"
+        },
+        {
+          "term": "\\mathcal{G}_{\\theta}",
+          "label": "Residual Memory Network"
+        }
+      ],
+      "svg_filename": "remory_residual_memory_compaction_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$P_{\\mathrm{REMORY}}(\\mathbf{y}) = P_{\\mathrm{frozen}}(\\mathbf{y} \\mid [\\mathcal{S} \\,;\\, \\mathbf{M}])$",
+      "filename": "remory_residual_memory_compaction_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "[\\mathcal{S} ; \\mathbf{M}]",
+          "label": "Sequence Residual Splicing"
+        },
+        {
+          "term": "P_{\\mathrm{frozen}}",
+          "label": "Frozen LLM Backbone"
+        }
+      ],
+      "svg_filename": "remory_residual_memory_compaction_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\frac{|\\mathcal{S} \\cup \\mathbf{M}|}{|\\mathcal{H}|} = 5.2\\%, \\quad \\Delta \\mathrm{Score}_{\\mathrm{joint}} \\approx 0$",
+      "filename": "remory_residual_memory_compaction_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "5.2\\%",
+          "label": "Input Position Budget"
+        },
+        {
+          "term": "\\Delta \\mathrm{Score}",
+          "label": "Near-Zero Accuracy Loss"
+        }
+      ],
+      "svg_filename": "remory_residual_memory_compaction_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "FULL HISTORY TRACE",
+          "color": "#38BDF8",
+          "items": [
+            "terminal_stdout",
+            "tool_arguments",
+            "stack_trace"
+          ]
+        },
+        {
+          "name": "COMPACT RESIDUAL MEMORY",
+          "color": "#10B981",
+          "items": [
+            "m_token_01",
+            "m_token_02",
+            "residual_vector"
+          ]
+        },
+        {
+          "name": "LOSSY TEXT SUMMARY",
+          "color": "#EF4444",
+          "items": [
+            "bullet_point_1",
+            "bullet_point_2",
+            "generic_intent"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"soft_residual_embed\"",
+        "target_cluster": "COMPACT RESIDUAL MEMORY",
+        "token": "\"soft_residual_embed\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Omitted Callstack",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Dropped Exit Code",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "REMORY + Qwen3.8-27B",
+    "model_a_specs": [
+      "5.2% Input Positions",
+      "Soft Residual Memory Tokens",
+      "Zero Repeated Tool Errors"
+    ],
+    "model_b": "Text Summary Baseline",
+    "model_b_specs": [
+      "3.5% Input Positions",
+      "Lossy Natural Language Only",
+      "Frequent Repetitive Failures"
+    ],
+    "divide_title": "CONTEXT COMPACTION VS AGENT RETENTION",
+    "model_a_stat": "94.8%",
+    "model_a_stat_label": "SUMMHAY JOINT ACCURACY",
+    "model_b_stat": "68.4%",
+    "model_b_stat_label": "BASELINE ACCURACY",
+    "efficiency_badge": "\u26a1 5.2% CONTEXT WINDOW USAGE",
+    "benchmarks": [
+      {
+        "name": "SummHay Joint Score",
+        "score_a": "94.8%",
+        "score_b": "68.4%"
+      },
+      {
+        "name": "Terminal-Bench 2.1 Errors",
+        "score_a": "Minimal",
+        "score_b": "Severe"
+      },
+      {
+        "name": "BrowseComp Looping",
+        "score_a": "Resolved",
+        "score_b": "Frequent"
+      }
+    ],
+    "scale_metric": "5.2%",
+    "scale_label": "Tokens Used vs Full Context",
+    "bottleneck_title": "LOSSY TEXT SUMMARY AMNESIA",
+    "bottleneck_desc": "Natural language summaries aggressively purge execution parameters",
+    "solution_title": "RESIDUAL SOFT MEMORY SPLICING",
+    "solution_components": "Learned Memory Tokens Appended to Summary",
+    "mechanism_title": "SEQUENCE-DIMENSION RESIDUAL ADAPTATION",
+    "payoff_stat": "94.8%",
+    "payoff_label": "FULL-CONTEXT RETENTION RECOVERY",
+    "payoff_sub": "Approaching Uncompressed Accuracy with 19x Token Savings",
+    "payoff_hero_stat": 94.8,
+    "payoff_hero_label": "REMORY Soft Tokens",
+    "payoff_base_stat": 68.4,
+    "payoff_base_label": "Summary-Only Baseline",
+    "payoff_delta_badge": "\u26a1 +26.4% ACCURACY AT 5.2% CONTEXT",
+    "challenger": "REMORY Architecture",
+    "incumbent": "Text-Only Context Compaction"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: SUMMHAY COMPACTION",
+    "metric_name": "Joint Retrieval & Insight Score",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "Uncompressed Full Context",
+        "value": 96.0,
+        "display_val": "96.0% (100% Context)",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "REMORY (Qwen3.8-27B)",
+        "value": 94.8,
+        "display_val": "94.8% (5.2% Context)",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "REMORY (GLM-5.3-Flash)",
+        "value": 92.5,
+        "display_val": "92.5% (5.2% Context)",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "Text-Only Summary Baseline",
+        "value": 68.4,
+        "display_val": "68.4% (3.5% Context)",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +26.4% OVER TEXT SUMMARY BASELINE",
+    "radar_axes": [
+      "Attribution Accuracy",
+      "Context Efficiency",
+      "Insight Coverage",
+      "Tool Loop Prevention",
+      "Compute Latency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "remory_residual.py",
+    "language": "python",
+    "lines": [
+      "def forward_compacted_context(history_ids, summary_ids):",
+      "soft_memory_tokens = memory_network(history_ids, summary_ids)",
+      "spliced_input = torch.cat([summary_ids, soft_memory_tokens], dim=1)",
+      "return frozen_llm.generate(spliced_input)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 SEQUENCE RESIDUAL CONCATENATION",
+    "explanation": "Conditioning frozen LLM generation on concatenated summary and soft memory tokens"
+  },
+  "arxiv_id": "2610.11287",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "headline_benchmarks",
+      "caption": "Headline Benchmarks",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/source/figures/headline_benchmarks.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_1_headline_benchmarks.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "live_trading_comparison",
+      "caption": "Live Trading Comparison",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/source/figures/live_trading_comparison.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_2_live_trading_comparison.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_2_live_trading_comparison.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "context_and_human_memory",
+      "caption": "Context And Human Memory",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/source/figures/context_and_human_memory.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_3_context_and_human_memory.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_3_context_and_human_memory.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "iclr_residual_compensation",
+      "caption": "Iclr Residual Compensation",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/source/figures/iclr_residual_compensation.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_4_iclr_residual_compensation.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_4_iclr_residual_compensation.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "qwen_cells_observed_round206",
+      "caption": "Qwen Cells Observed Round206",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/source/figures/qwen_cells_observed_round206.png",
+      "svg_path": null,
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.11287/chalkboard_figures/fig_5_qwen_cells_observed_round206.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 95
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014I hate hitting context limits, so you had me immediately. I like that you didn't use 'AI magic' metaphors. However, 'splice soft tokens' felt a bit hand-wavy. I get that you're injecting latent signals, but are you literally concatenating these to the KV cache or just prepending them to the input sequence? A tiny bit more technical precision there would make me trust the mechanism more."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "The Summary Gap",
+    "physical_analogy": "Rebuilding a skyscraper from a single, blurry blueprint sketch",
+    "eureka_mechanism": "Residual Soft Token Injection",
+    "paradigm_shift": "Approximating full-context performance with 5% of the original input"
+  },
+  "hook_gating": {
+    "selected_hook": "Why do 50% of your GPU cycles waste compute before REMORY fixes the bottleneck?",
+    "verdict": 76,
+    "band": "STRONG",
+    "formula": "The Question",
+    "properties": {
+      "SPECIFICITY": 68,
+      "ADDRESS": 76,
+      "STAKES": 88,
+      "CURIOSITY": 76,
+      "BREVITY": 100
+    },
+    "weakest_property": "SPECIFICITY",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Why do 50% of your GPU cycles waste compute before REMORY fixes the bottleneck?",
+        "verdict": 76,
+        "band": "STRONG",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Over 50% of your GPU memory is wasted before you see how REMORY actually fixes it.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Do not train your next model before you see how REMORY cuts 50% of your memory waste.",
+        "verdict": 72,
+        "band": "STRONG",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "This 1 breakthrough in REMORY stops your GPU from wasting compute before you run out of memory.",
+        "verdict": 60,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "You are probably making the mistake of wasting compute before you test REMORY.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Mistake"
+      },
+      {
+        "hook": "Everyone tells you your model needs more compute, but REMORY proves that advice actually wrong.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "Contrarian Flip"
+      },
+      {
+        "hook": "Your LLM is hallucinating because it\u2019s trying to build a skyscraper from a single, blurry sketch.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "REMORY + Qwen3.8-27B",
+        "model_a_score": "94.8%",
+        "model_b_name": "Text Summary Baseline",
+        "model_b_score": "68.4%",
+        "delta_label": "\u26a1 5.2% CONTEXT WINDOW USAGE"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}

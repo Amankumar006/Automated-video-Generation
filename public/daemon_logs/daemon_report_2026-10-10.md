@@ -1,14 +1,14 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-10 | **Timestamp:** 2026-10-10 11:23:08 UTC
+**Date:** 2026-10-10 | **Timestamp:** 2026-10-10 14:43:53 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: A GPU-Parallel Framework for Heterogeneous Multi-Task Reinforcement Learning
-- **arXiv ID:** [2606.03335](https://arxiv.org/abs/2606.03335)
-- **Domain Taxonomy:** `hardware_efficiency` (1.03x velocity)
-- **Category:** `benchmark_news`
-- **Editorial Hook:** *What if you could train a thousand robot arms at once inside a single GPU?*
-- **Everyday Analogy:** *A restaurant kitchen where a single chef (the GPU) manages dozens of burners simultaneously instead of one by one.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_gpu_parallel_hebero_rl_benchmark_news.mp4`
+### Reel 1: REMORY: Learning Residual Memory for Context Compaction
+- **arXiv ID:** [2610.11287](https://arxiv.org/abs/2610.11287)
+- **Domain Taxonomy:** `multimodal_diffusion` (0.60x velocity)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *What if your AI's short-term memory worked exactly like your own brain's 'active' workspace?*
+- **Everyday Analogy:** *A frantic desk worker clearing off paper scraps into a filing cabinet to make room for new projects.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_remory_residual_memory_compaction_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
