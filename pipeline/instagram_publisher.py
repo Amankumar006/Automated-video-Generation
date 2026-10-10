@@ -220,17 +220,13 @@ class InstagramPublisher:
             return None
 
         url = f"{self.graph_url}/{media_id}/comments"
-        payload = json.dumps({
+        data = urllib.parse.urlencode({
             "message": comment_text,
             "access_token": self.access_token
         }).encode("utf-8")
 
         try:
-            req = urllib.request.Request(
-                url,
-                data=payload,
-                headers={"Content-Type": "application/json"}
-            )
+            req = urllib.request.Request(url, data=data)
             with urllib.request.urlopen(req, timeout=20) as resp:
                 data = json.loads(resp.read().decode())
                 print("💬 First comment posted successfully on Instagram.")
