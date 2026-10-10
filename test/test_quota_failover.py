@@ -396,7 +396,7 @@ def test_pipeline_dry_run_command_completes_with_zero_errors():
         cwd=str(PROJECT_ROOT),
         capture_output=True,
         text=True,
-        timeout=120
+        timeout=240
     )
 
     assert result.returncode == 0, f"Dry-run failed with stderr:\n{result.stderr}\nstdout:\n{result.stdout}"

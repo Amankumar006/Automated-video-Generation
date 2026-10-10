@@ -290,9 +290,15 @@ print("SUCCESS_DRY_RUN_OK")
             cwd=str(PROJECT_ROOT)
         )
         if proc.returncode != 0:
-            err = proc.stderr.strip() or proc.stdout.strip()
-            tb_lines = [line for line in err.splitlines() if not line.startswith("Manim Community v")]
-            return False, "\n".join(tb_lines[-12:])
+            combined_err = f"{proc.stdout}\n{proc.stderr}".strip()
+            tb_lines = [
+                line for line in combined_err.splitlines()
+                if not line.startswith("Manim Community v")
+                and "ev_poll_posix" not in line
+                and "FD from fork" not in line
+                and "gRPC" not in line
+            ]
+            return False, "\n".join(tb_lines[-12:]) if tb_lines else "Subprocess failed with non-zero exit code"
         if "SUCCESS_DRY_RUN_OK" in proc.stdout:
             return True, None
         return False, f"Unexpected dry-run output: {proc.stdout[:200]}"

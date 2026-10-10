@@ -64,6 +64,7 @@ class ScriptDrivenScene(MovingCameraScene):
 
         # 3. Setup Persistent Brand Header & Formula Tray
         self.current_formula_mobj = None
+        self.active_auxiliary_mobjects = []
         self.setup_header()
 
         # 3.5 Setup Synchronized Kinetic Subtitle Pill
@@ -74,6 +75,18 @@ class ScriptDrivenScene(MovingCameraScene):
 
         # 5. Outro Brand Signature
         self.play_brand_outro()
+
+    def track_auxiliary_mobject(self, *mobjects: Any):
+        """Registers transient/auxiliary mobjects (particles, halos, overlays) to be cleaned up at beat exit."""
+        for m in mobjects:
+            if m is None:
+                continue
+            if isinstance(m, (list, tuple, set)):
+                for item in m:
+                    self.track_auxiliary_mobject(item)
+            elif isinstance(m, Mobject):
+                if m not in self.active_auxiliary_mobjects:
+                    self.active_auxiliary_mobjects.append(m)
 
     def load_spec(self) -> Dict[str, Any]:
         """Loads active spec from ACTIVE_SPEC_PATH or latest generated template."""
@@ -283,6 +296,9 @@ class ScriptDrivenScene(MovingCameraScene):
             b_text = b.get("text", "")
             v_focus = b.get("visual_focus", "")
 
+            # Reset active auxiliary mobjects tracking collection for the beat
+            self.active_auxiliary_mobjects = []
+
             # Skip final outro beat, handled separately in play_brand_outro
             if beat_id == total_beats:
                 continue
@@ -452,6 +468,8 @@ class ScriptDrivenScene(MovingCameraScene):
                     dim_opacity=0.55,
                     play_now=False
                 )
+                if getattr(self.spotlight_controller, "active_halo", None) is not None:
+                    self.track_auxiliary_mobject(self.spotlight_controller.active_halo)
             except Exception as e:
                 print(f"⚠️ Spotlight staging notice: {e}")
 
@@ -462,6 +480,7 @@ class ScriptDrivenScene(MovingCameraScene):
                     burst_pts, burst_anim = create_formula_sparkle_burst(tray_group, color="#38BDF8", run_time=enter_time)
                     halo_box, halo_anim = create_formula_halo_pulse(tray_group, color="#38BDF8", run_time=enter_time)
                     self.add(burst_pts, halo_box)
+                    self.track_auxiliary_mobject(burst_pts, halo_box)
                     particle_anims = [burst_anim, halo_anim]
             except Exception as e_p:
                 print(f"⚠️ Particle entrance notice: {e_p}")
@@ -552,20 +571,53 @@ class ScriptDrivenScene(MovingCameraScene):
 
             # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
             actual_exit = max(0.15, expected_end - self.renderer.time)
-            exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
-            if self.current_formula_mobj:
-                exit_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
-            
-            # Only reset camera framing if the camera actually moved or zoomed
-            if camera_action_anim is not None or beat_id == 5:
+            self.clean_beat_exit(
+                motif=motif,
+                actual_exit=actual_exit,
+                camera_action_anim=camera_action_anim,
+                beat_id=beat_id
+            )
+
+    def clean_beat_exit(
+        self,
+        motif: Mobject,
+        actual_exit: float = 0.2,
+        camera_action_anim: Optional[Animation] = None,
+        beat_id: int = 1
+    ):
+        """
+        Executes clean exit for active beat:
+        Fades out motif, formula tray, and all tracked auxiliary mobjects (particles, halos, overlays),
+        purges them explicitly from self.mobjects, and clears the active auxiliary tracking collection.
+        """
+        exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
+        if self.current_formula_mobj:
+            exit_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
+
+        # Include all tracked auxiliary mobjects (particles, halos, overlays) in exit animation
+        for aux_mob in self.active_auxiliary_mobjects:
+            if aux_mob is not None and aux_mob in self.mobjects:
+                exit_anims.append(FadeOut(aux_mob, shift=DOWN * 0.15))
+
+        # Only reset camera framing if the camera actually moved or zoomed
+        if camera_action_anim is not None or beat_id == 5:
+            if hasattr(self, "kinetic_camera") and self.kinetic_camera:
                 reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
                 exit_anims.append(reset_anim)
 
-            self.play(*exit_anims, run_time=actual_exit)
-            self.remove(motif)
-            if self.current_formula_mobj:
-                self.remove(self.current_formula_mobj)
-                self.current_formula_mobj = None
+        self.play(*exit_anims, run_time=actual_exit)
+        self.remove(motif)
+        if self.current_formula_mobj:
+            self.remove(self.current_formula_mobj)
+            self.current_formula_mobj = None
+
+        # Explicitly purge all tracked auxiliary mobjects from scene graph
+        for aux_mob in self.active_auxiliary_mobjects:
+            if aux_mob is not None:
+                self.remove(aux_mob)
+        self.active_auxiliary_mobjects.clear()
+        if hasattr(self, "spotlight_controller") and hasattr(self.spotlight_controller, "active_halo"):
+            self.spotlight_controller.active_halo = None
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
