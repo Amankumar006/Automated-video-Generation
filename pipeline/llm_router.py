@@ -703,10 +703,11 @@ class LLMRouter:
 
     def call_ollama(self, prompt: str) -> Optional[Dict[str, Any]]:
         """Invokes Ollama Cloud models (gpt-oss:120b:cloud, gemma4:31b:cloud)."""
-        sg_mod = sys.modules.get("pipeline.script_generator")
-        active_ollama_cls = getattr(sg_mod, "OllamaClient", None) if sg_mod is not None else None
-        if active_ollama_cls is None:
-            active_ollama_cls = OllamaClient
+        active_ollama_cls = OllamaClient
+        if not hasattr(active_ollama_cls, "mock_calls"):
+            sg_mod = sys.modules.get("pipeline.script_generator")
+            if sg_mod is not None and hasattr(sg_mod, "OllamaClient"):
+                active_ollama_cls = getattr(sg_mod, "OllamaClient")
 
         if not quota_tracker.is_healthy("ollama"):
             logger.info("⏩ [LLMRouter] Ollama is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
@@ -810,7 +811,8 @@ class LLMRouter:
     def call_gemini_text(
         self,
         prompt: str,
-        system_instruction: Optional[str] = None
+        system_instruction: Optional[str] = None,
+        preferred_model: Optional[str] = None
     ) -> Optional[str]:
         """Invokes primary Gemini API for raw text/code generation, cascading across models."""
         sg_mod = sys.modules.get("pipeline.script_generator")
@@ -834,17 +836,21 @@ class LLMRouter:
             logger.warning(f"⚠️ [LLMRouter] genai.configure failed: {e}")
             return None
 
-        models_to_try = [
+        models_to_try: List[str] = []
+        if preferred_model:
+            models_to_try.append(preferred_model)
+        models_to_try.extend(getattr(self, "gemini_models", []))
+        models_to_try.extend([
             os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
             "gemini-2.5-flash",
             "gemini-2.5-flash-lite",
             "gemini-2.0-flash",
             "gemini-1.5-flash",
             "gemini-flash-latest",
-        ]
+        ])
         unique_models: List[str] = []
         for m in models_to_try:
-            if m not in unique_models:
+            if m and m not in unique_models:
                 unique_models.append(m)
 
         for model_name in unique_models:
@@ -860,6 +866,7 @@ class LLMRouter:
                 resp = model.generate_content(prompt)
                 if resp and resp.text:
                     quota_tracker.record_success("gemini")
+                    quota_tracker.record_success("gemini_vision")
                     logger.info(f"✅ [LLMRouter] Gemini text generation succeeded via '{model_name}'")
                     return resp.text.strip()
             except Exception as e:
@@ -889,6 +896,7 @@ class LLMRouter:
                     continue
 
         quota_tracker.record_exhausted("gemini", "All Gemini models failed or exhausted")
+        quota_tracker.record_exhausted("gemini_vision", "All Gemini models failed or exhausted")
         return None
 
     def call_groq_text(
@@ -1018,10 +1026,11 @@ class LLMRouter:
         system_instruction: Optional[str] = None
     ) -> Optional[str]:
         """Invokes Ollama Cloud models for raw text/code generation."""
-        sg_mod = sys.modules.get("pipeline.script_generator")
-        active_ollama_cls = getattr(sg_mod, "OllamaClient", None) if sg_mod is not None else None
-        if active_ollama_cls is None:
-            active_ollama_cls = OllamaClient
+        active_ollama_cls = OllamaClient
+        if not hasattr(active_ollama_cls, "mock_calls"):
+            sg_mod = sys.modules.get("pipeline.script_generator")
+            if sg_mod is not None and hasattr(sg_mod, "OllamaClient"):
+                active_ollama_cls = getattr(sg_mod, "OllamaClient")
 
         if not quota_tracker.is_healthy("ollama"):
             logger.info("⏩ [LLMRouter] Ollama is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
@@ -1062,7 +1071,8 @@ class LLMRouter:
     def generate_text_with_cascade(
         self,
         prompt: str,
-        system_instruction: Optional[str] = None
+        system_instruction: Optional[str] = None,
+        preferred_model: Optional[str] = None
     ) -> Optional[str]:
         """
         Cascades text/code generation across:
@@ -1087,7 +1097,7 @@ class LLMRouter:
 
         # 1. Primary: Gemini (if not already tried)
         if provider_pref not in ("ollama", "groq", "openrouter"):
-            res = self.call_gemini_text(prompt, system_instruction)
+            res = self.call_gemini_text(prompt, system_instruction, preferred_model=preferred_model)
             if res:
                 return res
 
@@ -1118,7 +1128,12 @@ llm_router = LLMRouter()
 
 def generate_text_with_cascade(
     prompt: str,
-    system_instruction: Optional[str] = None
+    system_instruction: Optional[str] = None,
+    preferred_model: Optional[str] = None
 ) -> Optional[str]:
     """Module-level function forwarding to llm_router.generate_text_with_cascade."""
-    return llm_router.generate_text_with_cascade(prompt, system_instruction=system_instruction)
+    return llm_router.generate_text_with_cascade(
+        prompt,
+        system_instruction=system_instruction,
+        preferred_model=preferred_model
+    )

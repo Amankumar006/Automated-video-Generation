@@ -259,7 +259,8 @@ Return ONLY the corrected Python code enclosed in ```python ... ```.
         active_router = getattr(self, "router", None) or llm_router
         return active_router.generate_text_with_cascade(
             prompt=prompt,
-            system_instruction=BESPOKE_SYNTHESIZER_SYSTEM_PROMPT
+            system_instruction=BESPOKE_SYNTHESIZER_SYSTEM_PROMPT,
+            preferred_model=getattr(self, "model_name", None)
         )
 
     def _extract_python_code(self, response_text: str) -> str:
