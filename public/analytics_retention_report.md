@@ -1,29 +1,29 @@
 # 📈 The Model Verse — YouTube Performance & Retention Intelligence
 
-**Generated:** 2026-10-10T19:42:03.823047+00:00  
+**Generated:** 2026-10-11T06:02:21.709637+00:00  
 **Videos Analyzed:** 50 | **Autopsies Performed:** 16  
 **Top Domain:** `mechanistic_interpretability`  
 **Recommended Pacing:** `1.12x` TTS Speed | Hook $\le$ `7.2s`
 
 ---
 
-## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 144)
+## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 147)
 The autonomous pipeline continuously evolves these visual and narrative recipes based on real viewer drop-offs:
 
 | Visual Blueprint | Evolutionary Multiplier | Avg Retention | Win/Loss Track | Action Directive |
 | :--- | :--- | :--- | :--- | :--- |
-| `bespoke_code` | **1.5x** | 58.81% | 1614W / 150L | Auto-discovered layout. |
-| `chalkboard_code_block` | **1.5x** | 63.19% | 330W / 0L | Auto-discovered layout. |
-| `barrier_separation` | **1.5x** | 71.81% | 115W / 0L | Auto-discovered layout. |
-| `tree_hierarchy` | **1.5x** | 63.11% | 79W / 0L | Auto-discovered layout. |
-| `ast_tree` | **1.5x** | 66.15% | 74W / 0L | Auto-discovered layout. |
-| `chalkboard_code` | **1.5x** | 53.7% | 185W / 0L | Auto-discovered layout. |
-| `horizontal_race_bars` | **1.5x** | 60.91% | 241W / 0L | Auto-discovered layout. |
-| `paper_figure` | **1.5x** | 67.44% | 135W / 0L | Auto-discovered layout. |
-| `convergence_funnel` | **1.5x** | 59.0% | 70W / 0L | Auto-discovered layout. |
-| `side_by_side` | **1.5x** | 48.07% | 33W / 0L | Auto-discovered layout. |
-| `split_flow` | **1.5x** | 76.16% | 51W / 0L | Auto-discovered layout. |
-| `comparison_side_by_side` | **1.41x** | 48.46% | 101W / 3L | Auto-discovered layout. |
+| `bespoke_code` | **1.5x** | 58.81% | 1641W / 154L | Auto-discovered layout. |
+| `chalkboard_code_block` | **1.5x** | 63.19% | 338W / 0L | Auto-discovered layout. |
+| `barrier_separation` | **1.5x** | 71.86% | 117W / 0L | Auto-discovered layout. |
+| `tree_hierarchy` | **1.5x** | 63.11% | 80W / 0L | Auto-discovered layout. |
+| `ast_tree` | **1.5x** | 66.15% | 76W / 0L | Auto-discovered layout. |
+| `chalkboard_code` | **1.5x** | 53.7% | 190W / 0L | Auto-discovered layout. |
+| `horizontal_race_bars` | **1.5x** | 60.91% | 249W / 0L | Auto-discovered layout. |
+| `paper_figure` | **1.5x** | 67.44% | 140W / 0L | Auto-discovered layout. |
+| `convergence_funnel` | **1.5x** | 59.0% | 73W / 0L | Auto-discovered layout. |
+| `side_by_side` | **1.5x** | 48.07% | 34W / 0L | Auto-discovered layout. |
+| `split_flow` | **1.5x** | 76.16% | 55W / 0L | Auto-discovered layout. |
+| `comparison_side_by_side` | **1.38x** | 48.46% | 102W / 4L | Auto-discovered layout. |
 | `BlueprintHorizontalRaceBars` | **1.3x** | 78.5% | 6W / 0L | PRIORITIZE for Act 4 benchmark showdown. |
 | `catalog_routing` | **1.3x** | 70.1% | 6W / 0L | Auto-discovered layout. |
 | `BlueprintSplitFlow` | **1.25x** | 76.0% | 5W / 1L | EXCELLENT for bifurcated flows, dual-pass verification, or router dispatch. |
@@ -34,7 +34,7 @@ The autonomous pipeline continuously evolves these visual and narrative recipes 
 | `vector_flow_field` | **0.92x** | 50.0% | 0W / 1L | Auto-discovered layout. |
 | `layer_stack` | **0.76x** | 50.0% | 0W / 3L | Auto-discovered layout. |
 | `generic_sine_wave` | **0.5x** | 46.0% | 0W / 4L | BANNED: Flat generic animation trigger. Causes immediate cognitive drop-off. |
-| `grid_memory` | **0.45x** | 58.28% | 77W / 58L | Auto-discovered layout. |
+| `grid_memory` | **0.45x** | 58.28% | 79W / 60L | Auto-discovered layout. |
 
 **Top Performing Hook Archetype:** `ARCHITECTURE_BREAKDOWN` — *Auto-discovered hook archetype: architecture_breakdown*
 
