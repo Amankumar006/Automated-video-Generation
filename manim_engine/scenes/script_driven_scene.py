@@ -22,7 +22,7 @@ from pipeline.config import (
     VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON,
     FONT_HELVETICA
 )
-from manim_engine.primitives.typography import CleanText
+from manim_engine.primitives.typography import CleanText, clean_text
 
 # Alias Text -> CleanText so HUD headers and brand watermarks render with flawless subpixel typography
 Text = CleanText
