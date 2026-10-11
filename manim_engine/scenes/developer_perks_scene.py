@@ -134,19 +134,65 @@ class DeveloperPerksScene(BaseShortScene):
 
         grid_header = clean_text("WHAT YOU GET IN THE BUNDLE", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
 
+        # Dynamic bundle tiles based on provider / metadata
+        bundle = perk_meta.get("bundle", [])
+        if len(bundle) >= 2:
+            t1_name = bundle[0].get("name", f"{provider} API")
+            t1_ben = bundle[0].get("benefit", "$1,000 Credits")
+            t1_sub = bundle[0].get("sub_text", "Model Access")
+            t2_name = bundle[1].get("name", "Team Plan")
+            t2_ben = bundle[1].get("benefit", "1 Year Free")
+            t2_sub = bundle[1].get("sub_text", "Developer Seats")
+        else:
+            if "google" in provider.lower():
+                t1_name = "Google Cloud API"
+                t1_ben = "$250,000 Credits" if dollar_value >= 250000 else f"${dollar_value:,} Credits"
+                t1_sub = "Gemini 1.5 Pro & Vertex AI"
+                t2_name = "Google Workspace"
+                t2_ben = "1 Year Free"
+                t2_sub = "Enterprise Gemini AI Seats"
+            elif "openai" in provider.lower():
+                t1_name = "OpenAI API"
+                t1_ben = f"${dollar_value:,} Credits" if dollar_value > 0 else "$2,500 Credits"
+                t1_sub = "GPT-4o & o3-mini Reasoning"
+                t2_name = "ChatGPT Team"
+                t2_ben = "1 Year Free"
+                t2_sub = "Shared Workspace & Codex"
+            elif "microsoft" in provider.lower() or "azure" in provider.lower():
+                t1_name = "Azure OpenAI"
+                t1_ben = f"${dollar_value:,} Credits" if dollar_value > 0 else "$150,000 Credits"
+                t1_sub = "GPT-4 & Frontier Models"
+                t2_name = "GitHub Enterprise"
+                t2_ben = "GitHub Copilot Free"
+                t2_sub = "Enterprise Dev Tools"
+            elif "aws" in provider.lower():
+                t1_name = "AWS Bedrock"
+                t1_ben = f"${dollar_value:,} Credits" if dollar_value > 0 else "$100,000 Credits"
+                t1_sub = "Anthropic Claude on Bedrock"
+                t2_name = "AWS Activate"
+                t2_ben = "Full Cloud Suite"
+                t2_sub = "Dev Support & EC2 Compute"
+            else:
+                t1_name = f"{provider} API"
+                t1_ben = "$1,000 Credits"
+                t1_sub = "Sonnet 3.5 & Opus"
+                t2_name = "Team Plan"
+                t2_ben = "1 Year Free"
+                t2_sub = "5 Developer Seats ($1.8k)"
+
         tile_1 = create_partner_app_tile(
-            name=f"{provider} API",
-            benefit="$1,000 Credits",
-            sub_text="Sonnet 3.5 & Opus",
+            name=t1_name,
+            benefit=t1_ben,
+            sub_text=t1_sub,
             accent_color=COLOR_MINT,
             width=3.5,
             height=2.3
         )
 
         tile_2 = create_partner_app_tile(
-            name="Team Plan",
-            benefit="1 Year Free",
-            sub_text="5 Developer Seats ($1.8k)",
+            name=t2_name,
+            benefit=t2_ben,
+            sub_text=t2_sub,
             accent_color=COLOR_PURPLE,
             width=3.5,
             height=2.3
@@ -165,8 +211,18 @@ class DeveloperPerksScene(BaseShortScene):
             stroke_width=1.6
         ).next_to(top_tiles, DOWN, buff=0.3)
 
-        t3_title = clean_text("🚀 EXPANDABLE VENTURE TIER", font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=BOLD, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + UP * 0.28)
-        t3_sub = clean_text("VC-backed startups scale up to $100,000 in additional model credits", font=FONT_HELVETICA, font_size=11, color="#E2E8F0", weight=MEDIUM, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + DOWN * 0.22)
+        if "google" in provider.lower():
+            t3_title_str = "YEAR 2 SCALE COVERAGE"
+            t3_sub_str = "Up to $100,000 in additional credits matching 20% of Google Cloud spend"
+        elif "microsoft" in provider.lower():
+            t3_title_str = "PEGASUS VENTURE TIER"
+            t3_sub_str = "Series A startups scale up to $350,000 in Azure compute and OpenAI tokens"
+        else:
+            t3_title_str = "EXPANDABLE VENTURE TIER"
+            t3_sub_str = f"VC-backed startups scale up to {val_str} in additional model credits"
+
+        t3_title = clean_text(t3_title_str, font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=BOLD, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + UP * 0.28)
+        t3_sub = clean_text(t3_sub_str, font=FONT_HELVETICA, font_size=11, color="#E2E8F0", weight=MEDIUM, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + DOWN * 0.22)
         t3_grp = VGroup(tile_3, t3_title, t3_sub)
 
         tiles_group = VGroup(grid_header, top_tiles, t3_grp)
@@ -218,8 +274,8 @@ class DeveloperPerksScene(BaseShortScene):
             row_box = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.05, color="#334155", fill_color="#080C14", fill_opacity=0.92, stroke_width=1.2)
             
             # Text info
-            r_title = clean_text(t_str, font=FONT_HELVETICA, font_size=14, color=WHITE, weight=BOLD, max_width=4.6).align_to(row_box, LEFT).shift(RIGHT * 0.35 + UP * 0.18)
-            r_sub = clean_text(s_str, font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=4.6).align_to(row_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.18)
+            r_title = clean_text(t_str, font=FONT_HELVETICA, font_size=14, color=WHITE, weight=BOLD, max_width=4.2).align_to(row_box, LEFT).shift(RIGHT * 0.35 + UP * 0.18)
+            r_sub = clean_text(s_str, font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=4.2).align_to(row_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.18)
             
             # Popping Checkmark Badge
             chk_pill = RoundedRectangle(corner_radius=0.08, width=1.5, height=0.38, color=COLOR_MINT, fill_color="#064E3B", fill_opacity=0.8, stroke_width=1.2)
@@ -260,10 +316,27 @@ class DeveloperPerksScene(BaseShortScene):
             {f"{provider.lower()} console": COLOR_CYAN, "GitHub repo": COLOR_GOLD, "submit": COLOR_MINT}
         )
 
-        portal_url = perk_meta.get("official_url") or f"console.{provider.lower()}.com/startups"
-        clean_url = portal_url.replace("https://", "").replace("http://", "").split("?")[0]
-        if len(clean_url) > 34:
-            clean_url = clean_url[:34]
+        if "google" in provider.lower():
+            clean_url = "cloud.google.com/startup"
+            btn_label = f"⚡ CLAIM {val_str} GRANT"
+            f3_name = "Google Cloud Project"
+            f3_val = "neuralflow-ai-production"
+        elif "openai" in provider.lower():
+            clean_url = "platform.openai.com/startups"
+            btn_label = "⚡ CLAIM FOUNDER CREDITS"
+            f3_name = "GitHub Repository"
+            f3_val = "github.com/neuralflow/core"
+        elif "microsoft" in provider.lower():
+            clean_url = "foundershub.startups.microsoft.com"
+            btn_label = "⚡ APPLY FOR FOUNDERS HUB"
+            f3_name = "LinkedIn / AngelList"
+            f3_val = "linkedin.com/company/neuralflow"
+        else:
+            portal_url = perk_meta.get("official_url") or f"console.{provider.lower()}.com/startups"
+            clean_url = portal_url.replace("https://", "").replace("http://", "").split("?")[0]
+            btn_label = "⚡ SUBMIT APPLICATION"
+            f3_name = "GitHub Repository"
+            f3_val = "github.com/neuralflow/core"
 
         # Browser window frame
         portal_win = create_browser_window_mockup(
@@ -276,7 +349,7 @@ class DeveloperPerksScene(BaseShortScene):
         # Form fields inside the portal
         f1 = create_input_field("Company Name", "NeuralFlow AI", width=6.6, height=0.72)
         f2 = create_input_field("Company Domain", "https://neuralflow.ai", width=6.6, height=0.72)
-        f3 = create_input_field("GitHub Repository", "github.com/neuralflow/core", width=6.6, height=0.72)
+        f3 = create_input_field(f3_name, f3_val, width=6.6, height=0.72)
 
         # Submit button
         btn_box = RoundedRectangle(
@@ -288,7 +361,7 @@ class DeveloperPerksScene(BaseShortScene):
             fill_opacity=0.95,
             stroke_width=2.0
         )
-        btn_txt = clean_text("⚡ SUBMIT APPLICATION", font=FONT_HELVETICA, font_size=14, color=WHITE, weight=HEAVY, max_width=6.0).move_to(btn_box)
+        btn_txt = clean_text(btn_label, font=FONT_HELVETICA, font_size=14, color=WHITE, weight=HEAVY, max_width=6.0).move_to(btn_box)
         submit_btn = VGroup(btn_box, btn_txt)
 
         form_col = VGroup(f1, f2, f3, submit_btn).arrange(DOWN, buff=0.22).move_to(portal_win).shift(DOWN * 0.25)
@@ -352,7 +425,7 @@ class DeveloperPerksScene(BaseShortScene):
             reposts="89",
             platform="X / Twitter",
             width=7.4,
-            height=2.8,
+            height=3.0,
             accent_color="#1D9BF0"
         )
 

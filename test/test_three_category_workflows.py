@@ -327,3 +327,36 @@ def test_manim_social_proof_primitives():
     assert x_card is not None
     assert reddit_card is not None
     assert partner_tile is not None
+
+
+# -------------------------------------------------------------------------
+# 5. Scene Instantiation & Typography Tests
+# -------------------------------------------------------------------------
+
+def test_tech_news_scene_instantiation_and_typography():
+    """Validates TechNewsScene instantiation, provider inference, and typography setup."""
+    from manim_engine.scenes.tech_news_scene import TechNewsScene
+    scene = TechNewsScene()
+    assert scene is not None
+    spec = {
+        "title": "OpenAI o3-mini Reasoning Breakthrough",
+        "category": "tech_news",
+        "beats": []
+    }
+    provider = scene._infer_provider(spec)
+    assert provider == "OpenAI"
+
+
+def test_developer_perks_scene_instantiation_and_typography():
+    """Validates DeveloperPerksScene instantiation, provider inference, and typography setup."""
+    from manim_engine.scenes.developer_perks_scene import DeveloperPerksScene
+    scene = DeveloperPerksScene()
+    assert scene is not None
+    spec = {
+        "title": "Claude for Startups $1,000 Credits",
+        "category": "developer_perks",
+        "beats": []
+    }
+    provider = scene._infer_provider(spec)
+    assert provider == "Anthropic"
+

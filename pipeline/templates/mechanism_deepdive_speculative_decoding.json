@@ -11,7 +11,7 @@
       "visual_focus": "System architecture schematic illustrating Speculative Decoding highlighted in pulsing cyan.",
       "highlight_words": {
         "Speculative Decoding": "#38BDF8",
-        "hit a wall": "#EF4444"
+        "bottleneck": "#EF4444"
       },
       "svo_action": {
         "subject": "Speculative Decoding",
@@ -21,13 +21,11 @@
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "horizontal_race_bars",
-        "title": "ARCHITECTURAL BOTTLENECK",
-        "sub": "Standard methods hit scaling latency",
-        "accent_color": "#EF4444",
-        "params": {
-          "metric": "Bandwidth Utilization"
-        }
+        "layout": "grid_memory",
+        "title": "SPECULATIVE DECODING",
+        "sub": "Core Architectural Premise",
+        "accent_color": "#38BDF8",
+        "params": {}
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
@@ -37,14 +35,14 @@
     },
     {
       "beat_id": 2,
-      "text": "The problem? Scaling up triggers heavy latency and memory walls.",
+      "text": "The problem? Scaling workloads triggers severe resource contention and execution delays.",
       "visual_focus": "Bottleneck diagram showing resource stall and execution queue backup.",
       "highlight_words": {
-        "latency": "#EF4444",
-        "memory walls": "#F59E0B"
+        "resource contention": "#EF4444",
+        "delays": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Scaling Wall",
+        "subject": "Resource Contention",
         "action_verb": "stalls",
         "direct_object": "Pipeline Execution",
         "anchor_word": "triggers",
@@ -53,22 +51,20 @@
       "visual_blueprint": {
         "layout": "vector_flow_field",
         "title": "SYSTEM BOTTLENECK",
-        "sub": "Sequential resource contention halts throughput",
+        "sub": "Resource contention halts throughput",
         "accent_color": "#EF4444",
-        "params": {
-          "field_title": "Memory Drift"
-        }
+        "params": {}
       },
       "thriller_role": "villain_bottleneck",
       "act": 2
     },
     {
       "beat_id": 3,
-      "text": "Enter Speculative Decoding. It breaks the bottleneck with a fast, decoupled pipeline.",
+      "text": "Enter Speculative Decoding. It breaks the bottleneck with a decoupled, high-throughput pipeline.",
       "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
       "highlight_words": {
         "Speculative Decoding": "#10B981",
-        "breaks the bottleneck": "#38BDF8"
+        "decoupled": "#38BDF8"
       },
       "svo_action": {
         "subject": "Speculative Decoding",
@@ -82,20 +78,18 @@
         "title": "PARALLEL PIPELINE",
         "sub": "Decoupled execution paths",
         "accent_color": "#34D399",
-        "params": {
-          "router_label": "Async Scheduler"
-        }
+        "params": {}
       },
       "thriller_role": "eureka_mechanism",
       "act": 3
     },
     {
       "beat_id": 4,
-      "text": "Under the hood, it runs tasks in parallel. No more idle waiting.",
+      "text": "Under the hood. It coordinates operations in parallel. Eliminating idle wait states entirely.",
       "visual_focus": "Asynchronous coordinate graph demonstrating zero idle wait states.",
       "highlight_words": {
-        "parallel": "#38BDF8",
-        "idle waiting": "#10B981"
+        "in parallel": "#38BDF8",
+        "idle wait states": "#10B981"
       },
       "svo_action": {
         "subject": "Async Engine",
@@ -105,27 +99,24 @@
         "semantic_role": "innovation"
       },
       "visual_blueprint": {
-        "layout": "grid_memory",
+        "layout": "chalkboard_code_block",
         "title": "ASYNC COORDINATION",
         "sub": "Zero-stall execution kernel",
         "accent_color": "#38BDF8",
-        "params": {
-          "grid_title": "Register Bank"
-        }
+        "params": {}
       },
       "thriller_role": "technical_secret_sauce",
       "act": 3
     },
     {
       "beat_id": 5,
-      "text": "The result? Big benchmark speedups with zero accuracy loss.",
+      "text": "The result? Big benchmark speedups across standard tasks for Speculative Decoding.",
       "visual_focus": "Comparative benchmark race bars showing massive performance gains.",
       "highlight_words": {
-        "speedups": "#10B981",
-        "zero accuracy loss": "#38BDF8"
+        "speedups": "#10B981"
       },
       "svo_action": {
-        "subject": "Benchmark Metric",
+        "subject": "Speculative Decoding",
         "action_verb": "accelerates",
         "direct_object": "Throughput",
         "anchor_word": "speedups",
@@ -136,9 +127,7 @@
         "title": "BENCHMARK PERFORMANCE",
         "sub": "Verified speedup with zero accuracy loss",
         "accent_color": "#34D399",
-        "params": {
-          "metric_name": "TFLOPS"
-        }
+        "params": {}
       },
       "thriller_role": "empirical_payoff",
       "act": 4
@@ -382,7 +371,7 @@
         "formula": "The Warning"
       },
       {
-        "hook": "Before you deploy your next project, see how why are top AI researchers watching Speculative Decoding?. Because standard models hit a wall.",
+        "hook": "Before you build your next system, see how why are top AI researchers watching Speculative Decoding?. Because standard architectures hit a bottleneck.",
         "verdict": 62,
         "band": "WORKABLE",
         "formula": "The Warning"
@@ -400,7 +389,7 @@
         "formula": "The Statistic"
       },
       {
-        "hook": "Did you know why are top AI researchers watching Speculative Decoding?. Because standard models hit a wall?",
+        "hook": "Did you know why are top AI researchers watching Speculative Decoding?. Because standard architectures hit a bottleneck?",
         "verdict": 44,
         "band": "WEAK",
         "formula": "The Question"
@@ -412,7 +401,7 @@
         "formula": "The Statistic"
       },
       {
-        "hook": "Why are top AI researchers watching Speculative Decoding?. Because standard models hit a wall.",
+        "hook": "Why are top AI researchers watching Speculative Decoding?. Because standard architectures hit a bottleneck.",
         "verdict": 36,
         "band": "WEAK",
         "formula": "The Question"

@@ -131,10 +131,10 @@ class ScriptDrivenScene(MovingCameraScene):
         """Places subtle brand watermark in the topmost safe zone (Depth Layer 3)."""
         hook_tag = self.spec.get("hook_tag", "AI BREAKTHROUGH").upper()
         watermark = VGroup(
-            Text("THE MODEL VERSE", font_size=11, font=FONT_HELVETICA, color="#10B981", weight=BOLD),
-            Text(" // ", font_size=11, font=FONT_HELVETICA, color="#475569"),
-            Text(hook_tag, font_size=10, font=FONT_HELVETICA, color="#94A3B8", weight=MEDIUM)
-        ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
+            clean_text("THE MODEL VERSE", font_size=20, font=FONT_HELVETICA, color="#10B981", weight=BOLD),
+            clean_text(" // ", font_size=18, font=FONT_HELVETICA, color="#64748B"),
+            clean_text(hook_tag, font_size=18, font=FONT_HELVETICA, color="#CBD5E1", weight=MEDIUM)
+        ).arrange(RIGHT, buff=0.12).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.header_group.set_z_index(50)
         def update_header(mob, dt):

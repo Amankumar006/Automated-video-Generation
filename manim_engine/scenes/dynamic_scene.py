@@ -17,8 +17,10 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import (
-    VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON
+    VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON,
+    FONT_HELVETICA
 )
+from manim_engine.primitives.typography import clean_text
 
 # Enforce 9:16 vertical dimensions and 3b1b background
 config.pixel_width = VIDEO_WIDTH
@@ -148,10 +150,10 @@ class DynamicCompositeScene(Scene):
         """Places subtle brand watermark in the topmost safe zone, preserving pure canvas space."""
         hook_text = self.storyboard.hook_tag.upper()
         watermark = VGroup(
-            Text("THE MODEL VERSE", font_size=11, font="Helvetica", color="#10B981", weight=BOLD),
-            Text(" // ", font_size=11, font="Helvetica", color="#475569"),
-            Text(hook_text, font_size=10, font="Helvetica", color="#94A3B8", weight=MEDIUM)
-        ).arrange(RIGHT, buff=0.1).move_to([0, 7.1, 0])
+            clean_text("THE MODEL VERSE", font_size=20, font=FONT_HELVETICA, color="#10B981", weight=BOLD),
+            clean_text(" // ", font_size=18, font=FONT_HELVETICA, color="#64748B"),
+            clean_text(hook_text, font_size=18, font=FONT_HELVETICA, color="#CBD5E1", weight=MEDIUM)
+        ).arrange(RIGHT, buff=0.12).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.add(self.header_group)
 

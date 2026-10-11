@@ -64,3 +64,26 @@ def test_fit_text_to_container():
     fitted = fit_text_to_container(t, container, padding=0.25)
     assert fitted.width <= container.width - 2 * 0.25 + 1e-4
     assert fitted.height <= container.height - 2 * 0.25 + 1e-4
+
+
+def test_clean_text_empty_string_safe():
+    """Verify clean_text gracefully handles empty strings without ZeroDivisionError."""
+    t_empty = clean_text("", font_size=14, max_width=3.0, max_height=1.0)
+    assert t_empty is not None
+
+
+def test_clean_text_multiline_with_existing_newlines():
+    """Verify clean_text wraps each line when text already contains newlines."""
+    text_with_nl = "First paragraph line is quite long and definitely exceeds the wrap width\nSecond paragraph line is also quite long and exceeds the wrap width"
+    t = clean_text(text_with_nl, font_size=14, wrap_width=25)
+    assert t is not None
+    # Multiple wrapped lines will have height > 0.6
+    assert t.height > 0.6
+
+
+def test_fit_text_to_container_empty_safe():
+    """Verify fit_text_to_container handles zero-dimension text without ZeroDivisionError."""
+    container = Rectangle(width=4.0, height=2.0)
+    t_empty = clean_text("", font_size=14)
+    fitted = fit_text_to_container(t_empty, container, padding=0.25)
+    assert fitted is not None

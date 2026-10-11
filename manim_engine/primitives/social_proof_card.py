@@ -110,12 +110,12 @@ def create_social_proof_card(
         wrap_width=38,
         max_width=width - 0.9
     )
-    body_txt.align_to(card_bg, LEFT).shift(RIGHT * 0.45 + DOWN * 0.45)
+    body_txt.next_to(avatar, DOWN, buff=0.22).align_to(card_bg, LEFT).shift(RIGHT * 0.45)
 
     # Engagement row (Likes & Reposts)
     like_icon = clean_text(f"❤️ {likes} Likes", font=FONT_HELVETICA, font_size=11, color="#F43F5E", weight=SEMIBOLD)
     repost_icon = clean_text(f"🔁 {reposts} Reposts", font=FONT_HELVETICA, font_size=11, color="#10B981", weight=SEMIBOLD)
-    engage_row = VGroup(like_icon, repost_icon).arrange(RIGHT, buff=0.45).align_to(card_bg, LEFT).shift(RIGHT * 0.45 + DOWN * 1.15)
+    engage_row = VGroup(like_icon, repost_icon).arrange(RIGHT, buff=0.45).align_to(card_bg, LEFT).align_to(card_bg, DOWN).shift(RIGHT * 0.45 + UP * 0.28)
 
     return VGroup(card_bg, top_badge, avatar, name_row, handle_txt, body_txt, engage_row)
 

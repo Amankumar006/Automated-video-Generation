@@ -37,8 +37,9 @@ class CleanText(Text):
         **kwargs
     ):
         raw_text = str(text)
-        if wrap_width is not None and wrap_width > 0 and "\n" not in raw_text:
-            processed_text = textwrap.fill(raw_text, width=wrap_width)
+        if wrap_width is not None and wrap_width > 0:
+            lines = raw_text.split("\n")
+            processed_text = "\n".join(textwrap.fill(line, width=wrap_width) for line in lines)
         else:
             processed_text = raw_text
 
@@ -48,9 +49,9 @@ class CleanText(Text):
         super().__init__(processed_text, font=font, font_size=effective_base, **kwargs)
         if scale_factor != 1.0:
             self.scale(scale_factor)
-        if max_width is not None and self.width > max_width:
+        if max_width is not None and self.width > max_width and self.width > 0:
             self.scale_to_fit_width(max_width)
-        if max_height is not None and self.height > max_height:
+        if max_height is not None and self.height > max_height and self.height > 0:
             self.scale_to_fit_height(max_height)
 
 
@@ -85,9 +86,9 @@ def fit_text_to_container(text_mobj: Mobject, container: Mobject, padding: float
     """Scale and center text inside a container box/card/ellipse if it overflows."""
     avail_w = max(0.1, container.width - 2 * padding)
     avail_h = max(0.1, container.height - 2 * padding)
-    if text_mobj.width > avail_w:
+    if text_mobj.width > avail_w and text_mobj.width > 0:
         text_mobj.scale_to_fit_width(avail_w)
-    if text_mobj.height > avail_h:
+    if text_mobj.height > avail_h and text_mobj.height > 0:
         text_mobj.scale_to_fit_height(avail_h)
     text_mobj.move_to(container.get_center())
     return text_mobj

@@ -47,12 +47,12 @@ def create_chalkboard_brand_outro(
         logo_icon = VGroup(*edges, *nodes)
 
     # 2. Brand Name & Website (Clean Typography)
-    title = CleanText(logo_title, font=FONT_HELVETICA, font_size=26, color=WHITE, weight=BOLD).next_to(logo_icon, DOWN, buff=0.45)
-    site = CleanText(url, font=FONT_HELVETICA, font_size=18, color=COLOR_MINT, weight=BOLD).next_to(title, DOWN, buff=0.22)
+    title = CleanText(logo_title, font=FONT_HELVETICA, font_size=26, color=WHITE, weight=BOLD, max_width=6.8).next_to(logo_icon, DOWN, buff=0.45)
+    site = CleanText(url, font=FONT_HELVETICA, font_size=18, color=COLOR_MINT, weight=BOLD, max_width=6.8).next_to(title, DOWN, buff=0.22)
     brand_text_group = VGroup(title, site)
 
     # 3. Call to Action / Subtitle
-    sub = CleanText(tagline, font=FONT_HELVETICA, font_size=14, color="#94A3B8", weight=NORMAL).next_to(site, DOWN, buff=0.35)
+    sub = CleanText(tagline, font=FONT_HELVETICA, font_size=14, color="#CBD5E1", weight=NORMAL, max_width=6.8).next_to(site, DOWN, buff=0.35)
 
     return logo_icon, brand_text_group, sub
 

@@ -68,23 +68,21 @@ class ChalkboardCaptions:
             return FadeIn(
                 new_pill,
                 shift=UP * 0.15,
-                rate_func=lambda t: min(1.0, t / 0.20) if t < 0.20 else 1.0,
                 run_time=run_time
             )
         else:
             old_pill = self.current_pill
             self.current_pill = new_pill
-            # Fast, crisp cross-fade without glyph warping or letter collision
-            return FadeTransform(
-                old_pill,
-                new_pill,
-                stretch=False,
-                rate_func=lambda t: min(1.0, t / 0.18) if t < 0.18 else 1.0,
-                run_time=run_time
+            # Clean non-overlapping sequential transition: old pill fades out, new pill fades in cleanly
+            t_fadeout = min(0.12, run_time * 0.45)
+            t_fadein = min(0.16, run_time * 0.55)
+            return Succession(
+                FadeOut(old_pill, shift=DOWN * 0.08, run_time=t_fadeout),
+                FadeIn(new_pill, shift=UP * 0.08, run_time=t_fadein)
             )
 
     def morph_to(self, text: str, highlights: dict = None, run_time: float = 0.25) -> Animation:
-        """Morphs the current caption into a new phrase cleanly."""
+        """Transitions caption into a new phrase cleanly without text collision."""
         return self.show(text, highlights, run_time=run_time)
 
     def hide(self, run_time: float = 0.25) -> Animation:

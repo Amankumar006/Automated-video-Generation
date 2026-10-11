@@ -47,7 +47,18 @@ class TechNewsScene(BaseShortScene):
         meta = spec.get("metadata", {})
         news_meta = spec.get("tech_news_metadata", {})
         provider = news_meta.get("provider") or meta.get("provider") or self._infer_provider(spec)
-        model_name = news_meta.get("model_name") or spec.get("title", "Frontier AI Release").split("—")[0].strip()
+        raw_model = news_meta.get("model_name")
+        if not raw_model:
+            title_text = spec.get("title", "Frontier AI Release")
+            # Try to extract clean model identifier
+            m = re.search(r'\b(o\d(?:-mini|-preview)?|gpt-[\w.]+|claude-[\w.]+|gemini-[\w.]+|deepseek-[\w.]+)\b', title_text, re.IGNORECASE)
+            if m:
+                raw_model = m.group(1)
+            else:
+                raw_model = title_text.split("—")[0].split(":")[0].strip()
+                if len(raw_model) > 16:
+                    raw_model = " ".join(raw_model.split()[:2])
+        model_name = raw_model
 
         # Helper to get beat text, highlight words, and slot duration
         def get_beat(bid: int, def_text: str, def_dur: float, def_hl: dict = None):
@@ -67,43 +78,55 @@ class TechNewsScene(BaseShortScene):
             {model_name: COLOR_CYAN, "dropped": COLOR_GOLD}
         )
 
-        hero_badge = create_lab_hero_badge(
-            provider_name=provider,
-            status_text="OFFICIAL LAB DROP",
-            model_name=model_name,
-            width=7.4
-        ).shift(UP * 2.8)
+        # Top status pill (Compact broadcast tag)
+        top_pill_bg = RoundedRectangle(
+            corner_radius=0.12,
+            width=5.8,
+            height=0.48,
+            color="#EF4444",
+            fill_color="#7F1D1D",
+            fill_opacity=0.55,
+            stroke_width=1.2
+        ).shift(UP * 3.4)
+        top_pill_txt = clean_text(
+            f"⚡ {provider.upper()} OFFICIAL LAUNCH",
+            font=FONT_HELVETICA,
+            font_size=12,
+            color="#FCA5A5",
+            weight=HEAVY,
+            max_width=5.4
+        ).move_to(top_pill_bg)
+        hero_badge = VGroup(top_pill_bg, top_pill_txt)
 
-        # Hero announcement container card
+        # Main Hero announcement card
         hero_card = RoundedRectangle(
-            corner_radius=0.18,
+            corner_radius=0.20,
             width=7.4,
-            height=3.8,
+            height=4.6,
             color=COLOR_CYAN,
             fill_color=COLOR_CARD_BG,
             fill_opacity=0.95,
             stroke_width=2.2
         ).next_to(hero_badge, DOWN, buff=0.35)
 
-        lab_emblem = get_lab_logo(provider, size=1.8).move_to(hero_card).shift(UP * 0.4)
+        lab_emblem = get_lab_logo(provider, size=2.0).move_to(hero_card).shift(UP * 0.7)
         headline_txt = clean_text(
             spec.get("title", f"Introducing {model_name}"),
             font=FONT_HELVETICA,
-            font_size=18,
+            font_size=20,
             color=WHITE,
-            weight=BOLD,
+            weight=HEAVY,
             max_width=6.6
-        )
-        headline_txt.next_to(lab_emblem, DOWN, buff=0.4)
+        ).next_to(lab_emblem, DOWN, buff=0.35)
 
         status_tag = clean_text(
-            "⚡ FRONTIER REASONING & ACCELERATION",
+            "FRONTIER REASONING & DISTILLED ACCELERATION",
             font=FONT_HELVETICA,
             font_size=12,
             color=COLOR_CYAN,
             weight=BOLD,
             max_width=6.6
-        ).next_to(headline_txt, DOWN, buff=0.2)
+        ).next_to(headline_txt, DOWN, buff=0.22)
 
         hero_group = VGroup(hero_badge, hero_card, lab_emblem, headline_txt, status_tag)
         t_in = 0.8
@@ -147,9 +170,9 @@ class TechNewsScene(BaseShortScene):
 
         # 3 Pain Point Rows
         pain_points = [
-            ("🐢 HIGH INFERENCE LATENCY", "Slow token output blocks real-time developer workflows"),
-            ("💸 EXPENSIVE API BILLS", "Reasoning tokens burn through seed runways ($15-$60/1M)"),
-            ("⚠️ RESTRICTED CONCURRENCY", "Strict rate limits and heavy server queueing")
+            ("HIGH INFERENCE LATENCY", "Slow token output blocks real-time developer workflows"),
+            ("EXPENSIVE API BILLS", "Reasoning tokens burn through seed runways ($15-$60/1M)"),
+            ("RESTRICTED CONCURRENCY", "Strict rate limits and heavy server queueing")
         ]
         row_groups = []
         for title, sub in pain_points:
@@ -169,7 +192,10 @@ class TechNewsScene(BaseShortScene):
             FadeIn(ceiling_group, shift=UP * 0.2),
             run_time=t_in
         )
-        self.play(rows_col[1].animate(rate_func=there_and_back, run_time=t_action).scale(1.03).set_stroke(color=COLOR_DANGER, width=2.0))
+        self.play(
+            rows_col[1][0].animate(rate_func=there_and_back, run_time=t_action).set_stroke(color=COLOR_DANGER, width=2.2),
+            rows_col[1].animate(rate_func=there_and_back, run_time=t_action).scale(1.03)
+        )
         self.clean_transition([ceiling_group], run_time=t_out)
 
         # -----------------------------------------------------------------
@@ -254,15 +280,15 @@ class TechNewsScene(BaseShortScene):
         b1_lbl = clean_text("SWE-BENCH VERIFIED (CODING)", font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=4.0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + UP * 0.55)
         
         # New model bar
-        bar_w_max = 3.6
+        bar_w_max = 3.3
         bar_new_w = bar_w_max * 0.92
         bar_new = Rectangle(width=bar_new_w, height=0.28, color=COLOR_MINT, fill_color=COLOR_MINT, fill_opacity=1.0, stroke_width=0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + UP * 0.12)
-        val_new = clean_text(f"{model_name}: 49.3%", font=FONT_HELVETICA, font_size=12, color=COLOR_MINT, weight=BOLD, max_width=2.6).next_to(bar_new, RIGHT, buff=0.15)
+        val_new = clean_text(f"{model_name}: 49.3%", font=FONT_HELVETICA, font_size=12, color=COLOR_MINT, weight=BOLD, max_width=2.8).next_to(bar_new, RIGHT, buff=0.15)
         
         # Baseline model bar
         bar_old_w = bar_w_max * 0.65
         bar_old = Rectangle(width=bar_old_w, height=0.22, color="#475569", fill_color="#475569", fill_opacity=0.8, stroke_width=0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + DOWN * 0.28)
-        val_old = clean_text("o1-preview: 38.2%", font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=2.6).next_to(bar_old, RIGHT, buff=0.15)
+        val_old = clean_text("o1-preview: 38.2%", font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=2.8).next_to(bar_old, RIGHT, buff=0.15)
         
         # SOTA Leap Chip
         chip_bg = RoundedRectangle(corner_radius=0.08, width=1.8, height=0.32, color=COLOR_GOLD, fill_color="#78350F", fill_opacity=0.8, stroke_width=1.0)
@@ -277,7 +303,7 @@ class TechNewsScene(BaseShortScene):
         
         bar_aime_w = bar_w_max * 0.88
         bar_aime = Rectangle(width=bar_aime_w, height=0.26, color=COLOR_CYAN, fill_color=COLOR_CYAN, fill_opacity=1.0, stroke_width=0).align_to(b2_container, LEFT).shift(RIGHT * 0.35 + DOWN * 0.08)
-        val_aime = clean_text(f"{model_name}: 87.3%", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD, max_width=2.6).next_to(bar_aime, RIGHT, buff=0.15)
+        val_aime = clean_text(f"{model_name}: 87.3%", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD, max_width=2.8).next_to(bar_aime, RIGHT, buff=0.15)
 
         b2_group = VGroup(b2_container, b2_lbl, bar_aime, val_aime).next_to(b1_group, DOWN, buff=0.2)
         bench_group = VGroup(bench_card, bench_title, b1_group, b2_group)
