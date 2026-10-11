@@ -101,3 +101,9 @@ class ChalkboardCaptions:
             self.current_pill = None
             return anim
         return Wait(0.01)
+
+    def play_caption(self, text: str, highlights: dict = None, duration: float = 0.5):
+        """Displays caption pill within the active scene."""
+        anim = self.show(text, highlights)
+        rt = min(0.35, duration if duration else 0.35)
+        self.scene.play(anim, run_time=rt)

@@ -48,14 +48,14 @@ CATEGORY_SCENE_MAP = {
         "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
     },
     "developer_perks": {
-        "file": "manim_engine/scenes/benchmark_scene.py",
-        "class": "BenchmarkNewsScene",
-        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
     },
     "tech_news": {
-        "file": "manim_engine/scenes/benchmark_scene.py",
-        "class": "BenchmarkNewsScene",
-        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
     }
 }
 
@@ -392,25 +392,34 @@ def main():
     except Exception as e_vd:
         print(f"⚠️ Visual Director notice: {e_vd}")
 
-    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0)
-    print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
-    try:
-        from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
-        for idx, beat in enumerate(spec.get("beats", [])):
-            b_id = beat.get("beat_id", idx + 1)
-            # Prioritize authentic arXiv figures for Beat 3 if available
-            if b_id == 3 and spec.get("paper_figures"):
-                continue
-            bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
-    except Exception as e_synth:
-        print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Mechanism Breakdown)
+    if category in ("architecture_breakdown", "mechanism_deepdive", "model_showdown"):
+        print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
+        try:
+            from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
+            for idx, beat in enumerate(spec.get("beats", [])):
+                b_id = beat.get("beat_id", idx + 1)
+                # Prioritize authentic arXiv figures for Beat 3 if available
+                if b_id == 3 and spec.get("paper_figures"):
+                    continue
+                bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+        except Exception as e_synth:
+            print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
 
-    if not args.legacy_engine:
+    if category in ("developer_perks", "startup_credits", "perks"):
+        scene_file = "manim_engine/scenes/developer_perks_scene.py"
+        scene_class = "DeveloperPerksScene"
+        engine_label = "Developer Perks UI Card Engine (Track 3)"
+    elif category in ("tech_news", "official_blogs", "blogs", "news", "benchmark_news") and not args.legacy_engine:
+        scene_file = "manim_engine/scenes/tech_news_scene.py"
+        scene_class = "TechNewsScene"
+        engine_label = "Tech News Launch Studio Engine (Track 2)"
+    elif not args.legacy_engine:
         scene_file = "manim_engine/scenes/script_driven_scene.py"
         scene_class = "ScriptDrivenScene"
-        engine_label = "Visual Engine Script-Driven Compiler"
+        engine_label = "Visual Engine Script-Driven Compiler (Track 1)"
     else:
-        scene_info = CATEGORY_SCENE_MAP[category]
+        scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"
