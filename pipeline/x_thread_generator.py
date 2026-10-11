@@ -237,6 +237,7 @@ def generate_x_thread(spec: Dict[str, Any], use_llm: bool = True) -> List[str]:
                 prompt=user_prompt,
                 system_instruction=X_THREAD_SYSTEM_PROMPT
             )
+            parsed = None
             if response_text:
                 parsed = robust_json_loads(response_text)
 
