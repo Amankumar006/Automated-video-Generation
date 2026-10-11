@@ -600,3 +600,77 @@ def test_scene_active_auxiliary_mobjects_reset_per_beat():
     scene.track_auxiliary_mobject(aux_mob_2)
     assert len(scene.active_auxiliary_mobjects) == 1
     assert aux_mob_1 not in scene.active_auxiliary_mobjects
+
+
+def test_formula_tray_returns_none_when_no_formula_and_frosted_capsule_when_present():
+    """
+    Verifies that _build_formula_tray_mobject returns None when no math formula
+    exists (preventing redundant grey text chips from cluttering the bottom screen),
+    and returns a frosted glass capsule positioned at y = -2.6 when an authentic formula exists.
+    """
+    scene = DummyScriptDrivenScene()
+    scene.spec = {
+        "beats": [
+            {"beat_id": 1, "text": "Beat 1", "visual_focus": "attention mechanism"},
+            {"beat_id": 2, "text": "Beat 2", "visual_focus": "quantization error"}
+        ],
+        "math_formulas": [
+            {"beat_id": 2, "latex": "E = mc^2"}
+        ]
+    }
+
+    # Beat 1 has NO formula -> must return None (no fake text chips!)
+    tray_1 = scene._build_formula_tray_mobject(1)
+    assert tray_1 is None
+
+    # Beat 2 has an authentic LaTeX formula -> must return a capsule at y = -2.6
+    tray_2 = scene._build_formula_tray_mobject(2)
+    assert tray_2 is not None
+    assert len(tray_2) == 2  # Background capsule + math mobject
+    assert abs(tray_2.get_center()[1] - (-2.6)) < 0.05
+
+
+def test_kinetic_captions_positioned_at_safe_zone_y_minus_3_85():
+    """
+    Verifies that kinetic captions are anchored at y = -3.85,
+    leaving clean headroom for diagrams/formulas above and mobile Shorts UI below.
+    """
+    scene = DummyScriptDrivenScene()
+    scene.spec = {
+        "beats": [
+            {"beat_id": 1, "text": "Understanding Quantization", "start": 0.0, "end": 4.0}
+        ]
+    }
+    scene.setup_kinetic_captions()
+    assert scene.caption_container is not None
+    assert scene.caption_target_y == -3.85
+
+
+def test_seamless_cross_fade_handoff_in_play_brand_outro():
+    """
+    Verifies that play_brand_outro includes the final active motif and formula tray
+    in its intro handoff animation (FadeOut) while creating the brand logo (Create/FadeIn),
+    guaranteeing seamless handoff with zero black screen frames.
+    """
+    scene = DummyScriptDrivenScene()
+    scene.spec = {
+        "beats": [
+            {"beat_id": 1, "text": "B1"},
+            {"beat_id": 2, "text": "Outro"}
+        ]
+    }
+    dummy_motif = Square()
+    dummy_formula = Dot()
+    scene.add(dummy_motif, dummy_formula)
+    scene.current_motif = dummy_motif
+    scene.current_formula_mobj = dummy_formula
+
+    scene.play_brand_outro()
+
+    # The played animations must include FadeOut of current_motif and current_formula_mobj
+    faded_mobjects = [anim.mobject for anim in scene.played_animations if isinstance(anim, FadeOut)]
+    assert dummy_motif in faded_mobjects
+    assert dummy_formula in faded_mobjects
+    assert scene.current_motif is None
+    assert scene.current_formula_mobj is None
+

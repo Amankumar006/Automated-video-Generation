@@ -64,6 +64,7 @@ class ScriptDrivenScene(MovingCameraScene):
 
         # 3. Setup Persistent Brand Header & Formula Tray
         self.current_formula_mobj = None
+        self.current_motif = None
         self.active_auxiliary_mobjects = []
         self.setup_header()
 
@@ -87,6 +88,14 @@ class ScriptDrivenScene(MovingCameraScene):
             elif isinstance(m, Mobject):
                 if m not in self.active_auxiliary_mobjects:
                     self.active_auxiliary_mobjects.append(m)
+
+    def _safe_reset_camera(self):
+        """Safely resets camera frame to default 9:16 mobile canvas dimensions if camera is initialized."""
+        try:
+            if hasattr(self, "renderer") and hasattr(self.renderer, "camera") and hasattr(self.renderer.camera, "frame"):
+                self.camera.frame.set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
+        except Exception:
+            pass
 
     def load_spec(self) -> Dict[str, Any]:
         """Loads active spec from ACTIVE_SPEC_PATH or latest generated template."""
@@ -135,7 +144,7 @@ class ScriptDrivenScene(MovingCameraScene):
         self.add(self.header_group)
 
     def setup_kinetic_captions(self):
-        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.45 (Depth Layer 3)."""
+        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.85 (Depth Layer 3)."""
         try:
             from pipeline.subtitle_generator import generate_phrase_chunks
             self.caption_chunks = generate_phrase_chunks(self.spec.get("beats", []))
@@ -143,7 +152,8 @@ class ScriptDrivenScene(MovingCameraScene):
             print(f"⚠️ Kinetic subtitle setup notice: {e}")
             self.caption_chunks = []
 
-        self.caption_container = VGroup().move_to([0, -3.45, 0])
+        self.caption_target_y = -3.85
+        self.caption_container = VGroup().move_to([0, -3.85, 0])
         self.caption_container.set_z_index(60)
         self.add(self.caption_container)
 
@@ -187,7 +197,7 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_width=1.4
                         )
                         cam_center = self.camera.frame.get_center()
-                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.45, 0]))
+                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.85, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
@@ -208,8 +218,13 @@ class ScriptDrivenScene(MovingCameraScene):
                     return float(b["duration"])
         return default_dur
 
-    def _build_formula_tray_mobject(self, beat_id: int) -> VGroup:
-        """Constructs the math formula or key concept badge for the given beat."""
+    def _build_formula_tray_mobject(self, beat_id: int) -> Optional[VGroup]:
+        """
+        Constructs the math formula badge for the given beat if an authentic formula exists.
+        Renders inside a sleek frosted capsule positioned safely at y = -2.6 (Depth Layer 2),
+        eliminating clutter and overlapping with subtitles or diagram motifs.
+        Returns None if no formula exists for this beat.
+        """
         formulas = self.spec.get("math_formulas", [])
         matching_formula = None
         for f in formulas:
@@ -218,70 +233,90 @@ class ScriptDrivenScene(MovingCameraScene):
                 break
 
         if not matching_formula and beat_id <= len(formulas):
-            matching_formula = formulas[beat_id - 1]
+            candidate = formulas[beat_id - 1]
+            if "beat_id" not in candidate:
+                matching_formula = candidate
 
-        tray_group = VGroup()
-        if matching_formula:
-            # Check for pre-rendered SVG math
-            svg_filename = matching_formula.get("svg_filename") or matching_formula.get("filename") or ""
-            svg_path = PROJECT_ROOT / "public" / "math_svgs" / svg_filename if svg_filename else None
+        if not matching_formula:
+            return None
 
-            # Render on-the-fly via matplotlib mathtext if file is missing from disk
-            if svg_filename and (not svg_path or not svg_path.exists()):
-                latex_code = matching_formula.get("latex", "")
-                if latex_code:
-                    try:
-                        from scripts.generate_math_svgs import render_math_to_svg
-                        render_math_to_svg(latex_code, svg_filename, fontsize=matching_formula.get("fontsize", 24))
-                    except Exception as e:
-                        print(f"⚠️ On-the-fly math SVG generation failed: {e}")
+        math_mobj = None
+        # Check for pre-rendered SVG math
+        svg_filename = matching_formula.get("svg_filename") or matching_formula.get("filename") or ""
+        svg_path = PROJECT_ROOT / "public" / "math_svgs" / svg_filename if svg_filename else None
 
-            if svg_path and svg_path.exists():
+        # Render on-the-fly via matplotlib mathtext if file is missing from disk
+        if svg_filename and (not svg_path or not svg_path.exists()):
+            latex_code = matching_formula.get("latex", "")
+            if latex_code:
                 try:
-                    math_mobj = SVGMobject(str(svg_path))
-                    math_mobj.set_color_by_gradient("#38BDF8", "#34D399")
+                    from scripts.generate_math_svgs import render_math_to_svg
+                    render_math_to_svg(latex_code, svg_filename, fontsize=matching_formula.get("fontsize", 24))
+                except Exception as e:
+                    print(f"⚠️ On-the-fly math SVG generation failed: {e}")
+
+        if svg_path and svg_path.exists():
+            try:
+                math_mobj = SVGMobject(str(svg_path))
+                math_mobj.set_color_by_gradient("#38BDF8", "#34D399")
+                if math_mobj.width > 5.5:
+                    math_mobj.scale_to_fit_width(5.5)
+                if math_mobj.height > 0.8:
+                    math_mobj.scale_to_fit_height(0.8)
+            except Exception:
+                math_mobj = None
+
+        if math_mobj is None:
+            latex_code = matching_formula.get("latex", "")
+            if latex_code:
+                clean_tex = latex_code.replace(r"\implies", r"\to").replace(r"\iff", r"\leftrightarrow")
+                try:
+                    math_mobj = MathTex(clean_tex, font_size=24, color="#38BDF8")
                     if math_mobj.width > 5.5:
                         math_mobj.scale_to_fit_width(5.5)
-                    if math_mobj.height > 0.9:
-                        math_mobj.scale_to_fit_height(0.9)
-                    tray_group.add(math_mobj)
+                    if math_mobj.height > 0.8:
+                        math_mobj.scale_to_fit_height(0.8)
                 except Exception:
-                    pass
-
-            if len(tray_group) == 0:
-                latex_code = matching_formula.get("latex", "")
-                if latex_code:
                     try:
-                        clean_tex = latex_code.replace(r"\implies", r"\to").replace(r"\iff", r"\leftrightarrow")
-                        math_mobj = MathTex(clean_tex, font_size=24, color="#38BDF8")
+                        from manim_engine.primitives.typography import CleanText
+                        math_mobj = CleanText(clean_tex, font_size=16, color="#38BDF8")
                         if math_mobj.width > 5.5:
                             math_mobj.scale_to_fit_width(5.5)
-                        tray_group.add(math_mobj)
                     except Exception:
-                        pass
+                        math_mobj = None
 
-        # If no formula, add key insight chip
-        if len(tray_group) == 0:
-            for b in self.spec.get("beats", []):
-                if b.get("beat_id") == beat_id:
-                    v_focus = b.get("visual_focus", "")
-                    short_label = v_focus[:45] + "..." if len(v_focus) > 45 else v_focus
-                    chip = Text(short_label.upper(), font_size=11, font=FONT_HELVETICA, color="#64748B", weight=BOLD)
-                    tray_group.add(chip)
-                    break
+        if math_mobj is None:
+            return None
 
-        tray_group.set_z_index(70)
-        tray_group.move_to([0, -4.5, 0])
+        # Wrap authentic formula in frosted glass capsule
+        pill_w = min(6.4, max(3.5, math_mobj.width + 0.6))
+        pill_h = min(0.9, max(0.65, math_mobj.height + 0.25))
+        capsule_bg = RoundedRectangle(
+            corner_radius=0.16,
+            width=pill_w,
+            height=pill_h,
+            fill_color="#080C14",
+            fill_opacity=0.92,
+            stroke_color="#0284C7",
+            stroke_width=1.2
+        )
+        tray_group = VGroup(capsule_bg, math_mobj)
+        tray_group.set_z_index(45)
+        tray_group.move_to([0, -2.6, 0])
         return tray_group
 
     def display_math_formula(self, beat_id: int, run_time: float = 0.35):
         """Displays synchronized mathematical formula or key principle badge in the lower tray."""
         tray_group = self._build_formula_tray_mobject(beat_id)
-        if self.current_formula_mobj:
-            self.play(ReplacementTransform(self.current_formula_mobj, tray_group), run_time=run_time)
-        else:
-            self.play(FadeIn(tray_group, shift=UP * 0.2), run_time=run_time)
-        self.current_formula_mobj = tray_group
+        if tray_group is not None and len(tray_group) > 0:
+            if self.current_formula_mobj:
+                self.play(ReplacementTransform(self.current_formula_mobj, tray_group), run_time=run_time)
+            else:
+                self.play(FadeIn(tray_group, shift=UP * 0.15), run_time=run_time)
+            self.current_formula_mobj = tray_group
+        elif self.current_formula_mobj:
+            self.play(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15), run_time=run_time)
+            self.current_formula_mobj = None
 
     def play_script_driven_choreography(self):
         """
@@ -388,7 +423,11 @@ class ScriptDrivenScene(MovingCameraScene):
             expected_start = float(b.get("start", self.renderer.time))
             expected_end = expected_start + duration
             if self.renderer.time < expected_start:
-                self.wait(expected_start - self.renderer.time)
+                wait_time = expected_start - self.renderer.time
+                if self.current_motif is not None:
+                    self.play_ambient_micro_motion(self.current_motif, motif_type, wait_time)
+                else:
+                    self.wait(wait_time)
 
             print(f"🎬 [ScriptDrivenScene] Choreographing Beat {beat_id} -> Motif: '{motif_type}' [Target: {expected_start:.2f}s -> {expected_end:.2f}s | Dur: {duration:.2f}s]...")
 
@@ -437,26 +476,31 @@ class ScriptDrivenScene(MovingCameraScene):
             if motif is None:
                 motif = create_script_motif(motif_type, motif_params)
 
+            # Strict safe-zone enforcement to prevent overlapping with top headers or bottom subtitles
+            if motif.width > 7.2:
+                motif.scale_to_fit_width(7.2)
+            if motif.height > 5.8:
+                motif.scale_to_fit_height(5.8)
+
             if not isinstance(motif, BaseBlueprintComposition):
-                motif.move_to([0, 0.65, 0])
+                motif.move_to([0, 0.75, 0])
+            else:
+                if motif.get_bottom()[1] < -2.2:
+                    shift_up = -2.2 - motif.get_bottom()[1]
+                    if motif.get_top()[1] + shift_up <= 6.2:
+                        motif.shift(UP * shift_up)
+                    else:
+                        motif.scale_to_fit_height(8.4)
+                        motif.move_to([0, 1.9, 0])
+
             motif.set_z_index(10)
 
-            # 1 & 2. Construct Tray & Prepare Synchronous Entrance
+            # Construct formula tray (if authentic formula exists)
             tray_group = self._build_formula_tray_mobject(beat_id)
-            if self.current_formula_mobj:
-                formula_anim = ReplacementTransform(self.current_formula_mobj, tray_group)
-            else:
-                formula_anim = FadeIn(tray_group, shift=UP * 0.2)
-            self.current_formula_mobj = tray_group
 
-            enter_time = min(0.85, duration * 0.20)
-            if hasattr(motif, "get_entrance_animation"):
-                motif_enter = motif.get_entrance_animation(run_time=enter_time)
-            else:
-                motif_enter = FadeIn(motif, scale=0.96, run_time=enter_time)
+            enter_time = min(0.75, duration * 0.18)
 
-            # Cognitive Spotlight Staging (Visual Engine 7.0)
-            # Prepared concurrently with entrance so it never adds dead pauses!
+            # Cognitive Spotlight Staging
             spotlight_anims = []
             try:
                 spotlight_anims = self.spotlight_controller.apply_spotlight(
@@ -473,10 +517,10 @@ class ScriptDrivenScene(MovingCameraScene):
             except Exception as e:
                 print(f"⚠️ Spotlight staging notice: {e}")
 
-            # Formula Luminous Sparkle Burst & Neon Halo (Visual Engine 7.5)
+            # Formula Sparkle Burst & Halo Pulse (only on authentic formulas)
             particle_anims = []
             try:
-                if len(tray_group) > 0 and beat_id in [3, 4, 5]:
+                if tray_group is not None and len(tray_group) > 0 and beat_id in [3, 4, 5]:
                     burst_pts, burst_anim = create_formula_sparkle_burst(tray_group, color="#38BDF8", run_time=enter_time)
                     halo_box, halo_anim = create_formula_halo_pulse(tray_group, color="#38BDF8", run_time=enter_time)
                     self.add(burst_pts, halo_box)
@@ -485,14 +529,60 @@ class ScriptDrivenScene(MovingCameraScene):
             except Exception as e_p:
                 print(f"⚠️ Particle entrance notice: {e_p}")
 
-            entrance_group = [motif_enter, formula_anim]
+            # SEAMLESS CROSS-FADE ENTRANCE:
+            # If a prior motif exists, cross-fade it smoothly into the new motif in the SAME self.play call.
+            # ZERO black frames!
+            old_motif = self.current_motif
+            old_aux = list(self.active_auxiliary_mobjects)
+            self.active_auxiliary_mobjects = []
+
+            entrance_group = []
+            if old_motif is not None:
+                entrance_group.append(FadeOut(old_motif, shift=DOWN * 0.12))
+                for aux_m in old_aux:
+                    if aux_m is not None and aux_m in self.mobjects:
+                        entrance_group.append(FadeOut(aux_m, shift=DOWN * 0.12))
+                try:
+                    if hasattr(self, "kinetic_camera") and self.kinetic_camera:
+                        if hasattr(self, "renderer") and hasattr(self.renderer, "camera") and hasattr(self.renderer.camera, "frame"):
+                            entrance_group.append(
+                                self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=enter_time)
+                            )
+                except Exception:
+                    pass
+
+            if hasattr(motif, "get_entrance_animation"):
+                entrance_group.append(motif.get_entrance_animation(run_time=enter_time))
+            else:
+                entrance_group.append(FadeIn(motif, shift=UP * 0.12, run_time=enter_time))
+
+            if tray_group is not None and len(tray_group) > 0:
+                if self.current_formula_mobj:
+                    entrance_group.append(ReplacementTransform(self.current_formula_mobj, tray_group))
+                else:
+                    entrance_group.append(FadeIn(tray_group, shift=UP * 0.12))
+                self.current_formula_mobj = tray_group
+            elif self.current_formula_mobj:
+                entrance_group.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.12))
+                self.current_formula_mobj = None
+
             if spotlight_anims:
                 entrance_group.extend(spotlight_anims)
             if particle_anims:
                 entrance_group.extend(particle_anims)
+
             self.play(*entrance_group, run_time=enter_time)
 
-            # 3. Focal Kinetic Action & Cinematic Camera Staging (Cinematic Engine 8.0)
+            if old_motif is not None:
+                self.remove(old_motif)
+            for aux_m in old_aux:
+                if aux_m is not None:
+                    self.remove(aux_m)
+
+            self._safe_reset_camera()
+            self.current_motif = motif
+
+            # 3. Focal Kinetic Action & Cinematic Camera Staging
             action_time = min(1.3, duration * 0.26)
             camera_action_anim = None
 
@@ -520,7 +610,6 @@ class ScriptDrivenScene(MovingCameraScene):
                 except Exception as e:
                     print(f"⚠️ Lateral tracking dolly notice: {e}")
             else:
-                # Beats 1, 2, 4 maintain visual stability without repetitive zoom pulsing
                 camera_action_anim = None
 
             try:
@@ -563,20 +652,9 @@ class ScriptDrivenScene(MovingCameraScene):
                 self.wait(action_time)
 
             # 4. Continuous Ambient Micro-Motion (Strict Clock Alignment)
-            exit_time = 0.30
-            time_before_exit = expected_end - exit_time
-            remaining = max(0.0, time_before_exit - self.renderer.time)
+            remaining = max(0.0, expected_end - self.renderer.time)
             if remaining > 0.05:
                 self.play_ambient_micro_motion(motif, motif_type, remaining)
-
-            # 5. Clean Exit & Framing Reset (Simultaneous, Exact Audio Cut)
-            actual_exit = max(0.15, expected_end - self.renderer.time)
-            self.clean_beat_exit(
-                motif=motif,
-                actual_exit=actual_exit,
-                camera_action_anim=camera_action_anim,
-                beat_id=beat_id
-            )
 
     def clean_beat_exit(
         self,
@@ -588,7 +666,7 @@ class ScriptDrivenScene(MovingCameraScene):
         """
         Executes clean exit for active beat:
         Fades out motif, formula tray, and all tracked auxiliary mobjects (particles, halos, overlays),
-        purges them explicitly from self.mobjects, and clears the active auxiliary tracking collection.
+        purges them explicitly from self.mobjects, resets camera framing, and clears the active auxiliary tracking collection.
         """
         exit_anims = [FadeOut(motif, shift=DOWN * 0.15)]
         if self.current_formula_mobj:
@@ -599,11 +677,14 @@ class ScriptDrivenScene(MovingCameraScene):
             if aux_mob is not None and aux_mob in self.mobjects:
                 exit_anims.append(FadeOut(aux_mob, shift=DOWN * 0.15))
 
-        # Only reset camera framing if the camera actually moved or zoomed
-        if camera_action_anim is not None or beat_id == 5:
+        # Always reset camera framing to prevent cumulative drift
+        try:
             if hasattr(self, "kinetic_camera") and self.kinetic_camera:
-                reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
-                exit_anims.append(reset_anim)
+                if hasattr(self, "renderer") and hasattr(self.renderer, "camera") and hasattr(self.renderer.camera, "frame"):
+                    reset_anim = self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=actual_exit)
+                    exit_anims.append(reset_anim)
+        except Exception:
+            pass
 
         self.play(*exit_anims, run_time=actual_exit)
         self.remove(motif)
@@ -618,12 +699,15 @@ class ScriptDrivenScene(MovingCameraScene):
         self.active_auxiliary_mobjects.clear()
         if hasattr(self, "spotlight_controller") and hasattr(self.spotlight_controller, "active_halo"):
             self.spotlight_controller.active_halo = None
+        self._safe_reset_camera()
+        if getattr(self, "current_motif", None) == motif:
+            self.current_motif = None
 
     def play_ambient_micro_motion(self, motif: Mobject, motif_type: str, remaining_time: float):
         """
         3Blue1Brown-Standard Continuous Ambient Micro-Motion:
         Eliminates 'dead screens' / static wait during remaining voiceover narration.
-        Applies a gentle 2.5% slow camera push-in and subtle drift,
+        Applies a gentle organic camera breathing with zero accumulated drift,
         coupled with contextual traveling energy pulses across active motif elements.
         """
         if remaining_time <= 0.05:
@@ -631,13 +715,13 @@ class ScriptDrivenScene(MovingCameraScene):
 
         anims = []
 
-        # 1. Continuous Organic Camera Breathing (6% dynamic glide)
+        # 1. Continuous Organic Camera Breathing (zero drift accumulation via there_and_back)
         anims.append(
             self.kinetic_camera.get_ambient_drift_animation(
                 camera_frame=self.camera.frame,
                 duration=remaining_time,
-                scale_factor=0.94,
-                shift_vector=np.array([0.0, 0.12, 0.0])
+                scale_factor=0.985,
+                shift_vector=np.array([0.0, 0.04, 0.0])
             )
         )
 
@@ -685,27 +769,15 @@ class ScriptDrivenScene(MovingCameraScene):
         self.play(*anims, run_time=remaining_time)
 
     def play_brand_outro(self):
-        """Standard high-conversion 3Blue1Brown chalkboard outro with continuous subtle drift."""
+        """Standard high-conversion 3Blue1Brown chalkboard outro with seamless cross-fade from final beat."""
         total_beats = len(self.spec.get("beats", []))
         duration = self.get_beat_duration(total_beats, 4.5)
-        # 1. Cleanly purge ALL lingering vector mobjects from prior beats (except background dots & header)
-        persistent = {getattr(self, "dots", None), getattr(self, "header_group", None)}
-        lingering = [m for m in list(self.mobjects) if m not in persistent and m is not None]
 
         if hasattr(self, "caption_container") and self.caption_container:
             try:
                 self.caption_container.clear_updaters()
             except Exception:
                 pass
-
-        purge_time = 0.25 if lingering else 0.0
-        if lingering:
-            self.play(*[FadeOut(m) for m in lingering], run_time=purge_time)
-            for m in lingering:
-                self.remove(m)
-
-        self.current_formula_mobj = None
-        self.caption_container = None
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(
             logo_title="THE MODEL VERSE",
@@ -718,16 +790,61 @@ class ScriptDrivenScene(MovingCameraScene):
         intro_logo_time = 0.9
         intro_sub_time = 0.5
         exit_time = 0.35
-        self.play(Create(logo_icon), FadeIn(brand_text, shift=UP * 0.2), run_time=intro_logo_time)
+
+        # Seamless cross-fade from final motif into brand outro logo (zero black screen!)
+        handoff_anims = [
+            Create(logo_icon),
+            FadeIn(brand_text, shift=UP * 0.2)
+        ]
+        if getattr(self, "current_motif", None) is not None:
+            handoff_anims.append(FadeOut(self.current_motif, shift=DOWN * 0.15))
+        if self.current_formula_mobj is not None:
+            handoff_anims.append(FadeOut(self.current_formula_mobj, shift=DOWN * 0.15))
+        for aux_mob in self.active_auxiliary_mobjects:
+            if aux_mob is not None and aux_mob in self.mobjects:
+                handoff_anims.append(FadeOut(aux_mob, shift=DOWN * 0.15))
+
+        try:
+            if hasattr(self, "kinetic_camera") and self.kinetic_camera:
+                if hasattr(self, "renderer") and hasattr(self.renderer, "camera") and hasattr(self.renderer.camera, "frame"):
+                    handoff_anims.append(
+                        self.kinetic_camera.get_reset_animation(self.camera.frame, run_time=intro_logo_time)
+                    )
+        except Exception:
+            pass
+
+        self.play(*handoff_anims, run_time=intro_logo_time)
+
+        # Purge prior beat visuals from scene graph
+        if getattr(self, "current_motif", None) is not None:
+            self.remove(self.current_motif)
+            self.current_motif = None
+        if self.current_formula_mobj is not None:
+            self.remove(self.current_formula_mobj)
+            self.current_formula_mobj = None
+        for aux_mob in self.active_auxiliary_mobjects:
+            if aux_mob is not None:
+                self.remove(aux_mob)
+        self.active_auxiliary_mobjects.clear()
+        if hasattr(self, "caption_container") and self.caption_container:
+            self.remove(self.caption_container)
+            self.caption_container = None
+
         self.play(FadeIn(sub, shift=UP * 0.1), run_time=intro_sub_time)
 
-        # Micro-drift during outro narration & music
-        used_so_far = purge_time + intro_logo_time + intro_sub_time + exit_time
+        # Micro-drift during outro narration & music (zero drift accumulation via there_and_back)
+        used_so_far = intro_logo_time + intro_sub_time + exit_time
         outro_hold = max(0.5, duration - used_so_far)
-        self.play(
-            self.camera.frame.animate(rate_func=linear).scale(0.985).shift(UP * 0.05),
+        drift_anims = [
             brand_text.animate(rate_func=there_and_back).set_color("#34D399"),
             logo_icon.animate(rate_func=there_and_back).scale(1.03),
-            run_time=outro_hold
-        )
+        ]
+        try:
+            if hasattr(self, "renderer") and hasattr(self.renderer, "camera") and hasattr(self.renderer.camera, "frame"):
+                drift_anims.append(
+                    self.camera.frame.animate(rate_func=there_and_back).scale(0.985).shift(UP * 0.04)
+                )
+        except Exception:
+            pass
+        self.play(*drift_anims, run_time=outro_hold)
         self.play(FadeOut(outro_group), run_time=exit_time)

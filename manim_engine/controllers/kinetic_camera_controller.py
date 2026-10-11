@@ -75,9 +75,9 @@ class KineticCameraController:
         Uses near-unity scale (0.985) to prevent noticeable zoom fatigue.
         """
         s_factor = scale_factor if scale_factor is not None else 0.985
-        s_vec = shift_vector if shift_vector is not None else np.array([0.0, 0.05, 0.0])
+        s_vec = shift_vector if shift_vector is not None else np.array([0.0, 0.04, 0.0])
 
-        return camera_frame.animate(rate_func=linear, run_time=duration).scale(s_factor).shift(s_vec)
+        return camera_frame.animate(rate_func=there_and_back, run_time=duration).scale(s_factor).shift(s_vec)
 
     def get_selective_punch_in(
         self,
