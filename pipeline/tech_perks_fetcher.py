@@ -18,6 +18,12 @@ from enum import Enum
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
+from pipeline.config import (
+    MAX_PERK_VERIFICATION_AGE_DAYS,
+    is_content_recent,
+    calculate_content_age_days,
+)
+
 OFFICIAL_DOMAINS_WHITELIST = {
     "anthropic.com",
     "claude.com",
@@ -60,6 +66,16 @@ class PerkEvidenceRecord:
     category: str = "developer_perks"
     domain_taxonomy: str = "developer_perks"
 
+    @property
+    def age_days(self) -> Optional[int]:
+        """Calculates days elapsed since last verification date."""
+        return calculate_content_age_days(self.last_verified_date)
+
+    @property
+    def is_stale(self) -> bool:
+        """Determines if the perk has not been verified within MAX_PERK_VERIFICATION_AGE_DAYS."""
+        return not is_content_recent(self.last_verified_date, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS)
+
     def to_candidate_spec(self) -> Dict[str, Any]:
         """Converts verified perk into standard pipeline candidate specification."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.program_id.lower())
@@ -67,6 +83,10 @@ class PerkEvidenceRecord:
         return {
             "id": f"perk_{clean_id}",
             "title": self.headline,
+            "provider": self.provider,
+            "last_verified_date": self.last_verified_date,
+            "age_days": self.age_days,
+            "is_stale": self.is_stale,
             "recommended_category": "developer_perks",
             "domain_taxonomy": "developer_perks",
             "taxonomy": "developer_perks",
@@ -585,16 +605,39 @@ class TechPerksFetcher:
         """Retrieves a specific verified perk record by program ID."""
         return self.registry.get(program_id)
 
-    def get_all_verified_perks(self) -> List[PerkEvidenceRecord]:
-        """Returns all currently active verified perks."""
-        return [p for p in self.registry.values() if p.status == PerkVerificationStatus.VERIFIED_ACTIVE]
+    def get_all_verified_perks(
+        self,
+        max_age_days: Optional[int] = None,
+        allow_stale: bool = False
+    ) -> List[PerkEvidenceRecord]:
+        """
+        Returns all currently active verified perks.
+        Enforces that perks unverified for more than max_age_days (default: 60 days)
+        are excluded from publication candidates.
+        """
+        effective_max_age = MAX_PERK_VERIFICATION_AGE_DAYS if max_age_days is None else max_age_days
+        active_perks = [p for p in self.registry.values() if p.status == PerkVerificationStatus.VERIFIED_ACTIVE]
 
-    def get_trending_perks_digest(self, limit: int = 5) -> List[Dict[str, Any]]:
+        if not allow_stale:
+            active_perks = [
+                p for p in active_perks
+                if is_content_recent(p.last_verified_date, max_age_days=effective_max_age)
+            ]
+
+        return active_perks
+
+    def get_trending_perks_digest(
+        self,
+        limit: int = 5,
+        max_age_days: Optional[int] = None,
+        allow_stale: bool = False
+    ) -> List[Dict[str, Any]]:
         """
         Returns structured candidate specifications ready for ingestion by
         DailyShortsDaemon, auto_produce, or run_pipeline.
+        Filters out expired or unverified perks older than max_age_days.
         """
-        verified = self.get_all_verified_perks()
+        verified = self.get_all_verified_perks(max_age_days=max_age_days, allow_stale=allow_stale)
         candidates = [p.to_candidate_spec() for p in verified]
         # Prioritize high-value and easily accessible programs first
         candidates.sort(key=lambda x: x.get("impact_score", 0), reverse=True)
@@ -605,6 +648,14 @@ class TechPerksFetcher:
 tech_perks_fetcher = TechPerksFetcher()
 
 
-def get_verified_perks_digest(limit: int = 5) -> List[Dict[str, Any]]:
+def get_verified_perks_digest(
+    limit: int = 5,
+    max_age_days: Optional[int] = None,
+    allow_stale: bool = False
+) -> List[Dict[str, Any]]:
     """Helper for daemon and scheduler discovery."""
-    return tech_perks_fetcher.get_trending_perks_digest(limit=limit)
+    return tech_perks_fetcher.get_trending_perks_digest(
+        limit=limit,
+        max_age_days=max_age_days,
+        allow_stale=allow_stale
+    )

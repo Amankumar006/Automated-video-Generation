@@ -24,7 +24,16 @@ from pipeline.official_blogs_fetcher import get_official_blogs_digest, official_
 from pipeline.auto_produce import auto_produce
 from pipeline.script_critic import ScriptCritic
 from pipeline.json_utils import robust_json_loads
-from pipeline.config import WORKSPACE_ROOT, BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS
+from pipeline.config import (
+    WORKSPACE_ROOT,
+    BROADCAST_WIDTH,
+    BROADCAST_HEIGHT,
+    BROADCAST_FPS,
+    MAX_CONTENT_AGE_DAYS,
+    MAX_PERK_VERIFICATION_AGE_DAYS,
+    is_content_recent,
+    calculate_content_age_days,
+)
 from pipeline.analytics_feedback import (
     retention_analytics,
     get_performance_category_bias,
@@ -178,35 +187,88 @@ def get_content_rotation_order(
     return sorted_pillars
 
 
+def is_candidate_eligible_for_production(
+    candidate: Dict[str, Any],
+    max_age_days: Optional[int] = None,
+    allow_stale: bool = False
+) -> bool:
+    """
+    Validates that a candidate specification is fresh and eligible for publication.
+    Enforces maximum age cutoff (30-60 days max, default: 45 days) across all 3 pillars:
+    - ArXiv papers: published within max_age_days
+    - Official blogs: published within max_age_days
+    - Tech perks: verified within MAX_PERK_VERIFICATION_AGE_DAYS (60 days)
+    """
+    if allow_stale:
+        return True
+
+    effective_max_age = MAX_CONTENT_AGE_DAYS if max_age_days is None else max_age_days
+    c_id = str(candidate.get("id", ""))
+    src = str(candidate.get("source", "")).lower()
+    cat = str(candidate.get("category", "")).lower()
+
+    # 1. Perks check
+    if src in ("perks", "verified_perks") or cat == "developer_perks" or c_id.startswith("perk_"):
+        perk_meta = candidate.get("perk_metadata", {})
+        vdate = perk_meta.get("last_verified_date") or candidate.get("last_verified_date")
+        if not vdate:
+            return False
+        return is_content_recent(vdate, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS)
+
+    # 2. Official blogs check
+    if src in ("blogs", "official_blogs") or cat in ("tech_news", "official_blogs") or c_id.startswith(("blog_", "news_")):
+        b_date = candidate.get("published_date") or candidate.get("date")
+        if not b_date:
+            blog_meta = candidate.get("blog_metadata", {})
+            b_date = blog_meta.get("published_date")
+        if not b_date:
+            return False
+        return is_content_recent(b_date, max_age_days=effective_max_age)
+
+    # 3. ArXiv / academic papers check
+    p_date = candidate.get("published_at") or candidate.get("published_date") or candidate.get("date") or c_id
+    return is_content_recent(p_date, max_age_days=effective_max_age)
+
+
 def fetch_candidates_for_pillar(
     pillar: str,
     limit: int = 10,
-    history: Optional[Dict[str, Any]] = None
+    history: Optional[Dict[str, Any]] = None,
+    max_age_days: Optional[int] = None,
+    allow_stale: bool = False
 ) -> List[Dict[str, Any]]:
-    """Fetches candidate specifications for a specific content pillar, filtering out processed items."""
+    """Fetches candidate specifications for a specific content pillar, strictly enforcing content recency."""
     if history is None:
         history = load_history()
 
     proc_ids = set(history.get("processed_papers", {}).keys())
+    effective_max_age = MAX_CONTENT_AGE_DAYS if max_age_days is None else max_age_days
+
+    candidates: List[Dict[str, Any]] = []
 
     if pillar == "arxiv":
-        papers = get_trending_digest(limit=max(limit * 3, 50))
-        return [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids][:limit]
+        papers = get_trending_digest(limit=max(limit * 3, 50), max_age_days=effective_max_age, allow_stale=allow_stale)
+        candidates = [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids]
 
     elif pillar in ("blogs", "news"):
-        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100))
-        return [b for b in blog_candidates if b["id"] not in proc_ids][:limit]
+        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100), max_age_days=effective_max_age, allow_stale=allow_stale)
+        candidates = [b for b in blog_candidates if b["id"] not in proc_ids]
 
     elif pillar == "perks":
         from pipeline.tech_perks_fetcher import get_verified_perks_digest
-        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50))
-        return [p for p in perk_candidates if p["id"] not in proc_ids][:limit]
+        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50), max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS, allow_stale=allow_stale)
+        candidates = [p for p in perk_candidates if p["id"] not in proc_ids]
 
     elif pillar == "github":
         gh_candidates = get_trending_github_digest(limit=max(limit * 5, 30))
-        return [g for g in gh_candidates if g["id"] not in proc_ids][:limit]
+        candidates = [g for g in gh_candidates if g["id"] not in proc_ids]
 
-    return []
+    # Enforce second-layer defensive check on all candidates
+    eligible = [
+        c for c in candidates
+        if is_candidate_eligible_for_production(c, max_age_days=effective_max_age, allow_stale=allow_stale)
+    ]
+    return eligible[:limit]
 
 
 def evaluate_pedagogical_viability(

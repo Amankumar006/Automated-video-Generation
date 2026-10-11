@@ -4,6 +4,8 @@ The Model Verse — Configuration & Design Tokens
 
 import os
 import shutil
+import datetime
+from typing import Optional, Dict, Any, List
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -142,5 +144,99 @@ ENABLE_BG_MUSIC = True
 DEFAULT_DUCK_GAIN = 0.10    # -20 dB during speech
 DEFAULT_NORMAL_GAIN = 0.32  # -10 dB during pauses & outro
 CUSTOM_BG_MUSIC_PATH = str(WORKSPACE_ROOT / "public" / "audio" / "bg_music.wav")
+
+# Content Recency & Maximum Age Constraints (1 to 2 months max)
+# Strict default: 45 days. Hard ceiling: 60 days.
+MAX_CONTENT_AGE_DAYS: int = int(os.environ.get("MAX_CONTENT_AGE_DAYS", "45"))
+MAX_PERK_VERIFICATION_AGE_DAYS: int = int(os.environ.get("MAX_PERK_VERIFICATION_AGE_DAYS", "60"))
+STRICT_RECENCY_ENFORCEMENT: bool = os.environ.get("STRICT_RECENCY_ENFORCEMENT", "true").lower() in ("true", "1", "yes")
+
+
+def parse_content_date(date_str_or_id: Optional[str]) -> Optional[datetime.date]:
+    """
+    Parses an ISO date string, human date string, RFC date string, or arXiv ID
+    into a clean standard datetime.date object.
+    """
+    import re
+    import datetime
+    import email.utils
+
+    if not date_str_or_id:
+        return None
+
+    raw = str(date_str_or_id).strip()
+
+    # 1. Try ISO string (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)
+    iso_match = re.match(r"^(\d{4})-(\d{2})-(\d{2})", raw)
+    if iso_match:
+        try:
+            return datetime.date(int(iso_match.group(1)), int(iso_match.group(2)), int(iso_match.group(3)))
+        except ValueError:
+            pass
+
+    # 2. Try RFC 2822 (e.g., 'Fri, 31 Jan 2025 18:00:00 GMT')
+    try:
+        dt_tuple = email.utils.parsedate_to_datetime(raw)
+        if dt_tuple:
+            return dt_tuple.date()
+    except Exception:
+        pass
+
+    # 3. Try standard human-readable formats
+    for fmt in (
+        "%b %d, %Y", "%B %d, %Y",
+        "%d %b %Y", "%d %B %Y",
+        "%Y/%m/%d", "%m/%d/%Y"
+    ):
+        try:
+            return datetime.datetime.strptime(raw, fmt).date()
+        except Exception:
+            pass
+
+    # 4. Check if raw string is or contains an arXiv ID (YYMM.NNNNN)
+    arxiv_match = re.search(r"\b(\d{2})(\d{2})\.\d{4,5}(?:v\d+)?\b", raw)
+    if arxiv_match:
+        yy = int(arxiv_match.group(1))
+        mm = int(arxiv_match.group(2))
+        year = (2000 + yy) if yy < 70 else (1900 + yy)
+        if 1 <= mm <= 12:
+            return datetime.date(year, mm, 1)
+
+    return None
+
+
+def calculate_content_age_days(
+    date_str_or_id: Optional[str],
+    reference_date: Optional[datetime.date] = None
+) -> Optional[int]:
+    """
+    Computes age in elapsed days relative to reference_date (defaults to current date in UTC).
+    Returns None if date could not be extracted.
+    """
+    import datetime
+
+    target_date = parse_content_date(date_str_or_id)
+    if not target_date:
+        return None
+
+    ref = reference_date or datetime.datetime.now(datetime.timezone.utc).date()
+    return max(0, (ref - target_date).days)
+
+
+def is_content_recent(
+    date_str_or_id: Optional[str],
+    max_age_days: int = MAX_CONTENT_AGE_DAYS,
+    reference_date: Optional[datetime.date] = None
+) -> bool:
+    """
+    Validates whether content is recent and eligible for publication.
+    Enforces that content older than max_age_days (default: 45 days, max: 60 days) is rejected.
+    """
+    age = calculate_content_age_days(date_str_or_id, reference_date=reference_date)
+    if age is None:
+        # If date is completely unparseable and strict enforcement is active, reject
+        return not STRICT_RECENCY_ENFORCEMENT
+    return age <= max_age_days
+
 
 

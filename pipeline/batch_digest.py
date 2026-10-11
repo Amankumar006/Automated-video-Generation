@@ -20,6 +20,11 @@ sys.path.append(str(PROJECT_ROOT))
 from pipeline.arxiv_fetcher import extract_arxiv_id
 from pipeline.auto_produce import auto_produce
 from pipeline.analytics_feedback import classify_content_taxonomy, get_performance_category_bias
+from pipeline.config import (
+    MAX_CONTENT_AGE_DAYS,
+    is_content_recent,
+    calculate_content_age_days
+)
 
 HISTORY_FILE = PROJECT_ROOT / "pipeline" / "digest_history.json"
 
@@ -205,26 +210,46 @@ def score_and_classify_paper(paper: Dict[str, Any]) -> Dict[str, Any]:
     paper_out["impact_score"] = weighted_impact_score
     paper_out["recommended_category"] = best_cat
     paper_out["category_scores"] = scores
+
+    paper_date = paper.get("published_at") or extract_arxiv_id(paper.get("id", ""))
+    paper_out["content_age_days"] = calculate_content_age_days(paper_date)
+    paper_out["is_fresh"] = is_content_recent(paper_date, max_age_days=MAX_CONTENT_AGE_DAYS)
     return paper_out
 
-def get_trending_digest(date_str: Optional[str] = None, limit: int = 25) -> List[Dict[str, Any]]:
-    """Gets sorted list of scored and classified trending papers."""
-    papers = fetch_hf_daily_papers(date_str, limit=limit)
+def get_trending_digest(
+    date_str: Optional[str] = None,
+    limit: int = 25,
+    max_age_days: Optional[int] = None,
+    allow_stale: bool = False
+) -> List[Dict[str, Any]]:
+    """
+    Gets sorted list of scored and classified trending papers.
+    Strictly filters out any papers published more than max_age_days ago (default: 45 days, max: 60 days).
+    """
+    papers = fetch_hf_daily_papers(date_str, limit=max(limit * 2, 40))
     if not papers:
-        papers = fetch_arxiv_trending(limit=limit)
+        papers = fetch_arxiv_trending(limit=max(limit * 2, 40))
 
     history = load_history()
     processed_ids = set(history.get("processed_papers", {}).keys())
+
+    effective_max_age = MAX_CONTENT_AGE_DAYS if max_age_days is None else max_age_days
 
     scored_papers = []
     for p in papers:
         sp = score_and_classify_paper(p)
         sp["is_processed"] = sp["id"] in processed_ids
+
+        # Recency validation: verify paper was published within max_age_days
+        paper_date = sp.get("published_at") or sp["id"]
+        if not allow_stale and not is_content_recent(paper_date, max_age_days=effective_max_age):
+            continue
+
         scored_papers.append(sp)
 
     # Sort descending by impact score
     scored_papers.sort(key=lambda x: (not x["is_processed"], x["impact_score"]), reverse=True)
-    return scored_papers
+    return scored_papers[:limit]
 
 def display_digest(papers: List[Dict[str, Any]], top_n: int = 10):
     """Renders a formatted terminal table of trending papers with analytics multipliers."""

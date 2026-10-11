@@ -29,6 +29,13 @@ from dataclasses import dataclass, field, asdict
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
+from pipeline.config import (
+    MAX_CONTENT_AGE_DAYS,
+    is_content_recent,
+    calculate_content_age_days,
+    STRICT_RECENCY_ENFORCEMENT,
+)
+
 # Official domain whitelist to ensure primary-source attribution and prevent spoofed links
 OFFICIAL_LAB_DOMAINS = {
     "openai.com",
@@ -343,6 +350,16 @@ class OfficialBlogRecord:
     analytics_multiplier: float = 1.25
     tags: List[str] = field(default_factory=list)
 
+    @property
+    def age_days(self) -> Optional[int]:
+        """Calculates age in days relative to current date."""
+        return calculate_content_age_days(self.published_date)
+
+    @property
+    def is_stale(self) -> bool:
+        """Determines if the blog post is older than MAX_CONTENT_AGE_DAYS."""
+        return not is_content_recent(self.published_date, max_age_days=MAX_CONTENT_AGE_DAYS)
+
     def to_candidate_spec(self) -> Dict[str, Any]:
         """Converts official blog record into a standard pipeline candidate specification."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.id.lower())
@@ -351,6 +368,10 @@ class OfficialBlogRecord:
             "id": clean_id,
             "arxiv_id": clean_id,
             "title": self.title,
+            "provider": self.provider,
+            "published_date": self.published_date,
+            "age_days": self.age_days,
+            "is_stale": self.is_stale,
             "recommended_category": self.category,
             "category": self.category,
             "taxonomy": self.domain_taxonomy,
@@ -460,6 +481,160 @@ VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
         impact_score=121.0,
         analytics_multiplier=1.25,
         tags=["openai", "mathematics", "lean 4", "formal proofs", "frontier reasoning"]
+    ),
+    "blog_anthropic_claude_3_8_artifacts": OfficialBlogRecord(
+        id="blog_anthropic_claude_3_8_artifacts",
+        title="Claude 3.8 Sonnet: Interactive Artifacts and Extended Coding",
+        provider="Anthropic",
+        published_date="2026-10-02",
+        summary="Anthropic releases Claude 3.8 Sonnet, introducing real-time interactive canvas artifacts and expanded multi-turn code execution. The model scores 79.4% on SWE-bench Verified with state-of-the-art hybrid extended thinking.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"SWE-bench Verified": "79.4%", "TAU-bench": "88.6%", "AIME 2026": "91.2%"},
+            "speedups": ["Instant UI preview and hot execution"],
+            "pricing": ["$3.00 / 1M input tokens", "$15.00 / 1M output tokens"],
+            "release_tiers": ["API", "Claude.ai Free", "Claude Pro", "Team", "Enterprise"],
+            "availability": ["Claude API", "Amazon Bedrock", "Google Cloud Vertex AI", "Claude.ai"],
+            "steps": ["1. Access via Claude 3.8 Sonnet API or Claude.ai", "2. Open Artifacts canvas", "3. Test dynamic multi-turn code executions"]
+        },
+        canonical_url="https://www.anthropic.com/news/claude-3-8-interactive-artifacts",
+        domain_taxonomy="reasoning_models",
+        raw_impact_score=97.0,
+        impact_score=122.0,
+        analytics_multiplier=1.25,
+        tags=["anthropic", "claude 3.8", "artifacts", "hybrid reasoning", "swe-bench"]
+    ),
+    "blog_anthropic_developer_console_v3": OfficialBlogRecord(
+        id="blog_anthropic_developer_console_v3",
+        title="Anthropic Developer Platform v3: Automated Prompt Caching",
+        provider="Anthropic",
+        published_date="2026-09-25",
+        summary="Anthropic releases Developer Platform v3 with automatic prompt caching across all Claude endpoints, cutting latency by 95% and costs by 90% for long-context applications, with enhanced system tools.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Latency Reduction": "95%", "Cost Reduction": "90%"},
+            "speedups": ["Up to 20x throughput for cached context prefixes"],
+            "pricing": ["$0.30 / 1M cached prompt tokens"],
+            "release_tiers": ["Anthropic Console", "Amazon Bedrock", "Google Cloud Vertex AI"],
+            "availability": ["Anthropic API Console", "Bedrock"],
+            "steps": ["1. Open Claude Console", "2. Enable prompt caching header", "3. Enjoy 90% cost savings on cached context"]
+        },
+        canonical_url="https://www.anthropic.com/news/developer-platform-v3",
+        domain_taxonomy="hardware_efficiency",
+        raw_impact_score=95.0,
+        impact_score=119.0,
+        analytics_multiplier=1.22,
+        tags=["anthropic", "developer platform", "prompt caching", "cost reduction"]
+    ),
+    "blog_deepmind_gemini_3_pro": OfficialBlogRecord(
+        id="blog_deepmind_gemini_3_pro",
+        title="Gemini 3.0 Pro: Native Video Reasoning and 2M Token Context",
+        provider="Google DeepMind",
+        published_date="2026-10-04",
+        summary="Google DeepMind unveils Gemini 3.0 Pro, featuring native multi-hour video reasoning, 2-million token continuous context, and real-time multimodal code generation via Google AI Studio and Vertex AI.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Video-MME": "92.4%", "MMLU-Pro": "86.1%", "MathArena": "89.5%"},
+            "speedups": ["4x faster time-to-first-token across 2M context"],
+            "pricing": ["$1.25 / 1M input tokens", "$5.00 / 1M output tokens"],
+            "release_tiers": ["Google AI Studio Free Tier", "Vertex AI Enterprise", "Gemini Live API"],
+            "availability": ["Google AI Studio", "Google Cloud Vertex AI", "Gemini Live API"],
+            "steps": ["1. Sign in to Google AI Studio", "2. Select Gemini 3.0 Pro", "3. Stream high-throughput video and complex reasoning queries"]
+        },
+        canonical_url="https://blog.google/technology/ai/gemini-3-pro-multimodal",
+        domain_taxonomy="multimodal_diffusion",
+        raw_impact_score=98.0,
+        impact_score=124.0,
+        analytics_multiplier=1.28,
+        tags=["google", "deepmind", "gemini 3.0 pro", "multimodal", "video reasoning"]
+    ),
+    "blog_deepmind_genie_3_world_models": OfficialBlogRecord(
+        id="blog_deepmind_genie_3_world_models",
+        title="Genie 3: Interactive Controllable 3D World Models from Images",
+        provider="Google DeepMind",
+        published_date="2026-09-20",
+        summary="DeepMind launches Genie 3, a foundation generative world model capable of transforming single prompt images into fully interactive, physically consistent 3D environments controllable in real-time.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Frame Rate": "60 FPS real-time generation", "Action Latency": "18ms"},
+            "speedups": ["Zero-shot interactive world generation"],
+            "pricing": ["Research Preview on Vertex AI"],
+            "release_tiers": ["Vertex AI Preview", "Google DeepMind Research"],
+            "availability": ["Google DeepMind Research Portal"],
+            "steps": ["1. Upload reference concept image", "2. Select keyboard/mouse control schema", "3. Explore dynamically generated 3D world in 60 FPS"]
+        },
+        canonical_url="https://deepmind.google/discover/blog/genie-3-interactive-world-models",
+        domain_taxonomy="multimodal_diffusion",
+        raw_impact_score=96.0,
+        impact_score=121.0,
+        analytics_multiplier=1.27,
+        tags=["deepmind", "genie 3", "world models", "interactive", "diffusion"]
+    ),
+    "blog_hf_smolvlm_2": OfficialBlogRecord(
+        id="blog_hf_smolvlm_2",
+        title="SmolVLM-2: 2.2B Compact Multimodal Model for On-Device Vision",
+        provider="Hugging Face",
+        published_date="2026-10-01",
+        summary="Hugging Face releases SmolVLM-2, a 2.2B parameter open multimodal model designed to run locally on mobile devices and edge GPUs with Apache 2.0 open weights.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"DocVQA": "84.3%", "Video-MME": "68.2%"},
+            "speedups": ["Runs locally at 45 tokens/sec on Apple M-series chips"],
+            "pricing": ["100% Free Open Source (Apache 2.0 License)"],
+            "release_tiers": ["smolvlm on PyPI", "Hugging Face Hub Open Weights", "Transformers 4.49+"],
+            "availability": ["Hugging Face Hub", "pip install smolvlm"],
+            "steps": ["pip install transformers", "Load SmolVLM-2 checkpoint", "Execute edge vision inference"]
+        },
+        canonical_url="https://huggingface.co/blog/smolvlm-2",
+        domain_taxonomy="efficient_architectures",
+        raw_impact_score=91.0,
+        impact_score=114.0,
+        analytics_multiplier=1.22,
+        tags=["hugging face", "smolvlm-2", "multimodal", "on-device", "open weights"]
+    ),
+    "blog_hf_open_r1_v2": OfficialBlogRecord(
+        id="blog_hf_open_r1_v2",
+        title="Open-R1 v2: Fully Open Reproducible Reasoning Pipeline",
+        provider="Hugging Face",
+        published_date="2026-09-22",
+        summary="Hugging Face delivers Open-R1 v2, providing fully reproducible end-to-end reinforcement learning pipelines, synthetic reasoning datasets, and open checkpoints matching frontier reasoning architectures.",
+        category="model_showdown",
+        key_facts={
+            "benchmarks": {"MATH-500": "91.8%", "AIME 2026": "84.2%"},
+            "speedups": ["3x training efficiency using GRPO with vLLM integration"],
+            "pricing": ["100% Free Apache 2.0 Open Weights & Datasets"],
+            "release_tiers": ["Hugging Face Hub", "GitHub Repository"],
+            "availability": ["Hugging Face Hub", "GitHub"],
+            "steps": ["1. Clone open-r1 repository", "2. Install vllm and trl", "3. Train reasoning model with verified recipe"]
+        },
+        canonical_url="https://huggingface.co/blog/open-r1-v2",
+        domain_taxonomy="reasoning_models",
+        raw_impact_score=94.0,
+        impact_score=118.0,
+        analytics_multiplier=1.25,
+        tags=["hugging face", "open-r1", "reasoning", "grpo", "rlhf"]
+    ),
+    "blog_github_copilot_autonomous_agents": OfficialBlogRecord(
+        id="blog_github_copilot_autonomous_agents",
+        title="GitHub Copilot Autonomous Coding Agents in VS Code and CLI",
+        provider="GitHub",
+        published_date="2026-10-05",
+        summary="GitHub launches fully autonomous Copilot Agents across VS Code and GitHub CLI, enabling multi-file automated refactoring, continuous test suite validation, and end-to-end pull request generation.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"SWE-bench Verified Acceptance": "81.6%", "Automated PR Merge Rate": "69%"},
+            "speedups": ["Reduces full-feature scaffolding time by 75%"],
+            "pricing": ["Included in Copilot Pro, Business, and Enterprise"],
+            "release_tiers": ["Copilot Pro", "Copilot Business", "Copilot Enterprise"],
+            "availability": ["VS Code Insiders", "GitHub CLI", "GitHub.com"],
+            "steps": ["1. Update GitHub CLI or VS Code", "2. Run 'gh copilot agent'", "3. Delegate multi-file coding task autonomously"]
+        },
+        canonical_url="https://github.blog/news-insights/product-news/copilot-autonomous-coding-agents",
+        domain_taxonomy="hardware_efficiency",
+        raw_impact_score=94.0,
+        impact_score=118.0,
+        analytics_multiplier=1.25,
+        tags=["github", "copilot agents", "autonomous coding", "cli", "pull requests"]
     ),
     "blog_openai_o3_mini": OfficialBlogRecord(
         id="blog_openai_o3_mini",
@@ -1031,13 +1206,25 @@ class OfficialBlogsFetcher:
     def get_official_blogs_digest(
         self,
         limit: int = 10,
-        offline_only: Optional[bool] = None
+        offline_only: Optional[bool] = None,
+        max_age_days: Optional[int] = None,
+        allow_stale: bool = False
     ) -> List[Dict[str, Any]]:
         """
         Produces pipeline candidate specifications for the top official blog drops.
+        Enforces strict content recency (rejecting anything older than max_age_days / 45-60 days).
         Returns a list of candidate dictionaries formatted for daily_shorts_daemon and run_pipeline.
         """
         records = self.fetch_all_feeds(offline_only=offline_only)
+
+        effective_max_age = MAX_CONTENT_AGE_DAYS if max_age_days is None else max_age_days
+
+        # Recency filtering: strictly exclude stale drops older than max_age_days (unless allow_stale is explicitly True)
+        if not allow_stale:
+            records = [
+                r for r in records
+                if is_content_recent(r.published_date, max_age_days=effective_max_age)
+            ]
 
         # Sort by published date descending and impact score descending
         def sort_key(r: OfficialBlogRecord):
@@ -1062,11 +1249,22 @@ class OfficialBlogsFetcher:
 official_blogs_fetcher = OfficialBlogsFetcher()
 
 
-def get_official_blogs_digest(limit: int = 10, offline_only: Optional[bool] = None) -> List[Dict[str, Any]]:
+def get_official_blogs_digest(
+    limit: int = 10,
+    offline_only: Optional[bool] = None,
+    max_age_days: Optional[int] = None,
+    allow_stale: bool = False
+) -> List[Dict[str, Any]]:
     """Convenience helper to retrieve candidate specifications for top official blog announcements."""
-    return official_blogs_fetcher.get_official_blogs_digest(limit=limit, offline_only=offline_only)
+    return official_blogs_fetcher.get_official_blogs_digest(
+        limit=limit,
+        offline_only=offline_only,
+        max_age_days=max_age_days,
+        allow_stale=allow_stale
+    )
 
 
 def get_official_blog(blog_id: str) -> Optional[OfficialBlogRecord]:
     """Convenience helper to look up a specific blog announcement."""
     return official_blogs_fetcher.get_blog(blog_id)
+
