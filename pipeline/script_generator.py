@@ -82,7 +82,7 @@ The 4-Act Intellectual Thriller Narrative Arc:
    * Start with a bold, high-stakes curiosity loop or shocking inefficiency from the paper. No textbook greetings!
    * Illustrative Grounded Examples (DO NOT COPY VERBATIM; DRAFT SPECIFICALLY FOR THE PAPER):
      - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar room."
-     - Hardware: "Standard attention kernels waste over half their execution cycles waiting on HBM memory transfers."
+     - Hardware: "Scaling context windows beyond eight thousand tokens causes standard models to hit an insurmountable memory wall."
      - Diffusion: "Generating 10 seconds of high-fidelity video used to require hundreds of repetitive diffusion passes."
 2. ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
    * Personify the villain/bottleneck and explain WHY it happens using ONE clear, relatable physical analogy.

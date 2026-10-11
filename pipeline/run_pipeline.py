@@ -259,6 +259,7 @@ def main():
     parser.add_argument("--topic", default=None, help="Topic ID or title")
     parser.add_argument("--arxiv", default=None, help="arXiv paper ID or URL to ingest and generate fresh script")
     parser.add_argument("--perk", default=None, help="Verified developer perk program ID (e.g. 'anthropic_startup_program', 'microsoft_founders_hub')")
+    parser.add_argument("--template", default=None, help="Path or topic identifier of existing spec JSON template to load")
     parser.add_argument("--fresh", action="store_true", help="Always generate a fresh script from paper instead of using cached template")
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
@@ -324,7 +325,22 @@ def main():
     templates_dir = PROJECT_ROOT / "pipeline" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.fresh or args.arxiv or args.perk or args.blog or args.news:
+    if args.template:
+        print(f"📄 Loading specified template for '{args.template}'...")
+        spec, template_path = load_template(args.template)
+    elif args.dry_run and not (args.fresh or args.arxiv or args.perk or args.blog or args.news):
+        try:
+            spec, template_path = load_template(topic)
+            print(f"📄 [Dry-Run] Loaded fast cached template for '{topic}': {template_path.name}")
+        except FileNotFoundError:
+            print(f"🧠 Generating brand-new script for '{topic}' directly from source...")
+            spec = generate_script(
+                topic=topic,
+                category=args.category,
+                arxiv_meta=arxiv_meta
+            )
+            template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
+    else:
         print(f"🧠 Generating brand-new script for '{topic}' directly from source...")
         spec = generate_script(
             topic=topic,
@@ -332,8 +348,6 @@ def main():
             arxiv_meta=arxiv_meta
         )
         template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
-    else:
-        spec, template_path = load_template(topic)
 
     # Ingest / bind native arXiv paper figures
     target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
