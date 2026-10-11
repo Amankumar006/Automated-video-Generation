@@ -65,7 +65,6 @@ class TechNewsScene(BaseShortScene):
             7.5,
             {model_name: COLOR_CYAN, "dropped": COLOR_GOLD}
         )
-        captions.play_caption(b1_text, highlights=b1_hl, duration=b1_dur)
 
         hero_badge = create_lab_hero_badge(
             provider_name=provider,
@@ -106,15 +105,21 @@ class TechNewsScene(BaseShortScene):
         ).next_to(headline_txt, DOWN, buff=0.2)
 
         hero_group = VGroup(hero_badge, hero_card, lab_emblem, headline_txt, status_tag)
-        self.play(FadeIn(hero_group, scale=0.94), run_time=1.0)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b1_dur - t_in - t_out)
+        self.play(
+            captions.show(b1_text, highlights=b1_hl, run_time=t_in),
+            FadeIn(hero_group, scale=0.94),
+            run_time=t_in
+        )
         
         # Subtle kinetic breathing while narration plays
-        remaining_b1 = max(0.5, b1_dur - 1.2)
         self.play(
-            lab_emblem.animate(rate_func=there_and_back, run_time=remaining_b1).scale(1.06),
-            hero_card.animate(rate_func=there_and_back, run_time=remaining_b1).set_stroke(color=COLOR_MINT, width=2.8)
+            lab_emblem.animate(rate_func=there_and_back, run_time=t_action).scale(1.06),
+            hero_card.animate(rate_func=there_and_back, run_time=t_action).set_stroke(color=COLOR_MINT, width=2.8)
         )
-        self.clean_transition([hero_group], run_time=0.4)
+        self.clean_transition([hero_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 2: Predecessor Ceiling & Cost/Latency Pain Point (~8s - ~16s)
@@ -125,7 +130,6 @@ class TechNewsScene(BaseShortScene):
             7.5,
             {"latency": COLOR_DANGER, "steep token prices": COLOR_GOLD}
         )
-        captions.play_caption(b2_text, highlights=b2_hl, duration=b2_dur)
 
         ceiling_card = RoundedRectangle(
             corner_radius=0.18,
@@ -158,10 +162,16 @@ class TechNewsScene(BaseShortScene):
         rows_col = VGroup(*row_groups).arrange(DOWN, buff=0.25).next_to(ceiling_title, DOWN, buff=0.35)
         ceiling_group = VGroup(ceiling_card, ceiling_title, rows_col)
 
-        self.play(FadeIn(ceiling_group, shift=UP * 0.2), run_time=0.9)
-        remaining_b2 = max(0.5, b2_dur - 1.1)
-        self.play(rows_col[1].animate(rate_func=there_and_back, run_time=remaining_b2).scale(1.03).set_stroke(color=COLOR_DANGER, width=2.0))
-        self.clean_transition([ceiling_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b2_dur - t_in - t_out)
+        self.play(
+            captions.morph_to(b2_text, highlights=b2_hl, run_time=t_in),
+            FadeIn(ceiling_group, shift=UP * 0.2),
+            run_time=t_in
+        )
+        self.play(rows_col[1].animate(rate_func=there_and_back, run_time=t_action).scale(1.03).set_stroke(color=COLOR_DANGER, width=2.0))
+        self.clean_transition([ceiling_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 3: Breakthrough Architecture & Distilled Speedup (~16s - ~24s)
@@ -172,7 +182,6 @@ class TechNewsScene(BaseShortScene):
             8.0,
             {model_name: COLOR_MINT, "distilled": COLOR_CYAN}
         )
-        captions.play_caption(b3_text, highlights=b3_hl, duration=b3_dur)
 
         arch_card = RoundedRectangle(
             corner_radius=0.18,
@@ -207,10 +216,16 @@ class TechNewsScene(BaseShortScene):
         feats_row = VGroup(feat_1_grp, feat_2_grp).arrange(RIGHT, buff=0.3).next_to(meter_grp, DOWN, buff=0.25)
         arch_group = VGroup(arch_card, arch_title, meter_grp, feats_row)
 
-        self.play(FadeIn(arch_group, scale=0.96), run_time=0.9)
-        remaining_b3 = max(0.5, b3_dur - 1.1)
-        self.play(meter_val.animate(rate_func=there_and_back, run_time=remaining_b3).scale(1.08))
-        self.clean_transition([arch_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b3_dur - t_in - t_out)
+        self.play(
+            captions.morph_to(b3_text, highlights=b3_hl, run_time=t_in),
+            FadeIn(arch_group, scale=0.96),
+            run_time=t_in
+        )
+        self.play(meter_val.animate(rate_func=there_and_back, run_time=t_action).scale(1.08))
+        self.clean_transition([arch_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 4: Verified Benchmark Comparison Bar Chart (~24s - ~33s)
@@ -221,7 +236,6 @@ class TechNewsScene(BaseShortScene):
             8.0,
             {"forty-nine percent": COLOR_MINT, "SWE-bench": COLOR_CYAN}
         )
-        captions.play_caption(b4_text, highlights=b4_hl, duration=b4_dur)
 
         bench_card = RoundedRectangle(
             corner_radius=0.18,
@@ -269,10 +283,16 @@ class TechNewsScene(BaseShortScene):
         b2_group = VGroup(b2_container, b2_lbl, bar_aime, val_aime).next_to(b1_group, DOWN, buff=0.2)
         bench_group = VGroup(bench_card, bench_title, b1_group, b2_group)
 
-        self.play(FadeIn(bench_group, shift=UP * 0.2), run_time=0.9)
-        remaining_b4 = max(0.5, b4_dur - 1.1)
-        self.play(sota_chip.animate(rate_func=there_and_back, run_time=remaining_b4).scale(1.15))
-        self.clean_transition([bench_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b4_dur - t_in - t_out)
+        self.play(
+            captions.morph_to(b4_text, highlights=b4_hl, run_time=t_in),
+            FadeIn(bench_group, shift=UP * 0.2),
+            run_time=t_in
+        )
+        self.play(sota_chip.animate(rate_func=there_and_back, run_time=t_action).scale(1.15))
+        self.clean_transition([bench_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 5: Pricing Table & Availability Deltas (~33s - ~42s)
@@ -283,7 +303,6 @@ class TechNewsScene(BaseShortScene):
             8.0,
             {"one dollar and ten cents": COLOR_MINT, "available now": COLOR_CYAN}
         )
-        captions.play_caption(b5_text, highlights=b5_hl, duration=b5_dur)
 
         price_card = RoundedRectangle(
             corner_radius=0.18,
@@ -321,10 +340,16 @@ class TechNewsScene(BaseShortScene):
         tiers_row = VGroup(VGroup(t1, t1_txt), VGroup(t2, t2_txt), VGroup(t3, t3_txt)).arrange(RIGHT, buff=0.25).next_to(p2_grp, DOWN, buff=0.25)
 
         price_group = VGroup(price_card, price_title, p1_grp, p2_grp, tiers_row)
-        self.play(FadeIn(price_group, scale=0.96), run_time=0.9)
-        remaining_b5 = max(0.5, b5_dur - 1.1)
-        self.play(p1_val.animate(rate_func=there_and_back, run_time=remaining_b5).scale(1.10))
-        self.clean_transition([price_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b5_dur - t_in - t_out)
+        self.play(
+            captions.morph_to(b5_text, highlights=b5_hl, run_time=t_in),
+            FadeIn(price_group, scale=0.96),
+            run_time=t_in
+        )
+        self.play(p1_val.animate(rate_func=there_and_back, run_time=t_action).scale(1.10))
+        self.clean_transition([price_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 6: Outro & The Model Verse Brand Signature (~42s - 48s)
@@ -342,8 +367,14 @@ class TechNewsScene(BaseShortScene):
             y_center=0.8
         )
         outro = Group(logo_icon, brand_text, sub)
-        self.play(FadeIn(outro, scale=0.92), run_time=1.0)
-        self.wait(max(1.0, b6_dur - 1.2))
+        t_in = 0.8
+        t_hold = max(0.2, b6_dur - t_in)
+        self.play(
+            captions.morph_to(b6_text, highlights=b6_hl, run_time=t_in),
+            FadeIn(outro, scale=0.92),
+            run_time=t_in
+        )
+        self.wait(t_hold)
 
     def _load_spec(self) -> dict:
         spec_path = os.environ.get("ACTIVE_SPEC_PATH")

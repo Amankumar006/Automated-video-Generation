@@ -73,7 +73,6 @@ class DeveloperPerksScene(BaseShortScene):
             7.5,
             {provider: COLOR_CYAN, "free credits": COLOR_MINT, "out of pocket": COLOR_DANGER}
         )
-        captions.play_caption(b1_text, highlights=b1_hl, duration=b1_dur)
 
         # Top verified grant pill
         grant_pill = RoundedRectangle(
@@ -113,11 +112,16 @@ class DeveloperPerksScene(BaseShortScene):
         hero_prog_txt.next_to(val_sub, DOWN, buff=0.20)
 
         hero_group = VGroup(pill_grp, hero_box, provider_logo, val_badge, val_sub, hero_prog_txt)
-        self.play(FadeIn(hero_group, scale=0.95), run_time=1.0)
-        
-        remaining_b1 = max(0.5, b1_dur - 1.2)
-        self.play(val_badge.animate(rate_func=there_and_back, run_time=remaining_b1).scale(1.08))
-        self.clean_transition([hero_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b1_dur - t_in - t_out)
+        self.play(
+            captions.show(b1_text, highlights=b1_hl, run_time=t_in),
+            FadeIn(hero_group, scale=0.95),
+            run_time=t_in
+        )
+        self.play(val_badge.animate(rate_func=there_and_back, run_time=t_action).scale(1.08))
+        self.clean_transition([hero_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 2: Split-Screen Perk Package Tile Grid (~8s - ~16s)
@@ -128,7 +132,6 @@ class DeveloperPerksScene(BaseShortScene):
             8.0,
             {"one thousand dollars": COLOR_MINT, "Claude Team": COLOR_CYAN, "five seats": COLOR_GOLD}
         )
-        captions.play_caption(b2_text, highlights=b2_hl, duration=b2_dur)
 
         grid_header = Text("WHAT YOU GET IN THE BUNDLE", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
 
@@ -171,14 +174,19 @@ class DeveloperPerksScene(BaseShortScene):
         t3_grp = VGroup(tile_3, t3_title, t3_sub)
 
         tiles_group = VGroup(grid_header, top_tiles, t3_grp)
-        self.play(FadeIn(tiles_group, shift=UP * 0.25), run_time=1.0)
-
-        remaining_b2 = max(0.5, b2_dur - 1.2)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b2_dur - t_in - t_out)
         self.play(
-            tile_1.animate(rate_func=there_and_back, run_time=remaining_b2).scale(1.04),
-            tile_2.animate(rate_func=there_and_back, run_time=remaining_b2).scale(1.04)
+            captions.morph_to(b2_text, highlights=b2_hl, run_time=t_in),
+            FadeIn(tiles_group, shift=UP * 0.25),
+            run_time=t_in
         )
-        self.clean_transition([tiles_group], run_time=0.4)
+        self.play(
+            tile_1.animate(rate_func=there_and_back, run_time=t_action).scale(1.04),
+            tile_2.animate(rate_func=there_and_back, run_time=t_action).scale(1.04)
+        )
+        self.clean_transition([tiles_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 3: Interactive Eligibility Checklist (~16s - ~24s)
@@ -189,7 +197,6 @@ class DeveloperPerksScene(BaseShortScene):
             8.0,
             {"early-stage company": COLOR_CYAN, "live domain": COLOR_MINT, "prototype": COLOR_GOLD}
         )
-        captions.play_caption(b3_text, highlights=b3_hl, duration=b3_dur)
 
         check_box = RoundedRectangle(
             corner_radius=0.18,
@@ -230,15 +237,24 @@ class DeveloperPerksScene(BaseShortScene):
         rows_stack = VGroup(*check_rows).arrange(DOWN, buff=0.25).next_to(check_title, DOWN, buff=0.35)
         check_group = VGroup(check_box, check_title, rows_stack)
 
-        self.play(FadeIn(check_group, shift=UP * 0.2), run_time=0.9)
+        t_in = 0.8
+        t_out = 0.35
+        self.play(
+            captions.morph_to(b3_text, highlights=b3_hl, run_time=t_in),
+            FadeIn(check_group, shift=UP * 0.2),
+            run_time=t_in
+        )
         
-        # Pop in each checkmark badge with spring bounce
+        # Pop in each checkmark badge
+        n_rows = len(check_rows)
+        t_row = min(0.45, max(0.15, (b3_dur - t_in - t_out - 0.2) / n_rows))
         for r in check_rows:
-            self.play(r[3].animate(rate_func=there_and_back, run_time=0.55).scale(1.22))
+            self.play(r[3].animate(rate_func=there_and_back, run_time=t_row).scale(1.22))
 
-        remaining_b3 = max(0.4, b3_dur - (0.9 + len(check_rows) * 0.55))
-        self.wait(remaining_b3)
-        self.clean_transition([check_group], run_time=0.4)
+        remaining_b3 = max(0.01, b3_dur - t_in - (n_rows * t_row) - t_out)
+        if remaining_b3 > 0.05:
+            self.wait(remaining_b3)
+        self.clean_transition([check_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 4: Real Portal Mockup & Simulated Cursor Interaction (~24s - ~33s)
@@ -249,7 +265,6 @@ class DeveloperPerksScene(BaseShortScene):
             8.0,
             {f"{provider.lower()} console": COLOR_CYAN, "GitHub repo": COLOR_GOLD, "submit": COLOR_MINT}
         )
-        captions.play_caption(b4_text, highlights=b4_hl, duration=b4_dur)
 
         portal_url = perk_meta.get("official_url") or f"console.{provider.lower()}.com/startups"
         clean_url = portal_url.replace("https://", "").replace("http://", "").split("?")[0]
@@ -283,35 +298,43 @@ class DeveloperPerksScene(BaseShortScene):
         submit_btn = VGroup(btn_box, btn_txt)
 
         form_col = VGroup(f1, f2, f3, submit_btn).arrange(DOWN, buff=0.22).move_to(portal_win).shift(DOWN * 0.25)
-
         portal_group = VGroup(portal_win, form_col)
-        self.play(FadeIn(portal_group, scale=0.96), run_time=0.9)
+
+        t_in = 0.7
+        t_out = 0.35
+        self.play(
+            captions.morph_to(b4_text, highlights=b4_hl, run_time=t_in),
+            FadeIn(portal_group, scale=0.96),
+            run_time=t_in
+        )
 
         # Animated cursor interaction
         cursor = create_cursor(scale=0.32, color=WHITE).move_to(f1).shift(RIGHT * 2.2 + UP * 0.1)
-        self.play(FadeIn(cursor, scale=0.8), run_time=0.3)
+        self.play(FadeIn(cursor, scale=0.8), run_time=0.25)
 
         # Cursor glides down across inputs to the submit button
-        self.play(cursor.animate(rate_func=smooth, run_time=1.2).move_to(btn_box).shift(DOWN * 0.05 + RIGHT * 0.1))
+        self.play(cursor.animate(rate_func=smooth, run_time=1.0).move_to(btn_box).shift(DOWN * 0.05 + RIGHT * 0.1))
 
         # Button highlights on hover
         self.play(
-            btn_box.animate(run_time=0.3).set_stroke(color=COLOR_GOLD, width=3.0).set_fill(color="#047857", opacity=1.0),
-            cursor.animate(run_time=0.3).scale(0.92)
+            btn_box.animate(run_time=0.25).set_stroke(color=COLOR_GOLD, width=3.0).set_fill(color="#047857", opacity=1.0),
+            cursor.animate(run_time=0.25).scale(0.92)
         )
 
         # Click ripple animation
         ripple = create_click_ripple(point=btn_box.get_center(), radius=0.8, color=COLOR_MINT)
         self.play(
-            FadeIn(ripple, scale=0.3, run_time=0.25),
-            ripple.animate(rate_func=linear, run_time=0.6).scale(1.8).set_opacity(0.0),
-            btn_txt.animate(run_time=0.3).set_color(COLOR_GOLD)
+            FadeIn(ripple, scale=0.3, run_time=0.2),
+            ripple.animate(rate_func=linear, run_time=0.45).scale(1.8).set_opacity(0.0),
+            btn_txt.animate(run_time=0.25).set_color(COLOR_GOLD)
         )
         self.remove(ripple)
 
-        remaining_b4 = max(0.4, b4_dur - 3.7)
-        self.wait(remaining_b4)
-        self.clean_transition([portal_group, cursor], run_time=0.4)
+        t_cursor_sub = 0.25 + 1.0 + 0.25 + 0.45
+        remaining_b4 = max(0.01, b4_dur - t_in - t_cursor_sub - t_out)
+        if remaining_b4 > 0.05:
+            self.wait(remaining_b4)
+        self.clean_transition([portal_group, cursor], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 5: Floating 3D Social Proof Receipts (~33s - ~42s)
@@ -322,7 +345,6 @@ class DeveloperPerksScene(BaseShortScene):
             8.0,
             {"approved": COLOR_MINT, "twenty-four hours": COLOR_GOLD, "Twitter": COLOR_CYAN}
         )
-        captions.play_caption(b5_text, highlights=b5_hl, duration=b5_dur)
 
         social_header = Text("COMMUNITY APPROVAL RECEIPTS", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
 
@@ -352,10 +374,16 @@ class DeveloperPerksScene(BaseShortScene):
         social_stack = VGroup(receipt_1, receipt_2).arrange(DOWN, buff=0.3).next_to(social_header, DOWN, buff=0.35)
         social_group = VGroup(social_header, social_stack)
 
-        self.play(FadeIn(social_group, shift=UP * 0.25), run_time=1.0)
-        remaining_b5 = max(0.5, b5_dur - 1.2)
-        self.play(receipt_1.animate(rate_func=there_and_back, run_time=remaining_b5).scale(1.03))
-        self.clean_transition([social_group], run_time=0.4)
+        t_in = 0.8
+        t_out = 0.35
+        t_action = max(0.2, b5_dur - t_in - t_out)
+        self.play(
+            captions.morph_to(b5_text, highlights=b5_hl, run_time=t_in),
+            FadeIn(social_group, shift=UP * 0.25),
+            run_time=t_in
+        )
+        self.play(receipt_1.animate(rate_func=there_and_back, run_time=t_action).scale(1.03))
+        self.clean_transition([social_group], run_time=t_out)
 
         # -----------------------------------------------------------------
         # BEAT 6: Outro & Actionable Save Call to Action (~42s - 48s)
@@ -366,7 +394,6 @@ class DeveloperPerksScene(BaseShortScene):
             5.0,
             {"Save this video": COLOR_GOLD, "The Model Verse": COLOR_MINT}
         )
-        captions.play_caption(b6_text, highlights=b6_hl, duration=b6_dur)
 
         # Actionable Save Bookmark Banner
         save_banner = RoundedRectangle(corner_radius=0.12, width=7.2, height=0.85, color=COLOR_GOLD, fill_color="#78350F", fill_opacity=0.6, stroke_width=1.8).shift(UP * 3.4)
@@ -382,8 +409,14 @@ class DeveloperPerksScene(BaseShortScene):
         outro = Group(logo_icon, brand_text, sub)
         final_group = Group(save_grp, outro)
 
-        self.play(FadeIn(final_group, scale=0.94), run_time=1.0)
-        self.wait(max(1.0, b6_dur - 1.2))
+        t_in = 0.8
+        t_hold = max(0.2, b6_dur - t_in)
+        self.play(
+            captions.morph_to(b6_text, highlights=b6_hl, run_time=t_in),
+            FadeIn(final_group, scale=0.94),
+            run_time=t_in
+        )
+        self.wait(t_hold)
 
     def _load_spec(self) -> dict:
         spec_path = os.environ.get("ACTIVE_SPEC_PATH")

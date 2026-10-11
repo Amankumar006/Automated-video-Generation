@@ -52,11 +52,44 @@ CATEGORY_SCENE_MAP = {
         "class": "DeveloperPerksScene",
         "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
     },
+    "perks": {
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
+    },
+    "startup_credits": {
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
+    },
     "tech_news": {
         "file": "manim_engine/scenes/tech_news_scene.py",
         "class": "TechNewsScene",
         "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "blogs": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "news": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "official_blogs": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
     }
+}
+
+CATEGORY_ALIASES = {
+    "perks": "developer_perks",
+    "startup_credits": "developer_perks",
+    "blogs": "tech_news",
+    "news": "tech_news",
+    "official_blogs": "tech_news",
 }
 
 def load_template(topic: str):
@@ -378,6 +411,8 @@ def main():
             json.dump(spec, f, indent=2)
 
     category = args.category or spec.get("category")
+    if category:
+        category = CATEGORY_ALIASES.get(str(category).lower(), category)
     if category not in CATEGORY_SCENE_MAP:
         raise ValueError(f"Unsupported category '{category}'. Available: {list(CATEGORY_SCENE_MAP.keys())}")
 

@@ -329,6 +329,19 @@ def test_daemon_run_daily_cycle_mixed_count_1(monkeypatch):
     Validates that run_daily_cycle under source='mixed' automatically selects
     the least-recently produced pillar (blogs) when history only contains arXiv papers.
     """
+    mock_history = {
+        "processed_papers": {
+            "2610.11287": {
+                "title": "Arxiv Paper",
+                "category": "mechanism_deepdive",
+                "source": "arxiv",
+                "produced_at": "2026-10-10T14:49:20+00:00",
+                "status": "completed"
+            }
+        }
+    }
+    import copy
+    monkeypatch.setattr("pipeline.daily_shorts_daemon.load_history", lambda: copy.deepcopy(mock_history))
     monkeypatch.setattr("pipeline.script_generator.generate_script", _mock_generated_script)
     monkeypatch.setenv("GEMINI_API_KEY", "")
 
@@ -353,6 +366,19 @@ def test_daemon_run_daily_cycle_mixed_count_3_balances_all_three_pillars(monkeyp
     Validates that a multi-reel batch (count=3) under source='mixed'
     allocates one reel to each of the 3 content pillars in alternating succession.
     """
+    mock_history = {
+        "processed_papers": {
+            "2610.11287": {
+                "title": "Arxiv Paper",
+                "category": "mechanism_deepdive",
+                "source": "arxiv",
+                "produced_at": "2026-10-10T14:49:20+00:00",
+                "status": "completed"
+            }
+        }
+    }
+    import copy
+    monkeypatch.setattr("pipeline.daily_shorts_daemon.load_history", lambda: copy.deepcopy(mock_history))
     monkeypatch.setattr("pipeline.script_generator.generate_script", _mock_generated_script)
     monkeypatch.setenv("GEMINI_API_KEY", "")
 
@@ -371,6 +397,19 @@ def test_daemon_run_daily_cycle_mixed_count_3_balances_all_three_pillars(monkeyp
 
 def test_daemon_run_daily_cycle_auto_alias(monkeypatch):
     """Validates that source='auto' behaves identically to source='mixed'."""
+    mock_history = {
+        "processed_papers": {
+            "2610.11287": {
+                "title": "Arxiv Paper",
+                "category": "mechanism_deepdive",
+                "source": "arxiv",
+                "produced_at": "2026-10-10T14:49:20+00:00",
+                "status": "completed"
+            }
+        }
+    }
+    import copy
+    monkeypatch.setattr("pipeline.daily_shorts_daemon.load_history", lambda: copy.deepcopy(mock_history))
     monkeypatch.setattr("pipeline.script_generator.generate_script", _mock_generated_script)
     monkeypatch.setenv("GEMINI_API_KEY", "")
 
