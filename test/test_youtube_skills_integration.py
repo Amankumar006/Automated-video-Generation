@@ -384,7 +384,7 @@ def test_high_scoring_hook_gating_strong_band():
     assert win_eval["verdict"] >= 72
     assert win_eval["band"] == "STRONG"
     assert win_eval["formula"] in ("The Question", "The Statistic", "The Warning")
-    assert winner.startswith(("Why", "Over", "Do not"))
+    assert winner.startswith(("Why", "Over", "Do not", "Before"))
 
 
 def test_load_transcript_cues_and_compression(tmp_path):
@@ -458,3 +458,93 @@ def test_optimize_title_boundary_extremes():
 
     # Empty string
     assert optimize_title_for_mobile("", max_chars=50) == ""
+
+
+# ==============================================================================
+# 5. Anti-Repetition & Category Hook Diversity Tests
+# ==============================================================================
+
+def test_no_gpu_waste_in_developer_perks_hooks():
+    """Verify developer_perks topics generate API/credit hooks without any GPU cycles waste compute."""
+    topic = "Anthropic Startup Program: Claim $25k in Claude API Credits"
+    meta = {"payoff_stat": "$25,000", "category": "developer_perks"}
+    candidates = generate_hook_candidates(topic=topic, metadata=meta, category="developer_perks")
+
+    assert len(candidates) >= 4
+    # Absolutely NO candidates should mention GPU cycles or compute waste
+    for c in candidates:
+        assert "gpu cycles" not in c.lower(), f"Forbidden phrase found in candidate: {c}"
+        assert "gpu memory" not in c.lower(), f"Forbidden phrase found in candidate: {c}"
+        assert "50%" not in c, f"Hardcoded 50% found in candidate: {c}"
+
+    winner, win_eval, all_evals = gate_and_select_best_hook(candidates)
+    assert win_eval["verdict"] >= 55
+    assert any(term in winner.lower() for term in ("credit", "api", "tokens", "bill", "cash", "grant", "compute"))
+
+
+def test_no_gpu_waste_in_robotics_or_vision():
+    """Verify robotics and vision topics focus on physical/temporal tasks without GPU cycles boilerplate."""
+    topic = "Embodied Turing Machines: CoAP"
+    candidates = generate_hook_candidates(
+        topic=topic,
+        category="robotics_tamp",
+        domain_taxonomy="robotics_tamp"
+    )
+
+    for c in candidates:
+        assert "gpu cycles" not in c.lower(), f"Forbidden phrase in robotics candidate: {c}"
+        assert "50%" not in c, f"Hardcoded 50% in robotics candidate: {c}"
+
+    winner, win_eval, _ = gate_and_select_best_hook(candidates)
+    assert any(term in winner.lower() for term in ("robot", "policy", "real world", "execution", "manipulation"))
+
+
+def test_preserves_strong_bespoke_llm_hook():
+    """Verify optimize_script_hook preserves an authentic strong LLM hook rather than clobbering it."""
+    strong_llm_hook = "Before you pay your next API bill, see how Anthropic gives startups $25,000 in free Claude credits."
+    spec = {
+        "id": "anthropic_startup_program",
+        "title": "Anthropic Startup Program",
+        "category": "developer_perks",
+        "beats": [
+            {
+                "beat_id": 1,
+                "text": strong_llm_hook,
+                "visual_focus": "Credit voucher"
+            },
+            {
+                "beat_id": 2,
+                "text": "Startups burn thousands of dollars every month on token costs.",
+                "visual_focus": "Cost counter"
+            }
+        ]
+    }
+
+    optimized = optimize_script_hook(spec)
+    # The bespoke LLM hook should be preserved because it has a strong score
+    assert optimized["beats"][0]["text"] == strong_llm_hook
+    assert optimized["beats"][0]["hook_score"] >= 65
+
+
+def test_replaces_weak_low_effort_hook_with_category_hook():
+    """Verify optimize_script_hook replaces a weak, low-effort generic hook with a high-scoring category hook."""
+    weak_hook = "Today we are looking at standard attention kernels in deep learning."
+    spec = {
+        "id": "sparse_attention_breakthrough",
+        "title": "Sparse Attention Breakthrough",
+        "category": "hardware_efficiency",
+        "metadata": {"payoff_stat": "4x", "scale_metric": "70%"},
+        "beats": [
+            {
+                "beat_id": 1,
+                "text": weak_hook,
+                "visual_focus": "Standard attention"
+            }
+        ]
+    }
+
+    optimized = optimize_script_hook(spec)
+    # The weak hook must be replaced
+    assert optimized["beats"][0]["text"] != weak_hook
+    assert "gpu cycles waste compute" not in optimized["beats"][0]["text"].lower()
+    assert optimized["beats"][0]["hook_score"] >= 65

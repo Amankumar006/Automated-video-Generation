@@ -123,14 +123,142 @@ def score_hook(text: str) -> Dict[str, Any]:
     }
 
 
+def clean_display_topic(topic: str) -> str:
+    """Cleans raw topic slugs, prefixes, and colons into natural display names."""
+    if not topic:
+        return "Frontier AI"
+    t = topic.split(":")[0].strip()
+    for prefix in (
+        "mechanism_deepdive_", "architecture_breakdown_", "model_showdown_",
+        "benchmark_news_", "developer_perks_", "tech_news_", "perk_", "blog_", "news_", "gh_"
+    ):
+        if t.startswith(prefix):
+            t = t[len(prefix):]
+    t = t.replace("_", " ").strip()
+    if t.islower():
+        t = t.title()
+    return t or "Frontier AI"
+
+
+def extract_metric_from_context(
+    arxiv_meta: Optional[Dict[str, Any]] = None,
+    metadata: Optional[Dict[str, Any]] = None
+) -> Optional[str]:
+    """
+    Extracts concrete metrics (dollars, multipliers, percentages, compute) without
+    inventing a fake '50%' fallback.
+    """
+    text = ""
+    if arxiv_meta and isinstance(arxiv_meta, dict):
+        text += arxiv_meta.get("title", "") + " "
+        text += arxiv_meta.get("abstract", "") + " "
+        text += arxiv_meta.get("summary", "") + " "
+        key_facts = arxiv_meta.get("key_facts", [])
+        if isinstance(key_facts, list):
+            text += " ".join(str(k) for k in key_facts) + " "
+    if metadata and isinstance(metadata, dict):
+        for k in ("payoff_stat", "scale_metric", "metric", "stat"):
+            val = metadata.get(k)
+            if val and isinstance(val, str) and val.strip() and val.strip() != "50%":
+                return val.strip()
+
+    if not text.strip():
+        return None
+
+    # 1. Dollar amounts ($25,000, $350k, etc.)
+    m_dollars = re.findall(r"(\$\d+[\d,.]*(?:[kKmMbB]|(?:\s?(?:thousand|million|credits)))?)\b", text)
+    if m_dollars:
+        return m_dollars[0].strip()
+
+    # 2. Multipliers (76x, 2.4x, 10x)
+    m_multipliers = re.findall(r"\b(\d+[\d,.]*x)\b", text, re.I)
+    if m_multipliers:
+        return m_multipliers[0].strip()
+
+    # 3. Percentages (68.7%, 90%, 98.2%)
+    m_percent = re.findall(r"\b(\d+[\d,.]*%)\b", text)
+    if m_percent:
+        return m_percent[0].strip()
+
+    # 4. Compute / Hardware units (1.2 PFLOPS, 800 TFLOPS, 24GB)
+    m_compute = re.findall(r"\b(\d+[\d,.]*\s?(?:PFLOPS|TFLOPS|EFLOPS|GFLOPS|GB|TB|MB|ms))\b", text, re.I)
+    if m_compute:
+        return m_compute[0].strip()
+
+    return None
+
+
+def resolve_category_and_domain(
+    topic: str,
+    category: Optional[str] = None,
+    domain_taxonomy: Optional[str] = None,
+    metadata: Optional[Dict[str, Any]] = None,
+    arxiv_meta: Optional[Dict[str, Any]] = None
+) -> Tuple[str, str]:
+    """Infers category and domain taxonomy from context."""
+    cat = (
+        category
+        or (metadata.get("category") if metadata else None)
+        or (arxiv_meta.get("category") if arxiv_meta else None)
+        or ""
+    ).lower()
+
+    dom = (
+        domain_taxonomy
+        or (metadata.get("domain_taxonomy") if metadata else None)
+        or (arxiv_meta.get("domain_taxonomy") if arxiv_meta else None)
+        or ""
+    ).lower()
+
+    t_lower = topic.lower()
+
+    # Prioritize specific detected categories from keywords in topic or ID
+    if any(w in t_lower for w in ("perk", "credit", "grant", "tier", "founders", "startup program")) or (arxiv_meta and str(arxiv_meta.get("id", "")).startswith("perk_")):
+        cat = "developer_perks"
+    elif any(w in t_lower for w in ("blog_", "news_", "official_blog")) or (arxiv_meta and any(str(arxiv_meta.get("id", "")).startswith(p) for p in ("blog_", "news_"))):
+        cat = "tech_news"
+    elif not cat or cat in ("custom", "video", "paper"):
+        if any(w in t_lower for w in (" vs ", "showdown", "compared", "benchmark")):
+            cat = "model_showdown"
+        elif any(w in t_lower for w in ("robot", "manipulation", "locomotion", "embodied", "tamp")):
+            cat = "robotics_tamp"
+        elif any(w in t_lower for w in ("diffusion", "video gen", "3d", "cinemagraph", "gaussian")):
+            cat = "multimodal_diffusion"
+        elif any(w in t_lower for w in ("sae", "interpretability", "dictionary learning")):
+            cat = "neural_sae"
+        elif any(w in t_lower for w in ("quant", "attention", "flash", "gpu", "kernel", "memory")):
+            cat = "hardware_efficiency"
+        else:
+            cat = "mechanism_deepdive"
+
+    return cat, dom
+
+
+def is_candidate_relevant(candidate: str, category: str) -> bool:
+    """Rejects cross-category contamination (e.g. GPU waste on perks videos)."""
+    c_low = candidate.lower()
+    if category == "developer_perks":
+        if any(b in c_low for b in ("gpu cycles", "train your next model", "memory overhead", "render latency")):
+            return False
+    elif category in ("tech_news", "model_showdown"):
+        if "gpu cycles waste compute" in c_low:
+            return False
+    elif category in ("robotics_tamp", "robotics"):
+        if any(b in c_low for b in ("gpu cycles", "render latency", "diffusion")):
+            return False
+    return True
+
+
 def generate_hook_candidates(
     topic: str,
     base_hook: Optional[str] = None,
     arxiv_meta: Optional[Dict[str, Any]] = None,
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, Any]] = None,
+    category: Optional[str] = None,
+    domain_taxonomy: Optional[str] = None
 ) -> List[str]:
     """
-    Synthesizes candidate Beat 1 hooks inspired by proven archetypes from hooks.json:
+    Synthesizes category-aware, diverse Beat 1 hooks inspired by proven archetypes from hooks.json:
     - The Statistic (concrete %/number + consequence)
     - The Mistake (name error viewer's architecture makes)
     - Contrarian Flip (challenge conventional wisdom)
@@ -139,45 +267,196 @@ def generate_hook_candidates(
     - The Superlative / Teardown
     """
     candidates: List[str] = []
+
+    # Preserve base hook
     if base_hook and base_hook.strip():
-        candidates.append(base_hook.strip())
+        b_clean = base_hook.strip()
+        candidates.append(b_clean)
+        # Create 1-2 story-preserving addressed refinements of base hook
+        b_core = b_clean.rstrip(".")
+        if len(b_core) > 5 and not any(w in b_core.lower() for w in ("welcome", "today we", "in this video")):
+            # If base hook lacks second-person address, create an addressed variation
+            if not any(y in b_core.lower() for y in ("you", "your")):
+                candidates.append(f"Before you deploy your next project, see how {b_core[0].lower() + b_core[1:]}.")
+                if not b_core.endswith("?"):
+                    candidates.append(f"Did you know {b_core[0].lower() + b_core[1:]}?")
 
-    # Extract concrete metrics if available
-    metric = "50%"
-    if arxiv_meta and isinstance(arxiv_meta, dict):
-        abstract = arxiv_meta.get("abstract", "")
-        m = re.findall(r"\b(\d+[\d,.]*(?:%|x|PFLOPS|TFLOPS|GB|MB))\b", abstract)
-        if m:
-            metric = m[0]
-    elif metadata and isinstance(metadata, dict):
-        metric = metadata.get("payoff_stat") or metadata.get("scale_metric") or "50%"
+    # Resolve category and domain
+    cat, dom = resolve_category_and_domain(
+        topic=topic,
+        category=category,
+        domain_taxonomy=domain_taxonomy,
+        metadata=metadata,
+        arxiv_meta=arxiv_meta
+    )
 
-    clean_topic = topic.split(":")[0].strip()
+    # Extract real metric (NO fake 50% fallback)
+    metric = extract_metric_from_context(arxiv_meta=arxiv_meta, metadata=metadata)
+    clean_topic = clean_display_topic(topic)
 
-    # 1. The Statistic archetype (numbers, address, stakes, curiosity)
-    candidates.append(
-        f"Over {metric} of your GPU memory is wasted before you see how {clean_topic} actually fixes it."
-    )
-    # 2. The Question archetype (curiosity trigger, stakes, address)
-    candidates.append(
-        f"Why do {metric} of your GPU cycles waste compute before {clean_topic} fixes the bottleneck?"
-    )
-    # 3. The Warning archetype (urgency, cost, concrete metric)
-    candidates.append(
-        f"Do not train your next model before you see how {clean_topic} cuts {metric} of your memory waste."
-    )
-    # 4. The Mistake / Address archetype (common error viewer makes)
-    candidates.append(
-        f"You are probably making the mistake of wasting compute before you test {clean_topic}."
-    )
-    # 5. Contrarian Flip archetype (challenge conventional advice)
-    candidates.append(
-        f"Everyone tells you your model needs more compute, but {clean_topic} proves that advice actually wrong."
-    )
-    # 6. The Superlative / Proof archetype (single breakthrough)
-    candidates.append(
-        f"This 1 breakthrough in {clean_topic} stops your GPU from wasting compute before you run out of memory."
-    )
+    # Category-tailored candidate synthesis
+    if cat == "developer_perks":
+        if metric:
+            candidates.append(
+                f"Stop paying full price for AI APIs before you claim {metric} in free credits with {clean_topic}."
+            )
+            candidates.append(
+                f"Are you burning your own cash on API bills before claiming this {metric} grant from {clean_topic}?"
+            )
+            candidates.append(
+                f"Before you spend another dollar on model tokens, see how {clean_topic} gives you {metric} free."
+            )
+            candidates.append(
+                f"Did you know you can claim up to {metric} in free compute right now through {clean_topic}?"
+            )
+        else:
+            candidates.append(
+                f"Stop paying full price for AI tokens before checking out {clean_topic}."
+            )
+            candidates.append(
+                f"Are you burning your startup budget on API calls before claiming {clean_topic}?"
+            )
+            candidates.append(
+                f"Before you pay your next cloud bill, make sure you aren't missing out on {clean_topic}."
+            )
+            candidates.append(
+                f"You might be overpaying for AI infrastructure if you haven't applied for {clean_topic}."
+            )
+
+    elif cat in ("tech_news", "blogs", "news", "official_blogs"):
+        if metric:
+            candidates.append(
+                f"Before you deploy your next model, see how {clean_topic} cuts costs by {metric}."
+            )
+            candidates.append(
+                f"Why are leading AI teams switching to {clean_topic} after this {metric} breakthrough?"
+            )
+            candidates.append(
+                f"You might be running outdated architecture before you test the {metric} speedup in {clean_topic}."
+            )
+            candidates.append(
+                f"Everyone thought frontier models reached a ceiling, until {clean_topic} proved them wrong by {metric}."
+            )
+        else:
+            candidates.append(
+                f"Before you build your next AI workflow, see what {clean_topic} just dropped."
+            )
+            candidates.append(
+                f"Why is everyone in the AI community talking about {clean_topic} today?"
+            )
+            candidates.append(
+                f"You might be building on outdated tech before you test what {clean_topic} can do."
+            )
+            candidates.append(
+                f"Everyone assumed standard models were good enough, until {clean_topic} changed the game."
+            )
+
+    elif cat in ("model_showdown", "benchmark_news") or " vs " in topic.lower():
+        if metric:
+            candidates.append(
+                f"Does {clean_topic} actually crush the competition by {metric}, or is it just benchmark hype?"
+            )
+            candidates.append(
+                f"Before you choose your foundation model, look at how {clean_topic} beats the leader by {metric}."
+            )
+            candidates.append(
+                f"Why are top engineering teams abandoning old flagships for {clean_topic}'s {metric} gain?"
+            )
+            candidates.append(
+                f"Everyone tells you to use the reigning model, but {clean_topic} outperforms it by {metric}."
+            )
+        else:
+            candidates.append(
+                f"Does {clean_topic} actually beat the reigning champion, or is it just marketing hype?"
+            )
+            candidates.append(
+                f"Before you lock in your foundation model, see who actually wins this showdown with {clean_topic}."
+            )
+            candidates.append(
+                f"You might be betting on the wrong AI architecture before you see this benchmark breakdown."
+            )
+            candidates.append(
+                f"Everyone assumed the leaderboard was settled, until {clean_topic} entered the ring."
+            )
+
+    elif cat in ("robotics_tamp", "robotics") or dom == "robotics_tamp":
+        if metric:
+            candidates.append(
+                f"Why do standard robots fail {metric} of real-world trials before {clean_topic} fixes execution?"
+            )
+            candidates.append(
+                f"Before you deploy your next physical policy, see how {clean_topic} unlocks {metric} better precision."
+            )
+            candidates.append(
+                f"You are probably training robot policies with the wrong primitives before testing {clean_topic}."
+            )
+        else:
+            candidates.append(
+                f"Why do multi-task robots struggle in the real world before {clean_topic} fixes their execution?"
+            )
+            candidates.append(
+                f"Before you train your next physical robot policy, see how {clean_topic} bridges the sim-to-real gap."
+            )
+            candidates.append(
+                f"Most robot foundation models fail on complex manipulation, but {clean_topic} proves a working fix."
+            )
+
+    elif cat in ("multimodal_diffusion", "diffusion", "vision") or dom == "multimodal_diffusion":
+        if metric:
+            candidates.append(
+                f"Why do standard diffusion models waste {metric} of render latency before {clean_topic}?"
+            )
+            candidates.append(
+                f"Before you generate another frame, see how {clean_topic} cuts render latency by {metric}."
+            )
+        else:
+            candidates.append(
+                f"Why do standard video and 3D models lose temporal coherence before {clean_topic} fixes it?"
+            )
+            candidates.append(
+                f"Before you render your next diffusion frame, see how {clean_topic} solves the consistency bottleneck."
+            )
+            candidates.append(
+                f"You are probably wasting render cycles if you haven't seen how {clean_topic} handles 3D generation."
+            )
+
+    else:
+        # Academic papers / architecture breakdown / hardware efficiency
+        if metric:
+            candidates.append(
+                f"Before you train your next model, see how {clean_topic} cuts {metric} of memory overhead."
+            )
+            candidates.append(
+                f"Why do standard transformer architectures hit a memory wall before {clean_topic} unlocks {metric} gains?"
+            )
+            candidates.append(
+                f"You might be leaving {metric} of your hardware performance on the table without {clean_topic}."
+            )
+            candidates.append(
+                f"Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap."
+            )
+            candidates.append(
+                f"Do not scale your next training run before you see how {clean_topic} delivers {metric}."
+            )
+        else:
+            candidates.append(
+                f"Before you scale your next model, see why {clean_topic} completely rethinks standard architecture."
+            )
+            candidates.append(
+                f"Why do standard deep learning models hit a scaling bottleneck before {clean_topic} restructures it?"
+            )
+            candidates.append(
+                f"You might be building on a flawed architecture before you understand how {clean_topic} works."
+            )
+            candidates.append(
+                f"Everyone assumed scaling parameters was the only answer, until {clean_topic} proved otherwise."
+            )
+            candidates.append(
+                f"Do not deploy your next AI architecture before testing how {clean_topic} operates."
+            )
+
+    # Filter out irrelevant cross-category candidates
+    candidates = [c for c in candidates if is_candidate_relevant(c, cat)]
 
     # Deduplicate while preserving order
     seen = set()
@@ -224,7 +503,8 @@ def optimize_script_hook(
 ) -> Dict[str, Any]:
     """
     Integrates hook scoring gating directly into a script specification.
-    Evaluates candidates, selects the highest scoring hook for Beat 1,
+    Evaluates candidates, respects authentic high-quality base hooks from the LLM,
+    selects the highest scoring category-aware hook for Beat 1,
     and updates the spec with audit metadata.
     """
     beats = spec.get("beats", [])
@@ -234,6 +514,8 @@ def optimize_script_hook(
     topic = spec.get("title") or spec.get("id") or "Frontier AI"
     base_hook = beats[0].get("text", "")
     metadata = spec.get("metadata", {})
+    category = spec.get("category")
+    domain_taxonomy = spec.get("domain_taxonomy")
 
     if candidate_hooks and len(candidate_hooks) > 0:
         candidates = list(candidate_hooks)
@@ -244,10 +526,22 @@ def optimize_script_hook(
             topic=topic,
             base_hook=base_hook,
             arxiv_meta=arxiv_meta,
-            metadata=metadata
+            metadata=metadata,
+            category=category,
+            domain_taxonomy=domain_taxonomy
         )
 
     winning_hook, winner_eval, all_evals = gate_and_select_best_hook(candidates)
+
+    # Storyline preservation guard:
+    # If the base hook from the LLM has a solid score (>= 58, WORKABLE/STRONG) and is
+    # reasonably close to the top synthetic candidate (<= 8 points), prefer keeping
+    # the LLM's bespoke narrative to avoid generic repetitive templates!
+    if base_hook and base_hook.strip():
+        base_eval = score_hook(base_hook.strip())
+        if base_eval["verdict"] >= 58 and (winner_eval["verdict"] - base_eval["verdict"] <= 8):
+            winning_hook = base_hook.strip()
+            winner_eval = base_eval
 
     # Update Beat 1 text with winning gated hook
     beats[0]["text"] = winning_hook
@@ -277,3 +571,4 @@ def optimize_script_hook(
 
     print(f"🎯 [Hook Scoring Gating] Winner ({winner_eval['verdict']}/100, {winner_eval['band']}, {winner_eval['formula']}): \"{winning_hook}\"")
     return spec
+
