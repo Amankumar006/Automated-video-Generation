@@ -395,6 +395,72 @@ class OfficialBlogRecord:
 
 # Curated, ground-truth verified official announcements from the 5 major AI organizations
 VERIFIED_OFFICIAL_BLOGS_REGISTRY: Dict[str, OfficialBlogRecord] = {
+    "blog_openai_gpt_6_intelligent_ui": OfficialBlogRecord(
+        id="blog_openai_gpt_6_intelligent_ui",
+        title="GPT-6 and Intelligent UI for Everyone",
+        provider="OpenAI",
+        published_date="2026-10-07",
+        summary="OpenAI launches GPT-6 globally in ChatGPT with Intelligent UI. Moving beyond plain text, ChatGPT dynamically renders interactive widgets, tappable buttons, live charts, and diagrams directly in responses, powered by GPT-6 Sol, Luna, and Astra.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Thinking Depth": "Instant to Extra High", "Visual Components": "Full Interactive Canvas"},
+            "speedups": ["Dynamic UI generation in real-time"],
+            "pricing": ["Included in Free (Luna), Plus (Sol), and Pro (Astra) tiers"],
+            "release_tiers": ["Free (GPT-6 Luna)", "Plus/Business (GPT-6 Sol)", "Pro (GPT-6 Astra)"],
+            "availability": ["ChatGPT Web", "ChatGPT Mobile", "Desktop Apps"],
+            "steps": ["1. Open ChatGPT", "2. Select GPT-6", "3. Interact with dynamic buttons, diagrams, and UI widgets directly in responses"]
+        },
+        canonical_url="https://openai.com/index/gpt-6-for-everyone",
+        domain_taxonomy="reasoning_models",
+        raw_impact_score=99.0,
+        impact_score=125.0,
+        analytics_multiplier=1.3,
+        tags=["openai", "gpt-6", "intelligent ui", "chatgpt", "sol", "luna", "astra"]
+    ),
+    "blog_openai_dots": OfficialBlogRecord(
+        id="blog_openai_dots",
+        title="Introducing Dots: 24/7 Autonomous Proactive AI Agents",
+        provider="OpenAI",
+        published_date="2026-09-29",
+        summary="OpenAI launches Dots, 24/7 proactive autonomous agents powered by GPT-6 Astra. Operating on dedicated cloud computers with 4,000+ app integrations, Dots execute continuous workflows across ChatGPT, Slack, and Teams without human micromanagement.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Availability": "24/7 Background Execution", "App Integrations": "4,000+ Apps"},
+            "speedups": ["Proactive completion before user requests"],
+            "pricing": ["ChatGPT Pro, Business, and Enterprise"],
+            "release_tiers": ["ChatGPT", "Slack Integration", "Microsoft Teams"],
+            "availability": ["OpenAI Platform", "ChatGPT"],
+            "steps": ["1. Create your Dot in ChatGPT", "2. Connect cloud apps", "3. Set goals and let it work independently in background"]
+        },
+        canonical_url="https://openai.com/index/introducing-dots",
+        domain_taxonomy="reasoning_models",
+        raw_impact_score=98.0,
+        impact_score=123.0,
+        analytics_multiplier=1.3,
+        tags=["openai", "dots", "agents", "gpt-6 astra", "autonomous", "proactive"]
+    ),
+    "blog_openai_math_progress": OfficialBlogRecord(
+        id="blog_openai_math_progress",
+        title="Sharing AI Progress in Mathematics: Lean Proof Formalization",
+        provider="OpenAI",
+        published_date="2026-10-06",
+        summary="OpenAI publishes breakthroughs solving open problems in mathematics using an internal frontier reasoning model, releasing verified formalizations in the Lean theorem prover on GitHub with the Institute for Advanced Study.",
+        category="tech_news",
+        key_facts={
+            "benchmarks": {"Theorem Prover": "Lean 4", "Target Domain": "Open Mathematical Problems"},
+            "speedups": ["Formal computer-checked machine proofs"],
+            "pricing": ["Open Access Research Publication"],
+            "release_tiers": ["GitHub Open Source Repository", "ArXiv Paper"],
+            "availability": ["GitHub", "Institute for Advanced Study"],
+            "steps": ["1. View research announcement", "2. Clone GitHub Lean repository", "3. Verify formal machine proofs with Lean 4"]
+        },
+        canonical_url="https://openai.com/index/sharing-ai-progress-in-mathematics",
+        domain_taxonomy="reasoning_models",
+        raw_impact_score=97.0,
+        impact_score=121.0,
+        analytics_multiplier=1.25,
+        tags=["openai", "mathematics", "lean 4", "formal proofs", "frontier reasoning"]
+    ),
     "blog_openai_o3_mini": OfficialBlogRecord(
         id="blog_openai_o3_mini",
         title="OpenAI o3-mini: High-Speed STEM Reasoning Model",
