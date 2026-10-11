@@ -1,15 +1,15 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-11 | **Timestamp:** 2026-10-11 06:02:21 UTC
+**Date:** 2026-10-11 | **Timestamp:** 2026-10-11 07:09:01 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Google for Startups Cloud Program: Up to $350,000 in Cloud & Gemini Credits
-- **Verified Perk:** Google for Startups Cloud Program: Up to $350,000 in Cloud & Gemini Credits
-- **Content Pillar:** `perks`
-- **Domain Taxonomy:** `developer_perks` (1.25x velocity)
-- **Category:** `developer_perks`
-- **Editorial Hook:** *What if you could build the next Gemini-powered unicorn without ever paying for your own server costs?*
-- **Everyday Analogy:** *Treating infrastructure credits like a 'unlimited budget' VIP pass at a massive global construction site for code.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_google_startup_credits_350k_mechanism_deepdive.mp4`
+### Reel 1: Embodied Turing Machines: Stateful Code for Robot Recursive Self-Improvement
+- **arXiv ID:** [2610.12369](https://arxiv.org/abs/2610.12369)
+- **Content Pillar:** `arxiv`
+- **Domain Taxonomy:** `robotics_tamp` (1.37x velocity)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *What if your robot didn't just follow a command, but literally rewrote its own 'brain' while it worked?*
+- **Everyday Analogy:** *A cook who can modify their own recipe card and kitchen layout while in the middle of preparing dinner.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_embodied_turing_machines_coap_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
