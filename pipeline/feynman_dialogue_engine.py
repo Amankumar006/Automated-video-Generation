@@ -99,7 +99,7 @@ CRITICAL INTELLECTUAL THRILLER DIRECTIVES (ENGINE 7.0):
      * State a shocking paradox, counter-intuitive inefficiency, or core problem directly from the paper with wry wit.
      * Examples across domains (DO NOT COPY VERBATIM; DRAFT SPECIFICALLY FOR THE PAPER):
        - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar kitchen."
-       - Hardware: "Standard attention kernels waste over half their execution cycles waiting on HBM memory transfers."
+       - Hardware: "Scaling context windows beyond eight thousand tokens causes standard models to hit an insurmountable memory wall."
        - Vision: "Generating 10 seconds of high-fidelity video used to require hundreds of repetitive diffusion passes."
    - ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
      * Personify the villain / mechanical bottleneck holding back the architecture, grounded in ONE clear physical analogy and relatable friction.
@@ -405,52 +405,167 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
         hook_tag = (solution_title or clean_title or "AI BREAKTHROUGH").upper()
         domain = context.get("domain", "hardware_efficiency")
 
-        return {
-            "id": slug,
-            "title": title,
-            "category": context.get("category", "mechanism_deepdive"),
-            "domain_taxonomy": domain,
-            "hook_tag": hook_tag,
-            "analogy_theme": "parallel pipeline synchronization",
-            "beats": [
+        abstract_text = (context.get("abstract") or context.get("summary") or "").strip()
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", abstract_text) if len(s.strip()) > 15]
+        cat = (context.get("category") or "mechanism_deepdive").lower()
+
+        beats = []
+        if len(sentences) >= 4:
+            s0 = sentences[0].rstrip(".?! ")
+            t1 = f"Why are top AI researchers watching {clean_title}? Because {s0[0].lower() + s0[1:]}." if not any(w in s0.lower() for w in ("you", "your")) else s0 + "."
+            s1 = sentences[1].rstrip(".?! ")
+            t2 = f"The core challenge? {s1}."
+            s2 = sentences[2].rstrip(".?! ")
+            t3 = f"Enter {clean_title}: {s2[0].lower() + s2[1:]}."
+            s3 = sentences[3].rstrip(".?! ")
+            t4 = f"Under the hood, {s3[0].lower() + s3[1:]}."
+            if len(sentences) >= 5:
+                s4 = sentences[4].rstrip(".?! ")
+                t5 = f"The result? {s4}."
+            else:
+                t5 = f"The result? Verified benchmark speedups across standard workloads for {clean_title}."
+
+            beats = [
                 {
                     "beat_id": 1,
-                    "text": f"Why are top AI researchers watching {clean_title}? Because standard models hit a wall.",
+                    "text": t1,
                     "visual_focus": f"System architecture schematic illustrating {clean_title} highlighted in pulsing cyan.",
-                    "highlight_words": {clean_title: "#38BDF8", "hit a wall": "#EF4444"},
+                    "highlight_words": {clean_title: "#38BDF8"},
                     "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "watching", "semantic_role": "state_transition"},
-                    "visual_blueprint": {"layout": "grid_memory", "title": "ARCHITECTURAL BOTTLENECK", "sub": "Standard methods hit scaling latency", "accent_color": "#EF4444", "params": {}}
+                    "visual_blueprint": {"layout": "grid_memory", "title": clean_title.upper(), "sub": "Core Architectural Breakthrough", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 2,
-                    "text": "The problem? Scaling up triggers heavy latency and memory walls.",
-                    "visual_focus": "Bottleneck diagram showing resource stall and execution queue backup.",
-                    "highlight_words": {"latency": "#EF4444", "memory walls": "#F59E0B"},
-                    "svo_action": {"subject": "Scaling Wall", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "triggers", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Sequential resource contention halts throughput", "accent_color": "#F59E0B", "params": {}}
+                    "text": t2,
+                    "visual_focus": "Bottleneck diagram showing resource contention and latency backup.",
+                    "highlight_words": {"challenge": "#EF4444"},
+                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "challenge", "semantic_role": "bottleneck"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#EF4444", "params": {}}
                 },
                 {
                     "beat_id": 3,
-                    "text": f"Enter {clean_title}. It breaks the bottleneck with a fast, decoupled pipeline.",
+                    "text": t3,
                     "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
-                    "highlight_words": {clean_title: "#10B981", "breaks the bottleneck": "#38BDF8"},
+                    "highlight_words": {clean_title: "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "Enter", "semantic_role": "mechanism"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled execution paths", "accent_color": "#10B981", "params": {}}
+                },
+                {
+                    "beat_id": 4,
+                    "text": t4,
+                    "visual_focus": "Asynchronous coordinate graph demonstrating zero idle wait states.",
+                    "highlight_words": {"Under the hood": "#38BDF8"},
+                    "svo_action": {"subject": "Async Engine", "action_verb": "coordinates", "direct_object": "Workload Streams", "anchor_word": "hood", "semantic_role": "innovation"},
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "ASYNC COORDINATION", "sub": "Zero-stall execution kernel", "accent_color": "#38BDF8", "params": {}}
+                },
+                {
+                    "beat_id": 5,
+                    "text": t5,
+                    "visual_focus": "Comparative benchmark race bars showing massive performance gains.",
+                    "highlight_words": {"result": "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "delivers", "direct_object": "Benchmark Gains", "anchor_word": "result", "semantic_role": "victory"},
+                    "visual_blueprint": {"layout": "horizontal_race_bars", "title": "BENCHMARK PERFORMANCE", "sub": "Verified empirical performance", "accent_color": "#10B981", "params": {}}
+                },
+                {
+                    "beat_id": 6,
+                    "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+                    "visual_focus": "Brand chalkboard logo with glowing cyan rings, subscribe badge, and loop transition arrow.",
+                    "highlight_words": {"The Model Verse": "#10B981", "under the hood": "#38BDF8"},
+                    "svo_action": {"subject": "Viewer", "action_verb": "follows", "direct_object": "The Model Verse", "anchor_word": "daily", "semantic_role": "loop"},
+                    "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily AI Architecture & Research Breakdowns", "accent_color": "#10B981", "params": {}}
+                }
+            ]
+        elif cat == "developer_perks":
+            beats = [
+                {
+                    "beat_id": 1,
+                    "text": f"Stop paying full price for AI APIs before you claim developer credits with {clean_title}.",
+                    "visual_focus": "Program grant tiers and token subsidization badge.",
+                    "highlight_words": {clean_title: "#38BDF8", "full price": "#EF4444"},
+                    "svo_action": {"subject": "Developers", "action_verb": "claim", "direct_object": "API Grants", "anchor_word": "credits", "semantic_role": "state_transition"},
+                    "visual_blueprint": {"layout": "catalog_routing", "title": "DEVELOPER PROGRAM", "sub": "Subsidized Model Access", "accent_color": "#38BDF8", "params": {}}
+                },
+                {
+                    "beat_id": 2,
+                    "text": "The problem? High API and inference bills deplete startup runway before product-market fit.",
+                    "visual_focus": "Burn rate chart showing capital exhaustion on token usage.",
+                    "highlight_words": {"deplete": "#EF4444", "runway": "#F59E0B"},
+                    "svo_action": {"subject": "API Costs", "action_verb": "drains", "direct_object": "Engineering Runway", "anchor_word": "deplete", "semantic_role": "bottleneck"},
+                    "visual_blueprint": {"layout": "barrier_separation", "title": "API COST BOTTLENECK", "sub": "Inference Spend Pressure", "accent_color": "#EF4444", "params": {}}
+                },
+                {
+                    "beat_id": 3,
+                    "text": f"Enter {clean_title}. It provides subsidized model endpoints and direct foundation model credits.",
+                    "visual_focus": f"Grant tier dashboard highlighting compute subsidies via {clean_title}.",
+                    "highlight_words": {clean_title: "#10B981", "subsidized model": "#38BDF8"},
+                    "svo_action": {"subject": clean_title, "action_verb": "unlocks", "direct_object": "Free Compute", "anchor_word": "subsidized", "semantic_role": "mechanism"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "SUBSIDIZED COMPUTE", "sub": "Foundation Model Credits", "accent_color": "#10B981", "params": {}}
+                },
+                {
+                    "beat_id": 4,
+                    "text": "Under the hood, qualifying engineering teams apply online with their organization domain.",
+                    "visual_focus": "Step-by-step application walkthrough showing instant verification.",
+                    "highlight_words": {"apply online": "#38BDF8"},
+                    "svo_action": {"subject": "Application Portal", "action_verb": "onboards", "direct_object": "Founders", "anchor_word": "apply", "semantic_role": "innovation"},
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "VERIFICATION STEPS", "sub": "Application & Approval Process", "accent_color": "#38BDF8", "params": {}}
+                },
+                {
+                    "beat_id": 5,
+                    "text": f"The result? Tens of thousands in compute savings to ship production systems without burning cash.",
+                    "visual_focus": "Capital savings comparison showing months of extended runway.",
+                    "highlight_words": {"compute savings": "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "saves", "direct_object": "Engineering Capital", "anchor_word": "savings", "semantic_role": "victory"},
+                    "visual_blueprint": {"layout": "horizontal_race_bars", "title": "CAPITAL PRESERVATION", "sub": "Total Dollar Value Unlocked", "accent_color": "#10B981", "params": {}}
+                },
+                {
+                    "beat_id": 6,
+                    "text": "Follow The Model Verse for daily deep-dives into developer perks, tools, and frontier AI models.",
+                    "visual_focus": "Brand chalkboard logo with glowing cyan rings, subscribe badge, and loop transition.",
+                    "highlight_words": {"The Model Verse": "#10B981"},
+                    "svo_action": {"subject": "Viewer", "action_verb": "follows", "direct_object": "The Model Verse", "anchor_word": "daily", "semantic_role": "loop"},
+                    "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily Developer Perks & Research", "accent_color": "#10B981", "params": {}}
+                }
+            ]
+        else:
+            beats = [
+                {
+                    "beat_id": 1,
+                    "text": f"Why are top AI researchers watching {clean_title}? Because standard architectures hit a bottleneck.",
+                    "visual_focus": f"System architecture schematic illustrating {clean_title} highlighted in pulsing cyan.",
+                    "highlight_words": {clean_title: "#38BDF8", "bottleneck": "#EF4444"},
+                    "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "watching", "semantic_role": "state_transition"},
+                    "visual_blueprint": {"layout": "grid_memory", "title": clean_title.upper(), "sub": "Core Architectural Premise", "accent_color": "#38BDF8", "params": {}}
+                },
+                {
+                    "beat_id": 2,
+                    "text": "The problem? Scaling workloads triggers severe resource contention and execution delays.",
+                    "visual_focus": "Bottleneck diagram showing resource stall and execution queue backup.",
+                    "highlight_words": {"resource contention": "#EF4444", "delays": "#F59E0B"},
+                    "svo_action": {"subject": "Resource Contention", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "triggers", "semantic_role": "bottleneck"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#EF4444", "params": {}}
+                },
+                {
+                    "beat_id": 3,
+                    "text": f"Enter {clean_title}. It breaks the bottleneck with a decoupled, high-throughput pipeline.",
+                    "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
+                    "highlight_words": {clean_title: "#10B981", "decoupled": "#38BDF8"},
                     "svo_action": {"subject": clean_title, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "breaks", "semantic_role": "mechanism"},
                     "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled execution paths", "accent_color": "#10B981", "params": {}}
                 },
                 {
                     "beat_id": 4,
-                    "text": "Under the hood, it runs tasks in parallel. No more idle waiting.",
+                    "text": "Under the hood, it coordinates operations in parallel, eliminating idle wait states entirely.",
                     "visual_focus": "Asynchronous coordinate graph demonstrating zero idle wait states.",
-                    "highlight_words": {"parallel": "#38BDF8", "idle waiting": "#10B981"},
+                    "highlight_words": {"in parallel": "#38BDF8", "idle wait states": "#10B981"},
                     "svo_action": {"subject": "Async Engine", "action_verb": "coordinates", "direct_object": "Workload Streams", "anchor_word": "parallel", "semantic_role": "innovation"},
                     "visual_blueprint": {"layout": "chalkboard_code_block", "title": "ASYNC COORDINATION", "sub": "Zero-stall execution kernel", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 5,
-                    "text": "The result? Big benchmark speedups with zero accuracy loss.",
+                    "text": f"The result? Big benchmark speedups across standard tasks for {clean_title}.",
                     "visual_focus": "Comparative benchmark race bars showing massive performance gains.",
-                    "highlight_words": {"speedups": "#10B981", "zero accuracy loss": "#38BDF8"},
-                    "svo_action": {"subject": "Benchmark Metric", "action_verb": "accelerates", "direct_object": "Throughput", "anchor_word": "speedups", "semantic_role": "victory"},
+                    "highlight_words": {"speedups": "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "accelerates", "direct_object": "Throughput", "anchor_word": "speedups", "semantic_role": "victory"},
                     "visual_blueprint": {"layout": "horizontal_race_bars", "title": "BENCHMARK PERFORMANCE", "sub": "Verified speedup with zero accuracy loss", "accent_color": "#10B981", "params": {}}
                 },
                 {
@@ -462,6 +577,15 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily AI Architecture & Research Breakdowns", "accent_color": "#10B981", "params": {}}
                 }
             ]
+
+        return {
+            "id": slug,
+            "title": title,
+            "category": cat,
+            "domain_taxonomy": domain,
+            "hook_tag": hook_tag,
+            "analogy_theme": "parallel pipeline synchronization",
+            "beats": beats
         }
 
 

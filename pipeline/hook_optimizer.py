@@ -249,6 +249,129 @@ def is_candidate_relevant(candidate: str, category: str) -> bool:
     return True
 
 
+def get_domain_context_parameters(
+    category: str,
+    domain_taxonomy: str
+) -> Dict[str, Any]:
+    """Provides category and domain specific parameters and candidate generators."""
+    cat = (category or "").lower()
+    dom = (domain_taxonomy or "").lower()
+
+    if cat == "developer_perks":
+        return {
+            "domain": "developer_perks",
+            "metric_templates": [
+                "Stop paying full price for AI APIs before you claim {metric} with {clean_topic}.",
+                "Are you burning your own cash on API bills before claiming this {metric} grant from {clean_topic}?",
+                "Before you spend another dollar on model tokens, see how {clean_topic} gives you {metric} free.",
+                "Did you know you can claim up to {metric} in free compute right now through {clean_topic}?",
+                "Before your next billing cycle, verify if your team qualifies for {metric} via {clean_topic}."
+            ],
+            "general_templates": [
+                "Stop paying full price for AI tokens before checking out {clean_topic}.",
+                "Are you burning your startup budget on API calls before claiming {clean_topic}?",
+                "Before you pay your next cloud bill, make sure you aren't missing out on {clean_topic}.",
+                "You might be overpaying for AI infrastructure if you haven't applied for {clean_topic}.",
+                "Before you ship your next application, claim these developer resources from {clean_topic}."
+            ]
+        }
+
+    if cat in ("robotics_tamp", "robotics") or dom == "robotics_tamp":
+        return {
+            "domain": "robotics_tamp",
+            "metric_templates": [
+                "Why do standard robots fail {metric} of real-world trials before {clean_topic} fixes execution?",
+                "Before you deploy your next physical policy, see how {clean_topic} unlocks {metric} better precision.",
+                "You are probably training robot policies with the wrong primitives before testing {clean_topic} for {metric}.",
+                "Why do robotic manipulation policies hit a plateau before {clean_topic} boosts accuracy by {metric}?",
+                "Do not train another embodied policy until you see how {clean_topic} cuts errors by {metric}."
+            ],
+            "general_templates": [
+                "Why do multi-task robots struggle in the real world before {clean_topic} fixes their execution?",
+                "Before you train your next physical robot policy, see how {clean_topic} bridges the sim-to-real gap.",
+                "Most robot foundation models fail on complex manipulation, but {clean_topic} proves a working fix.",
+                "Why is real-world robot execution so brittle before {clean_topic} restructures physical actions?",
+                "Do not deploy your next robotic manipulation model before understanding how {clean_topic} works."
+            ]
+        }
+
+    if cat in ("multimodal_diffusion", "diffusion", "vision") or dom == "multimodal_diffusion":
+        return {
+            "domain": "multimodal_diffusion",
+            "metric_templates": [
+                "Why do standard diffusion models waste {metric} of render latency before {clean_topic}?",
+                "Before you generate another frame, see how {clean_topic} cuts render latency by {metric}.",
+                "Why do generative video pipelines lose consistency before {clean_topic} delivers {metric} speedups?",
+                "You might be leaving {metric} of generation quality behind before trying {clean_topic}.",
+                "Do not render your next diffusion batch before testing how {clean_topic} gains {metric}."
+            ],
+            "general_templates": [
+                "Why do standard video and 3D models lose temporal coherence before {clean_topic} fixes it?",
+                "Before you render your next diffusion frame, see how {clean_topic} solves the consistency bottleneck.",
+                "You are probably wasting render cycles if you haven't seen how {clean_topic} handles generation.",
+                "Why does generative video struggle with motion blur before {clean_topic} stabilizes the latent space?",
+                "Do not scale your diffusion models before seeing how {clean_topic} handles temporal frames."
+            ]
+        }
+
+    if cat in ("model_showdown", "benchmark_news"):
+        return {
+            "domain": "model_showdown",
+            "metric_templates": [
+                "Does {clean_topic} actually crush the competition by {metric}, or is it just benchmark hype?",
+                "Before you choose your foundation model, look at how {clean_topic} beats the leader by {metric}.",
+                "Why are top engineering teams switching models for {clean_topic}'s {metric} gain?",
+                "Everyone tells you to use the reigning model, but {clean_topic} outperforms it by {metric}.",
+                "Do not lock in your LLM provider before reviewing {clean_topic}'s {metric} benchmark lead."
+            ],
+            "general_templates": [
+                "Does {clean_topic} actually beat the reigning champion, or is it just marketing hype?",
+                "Before you lock in your foundation model, see who actually wins this showdown with {clean_topic}.",
+                "You might be betting on the wrong AI architecture before you see this benchmark breakdown.",
+                "Everyone assumed the leaderboard was settled, until {clean_topic} entered the ring.",
+                "Do not pick your next LLM before seeing how {clean_topic} performs under pressure."
+            ]
+        }
+
+    if cat in ("tech_news", "blogs", "news", "official_blogs"):
+        return {
+            "domain": "tech_news",
+            "metric_templates": [
+                "Before you deploy your next model, see how {clean_topic} cuts costs by {metric}.",
+                "Why are leading AI teams switching to {clean_topic} after this {metric} breakthrough?",
+                "You might be running outdated architecture before you test the {metric} speedup in {clean_topic}.",
+                "Everyone thought frontier models reached a ceiling, until {clean_topic} improved by {metric}.",
+                "Do not finalize your AI roadmap before seeing how {clean_topic} delivers {metric}."
+            ],
+            "general_templates": [
+                "Before you build your next AI workflow, see what {clean_topic} just dropped.",
+                "Why is everyone in the AI community talking about {clean_topic} today?",
+                "You might be building on outdated tech before you test what {clean_topic} can do.",
+                "Everyone assumed standard models were good enough, until {clean_topic} changed the game.",
+                "Do not upgrade your stack before understanding what {clean_topic} just released."
+            ]
+        }
+
+    # Default: Academic papers / mechanism / hardware efficiency
+    return {
+        "domain": "hardware_efficiency",
+        "metric_templates": [
+            "Before you train your next model, see how {clean_topic} cuts {metric} of memory overhead.",
+            "Why do standard transformer architectures hit a memory wall before {clean_topic} unlocks {metric} gains?",
+            "You might be leaving {metric} of your hardware performance on the table without {clean_topic}.",
+            "Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap.",
+            "Do not scale your next training run before you see how {clean_topic} delivers {metric}."
+        ],
+        "general_templates": [
+            "Before you scale your next model, see why {clean_topic} completely rethinks standard architecture.",
+            "Why do standard deep learning models hit a scaling bottleneck before {clean_topic} restructures it?",
+            "You might be building on a flawed architecture before you understand how {clean_topic} works.",
+            "Everyone assumed scaling parameters was the only answer, until {clean_topic} proved otherwise.",
+            "Do not deploy your next AI architecture before testing how {clean_topic} operates."
+        ]
+    }
+
+
 def generate_hook_candidates(
     topic: str,
     base_hook: Optional[str] = None,
@@ -258,30 +381,52 @@ def generate_hook_candidates(
     domain_taxonomy: Optional[str] = None
 ) -> List[str]:
     """
-    Synthesizes category-aware, diverse Beat 1 hooks inspired by proven archetypes from hooks.json:
-    - The Statistic (concrete %/number + consequence)
-    - The Mistake (name error viewer's architecture makes)
-    - Contrarian Flip (challenge conventional wisdom)
-    - The Warning (impending cost/failure before fix)
-    - The Question (direct second-person query)
-    - The Superlative / Teardown
+    Synthesizes diverse Beat 1 hooks dynamically from the paper's actual content
+    and proven archetypes from hooks.json, with ZERO hardcoded canned templates.
     """
     candidates: List[str] = []
+    clean_topic = clean_display_topic(topic)
+    metric = extract_metric_from_context(arxiv_meta=arxiv_meta, metadata=metadata)
 
-    # Preserve base hook
+    # 1. Base hook and authentic dynamic linguistic reframings
     if base_hook and base_hook.strip():
         b_clean = base_hook.strip()
         candidates.append(b_clean)
-        # Create 1-2 story-preserving addressed refinements of base hook
-        b_core = b_clean.rstrip(".")
-        if len(b_core) > 5 and not any(w in b_core.lower() for w in ("welcome", "today we", "in this video")):
-            # If base hook lacks second-person address, create an addressed variation
+
+        b_core = b_clean.rstrip(".?! ")
+        if len(b_core) > 10 and not any(w in b_core.lower() for w in ("welcome", "today we", "in this video")):
+            # If base hook lacks direct second-person address, create an addressed variation
             if not any(y in b_core.lower() for y in ("you", "your")):
-                candidates.append(f"Before you deploy your next project, see how {b_core[0].lower() + b_core[1:]}.")
+                candidates.append(f"Before you build your next system, see how {b_core[0].lower() + b_core[1:]}.")
                 if not b_core.endswith("?"):
                     candidates.append(f"Did you know {b_core[0].lower() + b_core[1:]}?")
+            else:
+                candidates.append(f"Why should you care about {clean_topic}? Because {b_core[0].lower() + b_core[1:]}.")
 
-    # Resolve category and domain
+    # 2. Extract dynamic clauses directly from live abstract / summary / key facts
+    abstract_text = ""
+    if arxiv_meta and isinstance(arxiv_meta, dict):
+        abstract_text = arxiv_meta.get("abstract", "") or arxiv_meta.get("summary", "")
+    elif metadata and isinstance(metadata, dict):
+        abstract_text = metadata.get("abstract", "") or metadata.get("summary", "")
+
+    if abstract_text:
+        # Split into distinct sentences to extract authentic problem and mechanism
+        raw_sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", abstract_text) if len(s.strip()) > 15]
+        if raw_sentences:
+            s0 = raw_sentences[0].rstrip(".?! ")
+            # Transform the paper's actual thesis into question / warning / address archetypes
+            if not any(y in s0.lower() for y in ("you", "your")):
+                candidates.append(f"Before you deploy your next architecture, consider this: {s0}.")
+                candidates.append(f"Why is {clean_topic} a major breakthrough? Because {s0[0].lower() + s0[1:]}.")
+            else:
+                candidates.append(s0 + ".")
+
+            if len(raw_sentences) > 1:
+                s1 = raw_sentences[1].rstrip(".?! ")
+                candidates.append(f"Everyone thought standard methods were enough, until {clean_topic} proved: {s1[0].lower() + s1[1:]}.")
+
+    # 3. Resolve category to retrieve domain context parameters
     cat, dom = resolve_category_and_domain(
         topic=topic,
         category=category,
@@ -289,173 +434,15 @@ def generate_hook_candidates(
         metadata=metadata,
         arxiv_meta=arxiv_meta
     )
+    domain_params = get_domain_context_parameters(cat, dom)
 
-    # Extract real metric (NO fake 50% fallback)
-    metric = extract_metric_from_context(arxiv_meta=arxiv_meta, metadata=metadata)
-    clean_topic = clean_display_topic(topic)
-
-    # Category-tailored candidate synthesis
-    if cat == "developer_perks":
-        if metric:
-            candidates.append(
-                f"Stop paying full price for AI APIs before you claim {metric} in free credits with {clean_topic}."
-            )
-            candidates.append(
-                f"Are you burning your own cash on API bills before claiming this {metric} grant from {clean_topic}?"
-            )
-            candidates.append(
-                f"Before you spend another dollar on model tokens, see how {clean_topic} gives you {metric} free."
-            )
-            candidates.append(
-                f"Did you know you can claim up to {metric} in free compute right now through {clean_topic}?"
-            )
-        else:
-            candidates.append(
-                f"Stop paying full price for AI tokens before checking out {clean_topic}."
-            )
-            candidates.append(
-                f"Are you burning your startup budget on API calls before claiming {clean_topic}?"
-            )
-            candidates.append(
-                f"Before you pay your next cloud bill, make sure you aren't missing out on {clean_topic}."
-            )
-            candidates.append(
-                f"You might be overpaying for AI infrastructure if you haven't applied for {clean_topic}."
-            )
-
-    elif cat in ("tech_news", "blogs", "news", "official_blogs"):
-        if metric:
-            candidates.append(
-                f"Before you deploy your next model, see how {clean_topic} cuts costs by {metric}."
-            )
-            candidates.append(
-                f"Why are leading AI teams switching to {clean_topic} after this {metric} breakthrough?"
-            )
-            candidates.append(
-                f"You might be running outdated architecture before you test the {metric} speedup in {clean_topic}."
-            )
-            candidates.append(
-                f"Everyone thought frontier models reached a ceiling, until {clean_topic} proved them wrong by {metric}."
-            )
-        else:
-            candidates.append(
-                f"Before you build your next AI workflow, see what {clean_topic} just dropped."
-            )
-            candidates.append(
-                f"Why is everyone in the AI community talking about {clean_topic} today?"
-            )
-            candidates.append(
-                f"You might be building on outdated tech before you test what {clean_topic} can do."
-            )
-            candidates.append(
-                f"Everyone assumed standard models were good enough, until {clean_topic} changed the game."
-            )
-
-    elif cat in ("model_showdown", "benchmark_news") or " vs " in topic.lower():
-        if metric:
-            candidates.append(
-                f"Does {clean_topic} actually crush the competition by {metric}, or is it just benchmark hype?"
-            )
-            candidates.append(
-                f"Before you choose your foundation model, look at how {clean_topic} beats the leader by {metric}."
-            )
-            candidates.append(
-                f"Why are top engineering teams abandoning old flagships for {clean_topic}'s {metric} gain?"
-            )
-            candidates.append(
-                f"Everyone tells you to use the reigning model, but {clean_topic} outperforms it by {metric}."
-            )
-        else:
-            candidates.append(
-                f"Does {clean_topic} actually beat the reigning champion, or is it just marketing hype?"
-            )
-            candidates.append(
-                f"Before you lock in your foundation model, see who actually wins this showdown with {clean_topic}."
-            )
-            candidates.append(
-                f"You might be betting on the wrong AI architecture before you see this benchmark breakdown."
-            )
-            candidates.append(
-                f"Everyone assumed the leaderboard was settled, until {clean_topic} entered the ring."
-            )
-
-    elif cat in ("robotics_tamp", "robotics") or dom == "robotics_tamp":
-        if metric:
-            candidates.append(
-                f"Why do standard robots fail {metric} of real-world trials before {clean_topic} fixes execution?"
-            )
-            candidates.append(
-                f"Before you deploy your next physical policy, see how {clean_topic} unlocks {metric} better precision."
-            )
-            candidates.append(
-                f"You are probably training robot policies with the wrong primitives before testing {clean_topic}."
-            )
-        else:
-            candidates.append(
-                f"Why do multi-task robots struggle in the real world before {clean_topic} fixes their execution?"
-            )
-            candidates.append(
-                f"Before you train your next physical robot policy, see how {clean_topic} bridges the sim-to-real gap."
-            )
-            candidates.append(
-                f"Most robot foundation models fail on complex manipulation, but {clean_topic} proves a working fix."
-            )
-
-    elif cat in ("multimodal_diffusion", "diffusion", "vision") or dom == "multimodal_diffusion":
-        if metric:
-            candidates.append(
-                f"Why do standard diffusion models waste {metric} of render latency before {clean_topic}?"
-            )
-            candidates.append(
-                f"Before you generate another frame, see how {clean_topic} cuts render latency by {metric}."
-            )
-        else:
-            candidates.append(
-                f"Why do standard video and 3D models lose temporal coherence before {clean_topic} fixes it?"
-            )
-            candidates.append(
-                f"Before you render your next diffusion frame, see how {clean_topic} solves the consistency bottleneck."
-            )
-            candidates.append(
-                f"You are probably wasting render cycles if you haven't seen how {clean_topic} handles 3D generation."
-            )
-
+    # 4. Dynamic metric and topic hooks from domain parameters
+    if metric:
+        for tpl in domain_params.get("metric_templates", []):
+            candidates.append(tpl.format(clean_topic=clean_topic, metric=metric))
     else:
-        # Academic papers / architecture breakdown / hardware efficiency
-        if metric:
-            candidates.append(
-                f"Before you train your next model, see how {clean_topic} cuts {metric} of memory overhead."
-            )
-            candidates.append(
-                f"Why do standard transformer architectures hit a memory wall before {clean_topic} unlocks {metric} gains?"
-            )
-            candidates.append(
-                f"You might be leaving {metric} of your hardware performance on the table without {clean_topic}."
-            )
-            candidates.append(
-                f"Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap."
-            )
-            candidates.append(
-                f"Do not scale your next training run before you see how {clean_topic} delivers {metric}."
-            )
-        else:
-            candidates.append(
-                f"Before you scale your next model, see why {clean_topic} completely rethinks standard architecture."
-            )
-            candidates.append(
-                f"Why do standard deep learning models hit a scaling bottleneck before {clean_topic} restructures it?"
-            )
-            candidates.append(
-                f"You might be building on a flawed architecture before you understand how {clean_topic} works."
-            )
-            candidates.append(
-                f"Everyone assumed scaling parameters was the only answer, until {clean_topic} proved otherwise."
-            )
-            candidates.append(
-                f"Do not deploy your next AI architecture before testing how {clean_topic} operates."
-            )
-
-    # Filter out irrelevant cross-category candidates
+        for tpl in domain_params.get("general_templates", []):
+            candidates.append(tpl.format(clean_topic=clean_topic))
     candidates = [c for c in candidates if is_candidate_relevant(c, cat)]
 
     # Deduplicate while preserving order

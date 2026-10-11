@@ -546,6 +546,133 @@ CRITICAL GROUND TRUTH RULES:
 
     def _generate_fallback_beat(self, beat_id: int, topic: str, paper_meta: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         clean_topic = topic[:30] if topic else "Modern AI"
+        abstract_text = ""
+        cat = ""
+        if paper_meta and isinstance(paper_meta, dict):
+            abstract_text = (paper_meta.get("abstract") or paper_meta.get("summary") or "").strip()
+            cat = (paper_meta.get("category") or "").lower()
+
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", abstract_text) if len(s.strip()) > 15]
+
+        if len(sentences) >= 4:
+            s0 = sentences[0].rstrip(".?! ")
+            s1 = sentences[1].rstrip(".?! ")
+            s2 = sentences[2].rstrip(".?! ")
+            s3 = sentences[3].rstrip(".?! ")
+            s4 = sentences[4].rstrip(".?! ") if len(sentences) >= 5 else f"Proven empirical gains across {clean_topic}"
+
+            t1 = f"Why are top AI researchers calling {clean_topic} a breakthrough? Because {s0[0].lower() + s0[1:]}." if not any(w in s0.lower() for w in ("you", "your")) else s0 + "."
+            t2 = f"The core bottleneck? {s1}."
+            t3 = f"Enter {clean_topic}: {s2[0].lower() + s2[1:]}."
+            t4 = f"Under the hood, {s3[0].lower() + s3[1:]}."
+            t5 = f"The result? {s4}."
+            t6 = "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood."
+
+            defaults = {
+                1: {
+                    "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",
+                    "text": t1,
+                    "visual_focus": f"System architecture diagram illustrating {clean_topic}.",
+                    "highlight_words": {clean_topic: "#38BDF8"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "disrupts", "direct_object": "Standard Paradigms", "anchor_word": clean_topic.split()[0], "semantic_role": "state_transition"},
+                    "visual_blueprint": {"layout": "grid_memory", "title": clean_topic.upper(), "sub": "Core Premise", "accent_color": "#38BDF8", "params": {}}
+                },
+                2: {
+                    "beat_id": 2, "act": 2, "thriller_role": "villain_bottleneck",
+                    "text": t2,
+                    "visual_focus": "Bottleneck diagram highlighting resource contention and execution stall.",
+                    "highlight_words": {"bottleneck": "#EF4444"},
+                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Pipeline Flow", "anchor_word": "bottleneck", "semantic_role": "bottleneck"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource Contention", "accent_color": "#EF4444", "params": {}}
+                },
+                3: {
+                    "beat_id": 3, "act": 3, "thriller_role": "eureka_mechanism",
+                    "text": t3,
+                    "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
+                    "highlight_words": {clean_topic: "#10B981"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "Enter", "semantic_role": "mechanism"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled Execution", "accent_color": "#10B981", "params": {}}
+                },
+                4: {
+                    "beat_id": 4, "act": 3, "thriller_role": "technical_secret_sauce",
+                    "text": t4,
+                    "visual_focus": "Low-level coordinate graph demonstrating execution flow without idle states.",
+                    "highlight_words": {"Under the hood": "#38BDF8"},
+                    "svo_action": {"subject": "Execution Engine", "action_verb": "coordinates", "direct_object": "Task Flow", "anchor_word": "hood", "semantic_role": "innovation"},
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "EXECUTION MECHANICS", "sub": "Algorithmic Coordination", "accent_color": "#38BDF8", "params": {}}
+                },
+                5: {
+                    "beat_id": 5, "act": 4, "thriller_role": "empirical_payoff",
+                    "text": t5,
+                    "visual_focus": "Comparative benchmark race bars showing massive performance gains.",
+                    "highlight_words": {"result": "#10B981"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "delivers", "direct_object": "Benchmark Gains", "anchor_word": "result", "semantic_role": "victory"},
+                    "visual_blueprint": {"layout": "horizontal_race_bars", "title": "BENCHMARK PERFORMANCE", "sub": "Empirical Gains", "accent_color": "#10B981", "params": {}}
+                },
+                6: {
+                    "beat_id": 6, "act": 4, "thriller_role": "open_loop_outro",
+                    "text": t6,
+                    "visual_focus": "Chalkboard brand logo with glowing cyan rings, subscribe badge, and loop transition.",
+                    "highlight_words": {"The Model Verse": "#34D399"},
+                    "svo_action": {"subject": "Viewer", "action_verb": "follows", "direct_object": "The Model Verse", "anchor_word": "daily", "semantic_role": "loop"},
+                    "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily AI Research Breakdowns", "accent_color": "#34D399", "params": {}}
+                }
+            }
+            return defaults.get(beat_id, defaults[1])
+
+        if cat == "developer_perks":
+            defaults = {
+                1: {
+                    "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",
+                    "text": f"Stop paying full price for AI tokens before checking out {clean_topic}.",
+                    "visual_focus": "Program grant tiers and token subsidization badge.",
+                    "highlight_words": {clean_topic: "#38BDF8", "full price": "#EF4444"},
+                    "svo_action": {"subject": "Developers", "action_verb": "claim", "direct_object": "API Grants", "anchor_word": "tokens", "semantic_role": "state_transition"},
+                    "visual_blueprint": {"layout": "catalog_routing", "title": "DEVELOPER PROGRAM", "sub": "Subsidized Model Access", "accent_color": "#38BDF8", "params": {}}
+                },
+                2: {
+                    "beat_id": 2, "act": 2, "thriller_role": "villain_bottleneck",
+                    "text": "The villain? Skyrocketing inference and token expenses that deplete startup runways before launch.",
+                    "visual_focus": "Burn rate chart showing capital exhaustion on token usage.",
+                    "highlight_words": {"deplete": "#EF4444", "runways": "#F59E0B"},
+                    "svo_action": {"subject": "API Costs", "action_verb": "drains", "direct_object": "Engineering Runway", "anchor_word": "deplete", "semantic_role": "bottleneck"},
+                    "visual_blueprint": {"layout": "barrier_separation", "title": "API COST BOTTLENECK", "sub": "Inference Spend Pressure", "accent_color": "#EF4444", "params": {}}
+                },
+                3: {
+                    "beat_id": 3, "act": 3, "thriller_role": "eureka_mechanism",
+                    "text": f"Enter {clean_topic}. It unlocks dedicated credits and foundation model subsidies.",
+                    "visual_focus": f"Grant tier dashboard highlighting compute subsidies via {clean_topic}.",
+                    "highlight_words": {clean_topic: "#10B981", "dedicated credits": "#38BDF8"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "unlocks", "direct_object": "Free Compute", "anchor_word": "credits", "semantic_role": "mechanism"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "SUBSIDIZED COMPUTE", "sub": "Foundation Model Credits", "accent_color": "#10B981", "params": {}}
+                },
+                4: {
+                    "beat_id": 4, "act": 3, "thriller_role": "technical_secret_sauce",
+                    "text": "Under the hood, qualifying teams bypass expensive bills with verified application steps.",
+                    "visual_focus": "Step-by-step application walkthrough showing instant verification.",
+                    "highlight_words": {"bypass": "#34D399", "application steps": "#38BDF8"},
+                    "svo_action": {"subject": "Application Portal", "action_verb": "verifies", "direct_object": "Credentials", "anchor_word": "bypass", "semantic_role": "innovation"},
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "VERIFICATION STEPS", "sub": "Application & Approval Process", "accent_color": "#38BDF8", "params": {}}
+                },
+                5: {
+                    "beat_id": 5, "act": 4, "thriller_role": "empirical_payoff",
+                    "text": f"The result? Tens of thousands in compute savings to ship production models faster.",
+                    "visual_focus": "Capital savings comparison showing months of extended runway.",
+                    "highlight_words": {"compute savings": "#10B981"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "saves", "direct_object": "Engineering Capital", "anchor_word": "savings", "semantic_role": "victory"},
+                    "visual_blueprint": {"layout": "horizontal_race_bars", "title": "CAPITAL PRESERVATION", "sub": "Total Dollar Value Unlocked", "accent_color": "#10B981", "params": {}}
+                },
+                6: {
+                    "beat_id": 6, "act": 4, "thriller_role": "open_loop_outro",
+                    "text": "Follow The Model Verse for daily updates on free developer perks, tools, and frontier AI models.",
+                    "visual_focus": "Chalkboard brand signature with subscribe indicator.",
+                    "highlight_words": {"The Model Verse": "#34D399"},
+                    "svo_action": {"subject": "The Model Verse", "action_verb": "curates", "direct_object": "Developer Perks", "anchor_word": "Model", "semantic_role": "loop"},
+                    "visual_blueprint": {"layout": "neural_activation_wave", "title": "THE MODEL VERSE", "sub": "Daily Developer Perks & Research", "accent_color": "#34D399", "params": {}}
+                }
+            }
+            return defaults.get(beat_id, defaults[1])
+
         defaults = {
             1: {
                 "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",

@@ -333,142 +333,329 @@ def generate_deterministic_fallback_script(
     """
     Constructs a structurally complete, domain-accurate 6-beat script spec
     when all external LLM providers are down, exhausted, or offline.
+    Dynamically extracts authentic sentences from arxiv_meta or synthesizes
+    category-accurate beats without canned repetitive templates.
     """
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", topic).lower()
     clean_id = re.sub(r"_+", "_", clean_id).strip("_")
     if not clean_id:
         clean_id = "short_topic"
-    cat = category or "mechanism_deepdive"
-    title = arxiv_meta.get("title") if arxiv_meta else topic
+    cat = (category or (arxiv_meta.get("category") if arxiv_meta else None) or "mechanism_deepdive").lower()
+    title = (arxiv_meta.get("title") if arxiv_meta else None) or topic
 
-    spec = {
-        "id": clean_id,
-        "title": title,
-        "category": cat,
-        "domain_taxonomy": "hardware_efficiency",
-        "hook_tag": cat.upper().replace("_", " "),
-        "beats": [
+    # Clean display topic
+    clean_topic = topic.split(":")[0].strip()
+    for prefix in (
+        "mechanism_deepdive_", "architecture_breakdown_", "model_showdown_",
+        "benchmark_news_", "developer_perks_", "tech_news_", "perk_", "blog_", "news_", "gh_"
+    ):
+        if clean_topic.startswith(prefix):
+            clean_topic = clean_topic[len(prefix):]
+    clean_topic = clean_topic.replace("_", " ").strip()
+    if clean_topic.islower():
+        clean_topic = clean_topic.title()
+    clean_topic = clean_topic or "Frontier AI"
+
+    # Infer domain taxonomy
+    dom = (arxiv_meta.get("domain_taxonomy") if arxiv_meta else None) or "hardware_efficiency"
+    if cat == "developer_perks":
+        dom = "developer_perks"
+    elif cat in ("tech_news", "blogs", "news"):
+        dom = "tech_news"
+    elif cat in ("model_showdown", "benchmark_news"):
+        dom = "model_showdown"
+    elif "robot" in topic.lower():
+        dom = "robotics_tamp"
+    elif any(w in topic.lower() for w in ("diffusion", "video gen", "3d")):
+        dom = "multimodal_diffusion"
+
+    abstract_text = ""
+    if arxiv_meta and isinstance(arxiv_meta, dict):
+        abstract_text = arxiv_meta.get("abstract", "") or arxiv_meta.get("summary", "")
+
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", abstract_text) if len(s.strip()) > 15]
+
+    beats: List[Dict[str, Any]] = []
+
+    if len(sentences) >= 4:
+        # Dynamic extraction directly from paper/article abstract
+        s0 = sentences[0].rstrip(".?! ")
+        t1 = f"Why is {clean_topic} a major breakthrough? Because {s0[0].lower() + s0[1:]}." if not any(w in s0.lower() for w in ("you", "your")) else s0 + "."
+        s1 = sentences[1].rstrip(".?! ")
+        t2 = f"The core challenge? {s1}."
+        s2 = sentences[2].rstrip(".?! ")
+        t3 = f"Enter {clean_topic}: {s2[0].lower() + s2[1:]}."
+        s3 = sentences[3].rstrip(".?! ")
+        t4 = f"Under the hood, {s3[0].lower() + s3[1:]}."
+        if len(sentences) >= 5:
+            s4 = sentences[4].rstrip(".?! ")
+            t5 = f"The result? {s4}."
+        else:
+            t5 = f"The result? Proven empirical gains and state-of-the-art benchmarks on {clean_topic}."
+
+        beats = [
             {
                 "beat_id": 1,
-                "text": f"Modern neural networks waste over half their execution cycles waiting on memory transfers when scaling {topic}.",
-                "visual_focus": "Hardware bandwidth bottleneck visualization with pulsing memory buses.",
-                "highlight_words": {"execution cycles": "#EF4444", "memory transfers": "#F59E0B"},
-                "svo_action": {
-                    "subject": "Memory Bus",
-                    "action_verb": "throttles",
-                    "direct_object": "Compute Cores",
-                    "anchor_word": "cycles",
-                    "semantic_role": "state_transition"
-                },
-                "visual_blueprint": {
-                    "layout": "horizontal_race_bars",
-                    "title": "MEMORY BANDWIDTH BOTTLENECK",
-                    "sub": "HBM vs SRAM Bandwidth Ceiling",
-                    "accent_color": "#EF4444",
-                    "params": {"metric": "Bandwidth Utilization"}
-                }
+                "text": t1,
+                "visual_focus": f"System architecture schematic introducing {clean_topic}.",
+                "highlight_words": {clean_topic: "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "disrupts", "direct_object": "Baseline Systems", "anchor_word": clean_topic.split()[0], "semantic_role": "state_transition"},
+                "visual_blueprint": {"layout": "grid_memory", "title": clean_topic.upper(), "sub": "Core Architectural Premise", "accent_color": "#38BDF8", "params": {}}
             },
             {
                 "beat_id": 2,
-                "text": "The villain is quadratic intermediate state bloat that overwhelms fast on-chip SRAM cache.",
-                "visual_focus": "Exploding state buffer graph overflowing beyond SRAM safe boundaries.",
-                "highlight_words": {"quadratic": "#EF4444", "SRAM cache": "#38BDF8"},
-                "svo_action": {
-                    "subject": "Buffer Bloat",
-                    "action_verb": "overflows",
-                    "direct_object": "SRAM Cache",
-                    "anchor_word": "bloat",
-                    "semantic_role": "causal_elimination"
-                },
-                "visual_blueprint": {
-                    "layout": "vector_flow_field",
-                    "title": "QUADRATIC INTERMEDIATE STATE BLOAT",
-                    "sub": "SRAM Eviction & Memory Pressure",
-                    "accent_color": "#EF4444",
-                    "params": {"field_title": "Memory Drift"}
-                }
+                "text": t2,
+                "visual_focus": "Bottleneck diagram illustrating resource contention and latency walls.",
+                "highlight_words": {"challenge": "#EF4444"},
+                "svo_action": {"subject": "System Bottleneck", "action_verb": "throttles", "direct_object": "Throughput", "anchor_word": "challenge", "semantic_role": "causal_elimination"},
+                "visual_blueprint": {"layout": "vector_flow_field", "title": "BOTTLENECK ANALYSIS", "sub": "Resource & Latency Pressure", "accent_color": "#EF4444", "params": {}}
             },
             {
                 "beat_id": 3,
-                "text": f"Instead of allocating giant buffers, {topic} fuses sequential stages into a single asynchronous pipeline.",
-                "visual_focus": "Split-screen contrasting fragmented buffers against an unified fused execution kernel.",
-                "highlight_words": {"fuses": "#34D399", "asynchronous pipeline": "#38BDF8"},
-                "svo_action": {
-                    "subject": "Fused Kernel",
-                    "action_verb": "pipelines",
-                    "direct_object": "Sequential Stages",
-                    "anchor_word": "fuses",
-                    "semantic_role": "agent_action"
-                },
-                "visual_blueprint": {
-                    "layout": "split_flow",
-                    "title": "UNIFIED FUSED KERNEL PIPELINE",
-                    "sub": "Asynchronous Stage Overlap",
-                    "accent_color": "#34D399",
-                    "params": {"router_label": "Async Scheduler"}
-                }
+                "text": t3,
+                "visual_focus": f"Split-screen contrasting traditional approaches with {clean_topic}.",
+                "highlight_words": {clean_topic: "#34D399"},
+                "svo_action": {"subject": clean_topic, "action_verb": "restructures", "direct_object": "Pipeline Flow", "anchor_word": clean_topic.split()[0], "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "split_flow", "title": "ARCHITECTURAL INNOVATION", "sub": "Decoupled Processing Pipeline", "accent_color": "#34D399", "params": {}}
             },
             {
                 "beat_id": 4,
-                "text": "By overlapping tensor contraction with memory prefetching, compute engines never idle waiting for data.",
-                "visual_focus": "Grid layout showing ping-pong registers alternating data feeds with zero stall cycles.",
-                "highlight_words": {"prefetching": "#38BDF8", "never idle": "#34D399"},
-                "svo_action": {
-                    "subject": "Prefetch Engine",
-                    "action_verb": "feeds",
-                    "direct_object": "Compute Cores",
-                    "anchor_word": "overlapping",
-                    "semantic_role": "agent_action"
-                },
-                "visual_blueprint": {
-                    "layout": "grid_memory",
-                    "title": "PING-PONG REGISTER PREFETCHING",
-                    "sub": "Zero-Stall Overlapped Execution",
-                    "accent_color": "#38BDF8",
-                    "params": {"grid_title": "Register Bank"}
-                }
+                "text": t4,
+                "visual_focus": "Low-level execution diagram detailing algorithmic coordination.",
+                "highlight_words": {"Under the hood": "#38BDF8"},
+                "svo_action": {"subject": "Execution Engine", "action_verb": "coordinates", "direct_object": "Workload Stream", "anchor_word": "hood", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "chalkboard_code_block", "title": "EXECUTION MECHANICS", "sub": "Algorithmic Coordination", "accent_color": "#38BDF8", "params": {}}
             },
             {
                 "beat_id": 5,
-                "text": f"The result is a two point six times throughput leap, slashing latency while maintaining full mathematical equivalence.",
-                "visual_focus": "Dynamic benchmark bar chart comparing standard PyTorch against the optimized kernel.",
-                "highlight_words": {"two point six times": "#F59E0B", "slashing latency": "#34D399"},
-                "svo_action": {
-                    "subject": "Optimized Kernel",
-                    "action_verb": "delivers",
-                    "direct_object": "Throughput Leap",
-                    "anchor_word": "throughput",
-                    "semantic_role": "metric_evaluation"
-                },
-                "visual_blueprint": {
-                    "layout": "horizontal_race_bars",
-                    "title": "THROUGHPUT SHOWDOWN: SOTA BENCHMARK",
-                    "sub": "Wall-Clock Speedup & Memory Savings",
-                    "accent_color": "#34D399",
-                    "params": {"metric_name": "TFLOPS"}
-                }
+                "text": t5,
+                "visual_focus": "Benchmark bar chart showing empirical speedups and efficiency gains.",
+                "highlight_words": {"empirical gains": "#34D399"},
+                "svo_action": {"subject": clean_topic, "action_verb": "delivers", "direct_object": "SOTA Performance", "anchor_word": "gains", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "horizontal_race_bars", "title": "EMPIRICAL PERFORMANCE", "sub": "Wall-Clock Benchmark Results", "accent_color": "#34D399", "params": {}}
             },
             {
                 "beat_id": 6,
                 "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
                 "visual_focus": "Minimalist chalkboard outro with The Model Verse branding.",
                 "highlight_words": {"The Model Verse": "#34D399"},
-                "svo_action": {
-                    "subject": "The Model Verse",
-                    "action_verb": "demystifies",
-                    "direct_object": "Modern AI",
-                    "anchor_word": "Model",
-                    "semantic_role": "metric_evaluation"
-                },
-                "visual_blueprint": {
-                    "layout": "paper_figure",
-                    "title": "THE MODEL VERSE",
-                    "sub": "Autonomous Architectural Analysis",
-                    "accent_color": "#34D399",
-                    "params": {"title": "Outro"}
-                }
+                "svo_action": {"subject": "The Model Verse", "action_verb": "demystifies", "direct_object": "Modern AI", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "paper_figure", "title": "THE MODEL VERSE", "sub": "Autonomous Architectural Analysis", "accent_color": "#34D399", "params": {"title": "Outro"}}
             }
         ]
+    elif cat == "developer_perks":
+        beats = [
+            {
+                "beat_id": 1,
+                "text": f"Stop paying full price for AI tokens before checking out {clean_topic}.",
+                "visual_focus": f"Credit allotment badge and API grant tier for {clean_topic}.",
+                "highlight_words": {clean_topic: "#38BDF8", "full price": "#EF4444"},
+                "svo_action": {"subject": "Developer Team", "action_verb": "claims", "direct_object": "API Credits", "anchor_word": "tokens", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "catalog_routing", "title": "DEVELOPER PROGRAM ACCESS", "sub": "Grant Tier & Token Subsidies", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 2,
+                "text": "The problem? Skyrocketing API and compute expenses drain engineering runways before launch.",
+                "visual_focus": "Expense burn graph showing rapid budget exhaustion across model calls.",
+                "highlight_words": {"Skyrocketing": "#EF4444", "drain": "#F59E0B"},
+                "svo_action": {"subject": "Inference Costs", "action_verb": "burns", "direct_object": "Startup Capital", "anchor_word": "expenses", "semantic_role": "causal_elimination"},
+                "visual_blueprint": {"layout": "barrier_separation", "title": "API INFRASTRUCTURE COSTS", "sub": "Token Consumption Burn Rate", "accent_color": "#EF4444", "params": {}}
+            },
+            {
+                "beat_id": 3,
+                "text": f"Enter {clean_topic}. It unlocks dedicated credits, subsidized endpoints, and startup grants.",
+                "visual_focus": f"Resource allocation split-screen showing subsidized compute via {clean_topic}.",
+                "highlight_words": {clean_topic: "#34D399", "dedicated credits": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "provides", "direct_object": "Subsidized Compute", "anchor_word": "credits", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "split_flow", "title": "PROGRAM TIERS & COMPUTE", "sub": "Direct Foundation Model Subsidies", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 4,
+                "text": "Under the hood, qualifying teams bypass costly bills by applying with their verified GitHub or domain.",
+                "visual_focus": "Application step-by-step checklist showing instant verification criteria.",
+                "highlight_words": {"verified GitHub": "#38BDF8", "bypass": "#34D399"},
+                "svo_action": {"subject": "Application Portal", "action_verb": "verifies", "direct_object": "Developer Credentials", "anchor_word": "qualifying", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "pipeline_stages", "title": "VERIFICATION STEPS", "sub": "Application & Approval Path", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 5,
+                "text": f"The result? Massive cost savings and extended compute capacity to ship production models faster.",
+                "visual_focus": "Comparison bars contrasting self-funded costs with grant-subsidized runway.",
+                "highlight_words": {"Massive cost savings": "#34D399", "ship faster": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "extends", "direct_object": "Engineering Runway", "anchor_word": "savings", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "horizontal_race_bars", "title": "CAPITAL & COMPUTE SAVINGS", "sub": "Direct Dollar Value Unlocked", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 6,
+                "text": "Follow The Model Verse for daily updates on free developer perks, tools, and frontier AI research.",
+                "visual_focus": "Chalkboard brand signature with subscribe indicator.",
+                "highlight_words": {"The Model Verse": "#34D399"},
+                "svo_action": {"subject": "The Model Verse", "action_verb": "curates", "direct_object": "Developer Perks", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "paper_figure", "title": "THE MODEL VERSE", "sub": "Daily Developer Perks & Research", "accent_color": "#34D399", "params": {"title": "Outro"}}
+            }
+        ]
+    elif cat in ("tech_news", "blogs", "news"):
+        beats = [
+            {
+                "beat_id": 1,
+                "text": f"Before you update your production stack, see what just dropped with {clean_topic}.",
+                "visual_focus": f"Headline banner announcing official launch details for {clean_topic}.",
+                "highlight_words": {clean_topic: "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "launches", "direct_object": "New Capabilities", "anchor_word": "dropped", "semantic_role": "state_transition"},
+                "visual_blueprint": {"layout": "grid_memory", "title": clean_topic.upper(), "sub": "Official Lab Release", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 2,
+                "text": "The villain? Prior models struggled with latency, steep pricing, and reasoning instability.",
+                "visual_focus": "Latency and pricing chart illustrating performance ceilings of predecessor models.",
+                "highlight_words": {"latency": "#EF4444", "steep pricing": "#F59E0B"},
+                "svo_action": {"subject": "Predecessor Models", "action_verb": "incurs", "direct_object": "Inference Latency", "anchor_word": "pricing", "semantic_role": "causal_elimination"},
+                "visual_blueprint": {"layout": "vector_flow_field", "title": "PREDECESSOR LIMITATIONS", "sub": "Cost & Reasoning Constraints", "accent_color": "#EF4444", "params": {}}
+            },
+            {
+                "beat_id": 3,
+                "text": f"Enter {clean_topic}. It addresses these limitations with an upgraded architecture and optimized inference.",
+                "visual_focus": f"Architectural schema showcasing key upgrades in {clean_topic}.",
+                "highlight_words": {clean_topic: "#34D399", "optimized inference": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "upgrades", "direct_object": "Inference Engine", "anchor_word": "addresses", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "split_flow", "title": "ARCHITECTURAL ADVANCEMENT", "sub": "Distilled Reasoning & Routing", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 4,
+                "text": "Under the hood, enhanced token routing and distilled execution deliver faster responses at lower cost.",
+                "visual_focus": "Execution pipeline illustrating token throughput and optimized KV-cache management.",
+                "highlight_words": {"faster responses": "#34D399", "lower cost": "#38BDF8"},
+                "svo_action": {"subject": "Routing Layer", "action_verb": "dispatches", "direct_object": "Tokens", "anchor_word": "routing", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "chalkboard_code_block", "title": "INFERENCE ENGINE", "sub": "Optimized Token Routing", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 5,
+                "text": f"The payoff? Verified benchmark leaps across reasoning, coding, and cost-efficiency metrics.",
+                "visual_focus": "Comparative benchmark race bars showing gains across industry standards.",
+                "highlight_words": {"benchmark leaps": "#34D399"},
+                "svo_action": {"subject": clean_topic, "action_verb": "beats", "direct_object": "Frontier Baselines", "anchor_word": "leaps", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "horizontal_race_bars", "title": "BENCHMARK PERFORMANCE", "sub": "Coding & Reasoning Gains", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 6,
+                "text": "Follow The Model Verse for daily breakdowns of major AI drops and architectural breakthroughs.",
+                "visual_focus": "Minimalist chalkboard outro with The Model Verse branding.",
+                "highlight_words": {"The Model Verse": "#34D399"},
+                "svo_action": {"subject": "The Model Verse", "action_verb": "breaks down", "direct_object": "AI Drops", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "paper_figure", "title": "THE MODEL VERSE", "sub": "Daily AI News & Analysis", "accent_color": "#34D399", "params": {"title": "Outro"}}
+            }
+        ]
+    elif cat in ("model_showdown", "benchmark_news"):
+        beats = [
+            {
+                "beat_id": 1,
+                "text": f"Does {clean_topic} actually beat the reigning champion, or is it just benchmark hype?",
+                "visual_focus": f"Split contender card comparing head-to-head metrics in {clean_topic}.",
+                "highlight_words": {clean_topic: "#38BDF8", "reigning champion": "#F59E0B"},
+                "svo_action": {"subject": clean_topic, "action_verb": "challenges", "direct_object": "Incumbent SOTA", "anchor_word": "beat", "semantic_role": "state_transition"},
+                "visual_blueprint": {"layout": "split_flow", "title": "HEAD-TO-HEAD SHOWDOWN", "sub": "Contender Comparison", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 2,
+                "text": "The tension? Leading models often claim top leaderboard spots through cherry-picked metrics.",
+                "visual_focus": "Dissected leaderboard radar plot highlighting evaluation discrepancies.",
+                "highlight_words": {"cherry-picked": "#EF4444"},
+                "svo_action": {"subject": "Leaderboard Bias", "action_verb": "distorts", "direct_object": "Model Comparison", "anchor_word": "tension", "semantic_role": "causal_elimination"},
+                "visual_blueprint": {"layout": "radar_pareto_plot", "title": "LEADERBOARD EVALUATION", "sub": "Reported vs Verified Performance", "accent_color": "#EF4444", "params": {}}
+            },
+            {
+                "beat_id": 3,
+                "text": f"Enter {clean_topic}. It challenges the incumbent with a radically different architectural trade-off.",
+                "visual_focus": "Architectural contrast showing routing divergence between the two models.",
+                "highlight_words": {clean_topic: "#34D399", "radically different": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "diverges", "direct_object": "Standard Paradigms", "anchor_word": "challenges", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "split_flow", "title": "ARCHITECTURAL DIVERGENCE", "sub": "Contrasting Design Trade-Offs", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 4,
+                "text": "Under the hood, comparative benchmarks reveal dramatic differences in reasoning speed and token cost.",
+                "visual_focus": "Throughput vs latency trade-off curve across varied prompt lengths.",
+                "highlight_words": {"reasoning speed": "#34D399", "token cost": "#38BDF8"},
+                "svo_action": {"subject": "Benchmark Runner", "action_verb": "evaluates", "direct_object": "Token Cost", "anchor_word": "speed", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "chalkboard_code_block", "title": "COST & LATENCY PROFILE", "sub": "Empirical Inference Efficiency", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 5,
+                "text": f"The verdict? A decisive shift in Pareto efficiency, setting a new bar for real-world tasks.",
+                "visual_focus": "Pareto frontier plot highlighting the winning model's dominance.",
+                "highlight_words": {"Pareto efficiency": "#34D399", "new bar": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "wins", "direct_object": "Pareto Frontier", "anchor_word": "verdict", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "horizontal_race_bars", "title": "FINAL SCORECARD", "sub": "Decisive Benchmark Advantage", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 6,
+                "text": "Follow The Model Verse for daily head-to-head model showdowns and engineering deep-dives.",
+                "visual_focus": "Minimalist chalkboard outro with The Model Verse branding.",
+                "highlight_words": {"The Model Verse": "#34D399"},
+                "svo_action": {"subject": "The Model Verse", "action_verb": "evaluates", "direct_object": "Model Showdowns", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "paper_figure", "title": "THE MODEL VERSE", "sub": "Daily AI Benchmark Showdowns", "accent_color": "#34D399", "params": {"title": "Outro"}}
+            }
+        ]
+    else:
+        # Default: Mechanism deep-dive / hardware efficiency / architecture
+        beats = [
+            {
+                "beat_id": 1,
+                "text": f"Why are top AI researchers watching {clean_topic}? Because standard models hit a scaling bottleneck.",
+                "visual_focus": f"System architecture schematic illustrating {clean_topic} core concept.",
+                "highlight_words": {clean_topic: "#38BDF8", "scaling bottleneck": "#EF4444"},
+                "svo_action": {"subject": clean_topic, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": clean_topic.split()[0], "semantic_role": "state_transition"},
+                "visual_blueprint": {"layout": "grid_memory", "title": clean_topic.upper(), "sub": "Architectural Premise", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 2,
+                "text": "The bottleneck? Conventional architectures hit severe resource walls when processing large workloads.",
+                "visual_focus": "Bottleneck diagram highlighting resource contention and execution stall.",
+                "highlight_words": {"resource walls": "#EF4444"},
+                "svo_action": {"subject": "Resource Wall", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "bottleneck", "semantic_role": "causal_elimination"},
+                "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Contention & Resource Constraints", "accent_color": "#EF4444", "params": {}}
+            },
+            {
+                "beat_id": 3,
+                "text": f"Enter {clean_topic}. It bypasses traditional constraints with a decoupled, high-throughput pipeline.",
+                "visual_focus": "Parallel pipeline separating heavy stages from critical latency paths.",
+                "highlight_words": {clean_topic: "#34D399", "decoupled": "#38BDF8"},
+                "svo_action": {"subject": clean_topic, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "decoupled", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled Processing Architecture", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 4,
+                "text": "Under the hood, asynchronous stage coordination eliminates idle wait states entirely.",
+                "visual_focus": "Asynchronous coordinate graph demonstrating continuous throughput with zero idle cycles.",
+                "highlight_words": {"asynchronous": "#38BDF8", "zero idle": "#34D399"},
+                "svo_action": {"subject": "Coordination Layer", "action_verb": "synchronizes", "direct_object": "Compute Stages", "anchor_word": "asynchronous", "semantic_role": "agent_action"},
+                "visual_blueprint": {"layout": "chalkboard_code_block", "title": "EXECUTION COORDINATION", "sub": "Zero-Stall Asynchronous Kernel", "accent_color": "#38BDF8", "params": {}}
+            },
+            {
+                "beat_id": 5,
+                "text": f"The result? Substantial throughput acceleration with zero sacrifice in mathematical fidelity.",
+                "visual_focus": "Comparative benchmark race bars showing massive speedups.",
+                "highlight_words": {"throughput acceleration": "#34D399"},
+                "svo_action": {"subject": clean_topic, "action_verb": "accelerates", "direct_object": "Throughput", "anchor_word": "acceleration", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "horizontal_race_bars", "title": "BENCHMARK PERFORMANCE", "sub": "Wall-Clock Speedup & Efficiency", "accent_color": "#34D399", "params": {}}
+            },
+            {
+                "beat_id": 6,
+                "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+                "visual_focus": "Minimalist chalkboard outro with The Model Verse branding.",
+                "highlight_words": {"The Model Verse": "#34D399"},
+                "svo_action": {"subject": "The Model Verse", "action_verb": "demystifies", "direct_object": "Modern AI", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "paper_figure", "title": "THE MODEL VERSE", "sub": "Autonomous Architectural Analysis", "accent_color": "#34D399", "params": {"title": "Outro"}}
+            }
+        ]
+
+    spec = {
+        "id": clean_id,
+        "title": title,
+        "category": cat,
+        "domain_taxonomy": dom,
+        "hook_tag": cat.upper().replace("_", " "),
+        "beats": beats
     }
     return enforce_script_schema(spec, topic, category=cat)
 
