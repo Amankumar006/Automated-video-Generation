@@ -20,7 +20,9 @@ sys.path.append(str(PROJECT_ROOT))
 from pipeline.config import (
     FONT_HELVETICA, FFMPEG_BIN, OUTPUT_DIR, DEFAULT_VOICE,
     BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS,
-    BROADCAST_CRF, BROADCAST_MAXRATE, BROADCAST_BUFSIZE
+    BROADCAST_CRF, BROADCAST_MAXRATE, BROADCAST_BUFSIZE,
+    MAX_CONTENT_AGE_DAYS, MAX_PERK_VERIFICATION_AGE_DAYS,
+    is_content_recent, calculate_content_age_days
 )
 from pipeline.audio_synthesizer import synthesize_audio_for_spec
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
@@ -48,15 +50,48 @@ CATEGORY_SCENE_MAP = {
         "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
     },
     "developer_perks": {
-        "file": "manim_engine/scenes/benchmark_scene.py",
-        "class": "BenchmarkNewsScene",
-        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
+    },
+    "perks": {
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
+    },
+    "startup_credits": {
+        "file": "manim_engine/scenes/developer_perks_scene.py",
+        "class": "DeveloperPerksScene",
+        "raw_video": "media/videos/developer_perks_scene/1920p30/DeveloperPerksScene.mp4"
     },
     "tech_news": {
-        "file": "manim_engine/scenes/benchmark_scene.py",
-        "class": "BenchmarkNewsScene",
-        "raw_video": "media/videos/benchmark_scene/1920p30/BenchmarkNewsScene.mp4"
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "blogs": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "news": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
+    },
+    "official_blogs": {
+        "file": "manim_engine/scenes/tech_news_scene.py",
+        "class": "TechNewsScene",
+        "raw_video": "media/videos/tech_news_scene/1920p30/TechNewsScene.mp4"
     }
+}
+
+CATEGORY_ALIASES = {
+    "perks": "developer_perks",
+    "startup_credits": "developer_perks",
+    "blogs": "tech_news",
+    "news": "tech_news",
+    "official_blogs": "tech_news",
 }
 
 def load_template(topic: str):
@@ -272,6 +307,7 @@ def main():
     parser.add_argument("--news", type=str, default="", help="Alias for --blog")
     parser.add_argument("--no-music", action="store_true", help="Disable background synth soundtrack")
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
+    parser.add_argument("--allow-stale", action="store_true", help="Bypass content recency filter for historical testing")
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
     args = parser.parse_args()
 
@@ -293,6 +329,15 @@ def main():
             perk_rec = tech_perks_fetcher.get_verified_perk(audit.get("program_id", ""))
         if not perk_rec:
             raise RuntimeError(f"Could not retrieve verified perk details for '{args.perk}'")
+
+        if not args.allow_stale and not is_content_recent(perk_rec.last_verified_date, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS):
+            age = calculate_content_age_days(perk_rec.last_verified_date)
+            raise ValueError(
+                f"Perk '{args.perk}' was last verified on {perk_rec.last_verified_date} ({age} days ago). "
+                f"Content unverified for more than {MAX_PERK_VERIFICATION_AGE_DAYS} days is not eligible for publication. "
+                "Use --allow-stale to override for historical testing."
+            )
+
         cand = perk_rec.to_candidate_spec()
         topic = args.topic or cand["title"]
         args.category = args.category or "developer_perks"
@@ -307,6 +352,15 @@ def main():
             blog_rec = official_blogs_fetcher.find_blog(target_blog_id)
         if not blog_rec:
             raise RuntimeError(f"Could not retrieve official blog details for '{target_blog_id}'")
+
+        if not args.allow_stale and not is_content_recent(blog_rec.published_date, max_age_days=MAX_CONTENT_AGE_DAYS):
+            age = calculate_content_age_days(blog_rec.published_date)
+            raise ValueError(
+                f"Official blog '{target_blog_id}' was published on {blog_rec.published_date} ({age} days ago). "
+                f"News older than {MAX_CONTENT_AGE_DAYS} days (1-2 months) is not eligible for publication. "
+                "Use --allow-stale to override for historical testing."
+            )
+
         cand = blog_rec.to_candidate_spec()
         topic = args.topic or cand["title"]
         args.category = args.category or cand.get("category", "tech_news")
@@ -317,6 +371,16 @@ def main():
         arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
         if not arxiv_meta:
             raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
+
+        paper_date = arxiv_meta.get("published") or arxiv_meta.get("published_at") or args.arxiv
+        if not args.allow_stale and not is_content_recent(paper_date, max_age_days=MAX_CONTENT_AGE_DAYS):
+            age = calculate_content_age_days(paper_date)
+            raise ValueError(
+                f"arXiv paper '{args.arxiv}' was published on {paper_date} ({age} days ago). "
+                f"Academic preprints older than {MAX_CONTENT_AGE_DAYS} days (1-2 months) are not eligible for publication. "
+                "Use --allow-stale to override for historical testing."
+            )
+
         topic = args.topic or arxiv_meta["title"]
         print(f"📄 Paper Ingested: {arxiv_meta['title']}")
     else:
@@ -378,6 +442,8 @@ def main():
             json.dump(spec, f, indent=2)
 
     category = args.category or spec.get("category")
+    if category:
+        category = CATEGORY_ALIASES.get(str(category).lower(), category)
     if category not in CATEGORY_SCENE_MAP:
         raise ValueError(f"Unsupported category '{category}'. Available: {list(CATEGORY_SCENE_MAP.keys())}")
 
@@ -392,25 +458,34 @@ def main():
     except Exception as e_vd:
         print(f"⚠️ Visual Director notice: {e_vd}")
 
-    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0)
-    print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
-    try:
-        from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
-        for idx, beat in enumerate(spec.get("beats", [])):
-            b_id = beat.get("beat_id", idx + 1)
-            # Prioritize authentic arXiv figures for Beat 3 if available
-            if b_id == 3 and spec.get("paper_figures"):
-                continue
-            bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
-    except Exception as e_synth:
-        print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Mechanism Breakdown)
+    if category in ("architecture_breakdown", "mechanism_deepdive", "model_showdown"):
+        print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
+        try:
+            from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
+            for idx, beat in enumerate(spec.get("beats", [])):
+                b_id = beat.get("beat_id", idx + 1)
+                # Prioritize authentic arXiv figures for Beat 3 if available
+                if b_id == 3 and spec.get("paper_figures"):
+                    continue
+                bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+        except Exception as e_synth:
+            print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
 
-    if not args.legacy_engine:
+    if category in ("developer_perks", "startup_credits", "perks"):
+        scene_file = "manim_engine/scenes/developer_perks_scene.py"
+        scene_class = "DeveloperPerksScene"
+        engine_label = "Developer Perks UI Card Engine (Track 3)"
+    elif category in ("tech_news", "official_blogs", "blogs", "news", "benchmark_news") and not args.legacy_engine:
+        scene_file = "manim_engine/scenes/tech_news_scene.py"
+        scene_class = "TechNewsScene"
+        engine_label = "Tech News Launch Studio Engine (Track 2)"
+    elif not args.legacy_engine:
         scene_file = "manim_engine/scenes/script_driven_scene.py"
         scene_class = "ScriptDrivenScene"
-        engine_label = "Visual Engine Script-Driven Compiler"
+        engine_label = "Visual Engine Script-Driven Compiler (Track 1)"
     else:
-        scene_info = CATEGORY_SCENE_MAP[category]
+        scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"

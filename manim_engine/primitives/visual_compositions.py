@@ -411,7 +411,7 @@ class BlueprintBarrierSeparation(BaseBlueprintComposition):
             Line(start=[-0.3, -2.0 + 0.6 * i, 0], end=[0.3, -1.8 + 0.6 * i, 0], color=COLOR_WHITE, stroke_width=2.0)
             for i in range(8)
         ])
-        barrier_badge = RoundedRectangle(corner_radius=0.1, width=4.6, height=0.6, color=COLOR_CORAL, fill_color="#450A0A", fill_opacity=0.95, stroke_width=2.0).move_to([0, -2.6, 0])
+        barrier_badge = RoundedRectangle(corner_radius=0.1, width=4.6, height=0.6, color=COLOR_CORAL, fill_color="#450A0A", fill_opacity=0.95, stroke_width=2.0).move_to([0, -1.6, 0])
         barrier_txt = CleanText(barrier_label[:26].upper(), font=FONT_HELVETICA, font_size=10, color=COLOR_CORAL, weight=BOLD).move_to(barrier_badge)
         barrier_group = VGroup(barrier_wall, hatches, barrier_badge, barrier_txt)
 

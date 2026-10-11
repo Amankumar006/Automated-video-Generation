@@ -10,6 +10,7 @@ from pipeline.config import (
     VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT,
     BG_CARBON, FONT_HELVETICA, COLOR_MINT
 )
+from manim_engine.primitives.typography import clean_text, CleanText
 
 # Apply global Manim configuration
 config.pixel_width = VIDEO_WIDTH
@@ -33,9 +34,9 @@ class BaseShortScene(MovingCameraScene):
 
         # Top safe-zone brand watermark (7.1 UP keeps it safely below platform top controls)
         self.brand_tag = VGroup(
-            Text("THE MODEL VERSE", font=FONT_HELVETICA, font_size=20, color=COLOR_MINT, weight=BOLD),
-            Text(" // ", font=FONT_HELVETICA, font_size=18, color="#475569"),
-            Text(category_label, font=FONT_HELVETICA, font_size=18, color="#94A3B8", weight=MEDIUM),
+            clean_text("THE MODEL VERSE", font=FONT_HELVETICA, font_size=20, color=COLOR_MINT, weight=BOLD),
+            clean_text(" // ", font=FONT_HELVETICA, font_size=18, color="#64748B"),
+            clean_text(category_label, font=FONT_HELVETICA, font_size=18, color="#CBD5E1", weight=MEDIUM),
         ).arrange(RIGHT, buff=0.12).shift(UP * 7.1)
         self.add(self.brand_tag)
 

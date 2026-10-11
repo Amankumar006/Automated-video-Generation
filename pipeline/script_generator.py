@@ -41,7 +41,10 @@ if API_KEY and genai is not None:
     except Exception as e:
         print(f"⚠️ Warning: genai.configure failed: {e}")
 
-CATEGORIES = ["architecture_breakdown", "model_showdown", "mechanism_deepdive", "benchmark_news"]
+CATEGORIES = [
+    "architecture_breakdown", "model_showdown", "mechanism_deepdive",
+    "benchmark_news", "developer_perks", "tech_news"
+]
 
 SCRIPT_DIRECTIVES = """
 You are the Lead Creative Director & Principal Technical Scriptwriter for 'The Model Verse' (themodelverse.in).
@@ -193,6 +196,44 @@ DEDICATED FULL-SCREEN VISUAL BLUEPRINTS (CRITICAL ARCHITECTURAL DIRECTIVE):
 - STRICT BAN ON CARTOON X AND CHECKMARKS: Never draw crude red 'X' and green checkmark boxes like cheap clickbait. All visuals must feature real scientific hardware telemetry, mathematical equations, and technical flow mechanics!
 """
 
+def _persist_and_finalize_spec(spec: Dict[str, Any], topic: str, default_category: str) -> Dict[str, Any]:
+    clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", topic)).lower()
+    spec["id"] = clean_id
+    cat_slug = spec.get("category") or default_category
+    spec["category"] = cat_slug
+
+    # Auto-generate LaTeX SVGs with topic-scoped unique filenames
+    if spec.get("math_formulas"):
+        print(f"📐 Auto-synthesizing {len(spec.get('math_formulas', []))} LaTeX mathematical SVGs...")
+        for f in spec.get("math_formulas", []):
+            latex = f.get("latex", "")
+            orig_fname = f.get("filename") or f.get("svg_filename") or ""
+            bid = f.get("beat_id", 1)
+            generic_names = {"formula.svg", "beat1_scale.svg", "beat2_bottleneck.svg", "beat3_architecture.svg", "beat4_mechanism.svg", "beat5_payoff.svg"}
+            if not orig_fname or orig_fname in generic_names or not orig_fname.startswith(clean_id):
+                clean_fname = f"{clean_id}_beat{bid}_formula.svg"
+            else:
+                clean_fname = orig_fname
+            f["filename"] = clean_fname
+            f["svg_filename"] = clean_fname
+            fontsize = f.get("fontsize", 24)
+            color = f.get("color", "white")
+            if latex and clean_fname:
+                try:
+                    render_math_to_svg(latex, clean_fname, fontsize=fontsize, color=color)
+                except Exception as e:
+                    print(f"⚠️ Warning: Could not render math SVG '{clean_fname}': {e}")
+
+    templates_dir = PROJECT_ROOT / "pipeline" / "templates"
+    templates_dir.mkdir(parents=True, exist_ok=True)
+    out_file = templates_dir / f"{cat_slug}_{clean_id}.json"
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(spec, f, indent=2)
+
+    print(f"✅ Generated and saved template to: {out_file.relative_to(PROJECT_ROOT)}")
+    return spec
+
+
 def generate_script(
     topic: str,
     category: Optional[str] = None,
@@ -200,8 +241,36 @@ def generate_script(
     arxiv_meta: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
-    Invokes Gemini 2.5 Flash to generate a 6-beat JSON template with SVO alignment.
+    Unified multi-track script generation dispatch:
+    - Track 1 (Academic Mechanism Deep Dive): Feynman / Intellectual Thriller Manim engine
+    - Track 2 (Official Tech News): Breaking newsroom reporter engine
+    - Track 3 (Developer Perks & Credits): Actionable deal guide engine
     """
+    clean_cat = (category or "").lower()
+    topic_str = str(topic).lower()
+    is_perk = (
+        clean_cat in ("developer_perks", "startup_credits", "perks")
+        or topic_str.startswith("perk_")
+        or (arxiv_meta and isinstance(arxiv_meta, dict) and bool(arxiv_meta.get("perk_metadata")))
+    )
+    is_news = (
+        clean_cat in ("tech_news", "official_blogs", "blogs", "news")
+        or topic_str.startswith(("blog_", "news_"))
+        or (arxiv_meta and isinstance(arxiv_meta, dict) and bool(arxiv_meta.get("tech_news_metadata") or arxiv_meta.get("key_facts")))
+    )
+
+    if is_perk:
+        from pipeline.developer_perks_script_engine import developer_perks_script_engine
+        print(f"🎁 [Track 3] Routing to Developer Perks Script Engine: '{topic}'...")
+        spec = developer_perks_script_engine.generate_perks_script(topic=topic, perk_meta=arxiv_meta, context=context)
+        return _persist_and_finalize_spec(spec, topic, "developer_perks")
+
+    if is_news:
+        from pipeline.tech_news_script_engine import tech_news_script_engine
+        print(f"📰 [Track 2] Routing to Tech News Script Engine: '{topic}'...")
+        spec = tech_news_script_engine.generate_news_script(topic=topic, blog_meta=arxiv_meta, context=context)
+        return _persist_and_finalize_spec(spec, topic, "tech_news")
+
     cat_hint = f"Target Category: {category}" if category else "Choose the best matching category from: architecture_breakdown, model_showdown, mechanism_deepdive, benchmark_news."
 
     paper_context = ""

@@ -146,13 +146,26 @@ def auto_produce(
 
     arxiv_meta = paper_meta
     if not arxiv_meta and arxiv and not spec:
-        print(f"🔍 Step 1: Ingesting arXiv paper '{arxiv}'...")
-        arxiv_meta = fetch_arxiv_paper(arxiv)
+        clean_arxiv_str = str(arxiv).strip()
+        if clean_arxiv_str.startswith("perk_") or category in ("developer_perks", "startup_credits", "perks"):
+            from pipeline.tech_perks_fetcher import tech_perks_fetcher
+            perk_rec = tech_perks_fetcher.get_verified_perk(clean_arxiv_str)
+            if perk_rec:
+                arxiv_meta = perk_rec.to_candidate_spec()
+        elif clean_arxiv_str.startswith(("blog_", "news_")) or category in ("tech_news", "official_blogs", "blogs", "news"):
+            from pipeline.official_blogs_fetcher import official_blogs_fetcher
+            blog_rec = official_blogs_fetcher.get_blog(clean_arxiv_str) or official_blogs_fetcher.find_blog(clean_arxiv_str)
+            if blog_rec:
+                arxiv_meta = blog_rec.to_candidate_spec()
+
         if not arxiv_meta:
-            raise RuntimeError(f"Could not retrieve paper metadata for '{arxiv}'")
+            print(f"🔍 Step 1: Ingesting arXiv paper '{arxiv}'...")
+            arxiv_meta = fetch_arxiv_paper(arxiv)
+            if not arxiv_meta:
+                raise RuntimeError(f"Could not retrieve paper metadata for '{arxiv}'")
         if not topic:
-            topic = arxiv_meta["title"]
-        print(f"📄 Ingested: {arxiv_meta['title']}")
+            topic = arxiv_meta.get("title", "Untitled")
+        print(f"📄 Ingested: {topic}")
     elif arxiv_meta and not topic:
         topic = arxiv_meta.get("title", "Untitled")
         print(f"📄 Using provided metadata: {topic}")
@@ -246,29 +259,39 @@ def auto_produce(
     except Exception as e:
         print(f"⚠️ Visual Director bypassed: {e}")
 
-    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0)
-    print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
-    try:
-        from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
-        for idx, beat in enumerate(spec.get("beats", [])):
-            b_id = beat.get("beat_id", idx + 1)
-            # Prioritize authentic arXiv figures for Beat 3 if available
-            if b_id == 3 and spec.get("paper_figures"):
-                continue
-            bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
-    except Exception as e:
-        print(f"⚠️ Bespoke visual synthesis notice: {e}")
-
+    # Resolve target scene category before visual synthesis dispatch
     resolved_category = spec.get("category", category or "mechanism_deepdive")
     if resolved_category not in CATEGORY_SCENE_MAP:
         resolved_category = "mechanism_deepdive"
 
-    if not legacy_engine:
+    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Papers)
+    if resolved_category in ("architecture_breakdown", "mechanism_deepdive", "model_showdown"):
+        print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
+        try:
+            from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
+            for idx, beat in enumerate(spec.get("beats", [])):
+                b_id = beat.get("beat_id", idx + 1)
+                # Prioritize authentic arXiv figures for Beat 3 if available
+                if b_id == 3 and spec.get("paper_figures"):
+                    continue
+                bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+        except Exception as e:
+            print(f"⚠️ Bespoke visual synthesis notice: {e}")
+
+    if resolved_category in ("developer_perks", "startup_credits", "perks"):
+        scene_file = "manim_engine/scenes/developer_perks_scene.py"
+        scene_class = "DeveloperPerksScene"
+        engine_label = "Developer Perks UI Card Engine (Track 3)"
+    elif resolved_category in ("tech_news", "official_blogs", "blogs", "news", "benchmark_news") and not legacy_engine:
+        scene_file = "manim_engine/scenes/tech_news_scene.py"
+        scene_class = "TechNewsScene"
+        engine_label = "Tech News Launch Studio Engine (Track 2)"
+    elif not legacy_engine:
         scene_file = "manim_engine/scenes/script_driven_scene.py"
         scene_class = "ScriptDrivenScene"
-        engine_label = "Visual Engine 6.0 Bespoke Synthesizer"
+        engine_label = "Visual Engine 6.0 Bespoke Synthesizer (Track 1)"
     else:
-        scene_info = CATEGORY_SCENE_MAP[resolved_category]
+        scene_info = CATEGORY_SCENE_MAP.get(resolved_category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"

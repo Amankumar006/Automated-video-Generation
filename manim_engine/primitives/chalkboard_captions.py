@@ -13,6 +13,7 @@ from pipeline.config import (
     FONT_HELVETICA, COLOR_MINT, COLOR_GOLD, COLOR_DANGER,
     FRAME_WIDTH, FRAME_HEIGHT
 )
+from manim_engine.primitives.typography import clean_text
 
 class ChalkboardCaptions:
     def __init__(self, scene: Scene, y_pos: float = -4.8, default_font_size: int = 24):
@@ -32,19 +33,16 @@ class ChalkboardCaptions:
         import textwrap
         display_text = textwrap.fill(text, width=34) if len(text) > 36 else text
 
-        # Start with default font size
-        txt = Text(
+        # Clean typography guaranteeing base_size=36 with subpixel scaling and safe bounds
+        txt = clean_text(
             display_text,
             font=FONT_HELVETICA,
             font_size=self.default_font_size,
             weight=BOLD,
             color=WHITE,
-            t2c=t2c
+            t2c=t2c,
+            max_width=self.max_width - 0.70
         )
-        
-        # Scale text if it exceeds maximum safe horizontal width
-        if txt.width > self.max_width - 0.70:
-            txt.scale_to_fit_width(self.max_width - 0.70)
 
         pill_width = min(txt.width + 0.65, self.max_width)
         pill_height = txt.height + 0.40
@@ -70,23 +68,21 @@ class ChalkboardCaptions:
             return FadeIn(
                 new_pill,
                 shift=UP * 0.15,
-                rate_func=lambda t: min(1.0, t / 0.20) if t < 0.20 else 1.0,
                 run_time=run_time
             )
         else:
             old_pill = self.current_pill
             self.current_pill = new_pill
-            # Fast, crisp cross-fade without glyph warping or letter collision
-            return FadeTransform(
-                old_pill,
-                new_pill,
-                stretch=False,
-                rate_func=lambda t: min(1.0, t / 0.18) if t < 0.18 else 1.0,
-                run_time=run_time
+            # Clean non-overlapping sequential transition: old pill fades out, new pill fades in cleanly
+            t_fadeout = min(0.12, run_time * 0.45)
+            t_fadein = min(0.16, run_time * 0.55)
+            return Succession(
+                FadeOut(old_pill, shift=DOWN * 0.08, run_time=t_fadeout),
+                FadeIn(new_pill, shift=UP * 0.08, run_time=t_fadein)
             )
 
     def morph_to(self, text: str, highlights: dict = None, run_time: float = 0.25) -> Animation:
-        """Morphs the current caption into a new phrase cleanly."""
+        """Transitions caption into a new phrase cleanly without text collision."""
         return self.show(text, highlights, run_time=run_time)
 
     def hide(self, run_time: float = 0.25) -> Animation:
@@ -101,3 +97,9 @@ class ChalkboardCaptions:
             self.current_pill = None
             return anim
         return Wait(0.01)
+
+    def play_caption(self, text: str, highlights: dict = None, duration: float = 0.5):
+        """Displays caption pill within the active scene."""
+        anim = self.show(text, highlights)
+        rt = min(0.35, duration if duration else 0.35)
+        self.scene.play(anim, run_time=rt)
