@@ -13,6 +13,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
+from manim_engine.primitives.typography import clean_text
 
 COLOR_PORTAL_BG = "#0B0F19"
 COLOR_PORTAL_BORDER = "#1E293B"
@@ -95,12 +96,24 @@ def create_input_field(
         stroke_width=1.8 if active else 1.2
     )
 
-    lbl = Text(label[:24], font=FONT_HELVETICA, font_size=11, color="#64748B", weight=BOLD)
+    lbl = clean_text(
+        label,
+        font=FONT_HELVETICA,
+        font_size=11,
+        color="#CBD5E1",
+        weight=BOLD,
+        max_width=width - 0.9
+    )
     lbl.align_to(box, LEFT).shift(RIGHT * 0.35 + UP * 0.16)
 
-    val = Text(value[:32], font=FONT_HELVETICA, font_size=14, color=WHITE if not active else accent_color, weight=SEMIBOLD)
-    if val.width > width - 1.2:
-        val.scale_to_fit_width(width - 1.2)
+    val = clean_text(
+        value,
+        font=FONT_HELVETICA,
+        font_size=14,
+        color=WHITE if not active else accent_color,
+        weight=SEMIBOLD,
+        max_width=width - 0.9
+    )
     val.align_to(box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.14)
 
     return VGroup(box, lbl, val)
@@ -158,12 +171,11 @@ def create_browser_window_mockup(
     # Procedural lock icon (crisp vector HTTPS padlock)
     lock_body = RoundedRectangle(corner_radius=0.02, width=0.14, height=0.11, color="#10B981", fill_color="#10B981", fill_opacity=0.9, stroke_width=0.8)
     lock_shackle = Arc(radius=0.05, start_angle=0, angle=PI, color="#10B981", stroke_width=1.2).next_to(lock_body, UP, buff=0.01)
-    lock_icon = VGroup(lock_body, lock_shackle).align_to(url_bg, LEFT).shift(RIGHT * 0.18)
+    lock_icon = VGroup(lock_body, lock_shackle).move_to(url_bg).align_to(url_bg, LEFT).shift(RIGHT * 0.18)
 
-    url_txt = Text(url[:36], font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM)
-    if url_txt.width > url_bg.width - 0.7:
-        url_txt.scale_to_fit_width(url_bg.width - 0.7)
+    url_txt = clean_text(url, font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=url_bg.width - 0.7)
     url_txt.next_to(lock_icon, RIGHT, buff=0.12)
+    url_txt.match_y(url_bg)
 
     url_bar = VGroup(url_bg, lock_icon, url_txt)
     return VGroup(window_frame, header_bar, traffic_lights, url_bar)

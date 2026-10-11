@@ -33,6 +33,7 @@ from manim_engine.primitives.social_proof_card import (
 from pipeline.config import (
     FONT_HELVETICA, COLOR_MINT, COLOR_DANGER, COLOR_GOLD, COLOR_SLATE
 )
+from manim_engine.primitives.typography import clean_text
 
 COLOR_CYAN = "#38BDF8"
 COLOR_PURPLE = "#A855F7"
@@ -84,7 +85,7 @@ class DeveloperPerksScene(BaseShortScene):
             fill_opacity=0.6,
             stroke_width=1.5
         ).shift(UP * 4.2)
-        grant_txt = Text("✔ VERIFIED DEVELOPER GRANT", font=FONT_HELVETICA, font_size=13, color="#A7F3D0", weight=BOLD).move_to(grant_pill)
+        grant_txt = clean_text("✔ VERIFIED DEVELOPER GRANT", font=FONT_HELVETICA, font_size=13, color="#A7F3D0", weight=BOLD, max_width=4.8).move_to(grant_pill)
         pill_grp = VGroup(grant_pill, grant_txt)
 
         # Hero Value Container Card
@@ -100,15 +101,13 @@ class DeveloperPerksScene(BaseShortScene):
 
         provider_logo = get_lab_logo(provider, size=1.5).move_to(hero_box).shift(UP * 1.1)
 
-        val_badge = Text(val_str, font=FONT_HELVETICA, font_size=42, color=COLOR_MINT, weight=HEAVY)
+        val_badge = clean_text(val_str, font=FONT_HELVETICA, font_size=42, color=COLOR_MINT, weight=HEAVY)
         val_badge.next_to(provider_logo, DOWN, buff=0.25)
 
-        val_sub = Text("IN FREE API CREDITS & DEVELOPER SEATS", font=FONT_HELVETICA, font_size=12, color="#94A3B8", weight=BOLD)
+        val_sub = clean_text("IN FREE API CREDITS & DEVELOPER SEATS", font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=6.6)
         val_sub.next_to(val_badge, DOWN, buff=0.18)
 
-        hero_prog_txt = Text(headline[:32], font=FONT_HELVETICA, font_size=16, color=WHITE, weight=BOLD)
-        if hero_prog_txt.width > 6.6:
-            hero_prog_txt.scale_to_fit_width(6.6)
+        hero_prog_txt = clean_text(headline, font=FONT_HELVETICA, font_size=16, color=WHITE, weight=BOLD, max_width=6.6)
         hero_prog_txt.next_to(val_sub, DOWN, buff=0.20)
 
         hero_group = VGroup(pill_grp, hero_box, provider_logo, val_badge, val_sub, hero_prog_txt)
@@ -133,7 +132,7 @@ class DeveloperPerksScene(BaseShortScene):
             {"one thousand dollars": COLOR_MINT, "Claude Team": COLOR_CYAN, "five seats": COLOR_GOLD}
         )
 
-        grid_header = Text("WHAT YOU GET IN THE BUNDLE", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
+        grid_header = clean_text("WHAT YOU GET IN THE BUNDLE", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
 
         tile_1 = create_partner_app_tile(
             name=f"{provider} API",
@@ -166,11 +165,8 @@ class DeveloperPerksScene(BaseShortScene):
             stroke_width=1.6
         ).next_to(top_tiles, DOWN, buff=0.3)
 
-        t3_title = Text("🚀 EXPANDABLE VENTURE TIER", font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=BOLD).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + UP * 0.28)
-        t3_sub = Text("VC-backed startups scale up to $100,000 in additional model credits", font=FONT_HELVETICA, font_size=11, color="#E2E8F0", weight=MEDIUM)
-        if t3_sub.width > 6.5:
-            t3_sub.scale_to_fit_width(6.5)
-        t3_sub.align_to(tile_3, LEFT).shift(RIGHT * 0.4 + DOWN * 0.22)
+        t3_title = clean_text("🚀 EXPANDABLE VENTURE TIER", font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=BOLD, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + UP * 0.28)
+        t3_sub = clean_text("VC-backed startups scale up to $100,000 in additional model credits", font=FONT_HELVETICA, font_size=11, color="#E2E8F0", weight=MEDIUM, max_width=6.5).align_to(tile_3, LEFT).shift(RIGHT * 0.4 + DOWN * 0.22)
         t3_grp = VGroup(tile_3, t3_title, t3_sub)
 
         tiles_group = VGroup(grid_header, top_tiles, t3_grp)
@@ -208,7 +204,7 @@ class DeveloperPerksScene(BaseShortScene):
             stroke_width=2.0
         ).shift(UP * 1.2)
 
-        check_title = Text("WHO QUALIFIES? // ELIGIBILITY", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY)
+        check_title = clean_text("WHO QUALIFIES? // ELIGIBILITY", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY)
         check_title.align_to(check_box, UP).shift(DOWN * 0.45)
 
         criteria_items = [
@@ -222,14 +218,12 @@ class DeveloperPerksScene(BaseShortScene):
             row_box = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.05, color="#334155", fill_color="#080C14", fill_opacity=0.92, stroke_width=1.2)
             
             # Text info
-            r_title = Text(t_str, font=FONT_HELVETICA, font_size=14, color=WHITE, weight=BOLD).align_to(row_box, LEFT).shift(RIGHT * 0.35 + UP * 0.18)
-            r_sub = Text(s_str, font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=MEDIUM).align_to(row_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.18)
-            if r_sub.width > 4.6:
-                r_sub.scale_to_fit_width(4.6)
+            r_title = clean_text(t_str, font=FONT_HELVETICA, font_size=14, color=WHITE, weight=BOLD, max_width=4.6).align_to(row_box, LEFT).shift(RIGHT * 0.35 + UP * 0.18)
+            r_sub = clean_text(s_str, font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=4.6).align_to(row_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.18)
             
             # Popping Checkmark Badge
             chk_pill = RoundedRectangle(corner_radius=0.08, width=1.5, height=0.38, color=COLOR_MINT, fill_color="#064E3B", fill_opacity=0.8, stroke_width=1.2)
-            chk_txt = Text("✔ PASS", font=FONT_HELVETICA, font_size=11, color="#A7F3D0", weight=BOLD).move_to(chk_pill)
+            chk_txt = clean_text("✔ PASS", font=FONT_HELVETICA, font_size=11, color="#A7F3D0", weight=BOLD).move_to(chk_pill)
             chk_badge = VGroup(chk_pill, chk_txt).align_to(row_box, RIGHT).shift(LEFT * 0.35)
             
             check_rows.append(VGroup(row_box, r_title, r_sub, chk_badge))
@@ -294,7 +288,7 @@ class DeveloperPerksScene(BaseShortScene):
             fill_opacity=0.95,
             stroke_width=2.0
         )
-        btn_txt = Text("⚡ SUBMIT APPLICATION", font=FONT_HELVETICA, font_size=14, color=WHITE, weight=HEAVY).move_to(btn_box)
+        btn_txt = clean_text("⚡ SUBMIT APPLICATION", font=FONT_HELVETICA, font_size=14, color=WHITE, weight=HEAVY, max_width=6.0).move_to(btn_box)
         submit_btn = VGroup(btn_box, btn_txt)
 
         form_col = VGroup(f1, f2, f3, submit_btn).arrange(DOWN, buff=0.22).move_to(portal_win).shift(DOWN * 0.25)
@@ -346,7 +340,7 @@ class DeveloperPerksScene(BaseShortScene):
             {"approved": COLOR_MINT, "twenty-four hours": COLOR_GOLD, "Twitter": COLOR_CYAN}
         )
 
-        social_header = Text("COMMUNITY APPROVAL RECEIPTS", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
+        social_header = clean_text("COMMUNITY APPROVAL RECEIPTS", font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY).shift(UP * 3.6)
 
         # Social proof card 1 (Twitter/X receipt)
         receipt_1 = create_social_proof_card(
@@ -364,10 +358,8 @@ class DeveloperPerksScene(BaseShortScene):
 
         # Social proof card 2 (Reddit testimonial snippet)
         reddit_bg = RoundedRectangle(corner_radius=0.14, width=7.4, height=1.65, color="#FF4500", fill_color=COLOR_CARD_BG, fill_opacity=0.95, stroke_width=1.6)
-        r_hdr = Text("r/startups • 5h ago", font=FONT_HELVETICA, font_size=11, color="#94A3B8", weight=BOLD).align_to(reddit_bg, LEFT).shift(RIGHT * 0.4 + UP * 0.38)
-        r_txt = Text(f'"Verified approval! Applied on Tuesday, {val_str} credits active by Wednesday. Legit program."', font=FONT_HELVETICA, font_size=12, color="#E2E8F0", weight=MEDIUM)
-        if r_txt.width > 6.6:
-            r_txt.scale_to_fit_width(6.6)
+        r_hdr = clean_text("r/startups • 5h ago", font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=BOLD).align_to(reddit_bg, LEFT).shift(RIGHT * 0.4 + UP * 0.38)
+        r_txt = clean_text(f'"Verified approval! Applied on Tuesday, {val_str} credits active by Wednesday. Legit program."', font=FONT_HELVETICA, font_size=12, color="#E2E8F0", weight=MEDIUM, max_width=6.6)
         r_txt.next_to(r_hdr, DOWN, buff=0.15).align_to(r_hdr, LEFT)
         receipt_2 = VGroup(reddit_bg, r_hdr, r_txt)
 
@@ -397,7 +389,7 @@ class DeveloperPerksScene(BaseShortScene):
 
         # Actionable Save Bookmark Banner
         save_banner = RoundedRectangle(corner_radius=0.12, width=7.2, height=0.85, color=COLOR_GOLD, fill_color="#78350F", fill_opacity=0.6, stroke_width=1.8).shift(UP * 3.4)
-        save_txt = Text("🔖 SAVE THIS REEL // BEFORE COHORT CAPS", font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=HEAVY).move_to(save_banner)
+        save_txt = clean_text("🔖 SAVE THIS REEL // BEFORE COHORT CAPS", font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=HEAVY, max_width=6.8).move_to(save_banner)
         save_grp = VGroup(save_banner, save_txt)
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(

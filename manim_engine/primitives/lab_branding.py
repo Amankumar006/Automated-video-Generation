@@ -18,6 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
+from manim_engine.primitives.typography import clean_text
 
 COLOR_OPENAI = "#10A37F"
 COLOR_ANTHROPIC = "#D97706"
@@ -180,12 +181,24 @@ def create_lab_hero_badge(
         fill_opacity=0.5,
         stroke_width=1.2
     )
-    pill_txt = Text(status_text.upper()[:28], font=FONT_HELVETICA, font_size=12, color="#FCA5A5", weight=BOLD).move_to(pill_bg)
+    pill_txt = clean_text(
+        status_text.upper(),
+        font=FONT_HELVETICA,
+        font_size=12,
+        color="#FCA5A5",
+        weight=BOLD,
+        max_width=3.4
+    ).move_to(pill_bg)
     status_pill = VGroup(pill_bg, pill_txt).next_to(logo, RIGHT, buff=0.35).shift(UP * 0.28)
 
-    title_txt = Text(model_name[:26], font=FONT_HELVETICA, font_size=23, color=WHITE, weight=HEAVY)
-    if title_txt.width > width - 2.2:
-        title_txt.scale_to_fit_width(width - 2.2)
+    title_txt = clean_text(
+        model_name,
+        font=FONT_HELVETICA,
+        font_size=23,
+        color=WHITE,
+        weight=HEAVY,
+        max_width=width - 2.2
+    )
     title_txt.next_to(status_pill, DOWN, buff=0.15).align_to(status_pill, LEFT)
 
     return VGroup(container, logo, status_pill, title_txt)

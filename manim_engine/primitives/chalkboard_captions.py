@@ -13,6 +13,7 @@ from pipeline.config import (
     FONT_HELVETICA, COLOR_MINT, COLOR_GOLD, COLOR_DANGER,
     FRAME_WIDTH, FRAME_HEIGHT
 )
+from manim_engine.primitives.typography import clean_text
 
 class ChalkboardCaptions:
     def __init__(self, scene: Scene, y_pos: float = -4.8, default_font_size: int = 24):
@@ -32,19 +33,16 @@ class ChalkboardCaptions:
         import textwrap
         display_text = textwrap.fill(text, width=34) if len(text) > 36 else text
 
-        # Start with default font size
-        txt = Text(
+        # Clean typography guaranteeing base_size=36 with subpixel scaling and safe bounds
+        txt = clean_text(
             display_text,
             font=FONT_HELVETICA,
             font_size=self.default_font_size,
             weight=BOLD,
             color=WHITE,
-            t2c=t2c
+            t2c=t2c,
+            max_width=self.max_width - 0.70
         )
-        
-        # Scale text if it exceeds maximum safe horizontal width
-        if txt.width > self.max_width - 0.70:
-            txt.scale_to_fit_width(self.max_width - 0.70)
 
         pill_width = min(txt.width + 0.65, self.max_width)
         pill_height = txt.height + 0.40

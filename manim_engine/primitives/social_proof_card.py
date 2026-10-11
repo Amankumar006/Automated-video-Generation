@@ -14,6 +14,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
+from manim_engine.primitives.typography import clean_text
 
 COLOR_CARD_BG = "#0B101D"
 COLOR_CARD_BORDER = "#1E293B"
@@ -66,34 +67,54 @@ def create_social_proof_card(
         fill_opacity=0.8,
         stroke_width=1.0
     ).align_to(card_bg, UP).shift(DOWN * 0.18 + LEFT * (width / 2 - 1.4))
-    platform_txt = Text(f"VERIFIED {platform.upper()[:10]}", font=FONT_HELVETICA, font_size=10, color=accent_color, weight=BOLD).move_to(platform_pill)
+    platform_txt = clean_text(
+        f"VERIFIED {platform.upper()}",
+        font=FONT_HELVETICA,
+        font_size=10,
+        color=accent_color,
+        weight=BOLD,
+        max_width=2.0
+    ).move_to(platform_pill)
     top_badge = VGroup(platform_pill, platform_txt)
 
     # Avatar circle
-    initials = "".join([w[0] for w in author.split()[:2]]).upper() or "DEV"
+    initials = avatar_letter if avatar_letter else ("".join([w[0] for w in author.split()[:2]]).upper() or "DEV")
     avatar_bg = Circle(radius=0.32, color=accent_color, fill_color="#1E293B", fill_opacity=1.0, stroke_width=1.5)
     avatar_bg.align_to(card_bg, LEFT).shift(RIGHT * 0.45 + UP * 0.4)
-    avatar_txt = Text(initials, font=FONT_HELVETICA, font_size=13, color=WHITE, weight=BOLD).move_to(avatar_bg)
+    avatar_txt = clean_text(initials, font=FONT_HELVETICA, font_size=13, color=WHITE, weight=BOLD).move_to(avatar_bg)
     avatar = VGroup(avatar_bg, avatar_txt)
 
     # Author & Handle
-    author_txt = Text(author[:22], font=FONT_HELVETICA, font_size=16, color=WHITE, weight=BOLD)
-    verified_badge = Text("✔", font=FONT_HELVETICA, font_size=12, color=accent_color, weight=HEAVY)
+    author_txt = clean_text(author, font=FONT_HELVETICA, font_size=16, color=WHITE, weight=BOLD, max_width=width - 2.8)
+    verified_badge = clean_text("✔", font=FONT_HELVETICA, font_size=12, color=accent_color, weight=HEAVY)
     name_row = VGroup(author_txt, verified_badge).arrange(RIGHT, buff=0.10).next_to(avatar, RIGHT, buff=0.25).shift(UP * 0.12)
 
-    handle_txt = Text(f"{handle} • {time_str}", font=FONT_HELVETICA, font_size=12, color="#64748B", weight=MEDIUM)
+    handle_txt = clean_text(
+        f"{handle} • {time_str}" if not metric_text else f"{handle} • {metric_text}",
+        font=FONT_HELVETICA,
+        font_size=12,
+        color="#CBD5E1",
+        weight=MEDIUM,
+        max_width=width - 2.8
+    )
     handle_txt.next_to(name_row, DOWN, buff=0.08).align_to(name_row, LEFT)
 
     # Tweet / Receipt Text
-    wrapped_lines = textwrap.fill(text, width=38)
-    body_txt = Text(wrapped_lines, font=FONT_HELVETICA, font_size=13, color="#E2E8F0", weight=MEDIUM, line_spacing=0.85)
-    if body_txt.width > width - 0.9:
-        body_txt.scale_to_fit_width(width - 0.9)
+    body_txt = clean_text(
+        text,
+        font=FONT_HELVETICA,
+        font_size=13,
+        color="#E2E8F0",
+        weight=MEDIUM,
+        line_spacing=0.85,
+        wrap_width=38,
+        max_width=width - 0.9
+    )
     body_txt.align_to(card_bg, LEFT).shift(RIGHT * 0.45 + DOWN * 0.45)
 
     # Engagement row (Likes & Reposts)
-    like_icon = Text(f"❤️ {likes} Likes", font=FONT_HELVETICA, font_size=11, color="#F43F5E", weight=SEMIBOLD)
-    repost_icon = Text(f"🔁 {reposts} Reposts", font=FONT_HELVETICA, font_size=11, color="#10B981", weight=SEMIBOLD)
+    like_icon = clean_text(f"❤️ {likes} Likes", font=FONT_HELVETICA, font_size=11, color="#F43F5E", weight=SEMIBOLD)
+    repost_icon = clean_text(f"🔁 {reposts} Reposts", font=FONT_HELVETICA, font_size=11, color="#10B981", weight=SEMIBOLD)
     engage_row = VGroup(like_icon, repost_icon).arrange(RIGHT, buff=0.45).align_to(card_bg, LEFT).shift(RIGHT * 0.45 + DOWN * 1.15)
 
     return VGroup(card_bg, top_badge, avatar, name_row, handle_txt, body_txt, engage_row)
@@ -129,19 +150,34 @@ def create_partner_app_tile(
         stroke_width=1.6
     )
 
-    name_txt = Text(name.upper()[:20], font=FONT_HELVETICA, font_size=13, color="#94A3B8", weight=BOLD)
+    name_txt = clean_text(
+        name.upper(),
+        font=FONT_HELVETICA,
+        font_size=13,
+        color="#CBD5E1",
+        weight=BOLD,
+        max_width=width - 0.5
+    )
     name_txt.align_to(box, UP).shift(DOWN * 0.35)
-    if name_txt.width > width - 0.4:
-        name_txt.scale_to_fit_width(width - 0.4)
 
-    val_txt = Text(benefit[:18], font=FONT_HELVETICA, font_size=20, color=accent_color, weight=HEAVY)
-    if val_txt.width > width - 0.4:
-        val_txt.scale_to_fit_width(width - 0.4)
+    val_txt = clean_text(
+        benefit,
+        font=FONT_HELVETICA,
+        font_size=20,
+        color=accent_color,
+        weight=HEAVY,
+        max_width=width - 0.5
+    )
     val_txt.next_to(name_txt, DOWN, buff=0.20)
 
-    sub_txt = Text(sub_text[:24], font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM)
-    if sub_txt.width > width - 0.4:
-        sub_txt.scale_to_fit_width(width - 0.4)
+    sub_txt = clean_text(
+        sub_text,
+        font=FONT_HELVETICA,
+        font_size=11,
+        color="#E2E8F0",
+        weight=MEDIUM,
+        max_width=width - 0.5
+    )
     sub_txt.next_to(val_txt, DOWN, buff=0.18)
 
     return VGroup(box, name_txt, val_txt, sub_txt)
