@@ -508,17 +508,37 @@ def auto_produce(
         from pipeline.instagram_publisher import instagram_publisher
         print("\n📸 Step 8: Instagram Reels automated distribution...")
         ig_post = generate_instagram_post(spec)
+
+        # Determine optimal thumbnail offset for Instagram Reel cover (eliminates 0ms black frame)
+        thumb_offset_ms = 2500
+        try:
+            if spec.get("beats") and len(spec["beats"]) > 0:
+                b1 = spec["beats"][0]
+                dur = float(b1.get("slot_duration", b1.get("duration", 5.0)))
+                # Center of Beat 1 is typically 2000-3000ms where title card & graphics are static and vibrant
+                thumb_offset_ms = int(min(3500, max(1500, dur * 500)))
+        except Exception:
+            thumb_offset_ms = 2500
+
+        cover_url = os.getenv("INSTAGRAM_COVER_URL") or spec.get("metadata", {}).get("cover_url")
+
         if dry_run_publish:
             print("\n=======================================================")
             print("🔍 INSTAGRAM REELS PREVIEW (DRY-RUN)")
             print("=======================================================\n")
             print(f"🪝 HOOK: {ig_post['hook']}")
+            print(f"🖼️ POSTER OFFSET: {thumb_offset_ms}ms" + (f" (Cover URL: {cover_url})" if cover_url else ""))
             print(f"📝 CAPTION:\n{format_full_caption_with_hashtags(ig_post)}\n")
             print(f"💬 FIRST COMMENT: {ig_post['first_comment']}")
             print("=======================================================\n")
         elif should_publish_ig:
             try:
-                instagram_publisher.publish_reel(final_output, ig_post)
+                instagram_publisher.publish_reel(
+                    final_output,
+                    ig_post,
+                    cover_url=cover_url,
+                    thumb_offset=thumb_offset_ms
+                )
             except Exception as e_ig:
                 print(f"\n⚠️ Instagram automated publish skipped or failed: {e_ig}")
 

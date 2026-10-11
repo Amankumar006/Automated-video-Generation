@@ -229,6 +229,7 @@ class TestInstagramPublisher(unittest.TestCase):
         )
         self.assertEqual(cid, "17928374620199999")
 
+    @patch.object(InstagramPublisher, "check_token_validity")
     @patch.object(InstagramPublisher, "create_resumable_reels_container")
     @patch.object(InstagramPublisher, "upload_binary_video_stream")
     @patch.object(InstagramPublisher, "wait_for_container_ready")
@@ -240,9 +241,11 @@ class TestInstagramPublisher(unittest.TestCase):
         mock_publish,
         mock_wait,
         mock_upload,
-        mock_create
+        mock_create,
+        mock_check_token
     ):
-        """Verifies end-to-end execution of publish_reel method."""
+        """Verifies end-to-end execution of publish_reel method with thumb_offset."""
+        mock_check_token.return_value = (True, {"username": "themodelverse"})
         mock_create.return_value = ("cid_123", "https://rupload.facebook.com/uri")
         mock_wait.return_value = True
         mock_publish.return_value = "mid_456"
@@ -255,14 +258,105 @@ class TestInstagramPublisher(unittest.TestCase):
             "first_comment": "Test comment"
         }
 
-        res = self.publisher.publish_reel(str(self.test_video_path), post_data)
+        res = self.publisher.publish_reel(
+            str(self.test_video_path),
+            post_data,
+            thumb_offset=3000
+        )
         self.assertEqual(res["media_id"], "mid_456")
         self.assertEqual(res["permalink"], "https://www.instagram.com/p/mid_456/")
+        self.assertTrue(mock_check_token.called)
         self.assertTrue(mock_create.called)
+        # Verify thumb_offset was forwarded
+        mock_create.assert_called_with(
+            str(self.test_video_path),
+            mock_create.call_args[0][1],
+            cover_url=None,
+            thumb_offset=3000
+        )
         self.assertTrue(mock_upload.called)
         self.assertTrue(mock_wait.called)
         self.assertTrue(mock_publish.called)
         self.assertTrue(mock_comment.called)
+
+    @patch("urllib.request.urlopen")
+    def test_create_resumable_reels_container_with_thumb_offset(self, mock_urlopen):
+        """Verifies thumb_offset is included in resumable upload POST body."""
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps({
+            "id": "17928374620194821",
+            "uri": "https://rupload.facebook.com/ig-video-upload/v21.0/17928374620194821"
+        }).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value = mock_resp
+
+        cid, uri = self.publisher.create_resumable_reels_container(
+            video_path=str(self.test_video_path),
+            caption="Test Reels Caption",
+            thumb_offset=2500
+        )
+        self.assertEqual(cid, "17928374620194821")
+        # Verify request payload included thumb_offset
+        req_arg = mock_urlopen.call_args[0][0]
+        data_str = req_arg.data.decode("utf-8")
+        self.assertIn("thumb_offset=2500", data_str)
+
+    @patch("urllib.request.urlopen")
+    def test_create_resumable_reels_container_with_cover_url(self, mock_urlopen):
+        """Verifies cover_url is included in resumable upload POST body."""
+        mock_resp = MagicMock()
+        mock_resp.read.return_value = json.dumps({
+            "id": "17928374620194821",
+            "uri": "https://rupload.facebook.com/ig-video-upload/v21.0/17928374620194821"
+        }).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value = mock_resp
+
+        cid, uri = self.publisher.create_resumable_reels_container(
+            video_path=str(self.test_video_path),
+            caption="Test Reels Caption",
+            cover_url="https://example.com/poster.jpg"
+        )
+        self.assertEqual(cid, "17928374620194821")
+        req_arg = mock_urlopen.call_args[0][0]
+        data_str = req_arg.data.decode("utf-8")
+        self.assertIn("cover_url=https%3A%2F%2Fexample.com%2Fposter.jpg", data_str)
+
+    @patch("urllib.request.urlopen")
+    def test_create_resumable_reels_container_expired_token_raises_clean_error(self, mock_urlopen):
+        """Verifies HTTPError with token expiration raises informative RuntimeError."""
+        import urllib.error
+        err_json = json.dumps({
+            "error": {
+                "message": "Error validating access token: Session has expired on Saturday, 10-Oct-26 09:00:00 PDT.",
+                "code": 190,
+                "error_subcode": 463
+            }
+        }).encode("utf-8")
+        mock_err = urllib.error.HTTPError(
+            url="https://graph.facebook.com/v21.0/media",
+            code=400,
+            msg="Bad Request",
+            hdrs={},
+            fp=MagicMock(read=MagicMock(return_value=err_json))
+        )
+        mock_urlopen.side_effect = mock_err
+
+        with self.assertRaises(RuntimeError) as ctx:
+            self.publisher.create_resumable_reels_container(
+                video_path=str(self.test_video_path),
+                caption="Test Reels Caption"
+            )
+        self.assertIn("Instagram Access Token EXPIRED or INVALID", str(ctx.exception))
+        self.assertIn("Session has expired", str(ctx.exception))
+
+    @patch.object(InstagramPublisher, "check_token_validity")
+    def test_publish_reel_aborts_early_when_token_invalid(self, mock_check_token):
+        """Verifies publish_reel halts immediately if access token is reported invalid."""
+        mock_check_token.return_value = (False, {"message": "Session has expired"})
+        post_data = {"hook": "Hook", "caption": "Caption"}
+
+        with self.assertRaises(RuntimeError) as ctx:
+            self.publisher.publish_reel(str(self.test_video_path), post_data)
+        self.assertIn("Instagram publishing aborted: Access token is invalid or expired", str(ctx.exception))
 
 
 if __name__ == "__main__":

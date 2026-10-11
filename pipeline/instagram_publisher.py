@@ -91,7 +91,13 @@ class InstagramPublisher:
             data = json.loads(resp.read().decode())
             return data["id"]
 
-    def create_video_url_container(self, video_url: str, caption: str, cover_url: Optional[str] = None) -> str:
+    def create_video_url_container(
+        self,
+        video_url: str,
+        caption: str,
+        cover_url: Optional[str] = None,
+        thumb_offset: Optional[int] = 2500
+    ) -> str:
         """Creates an Instagram Reels container using a public video URL."""
         url = f"{self.graph_url}/{self.account_id}/media"
         body: Dict[str, Any] = {
@@ -102,6 +108,8 @@ class InstagramPublisher:
         }
         if cover_url:
             body["cover_url"] = cover_url
+        elif thumb_offset is not None:
+            body["thumb_offset"] = int(thumb_offset)
 
         payload = json.dumps(body).encode("utf-8")
         req = urllib.request.Request(
@@ -109,14 +117,39 @@ class InstagramPublisher:
             data=payload,
             headers={"Content-Type": "application/json"}
         )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode())
-            return data["id"]
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode())
+                return data["id"]
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode()
+            try:
+                err_data = json.loads(err_body)
+                err_obj = err_data.get("error", {})
+                err_msg = err_obj.get("message", err_body)
+                code = err_obj.get("code")
+                subcode = err_obj.get("error_subcode")
+                if code == 190 or subcode == 463 or "Session has expired" in err_msg or "Error validating access token" in err_msg:
+                    raise RuntimeError(
+                        f"Instagram Access Token EXPIRED or INVALID (Code {code}, Subcode {subcode}): {err_msg}. "
+                        "Please update INSTAGRAM_ACCESS_TOKEN in repository secrets / .env."
+                    ) from e
+                raise RuntimeError(f"Instagram video URL container creation failed ({e.code}): {err_msg}") from e
+            except (json.JSONDecodeError, KeyError):
+                raise RuntimeError(f"Instagram video URL container creation failed ({e.code}): {err_body}") from e
 
-    def create_resumable_reels_container(self, video_path: str, caption: str) -> Tuple[str, str]:
+    def create_resumable_reels_container(
+        self,
+        video_path: str,
+        caption: str,
+        cover_url: Optional[str] = None,
+        thumb_offset: Optional[int] = 2500
+    ) -> Tuple[str, str]:
         """
         Step 1 of Resumable Upload:
         Initializes an Instagram Reels container for direct binary upload.
+        Accepts optional cover_url (public image URL) or thumb_offset (milliseconds from video start).
+        Defaults thumb_offset to 2500ms to eliminate black 0ms first-frame thumbnails.
         Returns: (container_id, upload_uri)
         """
         if not os.path.exists(video_path):
@@ -126,20 +159,42 @@ class InstagramPublisher:
         url = f"{self.graph_url}/{self.account_id}/media"
         
         # Format payload for resumable upload protocol
-        params = {
+        params: Dict[str, Any] = {
             "media_type": "REELS",
             "upload_type": "resumable",
             "caption": caption,
             "access_token": self.access_token
         }
+        if cover_url:
+            params["cover_url"] = cover_url
+        elif thumb_offset is not None:
+            params["thumb_offset"] = int(thumb_offset)
+
         data = urllib.parse.urlencode(params).encode("utf-8")
 
         req = urllib.request.Request(url, data=data)
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            res = json.loads(resp.read().decode())
-            container_id = res["id"]
-            upload_uri = res.get("uri") or f"{self.rupload_url}/{container_id}"
-            return container_id, upload_uri
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                res = json.loads(resp.read().decode())
+                container_id = res["id"]
+                upload_uri = res.get("uri") or f"{self.rupload_url}/{container_id}"
+                return container_id, upload_uri
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode()
+            try:
+                err_data = json.loads(err_body)
+                err_obj = err_data.get("error", {})
+                err_msg = err_obj.get("message", err_body)
+                code = err_obj.get("code")
+                subcode = err_obj.get("error_subcode")
+                if code == 190 or subcode == 463 or "Session has expired" in err_msg or "Error validating access token" in err_msg:
+                    raise RuntimeError(
+                        f"Instagram Access Token EXPIRED or INVALID (Code {code}, Subcode {subcode}): {err_msg}. "
+                        "Please update INSTAGRAM_ACCESS_TOKEN in repository secrets / .env."
+                    ) from e
+                raise RuntimeError(f"Instagram resumable Reels container creation failed ({e.code}): {err_msg}") from e
+            except (json.JSONDecodeError, KeyError):
+                raise RuntimeError(f"Instagram resumable Reels container creation failed ({e.code}): {err_body}") from e
 
     def upload_binary_video_stream(self, upload_uri: str, video_path: str) -> None:
         """
@@ -210,9 +265,18 @@ class InstagramPublisher:
             data=payload,
             headers={"Content-Type": "application/json"}
         )
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = json.loads(resp.read().decode())
-            return data["id"]
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = json.loads(resp.read().decode())
+                return data["id"]
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode()
+            try:
+                err_data = json.loads(err_body)
+                err_msg = err_data.get("error", {}).get("message", err_body)
+                raise RuntimeError(f"Instagram media publish failed ({e.code}): {err_msg}") from e
+            except (json.JSONDecodeError, KeyError):
+                raise RuntimeError(f"Instagram media publish failed ({e.code}): {err_body}") from e
 
     def post_first_comment(self, media_id: str, comment_text: str) -> Optional[str]:
         """Step 5: Posts an engagement follow-up first comment to the live post."""
@@ -239,12 +303,24 @@ class InstagramPublisher:
         self,
         video_path: str,
         post_data: Dict[str, str],
-        video_url: Optional[str] = None
+        video_url: Optional[str] = None,
+        cover_url: Optional[str] = None,
+        thumb_offset: Optional[int] = 2500
     ) -> Dict[str, Any]:
         """
         Full end-to-end publishing pipeline for Instagram Reels.
         Uses resumable binary upload if video_path is local, or video_url if provided.
+        Configures cover_url or thumb_offset to avoid pitch-black 0ms thumbnails.
         """
+        # Validate token first to provide clear error upfront
+        is_valid, token_info = self.check_token_validity()
+        if not is_valid:
+            err_msg = token_info.get("message", json.dumps(token_info))
+            raise RuntimeError(
+                f"Instagram publishing aborted: Access token is invalid or expired: {err_msg}. "
+                "Please update INSTAGRAM_ACCESS_TOKEN in your environment or repository secrets."
+            )
+
         caption = format_full_caption_with_hashtags(post_data)
 
         print("\n=======================================================")
@@ -253,13 +329,21 @@ class InstagramPublisher:
         print(f"🎬 Video: {video_path}")
         print(f"🪝 Hook: {post_data.get('hook', '')}")
         print(f"📝 Caption length: {len(caption)} characters")
+        if cover_url:
+            print(f"🖼️ Cover: Custom cover URL -> {cover_url}")
+        elif thumb_offset is not None:
+            print(f"🖼️ Poster Cover: Video frame at {thumb_offset}ms (eliminates 0ms black frame)")
 
         if video_url:
             print(f"🌐 Creating Reels container via public URL: {video_url}...")
-            container_id = self.create_video_url_container(video_url, caption)
+            container_id = self.create_video_url_container(
+                video_url, caption, cover_url=cover_url, thumb_offset=thumb_offset
+            )
         else:
             print(f"📁 Initiating direct binary Resumable Upload for local file: {video_path}...")
-            container_id, upload_uri = self.create_resumable_reels_container(video_path, caption)
+            container_id, upload_uri = self.create_resumable_reels_container(
+                video_path, caption, cover_url=cover_url, thumb_offset=thumb_offset
+            )
             self.upload_binary_video_stream(upload_uri, video_path)
 
         # Poll container readiness
@@ -299,6 +383,8 @@ def main():
     parser.add_argument("--spec", help="Path to spec JSON template")
     parser.add_argument("--video-url", help="Optional publicly hosted video URL")
     parser.add_argument("--image-url", help="Optional public image URL for feed post")
+    parser.add_argument("--cover-url", help="Optional publicly hosted custom cover image URL (JPEG, 9:16)")
+    parser.add_argument("--thumb-offset", type=int, default=2500, help="Video thumbnail frame offset in milliseconds (default: 2500)")
     parser.add_argument("--check-token", action="store_true", help="Verify Instagram access token and account status")
     parser.add_argument("--dry-run", action="store_true", help="Generate caption, hashtags, and preview payload without publishing")
     args = parser.parse_args()
@@ -340,8 +426,9 @@ def main():
     if args.dry_run or not args.video:
         print("\n=======================================================")
         print("🔍 INSTAGRAM POST METADATA PREVIEW (DRY-RUN)")
-        print("=======================================================\n")
+        print("=======================================================")
         print(f"🪝 HOOK:\n{post_data['hook']}\n")
+        print(f"🖼️ THUMBNAIL OFFSET: {args.thumb_offset}ms" + (f" (Cover URL: {args.cover_url})" if args.cover_url else ""))
         print(f"📝 CAPTION ({len(post_data['caption'])} chars):\n{post_data['caption']}\n")
         print(f"🏷️ HASHTAGS:\n{post_data['hashtags']}\n")
         print(f"💬 FIRST COMMENT:\n{post_data['first_comment']}\n")
@@ -360,7 +447,13 @@ def main():
         print("\nPlease update INSTAGRAM_ACCESS_TOKEN in your environment or .env file.")
         sys.exit(1)
 
-    pub.publish_reel(args.video, post_data, video_url=args.video_url)
+    pub.publish_reel(
+        args.video,
+        post_data,
+        video_url=args.video_url,
+        cover_url=args.cover_url,
+        thumb_offset=args.thumb_offset
+    )
 
 
 if __name__ == "__main__":
