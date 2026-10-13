@@ -560,7 +560,8 @@ def main():
     elif engine_name == "remotion":
         manifest = adapter.compile_scene_graph(vsg)
         if not args.skip_render:
-            render_res = adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+            raw_remotion_video = final_output.replace(".mp4", "_raw.mp4")
+            render_res = adapter.render_video(manifest, raw_remotion_video, options=RenderOptions(crf=18))
             if not render_res.success:
                 print(f"⚠️ Remotion render encountered issue: {render_res.error_message}. Falling back to Manim.")
                 adapter = engine_router._manim_adapter
@@ -578,8 +579,8 @@ def main():
                         cv2.imwrite(frame_path, frame_bgr)
                     except Exception as e_frame:
                         print(f"⚠️ Frame {bid} seek notice: {e_frame}")
-                if os.path.exists(final_output) and not args.no_music:
-                    mux_final_short(final_output, master_audio, final_output)
+                if os.path.exists(raw_remotion_video):
+                    mux_final_short(raw_remotion_video, master_audio, final_output)
         else:
             extract_frames(final_output, frames_dir, category=category, spec=spec)
     else:
@@ -650,7 +651,8 @@ def main():
         if len(ledger.patches) > 0 and engine_name == "remotion":
             vsg = repaired_vsg
             manifest = adapter.compile_scene_graph(vsg)
-            adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+            raw_remotion_video = final_output.replace(".mp4", "_raw.mp4")
+            adapter.render_video(manifest, raw_remotion_video, options=RenderOptions(crf=18))
             for b in vsg.beats:
                 bid = b.beat_id
                 frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
@@ -659,8 +661,8 @@ def main():
                     cv2.imwrite(frame_path, frame_bgr)
                 except Exception:
                     pass
-            if os.path.exists(final_output) and not args.no_music:
-                mux_final_short(final_output, master_audio, final_output)
+            if os.path.exists(raw_remotion_video):
+                mux_final_short(raw_remotion_video, master_audio, final_output)
             extract_frames(final_output, frames_dir, category=category, spec=spec)
 
     if args.dry_run:

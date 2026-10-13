@@ -197,18 +197,31 @@ class RemotionBroadcastAdapter(RenderAdapter):
 
         t0 = time.perf_counter()
         logger.info(f"🎬 Initiating Remotion video render: {self.composition_id} -> {out_path.name}")
-        proc = subprocess.run(
-            cmd,
-            cwd=str(self.root_dir),
-            capture_output=True,
-            text=True,
-            timeout=opts.timeout_sec
-        )
-        wall_clock_sec = time.perf_counter() - t0
+        try:
+            proc = subprocess.run(
+                cmd,
+                cwd=str(self.root_dir),
+                capture_output=True,
+                text=True,
+                timeout=opts.timeout_sec
+            )
+            wall_clock_sec = time.perf_counter() - t0
 
-        if proc.returncode != 0:
-            err = f"Remotion video render failed (exit {proc.returncode}):\n{proc.stderr}\n{proc.stdout}"
-            logger.error(err)
+            if proc.returncode != 0:
+                err = f"Remotion video render failed (exit {proc.returncode}):\n{proc.stderr}\n{proc.stdout}"
+                logger.error(err)
+                return RenderResult(
+                    output_file_path=str(out_path),
+                    total_frames=manifest.total_frames,
+                    wall_clock_duration_sec=round(wall_clock_sec, 2),
+                    average_fps=0.0,
+                    success=False,
+                    error_message=err
+                )
+        except subprocess.TimeoutExpired as e_timeout:
+            wall_clock_sec = time.perf_counter() - t0
+            err = f"Remotion video render timed out after {opts.timeout_sec}s"
+            logger.warning(f"⚠️ {err}. Gracefully tripping fallback circuit.")
             return RenderResult(
                 output_file_path=str(out_path),
                 total_frames=manifest.total_frames,
