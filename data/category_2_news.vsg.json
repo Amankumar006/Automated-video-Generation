@@ -1,0 +1,413 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "project_id": "category_2_news",
+    "title": "OpenAI Releases o3-mini Globally",
+    "domain_taxonomy": "OFFICIAL_TECH_NEWS",
+    "aspect_ratio": "9:16",
+    "canvas": {
+      "width_px": 1080,
+      "height_px": 1920,
+      "fps": 60,
+      "duration_seconds": 14.71,
+      "total_frames": 883
+    },
+    "audio": {
+      "master_voiceover_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/short_master_audio.wav",
+      "sample_rate_hz": 24000,
+      "music_ducking_db": -18.0
+    }
+  },
+  "theme": {
+    "theme_id": "cyber_cyan",
+    "colors": {
+      "canvas_void": "#06080F",
+      "surface_recessed": "#0B101D",
+      "surface_primary": "rgba(15, 23, 42, 0.85)",
+      "surface_elevated": "rgba(30, 41, 59, 0.95)",
+      "surface_border": "rgba(255, 255, 255, 0.15)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_tertiary": "#64748B",
+      "hero_accent": "#38BDF8",
+      "secondary_accent": "#10B981",
+      "status_gain": "#10B981",
+      "status_loss": "#EF4444",
+      "status_warning": "#F59E0B"
+    },
+    "materials": {
+      "card_blur_px": 24.0,
+      "border_radius_px": 20.0,
+      "border_width_px": 1.5,
+      "shadow_elevation": "0 24px 48px -12px rgba(0, 0, 0, 0.65)",
+      "vignette_intensity": 0.4
+    },
+    "typography": {
+      "font_family_display": "Inter Display",
+      "font_family_code": "JetBrains Mono",
+      "font_family_math": "KaTeX Main",
+      "open_type_features": "cv05=1, cv08=1, zero=1, tnum=1"
+    }
+  },
+  "beats": [
+    {
+      "beat_id": 1,
+      "time_range": {
+        "start_sec": 0.0,
+        "end_sec": 4.1,
+        "start_frame": 0,
+        "end_frame": 255
+      },
+      "narrative": {
+        "spoken_text": "OpenAI just dropped o3-mini globally with high reasoning effort.",
+        "intent": "Official lab drop breaking news",
+        "visual_metaphor": "NewsAnnouncementBanner",
+        "primary_focus_node_id": "news_banner_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "OPENAI",
+          "timestamp_sec": 0.01,
+          "frame_trigger": 1
+        },
+        {
+          "word": "JUST",
+          "timestamp_sec": 0.73,
+          "frame_trigger": 44
+        },
+        {
+          "word": "DROPPED",
+          "timestamp_sec": 1.07,
+          "frame_trigger": 64
+        },
+        {
+          "word": "O3MINI",
+          "timestamp_sec": 1.525,
+          "frame_trigger": 92
+        },
+        {
+          "word": "GLOBALLY",
+          "timestamp_sec": 2.285,
+          "frame_trigger": 137
+        },
+        {
+          "word": "WITH",
+          "timestamp_sec": 2.77,
+          "frame_trigger": 166
+        },
+        {
+          "word": "HIGH",
+          "timestamp_sec": 3.04,
+          "frame_trigger": 182
+        },
+        {
+          "word": "REASONING",
+          "timestamp_sec": 3.18,
+          "frame_trigger": 191
+        },
+        {
+          "word": "EFFORT",
+          "timestamp_sec": 3.635,
+          "frame_trigger": 218
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b1",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 480
+          },
+          "nodes": [
+            {
+              "id": "news_banner_node",
+              "node_type": "NewsAnnouncementBanner",
+              "props": {
+                "title": "o3-mini Released Globally with High Reasoning Effort",
+                "labName": "OpenAI Newsroom",
+                "badgeText": "03-MINI",
+                "metric1Label": "Math & Code",
+                "metric1Val": "88.2%",
+                "metric1Delta": "+7.4% vs o1-mini",
+                "metric2Label": "Token Pricing",
+                "metric2Val": "$1.10",
+                "metric2Delta": "-63% Cost Cut",
+                "metric3Label": "Inference Latency",
+                "metric3Val": "3.2s",
+                "metric3Delta": "2.8x Faster",
+                "metric4Label": "Context Window",
+                "metric4Val": "200K",
+                "metric4Delta": "Full Multimodal",
+                "sourceUrl": "openai.com/index/openai-o3-mini"
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 480
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 0,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "time_range": {
+        "start_sec": 4.25,
+        "end_sec": 9.0,
+        "start_frame": 255,
+        "end_frame": 549
+      },
+      "narrative": {
+        "spoken_text": "It crushes competitive coding and math benchmarks with eighty-eight percent accuracy.",
+        "intent": "Competitive benchmark showdown",
+        "visual_metaphor": "HorizontalRaceBars",
+        "primary_focus_node_id": "race_bars_news_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "IT",
+          "timestamp_sec": 4.256,
+          "frame_trigger": 255
+        },
+        {
+          "word": "CRUSHES",
+          "timestamp_sec": 4.356,
+          "frame_trigger": 261
+        },
+        {
+          "word": "COMPETITIVE",
+          "timestamp_sec": 4.761,
+          "frame_trigger": 286
+        },
+        {
+          "word": "CODING",
+          "timestamp_sec": 5.551,
+          "frame_trigger": 333
+        },
+        {
+          "word": "AND",
+          "timestamp_sec": 5.986,
+          "frame_trigger": 359
+        },
+        {
+          "word": "MATH",
+          "timestamp_sec": 6.172,
+          "frame_trigger": 370
+        },
+        {
+          "word": "BENCHMARKS",
+          "timestamp_sec": 6.466,
+          "frame_trigger": 388
+        },
+        {
+          "word": "WITH",
+          "timestamp_sec": 7.186,
+          "frame_trigger": 431
+        },
+        {
+          "word": "EIGHTYEIGHT",
+          "timestamp_sec": 7.376,
+          "frame_trigger": 443
+        },
+        {
+          "word": "PERCENT",
+          "timestamp_sec": 7.956,
+          "frame_trigger": 477
+        },
+        {
+          "word": "ACCURACY",
+          "timestamp_sec": 8.306,
+          "frame_trigger": 498
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b2",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 540
+          },
+          "nodes": [
+            {
+              "id": "race_bars_news_node",
+              "node_type": "HorizontalRaceBars",
+              "props": {
+                "title": "STEM & Coding Reasoning Benchmark",
+                "contestants": [
+                  {
+                    "name": "o3-mini (High)",
+                    "score": 88.2,
+                    "color": "#10B981",
+                    "isHero": true,
+                    "tag": "SOTA"
+                  },
+                  {
+                    "name": "o1-mini",
+                    "score": 80.8,
+                    "color": "#64748B",
+                    "isHero": false
+                  },
+                  {
+                    "name": "Claude 3.5 Sonnet",
+                    "score": 78.4,
+                    "color": "#475569",
+                    "isHero": false
+                  }
+                ],
+                "maxScore": 100.0
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 540
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 255,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "time_range": {
+        "start_sec": 9.15,
+        "end_sec": 14.21,
+        "start_frame": 549,
+        "end_frame": 883
+      },
+      "narrative": {
+        "spoken_text": "And token pricing drops sixty-three percent, cutting inference costs for production AI.",
+        "intent": "Inference pricing disruption analysis",
+        "visual_metaphor": "PricingDeltaComparison",
+        "primary_focus_node_id": "pricing_delta_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "AND",
+          "timestamp_sec": 9.168,
+          "frame_trigger": 550
+        },
+        {
+          "word": "TOKEN",
+          "timestamp_sec": 9.278,
+          "frame_trigger": 557
+        },
+        {
+          "word": "PRICING",
+          "timestamp_sec": 9.733,
+          "frame_trigger": 584
+        },
+        {
+          "word": "DROPS",
+          "timestamp_sec": 10.308,
+          "frame_trigger": 618
+        },
+        {
+          "word": "SIXTYTHREE",
+          "timestamp_sec": 10.643,
+          "frame_trigger": 639
+        },
+        {
+          "word": "PERCENT",
+          "timestamp_sec": 11.203,
+          "frame_trigger": 672
+        },
+        {
+          "word": "CUTTING",
+          "timestamp_sec": 11.818,
+          "frame_trigger": 709
+        },
+        {
+          "word": "INFERENCE",
+          "timestamp_sec": 12.003,
+          "frame_trigger": 720
+        },
+        {
+          "word": "COSTS",
+          "timestamp_sec": 12.513,
+          "frame_trigger": 751
+        },
+        {
+          "word": "FOR",
+          "timestamp_sec": 12.943,
+          "frame_trigger": 777
+        },
+        {
+          "word": "PRODUCTION",
+          "timestamp_sec": 13.213,
+          "frame_trigger": 793
+        },
+        {
+          "word": "AI",
+          "timestamp_sec": 13.743,
+          "frame_trigger": 825
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b3",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 440
+          },
+          "nodes": [
+            {
+              "id": "pricing_delta_node",
+              "node_type": "PricingDeltaComparison",
+              "props": {
+                "title": "API Inference Cost Disruption",
+                "subtitle": "OpenAI Reasoning Models Economics",
+                "oldTierName": "Legacy o1-mini",
+                "oldPrice": "$3.00 / 1M",
+                "oldLatency": "7.8s Latency",
+                "newTierName": "o3-mini (Standard)",
+                "newPrice": "$1.10 / 1M",
+                "newLatency": "3.2s Latency",
+                "savingsPercentage": "63.3% CHEAPER",
+                "efficiencyMultiplier": "2.4x FASTER"
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 440
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 549,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

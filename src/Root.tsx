@@ -10,7 +10,17 @@ export const Root: React.FC = () => {
       <Composition
         id="BroadcastComposition"
         component={BroadcastComposition}
-        durationInFrames={600} // 10 seconds at 60fps default (overridable)
+        calculateMetadata={({ props }: { props: any }) => {
+          const vsg = props?.vsg || (props?.metadata ? props : undefined);
+          const totalFrames = vsg?.metadata?.canvas?.total_frames || 600;
+          return {
+            durationInFrames: totalFrames,
+            fps: vsg?.metadata?.canvas?.fps || 60,
+            width: vsg?.metadata?.canvas?.width_px || 1080,
+            height: vsg?.metadata?.canvas?.height_px || 1920,
+          };
+        }}
+        durationInFrames={600}
         fps={60}
         width={1080}
         height={1920}
@@ -21,6 +31,16 @@ export const Root: React.FC = () => {
       <Composition
         id="BroadcastCompositionWithSafeZone"
         component={BroadcastComposition}
+        calculateMetadata={({ props }: { props: any }) => {
+          const vsg = props?.vsg || (props?.metadata ? props : undefined);
+          const totalFrames = vsg?.metadata?.canvas?.total_frames || 600;
+          return {
+            durationInFrames: totalFrames,
+            fps: vsg?.metadata?.canvas?.fps || 60,
+            width: vsg?.metadata?.canvas?.width_px || 1080,
+            height: vsg?.metadata?.canvas?.height_px || 1920,
+          };
+        }}
         durationInFrames={600}
         fps={60}
         width={1080}

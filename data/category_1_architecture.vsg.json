@@ -1,0 +1,389 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "project_id": "category_1_architecture",
+    "title": "DeepSeek-V3 MoE Architecture Breakdown",
+    "domain_taxonomy": "FRONTIER_AI_ARCHITECTURES",
+    "aspect_ratio": "9:16",
+    "canvas": {
+      "width_px": 1080,
+      "height_px": 1920,
+      "fps": 60,
+      "duration_seconds": 13.79,
+      "total_frames": 828
+    },
+    "audio": {
+      "master_voiceover_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/short_master_audio.wav",
+      "sample_rate_hz": 24000,
+      "music_ducking_db": -18.0
+    }
+  },
+  "theme": {
+    "theme_id": "cyber_cyan",
+    "colors": {
+      "canvas_void": "#06080F",
+      "surface_recessed": "#0B101D",
+      "surface_primary": "rgba(15, 23, 42, 0.85)",
+      "surface_elevated": "rgba(30, 41, 59, 0.95)",
+      "surface_border": "rgba(255, 255, 255, 0.15)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_tertiary": "#64748B",
+      "hero_accent": "#38BDF8",
+      "secondary_accent": "#10B981",
+      "status_gain": "#10B981",
+      "status_loss": "#EF4444",
+      "status_warning": "#F59E0B"
+    },
+    "materials": {
+      "card_blur_px": 24.0,
+      "border_radius_px": 20.0,
+      "border_width_px": 1.5,
+      "shadow_elevation": "0 24px 48px -12px rgba(0, 0, 0, 0.65)",
+      "vignette_intensity": 0.4
+    },
+    "typography": {
+      "font_family_display": "Inter Display",
+      "font_family_code": "JetBrains Mono",
+      "font_family_math": "KaTeX Main",
+      "open_type_features": "cv05=1, cv08=1, zero=1, tnum=1"
+    }
+  },
+  "beats": [
+    {
+      "beat_id": 1,
+      "time_range": {
+        "start_sec": 0.0,
+        "end_sec": 4.05,
+        "start_frame": 0,
+        "end_frame": 252
+      },
+      "narrative": {
+        "spoken_text": "DeepSeek V3 routes eight routed experts dynamically per token.",
+        "intent": "Introduce sparse mixture-of-experts routing",
+        "visual_metaphor": "MoERouterMatrix",
+        "primary_focus_node_id": "moe_matrix_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "DEEPSEEK",
+          "timestamp_sec": 0.01,
+          "frame_trigger": 1
+        },
+        {
+          "word": "V3",
+          "timestamp_sec": 0.644,
+          "frame_trigger": 39
+        },
+        {
+          "word": "ROUTES",
+          "timestamp_sec": 1.235,
+          "frame_trigger": 74
+        },
+        {
+          "word": "EIGHT",
+          "timestamp_sec": 1.566,
+          "frame_trigger": 94
+        },
+        {
+          "word": "ROUTED",
+          "timestamp_sec": 1.84,
+          "frame_trigger": 110
+        },
+        {
+          "word": "EXPERTS",
+          "timestamp_sec": 2.27,
+          "frame_trigger": 136
+        },
+        {
+          "word": "DYNAMICALLY",
+          "timestamp_sec": 2.7,
+          "frame_trigger": 162
+        },
+        {
+          "word": "PER",
+          "timestamp_sec": 3.34,
+          "frame_trigger": 200
+        },
+        {
+          "word": "TOKEN",
+          "timestamp_sec": 3.495,
+          "frame_trigger": 210
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b1",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 650
+          },
+          "nodes": [
+            {
+              "id": "moe_matrix_node",
+              "node_type": "MoERouterMatrix",
+              "props": {
+                "tokenText": "deepseek_r1",
+                "totalExperts": 256,
+                "activeRouted": 8,
+                "sharedExperts": 1
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 650
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 0,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "time_range": {
+        "start_sec": 4.2,
+        "end_sec": 8.45,
+        "start_frame": 252,
+        "end_frame": 516
+      },
+      "narrative": {
+        "spoken_text": "Multi-Head Attention compresses query key states without memory overhead.",
+        "intent": "Explain multi-head latent attention mechanism",
+        "visual_metaphor": "AttentionHeatmap",
+        "primary_focus_node_id": "attn_map_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "MULTIHEAD",
+          "timestamp_sec": 4.213,
+          "frame_trigger": 253
+        },
+        {
+          "word": "ATTENTION",
+          "timestamp_sec": 4.823,
+          "frame_trigger": 289
+        },
+        {
+          "word": "COMPRESSES",
+          "timestamp_sec": 5.453,
+          "frame_trigger": 327
+        },
+        {
+          "word": "QUERY",
+          "timestamp_sec": 5.973,
+          "frame_trigger": 358
+        },
+        {
+          "word": "KEY",
+          "timestamp_sec": 6.383,
+          "frame_trigger": 383
+        },
+        {
+          "word": "STATES",
+          "timestamp_sec": 6.618,
+          "frame_trigger": 397
+        },
+        {
+          "word": "WITHOUT",
+          "timestamp_sec": 6.963,
+          "frame_trigger": 418
+        },
+        {
+          "word": "MEMORY",
+          "timestamp_sec": 7.453,
+          "frame_trigger": 447
+        },
+        {
+          "word": "OVERHEAD",
+          "timestamp_sec": 7.823,
+          "frame_trigger": 469
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b2",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 580
+          },
+          "nodes": [
+            {
+              "id": "attn_map_node",
+              "node_type": "AttentionHeatmap",
+              "props": {
+                "matrixDim": 5,
+                "highlightHead": 1,
+                "activeLatentDim": 512
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 580
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 252,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "time_range": {
+        "start_sec": 8.6,
+        "end_sec": 13.29,
+        "start_frame": 516,
+        "end_frame": 828
+      },
+      "narrative": {
+        "spoken_text": "DeepSeek matches frontier models on benchmarks at a fraction of the compute cost.",
+        "intent": "Empirical benchmark showdown payoff",
+        "visual_metaphor": "HorizontalRaceBars",
+        "primary_focus_node_id": "race_bars_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "DEEPSEEK",
+          "timestamp_sec": 8.614,
+          "frame_trigger": 517
+        },
+        {
+          "word": "MATCHES",
+          "timestamp_sec": 9.239,
+          "frame_trigger": 554
+        },
+        {
+          "word": "FRONTIER",
+          "timestamp_sec": 9.644,
+          "frame_trigger": 579
+        },
+        {
+          "word": "MODELS",
+          "timestamp_sec": 10.049,
+          "frame_trigger": 603
+        },
+        {
+          "word": "ON",
+          "timestamp_sec": 10.664,
+          "frame_trigger": 640
+        },
+        {
+          "word": "BENCHMARKS",
+          "timestamp_sec": 10.718,
+          "frame_trigger": 643
+        },
+        {
+          "word": "AT",
+          "timestamp_sec": 11.509,
+          "frame_trigger": 691
+        },
+        {
+          "word": "A",
+          "timestamp_sec": 11.514,
+          "frame_trigger": 691
+        },
+        {
+          "word": "FRACTION",
+          "timestamp_sec": 11.754,
+          "frame_trigger": 705
+        },
+        {
+          "word": "OF",
+          "timestamp_sec": 12.144,
+          "frame_trigger": 729
+        },
+        {
+          "word": "THE",
+          "timestamp_sec": 12.249,
+          "frame_trigger": 735
+        },
+        {
+          "word": "COMPUTE",
+          "timestamp_sec": 12.349,
+          "frame_trigger": 741
+        },
+        {
+          "word": "COST",
+          "timestamp_sec": 12.769,
+          "frame_trigger": 766
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b3",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 540
+          },
+          "nodes": [
+            {
+              "id": "race_bars_node",
+              "node_type": "HorizontalRaceBars",
+              "props": {
+                "title": "MMLU-Pro Accuracy Showdown",
+                "contestants": [
+                  {
+                    "name": "DeepSeek-V3",
+                    "score": 88.5,
+                    "color": "#38BDF8",
+                    "isHero": true,
+                    "tag": "SOTA"
+                  },
+                  {
+                    "name": "Claude 3.5 Sonnet",
+                    "score": 85.1,
+                    "color": "#64748B",
+                    "isHero": false
+                  },
+                  {
+                    "name": "GPT-4o (0513)",
+                    "score": 84.8,
+                    "color": "#475569",
+                    "isHero": false
+                  }
+                ],
+                "maxScore": 100.0
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 540
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 516,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
