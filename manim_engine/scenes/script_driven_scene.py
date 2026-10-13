@@ -117,24 +117,62 @@ class ScriptDrivenScene(MovingCameraScene):
         return spec_data
 
     def setup_chalkboard(self):
-        """Constructs the signature 3Blue1Brown carbon chalkboard with dot matrix lattice (Depth Layer 1)."""
+        """Constructs the signature 3Blue1Brown carbon chalkboard with architectural matrix depth (Depth Layer 1)."""
         self.camera.background_color = "#0A0D14"
+        bg_group = VGroup()
+
+        # Subtle architectural coordinate grid lines
+        grid_lines = VGroup()
+        for x in np.arange(-3.6, 3.7, 1.8):
+            grid_lines.add(Line([x, -7.0, 0], [x, 7.0, 0], stroke_width=0.75, stroke_opacity=0.07, color="#38BDF8"))
+        for y in np.arange(-6.0, 6.1, 1.8):
+            grid_lines.add(Line([-4.0, y, 0], [4.0, y, 0], stroke_width=0.75, stroke_opacity=0.07, color="#38BDF8"))
+        bg_group.add(grid_lines)
+
+        # Dot matrix lattice
         dots = VGroup()
         for x in np.arange(-3.6, 3.7, 0.9):
             for y in np.arange(-6.0, 6.1, 0.9):
-                dots.add(Dot(point=[x, y, 0], radius=0.016, color="#2D3748", fill_opacity=0.35))
-        dots.set_z_index(-10)
-        self.dots = dots
+                dots.add(Dot(point=[x, y, 0], radius=0.016, color="#2D3748", fill_opacity=0.38))
+        bg_group.add(dots)
+
+        # Ambient corner crosshairs / telemetry ticks
+        crosshairs = VGroup()
+        for cx, cy in [(-3.6, 6.2), (3.6, 6.2), (-3.6, -6.2), (3.6, -6.2)]:
+            ch = VGroup(
+                Line([cx - 0.2, cy, 0], [cx + 0.2, cy, 0], stroke_width=1.0, stroke_opacity=0.25, color="#64748B"),
+                Line([cx, cy - 0.2, 0], [cx, cy + 0.2, 0], stroke_width=1.0, stroke_opacity=0.25, color="#64748B")
+            )
+            crosshairs.add(ch)
+        bg_group.add(crosshairs)
+
+        bg_group.set_z_index(-10)
+        self.dots = bg_group
         self.add(self.dots)
 
     def setup_header(self):
-        """Places subtle brand watermark in the topmost safe zone (Depth Layer 3)."""
-        hook_tag = self.spec.get("hook_tag", "AI BREAKTHROUGH").upper()
-        watermark = VGroup(
-            clean_text("THE MODEL VERSE", font_size=20, font=FONT_HELVETICA, color="#10B981", weight=BOLD),
-            clean_text(" // ", font_size=18, font=FONT_HELVETICA, color="#64748B"),
-            clean_text(hook_tag, font_size=18, font=FONT_HELVETICA, color="#CBD5E1", weight=MEDIUM)
-        ).arrange(RIGHT, buff=0.12).move_to([0, 7.1, 0])
+        """Places branded series banner in topmost safe zone (Depth Layer 3)."""
+        from pipeline.config import resolve_track, TRACK_METADATA, TRACK_ACADEMIC
+        track = resolve_track(self.spec.get("category"))
+        badge = TRACK_METADATA.get(track, TRACK_METADATA[TRACK_ACADEMIC])["badge"]
+
+        # Pill banner behind badge
+        badge_txt = clean_text(badge, font_size=13, font=FONT_HELVETICA, color="#38BDF8", weight=BOLD)
+        badge_pill = RoundedRectangle(
+            corner_radius=0.1,
+            width=badge_txt.width + 0.35,
+            height=0.34,
+            color="#0284C7",
+            stroke_width=1.2,
+            fill_color="#082F49",
+            fill_opacity=0.85
+        )
+        badge_grp = VGroup(badge_pill, badge_txt)
+
+        brand_txt = clean_text("THE MODEL VERSE", font_size=18, font=FONT_HELVETICA, color="#10B981", weight=BOLD)
+        divider = clean_text(" // ", font_size=15, font=FONT_HELVETICA, color="#475569")
+
+        watermark = VGroup(brand_txt, divider, badge_grp).arrange(RIGHT, buff=0.14).move_to([0, 7.1, 0])
         self.header_group = watermark
         self.header_group.set_z_index(50)
         def update_header(mob, dt):

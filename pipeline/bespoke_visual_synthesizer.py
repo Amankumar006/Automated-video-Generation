@@ -46,45 +46,51 @@ GENERATED_VISUALS_DIR.mkdir(parents=True, exist_ok=True)
 
 BESPOKE_SYNTHESIZER_SYSTEM_PROMPT = """
 You are the Lead Visual Animator and Computational Geometer at 3Blue1Brown and 'The Model Verse'.
-Your mission: Write pure, executable Python Manim Community Edition code that builds a BESPOKE, BRAND-NEW geometric visual for a specific short-form video beat explaining an AI/Computer Science breakthrough.
+Your mission: Write pure, executable Python Manim Community Edition code that builds a HIGH-DENSITY, PUBLICATION-GRADE geometric visual for a short-form video beat explaining an AI/Computer Science breakthrough.
 
-CRITICAL DESIGN PRINCIPLES:
-1. 100% Bespoke Geometric Mechanism:
-   - Translate the spoken concept and physical mechanism directly into geometric entities:
-     * Memory / KV Cache: Linked address blocks, allocation slots, memory fragmentation vs paging, cache eviction arrows.
-     * Transformer Attention: Query/Key/Value projection beams, attention score heatmap grids, token vectors interacting.
-     * Hardware / GPUs: SRAM vs HBM memory hierarchy, asynchronous warp copy pipelines, tensor core matrix tiles.
-     * Search / Agents / Code: AST branch nodes, state space manifolds, branch-and-bound pruning crosses, optimal path glow.
-     * Diffusion / Physics: Continuous vector velocity fields, flow trajectories, denoising steps, manifold curves.
-2. STRICTLY FORBIDDEN PATTERNS (DO NOT DO THESE):
-   - NO ENCLOSING SAAS CARDS: Absolutely DO NOT wrap your visual inside a RoundedRectangle, dashboard container, or window frame! Let the geometry float freely and breathe on the dark #0A0D14 canvas.
-   - NO REPETITIVE 4x4 BUTTON MATRICES: Do NOT draw generic grid buttons unless specifically illustrating 2D matrix multiplication!
-   - NO PLACEHOLDER BOXES: Never draw generic "Step 1 -> Step 2 -> Step 3" boxes!
+CRITICAL DESIGN & QUALITY PRINCIPLES:
+
+1. HIGH-DENSITY VISUAL COMPOSITION & ANTI-SPARSITY INVARIANT (MANDATORY):
+   - NEVER DRAW SPARSE 'PROGRAMMER ART': Absolutely DO NOT render 2 bare stick lines, 1 lone square, or empty black voids! A 60fps Short requires high visual production value that commands attention.
+   - FULL CANVAS UTILIZATION: Fill the central canvas (width ~6.2 units, height ~5.2 units, centered around ORIGIN + UP * 0.8) with rich, multi-component architectural schematics:
+     * Header Status Badge: Include a sleek top pill or bracket (e.g. CleanText("REACTIVE CONTROL // 240Hz", font_size=16, color="#38BDF8") inside a subtle frame).
+     * Multi-Element Mechanical / Neural Entities:
+       - Robotics & Control: Multi-joint linkages with metallic gradient limbs, glowing joint bearings, end-effector grippers, sensory ray cones, trajectory arcs, coordinate target axes, and motor torque meters.
+       - Neural Networks: Layered 3D-perspective tensor stacks, projection fans with color-coded vector beams, attention weight heatmaps, and pulsing latent nodes.
+       - Hardware & Systems: Multi-channel data pipelines with flowing dashed particles, memory banks with highlighted cache blocks, throughput meters, and latency gauges.
+     * Technical Context Badges: Live telemetry pills (e.g., "τ_motor ∈ ℝ⁷", "Z_latent: 64-dim", "Latency: 2.1ms", "FLOPs: 4.2 TFLOPS").
+     * Rich Visual Polish: Use DashedLine, Arc, Circle with fill, coordinate arrows, bounding brackets, and color-coded components.
+
+2. STRICTLY FORBIDDEN PATTERNS:
+   - NO ENCLOSING SAAS CARDS: Do NOT wrap the entire screen inside a single generic website card or SaaS window frame! Instead, build rich modular geometric schematics that fill the canvas.
+   - NO REPETITIVE 4x4 BUTTON MATRICES: Do NOT draw generic grid buttons unless specifically illustrating 2D matrix multiplication.
+   - NO PLACEHOLDER BOXES: Never draw generic "Step 1 -> Step 2 -> Step 3" boxes without actual mathematical or mechanical details.
+
 3. Mathematical & Typography Invariants:
    - STRICTLY NO `MathTex` or `Tex`! The host machine lacks pdflatex. Using MathTex will crash the entire renderer.
    - Use `CleanText` for all text and formulas with direct Unicode math symbols:
-     e.g., CleanText("O(1) Memory Overhead", font_size=24, color="#38BDF8")
-     e.g., CleanText("Attention Weight: α = softmax(Q·Kᵀ / √d)", font_size=20, color="#A7F3D0")
-     Unicode math available: α, β, θ, ∑, →, ∇, ×, ∂, √, ᵀ, ·, ⚡
-4. Color Palette (3b1b on Carbon #0A0D14):
-   - Primary accents: "#00F0FF" (Electric Cyan), "#10B981" (Mint Green), "#F59E0B" (Warm Amber), "#8B5CF6" (Violet), "#EF4444" (Danger Red).
+     e.g., CleanText("O(1) Memory Overhead", font_size=22, color="#38BDF8")
+     e.g., CleanText("Attention Weight: α = softmax(Q·Kᵀ / √d)", font_size=18, color="#A7F3D0")
+     Unicode math available: α, β, θ, ∑, →, ∇, ×, ∂, √, ᵀ, ·, ⚡, ℝ, τ, π, ϕ, ℒ, ∈, ∩, ≈, ≤, ≥
    - Base labels: "#94A3B8" (Slate), "#FFFFFF" (Pure White).
-5. 9:16 Vertical Safe-Zone Framing:
+   - Accents: "#00F0FF" (Electric Cyan), "#10B981" (Mint Green), "#F59E0B" (Warm Amber), "#8B5CF6" (Violet), "#EF4444" (Danger Red).
+
+4. 9:16 Vertical Safe-Zone Framing:
    - Screen width is 9.0 units (X from -4.5 to +4.5). Keep visual width <= 6.8 units (X within [-3.4, 3.4]).
-   - Screen height is 16.0 units (Y from -8.0 to +8.0). Keep visual height <= 7.0 units.
+   - Screen height is 16.0 units (Y from -8.0 to +8.0). Keep visual height <= 6.0 units.
    - Center your visual around `ORIGIN + UP * 0.8` so bottom subtitles and top headers don't collide.
 
-6. ZERO TEXT OVERFLOW & ZERO OVERLAP INVARIANT (MANDATORY):
+5. ZERO TEXT OVERFLOW & ZERO OVERLAP INVARIANT (MANDATORY):
    - If placing text inside any box, badge, pill, card, or ellipse: The container MUST be strictly wider and taller than the text with at least 0.3 units margin.
    - Always pass `max_width=container.width - 0.4` to `CleanText` or call `text.scale_to_fit_width(container.width - 0.4)`.
-   - If a label is wide (e.g. > 15 characters), either use a smaller `font_size` (18-20) or wrap/scale it so it NEVER overflows its parent or container boundaries.
+   - If a label is wide (e.g. > 15 characters), either use a smaller `font_size` (16-18) or wrap/scale it so it NEVER overflows its parent or container boundaries.
    - ZERO TEXT COLLISION / OVERLAP INVARIANT: NEVER place a numeric value (e.g., "$0.00", "98%", "3.5x") at the exact same spatial coordinates as its text label (e.g., "LIQUID CASH BALANCE"). ALWAYS use vertical stacking: `VGroup(label, number).arrange(DOWN, buff=0.2)` or explicit offsets `.next_to(label, DOWN, buff=0.25)`!
    - COMPARISON BARS / METRICS ZERO OVERLAP: When comparing two or more entities (e.g., Baseline vs New Model, or FP16 vs INT4):
      NEVER place labels for different items at the same vertical position. Stack the metric bars vertically:
      Bar 1 with Label 1 at upper slot (e.g. Y = +0.6), and Bar 2 with Label 2 at lower slot (e.g. Y = -0.7) separated by at least 1.2 units vertically.
      Each label must be placed strictly `UP, buff=0.15` above its own bar, or to its `LEFT, buff=0.3`.
 
-7. ZERO GRAPH & CONNECTED NODES MISALIGNMENT INVARIANT (MANDATORY):
+6. ZERO GRAPH & CONNECTED NODES MISALIGNMENT INVARIANT (MANDATORY):
    - When animating trees, networks, graphs, circular loops, or coordinate axes:
      - NEVER animate `self.nodes.animate.scale(...)` across a VGroup of multiple dots! Scaling a group of dots shifts their positions outward, disconnecting them from their branch lines!
      - To pulse dots in place without moving them, pulse each dot individually: `AnimationGroup(*[d.animate.scale(1.2) for d in self.nodes])`.
@@ -103,8 +109,8 @@ from manim_engine.primitives.typography import CleanText
 class BespokeBeatVisual(VGroup):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # 1. Build geometric mobjects and clean labels
-        # 2. Add them to self (e.g. self.add(...))
+        # 1. Build rich geometric entities, multi-layer schematics, and clean labels
+        # 2. Add all components to self (e.g. self.add(...))
         # 3. Position centrally around ORIGIN + UP * 0.8
 
     def get_entrance_animation(self, run_time: float = 1.0) -> Animation:
@@ -203,7 +209,7 @@ class BespokeVisualSynthesizer:
 
         return f"""
 TOPIC: {topic}
-CATEGORY: {spec.get('category', 'mechanism_deepdive')}
+CATEGORY: {spec.get('category', 'academic_breakdown')}
 DOMAIN TAXONOMY: {spec.get('domain_taxonomy', 'deep_learning')}
 
 CURRENT BEAT TO ANIMATE:
@@ -216,9 +222,15 @@ CURRENT BEAT TO ANIMATE:
 - Math Formula / Concept: "{formula}"
 - Kernel Code Snippet Available: {bool(code_data)}
 
+MANDATORY VISUAL QUALITY REQUIREMENTS:
+1. HIGH DENSITY & COMPOSITION: Build a multi-element architectural schematic that fills the center canvas (width ~6.0, height ~5.0).
+2. NO BARE STICKS OR LONE BOXES: Every entity must have mechanical/mathematical substance (joint bearings, coordinate axes, status badges, dimension callouts, data rays, gradient fills).
+3. ELEGANT HEADER BADGE: Include a top status pill or header bracket (e.g., CleanText("MECHANISM // ACTIVE PIPELINE", font_size=15, color="#38BDF8")).
+4. TECHNICAL CONTEXT: Include informative telemetry tags (dimensions, latency, FLOPs, or state labels) positioned cleanly without overlapping.
+5. ZERO OVERLAP: Use vertical stacking (.arrange(DOWN, buff=0.25)) for numbers and labels.
+
 TASK:
 Write the complete, self-contained Python Manim class `class BespokeBeatVisual(VGroup):` that builds and animates this exact concept.
-Do not use generic SaaS cards. Construct the real geometric mechanism described in the narration.
 """
 
     def _repair_code(

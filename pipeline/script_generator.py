@@ -246,15 +246,16 @@ def generate_script(
     - Track 2 (Official Tech News): Breaking newsroom reporter engine
     - Track 3 (Developer Perks & Credits): Actionable deal guide engine
     """
-    clean_cat = (category or "").lower()
+    from pipeline.config import resolve_track, TRACK_ACADEMIC, TRACK_TECH_NEWS, TRACK_DEVELOPER_PERKS
+    track = resolve_track(category)
     topic_str = str(topic).lower()
     is_perk = (
-        clean_cat in ("developer_perks", "startup_credits", "perks")
+        track == TRACK_DEVELOPER_PERKS
         or topic_str.startswith("perk_")
         or (arxiv_meta and isinstance(arxiv_meta, dict) and bool(arxiv_meta.get("perk_metadata")))
     )
     is_news = (
-        clean_cat in ("tech_news", "official_blogs", "blogs", "news")
+        track == TRACK_TECH_NEWS
         or topic_str.startswith(("blog_", "news_"))
         or (arxiv_meta and isinstance(arxiv_meta, dict) and bool(arxiv_meta.get("tech_news_metadata") or arxiv_meta.get("key_facts")))
     )
@@ -271,7 +272,7 @@ def generate_script(
         spec = tech_news_script_engine.generate_news_script(topic=topic, blog_meta=arxiv_meta, context=context)
         return _persist_and_finalize_spec(spec, topic, "tech_news")
 
-    cat_hint = f"Target Category: {category}" if category else "Choose the best matching category from: architecture_breakdown, model_showdown, mechanism_deepdive, benchmark_news."
+    cat_hint = f"Target Category: {category or 'academic_breakdown'}" if category else "Choose the best matching category from: academic_breakdown, architecture_breakdown, model_showdown, mechanism_deepdive."
 
     paper_context = ""
     if arxiv_meta:

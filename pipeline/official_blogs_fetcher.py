@@ -1133,18 +1133,20 @@ class OfficialBlogsFetcher:
         """
         use_offline = self.offline_only if offline_only is None else offline_only
 
+        if use_offline:
+            return list(VERIFIED_OFFICIAL_BLOGS_REGISTRY.values())
+
         all_records: List[OfficialBlogRecord] = []
 
-        if not use_offline:
-            for p_key in OFFICIAL_LAB_FEEDS:
-                try:
-                    p_records = self.fetch_provider_feed(p_key, max_items=max_per_provider)
-                    all_records.extend(p_records)
-                except Exception as e:
-                    print(f"⚠️ Notice while fetching official feed for {p_key}: {e}")
+        for p_key in OFFICIAL_LAB_FEEDS:
+            try:
+                p_records = self.fetch_provider_feed(p_key, max_items=max_per_provider)
+                all_records.extend(p_records)
+            except Exception as e:
+                print(f"⚠️ Notice while fetching official feed for {p_key}: {e}")
 
-        # Always supplement with verified landmark registry for comprehensive coverage
-        for reg_id, reg_rec in self.cache.items():
+        # Supplement with verified landmark registry for comprehensive coverage
+        for reg_id, reg_rec in VERIFIED_OFFICIAL_BLOGS_REGISTRY.items():
             if not any(r.id == reg_id or r.canonical_url == reg_rec.canonical_url for r in all_records):
                 all_records.append(reg_rec)
 

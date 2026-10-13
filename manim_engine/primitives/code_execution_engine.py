@@ -24,6 +24,7 @@ from manim_engine.primitives.visual_compositions import BaseBlueprintComposition
 COLOR_CYAN = "#38BDF8"
 COLOR_MINT = "#10B981"
 COLOR_AMBER = "#F59E0B"
+COLOR_GOLD = "#F59E0B"
 COLOR_CORAL = "#EF4444"
 COLOR_PURPLE = "#C084FC"
 COLOR_BLUE = "#60A5FA"
