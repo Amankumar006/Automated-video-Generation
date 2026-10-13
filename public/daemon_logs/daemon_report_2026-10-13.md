@@ -1,15 +1,15 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-13 | **Timestamp:** 2026-10-13 12:58:15 UTC
+**Date:** 2026-10-13 | **Timestamp:** 2026-10-13 16:43:41 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: AI Startup Credits 2026: Up to $100K in Model & Compute Grants Without VC
-- **Verified Perk:** AI Startup Credits 2026: Up to $100K in Model & Compute Grants Without VC
-- **Content Pillar:** `perks`
-- **Domain Taxonomy:** `developer_perks` (1.25x velocity)
-- **Category:** `developer_perks`
-- **Editorial Hook:** *What if you could build the next unicorn AI startup without spending a single dollar on model inference?*
-- **Everyday Analogy:** *A 'Resource Tetris' where you are fitting differently shaped blocks of credits (compute, model, infrastructure) into the foundation of a building to make it reach the sky.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_ai-startup-credits-2026-guide_developer_perks.mp4`
+### Reel 1: Coding-Agent Benchmarks Should Match Their Users' Task Flows
+- **arXiv ID:** [2610.09633](https://arxiv.org/abs/2610.09633)
+- **Content Pillar:** `arxiv`
+- **Domain Taxonomy:** `robotics_tamp` (1.29x velocity)
+- **Category:** `benchmark_news`
+- **Editorial Hook:** *Are your AI coding agents actually helpful, or are they just hallucinating in a vacuum?*
+- **Everyday Analogy:** *The difference between an apprentice reading a textbook and a seasoned pro navigating a messy, live construction site.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_coding_agent_benchmarks_taskflow_benchmark_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
