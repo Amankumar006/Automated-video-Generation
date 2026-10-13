@@ -282,7 +282,7 @@ def auto_produce(
         scene_file = "manim_engine/scenes/developer_perks_scene.py"
         scene_class = "DeveloperPerksScene"
         engine_label = "Developer Perks UI Card Engine (Track 3)"
-    elif resolved_category in ("tech_news", "official_blogs", "blogs", "news", "benchmark_news") and not legacy_engine:
+    elif resolved_category in ("tech_news", "official_blogs", "blogs", "news") and not legacy_engine:
         scene_file = "manim_engine/scenes/tech_news_scene.py"
         scene_class = "TechNewsScene"
         engine_label = "Tech News Launch Studio Engine (Track 2)"

@@ -79,6 +79,10 @@ CRITICAL DESIGN PRINCIPLES:
    - Always pass `max_width=container.width - 0.4` to `CleanText` or call `text.scale_to_fit_width(container.width - 0.4)`.
    - If a label is wide (e.g. > 15 characters), either use a smaller `font_size` (18-20) or wrap/scale it so it NEVER overflows its parent or container boundaries.
    - ZERO TEXT COLLISION / OVERLAP INVARIANT: NEVER place a numeric value (e.g., "$0.00", "98%", "3.5x") at the exact same spatial coordinates as its text label (e.g., "LIQUID CASH BALANCE"). ALWAYS use vertical stacking: `VGroup(label, number).arrange(DOWN, buff=0.2)` or explicit offsets `.next_to(label, DOWN, buff=0.25)`!
+   - COMPARISON BARS / METRICS ZERO OVERLAP: When comparing two or more entities (e.g., Baseline vs New Model, or FP16 vs INT4):
+     NEVER place labels for different items at the same vertical position. Stack the metric bars vertically:
+     Bar 1 with Label 1 at upper slot (e.g. Y = +0.6), and Bar 2 with Label 2 at lower slot (e.g. Y = -0.7) separated by at least 1.2 units vertically.
+     Each label must be placed strictly `UP, buff=0.15` above its own bar, or to its `LEFT, buff=0.3`.
 
 7. ZERO GRAPH & CONNECTED NODES MISALIGNMENT INVARIANT (MANDATORY):
    - When animating trees, networks, graphs, circular loops, or coordinate axes:
