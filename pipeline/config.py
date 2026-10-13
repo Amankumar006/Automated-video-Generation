@@ -239,4 +239,73 @@ def is_content_recent(
     return age <= max_age_days
 
 
+# -----------------------------------------------------------------------------
+# Canonical 3-Track Production Architecture
+# -----------------------------------------------------------------------------
+TRACK_ACADEMIC = "academic_breakdown"
+TRACK_TECH_NEWS = "tech_news"
+TRACK_DEVELOPER_PERKS = "developer_perks"
 
+CANONICAL_TRACKS = [TRACK_ACADEMIC, TRACK_TECH_NEWS, TRACK_DEVELOPER_PERKS]
+
+TRACK_ALIASES = {
+    # Track 1 aliases
+    "academic": TRACK_ACADEMIC,
+    "academic_breakdown": TRACK_ACADEMIC,
+    "architecture_breakdown": TRACK_ACADEMIC,
+    "mechanism_deepdive": TRACK_ACADEMIC,
+    "benchmark_news": TRACK_ACADEMIC,
+    "model_showdown": TRACK_ACADEMIC,
+    "arxiv": TRACK_ACADEMIC,
+    "paper": TRACK_ACADEMIC,
+    "papers": TRACK_ACADEMIC,
+
+    # Track 2 aliases
+    "news": TRACK_TECH_NEWS,
+    "tech_news": TRACK_TECH_NEWS,
+    "blogs": TRACK_TECH_NEWS,
+    "official_blogs": TRACK_TECH_NEWS,
+
+    # Track 3 aliases
+    "perks": TRACK_DEVELOPER_PERKS,
+    "developer_perks": TRACK_DEVELOPER_PERKS,
+    "startup_credits": TRACK_DEVELOPER_PERKS,
+    "credits": TRACK_DEVELOPER_PERKS,
+}
+
+TRACK_METADATA = {
+    TRACK_ACADEMIC: {
+        "display_name": "Academic Breakdown",
+        "badge": "PAPER BREAKDOWN",
+        "scene_file": "manim_engine/scenes/script_driven_scene.py",
+        "scene_class": "ScriptDrivenScene",
+        "description_prefix": "Frontier AI Research & Architectural Deep Dive",
+        "default_tags": ["AIResearch", "PaperBreakdown", "DeepLearning", "ComputerScience", "MachineLearning", "arXiv", "Shorts"],
+        "pinned_comment": "💡 What AI paper or architectural breakthrough should we break down next? Let us know below! 👇"
+    },
+    TRACK_TECH_NEWS: {
+        "display_name": "Official Tech News",
+        "badge": "TECH NEWS DISPATCH",
+        "scene_file": "manim_engine/scenes/tech_news_scene.py",
+        "scene_class": "TechNewsScene",
+        "description_prefix": "Official AI Tech News & Breakthrough Launch Dispatch",
+        "default_tags": ["AITechNews", "TechNews", "ArtificialIntelligence", "FoundationModels", "OpenAI", "Anthropic", "GoogleDeepMind", "Shorts"],
+        "pinned_comment": "🔥 Are you testing this new release in your workflow? Drop your benchmarks and thoughts below! 👇"
+    },
+    TRACK_DEVELOPER_PERKS: {
+        "display_name": "Developer Perks & Credits",
+        "badge": "DEVELOPER PERKS",
+        "scene_file": "manim_engine/scenes/developer_perks_scene.py",
+        "scene_class": "DeveloperPerksScene",
+        "description_prefix": "Actionable Developer Grants, Free API Credits & Startup Tiers",
+        "default_tags": ["DeveloperPerks", "StartupCredits", "FreeAIAPI", "StartupGrant", "SoftwareEngineering", "CodingTools", "Shorts"],
+        "pinned_comment": "🎁 Did you claim this grant? Which AI tool or cloud perk should we audit next? Let us know below! 👇"
+    }
+}
+
+def resolve_track(category_or_pillar: Optional[str]) -> str:
+    """Normalizes any category, alias, or source string into one of the 3 canonical tracks."""
+    if not category_or_pillar:
+        return TRACK_ACADEMIC
+    clean = str(category_or_pillar).strip().lower()
+    return TRACK_ALIASES.get(clean, TRACK_ACADEMIC)

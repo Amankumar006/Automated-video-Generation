@@ -1,0 +1,1653 @@
+{
+  "id": "reflex_reactive_humanoid",
+  "title": "Reflex: Visually Grounded Reactive Humanoid Control",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "PHYSICS-SPEED REACTION",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+      "visual_focus": "A Unitree G1 robot standing still while a box flies past it.",
+      "highlight_words": {
+        "paralyzed": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Visual Latency",
+        "action_verb": "disrupts",
+        "direct_object": "Humanoid Reflexes",
+        "anchor_word": "paralyzed",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE REACTION GAP",
+        "sub": "Why robots fail to catch",
+        "accent_color": "#EF4444",
+        "params": {
+          "field_title": "Velocity Uncertainty Field",
+          "source_label": "Robot",
+          "target_label": "Target Object",
+          "stream_formula": "v_{target} = \\int a \\, dt"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Statistic",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THE REACTION GAP",
+        "sub": "Why robots fail to catch",
+        "accent_color": "#EF4444",
+        "field_title": "Velocity Uncertainty Field",
+        "source_label": "Robot",
+        "target_label": "Target Object",
+        "stream_formula": "v_{target} = \\int a \\, dt"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.59,
+      "duration": 5.59,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.33,
+          "duration": 0.32,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.33,
+          "end": 0.44,
+          "duration": 0.11,
+          "frame_ahead_trigger": 0.29
+        },
+        {
+          "word": "deploy",
+          "clean_word": "deploy",
+          "phonemes": "d\u1d7bpl\u02c8\u0254\u026a",
+          "start": 0.44,
+          "end": 0.925,
+          "duration": 0.485,
+          "frame_ahead_trigger": 0.4
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.925,
+          "end": 1.065,
+          "duration": 0.14,
+          "frame_ahead_trigger": 0.885
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 1.065,
+          "end": 1.28,
+          "duration": 0.215,
+          "frame_ahead_trigger": 1.025
+        },
+        {
+          "word": "physical",
+          "clean_word": "physical",
+          "phonemes": "f\u02c8\u026az\u026ak\u0259l",
+          "start": 1.28,
+          "end": 1.76,
+          "duration": 0.48,
+          "frame_ahead_trigger": 1.24
+        },
+        {
+          "word": "policy,",
+          "clean_word": "policy",
+          "phonemes": "p\u02c8\u0251\u02d0l\u026asi",
+          "start": 1.76,
+          "end": 2.21,
+          "duration": 0.45,
+          "frame_ahead_trigger": 1.72
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 2.21,
+          "end": 2.39,
+          "duration": 0.18,
+          "frame_ahead_trigger": 2.17
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 2.39,
+          "end": 2.54,
+          "duration": 0.15,
+          "frame_ahead_trigger": 2.35
+        },
+        {
+          "word": "Reflex",
+          "clean_word": "reflex",
+          "phonemes": "\u0279\u02c8i\u02d0fl\u025bks",
+          "start": 2.54,
+          "end": 3.005,
+          "duration": 0.465,
+          "frame_ahead_trigger": 2.5
+        },
+        {
+          "word": "unlocks",
+          "clean_word": "unlocks",
+          "phonemes": "\u028cnl\u02c8\u0251\u02d0ks",
+          "start": 3.005,
+          "end": 3.37,
+          "duration": 0.365,
+          "frame_ahead_trigger": 2.965
+        },
+        {
+          "word": "85.7%",
+          "clean_word": "857",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad f\u02c8\u026afti s\u02c8\u025bv\u0259n",
+          "start": 3.37,
+          "end": 4.765,
+          "duration": 1.395,
+          "frame_ahead_trigger": 3.33
+        },
+        {
+          "word": "better",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 4.765,
+          "end": 5.015,
+          "duration": 0.25,
+          "frame_ahead_trigger": 4.725
+        },
+        {
+          "word": "precision.",
+          "clean_word": "precision",
+          "phonemes": "p\u0279\u026as\u02c8\u026a\u0292\u0259n",
+          "start": 5.015,
+          "end": 5.43,
+          "duration": 0.415,
+          "frame_ahead_trigger": 4.975
+        }
+      ],
+      "audio_duration": 5.59,
+      "slot_duration": 5.74
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is latency. Waiting to render a full 3D scene before moving is a death sentence.",
+      "visual_focus": "A split screen showing a slow rendering pipeline versus a fast motor command.",
+      "highlight_words": {
+        "latency": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Latency",
+        "action_verb": "chokes",
+        "direct_object": "Motor Control",
+        "anchor_word": "latency",
+        "semantic_role": "bottleneck"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE BOTTLENECK",
+        "sub": "Perception vs. Physics",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "RGB-D Vision Stream",
+          "stream_b_label": "Joint Motor Control",
+          "barrier_label": "Inference Lag",
+          "barrier_sub": "100ms processing delay"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE BOTTLENECK",
+        "sub": "Perception vs. Physics",
+        "accent_color": "#EF4444",
+        "stream_a_label": "RGB-D Vision Stream",
+        "stream_b_label": "Joint Motor Control",
+        "barrier_label": "Inference Lag",
+        "barrier_sub": "100ms processing delay"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.74,
+      "end": 10.54,
+      "duration": 4.8,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.749,
+          "end": 5.859,
+          "duration": 0.11,
+          "frame_ahead_trigger": 5.859
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.859,
+          "end": 6.179,
+          "duration": 0.32,
+          "frame_ahead_trigger": 5.969
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.179,
+          "end": 6.299,
+          "duration": 0.12,
+          "frame_ahead_trigger": 6.289
+        },
+        {
+          "word": "latency.",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 6.299,
+          "end": 6.764,
+          "duration": 0.465,
+          "frame_ahead_trigger": 6.409
+        },
+        {
+          "word": "Waiting",
+          "clean_word": "waiting",
+          "phonemes": "w\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 6.764,
+          "end": 7.224,
+          "duration": 0.46,
+          "frame_ahead_trigger": 6.874
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 7.224,
+          "end": 7.295,
+          "duration": 0.071,
+          "frame_ahead_trigger": 7.334
+        },
+        {
+          "word": "render",
+          "clean_word": "render",
+          "phonemes": "\u0279\u02c8\u025bnd\u025a",
+          "start": 7.295,
+          "end": 7.654,
+          "duration": 0.359,
+          "frame_ahead_trigger": 7.405
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 7.654,
+          "end": 7.799,
+          "duration": 0.145,
+          "frame_ahead_trigger": 7.764
+        },
+        {
+          "word": "full",
+          "clean_word": "full",
+          "phonemes": "f\u02c8\u028al",
+          "start": 7.799,
+          "end": 8.004,
+          "duration": 0.205,
+          "frame_ahead_trigger": 7.909
+        },
+        {
+          "word": "3D",
+          "clean_word": "3d",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0 d\u02c8i\u02d0",
+          "start": 8.004,
+          "end": 8.504,
+          "duration": 0.5,
+          "frame_ahead_trigger": 8.114
+        },
+        {
+          "word": "scene",
+          "clean_word": "scene",
+          "phonemes": "s\u02c8i\u02d0n",
+          "start": 8.504,
+          "end": 8.744,
+          "duration": 0.24,
+          "frame_ahead_trigger": 8.614
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 8.744,
+          "end": 9.169,
+          "duration": 0.425,
+          "frame_ahead_trigger": 8.854
+        },
+        {
+          "word": "moving",
+          "clean_word": "moving",
+          "phonemes": "m\u02c8u\u02d0v\u026a\u014b",
+          "start": 9.169,
+          "end": 9.559,
+          "duration": 0.39,
+          "frame_ahead_trigger": 9.279
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 9.559,
+          "end": 9.64,
+          "duration": 0.081,
+          "frame_ahead_trigger": 9.669
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.64,
+          "end": 9.754,
+          "duration": 0.114,
+          "frame_ahead_trigger": 9.75
+        },
+        {
+          "word": "death",
+          "clean_word": "death",
+          "phonemes": "d\u02c8\u025b\u03b8",
+          "start": 9.754,
+          "end": 10.024,
+          "duration": 0.27,
+          "frame_ahead_trigger": 9.864
+        },
+        {
+          "word": "sentence.",
+          "clean_word": "sentence",
+          "phonemes": "s\u02c8\u025bnt\u0259ns",
+          "start": 10.024,
+          "end": 10.439,
+          "duration": 0.415,
+          "frame_ahead_trigger": 10.134
+        }
+      ],
+      "audio_duration": 4.8,
+      "slot_duration": 4.95
+    },
+    {
+      "beat_id": 3,
+      "text": "Reflex shatters this by splitting the brain, separating visual perception from the whole-body motor controller.",
+      "visual_focus": "An architectural diagram showing the separation of the policy and the encoder.",
+      "highlight_words": {
+        "splitting": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Reflex",
+        "action_verb": "decouples",
+        "direct_object": "Perception",
+        "anchor_word": "splitting",
+        "semantic_role": "eureka"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "REFLEX ARCHITECTURE",
+        "sub": "An architectural diagram showing the separation of the policy and",
+        "params": {
+          "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+          "arxiv_id": "2610.12772",
+          "title": "REFLEX ARCHITECTURE",
+          "sub": "An architectural diagram showing the separation of the policy and",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Fig Method",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+        "arxiv_id": "2610.12772",
+        "title": "REFLEX ARCHITECTURE",
+        "sub": "An architectural diagram showing the separation of the policy and",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Fig Method",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 10.69,
+      "end": 16.26,
+      "duration": 5.57,
+      "word_timings": [
+        {
+          "word": "Reflex",
+          "clean_word": "reflex",
+          "phonemes": "\u0279\u02c8i\u02d0fl\u025bks",
+          "start": 10.704,
+          "end": 11.174,
+          "duration": 0.47,
+          "frame_ahead_trigger": 10.964
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 11.174,
+          "end": 11.609,
+          "duration": 0.435,
+          "frame_ahead_trigger": 11.434
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 11.609,
+          "end": 11.819,
+          "duration": 0.21,
+          "frame_ahead_trigger": 11.869
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 11.819,
+          "end": 11.946,
+          "duration": 0.127,
+          "frame_ahead_trigger": 12.079
+        },
+        {
+          "word": "splitting",
+          "clean_word": "splitting",
+          "phonemes": "spl\u02c8\u026a\u027e\u026a\u014b",
+          "start": 11.946,
+          "end": 12.459,
+          "duration": 0.513,
+          "frame_ahead_trigger": 12.206
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.459,
+          "end": 12.486,
+          "duration": 0.027,
+          "frame_ahead_trigger": 12.719
+        },
+        {
+          "word": "brain,",
+          "clean_word": "brain",
+          "phonemes": "b\u0279\u02c8e\u026an",
+          "start": 12.486,
+          "end": 12.81,
+          "duration": 0.324,
+          "frame_ahead_trigger": 12.746
+        },
+        {
+          "word": "separating",
+          "clean_word": "separating",
+          "phonemes": "s\u02c8\u025bp\u025a\u0279\u02cce\u026a\u027e\u026a\u014b",
+          "start": 12.81,
+          "end": 13.479,
+          "duration": 0.669,
+          "frame_ahead_trigger": 13.07
+        },
+        {
+          "word": "visual",
+          "clean_word": "visual",
+          "phonemes": "v\u02c8\u026a\u0292u\u02d0\u0259l",
+          "start": 13.479,
+          "end": 13.929,
+          "duration": 0.45,
+          "frame_ahead_trigger": 13.739
+        },
+        {
+          "word": "perception",
+          "clean_word": "perception",
+          "phonemes": "p\u025as\u02c8\u025bp\u0283\u0259n",
+          "start": 13.929,
+          "end": 14.404,
+          "duration": 0.475,
+          "frame_ahead_trigger": 14.189
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 14.404,
+          "end": 14.659,
+          "duration": 0.255,
+          "frame_ahead_trigger": 14.664
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 14.659,
+          "end": 14.7,
+          "duration": 0.041,
+          "frame_ahead_trigger": 14.919
+        },
+        {
+          "word": "whole-body",
+          "clean_word": "wholebody",
+          "phonemes": "h\u02c8o\u028alb\u0251\u02d0di",
+          "start": 14.7,
+          "end": 15.264,
+          "duration": 0.564,
+          "frame_ahead_trigger": 14.96
+        },
+        {
+          "word": "motor",
+          "clean_word": "motor",
+          "phonemes": "m\u02c8o\u028a\u027e\u025a",
+          "start": 15.264,
+          "end": 15.544,
+          "duration": 0.28,
+          "frame_ahead_trigger": 15.524
+        },
+        {
+          "word": "controller.",
+          "clean_word": "controller",
+          "phonemes": "k\u0259nt\u0279\u02c8o\u028al\u025a",
+          "start": 15.544,
+          "end": 16.104,
+          "duration": 0.56,
+          "frame_ahead_trigger": 15.804
+        }
+      ],
+      "audio_duration": 5.57,
+      "slot_duration": 5.72
+    },
+    {
+      "beat_id": 4,
+      "text": "We compress RGB-D stacks into a compact dynamics state, bypassing heavy frame-by-frame neural computation for instant movement.",
+      "visual_focus": "A neural network compressing visual data into a small vector.",
+      "highlight_words": {
+        "compact": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Encoder",
+        "action_verb": "compresses",
+        "direct_object": "Visual Input",
+        "anchor_word": "compact",
+        "semantic_role": "mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: REFLEX: VISUALLY G",
+        "sub": "A neural network compressing visual data into a small vector.",
+        "params": {
+          "title": "KERNEL CODE: REFLEX: VISUALLY G",
+          "sub": "A neural network compressing visual data into a small vector.",
+          "filename": "reflex_stage.py",
+          "language": "python",
+          "lines": [
+            "def infer_dynamics(rgb_d_stack):",
+            "# Encode delayed observations",
+            "latent = encoder.forward(rgb_d_stack)",
+            "return policy.act(latent)"
+          ],
+          "highlight_lines": [
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 DYNAMICS LATENT MAPPING",
+          "delta_badge": "Learned dynamics from temporal visual history"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: REFLEX: VISUALLY G",
+        "sub": "A neural network compressing visual data into a small vector.",
+        "filename": "reflex_stage.py",
+        "language": "python",
+        "lines": [
+          "def infer_dynamics(rgb_d_stack):",
+          "# Encode delayed observations",
+          "latent = encoder.forward(rgb_d_stack)",
+          "return policy.act(latent)"
+        ],
+        "highlight_lines": [
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 DYNAMICS LATENT MAPPING",
+        "delta_badge": "Learned dynamics from temporal visual history"
+      },
+      "start": 16.41,
+      "end": 23.49,
+      "duration": 7.08,
+      "word_timings": [
+        {
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 16.417,
+          "end": 16.517,
+          "duration": 0.1,
+          "frame_ahead_trigger": 16.827
+        },
+        {
+          "word": "compress",
+          "clean_word": "compress",
+          "phonemes": "k\u0259mp\u0279\u02c8\u025bs",
+          "start": 16.517,
+          "end": 16.902,
+          "duration": 0.385,
+          "frame_ahead_trigger": 16.927
+        },
+        {
+          "word": "RGB-D",
+          "clean_word": "rgbd",
+          "phonemes": "\u02cc\u0251\u02d0\u0279d\u0292\u02cci\u02d0b\u02cci\u02d0d\u02c8i\u02d0",
+          "start": 16.902,
+          "end": 17.867,
+          "duration": 0.965,
+          "frame_ahead_trigger": 17.312
+        },
+        {
+          "word": "stacks",
+          "clean_word": "stacks",
+          "phonemes": "st\u02c8\u00e6ks",
+          "start": 17.867,
+          "end": 18.067,
+          "duration": 0.2,
+          "frame_ahead_trigger": 18.277
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 18.067,
+          "end": 18.397,
+          "duration": 0.33,
+          "frame_ahead_trigger": 18.477
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.397,
+          "end": 18.637,
+          "duration": 0.24,
+          "frame_ahead_trigger": 18.807
+        },
+        {
+          "word": "compact",
+          "clean_word": "compact",
+          "phonemes": "k\u0259mp\u02c8\u00e6kt",
+          "start": 18.637,
+          "end": 18.917,
+          "duration": 0.28,
+          "frame_ahead_trigger": 19.047
+        },
+        {
+          "word": "dynamics",
+          "clean_word": "dynamics",
+          "phonemes": "da\u026an\u02c8\u00e6m\u026aks",
+          "start": 18.917,
+          "end": 19.417,
+          "duration": 0.5,
+          "frame_ahead_trigger": 19.327
+        },
+        {
+          "word": "state,",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 19.417,
+          "end": 19.717,
+          "duration": 0.3,
+          "frame_ahead_trigger": 19.827
+        },
+        {
+          "word": "bypassing",
+          "clean_word": "bypassing",
+          "phonemes": "b\u02c8a\u026ap\u00e6s\u026a\u014b",
+          "start": 19.717,
+          "end": 20.227,
+          "duration": 0.51,
+          "frame_ahead_trigger": 20.127
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 20.227,
+          "end": 20.427,
+          "duration": 0.2,
+          "frame_ahead_trigger": 20.637
+        },
+        {
+          "word": "frame-by-frame",
+          "clean_word": "framebyframe",
+          "phonemes": "f\u0279\u02c8e\u026amb\u026af\u0279\u02cce\u026am",
+          "start": 20.427,
+          "end": 21.072,
+          "duration": 0.645,
+          "frame_ahead_trigger": 20.837
+        },
+        {
+          "word": "neural",
+          "clean_word": "neural",
+          "phonemes": "n\u02c8\u028a\u0279\u0279\u0259l",
+          "start": 21.072,
+          "end": 21.502,
+          "duration": 0.43,
+          "frame_ahead_trigger": 21.482
+        },
+        {
+          "word": "computation",
+          "clean_word": "computation",
+          "phonemes": "k\u02cc\u0251\u02d0mpju\u02d0t\u02c8e\u026a\u0283\u0259n",
+          "start": 21.502,
+          "end": 22.377,
+          "duration": 0.875,
+          "frame_ahead_trigger": 21.912
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 22.377,
+          "end": 22.467,
+          "duration": 0.09,
+          "frame_ahead_trigger": 22.787
+        },
+        {
+          "word": "instant",
+          "clean_word": "instant",
+          "phonemes": "\u02c8\u026anst\u0259nt",
+          "start": 22.467,
+          "end": 22.857,
+          "duration": 0.39,
+          "frame_ahead_trigger": 22.877
+        },
+        {
+          "word": "movement.",
+          "clean_word": "movement",
+          "phonemes": "m\u02c8u\u02d0vm\u0259nt",
+          "start": 22.857,
+          "end": 23.317,
+          "duration": 0.46,
+          "frame_ahead_trigger": 23.267
+        }
+      ],
+      "audio_duration": 7.08,
+      "slot_duration": 7.23
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 85.7% catch success in simulation, nearly matching privileged data, and 76% of human performance in reality.",
+      "visual_focus": "A bar chart showing the success rate climbing to 85.7%.",
+      "highlight_words": {
+        "85.7%": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Reflex",
+        "action_verb": "achieves",
+        "direct_object": "Human-level Success",
+        "anchor_word": "85.7%",
+        "semantic_role": "payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+        "sub": "A bar chart showing the success rate climbing to 85.7%.",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+          "sub": "A bar chart showing the success rate climbing to 85.7%.",
+          "metric_name": "Catch Success",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "Reflex (Egocentric)",
+              "value": 85.7,
+              "display_val": "85.7%",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Privileged Baseline",
+              "value": 87.9,
+              "display_val": "87.9%",
+              "is_hero": false,
+              "color": "#38BDF8"
+            }
+          ],
+          "delta_badge": "\u26a1 +39.8% TEMPORAL HISTORY GAIN"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+        "sub": "A bar chart showing the success rate climbing to 85.7%.",
+        "metric_name": "Catch Success",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "Reflex (Egocentric)",
+            "value": 85.7,
+            "display_val": "85.7%",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Privileged Baseline",
+            "value": 87.9,
+            "display_val": "87.9%",
+            "is_hero": false,
+            "color": "#38BDF8"
+          }
+        ],
+        "delta_badge": "\u26a1 +39.8% TEMPORAL HISTORY GAIN"
+      },
+      "start": 23.64,
+      "end": 32.0,
+      "duration": 8.36,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.65,
+          "end": 23.85,
+          "duration": 0.2,
+          "frame_ahead_trigger": 24.21
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 23.85,
+          "end": 24.23,
+          "duration": 0.38,
+          "frame_ahead_trigger": 24.41
+        },
+        {
+          "word": "85.7%",
+          "clean_word": "857",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad f\u02c8\u026afti s\u02c8\u025bv\u0259n",
+          "start": 24.23,
+          "end": 25.66,
+          "duration": 1.43,
+          "frame_ahead_trigger": 24.79
+        },
+        {
+          "word": "catch",
+          "clean_word": "catch",
+          "phonemes": "k\u02c8\u00e6t\u0283",
+          "start": 25.66,
+          "end": 25.875,
+          "duration": 0.215,
+          "frame_ahead_trigger": 26.22
+        },
+        {
+          "word": "success",
+          "clean_word": "success",
+          "phonemes": "s\u0259ks\u02c8\u025bs",
+          "start": 25.875,
+          "end": 26.37,
+          "duration": 0.495,
+          "frame_ahead_trigger": 26.435
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 26.37,
+          "end": 26.57,
+          "duration": 0.2,
+          "frame_ahead_trigger": 26.93
+        },
+        {
+          "word": "simulation,",
+          "clean_word": "simulation",
+          "phonemes": "s\u02cc\u026amj\u028al\u02c8e\u026a\u0283\u0259n",
+          "start": 26.57,
+          "end": 27.288,
+          "duration": 0.718,
+          "frame_ahead_trigger": 27.13
+        },
+        {
+          "word": "nearly",
+          "clean_word": "nearly",
+          "phonemes": "n\u02c8\u026a\u0279li",
+          "start": 27.288,
+          "end": 27.57,
+          "duration": 0.282,
+          "frame_ahead_trigger": 27.848
+        },
+        {
+          "word": "matching",
+          "clean_word": "matching",
+          "phonemes": "m\u02c8\u00e6t\u0283\u026a\u014b",
+          "start": 27.57,
+          "end": 28.08,
+          "duration": 0.51,
+          "frame_ahead_trigger": 28.13
+        },
+        {
+          "word": "privileged",
+          "clean_word": "privileged",
+          "phonemes": "p\u0279\u02c8\u026av\u1d7bl\u026ad\u0292d",
+          "start": 28.08,
+          "end": 28.72,
+          "duration": 0.64,
+          "frame_ahead_trigger": 28.64
+        },
+        {
+          "word": "data,",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 28.72,
+          "end": 29.02,
+          "duration": 0.3,
+          "frame_ahead_trigger": 29.28
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 29.02,
+          "end": 29.265,
+          "duration": 0.245,
+          "frame_ahead_trigger": 29.58
+        },
+        {
+          "word": "76%",
+          "clean_word": "76",
+          "phonemes": "s\u02c8\u025bv\u0259nti s\u02c8\u026aks",
+          "start": 29.265,
+          "end": 30.03,
+          "duration": 0.765,
+          "frame_ahead_trigger": 29.825
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 30.03,
+          "end": 30.195,
+          "duration": 0.165,
+          "frame_ahead_trigger": 30.59
+        },
+        {
+          "word": "human",
+          "clean_word": "human",
+          "phonemes": "hj\u02c8u\u02d0m\u0259n",
+          "start": 30.195,
+          "end": 30.47,
+          "duration": 0.275,
+          "frame_ahead_trigger": 30.755
+        },
+        {
+          "word": "performance",
+          "clean_word": "performance",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279m\u0259ns",
+          "start": 30.47,
+          "end": 31.205,
+          "duration": 0.735,
+          "frame_ahead_trigger": 31.03
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 31.205,
+          "end": 31.475,
+          "duration": 0.27,
+          "frame_ahead_trigger": 31.765
+        },
+        {
+          "word": "reality.",
+          "clean_word": "reality",
+          "phonemes": "\u0279\u026a\u02c8\u00e6l\u1d7b\u027ei",
+          "start": 31.475,
+          "end": 31.85,
+          "duration": 0.375,
+          "frame_ahead_trigger": 32.035
+        }
+      ],
+      "audio_duration": 8.36,
+      "slot_duration": 8.51
+    },
+    {
+      "beat_id": 6,
+      "text": "Vision can finally keep up with physics. Follow The Model Verse for daily deep-dives into AI.",
+      "visual_focus": "The robot catching a box in slow motion.",
+      "highlight_words": {
+        "physics": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Vision",
+        "action_verb": "synchronizes",
+        "direct_object": "Physics",
+        "anchor_word": "physics",
+        "semantic_role": "loop"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "THE NEW REALITY",
+        "sub": "Reflexive control",
+        "accent_color": "#F59E0B",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 32.15,
+      "end": 37.29,
+      "duration": 5.14,
+      "word_timings": [
+        {
+          "word": "Vision",
+          "clean_word": "vision",
+          "phonemes": "v\u02c8\u026a\u0292\u0259n",
+          "start": 32.168,
+          "end": 32.513,
+          "duration": 0.345,
+          "frame_ahead_trigger": 32.878
+        },
+        {
+          "word": "can",
+          "clean_word": "can",
+          "phonemes": "k\u02c8\u00e6n",
+          "start": 32.513,
+          "end": 32.728,
+          "duration": 0.215,
+          "frame_ahead_trigger": 33.223
+        },
+        {
+          "word": "finally",
+          "clean_word": "finally",
+          "phonemes": "f\u02c8a\u026an\u0259li",
+          "start": 32.728,
+          "end": 33.153,
+          "duration": 0.425,
+          "frame_ahead_trigger": 33.438
+        },
+        {
+          "word": "keep",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 33.153,
+          "end": 33.523,
+          "duration": 0.37,
+          "frame_ahead_trigger": 33.863
+        },
+        {
+          "word": "up",
+          "clean_word": "up",
+          "phonemes": "\u02c8\u028cp",
+          "start": 33.523,
+          "end": 33.718,
+          "duration": 0.195,
+          "frame_ahead_trigger": 34.233
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 33.718,
+          "end": 33.826,
+          "duration": 0.108,
+          "frame_ahead_trigger": 34.428
+        },
+        {
+          "word": "physics.",
+          "clean_word": "physics",
+          "phonemes": "f\u02c8\u026az\u026aks",
+          "start": 33.826,
+          "end": 34.226,
+          "duration": 0.4,
+          "frame_ahead_trigger": 34.536
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.226,
+          "end": 34.673,
+          "duration": 0.446,
+          "frame_ahead_trigger": 34.936
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.673,
+          "end": 34.803,
+          "duration": 0.13,
+          "frame_ahead_trigger": 35.383
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.803,
+          "end": 35.073,
+          "duration": 0.27,
+          "frame_ahead_trigger": 35.513
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 35.073,
+          "end": 35.498,
+          "duration": 0.425,
+          "frame_ahead_trigger": 35.783
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.498,
+          "end": 35.643,
+          "duration": 0.145,
+          "frame_ahead_trigger": 36.208
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 35.643,
+          "end": 35.943,
+          "duration": 0.3,
+          "frame_ahead_trigger": 36.353
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 35.943,
+          "end": 36.463,
+          "duration": 0.52,
+          "frame_ahead_trigger": 36.653
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 36.463,
+          "end": 36.683,
+          "duration": 0.22,
+          "frame_ahead_trigger": 37.173
+        },
+        {
+          "word": "AI.",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 36.683,
+          "end": 37.143,
+          "duration": 0.46,
+          "frame_ahead_trigger": 37.393
+        }
+      ],
+      "audio_duration": 5.14,
+      "slot_duration": 5.14
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{robot}} = 0, \\; t_{delay} > 500\\mathrm{ms}$",
+      "filename": "reflex_reactive_humanoid_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "t_{delay}",
+          "label": "Latency bottleneck"
+        }
+      ],
+      "svg_filename": "reflex_reactive_humanoid_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(V_{in}) \\gg \\Delta t_{reflex}$",
+      "filename": "reflex_reactive_humanoid_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\Delta t_{reflex}",
+          "label": "Reaction budget"
+        }
+      ],
+      "svg_filename": "reflex_reactive_humanoid_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\pi_{\\mathrm{total}} = \\phi_{\\mathrm{ctrl}} \\circ \\psi_{\\mathrm{dyn}} \\circ \\theta_{\\mathrm{vis}}$",
+      "filename": "reflex_reactive_humanoid_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\phi",
+          "label": "Control policy"
+        },
+        {
+          "term": "\\theta",
+          "label": "Vision encoder"
+        }
+      ],
+      "svg_filename": "reflex_reactive_humanoid_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$z = f_{\\phi}(I_{t}, I_{t-1}, \\dots)$",
+      "filename": "reflex_reactive_humanoid_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "z",
+          "label": "Dynamics latent"
+        },
+        {
+          "term": "I_{t}",
+          "label": "Visual sequence"
+        }
+      ],
+      "svg_filename": "reflex_reactive_humanoid_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Success}_{Reflex} = 85.7\\%$",
+      "filename": "reflex_reactive_humanoid_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathrm{Success}",
+          "label": "Catch success rate"
+        }
+      ],
+      "svg_filename": "reflex_reactive_humanoid_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "CORE",
+          "color": "#38BDF8",
+          "items": [
+            "policy",
+            "dynamics",
+            "vision"
+          ]
+        },
+        {
+          "name": "OUTPUT",
+          "color": "#10B981",
+          "items": [
+            "reach",
+            "catch",
+            "react"
+          ]
+        },
+        {
+          "name": "LATENCY",
+          "color": "#EF4444",
+          "items": [
+            "buffer",
+            "drift",
+            "lag"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"box_dynamics\"",
+        "target_cluster": "CORE",
+        "token": "\"box_dynamics\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'lag'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'drift'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Reflex",
+    "model_a_specs": [
+      "Egocentric RGB-D",
+      "3-Stage Learning",
+      "Reactive Control"
+    ],
+    "model_b": "Privileged Baseline",
+    "model_b_specs": [
+      "Direct State Access",
+      "No Visual Latency",
+      "Static Planner"
+    ],
+    "divide_title": "VISUAL GROUNDING DIVIDE",
+    "model_a_stat": "85.7%",
+    "model_a_stat_label": "SUCCESS RATE",
+    "model_b_stat": "87.9%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 97% RELATIVE PERFORMANCE",
+    "benchmarks": [
+      {
+        "name": "Success Rate",
+        "score_a": "85.7%",
+        "score_b": "87.9%"
+      },
+      {
+        "name": "Real World Success",
+        "score_a": "65%",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Latency Impact",
+        "score_a": "Robust",
+        "score_b": "Fragile"
+      }
+    ],
+    "scale_metric": "85.7",
+    "scale_label": "Percent Catch Rate",
+    "bottleneck_title": "THE PERCEPTION GAP",
+    "bottleneck_desc": "Delays between input and joint motor response",
+    "solution_title": "THREE-STAGE DECOMPOSITION",
+    "solution_components": "Policy + Dynamics + Vision",
+    "mechanism_title": "LATENT DYNAMICS INFERENCE",
+    "payoff_stat": "85.7%",
+    "payoff_label": "SUCCESS RATE",
+    "payoff_sub": "Outperforming privileged traditional methods",
+    "payoff_hero_stat": 85.7,
+    "payoff_hero_label": "Reflex System",
+    "payoff_base_stat": 45.9,
+    "payoff_base_label": "No Temporal History",
+    "payoff_delta_badge": "\u26a1 +39.8% TEMPORAL RECOVERY GAIN",
+    "challenger": "Reflex",
+    "incumbent": "Privileged Baseline"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+    "metric_name": "Catch Success",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "Reflex (Egocentric)",
+        "value": 85.7,
+        "display_val": "85.7%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Privileged Baseline",
+        "value": 87.9,
+        "display_val": "87.9%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      }
+    ],
+    "delta_badge": "\u26a1 +39.8% TEMPORAL HISTORY GAIN",
+    "radar_axes": [
+      "Success",
+      "Latency",
+      "Visual Fidelity",
+      "Dynamics Robustness",
+      "Scalability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "reflex_stage.py",
+    "language": "python",
+    "lines": [
+      "def infer_dynamics(rgb_d_stack):",
+      "# Encode delayed observations",
+      "latent = encoder.forward(rgb_d_stack)",
+      "return policy.act(latent)"
+    ],
+    "highlight_lines": [
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 DYNAMICS LATENT MAPPING",
+    "explanation": "Learned dynamics from temporal visual history"
+  },
+  "arxiv_id": "2610.12772",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig_method",
+      "caption": "Fig Method",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_method.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig_teaser",
+      "caption": "Fig Teaser",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_teaser.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_2_fig_teaser.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_2_fig_teaser.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig_lateral_offset_success",
+      "caption": "Fig Lateral Offset Success",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_lateral_offset_success.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_3_fig_lateral_offset_success.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_3_fig_lateral_offset_success.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "fig_real_robot",
+      "caption": "Fig Real Robot",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_real_robot.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_4_fig_real_robot.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_4_fig_real_robot.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "reflex_icon",
+      "caption": "Reflex Icon",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/reflex_icon.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_5_reflex_icon.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 95
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually slapped. You didn't waste time with 'Hey guys' or 'In this video,' and you didn't treat me like I'm five. Explaining the latency issue as a 'death sentence' for the arm movement made total sense. I liked that you actually explained the 'shortcut' as a compressed vector instead of just saying 'AI magic.' It felt like a real dev breakdown."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Visual Latency",
+    "physical_analogy": "A relay runner waiting for a full stadium scan before taking the baton.",
+    "eureka_mechanism": "Three-stage modular decomposition",
+    "paradigm_shift": "Decoupling visual perception from motor control for real-time reactivity"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Statistic",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 11,
+    "rankings": [
+      {
+        "hook": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "You are probably training robot policies with the wrong primitives before testing Reflex for 85.7%.",
+        "verdict": 57,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Before you build your next system, see how humanoids freeze when objects move, paralyzed by the heavy weight of their own visual processing.",
+        "verdict": 54,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard robots fail 85.7% of real-world trials before Reflex fixes execution?",
+        "verdict": 53,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Do not train another embodied policy until you see how Reflex cuts errors by 85.7%.",
+        "verdict": 51,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why do robotic manipulation policies hit a plateau before Reflex boosts accuracy by 85.7%?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Did you know humanoids freeze when objects move, paralyzed by the heavy weight of their own visual processing?",
+        "verdict": 42,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Humanoids freeze when objects move, paralyzed by the heavy weight of their own visual processing.",
+        "verdict": 34,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until Reflex proved: these everyday actions require anticipating a moving target and reflexively responding with the whole body within about a second.",
+        "verdict": 33,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Humans effortlessly react to the world; they adeptly return a tennis shot, catch a falling cup, step aside from a passing cart, or pass a box tossed during truck unloading.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why is Reflex a major breakthrough? Because humans effortlessly react to the world; they adeptly return a tennis shot, catch a falling cup, step aside from a passing cart, or pass a box tossed during truck unloading.",
+        "verdict": 19,
+        "band": "WEAK",
+        "formula": "The Question"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Reflex",
+        "model_a_score": "85.7%",
+        "model_b_name": "Privileged Baseline",
+        "model_b_score": "87.9%",
+        "delta_label": "\u26a1 97% RELATIVE PERFORMANCE"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}

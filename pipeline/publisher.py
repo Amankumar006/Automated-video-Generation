@@ -22,6 +22,11 @@ from pipeline.config import (
     YOUTUBE_CLIENT_SECRETS_PATH,
     YOUTUBE_TOKEN_PATH,
     YOUTUBE_DEFAULT_CATEGORY,
+    resolve_track,
+    TRACK_METADATA,
+    TRACK_ACADEMIC,
+    TRACK_TECH_NEWS,
+    TRACK_DEVELOPER_PERKS,
 )
 
 SCOPES = [
@@ -182,8 +187,52 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
         else:
             arxiv_url = "https://themodelverse.in"
 
-    # 4. Description construction
-    description = f"""{title_raw} — Animated in pure 3Blue1Brown chalkboard style.
+    # 4. Canonical track resolution and references block
+    track = resolve_track(spec.get("category") or spec.get("metadata", {}).get("category", ""))
+    track_meta = TRACK_METADATA.get(track, TRACK_METADATA[TRACK_ACADEMIC])
+
+    if track == TRACK_TECH_NEWS:
+        source_url = spec.get("canonical_url") or spec.get("metadata", {}).get("canonical_url") or arxiv_url
+        ref_block = f"""📰 OFFICIAL SOURCE & ANNOUNCEMENT:
+• Breakthrough: {title_raw}
+• Source Link: {source_url}
+• Track: {track_meta['display_name']} // {track_meta['badge']}
+• Visuals: Powered by The Model Verse Engine"""
+    elif track == TRACK_DEVELOPER_PERKS:
+        perk_url = spec.get("claim_url") or spec.get("canonical_url") or spec.get("metadata", {}).get("claim_url") or arxiv_url
+        ref_block = f"""🎁 DEVELOPER PERK DETAILS:
+• Program: {title_raw}
+• Claim Portal: {perk_url}
+• Track: {track_meta['display_name']} // {track_meta['badge']}
+• Verification: Ground-truth audited by The Model Verse"""
+    else:
+        ref_block = f"""📄 PAPER & REFERENCES:
+• Title: {title_raw}
+• Paper link: {arxiv_url}
+• Track: {track_meta['display_name']} // {track_meta['badge']}
+• Visuals: Powered by The Model Verse Engine"""
+
+    # 5. Hashtags construction (dynamically category-aware)
+    tag_set = set(track_meta.get("default_tags", ["AI", "MachineLearning", "Shorts"]))
+    title_lower = title_raw.lower()
+    spec_id_lower = str(spec.get("id", "")).lower()
+
+    if any(k in title_lower for k in ["diffusion", "tv static", "creates images"]):
+        tag_set.update(["DiffusionModels", "StableDiffusion", "GenerativeAI", "ComputerVision"])
+    if any(k in title_lower or k in spec_id_lower for k in ["robot", "humanoid", "reflex", "kinematic", "locomotion"]):
+        tag_set.update(["Robotics", "Humanoid", "EmbodiedAI", "ControlSystems"])
+    if any(k in title_lower or k in spec_id_lower for k in ["transformer", "attention", "flashattention"]):
+        tag_set.update(["Transformer", "AttentionMechanism", "GPUOptimization"])
+    if "deepseek" in title_lower or "deepseek" in spec_id_lower:
+        tag_set.update(["DeepSeek", "DeepSeekV3", "MoE"])
+    if any(k in title_lower or k in spec_id_lower for k in ["r1", "reasoning", "grpo"]):
+        tag_set.update(["ReasoningModels", "ReinforcementLearning", "GRPO"])
+
+    hashtags = [f"#{t.replace(' ', '')}" for t in sorted(tag_set)]
+    hashtags_str = " ".join(hashtags[:12])
+
+    # 6. Description construction
+    description = f"""{title_raw} — {track_meta['description_prefix']}.
 
 {b1_text}
 
@@ -192,58 +241,40 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
 ⏱️ CHAPTERS:
 {chapters_block}
 
-📄 PAPER & REFERENCES:
-• Title: {title_raw}
-• Paper link: {arxiv_url}
-• Architecture & Visuals: Powered by The Model Verse engine
+{ref_block}
 
 🌐 CONNECT WITH US:
 • Website: https://themodelverse.in
 • Subscribe for daily engineering deep dives into frontier AI models!
 
-#Shorts #AI #MachineLearning #DeepSeek #arXiv #3Blue1Brown #NeuralNetworks #GPU #ComputerScience #LLM #ArtificialIntelligence
+{hashtags_str}
 """
 
-    # 5. Targeted Tags
-    base_tags = [
-        "AI", "Machine Learning", "Artificial Intelligence", "Deep Learning",
-        "Neural Networks", "3Blue1Brown", "The Model Verse", "LLM", "Tech Shorts",
-        "arXiv", "GPU Acceleration", "Computer Science", "Shorts"
-    ]
-    if "diffusion" in title_raw.lower() or "tv static" in title_raw.lower() or "creates images" in title_raw.lower():
-        base_tags.extend(["Diffusion Models", "Stable Diffusion", "Midjourney", "Denoising", "Reverse Diffusion", "Gaussian Noise", "AI Art", "Generative AI", "Computer Vision"])
-    elif "one second" in title_raw.lower() or "ai thinks" in title_raw.lower() or "how_ai_thinks" in spec.get("id", "").lower():
-        base_tags.extend(["Transformer", "Attention Mechanism", "GPU Memory", "SRAM", "FlashAttention", "SwiGLU", "Logits", "Softmax", "Inference Speed", "AI Hardware", "LLM Inference"])
-    elif "r1" in title_raw.lower() or "r1" in spec.get("id", "").lower():
-        base_tags.extend(["DeepSeek-R1", "OpenAI o1", "Reinforcement Learning", "GRPO", "Reasoning Models", "AIME 2024", "Math AI"])
-    elif "deepseek" in title_raw.lower():
-        base_tags.extend(["DeepSeek", "DeepSeek-V3", "Mixture of Experts", "MoE", "Sparse MoE"])
-    if "flashattention" in title_raw.lower():
-        base_tags.extend(["FlashAttention", "FlashAttention-3", "NVIDIA H100", "Tensor Cores", "CUDA", "Hopper TMA"])
-    if "kv" in title_raw.lower() or "cache" in title_raw.lower():
-        base_tags.extend(["KV Cache", "Transformer Attention", "Inference Optimization", "vLLM"])
-    if "sae" in title_raw.lower() or "latent" in title_raw.lower() or "interpret" in title_raw.lower():
-        base_tags.extend(["Sparse Autoencoders", "Mechanistic Interpretability", "SAE Latents", "Anthropic", "Parts of Speech", "Superposition", "AI Research", "Neural Geometry"])
-    if "tamp" in title_raw.lower() or "motion planning" in title_raw.lower() or "robot" in title_raw.lower() or "coding" in title_raw.lower():
-        base_tags.extend(["Robotics", "TAMP", "Coding Agents", "Task and Motion Planning", "Program Synthesis", "Kinematics", "Autonomous Agents", "Robot Learning", "3Blue1Brown"])
+    # 7. Targeted Tags for YouTube Metadata
+    base_tags = list(track_meta.get("default_tags", []))
+    for t in sorted(tag_set):
+        if t not in base_tags:
+            base_tags.append(t)
 
-    # 6. Pinned Comment (Drives Algorithm Engagement)
-    if "diffusion" in title_raw.lower() or "tv static" in title_raw.lower() or "creates images" in title_raw.lower():
+    # 8. Pinned Comment (Drives Algorithm Engagement)
+    if any(k in title_lower for k in ["diffusion", "tv static", "creates images"]):
         pinned_comment = "🎨 Question: Does thinking of diffusion as 'a sculptor chipping away noise dust' make generative image models click for you? Drop your thoughts below! 👇"
-    elif "one second" in title_raw.lower() or "ai thinks" in title_raw.lower() or "how_ai_thinks" in spec.get("id", "").lower():
-        pinned_comment = "⚡ From token disintegration to 80-layer SwiGLU gating in under 1000ms: What part of the transformer inference pipeline surprised you most? Drop your thoughts below! 👇"
-    elif "r1" in title_raw.lower() or "r1" in spec.get("id", "").lower():
+    elif any(k in title_lower or k in spec_id_lower for k in ["robot", "humanoid", "reflex", "kinematic", "locomotion"]):
+        pinned_comment = "🤖 Question: Will reactive visual reflex loops replace traditional trajectory planning for humanoid robots? Drop your take below! 👇"
+    elif any(k in title_lower or k in spec_id_lower for k in ["transformer", "one second", "ai thinks"]):
+        pinned_comment = "⚡ From token disintegration to 80-layer SwiGLU gating in under 1000ms: What part of the inference pipeline surprised you most? Drop your thoughts below! 👇"
+    elif any(k in title_lower or k in spec_id_lower for k in ["r1", "reasoning"]):
         pinned_comment = "🧠 Question: Can pure reinforcement learning without human supervision replace human-annotated fine-tuning entirely? Drop your thoughts below! 👇"
-    elif "flashattention" in title_raw.lower():
+    elif "flashattention" in title_lower:
         pinned_comment = "⚡ Question: Are you bottlenecked more by GPU memory bandwidth (HBM) or compute FLOPS in your inference stack? Drop your hardware setup below! 👇"
-    elif "deepseek" in title_raw.lower():
+    elif "deepseek" in title_lower:
         pinned_comment = "🧠 Question: Would you rather serve an active 37B MoE or a monolithic 70B dense model for your production workflows? Let's discuss! 👇"
-    elif "sae" in title_raw.lower() or "latent" in title_raw.lower() or "interpret" in title_raw.lower():
+    elif any(k in title_lower or k in spec_id_lower for k in ["sae", "latent", "interpret"]):
         pinned_comment = "🧠 Question: Do you think Sparse Autoencoders will completely demystify neural network 'black boxes'? Drop your thoughts below! 👇"
-    elif "tamp" in title_raw.lower() or "motion planning" in title_raw.lower() or "robot" in title_raw.lower() or "coding" in title_raw.lower():
+    elif any(k in title_lower or k in spec_id_lower for k in ["tamp", "motion planning"]):
         pinned_comment = "🤖 Question: Will programmatic coding agents replace traditional PDDLStream search algorithms for physical robots? Drop your take below! 👇"
     else:
-        pinned_comment = "💡 What AI paper or architectural breakthrough should we break down on the chalkboard next? Let us know below! 👇"
+        pinned_comment = track_meta.get("pinned_comment", "💡 What topic or architectural breakthrough should we break down next? Let us know below! 👇")
 
     return {
         "title": title,

@@ -1,0 +1,744 @@
+{
+  "id": "reflex_humanoid_control",
+  "title": "Reflex: Visually Grounded Reactive Control",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "ROBOTIC REFLEXES",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+      "visual_focus": "A humanoid robot standing motionless as a box flies past its static hands.",
+      "highlight_words": {
+        "freeze": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Visual Latency",
+        "action_verb": "paralyzes",
+        "direct_object": "humanoid reflexes",
+        "anchor_word": "freeze",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "THE MOTION PARADOX",
+        "sub": "Why robots fail at basic catching",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Statistic",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "paper_figure",
+        "title": "THE MOTION PARADOX",
+        "sub": "Why robots fail at basic catching",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is Visual Latency. The robot sees a frame, but by the time the math finishes, the box has already moved.",
+      "visual_focus": "A split-screen showing the robot's delayed perception vs the actual object trajectory.",
+      "highlight_words": {
+        "Visual Latency": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Latency",
+        "action_verb": "decouples",
+        "direct_object": "perception from reality",
+        "anchor_word": "moved",
+        "semantic_role": "bottleneck_definition"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE LAG TRAP",
+        "sub": "Processing speed vs physical reality",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Visual RGB-D Feed",
+          "stream_b_label": "Whole-Body Motor State",
+          "barrier_label": "Temporal Gap",
+          "barrier_sub": "O(N) Prediction Latency"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE LAG TRAP",
+        "sub": "Processing speed vs physical reality",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Visual RGB-D Feed",
+        "stream_b_label": "Whole-Body Motor State",
+        "barrier_label": "Temporal Gap",
+        "barrier_sub": "O(N) Prediction Latency"
+      },
+      "kinetic_action": "blueprint_transform"
+    },
+    {
+      "beat_id": 3,
+      "text": "Reflex shatters this by splitting training: first, it masters whole-body movement, then it learns to map vision to that movement.",
+      "visual_focus": "A three-stage modular diagram showing the policy, dynamics inference, and RGB-D encoder.",
+      "highlight_words": {
+        "splitting training": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Reflex",
+        "action_verb": "decomposes",
+        "direct_object": "complex control",
+        "anchor_word": "mastery",
+        "semantic_role": "eureka_moment"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "REFLEX ARCHITECTURE",
+        "sub": "A three-stage modular diagram showing the policy, dynamics infere",
+        "params": {
+          "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+          "arxiv_id": "2610.12772",
+          "title": "REFLEX ARCHITECTURE",
+          "sub": "A three-stage modular diagram showing the policy, dynamics infere",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Fig Method",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+        "arxiv_id": "2610.12772",
+        "title": "REFLEX ARCHITECTURE",
+        "sub": "A three-stage modular diagram showing the policy, dynamics infere",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Fig Method",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan"
+    },
+    {
+      "beat_id": 4,
+      "text": "It compresses raw RGB-D frames into a compact dynamics vector, predicting the object's path without slow, raw image processing loops.",
+      "visual_focus": "Visual data collapsing into a clean, high-dimensional vector representation.",
+      "highlight_words": {
+        "compact dynamics vector": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Encoder",
+        "action_verb": "distills",
+        "direct_object": "visual noise",
+        "anchor_word": "compact",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: REFLEX: VISUALLY G",
+        "sub": "Visual data collapsing into a clean, high-dimensional vector repr",
+        "params": {
+          "title": "KERNEL CODE: REFLEX: VISUALLY G",
+          "sub": "Visual data collapsing into a clean, high-dimensional vector repr",
+          "filename": "reflex_controller.py",
+          "language": "python",
+          "lines": [
+            "def compute_reflex(obs_history):",
+            "# Encode dynamics with temporal context",
+            "latent_box = encoder(obs_history)",
+            "action = policy.forward(latent_box)",
+            "return action"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 DYNAMICS PROJECTION KERNEL",
+          "delta_badge": "Mapping visual history to real-time action"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: REFLEX: VISUALLY G",
+        "sub": "Visual data collapsing into a clean, high-dimensional vector repr",
+        "filename": "reflex_controller.py",
+        "language": "python",
+        "lines": [
+          "def compute_reflex(obs_history):",
+          "# Encode dynamics with temporal context",
+          "latent_box = encoder(obs_history)",
+          "action = policy.forward(latent_box)",
+          "return action"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 DYNAMICS PROJECTION KERNEL",
+        "delta_badge": "Mapping visual history to real-time action"
+      }
+    },
+    {
+      "beat_id": 5,
+      "text": "In simulation, it hits an 85.7% success rate, nearly matching privileged sensors and proving vision can finally drive reactive movement.",
+      "visual_focus": "A bar chart comparing Reflex vs privileged sensor performance.",
+      "highlight_words": {
+        "85.7%": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Reflex",
+        "action_verb": "achieves",
+        "direct_object": "human-level parity",
+        "anchor_word": "success",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+        "sub": "A bar chart comparing Reflex vs privileged sensor",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+          "sub": "A bar chart comparing Reflex vs privileged sensor",
+          "metric_name": "Success Rate",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "Reflex (Sim)",
+              "value": 85.7,
+              "display_val": "85.7%",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Privileged Obs",
+              "value": 87.9,
+              "display_val": "87.9%",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "No-History Baseline",
+              "value": 50.1,
+              "display_val": "50.1%",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +35.6% TEMPORAL RECOVERY GAIN"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+        "sub": "A bar chart comparing Reflex vs privileged sensor",
+        "metric_name": "Success Rate",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "Reflex (Sim)",
+            "value": 85.7,
+            "display_val": "85.7%",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Privileged Obs",
+            "value": 87.9,
+            "display_val": "87.9%",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "No-History Baseline",
+            "value": 50.1,
+            "display_val": "50.1%",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +35.6% TEMPORAL RECOVERY GAIN"
+      }
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "The Model Verse logo with a seamless loop transition.",
+      "highlight_words": {
+        "The Model Verse": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "masters",
+        "direct_object": "AI architecture",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "THE MODEL VERSE",
+        "sub": "Daily deep-dives",
+        "accent_color": "#38BDF8",
+        "params": {
+          "param_key_1": "metric_a",
+          "param_key_2": "metric_b"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$d_{\\mathrm{robot}} = f(\\mathcal{T}_{\\mathrm{obs}}) \\to \\text{Freeze}$",
+      "filename": "reflex_humanoid_control_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "f(\\mathcal{T}_{\\mathrm{obs}})",
+          "label": "Delayed Vision Obs"
+        }
+      ],
+      "svg_filename": "reflex_humanoid_control_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{L}_{\\mathrm{pred}} = \\mathbb{E}[|| x_t - \\hat{x}_t ||^2]$",
+      "filename": "reflex_humanoid_control_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "x_t",
+          "label": "Actual Dynamics"
+        }
+      ],
+      "svg_filename": "reflex_humanoid_control_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\pi_{\\mathrm{total}} = \\phi_{\\mathrm{catch}}(\\mathcal{S}_{\\mathrm{box}})",
+      "filename": "reflex_humanoid_control_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\phi_{\\mathrm{catch}}",
+          "label": "Catch Policy"
+        }
+      ],
+      "svg_filename": "reflex_humanoid_control_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{H} = \\mathrm{Encoder}(\\{I_{t-k}, \\dots, I_t\\})$",
+      "filename": "reflex_humanoid_control_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{H}",
+          "label": "Temporal Latent"
+        }
+      ],
+      "svg_filename": "reflex_humanoid_control_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Success}_{\\mathrm{Reflex}} = 0.857 > \\mathrm{Success}_{\\mathrm{Baseline}}$",
+      "filename": "reflex_humanoid_control_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "0.857",
+          "label": "Final Success"
+        }
+      ],
+      "svg_filename": "reflex_humanoid_control_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "semantic_clusters",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "ROBOTICS",
+          "color": "#38BDF8",
+          "items": [
+            "Control",
+            "Planning",
+            "Kinematics"
+          ]
+        },
+        {
+          "name": "VISION",
+          "color": "#10B981",
+          "items": [
+            "RGB-D",
+            "Temporal",
+            "Encoder"
+          ]
+        },
+        {
+          "name": "DYNAMICS",
+          "color": "#F59E0B",
+          "items": [
+            "Velocity",
+            "Acceleration",
+            "State"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"box_trajectory\"",
+        "target_cluster": "DYNAMICS",
+        "token": "\"box_trajectory\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Temporal Lag",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    "model_a": "Reflex System",
+    "model_a_specs": [
+      "Egocentric Vision",
+      "State-based RL",
+      "Multi-stage Training"
+    ],
+    "model_b": "Classical TAMP",
+    "model_b_specs": [
+      "Requires MoCap",
+      "Marked Objects",
+      "Hard-coded Rules"
+    ],
+    "divide_title": "REACTIVE CONTROL DIVIDE",
+    "model_a_stat": "85.7%",
+    "model_a_stat_label": "CATCH SUCCESS",
+    "model_b_stat": "50.1%",
+    "model_b_stat_label": "BASELINE SUCCESS",
+    "efficiency_badge": "\u26a1 +35.6% TEMPORAL GAIN",
+    "benchmarks": [
+      {
+        "name": "Catch Success",
+        "score_a": "85.7%",
+        "score_b": "50.1%"
+      },
+      {
+        "name": "Sim-to-Real Gap",
+        "score_a": "Minimal",
+        "score_b": "High"
+      },
+      {
+        "name": "Visual Grounding",
+        "score_a": "High",
+        "score_b": "N/A"
+      }
+    ],
+    "scale_metric": "85.7",
+    "scale_label": "Success Percentage",
+    "bottleneck_title": "MONOLITHIC INPUT BOTTLENECK",
+    "bottleneck_desc": "Entangled perception and motor control",
+    "solution_title": "STAGE-WISE DECOMPOSITION",
+    "solution_components": "Modular RL Policy",
+    "mechanism_title": "TEMPORAL HISTORY LATENTS",
+    "payoff_stat": "85.7%",
+    "payoff_label": "CATCH SUCCESS",
+    "payoff_sub": "Outperforming naive history-less baselines",
+    "payoff_hero_stat": 85.7,
+    "payoff_hero_label": "Reflex Policy",
+    "payoff_base_stat": 50.1,
+    "payoff_base_label": "Static Baseline",
+    "payoff_delta_badge": "\u26a1 +35.6% RECOVERY GAIN",
+    "challenger": "Reflex",
+    "incumbent": "State-based Baselines"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: CATCH SUCCESS",
+    "metric_name": "Success Rate",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "Reflex (Sim)",
+        "value": 85.7,
+        "display_val": "85.7%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Privileged Obs",
+        "value": 87.9,
+        "display_val": "87.9%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "No-History Baseline",
+        "value": 50.1,
+        "display_val": "50.1%",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +35.6% TEMPORAL RECOVERY GAIN",
+    "radar_axes": [
+      "Reactive Control",
+      "Temporal History",
+      "Egocentric Vision",
+      "Robustness",
+      "Real-Time Latency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "reflex_controller.py",
+    "language": "python",
+    "lines": [
+      "def compute_reflex(obs_history):",
+      "# Encode dynamics with temporal context",
+      "latent_box = encoder(obs_history)",
+      "action = policy.forward(latent_box)",
+      "return action"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 DYNAMICS PROJECTION KERNEL",
+    "explanation": "Mapping visual history to real-time action"
+  },
+  "arxiv_id": "2610.12772",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "fig_method",
+      "caption": "Fig Method",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_method.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_1_fig_method.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig_teaser",
+      "caption": "Fig Teaser",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_teaser.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_2_fig_teaser.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_2_fig_teaser.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig_lateral_offset_success",
+      "caption": "Fig Lateral Offset Success",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_lateral_offset_success.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_3_fig_lateral_offset_success.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_3_fig_lateral_offset_success.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "fig_real_robot",
+      "caption": "Fig Real Robot",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/fig_real_robot.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_4_fig_real_robot.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_4_fig_real_robot.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "reflex_icon",
+      "caption": "Reflex Icon",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/source/figures/reflex_icon.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2610.12772/chalkboard_figures/fig_5_reflex_icon.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 95
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.0,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014it hit a real pain point in robotics immediately without the 'Today we're going to learn' fluff. I actually understood the 'split training' concept, which is rare for these types of videos. My only hang-up was 'privileged sensors' in Beat 5; I assume you mean ground-truth data or lidar/IMU inputs, but it sounds a bit like marketing jargon."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Visual Latency",
+    "physical_analogy": "A goalie trying to block a penalty kick while wearing a blindfold that updates every two seconds.",
+    "eureka_mechanism": "Three-stage policy decomposition",
+    "paradigm_shift": "Egocentric vision driving high-speed reactive whole-body control"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Statistic",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 11,
+    "rankings": [
+      {
+        "hook": "Before you deploy your next physical policy, see how Reflex unlocks 85.7% better precision.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "You are probably training robot policies with the wrong primitives before testing Reflex for 85.7%.",
+        "verdict": 57,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Before you build your next system, see how most humanoid robots freeze the moment they try to catch a fast-moving, thrown object.",
+        "verdict": 54,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard robots fail 85.7% of real-world trials before Reflex fixes execution?",
+        "verdict": 53,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Do not train another embodied policy until you see how Reflex cuts errors by 85.7%.",
+        "verdict": 51,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why do robotic manipulation policies hit a plateau before Reflex boosts accuracy by 85.7%?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Did you know most humanoid robots freeze the moment they try to catch a fast-moving, thrown object?",
+        "verdict": 42,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Most humanoid robots freeze the moment they try to catch a fast-moving, thrown object.",
+        "verdict": 34,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until Reflex proved: these everyday actions require anticipating a moving target and reflexively responding with the whole body within about a second.",
+        "verdict": 33,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Humans effortlessly react to the world; they adeptly return a tennis shot, catch a falling cup, step aside from a passing cart, or pass a box tossed during truck unloading.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why is Reflex a major breakthrough? Because humans effortlessly react to the world; they adeptly return a tennis shot, catch a falling cup, step aside from a passing cart, or pass a box tossed during truck unloading.",
+        "verdict": 19,
+        "band": "WEAK",
+        "formula": "The Question"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Reflex System",
+        "model_a_score": "85.7%",
+        "model_b_name": "Classical TAMP",
+        "model_b_score": "50.1%",
+        "delta_label": "\u26a1 +35.6% TEMPORAL GAIN"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}

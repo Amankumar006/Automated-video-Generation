@@ -830,18 +830,61 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
             lbl = CleanText(title[:28], font_size=13, color=accent_color, weight=BOLD).move_to(box)
             fig_mobj = Group(box, lbl)
 
-        # Subtle chassis behind figure with dynamic hugging and accent stroke
-        chassis_w = min(max(fig_mobj.width + 0.45, 5.8), 7.8)
-        chassis_h = max(fig_mobj.height + 0.45, 2.2)
+        # Architectural lightbox chassis behind figure with glowing accent and corner brackets
+        chassis_w = min(max(fig_mobj.width + 0.6, 5.8), 7.8)
+        chassis_h = max(fig_mobj.height + 0.6, 2.4)
+        chassis_center = fig_mobj.get_center()
+
+        # Outer subtle glow chassis
+        self.glow_chassis = RoundedRectangle(
+            corner_radius=0.18,
+            width=chassis_w + 0.12,
+            height=chassis_h + 0.12,
+            color=accent_color,
+            stroke_width=1.0,
+            stroke_opacity=0.35,
+            fill_color="#050811",
+            fill_opacity=0.6
+        ).move_to(chassis_center)
+
+        # Primary inner chassis
         self.chassis = RoundedRectangle(
             corner_radius=0.15,
             width=chassis_w,
             height=chassis_h,
             color=COLOR_DARK_SLATE,
-            stroke_width=1.8,
+            stroke_width=2.0,
             fill_color=COLOR_PANEL_BG,
-            fill_opacity=0.88
-        ).move_to(fig_mobj.get_center())
+            fill_opacity=0.92
+        ).move_to(chassis_center)
+
+        # Four architectural corner brackets
+        cx, cy = chassis_center[0], chassis_center[1]
+        hw, hh = chassis_w / 2.0, chassis_h / 2.0
+        self.corner_brackets = VGroup()
+        for x_edge, y_edge, dx, dy in [
+            (cx - hw, cy + hh, 1, -1),
+            (cx + hw, cy + hh, -1, -1),
+            (cx - hw, cy - hh, 1, 1),
+            (cx + hw, cy - hh, -1, 1),
+        ]:
+            b_line_h = Line([x_edge, y_edge, 0], [x_edge + dx * 0.35, y_edge, 0], stroke_width=2.5, color=accent_color)
+            b_line_v = Line([x_edge, y_edge, 0], [x_edge, y_edge + dy * 0.35, 0], stroke_width=2.5, color=accent_color)
+            self.corner_brackets.add(b_line_h, b_line_v)
+
+        # Top chassis telemetry header pill
+        header_bar_w = min(chassis_w - 0.6, 4.4)
+        header_pill = RoundedRectangle(
+            corner_radius=0.08,
+            width=header_bar_w,
+            height=0.30,
+            color="#0284C7",
+            stroke_width=1.0,
+            fill_color="#0369A1",
+            fill_opacity=0.35
+        ).move_to([cx, cy + hh - 0.22, 0])
+        header_lbl = CleanText("ARXIV ARCHITECTURAL SCHEMATIC", font_size=8, color="#38BDF8", weight=BOLD).move_to(header_pill)
+        self.lightbox_header = Group(header_pill, header_lbl)
 
         # Bottom citation badge (safe at y = -2.1, well above subtitles at y = -3.45)
         raw_b = badge_text.strip().upper()
@@ -862,10 +905,38 @@ class BlueprintPaperFigure(BaseBlueprintComposition):
         badge_txt.move_to(badge_pill)
         self.badge = Group(badge_pill, badge_txt).move_to([0, -2.1, 0])
 
+        # Kinetic laser sweep line
+        self.laser_line = Line(
+            [cx - hw + 0.2, cy + hh - 0.45, 0],
+            [cx + hw - 0.2, cy + hh - 0.45, 0],
+            color="#38BDF8",
+            stroke_width=2.0,
+            stroke_opacity=0.6
+        )
+
         self.fig_mobj = fig_mobj
-        self.content_group.add(self.chassis, self.fig_mobj, self.badge)
+        self.content_group.add(
+            self.glow_chassis,
+            self.chassis,
+            self.corner_brackets,
+            self.lightbox_header,
+            self.fig_mobj,
+            self.badge,
+            self.laser_line
+        )
         self.kinetic_elements.add(self.fig_mobj)
         self.add(self.title, self.sub, self.content_group)
+
+    def get_kinetic_animation(self, run_time: float = 1.5) -> Animation:
+        """Returns kinetic architectural laser sweep across the diagram."""
+        if hasattr(self, "laser_line") and hasattr(self, "chassis"):
+            top_y = self.chassis.get_top()[1] - 0.45
+            bot_y = self.chassis.get_bottom()[1] + 0.45
+            return AnimationGroup(
+                self.fig_mobj.animate(rate_func=there_and_back, run_time=run_time).scale(1.03),
+                self.laser_line.animate(rate_func=there_and_back, run_time=run_time).shift(DOWN * (top_y - bot_y))
+            )
+        return super().get_kinetic_animation(run_time=run_time)
 
 
 # Registry mapping layout names to concrete composition classes

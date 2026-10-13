@@ -22,7 +22,8 @@ from pipeline.config import (
     BROADCAST_WIDTH, BROADCAST_HEIGHT, BROADCAST_FPS,
     BROADCAST_CRF, BROADCAST_MAXRATE, BROADCAST_BUFSIZE,
     MAX_CONTENT_AGE_DAYS, MAX_PERK_VERIFICATION_AGE_DAYS,
-    is_content_recent, calculate_content_age_days
+    is_content_recent, calculate_content_age_days,
+    resolve_track, TRACK_ACADEMIC, TRACK_TECH_NEWS, TRACK_DEVELOPER_PERKS, TRACK_METADATA
 )
 from pipeline.audio_synthesizer import synthesize_audio_for_spec
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
@@ -458,8 +459,11 @@ def main():
     except Exception as e_vd:
         print(f"⚠️ Visual Director notice: {e_vd}")
 
-    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Mechanism Breakdown)
-    if category in ("architecture_breakdown", "mechanism_deepdive", "model_showdown"):
+    track = resolve_track(category)
+    track_meta = TRACK_METADATA[track]
+
+    # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Breakdown)
+    if track == TRACK_ACADEMIC:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -472,18 +476,10 @@ def main():
         except Exception as e_synth:
             print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
 
-    if category in ("developer_perks", "startup_credits", "perks"):
-        scene_file = "manim_engine/scenes/developer_perks_scene.py"
-        scene_class = "DeveloperPerksScene"
-        engine_label = "Developer Perks UI Card Engine (Track 3)"
-    elif category in ("tech_news", "official_blogs", "blogs", "news") and not args.legacy_engine:
-        scene_file = "manim_engine/scenes/tech_news_scene.py"
-        scene_class = "TechNewsScene"
-        engine_label = "Tech News Launch Studio Engine (Track 2)"
-    elif not args.legacy_engine:
-        scene_file = "manim_engine/scenes/script_driven_scene.py"
-        scene_class = "ScriptDrivenScene"
-        engine_label = "Visual Engine Script-Driven Compiler (Track 1)"
+    if not args.legacy_engine:
+        scene_file = track_meta["scene_file"]
+        scene_class = track_meta["scene_class"]
+        engine_label = f"{track_meta['display_name']} ({track_meta['badge']})"
     else:
         scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]

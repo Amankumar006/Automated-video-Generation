@@ -19,7 +19,10 @@ from typing import Optional, Dict, Any, List
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from pipeline.config import OUTPUT_DIR, FFMPEG_BIN, DEFAULT_VOICE
+from pipeline.config import (
+    OUTPUT_DIR, FFMPEG_BIN, DEFAULT_VOICE,
+    resolve_track, TRACK_ACADEMIC, TRACK_METADATA
+)
 from pipeline.arxiv_fetcher import fetch_arxiv_paper
 from pipeline.script_generator import generate_script
 from pipeline.audio_synthesizer import synthesize_audio_for_spec
@@ -259,13 +262,13 @@ def auto_produce(
     except Exception as e:
         print(f"⚠️ Visual Director bypassed: {e}")
 
-    # Resolve target scene category before visual synthesis dispatch
-    resolved_category = spec.get("category", category or "mechanism_deepdive")
-    if resolved_category not in CATEGORY_SCENE_MAP:
-        resolved_category = "mechanism_deepdive"
+    # Resolve target scene track before visual synthesis dispatch
+    resolved_category = spec.get("category", category or "academic_breakdown")
+    track = resolve_track(resolved_category)
+    track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Papers)
-    if resolved_category in ("architecture_breakdown", "mechanism_deepdive", "model_showdown"):
+    if track == TRACK_ACADEMIC:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -278,18 +281,10 @@ def auto_produce(
         except Exception as e:
             print(f"⚠️ Bespoke visual synthesis notice: {e}")
 
-    if resolved_category in ("developer_perks", "startup_credits", "perks"):
-        scene_file = "manim_engine/scenes/developer_perks_scene.py"
-        scene_class = "DeveloperPerksScene"
-        engine_label = "Developer Perks UI Card Engine (Track 3)"
-    elif resolved_category in ("tech_news", "official_blogs", "blogs", "news") and not legacy_engine:
-        scene_file = "manim_engine/scenes/tech_news_scene.py"
-        scene_class = "TechNewsScene"
-        engine_label = "Tech News Launch Studio Engine (Track 2)"
-    elif not legacy_engine:
-        scene_file = "manim_engine/scenes/script_driven_scene.py"
-        scene_class = "ScriptDrivenScene"
-        engine_label = "Visual Engine 6.0 Bespoke Synthesizer (Track 1)"
+    if not legacy_engine:
+        scene_file = track_meta["scene_file"]
+        scene_class = track_meta["scene_class"]
+        engine_label = f"{track_meta['display_name']} ({track_meta['badge']})"
     else:
         scene_info = CATEGORY_SCENE_MAP.get(resolved_category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
