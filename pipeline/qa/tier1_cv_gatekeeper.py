@@ -374,12 +374,12 @@ class Tier1CVGatekeeper:
 
         # 1. Optical Flow & Strobing (if previous frame provided)
         if prev_frame_bgr is not None:
-            # Ultra-fast downsample prior to grayscale conversion
+            # Ultra-fast downsample after grayscale conversion (< 1.5ms)
             h, w = frame_bgr.shape[:2]
-            small_prev_bgr = cv2.resize(prev_frame_bgr, (216, 384), interpolation=cv2.INTER_AREA) if (w > 216 or h > 384) else prev_frame_bgr
-            small_curr_bgr = cv2.resize(frame_bgr, (216, 384), interpolation=cv2.INTER_AREA) if (w > 216 or h > 384) else frame_bgr
-            prev_gray = cv2.cvtColor(small_prev_bgr, cv2.COLOR_BGR2GRAY)
-            curr_gray = cv2.cvtColor(small_curr_bgr, cv2.COLOR_BGR2GRAY)
+            prev_gray_full = cv2.cvtColor(prev_frame_bgr, cv2.COLOR_BGR2GRAY)
+            curr_gray_full = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2GRAY)
+            prev_gray = cv2.resize(prev_gray_full, (216, 384), interpolation=cv2.INTER_LINEAR) if (w > 216 or h > 384) else prev_gray_full
+            curr_gray = cv2.resize(curr_gray_full, (216, 384), interpolation=cv2.INTER_LINEAR) if (w > 216 or h > 384) else curr_gray_full
 
             passed_motion, motion_violations, motion_metrics, curr_flow = self.motion_analyzer.analyze(
                 prev_gray, curr_gray, prev_flow=prev_flow, is_scene_cut=is_scene_cut

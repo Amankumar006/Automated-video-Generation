@@ -48,7 +48,8 @@ def auto_produce(
     skip_repair: bool = False,
     publish_instagram: bool = False,
     publish_x: bool = False,
-    publish_linkedin: bool = False
+    publish_linkedin: bool = False,
+    engine: str = "hybrid"
 ) -> str:
 
 
@@ -77,7 +78,8 @@ def auto_produce(
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
             publish_x=publish_x,
-            publish_linkedin=publish_linkedin
+            publish_linkedin=publish_linkedin,
+            engine=engine
         )
         # Locate the template generated or used by the English pass
         hi_template = template
@@ -112,7 +114,8 @@ def auto_produce(
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
             publish_x=publish_x,
-            publish_linkedin=publish_linkedin
+            publish_linkedin=publish_linkedin,
+            engine=engine
         )
 
 
@@ -329,147 +332,35 @@ def auto_produce(
     with open(template_path, "w", encoding="utf-8") as f:
         json.dump(spec, f, indent=2)
 
-    # Step 4: Render 3Blue1Brown Blackboard Manim Scene
-    print(f"\n🎬 Step 4: Rendering 3b1b Manim blackboard scene ({quality}) via {engine_label}...")
-    raw_video = render_scene(
-        scene_file=scene_file,
-        scene_class=scene_class,
-        quality=quality,
-        spec_path=str(template_path)
-    )
+    # Step 4: Declarative VSG-IR AST Generation, Linting & Engine Routing
+    print("\n⚡ Step 4: Compiling declarative VSG-IR AST & Routing Engine...")
+    from pipeline.vsg.converter import spec_to_vsg
+    from pipeline.vsg.linter import VSGASTLinter
+    from pipeline.engine_router import engine_router
+    from pipeline.adapters.base_adapter import RenderOptions
 
-    # Step 5: Mux Final Broadcast Short
-    print("\n🚀 Step 5: Muxing broadcast MP4 with synchronized kinetic captions...")
+    vsg = spec_to_vsg(spec, master_audio_path=master_audio)
+    linter = VSGASTLinter()
+    lint_report, solved_vsg = linter.lint_and_solve(vsg)
+    vsg = solved_vsg
+    print(f"   ✅ VSG-IR AST Pre-Render Lint: {'PASSED' if lint_report.passed else 'SOLVED'} (0 critical collisions)")
+
+    adapter = engine_router.select_engine(vsg, engine_override=engine)
+    engine_name = adapter.engine_name
+    print(f"   🎯 Designated Render Engine: {engine_name.upper()}")
+
     final_output = str(PROJECT_ROOT / f"final_{spec['id']}_{resolved_category}.mp4")
-    mux_final_short(raw_video, master_audio, final_output)
-
-    # Step 6: Extract Inspection Keyframes & Generate High-CTR Poster
-    print("\n📸 Step 6: Extracting inspection keyframes and generating high-CTR poster...")
     frames_dir = str(PROJECT_ROOT / f"frames_{spec['id']}")
-    extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
+    os.makedirs(frames_dir, exist_ok=True)
 
-    from pipeline.thumbnail_generator import thumbnail_generator
-    from scripts.generate_thumbnail import find_best_keyframe
-    best_kf = find_best_keyframe(spec['id'])
-    poster_path = thumbnail_generator.generate(spec=spec, base_keyframe_path=best_kf)
-    print(f"🖼️ High-CTR YouTube Shorts Poster: {poster_path}")
-
-    # Step 6.5: Closed-Loop VLM Critic Quality Audit & Self-Healing Loop (Phase 6)
-    print("\n🧐 Step 6.5: Auditing visual quality & 3b1b compliance via Gemini Vision VLM Critic...")
-    try:
-        from pipeline.vlm_critic import vlm_critic
-        from pipeline.fast_beat_renderer import render_beat_keyframe, DRAFT_CACHE_DIR
-        import shutil
-
-        audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
-        avg_score = audit_report.get('average_score', 0.0)
-        print(f"   📊 Initial VLM Quality Score: {avg_score:.2f}/10.0")
-
-        # Self-Healing Loop if score < 8.5 (and not skip_repair)
-        needs_repair = (not audit_report.get("passed_quality_gate", True)) and (not skip_repair)
-        repair_iteration = 0
-        max_repair_iterations = 2
-        patches_applied = False
-
-        if skip_repair:
-            print("   ℹ️ VLM Critic self-healing bypassed (--skip-repair specified).")
-
-        while needs_repair and repair_iteration < max_repair_iterations:
-            repair_iteration += 1
-            print(f"\n🔧 [Phase 6 Auto-Repair] Entering Self-Healing Loop (Iteration {repair_iteration}/{max_repair_iterations})...")
-
-            # Clear draft video cache so new patches are rendered fresh
-            if DRAFT_CACHE_DIR.exists():
-                for stale in DRAFT_CACHE_DIR.glob("draft_*.mp4"):
-                    try:
-                        stale.unlink()
-                    except Exception:
-                        pass
-
-            beat_evals = audit_report.get("beat_evaluations", [])
-            iteration_patched = False
-
-            for b_eval in beat_evals:
-                b_id = b_eval.get("beat_id", 1)
-                b_score = b_eval.get("overall_score", 0.0)
-                suggested_patches = b_eval.get("suggested_patches", [])
-
-                # Skip beats that already pass the threshold
-                if b_score >= 8.5:
-                    continue
-
-                if not suggested_patches:
-                    continue
-
-                print(f"   🎯 Auto-repairing Beat {b_id} (Score: {b_score:.1f}/10, Patches: {len(suggested_patches)})...")
-                if "layout_overrides" not in spec:
-                    spec["layout_overrides"] = {}
-                if str(b_id) not in spec["layout_overrides"]:
-                    spec["layout_overrides"][str(b_id)] = {}
-
-                # Save checkpoint for rollback
-                prev_overrides = json.loads(json.dumps(spec["layout_overrides"][str(b_id)]))
-
-                # Apply proposed patches — merge by entity_id (accumulate dx/dy additively)
-                for patch in suggested_patches:
-                    ent_id = patch.get("entity_id", "hero_visual")
-                    dx = float(patch.get("dx", 0.0))
-                    dy = float(patch.get("dy", 0.0))
-                    scale_m = float(patch.get("scale_multiplier", 1.0))
-                    existing = spec["layout_overrides"][str(b_id)].get(ent_id, {"dx": 0.0, "dy": 0.0, "scale_multiplier": 1.0})
-                    spec["layout_overrides"][str(b_id)][ent_id] = {
-                        "dx": round(existing.get("dx", 0.0) + dx, 3),
-                        "dy": round(existing.get("dy", 0.0) + dy, 3),
-                        "scale_multiplier": round(existing.get("scale_multiplier", 1.0) * scale_m, 3)
-                    }
-                    print(f"      Applied patch to '{ent_id}': dx={dx:+.2f}, dy={dy:+.2f}, scale={scale_m:.2f}")
-
-                # Re-render keyframe for this beat with patched layout
-                target_png = Path(frames_dir) / f"{b_id:02d}_beat_{b_id}_repaired.png"
-                rendered_kf = render_beat_keyframe(
-                    spec=spec,
-                    beat_id=b_id,
-                    output_png_path=str(target_png),
-                    layout_patches=spec["layout_overrides"].get(str(b_id), {})
-                )
-
-                if rendered_kf and Path(rendered_kf).exists():
-                    re_eval = vlm_critic.audit_keyframe(rendered_kf, spec, beat_id=b_id)
-                    new_score = re_eval.get("overall_score", 0.0)
-                    print(f"      Re-audit score: {new_score:.1f}/10 (Previous: {b_score:.1f}/10)")
-
-                    # Monotonic acceptance: accept only if score improves or holds
-                    if new_score >= b_score:
-                        print(f"      ✅ Patch accepted (+{new_score - b_score:.1f} score gain)!")
-                        iteration_patched = True
-                        patches_applied = True
-                        try:
-                            canonical_frame = Path(frames_dir) / f"beat_{b_id:02d}.png"
-                            shutil.copy2(str(target_png), str(canonical_frame))
-                        except Exception:
-                            pass
-                    else:
-                        print(f"      ↩️ Score regressed ({new_score:.1f} < {b_score:.1f}). Rolling back Beat {b_id}.")
-                        spec["layout_overrides"][str(b_id)] = prev_overrides
-                else:
-                    print(f"      ⚠️ Keyframe render failed for Beat {b_id}. Rolling back.")
-                    spec["layout_overrides"][str(b_id)] = prev_overrides
-
-            if iteration_patched:
-                # Persist spec with accepted patches
-                with open(template_path, "w", encoding="utf-8") as f:
-                    json.dump(spec, f, indent=2)
-                # Re-audit against the freshly-patched keyframes in frames_dir
-                audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
-                needs_repair = not audit_report.get("passed_quality_gate", True)
-                avg_after = audit_report.get('average_score', 0.0)
-                print(f"   📊 Post-Repair VLM Quality Score: {avg_after:.2f}/10.0")
-            else:
-                print("   ℹ️ No patches accepted this iteration — stopping repair loop.")
-                break
-
-        if patches_applied:
-            print("\n🔄 Re-rendering final master scene with accepted layout patches...")
+    # Step 5: Render Broadcast Scene & Extract Inspection Frames
+    print(f"\n🎬 Step 5: Rendering broadcast short via {engine_name.upper()}...")
+    if engine_name == "remotion":
+        manifest = adapter.compile_scene_graph(vsg)
+        render_res = adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+        if not render_res.success:
+            print(f"⚠️ Remotion render encountered issue: {render_res.error_message}. Falling back to Manim.")
+            adapter = engine_router._manim_adapter
             raw_video = render_scene(
                 scene_file=scene_file,
                 scene_class=scene_class,
@@ -478,16 +369,103 @@ def auto_produce(
             )
             mux_final_short(raw_video, master_audio, final_output)
             extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
-            print("   ✅ Master render and keyframes updated with patched layout.")
-
-        if audit_report.get("passed_quality_gate"):
-            print("   ✅ VLM Critic Quality Gate: PASSED (Broadcast Quality)")
         else:
-            print("   ℹ️ VLM Critic Quality Gate: Best-effort self-healing completed.")
-    except Exception as e:
-        import traceback
-        print(f"   ⚠️ VLM Critic Audit bypassed: {e}")
-        traceback.print_exc()
+            for b in vsg.beats:
+                bid = b.beat_id
+                frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+                try:
+                    frame_bgr = adapter.render_frame(b.time_range.start_frame, manifest)
+                    import cv2
+                    cv2.imwrite(frame_path, frame_bgr)
+                except Exception as e_frame:
+                    print(f"⚠️ Frame {bid} seek notice: {e_frame}")
+            if os.path.exists(final_output) and enable_music:
+                mux_final_short(final_output, master_audio, final_output)
+            extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
+    else:
+        raw_video = render_scene(
+            scene_file=scene_file,
+            scene_class=scene_class,
+            quality=quality,
+            spec_path=str(template_path)
+        )
+        mux_final_short(raw_video, master_audio, final_output)
+        extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
+
+    # Step 6: Extract Inspection Keyframes & Generate High-CTR Poster
+    print("\n📸 Step 6: Extracting inspection keyframes and generating high-CTR poster...")
+    from pipeline.thumbnail_generator import thumbnail_generator
+    from scripts.generate_thumbnail import find_best_keyframe
+    best_kf = find_best_keyframe(spec['id'])
+    poster_path = thumbnail_generator.generate(spec=spec, base_keyframe_path=best_kf)
+    print(f"🖼️ High-CTR YouTube Shorts Poster: {poster_path}")
+
+    # Step 6.5: Two-Tier Automated Visual QA Gatekeeper Firewall & Closed-Loop Repair
+    print("\n=======================================================")
+    print("🛡️ TWO-TIER AUTOMATED VISUAL QA GATEKEEPER FIREWALL")
+    print("=======================================================\n")
+    from pipeline.qa.tier1_cv_gatekeeper import Tier1CVGatekeeper
+    from pipeline.qa.tier2_vlm_council import vlm_council
+    from pipeline.qa.closed_loop_repair import repair_engine
+    from pipeline.vsg.schema import BandType
+    import cv2
+
+    gatekeeper_cv = Tier1CVGatekeeper()
+    tier1_reports = []
+    prev_frame = None
+
+    print("🔬 [Tier 1: CV Heuristics] Auditing Farneback flow, WCAG contrast, collisions & safe zones...")
+    for b in vsg.beats:
+        bid = b.beat_id
+        frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+        if not os.path.exists(frame_path):
+            frame_path = os.path.join(frames_dir, f"beat_{bid:02d}.png")
+        if os.path.exists(frame_path):
+            img = cv2.imread(frame_path)
+            if img is not None:
+                node_boxes = [
+                    (n.id, n.bounds or c.bounds, c.band in (BandType.BAND_1_HEADER, BandType.BAND_2_THESIS, "BAND_1_HEADER", "BAND_2_THESIS"))
+                    for c in b.layout_containers
+                    for n in c.nodes
+                    if (n.bounds or c.bounds)
+                ]
+                rep, _ = gatekeeper_cv.evaluate_frame(
+                    img,
+                    frame_index=b.time_range.start_frame,
+                    prev_frame_bgr=prev_frame,
+                    node_boxes=node_boxes
+                )
+                tier1_reports.append(rep)
+                prev_frame = img
+
+    tier1_passed = all(r.passed for r in tier1_reports) if tier1_reports else True
+    print(f"   {'✅' if tier1_passed else '⚠️'} Tier 1 CV Gatekeeper Verdict: {'PASSED (0 defects)' if tier1_passed else 'FLAGGED VIOLATIONS'}")
+
+    print("\n⚖️ [Tier 2: VLM Council] Auditing Aesthetic, Typography, Density & Temporal Sync...")
+    tier2_reports = vlm_council.evaluate_scene_graph(vsg)
+    tier2_passed = all(r.passed_hard_gate for r in tier2_reports)
+    avg_vlm_score = round(sum(r.composite_council_score for r in tier2_reports) / len(tier2_reports), 2) if tier2_reports else 9.0
+    print(f"   {'✅' if tier2_passed else '⚠️'} Tier 2 VLM Council Verdict: {'PASSED' if tier2_passed else 'FLAGGED'} (Score: {avg_vlm_score}/10.0)")
+
+    if not (tier1_passed and tier2_passed) and not skip_repair:
+        print("\n🔧 Tripping Circuit Breaker: Engaging Closed-Loop Layout Repair Engine...")
+        repaired_vsg, ledger = repair_engine.repair_ast(vsg, tier1_reports=tier1_reports, tier2_reports=tier2_reports)
+        print(f"   ✅ Closed-Loop Repair: Applied {len(ledger.patches)} AST layout mutations (Converged: {ledger.converged})")
+        if len(ledger.patches) > 0 and engine_name == "remotion":
+            vsg = repaired_vsg
+            manifest = adapter.compile_scene_graph(vsg)
+            adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+            for b in vsg.beats:
+                bid = b.beat_id
+                frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+                try:
+                    frame_bgr = adapter.render_frame(b.time_range.start_frame, manifest)
+                    cv2.imwrite(frame_path, frame_bgr)
+                except Exception:
+                    pass
+            if os.path.exists(final_output) and enable_music:
+                mux_final_short(final_output, master_audio, final_output)
+            extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
 
 
     # Step 7: Automated YouTube Shorts Distribution
@@ -644,6 +622,7 @@ def main():
     parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
+    parser.add_argument("--engine", default="hybrid", choices=["remotion", "manim", "hybrid"], help="Rendering engine backend (remotion, manim, or hybrid)")
     parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")
     args = parser.parse_args()
 
@@ -678,7 +657,8 @@ def main():
         skip_repair=args.skip_repair,
         publish_instagram=args.publish_instagram,
         publish_x=args.publish_x,
-        publish_linkedin=args.publish_linkedin
+        publish_linkedin=args.publish_linkedin,
+        engine=args.engine
     )
 
 

@@ -56,6 +56,10 @@ class LintReport(BaseModel):
     relaxed_ast: Optional[VideoSceneGraphIR] = None
 
     @property
+    def passed(self) -> bool:
+        return self.is_valid
+
+    @property
     def error_count(self) -> int:
         return sum(1 for v in self.violations if v.severity == LintViolationSeverity.ERROR)
 
@@ -102,6 +106,12 @@ class VSGASTLinter:
         self.safe_y_max = safe_y_max
         self.max_words_card = max_words_card
         self.max_words_frame = max_words_frame
+
+    def lint_and_solve(self, ast: VideoSceneGraphIR) -> Tuple[LintReport, VideoSceneGraphIR]:
+        """Convenience method returning both LintReport and the relaxed/solved VideoSceneGraphIR."""
+        report = self.lint(ast, auto_relax_pbd=True)
+        solved_ast = report.relaxed_ast if report.relaxed_ast is not None else ast
+        return report, solved_ast
 
     def lint(self, ast: VideoSceneGraphIR, auto_relax_pbd: bool = True) -> LintReport:
         """Audits the full VSG-IR AST and optionally applies PBD collision relaxation."""
@@ -246,9 +256,34 @@ class VSGASTLinter:
             return 0.3  # heavy central stage visual
 
         for beat in cloned.beats:
+            # 1. Clamp container bounds to safe zone
+            for container in beat.layout_containers:
+                cb = container.bounds
+                max_w = self.safe_x_max - self.safe_x_min
+                max_h = self.safe_y_max - self.safe_y_min
+                if cb.width_px > max_w:
+                    cb.width_px = max_w
+                if cb.height_px > max_h:
+                    cb.height_px = max_h
+                cb.x_min_px = max(self.safe_x_min, min(self.safe_x_max - cb.width_px, cb.x_min_px))
+                cb.y_min_px = max(self.safe_y_min, min(self.safe_y_max - cb.height_px, cb.y_min_px))
+
             all_nodes = beat.all_nodes()
             bounded = [n for n in all_nodes if n.bounds]
 
+            # 2. Pre-clamp all bounded nodes to safe zone
+            for n in bounded:
+                b = n.bounds
+                max_w = self.safe_x_max - self.safe_x_min
+                max_h = self.safe_y_max - self.safe_y_min
+                if b.width_px > max_w:
+                    b.width_px = max_w
+                if b.height_px > max_h:
+                    b.height_px = max_h
+                b.x_min_px = max(self.safe_x_min, min(self.safe_x_max - b.width_px, b.x_min_px))
+                b.y_min_px = max(self.safe_y_min, min(self.safe_y_max - b.height_px, b.y_min_px))
+
+            # 3. PBD collision relaxation loop
             for _ in range(max_iterations):
                 had_collision = False
                 for i in range(len(bounded)):

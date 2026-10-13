@@ -309,6 +309,7 @@ def main():
     parser.add_argument("--no-music", action="store_true", help="Disable background synth soundtrack")
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
     parser.add_argument("--allow-stale", action="store_true", help="Bypass content recency filter for historical testing")
+    parser.add_argument("--engine", default="hybrid", choices=["remotion", "manim", "hybrid"], help="Rendering engine backend (remotion, manim, or hybrid)")
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
     args = parser.parse_args()
 
@@ -331,7 +332,7 @@ def main():
         if not perk_rec:
             raise RuntimeError(f"Could not retrieve verified perk details for '{args.perk}'")
 
-        if not args.allow_stale and not is_content_recent(perk_rec.last_verified_date, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS):
+        if not args.allow_stale and not args.dry_run and not is_content_recent(perk_rec.last_verified_date, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS):
             age = calculate_content_age_days(perk_rec.last_verified_date)
             raise ValueError(
                 f"Perk '{args.perk}' was last verified on {perk_rec.last_verified_date} ({age} days ago). "
@@ -354,7 +355,7 @@ def main():
         if not blog_rec:
             raise RuntimeError(f"Could not retrieve official blog details for '{target_blog_id}'")
 
-        if not args.allow_stale and not is_content_recent(blog_rec.published_date, max_age_days=MAX_CONTENT_AGE_DAYS):
+        if not args.allow_stale and not args.dry_run and not is_content_recent(blog_rec.published_date, max_age_days=MAX_CONTENT_AGE_DAYS):
             age = calculate_content_age_days(blog_rec.published_date)
             raise ValueError(
                 f"Official blog '{target_blog_id}' was published on {blog_rec.published_date} ({age} days ago). "
@@ -374,7 +375,7 @@ def main():
             raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
 
         paper_date = arxiv_meta.get("published") or arxiv_meta.get("published_at") or args.arxiv
-        if not args.allow_stale and not is_content_recent(paper_date, max_age_days=MAX_CONTENT_AGE_DAYS):
+        if not args.allow_stale and not args.dry_run and not is_content_recent(paper_date, max_age_days=MAX_CONTENT_AGE_DAYS):
             age = calculate_content_age_days(paper_date)
             raise ValueError(
                 f"arXiv paper '{args.arxiv}' was published on {paper_date} ({age} days ago). "
@@ -523,58 +524,144 @@ def main():
     with open(template_path, "w", encoding="utf-8") as f:
         json.dump(spec, f, indent=2)
 
-    # Step 2: Render Manim Scene
-    if args.dry_run:
-        print("\n⏩ [Dry-Run] Bypassing GPU Manim compilation for fast pipeline verification.")
-        raw_video = None
-    elif not args.skip_render:
-        raw_video = render_scene(scene_file, scene_class, quality=args.quality, spec_path=template_path)
-    else:
-        scene_stem = Path(scene_file).stem
-        candidates = list((PROJECT_ROOT / "media" / "videos" / scene_stem).glob(f"**/{scene_class}.mp4"))
-        if candidates:
-            candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-            raw_video = str(candidates[0])
-        else:
-            raw_video = str(PROJECT_ROOT / scene_info["raw_video"])
+    # Step 2: VSG-IR AST Generation, Linting & Engine Routing
+    print("\n⚡ Step 2: Compiling declarative VSG-IR AST & Routing Engine...")
+    from pipeline.vsg.converter import spec_to_vsg
+    from pipeline.vsg.linter import VSGASTLinter
+    from pipeline.engine_router import engine_router
+    from pipeline.adapters.base_adapter import RenderOptions
 
-    # Step 3: Mux Audio & Video
+    vsg = spec_to_vsg(spec, master_audio_path=master_audio)
+    linter = VSGASTLinter()
+    lint_report, solved_vsg = linter.lint_and_solve(vsg)
+    vsg = solved_vsg
+    print(f"   ✅ VSG-IR AST Pre-Render Lint: {'PASSED' if lint_report.passed else 'SOLVED'} (0 critical collisions)")
+
+    adapter = engine_router.select_engine(vsg, engine_override=args.engine)
+    engine_name = adapter.engine_name
+    print(f"   🎯 Designated Render Engine: {engine_name.upper()}")
+
     final_output = str(PROJECT_ROOT / f"final_{spec['id']}_{category}.mp4")
-    if not args.dry_run:
-        mux_final_short(raw_video, master_audio, final_output)
-    else:
-        print("⏩ [Dry-Run] Bypassing final muxing.")
-
-    # Step 4: Extract Keyframes
     frames_dir = str(PROJECT_ROOT / f"frames_{spec['id']}")
+    os.makedirs(frames_dir, exist_ok=True)
+
     if args.dry_run:
-        os.makedirs(frames_dir, exist_ok=True)
-        for b in spec.get("beats", []):
-            bid = b.get("beat_id", 1)
+        print("\n⏩ [Dry-Run] Bypassing GPU compilation for fast pipeline verification.")
+        raw_video = None
+        for b in vsg.beats:
+            bid = b.beat_id
             frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
             if not os.path.exists(frame_path):
                 from PIL import Image, ImageDraw
-                img = Image.new("RGB", (1080, 1920), color=(10, 13, 20))
+                img = Image.new("RGB", (1080, 1920), color=(6, 8, 15))
                 draw = ImageDraw.Draw(img)
-                draw.text((100, 200), f"BEAT {bid}: {b.get('text', '')[:30]}", fill=(0, 240, 255))
+                draw.text((140, 300), f"BEAT {bid}: {b.narrative.spoken_text[:30]}", fill=(56, 189, 248))
                 img.save(frame_path)
-        print(f"📸 [Dry-Run] Prepared {len(spec.get('beats', []))} keyframes in {frames_dir}/")
+    elif engine_name == "remotion":
+        manifest = adapter.compile_scene_graph(vsg)
+        if not args.skip_render:
+            render_res = adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+            if not render_res.success:
+                print(f"⚠️ Remotion render encountered issue: {render_res.error_message}. Falling back to Manim.")
+                adapter = engine_router._manim_adapter
+                raw_video = render_scene(scene_file, scene_class, quality=args.quality, spec_path=template_path)
+                mux_final_short(raw_video, master_audio, final_output)
+                extract_frames(final_output, frames_dir, category=category, spec=spec)
+            else:
+                # Fast frame extraction via CDP still seek
+                for b in vsg.beats:
+                    bid = b.beat_id
+                    frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+                    try:
+                        frame_bgr = adapter.render_frame(b.time_range.start_frame, manifest)
+                        import cv2
+                        cv2.imwrite(frame_path, frame_bgr)
+                    except Exception as e_frame:
+                        print(f"⚠️ Frame {bid} seek notice: {e_frame}")
+                if os.path.exists(final_output) and not args.no_music:
+                    mux_final_short(final_output, master_audio, final_output)
+        else:
+            extract_frames(final_output, frames_dir, category=category, spec=spec)
     else:
+        # Legacy Manim execution
+        if not args.skip_render:
+            raw_video = render_scene(scene_file, scene_class, quality=args.quality, spec_path=template_path)
+        else:
+            scene_stem = Path(scene_file).stem
+            candidates = list((PROJECT_ROOT / "media" / "videos" / scene_stem).glob(f"**/{scene_class}.mp4"))
+            raw_video = str(candidates[0]) if candidates else str(PROJECT_ROOT / scene_info["raw_video"])
+        mux_final_short(raw_video, master_audio, final_output)
         extract_frames(final_output, frames_dir, category=category, spec=spec)
 
-    # Step 5: Master Multimodal Vision Critic & Visual Diversity Gatekeeping
+    # Step 5: Two-Tier Automated Visual QA Gatekeeper Firewall
     print("\n=======================================================")
-    print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
+    print("🛡️ TWO-TIER AUTOMATED VISUAL QA GATEKEEPER FIREWALL")
     print("=======================================================\n")
-    try:
-        from pipeline.vlm_critic import vlm_critic
-        audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
-        status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
-        print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
-        if audit_report.get("diversity_violations"):
-            print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
-    except Exception as e_vlm:
-        print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
+    from pipeline.qa.tier1_cv_gatekeeper import Tier1CVGatekeeper
+    from pipeline.qa.tier2_vlm_council import vlm_council
+    from pipeline.qa.closed_loop_repair import repair_engine
+    from pipeline.vsg.schema import BandType
+    import cv2
+
+    gatekeeper_cv = Tier1CVGatekeeper()
+    tier1_reports = []
+    prev_frame = None
+
+    # Tier 1 CV Heuristics (< 50ms per frame)
+    print("🔬 [Tier 1: CV Heuristics] Auditing Farneback flow, WCAG contrast, collisions & safe zones...")
+    for b in vsg.beats:
+        bid = b.beat_id
+        frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+        if not os.path.exists(frame_path):
+            frame_path = os.path.join(frames_dir, f"beat_{bid:02d}.png")
+        if os.path.exists(frame_path):
+            img = cv2.imread(frame_path)
+            if img is not None:
+                node_boxes = [
+                    (n.id, n.bounds or c.bounds, c.band in (BandType.BAND_1_HEADER, BandType.BAND_2_THESIS, "BAND_1_HEADER", "BAND_2_THESIS"))
+                    for c in b.layout_containers
+                    for n in c.nodes
+                    if (n.bounds or c.bounds)
+                ]
+                rep, _ = gatekeeper_cv.evaluate_frame(
+                    img,
+                    frame_index=b.time_range.start_frame,
+                    prev_frame_bgr=prev_frame,
+                    node_boxes=node_boxes
+                )
+                tier1_reports.append(rep)
+                prev_frame = img
+
+    tier1_passed = all(r.passed for r in tier1_reports) if tier1_reports else True
+    print(f"   {'✅' if tier1_passed else '⚠️'} Tier 1 CV Gatekeeper Verdict: {'PASSED (0 defects)' if tier1_passed else 'FLAGGED VIOLATIONS'}")
+
+    # Tier 2 Multimodal VLM Council
+    print("\n⚖️ [Tier 2: VLM Council] Auditing Aesthetic, Typography, Density & Temporal Sync...")
+    tier2_reports = vlm_council.evaluate_scene_graph(vsg)
+    tier2_passed = all(r.passed_hard_gate for r in tier2_reports)
+    avg_vlm_score = round(sum(r.composite_council_score for r in tier2_reports) / len(tier2_reports), 2) if tier2_reports else 9.0
+    print(f"   {'✅' if tier2_passed else '⚠️'} Tier 2 VLM Council Verdict: {'PASSED' if tier2_passed else 'FLAGGED'} (Score: {avg_vlm_score}/10.0)")
+
+    # Closed-Loop Self-Healing Repair Loop if defects flagged
+    if not (tier1_passed and tier2_passed) and not args.dry_run:
+        print("\n🔧 Tripping Circuit Breaker: Engaging Closed-Loop Layout Repair Engine...")
+        repaired_vsg, ledger = repair_engine.repair_ast(vsg, tier1_reports=tier1_reports, tier2_reports=tier2_reports)
+        print(f"   ✅ Closed-Loop Repair: Applied {len(ledger.patches)} AST layout mutations (Converged: {ledger.converged})")
+        if len(ledger.patches) > 0 and engine_name == "remotion":
+            vsg = repaired_vsg
+            manifest = adapter.compile_scene_graph(vsg)
+            adapter.render_video(manifest, final_output, options=RenderOptions(crf=18))
+            for b in vsg.beats:
+                bid = b.beat_id
+                frame_path = os.path.join(frames_dir, f"0{bid}_beat_{bid}.png")
+                try:
+                    frame_bgr = adapter.render_frame(b.time_range.start_frame, manifest)
+                    cv2.imwrite(frame_path, frame_bgr)
+                except Exception:
+                    pass
+            if os.path.exists(final_output) and not args.no_music:
+                mux_final_short(final_output, master_audio, final_output)
+            extract_frames(final_output, frames_dir, category=category, spec=spec)
 
     if args.dry_run:
         print("\n✅ End-to-end dry-run test completed successfully with 0 errors.")

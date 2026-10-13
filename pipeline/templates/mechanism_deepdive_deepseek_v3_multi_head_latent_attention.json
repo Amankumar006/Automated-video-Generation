@@ -6,55 +6,154 @@
     {
       "beat_id": 1,
       "name": "b1",
-      "text": "Before you build your next system, see how why are top AI researchers paying attention to DeepSeek-V3 Technical Report: Multi-.",
+      "text": "Before you scale your next model, see why DeepSeek-V3 Multi-head Latent Attention completely rethinks standard architecture.",
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
+      "visual_focus": "A glowing memory chip turning red as data overflows.",
       "highlight_words": {
-        "Why": "#EF4444"
+        "KV cache": "#EF4444"
       },
-      "hook_score": 64,
+      "svo_action": {
+        "subject": "KV Cache",
+        "action_verb": "chokes",
+        "direct_object": "Inference Speed",
+        "anchor_word": "starving",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "MEMORY STARVATION",
+        "sub": "The KV Cache Bottleneck",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "hook_score": 62,
       "hook_band": "WORKABLE",
       "hook_formula": "The Warning"
     },
     {
       "beat_id": 2,
       "name": "b2",
-      "text": "The bottleneck? Traditional systems hit a scaling wall when handling complex workloads without massive friction.",
+      "text": "Standard attention stores redundant key-value pairs for every token, like a library clerk photocopying the entire archive for every single visitor.",
       "thriller_role": "villain_bottleneck",
       "act": 2,
+      "visual_focus": "A stream of identical documents piling up in a server rack.",
       "highlight_words": {
-        "bottleneck": "#F59E0B"
+        "redundant": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Redundancy",
+        "action_verb": "drains",
+        "direct_object": "System Throughput",
+        "anchor_word": "photocopying",
+        "semantic_role": "causal_link"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE REDUNDANCY TRAP",
+        "sub": "KV Cache Bloat",
+        "accent_color": "#F59E0B",
+        "params": {}
       }
     },
     {
       "beat_id": 3,
       "name": "b3",
-      "text": "Beat 3",
-      "thriller_role": "eureka_mechanism",
-      "act": 3
+      "text": "DeepSeek-V3 shatters this by introducing Multi-head Latent Attention, compressing the KV cache into a tiny, shared latent vector space.",
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "visual_focus": "A massive data stream collapsing into a single, high-density beam.",
+      "highlight_words": {
+        "Multi-head Latent Attention": "#10B981"
+      },
+      "svo_action": {
+        "subject": "MLA",
+        "action_verb": "compresses",
+        "direct_object": "KV Cache",
+        "anchor_word": "shatters",
+        "semantic_role": "solution"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "MLA ARCHITECTURE",
+        "sub": "Latent Compression",
+        "accent_color": "#10B981",
+        "params": {}
+      }
     },
     {
       "beat_id": 4,
       "name": "b4",
-      "text": "Beat 4",
-      "thriller_role": "technical_secret_sauce",
-      "act": 3
+      "text": "It uses low-rank matrix decomposition to decouple query and key-value projections, drastically reducing the memory footprint during sequential token generation.",
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "visual_focus": "Matrix math splitting into smaller, efficient factors.",
+      "highlight_words": {
+        "low-rank": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Decomposition",
+        "action_verb": "optimizes",
+        "direct_object": "Memory Footprint",
+        "anchor_word": "decouple",
+        "semantic_role": "mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "LOW-RANK PROJECTION",
+        "sub": "Matrix Decomposition",
+        "accent_color": "#10B981",
+        "params": {}
+      }
     },
     {
       "beat_id": 5,
       "name": "b5",
-      "text": "The result? Proven empirical gains and state-of-the-art benchmarks on DeepSeek-V3 Technical Re.",
-      "thriller_role": "empirical_payoff",
-      "act": 4
+      "text": "The result? A massive reduction in KV cache size, allowing for significantly higher throughput and longer context windows without crashing your hardware.",
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "visual_focus": "A performance bar chart spiking upward.",
+      "highlight_words": {
+        "higher throughput": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "MLA",
+        "action_verb": "enables",
+        "direct_object": "Longer Context",
+        "anchor_word": "reduction",
+        "semantic_role": "outcome"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "PERFORMANCE GAINS",
+        "sub": "Throughput vs. Memory",
+        "accent_color": "#3B82F6",
+        "params": {}
+      }
     },
     {
       "beat_id": 6,
       "name": "b6",
-      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
-      "thriller_role": "open_loop_outro",
+      "text": "Stop wasting memory on redundant data. Follow The Model Verse for deep-dives into how AI architectures actually scale.",
+      "thriller_role": "paradigm_shift",
       "act": 4,
+      "visual_focus": "The Model Verse logo appearing over a clean, optimized server rack.",
       "highlight_words": {
-        "The Model Verse": "#34D399"
+        "The Model Verse": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "You",
+        "action_verb": "master",
+        "direct_object": "AI Scaling",
+        "anchor_word": "scale",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE MODEL VERSE",
+        "sub": "Architectural Deep-Dives",
+        "accent_color": "#3B82F6",
+        "params": {}
       }
     }
   ],
@@ -62,52 +161,27 @@
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "acts": {
-      "act_1_hook": {
-        "beat": 1,
-        "role": "pattern_interrupt_hook"
-      },
-      "act_2_villain": {
-        "beat": 2,
-        "role": "villain_bottleneck"
-      },
-      "act_3_eureka": {
-        "beats": [
-          3,
-          4
-        ],
-        "role": "eureka_mechanism"
-      },
-      "act_4_paradigm_shift": {
-        "beats": [
-          5,
-          6
-        ],
-        "role": "paradigm_shift_open_loop"
-      }
-    }
+    "villain_entity": "KV Cache Bloat",
+    "physical_analogy": "A library archive where every book requires a massive, redundant index card for every single reader.",
+    "eureka_mechanism": "Multi-head Latent Attention (MLA)",
+    "paradigm_shift": "Decoupling attention heads from memory overhead"
   },
+  "hook_tag": "MEMORY BOTTLENECK KILLED",
   "hook_gating": {
-    "selected_hook": "Before you build your next system, see how why are top AI researchers paying attention to DeepSeek-V3 Technical Report: Multi-.",
-    "verdict": 64,
+    "selected_hook": "Before you scale your next model, see why DeepSeek-V3 Multi-head Latent Attention completely rethinks standard architecture.",
+    "verdict": 62,
     "band": "WORKABLE",
     "formula": "The Warning",
     "properties": {
       "SPECIFICITY": 52,
       "ADDRESS": 96,
       "STAKES": 48,
-      "CURIOSITY": 75,
+      "CURIOSITY": 58,
       "BREVITY": 100
     },
     "weakest_property": "STAKES",
-    "candidates_evaluated": 10,
+    "candidates_evaluated": 9,
     "rankings": [
-      {
-        "hook": "Before you build your next system, see how why are top AI researchers paying attention to DeepSeek-V3 Technical Report: Multi-.",
-        "verdict": 64,
-        "band": "WORKABLE",
-        "formula": "The Warning"
-      },
       {
         "hook": "Before you scale your next model, see why DeepSeek-V3 Multi-head Latent Attention completely rethinks standard architecture.",
         "verdict": 62,
@@ -139,14 +213,8 @@
         "formula": "The Question"
       },
       {
-        "hook": "Did you know why are top AI researchers paying attention to DeepSeek-V3 Technical Report: Multi-?",
-        "verdict": 46,
-        "band": "WEAK",
-        "formula": "The Question"
-      },
-      {
-        "hook": "Why are top AI researchers paying attention to DeepSeek-V3 Technical Report: Multi-?",
-        "verdict": 40,
+        "hook": "Why should you care about DeepSeek-V3 Multi-head Latent Attention? Because your massive language models are starving because the KV cache is eating all your memory bandwidth.",
+        "verdict": 39,
         "band": "WEAK",
         "formula": "The Question"
       },
@@ -161,6 +229,12 @@
         "verdict": 36,
         "band": "WEAK",
         "formula": "The Question"
+      },
+      {
+        "hook": "Your massive language models are starving because the KV cache is eating all your memory bandwidth.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "Unclassified"
       }
     ]
   },

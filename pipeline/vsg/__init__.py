@@ -48,7 +48,10 @@ from pipeline.vsg.linter import (
     MAX_WORDS_PER_FRAME
 )
 
+from pipeline.vsg.converter import spec_to_vsg
+
 __all__ = [
+    "spec_to_vsg",
     "AspectRatio",
     "ThemeId",
     "BandType",
