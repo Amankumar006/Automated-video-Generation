@@ -37,7 +37,8 @@ OFFICIAL_DOMAINS_WHITELIST = {
     "amazon.com",
     "cloudflare.com",
     "openai.com",
-    "platform.openai.com"
+    "platform.openai.com",
+    "fin.ai"
 }
 
 
@@ -322,6 +323,35 @@ VERIFIED_PERKS_REGISTRY: Dict[str, PerkEvidenceRecord] = {
         status=PerkVerificationStatus.VERIFIED_ACTIVE,
         last_verified_date="2026-10-10",
         anti_hallucination_notes="OpenAI does NOT offer a direct public self-serve application form for non-backed startups. Beware of scams claiming free $2,500 OpenAI vouchers on unverified forms. Independent startups should use Microsoft Founders Hub for verified Azure OpenAI credits."
+    ),
+    "fin_ai_credits_guide": PerkEvidenceRecord(
+        program_id="fin_ai_credits_guide",
+        provider="Fin AI & Lab Ecosystem",
+        headline="AI Startup Credits 2026: Up to $100K in Model & Compute Grants Without VC",
+        value_usd=100000,
+        benefit_summary="Master stacking strategy for early-stage AI startups: $1,000 to $25,000 in Claude/OpenAI model credits, $7,500 Lambda GPU credits via NVIDIA Inception, plus 1 full free year of Fin AI application tier",
+        eligibility_criteria=[
+            "Early-stage AI startups under 50 employees building on foundation models",
+            "Anthropic, ElevenLabs, AssemblyAI, and Groq explicitly require zero VC backing to apply",
+            "Functional company website with corporate email domain",
+            "No prior consumption of primary hyperscaler credits"
+        ],
+        required_documents=[
+            "Company website and founder LinkedIn or GitHub profile",
+            "Technical architecture summary showing model and compute layer utilization"
+        ],
+        step_by_step_application=[
+            "1. Visit fin.ai/learn/ai-credits-for-startups for verified provider application routing.",
+            "2. Apply at claude.com/programs/startups for $1,000 direct Claude API credits + 1 yr Claude Team.",
+            "3. Sign up for Groq and Deepgram developer tiers for zero-cost model testing without credit cards.",
+            "4. Join NVIDIA Inception to unlock $7,500 in Lambda Labs GPU cloud compute.",
+            "5. Activate Fin Startup Pack for 1 free year of AI agent application layer."
+        ],
+        official_url="https://fin.ai/learn/ai-credits-for-startups",
+        allowed_domains=["fin.ai", "claude.com", "openai.com", "together.ai", "groq.com", "deepgram.com", "elevenlabs.io"],
+        status=PerkVerificationStatus.VERIFIED_ACTIVE,
+        last_verified_date="2026-10-12",
+        anti_hallucination_notes="AI model credits (Anthropic/OpenAI) cover inference tokens. Compute credits (Lambda/AWS) cover VMs and GPUs. Application layer credits (Fin) cover customer service agents. Stacking across layers provides up to $100K in total runway without diluting equity."
     )
 }
 
