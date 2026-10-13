@@ -20,10 +20,9 @@ export interface BroadcastCompositionProps {
   showSafeZoneOverlay?: boolean;
 }
 
-export const BroadcastComposition: React.FC<BroadcastCompositionProps> = ({
-  vsg,
-  showSafeZoneOverlay = false,
-}) => {
+export const BroadcastComposition: React.FC<BroadcastCompositionProps> = (rawProps) => {
+  const vsg = rawProps.vsg || ((rawProps as any)?.metadata ? (rawProps as any as VSGManifest) : undefined);
+  const showSafeZoneOverlay = rawProps.showSafeZoneOverlay || false;
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 

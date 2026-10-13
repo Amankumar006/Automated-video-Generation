@@ -45,21 +45,21 @@ export const CanvasVoid: React.FC<CanvasVoidProps> = ({
 
       {/* 3. Secondary Warm/Cool Ambient Fill in Lower Third to prevent dead void */}
       <div
-        className="absolute w-[1100px] h-[700px] rounded-full blur-[160px] pointer-events-none -translate-x-1/2"
+        className="absolute w-[1100px] h-[700px] rounded-full blur-[140px] pointer-events-none -translate-x-1/2"
         style={{
           left: "540px",
-          top: "1400px",
-          background: `radial-gradient(ellipse at center, ${secondaryAccent}14 0%, rgba(15, 23, 42, 0.25) 50%, transparent 80%)`,
+          top: "1350px",
+          background: `radial-gradient(ellipse at center, ${heroAccent}2b 0%, ${secondaryAccent}22 45%, rgba(15, 23, 42, 0.35) 70%, transparent 90%)`,
         }}
       />
 
       {/* 4. Perspective Floor Grid in Lower Horizon (Y: 1350px - 1920px) */}
       <div
-        className="absolute bottom-0 left-[-200px] right-[-200px] h-[550px] pointer-events-none opacity-25"
+        className="absolute bottom-0 left-[-200px] right-[-200px] h-[580px] pointer-events-none opacity-60"
         style={{
-          perspective: "600px",
-          maskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 95%)",
-          WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 95%)",
+          perspective: "450px",
+          maskImage: "linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.45) 70%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.45) 70%, transparent 100%)",
         }}
       >
         <div
@@ -67,9 +67,9 @@ export const CanvasVoid: React.FC<CanvasVoidProps> = ({
           style={{
             transform: "rotateX(68deg)",
             transformOrigin: "bottom center",
-            backgroundImage: `linear-gradient(to right, rgba(56, 189, 248, 0.15) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(56, 189, 248, 0.15) 1px, transparent 1px)`,
-            backgroundSize: "48px 48px",
+            backgroundImage: `linear-gradient(to right, rgba(56, 189, 248, 0.4) 1.5px, transparent 1.5px),
+                              linear-gradient(to bottom, rgba(56, 189, 248, 0.4) 1.5px, transparent 1.5px)`,
+            backgroundSize: "44px 44px",
           }}
         />
       </div>
