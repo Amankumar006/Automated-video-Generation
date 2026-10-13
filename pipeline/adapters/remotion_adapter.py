@@ -186,6 +186,7 @@ class RemotionBroadcastAdapter(RenderAdapter):
             self.composition_id,
             str(out_path),
             f"--props={manifest.props_file_path}",
+            f"--frames=0-{max(0, manifest.total_frames - 1)}",
             f"--crf={opts.crf}",
             f"--codec={opts.codec}",
             "--overwrite"

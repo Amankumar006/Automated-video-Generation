@@ -10,6 +10,10 @@ import { AttentionHeatmap } from "../components/AttentionHeatmap";
 import { SyntaxCodeBlock } from "../components/SyntaxCodeBlock";
 import { HorizontalRaceBars } from "../components/HorizontalRaceBars";
 import { VectorFlowDiagram } from "../components/VectorFlowDiagram";
+import { PerkPortalWindow } from "../components/PerkPortalWindow";
+import { PartnerAppGrid } from "../components/PartnerAppGrid";
+import { NewsAnnouncementBanner } from "../components/NewsAnnouncementBanner";
+import { PricingDeltaComparison } from "../components/PricingDeltaComparison";
 
 export interface BroadcastCompositionProps {
   vsg?: VideoSceneGraphIR;
@@ -182,6 +186,46 @@ export const BroadcastComposition: React.FC<BroadcastCompositionProps> = ({
             {...node.props}
           />
         );
+      case "PerkPortalWindow":
+        return (
+          <PerkPortalWindow
+            key={node.id}
+            id={node.id}
+            theme={defaultTheme}
+            bounds={nodeBounds}
+            {...node.props}
+          />
+        );
+      case "PartnerAppGrid":
+        return (
+          <PartnerAppGrid
+            key={node.id}
+            id={node.id}
+            theme={defaultTheme}
+            bounds={nodeBounds}
+            {...node.props}
+          />
+        );
+      case "NewsAnnouncementBanner":
+        return (
+          <NewsAnnouncementBanner
+            key={node.id}
+            id={node.id}
+            theme={defaultTheme}
+            bounds={nodeBounds}
+            {...node.props}
+          />
+        );
+      case "PricingDeltaComparison":
+        return (
+          <PricingDeltaComparison
+            key={node.id}
+            id={node.id}
+            theme={defaultTheme}
+            bounds={nodeBounds}
+            {...node.props}
+          />
+        );
       default:
         return (
           <GlassHUDCard
@@ -195,6 +239,13 @@ export const BroadcastComposition: React.FC<BroadcastCompositionProps> = ({
         );
     }
   };
+
+  // Continuous Camera Focal Breathing calculation
+  const beatStartFrame = currentBeat?.time_range.start_frame ?? 0;
+  const beatEndFrame = currentBeat?.time_range.end_frame ?? 600;
+  const beatDuration = Math.max(1, beatEndFrame - beatStartFrame);
+  const beatProgress = Math.max(0, Math.min(1, (frame - beatStartFrame) / beatDuration));
+  const cameraZoom = 1.000 + 0.038 * Math.pow(beatProgress, 0.85);
 
   return (
     <div className="relative w-[1080px] h-[1920px] overflow-hidden select-none font-sans text-white">
@@ -232,8 +283,15 @@ export const BroadcastComposition: React.FC<BroadcastCompositionProps> = ({
         )}
       </div>
 
-      {/* 3. BAND 3: PRIMARY VISUAL STAGE (Y: 480px to 1180px) */}
-      <div className="absolute inset-0 z-30 pointer-events-none">
+      {/* 3. BAND 3: PRIMARY VISUAL STAGE (Y: 480px to 1180px) with 2.5D Focal Breathing */}
+      <div
+        className="absolute inset-0 z-30 pointer-events-none"
+        style={{
+          transform: `scale(${cameraZoom})`,
+          transformOrigin: "520px 830px",
+          perspective: "1200px",
+        }}
+      >
         {currentBeat?.layout_containers?.map((container) => (
           <div key={container.container_id} className="absolute inset-0 pointer-events-none">
             {container.nodes.map((node) => renderNode(node, container.bounds))}

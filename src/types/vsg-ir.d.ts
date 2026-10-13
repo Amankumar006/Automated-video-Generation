@@ -24,7 +24,11 @@ export type NodeType =
   | "VectorFlowDiagram"
   | "PaperFigureEmbed"
   | "EquationChassis"
-  | "ComparisonSplit";
+  | "ComparisonSplit"
+  | "PerkPortalWindow"
+  | "PartnerAppGrid"
+  | "NewsAnnouncementBanner"
+  | "PricingDeltaComparison";
 
 export type MotionType =
   | "EASE_OUT_EXPO"

@@ -26,7 +26,7 @@ class RenderOptions:
     quality: str = "high"
     pixel_format: str = "yuv420p"
     hardware_acceleration: bool = True
-    timeout_sec: int = 300
+    timeout_sec: int = 600
     extra_flags: Dict[str, Any] = field(default_factory=dict)
 
 

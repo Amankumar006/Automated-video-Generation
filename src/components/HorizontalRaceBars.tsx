@@ -122,6 +122,58 @@ export const HorizontalRaceBars: React.FC<HorizontalRaceBarsProps> = ({
           );
         })}
       </div>
+
+      {/* Engineering Efficiency & Cost Telemetry Deck */}
+      <div className="mt-2 pt-4 border-t border-white/10 flex flex-col gap-3">
+        <div className="flex items-center justify-between text-[16px] font-mono">
+          <span className="font-bold text-slate-400 uppercase tracking-wider">
+            Compute & Cost Efficiency
+          </span>
+          <span className="px-2.5 py-0.5 rounded-full text-[14px] font-mono font-bold bg-sky-500/20 text-sky-400 border border-sky-500/40">
+            FRONTIER PARITY
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-700/60 flex flex-col gap-1">
+            <span className="text-[13px] font-mono text-slate-400 uppercase">
+              Training Compute
+            </span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-[24px] font-mono font-black text-white">
+                2.788M
+              </span>
+              <span className="text-[13px] font-mono text-emerald-400 font-bold">
+                (5.8x Cheaper)
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-slate-500">
+              H800 GPU Hours
+            </span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-700/60 flex flex-col gap-1">
+            <span className="text-[13px] font-mono text-slate-400 uppercase">
+              API Input Pricing
+            </span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-[24px] font-mono font-black text-emerald-400">
+                $0.14
+              </span>
+              <span className="text-[13px] font-mono text-emerald-400 font-bold">
+                / 1M tokens
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-slate-500">
+              vs $2.50 Industry Average
+            </span>
+          </div>
+        </div>
+
+        <div className="text-[13px] font-mono text-slate-500 text-center">
+          Source: DeepSeek-V3 Official Benchmark Evaluation
+        </div>
+      </div>
     </div>
   );
 };

@@ -45,6 +45,10 @@ class NodeType(str, Enum):
     PAPER_FIGURE_EMBED = "PaperFigureEmbed"
     EQUATION_CHASSIS = "EquationChassis"
     COMPARISON_SPLIT = "ComparisonSplit"
+    PERK_PORTAL_WINDOW = "PerkPortalWindow"
+    PARTNER_APP_GRID = "PartnerAppGrid"
+    NEWS_ANNOUNCEMENT_BANNER = "NewsAnnouncementBanner"
+    PRICING_DELTA_COMPARISON = "PricingDeltaComparison"
 
 
 class MotionType(str, Enum):

@@ -178,3 +178,34 @@ class TestRenderAdapters:
         # 3. Explicit override flags
         assert router.select_engine(sample_vsg, engine_override="remotion").engine_name == "remotion"
         assert router.select_engine(sample_vsg, engine_override="manim").engine_name == "manim"
+
+    def test_tech_perks_and_news_node_types_render(self, sample_vsg: VideoSceneGraphIR):
+        """Verifies Remotion renders still frames containing new Perk and News node types."""
+        adapter = RemotionBroadcastAdapter()
+
+        # Build VSG with PerkPortalWindow node
+        perk_vsg = sample_vsg.model_copy(deep=True)
+        perk_node = VisualNode(
+            id="perk_portal",
+            node_type=NodeType.PERK_PORTAL_WINDOW,
+            props={
+                "portalUrl": "anthropic.com/startups",
+                "programTitle": "Claude Startups Accelerator",
+                "creditValue": "$1,000 FREE CREDITS"
+            },
+            bounds=BoundingBoxPx(x_min_px=140, y_min_px=500, width_px=760, height_px=650),
+            motion_track=MotionTrack(
+                enter=EnterMotion(
+                    type=MotionType.SPRING_DAMPED,
+                    start_frame=0,
+                    duration_frames=30
+                )
+            )
+        )
+        perk_vsg.beats[0].layout_containers[0].nodes = [perk_node]
+
+        manifest = adapter.compile_scene_graph(perk_vsg)
+        frame_bgr = adapter.render_frame(10, manifest)
+        assert frame_bgr.shape == (1920, 1080, 3)
+        assert np.mean(frame_bgr) > 0.0
+

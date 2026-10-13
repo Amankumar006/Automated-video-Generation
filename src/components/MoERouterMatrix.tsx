@@ -126,6 +126,36 @@ export const MoERouterMatrix: React.FC<MoERouterMatrixProps> = ({
           100% ROUTING EFFICIENCY
         </span>
       </div>
+
+      {/* 5. Active Expert Cluster Roster */}
+      <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
+        <div className="flex items-center justify-between text-[14px] font-mono">
+          <span className="font-bold text-slate-400 uppercase tracking-wider">
+            Active Expert Clusters
+          </span>
+          <span className="text-sky-400 font-bold">Top-8 Sigmoid Selected</span>
+        </div>
+        <div className="grid grid-cols-4 gap-2">
+          {[
+            { id: 4, name: "Math" },
+            { id: 12, name: "Code" },
+            { id: 19, name: "Logic" },
+            { id: 27, name: "Reason" },
+            { id: 34, name: "Language" },
+            { id: 45, name: "Vision" },
+            { id: 52, name: "Memory" },
+            { id: 61, name: "Arch" },
+          ].map((exp) => (
+            <div
+              key={exp.id}
+              className="px-2 py-1.5 rounded-lg bg-sky-950/50 border border-sky-500/30 flex items-center justify-between text-[12px] font-mono"
+            >
+              <span className="text-sky-300 font-black">#{exp.id}</span>
+              <span className="text-slate-300 font-bold">{exp.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

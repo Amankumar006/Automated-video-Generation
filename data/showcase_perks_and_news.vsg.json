@@ -1,0 +1,204 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "project_id": "showcase_perks_and_news",
+    "title": "Claim $31,000 in Free AI Credits",
+    "domain_taxonomy": "startup_perks_and_grants",
+    "aspect_ratio": "9:16",
+    "canvas": {
+      "width_px": 1080,
+      "height_px": 1920,
+      "fps": 60,
+      "duration_seconds": 6.0,
+      "total_frames": 360
+    },
+    "audio": {
+      "master_voiceover_path": "audio/perks_voice.wav",
+      "sample_rate_hz": 24000,
+      "music_ducking_db": -18.0
+    }
+  },
+  "theme": {
+    "theme_id": "cyber_cyan",
+    "colors": {
+      "canvas_void": "#06080F",
+      "surface_recessed": "#0B101D",
+      "surface_primary": "rgba(15, 23, 42, 0.85)",
+      "surface_elevated": "rgba(30, 41, 59, 0.95)",
+      "surface_border": "rgba(255, 255, 255, 0.15)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_tertiary": "#64748B",
+      "hero_accent": "#38BDF8",
+      "secondary_accent": "#10B981",
+      "status_gain": "#10B981",
+      "status_loss": "#EF4444",
+      "status_warning": "#F59E0B"
+    },
+    "materials": {
+      "card_blur_px": 24.0,
+      "border_radius_px": 20.0,
+      "border_width_px": 1.5,
+      "shadow_elevation": "0 24px 48px -12px rgba(0, 0, 0, 0.65)",
+      "vignette_intensity": 0.4
+    },
+    "typography": {
+      "font_family_display": "Inter Display",
+      "font_family_code": "JetBrains Mono",
+      "font_family_math": "KaTeX Main",
+      "open_type_features": "cv05=1, cv08=1, zero=1, tnum=1"
+    }
+  },
+  "beats": [
+    {
+      "beat_id": 1,
+      "time_range": {
+        "start_sec": 0.0,
+        "end_sec": 2.0,
+        "start_frame": 0,
+        "end_frame": 120
+      },
+      "narrative": {
+        "spoken_text": "Anthropic is giving one thousand dollars in free API credits to early stage startups.",
+        "intent": "Actionable startup credits walkthrough",
+        "visual_metaphor": "PerkPortalWindow",
+        "primary_focus_node_id": "perk_portal_node"
+      },
+      "acoustic_anchors": [
+        { "word": "ANTHROPIC", "timestamp_sec": 0.2, "frame_trigger": 12 },
+        { "word": "GIVING", "timestamp_sec": 0.6, "frame_trigger": 36 },
+        { "word": "FREE", "timestamp_sec": 1.0, "frame_trigger": 60 },
+        { "word": "CREDITS", "timestamp_sec": 1.4, "frame_trigger": 84 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_p1",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 700 },
+          "nodes": [
+            {
+              "id": "perk_portal_node",
+              "node_type": "PerkPortalWindow",
+              "props": {
+                "portalUrl": "anthropic.com/startups",
+                "programTitle": "Claude Startups Accelerator",
+                "creditValue": "$1,000 FREE CREDITS",
+                "partnerName": "Anthropic Early-Stage Tier",
+                "checklist": [
+                  { "label": "Raised under $5M in funding", "isCompleted": true },
+                  { "label": "Valid company domain & work email", "isCompleted": true },
+                  { "label": "Building production AI application", "isCompleted": true }
+                ],
+                "ctaButtonText": "Claim Credits Now",
+                "showCursorClick": true
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 700 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 0, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "time_range": {
+        "start_sec": 2.0,
+        "end_sec": 4.0,
+        "start_frame": 120,
+        "end_frame": 240
+      },
+      "narrative": {
+        "spoken_text": "Stack this with AWS and Stripe for over thirty-one thousand dollars in total runway.",
+        "intent": "Ecosystem grant stack matrix",
+        "visual_metaphor": "PartnerAppGrid",
+        "primary_focus_node_id": "partner_grid_node"
+      },
+      "acoustic_anchors": [
+        { "word": "STACK", "timestamp_sec": 2.2, "frame_trigger": 132 },
+        { "word": "THIS", "timestamp_sec": 2.6, "frame_trigger": 156 },
+        { "word": "WITH", "timestamp_sec": 3.0, "frame_trigger": 180 },
+        { "word": "AWS", "timestamp_sec": 3.4, "frame_trigger": 204 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_p2",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 460 },
+          "nodes": [
+            {
+              "id": "partner_grid_node",
+              "node_type": "PartnerAppGrid",
+              "props": {
+                "title": "Active Founder Grant Matrix",
+                "subtitle": "Stackable founder tiers verified today",
+                "partners": [
+                  { "name": "Anthropic Claude", "grantValue": "$1,000", "category": "API Credits", "highlightColor": "#38BDF8", "isHero": true },
+                  { "name": "AWS Activate", "grantValue": "$25,000", "category": "Compute Tier", "highlightColor": "#F59E0B" },
+                  { "name": "Stripe Atlas", "grantValue": "$5,000", "category": "Waived Fees", "highlightColor": "#8B5CF6" },
+                  { "name": "GitHub Copilot", "grantValue": "1-Yr Free", "category": "Developer Seats", "highlightColor": "#10B981" }
+                ]
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 460 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 120, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "time_range": {
+        "start_sec": 4.0,
+        "end_sec": 6.0,
+        "start_frame": 240,
+        "end_frame": 360
+      },
+      "narrative": {
+        "spoken_text": "Plus OpenAI o3-mini cuts API reasoning costs by over sixty percent.",
+        "intent": "Official lab drop breaking news",
+        "visual_metaphor": "NewsAnnouncementBanner",
+        "primary_focus_node_id": "news_banner_node"
+      },
+      "acoustic_anchors": [
+        { "word": "OPENAI", "timestamp_sec": 4.2, "frame_trigger": 252 },
+        { "word": "O3-MINI", "timestamp_sec": 4.6, "frame_trigger": 276 },
+        { "word": "CUTS", "timestamp_sec": 5.0, "frame_trigger": 300 },
+        { "word": "COSTS", "timestamp_sec": 5.4, "frame_trigger": 324 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_p3",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 480 },
+          "nodes": [
+            {
+              "id": "news_banner_node",
+              "node_type": "NewsAnnouncementBanner",
+              "props": {
+                "labName": "OpenAI Newsroom",
+                "announcementHeadline": "o3-mini Released Globally with High Reasoning Effort",
+                "releaseDate": "OFFICIAL DROP",
+                "modelVersion": "o3-mini",
+                "metrics": [
+                  { "label": "Math & Code", "value": "88.2%", "deltaText": "+7.4% vs o1-mini", "isPositive": true },
+                  { "label": "Token Pricing", "value": "$1.10", "deltaText": "-63% Cost Cut", "isPositive": true },
+                  { "label": "Inference Latency", "value": "3.2s", "deltaText": "2.8x Faster", "isPositive": true },
+                  { "label": "Context Window", "value": "200K", "deltaText": "Full Multimodal", "isPositive": true }
+                ],
+                "canonicalUrl": "openai.com/index/openai-o3-mini"
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 480, "width_px": 760, "height_px": 480 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 240, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
