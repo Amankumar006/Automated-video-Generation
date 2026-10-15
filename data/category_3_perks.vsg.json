@@ -1,0 +1,451 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "project_id": "category_3_perks",
+    "title": "Claim $31,000 in Free AI Credits",
+    "domain_taxonomy": "STARTUP_PERKS_AND_GRANTS",
+    "aspect_ratio": "9:16",
+    "canvas": {
+      "width_px": 1080,
+      "height_px": 1920,
+      "fps": 60,
+      "duration_seconds": 15.41,
+      "total_frames": 925
+    },
+    "audio": {
+      "master_voiceover_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/short_master_audio.wav",
+      "sample_rate_hz": 24000,
+      "music_ducking_db": -18.0
+    }
+  },
+  "theme": {
+    "theme_id": "cyber_cyan",
+    "colors": {
+      "canvas_void": "#06080F",
+      "surface_recessed": "#0B101D",
+      "surface_primary": "rgba(15, 23, 42, 0.85)",
+      "surface_elevated": "rgba(30, 41, 59, 0.95)",
+      "surface_border": "rgba(255, 255, 255, 0.15)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_tertiary": "#64748B",
+      "hero_accent": "#38BDF8",
+      "secondary_accent": "#10B981",
+      "status_gain": "#10B981",
+      "status_loss": "#EF4444",
+      "status_warning": "#F59E0B"
+    },
+    "materials": {
+      "card_blur_px": 24.0,
+      "border_radius_px": 20.0,
+      "border_width_px": 1.5,
+      "shadow_elevation": "0 24px 48px -12px rgba(0, 0, 0, 0.65)",
+      "vignette_intensity": 0.4
+    },
+    "typography": {
+      "font_family_display": "Inter Display",
+      "font_family_code": "JetBrains Mono",
+      "font_family_math": "KaTeX Main",
+      "open_type_features": "cv05=1, cv08=1, zero=1, tnum=1"
+    }
+  },
+  "beats": [
+    {
+      "beat_id": 1,
+      "time_range": {
+        "start_sec": 0.0,
+        "end_sec": 5.18,
+        "start_frame": 0,
+        "end_frame": 320
+      },
+      "narrative": {
+        "spoken_text": "Anthropic is giving one thousand dollars in free API credits to early stage startups.",
+        "intent": "Actionable startup credits walkthrough",
+        "visual_metaphor": "PerkPortalWindow",
+        "primary_focus_node_id": "perk_portal_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "ANTHROPIC",
+          "timestamp_sec": 0.01,
+          "frame_trigger": 1
+        },
+        {
+          "word": "IS",
+          "timestamp_sec": 0.56,
+          "frame_trigger": 34
+        },
+        {
+          "word": "GIVING",
+          "timestamp_sec": 0.78,
+          "frame_trigger": 47
+        },
+        {
+          "word": "ONE",
+          "timestamp_sec": 1.035,
+          "frame_trigger": 62
+        },
+        {
+          "word": "THOUSAND",
+          "timestamp_sec": 1.29,
+          "frame_trigger": 77
+        },
+        {
+          "word": "DOLLARS",
+          "timestamp_sec": 1.685,
+          "frame_trigger": 101
+        },
+        {
+          "word": "IN",
+          "timestamp_sec": 2.215,
+          "frame_trigger": 133
+        },
+        {
+          "word": "FREE",
+          "timestamp_sec": 2.375,
+          "frame_trigger": 142
+        },
+        {
+          "word": "API",
+          "timestamp_sec": 2.665,
+          "frame_trigger": 160
+        },
+        {
+          "word": "CREDITS",
+          "timestamp_sec": 3.265,
+          "frame_trigger": 196
+        },
+        {
+          "word": "TO",
+          "timestamp_sec": 3.69,
+          "frame_trigger": 221
+        },
+        {
+          "word": "EARLY",
+          "timestamp_sec": 3.83,
+          "frame_trigger": 230
+        },
+        {
+          "word": "STAGE",
+          "timestamp_sec": 4.12,
+          "frame_trigger": 247
+        },
+        {
+          "word": "STARTUPS",
+          "timestamp_sec": 4.6,
+          "frame_trigger": 276
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b1",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 520
+          },
+          "nodes": [
+            {
+              "id": "perk_portal_node",
+              "node_type": "PerkPortalWindow",
+              "props": {
+                "urlPath": "anthropic.com/startups",
+                "partnerName": "Claude Startups Accelerator",
+                "benefitAmount": "$1,000 FREE CREDITS",
+                "eligibilitySteps": [
+                  "Raised under $5M in funding",
+                  "Valid company domain & work email",
+                  "Building production AI application"
+                ],
+                "ctaLabel": "CLAIM CREDITS NOW \u2192"
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 520
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 0,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "time_range": {
+        "start_sec": 5.33,
+        "end_sec": 10.45,
+        "start_frame": 320,
+        "end_frame": 636
+      },
+      "narrative": {
+        "spoken_text": "You can stack this with twenty-five thousand from AWS Activate and GitHub Copilot.",
+        "intent": "Ecosystem grant stack matrix",
+        "visual_metaphor": "PartnerAppGrid",
+        "primary_focus_node_id": "partner_app_grid_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "YOU",
+          "timestamp_sec": 5.344,
+          "frame_trigger": 321
+        },
+        {
+          "word": "CAN",
+          "timestamp_sec": 5.584,
+          "frame_trigger": 335
+        },
+        {
+          "word": "STACK",
+          "timestamp_sec": 5.679,
+          "frame_trigger": 341
+        },
+        {
+          "word": "THIS",
+          "timestamp_sec": 6.064,
+          "frame_trigger": 364
+        },
+        {
+          "word": "WITH",
+          "timestamp_sec": 6.319,
+          "frame_trigger": 379
+        },
+        {
+          "word": "TWENTYFIVE",
+          "timestamp_sec": 6.504,
+          "frame_trigger": 390
+        },
+        {
+          "word": "THOUSAND",
+          "timestamp_sec": 7.219,
+          "frame_trigger": 433
+        },
+        {
+          "word": "FROM",
+          "timestamp_sec": 7.764,
+          "frame_trigger": 466
+        },
+        {
+          "word": "AWS",
+          "timestamp_sec": 8.029,
+          "frame_trigger": 482
+        },
+        {
+          "word": "ACTIVATE",
+          "timestamp_sec": 8.274,
+          "frame_trigger": 496
+        },
+        {
+          "word": "AND",
+          "timestamp_sec": 8.926,
+          "frame_trigger": 536
+        },
+        {
+          "word": "GITHUB",
+          "timestamp_sec": 9.209,
+          "frame_trigger": 553
+        },
+        {
+          "word": "COPILOT",
+          "timestamp_sec": 9.734,
+          "frame_trigger": 584
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b2",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 460
+          },
+          "nodes": [
+            {
+              "id": "partner_app_grid_node",
+              "node_type": "PartnerAppGrid",
+              "props": {
+                "title": "Active Founder Grant Matrix",
+                "subtitle": "Stackable founder tiers verified today",
+                "partners": [
+                  {
+                    "name": "Anthropic Claude",
+                    "perk": "$1,000",
+                    "type": "API Credits",
+                    "status": "APPROVED",
+                    "color": "#38BDF8"
+                  },
+                  {
+                    "name": "AWS Activate",
+                    "perk": "$25,000",
+                    "type": "Compute Tier",
+                    "status": "APPROVED",
+                    "color": "#F59E0B"
+                  },
+                  {
+                    "name": "Stripe Atlas",
+                    "perk": "$5,000",
+                    "type": "Waived Fees",
+                    "status": "APPROVED",
+                    "color": "#A855F7"
+                  },
+                  {
+                    "name": "GitHub Copilot",
+                    "perk": "1-Yr Free",
+                    "type": "Developer Seats",
+                    "status": "APPROVED",
+                    "color": "#10B981"
+                  }
+                ],
+                "totalValue": "$31,000+ Available Value"
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 460
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 320,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "time_range": {
+        "start_sec": 10.6,
+        "end_sec": 14.91,
+        "start_frame": 636,
+        "end_frame": 925
+      },
+      "narrative": {
+        "spoken_text": "Apply with your company domain to claim over thirty-one thousand dollars today.",
+        "intent": "Bootstrap vs subsidized cost delta",
+        "visual_metaphor": "PricingDeltaComparison",
+        "primary_focus_node_id": "perks_pricing_delta_node"
+      },
+      "acoustic_anchors": [
+        {
+          "word": "APPLY",
+          "timestamp_sec": 10.609,
+          "frame_trigger": 637
+        },
+        {
+          "word": "WITH",
+          "timestamp_sec": 10.994,
+          "frame_trigger": 660
+        },
+        {
+          "word": "YOUR",
+          "timestamp_sec": 11.084,
+          "frame_trigger": 665
+        },
+        {
+          "word": "COMPANY",
+          "timestamp_sec": 11.219,
+          "frame_trigger": 673
+        },
+        {
+          "word": "DOMAIN",
+          "timestamp_sec": 11.734,
+          "frame_trigger": 704
+        },
+        {
+          "word": "TO",
+          "timestamp_sec": 12.176,
+          "frame_trigger": 731
+        },
+        {
+          "word": "CLAIM",
+          "timestamp_sec": 12.334,
+          "frame_trigger": 740
+        },
+        {
+          "word": "OVER",
+          "timestamp_sec": 12.694,
+          "frame_trigger": 762
+        },
+        {
+          "word": "THIRTYONE",
+          "timestamp_sec": 13.079,
+          "frame_trigger": 785
+        },
+        {
+          "word": "THOUSAND",
+          "timestamp_sec": 13.639,
+          "frame_trigger": 818
+        },
+        {
+          "word": "DOLLARS",
+          "timestamp_sec": 14.034,
+          "frame_trigger": 842
+        },
+        {
+          "word": "TODAY",
+          "timestamp_sec": 14.464,
+          "frame_trigger": 868
+        }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b3",
+          "band": "BAND_3_STAGE",
+          "bounds": {
+            "x_min_px": 140,
+            "y_min_px": 500,
+            "width_px": 760,
+            "height_px": 440
+          },
+          "nodes": [
+            {
+              "id": "perks_pricing_delta_node",
+              "node_type": "PricingDeltaComparison",
+              "props": {
+                "title": "Startup Runway Capital Leverage",
+                "subtitle": "Bootstrapped out-of-pocket vs grant acceleration",
+                "oldTierName": "Out-of-Pocket Compute",
+                "oldPrice": "$31,000 Cash",
+                "oldLatency": "Zero Subsidy",
+                "newTierName": "Accelerated Stack",
+                "newPrice": "$0 Subsidized",
+                "newLatency": "100% Covered",
+                "savingsPercentage": "100% SUBSIDIZED",
+                "efficiencyMultiplier": "$31K VALUE"
+              },
+              "bounds": {
+                "x_min_px": 140,
+                "y_min_px": 500,
+                "width_px": 760,
+                "height_px": 440
+              },
+              "motion_track": {
+                "enter": {
+                  "type": "SPRING_DAMPED",
+                  "start_frame": 636,
+                  "duration_frames": 24
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -19,6 +19,15 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
+from pipeline.script_directives import (
+    SHARED_SCRIPT_PROMPT_DIRECTIVE,
+    TRACK_3_DEVELOPER_PERKS_PROMPT_TEMPLATE,
+    validate_script_spec,
+    get_total_word_count,
+)
+
+SHARED_SCRIPT_PROMPT = SHARED_SCRIPT_PROMPT_DIRECTIVE
+
 COLOR_MINT = "#34D399"
 COLOR_DANGER = "#EF4444"
 COLOR_CYAN = "#38BDF8"
@@ -61,50 +70,19 @@ class DeveloperPerksScriptEngine:
 
     def _build_prompt(self, topic: str, perk_meta: Optional[Dict[str, Any]], context: Optional[str]) -> str:
         prov = self._extract_provider(topic, perk_meta)
-        headline = (perk_meta.get("title") if perk_meta else None) or topic
-        val_usd = perk_meta.get("value_usd", 2800) if perk_meta else 2800
-        val_str = f"${val_usd:,}" if isinstance(val_usd, (int, float)) and val_usd > 0 else "$1,000+"
-        abstract = (perk_meta.get("abstract") if perk_meta else None) or context or ""
+        headline = (perk_meta.get("title") if perk_meta else None) or (perk_meta.get("headline") if perk_meta else None) or topic
+        val_str = self._extract_dollar_value(topic, perk_meta)
+        details = (perk_meta.get("summary") if perk_meta else None) or (perk_meta.get("abstract") if perk_meta else None) or context or topic
 
-        return f"""You are the Host & Lead Producer of 'The Model Verse' (themodelverse.in), creating an Actionable Developer Perks & Credits Guide.
-Generate a fast-paced, highly practical 6-beat YouTube Shorts script matching the style of Alex Bowers:
-Provider: {prov}
-Program: {headline}
-Total Dollar Value: {val_str}
-Details: {abstract}
+        track_prompt = TRACK_3_DEVELOPER_PERKS_PROMPT_TEMPLATE.format(
+            provider=prov,
+            headline=headline,
+            val_str=val_str,
+            details=details
+        )
+        return f"""{SHARED_SCRIPT_PROMPT_DIRECTIVE}
 
-Voice & Deal Guide Persona:
-- Tone: High-energy, direct, actionable, insider developer deal breakdown (like Alex Bowers or Starter Story).
-- Speak directly to developers, indie hackers, and early-stage startup founders.
-- NO academic jargon, no textbook theories, no LaTeX references.
-- Focus on dollar amounts, who qualifies, how to apply in 3 steps, and approval turnaround.
-
-6-Beat Structure (Exactly 125-155 words total):
-Beat 1 (0-3s, Total Dollar Value Hook): Hook the viewer with the exact massive dollar amount of free credits.
-Beat 2 (3-12s, Deal Breakdown): Exact benefits (e.g. $1,000 API credits + 1 year free Claude Team for 5 seats).
-Beat 3 (12-24s, Eligibility Checklist): Clear 3-part qualification criteria (early stage, domain, working code/GitHub).
-Beat 4 (24-35s, Console Walkthrough): Exact steps to apply (console URL, linking GitHub, filling 3 fields).
-Beat 5 (35-44s, Social Proof Receipts): Community proof (founders on Twitter/Reddit getting approved in 24-48 hours).
-Beat 6 (44-50s, Urgent Save CTA): 'Save this video before the program caps, and follow The Model Verse for daily developer perks.'
-
-Output ONLY valid JSON matching this schema:
-{{
-  "id": "slug_id",
-  "title": "{headline}",
-  "category": "developer_perks",
-  "domain_taxonomy": "developer_perks",
-  "beats": [
-    {{
-      "beat_id": 1,
-      "text": "...",
-      "visual_focus": "Total dollar value hero card with {prov} branding.",
-      "highlight_words": {{"{prov}": "{COLOR_CYAN}", "free credits": "{COLOR_MINT}"}},
-      "svo_action": {{"subject": "Developers", "action_verb": "claim", "direct_object": "Free Credits", "anchor_word": "credits"}},
-      "visual_blueprint": {{"layout": "perks_hero_value", "title": "{headline.upper()}", "sub": "Official Developer Grant", "params": {{}}}}
-    }}
-  ]
-}}
-"""
+{track_prompt}"""
 
     def _build_deterministic_script(self, topic: str, perk_meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         prov = self._extract_provider(topic, perk_meta)
@@ -124,60 +102,80 @@ Output ONLY valid JSON matching this schema:
 
         beats = [
             {
+                "n": 1,
                 "beat_id": 1,
                 "name": "b1_dollar_value_hook",
-                "text": f"Stop paying for AI APIs out of pocket: {prov} just launched their Startups Program with {val_str} in free credits!",
+                "text": f"Stop paying for AI APIs: {prov} offers {val_str} in free credits.",
+                "anchor_word": "credits",
+                "visual_cue": f"Hero value card highlighting {val_str} free developer credits and {prov} badge.",
                 "visual_focus": f"Hero value card highlighting {val_str} free developer credits and {prov} badge.",
-                "highlight_words": {prov: COLOR_CYAN, val_str: COLOR_MINT, "out of pocket": COLOR_DANGER},
+                "highlight_words": {prov: COLOR_CYAN, val_str: COLOR_MINT, "credits": COLOR_GOLD},
                 "svo_action": {"subject": "Developers", "action_verb": "claim", "direct_object": "Startup Credits", "anchor_word": "credits", "semantic_role": "agent_action"},
                 "visual_blueprint": {"layout": "perks_hero_value", "title": f"{prov.upper()} STARTUP PROGRAM", "sub": f"{val_str} Official Grant", "params": {"provider": prov, "value": val_str}}
             },
             {
+                "n": 2,
                 "beat_id": 2,
                 "name": "b2_bundle_breakdown",
-                "text": "Here is the exact bundle: one thousand dollars in direct model credits plus a full free year of Claude Team for five developer seats.",
+                "text": "Here is the exact bundle breakdown: one thousand dollars in direct model credits plus one full free year of Claude Team for five developer seats.",
+                "anchor_word": "bundle",
+                "visual_cue": "Split-screen perk package tiles displaying API credit balance and Team seats.",
                 "visual_focus": "Split-screen perk package tiles displaying API credit balance and Team seats.",
                 "highlight_words": {"one thousand dollars": COLOR_MINT, "Claude Team": COLOR_CYAN, "five developer seats": COLOR_GOLD},
                 "svo_action": {"subject": prov, "action_verb": "grants", "direct_object": "Team Seats", "anchor_word": "bundle", "semantic_role": "agent_action"},
                 "visual_blueprint": {"layout": "perks_package_tiles", "title": "PERK PACKAGE BREAKDOWN", "sub": "Direct Model Credits & Seats", "params": {}}
             },
             {
+                "n": 3,
                 "beat_id": 3,
                 "name": "b3_eligibility_criteria",
-                "text": "Qualifying is straightforward: you need an early-stage company, a live website with a custom domain, and an active prototype or GitHub repository.",
+                "text": "Eligibility requires three simple things: an early-stage incorporated startup, a live landing page with custom domain, and an active prototype or GitHub repository.",
+                "anchor_word": "Eligibility",
+                "visual_cue": "Interactive eligibility checklist with animated green checkmarks popping in.",
                 "visual_focus": "Interactive eligibility checklist with animated green checkmarks popping in.",
-                "highlight_words": {"early-stage company": COLOR_CYAN, "custom domain": COLOR_MINT, "GitHub repository": COLOR_GOLD},
-                "svo_action": {"subject": "Founders", "action_verb": "qualifies", "direct_object": "Eligibility Checklist", "anchor_word": "Qualifying", "semantic_role": "state_transition"},
+                "highlight_words": {"early-stage incorporated startup": COLOR_CYAN, "custom domain": COLOR_MINT, "GitHub repository": COLOR_GOLD},
+                "svo_action": {"subject": "Founders", "action_verb": "qualifies", "direct_object": "Eligibility Checklist", "anchor_word": "Eligibility", "semantic_role": "state_transition"},
                 "visual_blueprint": {"layout": "perks_eligibility_checklist", "title": "ELIGIBILITY CHECKLIST", "sub": "Three Simple Requirements", "params": {}}
             },
             {
+                "n": 4,
                 "beat_id": 4,
                 "name": "b4_console_walkthrough",
-                "text": f"To apply, head to {official_url.replace('https://', '').split('?')[0]}, link your GitHub repo, fill in three quick fields, and hit submit.",
+                "text": f"To apply, head to {official_url.replace('https://', '').split('?')[0]}, link your GitHub repository, fill in three short team questions, and submit your application for review.",
+                "anchor_word": "submit",
+                "visual_cue": "Simulated developer console form with animated cursor gliding and clicking submit.",
                 "visual_focus": "Simulated developer console form with animated cursor gliding and clicking submit.",
-                "highlight_words": {"GitHub repo": COLOR_GOLD, "three quick fields": COLOR_CYAN, "submit": COLOR_MINT},
+                "highlight_words": {"GitHub repository": COLOR_GOLD, "three short team questions": COLOR_CYAN, "submit": COLOR_MINT},
                 "svo_action": {"subject": "Cursor", "action_verb": "submits", "direct_object": "Console Application", "anchor_word": "submit", "semantic_role": "agent_action"},
                 "visual_blueprint": {"layout": "perks_console_walkthrough", "title": "CONSOLE APPLICATION", "sub": "Three-Minute Verification", "params": {"url": official_url}}
             },
             {
+                "n": 5,
                 "beat_id": 5,
                 "name": "b5_social_proof",
-                "text": "The turnaround is rapid: founders on Twitter and Reddit confirm approvals within twenty-four to forty-eight hours, with credits dropping straight into the console.",
+                "text": "Community founders on social channels report swift verifications, with verified credit balances appearing directly inside the developer production billing dashboard.",
+                "anchor_word": "verifications",
+                "visual_cue": "Floating 3D Twitter and Reddit social proof receipt cards with glowing like counters.",
                 "visual_focus": "Floating 3D Twitter and Reddit social proof receipt cards with glowing like counters.",
-                "highlight_words": {"twenty-four hours": COLOR_GOLD, "approvals": COLOR_MINT, "Twitter and Reddit": COLOR_CYAN},
-                "svo_action": {"subject": "Founders", "action_verb": "confirms", "direct_object": "Fast Approvals", "anchor_word": "turnaround", "semantic_role": "metric_evaluation"},
+                "highlight_words": {"swift verifications": COLOR_GOLD, "verified credit balances": COLOR_MINT, "billing dashboard": COLOR_CYAN},
+                "svo_action": {"subject": "Founders", "action_verb": "confirms", "direct_object": "Fast Approvals", "anchor_word": "verifications", "semantic_role": "metric_evaluation"},
                 "visual_blueprint": {"layout": "perks_social_proof_receipt", "title": "COMMUNITY SOCIAL PROOF", "sub": "Real Founder Receipts", "params": {}}
             },
             {
+                "n": 6,
                 "beat_id": 6,
                 "name": "b6_save_bookmark_cta",
-                "text": "Save this reel before the program cohort caps, and follow The Model Verse for daily developer perks and AI tools.",
+                "text": "Save this video and follow The Model Verse for daily developer perks and free startup grants.",
+                "anchor_word": "Model",
+                "visual_cue": "Actionable save bookmark banner and The Model Verse brand signature.",
                 "visual_focus": "Actionable save bookmark banner and The Model Verse brand signature.",
-                "highlight_words": {"Save this reel": COLOR_GOLD, "The Model Verse": COLOR_MINT},
+                "highlight_words": {"Save this video": COLOR_GOLD, "The Model Verse": COLOR_MINT},
                 "svo_action": {"subject": "The Model Verse", "action_verb": "curates", "direct_object": "Developer Perks", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
                 "visual_blueprint": {"layout": "perks_action_outro", "title": "THE MODEL VERSE", "sub": "Daily Developer Perks & Tools", "params": {}}
             }
         ]
+
+        total_words = sum(len(b["text"].split()) for b in beats)
 
         spec = {
             "id": clean_id,
@@ -186,6 +184,7 @@ Output ONLY valid JSON matching this schema:
             "provider": prov.lower(),
             "voice_style": "actionable_insider",
             "domain_taxonomy": "developer_perks",
+            "word_count": total_words,
             "beats": beats,
             "manim_blueprints": [
                 {"type": "dollar_value_hero", "title": f"{prov.upper()} STARTUP PROGRAM"},
@@ -195,8 +194,6 @@ Output ONLY valid JSON matching this schema:
                 {"type": "social_proof_receipts", "title": "COMMUNITY SOCIAL PROOF"},
                 {"type": "save_bookmark_cta", "title": "THE MODEL VERSE"}
             ],
-            "domain_taxonomy": "developer_perks",
-            "beats": beats,
             "perk_metadata": {
                 "provider": prov,
                 "headline": headline,
@@ -246,15 +243,99 @@ Output ONLY valid JSON matching this schema:
         return spec
 
     def _finalize_spec(self, spec: Dict[str, Any], topic: str, perk_meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        prov = self._extract_provider(topic, perk_meta)
+        headline = (perk_meta.get("title") if perk_meta else None) or (perk_meta.get("headline") if perk_meta else None) or spec.get("title") or topic
+        clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", topic).lower()).strip("_")
+        if not clean_id.startswith("perk_"):
+            clean_id = f"perk_{clean_id}"
+
+        spec["id"] = clean_id
+        spec["title"] = spec.get("title") or headline
         spec["category"] = "developer_perks"
+        spec["provider"] = prov.lower()
+        spec["voice_style"] = "actionable_insider"
+        spec["domain_taxonomy"] = spec.get("domain_taxonomy") or "developer_perks"
+
         if not spec.get("perk_metadata"):
-            prov = self._extract_provider(topic, perk_meta)
             spec["perk_metadata"] = {
                 "provider": prov,
                 "headline": spec.get("title", topic),
                 "value_usd": perk_meta.get("value_usd", 2800) if perk_meta else 2800,
                 "official_url": (perk_meta.get("official_url", "")) if perk_meta else ""
             }
+
+        beat_names = ["b1_dollar_value_hook", "b2_bundle_breakdown", "b3_eligibility_criteria", "b4_console_walkthrough", "b5_social_proof", "b6_save_bookmark_cta"]
+        val_str = self._extract_dollar_value(topic, perk_meta)
+        default_blueprints = [
+            {"layout": "perks_hero_value", "title": f"{prov.upper()} STARTUP PROGRAM", "sub": f"{val_str} Official Grant", "params": {"provider": prov, "value": val_str}},
+            {"layout": "perks_package_tiles", "title": "PERK PACKAGE BREAKDOWN", "sub": "Direct Model Credits & Seats", "params": {}},
+            {"layout": "perks_eligibility_checklist", "title": "ELIGIBILITY CHECKLIST", "sub": "Three Simple Requirements", "params": {}},
+            {"layout": "perks_console_walkthrough", "title": "CONSOLE APPLICATION", "sub": "Three-Minute Verification", "params": {}},
+            {"layout": "perks_social_proof_receipt", "title": "COMMUNITY SOCIAL PROOF", "sub": "Real Founder Receipts", "params": {}},
+            {"layout": "perks_action_outro", "title": "THE MODEL VERSE", "sub": "Daily Developer Perks & Tools", "params": {}}
+        ]
+
+        normalized_beats = []
+        for idx, b in enumerate(spec.get("beats", [])):
+            b_id = b.get("n") or b.get("beat_id", idx + 1)
+            text = (b.get("text") or "").strip()
+            anchor_word = (b.get("anchor_word") or "").strip()
+            visual_cue = (b.get("visual_cue") or b.get("visual_focus") or "").strip()
+
+            if not anchor_word and text:
+                words = [re.sub(r"[^\w]", "", w) for w in text.split()]
+                anchor_word = words[-1] if words else "Credits"
+
+            b["beat_id"] = b_id
+            b["n"] = b_id
+            b["text"] = text
+            b["anchor_word"] = anchor_word
+            b["visual_cue"] = visual_cue
+            b["visual_focus"] = visual_cue or b.get("visual_focus", f"Beat {b_id} visual")
+            b["name"] = b.get("name") or (beat_names[idx] if idx < len(beat_names) else f"b{b_id}")
+
+            if not b.get("svo_action"):
+                b["svo_action"] = {
+                    "subject": "Developers",
+                    "action_verb": "claim",
+                    "direct_object": "Free Credits",
+                    "anchor_word": anchor_word,
+                    "semantic_role": "agent_action"
+                }
+            else:
+                b["svo_action"]["anchor_word"] = anchor_word
+
+            if not b.get("highlight_words"):
+                b["highlight_words"] = {anchor_word: COLOR_MINT} if anchor_word else {}
+
+            if not b.get("visual_blueprint"):
+                bp_idx = min(max(0, b_id - 1), len(default_blueprints) - 1)
+                bp = default_blueprints[bp_idx].copy()
+                if visual_cue:
+                    bp["sub"] = visual_cue
+                b["visual_blueprint"] = bp
+
+            normalized_beats.append(b)
+
+        spec["beats"] = normalized_beats
+
+        if not spec.get("manim_blueprints"):
+            spec["manim_blueprints"] = [
+                {"type": "dollar_value_hero", "title": f"{prov.upper()} STARTUP PROGRAM"},
+                {"type": "bundle_breakdown", "title": "PERK PACKAGE BREAKDOWN"},
+                {"type": "eligibility_checklist", "title": "ELIGIBILITY CHECKLIST"},
+                {"type": "console_walkthrough", "title": "CONSOLE APPLICATION"},
+                {"type": "social_proof_receipts", "title": "COMMUNITY SOCIAL PROOF"},
+                {"type": "save_bookmark_cta", "title": "THE MODEL VERSE"}
+            ]
+
+        spec["word_count"] = get_total_word_count(spec)
+        is_valid, validation_errors = validate_script_spec(spec)
+        if is_valid:
+            print(f"✅ Developer perks script passed validation ({spec['word_count']} words).")
+        else:
+            print(f"⚠️ Developer perks script validation notices ({spec['word_count']} words):\n" + "\n".join(f"   - {e}" for e in validation_errors))
+
         return spec
 
     def _extract_dollar_value(self, topic: str, perk_meta: Optional[Dict[str, Any]] = None) -> str:

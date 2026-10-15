@@ -1,0 +1,94 @@
+"""
+The Model Verse — VSG Package Init
+Exports VSG-IR v1.0.0 schemas, presets, and pre-render linter.
+"""
+
+from pipeline.vsg.schema import (
+    AspectRatio,
+    ThemeId,
+    BandType,
+    NodeType,
+    MotionType,
+    LinkedSemanticAction,
+    CanvasMetadata,
+    AudioMetadata,
+    ProjectMetadata,
+    ThemeColors,
+    ThemeMaterials,
+    ThemeTypography,
+    ThemeTokens,
+    THEME_CYBER_CYAN,
+    THEME_NEON_VIOLET,
+    THEME_SOLAR_AMBER,
+    THEME_DARK_OBSIDIAN,
+    BoundingBoxPx,
+    EnterMotion,
+    FocalHighlight,
+    ExitMotion,
+    MotionTrack,
+    VisualNode,
+    LayoutContainer,
+    TimeRange,
+    NarrativeInfo,
+    AcousticAnchor,
+    BeatAST,
+    VideoSceneGraphIR
+)
+
+from pipeline.vsg.linter import (
+    VSGASTLinter,
+    LintViolation,
+    LintViolationSeverity,
+    LintReport,
+    SAFE_ZONE_X_MIN,
+    SAFE_ZONE_X_MAX,
+    SAFE_ZONE_Y_MIN,
+    SAFE_ZONE_Y_MAX,
+    MAX_WORDS_PER_CARD,
+    MAX_WORDS_PER_FRAME
+)
+
+from pipeline.vsg.converter import spec_to_vsg
+
+__all__ = [
+    "spec_to_vsg",
+    "AspectRatio",
+    "ThemeId",
+    "BandType",
+    "NodeType",
+    "MotionType",
+    "LinkedSemanticAction",
+    "CanvasMetadata",
+    "AudioMetadata",
+    "ProjectMetadata",
+    "ThemeColors",
+    "ThemeMaterials",
+    "ThemeTypography",
+    "ThemeTokens",
+    "THEME_CYBER_CYAN",
+    "THEME_NEON_VIOLET",
+    "THEME_SOLAR_AMBER",
+    "THEME_DARK_OBSIDIAN",
+    "BoundingBoxPx",
+    "EnterMotion",
+    "FocalHighlight",
+    "ExitMotion",
+    "MotionTrack",
+    "VisualNode",
+    "LayoutContainer",
+    "TimeRange",
+    "NarrativeInfo",
+    "AcousticAnchor",
+    "BeatAST",
+    "VideoSceneGraphIR",
+    "VSGASTLinter",
+    "LintViolation",
+    "LintViolationSeverity",
+    "LintReport",
+    "SAFE_ZONE_X_MIN",
+    "SAFE_ZONE_X_MAX",
+    "SAFE_ZONE_Y_MIN",
+    "SAFE_ZONE_Y_MAX",
+    "MAX_WORDS_PER_CARD",
+    "MAX_WORDS_PER_FRAME"
+]

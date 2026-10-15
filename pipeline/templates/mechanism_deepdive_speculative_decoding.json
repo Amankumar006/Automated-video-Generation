@@ -173,7 +173,15 @@
         }
       ],
       "audio_duration": 5.63,
-      "slot_duration": 5.78
+      "slot_duration": 5.78,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "SPECULATIVE DECODING",
+        "sub": "Core Architectural Premise",
+        "accent_color": "#38BDF8"
+      },
+      "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 2,
@@ -304,7 +312,15 @@
         }
       ],
       "audio_duration": 4.44,
-      "slot_duration": 4.59
+      "slot_duration": 4.59,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "SYSTEM BOTTLENECK",
+        "sub": "Resource contention halts throughput",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 3,
@@ -322,11 +338,24 @@
         "semantic_role": "mechanism"
       },
       "visual_blueprint": {
-        "layout": "split_flow",
-        "title": "PARALLEL PIPELINE",
-        "sub": "Decoupled execution paths",
-        "accent_color": "#34D399",
-        "params": {}
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SPECULATIVE DECODI",
+        "sub": "Parallel pipeline splitting heavy operations away from the critic",
+        "params": {
+          "title": "KERNEL CODE: SPECULATIVE DECODI",
+          "sub": "Parallel pipeline splitting heavy operations away from the critic",
+          "filename": "kernel.py",
+          "language": "python",
+          "lines": [
+            "def forward_pass(input_tensor):",
+            "    return fused_kernel_op(input_tensor)"
+          ],
+          "highlight_lines": [
+            1
+          ],
+          "trace_register": "\u26a1 HARDWARE FUSED DISPATCH",
+          "delta_badge": "Zero-latency pipeline operation"
+        }
       },
       "thriller_role": "eureka_mechanism",
       "act": 3,
@@ -444,7 +473,24 @@
         }
       ],
       "audio_duration": 4.78,
-      "slot_duration": 4.93
+      "slot_duration": 4.93,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SPECULATIVE DECODI",
+        "sub": "Parallel pipeline splitting heavy operations away from the critic",
+        "filename": "kernel.py",
+        "language": "python",
+        "lines": [
+          "def forward_pass(input_tensor):",
+          "    return fused_kernel_op(input_tensor)"
+        ],
+        "highlight_lines": [
+          1
+        ],
+        "trace_register": "\u26a1 HARDWARE FUSED DISPATCH",
+        "delta_badge": "Zero-latency pipeline operation"
+      }
     },
     {
       "beat_id": 4,
@@ -462,11 +508,16 @@
         "semantic_role": "innovation"
       },
       "visual_blueprint": {
-        "layout": "chalkboard_code_block",
-        "title": "ASYNC COORDINATION",
-        "sub": "Zero-stall execution kernel",
+        "layout": "pipeline_stages",
+        "title": "SPECULATIVE DECODING: ASYNC ENGINE",
+        "sub": "Asynchronous coordinate graph demonstrating zero idle wait states",
         "accent_color": "#38BDF8",
-        "params": {}
+        "stage_1_label": "STAGE 1: ASYNC ENGINE",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: COORDINATES ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: WORKLOAD STREAMS",
+        "stage_3_sub": "Target reconstructed state"
       },
       "thriller_role": "technical_secret_sauce",
       "act": 3,
@@ -593,7 +644,21 @@
         }
       ],
       "audio_duration": 5.1,
-      "slot_duration": 5.25
+      "slot_duration": 5.25,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "pipeline_stages",
+        "title": "SPECULATIVE DECODING: ASYNC ENGINE",
+        "sub": "Asynchronous coordinate graph demonstrating zero idle wait states",
+        "accent_color": "#38BDF8",
+        "stage_1_label": "STAGE 1: ASYNC ENGINE",
+        "stage_1_sub": "Raw high-dimensional inputs",
+        "stage_2_label": "STAGE 2: COORDINATES ENGINE",
+        "stage_2_sub": "Core mathematical transformation",
+        "stage_3_label": "STAGE 3: WORKLOAD STREAMS",
+        "stage_3_sub": "Target reconstructed state"
+      },
+      "kinetic_action": "blueprint_transform"
     },
     {
       "beat_id": 5,
@@ -611,10 +676,31 @@
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
-        "title": "BENCHMARK PERFORMANCE",
-        "sub": "Verified speedup with zero accuracy loss",
-        "accent_color": "#34D399",
-        "params": {}
+        "title": "BENCHMARK PERFORMANCE COMPARISON",
+        "sub": "Comparative benchmark race bars showing massive",
+        "params": {
+          "title": "BENCHMARK PERFORMANCE COMPARISON",
+          "sub": "Comparative benchmark race bars showing massive",
+          "metric_name": "Throughput",
+          "unit": "TFLOPS",
+          "contestants": [
+            {
+              "name": "Speculative Decoding",
+              "value": 1180.0,
+              "display_val": "1,180 TFLOPS",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Standard Baseline",
+              "value": 450.0,
+              "display_val": "450 TFLOPS",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +2.6x SPEEDUP"
+        }
       },
       "thriller_role": "empirical_payoff",
       "act": 4,
@@ -723,7 +809,32 @@
         }
       ],
       "audio_duration": 4.22,
-      "slot_duration": 4.37
+      "slot_duration": 4.37,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK PERFORMANCE COMPARISON",
+        "sub": "Comparative benchmark race bars showing massive",
+        "metric_name": "Throughput",
+        "unit": "TFLOPS",
+        "contestants": [
+          {
+            "name": "Speculative Decoding",
+            "value": 1180.0,
+            "display_val": "1,180 TFLOPS",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Standard Baseline",
+            "value": 450.0,
+            "display_val": "450 TFLOPS",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +2.6x SPEEDUP"
+      }
     },
     {
       "beat_id": 6,
@@ -1172,5 +1283,6 @@
         "delta_label": "+50% Efficiency"
       }
     }
-  ]
+  ],
+  "script_driven_visuals": true
 }
