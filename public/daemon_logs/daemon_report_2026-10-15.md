@@ -1,15 +1,15 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-15 | **Timestamp:** 2026-10-15 13:54:53 UTC
+**Date:** 2026-10-15 | **Timestamp:** 2026-10-15 17:19:37 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: GitHub’s model for secret detection: Finding more secrets with less noise
-- **Official Lab Drop:** GitHub’s model for secret detection: Finding more secrets with less noise
-- **Content Pillar:** `blogs`
-- **Domain Taxonomy:** `hardware_efficiency` (1.25x velocity)
-- **Category:** `tech_news`
-- **Editorial Hook:** *What if your code could scan for security leaks 7 times faster without ever raising a false alarm?*
-- **Everyday Analogy:** *A high-speed airport conveyor belt using a 'smart magnet' to pluck out dangerous metallic objects while letting the luggage slide through untouched.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_github-secret-detection-model_tech_news.mp4`
+### Reel 1: History Replays Itself: Unleashing Long-Context Capability in Linear Attention
+- **arXiv ID:** [2610.15715](https://arxiv.org/abs/2610.15715)
+- **Content Pillar:** `arxiv`
+- **Domain Taxonomy:** `hardware_efficiency` (1.28x velocity)
+- **Category:** `mechanism_deepdive`
+- **Editorial Hook:** *How can an AI remember your entire life story without needing a memory bank the size of a skyscraper?*
+- **Everyday Analogy:** *A professional stenographer who can only write on one scroll, having to erase and summarize old notes to fit new secrets without losing the plot.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_linear_attention_note_bank_mechanism_deepdive.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
