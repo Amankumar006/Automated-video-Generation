@@ -1,0 +1,1922 @@
+{
+  "id": "jssa_sparse_attention",
+  "title": "Joint Subspace Sparse Attention: 6.4x Long-Context Decoding",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "MEMORY WALL BREACHED",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you train your next model, see how Joint Subspace Sparse Attention cuts 6.43x of memory overhead.",
+      "visual_focus": "A glowing neural network flickering as it chokes on massive data streams.",
+      "highlight_words": {
+        "wastefully read": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Long-context LLMs",
+        "action_verb": "choke",
+        "direct_object": "memory bandwidth",
+        "anchor_word": "wastefully",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE CONTEXT BOTTLENECK",
+        "sub": "Decoding at 128K context",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "128K KV Context Buffer",
+          "active_cell_label": "Active Query Heads",
+          "efficiency_label": "90% Idle Cache Churn"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 70,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE CONTEXT BOTTLENECK",
+        "sub": "Decoding at 128K context",
+        "accent_color": "#EF4444",
+        "grid_title": "128K KV Context Buffer",
+        "active_cell_label": "Active Query Heads",
+        "efficiency_label": "90% Idle Cache Churn"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 6.12,
+      "duration": 6.12,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.355,
+          "duration": 0.345,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.355,
+          "end": 0.485,
+          "duration": 0.13,
+          "frame_ahead_trigger": 0.315
+        },
+        {
+          "word": "train",
+          "clean_word": "train",
+          "phonemes": "t\u0279\u02c8e\u026an",
+          "start": 0.485,
+          "end": 0.87,
+          "duration": 0.385,
+          "frame_ahead_trigger": 0.445
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.87,
+          "end": 0.912,
+          "duration": 0.042,
+          "frame_ahead_trigger": 0.83
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 0.912,
+          "end": 1.165,
+          "duration": 0.253,
+          "frame_ahead_trigger": 0.872
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 1.165,
+          "end": 1.57,
+          "duration": 0.405,
+          "frame_ahead_trigger": 1.125
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 1.57,
+          "end": 1.74,
+          "duration": 0.17,
+          "frame_ahead_trigger": 1.53
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 1.74,
+          "end": 1.975,
+          "duration": 0.235,
+          "frame_ahead_trigger": 1.7
+        },
+        {
+          "word": "Joint",
+          "clean_word": "joint",
+          "phonemes": "d\u0292\u02c8\u0254\u026ant",
+          "start": 1.975,
+          "end": 2.295,
+          "duration": 0.32,
+          "frame_ahead_trigger": 1.935
+        },
+        {
+          "word": "Subspace",
+          "clean_word": "subspace",
+          "phonemes": "s\u02c8\u028cbspe\u026as",
+          "start": 2.295,
+          "end": 2.575,
+          "duration": 0.28,
+          "frame_ahead_trigger": 2.255
+        },
+        {
+          "word": "Sparse",
+          "clean_word": "sparse",
+          "phonemes": "sp\u02c8\u0251\u02d0\u0279s",
+          "start": 2.575,
+          "end": 2.915,
+          "duration": 0.34,
+          "frame_ahead_trigger": 2.535
+        },
+        {
+          "word": "Attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 2.915,
+          "end": 3.32,
+          "duration": 0.405,
+          "frame_ahead_trigger": 2.875
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 3.32,
+          "end": 3.605,
+          "duration": 0.285,
+          "frame_ahead_trigger": 3.28
+        },
+        {
+          "word": "6.43x",
+          "clean_word": "643x",
+          "phonemes": "s\u02c8\u026aksh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei \u03b8\u0279\u02c8i\u02d0 \u02c8\u025bks",
+          "start": 3.605,
+          "end": 5.145,
+          "duration": 1.54,
+          "frame_ahead_trigger": 3.565
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 5.145,
+          "end": 5.231,
+          "duration": 0.086,
+          "frame_ahead_trigger": 5.105
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 5.231,
+          "end": 5.675,
+          "duration": 0.444,
+          "frame_ahead_trigger": 5.191
+        },
+        {
+          "word": "overhead.",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 5.675,
+          "end": 5.99,
+          "duration": 0.315,
+          "frame_ahead_trigger": 5.635
+        }
+      ],
+      "audio_duration": 6.12,
+      "slot_duration": 6.27
+    },
+    {
+      "beat_id": 2,
+      "text": "The KV-cache is the villain. It forces your GPU to fetch useless tokens, like a librarian retrieving every book in the building for one sentence.",
+      "visual_focus": "A massive, cluttered bookshelf collapsing under the weight of redundant data blocks.",
+      "highlight_words": {
+        "KV-cache": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "KV-cache",
+        "action_verb": "strangles",
+        "direct_object": "throughput",
+        "anchor_word": "useless",
+        "semantic_role": "conflict_initiation"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE LIBRARIAN'S BURDEN",
+        "sub": "Redundant token fetching",
+        "accent_color": "#EF4444",
+        "params": {
+          "input_label": "Candidate KV Tokens",
+          "router_label": "Token Selection",
+          "branch_a_label": "Ranking Error",
+          "branch_a_sub": "Distorted Low-Dim Projection",
+          "branch_b_label": "Gather Stall",
+          "branch_b_sub": "Scattered VRAM Cache-Line Fetch"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "split_flow",
+        "title": "THE LIBRARIAN'S BURDEN",
+        "sub": "Redundant token fetching",
+        "accent_color": "#EF4444",
+        "input_label": "Candidate KV Tokens",
+        "router_label": "Token Selection",
+        "branch_a_label": "Ranking Error",
+        "branch_a_sub": "Distorted Low-Dim Projection",
+        "branch_b_label": "Gather Stall",
+        "branch_b_sub": "Scattered VRAM Cache-Line Fetch"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 6.27,
+      "end": 13.95,
+      "duration": 7.68,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 6.293,
+          "end": 6.388,
+          "duration": 0.095,
+          "frame_ahead_trigger": 6.403
+        },
+        {
+          "word": "KV-cache",
+          "clean_word": "kvcache",
+          "phonemes": "k\u02c8e\u026a v\u02c8i\u02d0k\u02c8\u00e6\u0283",
+          "start": 6.388,
+          "end": 7.078,
+          "duration": 0.69,
+          "frame_ahead_trigger": 6.498
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 7.078,
+          "end": 7.233,
+          "duration": 0.155,
+          "frame_ahead_trigger": 7.188
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 7.233,
+          "end": 7.358,
+          "duration": 0.125,
+          "frame_ahead_trigger": 7.343
+        },
+        {
+          "word": "villain.",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 7.358,
+          "end": 7.636,
+          "duration": 0.278,
+          "frame_ahead_trigger": 7.468
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 7.636,
+          "end": 7.743,
+          "duration": 0.107,
+          "frame_ahead_trigger": 7.746
+        },
+        {
+          "word": "forces",
+          "clean_word": "forces",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
+          "start": 7.743,
+          "end": 8.238,
+          "duration": 0.494,
+          "frame_ahead_trigger": 7.853
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 8.238,
+          "end": 8.334,
+          "duration": 0.096,
+          "frame_ahead_trigger": 8.348
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 8.334,
+          "end": 9.043,
+          "duration": 0.709,
+          "frame_ahead_trigger": 8.444
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 9.043,
+          "end": 9.228,
+          "duration": 0.185,
+          "frame_ahead_trigger": 9.153
+        },
+        {
+          "word": "fetch",
+          "clean_word": "fetch",
+          "phonemes": "f\u02c8\u025bt\u0283",
+          "start": 9.228,
+          "end": 9.508,
+          "duration": 0.28,
+          "frame_ahead_trigger": 9.338
+        },
+        {
+          "word": "useless",
+          "clean_word": "useless",
+          "phonemes": "j\u02c8u\u02d0sl\u0259s",
+          "start": 9.508,
+          "end": 9.808,
+          "duration": 0.3,
+          "frame_ahead_trigger": 9.618
+        },
+        {
+          "word": "tokens,",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 9.808,
+          "end": 10.233,
+          "duration": 0.425,
+          "frame_ahead_trigger": 9.918
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 10.233,
+          "end": 10.648,
+          "duration": 0.415,
+          "frame_ahead_trigger": 10.343
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.648,
+          "end": 10.783,
+          "duration": 0.135,
+          "frame_ahead_trigger": 10.758
+        },
+        {
+          "word": "librarian",
+          "clean_word": "librarian",
+          "phonemes": "la\u026ab\u0279\u02c8\u025b\u0279i\u0259n",
+          "start": 10.783,
+          "end": 11.418,
+          "duration": 0.635,
+          "frame_ahead_trigger": 10.893
+        },
+        {
+          "word": "retrieving",
+          "clean_word": "retrieving",
+          "phonemes": "\u0279\u1d7bt\u0279\u02c8i\u02d0v\u026a\u014b",
+          "start": 11.418,
+          "end": 11.838,
+          "duration": 0.42,
+          "frame_ahead_trigger": 11.528
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 11.838,
+          "end": 12.183,
+          "duration": 0.345,
+          "frame_ahead_trigger": 11.948
+        },
+        {
+          "word": "book",
+          "clean_word": "book",
+          "phonemes": "b\u02c8\u028ak",
+          "start": 12.183,
+          "end": 12.358,
+          "duration": 0.175,
+          "frame_ahead_trigger": 12.293
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 12.358,
+          "end": 12.503,
+          "duration": 0.145,
+          "frame_ahead_trigger": 12.468
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 12.503,
+          "end": 12.708,
+          "duration": 0.205,
+          "frame_ahead_trigger": 12.613
+        },
+        {
+          "word": "building",
+          "clean_word": "building",
+          "phonemes": "b\u02c8\u026ald\u026a\u014b",
+          "start": 12.708,
+          "end": 13.068,
+          "duration": 0.36,
+          "frame_ahead_trigger": 12.818
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 13.068,
+          "end": 13.193,
+          "duration": 0.125,
+          "frame_ahead_trigger": 13.178
+        },
+        {
+          "word": "one",
+          "clean_word": "one",
+          "phonemes": "w\u02cc\u028cn",
+          "start": 13.193,
+          "end": 13.458,
+          "duration": 0.265,
+          "frame_ahead_trigger": 13.303
+        },
+        {
+          "word": "sentence.",
+          "clean_word": "sentence",
+          "phonemes": "s\u02c8\u025bnt\u0259ns",
+          "start": 13.458,
+          "end": 13.868,
+          "duration": 0.41,
+          "frame_ahead_trigger": 13.568
+        }
+      ],
+      "audio_duration": 7.68,
+      "slot_duration": 7.83
+    },
+    {
+      "beat_id": 3,
+      "text": "JSSA shatters this by learning a shared low-dimensional subspace, isolating only the critical tokens needed for accurate attention.",
+      "visual_focus": "A complex cloud of vectors collapsing into a clean, sharp, low-dimensional manifold.",
+      "highlight_words": {
+        "JSSA": "#22C55E",
+        "low-dimensional subspace": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "JSSA",
+        "action_verb": "isolates",
+        "direct_object": "critical tokens",
+        "anchor_word": "shatters",
+        "semantic_role": "solution_discovery"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "JOINT SUBSPACE SPA ARCHITECTURE",
+        "sub": "A complex cloud of vectors collapsing into a clean, sharp, low-di",
+        "params": {
+          "svg_path": null,
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_1_overview.png",
+          "arxiv_id": "2610.19026",
+          "title": "JOINT SUBSPACE SPA ARCHITECTURE",
+          "sub": "A complex cloud of vectors collapsing into a clean, sharp, low-di",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Overview",
+          "preferred_renderer": "raster"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": null,
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_1_overview.png",
+        "arxiv_id": "2610.19026",
+        "title": "JOINT SUBSPACE SPA ARCHITECTURE",
+        "sub": "A complex cloud of vectors collapsing into a clean, sharp, low-di",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Overview",
+        "preferred_renderer": "raster"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 14.1,
+      "end": 21.36,
+      "duration": 7.25,
+      "word_timings": [
+        {
+          "word": "JSSA",
+          "clean_word": "jssa",
+          "phonemes": "d\u0292\u02cce\u026a\u02cc\u025bs\u02cc\u025bs\u02c8e\u026a",
+          "start": 14.138,
+          "end": 14.883,
+          "duration": 0.745,
+          "frame_ahead_trigger": 14.398
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 14.883,
+          "end": 15.273,
+          "duration": 0.39,
+          "frame_ahead_trigger": 15.143
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 15.273,
+          "end": 15.483,
+          "duration": 0.21,
+          "frame_ahead_trigger": 15.533
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 15.483,
+          "end": 15.653,
+          "duration": 0.17,
+          "frame_ahead_trigger": 15.743
+        },
+        {
+          "word": "learning",
+          "clean_word": "learning",
+          "phonemes": "l\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 15.653,
+          "end": 16.053,
+          "duration": 0.4,
+          "frame_ahead_trigger": 15.913
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.053,
+          "end": 16.203,
+          "duration": 0.15,
+          "frame_ahead_trigger": 16.313
+        },
+        {
+          "word": "shared",
+          "clean_word": "shared",
+          "phonemes": "\u0283\u02c8\u025b\u0279d",
+          "start": 16.203,
+          "end": 16.353,
+          "duration": 0.15,
+          "frame_ahead_trigger": 16.463
+        },
+        {
+          "word": "low-dimensional",
+          "clean_word": "lowdimensional",
+          "phonemes": "l\u02c8o\u028ad\u1d7bm\u02cc\u025bn\u0283\u0259n\u0259l",
+          "start": 16.353,
+          "end": 17.163,
+          "duration": 0.81,
+          "frame_ahead_trigger": 16.613
+        },
+        {
+          "word": "subspace,",
+          "clean_word": "subspace",
+          "phonemes": "s\u02c8\u028cbspe\u026as",
+          "start": 17.163,
+          "end": 17.738,
+          "duration": 0.576,
+          "frame_ahead_trigger": 17.423
+        },
+        {
+          "word": "isolating",
+          "clean_word": "isolating",
+          "phonemes": "\u02c8a\u026as\u0259l\u02cce\u026a\u027e\u026a\u014b",
+          "start": 17.738,
+          "end": 18.453,
+          "duration": 0.714,
+          "frame_ahead_trigger": 17.998
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 18.453,
+          "end": 18.623,
+          "duration": 0.17,
+          "frame_ahead_trigger": 18.713
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.623,
+          "end": 18.818,
+          "duration": 0.195,
+          "frame_ahead_trigger": 18.883
+        },
+        {
+          "word": "critical",
+          "clean_word": "critical",
+          "phonemes": "k\u0279\u02c8\u026a\u027e\u026ak\u0259l",
+          "start": 18.818,
+          "end": 19.263,
+          "duration": 0.445,
+          "frame_ahead_trigger": 19.078
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 19.263,
+          "end": 19.673,
+          "duration": 0.41,
+          "frame_ahead_trigger": 19.523
+        },
+        {
+          "word": "needed",
+          "clean_word": "needed",
+          "phonemes": "n\u02c8i\u02d0d\u1d7bd",
+          "start": 19.673,
+          "end": 20.103,
+          "duration": 0.43,
+          "frame_ahead_trigger": 19.933
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 20.103,
+          "end": 20.268,
+          "duration": 0.165,
+          "frame_ahead_trigger": 20.363
+        },
+        {
+          "word": "accurate",
+          "clean_word": "accurate",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259t",
+          "start": 20.268,
+          "end": 20.753,
+          "duration": 0.485,
+          "frame_ahead_trigger": 20.528
+        },
+        {
+          "word": "attention.",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 20.753,
+          "end": 21.178,
+          "duration": 0.425,
+          "frame_ahead_trigger": 21.013
+        }
+      ],
+      "audio_duration": 7.25,
+      "slot_duration": 7.41
+    },
+    {
+      "beat_id": 4,
+      "text": "The secret? A gather-free kernel that reads tokens directly from the GQA layout, bypassing the latency of expensive memory reshuffling.",
+      "visual_focus": "A high-speed data bus bypassing a congested traffic jam of memory pointers.",
+      "highlight_words": {
+        "gather-free kernel": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Gather-free kernel",
+        "action_verb": "bypasses",
+        "direct_object": "reshuffling latency",
+        "anchor_word": "direct",
+        "semantic_role": "technical_execution"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: JOINT SUBSPACE SPA",
+        "sub": "A high-speed data bus bypassing a congested traffic jam of memory",
+        "params": {
+          "title": "KERNEL CODE: JOINT SUBSPACE SPA",
+          "sub": "A high-speed data bus bypassing a congested traffic jam of memory",
+          "filename": "jssa_gather_free_kernel.cu",
+          "language": "cuda",
+          "lines": [
+            "__global__ void jssa_indexed_attention_kernel(",
+            "const half* __restrict__ Q_sub, const half* __restrict__ K_cache,",
+            "const int32_t* __restrict__ head_idx, half* __restrict__ Out) {",
+            "int token_id = head_idx[blockIdx.x * stride + threadIdx.x];",
+            "// Gather-free direct strided fetch from GQA KV buffer",
+            "accumulate_sparse_gemv(Q_sub, K_cache + token_id * D_HEAD);",
+            "}"
+          ],
+          "highlight_lines": [
+            4,
+            5,
+            6
+          ],
+          "trace_register": "\u26a1 DIRECT INDEXED STRIDED ACCESS (ZERO-GATHER COPY)",
+          "delta_badge": "Executes per-head sparse selection without memory re"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: JOINT SUBSPACE SPA",
+        "sub": "A high-speed data bus bypassing a congested traffic jam of memory",
+        "filename": "jssa_gather_free_kernel.cu",
+        "language": "cuda",
+        "lines": [
+          "__global__ void jssa_indexed_attention_kernel(",
+          "const half* __restrict__ Q_sub, const half* __restrict__ K_cache,",
+          "const int32_t* __restrict__ head_idx, half* __restrict__ Out) {",
+          "int token_id = head_idx[blockIdx.x * stride + threadIdx.x];",
+          "// Gather-free direct strided fetch from GQA KV buffer",
+          "accumulate_sparse_gemv(Q_sub, K_cache + token_id * D_HEAD);",
+          "}"
+        ],
+        "highlight_lines": [
+          4,
+          5,
+          6
+        ],
+        "trace_register": "\u26a1 DIRECT INDEXED STRIDED ACCESS (ZERO-GATHER COPY)",
+        "delta_badge": "Executes per-head sparse selection without memory re"
+      },
+      "start": 21.51,
+      "end": 28.93,
+      "duration": 7.42,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.531,
+          "end": 21.696,
+          "duration": 0.165,
+          "frame_ahead_trigger": 21.941
+        },
+        {
+          "word": "secret?",
+          "clean_word": "secret",
+          "phonemes": "s\u02c8i\u02d0k\u0279\u1d7bt",
+          "start": 21.696,
+          "end": 22.176,
+          "duration": 0.48,
+          "frame_ahead_trigger": 22.106
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 22.176,
+          "end": 22.296,
+          "duration": 0.12,
+          "frame_ahead_trigger": 22.586
+        },
+        {
+          "word": "gather-free",
+          "clean_word": "gatherfree",
+          "phonemes": "\u0261\u02c8\u00e6\u00f0\u025af\u0279\u02cci\u02d0",
+          "start": 22.296,
+          "end": 22.796,
+          "duration": 0.5,
+          "frame_ahead_trigger": 22.706
+        },
+        {
+          "word": "kernel",
+          "clean_word": "kernel",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
+          "start": 22.796,
+          "end": 23.171,
+          "duration": 0.375,
+          "frame_ahead_trigger": 23.206
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 23.171,
+          "end": 23.301,
+          "duration": 0.13,
+          "frame_ahead_trigger": 23.581
+        },
+        {
+          "word": "reads",
+          "clean_word": "reads",
+          "phonemes": "\u0279\u02c8i\u02d0dz",
+          "start": 23.301,
+          "end": 23.701,
+          "duration": 0.4,
+          "frame_ahead_trigger": 23.711
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "t\u02c8o\u028ak\u0259nz",
+          "start": 23.701,
+          "end": 24.191,
+          "duration": 0.49,
+          "frame_ahead_trigger": 24.111
+        },
+        {
+          "word": "directly",
+          "clean_word": "directly",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bktli",
+          "start": 24.191,
+          "end": 24.681,
+          "duration": 0.49,
+          "frame_ahead_trigger": 24.601
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 24.681,
+          "end": 24.811,
+          "duration": 0.13,
+          "frame_ahead_trigger": 25.091
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.811,
+          "end": 25.011,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.221
+        },
+        {
+          "word": "GQA",
+          "clean_word": "gqa",
+          "phonemes": "d\u0292\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 25.011,
+          "end": 25.731,
+          "duration": 0.72,
+          "frame_ahead_trigger": 25.421
+        },
+        {
+          "word": "layout,",
+          "clean_word": "layout",
+          "phonemes": "l\u02c8e\u026aa\u028at",
+          "start": 25.731,
+          "end": 26.041,
+          "duration": 0.31,
+          "frame_ahead_trigger": 26.141
+        },
+        {
+          "word": "bypassing",
+          "clean_word": "bypassing",
+          "phonemes": "b\u02c8a\u026ap\u00e6s\u026a\u014b",
+          "start": 26.041,
+          "end": 26.666,
+          "duration": 0.625,
+          "frame_ahead_trigger": 26.451
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 26.666,
+          "end": 26.726,
+          "duration": 0.06,
+          "frame_ahead_trigger": 27.076
+        },
+        {
+          "word": "latency",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 26.726,
+          "end": 27.256,
+          "duration": 0.53,
+          "frame_ahead_trigger": 27.136
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 27.256,
+          "end": 27.371,
+          "duration": 0.115,
+          "frame_ahead_trigger": 27.666
+        },
+        {
+          "word": "expensive",
+          "clean_word": "expensive",
+          "phonemes": "\u025bksp\u02c8\u025bns\u026av",
+          "start": 27.371,
+          "end": 27.876,
+          "duration": 0.505,
+          "frame_ahead_trigger": 27.781
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 27.876,
+          "end": 28.301,
+          "duration": 0.425,
+          "frame_ahead_trigger": 28.286
+        },
+        {
+          "word": "reshuffling.",
+          "clean_word": "reshuffling",
+          "phonemes": "\u0279\u1d7b\u0283\u02c8\u028cfl\u026a\u014b",
+          "start": 28.301,
+          "end": 28.771,
+          "duration": 0.47,
+          "frame_ahead_trigger": 28.711
+        }
+      ],
+      "audio_duration": 7.42,
+      "slot_duration": 7.57
+    },
+    {
+      "beat_id": 5,
+      "text": "On an NVIDIA B200, JSSA hits 6.43x throughput at 128K context, maintaining full-KV accuracy while crushing the memory wall.",
+      "visual_focus": "A bar chart showing a massive performance spike compared to baseline attention.",
+      "highlight_words": {
+        "6.43x throughput": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "JSSA",
+        "action_verb": "crushes",
+        "direct_object": "the memory wall",
+        "anchor_word": "6.43x",
+        "semantic_role": "empirical_validation"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "B200 DECODING THROUGHPUT SHOWDOWN (128K CONTEXT)",
+        "sub": "A bar chart showing a massive performance spike",
+        "params": {
+          "title": "B200 DECODING THROUGHPUT SHOWDOWN (128K CONTEXT)",
+          "sub": "A bar chart showing a massive performance spike",
+          "metric_name": "Throughput Multiplier",
+          "unit": "x Baseline",
+          "contestants": [
+            {
+              "name": "JSSA (Ours)",
+              "value": 6.43,
+              "display_val": "6.43x Speedup",
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "Native DSA (Retrained)",
+              "value": 6.18,
+              "display_val": "6.18x Speedup",
+              "is_hero": false,
+              "color": "#F59E0B"
+            },
+            {
+              "name": "Coarse Sparse Attention",
+              "value": 2.45,
+              "display_val": "2.45x Speedup",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Full-KV Standard Baseline",
+              "value": 1.0,
+              "display_val": "1.00x Baseline",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 6.43x MAXIMUM HARDWARE SPEEDUP"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "B200 DECODING THROUGHPUT SHOWDOWN (128K CONTEXT)",
+        "sub": "A bar chart showing a massive performance spike",
+        "metric_name": "Throughput Multiplier",
+        "unit": "x Baseline",
+        "contestants": [
+          {
+            "name": "JSSA (Ours)",
+            "value": 6.43,
+            "display_val": "6.43x Speedup",
+            "is_hero": true,
+            "color": "#34D399"
+          },
+          {
+            "name": "Native DSA (Retrained)",
+            "value": 6.18,
+            "display_val": "6.18x Speedup",
+            "is_hero": false,
+            "color": "#F59E0B"
+          },
+          {
+            "name": "Coarse Sparse Attention",
+            "value": 2.45,
+            "display_val": "2.45x Speedup",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Full-KV Standard Baseline",
+            "value": 1.0,
+            "display_val": "1.00x Baseline",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 6.43x MAXIMUM HARDWARE SPEEDUP"
+      },
+      "start": 29.08,
+      "end": 38.3,
+      "duration": 9.22,
+      "word_timings": [
+        {
+          "word": "On",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 29.095,
+          "end": 29.237,
+          "duration": 0.142,
+          "frame_ahead_trigger": 29.655
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 29.237,
+          "end": 29.41,
+          "duration": 0.173,
+          "frame_ahead_trigger": 29.797
+        },
+        {
+          "word": "NVIDIA",
+          "clean_word": "nvidia",
+          "phonemes": "\u02c8\u025bnv\u02c8\u026adi\u0259",
+          "start": 29.41,
+          "end": 29.8,
+          "duration": 0.39,
+          "frame_ahead_trigger": 29.97
+        },
+        {
+          "word": "B200,",
+          "clean_word": "b200",
+          "phonemes": "b\u02c8i\u02d0 t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad",
+          "start": 29.8,
+          "end": 30.64,
+          "duration": 0.84,
+          "frame_ahead_trigger": 30.36
+        },
+        {
+          "word": "JSSA",
+          "clean_word": "jssa",
+          "phonemes": "d\u0292\u02cce\u026a\u02cc\u025bs\u02cc\u025bs\u02c8e\u026a",
+          "start": 30.64,
+          "end": 31.18,
+          "duration": 0.54,
+          "frame_ahead_trigger": 31.2
+        },
+        {
+          "word": "hits",
+          "clean_word": "hits",
+          "phonemes": "h\u02c8\u026ats",
+          "start": 31.18,
+          "end": 31.52,
+          "duration": 0.34,
+          "frame_ahead_trigger": 31.74
+        },
+        {
+          "word": "6.43x",
+          "clean_word": "643x",
+          "phonemes": "s\u02c8\u026aksh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei \u03b8\u0279\u02c8i\u02d0 \u02c8\u025bks",
+          "start": 31.52,
+          "end": 33.0,
+          "duration": 1.48,
+          "frame_ahead_trigger": 32.08
+        },
+        {
+          "word": "throughput",
+          "clean_word": "throughput",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
+          "start": 33.0,
+          "end": 33.26,
+          "duration": 0.26,
+          "frame_ahead_trigger": 33.56
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 33.26,
+          "end": 33.53,
+          "duration": 0.27,
+          "frame_ahead_trigger": 33.82
+        },
+        {
+          "word": "128K",
+          "clean_word": "128k",
+          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad tw\u02c8\u025bnti \u02c8e\u026at k\u02c8e\u026a",
+          "start": 33.53,
+          "end": 34.866,
+          "duration": 1.336,
+          "frame_ahead_trigger": 34.09
+        },
+        {
+          "word": "context,",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 34.866,
+          "end": 35.339,
+          "duration": 0.473,
+          "frame_ahead_trigger": 35.426
+        },
+        {
+          "word": "maintaining",
+          "clean_word": "maintaining",
+          "phonemes": "me\u026ant\u02c8e\u026an\u026a\u014b",
+          "start": 35.339,
+          "end": 35.795,
+          "duration": 0.456,
+          "frame_ahead_trigger": 35.899
+        },
+        {
+          "word": "full-KV",
+          "clean_word": "fullkv",
+          "phonemes": "f\u02c8\u028al k\u02cce\u026av\u02c8i\u02d0",
+          "start": 35.795,
+          "end": 36.54,
+          "duration": 0.745,
+          "frame_ahead_trigger": 36.355
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 36.54,
+          "end": 36.91,
+          "duration": 0.37,
+          "frame_ahead_trigger": 37.1
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 36.91,
+          "end": 37.085,
+          "duration": 0.175,
+          "frame_ahead_trigger": 37.47
+        },
+        {
+          "word": "crushing",
+          "clean_word": "crushing",
+          "phonemes": "k\u0279\u02c8\u028c\u0283\u026a\u014b",
+          "start": 37.085,
+          "end": 37.51,
+          "duration": 0.425,
+          "frame_ahead_trigger": 37.645
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.51,
+          "end": 37.562,
+          "duration": 0.052,
+          "frame_ahead_trigger": 38.07
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 37.562,
+          "end": 37.915,
+          "duration": 0.353,
+          "frame_ahead_trigger": 38.122
+        },
+        {
+          "word": "wall.",
+          "clean_word": "wall",
+          "phonemes": "w\u02c8\u0254\u02d0l",
+          "start": 37.915,
+          "end": 38.13,
+          "duration": 0.215,
+          "frame_ahead_trigger": 38.475
+        }
+      ],
+      "audio_duration": 9.22,
+      "slot_duration": 9.37
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for deep-dives into how modern hardware actually handles the next generation of AI.",
+      "visual_focus": "The Model Verse logo pulsing with a clean, high-tech aesthetic.",
+      "highlight_words": {
+        "The Model Verse": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "decodes",
+        "direct_object": "AI architecture",
+        "anchor_word": "next generation",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "radar_pareto_plot",
+        "title": "THE MODEL VERSE",
+        "sub": "Subscribe for more",
+        "accent_color": "#38BDF8",
+        "params": {
+          "axes": [
+            "Throughput",
+            "Zero-Training Fit",
+            "Memory Savings",
+            "Score Fidelity",
+            "Kernel Latency"
+          ],
+          "models": [
+            {
+              "name": "JSSA (Ours)",
+              "scores": [
+                0.96,
+                1.0,
+                0.94,
+                0.95,
+                0.98
+              ],
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "Full-KV Attention",
+              "scores": [
+                0.15,
+                1.0,
+                0.1,
+                1.0,
+                0.2
+              ],
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 99% DSA PERFORMANCE WITHOUT RETRAINING"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 38.45,
+      "end": 43.91,
+      "duration": 5.46,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 38.446,
+          "end": 38.766,
+          "duration": 0.32,
+          "frame_ahead_trigger": 39.156
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.766,
+          "end": 38.966,
+          "duration": 0.2,
+          "frame_ahead_trigger": 39.476
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 38.966,
+          "end": 39.181,
+          "duration": 0.215,
+          "frame_ahead_trigger": 39.676
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 39.181,
+          "end": 39.466,
+          "duration": 0.285,
+          "frame_ahead_trigger": 39.891
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 39.466,
+          "end": 39.606,
+          "duration": 0.14,
+          "frame_ahead_trigger": 40.176
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 39.606,
+          "end": 40.126,
+          "duration": 0.52,
+          "frame_ahead_trigger": 40.316
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 40.126,
+          "end": 40.411,
+          "duration": 0.285,
+          "frame_ahead_trigger": 40.836
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 40.411,
+          "end": 40.601,
+          "duration": 0.19,
+          "frame_ahead_trigger": 41.121
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 40.601,
+          "end": 40.951,
+          "duration": 0.35,
+          "frame_ahead_trigger": 41.311
+        },
+        {
+          "word": "hardware",
+          "clean_word": "hardware",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279",
+          "start": 40.951,
+          "end": 41.461,
+          "duration": 0.51,
+          "frame_ahead_trigger": 41.661
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 41.461,
+          "end": 41.956,
+          "duration": 0.495,
+          "frame_ahead_trigger": 42.171
+        },
+        {
+          "word": "handles",
+          "clean_word": "handles",
+          "phonemes": "h\u02c8\u00e6nd\u0259lz",
+          "start": 41.956,
+          "end": 42.251,
+          "duration": 0.295,
+          "frame_ahead_trigger": 42.666
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 42.251,
+          "end": 42.366,
+          "duration": 0.115,
+          "frame_ahead_trigger": 42.961
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 42.366,
+          "end": 42.716,
+          "duration": 0.35,
+          "frame_ahead_trigger": 43.076
+        },
+        {
+          "word": "generation",
+          "clean_word": "generation",
+          "phonemes": "d\u0292\u02cc\u025bn\u025a\u0279\u02c8e\u026a\u0283\u0259n",
+          "start": 42.716,
+          "end": 43.321,
+          "duration": 0.605,
+          "frame_ahead_trigger": 43.426
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 43.321,
+          "end": 43.427,
+          "duration": 0.106,
+          "frame_ahead_trigger": 44.031
+        },
+        {
+          "word": "AI.",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 43.427,
+          "end": 43.726,
+          "duration": 0.299,
+          "frame_ahead_trigger": 44.137
+        }
+      ],
+      "audio_duration": 5.46,
+      "slot_duration": 5.46
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\mathrm{context}} = 128\\mathrm{K}, \\quad \\mathrm{Traffic}_{\\mathrm{KV}} \\propto B \\cdot L \\cdot d_{\\mathrm{head}}$",
+      "filename": "jssa_sparse_attention_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{\\mathrm{context}}",
+          "label": "128K Token Window"
+        },
+        {
+          "term": "\\mathrm{Traffic}_{\\mathrm{KV}}",
+          "label": "Memory Bus Volume"
+        }
+      ],
+      "svg_filename": "jssa_sparse_attention_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{E}_{\\mathrm{score}} = \\|\\mathbf{Q}\\mathbf{K}^T - (\\mathbf{Q}\\mathbf{P})(\\mathbf{K}\\mathbf{P})^T\\|_F^2 + \\tau_{\\mathrm{gather}}$",
+      "filename": "jssa_sparse_attention_beat2_formula.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{E}_{\\mathrm{score}}",
+          "label": "Preservation Error"
+        },
+        {
+          "term": "\\tau_{\\mathrm{gather}}",
+          "label": "Cache Gather Latency"
+        }
+      ],
+      "svg_filename": "jssa_sparse_attention_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{P}^* = \\arg\\max_{\\mathbf{P}^T\\mathbf{P}=\\mathbf{I}_r} \\mathrm{Tr}\\left(\\mathbf{P}^T (\\mathbf{Q}^T\\mathbf{Q} \\odot \\mathbf{K}^T\\mathbf{K}) \\mathbf{P}\\right)$",
+      "filename": "jssa_sparse_attention_beat3_formula.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{P}^*",
+          "label": "Spectral Subspace Matrix"
+        },
+        {
+          "term": "\\mathbf{I}_r",
+          "label": "Rank-r Orthogonal Basis"
+        }
+      ],
+      "svg_filename": "jssa_sparse_attention_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbf{O}_h = \\mathrm{Softmax}\\left(\\frac{\\mathbf{q}_h \\mathbf{K}_{\\mathcal{I}_h}^T}{\\sqrt{d}}\\right) \\mathbf{V}_{\\mathcal{I}_h}, \\quad |\\mathcal{I}_h| \\ll N$",
+      "filename": "jssa_sparse_attention_beat4_formula.svg",
+      "fontsize": 22,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{I}_h",
+          "label": "Per-Head Index Set"
+        },
+        {
+          "term": "\\mathbf{O}_h",
+          "label": "Gather-Free Attention Output"
+        }
+      ],
+      "svg_filename": "jssa_sparse_attention_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Throughput}_{\\mathrm{JSSA}} = 6.43 \\times \\mathrm{Throughput}_{\\mathrm{Full\\text{-}KV}} \\quad [\\mathrm{B200}, 128\\mathrm{K}]$",
+      "filename": "jssa_sparse_attention_beat5_formula.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "6.43 \\times",
+          "label": "B200 Speedup Factor"
+        },
+        {
+          "term": "128\\mathrm{K}",
+          "label": "Sequence Context"
+        }
+      ],
+      "svg_filename": "jssa_sparse_attention_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "HIGH_SCORE_TOKENS",
+          "color": "#34D399",
+          "items": [
+            "Key_312",
+            "Key_819",
+            "Key_994"
+          ]
+        },
+        {
+          "name": "GATHER_OVERHEAD",
+          "color": "#EF4444",
+          "items": [
+            "VRAM_Stall",
+            "Bank_Conflict",
+            "Scatter_Read"
+          ]
+        },
+        {
+          "name": "SPECTRAL_SUBSPACE",
+          "color": "#38BDF8",
+          "items": [
+            "Eigenvector_1",
+            "Eigenvector_2",
+            "Projection_P"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Query Vector q_t",
+        "target_cluster": "SPECTRAL_SUBSPACE",
+        "token": "q_t"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "VRAM Bandwidth Stall",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Rank Projection Noise",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "JSSA (Joint Subspace)",
+    "model_a_specs": [
+      "Spectral Subspace Scoring",
+      "Gather-Free CUDA Kernel",
+      "Zero Model Training"
+    ],
+    "model_b": "Full-KV Attention",
+    "model_b_specs": [
+      "O(N) VRAM Memory Footprint",
+      "Bandwidth Saturated",
+      "No Token Pruning"
+    ],
+    "divide_title": "BANDWIDTH CONSUMPTION DIVIDE",
+    "model_a_stat": "6.43x",
+    "model_a_stat_label": "DECODING THROUGHPUT (128K)",
+    "model_b_stat": "1.00x",
+    "model_b_stat_label": "FULL-KV BASELINE",
+    "efficiency_badge": "\u26a1 6.43x THROUGHPUT AT 128K CONTEXT",
+    "benchmarks": [
+      {
+        "name": "Throughput @ 128K (B200)",
+        "score_a": "6.43x",
+        "score_b": "1.00x"
+      },
+      {
+        "name": "Accuracy Retention",
+        "score_a": "99.2%",
+        "score_b": "100%"
+      },
+      {
+        "name": "Model Retraining Required",
+        "score_a": "None (0 Hrs)",
+        "score_b": "None"
+      }
+    ],
+    "scale_metric": "128K",
+    "scale_label": "Decoding Context Length",
+    "bottleneck_title": "KV-CACHE TRAFFIC & GATHER OVERHEAD",
+    "bottleneck_desc": "HBM Bandwidth Saturation and Fragmented Cache Gather",
+    "solution_title": "JOINT SUBSPACE SPARSE ATTENTION",
+    "solution_components": "Closed-Form Spectral Projection & Gather-Free Kernel",
+    "mechanism_title": "INDEXED HARDWARE-ACCELERATED DECODING",
+    "payoff_stat": "6.43x",
+    "payoff_label": "DECODING THROUGHPUT SPEEDUP",
+    "payoff_sub": "Measured on NVIDIA B200 GPU at 128K Context Length",
+    "payoff_hero_stat": 6.43,
+    "payoff_hero_label": "JSSA Sparse Kernel",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Dense Full-KV",
+    "payoff_delta_badge": "\u26a1 +543% DECODING THROUGHPUT GAIN",
+    "challenger": "Joint Subspace Sparse Attention (JSSA)",
+    "incumbent": "Full-KV Attention & Coarse Chunked Pruning"
+  },
+  "benchmark_comparison": {
+    "title": "B200 DECODING THROUGHPUT SHOWDOWN (128K CONTEXT)",
+    "metric_name": "Throughput Multiplier",
+    "unit": "x Baseline",
+    "contestants": [
+      {
+        "name": "JSSA (Ours)",
+        "value": 6.43,
+        "display_val": "6.43x Speedup",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "Native DSA (Retrained)",
+        "value": 6.18,
+        "display_val": "6.18x Speedup",
+        "is_hero": false,
+        "color": "#F59E0B"
+      },
+      {
+        "name": "Coarse Sparse Attention",
+        "value": 2.45,
+        "display_val": "2.45x Speedup",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Full-KV Standard Baseline",
+        "value": 1.0,
+        "display_val": "1.00x Baseline",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 6.43x MAXIMUM HARDWARE SPEEDUP",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Accuracy",
+      "Context Length",
+      "Zero-Training Fit"
+    ]
+  },
+  "code_snippet": {
+    "filename": "jssa_gather_free_kernel.cu",
+    "language": "cuda",
+    "lines": [
+      "__global__ void jssa_indexed_attention_kernel(",
+      "const half* __restrict__ Q_sub, const half* __restrict__ K_cache,",
+      "const int32_t* __restrict__ head_idx, half* __restrict__ Out) {",
+      "int token_id = head_idx[blockIdx.x * stride + threadIdx.x];",
+      "// Gather-free direct strided fetch from GQA KV buffer",
+      "accumulate_sparse_gemv(Q_sub, K_cache + token_id * D_HEAD);",
+      "}"
+    ],
+    "highlight_lines": [
+      4,
+      5,
+      6
+    ],
+    "trace_register": "\u26a1 DIRECT INDEXED STRIDED ACCESS (ZERO-GATHER COPY)",
+    "explanation": "Executes per-head sparse selection without memory reallocation"
+  },
+  "arxiv_id": "2610.19026",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "overview",
+      "caption": "Overview",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/source/figures/overview.png",
+      "svg_path": null,
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_1_overview.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig_ruler_accuracy",
+      "caption": "Fig Ruler Accuracy",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/source/figures/fig_ruler_accuracy.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_2_fig_ruler_accuracy.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_2_fig_ruler_accuracy.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig_deepseek_throughput",
+      "caption": "Fig Deepseek Throughput",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/source/figures/fig_deepseek_throughput.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_3_fig_deepseek_throughput.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_3_fig_deepseek_throughput.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "fig_throughput",
+      "caption": "Fig Throughput",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/source/figures/fig_throughput.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_4_fig_throughput.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_4_fig_throughput.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "fig_throughput_appendix",
+      "caption": "Fig Throughput Appendix",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/source/figures/fig_throughput_appendix.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_5_fig_throughput_appendix.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.19026/chalkboard_figures/fig_5_fig_throughput_appendix.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014hitting the 'memory bandwidth' pain point immediately is exactly what I want to hear. I didn't cringe at any 'smart drawer' metaphors, which is a huge plus. I got lost for a second on the 'gather-free kernel' part; I know what a kernel is, but I'm not 100% sure why the 'gather' operation is the specific bottleneck being bypassed here without a quick visual or one-sentence clarification."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "KV-Cache Memory Traffic",
+    "physical_analogy": "A librarian forced to fetch every book in the library just to read a single sentence.",
+    "eureka_mechanism": "Joint Subspace Sparse Attention (JSSA)",
+    "paradigm_shift": "Token-level selection without the gather-latency penalty"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you train your next model, see how Joint Subspace Sparse Attention cuts 6.43x of memory overhead.",
+    "verdict": 70,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 74,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 11,
+    "rankings": [
+      {
+        "hook": "Before you train your next model, see how Joint Subspace Sparse Attention cuts 6.43x of memory overhead.",
+        "verdict": 70,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not scale your next training run before you see how Joint Subspace Sparse Attention delivers 6.43x.",
+        "verdict": 70,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Before you build your next system, see how long-context LLMs are dying because they wastefully read every single token in the sequence.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Sparse attention reduces the KV-cache traffic that dominates long-context LLM decoding, but practical methods largely operate at coarse granularity.",
+        "verdict": 57,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before Joint Subspace Sparse Attention unlocks 6.43x gains?",
+        "verdict": 51,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 6.43x of your hardware performance on the table without Joint Subspace Sparse Attention.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until Joint Subspace Sparse Attention proved a 6.43x leap.",
+        "verdict": 44,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Did you know long-context LLMs are dying because they wastefully read every single token in the sequence?",
+        "verdict": 44,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Why is Joint Subspace Sparse Attention a major breakthrough? Because sparse attention reduces the KV-cache traffic that dominates long-context LLM decoding, but practical methods largely operate at coarse granularity.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Long-context LLMs are dying because they wastefully read every single token in the sequence.",
+        "verdict": 29,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until Joint Subspace Sparse Attention proved: token-level selection offers finer control, yet presents two challenges: low-dimensional scoring may lose query--key structure needed for accurate ranking, while gathering scattered selected tokens can offset the resulting latency benefit.",
+        "verdict": 25,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}
