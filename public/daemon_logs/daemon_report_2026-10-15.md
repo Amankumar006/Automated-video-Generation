@@ -1,15 +1,15 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-15 | **Timestamp:** 2026-10-15 10:17:47 UTC
+**Date:** 2026-10-15 | **Timestamp:** 2026-10-15 13:54:53 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: Joint Subspace Sparse Attention for Efficient Long-Context Decoding
-- **arXiv ID:** [2610.19026](https://arxiv.org/abs/2610.19026)
-- **Content Pillar:** `arxiv`
-- **Domain Taxonomy:** `hardware_efficiency` (1.30x velocity)
-- **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *What if your AI only 'remembered' the most important 5% of a book while reading?*
-- **Everyday Analogy:** *A frantic librarian who only keeps the most relevant page numbers on their desk rather than the entire bookshelf.*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_jssa_sparse_attention_mechanism_deepdive.mp4`
+### Reel 1: GitHub’s model for secret detection: Finding more secrets with less noise
+- **Official Lab Drop:** GitHub’s model for secret detection: Finding more secrets with less noise
+- **Content Pillar:** `blogs`
+- **Domain Taxonomy:** `hardware_efficiency` (1.25x velocity)
+- **Category:** `tech_news`
+- **Editorial Hook:** *What if your code could scan for security leaks 7 times faster without ever raising a false alarm?*
+- **Everyday Analogy:** *A high-speed airport conveyor belt using a 'smart magnet' to pluck out dangerous metallic objects while letting the luggage slide through untouched.*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_github-secret-detection-model_tech_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
