@@ -1,0 +1,1815 @@
+{
+  "id": "velox_spatial_memory_optimization",
+  "title": "Velox: Spatial Memory Makes World Models Efficient",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "SPATIAL ROUTING",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you generate another frame, see how Velox cuts render latency by 4.36x.",
+      "visual_focus": "A progress bar slowing down exponentially as video length increases.",
+      "highlight_words": {
+        "crawl to a halt": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Video models",
+        "action_verb": "choke",
+        "direct_object": "memory",
+        "anchor_word": "forever",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE MEMORY TRAP",
+        "sub": "Why long videos kill inference speed",
+        "accent_color": "#EF4444",
+        "params": {
+          "field_title": "Memory Growth",
+          "source_label": "Chunk 1",
+          "target_label": "Chunk 48",
+          "stream_formula": "O(N^2)"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 66,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THE MEMORY TRAP",
+        "sub": "Why long videos kill inference speed",
+        "accent_color": "#EF4444",
+        "field_title": "Memory Growth",
+        "source_label": "Chunk 1",
+        "target_label": "Chunk 48",
+        "stream_formula": "O(N^2)"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 4.91,
+      "duration": 4.91,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.26,
+          "duration": 0.25,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.26,
+          "end": 0.405,
+          "duration": 0.145,
+          "frame_ahead_trigger": 0.22
+        },
+        {
+          "word": "generate",
+          "clean_word": "generate",
+          "phonemes": "d\u0292\u02c8\u025bn\u025a\u0279\u02cce\u026at",
+          "start": 0.405,
+          "end": 0.925,
+          "duration": 0.52,
+          "frame_ahead_trigger": 0.365
+        },
+        {
+          "word": "another",
+          "clean_word": "another",
+          "phonemes": "\u0250n\u02c8\u028c\u00f0\u025a",
+          "start": 0.925,
+          "end": 1.254,
+          "duration": 0.329,
+          "frame_ahead_trigger": 0.885
+        },
+        {
+          "word": "frame,",
+          "clean_word": "frame",
+          "phonemes": "f\u0279\u02c8e\u026am",
+          "start": 1.254,
+          "end": 1.53,
+          "duration": 0.276,
+          "frame_ahead_trigger": 1.214
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 1.53,
+          "end": 1.685,
+          "duration": 0.155,
+          "frame_ahead_trigger": 1.49
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 1.685,
+          "end": 1.825,
+          "duration": 0.14,
+          "frame_ahead_trigger": 1.645
+        },
+        {
+          "word": "Velox",
+          "clean_word": "velox",
+          "phonemes": "v\u02c8\u025bl\u0251\u02d0ks",
+          "start": 1.825,
+          "end": 2.32,
+          "duration": 0.495,
+          "frame_ahead_trigger": 1.785
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 2.32,
+          "end": 2.56,
+          "duration": 0.24,
+          "frame_ahead_trigger": 2.28
+        },
+        {
+          "word": "render",
+          "clean_word": "render",
+          "phonemes": "\u0279\u02c8\u025bnd\u025a",
+          "start": 2.56,
+          "end": 2.825,
+          "duration": 0.265,
+          "frame_ahead_trigger": 2.52
+        },
+        {
+          "word": "latency",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 2.825,
+          "end": 3.19,
+          "duration": 0.365,
+          "frame_ahead_trigger": 2.785
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 3.19,
+          "end": 3.355,
+          "duration": 0.165,
+          "frame_ahead_trigger": 3.15
+        },
+        {
+          "word": "4.36x.",
+          "clean_word": "436x",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279h\u02c8\u028cnd\u0279\u026ad \u03b8\u02c8\u025c\u02d0\u027ei s\u02c8\u026aks \u02c8\u025bks",
+          "start": 3.355,
+          "end": 4.8,
+          "duration": 1.445,
+          "frame_ahead_trigger": 3.315
+        }
+      ],
+      "audio_duration": 4.91,
+      "slot_duration": 5.06
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is the KV cache, a hoarder forcing your GPU to process irrelevant past frames for every new token.",
+      "visual_focus": "A bloated cache buffer overflowing with redundant visual data.",
+      "highlight_words": {
+        "hoarder": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "KV cache",
+        "action_verb": "clogs",
+        "direct_object": "compute",
+        "anchor_word": "irrelevant",
+        "semantic_role": "bottleneck_definition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE CACHE HOARDER",
+        "sub": "Redundant data bloat",
+        "accent_color": "#F59E0B",
+        "params": {}
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE CACHE HOARDER",
+        "sub": "Redundant data bloat",
+        "accent_color": "#F59E0B"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.06,
+      "end": 11.14,
+      "duration": 6.08,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.077,
+          "end": 5.172,
+          "duration": 0.095,
+          "frame_ahead_trigger": 5.187
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.172,
+          "end": 5.497,
+          "duration": 0.325,
+          "frame_ahead_trigger": 5.282
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.497,
+          "end": 5.642,
+          "duration": 0.145,
+          "frame_ahead_trigger": 5.607
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.642,
+          "end": 5.757,
+          "duration": 0.115,
+          "frame_ahead_trigger": 5.752
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 5.757,
+          "end": 6.172,
+          "duration": 0.415,
+          "frame_ahead_trigger": 5.867
+        },
+        {
+          "word": "cache,",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 6.172,
+          "end": 6.387,
+          "duration": 0.215,
+          "frame_ahead_trigger": 6.282
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.387,
+          "end": 6.507,
+          "duration": 0.12,
+          "frame_ahead_trigger": 6.497
+        },
+        {
+          "word": "hoarder",
+          "clean_word": "hoarder",
+          "phonemes": "h\u02c8\u0254\u02d0\u0279d\u025a",
+          "start": 6.507,
+          "end": 6.932,
+          "duration": 0.425,
+          "frame_ahead_trigger": 6.617
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 6.932,
+          "end": 7.252,
+          "duration": 0.32,
+          "frame_ahead_trigger": 7.042
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 7.252,
+          "end": 7.467,
+          "duration": 0.215,
+          "frame_ahead_trigger": 7.362
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
+          "start": 7.467,
+          "end": 8.077,
+          "duration": 0.61,
+          "frame_ahead_trigger": 7.577
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 8.077,
+          "end": 8.257,
+          "duration": 0.18,
+          "frame_ahead_trigger": 8.187
+        },
+        {
+          "word": "process",
+          "clean_word": "process",
+          "phonemes": "p\u0279\u02c8\u0251\u02d0s\u025bs",
+          "start": 8.257,
+          "end": 8.757,
+          "duration": 0.5,
+          "frame_ahead_trigger": 8.367
+        },
+        {
+          "word": "irrelevant",
+          "clean_word": "irrelevant",
+          "phonemes": "\u026a\u0279\u02c8\u025bl\u1d7bv\u0259nt",
+          "start": 8.757,
+          "end": 9.277,
+          "duration": 0.52,
+          "frame_ahead_trigger": 8.867
+        },
+        {
+          "word": "past",
+          "clean_word": "past",
+          "phonemes": "p\u02c8\u00e6st",
+          "start": 9.277,
+          "end": 9.607,
+          "duration": 0.33,
+          "frame_ahead_trigger": 9.387
+        },
+        {
+          "word": "frames",
+          "clean_word": "frames",
+          "phonemes": "f\u0279\u02c8e\u026amz",
+          "start": 9.607,
+          "end": 9.897,
+          "duration": 0.291,
+          "frame_ahead_trigger": 9.717
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 9.897,
+          "end": 10.142,
+          "duration": 0.244,
+          "frame_ahead_trigger": 10.007
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 10.142,
+          "end": 10.292,
+          "duration": 0.15,
+          "frame_ahead_trigger": 10.252
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 10.292,
+          "end": 10.602,
+          "duration": 0.31,
+          "frame_ahead_trigger": 10.402
+        },
+        {
+          "word": "token.",
+          "clean_word": "token",
+          "phonemes": "t\u02c8o\u028ak\u0259n",
+          "start": 10.602,
+          "end": 10.957,
+          "duration": 0.355,
+          "frame_ahead_trigger": 10.712
+        }
+      ],
+      "audio_duration": 6.08,
+      "slot_duration": 6.23
+    },
+    {
+      "beat_id": 3,
+      "text": "Velox shatters this by using an attention router that treats video like a camera view, dropping pixels outside the current vision.",
+      "visual_focus": "A camera frustum slicing through 3D space, isolating relevant tiles.",
+      "highlight_words": {
+        "attention router": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Velox",
+        "action_verb": "culls",
+        "direct_object": "pixels",
+        "anchor_word": "vision",
+        "semantic_role": "breakthrough"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "VELOX ARCHITECTURE",
+        "sub": "A camera frustum slicing through 3D space, isolating relevant til",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.png",
+          "arxiv_id": "2610.22311",
+          "title": "VELOX ARCHITECTURE",
+          "sub": "A camera frustum slicing through 3D space, isolating relevant til",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Velox-Overview-V8",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.png",
+        "arxiv_id": "2610.22311",
+        "title": "VELOX ARCHITECTURE",
+        "sub": "A camera frustum slicing through 3D space, isolating relevant til",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Velox-Overview-V8",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 11.29,
+      "end": 17.92,
+      "duration": 6.63,
+      "word_timings": [
+        {
+          "word": "Velox",
+          "clean_word": "velox",
+          "phonemes": "v\u02c8\u025bl\u0251\u02d0ks",
+          "start": 11.322,
+          "end": 11.742,
+          "duration": 0.42,
+          "frame_ahead_trigger": 11.582
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 11.742,
+          "end": 11.957,
+          "duration": 0.215,
+          "frame_ahead_trigger": 12.002
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 11.957,
+          "end": 12.182,
+          "duration": 0.225,
+          "frame_ahead_trigger": 12.217
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 12.182,
+          "end": 12.392,
+          "duration": 0.21,
+          "frame_ahead_trigger": 12.442
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 12.392,
+          "end": 12.848,
+          "duration": 0.456,
+          "frame_ahead_trigger": 12.652
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 12.848,
+          "end": 13.007,
+          "duration": 0.159,
+          "frame_ahead_trigger": 13.108
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 13.007,
+          "end": 13.417,
+          "duration": 0.41,
+          "frame_ahead_trigger": 13.267
+        },
+        {
+          "word": "router",
+          "clean_word": "router",
+          "phonemes": "\u0279\u02c8a\u028a\u027e\u025a",
+          "start": 13.417,
+          "end": 13.637,
+          "duration": 0.22,
+          "frame_ahead_trigger": 13.677
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 13.637,
+          "end": 13.897,
+          "duration": 0.26,
+          "frame_ahead_trigger": 13.897
+        },
+        {
+          "word": "treats",
+          "clean_word": "treats",
+          "phonemes": "t\u0279\u02c8i\u02d0ts",
+          "start": 13.897,
+          "end": 14.222,
+          "duration": 0.325,
+          "frame_ahead_trigger": 14.157
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 14.222,
+          "end": 14.632,
+          "duration": 0.41,
+          "frame_ahead_trigger": 14.482
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 14.632,
+          "end": 14.887,
+          "duration": 0.255,
+          "frame_ahead_trigger": 14.892
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 14.887,
+          "end": 15.057,
+          "duration": 0.17,
+          "frame_ahead_trigger": 15.147
+        },
+        {
+          "word": "camera",
+          "clean_word": "camera",
+          "phonemes": "k\u02c8\u00e6m\u0279\u0259",
+          "start": 15.057,
+          "end": 15.277,
+          "duration": 0.22,
+          "frame_ahead_trigger": 15.317
+        },
+        {
+          "word": "view,",
+          "clean_word": "view",
+          "phonemes": "vj\u02c8u\u02d0",
+          "start": 15.277,
+          "end": 15.637,
+          "duration": 0.36,
+          "frame_ahead_trigger": 15.537
+        },
+        {
+          "word": "dropping",
+          "clean_word": "dropping",
+          "phonemes": "d\u0279\u02c8\u0251\u02d0p\u026a\u014b",
+          "start": 15.637,
+          "end": 16.087,
+          "duration": 0.45,
+          "frame_ahead_trigger": 15.897
+        },
+        {
+          "word": "pixels",
+          "clean_word": "pixels",
+          "phonemes": "p\u02c8\u026aks\u0259lz",
+          "start": 16.087,
+          "end": 16.492,
+          "duration": 0.405,
+          "frame_ahead_trigger": 16.347
+        },
+        {
+          "word": "outside",
+          "clean_word": "outside",
+          "phonemes": "a\u028ats\u02c8a\u026ad",
+          "start": 16.492,
+          "end": 16.902,
+          "duration": 0.41,
+          "frame_ahead_trigger": 16.752
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 16.902,
+          "end": 16.987,
+          "duration": 0.085,
+          "frame_ahead_trigger": 17.162
+        },
+        {
+          "word": "current",
+          "clean_word": "current",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 16.987,
+          "end": 17.452,
+          "duration": 0.465,
+          "frame_ahead_trigger": 17.247
+        },
+        {
+          "word": "vision.",
+          "clean_word": "vision",
+          "phonemes": "v\u02c8\u026a\u0292\u0259n",
+          "start": 17.452,
+          "end": 17.742,
+          "duration": 0.29,
+          "frame_ahead_trigger": 17.712
+        }
+      ],
+      "audio_duration": 6.63,
+      "slot_duration": 6.78
+    },
+    {
+      "beat_id": 4,
+      "text": "It maps historical blocks to frustum slabs with depth intervals, using recency-priority multiwarp to keep only what matters for the current frame.",
+      "visual_focus": "Geometric depth mapping of video blocks.",
+      "highlight_words": {
+        "frustum slabs": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Multiwarp",
+        "action_verb": "prioritizes",
+        "direct_object": "geometry",
+        "anchor_word": "depth",
+        "semantic_role": "mechanism_detail"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: VELOX: SPATIAL MEM",
+        "sub": "Geometric depth mapping of video blocks.",
+        "params": {
+          "title": "KERNEL CODE: VELOX: SPATIAL MEM",
+          "sub": "Geometric depth mapping of video blocks.",
+          "filename": "router.py",
+          "language": "python",
+          "lines": [
+            "def get_attention_route(frustum, context):",
+            "mask = compute_overlap(frustum, context)",
+            "weights = soft_modulate(mask)",
+            "return select_top_context(weights)"
+          ],
+          "highlight_lines": [
+            2,
+            3
+          ],
+          "trace_register": "\u26a1 GEOMETRIC FRUSTUM ROUTER",
+          "delta_badge": "Decoupled spatial memory selection"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: VELOX: SPATIAL MEM",
+        "sub": "Geometric depth mapping of video blocks.",
+        "filename": "router.py",
+        "language": "python",
+        "lines": [
+          "def get_attention_route(frustum, context):",
+          "mask = compute_overlap(frustum, context)",
+          "weights = soft_modulate(mask)",
+          "return select_top_context(weights)"
+        ],
+        "highlight_lines": [
+          2,
+          3
+        ],
+        "trace_register": "\u26a1 GEOMETRIC FRUSTUM ROUTER",
+        "delta_badge": "Decoupled spatial memory selection"
+      },
+      "start": 18.07,
+      "end": 25.56,
+      "duration": 7.49,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 18.086,
+          "end": 18.19,
+          "duration": 0.103,
+          "frame_ahead_trigger": 18.496
+        },
+        {
+          "word": "maps",
+          "clean_word": "maps",
+          "phonemes": "m\u02c8\u00e6ps",
+          "start": 18.19,
+          "end": 18.376,
+          "duration": 0.187,
+          "frame_ahead_trigger": 18.6
+        },
+        {
+          "word": "historical",
+          "clean_word": "historical",
+          "phonemes": "h\u026ast\u02c8\u0254\u02d0\u0279\u026ak\u0259l",
+          "start": 18.376,
+          "end": 19.006,
+          "duration": 0.63,
+          "frame_ahead_trigger": 18.786
+        },
+        {
+          "word": "blocks",
+          "clean_word": "blocks",
+          "phonemes": "bl\u02c8\u0251\u02d0ks",
+          "start": 19.006,
+          "end": 19.376,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.416
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 19.376,
+          "end": 19.526,
+          "duration": 0.15,
+          "frame_ahead_trigger": 19.786
+        },
+        {
+          "word": "frustum",
+          "clean_word": "frustum",
+          "phonemes": "f\u0279\u02c8\u028cst\u0259m",
+          "start": 19.526,
+          "end": 19.991,
+          "duration": 0.465,
+          "frame_ahead_trigger": 19.936
+        },
+        {
+          "word": "slabs",
+          "clean_word": "slabs",
+          "phonemes": "sl\u02c8\u00e6bz",
+          "start": 19.991,
+          "end": 20.311,
+          "duration": 0.32,
+          "frame_ahead_trigger": 20.401
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 20.311,
+          "end": 20.476,
+          "duration": 0.165,
+          "frame_ahead_trigger": 20.721
+        },
+        {
+          "word": "depth",
+          "clean_word": "depth",
+          "phonemes": "d\u02c8\u025bp\u03b8",
+          "start": 20.476,
+          "end": 20.696,
+          "duration": 0.22,
+          "frame_ahead_trigger": 20.886
+        },
+        {
+          "word": "intervals,",
+          "clean_word": "intervals",
+          "phonemes": "\u02c8\u026ant\u025av\u0259lz",
+          "start": 20.696,
+          "end": 21.086,
+          "duration": 0.39,
+          "frame_ahead_trigger": 21.106
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 21.086,
+          "end": 21.576,
+          "duration": 0.49,
+          "frame_ahead_trigger": 21.496
+        },
+        {
+          "word": "recency-priority",
+          "clean_word": "recencypriority",
+          "phonemes": "\u0279\u1d7bs\u02cc\u025bns\u026ap\u0279a\u026a\u02c8\u0254\u02d0\u0279\u1d7b\u027ei",
+          "start": 21.576,
+          "end": 22.566,
+          "duration": 0.99,
+          "frame_ahead_trigger": 21.986
+        },
+        {
+          "word": "multiwarp",
+          "clean_word": "multiwarp",
+          "phonemes": "m\u02c8\u028cltiw\u02cc\u0254\u02d0\u0279p",
+          "start": 22.566,
+          "end": 23.176,
+          "duration": 0.61,
+          "frame_ahead_trigger": 22.976
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.176,
+          "end": 23.391,
+          "duration": 0.215,
+          "frame_ahead_trigger": 23.586
+        },
+        {
+          "word": "keep",
+          "clean_word": "keep",
+          "phonemes": "k\u02c8i\u02d0p",
+          "start": 23.391,
+          "end": 23.541,
+          "duration": 0.15,
+          "frame_ahead_trigger": 23.801
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 23.541,
+          "end": 23.864,
+          "duration": 0.322,
+          "frame_ahead_trigger": 23.951
+        },
+        {
+          "word": "what",
+          "clean_word": "what",
+          "phonemes": "w\u02cc\u028ct",
+          "start": 23.864,
+          "end": 24.096,
+          "duration": 0.233,
+          "frame_ahead_trigger": 24.274
+        },
+        {
+          "word": "matters",
+          "clean_word": "matters",
+          "phonemes": "m\u02c8\u00e6\u027e\u025az",
+          "start": 24.096,
+          "end": 24.471,
+          "duration": 0.375,
+          "frame_ahead_trigger": 24.506
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 24.471,
+          "end": 24.586,
+          "duration": 0.115,
+          "frame_ahead_trigger": 24.881
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 24.586,
+          "end": 24.716,
+          "duration": 0.13,
+          "frame_ahead_trigger": 24.996
+        },
+        {
+          "word": "current",
+          "clean_word": "current",
+          "phonemes": "k\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 24.716,
+          "end": 25.151,
+          "duration": 0.435,
+          "frame_ahead_trigger": 25.126
+        },
+        {
+          "word": "frame.",
+          "clean_word": "frame",
+          "phonemes": "f\u0279\u02c8e\u026am",
+          "start": 25.151,
+          "end": 25.411,
+          "duration": 0.26,
+          "frame_ahead_trigger": 25.561
+        }
+      ],
+      "audio_duration": 7.49,
+      "slot_duration": 7.64
+    },
+    {
+      "beat_id": 5,
+      "text": "At chunk 48, Velox delivers a 4.36x speedup in attention and 2.43x in denoising, all while maintaining perfect visual coherence.",
+      "visual_focus": "Comparison chart showing flat compute costs vs linear growth.",
+      "highlight_words": {
+        "4.36x speedup": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Velox",
+        "action_verb": "crushes",
+        "direct_object": "latency",
+        "anchor_word": "coherence",
+        "semantic_role": "benchmark_victory"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: CHUNK 48",
+        "sub": "Comparison chart showing flat compute costs vs linear",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: CHUNK 48",
+          "sub": "Comparison chart showing flat compute costs vs linear",
+          "metric_name": "Performance Multiplier",
+          "unit": "x Speedup",
+          "contestants": [
+            {
+              "name": "Velox (Attention)",
+              "value": 4.36,
+              "display_val": "4.36x",
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "Velox (Denoising)",
+              "value": 2.43,
+              "display_val": "2.43x",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Dense Baseline",
+              "value": 1.0,
+              "display_val": "1.0x",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +336% SPEEDUP GAIN"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: CHUNK 48",
+        "sub": "Comparison chart showing flat compute costs vs linear",
+        "metric_name": "Performance Multiplier",
+        "unit": "x Speedup",
+        "contestants": [
+          {
+            "name": "Velox (Attention)",
+            "value": 4.36,
+            "display_val": "4.36x",
+            "is_hero": true,
+            "color": "#34D399"
+          },
+          {
+            "name": "Velox (Denoising)",
+            "value": 2.43,
+            "display_val": "2.43x",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Dense Baseline",
+            "value": 1.0,
+            "display_val": "1.0x",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +336% SPEEDUP GAIN"
+      },
+      "start": 25.71,
+      "end": 34.39,
+      "duration": 8.68,
+      "word_timings": [
+        {
+          "word": "At",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 25.719,
+          "end": 25.819,
+          "duration": 0.1,
+          "frame_ahead_trigger": 26.279
+        },
+        {
+          "word": "chunk",
+          "clean_word": "chunk",
+          "phonemes": "t\u0283\u02c8\u028c\u014bk",
+          "start": 25.819,
+          "end": 26.124,
+          "duration": 0.305,
+          "frame_ahead_trigger": 26.379
+        },
+        {
+          "word": "48,",
+          "clean_word": "48",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279\u027ei \u02c8e\u026at",
+          "start": 26.124,
+          "end": 26.589,
+          "duration": 0.465,
+          "frame_ahead_trigger": 26.684
+        },
+        {
+          "word": "Velox",
+          "clean_word": "velox",
+          "phonemes": "v\u02c8\u025bl\u0251\u02d0ks",
+          "start": 26.589,
+          "end": 27.099,
+          "duration": 0.51,
+          "frame_ahead_trigger": 27.149
+        },
+        {
+          "word": "delivers",
+          "clean_word": "delivers",
+          "phonemes": "d\u1d7bl\u02c8\u026av\u025az",
+          "start": 27.099,
+          "end": 27.419,
+          "duration": 0.32,
+          "frame_ahead_trigger": 27.659
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 27.419,
+          "end": 27.584,
+          "duration": 0.165,
+          "frame_ahead_trigger": 27.979
+        },
+        {
+          "word": "4.36x",
+          "clean_word": "436x",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279h\u02c8\u028cnd\u0279\u026ad \u03b8\u02c8\u025c\u02d0\u027ei s\u02c8\u026aks \u02c8\u025bks",
+          "start": 27.584,
+          "end": 29.044,
+          "duration": 1.46,
+          "frame_ahead_trigger": 28.144
+        },
+        {
+          "word": "speedup",
+          "clean_word": "speedup",
+          "phonemes": "sp\u02c8i\u02d0d\u028cp",
+          "start": 29.044,
+          "end": 29.489,
+          "duration": 0.445,
+          "frame_ahead_trigger": 29.604
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 29.489,
+          "end": 29.557,
+          "duration": 0.067,
+          "frame_ahead_trigger": 30.049
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 29.557,
+          "end": 29.894,
+          "duration": 0.338,
+          "frame_ahead_trigger": 30.117
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 29.894,
+          "end": 30.059,
+          "duration": 0.165,
+          "frame_ahead_trigger": 30.454
+        },
+        {
+          "word": "2.43x",
+          "clean_word": "243x",
+          "phonemes": "t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei \u03b8\u0279\u02c8i\u02d0 \u02c8\u025bks",
+          "start": 30.059,
+          "end": 31.504,
+          "duration": 1.445,
+          "frame_ahead_trigger": 30.619
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 31.504,
+          "end": 31.689,
+          "duration": 0.184,
+          "frame_ahead_trigger": 32.064
+        },
+        {
+          "word": "denoising,",
+          "clean_word": "denoising",
+          "phonemes": "d\u1d7bn\u02c8\u0254\u026as\u026a\u014b",
+          "start": 31.689,
+          "end": 32.039,
+          "duration": 0.351,
+          "frame_ahead_trigger": 32.249
+        },
+        {
+          "word": "all",
+          "clean_word": "all",
+          "phonemes": "\u02c8\u0254\u02d0l",
+          "start": 32.039,
+          "end": 32.364,
+          "duration": 0.325,
+          "frame_ahead_trigger": 32.599
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 32.364,
+          "end": 32.614,
+          "duration": 0.25,
+          "frame_ahead_trigger": 32.924
+        },
+        {
+          "word": "maintaining",
+          "clean_word": "maintaining",
+          "phonemes": "me\u026ant\u02c8e\u026an\u026a\u014b",
+          "start": 32.614,
+          "end": 33.149,
+          "duration": 0.535,
+          "frame_ahead_trigger": 33.174
+        },
+        {
+          "word": "perfect",
+          "clean_word": "perfect",
+          "phonemes": "p\u02c8\u025c\u02d0f\u025bkt",
+          "start": 33.149,
+          "end": 33.529,
+          "duration": 0.38,
+          "frame_ahead_trigger": 33.709
+        },
+        {
+          "word": "visual",
+          "clean_word": "visual",
+          "phonemes": "v\u02c8\u026a\u0292u\u02d0\u0259l",
+          "start": 33.529,
+          "end": 33.879,
+          "duration": 0.35,
+          "frame_ahead_trigger": 34.089
+        },
+        {
+          "word": "coherence.",
+          "clean_word": "coherence",
+          "phonemes": "ko\u028ah\u02c8\u026a\u0279\u0259ns",
+          "start": 33.879,
+          "end": 34.294,
+          "duration": 0.415,
+          "frame_ahead_trigger": 34.439
+        }
+      ],
+      "audio_duration": 8.68,
+      "slot_duration": 8.83
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how we break the memory wall in modern AI architectures.",
+      "visual_focus": "Looping animation of the Velox router.",
+      "highlight_words": {
+        "break the memory wall": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "decodes",
+        "direct_object": "architectures",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "THE MODEL VERSE",
+        "sub": "Architectural deep-dives",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "Hardware",
+          "input_2_label": "Math",
+          "input_3_label": "Geometry",
+          "fused_label": "Spatial Intelligence"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 34.54,
+      "end": 40.07,
+      "duration": 5.53,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.602,
+          "end": 34.887,
+          "duration": 0.285,
+          "frame_ahead_trigger": 35.312
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.887,
+          "end": 35.087,
+          "duration": 0.2,
+          "frame_ahead_trigger": 35.597
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 35.087,
+          "end": 35.446,
+          "duration": 0.359,
+          "frame_ahead_trigger": 35.797
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 35.446,
+          "end": 35.747,
+          "duration": 0.301,
+          "frame_ahead_trigger": 36.156
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.747,
+          "end": 35.922,
+          "duration": 0.175,
+          "frame_ahead_trigger": 36.457
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 35.922,
+          "end": 36.252,
+          "duration": 0.33,
+          "frame_ahead_trigger": 36.632
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 36.252,
+          "end": 36.787,
+          "duration": 0.535,
+          "frame_ahead_trigger": 36.962
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 36.787,
+          "end": 36.982,
+          "duration": 0.195,
+          "frame_ahead_trigger": 37.497
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 36.982,
+          "end": 37.272,
+          "duration": 0.29,
+          "frame_ahead_trigger": 37.692
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 37.272,
+          "end": 37.345,
+          "duration": 0.073,
+          "frame_ahead_trigger": 37.982
+        },
+        {
+          "word": "break",
+          "clean_word": "break",
+          "phonemes": "b\u0279\u02c8e\u026ak",
+          "start": 37.345,
+          "end": 37.622,
+          "duration": 0.277,
+          "frame_ahead_trigger": 38.055
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.622,
+          "end": 37.767,
+          "duration": 0.145,
+          "frame_ahead_trigger": 38.332
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 37.767,
+          "end": 38.136,
+          "duration": 0.369,
+          "frame_ahead_trigger": 38.477
+        },
+        {
+          "word": "wall",
+          "clean_word": "wall",
+          "phonemes": "w\u02c8\u0254\u02d0l",
+          "start": 38.136,
+          "end": 38.477,
+          "duration": 0.341,
+          "frame_ahead_trigger": 38.846
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 38.477,
+          "end": 38.547,
+          "duration": 0.07,
+          "frame_ahead_trigger": 39.187
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 38.547,
+          "end": 38.827,
+          "duration": 0.28,
+          "frame_ahead_trigger": 39.257
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 38.827,
+          "end": 39.202,
+          "duration": 0.375,
+          "frame_ahead_trigger": 39.537
+        },
+        {
+          "word": "architectures.",
+          "clean_word": "architectures",
+          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
+          "start": 39.202,
+          "end": 39.982,
+          "duration": 0.78,
+          "frame_ahead_trigger": 39.912
+        }
+      ],
+      "audio_duration": 5.53,
+      "slot_duration": 5.53
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{O}(L^2) \\to \\text{Bottleneck}$",
+      "filename": "velox_spatial_memory_optimization_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "L",
+          "label": "Context Length"
+        }
+      ],
+      "svg_filename": "velox_spatial_memory_optimization_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathbf{x}_{t} = \\sum_{i=0}^{t-1} \\text{Softmax}(\\frac{Q K_i^T}{\\sqrt{d}})V_i$",
+      "filename": "velox_spatial_memory_optimization_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "K_i",
+          "label": "Historical KV Cache"
+        }
+      ],
+      "svg_filename": "velox_spatial_memory_optimization_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{F}_{slab} = \\{k \\mid d_{min} \\leq \\text{depth}(k) \\leq d_{max}\\} $",
+      "filename": "velox_spatial_memory_optimization_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathcal{F}_{slab}",
+          "label": "Frustum Slab"
+        }
+      ],
+      "svg_filename": "velox_spatial_memory_optimization_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\alpha = \\sigma(W_g \\cdot \\text{Overlap}(\\mathcal{F}_{curr}, \\mathcal{F}_{hist}))$",
+      "filename": "velox_spatial_memory_optimization_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\alpha",
+          "label": "Routing Importance"
+        }
+      ],
+      "svg_filename": "velox_spatial_memory_optimization_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\text{Speedup} = \\frac{\\text{Latency}_{dense}}{\\text{Latency}_{Velox}} \\approx 4.36$",
+      "filename": "velox_spatial_memory_optimization_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "4.36",
+          "label": "Attention Kernel Gain"
+        }
+      ],
+      "svg_filename": "velox_spatial_memory_optimization_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Spatial",
+          "color": "#38BDF8",
+          "items": [
+            "Frustum",
+            "Depth",
+            "Warp"
+          ]
+        },
+        {
+          "name": "Memory",
+          "color": "#10B981",
+          "items": [
+            "Cache",
+            "Slab",
+            "KV"
+          ]
+        },
+        {
+          "name": "Router",
+          "color": "#F59E0B",
+          "items": [
+            "Modulate",
+            "Weight",
+            "Select"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"World-Pixel\"",
+        "target_cluster": "Spatial",
+        "token": "\"World-Pixel\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'Cache-Growth'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'Slow-Compute'",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    "model_a": "Velox Router",
+    "model_a_specs": [
+      "Training-free",
+      "Spatial Routing",
+      "Multiwarp"
+    ],
+    "model_b": "Dense KV Cache",
+    "model_b_specs": [
+      "Growing memory",
+      "Quadratic Latency",
+      "Redundant"
+    ],
+    "divide_title": "SPATIAL ROUTING VS BRUTE FORCE",
+    "model_a_stat": "4.36x",
+    "model_a_stat_label": "ATTENTION SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE LATENCY",
+    "efficiency_badge": "\u26a1 4.36x ATTENTION SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "Attention Speed",
+        "score_a": "4.36x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Denoising Speed",
+        "score_a": "2.43x",
+        "score_b": "1.0x"
+      },
+      {
+        "name": "Consistency",
+        "score_a": "High",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "48",
+    "scale_label": "Chunk Sequence Limit",
+    "bottleneck_title": "QUADRATIC MEMORY BOTTLENECK",
+    "bottleneck_desc": "Explosive growth in KV Cache context.",
+    "solution_title": "SPATIAL FRUSTUM ROUTER",
+    "solution_components": "Geometry-based context selection.",
+    "mechanism_title": "RECENCY-PRIORITY MULTIWARP",
+    "payoff_stat": "4.36x",
+    "payoff_label": "ATTENTION SPEEDUP",
+    "payoff_sub": "Achieved through frustum-based selection",
+    "payoff_hero_stat": 4.36,
+    "payoff_hero_label": "Velox Attention",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Dense Baseline",
+    "payoff_delta_badge": "\u26a1 +336% ATTENTION THROUGHPUT",
+    "challenger": "Velox",
+    "incumbent": "LingBot-Fast-Cam"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: CHUNK 48",
+    "metric_name": "Performance Multiplier",
+    "unit": "x Speedup",
+    "contestants": [
+      {
+        "name": "Velox (Attention)",
+        "value": 4.36,
+        "display_val": "4.36x",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "Velox (Denoising)",
+        "value": 2.43,
+        "display_val": "2.43x",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Dense Baseline",
+        "value": 1.0,
+        "display_val": "1.0x",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +336% SPEEDUP GAIN",
+    "radar_axes": [
+      "Attention",
+      "Denoising",
+      "Memory",
+      "Consistency",
+      "Context Length"
+    ]
+  },
+  "code_snippet": {
+    "filename": "router.py",
+    "language": "python",
+    "lines": [
+      "def get_attention_route(frustum, context):",
+      "mask = compute_overlap(frustum, context)",
+      "weights = soft_modulate(mask)",
+      "return select_top_context(weights)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 GEOMETRIC FRUSTUM ROUTER",
+    "explanation": "Decoupled spatial memory selection"
+  },
+  "arxiv_id": "2610.22311",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "velox-overview-v8",
+      "caption": "Velox-Overview-V8",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/source/figures/velox-overview-v8.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_1_velox-overview-v8.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "fig-qualitative-comparison-appendix",
+      "caption": "Fig-Qualitative-Comparison-Appendix",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/source/figures/fig-qualitative-comparison-appendix.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_2_fig-qualitative-comparison-appendix.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_2_fig-qualitative-comparison-appendix.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "fig-qualitative-comparison",
+      "caption": "Fig-Qualitative-Comparison",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/source/figures/fig-qualitative-comparison.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_3_fig-qualitative-comparison.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_3_fig-qualitative-comparison.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 110
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "per_chunk_denoise_48c",
+      "caption": "Per Chunk Denoise 48C",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/source/figures/per_chunk_denoise_48c.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_4_per_chunk_denoise_48c.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_4_per_chunk_denoise_48c.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "fig-chunk-gilbert-flip-rule",
+      "caption": "Fig-Chunk-Gilbert-Flip-Rule",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/source/figures/fig-chunk-gilbert-flip-rule.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_5_fig-chunk-gilbert-flip-rule.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22311/chalkboard_figures/fig_5_fig-chunk-gilbert-flip-rule.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014calling out the KV cache as a 'hoarder' actually made sense because I've dealt with memory bloat in my own projects. I didn't swipe because you got straight to the point. My only gripe is 'spatial router'\u2014it sounds a bit like a buzzword. I get that you're dropping pixels, but is it a masking layer? A custom attention mask? Just be specific about the implementation."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Growing KV Cache",
+    "physical_analogy": "A hoarder trying to carry every single piece of furniture from a house into a tiny elevator.",
+    "eureka_mechanism": "Frustum Slab Attention Routing",
+    "paradigm_shift": "Constant-time generation for infinite-length video rollouts"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you generate another frame, see how Velox cuts render latency by 4.36x.",
+    "verdict": 66,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 76,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 11,
+    "rankings": [
+      {
+        "hook": "Before you generate another frame, see how Velox cuts render latency by 4.36x.",
+        "verdict": 66,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not render your next diffusion batch before testing how Velox gains 4.36x.",
+        "verdict": 66,
+        "band": "WORKABLE",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 4.36x of generation quality behind before trying Velox.",
+        "verdict": 57,
+        "band": "WORKABLE",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why do standard diffusion models waste 4.36x of render latency before Velox?",
+        "verdict": 53,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Why do generative video pipelines lose consistency before Velox delivers 4.36x speedups?",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Before you build your next system, see how video models crawl to a halt because they try to remember every single pixel forever.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Video world models turn actions and camera motion into long visual rollouts, making video a natural interface for interactive simulation.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Did you know video models crawl to a halt because they try to remember every single pixel forever?",
+        "verdict": 39,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until Velox proved: such interaction requires responsive generation, yet coherent rollouts must retain visual memory of what has already been generated.",
+        "verdict": 36,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is Velox a major breakthrough? Because video world models turn actions and camera motion into long visual rollouts, making video a natural interface for interactive simulation.",
+        "verdict": 31,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Video models crawl to a halt because they try to remember every single pixel forever.",
+        "verdict": 24,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Velox Router",
+        "model_a_score": "4.36x",
+        "model_b_name": "Dense KV Cache",
+        "model_b_score": "1.0x",
+        "delta_label": "\u26a1 4.36x ATTENTION SPEEDUP"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}
