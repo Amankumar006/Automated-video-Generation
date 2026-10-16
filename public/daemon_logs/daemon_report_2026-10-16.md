@@ -1,15 +1,15 @@
 # 🤖 The Model Verse — Daily Shorts Production Report
-**Date:** 2026-10-16 | **Timestamp:** 2026-10-16 13:45:14 UTC
+**Date:** 2026-10-16 | **Timestamp:** 2026-10-16 16:55:26 UTC
 **Total Reels Produced:** 1 / 1
 
-### Reel 1: When the KV Cache Is Slower Than the GPU: Scaling Remote KV Tiers for Context-Parallel Prefill
-- **arXiv ID:** [2610.21500](https://arxiv.org/abs/2610.21500)
-- **Content Pillar:** `arxiv`
-- **Domain Taxonomy:** `hardware_efficiency` (1.27x velocity)
-- **Category:** `mechanism_deepdive`
-- **Editorial Hook:** *N/A*
-- **Everyday Analogy:** *N/A*
-- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_kv_cache_scaling_remote_mechanism_deepdive.mp4`
+### Reel 1: Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline
+- **Official Lab Drop:** Scaling Indic Pretraining: 2.8 Trillion Tokens and an Open Data Generation Pipeline
+- **Content Pillar:** `blogs`
+- **Domain Taxonomy:** `efficient_architectures` (1.25x velocity)
+- **Category:** `tech_news`
+- **Editorial Hook:** *Why Hugging Face's new Scaling Indic Pretraining changes modern AI for developers*
+- **Everyday Analogy:** *A precision engineering breakthrough redefining standard industry baselines*
+- **Local Master Video:** `/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_scaling_indic_pretraining_2_8_trillion_tokens_and_an_open_data_generation_pipeline_tech_news.mp4`
 - **Resolution:** `1440x2560 @ 60fps`
 
 ## 🎬 Production & Broadcast Specs
