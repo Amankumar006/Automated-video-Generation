@@ -1,52 +1,56 @@
 {
   "id": "virtual_head_attention",
-  "title": "Virtual Head Attention: Cracking LLM Memory",
+  "title": "Virtual Head Attention: Breaking LLM Memory Walls",
   "category": "mechanism_deepdive",
   "domain_taxonomy": "neural_attention",
   "hook_tag": "MEMORY BOTTLENECK",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Before you train your next model, see how Virtual Head Attention cuts +11.4 of memory overhead.",
-      "visual_focus": "A glowing triangle graphic flickering and glitching on a dark background.",
+      "text": "Before you train your next model, see how Virtual Head Attention cuts 84.4 vs 73.0 of memory overhead.",
+      "visual_focus": "A glowing memory block overflowing with data packets.",
       "highlight_words": {
-        "impossible triangle": "#EF4444"
+        "bloated mess": "#EF4444"
       },
       "svo_action": {
-        "subject": "Memory",
+        "subject": "KV Cache",
         "action_verb": "strangles",
-        "direct_object": "Model Intelligence",
-        "anchor_word": "choking",
+        "direct_object": "Model Performance",
+        "anchor_word": "bloated",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "attention_prism_refraction",
-        "title": "THE IMPOSSIBLE TRIANGLE",
-        "sub": "KV Cache vs. FLOPs vs. Quality",
+        "layout": "barrier_separation",
+        "title": "THE CACHE TRAP",
+        "sub": "Memory vs. Intelligence",
         "accent_color": "#EF4444",
         "params": {
-          "token_label": "KV Cache Tokens",
-          "matrix_title": "Multi-Head KV Footprint"
+          "stream_a_label": "High Quality (GQA-8)",
+          "stream_b_label": "Low VRAM (MLA / GQA-2)",
+          "barrier_label": "FLOP Overhead Barrier",
+          "barrier_sub": "Memory Wall & Compute Tax"
         }
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
-      "hook_score": 70,
-      "hook_band": "WORKABLE",
+      "hook_score": 73,
+      "hook_band": "STRONG",
       "hook_formula": "The Warning",
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "attention_prism_refraction",
-        "title": "THE IMPOSSIBLE TRIANGLE",
-        "sub": "KV Cache vs. FLOPs vs. Quality",
+        "layout": "barrier_separation",
+        "title": "THE CACHE TRAP",
+        "sub": "Memory vs. Intelligence",
         "accent_color": "#EF4444",
-        "token_label": "KV Cache Tokens",
-        "matrix_title": "Multi-Head KV Footprint"
+        "stream_a_label": "High Quality (GQA-8)",
+        "stream_b_label": "Low VRAM (MLA / GQA-2)",
+        "barrier_label": "FLOP Overhead Barrier",
+        "barrier_sub": "Memory Wall & Compute Tax"
       },
       "kinetic_action": "blueprint_transform",
       "start": 0.0,
-      "end": 5.31,
-      "duration": 5.31,
+      "end": 6.63,
+      "duration": 6.63,
       "word_timings": [
         {
           "word": "Before",
@@ -62,163 +66,181 @@
           "clean_word": "you",
           "phonemes": "ju\u02d0",
           "start": 0.35,
-          "end": 0.49,
-          "duration": 0.14,
+          "end": 0.476,
+          "duration": 0.126,
           "frame_ahead_trigger": 0.31
         },
         {
           "word": "train",
           "clean_word": "train",
           "phonemes": "t\u0279\u02c8e\u026an",
-          "start": 0.49,
-          "end": 0.87,
-          "duration": 0.38,
-          "frame_ahead_trigger": 0.45
+          "start": 0.476,
+          "end": 0.82,
+          "duration": 0.344,
+          "frame_ahead_trigger": 0.436
         },
         {
           "word": "your",
           "clean_word": "your",
           "phonemes": "j\u028a\u0279",
-          "start": 0.87,
-          "end": 0.965,
+          "start": 0.82,
+          "end": 0.915,
           "duration": 0.095,
-          "frame_ahead_trigger": 0.83
+          "frame_ahead_trigger": 0.78
         },
         {
           "word": "next",
           "clean_word": "next",
           "phonemes": "n\u02c8\u025bkst",
-          "start": 0.965,
-          "end": 1.16,
-          "duration": 0.195,
-          "frame_ahead_trigger": 0.925
+          "start": 0.915,
+          "end": 1.23,
+          "duration": 0.315,
+          "frame_ahead_trigger": 0.875
         },
         {
           "word": "model,",
           "clean_word": "model",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 1.16,
-          "end": 1.565,
-          "duration": 0.405,
-          "frame_ahead_trigger": 1.12
+          "start": 1.23,
+          "end": 1.525,
+          "duration": 0.295,
+          "frame_ahead_trigger": 1.19
         },
         {
           "word": "see",
           "clean_word": "see",
           "phonemes": "s\u02c8i\u02d0",
-          "start": 1.565,
-          "end": 1.715,
-          "duration": 0.15,
-          "frame_ahead_trigger": 1.525
+          "start": 1.525,
+          "end": 1.665,
+          "duration": 0.14,
+          "frame_ahead_trigger": 1.485
         },
         {
           "word": "how",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
-          "start": 1.715,
-          "end": 1.93,
-          "duration": 0.215,
-          "frame_ahead_trigger": 1.675
+          "start": 1.665,
+          "end": 1.87,
+          "duration": 0.205,
+          "frame_ahead_trigger": 1.625
         },
         {
           "word": "Virtual",
           "clean_word": "virtual",
           "phonemes": "v\u02c8\u025c\u02d0t\u0283u\u02d0\u0259l",
-          "start": 1.93,
-          "end": 2.425,
-          "duration": 0.495,
-          "frame_ahead_trigger": 1.89
+          "start": 1.87,
+          "end": 2.455,
+          "duration": 0.585,
+          "frame_ahead_trigger": 1.83
         },
         {
           "word": "Head",
           "clean_word": "head",
           "phonemes": "h\u02c8\u025bd",
-          "start": 2.425,
-          "end": 2.55,
-          "duration": 0.125,
-          "frame_ahead_trigger": 2.385
+          "start": 2.455,
+          "end": 2.527,
+          "duration": 0.072,
+          "frame_ahead_trigger": 2.415
         },
         {
           "word": "Attention",
           "clean_word": "attention",
           "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
-          "start": 2.55,
-          "end": 2.985,
-          "duration": 0.435,
-          "frame_ahead_trigger": 2.51
+          "start": 2.527,
+          "end": 2.925,
+          "duration": 0.398,
+          "frame_ahead_trigger": 2.487
         },
         {
           "word": "cuts",
           "clean_word": "cuts",
           "phonemes": "k\u02c8\u028cts",
-          "start": 2.985,
-          "end": 3.225,
-          "duration": 0.24,
-          "frame_ahead_trigger": 2.945
+          "start": 2.925,
+          "end": 3.11,
+          "duration": 0.185,
+          "frame_ahead_trigger": 2.885
         },
         {
-          "word": "+11.4",
-          "clean_word": "114",
-          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279ti\u02d0n",
-          "start": 3.225,
-          "end": 4.295,
-          "duration": 1.07,
-          "frame_ahead_trigger": 3.185
+          "word": "84.4",
+          "clean_word": "844",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei f\u02c8\u0254\u02d0\u0279",
+          "start": 3.11,
+          "end": 4.43,
+          "duration": 1.32,
+          "frame_ahead_trigger": 3.07
+        },
+        {
+          "word": "vs",
+          "clean_word": "vs",
+          "phonemes": "v\u02cci\u02d0\u02c8\u025bs",
+          "start": 4.43,
+          "end": 4.63,
+          "duration": 0.2,
+          "frame_ahead_trigger": 4.39
+        },
+        {
+          "word": "73.0",
+          "clean_word": "730",
+          "phonemes": "s\u02c8\u025bv\u0259nh\u02c8\u028cnd\u0279\u026ad \u03b8\u02c8\u025c\u02d0\u027ei",
+          "start": 4.63,
+          "end": 5.615,
+          "duration": 0.985,
+          "frame_ahead_trigger": 4.59
         },
         {
           "word": "of",
           "clean_word": "of",
           "phonemes": "\u028cv",
-          "start": 4.295,
-          "end": 4.48,
-          "duration": 0.185,
-          "frame_ahead_trigger": 4.255
+          "start": 5.615,
+          "end": 5.744,
+          "duration": 0.129,
+          "frame_ahead_trigger": 5.575
         },
         {
           "word": "memory",
           "clean_word": "memory",
           "phonemes": "m\u02c8\u025bm\u025a\u0279i",
-          "start": 4.48,
-          "end": 4.725,
-          "duration": 0.245,
-          "frame_ahead_trigger": 4.44
+          "start": 5.744,
+          "end": 6.025,
+          "duration": 0.281,
+          "frame_ahead_trigger": 5.704
         },
         {
           "word": "overhead.",
           "clean_word": "overhead",
           "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
-          "start": 4.725,
-          "end": 5.185,
-          "duration": 0.46,
-          "frame_ahead_trigger": 4.685
+          "start": 6.025,
+          "end": 6.49,
+          "duration": 0.465,
+          "frame_ahead_trigger": 5.985
         }
       ],
-      "audio_duration": 5.31,
-      "slot_duration": 5.46
+      "audio_duration": 6.63,
+      "slot_duration": 6.78
     },
     {
       "beat_id": 2,
-      "text": "Standard attention forces a brutal trade-off: shrink the cache and lose intelligence, or expand it and kill your GPU throughput.",
-      "visual_focus": "A scale tipping violently between a brain icon and a server rack icon.",
+      "text": "GQA demands massive cache, while MLA sacrifices quality. You are trapped by the physical constraints of head count.",
+      "visual_focus": "A 3-way intersection sign labeled KV Cache, FLOPs, and Quality.",
       "highlight_words": {
-        "brutal trade-off": "#EF4444"
+        "physical constraints": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Attention",
-        "action_verb": "forces",
-        "direct_object": "Hardware Failure",
-        "anchor_word": "trade-off",
-        "semantic_role": "causal_link"
+        "subject": "Architecture",
+        "action_verb": "stalls",
+        "direct_object": "Inference",
+        "anchor_word": "trapped",
+        "semantic_role": "constraint_definition"
       },
       "visual_blueprint": {
         "layout": "grid_memory",
-        "title": "THE BOTTLENECK",
-        "sub": "The Cost of Context",
+        "title": "THE IMPOSSIBLE TRIANGLE",
+        "sub": "Hardware Bottlenecks",
         "accent_color": "#F59E0B",
         "params": {
-          "grid_title": "Attention Head Allocation Matrix",
-          "active_cell_label": "GQA: High KV VRAM",
-          "efficiency_label": "MLA: Degraded Subspace Rank"
+          "grid_title": "VRAM KV Allocator",
+          "active_cell_label": "Active KV Head Pairs",
+          "efficiency_label": "2 KV Heads (Severe Capacity Loss)"
         }
       },
       "thriller_role": "villain_bottleneck",
@@ -226,226 +248,208 @@
       "motif_type": "visual_composition",
       "motif_params": {
         "layout": "grid_memory",
-        "title": "THE BOTTLENECK",
-        "sub": "The Cost of Context",
+        "title": "THE IMPOSSIBLE TRIANGLE",
+        "sub": "Hardware Bottlenecks",
         "accent_color": "#F59E0B",
-        "grid_title": "Attention Head Allocation Matrix",
-        "active_cell_label": "GQA: High KV VRAM",
-        "efficiency_label": "MLA: Degraded Subspace Rank"
+        "grid_title": "VRAM KV Allocator",
+        "active_cell_label": "Active KV Head Pairs",
+        "efficiency_label": "2 KV Heads (Severe Capacity Loss)"
       },
       "kinetic_action": "blueprint_transform",
-      "start": 5.46,
-      "end": 11.88,
-      "duration": 6.42,
+      "start": 6.78,
+      "end": 13.04,
+      "duration": 6.25,
       "word_timings": [
         {
-          "word": "Standard",
-          "clean_word": "standard",
-          "phonemes": "st\u02c8\u00e6nd\u025ad",
-          "start": 5.492,
-          "end": 5.902,
-          "duration": 0.41,
-          "frame_ahead_trigger": 5.602
+          "word": "GQA",
+          "clean_word": "gqa",
+          "phonemes": "d\u0292\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 6.805,
+          "end": 7.482,
+          "duration": 0.677,
+          "frame_ahead_trigger": 6.915
         },
         {
-          "word": "attention",
-          "clean_word": "attention",
-          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
-          "start": 5.902,
-          "end": 6.372,
-          "duration": 0.47,
-          "frame_ahead_trigger": 6.012
+          "word": "demands",
+          "clean_word": "demands",
+          "phonemes": "d\u1d7bm\u02c8\u00e6ndz",
+          "start": 7.482,
+          "end": 7.95,
+          "duration": 0.468,
+          "frame_ahead_trigger": 7.592
         },
         {
-          "word": "forces",
-          "clean_word": "forces",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
-          "start": 6.372,
-          "end": 6.777,
-          "duration": 0.405,
-          "frame_ahead_trigger": 6.482
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "m\u02c8\u00e6s\u026av",
+          "start": 7.95,
+          "end": 8.095,
+          "duration": 0.145,
+          "frame_ahead_trigger": 8.06
         },
         {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 6.777,
-          "end": 6.927,
-          "duration": 0.15,
-          "frame_ahead_trigger": 6.887
+          "word": "cache,",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 8.095,
+          "end": 8.49,
+          "duration": 0.395,
+          "frame_ahead_trigger": 8.205
         },
         {
-          "word": "brutal",
-          "clean_word": "brutal",
-          "phonemes": "b\u0279\u02c8u\u02d0\u027e\u0259l",
-          "start": 6.927,
-          "end": 7.302,
-          "duration": 0.375,
-          "frame_ahead_trigger": 7.037
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 8.49,
+          "end": 8.67,
+          "duration": 0.18,
+          "frame_ahead_trigger": 8.6
         },
         {
-          "word": "trade-off:",
-          "clean_word": "tradeoff",
-          "phonemes": "t\u0279\u02c8e\u026ad\u0254f",
-          "start": 7.302,
-          "end": 7.745,
-          "duration": 0.443,
-          "frame_ahead_trigger": 7.412
+          "word": "MLA",
+          "clean_word": "mla",
+          "phonemes": "\u02cc\u025bm\u02cc\u025bl\u02c8e\u026a",
+          "start": 8.67,
+          "end": 9.195,
+          "duration": 0.525,
+          "frame_ahead_trigger": 8.78
         },
         {
-          "word": "shrink",
-          "clean_word": "shrink",
-          "phonemes": "\u0283\u0279\u02c8\u026a\u014bk",
-          "start": 7.745,
-          "end": 8.022,
-          "duration": 0.277,
-          "frame_ahead_trigger": 7.855
+          "word": "sacrifices",
+          "clean_word": "sacrifices",
+          "phonemes": "s\u02c8\u00e6k\u0279\u1d7bf\u02cca\u026as\u1d7bz",
+          "start": 9.195,
+          "end": 9.85,
+          "duration": 0.655,
+          "frame_ahead_trigger": 9.305
+        },
+        {
+          "word": "quality.",
+          "clean_word": "quality",
+          "phonemes": "kw\u02c8\u0254l\u1d7b\u027ei",
+          "start": 9.85,
+          "end": 10.17,
+          "duration": 0.32,
+          "frame_ahead_trigger": 9.96
+        },
+        {
+          "word": "You",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 10.17,
+          "end": 10.4,
+          "duration": 0.231,
+          "frame_ahead_trigger": 10.28
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 10.4,
+          "end": 10.557,
+          "duration": 0.156,
+          "frame_ahead_trigger": 10.51
+        },
+        {
+          "word": "trapped",
+          "clean_word": "trapped",
+          "phonemes": "t\u0279\u02c8\u00e6pt",
+          "start": 10.557,
+          "end": 10.935,
+          "duration": 0.378,
+          "frame_ahead_trigger": 10.667
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 10.935,
+          "end": 11.078,
+          "duration": 0.143,
+          "frame_ahead_trigger": 11.045
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 8.022,
-          "end": 8.217,
-          "duration": 0.195,
-          "frame_ahead_trigger": 8.132
+          "start": 11.078,
+          "end": 11.22,
+          "duration": 0.142,
+          "frame_ahead_trigger": 11.188
         },
         {
-          "word": "cache",
-          "clean_word": "cache",
-          "phonemes": "k\u02c8\u00e6\u0283",
-          "start": 8.217,
-          "end": 8.347,
-          "duration": 0.13,
-          "frame_ahead_trigger": 8.327
+          "word": "physical",
+          "clean_word": "physical",
+          "phonemes": "f\u02c8\u026az\u026ak\u0259l",
+          "start": 11.22,
+          "end": 11.62,
+          "duration": 0.4,
+          "frame_ahead_trigger": 11.33
         },
         {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 8.347,
-          "end": 8.617,
-          "duration": 0.27,
-          "frame_ahead_trigger": 8.457
+          "word": "constraints",
+          "clean_word": "constraints",
+          "phonemes": "k\u0259nst\u0279\u02c8e\u026ants",
+          "start": 11.62,
+          "end": 12.265,
+          "duration": 0.645,
+          "frame_ahead_trigger": 11.73
         },
         {
-          "word": "lose",
-          "clean_word": "lose",
-          "phonemes": "l\u02c8u\u02d0z",
-          "start": 8.617,
-          "end": 8.793,
-          "duration": 0.176,
-          "frame_ahead_trigger": 8.727
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 12.265,
+          "end": 12.385,
+          "duration": 0.12,
+          "frame_ahead_trigger": 12.375
         },
         {
-          "word": "intelligence,",
-          "clean_word": "intelligence",
-          "phonemes": "\u026ant\u02c8\u025bl\u026ad\u0292\u0259ns",
-          "start": 8.793,
-          "end": 9.357,
-          "duration": 0.564,
-          "frame_ahead_trigger": 8.903
+          "word": "head",
+          "clean_word": "head",
+          "phonemes": "h\u02c8\u025bd",
+          "start": 12.385,
+          "end": 12.6,
+          "duration": 0.215,
+          "frame_ahead_trigger": 12.495
         },
         {
-          "word": "or",
-          "clean_word": "or",
-          "phonemes": "\u0254\u02d0\u0279",
-          "start": 9.357,
-          "end": 9.537,
-          "duration": 0.18,
-          "frame_ahead_trigger": 9.467
-        },
-        {
-          "word": "expand",
-          "clean_word": "expand",
-          "phonemes": "\u025bksp\u02c8\u00e6nd",
-          "start": 9.537,
-          "end": 10.022,
-          "duration": 0.485,
-          "frame_ahead_trigger": 9.647
-        },
-        {
-          "word": "it",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 10.022,
-          "end": 10.177,
-          "duration": 0.155,
-          "frame_ahead_trigger": 10.132
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 10.177,
-          "end": 10.342,
-          "duration": 0.165,
-          "frame_ahead_trigger": 10.287
-        },
-        {
-          "word": "kill",
-          "clean_word": "kill",
-          "phonemes": "k\u02c8\u026al",
-          "start": 10.342,
-          "end": 10.562,
-          "duration": 0.22,
-          "frame_ahead_trigger": 10.452
-        },
-        {
-          "word": "your",
-          "clean_word": "your",
-          "phonemes": "j\u028a\u0279",
-          "start": 10.562,
-          "end": 10.662,
-          "duration": 0.1,
-          "frame_ahead_trigger": 10.672
-        },
-        {
-          "word": "GPU",
-          "clean_word": "gpu",
-          "phonemes": "d\u0292\u02cci\u02d0p\u02cci\u02d0j\u02c8u\u02d0",
-          "start": 10.662,
-          "end": 11.257,
-          "duration": 0.595,
-          "frame_ahead_trigger": 10.772
-        },
-        {
-          "word": "throughput.",
-          "clean_word": "throughput",
-          "phonemes": "\u03b8\u0279\u02c8u\u02d0p\u028at",
-          "start": 11.257,
-          "end": 11.727,
-          "duration": 0.47,
-          "frame_ahead_trigger": 11.367
+          "word": "count.",
+          "clean_word": "count",
+          "phonemes": "k\u02c8a\u028ant",
+          "start": 12.6,
+          "end": 12.85,
+          "duration": 0.25,
+          "frame_ahead_trigger": 12.71
         }
       ],
-      "audio_duration": 6.42,
-      "slot_duration": 6.57
+      "audio_duration": 6.25,
+      "slot_duration": 6.41
     },
     {
       "beat_id": 3,
-      "text": "Virtual Head Attention shatters this by using two linear operations: Q-Premix and Postmix to simulate head diversity without physical overhead.",
-      "visual_focus": "Geometric lines folding into a single, clean, high-density vector path.",
+      "text": "Virtual Head Attention synthesizes head diversity using Q Premix and Linear Postmix, bypassing the need for physical KV heads.",
+      "visual_focus": "A mathematical transformation matrix collapsing into a single, efficient layer.",
       "highlight_words": {
-        "Virtual Head Attention": "#22C55E"
+        "synthesizes": "#10B981"
       },
       "svo_action": {
         "subject": "VHA",
-        "action_verb": "shatters",
-        "direct_object": "Memory Constraints",
-        "anchor_word": "shatters",
+        "action_verb": "recovers",
+        "direct_object": "Head Diversity",
+        "anchor_word": "synthesizes",
         "semantic_role": "solution_discovery"
       },
       "visual_blueprint": {
         "layout": "paper_figure",
         "title": "VIRTUAL HEAD ATTEN ARCHITECTURE",
-        "sub": "Geometric lines folding into a single, clean, high-density vector",
+        "sub": "A mathematical transformation matrix collapsing into a single, ef",
         "params": {
           "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.17959/chalkboard_figures/fig_1_postmix0505.svg",
           "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.17959/chalkboard_figures/fig_1_postmix0505.png",
           "arxiv_id": "2610.17959",
           "title": "VIRTUAL HEAD ATTEN ARCHITECTURE",
-          "sub": "Geometric lines folding into a single, clean, high-density vector",
+          "sub": "A mathematical transformation matrix collapsing into a single, ef",
           "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
           "caption": "Postmix0505",
           "preferred_renderer": "vector"
@@ -459,237 +463,227 @@
         "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.17959/chalkboard_figures/fig_1_postmix0505.png",
         "arxiv_id": "2610.17959",
         "title": "VIRTUAL HEAD ATTEN ARCHITECTURE",
-        "sub": "Geometric lines folding into a single, clean, high-density vector",
+        "sub": "A mathematical transformation matrix collapsing into a single, ef",
         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
         "caption": "Postmix0505",
         "preferred_renderer": "vector"
       },
       "kinetic_action": "figure_scan",
-      "start": 12.03,
-      "end": 19.78,
-      "duration": 7.74,
+      "start": 13.19,
+      "end": 20.37,
+      "duration": 7.19,
       "word_timings": [
         {
           "word": "Virtual",
           "clean_word": "virtual",
           "phonemes": "v\u02c8\u025c\u02d0t\u0283u\u02d0\u0259l",
-          "start": 12.063,
-          "end": 12.558,
+          "start": 13.215,
+          "end": 13.71,
           "duration": 0.495,
-          "frame_ahead_trigger": 12.323
+          "frame_ahead_trigger": 13.475
         },
         {
           "word": "Head",
           "clean_word": "head",
           "phonemes": "h\u02c8\u025bd",
-          "start": 12.558,
-          "end": 12.783,
+          "start": 13.71,
+          "end": 13.935,
           "duration": 0.225,
-          "frame_ahead_trigger": 12.818
+          "frame_ahead_trigger": 13.97
         },
         {
           "word": "Attention",
           "clean_word": "attention",
           "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
-          "start": 12.783,
-          "end": 13.228,
-          "duration": 0.445,
-          "frame_ahead_trigger": 13.043
+          "start": 13.935,
+          "end": 14.415,
+          "duration": 0.48,
+          "frame_ahead_trigger": 14.195
         },
         {
-          "word": "shatters",
-          "clean_word": "shatters",
-          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
-          "start": 13.228,
-          "end": 13.528,
-          "duration": 0.3,
-          "frame_ahead_trigger": 13.488
-        },
-        {
-          "word": "this",
-          "clean_word": "this",
-          "phonemes": "\u00f0\u02c8\u026as",
-          "start": 13.528,
-          "end": 13.743,
-          "duration": 0.215,
-          "frame_ahead_trigger": 13.788
-        },
-        {
-          "word": "by",
-          "clean_word": "by",
-          "phonemes": "b\u02c8a\u026a",
-          "start": 13.743,
-          "end": 13.913,
-          "duration": 0.17,
-          "frame_ahead_trigger": 14.003
-        },
-        {
-          "word": "using",
-          "clean_word": "using",
-          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
-          "start": 13.913,
-          "end": 14.288,
-          "duration": 0.375,
-          "frame_ahead_trigger": 14.173
-        },
-        {
-          "word": "two",
-          "clean_word": "two",
-          "phonemes": "t\u02c8u\u02d0",
-          "start": 14.288,
-          "end": 14.538,
-          "duration": 0.25,
-          "frame_ahead_trigger": 14.548
-        },
-        {
-          "word": "linear",
-          "clean_word": "linear",
-          "phonemes": "l\u02c8\u026an\u026a\u0279",
-          "start": 14.538,
-          "end": 14.863,
-          "duration": 0.325,
-          "frame_ahead_trigger": 14.798
-        },
-        {
-          "word": "operations:",
-          "clean_word": "operations",
-          "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
-          "start": 14.863,
-          "end": 15.49,
-          "duration": 0.627,
-          "frame_ahead_trigger": 15.123
-        },
-        {
-          "word": "Q-Premix",
-          "clean_word": "qpremix",
-          "phonemes": "kj\u02c8u\u02d0 p\u0279\u02c8\u025bm\u026aks",
-          "start": 15.49,
-          "end": 16.313,
-          "duration": 0.823,
-          "frame_ahead_trigger": 15.75
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 16.313,
-          "end": 16.398,
-          "duration": 0.085,
-          "frame_ahead_trigger": 16.573
-        },
-        {
-          "word": "Postmix",
-          "clean_word": "postmix",
-          "phonemes": "p\u02c8o\u028astm\u026aks",
-          "start": 16.398,
-          "end": 16.848,
-          "duration": 0.45,
-          "frame_ahead_trigger": 16.658
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 16.848,
-          "end": 17.093,
-          "duration": 0.245,
-          "frame_ahead_trigger": 17.108
-        },
-        {
-          "word": "simulate",
-          "clean_word": "simulate",
-          "phonemes": "s\u02c8\u026amj\u028al\u02cce\u026at",
-          "start": 17.093,
-          "end": 17.673,
-          "duration": 0.58,
-          "frame_ahead_trigger": 17.353
+          "word": "synthesizes",
+          "clean_word": "synthesizes",
+          "phonemes": "s\u02c8\u026an\u03b8\u026as\u02cca\u026az\u1d7bz",
+          "start": 14.415,
+          "end": 15.11,
+          "duration": 0.695,
+          "frame_ahead_trigger": 14.675
         },
         {
           "word": "head",
           "clean_word": "head",
           "phonemes": "h\u02c8\u025bd",
-          "start": 17.673,
-          "end": 17.858,
+          "start": 15.11,
+          "end": 15.295,
           "duration": 0.185,
-          "frame_ahead_trigger": 17.933
+          "frame_ahead_trigger": 15.37
         },
         {
           "word": "diversity",
           "clean_word": "diversity",
           "phonemes": "da\u026av\u02c8\u025c\u02d0s\u1d7b\u027ei",
-          "start": 17.858,
-          "end": 18.368,
-          "duration": 0.51,
-          "frame_ahead_trigger": 18.118
+          "start": 15.295,
+          "end": 15.94,
+          "duration": 0.645,
+          "frame_ahead_trigger": 15.555
         },
         {
-          "word": "without",
-          "clean_word": "without",
-          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
-          "start": 18.368,
-          "end": 18.878,
-          "duration": 0.51,
-          "frame_ahead_trigger": 18.628
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 15.94,
+          "end": 16.37,
+          "duration": 0.43,
+          "frame_ahead_trigger": 16.2
+        },
+        {
+          "word": "Q",
+          "clean_word": "q",
+          "phonemes": "kj\u02c8u\u02d0",
+          "start": 16.37,
+          "end": 16.695,
+          "duration": 0.325,
+          "frame_ahead_trigger": 16.63
+        },
+        {
+          "word": "Premix",
+          "clean_word": "premix",
+          "phonemes": "p\u0279\u02c8\u025bm\u026aks",
+          "start": 16.695,
+          "end": 16.93,
+          "duration": 0.235,
+          "frame_ahead_trigger": 16.955
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 16.93,
+          "end": 17.215,
+          "duration": 0.285,
+          "frame_ahead_trigger": 17.19
+        },
+        {
+          "word": "Linear",
+          "clean_word": "linear",
+          "phonemes": "l\u02c8\u026an\u026a\u0279",
+          "start": 17.215,
+          "end": 17.5,
+          "duration": 0.285,
+          "frame_ahead_trigger": 17.475
+        },
+        {
+          "word": "Postmix,",
+          "clean_word": "postmix",
+          "phonemes": "p\u02c8o\u028astm\u026aks",
+          "start": 17.5,
+          "end": 18.145,
+          "duration": 0.645,
+          "frame_ahead_trigger": 17.76
+        },
+        {
+          "word": "bypassing",
+          "clean_word": "bypassing",
+          "phonemes": "b\u02c8a\u026ap\u00e6s\u026a\u014b",
+          "start": 18.145,
+          "end": 18.535,
+          "duration": 0.39,
+          "frame_ahead_trigger": 18.405
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 18.535,
+          "end": 18.765,
+          "duration": 0.23,
+          "frame_ahead_trigger": 18.795
+        },
+        {
+          "word": "need",
+          "clean_word": "need",
+          "phonemes": "n\u02c8i\u02d0d",
+          "start": 18.765,
+          "end": 19.03,
+          "duration": 0.265,
+          "frame_ahead_trigger": 19.025
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 19.03,
+          "end": 19.2,
+          "duration": 0.17,
+          "frame_ahead_trigger": 19.29
         },
         {
           "word": "physical",
           "clean_word": "physical",
           "phonemes": "f\u02c8\u026az\u026ak\u0259l",
-          "start": 18.878,
-          "end": 19.093,
-          "duration": 0.215,
-          "frame_ahead_trigger": 19.138
+          "start": 19.2,
+          "end": 19.575,
+          "duration": 0.375,
+          "frame_ahead_trigger": 19.46
         },
         {
-          "word": "overhead.",
-          "clean_word": "overhead",
-          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
-          "start": 19.093,
-          "end": 19.643,
-          "duration": 0.55,
-          "frame_ahead_trigger": 19.353
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 19.575,
+          "end": 19.975,
+          "duration": 0.4,
+          "frame_ahead_trigger": 19.835
+        },
+        {
+          "word": "heads.",
+          "clean_word": "heads",
+          "phonemes": "h\u02c8\u025bdz",
+          "start": 19.975,
+          "end": 20.285,
+          "duration": 0.31,
+          "frame_ahead_trigger": 20.235
         }
       ],
-      "audio_duration": 7.74,
-      "slot_duration": 7.9
+      "audio_duration": 7.19,
+      "slot_duration": 7.33
     },
     {
       "beat_id": 4,
-      "text": "Because these operations are purely linear, we fold them into projection weights, reducing the model to a standard GQA-2 architecture.",
-      "visual_focus": "Code blocks collapsing into a single, optimized weight matrix.",
+      "text": "We fold these linear operations into projection weights at inference, executing as standard GQA-2 without custom kernels.",
+      "visual_focus": "Code blocks merging into a single optimized projection layer.",
       "highlight_words": {
-        "fold": "#22C55E"
+        "fold": "#10B981"
       },
       "svo_action": {
-        "subject": "Linear Operations",
-        "action_verb": "fold",
-        "direct_object": "Projection Weights",
+        "subject": "Weights",
+        "action_verb": "absorb",
+        "direct_object": "Operations",
         "anchor_word": "fold",
         "semantic_role": "optimization_mechanism"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code_block",
         "title": "KERNEL CODE: VIRTUAL HEAD ATTEN",
-        "sub": "Code blocks collapsing into a single, optimized weight matrix.",
+        "sub": "Code blocks merging into a single optimized projection layer.",
         "params": {
           "title": "KERNEL CODE: VIRTUAL HEAD ATTEN",
-          "sub": "Code blocks collapsing into a single, optimized weight matrix.",
-          "filename": "vha_folded_inference.py",
+          "sub": "Code blocks merging into a single optimized projection layer.",
+          "filename": "vha_folding.py",
           "language": "python",
           "lines": [
-            "# Offline Linear Weight Folding for Zero-Overhead Serving",
-            "W_q_folded = W_q @ (torch.eye(d) + P_premix)",
-            "W_out_folded = (torch.eye(d) + A @ B.T) @ W_out",
-            "# Pure standard GQA-2 execution on Tensor Cores",
-            "out = flash_attn_gqa(q=x @ W_q_folded, kv_heads=2) @ W_out_folded"
+            "def compile_vha_inference(W_q, W_out, premix_delta, postmix_AB):",
+            "# Fold linear transformations into standard projection weights",
+            "W_q_fused = (torch.eye(W_q.size(0)) + premix_delta) @ W_q",
+            "W_out_fused = (torch.eye(W_out.size(0)) + postmix_AB) @ W_out",
+            "return W_q_fused, W_out_fused  # Deploys as standard GQA-2"
           ],
           "highlight_lines": [
-            2,
             3,
-            5
+            4
           ],
-          "trace_register": "\u26a1 ZERO RUNTIME NONLINEAR OVERHEAD",
-          "delta_badge": "Q Premix and Linear Postmix fold directly into proje"
+          "trace_register": "\u26a1 ZERO RUNTIME FLOP OVERHEAD COMPILED",
+          "delta_badge": "Premix and Postmix fold into GEMM projections at dep"
         }
       },
       "thriller_role": "technical_deep_dive",
@@ -698,259 +692,232 @@
       "kinetic_action": "pulse",
       "motif_params": {
         "title": "KERNEL CODE: VIRTUAL HEAD ATTEN",
-        "sub": "Code blocks collapsing into a single, optimized weight matrix.",
-        "filename": "vha_folded_inference.py",
+        "sub": "Code blocks merging into a single optimized projection layer.",
+        "filename": "vha_folding.py",
         "language": "python",
         "lines": [
-          "# Offline Linear Weight Folding for Zero-Overhead Serving",
-          "W_q_folded = W_q @ (torch.eye(d) + P_premix)",
-          "W_out_folded = (torch.eye(d) + A @ B.T) @ W_out",
-          "# Pure standard GQA-2 execution on Tensor Cores",
-          "out = flash_attn_gqa(q=x @ W_q_folded, kv_heads=2) @ W_out_folded"
+          "def compile_vha_inference(W_q, W_out, premix_delta, postmix_AB):",
+          "# Fold linear transformations into standard projection weights",
+          "W_q_fused = (torch.eye(W_q.size(0)) + premix_delta) @ W_q",
+          "W_out_fused = (torch.eye(W_out.size(0)) + postmix_AB) @ W_out",
+          "return W_q_fused, W_out_fused  # Deploys as standard GQA-2"
         ],
         "highlight_lines": [
-          2,
           3,
-          5
+          4
         ],
-        "trace_register": "\u26a1 ZERO RUNTIME NONLINEAR OVERHEAD",
-        "delta_badge": "Q Premix and Linear Postmix fold directly into proje"
+        "trace_register": "\u26a1 ZERO RUNTIME FLOP OVERHEAD COMPILED",
+        "delta_badge": "Premix and Postmix fold into GEMM projections at dep"
       },
-      "start": 19.93,
-      "end": 27.37,
-      "duration": 7.45,
+      "start": 20.52,
+      "end": 27.22,
+      "duration": 6.7,
       "word_timings": [
         {
-          "word": "Because",
-          "clean_word": "because",
-          "phonemes": "b\u026ak\u02c8\u028cz",
-          "start": 19.942,
-          "end": 20.227,
-          "duration": 0.285,
-          "frame_ahead_trigger": 20.352
-        },
-        {
-          "word": "these",
-          "clean_word": "these",
-          "phonemes": "\u00f0\u02c8i\u02d0z",
-          "start": 20.227,
-          "end": 20.607,
-          "duration": 0.38,
-          "frame_ahead_trigger": 20.637
-        },
-        {
-          "word": "operations",
-          "clean_word": "operations",
-          "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
-          "start": 20.607,
-          "end": 21.112,
-          "duration": 0.505,
-          "frame_ahead_trigger": 21.017
-        },
-        {
-          "word": "are",
-          "clean_word": "are",
-          "phonemes": "\u0251\u02d0\u0279",
-          "start": 21.112,
-          "end": 21.397,
-          "duration": 0.285,
-          "frame_ahead_trigger": 21.522
-        },
-        {
-          "word": "purely",
-          "clean_word": "purely",
-          "phonemes": "pj\u02c8\u028a\u0279li",
-          "start": 21.397,
-          "end": 21.687,
-          "duration": 0.29,
-          "frame_ahead_trigger": 21.807
-        },
-        {
-          "word": "linear,",
-          "clean_word": "linear",
-          "phonemes": "l\u02c8\u026an\u026a\u0279",
-          "start": 21.687,
-          "end": 22.052,
-          "duration": 0.365,
-          "frame_ahead_trigger": 22.097
-        },
-        {
-          "word": "we",
+          "word": "We",
           "clean_word": "we",
           "phonemes": "wi\u02d0",
-          "start": 22.052,
-          "end": 22.212,
-          "duration": 0.16,
-          "frame_ahead_trigger": 22.462
+          "start": 20.535,
+          "end": 20.645,
+          "duration": 0.11,
+          "frame_ahead_trigger": 20.945
         },
         {
           "word": "fold",
           "clean_word": "fold",
           "phonemes": "f\u02c8o\u028ald",
-          "start": 22.212,
-          "end": 22.617,
-          "duration": 0.405,
-          "frame_ahead_trigger": 22.622
+          "start": 20.645,
+          "end": 21.065,
+          "duration": 0.42,
+          "frame_ahead_trigger": 21.055
         },
         {
-          "word": "them",
-          "clean_word": "them",
-          "phonemes": "\u00f0\u02cc\u025bm",
-          "start": 22.617,
-          "end": 22.732,
-          "duration": 0.115,
-          "frame_ahead_trigger": 23.027
+          "word": "these",
+          "clean_word": "these",
+          "phonemes": "\u00f0\u02c8i\u02d0z",
+          "start": 21.065,
+          "end": 21.21,
+          "duration": 0.145,
+          "frame_ahead_trigger": 21.475
+        },
+        {
+          "word": "linear",
+          "clean_word": "linear",
+          "phonemes": "l\u02c8\u026an\u026a\u0279",
+          "start": 21.21,
+          "end": 21.53,
+          "duration": 0.32,
+          "frame_ahead_trigger": 21.62
+        },
+        {
+          "word": "operations",
+          "clean_word": "operations",
+          "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
+          "start": 21.53,
+          "end": 22.24,
+          "duration": 0.71,
+          "frame_ahead_trigger": 21.94
         },
         {
           "word": "into",
           "clean_word": "into",
           "phonemes": "\u02cc\u026ant\u028a",
-          "start": 22.732,
-          "end": 23.007,
-          "duration": 0.275,
-          "frame_ahead_trigger": 23.142
+          "start": 22.24,
+          "end": 22.53,
+          "duration": 0.29,
+          "frame_ahead_trigger": 22.65
         },
         {
           "word": "projection",
           "clean_word": "projection",
           "phonemes": "p\u0279\u0259d\u0292\u02c8\u025bk\u0283\u0259n",
-          "start": 23.007,
-          "end": 23.522,
-          "duration": 0.515,
-          "frame_ahead_trigger": 23.417
+          "start": 22.53,
+          "end": 23.035,
+          "duration": 0.505,
+          "frame_ahead_trigger": 22.94
         },
         {
-          "word": "weights,",
+          "word": "weights",
           "clean_word": "weights",
           "phonemes": "w\u02c8e\u026ats",
-          "start": 23.522,
-          "end": 23.899,
-          "duration": 0.377,
-          "frame_ahead_trigger": 23.932
+          "start": 23.035,
+          "end": 23.4,
+          "duration": 0.365,
+          "frame_ahead_trigger": 23.445
         },
         {
-          "word": "reducing",
-          "clean_word": "reducing",
-          "phonemes": "\u0279\u1d7bd\u02c8u\u02d0s\u026a\u014b",
-          "start": 23.899,
-          "end": 24.382,
-          "duration": 0.483,
-          "frame_ahead_trigger": 24.309
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 23.4,
+          "end": 23.453,
+          "duration": 0.053,
+          "frame_ahead_trigger": 23.81
         },
         {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 24.382,
-          "end": 24.479,
-          "duration": 0.097,
-          "frame_ahead_trigger": 24.792
+          "word": "inference,",
+          "clean_word": "inference",
+          "phonemes": "\u02c8\u026anf\u025a\u0279\u0259ns",
+          "start": 23.453,
+          "end": 23.914,
+          "duration": 0.461,
+          "frame_ahead_trigger": 23.863
         },
         {
-          "word": "model",
-          "clean_word": "model",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 24.479,
-          "end": 24.812,
-          "duration": 0.333,
-          "frame_ahead_trigger": 24.889
+          "word": "executing",
+          "clean_word": "executing",
+          "phonemes": "\u02c8\u025bks\u1d7bkj\u02ccu\u02d0\u027e\u026a\u014b",
+          "start": 23.914,
+          "end": 24.605,
+          "duration": 0.691,
+          "frame_ahead_trigger": 24.324
         },
         {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 24.812,
-          "end": 24.987,
-          "duration": 0.175,
-          "frame_ahead_trigger": 25.222
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 24.987,
-          "end": 25.137,
-          "duration": 0.15,
-          "frame_ahead_trigger": 25.397
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "\u00e6z",
+          "start": 24.605,
+          "end": 24.682,
+          "duration": 0.077,
+          "frame_ahead_trigger": 25.015
         },
         {
           "word": "standard",
           "clean_word": "standard",
           "phonemes": "st\u02c8\u00e6nd\u025ad",
-          "start": 25.137,
-          "end": 25.657,
-          "duration": 0.52,
-          "frame_ahead_trigger": 25.547
+          "start": 24.682,
+          "end": 25.025,
+          "duration": 0.343,
+          "frame_ahead_trigger": 25.092
         },
         {
           "word": "GQA-2",
           "clean_word": "gqa2",
           "phonemes": "d\u0292\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a t\u02c8u\u02d0",
-          "start": 25.657,
-          "end": 26.592,
-          "duration": 0.935,
-          "frame_ahead_trigger": 26.067
+          "start": 25.025,
+          "end": 26.02,
+          "duration": 0.995,
+          "frame_ahead_trigger": 25.435
         },
         {
-          "word": "architecture.",
-          "clean_word": "architecture",
-          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
-          "start": 26.592,
-          "end": 27.222,
-          "duration": 0.63,
-          "frame_ahead_trigger": 27.002
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 26.02,
+          "end": 26.285,
+          "duration": 0.265,
+          "frame_ahead_trigger": 26.43
+        },
+        {
+          "word": "custom",
+          "clean_word": "custom",
+          "phonemes": "k\u02c8\u028cst\u0259m",
+          "start": 26.285,
+          "end": 26.685,
+          "duration": 0.4,
+          "frame_ahead_trigger": 26.695
+        },
+        {
+          "word": "kernels.",
+          "clean_word": "kernels",
+          "phonemes": "k\u02c8\u025c\u02d0n\u0259lz",
+          "start": 26.685,
+          "end": 27.14,
+          "duration": 0.455,
+          "frame_ahead_trigger": 27.095
         }
       ],
-      "audio_duration": 7.45,
-      "slot_duration": 7.59
+      "audio_duration": 6.7,
+      "slot_duration": 6.85
     },
     {
       "beat_id": 5,
-      "text": "Benchmarks show an 11.4 point gain on RULER, slashing KV cache requirements by half while outperforming MLA and GQA.",
-      "visual_focus": "A bar chart showing VHA soaring past GQA and MLA benchmarks.",
+      "text": "VHA slashes KV cache by 4x while boosting RULER retrieval accuracy to 84.4 versus 73.0 for standard GQA.",
+      "visual_focus": "A bar chart showing a massive drop in memory usage and a spike in accuracy.",
       "highlight_words": {
-        "11.4 point gain": "#3B82F6"
+        "4x": "#3B82F6",
+        "84.4": "#3B82F6"
       },
       "svo_action": {
         "subject": "VHA",
         "action_verb": "outperforms",
         "direct_object": "Baselines",
-        "anchor_word": "gain",
+        "anchor_word": "accuracy",
         "semantic_role": "empirical_proof"
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
-        "title": "LONG-CONTEXT RULER SHOWDOWN (8K-128K)",
-        "sub": "A bar chart showing VHA soaring past GQA and MLA",
+        "title": "LONG CONTEXT RETRIEVAL: RULER (8K-128K)",
+        "sub": "A bar chart showing a massive drop in memory usage and",
         "params": {
-          "title": "LONG-CONTEXT RULER SHOWDOWN (8K-128K)",
-          "sub": "A bar chart showing VHA soaring past GQA and MLA",
-          "metric_name": "RULER Benchmark Score",
-          "unit": "pts",
+          "title": "LONG CONTEXT RETRIEVAL: RULER (8K-128K)",
+          "sub": "A bar chart showing a massive drop in memory usage and",
+          "metric_name": "RULER Accuracy",
+          "unit": "%",
           "contestants": [
             {
-              "name": "Virtual Head Attention (2 KV)",
+              "name": "VHA (2 KV Heads)",
               "value": 84.4,
-              "display_val": "84.4 pts",
+              "display_val": "84.4%",
               "is_hero": true,
               "color": "#34D399"
             },
             {
-              "name": "GQA Baseline (4 KV)",
+              "name": "GQA (4 KV Heads)",
               "value": 73.0,
-              "display_val": "73.0 pts",
+              "display_val": "73.0%",
               "is_hero": false,
               "color": "#EF4444"
             },
             {
-              "name": "MLA Compressed Baseline",
-              "value": 71.2,
-              "display_val": "71.2 pts",
+              "name": "MLA Baseline",
+              "value": 81.8,
+              "display_val": "81.8%",
               "is_hero": false,
-              "color": "#F59E0B"
+              "color": "#38BDF8"
             }
           ],
-          "delta_badge": "\u26a1 +11.4 PTS WITH 2X SMALLER CACHE"
+          "delta_badge": "\u26a1 +11.4% OVER GQA BASELINE"
         }
       },
       "thriller_role": "empirical_victory",
@@ -958,504 +925,468 @@
       "motif_type": "horizontal_race_bars",
       "kinetic_action": "bar_fill",
       "motif_params": {
-        "title": "LONG-CONTEXT RULER SHOWDOWN (8K-128K)",
-        "sub": "A bar chart showing VHA soaring past GQA and MLA",
-        "metric_name": "RULER Benchmark Score",
-        "unit": "pts",
+        "title": "LONG CONTEXT RETRIEVAL: RULER (8K-128K)",
+        "sub": "A bar chart showing a massive drop in memory usage and",
+        "metric_name": "RULER Accuracy",
+        "unit": "%",
         "contestants": [
           {
-            "name": "Virtual Head Attention (2 KV)",
+            "name": "VHA (2 KV Heads)",
             "value": 84.4,
-            "display_val": "84.4 pts",
+            "display_val": "84.4%",
             "is_hero": true,
             "color": "#34D399"
           },
           {
-            "name": "GQA Baseline (4 KV)",
+            "name": "GQA (4 KV Heads)",
             "value": 73.0,
-            "display_val": "73.0 pts",
+            "display_val": "73.0%",
             "is_hero": false,
             "color": "#EF4444"
           },
           {
-            "name": "MLA Compressed Baseline",
-            "value": 71.2,
-            "display_val": "71.2 pts",
+            "name": "MLA Baseline",
+            "value": 81.8,
+            "display_val": "81.8%",
             "is_hero": false,
-            "color": "#F59E0B"
+            "color": "#38BDF8"
           }
         ],
-        "delta_badge": "\u26a1 +11.4 PTS WITH 2X SMALLER CACHE"
+        "delta_badge": "\u26a1 +11.4% OVER GQA BASELINE"
       },
-      "start": 27.52,
-      "end": 34.2,
-      "duration": 6.68,
+      "start": 27.37,
+      "end": 35.57,
+      "duration": 8.19,
       "word_timings": [
         {
-          "word": "Benchmarks",
-          "clean_word": "benchmarks",
-          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
-          "start": 27.528,
-          "end": 28.053,
+          "word": "VHA",
+          "clean_word": "vha",
+          "phonemes": "v\u02cci\u02d0\u02cce\u026at\u0283\u02c8e\u026a",
+          "start": 27.398,
+          "end": 27.923,
           "duration": 0.525,
-          "frame_ahead_trigger": 28.088
+          "frame_ahead_trigger": 27.958
         },
         {
-          "word": "show",
-          "clean_word": "show",
-          "phonemes": "\u0283\u02c8o\u028a",
-          "start": 28.053,
-          "end": 28.308,
-          "duration": 0.255,
-          "frame_ahead_trigger": 28.613
-        },
-        {
-          "word": "an",
-          "clean_word": "an",
-          "phonemes": "\u00e6n",
-          "start": 28.308,
-          "end": 28.348,
-          "duration": 0.04,
-          "frame_ahead_trigger": 28.868
-        },
-        {
-          "word": "11.4",
-          "clean_word": "114",
-          "phonemes": "w\u02c8\u028cnh\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279ti\u02d0n",
-          "start": 28.348,
-          "end": 29.418,
-          "duration": 1.07,
-          "frame_ahead_trigger": 28.908
-        },
-        {
-          "word": "point",
-          "clean_word": "point",
-          "phonemes": "p\u02c8\u0254\u026ant",
-          "start": 29.418,
-          "end": 29.623,
-          "duration": 0.206,
-          "frame_ahead_trigger": 29.978
-        },
-        {
-          "word": "gain",
-          "clean_word": "gain",
-          "phonemes": "\u0261\u02c8e\u026an",
-          "start": 29.623,
-          "end": 29.851,
-          "duration": 0.228,
-          "frame_ahead_trigger": 30.183
-        },
-        {
-          "word": "on",
-          "clean_word": "on",
-          "phonemes": "\u02c8\u0254n",
-          "start": 29.851,
-          "end": 29.988,
-          "duration": 0.137,
-          "frame_ahead_trigger": 30.411
-        },
-        {
-          "word": "RULER,",
-          "clean_word": "ruler",
-          "phonemes": "\u0279\u02c8u\u02d0l\u025a",
-          "start": 29.988,
-          "end": 30.233,
-          "duration": 0.245,
-          "frame_ahead_trigger": 30.548
-        },
-        {
-          "word": "slashing",
-          "clean_word": "slashing",
-          "phonemes": "sl\u02c8\u00e6\u0283\u026a\u014b",
-          "start": 30.233,
-          "end": 30.628,
-          "duration": 0.395,
-          "frame_ahead_trigger": 30.793
+          "word": "slashes",
+          "clean_word": "slashes",
+          "phonemes": "sl\u02c8\u00e6\u0283\u1d7bz",
+          "start": 27.923,
+          "end": 28.338,
+          "duration": 0.415,
+          "frame_ahead_trigger": 28.483
         },
         {
           "word": "KV",
           "clean_word": "kv",
           "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
-          "start": 30.628,
-          "end": 30.923,
-          "duration": 0.295,
-          "frame_ahead_trigger": 31.188
+          "start": 28.338,
+          "end": 28.698,
+          "duration": 0.36,
+          "frame_ahead_trigger": 28.898
         },
         {
           "word": "cache",
           "clean_word": "cache",
           "phonemes": "k\u02c8\u00e6\u0283",
-          "start": 30.923,
-          "end": 31.173,
-          "duration": 0.25,
-          "frame_ahead_trigger": 31.483
-        },
-        {
-          "word": "requirements",
-          "clean_word": "requirements",
-          "phonemes": "\u0279\u1d7bkw\u02c8a\u026a\u025am\u0259nts",
-          "start": 31.173,
-          "end": 31.753,
-          "duration": 0.58,
-          "frame_ahead_trigger": 31.733
+          "start": 28.698,
+          "end": 29.008,
+          "duration": 0.31,
+          "frame_ahead_trigger": 29.258
         },
         {
           "word": "by",
           "clean_word": "by",
           "phonemes": "b\u02c8a\u026a",
-          "start": 31.753,
-          "end": 31.858,
-          "duration": 0.105,
-          "frame_ahead_trigger": 32.313
+          "start": 29.008,
+          "end": 29.088,
+          "duration": 0.08,
+          "frame_ahead_trigger": 29.568
         },
         {
-          "word": "half",
-          "clean_word": "half",
-          "phonemes": "h\u02c8\u00e6f",
-          "start": 31.858,
-          "end": 32.153,
-          "duration": 0.295,
-          "frame_ahead_trigger": 32.418
+          "word": "4x",
+          "clean_word": "4x",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279 \u02c8\u025bks",
+          "start": 29.088,
+          "end": 29.558,
+          "duration": 0.47,
+          "frame_ahead_trigger": 29.648
         },
         {
           "word": "while",
           "clean_word": "while",
           "phonemes": "w\u02c8a\u026al",
-          "start": 32.153,
-          "end": 32.323,
-          "duration": 0.17,
-          "frame_ahead_trigger": 32.713
+          "start": 29.558,
+          "end": 29.863,
+          "duration": 0.305,
+          "frame_ahead_trigger": 30.118
         },
         {
-          "word": "outperforming",
-          "clean_word": "outperforming",
-          "phonemes": "a\u028atp\u025af\u02c8\u0254\u02d0\u0279m\u026a\u014b",
-          "start": 32.323,
-          "end": 32.968,
-          "duration": 0.645,
-          "frame_ahead_trigger": 32.883
+          "word": "boosting",
+          "clean_word": "boosting",
+          "phonemes": "b\u02c8u\u02d0st\u026a\u014b",
+          "start": 29.863,
+          "end": 30.258,
+          "duration": 0.395,
+          "frame_ahead_trigger": 30.423
         },
         {
-          "word": "MLA",
-          "clean_word": "mla",
-          "phonemes": "\u02cc\u025bm\u02cc\u025bl\u02c8e\u026a",
-          "start": 32.968,
-          "end": 33.314,
-          "duration": 0.346,
-          "frame_ahead_trigger": 33.528
+          "word": "RULER",
+          "clean_word": "ruler",
+          "phonemes": "\u0279\u02c8u\u02d0l\u025a",
+          "start": 30.258,
+          "end": 30.543,
+          "duration": 0.285,
+          "frame_ahead_trigger": 30.818
         },
         {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 33.314,
-          "end": 33.443,
-          "duration": 0.129,
-          "frame_ahead_trigger": 33.874
+          "word": "retrieval",
+          "clean_word": "retrieval",
+          "phonemes": "\u0279\u1d7bt\u0279\u02c8i\u02d0v\u0259l",
+          "start": 30.543,
+          "end": 31.028,
+          "duration": 0.485,
+          "frame_ahead_trigger": 31.103
         },
         {
-          "word": "GQA.",
-          "clean_word": "gqa",
-          "phonemes": "d\u0292\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
-          "start": 33.443,
-          "end": 34.043,
-          "duration": 0.6,
-          "frame_ahead_trigger": 34.003
-        }
-      ],
-      "audio_duration": 6.68,
-      "slot_duration": 6.83
-    },
-    {
-      "beat_id": 6,
-      "text": "Efficiency is no longer a compromise. Follow The Model Verse for daily deep-dives into how modern AI actually works.",
-      "visual_focus": "The Model Verse logo pulsing against a clean, high-tech background.",
-      "highlight_words": {
-        "no longer a compromise": "#3B82F6"
-      },
-      "svo_action": {
-        "subject": "VHA",
-        "action_verb": "redefines",
-        "direct_object": "Architecture",
-        "anchor_word": "redefines",
-        "semantic_role": "paradigm_shift"
-      },
-      "visual_blueprint": {
-        "layout": "vector_flow_field",
-        "title": "THE MODEL VERSE",
-        "sub": "Deep-Dive Daily",
-        "accent_color": "#38BDF8",
-        "params": {}
-      },
-      "thriller_role": "paradigm_shift",
-      "act": 4,
-      "start": 34.35,
-      "end": 40.77,
-      "duration": 6.42,
-      "word_timings": [
-        {
-          "word": "Efficiency",
-          "clean_word": "efficiency",
-          "phonemes": "\u026af\u02c8\u026a\u0283\u0259nsi",
-          "start": 34.365,
-          "end": 34.93,
-          "duration": 0.565,
-          "frame_ahead_trigger": 35.075
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 31.028,
+          "end": 31.438,
+          "duration": 0.41,
+          "frame_ahead_trigger": 31.588
         },
         {
-          "word": "is",
-          "clean_word": "is",
-          "phonemes": "\u026az",
-          "start": 34.93,
-          "end": 34.969,
-          "duration": 0.039,
-          "frame_ahead_trigger": 35.64
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 31.438,
+          "end": 31.563,
+          "duration": 0.125,
+          "frame_ahead_trigger": 31.998
         },
         {
-          "word": "no",
-          "clean_word": "no",
-          "phonemes": "n\u02c8o\u028a",
-          "start": 34.969,
-          "end": 35.3,
-          "duration": 0.331,
-          "frame_ahead_trigger": 35.679
+          "word": "84.4",
+          "clean_word": "844",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad f\u02c8\u0254\u02d0\u0279\u027ei f\u02c8\u0254\u02d0\u0279",
+          "start": 31.563,
+          "end": 32.938,
+          "duration": 1.375,
+          "frame_ahead_trigger": 32.123
         },
         {
-          "word": "longer",
-          "clean_word": "longer",
-          "phonemes": "l\u02c8\u0254\u014b\u0261\u025a",
-          "start": 35.3,
-          "end": 35.51,
-          "duration": 0.21,
-          "frame_ahead_trigger": 36.01
+          "word": "versus",
+          "clean_word": "versus",
+          "phonemes": "v\u02c8\u025c\u02d0s\u1d7bz",
+          "start": 32.938,
+          "end": 33.133,
+          "duration": 0.195,
+          "frame_ahead_trigger": 33.498
         },
         {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 35.51,
-          "end": 35.665,
-          "duration": 0.155,
-          "frame_ahead_trigger": 36.22
-        },
-        {
-          "word": "compromise.",
-          "clean_word": "compromise",
-          "phonemes": "k\u02c8\u0251\u02d0mp\u0279\u0259m\u02cca\u026az",
-          "start": 35.665,
-          "end": 36.395,
-          "duration": 0.73,
-          "frame_ahead_trigger": 36.375
-        },
-        {
-          "word": "Follow",
-          "clean_word": "follow",
-          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 36.395,
-          "end": 36.781,
-          "duration": 0.386,
-          "frame_ahead_trigger": 37.105
-        },
-        {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 36.781,
-          "end": 36.92,
-          "duration": 0.139,
-          "frame_ahead_trigger": 37.491
-        },
-        {
-          "word": "Model",
-          "clean_word": "model",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 36.92,
-          "end": 37.24,
-          "duration": 0.32,
-          "frame_ahead_trigger": 37.63
-        },
-        {
-          "word": "Verse",
-          "clean_word": "verse",
-          "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 37.24,
-          "end": 37.465,
-          "duration": 0.225,
-          "frame_ahead_trigger": 37.95
+          "word": "73.0",
+          "clean_word": "730",
+          "phonemes": "s\u02c8\u025bv\u0259nh\u02c8\u028cnd\u0279\u026ad \u03b8\u02c8\u025c\u02d0\u027ei",
+          "start": 33.133,
+          "end": 34.199,
+          "duration": 1.066,
+          "frame_ahead_trigger": 33.693
         },
         {
           "word": "for",
           "clean_word": "for",
           "phonemes": "f\u0254\u02d0\u0279",
-          "start": 37.465,
-          "end": 37.745,
-          "duration": 0.28,
-          "frame_ahead_trigger": 38.175
+          "start": 34.199,
+          "end": 34.393,
+          "duration": 0.194,
+          "frame_ahead_trigger": 34.759
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "st\u02c8\u00e6nd\u025ad",
+          "start": 34.393,
+          "end": 34.723,
+          "duration": 0.33,
+          "frame_ahead_trigger": 34.953
+        },
+        {
+          "word": "GQA.",
+          "clean_word": "gqa",
+          "phonemes": "d\u0292\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 34.723,
+          "end": 35.413,
+          "duration": 0.69,
+          "frame_ahead_trigger": 35.283
+        }
+      ],
+      "audio_duration": 8.19,
+      "slot_duration": 8.35
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "The Model Verse logo pulsing with a data-stream effect.",
+      "highlight_words": {
+        "The Model Verse": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "masters",
+        "direct_object": "AI Architecture",
+        "anchor_word": "deep-dives",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE MODEL VERSE",
+        "sub": "Master the Architecture",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 35.72,
+      "end": 40.43,
+      "duration": 4.71,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 35.715,
+          "end": 36.035,
+          "duration": 0.32,
+          "frame_ahead_trigger": 36.425
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 36.035,
+          "end": 36.25,
+          "duration": 0.215,
+          "frame_ahead_trigger": 36.745
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 36.25,
+          "end": 36.47,
+          "duration": 0.22,
+          "frame_ahead_trigger": 36.96
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 36.47,
+          "end": 36.76,
+          "duration": 0.29,
+          "frame_ahead_trigger": 37.18
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 36.76,
+          "end": 37.075,
+          "duration": 0.315,
+          "frame_ahead_trigger": 37.47
         },
         {
           "word": "daily",
           "clean_word": "daily",
           "phonemes": "d\u02c8e\u026ali",
-          "start": 37.745,
-          "end": 38.04,
-          "duration": 0.295,
-          "frame_ahead_trigger": 38.455
+          "start": 37.075,
+          "end": 37.225,
+          "duration": 0.15,
+          "frame_ahead_trigger": 37.785
         },
         {
           "word": "deep-dives",
           "clean_word": "deepdives",
           "phonemes": "d\u02c8i\u02d0pd\u026avz",
-          "start": 38.04,
-          "end": 38.593,
-          "duration": 0.553,
-          "frame_ahead_trigger": 38.75
+          "start": 37.225,
+          "end": 37.695,
+          "duration": 0.47,
+          "frame_ahead_trigger": 37.935
         },
         {
           "word": "into",
           "clean_word": "into",
           "phonemes": "\u02cc\u026ant\u028a",
-          "start": 38.593,
-          "end": 38.84,
-          "duration": 0.247,
-          "frame_ahead_trigger": 39.303
+          "start": 37.695,
+          "end": 38.06,
+          "duration": 0.365,
+          "frame_ahead_trigger": 38.405
         },
         {
           "word": "how",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
-          "start": 38.84,
-          "end": 39.095,
-          "duration": 0.255,
-          "frame_ahead_trigger": 39.55
+          "start": 38.06,
+          "end": 38.14,
+          "duration": 0.08,
+          "frame_ahead_trigger": 38.77
         },
         {
           "word": "modern",
           "clean_word": "modern",
           "phonemes": "m\u02c8\u0251\u02d0d\u025an",
-          "start": 39.095,
-          "end": 39.485,
-          "duration": 0.39,
-          "frame_ahead_trigger": 39.805
+          "start": 38.14,
+          "end": 38.635,
+          "duration": 0.495,
+          "frame_ahead_trigger": 38.85
         },
         {
           "word": "AI",
           "clean_word": "ai",
           "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 39.485,
-          "end": 39.73,
-          "duration": 0.245,
-          "frame_ahead_trigger": 40.195
+          "start": 38.635,
+          "end": 38.888,
+          "duration": 0.253,
+          "frame_ahead_trigger": 39.345
         },
         {
           "word": "actually",
           "clean_word": "actually",
           "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
-          "start": 39.73,
-          "end": 40.35,
-          "duration": 0.62,
-          "frame_ahead_trigger": 40.44
+          "start": 38.888,
+          "end": 39.435,
+          "duration": 0.547,
+          "frame_ahead_trigger": 39.598
         },
         {
-          "word": "works.",
+          "word": "works",
           "clean_word": "works",
           "phonemes": "w\u02c8\u025c\u02d0ks",
-          "start": 40.35,
-          "end": 40.68,
-          "duration": 0.33,
-          "frame_ahead_trigger": 41.06
+          "start": 39.435,
+          "end": 39.785,
+          "duration": 0.35,
+          "frame_ahead_trigger": 40.145
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 39.785,
+          "end": 40.03,
+          "duration": 0.245,
+          "frame_ahead_trigger": 40.495
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.03,
+          "end": 40.066,
+          "duration": 0.035,
+          "frame_ahead_trigger": 40.74
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 40.066,
+          "end": 40.27,
+          "duration": 0.205,
+          "frame_ahead_trigger": 40.776
         }
       ],
-      "audio_duration": 6.42,
-      "slot_duration": 6.42
+      "audio_duration": 4.71,
+      "slot_duration": 4.71
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$\\mathcal{S}_{\\mathrm{KV}} = 2 \\cdot b \\cdot s \\cdot h_{\\mathrm{KV}} \\cdot d_k$",
+      "latex": "$\\mathcal{M}_{\\mathrm{KV}} = 2 \\times b \\times s \\times n_{\\mathrm{kv}} \\times d_{\\mathrm{head}}$",
       "filename": "virtual_head_attention_beat1_formula.svg",
       "fontsize": 24,
-      "color": "#38BDF8",
+      "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "\\mathcal{S}_{\\mathrm{KV}}",
-          "label": "KV Cache VRAM Footprint"
+          "term": "M_{KV}",
+          "label": "Total KV Cache Footprint"
         },
         {
-          "term": "h_{\\mathrm{KV}}",
-          "label": "Physical KV Head Count"
+          "term": "n_{kv}",
+          "label": "Physical Key-Value Heads"
         }
       ],
       "svg_filename": "virtual_head_attention_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\Delta_{\\mathrm{Trilemma}} = \\{\\mathrm{FLOPs}_{\\mathrm{prefill}},\\, \\mathrm{VRAM}_{\\mathrm{KV}},\\, \\mathcal{L}_{\\mathrm{quality}}\\}$",
+      "latex": "$\\mathrm{Rank}(\\mathbf{Q}_g \\mathbf{K}_g^\\top) \\le \\min(d_{\\mathrm{head}},\\, d_{\\mathrm{subspace}})$",
       "filename": "virtual_head_attention_beat2_formula.svg",
-      "fontsize": 22,
-      "color": "#EF4444",
+      "fontsize": 24,
+      "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "\\mathrm{VRAM}_{\\mathrm{KV}}",
-          "label": "KV Cache Bound"
+          "term": "Q_g K_g^T",
+          "label": "Grouped Attention Matrix"
         },
         {
-          "term": "\\mathcal{L}_{\\mathrm{quality}}",
-          "label": "Expressive Subspace Loss"
+          "term": "Rank",
+          "label": "Subspace Expressivity Bound"
         }
       ],
       "svg_filename": "virtual_head_attention_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathbf{Q}' = \\mathbf{Q} \\cdot (\\mathbf{I} + \\mathbf{P}_{\\mathrm{premix}}), \\quad \\mathbf{P}_{\\mathrm{premix}} \\in \\mathbb{R}^{d \\times d}$",
+      "latex": "$\\widetilde{\\mathbf{Q}}_g = \\mathbf{Q}_g (\\mathbf{I} + \\mathbf{\\Delta}_{\\mathrm{premix}})$",
       "filename": "virtual_head_attention_beat3_formula.svg",
-      "fontsize": 22,
-      "color": "#34D399",
+      "fontsize": 24,
+      "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "\\mathbf{Q}'",
-          "label": "Virtual Query Subspace"
+          "term": "Q_g",
+          "label": "Physical Query Heads"
         },
         {
-          "term": "\\mathbf{P}_{\\mathrm{premix}}",
-          "label": "Near-Identity Query Mix"
+          "term": "Delta_{premix}",
+          "label": "Near-Identity Query Premix"
         }
       ],
       "svg_filename": "virtual_head_attention_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathbf{W}_{\\mathrm{out}}^{\\mathrm{folded}} = (\\mathbf{I} + \\mathbf{A}\\mathbf{B}^\\top) \\cdot \\mathbf{W}_{\\mathrm{out}}$",
+      "latex": "$\\mathbf{W}_{\\mathrm{fused}} = (\\mathbf{I} + \\mathbf{A}\\mathbf{B}^\\top) \\mathbf{W}_{\\mathrm{proj}}$",
       "filename": "virtual_head_attention_beat4_formula.svg",
       "fontsize": 24,
-      "color": "#F59E0B",
+      "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\mathbf{I} + \\mathbf{A}\\mathbf{B}^\\top",
-          "label": "Low-Rank Residual Postmix"
+          "term": "I + AB^T",
+          "label": "Low-Rank Linear Postmix"
         },
         {
-          "term": "\\mathbf{W}_{\\mathrm{out}}^{\\mathrm{folded}}",
-          "label": "Zero-Cost Linear Projection"
+          "term": "W_{fused}",
+          "label": "Compiled Zero-Overhead GEMM"
         }
       ],
       "svg_filename": "virtual_head_attention_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{RULER}_{8\\mathrm{K}-128\\mathrm{K}} = 84.4 \\quad (\\mathrm{GQA}_{\\mathrm{baseline}} = 73.0)$",
+      "latex": "$\\mathrm{Score}_{\\mathrm{RULER}} = 84.4 \\% \\quad (\\Delta = +11.4 \\%)$",
       "filename": "virtual_head_attention_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "84.4",
-          "label": "VHA Long-Context Score"
+          "term": "Score_{RULER}",
+          "label": "VHA 8K-128K Needle Retrieval"
         },
         {
-          "term": "73.0",
-          "label": "GQA-4 Baseline Score"
+          "term": "Delta",
+          "label": "Improvement over GQA-4"
         }
       ],
       "svg_filename": "virtual_head_attention_beat5_formula.svg"
@@ -1478,19 +1409,14 @@
       "volume": 0.35
     },
     {
-      "timestamp": 19.5,
+      "timestamp": 20.0,
       "sound_type": "sub_impact",
       "volume": 0.4
     },
     {
-      "timestamp": 27.5,
+      "timestamp": 28.5,
       "sound_type": "sub_impact",
       "volume": 0.5
-    },
-    {
-      "timestamp": 35.0,
-      "sound_type": "whoosh",
-      "volume": 0.35
     },
     {
       "timestamp": 36.5,
@@ -1499,159 +1425,157 @@
     }
   ],
   "metadata": {
-    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_metaphor": "attention_flow",
     "visual_entities": {
       "clusters": [
         {
-          "name": "PREFILL_FLOPS",
+          "name": "Physical KV Heads",
           "color": "#EF4444",
           "items": [
-            "MFA Overhead",
-            "Matrix Mult",
-            "Context FLOPs"
+            "Head_0",
+            "Head_1"
           ]
         },
         {
-          "name": "KV_CACHE_VRAM",
-          "color": "#F59E0B",
+          "name": "Virtual Query Heads",
+          "color": "#38BDF8",
           "items": [
-            "GQA Footprint",
-            "Bandwidth Stalls",
-            "OOM Wall"
+            "VQ_0",
+            "VQ_1",
+            "VQ_2",
+            "VQ_3"
           ]
         },
         {
-          "name": "VIRTUAL_HEADS",
+          "name": "Fused GEMM Layer",
           "color": "#34D399",
           "items": [
-            "Q Premix",
-            "Linear Postmix",
-            "Weight Folding"
+            "W_fused_Q",
+            "W_fused_Out"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"long_context_token\"",
-        "target_cluster": "VIRTUAL_HEADS",
-        "token": "\"long_context_token\""
+        "label": "Context Token Sequence: S=128K",
+        "target_cluster": "Virtual Query Heads",
+        "token": "Sequence Context Buffer"
       },
       "bottleneck_tokens": [
         {
-          "word": "GQA-8 Cache Bloat",
+          "word": "VRAM Cache Blowup",
           "color": "#EF4444"
         },
         {
-          "word": "MLA Quality Loss",
+          "word": "Head Subspace Degeneracy",
           "color": "#F59E0B"
         }
       ]
     },
-    "model_a": "Virtual Head Attention (VHA)",
+    "model_a": "Virtual Head Attention (VHA-2)",
     "model_a_specs": [
       "2 KV Heads (Group Size 64)",
-      "Zero-Overhead Linear Weight Folding",
-      "Halved Physical Query Projections"
+      "Q Premix Near-Identity",
+      "Inference-folded Postmix"
     ],
-    "model_b": "Standard GQA-4 Baseline",
+    "model_b": "Standard GQA-4 / GQA-8",
     "model_b_specs": [
-      "4 KV Heads Overhead",
-      "Unfolded Runtime Latency",
-      "High VRAM Cache Footprint"
+      "4 to 8 KV Heads",
+      "High VRAM Cache Footprint",
+      "Standard Linear Projections"
     ],
-    "divide_title": "ATTENTION TRILEMMA DIVIDE",
+    "divide_title": "ATTENTION EFFICIENCY SHOWDOWN",
     "model_a_stat": "84.4",
-    "model_a_stat_label": "RULER 128K SCORE",
+    "model_a_stat_label": "RULER SCORE (8K-128K)",
     "model_b_stat": "73.0",
-    "model_b_stat_label": "BASELINE RULER SCORE",
-    "efficiency_badge": "\u26a1 2X KV CACHE REDUCTION",
+    "model_b_stat_label": "GQA RULER BASELINE",
+    "efficiency_badge": "\u26a1 4x VRAM COMPRESSION",
     "benchmarks": [
       {
-        "name": "RULER (8K-128K Avg)",
+        "name": "RULER Long-Context (8K-128K)",
         "score_a": "84.4",
         "score_b": "73.0"
       },
       {
-        "name": "KV Cache Size",
-        "score_a": "2 Heads",
-        "score_b": "4 Heads"
+        "name": "KV Cache Compression",
+        "score_a": "4x Reduction",
+        "score_b": "Baseline"
       },
       {
-        "name": "Prefill FLOPs (1.7B)",
+        "name": "Prefill & Training FLOPs",
         "score_a": "-7.9%",
-        "score_b": "Baseline"
+        "score_b": "0%"
       }
     ],
     "scale_metric": "2 KV Heads",
-    "scale_label": "Group Size 64 on Tensor Cores",
-    "bottleneck_title": "ATTENTION IMPOSSIBLE TRIANGLE",
-    "bottleneck_desc": "KV Cache vs Prefill FLOPs vs Quality",
-    "solution_title": "VIRTUAL HEAD ATTENTION",
-    "solution_components": "Q Premix + Low-Rank Linear Postmix",
-    "mechanism_title": "ZERO-COST RUNTIME WEIGHT FOLDING",
-    "payoff_stat": "+11.4",
-    "payoff_label": "RULER SCORE ADVANTAGE",
-    "payoff_sub": "Outperforming GQA while halving KV cache size",
+    "scale_label": "Decoupled Group Size: 64",
+    "bottleneck_title": "THE IMPOSSIBLE ATTENTION TRIANGLE",
+    "bottleneck_desc": "Trading KV Cache VRAM against Training Compute & Model Quality",
+    "solution_title": "Q PREMIX & LINEAR POSTMIX",
+    "solution_components": "Near-Identity Premix + Low-Rank I+AB^T Postmix",
+    "mechanism_title": "ZERO-COST INFERENCE WEIGHT FOLDING",
+    "payoff_stat": "84.4 vs 73.0",
+    "payoff_label": "RULER LONG-CONTEXT ACCURACY",
+    "payoff_sub": "Outperforming 4-Head GQA with Only 2 KV Heads",
     "payoff_hero_stat": 84.4,
-    "payoff_hero_label": "VHA-2KV (MoE)",
+    "payoff_hero_label": "VHA-2 Architecture",
     "payoff_base_stat": 73.0,
-    "payoff_base_label": "GQA-4KV Baseline",
-    "payoff_delta_badge": "\u26a1 +11.4 PTS LONG-CONTEXT GAIN",
-    "challenger": "Virtual Head Attention",
-    "incumbent": "Grouped-Query Attention"
+    "payoff_base_label": "Standard GQA-4",
+    "payoff_delta_badge": "\u26a1 +11.4 RULER BENCHMARK ADVANTAGE",
+    "challenger": "Virtual Head Attention (VHA)",
+    "incumbent": "Grouped Query Attention (GQA)"
   },
   "benchmark_comparison": {
-    "title": "LONG-CONTEXT RULER SHOWDOWN (8K-128K)",
-    "metric_name": "RULER Benchmark Score",
-    "unit": "pts",
+    "title": "LONG CONTEXT RETRIEVAL: RULER (8K-128K)",
+    "metric_name": "RULER Accuracy",
+    "unit": "%",
     "contestants": [
       {
-        "name": "Virtual Head Attention (2 KV)",
+        "name": "VHA (2 KV Heads)",
         "value": 84.4,
-        "display_val": "84.4 pts",
+        "display_val": "84.4%",
         "is_hero": true,
         "color": "#34D399"
       },
       {
-        "name": "GQA Baseline (4 KV)",
+        "name": "GQA (4 KV Heads)",
         "value": 73.0,
-        "display_val": "73.0 pts",
+        "display_val": "73.0%",
         "is_hero": false,
         "color": "#EF4444"
       },
       {
-        "name": "MLA Compressed Baseline",
-        "value": 71.2,
-        "display_val": "71.2 pts",
+        "name": "MLA Baseline",
+        "value": 81.8,
+        "display_val": "81.8%",
         "is_hero": false,
-        "color": "#F59E0B"
+        "color": "#38BDF8"
       }
     ],
-    "delta_badge": "\u26a1 +11.4 PTS WITH 2X SMALLER CACHE",
+    "delta_badge": "\u26a1 +11.4% OVER GQA BASELINE",
     "radar_axes": [
-      "Throughput",
-      "VRAM Efficiency",
-      "Accuracy",
-      "Context Length",
-      "FLOP Efficiency"
+      "VRAM Savings",
+      "Prefill Speed",
+      "Retrieval Quality",
+      "Tensor Core Util",
+      "Inference Simplicity"
     ]
   },
   "code_snippet": {
-    "filename": "vha_folded_inference.py",
+    "filename": "vha_folding.py",
     "language": "python",
     "lines": [
-      "# Offline Linear Weight Folding for Zero-Overhead Serving",
-      "W_q_folded = W_q @ (torch.eye(d) + P_premix)",
-      "W_out_folded = (torch.eye(d) + A @ B.T) @ W_out",
-      "# Pure standard GQA-2 execution on Tensor Cores",
-      "out = flash_attn_gqa(q=x @ W_q_folded, kv_heads=2) @ W_out_folded"
+      "def compile_vha_inference(W_q, W_out, premix_delta, postmix_AB):",
+      "# Fold linear transformations into standard projection weights",
+      "W_q_fused = (torch.eye(W_q.size(0)) + premix_delta) @ W_q",
+      "W_out_fused = (torch.eye(W_out.size(0)) + postmix_AB) @ W_out",
+      "return W_q_fused, W_out_fused  # Deploys as standard GQA-2"
     ],
     "highlight_lines": [
-      2,
       3,
-      5
+      4
     ],
-    "trace_register": "\u26a1 ZERO RUNTIME NONLINEAR OVERHEAD",
-    "explanation": "Q Premix and Linear Postmix fold directly into projection weights"
+    "trace_register": "\u26a1 ZERO RUNTIME FLOP OVERHEAD COMPILED",
+    "explanation": "Premix and Postmix fold into GEMM projections at deploy time."
   },
   "arxiv_id": "2610.17959",
   "paper_figures": [
@@ -1705,64 +1629,64 @@
     }
   ],
   "feynman_certification": {
-    "converged_turn": 1,
+    "converged_turn": 3,
     "final_comprehension_score": 8.8,
     "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook was solid\u2014'choking on their own memory' is a relatable pain point for anyone who's tried to run a local LLM. I didn't swipe because you got straight to the point. However, when you mentioned 'Q-Premix and Postmix,' I had to pause to think if those were standard architectural terms or specific to this paper. It's a bit jargon-heavy, but since you explained the 'folding into weights' part immediately after, I stayed with you."
+    "listener_verdict": "The hook is fire\u2014calling out the KV cache bloat immediately hits home because everyone dealing with inference knows that pain. I didn't swipe because you didn't waste time with 'Hey guys.' However, in Beat 3, you threw 'Q Premix' and 'Linear Postmix' at me without explaining if those are standard operations or your own custom implementation. I get the 'why' (saving memory), but the 'how' feels like a black box for a second."
   },
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "villain_entity": "The Impossible Triangle of KV Cache",
-    "physical_analogy": "A traffic bottleneck where expanding lanes to improve flow forces the entire highway system to collapse under maintenance costs.",
-    "eureka_mechanism": "Virtual Head Attention (VHA)",
-    "paradigm_shift": "Achieving superior model quality while slashing KV cache requirements by half with zero inference latency."
+    "villain_entity": "The Impossible Triangle of KV cache, compute, and quality",
+    "physical_analogy": "A crowded highway where you must choose between lane capacity, speed, or the number of vehicles allowed to merge.",
+    "eureka_mechanism": "Q Premix and Linear Postmix reparameterization",
+    "paradigm_shift": "Standardizing high-efficiency inference without custom kernel overhead"
   },
   "hook_gating": {
-    "selected_hook": "Before you train your next model, see how Virtual Head Attention cuts +11.4 of memory overhead.",
-    "verdict": 70,
-    "band": "WORKABLE",
+    "selected_hook": "Before you train your next model, see how Virtual Head Attention cuts 84.4 vs 73.0 of memory overhead.",
+    "verdict": 73,
+    "band": "STRONG",
     "formula": "The Warning",
     "properties": {
-      "SPECIFICITY": 74,
+      "SPECIFICITY": 96,
       "ADDRESS": 96,
       "STAKES": 62,
       "CURIOSITY": 58,
       "BREVITY": 100
     },
     "weakest_property": "CURIOSITY",
-    "candidates_evaluated": 11,
+    "candidates_evaluated": 10,
     "rankings": [
       {
-        "hook": "Before you train your next model, see how Virtual Head Attention cuts +11.4 of memory overhead.",
-        "verdict": 70,
-        "band": "WORKABLE",
+        "hook": "Before you train your next model, see how Virtual Head Attention cuts 84.4 vs 73.0 of memory overhead.",
+        "verdict": 73,
+        "band": "STRONG",
         "formula": "The Warning"
       },
       {
-        "hook": "Do not scale your next training run before you see how Virtual Head Attention delivers +11.4.",
-        "verdict": 70,
-        "band": "WORKABLE",
+        "hook": "Do not scale your next training run before you see how Virtual Head Attention delivers 84.4 vs 73.0.",
+        "verdict": 73,
+        "band": "STRONG",
         "formula": "The Warning"
       },
       {
-        "hook": "Before you build your next system, see how large language models are choking on their own memory, trapped by an impossible triangle of efficiency.",
+        "hook": "Why do standard transformer architectures hit a memory wall before Virtual Head Attention unlocks 84.4 vs 73.0 gains?",
         "verdict": 54,
-        "band": "WEAK",
-        "formula": "The Warning"
-      },
-      {
-        "hook": "Why do standard transformer architectures hit a memory wall before Virtual Head Attention unlocks +11.4 gains?",
-        "verdict": 51,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "You might be leaving +11.4 of your hardware performance on the table without Virtual Head Attention.",
-        "verdict": 49,
+        "hook": "You might be leaving 84.4 vs 73.0 of your hardware performance on the table without Virtual Head Attention.",
+        "verdict": 52,
         "band": "WEAK",
         "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until Virtual Head Attention proved a 84.4 vs 73.0 leap.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "The Comparison"
       },
       {
         "hook": "Before you deploy your next architecture, consider this: The design of attention mechanisms in long-context large language models faces an ``impossible triangle'' among KV cache size, training and prefill FLOPs, and model quality.",
@@ -1771,20 +1695,14 @@
         "formula": "The Warning"
       },
       {
-        "hook": "Everyone assumed standard attention was optimal, until Virtual Head Attention proved a +11.4 leap.",
-        "verdict": 44,
-        "band": "WEAK",
-        "formula": "Unclassified"
-      },
-      {
-        "hook": "Did you know large language models are choking on their own memory, trapped by an impossible triangle of efficiency?",
-        "verdict": 42,
+        "hook": "Why should you care about Virtual Head Attention? Because your KV cache is a bloated mess, forcing a brutal choice between speed and model intelligence.",
+        "verdict": 43,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "Large language models are choking on their own memory, trapped by an impossible triangle of efficiency.",
-        "verdict": 34,
+        "hook": "Your KV cache is a bloated mess, forcing a brutal choice between speed and model intelligence.",
+        "verdict": 40,
         "band": "WEAK",
         "formula": "Unclassified"
       },
