@@ -1,0 +1,1816 @@
+{
+  "id": "ready_speculative_drafting_hla",
+  "title": "ReaDy: Dynamic Recurrent Context for Speculative Decoding",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "SPEEDUP ARCHITECTURE",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you train your next model, see how ReaDy cuts 3.16x of memory overhead.",
+      "visual_focus": "A flickering red light over a GPU cluster.",
+      "highlight_words": {
+        "guessing blind": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Speculative drafter",
+        "action_verb": "wastes",
+        "direct_object": "GPU cycles",
+        "anchor_word": "rejected",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE SPECULATIVE WALL",
+        "sub": "Why your model is stalling",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "TARGET KV BUFFER vs DRAFT HORIZON",
+          "active_cell_label": "Frozen Feature h_0",
+          "efficiency_label": "Context Drift: High"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE SPECULATIVE WALL",
+        "sub": "Why your model is stalling",
+        "accent_color": "#EF4444",
+        "grid_title": "TARGET KV BUFFER vs DRAFT HORIZON",
+        "active_cell_label": "Frozen Feature h_0",
+        "efficiency_label": "Context Drift: High"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 4.8,
+      "duration": 4.8,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.355,
+          "duration": 0.345,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.355,
+          "end": 0.49,
+          "duration": 0.135,
+          "frame_ahead_trigger": 0.315
+        },
+        {
+          "word": "train",
+          "clean_word": "train",
+          "phonemes": "t\u0279\u02c8e\u026an",
+          "start": 0.49,
+          "end": 0.845,
+          "duration": 0.355,
+          "frame_ahead_trigger": 0.45
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.845,
+          "end": 0.892,
+          "duration": 0.047,
+          "frame_ahead_trigger": 0.805
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 0.892,
+          "end": 1.14,
+          "duration": 0.248,
+          "frame_ahead_trigger": 0.852
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 1.14,
+          "end": 1.48,
+          "duration": 0.34,
+          "frame_ahead_trigger": 1.1
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 1.48,
+          "end": 1.665,
+          "duration": 0.185,
+          "frame_ahead_trigger": 1.44
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 1.665,
+          "end": 1.915,
+          "duration": 0.25,
+          "frame_ahead_trigger": 1.625
+        },
+        {
+          "word": "ReaDy",
+          "clean_word": "ready",
+          "phonemes": "\u0279\u02c8i\u0259 d\u02c8a\u026a",
+          "start": 1.915,
+          "end": 2.335,
+          "duration": 0.42,
+          "frame_ahead_trigger": 1.875
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 2.335,
+          "end": 2.44,
+          "duration": 0.105,
+          "frame_ahead_trigger": 2.295
+        },
+        {
+          "word": "3.16x",
+          "clean_word": "316x",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0h\u02c8\u028cnd\u0279\u026ad s\u02c8\u026aksti\u02d0n \u02c8\u025bks",
+          "start": 2.44,
+          "end": 3.805,
+          "duration": 1.365,
+          "frame_ahead_trigger": 2.4
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 3.805,
+          "end": 3.98,
+          "duration": 0.175,
+          "frame_ahead_trigger": 3.765
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 3.98,
+          "end": 4.22,
+          "duration": 0.24,
+          "frame_ahead_trigger": 3.94
+        },
+        {
+          "word": "overhead.",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 4.22,
+          "end": 4.65,
+          "duration": 0.43,
+          "frame_ahead_trigger": 4.18
+        }
+      ],
+      "audio_duration": 4.8,
+      "slot_duration": 4.95
+    },
+    {
+      "beat_id": 2,
+      "text": "Feature-based drafters are like archers firing in the dark; they lack the target's deep recurrent history, leading to constant, expensive misfires.",
+      "visual_focus": "An archer missing a target in a dark room.",
+      "highlight_words": {
+        "misfires": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Feature-based drafters",
+        "action_verb": "lack",
+        "direct_object": "recurrent history",
+        "anchor_word": "misfires",
+        "semantic_role": "bottleneck_definition"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE BLIND ARCHER",
+        "sub": "Contextual blindness",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Committed Recurrent State",
+          "stream_b_label": "Speculative Draft Horizon",
+          "barrier_label": "Contextual Disconnect",
+          "barrier_sub": "Forces Verification Rejections"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE BLIND ARCHER",
+        "sub": "Contextual blindness",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Committed Recurrent State",
+        "stream_b_label": "Speculative Draft Horizon",
+        "barrier_label": "Contextual Disconnect",
+        "barrier_sub": "Forces Verification Rejections"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 4.95,
+      "end": 12.48,
+      "duration": 7.53,
+      "word_timings": [
+        {
+          "word": "Feature-based",
+          "clean_word": "featurebased",
+          "phonemes": "f\u02c8i\u02d0t\u0283\u025a\u0279\u02cc\u025bbe\u026ast",
+          "start": 4.98,
+          "end": 5.81,
+          "duration": 0.83,
+          "frame_ahead_trigger": 5.09
+        },
+        {
+          "word": "drafters",
+          "clean_word": "drafters",
+          "phonemes": "d\u0279\u02c8\u00e6ft\u025az",
+          "start": 5.81,
+          "end": 6.325,
+          "duration": 0.515,
+          "frame_ahead_trigger": 5.92
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 6.325,
+          "end": 6.375,
+          "duration": 0.05,
+          "frame_ahead_trigger": 6.435
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 6.375,
+          "end": 6.59,
+          "duration": 0.215,
+          "frame_ahead_trigger": 6.485
+        },
+        {
+          "word": "archers",
+          "clean_word": "archers",
+          "phonemes": "\u02c8\u0251\u02d0\u0279t\u0283\u025az",
+          "start": 6.59,
+          "end": 7.073,
+          "duration": 0.483,
+          "frame_ahead_trigger": 6.7
+        },
+        {
+          "word": "firing",
+          "clean_word": "firing",
+          "phonemes": "f\u02c8a\u026a\u025a\u0279\u026a\u014b",
+          "start": 7.073,
+          "end": 7.42,
+          "duration": 0.347,
+          "frame_ahead_trigger": 7.183
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 7.42,
+          "end": 7.663,
+          "duration": 0.243,
+          "frame_ahead_trigger": 7.53
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 7.663,
+          "end": 7.77,
+          "duration": 0.107,
+          "frame_ahead_trigger": 7.773
+        },
+        {
+          "word": "dark;",
+          "clean_word": "dark",
+          "phonemes": "d\u02c8\u0251\u02d0\u0279k",
+          "start": 7.77,
+          "end": 8.175,
+          "duration": 0.405,
+          "frame_ahead_trigger": 7.88
+        },
+        {
+          "word": "they",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 8.175,
+          "end": 8.253,
+          "duration": 0.078,
+          "frame_ahead_trigger": 8.285
+        },
+        {
+          "word": "lack",
+          "clean_word": "lack",
+          "phonemes": "l\u02c8\u00e6k",
+          "start": 8.253,
+          "end": 8.52,
+          "duration": 0.267,
+          "frame_ahead_trigger": 8.363
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.52,
+          "end": 8.63,
+          "duration": 0.11,
+          "frame_ahead_trigger": 8.63
+        },
+        {
+          "word": "target's",
+          "clean_word": "targets",
+          "phonemes": "t\u02c8\u0251\u02d0\u0279\u0261\u026ats",
+          "start": 8.63,
+          "end": 9.045,
+          "duration": 0.415,
+          "frame_ahead_trigger": 8.74
+        },
+        {
+          "word": "deep",
+          "clean_word": "deep",
+          "phonemes": "d\u02c8i\u02d0p",
+          "start": 9.045,
+          "end": 9.31,
+          "duration": 0.265,
+          "frame_ahead_trigger": 9.155
+        },
+        {
+          "word": "recurrent",
+          "clean_word": "recurrent",
+          "phonemes": "\u0279\u1d7bk\u02c8\u025c\u02d0\u0279\u0259nt",
+          "start": 9.31,
+          "end": 9.975,
+          "duration": 0.665,
+          "frame_ahead_trigger": 9.42
+        },
+        {
+          "word": "history,",
+          "clean_word": "history",
+          "phonemes": "h\u02c8\u026ast\u025a\u0279i",
+          "start": 9.975,
+          "end": 10.295,
+          "duration": 0.32,
+          "frame_ahead_trigger": 10.085
+        },
+        {
+          "word": "leading",
+          "clean_word": "leading",
+          "phonemes": "l\u02c8i\u02d0d\u026a\u014b",
+          "start": 10.295,
+          "end": 10.635,
+          "duration": 0.34,
+          "frame_ahead_trigger": 10.405
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 10.635,
+          "end": 10.73,
+          "duration": 0.095,
+          "frame_ahead_trigger": 10.745
+        },
+        {
+          "word": "constant,",
+          "clean_word": "constant",
+          "phonemes": "k\u02c8\u0251\u02d0nst\u0259nt",
+          "start": 10.73,
+          "end": 11.315,
+          "duration": 0.585,
+          "frame_ahead_trigger": 10.84
+        },
+        {
+          "word": "expensive",
+          "clean_word": "expensive",
+          "phonemes": "\u025bksp\u02c8\u025bns\u026av",
+          "start": 11.315,
+          "end": 11.99,
+          "duration": 0.675,
+          "frame_ahead_trigger": 11.425
+        },
+        {
+          "word": "misfires.",
+          "clean_word": "misfires",
+          "phonemes": "m\u02c8\u026asfa\u026a\u025az",
+          "start": 11.99,
+          "end": 12.385,
+          "duration": 0.395,
+          "frame_ahead_trigger": 12.1
+        }
+      ],
+      "audio_duration": 7.53,
+      "slot_duration": 7.68
+    },
+    {
+      "beat_id": 3,
+      "text": "Enter ReaDy. It transforms Hybrid Linear Attention states into a live, queryable database for every single draft position.",
+      "visual_focus": "A glowing neural state being accessed by a query pointer.",
+      "highlight_words": {
+        "queryable database": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "ReaDy",
+        "action_verb": "queries",
+        "direct_object": "recurrent states",
+        "anchor_word": "database",
+        "semantic_role": "eureka_breakthrough"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "READY ARCHITECTURE",
+        "sub": "A glowing neural state being accessed by a query pointer.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.png",
+          "arxiv_id": "2610.20503",
+          "title": "READY ARCHITECTURE",
+          "sub": "A glowing neural state being accessed by a query pointer.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Ready-Speedup-Overview",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.png",
+        "arxiv_id": "2610.20503",
+        "title": "READY ARCHITECTURE",
+        "sub": "A glowing neural state being accessed by a query pointer.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Ready-Speedup-Overview",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 12.63,
+      "end": 19.37,
+      "duration": 6.74,
+      "word_timings": [
+        {
+          "word": "Enter",
+          "clean_word": "enter",
+          "phonemes": "\u02c8\u025bnt\u025a",
+          "start": 12.641,
+          "end": 12.966,
+          "duration": 0.325,
+          "frame_ahead_trigger": 12.901
+        },
+        {
+          "word": "ReaDy.",
+          "clean_word": "ready",
+          "phonemes": "\u0279\u02c8i\u0259 d\u02c8a\u026a",
+          "start": 12.966,
+          "end": 13.395,
+          "duration": 0.429,
+          "frame_ahead_trigger": 13.226
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 13.395,
+          "end": 13.502,
+          "duration": 0.108,
+          "frame_ahead_trigger": 13.655
+        },
+        {
+          "word": "transforms",
+          "clean_word": "transforms",
+          "phonemes": "t\u0279\u00e6nsf\u02c8\u0254\u02d0\u0279mz",
+          "start": 13.502,
+          "end": 14.156,
+          "duration": 0.653,
+          "frame_ahead_trigger": 13.762
+        },
+        {
+          "word": "Hybrid",
+          "clean_word": "hybrid",
+          "phonemes": "h\u02c8a\u026ab\u0279\u026ad",
+          "start": 14.156,
+          "end": 14.671,
+          "duration": 0.515,
+          "frame_ahead_trigger": 14.416
+        },
+        {
+          "word": "Linear",
+          "clean_word": "linear",
+          "phonemes": "l\u02c8\u026an\u026a\u0279",
+          "start": 14.671,
+          "end": 14.811,
+          "duration": 0.14,
+          "frame_ahead_trigger": 14.931
+        },
+        {
+          "word": "Attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 14.811,
+          "end": 15.401,
+          "duration": 0.59,
+          "frame_ahead_trigger": 15.071
+        },
+        {
+          "word": "states",
+          "clean_word": "states",
+          "phonemes": "st\u02c8e\u026ats",
+          "start": 15.401,
+          "end": 15.621,
+          "duration": 0.22,
+          "frame_ahead_trigger": 15.661
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 15.621,
+          "end": 16.046,
+          "duration": 0.425,
+          "frame_ahead_trigger": 15.881
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 16.046,
+          "end": 16.126,
+          "duration": 0.08,
+          "frame_ahead_trigger": 16.306
+        },
+        {
+          "word": "live,",
+          "clean_word": "live",
+          "phonemes": "l\u02c8a\u026av",
+          "start": 16.126,
+          "end": 16.41,
+          "duration": 0.285,
+          "frame_ahead_trigger": 16.386
+        },
+        {
+          "word": "queryable",
+          "clean_word": "queryable",
+          "phonemes": "kw\u02c8i\u0259\u0279\u026a\u0259b\u0259l",
+          "start": 16.41,
+          "end": 17.056,
+          "duration": 0.645,
+          "frame_ahead_trigger": 16.67
+        },
+        {
+          "word": "database",
+          "clean_word": "database",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259b\u02cce\u026as",
+          "start": 17.056,
+          "end": 17.595,
+          "duration": 0.539,
+          "frame_ahead_trigger": 17.316
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 17.595,
+          "end": 17.751,
+          "duration": 0.156,
+          "frame_ahead_trigger": 17.855
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 17.751,
+          "end": 18.021,
+          "duration": 0.27,
+          "frame_ahead_trigger": 18.011
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 18.021,
+          "end": 18.511,
+          "duration": 0.49,
+          "frame_ahead_trigger": 18.281
+        },
+        {
+          "word": "draft",
+          "clean_word": "draft",
+          "phonemes": "d\u0279\u02c8\u00e6ft",
+          "start": 18.511,
+          "end": 18.826,
+          "duration": 0.315,
+          "frame_ahead_trigger": 18.771
+        },
+        {
+          "word": "position.",
+          "clean_word": "position",
+          "phonemes": "p\u0259z\u02c8\u026a\u0283\u0259n",
+          "start": 18.826,
+          "end": 19.211,
+          "duration": 0.385,
+          "frame_ahead_trigger": 19.086
+        }
+      ],
+      "audio_duration": 6.74,
+      "slot_duration": 6.89
+    },
+    {
+      "beat_id": 4,
+      "text": "A lightweight reader uses low-rank projections and fused operators to inject this context via residual updates, keeping I/O overhead near zero.",
+      "visual_focus": "A schematic showing low-rank projection matrices.",
+      "highlight_words": {
+        "low-rank projections": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Lightweight reader",
+        "action_verb": "injects",
+        "direct_object": "context",
+        "anchor_word": "residual updates",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: READY: DYNAMIC REC",
+        "sub": "A schematic showing low-rank projection matrices.",
+        "params": {
+          "title": "KERNEL CODE: READY: DYNAMIC REC",
+          "sub": "A schematic showing low-rank projection matrices.",
+          "filename": "ready_state_reader.py",
+          "language": "python",
+          "lines": [
+            "def read_recurrent_context(S_target, draft_queries):",
+            "# Low-rank fused state projection",
+            "raw_context = torch.einsum('k d, d s -> k s', draft_queries, S_target)",
+            "context_residual = self.w_up(F.silu(self.w_down(raw_context)))",
+            "return draft_hidden_states + context_residual"
+          ],
+          "highlight_lines": [
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 FUSED LOW-RANK STATE READER",
+          "delta_badge": "Extracts position-specific historical context direct"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: READY: DYNAMIC REC",
+        "sub": "A schematic showing low-rank projection matrices.",
+        "filename": "ready_state_reader.py",
+        "language": "python",
+        "lines": [
+          "def read_recurrent_context(S_target, draft_queries):",
+          "# Low-rank fused state projection",
+          "raw_context = torch.einsum('k d, d s -> k s', draft_queries, S_target)",
+          "context_residual = self.w_up(F.silu(self.w_down(raw_context)))",
+          "return draft_hidden_states + context_residual"
+        ],
+        "highlight_lines": [
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 FUSED LOW-RANK STATE READER",
+        "delta_badge": "Extracts position-specific historical context direct"
+      },
+      "start": 19.52,
+      "end": 27.74,
+      "duration": 8.21,
+      "word_timings": [
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 19.542,
+          "end": 19.705,
+          "duration": 0.163,
+          "frame_ahead_trigger": 19.952
+        },
+        {
+          "word": "lightweight",
+          "clean_word": "lightweight",
+          "phonemes": "l\u02c8a\u026atwe\u026at",
+          "start": 19.705,
+          "end": 20.227,
+          "duration": 0.522,
+          "frame_ahead_trigger": 20.115
+        },
+        {
+          "word": "reader",
+          "clean_word": "reader",
+          "phonemes": "\u0279\u02c8i\u02d0d\u025a",
+          "start": 20.227,
+          "end": 20.567,
+          "duration": 0.34,
+          "frame_ahead_trigger": 20.637
+        },
+        {
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 20.567,
+          "end": 20.942,
+          "duration": 0.375,
+          "frame_ahead_trigger": 20.977
+        },
+        {
+          "word": "low-rank",
+          "clean_word": "lowrank",
+          "phonemes": "l\u02c8o\u028a\u0279\u00e6\u014bk",
+          "start": 20.942,
+          "end": 21.322,
+          "duration": 0.38,
+          "frame_ahead_trigger": 21.352
+        },
+        {
+          "word": "projections",
+          "clean_word": "projections",
+          "phonemes": "p\u0279\u0259d\u0292\u02c8\u025bk\u0283\u0259nz",
+          "start": 21.322,
+          "end": 22.012,
+          "duration": 0.69,
+          "frame_ahead_trigger": 21.732
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 22.012,
+          "end": 22.143,
+          "duration": 0.131,
+          "frame_ahead_trigger": 22.422
+        },
+        {
+          "word": "fused",
+          "clean_word": "fused",
+          "phonemes": "fj\u02c8u\u02d0zd",
+          "start": 22.143,
+          "end": 22.507,
+          "duration": 0.364,
+          "frame_ahead_trigger": 22.553
+        },
+        {
+          "word": "operators",
+          "clean_word": "operators",
+          "phonemes": "\u02c8\u0251\u02d0p\u025a\u0279\u02cce\u026a\u027e\u025az",
+          "start": 22.507,
+          "end": 23.187,
+          "duration": 0.68,
+          "frame_ahead_trigger": 22.917
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.187,
+          "end": 23.392,
+          "duration": 0.205,
+          "frame_ahead_trigger": 23.597
+        },
+        {
+          "word": "inject",
+          "clean_word": "inject",
+          "phonemes": "\u026and\u0292\u02c8\u025bkt",
+          "start": 23.392,
+          "end": 23.822,
+          "duration": 0.43,
+          "frame_ahead_trigger": 23.802
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 23.822,
+          "end": 23.982,
+          "duration": 0.16,
+          "frame_ahead_trigger": 24.232
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 23.982,
+          "end": 24.522,
+          "duration": 0.54,
+          "frame_ahead_trigger": 24.392
+        },
+        {
+          "word": "via",
+          "clean_word": "via",
+          "phonemes": "v\u02c8a\u026a\u0259",
+          "start": 24.522,
+          "end": 24.802,
+          "duration": 0.28,
+          "frame_ahead_trigger": 24.932
+        },
+        {
+          "word": "residual",
+          "clean_word": "residual",
+          "phonemes": "\u0279\u1d7bs\u02c8\u026ad\u0292u\u02d0\u0259l",
+          "start": 24.802,
+          "end": 25.394,
+          "duration": 0.592,
+          "frame_ahead_trigger": 25.212
+        },
+        {
+          "word": "updates,",
+          "clean_word": "updates",
+          "phonemes": "\u02c8\u028cpde\u026ats",
+          "start": 25.394,
+          "end": 25.817,
+          "duration": 0.423,
+          "frame_ahead_trigger": 25.804
+        },
+        {
+          "word": "keeping",
+          "clean_word": "keeping",
+          "phonemes": "k\u02c8i\u02d0p\u026a\u014b",
+          "start": 25.817,
+          "end": 26.192,
+          "duration": 0.375,
+          "frame_ahead_trigger": 26.227
+        },
+        {
+          "word": "I/O",
+          "clean_word": "io",
+          "phonemes": "\u02c8i\u02d0o\u028a",
+          "start": 26.192,
+          "end": 26.467,
+          "duration": 0.275,
+          "frame_ahead_trigger": 26.602
+        },
+        {
+          "word": "overhead",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 26.467,
+          "end": 26.967,
+          "duration": 0.5,
+          "frame_ahead_trigger": 26.877
+        },
+        {
+          "word": "near",
+          "clean_word": "near",
+          "phonemes": "n\u02c8\u026a\u0279",
+          "start": 26.967,
+          "end": 27.257,
+          "duration": 0.29,
+          "frame_ahead_trigger": 27.377
+        },
+        {
+          "word": "zero.",
+          "clean_word": "zero",
+          "phonemes": "z\u02c8i\u0259\u0279o\u028a",
+          "start": 27.257,
+          "end": 27.562,
+          "duration": 0.305,
+          "frame_ahead_trigger": 27.667
+        }
+      ],
+      "audio_duration": 8.21,
+      "slot_duration": 8.37
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? A 3.16x speedup on an NVIDIA B200, beating DSpark by 8.5% in acceptance length across seven benchmarks.",
+      "visual_focus": "A bar chart showing performance gains.",
+      "highlight_words": {
+        "3.16x speedup": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "ReaDy",
+        "action_verb": "outperforms",
+        "direct_object": "DSpark",
+        "anchor_word": "benchmarks",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "SPECULATIVE DECODING SPEEDUP SHOWDOWN",
+        "sub": "A bar chart showing performance gains.",
+        "params": {
+          "title": "SPECULATIVE DECODING SPEEDUP SHOWDOWN",
+          "sub": "A bar chart showing performance gains.",
+          "metric_name": "Decoding Speedup",
+          "unit": "x Baseline",
+          "contestants": [
+            {
+              "name": "ReaDy",
+              "value": 3.16,
+              "display_val": "3.16x",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "DSpark",
+              "value": 2.92,
+              "display_val": "2.92x",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Autoregressive Baseline",
+              "value": 1.0,
+              "display_val": "1.00x",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +8.50% ACCEPTANCE LENGTH"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "SPECULATIVE DECODING SPEEDUP SHOWDOWN",
+        "sub": "A bar chart showing performance gains.",
+        "metric_name": "Decoding Speedup",
+        "unit": "x Baseline",
+        "contestants": [
+          {
+            "name": "ReaDy",
+            "value": 3.16,
+            "display_val": "3.16x",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "DSpark",
+            "value": 2.92,
+            "display_val": "2.92x",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Autoregressive Baseline",
+            "value": 1.0,
+            "display_val": "1.00x",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +8.50% ACCEPTANCE LENGTH"
+      },
+      "start": 27.89,
+      "end": 35.97,
+      "duration": 8.09,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 27.905,
+          "end": 28.115,
+          "duration": 0.21,
+          "frame_ahead_trigger": 28.465
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 28.115,
+          "end": 28.335,
+          "duration": 0.22,
+          "frame_ahead_trigger": 28.675
+        },
+        {
+          "word": "A",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 28.335,
+          "end": 28.48,
+          "duration": 0.145,
+          "frame_ahead_trigger": 28.895
+        },
+        {
+          "word": "3.16x",
+          "clean_word": "316x",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0h\u02c8\u028cnd\u0279\u026ad s\u02c8\u026aksti\u02d0n \u02c8\u025bks",
+          "start": 28.48,
+          "end": 29.995,
+          "duration": 1.515,
+          "frame_ahead_trigger": 29.04
+        },
+        {
+          "word": "speedup",
+          "clean_word": "speedup",
+          "phonemes": "sp\u02c8i\u02d0d\u028cp",
+          "start": 29.995,
+          "end": 30.375,
+          "duration": 0.38,
+          "frame_ahead_trigger": 30.555
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 30.375,
+          "end": 30.46,
+          "duration": 0.085,
+          "frame_ahead_trigger": 30.935
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 30.46,
+          "end": 30.64,
+          "duration": 0.18,
+          "frame_ahead_trigger": 31.02
+        },
+        {
+          "word": "NVIDIA",
+          "clean_word": "nvidia",
+          "phonemes": "\u02c8\u025bnv\u02c8\u026adi\u0259",
+          "start": 30.64,
+          "end": 31.155,
+          "duration": 0.515,
+          "frame_ahead_trigger": 31.2
+        },
+        {
+          "word": "B200,",
+          "clean_word": "b200",
+          "phonemes": "b\u02c8i\u02d0 t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad",
+          "start": 31.155,
+          "end": 32.035,
+          "duration": 0.88,
+          "frame_ahead_trigger": 31.715
+        },
+        {
+          "word": "beating",
+          "clean_word": "beating",
+          "phonemes": "b\u02c8i\u02d0\u027e\u026a\u014b",
+          "start": 32.035,
+          "end": 32.275,
+          "duration": 0.24,
+          "frame_ahead_trigger": 32.595
+        },
+        {
+          "word": "DSpark",
+          "clean_word": "dspark",
+          "phonemes": "d\u02c8i\u02d0 sp\u02c8\u0251\u02d0\u0279k",
+          "start": 32.275,
+          "end": 32.912,
+          "duration": 0.637,
+          "frame_ahead_trigger": 32.835
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 32.912,
+          "end": 33.19,
+          "duration": 0.278,
+          "frame_ahead_trigger": 33.472
+        },
+        {
+          "word": "8.5%",
+          "clean_word": "85",
+          "phonemes": "\u02c8e\u026a\u027ei f\u02c8a\u026av",
+          "start": 33.19,
+          "end": 33.635,
+          "duration": 0.445,
+          "frame_ahead_trigger": 33.75
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 33.635,
+          "end": 33.725,
+          "duration": 0.09,
+          "frame_ahead_trigger": 34.195
+        },
+        {
+          "word": "acceptance",
+          "clean_word": "acceptance",
+          "phonemes": "\u0250ks\u02c8\u025bpt\u0259ns",
+          "start": 33.725,
+          "end": 34.43,
+          "duration": 0.705,
+          "frame_ahead_trigger": 34.285
+        },
+        {
+          "word": "length",
+          "clean_word": "length",
+          "phonemes": "l\u02c8\u025b\u014b\u03b8",
+          "start": 34.43,
+          "end": 34.66,
+          "duration": 0.23,
+          "frame_ahead_trigger": 34.99
+        },
+        {
+          "word": "across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 34.66,
+          "end": 35.01,
+          "duration": 0.35,
+          "frame_ahead_trigger": 35.22
+        },
+        {
+          "word": "seven",
+          "clean_word": "seven",
+          "phonemes": "s\u02c8\u025bv\u0259n",
+          "start": 35.01,
+          "end": 35.295,
+          "duration": 0.285,
+          "frame_ahead_trigger": 35.57
+        },
+        {
+          "word": "benchmarks.",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 35.295,
+          "end": 35.875,
+          "duration": 0.58,
+          "frame_ahead_trigger": 35.855
+        }
+      ],
+      "audio_duration": 8.09,
+      "slot_duration": 8.23
+    },
+    {
+      "beat_id": 6,
+      "text": "Context is king. Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "A seamless loop transition back to the start.",
+      "highlight_words": {
+        "Context is king": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "decodes",
+        "direct_object": "AI architecture",
+        "anchor_word": "loop",
+        "semantic_role": "paradigm_shift"
+      },
+      "visual_blueprint": {
+        "layout": "neural_activation_wave",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dive daily",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 36.12,
+      "end": 42.01,
+      "duration": 5.89,
+      "word_timings": [
+        {
+          "word": "Context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 36.121,
+          "end": 36.591,
+          "duration": 0.47,
+          "frame_ahead_trigger": 36.831
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 36.591,
+          "end": 36.786,
+          "duration": 0.195,
+          "frame_ahead_trigger": 37.301
+        },
+        {
+          "word": "king.",
+          "clean_word": "king",
+          "phonemes": "k\u02c8\u026a\u014b",
+          "start": 36.786,
+          "end": 36.997,
+          "duration": 0.211,
+          "frame_ahead_trigger": 37.496
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 36.997,
+          "end": 37.466,
+          "duration": 0.469,
+          "frame_ahead_trigger": 37.707
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.466,
+          "end": 37.49,
+          "duration": 0.024,
+          "frame_ahead_trigger": 38.176
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 37.49,
+          "end": 37.841,
+          "duration": 0.351,
+          "frame_ahead_trigger": 38.2
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 37.841,
+          "end": 38.111,
+          "duration": 0.27,
+          "frame_ahead_trigger": 38.551
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 38.111,
+          "end": 38.256,
+          "duration": 0.145,
+          "frame_ahead_trigger": 38.821
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 38.256,
+          "end": 38.681,
+          "duration": 0.425,
+          "frame_ahead_trigger": 38.966
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 38.681,
+          "end": 39.161,
+          "duration": 0.48,
+          "frame_ahead_trigger": 39.391
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 39.161,
+          "end": 39.511,
+          "duration": 0.35,
+          "frame_ahead_trigger": 39.871
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.511,
+          "end": 39.631,
+          "duration": 0.12,
+          "frame_ahead_trigger": 40.221
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 39.631,
+          "end": 40.116,
+          "duration": 0.485,
+          "frame_ahead_trigger": 40.341
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 40.116,
+          "end": 40.286,
+          "duration": 0.17,
+          "frame_ahead_trigger": 40.826
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 40.286,
+          "end": 40.896,
+          "duration": 0.61,
+          "frame_ahead_trigger": 40.996
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 40.896,
+          "end": 41.341,
+          "duration": 0.445,
+          "frame_ahead_trigger": 41.606
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 41.341,
+          "end": 41.586,
+          "duration": 0.245,
+          "frame_ahead_trigger": 42.051
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 41.586,
+          "end": 41.686,
+          "duration": 0.1,
+          "frame_ahead_trigger": 42.296
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 41.686,
+          "end": 41.871,
+          "duration": 0.185,
+          "frame_ahead_trigger": 42.396
+        }
+      ],
+      "audio_duration": 5.89,
+      "slot_duration": 5.89
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{\\mathrm{spec}} = \\gamma \\cdot T_{\\mathrm{draft}} + T_{\\mathrm{verify}}$",
+      "filename": "ready_speculative_drafting_hla_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{\\mathrm{draft}}",
+          "label": "Draft Step Latency"
+        },
+        {
+          "term": "\\gamma",
+          "label": "Draft Horizon Length"
+        }
+      ],
+      "svg_filename": "ready_speculative_drafting_hla_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\Delta_{\\mathrm{ctx}}(k) = \\Vert h_{\\mathrm{target}}^{(0)} - h_{\\mathrm{target}}^{(k)} \\Vert_2 > \\epsilon$",
+      "filename": "ready_speculative_drafting_hla_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "h_{\\mathrm{target}}^{(0)}",
+          "label": "Static Root Feature"
+        },
+        {
+          "term": "h_{\\mathrm{target}}^{(k)}",
+          "label": "Ideal Step-k Context"
+        }
+      ],
+      "svg_filename": "ready_speculative_drafting_hla_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$S_t = \\alpha_t S_{t-1} + K_t^\\top V_t \\implies c_k = Q_k S_t$",
+      "filename": "ready_speculative_drafting_hla_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "S_t",
+          "label": "HLA Recurrent State"
+        },
+        {
+          "term": "c_k",
+          "label": "Position-k Context"
+        }
+      ],
+      "svg_filename": "ready_speculative_drafting_hla_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\tilde{h}_k = h_k + W_{\\mathrm{up}} \\sigma(W_{\\mathrm{down}} (Q_k S_t))$",
+      "filename": "ready_speculative_drafting_hla_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "W_{\\mathrm{down}}, W_{\\mathrm{up}}",
+          "label": "Low-Rank Projections"
+        },
+        {
+          "term": "\\tilde{h}_k",
+          "label": "Enriched Draft State"
+        }
+      ],
+      "svg_filename": "ready_speculative_drafting_hla_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Speedup} = 3.16\\times \\quad (\\Delta \\alpha_{\\mathrm{acc}} = +8.50\\%)$",
+      "filename": "ready_speculative_drafting_hla_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "3.16\\times",
+          "label": "NVIDIA B200 Speedup"
+        },
+        {
+          "term": "\\alpha_{\\mathrm{acc}}",
+          "label": "Mean Acceptance Length"
+        }
+      ],
+      "svg_filename": "ready_speculative_drafting_hla_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "TARGET_RECURRENT_STATES",
+          "color": "#38BDF8",
+          "items": [
+            "S_t",
+            "historical_context",
+            "linear_memory"
+          ]
+        },
+        {
+          "name": "DRAFT_POSITION_QUERIES",
+          "color": "#10B981",
+          "items": [
+            "Q_1",
+            "Q_2",
+            "Q_k"
+          ]
+        },
+        {
+          "name": "VERIFICATION_RESULTS",
+          "color": "#F59E0B",
+          "items": [
+            "accepted_tokens",
+            "3.16x_gain",
+            "b200_throughput"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Query: \"k-th Draft Position\"",
+        "target_cluster": "DRAFT_POSITION_QUERIES",
+        "token": "\"Q_k\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Static Feature h_0",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token Rollback",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "ReaDy Drafter",
+    "model_a_specs": [
+      "Dynamic Recurrent State Read",
+      "Low-Rank Fused Projection",
+      "Residual Context Injection"
+    ],
+    "model_b": "DSpark Drafter",
+    "model_b_specs": [
+      "Static Hidden Feature Reuse",
+      "Fixed Context Alignment",
+      "Sequential Prediction Head"
+    ],
+    "divide_title": "DYNAMIC RECURRENT CONTEXT VS STATIC DRAFTING",
+    "model_a_stat": "3.16x",
+    "model_a_stat_label": "DECODING SPEEDUP (B200)",
+    "model_b_stat": "2.92x",
+    "model_b_stat_label": "BASELINE DRAFT SPEEDUP",
+    "efficiency_badge": "\u26a1 +8.50% ACCEPTANCE LENGTH",
+    "benchmarks": [
+      {
+        "name": "GSM8K Mathematics",
+        "score_a": "3.28x",
+        "score_b": "3.01x"
+      },
+      {
+        "name": "HumanEval Code",
+        "score_a": "3.12x",
+        "score_b": "2.90x"
+      },
+      {
+        "name": "MT-Bench Dialogue",
+        "score_a": "3.08x",
+        "score_b": "2.85x"
+      }
+    ],
+    "scale_metric": "3.16x",
+    "scale_label": "Speculative Decoding Speedup",
+    "bottleneck_title": "CONTEXT DESYNCHRONIZATION BOTTLENECK",
+    "bottleneck_desc": "Static Target Hidden Features Misaligned With Subsequent Draft Tokens",
+    "solution_title": "READY RECURRENT CONTEXT INJECTION",
+    "solution_components": "Learned Position Queries + Low-Rank State Reader",
+    "mechanism_title": "FUSED LOW-RANK STATE INTEGRATION",
+    "payoff_stat": "3.16x",
+    "payoff_label": "AVERAGE SPEEDUP OVER AUTOREGRESSIVE",
+    "payoff_sub": "Tested on Qwen-27B on NVIDIA B200 GPU",
+    "payoff_hero_stat": 3.16,
+    "payoff_hero_label": "ReaDy Speculative Drafter",
+    "payoff_base_stat": 2.92,
+    "payoff_base_label": "DSpark Baseline",
+    "payoff_delta_badge": "\u26a1 +7.97% THROUGHPUT GAIN",
+    "challenger": "ReaDy (Qwen-27B)",
+    "incumbent": "DSpark Drafter"
+  },
+  "benchmark_comparison": {
+    "title": "SPECULATIVE DECODING SPEEDUP SHOWDOWN",
+    "metric_name": "Decoding Speedup",
+    "unit": "x Baseline",
+    "contestants": [
+      {
+        "name": "ReaDy",
+        "value": 3.16,
+        "display_val": "3.16x",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "DSpark",
+        "value": 2.92,
+        "display_val": "2.92x",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Autoregressive Baseline",
+        "value": 1.0,
+        "display_val": "1.00x",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +8.50% ACCEPTANCE LENGTH",
+    "radar_axes": [
+      "Throughput",
+      "Acceptance Rate",
+      "Memory Overhead",
+      "Kernel Latency",
+      "Verification Rate"
+    ]
+  },
+  "code_snippet": {
+    "filename": "ready_state_reader.py",
+    "language": "python",
+    "lines": [
+      "def read_recurrent_context(S_target, draft_queries):",
+      "# Low-rank fused state projection",
+      "raw_context = torch.einsum('k d, d s -> k s', draft_queries, S_target)",
+      "context_residual = self.w_up(F.silu(self.w_down(raw_context)))",
+      "return draft_hidden_states + context_residual"
+    ],
+    "highlight_lines": [
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 FUSED LOW-RANK STATE READER",
+    "explanation": "Extracts position-specific historical context directly from HLA recurrent memory"
+  },
+  "arxiv_id": "2610.20503",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "ready-speedup-overview",
+      "caption": "Ready-Speedup-Overview",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/source/ready-speedup-overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_1_ready-speedup-overview.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "ready-architecture",
+      "caption": "Ready-Architecture",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/source/ready-architecture.png",
+      "svg_path": null,
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_2_ready-architecture.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "ready-operator-latency",
+      "caption": "Ready-Operator-Latency",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/source/ready-operator-latency.png",
+      "svg_path": null,
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_3_ready-operator-latency.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 125
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "ready-position-survival",
+      "caption": "Ready-Position-Survival",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/source/ready-position-survival.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_4_ready-position-survival.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_4_ready-position-survival.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 60
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "ready-qualitative-example",
+      "caption": "Ready-Qualitative-Example",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/source/ready-qualitative-example.png",
+      "svg_path": null,
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.20503/chalkboard_figures/fig_5_ready-qualitative-example.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 50
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014I've definitely dealt with speculative decoding latency, so calling out the 'wall' it hits caught me immediately. I like that you didn't waste time with a 'Hey guys' intro. I got lost for a second on 'Hybrid Linear Attention states'\u2014I know what linear attention is, but the 'Hybrid' part felt like a buzzword without a quick clarification on what it's actually mixing. Otherwise, the technical breakdown felt like something I'd actually send to my study group."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Feature-based drafters",
+    "physical_analogy": "A blindfolded archer shooting at targets without knowing the wind speed or distance.",
+    "eureka_mechanism": "ReaDy (Recurrent State Retrieval)",
+    "paradigm_shift": "Leveraging Hybrid Linear Attention states as a queryable database for draft context."
+  },
+  "hook_gating": {
+    "selected_hook": "Before you train your next model, see how ReaDy cuts 3.16x of memory overhead.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 10,
+    "rankings": [
+      {
+        "hook": "Before you train your next model, see how ReaDy cuts 3.16x of memory overhead.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not scale your next training run before you see how ReaDy delivers 3.16x.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before ReaDy unlocks 3.16x gains?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 3.16x of your hardware performance on the table without ReaDy.",
+        "verdict": 48,
+        "band": "WEAK",
+        "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Why should you care about ReaDy? Because your speculative drafter is guessing blind, wasting precious GPU cycles on rejected, context-less tokens.",
+        "verdict": 47,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Your speculative drafter is guessing blind, wasting precious GPU cycles on rejected, context-less tokens.",
+        "verdict": 44,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until ReaDy proved a 3.16x leap.",
+        "verdict": 42,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Speculative decoding accelerates autoregressive generation by drafting multiple tokens per step, yet feature-based drafters rely on target hidden features whose contextual emphasis may not align with the needs of subsequent draft positions.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until ReaDy proved: hybrid linear attention (HLA) models maintain compact recurrent states that accumulate historical associations, offering an efficient source of complementary context for speculative drafting.",
+        "verdict": 30,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is ReaDy a major breakthrough? Because speculative decoding accelerates autoregressive generation by drafting multiple tokens per step, yet feature-based drafters rely on target hidden features whose contextual emphasis may not align with the needs of subsequent draft positions.",
+        "verdict": 19,
+        "band": "WEAK",
+        "formula": "The Question"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "ReaDy Drafter",
+        "model_a_score": "3.16x",
+        "model_b_name": "DSpark Drafter",
+        "model_b_score": "2.92x",
+        "delta_label": "\u26a1 +8.50% ACCEPTANCE LENGTH"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}
