@@ -1,0 +1,1785 @@
+{
+  "id": "kronlstm_kronecker_delta_rule",
+  "title": "KronLSTM: Kronecker Delta Rule for Linear Attention",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "STABLE MEMORY",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you train your next model, see how KronLSTM cuts +8.3% of memory overhead.",
+      "visual_focus": "A neural matrix flickering and fading into static.",
+      "highlight_words": {
+        "memory corruption": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Linear attention",
+        "action_verb": "corrupts",
+        "direct_object": "long-context data",
+        "anchor_word": "lobotomizing",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "MEMORY DECAY",
+        "sub": "The long-context bottleneck",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "Associative Matrix S_t",
+          "active_cell_label": "Interference Collision",
+          "efficiency_label": "State Drift: Diverging"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Statistic",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "MEMORY DECAY",
+        "sub": "The long-context bottleneck",
+        "accent_color": "#EF4444",
+        "grid_title": "Associative Matrix S_t",
+        "active_cell_label": "Interference Collision",
+        "efficiency_label": "State Drift: Diverging"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.35,
+      "duration": 5.35,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.405,
+          "duration": 0.395,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.405,
+          "end": 0.56,
+          "duration": 0.155,
+          "frame_ahead_trigger": 0.365
+        },
+        {
+          "word": "train",
+          "clean_word": "train",
+          "phonemes": "t\u0279\u02c8e\u026an",
+          "start": 0.56,
+          "end": 0.915,
+          "duration": 0.355,
+          "frame_ahead_trigger": 0.52
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.915,
+          "end": 1.115,
+          "duration": 0.2,
+          "frame_ahead_trigger": 0.875
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 1.115,
+          "end": 1.397,
+          "duration": 0.282,
+          "frame_ahead_trigger": 1.075
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 1.397,
+          "end": 1.725,
+          "duration": 0.328,
+          "frame_ahead_trigger": 1.357
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 1.725,
+          "end": 2.055,
+          "duration": 0.33,
+          "frame_ahead_trigger": 1.685
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 2.055,
+          "end": 2.245,
+          "duration": 0.19,
+          "frame_ahead_trigger": 2.015
+        },
+        {
+          "word": "KronLSTM",
+          "clean_word": "kronlstm",
+          "phonemes": "k\u0279\u02c8\u0251\u02d0n \u02cc\u025bl\u02cc\u025bst\u02cci\u02d0\u02c8\u025bm",
+          "start": 2.245,
+          "end": 3.339,
+          "duration": 1.094,
+          "frame_ahead_trigger": 2.205
+        },
+        {
+          "word": "cuts",
+          "clean_word": "cuts",
+          "phonemes": "k\u02c8\u028cts",
+          "start": 3.339,
+          "end": 3.616,
+          "duration": 0.277,
+          "frame_ahead_trigger": 3.299
+        },
+        {
+          "word": "+8.3%",
+          "clean_word": "83",
+          "phonemes": "\u02c8e\u026a\u027ei \u03b8\u0279\u02c8i\u02d0",
+          "start": 3.616,
+          "end": 4.255,
+          "duration": 0.639,
+          "frame_ahead_trigger": 3.576
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 4.255,
+          "end": 4.35,
+          "duration": 0.095,
+          "frame_ahead_trigger": 4.215
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 4.35,
+          "end": 4.775,
+          "duration": 0.425,
+          "frame_ahead_trigger": 4.31
+        },
+        {
+          "word": "overhead.",
+          "clean_word": "overhead",
+          "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
+          "start": 4.775,
+          "end": 5.225,
+          "duration": 0.45,
+          "frame_ahead_trigger": 4.735
+        }
+      ],
+      "audio_duration": 5.35,
+      "slot_duration": 5.5
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is the Delta Rule. It updates the entire matrix blindly, overwriting vital context like a sledgehammer in a library.",
+      "visual_focus": "A sledgehammer smashing a bookshelf.",
+      "highlight_words": {
+        "sledgehammer": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Delta Rule",
+        "action_verb": "obliterates",
+        "direct_object": "stored context",
+        "anchor_word": "blindly",
+        "semantic_role": "conflict_initiation"
+      },
+      "visual_blueprint": {
+        "layout": "optimization_landscape",
+        "title": "THE SLEDGEHAMMER",
+        "sub": "Blind matrix updates",
+        "accent_color": "#EF4444",
+        "params": {
+          "landscape_title": "Matrix Norm Divergence Basin",
+          "optima_label": "Instability Zone ||S_t|| -> inf"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "optimization_landscape",
+        "title": "THE SLEDGEHAMMER",
+        "sub": "Blind matrix updates",
+        "accent_color": "#EF4444",
+        "landscape_title": "Matrix Norm Divergence Basin",
+        "optima_label": "Instability Zone ||S_t|| -> inf"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.5,
+      "end": 12.29,
+      "duration": 6.78,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.525,
+          "end": 5.625,
+          "duration": 0.1,
+          "frame_ahead_trigger": 5.635
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.625,
+          "end": 5.945,
+          "duration": 0.32,
+          "frame_ahead_trigger": 5.735
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 5.945,
+          "end": 6.09,
+          "duration": 0.145,
+          "frame_ahead_trigger": 6.055
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 6.09,
+          "end": 6.215,
+          "duration": 0.125,
+          "frame_ahead_trigger": 6.2
+        },
+        {
+          "word": "Delta",
+          "clean_word": "delta",
+          "phonemes": "d\u02c8\u025blt\u0259",
+          "start": 6.215,
+          "end": 6.545,
+          "duration": 0.33,
+          "frame_ahead_trigger": 6.325
+        },
+        {
+          "word": "Rule.",
+          "clean_word": "rule",
+          "phonemes": "\u0279\u02c8u\u02d0l",
+          "start": 6.545,
+          "end": 6.77,
+          "duration": 0.225,
+          "frame_ahead_trigger": 6.655
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 6.77,
+          "end": 6.878,
+          "duration": 0.108,
+          "frame_ahead_trigger": 6.88
+        },
+        {
+          "word": "updates",
+          "clean_word": "updates",
+          "phonemes": "\u02c8\u028cpde\u026ats",
+          "start": 6.878,
+          "end": 7.4,
+          "duration": 0.522,
+          "frame_ahead_trigger": 6.988
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 7.4,
+          "end": 7.42,
+          "duration": 0.02,
+          "frame_ahead_trigger": 7.51
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 7.42,
+          "end": 7.9,
+          "duration": 0.48,
+          "frame_ahead_trigger": 7.53
+        },
+        {
+          "word": "matrix",
+          "clean_word": "matrix",
+          "phonemes": "m\u02c8e\u026at\u0279\u026aks",
+          "start": 7.9,
+          "end": 8.4,
+          "duration": 0.5,
+          "frame_ahead_trigger": 8.01
+        },
+        {
+          "word": "blindly,",
+          "clean_word": "blindly",
+          "phonemes": "bl\u02c8a\u026andli",
+          "start": 8.4,
+          "end": 8.69,
+          "duration": 0.29,
+          "frame_ahead_trigger": 8.51
+        },
+        {
+          "word": "overwriting",
+          "clean_word": "overwriting",
+          "phonemes": "\u02cco\u028av\u025a\u0279\u02c8a\u026a\u027e\u026a\u014b",
+          "start": 8.69,
+          "end": 9.44,
+          "duration": 0.75,
+          "frame_ahead_trigger": 8.8
+        },
+        {
+          "word": "vital",
+          "clean_word": "vital",
+          "phonemes": "v\u02c8a\u026a\u027e\u0259l",
+          "start": 9.44,
+          "end": 9.86,
+          "duration": 0.42,
+          "frame_ahead_trigger": 9.55
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 9.86,
+          "end": 10.35,
+          "duration": 0.49,
+          "frame_ahead_trigger": 9.97
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 10.35,
+          "end": 10.61,
+          "duration": 0.26,
+          "frame_ahead_trigger": 10.46
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 10.61,
+          "end": 10.715,
+          "duration": 0.105,
+          "frame_ahead_trigger": 10.72
+        },
+        {
+          "word": "sledgehammer",
+          "clean_word": "sledgehammer",
+          "phonemes": "sl\u02c8\u025bd\u0292h\u00e6m\u025a",
+          "start": 10.715,
+          "end": 11.275,
+          "duration": 0.56,
+          "frame_ahead_trigger": 10.825
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 11.275,
+          "end": 11.555,
+          "duration": 0.28,
+          "frame_ahead_trigger": 11.385
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.555,
+          "end": 11.642,
+          "duration": 0.088,
+          "frame_ahead_trigger": 11.665
+        },
+        {
+          "word": "library.",
+          "clean_word": "library",
+          "phonemes": "l\u02c8a\u026ab\u0279\u025b\u0279i",
+          "start": 11.642,
+          "end": 12.13,
+          "duration": 0.487,
+          "frame_ahead_trigger": 11.752
+        }
+      ],
+      "audio_duration": 6.78,
+      "slot_duration": 6.94
+    },
+    {
+      "beat_id": 3,
+      "text": "KronLSTM pivots to the Kronecker Delta Rule. It performs surgical updates, modifying memory only along a single, precise vector direction.",
+      "visual_focus": "A laser beam cutting through a matrix with surgical precision.",
+      "highlight_words": {
+        "surgical updates": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "KronLSTM",
+        "action_verb": "isolates",
+        "direct_object": "memory updates",
+        "anchor_word": "surgical",
+        "semantic_role": "resolution_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "KRONLSTM ARCHITECTURE",
+        "sub": "A laser beam cutting through a matrix with surgical precision.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.png",
+          "arxiv_id": "2610.26834",
+          "title": "KRONLSTM ARCHITECTURE",
+          "sub": "A laser beam cutting through a matrix with surgical precision.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Training Throughput",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.png",
+        "arxiv_id": "2610.26834",
+        "title": "KRONLSTM ARCHITECTURE",
+        "sub": "A laser beam cutting through a matrix with surgical precision.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Training Throughput",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 12.44,
+      "end": 20.59,
+      "duration": 8.15,
+      "word_timings": [
+        {
+          "word": "KronLSTM",
+          "clean_word": "kronlstm",
+          "phonemes": "k\u0279\u02c8\u0251\u02d0n \u02cc\u025bl\u02cc\u025bst\u02cci\u02d0\u02c8\u025bm",
+          "start": 12.474,
+          "end": 13.614,
+          "duration": 1.14,
+          "frame_ahead_trigger": 12.734
+        },
+        {
+          "word": "pivots",
+          "clean_word": "pivots",
+          "phonemes": "p\u02c8\u026av\u0259ts",
+          "start": 13.614,
+          "end": 13.929,
+          "duration": 0.315,
+          "frame_ahead_trigger": 13.874
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 13.929,
+          "end": 14.244,
+          "duration": 0.315,
+          "frame_ahead_trigger": 14.189
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 14.244,
+          "end": 14.254,
+          "duration": 0.01,
+          "frame_ahead_trigger": 14.504
+        },
+        {
+          "word": "Kronecker",
+          "clean_word": "kronecker",
+          "phonemes": "k\u0279\u02c8o\u028a\u014bk\u025a",
+          "start": 14.254,
+          "end": 14.704,
+          "duration": 0.45,
+          "frame_ahead_trigger": 14.514
+        },
+        {
+          "word": "Delta",
+          "clean_word": "delta",
+          "phonemes": "d\u02c8\u025blt\u0259",
+          "start": 14.704,
+          "end": 15.033,
+          "duration": 0.329,
+          "frame_ahead_trigger": 14.964
+        },
+        {
+          "word": "Rule.",
+          "clean_word": "rule",
+          "phonemes": "\u0279\u02c8u\u02d0l",
+          "start": 15.033,
+          "end": 15.369,
+          "duration": 0.336,
+          "frame_ahead_trigger": 15.293
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 15.369,
+          "end": 15.422,
+          "duration": 0.053,
+          "frame_ahead_trigger": 15.629
+        },
+        {
+          "word": "performs",
+          "clean_word": "performs",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279mz",
+          "start": 15.422,
+          "end": 16.004,
+          "duration": 0.582,
+          "frame_ahead_trigger": 15.682
+        },
+        {
+          "word": "surgical",
+          "clean_word": "surgical",
+          "phonemes": "s\u02c8\u025c\u02d0d\u0292\u026ak\u0259l",
+          "start": 16.004,
+          "end": 16.439,
+          "duration": 0.435,
+          "frame_ahead_trigger": 16.264
+        },
+        {
+          "word": "updates,",
+          "clean_word": "updates",
+          "phonemes": "\u02c8\u028cpde\u026ats",
+          "start": 16.439,
+          "end": 16.819,
+          "duration": 0.38,
+          "frame_ahead_trigger": 16.699
+        },
+        {
+          "word": "modifying",
+          "clean_word": "modifying",
+          "phonemes": "m\u02c8\u0251\u02d0d\u1d7bf\u02cca\u026a\u026a\u014b",
+          "start": 16.819,
+          "end": 17.709,
+          "duration": 0.89,
+          "frame_ahead_trigger": 17.079
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 17.709,
+          "end": 17.981,
+          "duration": 0.272,
+          "frame_ahead_trigger": 17.969
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 17.981,
+          "end": 18.354,
+          "duration": 0.373,
+          "frame_ahead_trigger": 18.241
+        },
+        {
+          "word": "along",
+          "clean_word": "along",
+          "phonemes": "\u0250l\u02c8\u0254\u014b",
+          "start": 18.354,
+          "end": 18.534,
+          "duration": 0.18,
+          "frame_ahead_trigger": 18.614
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 18.534,
+          "end": 18.689,
+          "duration": 0.155,
+          "frame_ahead_trigger": 18.794
+        },
+        {
+          "word": "single,",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 18.689,
+          "end": 19.074,
+          "duration": 0.385,
+          "frame_ahead_trigger": 18.949
+        },
+        {
+          "word": "precise",
+          "clean_word": "precise",
+          "phonemes": "p\u0279\u026as\u02c8a\u026as",
+          "start": 19.074,
+          "end": 19.514,
+          "duration": 0.44,
+          "frame_ahead_trigger": 19.334
+        },
+        {
+          "word": "vector",
+          "clean_word": "vector",
+          "phonemes": "v\u02c8\u025bkt\u025a",
+          "start": 19.514,
+          "end": 19.884,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.774
+        },
+        {
+          "word": "direction.",
+          "clean_word": "direction",
+          "phonemes": "d\u1d7b\u0279\u02c8\u025bk\u0283\u0259n",
+          "start": 19.884,
+          "end": 20.429,
+          "duration": 0.545,
+          "frame_ahead_trigger": 20.144
+        }
+      ],
+      "audio_duration": 8.15,
+      "slot_duration": 8.3
+    },
+    {
+      "beat_id": 4,
+      "text": "Mathematically, the memory norm stays bounded. It converges to a steady-state distribution without needing extra normalization layers.",
+      "visual_focus": "A graph showing a stable, flat line for memory norm.",
+      "highlight_words": {
+        "steady-state": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Memory norm",
+        "action_verb": "stabilizes",
+        "direct_object": "matrix dynamics",
+        "anchor_word": "bounded",
+        "semantic_role": "technical_validation"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: KRONLSTM: KRONECKE",
+        "sub": "A graph showing a stable, flat line for memory norm.",
+        "params": {
+          "title": "KERNEL CODE: KRONLSTM: KRONECKE",
+          "sub": "A graph showing a stable, flat line for memory norm.",
+          "filename": "kron_lstm_cell.py",
+          "language": "python",
+          "lines": [
+            "def kron_update(S_prev, k, v, q, alpha):",
+            "pred = torch.einsum('bdk,bk->bd', S_prev, k)",
+            "err = v - pred",
+            "S_t = S_prev + alpha * torch.einsum('bd,bk->bdk', err, q)",
+            "return S_t"
+          ],
+          "highlight_lines": [
+            3,
+            4
+          ],
+          "trace_register": "\u26a1 RANK-ONE KRONECKER REVISION KERNEL",
+          "delta_badge": "Modifies associative memory strictly along a single "
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: KRONLSTM: KRONECKE",
+        "sub": "A graph showing a stable, flat line for memory norm.",
+        "filename": "kron_lstm_cell.py",
+        "language": "python",
+        "lines": [
+          "def kron_update(S_prev, k, v, q, alpha):",
+          "pred = torch.einsum('bdk,bk->bd', S_prev, k)",
+          "err = v - pred",
+          "S_t = S_prev + alpha * torch.einsum('bd,bk->bdk', err, q)",
+          "return S_t"
+        ],
+        "highlight_lines": [
+          3,
+          4
+        ],
+        "trace_register": "\u26a1 RANK-ONE KRONECKER REVISION KERNEL",
+        "delta_badge": "Modifies associative memory strictly along a single "
+      },
+      "start": 20.74,
+      "end": 27.93,
+      "duration": 7.19,
+      "word_timings": [
+        {
+          "word": "Mathematically,",
+          "clean_word": "mathematically",
+          "phonemes": "m\u02cc\u00e6\u03b8\u026am\u02c8\u00e6\u027e\u026akli",
+          "start": 20.748,
+          "end": 21.528,
+          "duration": 0.78,
+          "frame_ahead_trigger": 21.158
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 21.528,
+          "end": 21.562,
+          "duration": 0.034,
+          "frame_ahead_trigger": 21.938
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 21.562,
+          "end": 21.941,
+          "duration": 0.38,
+          "frame_ahead_trigger": 21.972
+        },
+        {
+          "word": "norm",
+          "clean_word": "norm",
+          "phonemes": "n\u02c8\u0254\u02d0\u0279m",
+          "start": 21.941,
+          "end": 22.358,
+          "duration": 0.417,
+          "frame_ahead_trigger": 22.351
+        },
+        {
+          "word": "stays",
+          "clean_word": "stays",
+          "phonemes": "st\u02c8e\u026az",
+          "start": 22.358,
+          "end": 22.618,
+          "duration": 0.26,
+          "frame_ahead_trigger": 22.768
+        },
+        {
+          "word": "bounded.",
+          "clean_word": "bounded",
+          "phonemes": "b\u02c8a\u028and\u1d7bd",
+          "start": 22.618,
+          "end": 23.026,
+          "duration": 0.408,
+          "frame_ahead_trigger": 23.028
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 23.026,
+          "end": 23.134,
+          "duration": 0.108,
+          "frame_ahead_trigger": 23.436
+        },
+        {
+          "word": "converges",
+          "clean_word": "converges",
+          "phonemes": "k\u0259nv\u02c8\u025c\u02d0d\u0292\u1d7bz",
+          "start": 23.134,
+          "end": 23.708,
+          "duration": 0.574,
+          "frame_ahead_trigger": 23.544
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 23.708,
+          "end": 23.918,
+          "duration": 0.21,
+          "frame_ahead_trigger": 24.118
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 23.918,
+          "end": 24.093,
+          "duration": 0.175,
+          "frame_ahead_trigger": 24.328
+        },
+        {
+          "word": "steady-state",
+          "clean_word": "steadystate",
+          "phonemes": "st\u02c8\u025bd\u026ast\u02cce\u026at",
+          "start": 24.093,
+          "end": 24.713,
+          "duration": 0.62,
+          "frame_ahead_trigger": 24.503
+        },
+        {
+          "word": "distribution",
+          "clean_word": "distribution",
+          "phonemes": "d\u02cc\u026ast\u0279\u026abj\u02c8u\u02d0\u0283\u0259n",
+          "start": 24.713,
+          "end": 25.478,
+          "duration": 0.765,
+          "frame_ahead_trigger": 25.123
+        },
+        {
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 25.478,
+          "end": 25.903,
+          "duration": 0.425,
+          "frame_ahead_trigger": 25.888
+        },
+        {
+          "word": "needing",
+          "clean_word": "needing",
+          "phonemes": "n\u02c8i\u02d0d\u026a\u014b",
+          "start": 25.903,
+          "end": 26.233,
+          "duration": 0.33,
+          "frame_ahead_trigger": 26.313
+        },
+        {
+          "word": "extra",
+          "clean_word": "extra",
+          "phonemes": "\u02c8\u025bkst\u0279\u0259",
+          "start": 26.233,
+          "end": 26.673,
+          "duration": 0.44,
+          "frame_ahead_trigger": 26.643
+        },
+        {
+          "word": "normalization",
+          "clean_word": "normalization",
+          "phonemes": "n\u02cc\u0254\u02d0\u0279m\u0259l\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 26.673,
+          "end": 27.528,
+          "duration": 0.855,
+          "frame_ahead_trigger": 27.083
+        },
+        {
+          "word": "layers.",
+          "clean_word": "layers",
+          "phonemes": "l\u02c8e\u026a\u025az",
+          "start": 27.528,
+          "end": 27.853,
+          "duration": 0.325,
+          "frame_ahead_trigger": 27.938
+        }
+      ],
+      "audio_duration": 7.19,
+      "slot_duration": 7.34
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 96.4% accuracy on 256k context recall. That is an 8.3% jump over Gated DeltaNet.",
+      "visual_focus": "Bar chart showing a massive leap in performance.",
+      "highlight_words": {
+        "96.4%": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "KronLSTM",
+        "action_verb": "outperforms",
+        "direct_object": "Gated DeltaNet",
+        "anchor_word": "jump",
+        "semantic_role": "empirical_proof"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "LONG-CONTEXT ASSOCIATIVE RECALL (256K)",
+        "sub": "Bar chart showing a massive leap in performance.",
+        "params": {
+          "title": "LONG-CONTEXT ASSOCIATIVE RECALL (256K)",
+          "sub": "Bar chart showing a massive leap in performance.",
+          "metric_name": "Accuracy",
+          "unit": "%",
+          "contestants": [
+            {
+              "name": "KronLSTM",
+              "value": 96.4,
+              "display_val": "96.4%",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Gated DeltaNet",
+              "value": 88.1,
+              "display_val": "88.1%",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "DeltaNet",
+              "value": 74.3,
+              "display_val": "74.3%",
+              "is_hero": false,
+              "color": "#A855F7"
+            },
+            {
+              "name": "Standard Linear Attention",
+              "value": 51.2,
+              "display_val": "51.2%",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +8.3% ACCURACY OVER SOTA BASELINE"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "LONG-CONTEXT ASSOCIATIVE RECALL (256K)",
+        "sub": "Bar chart showing a massive leap in performance.",
+        "metric_name": "Accuracy",
+        "unit": "%",
+        "contestants": [
+          {
+            "name": "KronLSTM",
+            "value": 96.4,
+            "display_val": "96.4%",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Gated DeltaNet",
+            "value": 88.1,
+            "display_val": "88.1%",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "DeltaNet",
+            "value": 74.3,
+            "display_val": "74.3%",
+            "is_hero": false,
+            "color": "#A855F7"
+          },
+          {
+            "name": "Standard Linear Attention",
+            "value": 51.2,
+            "display_val": "51.2%",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +8.3% ACCURACY OVER SOTA BASELINE"
+      },
+      "start": 28.08,
+      "end": 36.03,
+      "duration": 7.96,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.097,
+          "end": 28.312,
+          "duration": 0.215,
+          "frame_ahead_trigger": 28.657
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 28.312,
+          "end": 28.532,
+          "duration": 0.22,
+          "frame_ahead_trigger": 28.872
+        },
+        {
+          "word": "96.4%",
+          "clean_word": "964",
+          "phonemes": "n\u02c8a\u026anh\u02c8\u028cnd\u0279\u026ad s\u02c8\u026aksti f\u02c8\u0254\u02d0\u0279",
+          "start": 28.532,
+          "end": 30.107,
+          "duration": 1.575,
+          "frame_ahead_trigger": 29.092
+        },
+        {
+          "word": "accuracy",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 30.107,
+          "end": 30.562,
+          "duration": 0.455,
+          "frame_ahead_trigger": 30.667
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 30.562,
+          "end": 30.692,
+          "duration": 0.13,
+          "frame_ahead_trigger": 31.122
+        },
+        {
+          "word": "256k",
+          "clean_word": "256k",
+          "phonemes": "t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad f\u02c8\u026afti s\u02c8\u026aks k\u02c8e\u026a",
+          "start": 30.692,
+          "end": 32.367,
+          "duration": 1.675,
+          "frame_ahead_trigger": 31.252
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 32.367,
+          "end": 32.852,
+          "duration": 0.484,
+          "frame_ahead_trigger": 32.927
+        },
+        {
+          "word": "recall.",
+          "clean_word": "recall",
+          "phonemes": "\u0279\u02c8i\u02d0k\u0254\u02d0l",
+          "start": 32.852,
+          "end": 33.252,
+          "duration": 0.401,
+          "frame_ahead_trigger": 33.412
+        },
+        {
+          "word": "That",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 33.252,
+          "end": 33.5,
+          "duration": 0.248,
+          "frame_ahead_trigger": 33.812
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 33.5,
+          "end": 33.608,
+          "duration": 0.108,
+          "frame_ahead_trigger": 34.06
+        },
+        {
+          "word": "an",
+          "clean_word": "an",
+          "phonemes": "\u00e6n",
+          "start": 33.608,
+          "end": 33.716,
+          "duration": 0.108,
+          "frame_ahead_trigger": 34.168
+        },
+        {
+          "word": "8.3%",
+          "clean_word": "83",
+          "phonemes": "\u02c8e\u026a\u027ei \u03b8\u0279\u02c8i\u02d0",
+          "start": 33.716,
+          "end": 34.262,
+          "duration": 0.546,
+          "frame_ahead_trigger": 34.276
+        },
+        {
+          "word": "jump",
+          "clean_word": "jump",
+          "phonemes": "d\u0292\u02c8\u028cmp",
+          "start": 34.262,
+          "end": 34.627,
+          "duration": 0.365,
+          "frame_ahead_trigger": 34.822
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "\u02c8o\u028av\u025a",
+          "start": 34.627,
+          "end": 34.857,
+          "duration": 0.23,
+          "frame_ahead_trigger": 35.187
+        },
+        {
+          "word": "Gated",
+          "clean_word": "gated",
+          "phonemes": "\u0261\u02c8e\u026a\u027e\u1d7bd",
+          "start": 34.857,
+          "end": 35.257,
+          "duration": 0.4,
+          "frame_ahead_trigger": 35.417
+        },
+        {
+          "word": "DeltaNet.",
+          "clean_word": "deltanet",
+          "phonemes": "d\u02c8\u025blt\u0259 n\u02c8\u025bt",
+          "start": 35.257,
+          "end": 35.877,
+          "duration": 0.62,
+          "frame_ahead_trigger": 35.817
+        }
+      ],
+      "audio_duration": 7.96,
+      "slot_duration": 8.1
+    },
+    {
+      "beat_id": 6,
+      "text": "Stable memory is the new frontier. Follow The Model Verse for daily deep-dives into how modern AI actually works.",
+      "visual_focus": "The Model Verse logo appearing over a clean, stable matrix.",
+      "highlight_words": {
+        "new frontier": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Stable memory",
+        "action_verb": "defines",
+        "direct_object": "future architectures",
+        "anchor_word": "frontier",
+        "semantic_role": "loop_closure"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "THE MODEL VERSE",
+        "sub": "Architectural intelligence",
+        "accent_color": "#34D399",
+        "params": {
+          "filename": "kron_lstm_step.py",
+          "code_line_1": "delta = v_t - torch.einsum('bdk,bk->bd', S, k_t)",
+          "code_line_2": "S_next = S + torch.einsum('bd,bk->bdk', delta, q_t)"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 36.18,
+      "end": 42.46,
+      "duration": 6.27,
+      "word_timings": [
+        {
+          "word": "Stable",
+          "clean_word": "stable",
+          "phonemes": "st\u02c8e\u026ab\u0259l",
+          "start": 36.2,
+          "end": 36.72,
+          "duration": 0.52,
+          "frame_ahead_trigger": 36.91
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "m\u02c8\u025bm\u025a\u0279i",
+          "start": 36.72,
+          "end": 37.015,
+          "duration": 0.295,
+          "frame_ahead_trigger": 37.43
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 37.015,
+          "end": 37.195,
+          "duration": 0.18,
+          "frame_ahead_trigger": 37.725
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 37.195,
+          "end": 37.275,
+          "duration": 0.081,
+          "frame_ahead_trigger": 37.905
+        },
+        {
+          "word": "new",
+          "clean_word": "new",
+          "phonemes": "n\u02c8u\u02d0",
+          "start": 37.275,
+          "end": 37.465,
+          "duration": 0.189,
+          "frame_ahead_trigger": 37.985
+        },
+        {
+          "word": "frontier.",
+          "clean_word": "frontier",
+          "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
+          "start": 37.465,
+          "end": 37.954,
+          "duration": 0.49,
+          "frame_ahead_trigger": 38.175
+        },
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 37.954,
+          "end": 38.35,
+          "duration": 0.395,
+          "frame_ahead_trigger": 38.664
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.35,
+          "end": 38.464,
+          "duration": 0.114,
+          "frame_ahead_trigger": 39.06
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 38.464,
+          "end": 38.92,
+          "duration": 0.456,
+          "frame_ahead_trigger": 39.174
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 38.92,
+          "end": 39.145,
+          "duration": 0.225,
+          "frame_ahead_trigger": 39.63
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 39.145,
+          "end": 39.43,
+          "duration": 0.285,
+          "frame_ahead_trigger": 39.855
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 39.43,
+          "end": 39.715,
+          "duration": 0.285,
+          "frame_ahead_trigger": 40.14
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 39.715,
+          "end": 40.335,
+          "duration": 0.62,
+          "frame_ahead_trigger": 40.425
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 40.335,
+          "end": 40.52,
+          "duration": 0.185,
+          "frame_ahead_trigger": 41.045
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 40.52,
+          "end": 40.625,
+          "duration": 0.105,
+          "frame_ahead_trigger": 41.23
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 40.625,
+          "end": 41.17,
+          "duration": 0.545,
+          "frame_ahead_trigger": 41.335
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 41.17,
+          "end": 41.41,
+          "duration": 0.24,
+          "frame_ahead_trigger": 41.88
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 41.41,
+          "end": 42.03,
+          "duration": 0.62,
+          "frame_ahead_trigger": 42.12
+        },
+        {
+          "word": "works.",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 42.03,
+          "end": 42.37,
+          "duration": 0.34,
+          "frame_ahead_trigger": 42.74
+        }
+      ],
+      "audio_duration": 6.27,
+      "slot_duration": 6.28
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$S_t = S_{t-1} + v_t k_t^\\top \\quad \\text{with} \\quad S_t \\in \\mathbb{R}^{d_v \\times d_k}$",
+      "filename": "kronlstm_kronecker_delta_rule_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "S_t",
+          "label": "Associative Memory"
+        },
+        {
+          "term": "v_t k_t^\\top",
+          "label": "Outer-Product Write"
+        }
+      ],
+      "svg_filename": "kronlstm_kronecker_delta_rule_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\Delta S_t = \\beta_t (v_t - S_{t-1} k_t) k_t^\\top \\implies \\lim_{t \\to \\infty} \\|S_t\\|_F = \\infty$",
+      "filename": "kronlstm_kronecker_delta_rule_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "v_t - S_{t-1} k_t",
+          "label": "Delta Error Residual"
+        },
+        {
+          "term": "\\|S_t\\|_F",
+          "label": "Unbounded Frobenius Norm"
+        }
+      ],
+      "svg_filename": "kronlstm_kronecker_delta_rule_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$S_t = S_{t-1} + \\eta_t (v_t - S_{t-1} k_t) \\otimes w_t^\\top$",
+      "filename": "kronlstm_kronecker_delta_rule_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\otimes",
+          "label": "Kronecker Product"
+        },
+        {
+          "term": "w_t^\\top",
+          "label": "Single Matrix Direction"
+        }
+      ],
+      "svg_filename": "kronlstm_kronecker_delta_rule_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbb{E}[\\|S_t\\|_F] \\le M < \\infty \\quad \\forall t, \\quad P(S_t) \\xrightarrow{t \\to \\infty} \\pi(S)$",
+      "filename": "kronlstm_kronecker_delta_rule_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "M",
+          "label": "Uniform Upper Bound"
+        },
+        {
+          "term": "\\pi(S)",
+          "label": "Markov Stationary Distribution"
+        }
+      ],
+      "svg_filename": "kronlstm_kronecker_delta_rule_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\mathrm{Accuracy}_{256k} = +8.3\\%, \\quad \\sup_{t \\ge 1} \\|S_t\\| \\le \\mathcal{O}(1)$",
+      "filename": "kronlstm_kronecker_delta_rule_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "+8.3\\%",
+          "label": "Long Context Recall Gain"
+        },
+        {
+          "term": "\\mathcal{O}(1)",
+          "label": "Constant Norm Bound"
+        }
+      ],
+      "svg_filename": "kronlstm_kronecker_delta_rule_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 4.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 12.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 20.2,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 28.0,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 35.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Targeted Associative Slot",
+          "color": "#38BDF8",
+          "items": [
+            "key_0",
+            "val_0",
+            "delta_0"
+          ]
+        },
+        {
+          "name": "Preserved Memory Buffer",
+          "color": "#10B981",
+          "items": [
+            "hist_ctx_1",
+            "hist_ctx_2",
+            "hist_ctx_3"
+          ]
+        },
+        {
+          "name": "Orthogonal Projection Subspace",
+          "color": "#F59E0B",
+          "items": [
+            "kron_basis_u",
+            "kron_basis_v"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"long_context_fact\"",
+        "target_cluster": "Targeted Associative Slot",
+        "token": "\"long_context_fact\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Interference Drift",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Unbounded Norm",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "KronLSTM",
+    "model_a_specs": [
+      "Kronecker Delta Rule",
+      "Uniformly Bounded Norm",
+      "Zero Extra Normalization"
+    ],
+    "model_b": "Gated DeltaNet",
+    "model_b_specs": [
+      "Standard Delta Rule",
+      "Eigenvalue Drift",
+      "Requires Normalization"
+    ],
+    "divide_title": "ASSOCIATIVE REVISION STABILITY",
+    "model_a_stat": "96.4%",
+    "model_a_stat_label": "256K RETRIEVAL ACCURACY",
+    "model_b_stat": "88.1%",
+    "model_b_stat_label": "BASELINE ACCURACY",
+    "efficiency_badge": "\u26a1 UNIFORM MARKOV BOUND GUARANTEE",
+    "benchmarks": [
+      {
+        "name": "Associative Recall (256k)",
+        "score_a": "96.4%",
+        "score_b": "88.1%"
+      },
+      {
+        "name": "Memory Norm Stability",
+        "score_a": "O(1) Bounded",
+        "score_b": "Divergent"
+      },
+      {
+        "name": "Language Modeling PPL",
+        "score_a": "SOTA",
+        "score_b": "Competitive"
+      }
+    ],
+    "scale_metric": "O(1)",
+    "scale_label": "Uniform Frobenius Norm Bound",
+    "bottleneck_title": "DESTRUCTIVE DELTA INTERFERENCE",
+    "bottleneck_desc": "Full-Rank Perturbation & Norm Explosion",
+    "solution_title": "KRONECKER DELTA RULE",
+    "solution_components": "Single-Direction Matrix Projection",
+    "mechanism_title": "ERGODIC MARKOV CONVERGENCE",
+    "payoff_stat": "+8.3%",
+    "payoff_label": "LONG-CONTEXT RECALL GAIN",
+    "payoff_sub": "Outperforming Gated DeltaNet Without Extra Normalization",
+    "payoff_hero_stat": 96.4,
+    "payoff_hero_label": "KronLSTM",
+    "payoff_base_stat": 88.1,
+    "payoff_base_label": "Gated DeltaNet",
+    "payoff_delta_badge": "\u26a1 +8.3% ACCURACY OVER SOTA BASELINE",
+    "challenger": "KronLSTM",
+    "incumbent": "Gated DeltaNet"
+  },
+  "benchmark_comparison": {
+    "title": "LONG-CONTEXT ASSOCIATIVE RECALL (256K)",
+    "metric_name": "Accuracy",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "KronLSTM",
+        "value": 96.4,
+        "display_val": "96.4%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Gated DeltaNet",
+        "value": 88.1,
+        "display_val": "88.1%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "DeltaNet",
+        "value": 74.3,
+        "display_val": "74.3%",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Standard Linear Attention",
+        "value": 51.2,
+        "display_val": "51.2%",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +8.3% ACCURACY OVER SOTA BASELINE",
+    "radar_axes": [
+      "Recall Accuracy",
+      "Memory Stability",
+      "Perplexity",
+      "Throughput",
+      "Convergence Rate"
+    ]
+  },
+  "code_snippet": {
+    "filename": "kron_lstm_cell.py",
+    "language": "python",
+    "lines": [
+      "def kron_update(S_prev, k, v, q, alpha):",
+      "pred = torch.einsum('bdk,bk->bd', S_prev, k)",
+      "err = v - pred",
+      "S_t = S_prev + alpha * torch.einsum('bd,bk->bdk', err, q)",
+      "return S_t"
+    ],
+    "highlight_lines": [
+      3,
+      4
+    ],
+    "trace_register": "\u26a1 RANK-ONE KRONECKER REVISION KERNEL",
+    "explanation": "Modifies associative memory strictly along a single directional subspace"
+  },
+  "arxiv_id": "2610.26834",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "training_throughput",
+      "caption": "Training Throughput",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/source/figures/training_throughput.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_1_training_throughput.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "length_generalization",
+      "caption": "Length Generalization",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/source/figures/length_generalization.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_2_length_generalization.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_2_length_generalization.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "gradnorm_8k_paper",
+      "caption": "Gradnorm 8K Paper",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/source/figures/gradnorm_8k_paper.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_3_gradnorm_8k_paper.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_3_gradnorm_8k_paper.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "ruler_lc32k_dashed",
+      "caption": "Ruler Lc32K Dashed",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/source/figures/ruler_lc32k_dashed.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_4_ruler_lc32k_dashed.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_4_ruler_lc32k_dashed.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "kronlstm_block",
+      "caption": "Kronlstm Block",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/source/figures/kronlstm_block.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_5_kronlstm_block.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26834/chalkboard_figures/fig_5_kronlstm_block.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014calling out memory corruption in linear attention models is exactly the kind of pain point I actually care about. I didn't swipe because you didn't waste time with a 'Hey guys' intro. However, in Beat 3, the phrasing 'along a single. Precise vector direction' felt a bit clunky and grammatically weird, which made me pause for a second to figure out if you meant a rank-1 update or something else. Otherwise, the performance stats in Beat 5 actually felt grounded and not like marketing fluff."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "The Delta Rule",
+    "physical_analogy": "A sledgehammer destroying a library index while trying to file a single book.",
+    "eureka_mechanism": "Kronecker Delta Rule",
+    "paradigm_shift": "Stable, bounded associative memory without normalization overhead"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you train your next model, see how KronLSTM cuts +8.3% of memory overhead.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Statistic",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 10,
+    "rankings": [
+      {
+        "hook": "Before you train your next model, see how KronLSTM cuts +8.3% of memory overhead.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Do not scale your next training run before you see how KronLSTM delivers +8.3%.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: We propose KronLSTM, a linear attention architecture based on the Kronecker Delta Rule, a novel update rule for associative matrix memories.",
+        "verdict": 53,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before KronLSTM unlocks +8.3% gains?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving +8.3% of your hardware performance on the table without KronLSTM.",
+        "verdict": 48,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why should you care about KronLSTM? Because your linear attention model is suffering from memory corruption, effectively lobotomizing itself on long sequences.",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until KronLSTM proved a +8.3% leap.",
+        "verdict": 42,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Your linear attention model is suffering from memory corruption, effectively lobotomizing itself on long sequences.",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is KronLSTM a major breakthrough? Because we propose KronLSTM, a linear attention architecture based on the Kronecker Delta Rule, a novel update rule for associative matrix memories.",
+        "verdict": 32,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until KronLSTM proved: kronLSTM extends the xLSTM family with a memory-revision mechanism that corrects targeted associations while modifying the memory only along a single direction in matrix space.",
+        "verdict": 27,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}
