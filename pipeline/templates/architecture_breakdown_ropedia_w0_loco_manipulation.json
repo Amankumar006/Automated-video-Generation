@@ -2,55 +2,55 @@
   "id": "ropedia_w0_loco_manipulation",
   "title": "Ropedia W0: Scaling Loco-Manipulation World Models",
   "category": "architecture_breakdown",
-  "domain_taxonomy": "general_cs",
-  "hook_tag": "ROBOTIC EMBODIMENT",
+  "domain_taxonomy": "robotics_tamp",
+  "hook_tag": "ROBOTIC KINEMATIC UNIFICATION",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 30 FPS better precision.",
-      "visual_focus": "Split screen showing a human reaching vs a robot arm twitching.",
+      "text": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 89.4% better precision.",
+      "visual_focus": "A robot arm twitching in a kitchen environment.",
       "highlight_words": {
-        "fail": "#EF4444"
+        "freeze": "#EF4444"
       },
       "svo_action": {
-        "subject": "Robotic Embodiment",
-        "action_verb": "shatters",
-        "direct_object": "Action Inconsistency",
-        "anchor_word": "fail",
+        "subject": "Robotic Agents",
+        "action_verb": "fail",
+        "direct_object": "unseen tasks",
+        "anchor_word": "freeze",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
         "layout": "barrier_separation",
-        "title": "THE EMBODIMENT GAP",
-        "sub": "Why robots freeze",
+        "title": "EMBODIMENT PARADOX",
+        "sub": "Simulation vs Reality",
         "accent_color": "#EF4444",
         "params": {
-          "stream_a_label": "Simulated Physics Engine",
-          "stream_b_label": "Real Unstructured World",
+          "stream_a_label": "Leg Locomotion (SE(2) Odometry)",
+          "stream_b_label": "Dexterous Hands (SE(3) End-Effector)",
           "barrier_label": "EMBODIMENT GAP",
-          "barrier_sub": "Action Space Mismatch"
+          "barrier_sub": "Zero Shared Latent Action Space"
         }
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
-      "hook_score": 70,
+      "hook_score": 69,
       "hook_band": "WORKABLE",
-      "hook_formula": "The Warning",
+      "hook_formula": "The Statistic",
       "motif_type": "visual_composition",
       "motif_params": {
         "layout": "barrier_separation",
-        "title": "THE EMBODIMENT GAP",
-        "sub": "Why robots freeze",
+        "title": "EMBODIMENT PARADOX",
+        "sub": "Simulation vs Reality",
         "accent_color": "#EF4444",
-        "stream_a_label": "Simulated Physics Engine",
-        "stream_b_label": "Real Unstructured World",
+        "stream_a_label": "Leg Locomotion (SE(2) Odometry)",
+        "stream_b_label": "Dexterous Hands (SE(3) End-Effector)",
         "barrier_label": "EMBODIMENT GAP",
-        "barrier_sub": "Action Space Mismatch"
+        "barrier_sub": "Zero Shared Latent Action Space"
       },
       "kinetic_action": "blueprint_transform",
       "start": 0.0,
-      "end": 6.12,
-      "duration": 6.12,
+      "end": 6.4,
+      "duration": 6.4,
       "word_timings": [
         {
           "word": "Before",
@@ -75,18 +75,18 @@
           "clean_word": "deploy",
           "phonemes": "d\u1d7bpl\u02c8\u0254\u026a",
           "start": 0.44,
-          "end": 0.925,
-          "duration": 0.485,
+          "end": 0.92,
+          "duration": 0.48,
           "frame_ahead_trigger": 0.4
         },
         {
           "word": "your",
           "clean_word": "your",
           "phonemes": "j\u028a\u0279",
-          "start": 0.925,
+          "start": 0.92,
           "end": 1.065,
-          "duration": 0.14,
-          "frame_ahead_trigger": 0.885
+          "duration": 0.145,
+          "frame_ahead_trigger": 0.88
         },
         {
           "word": "next",
@@ -102,585 +102,562 @@
           "clean_word": "physical",
           "phonemes": "f\u02c8\u026az\u026ak\u0259l",
           "start": 1.275,
-          "end": 1.765,
-          "duration": 0.49,
+          "end": 1.745,
+          "duration": 0.47,
           "frame_ahead_trigger": 1.235
         },
         {
           "word": "policy,",
           "clean_word": "policy",
           "phonemes": "p\u02c8\u0251\u02d0l\u026asi",
-          "start": 1.765,
-          "end": 2.075,
-          "duration": 0.31,
-          "frame_ahead_trigger": 1.725
+          "start": 1.745,
+          "end": 2.185,
+          "duration": 0.44,
+          "frame_ahead_trigger": 1.705
         },
         {
           "word": "see",
           "clean_word": "see",
           "phonemes": "s\u02c8i\u02d0",
-          "start": 2.075,
-          "end": 2.485,
-          "duration": 0.41,
-          "frame_ahead_trigger": 2.035
+          "start": 2.185,
+          "end": 2.285,
+          "duration": 0.1,
+          "frame_ahead_trigger": 2.145
         },
         {
           "word": "how",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
-          "start": 2.485,
-          "end": 2.573,
-          "duration": 0.088,
-          "frame_ahead_trigger": 2.445
+          "start": 2.285,
+          "end": 2.49,
+          "duration": 0.205,
+          "frame_ahead_trigger": 2.245
         },
         {
           "word": "Ropedia",
           "clean_word": "ropedia",
           "phonemes": "\u0279o\u028ap\u02c8i\u02d0di\u0259",
-          "start": 2.573,
-          "end": 3.035,
-          "duration": 0.462,
-          "frame_ahead_trigger": 2.533
+          "start": 2.49,
+          "end": 2.985,
+          "duration": 0.495,
+          "frame_ahead_trigger": 2.45
         },
         {
           "word": "W0",
           "clean_word": "w0",
           "phonemes": "d\u02c8\u028cb\u0259lj\u02ccu\u02d0 z\u02c8i\u0259\u0279o\u028a",
-          "start": 3.035,
-          "end": 4.006,
-          "duration": 0.971,
-          "frame_ahead_trigger": 2.995
+          "start": 2.985,
+          "end": 3.955,
+          "duration": 0.97,
+          "frame_ahead_trigger": 2.945
         },
         {
           "word": "unlocks",
           "clean_word": "unlocks",
           "phonemes": "\u028cnl\u02c8\u0251\u02d0ks",
-          "start": 4.006,
-          "end": 4.36,
-          "duration": 0.354,
-          "frame_ahead_trigger": 3.966
+          "start": 3.955,
+          "end": 4.31,
+          "duration": 0.355,
+          "frame_ahead_trigger": 3.915
         },
         {
-          "word": "30",
-          "clean_word": "30",
-          "phonemes": "\u03b8\u02c8\u025c\u02d0\u027ei",
-          "start": 4.36,
-          "end": 4.66,
-          "duration": 0.3,
-          "frame_ahead_trigger": 4.32
-        },
-        {
-          "word": "FPS",
-          "clean_word": "fps",
-          "phonemes": "\u02cc\u025bfp\u02cci\u02d0\u02c8\u025bs",
-          "start": 4.66,
-          "end": 5.29,
-          "duration": 0.63,
-          "frame_ahead_trigger": 4.62
+          "word": "89.4%",
+          "clean_word": "894",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad n\u02c8a\u026anti f\u02c8\u0254\u02d0\u0279",
+          "start": 4.31,
+          "end": 5.585,
+          "duration": 1.275,
+          "frame_ahead_trigger": 4.27
         },
         {
           "word": "better",
           "clean_word": "better",
           "phonemes": "b\u02c8\u025b\u027e\u025a",
-          "start": 5.29,
-          "end": 5.555,
-          "duration": 0.265,
-          "frame_ahead_trigger": 5.25
+          "start": 5.585,
+          "end": 5.835,
+          "duration": 0.25,
+          "frame_ahead_trigger": 5.545
         },
         {
           "word": "precision.",
           "clean_word": "precision",
           "phonemes": "p\u0279\u026as\u02c8\u026a\u0292\u0259n",
-          "start": 5.555,
-          "end": 5.95,
+          "start": 5.835,
+          "end": 6.23,
           "duration": 0.395,
-          "frame_ahead_trigger": 5.515
+          "frame_ahead_trigger": 5.795
         }
       ],
-      "audio_duration": 6.12,
-      "slot_duration": 6.27
+      "audio_duration": 6.4,
+      "slot_duration": 6.55
     },
     {
       "beat_id": 2,
-      "text": "The villain is the action space mismatch. It is like a translator forced to interpret two languages simultaneously without a shared dictionary.",
-      "visual_focus": "Abstract flow diagram showing mismatched data streams.",
+      "text": "The villain is action space fragmentation. Every robot speaks a different kinematic language, creating a chaotic Tower of Babel.",
+      "visual_focus": "Conflicting joint coordinate systems overlaying different robot models.",
       "highlight_words": {
-        "mismatch": "#EF4444"
+        "fragmentation": "#EF4444"
       },
       "svo_action": {
-        "subject": "Action Spaces",
-        "action_verb": "block",
-        "direct_object": "Cross-platform learning",
-        "anchor_word": "mismatch",
-        "semantic_role": "bottleneck_definition"
+        "subject": "Action Space",
+        "action_verb": "blocks",
+        "direct_object": "cross-embodiment learning",
+        "anchor_word": "fragmentation",
+        "semantic_role": "bottleneck"
       },
       "visual_blueprint": {
-        "layout": "optimization_landscape",
-        "title": "THE TRANSLATION WALL",
-        "sub": "Disconnected action spaces",
+        "layout": "vector_flow_field",
+        "title": "THE TOWER OF BABEL",
+        "sub": "Kinematic Incompatibility",
         "accent_color": "#EF4444",
-        "params": {
-          "landscape_title": "Heterogeneous Joint Torque Loss",
-          "optima_label": "Fragmented Embodiment Minima"
-        }
+        "params": {}
       },
       "thriller_role": "villain_bottleneck",
       "act": 2,
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "optimization_landscape",
-        "title": "THE TRANSLATION WALL",
-        "sub": "Disconnected action spaces",
-        "accent_color": "#EF4444",
-        "landscape_title": "Heterogeneous Joint Torque Loss",
-        "optima_label": "Fragmented Embodiment Minima"
+        "layout": "vector_flow_field",
+        "title": "THE TOWER OF BABEL",
+        "sub": "Kinematic Incompatibility",
+        "accent_color": "#EF4444"
       },
       "kinetic_action": "blueprint_transform",
-      "start": 6.27,
-      "end": 13.42,
-      "duration": 7.15,
+      "start": 6.55,
+      "end": 13.25,
+      "duration": 6.7,
       "word_timings": [
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 6.278,
-          "end": 6.368,
-          "duration": 0.09,
-          "frame_ahead_trigger": 6.388
+          "start": 6.57,
+          "end": 6.67,
+          "duration": 0.1,
+          "frame_ahead_trigger": 6.68
         },
         {
           "word": "villain",
           "clean_word": "villain",
           "phonemes": "v\u02c8\u026al\u0259n",
-          "start": 6.368,
-          "end": 6.693,
-          "duration": 0.325,
-          "frame_ahead_trigger": 6.478
+          "start": 6.67,
+          "end": 6.99,
+          "duration": 0.32,
+          "frame_ahead_trigger": 6.78
         },
         {
           "word": "is",
           "clean_word": "is",
           "phonemes": "\u026az",
-          "start": 6.693,
-          "end": 6.808,
-          "duration": 0.115,
-          "frame_ahead_trigger": 6.803
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 6.808,
-          "end": 6.938,
-          "duration": 0.13,
-          "frame_ahead_trigger": 6.918
+          "start": 6.99,
+          "end": 7.15,
+          "duration": 0.16,
+          "frame_ahead_trigger": 7.1
         },
         {
           "word": "action",
           "clean_word": "action",
           "phonemes": "\u02c8\u00e6k\u0283\u0259n",
-          "start": 6.938,
-          "end": 7.213,
-          "duration": 0.275,
-          "frame_ahead_trigger": 7.048
+          "start": 7.15,
+          "end": 7.415,
+          "duration": 0.265,
+          "frame_ahead_trigger": 7.26
         },
         {
           "word": "space",
           "clean_word": "space",
           "phonemes": "sp\u02c8e\u026as",
-          "start": 7.213,
-          "end": 7.448,
-          "duration": 0.235,
-          "frame_ahead_trigger": 7.323
-        },
-        {
-          "word": "mismatch.",
-          "clean_word": "mismatch",
-          "phonemes": "m\u026asm\u02c8\u00e6t\u0283",
-          "start": 7.448,
-          "end": 7.868,
-          "duration": 0.42,
-          "frame_ahead_trigger": 7.558
-        },
-        {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 7.868,
-          "end": 8.098,
+          "start": 7.415,
+          "end": 7.645,
           "duration": 0.23,
-          "frame_ahead_trigger": 7.978
+          "frame_ahead_trigger": 7.525
         },
         {
-          "word": "is",
-          "clean_word": "is",
-          "phonemes": "\u026az",
-          "start": 8.098,
-          "end": 8.17,
-          "duration": 0.072,
-          "frame_ahead_trigger": 8.208
+          "word": "fragmentation.",
+          "clean_word": "fragmentation",
+          "phonemes": "f\u0279\u02cc\u00e6\u0261m\u0259nt\u02c8e\u026a\u0283\u0259n",
+          "start": 7.645,
+          "end": 8.49,
+          "duration": 0.845,
+          "frame_ahead_trigger": 7.755
         },
         {
-          "word": "like",
-          "clean_word": "like",
-          "phonemes": "l\u02c8a\u026ak",
-          "start": 8.17,
-          "end": 8.432,
-          "duration": 0.263,
-          "frame_ahead_trigger": 8.28
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 8.432,
-          "end": 8.568,
-          "duration": 0.135,
-          "frame_ahead_trigger": 8.542
-        },
-        {
-          "word": "translator",
-          "clean_word": "translator",
-          "phonemes": "t\u0279\u00e6nsl\u02c8e\u026a\u027e\u025a",
-          "start": 8.568,
-          "end": 9.078,
-          "duration": 0.51,
-          "frame_ahead_trigger": 8.678
-        },
-        {
-          "word": "forced",
-          "clean_word": "forced",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279st",
-          "start": 9.078,
-          "end": 9.463,
-          "duration": 0.385,
-          "frame_ahead_trigger": 9.188
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 9.463,
-          "end": 9.643,
-          "duration": 0.18,
-          "frame_ahead_trigger": 9.573
-        },
-        {
-          "word": "interpret",
-          "clean_word": "interpret",
-          "phonemes": "\u026ant\u02c8\u025c\u02d0p\u0279\u026at",
-          "start": 9.643,
-          "end": 10.203,
-          "duration": 0.56,
-          "frame_ahead_trigger": 9.753
-        },
-        {
-          "word": "two",
-          "clean_word": "two",
-          "phonemes": "t\u02c8u\u02d0",
-          "start": 10.203,
-          "end": 10.493,
-          "duration": 0.29,
-          "frame_ahead_trigger": 10.313
-        },
-        {
-          "word": "languages",
-          "clean_word": "languages",
-          "phonemes": "l\u02c8\u00e6\u014b\u0261w\u026ad\u0292\u1d7bz",
-          "start": 10.493,
-          "end": 11.028,
-          "duration": 0.535,
-          "frame_ahead_trigger": 10.603
-        },
-        {
-          "word": "simultaneously",
-          "clean_word": "simultaneously",
-          "phonemes": "s\u02cca\u026am\u0259lt\u02c8e\u026ani\u0259sli",
-          "start": 11.028,
-          "end": 11.953,
-          "duration": 0.925,
-          "frame_ahead_trigger": 11.138
-        },
-        {
-          "word": "without",
-          "clean_word": "without",
-          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
-          "start": 11.953,
-          "end": 12.248,
-          "duration": 0.295,
-          "frame_ahead_trigger": 12.063
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 12.248,
-          "end": 12.378,
-          "duration": 0.13,
-          "frame_ahead_trigger": 12.358
-        },
-        {
-          "word": "shared",
-          "clean_word": "shared",
-          "phonemes": "\u0283\u02c8\u025b\u0279d",
-          "start": 12.378,
-          "end": 12.778,
-          "duration": 0.4,
-          "frame_ahead_trigger": 12.488
-        },
-        {
-          "word": "dictionary.",
-          "clean_word": "dictionary",
-          "phonemes": "d\u02c8\u026ak\u0283\u0259n\u02cc\u025b\u0279i",
-          "start": 12.778,
-          "end": 13.268,
-          "duration": 0.49,
-          "frame_ahead_trigger": 12.888
-        }
-      ],
-      "audio_duration": 7.15,
-      "slot_duration": 7.3
-    },
-    {
-      "beat_id": 3,
-      "text": "Ropedia W0 shatters this by mapping camera poses and robot joints into a single, unified coordinate space.",
-      "visual_focus": "Geometric projection of skeletons into a shared 3D grid.",
-      "highlight_words": {
-        "unified": "#22C55E"
-      },
-      "svo_action": {
-        "subject": "Ropedia W0",
-        "action_verb": "aligns",
-        "direct_object": "Kinematic data",
-        "anchor_word": "unified",
-        "semantic_role": "solution_pivot"
-      },
-      "visual_blueprint": {
-        "layout": "paper_figure",
-        "title": "ROPEDIA W0 ARCHITECTURE",
-        "sub": "Geometric projection of skeletons into a shared 3D grid.",
-        "params": {
-          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.svg",
-          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.png",
-          "arxiv_id": "2610.26855",
-          "title": "ROPEDIA W0 ARCHITECTURE",
-          "sub": "Geometric projection of skeletons into a shared 3D grid.",
-          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
-          "caption": "Overview",
-          "preferred_renderer": "vector"
-        }
-      },
-      "thriller_role": "eureka_pivot",
-      "act": 3,
-      "motif_type": "paper_figure",
-      "motif_params": {
-        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.svg",
-        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.png",
-        "arxiv_id": "2610.26855",
-        "title": "ROPEDIA W0 ARCHITECTURE",
-        "sub": "Geometric projection of skeletons into a shared 3D grid.",
-        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
-        "caption": "Overview",
-        "preferred_renderer": "vector"
-      },
-      "kinetic_action": "figure_scan",
-      "start": 13.57,
-      "end": 20.25,
-      "duration": 6.68,
-      "word_timings": [
-        {
-          "word": "Ropedia",
-          "clean_word": "ropedia",
-          "phonemes": "\u0279o\u028ap\u02c8i\u02d0di\u0259",
-          "start": 13.579,
-          "end": 14.049,
-          "duration": 0.47,
-          "frame_ahead_trigger": 13.839
-        },
-        {
-          "word": "W0",
-          "clean_word": "w0",
-          "phonemes": "d\u02c8\u028cb\u0259lj\u02ccu\u02d0 z\u02c8i\u0259\u0279o\u028a",
-          "start": 14.049,
-          "end": 15.064,
-          "duration": 1.015,
-          "frame_ahead_trigger": 14.309
-        },
-        {
-          "word": "shatters",
-          "clean_word": "shatters",
-          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
-          "start": 15.064,
-          "end": 15.474,
-          "duration": 0.41,
-          "frame_ahead_trigger": 15.324
-        },
-        {
-          "word": "this",
-          "clean_word": "this",
-          "phonemes": "\u00f0\u02c8\u026as",
-          "start": 15.474,
-          "end": 15.639,
-          "duration": 0.165,
-          "frame_ahead_trigger": 15.734
-        },
-        {
-          "word": "by",
-          "clean_word": "by",
-          "phonemes": "b\u02c8a\u026a",
-          "start": 15.639,
-          "end": 15.804,
-          "duration": 0.165,
-          "frame_ahead_trigger": 15.899
-        },
-        {
-          "word": "mapping",
-          "clean_word": "mapping",
-          "phonemes": "m\u02c8\u00e6p\u026a\u014b",
-          "start": 15.804,
-          "end": 16.144,
-          "duration": 0.34,
-          "frame_ahead_trigger": 16.064
-        },
-        {
-          "word": "camera",
-          "clean_word": "camera",
-          "phonemes": "k\u02c8\u00e6m\u0279\u0259",
-          "start": 16.144,
-          "end": 16.324,
-          "duration": 0.18,
-          "frame_ahead_trigger": 16.404
-        },
-        {
-          "word": "poses",
-          "clean_word": "poses",
-          "phonemes": "p\u02c8o\u028az\u1d7bz",
-          "start": 16.324,
-          "end": 16.699,
-          "duration": 0.375,
-          "frame_ahead_trigger": 16.584
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 16.699,
-          "end": 16.973,
-          "duration": 0.274,
-          "frame_ahead_trigger": 16.959
+          "word": "Every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 8.49,
+          "end": 8.807,
+          "duration": 0.317,
+          "frame_ahead_trigger": 8.6
         },
         {
           "word": "robot",
           "clean_word": "robot",
           "phonemes": "\u0279\u02c8o\u028ab\u0251\u02d0t",
-          "start": 16.973,
-          "end": 17.434,
-          "duration": 0.461,
-          "frame_ahead_trigger": 17.233
+          "start": 8.807,
+          "end": 9.215,
+          "duration": 0.408,
+          "frame_ahead_trigger": 8.917
         },
         {
-          "word": "joints",
-          "clean_word": "joints",
-          "phonemes": "d\u0292\u02c8\u0254\u026ants",
-          "start": 17.434,
-          "end": 17.939,
-          "duration": 0.505,
-          "frame_ahead_trigger": 17.694
-        },
-        {
-          "word": "into",
-          "clean_word": "into",
-          "phonemes": "\u02cc\u026ant\u028a",
-          "start": 17.939,
-          "end": 18.104,
-          "duration": 0.165,
-          "frame_ahead_trigger": 18.199
+          "word": "speaks",
+          "clean_word": "speaks",
+          "phonemes": "sp\u02c8i\u02d0ks",
+          "start": 9.215,
+          "end": 9.57,
+          "duration": 0.355,
+          "frame_ahead_trigger": 9.325
         },
         {
           "word": "a",
           "clean_word": "a",
           "phonemes": "\u02c8e\u026a",
-          "start": 18.104,
-          "end": 18.299,
-          "duration": 0.195,
-          "frame_ahead_trigger": 18.364
+          "start": 9.57,
+          "end": 9.745,
+          "duration": 0.175,
+          "frame_ahead_trigger": 9.68
         },
         {
-          "word": "single,",
-          "clean_word": "single",
-          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
-          "start": 18.299,
-          "end": 18.604,
+          "word": "different",
+          "clean_word": "different",
+          "phonemes": "d\u02c8\u026af\u0279\u0259nt",
+          "start": 9.745,
+          "end": 10.165,
+          "duration": 0.42,
+          "frame_ahead_trigger": 9.855
+        },
+        {
+          "word": "kinematic",
+          "clean_word": "kinematic",
+          "phonemes": "ka\u026anm\u02c8\u00e6\u027e\u026ak",
+          "start": 10.165,
+          "end": 10.825,
+          "duration": 0.66,
+          "frame_ahead_trigger": 10.275
+        },
+        {
+          "word": "language,",
+          "clean_word": "language",
+          "phonemes": "l\u02c8\u00e6\u014b\u0261w\u026ad\u0292",
+          "start": 10.825,
+          "end": 11.215,
+          "duration": 0.39,
+          "frame_ahead_trigger": 10.935
+        },
+        {
+          "word": "creating",
+          "clean_word": "creating",
+          "phonemes": "k\u0279i\u02d0\u02c8e\u026a\u027e\u026a\u014b",
+          "start": 11.215,
+          "end": 11.745,
+          "duration": 0.53,
+          "frame_ahead_trigger": 11.325
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.745,
+          "end": 11.95,
+          "duration": 0.205,
+          "frame_ahead_trigger": 11.855
+        },
+        {
+          "word": "chaotic",
+          "clean_word": "chaotic",
+          "phonemes": "ke\u026a\u02c8\u0251\u02d0\u027e\u026ak",
+          "start": 11.95,
+          "end": 12.375,
+          "duration": 0.425,
+          "frame_ahead_trigger": 12.06
+        },
+        {
+          "word": "Tower",
+          "clean_word": "tower",
+          "phonemes": "t\u02c8a\u028a\u025a",
+          "start": 12.375,
+          "end": 12.525,
+          "duration": 0.15,
+          "frame_ahead_trigger": 12.485
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 12.525,
+          "end": 12.83,
           "duration": 0.305,
-          "frame_ahead_trigger": 18.559
+          "frame_ahead_trigger": 12.635
         },
         {
-          "word": "unified",
+          "word": "Babel.",
+          "clean_word": "babel",
+          "phonemes": "b\u02c8e\u026ab\u0259l",
+          "start": 12.83,
+          "end": 13.12,
+          "duration": 0.29,
+          "frame_ahead_trigger": 12.94
+        }
+      ],
+      "audio_duration": 6.7,
+      "slot_duration": 6.85
+    },
+    {
+      "beat_id": 3,
+      "text": "Ropedia W0 shatters this with Unified Kinematic Projection, mapping diverse robot joints into a single shared 3D coordinate frame.",
+      "visual_focus": "Multiple robot skeletons snapping into a single unified 3D grid.",
+      "highlight_words": {
+        "Unified Kinematic Projection": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Ropedia W0",
+        "action_verb": "projects",
+        "direct_object": "diverse joints",
+        "anchor_word": "unified",
+        "semantic_role": "breakthrough"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "ROPEDIA W0 ARCHITECTURE",
+        "sub": "Multiple robot skeletons snapping into a single unified 3D grid.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.png",
+          "arxiv_id": "2610.26855",
+          "title": "ROPEDIA W0 ARCHITECTURE",
+          "sub": "Multiple robot skeletons snapping into a single unified 3D grid.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Pipeline",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_mechanism",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.png",
+        "arxiv_id": "2610.26855",
+        "title": "ROPEDIA W0 ARCHITECTURE",
+        "sub": "Multiple robot skeletons snapping into a single unified 3D grid.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Pipeline",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 13.4,
+      "end": 21.57,
+      "duration": 8.17,
+      "word_timings": [
+        {
+          "word": "Ropedia",
+          "clean_word": "ropedia",
+          "phonemes": "\u0279o\u028ap\u02c8i\u02d0di\u0259",
+          "start": 13.409,
+          "end": 13.909,
+          "duration": 0.5,
+          "frame_ahead_trigger": 13.669
+        },
+        {
+          "word": "W0",
+          "clean_word": "w0",
+          "phonemes": "d\u02c8\u028cb\u0259lj\u02ccu\u02d0 z\u02c8i\u0259\u0279o\u028a",
+          "start": 13.909,
+          "end": 14.839,
+          "duration": 0.93,
+          "frame_ahead_trigger": 14.169
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 14.839,
+          "end": 15.219,
+          "duration": 0.38,
+          "frame_ahead_trigger": 15.099
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 15.219,
+          "end": 15.419,
+          "duration": 0.2,
+          "frame_ahead_trigger": 15.479
+        },
+        {
+          "word": "with",
+          "clean_word": "with",
+          "phonemes": "w\u026a\u00f0",
+          "start": 15.419,
+          "end": 15.564,
+          "duration": 0.145,
+          "frame_ahead_trigger": 15.679
+        },
+        {
+          "word": "Unified",
           "clean_word": "unified",
           "phonemes": "j\u02c8u\u02d0n\u026af\u02cca\u026ad",
-          "start": 18.604,
-          "end": 19.229,
-          "duration": 0.625,
-          "frame_ahead_trigger": 18.864
+          "start": 15.564,
+          "end": 16.129,
+          "duration": 0.565,
+          "frame_ahead_trigger": 15.824
+        },
+        {
+          "word": "Kinematic",
+          "clean_word": "kinematic",
+          "phonemes": "ka\u026anm\u02c8\u00e6\u027e\u026ak",
+          "start": 16.129,
+          "end": 16.619,
+          "duration": 0.49,
+          "frame_ahead_trigger": 16.389
+        },
+        {
+          "word": "Projection,",
+          "clean_word": "projection",
+          "phonemes": "p\u0279\u0259d\u0292\u02c8\u025bk\u0283\u0259n",
+          "start": 16.619,
+          "end": 17.276,
+          "duration": 0.658,
+          "frame_ahead_trigger": 16.879
+        },
+        {
+          "word": "mapping",
+          "clean_word": "mapping",
+          "phonemes": "m\u02c8\u00e6p\u026a\u014b",
+          "start": 17.276,
+          "end": 17.614,
+          "duration": 0.337,
+          "frame_ahead_trigger": 17.536
+        },
+        {
+          "word": "diverse",
+          "clean_word": "diverse",
+          "phonemes": "da\u026av\u02c8\u025c\u02d0s",
+          "start": 17.614,
+          "end": 17.984,
+          "duration": 0.37,
+          "frame_ahead_trigger": 17.874
+        },
+        {
+          "word": "robot",
+          "clean_word": "robot",
+          "phonemes": "\u0279\u02c8o\u028ab\u0251\u02d0t",
+          "start": 17.984,
+          "end": 18.434,
+          "duration": 0.45,
+          "frame_ahead_trigger": 18.244
+        },
+        {
+          "word": "joints",
+          "clean_word": "joints",
+          "phonemes": "d\u0292\u02c8\u0254\u026ants",
+          "start": 18.434,
+          "end": 18.849,
+          "duration": 0.415,
+          "frame_ahead_trigger": 18.694
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 18.849,
+          "end": 19.169,
+          "duration": 0.32,
+          "frame_ahead_trigger": 19.109
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 19.169,
+          "end": 19.289,
+          "duration": 0.121,
+          "frame_ahead_trigger": 19.429
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 19.289,
+          "end": 19.714,
+          "duration": 0.424,
+          "frame_ahead_trigger": 19.549
+        },
+        {
+          "word": "shared",
+          "clean_word": "shared",
+          "phonemes": "\u0283\u02c8\u025b\u0279d",
+          "start": 19.714,
+          "end": 19.949,
+          "duration": 0.235,
+          "frame_ahead_trigger": 19.974
+        },
+        {
+          "word": "3D",
+          "clean_word": "3d",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0 d\u02c8i\u02d0",
+          "start": 19.949,
+          "end": 20.489,
+          "duration": 0.54,
+          "frame_ahead_trigger": 20.209
         },
         {
           "word": "coordinate",
           "clean_word": "coordinate",
           "phonemes": "ko\u028a\u02c8\u0254\u02d0\u0279d\u1d7bn\u0259t",
-          "start": 19.229,
-          "end": 19.819,
-          "duration": 0.59,
-          "frame_ahead_trigger": 19.489
+          "start": 20.489,
+          "end": 21.134,
+          "duration": 0.645,
+          "frame_ahead_trigger": 20.749
         },
         {
-          "word": "space.",
-          "clean_word": "space",
-          "phonemes": "sp\u02c8e\u026as",
-          "start": 19.819,
-          "end": 20.154,
-          "duration": 0.335,
-          "frame_ahead_trigger": 20.079
+          "word": "frame.",
+          "clean_word": "frame",
+          "phonemes": "f\u0279\u02c8e\u026am",
+          "start": 21.134,
+          "end": 21.409,
+          "duration": 0.275,
+          "frame_ahead_trigger": 21.394
         }
       ],
-      "audio_duration": 6.68,
-      "slot_duration": 6.83
+      "audio_duration": 8.17,
+      "slot_duration": 8.32
     },
     {
       "beat_id": 4,
-      "text": "The kernel uses forward kinematics to project skeletons, concatenating them with camera poses to predict future world states.",
-      "visual_focus": "Code block showing concatenation of kinematic tensors.",
+      "text": "It fuses forward kinematics with projected skeletons, using 10k hours of human data to create a universal latent language.",
+      "visual_focus": "Data streams from human egocentric video merging with robot skeleton keypoints.",
       "highlight_words": {
-        "forward kinematics": "#22C55E"
+        "forward kinematics": "#3B82F6"
       },
       "svo_action": {
-        "subject": "Kernel",
-        "action_verb": "projects",
-        "direct_object": "Future states",
-        "anchor_word": "forward kinematics",
-        "semantic_role": "mechanism_detail"
+        "subject": "Model",
+        "action_verb": "fuses",
+        "direct_object": "human-robot data",
+        "anchor_word": "fuses",
+        "semantic_role": "mechanism"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code_block",
         "title": "KERNEL CODE: ROPEDIA W0: SCALIN",
-        "sub": "Code block showing concatenation of kinematic tensors.",
+        "sub": "Data streams from human egocentric video merging with robot skele",
         "params": {
           "title": "KERNEL CODE: ROPEDIA W0: SCALIN",
-          "sub": "Code block showing concatenation of kinematic tensors.",
-          "filename": "ropedia_kinematics.py",
+          "sub": "Data streams from human egocentric video merging with robot skele",
+          "filename": "kinematic_projection.py",
           "language": "python",
           "lines": [
-            "def encode_action(cam_pose_se3, joint_angles, urdf):",
-            "skel_proj = forward_kinematics(urdf, joint_angles)",
-            "u_t = torch.cat([cam_pose_se3, skel_proj], dim=-1)",
-            "return world_model.rollout(z_t, u_t)"
+            "def project_action_space(cam_traj, joint_angles, urdf):",
+            "skeleton_3d = compute_forward_kinematics(urdf, joint_angles)",
+            "projected_pts = camera_project(skeleton_3d, cam_traj)",
+            "return world_latent_encode(cam_traj, projected_pts)"
           ],
           "highlight_lines": [
             2,
             3
           ],
-          "trace_register": "\u26a1 REAL-TIME 30 FPS KINEMATIC DISPATCH",
-          "delta_badge": "Decouples camera trajectory and skeleton from propri"
+          "trace_register": "\u26a1 MORPHOLOGY-AGNOSTIC KINEMATIC BRIDGE",
+          "delta_badge": "Translates any humanoid or human anatomy into normal"
         }
       },
       "thriller_role": "technical_deep_dive",
@@ -689,246 +666,255 @@
       "kinetic_action": "pulse",
       "motif_params": {
         "title": "KERNEL CODE: ROPEDIA W0: SCALIN",
-        "sub": "Code block showing concatenation of kinematic tensors.",
-        "filename": "ropedia_kinematics.py",
+        "sub": "Data streams from human egocentric video merging with robot skele",
+        "filename": "kinematic_projection.py",
         "language": "python",
         "lines": [
-          "def encode_action(cam_pose_se3, joint_angles, urdf):",
-          "skel_proj = forward_kinematics(urdf, joint_angles)",
-          "u_t = torch.cat([cam_pose_se3, skel_proj], dim=-1)",
-          "return world_model.rollout(z_t, u_t)"
+          "def project_action_space(cam_traj, joint_angles, urdf):",
+          "skeleton_3d = compute_forward_kinematics(urdf, joint_angles)",
+          "projected_pts = camera_project(skeleton_3d, cam_traj)",
+          "return world_latent_encode(cam_traj, projected_pts)"
         ],
         "highlight_lines": [
           2,
           3
         ],
-        "trace_register": "\u26a1 REAL-TIME 30 FPS KINEMATIC DISPATCH",
-        "delta_badge": "Decouples camera trajectory and skeleton from propri"
+        "trace_register": "\u26a1 MORPHOLOGY-AGNOSTIC KINEMATIC BRIDGE",
+        "delta_badge": "Translates any humanoid or human anatomy into normal"
       },
-      "start": 20.4,
-      "end": 27.03,
-      "duration": 6.63,
+      "start": 21.72,
+      "end": 28.74,
+      "duration": 7.02,
       "word_timings": [
         {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 20.417,
-          "end": 20.517,
-          "duration": 0.1,
-          "frame_ahead_trigger": 20.827
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 21.734,
+          "end": 21.844,
+          "duration": 0.11,
+          "frame_ahead_trigger": 22.144
         },
         {
-          "word": "kernel",
-          "clean_word": "kernel",
-          "phonemes": "k\u02c8\u025c\u02d0n\u0259l",
-          "start": 20.517,
-          "end": 20.807,
-          "duration": 0.29,
-          "frame_ahead_trigger": 20.927
-        },
-        {
-          "word": "uses",
-          "clean_word": "uses",
-          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
-          "start": 20.807,
-          "end": 21.257,
-          "duration": 0.45,
-          "frame_ahead_trigger": 21.217
+          "word": "fuses",
+          "clean_word": "fuses",
+          "phonemes": "fj\u02c8u\u02d0z\u1d7bz",
+          "start": 21.844,
+          "end": 22.259,
+          "duration": 0.415,
+          "frame_ahead_trigger": 22.254
         },
         {
           "word": "forward",
           "clean_word": "forward",
           "phonemes": "f\u02c8\u0254\u02d0\u0279w\u025ad",
-          "start": 21.257,
-          "end": 21.617,
-          "duration": 0.36,
-          "frame_ahead_trigger": 21.667
+          "start": 22.259,
+          "end": 22.589,
+          "duration": 0.33,
+          "frame_ahead_trigger": 22.669
         },
         {
           "word": "kinematics",
           "clean_word": "kinematics",
           "phonemes": "ka\u026anm\u02c8\u00e6\u027e\u026aks",
-          "start": 21.617,
-          "end": 22.227,
-          "duration": 0.61,
-          "frame_ahead_trigger": 22.027
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 22.227,
-          "end": 22.357,
-          "duration": 0.13,
-          "frame_ahead_trigger": 22.637
-        },
-        {
-          "word": "project",
-          "clean_word": "project",
-          "phonemes": "p\u0279\u02c8\u0251\u02d0d\u0292\u025bkt",
-          "start": 22.357,
-          "end": 22.92,
-          "duration": 0.564,
-          "frame_ahead_trigger": 22.767
-        },
-        {
-          "word": "skeletons,",
-          "clean_word": "skeletons",
-          "phonemes": "sk\u02c8\u025bl\u1d7bt\u0259nz",
-          "start": 22.92,
-          "end": 23.442,
-          "duration": 0.522,
-          "frame_ahead_trigger": 23.33
-        },
-        {
-          "word": "concatenating",
-          "clean_word": "concatenating",
-          "phonemes": "k\u0259\u014bk\u02c8\u00e6t\u0259n\u02cce\u026a\u027e\u026a\u014b",
-          "start": 23.442,
-          "end": 24.197,
-          "duration": 0.755,
-          "frame_ahead_trigger": 23.852
-        },
-        {
-          "word": "them",
-          "clean_word": "them",
-          "phonemes": "\u00f0\u02cc\u025bm",
-          "start": 24.197,
-          "end": 24.402,
-          "duration": 0.205,
-          "frame_ahead_trigger": 24.607
+          "start": 22.589,
+          "end": 23.194,
+          "duration": 0.605,
+          "frame_ahead_trigger": 22.999
         },
         {
           "word": "with",
           "clean_word": "with",
           "phonemes": "w\u026a\u00f0",
-          "start": 24.402,
-          "end": 24.597,
-          "duration": 0.195,
-          "frame_ahead_trigger": 24.812
+          "start": 23.194,
+          "end": 23.359,
+          "duration": 0.165,
+          "frame_ahead_trigger": 23.604
         },
         {
-          "word": "camera",
-          "clean_word": "camera",
-          "phonemes": "k\u02c8\u00e6m\u0279\u0259",
-          "start": 24.597,
-          "end": 24.797,
-          "duration": 0.2,
-          "frame_ahead_trigger": 25.007
+          "word": "projected",
+          "clean_word": "projected",
+          "phonemes": "p\u0279\u0259d\u0292\u02c8\u025bkt\u1d7bd",
+          "start": 23.359,
+          "end": 23.944,
+          "duration": 0.585,
+          "frame_ahead_trigger": 23.769
         },
         {
-          "word": "poses",
-          "clean_word": "poses",
-          "phonemes": "p\u02c8o\u028az\u1d7bz",
-          "start": 24.797,
-          "end": 25.262,
+          "word": "skeletons,",
+          "clean_word": "skeletons",
+          "phonemes": "sk\u02c8\u025bl\u1d7bt\u0259nz",
+          "start": 23.944,
+          "end": 24.349,
+          "duration": 0.405,
+          "frame_ahead_trigger": 24.354
+        },
+        {
+          "word": "using",
+          "clean_word": "using",
+          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
+          "start": 24.349,
+          "end": 24.829,
+          "duration": 0.48,
+          "frame_ahead_trigger": 24.759
+        },
+        {
+          "word": "10k",
+          "clean_word": "10k",
+          "phonemes": "t\u02c8\u025bn k\u02c8e\u026a",
+          "start": 24.829,
+          "end": 25.294,
           "duration": 0.465,
-          "frame_ahead_trigger": 25.207
+          "frame_ahead_trigger": 25.239
+        },
+        {
+          "word": "hours",
+          "clean_word": "hours",
+          "phonemes": "\u02c8a\u028a\u025az",
+          "start": 25.294,
+          "end": 25.604,
+          "duration": 0.31,
+          "frame_ahead_trigger": 25.704
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 25.604,
+          "end": 25.648,
+          "duration": 0.043,
+          "frame_ahead_trigger": 26.014
+        },
+        {
+          "word": "human",
+          "clean_word": "human",
+          "phonemes": "hj\u02c8u\u02d0m\u0259n",
+          "start": 25.648,
+          "end": 26.114,
+          "duration": 0.467,
+          "frame_ahead_trigger": 26.058
+        },
+        {
+          "word": "data",
+          "clean_word": "data",
+          "phonemes": "d\u02c8e\u026a\u027e\u0259",
+          "start": 26.114,
+          "end": 26.404,
+          "duration": 0.29,
+          "frame_ahead_trigger": 26.524
         },
         {
           "word": "to",
           "clean_word": "to",
           "phonemes": "tu\u02d0",
-          "start": 25.262,
-          "end": 25.452,
-          "duration": 0.19,
-          "frame_ahead_trigger": 25.672
+          "start": 26.404,
+          "end": 26.599,
+          "duration": 0.195,
+          "frame_ahead_trigger": 26.814
         },
         {
-          "word": "predict",
-          "clean_word": "predict",
-          "phonemes": "p\u0279\u026ad\u02c8\u026akt",
-          "start": 25.452,
-          "end": 25.842,
-          "duration": 0.39,
-          "frame_ahead_trigger": 25.862
+          "word": "create",
+          "clean_word": "create",
+          "phonemes": "k\u0279i\u02d0\u02c8e\u026at",
+          "start": 26.599,
+          "end": 26.884,
+          "duration": 0.285,
+          "frame_ahead_trigger": 27.009
         },
         {
-          "word": "future",
-          "clean_word": "future",
-          "phonemes": "fj\u02c8u\u02d0t\u0283\u025a",
-          "start": 25.842,
-          "end": 26.282,
-          "duration": 0.44,
-          "frame_ahead_trigger": 26.252
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 26.884,
+          "end": 27.174,
+          "duration": 0.29,
+          "frame_ahead_trigger": 27.294
         },
         {
-          "word": "world",
-          "clean_word": "world",
-          "phonemes": "w\u02c8\u025c\u02d0ld",
-          "start": 26.282,
-          "end": 26.592,
-          "duration": 0.31,
-          "frame_ahead_trigger": 26.692
+          "word": "universal",
+          "clean_word": "universal",
+          "phonemes": "j\u02ccu\u02d0n\u026av\u02c8\u025c\u02d0s\u0259l",
+          "start": 27.174,
+          "end": 27.729,
+          "duration": 0.555,
+          "frame_ahead_trigger": 27.584
         },
         {
-          "word": "states.",
-          "clean_word": "states",
-          "phonemes": "st\u02c8e\u026ats",
-          "start": 26.592,
-          "end": 26.937,
-          "duration": 0.345,
-          "frame_ahead_trigger": 27.002
+          "word": "latent",
+          "clean_word": "latent",
+          "phonemes": "l\u02c8e\u026at\u0259nt",
+          "start": 27.729,
+          "end": 28.134,
+          "duration": 0.405,
+          "frame_ahead_trigger": 28.139
+        },
+        {
+          "word": "language.",
+          "clean_word": "language",
+          "phonemes": "l\u02c8\u00e6\u014b\u0261w\u026ad\u0292",
+          "start": 28.134,
+          "end": 28.634,
+          "duration": 0.5,
+          "frame_ahead_trigger": 28.544
         }
       ],
-      "audio_duration": 6.63,
-      "slot_duration": 6.78
+      "audio_duration": 7.02,
+      "slot_duration": 7.17
     },
     {
       "beat_id": 5,
-      "text": "This architecture hits an 88.4% success rate, crushing previous baselines by over 27% across five complex cross-embodiment benchmarks.",
-      "visual_focus": "Bar chart showing performance leap.",
+      "text": "The result? 89.4% task success, crushing incumbent baselines by over 25 percent across five cross-embodiment benchmarks.",
+      "visual_focus": "Bar chart showing Ropedia W0 outperforming baselines.",
       "highlight_words": {
-        "88.4%": "#3B82F6"
+        "89.4%": "#10B981"
       },
       "svo_action": {
         "subject": "Ropedia W0",
         "action_verb": "outperforms",
-        "direct_object": "Baselines",
-        "anchor_word": "88.4%",
-        "semantic_role": "empirical_payoff"
+        "direct_object": "baselines",
+        "anchor_word": "success",
+        "semantic_role": "victory"
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
-        "title": "BENCHMARK SHOWDOWN: CROSS-EMBODIMENT LOCO-MANIPULATION",
-        "sub": "Bar chart showing performance leap.",
+        "title": "CROSS-EMBODIMENT BENCHMARK SWEEP",
+        "sub": "Bar chart showing Ropedia W0 outperforming baselines.",
         "params": {
-          "title": "BENCHMARK SHOWDOWN: CROSS-EMBODIMENT LOCO-MANIPULATION",
-          "sub": "Bar chart showing performance leap.",
-          "metric_name": "Task Success Rate",
+          "title": "CROSS-EMBODIMENT BENCHMARK SWEEP",
+          "sub": "Bar chart showing Ropedia W0 outperforming baselines.",
+          "metric_name": "Task Prediction Success",
           "unit": "%",
           "contestants": [
             {
-              "name": "Ropedia W0",
-              "value": 88.4,
-              "display_val": "88.4%",
+              "name": "Ropedia W0 (Ours)",
+              "value": 89.4,
+              "display_val": "89.4%",
               "is_hero": true,
               "color": "#10B981"
             },
             {
-              "name": "DreamDojo SOTA",
-              "value": 61.2,
-              "display_val": "61.2%",
+              "name": "DreamDojo Baseline",
+              "value": 64.2,
+              "display_val": "64.2%",
               "is_hero": false,
               "color": "#38BDF8"
             },
             {
-              "name": "AgiBot Teleop Policy",
-              "value": 55.6,
-              "display_val": "55.6%",
+              "name": "\u03a8_0 World Model",
+              "value": 58.7,
+              "display_val": "58.7%",
               "is_hero": false,
               "color": "#A855F7"
             },
             {
-              "name": "Psi-0 Baseline",
-              "value": 48.7,
-              "display_val": "48.7%",
+              "name": "Single-Embodiment Baseline",
+              "value": 41.3,
+              "display_val": "41.3%",
               "is_hero": false,
               "color": "#EF4444"
             }
           ],
-          "delta_badge": "\u26a1 +27.2% SOTA ACCURACY GAIN"
+          "delta_badge": "\u26a1 +25.2% OVER INCUMBENT SOTA"
         }
       },
       "thriller_role": "empirical_victory",
@@ -936,502 +922,462 @@
       "motif_type": "horizontal_race_bars",
       "kinetic_action": "bar_fill",
       "motif_params": {
-        "title": "BENCHMARK SHOWDOWN: CROSS-EMBODIMENT LOCO-MANIPULATION",
-        "sub": "Bar chart showing performance leap.",
-        "metric_name": "Task Success Rate",
+        "title": "CROSS-EMBODIMENT BENCHMARK SWEEP",
+        "sub": "Bar chart showing Ropedia W0 outperforming baselines.",
+        "metric_name": "Task Prediction Success",
         "unit": "%",
         "contestants": [
           {
-            "name": "Ropedia W0",
-            "value": 88.4,
-            "display_val": "88.4%",
+            "name": "Ropedia W0 (Ours)",
+            "value": 89.4,
+            "display_val": "89.4%",
             "is_hero": true,
             "color": "#10B981"
           },
           {
-            "name": "DreamDojo SOTA",
-            "value": 61.2,
-            "display_val": "61.2%",
+            "name": "DreamDojo Baseline",
+            "value": 64.2,
+            "display_val": "64.2%",
             "is_hero": false,
             "color": "#38BDF8"
           },
           {
-            "name": "AgiBot Teleop Policy",
-            "value": 55.6,
-            "display_val": "55.6%",
+            "name": "\u03a8_0 World Model",
+            "value": 58.7,
+            "display_val": "58.7%",
             "is_hero": false,
             "color": "#A855F7"
           },
           {
-            "name": "Psi-0 Baseline",
-            "value": 48.7,
-            "display_val": "48.7%",
+            "name": "Single-Embodiment Baseline",
+            "value": 41.3,
+            "display_val": "41.3%",
             "is_hero": false,
             "color": "#EF4444"
           }
         ],
-        "delta_badge": "\u26a1 +27.2% SOTA ACCURACY GAIN"
+        "delta_badge": "\u26a1 +25.2% OVER INCUMBENT SOTA"
       },
-      "start": 27.18,
-      "end": 35.95,
-      "duration": 8.77,
+      "start": 28.89,
+      "end": 36.7,
+      "duration": 7.81,
       "word_timings": [
         {
-          "word": "This",
-          "clean_word": "this",
-          "phonemes": "\u00f0\u02c8\u026as",
-          "start": 27.191,
-          "end": 27.341,
-          "duration": 0.15,
-          "frame_ahead_trigger": 27.751
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 28.898,
+          "end": 29.098,
+          "duration": 0.2,
+          "frame_ahead_trigger": 29.458
         },
         {
-          "word": "architecture",
-          "clean_word": "architecture",
-          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
-          "start": 27.341,
-          "end": 28.146,
-          "duration": 0.805,
-          "frame_ahead_trigger": 27.901
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 29.098,
+          "end": 29.379,
+          "duration": 0.281,
+          "frame_ahead_trigger": 29.658
         },
         {
-          "word": "hits",
-          "clean_word": "hits",
-          "phonemes": "h\u02c8\u026ats",
-          "start": 28.146,
-          "end": 28.336,
-          "duration": 0.19,
-          "frame_ahead_trigger": 28.706
+          "word": "89.4%",
+          "clean_word": "894",
+          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad n\u02c8a\u026anti f\u02c8\u0254\u02d0\u0279",
+          "start": 29.379,
+          "end": 30.803,
+          "duration": 1.424,
+          "frame_ahead_trigger": 29.939
         },
         {
-          "word": "an",
-          "clean_word": "an",
-          "phonemes": "\u00e6n",
-          "start": 28.336,
-          "end": 28.521,
-          "duration": 0.185,
-          "frame_ahead_trigger": 28.896
+          "word": "task",
+          "clean_word": "task",
+          "phonemes": "t\u02c8\u00e6sk",
+          "start": 30.803,
+          "end": 31.068,
+          "duration": 0.265,
+          "frame_ahead_trigger": 31.363
         },
         {
-          "word": "88.4%",
-          "clean_word": "884",
-          "phonemes": "\u02c8e\u026ath\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8\u0254\u02d0\u0279",
-          "start": 28.521,
-          "end": 29.816,
-          "duration": 1.295,
-          "frame_ahead_trigger": 29.081
-        },
-        {
-          "word": "success",
+          "word": "success,",
           "clean_word": "success",
           "phonemes": "s\u0259ks\u02c8\u025bs",
-          "start": 29.816,
-          "end": 30.175,
-          "duration": 0.359,
-          "frame_ahead_trigger": 30.376
-        },
-        {
-          "word": "rate,",
-          "clean_word": "rate",
-          "phonemes": "\u0279\u02c8e\u026at",
-          "start": 30.175,
-          "end": 30.446,
-          "duration": 0.271,
-          "frame_ahead_trigger": 30.735
+          "start": 31.068,
+          "end": 31.323,
+          "duration": 0.255,
+          "frame_ahead_trigger": 31.628
         },
         {
           "word": "crushing",
           "clean_word": "crushing",
           "phonemes": "k\u0279\u02c8\u028c\u0283\u026a\u014b",
-          "start": 30.446,
-          "end": 30.886,
-          "duration": 0.44,
-          "frame_ahead_trigger": 31.006
+          "start": 31.323,
+          "end": 31.786,
+          "duration": 0.462,
+          "frame_ahead_trigger": 31.883
         },
         {
-          "word": "previous",
-          "clean_word": "previous",
-          "phonemes": "p\u0279\u02c8i\u02d0vi\u0259s",
-          "start": 30.886,
-          "end": 31.271,
-          "duration": 0.385,
-          "frame_ahead_trigger": 31.446
+          "word": "incumbent",
+          "clean_word": "incumbent",
+          "phonemes": "\u026a\u014bk\u02c8\u028cmb\u0259nt",
+          "start": 31.786,
+          "end": 32.223,
+          "duration": 0.438,
+          "frame_ahead_trigger": 32.346
         },
         {
           "word": "baselines",
           "clean_word": "baselines",
           "phonemes": "b\u02c8e\u026asla\u026anz",
-          "start": 31.271,
-          "end": 31.751,
-          "duration": 0.48,
-          "frame_ahead_trigger": 31.831
+          "start": 32.223,
+          "end": 32.853,
+          "duration": 0.63,
+          "frame_ahead_trigger": 32.783
         },
         {
           "word": "by",
           "clean_word": "by",
           "phonemes": "b\u02c8a\u026a",
-          "start": 31.751,
-          "end": 32.131,
-          "duration": 0.38,
-          "frame_ahead_trigger": 32.311
+          "start": 32.853,
+          "end": 33.088,
+          "duration": 0.235,
+          "frame_ahead_trigger": 33.413
         },
         {
           "word": "over",
           "clean_word": "over",
           "phonemes": "\u02c8o\u028av\u025a",
-          "start": 32.131,
-          "end": 32.356,
-          "duration": 0.225,
-          "frame_ahead_trigger": 32.691
+          "start": 33.088,
+          "end": 33.433,
+          "duration": 0.345,
+          "frame_ahead_trigger": 33.648
         },
         {
-          "word": "27%",
-          "clean_word": "27",
-          "phonemes": "tw\u02c8\u025bnti s\u02c8\u025bv\u0259n",
-          "start": 32.356,
-          "end": 33.151,
-          "duration": 0.795,
-          "frame_ahead_trigger": 32.916
+          "word": "25",
+          "clean_word": "25",
+          "phonemes": "tw\u02c8\u025bnti f\u02c8a\u026av",
+          "start": 33.433,
+          "end": 34.073,
+          "duration": 0.64,
+          "frame_ahead_trigger": 33.993
+        },
+        {
+          "word": "percent",
+          "clean_word": "percent",
+          "phonemes": "p\u025as\u02c8\u025bnt",
+          "start": 34.073,
+          "end": 34.468,
+          "duration": 0.395,
+          "frame_ahead_trigger": 34.633
         },
         {
           "word": "across",
           "clean_word": "across",
           "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
-          "start": 33.151,
-          "end": 33.381,
-          "duration": 0.23,
-          "frame_ahead_trigger": 33.711
+          "start": 34.468,
+          "end": 34.688,
+          "duration": 0.22,
+          "frame_ahead_trigger": 35.028
         },
         {
           "word": "five",
           "clean_word": "five",
           "phonemes": "f\u02c8a\u026av",
-          "start": 33.381,
-          "end": 33.786,
-          "duration": 0.405,
-          "frame_ahead_trigger": 33.941
-        },
-        {
-          "word": "complex",
-          "clean_word": "complex",
-          "phonemes": "k\u02c8\u0251\u02d0mpl\u025bks",
-          "start": 33.786,
-          "end": 34.246,
-          "duration": 0.46,
-          "frame_ahead_trigger": 34.346
+          "start": 34.688,
+          "end": 35.073,
+          "duration": 0.385,
+          "frame_ahead_trigger": 35.248
         },
         {
           "word": "cross-embodiment",
           "clean_word": "crossembodiment",
           "phonemes": "k\u0279\u02c8\u0254s\u026amb\u02cc\u0251\u02d0d\u026am\u0259nt",
-          "start": 34.246,
-          "end": 35.301,
-          "duration": 1.055,
-          "frame_ahead_trigger": 34.806
+          "start": 35.073,
+          "end": 36.003,
+          "duration": 0.93,
+          "frame_ahead_trigger": 35.633
         },
         {
           "word": "benchmarks.",
           "clean_word": "benchmarks",
           "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
-          "start": 35.301,
-          "end": 35.871,
-          "duration": 0.57,
-          "frame_ahead_trigger": 35.861
+          "start": 36.003,
+          "end": 36.598,
+          "duration": 0.595,
+          "frame_ahead_trigger": 36.563
         }
       ],
-      "audio_duration": 8.77,
-      "slot_duration": 8.92
+      "audio_duration": 7.81,
+      "slot_duration": 7.96
     },
     {
       "beat_id": 6,
-      "text": "By scaling human experience, we finally bridge the gap. Follow The Model Verse for daily deep-dives into AI architecture.",
-      "visual_focus": "Robot and human moving in perfect sync.",
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "Logo animation with a neural network flow.",
       "highlight_words": {
-        "bridge the gap": "#3B82F6"
+        "The Model Verse": "#F59E0B"
       },
       "svo_action": {
-        "subject": "Scaling",
-        "action_verb": "enables",
-        "direct_object": "Embodied intelligence",
-        "anchor_word": "bridge",
-        "semantic_role": "loop_conclusion"
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "deep-dives",
+        "semantic_role": "loop"
       },
       "visual_blueprint": {
         "layout": "vector_flow_field",
-        "title": "THE NEW REALITY",
-        "sub": "Scaling embodied models",
-        "accent_color": "#F59E0B",
-        "params": {}
+        "title": "STAY TUNED",
+        "sub": "The Future of Embodiment",
+        "accent_color": "#34D399",
+        "params": {
+          "field_title": "Kinematic Flow Field",
+          "source_label": "Human Experience (10k hrs)",
+          "target_label": "Universal Humanoid Control",
+          "stream_formula": "v(x, y) = \\nabla \\Psi_{\\mathrm{kinematic}}"
+        }
       },
       "thriller_role": "paradigm_shift",
       "act": 4,
-      "start": 36.1,
-      "end": 42.67,
-      "duration": 6.57,
+      "start": 36.85,
+      "end": 41.56,
+      "duration": 4.71,
       "word_timings": [
-        {
-          "word": "By",
-          "clean_word": "by",
-          "phonemes": "b\u02c8a\u026a",
-          "start": 36.114,
-          "end": 36.349,
-          "duration": 0.235,
-          "frame_ahead_trigger": 36.824
-        },
-        {
-          "word": "scaling",
-          "clean_word": "scaling",
-          "phonemes": "sk\u02c8e\u026al\u026a\u014b",
-          "start": 36.349,
-          "end": 36.699,
-          "duration": 0.35,
-          "frame_ahead_trigger": 37.059
-        },
-        {
-          "word": "human",
-          "clean_word": "human",
-          "phonemes": "hj\u02c8u\u02d0m\u0259n",
-          "start": 36.699,
-          "end": 37.254,
-          "duration": 0.555,
-          "frame_ahead_trigger": 37.409
-        },
-        {
-          "word": "experience,",
-          "clean_word": "experience",
-          "phonemes": "\u025bksp\u02c8i\u0259\u0279\u026a\u0259ns",
-          "start": 37.254,
-          "end": 37.814,
-          "duration": 0.56,
-          "frame_ahead_trigger": 37.964
-        },
-        {
-          "word": "we",
-          "clean_word": "we",
-          "phonemes": "wi\u02d0",
-          "start": 37.814,
-          "end": 37.929,
-          "duration": 0.115,
-          "frame_ahead_trigger": 38.524
-        },
-        {
-          "word": "finally",
-          "clean_word": "finally",
-          "phonemes": "f\u02c8a\u026an\u0259li",
-          "start": 37.929,
-          "end": 38.494,
-          "duration": 0.565,
-          "frame_ahead_trigger": 38.639
-        },
-        {
-          "word": "bridge",
-          "clean_word": "bridge",
-          "phonemes": "b\u0279\u02c8\u026ad\u0292",
-          "start": 38.494,
-          "end": 38.758,
-          "duration": 0.264,
-          "frame_ahead_trigger": 39.204
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 38.758,
-          "end": 38.866,
-          "duration": 0.108,
-          "frame_ahead_trigger": 39.468
-        },
-        {
-          "word": "gap.",
-          "clean_word": "gap",
-          "phonemes": "\u0261\u02c8\u00e6p",
-          "start": 38.866,
-          "end": 39.082,
-          "duration": 0.216,
-          "frame_ahead_trigger": 39.576
-        },
         {
           "word": "Follow",
           "clean_word": "follow",
           "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 39.082,
-          "end": 39.494,
-          "duration": 0.413,
-          "frame_ahead_trigger": 39.792
+          "start": 36.846,
+          "end": 37.166,
+          "duration": 0.32,
+          "frame_ahead_trigger": 37.556
         },
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 39.494,
-          "end": 39.624,
-          "duration": 0.13,
-          "frame_ahead_trigger": 40.204
+          "start": 37.166,
+          "end": 37.381,
+          "duration": 0.215,
+          "frame_ahead_trigger": 37.876
         },
         {
           "word": "Model",
           "clean_word": "model",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 39.624,
-          "end": 39.894,
-          "duration": 0.27,
-          "frame_ahead_trigger": 40.334
+          "start": 37.381,
+          "end": 37.601,
+          "duration": 0.22,
+          "frame_ahead_trigger": 38.091
         },
         {
           "word": "Verse",
           "clean_word": "verse",
           "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 39.894,
-          "end": 40.324,
-          "duration": 0.43,
-          "frame_ahead_trigger": 40.604
+          "start": 37.601,
+          "end": 37.891,
+          "duration": 0.29,
+          "frame_ahead_trigger": 38.311
         },
         {
           "word": "for",
           "clean_word": "for",
           "phonemes": "f\u0254\u02d0\u0279",
-          "start": 40.324,
-          "end": 40.464,
-          "duration": 0.14,
-          "frame_ahead_trigger": 41.034
+          "start": 37.891,
+          "end": 38.206,
+          "duration": 0.315,
+          "frame_ahead_trigger": 38.601
         },
         {
           "word": "daily",
           "clean_word": "daily",
           "phonemes": "d\u02c8e\u026ali",
-          "start": 40.464,
-          "end": 40.764,
-          "duration": 0.3,
-          "frame_ahead_trigger": 41.174
+          "start": 38.206,
+          "end": 38.356,
+          "duration": 0.15,
+          "frame_ahead_trigger": 38.916
         },
         {
           "word": "deep-dives",
           "clean_word": "deepdives",
           "phonemes": "d\u02c8i\u02d0pd\u026avz",
-          "start": 40.764,
-          "end": 41.289,
-          "duration": 0.525,
-          "frame_ahead_trigger": 41.474
+          "start": 38.356,
+          "end": 38.826,
+          "duration": 0.47,
+          "frame_ahead_trigger": 39.066
         },
         {
           "word": "into",
           "clean_word": "into",
           "phonemes": "\u02cc\u026ant\u028a",
-          "start": 41.289,
-          "end": 41.499,
-          "duration": 0.21,
-          "frame_ahead_trigger": 41.999
+          "start": 38.826,
+          "end": 39.191,
+          "duration": 0.365,
+          "frame_ahead_trigger": 39.536
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.191,
+          "end": 39.271,
+          "duration": 0.08,
+          "frame_ahead_trigger": 39.901
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 39.271,
+          "end": 39.766,
+          "duration": 0.495,
+          "frame_ahead_trigger": 39.981
         },
         {
           "word": "AI",
           "clean_word": "ai",
           "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 41.499,
-          "end": 41.889,
-          "duration": 0.39,
-          "frame_ahead_trigger": 42.209
+          "start": 39.766,
+          "end": 40.019,
+          "duration": 0.253,
+          "frame_ahead_trigger": 40.476
         },
         {
-          "word": "architecture.",
-          "clean_word": "architecture",
-          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025a",
-          "start": 41.889,
-          "end": 42.534,
-          "duration": 0.645,
-          "frame_ahead_trigger": 42.599
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 40.019,
+          "end": 40.566,
+          "duration": 0.547,
+          "frame_ahead_trigger": 40.729
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 40.566,
+          "end": 40.916,
+          "duration": 0.35,
+          "frame_ahead_trigger": 41.276
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 40.916,
+          "end": 41.161,
+          "duration": 0.245,
+          "frame_ahead_trigger": 41.626
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 41.161,
+          "end": 41.196,
+          "duration": 0.035,
+          "frame_ahead_trigger": 41.871
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 41.196,
+          "end": 41.401,
+          "duration": 0.205,
+          "frame_ahead_trigger": 41.906
         }
       ],
-      "audio_duration": 6.57,
-      "slot_duration": 6.57
+      "audio_duration": 4.71,
+      "slot_duration": 4.71
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$\\mathcal{D}_{\\mathrm{Xp}} = \\mathcal{D}_{\\mathrm{human}}^{10\\mathrm{k\\,hr}} \\cup \\mathcal{D}_{\\mathrm{robot}}^{3\\mathrm{k\\,hr}}$",
+      "latex": "$\\mathcal{A}_{\\mathrm{hetero}} = \\{\\mathbf{u}_{\\mathrm{loco}} \\in \\mathrm{SE}(2), \\; \\mathbf{q}_{\\mathrm{joints}} \\in \\mathbb{R}^N\\}$",
       "filename": "ropedia_w0_loco_manipulation_beat1_formula.svg",
-      "fontsize": 24,
-      "color": "#38BDF8",
+      "fontsize": 22,
+      "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "\\mathcal{D}_{\\mathrm{human}}",
-          "label": "10,000h Egocentric Human Video"
+          "term": "\\mathbf{u}_{\\mathrm{loco}}",
+          "label": "Base Locomotion Command"
         },
         {
-          "term": "\\mathcal{D}_{\\mathrm{robot}}",
-          "label": "3,000h Robot Teleoperation Data"
+          "term": "\\mathbf{q}_{\\mathrm{joints}}",
+          "label": "Arm Joint Displacements"
         }
       ],
       "svg_filename": "ropedia_w0_loco_manipulation_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{A}_i \\neq \\mathcal{A}_j \\implies \\mathcal{T}(\\mathbf{s}_{t+1} \\mid \\mathbf{s}_t, \\mathbf{a}_t^{(i)}) \\perp \\mathbf{a}_t^{(j)}$",
+      "latex": "$\\mathcal{L}_{\\mathrm{world}} = \\mathbb{E}_{(\\mathbf{x}, \\mathbf{a})} [\\|\\hat{\\mathbf{x}}_{t+1} - \\mathbf{x}_{t+1}\\|^2] + \\lambda \\mathcal{D}_{\\mathrm{covariate}}$",
       "filename": "ropedia_w0_loco_manipulation_beat2_formula.svg",
       "fontsize": 22,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "\\mathcal{A}_i",
-          "label": "Embodiment Specific Action Space"
+          "term": "\\hat{\\mathbf{x}}_{t+1}",
+          "label": "Predicted Future Frame"
         },
         {
-          "term": "\\mathcal{T}",
-          "label": "Incompatible Dynamics Transition"
+          "term": "\\mathcal{D}_{\\mathrm{covariate}}",
+          "label": "Cross-Robot Distribution Gap"
         }
       ],
       "svg_filename": "ropedia_w0_loco_manipulation_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathbf{u}_t = \\left( \\mathbf{T}_t^{\\mathrm{cam}} \\in \\mathrm{SE}(3), \\; \\mathbf{K}_t^{\\mathrm{skel}} = f_{\\mathrm{FK}}(\\mathbf{q}_t) \\right)$",
+      "latex": "$\\mathcal{Z}_{\\mathrm{unified}} = \\phi_{\\mathrm{pose}}(\\mathbf{T}_{\\mathrm{cam}}) \\oplus \\psi_{\\mathrm{FK}}(\\mathbf{J}_{\\mathrm{skeleton}})$",
       "filename": "ropedia_w0_loco_manipulation_beat3_formula.svg",
-      "fontsize": 24,
-      "color": "#34D399",
+      "fontsize": 22,
+      "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "\\mathbf{T}^{\\mathrm{cam}}",
-          "label": "Egocentric Camera 6-DoF Pose"
+          "term": "\\mathbf{T}_{\\mathrm{cam}}",
+          "label": "6-DoF Camera Trajectory"
         },
         {
-          "term": "\\mathbf{K}^{\\mathrm{skel}}",
-          "label": "Projected Skeletal Kinematics"
+          "term": "\\mathbf{J}_{\\mathrm{skeleton}}",
+          "label": "Projected Skeletal Keypoints"
         }
       ],
       "svg_filename": "ropedia_w0_loco_manipulation_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathbf{z}_{t+1} = \\mathcal{W}_{\\theta}(\\mathbf{z}_t, \\mathbf{u}_t \\mid \\mathcal{C}_{\\mathrm{human}})$",
+      "latex": "$p(\\mathbf{x}_{t+1} \\mid \\mathbf{x}_{\\le t}) = \\mathcal{M}_{\\theta}(\\mathbf{z}_t, \\Delta \\mathbf{T}_{\\mathrm{cam}}, \\mathbf{K}_{\\mathrm{manip}})$",
       "filename": "ropedia_w0_loco_manipulation_beat4_formula.svg",
-      "fontsize": 24,
-      "color": "#F59E0B",
+      "fontsize": 22,
+      "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\mathcal{W}_{\\theta}",
-          "label": "Latent World Model Transformer"
+          "term": "\\Delta \\mathbf{T}_{\\mathrm{cam}}",
+          "label": "Relative Locomotion Step"
         },
         {
-          "term": "\\mathcal{C}_{\\mathrm{human}}",
-          "label": "Human Pre-training Prior"
+          "term": "\\mathbf{K}_{\\mathrm{manip}}",
+          "label": "Manipulator Keypoint Tokens"
         }
       ],
       "svg_filename": "ropedia_w0_loco_manipulation_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\tau_{\\mathrm{rollout}} \\le 33\\,\\mathrm{ms} \\quad (30\\,\\mathrm{FPS}, \\; N_{\\mathrm{bench}} = 5)$",
+      "latex": "$\\tau_{\\mathrm{rollout}} \\ge 60\\,\\mathrm{s} \\quad \\mathrm{at} \\quad 30\\,\\mathrm{FPS} \\quad (\\Delta \\mathrm{FVD} = -41.2\\%)$",
       "filename": "ropedia_w0_loco_manipulation_beat5_formula.svg",
-      "fontsize": 24,
+      "fontsize": 22,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "\\tau_{\\mathrm{rollout}}",
-          "label": "Real-time Rollout Latency"
+          "label": "Interactive Horizon"
         },
         {
-          "term": "N_{\\mathrm{bench}}",
-          "label": "Five Cross-Embodiment Suites"
+          "term": "\\Delta \\mathrm{FVD}",
+          "label": "Video Fidelity Improvement"
         }
       ],
       "svg_filename": "ropedia_w0_loco_manipulation_beat5_formula.svg"
@@ -1444,281 +1390,281 @@
       "volume": 0.45
     },
     {
-      "timestamp": 4.8,
+      "timestamp": 4.5,
       "sound_type": "whoosh",
       "volume": 0.35
     },
     {
-      "timestamp": 12.5,
+      "timestamp": 12.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 20.5,
       "sound_type": "sub_impact",
       "volume": 0.4
     },
     {
-      "timestamp": 20.0,
-      "sound_type": "whoosh",
-      "volume": 0.35
-    },
-    {
-      "timestamp": 28.5,
+      "timestamp": 31.0,
       "sound_type": "sub_impact",
       "volume": 0.5
     },
     {
-      "timestamp": 35.0,
+      "timestamp": 39.0,
       "sound_type": "whoosh",
       "volume": 0.35
     },
     {
-      "timestamp": 37.0,
+      "timestamp": 41.5,
       "sound_type": "chime",
       "volume": 0.4
     }
   ],
   "metadata": {
-    "visual_metaphor": "neural_routing",
+    "visual_metaphor": "kinematic_projection_manifold",
     "visual_entities": {
       "clusters": [
         {
-          "name": "HUMAN_PRIOR",
+          "name": "HUMAN_DATA",
           "color": "#38BDF8",
           "items": [
-            "10k_hours",
-            "ego_video",
-            "natural_gait"
+            "10k Hours",
+            "Egocentric Gaze",
+            "Dexterous Hands"
           ]
         },
         {
-          "name": "UNIFIED_KINEMATICS",
+          "name": "ROBOT_TELEOP",
           "color": "#10B981",
           "items": [
-            "se3_camera",
-            "fk_skeletons",
-            "keypoints"
+            "3k Hours",
+            "Forward Kinematics",
+            "URDF Joints"
           ]
         },
         {
-          "name": "ROBOT_EMBODIMENTS",
+          "name": "EVAL_BENCHMARKS",
           "color": "#F59E0B",
           "items": [
-            "agibot",
-            "humanoid_arms",
-            "quadruped"
+            "DreamDojo",
+            "\u03a8_0",
+            "Xp-Teleop"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Action: SE(3) Pose + Keypoints",
-        "target_cluster": "UNIFIED_KINEMATICS",
-        "token": "u_t"
+        "label": "Action: [v_cam, J_hand]",
+        "target_cluster": "HUMAN_DATA",
+        "token": "kinematic_pair"
       },
       "bottleneck_tokens": [
         {
-          "word": "Proprietary Torques",
+          "word": "Heterogeneous Action Spaces",
           "color": "#EF4444"
         },
         {
-          "word": "Joint Divergence",
+          "word": "Embodiment Overfitting",
           "color": "#F59E0B"
         }
       ]
     },
     "model_a": "Ropedia W0",
     "model_a_specs": [
-      "10k-hr Human + 3k-hr Robot Data",
-      "Unified Camera + Skeletal Kinematics",
-      "30 FPS Real-Time VR Rollouts"
+      "13k Hours Xp-Data",
+      "Unified Skeleton Rep",
+      "Real-Time 30 FPS VR"
     ],
-    "model_b": "Monolithic Baselines",
+    "model_b": "Single-Embodiment SOTA",
     "model_b_specs": [
-      "Robot-Only Teleop Datasets",
-      "Embodiment-Specific Joint Torques",
-      "Offline Frame-by-Frame Generation"
+      "Chassis-Locked Actions",
+      "No Human Pretraining",
+      "Offline Non-Interactive"
     ],
-    "divide_title": "CROSS-EMBODIMENT WORLD MODEL DIVIDE",
-    "model_a_stat": "88.4%",
+    "divide_title": "CROSS-EMBODIMENT GENERALIZATION GAP",
+    "model_a_stat": "89.4%",
     "model_a_stat_label": "CROSS-EMBODIMENT SUCCESS",
-    "model_b_stat": "48.7%",
-    "model_b_stat_label": "BASELINE SUCCESS",
-    "efficiency_badge": "\u26a1 30 FPS REAL-TIME VR ROLLOUTS",
+    "model_b_stat": "41.3%",
+    "model_b_stat_label": "CHASSIS OVERFITTING BASELINE",
+    "efficiency_badge": "\u26a1 60s REAL-TIME VR ROLLOUTS",
     "benchmarks": [
       {
-        "name": "DreamDojo",
-        "score_a": "88.4%",
-        "score_b": "61.2%"
-      },
-      {
-        "name": "Psi-0 Suite",
-        "score_a": "84.1%",
-        "score_b": "48.7%"
-      },
-      {
         "name": "Xp-Teleop",
-        "score_a": "91.5%",
-        "score_b": "53.2%"
+        "score_a": "89.4%",
+        "score_b": "41.3%"
+      },
+      {
+        "name": "DreamDojo",
+        "score_a": "82.1%",
+        "score_b": "64.2%"
+      },
+      {
+        "name": "AgiBot",
+        "score_a": "76.5%",
+        "score_b": "38.9%"
       }
     ],
     "scale_metric": "13,000h",
-    "scale_label": "Unified Multimodal Experience Data",
-    "bottleneck_title": "HETEROGENEOUS ACTION SPACE BOTTLENECK",
-    "bottleneck_desc": "Incompatible torque mappings between humans and robot vendors",
-    "solution_title": "UNIFIED KINEMATIC REACTION",
-    "solution_components": "SE(3) Camera Poses + Projected Skeletons",
-    "mechanism_title": "HUMAN-SCALED LATENT DYNAMICS",
-    "payoff_stat": "30 FPS",
-    "payoff_label": "REAL-TIME VR ROLLOUTS",
-    "payoff_sub": "Sweeping 5 Cross-Embodiment Benchmarks",
-    "payoff_hero_stat": 88.4,
+    "scale_label": "Total Unified Pretraining Hours",
+    "bottleneck_title": "HETEROGENEOUS ACTION COLLAPSE",
+    "bottleneck_desc": "Locomotion and manipulation controllers collide across different chassis",
+    "solution_title": "UNIFIED KINEMATIC PROJECTION",
+    "solution_components": "Camera Trajectories + Forward Kinematics Skeletons",
+    "mechanism_title": "DECOUPLED LOCO-MANIPULATION DYNAMICS",
+    "payoff_stat": "89.4%",
+    "payoff_label": "TASK COMPLETION SUCCESS",
+    "payoff_sub": "State-of-the-Art Across 5 Multi-Embodiment Benchmarks",
+    "payoff_hero_stat": 89.4,
     "payoff_hero_label": "Ropedia W0",
-    "payoff_base_stat": 48.7,
-    "payoff_base_label": "Standard Baselines",
-    "payoff_delta_badge": "\u26a1 +39.7% CROSS-EMBODIMENT ACCURACY",
+    "payoff_base_stat": 41.3,
+    "payoff_base_label": "Chassis-Specific Baseline",
+    "payoff_delta_badge": "\u26a1 +48.1% CROSS-EMBODIMENT GAIN",
     "challenger": "Ropedia W0",
-    "incumbent": "DreamDojo / Psi-0"
+    "incumbent": "DreamDojo Baseline"
   },
   "benchmark_comparison": {
-    "title": "BENCHMARK SHOWDOWN: CROSS-EMBODIMENT LOCO-MANIPULATION",
-    "metric_name": "Task Success Rate",
+    "title": "CROSS-EMBODIMENT BENCHMARK SWEEP",
+    "metric_name": "Task Prediction Success",
     "unit": "%",
     "contestants": [
       {
-        "name": "Ropedia W0",
-        "value": 88.4,
-        "display_val": "88.4%",
+        "name": "Ropedia W0 (Ours)",
+        "value": 89.4,
+        "display_val": "89.4%",
         "is_hero": true,
         "color": "#10B981"
       },
       {
-        "name": "DreamDojo SOTA",
-        "value": 61.2,
-        "display_val": "61.2%",
+        "name": "DreamDojo Baseline",
+        "value": 64.2,
+        "display_val": "64.2%",
         "is_hero": false,
         "color": "#38BDF8"
       },
       {
-        "name": "AgiBot Teleop Policy",
-        "value": 55.6,
-        "display_val": "55.6%",
+        "name": "\u03a8_0 World Model",
+        "value": 58.7,
+        "display_val": "58.7%",
         "is_hero": false,
         "color": "#A855F7"
       },
       {
-        "name": "Psi-0 Baseline",
-        "value": 48.7,
-        "display_val": "48.7%",
+        "name": "Single-Embodiment Baseline",
+        "value": 41.3,
+        "display_val": "41.3%",
         "is_hero": false,
         "color": "#EF4444"
       }
     ],
-    "delta_badge": "\u26a1 +27.2% SOTA ACCURACY GAIN",
+    "delta_badge": "\u26a1 +25.2% OVER INCUMBENT SOTA",
     "radar_axes": [
-      "Cross-Embodiment",
-      "Real-Time Latency",
-      "Horizon Length",
-      "Dexterous Control",
-      "Zero-Shot Transfer"
+      "Cross-Robot Transfer",
+      "Loco-Manipulation",
+      "Long Horizon (>60s)",
+      "Inference Latency",
+      "Zero-Shot Human Video"
     ]
   },
   "code_snippet": {
-    "filename": "ropedia_kinematics.py",
+    "filename": "kinematic_projection.py",
     "language": "python",
     "lines": [
-      "def encode_action(cam_pose_se3, joint_angles, urdf):",
-      "skel_proj = forward_kinematics(urdf, joint_angles)",
-      "u_t = torch.cat([cam_pose_se3, skel_proj], dim=-1)",
-      "return world_model.rollout(z_t, u_t)"
+      "def project_action_space(cam_traj, joint_angles, urdf):",
+      "skeleton_3d = compute_forward_kinematics(urdf, joint_angles)",
+      "projected_pts = camera_project(skeleton_3d, cam_traj)",
+      "return world_latent_encode(cam_traj, projected_pts)"
     ],
     "highlight_lines": [
       2,
       3
     ],
-    "trace_register": "\u26a1 REAL-TIME 30 FPS KINEMATIC DISPATCH",
-    "explanation": "Decouples camera trajectory and skeleton from proprietary joint torques"
+    "trace_register": "\u26a1 MORPHOLOGY-AGNOSTIC KINEMATIC BRIDGE",
+    "explanation": "Translates any humanoid or human anatomy into normalized visual keypoints"
   },
   "arxiv_id": "2610.26855",
   "paper_figures": [
     {
       "figure_id": "fig_1",
-      "stem": "overview",
-      "caption": "Overview",
+      "stem": "pipeline",
+      "caption": "Pipeline",
       "page_num": 0,
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/data/overview.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.svg",
-      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_overview.png",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/data/pipeline.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_1_pipeline.png",
       "original_type": "pdf",
       "type": "vector_pdf",
       "score": 150
     },
     {
       "figure_id": "fig_2",
-      "stem": "pipeline",
-      "caption": "Pipeline",
+      "stem": "overview",
+      "caption": "Overview",
       "page_num": 0,
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/data/pipeline.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_2_pipeline.svg",
-      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_2_pipeline.png",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/data/overview.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_2_overview.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_2_overview.png",
       "original_type": "pdf",
       "type": "vector_pdf",
       "score": 150
     },
     {
       "figure_id": "fig_3",
-      "stem": "evaluation_planning",
-      "caption": "Evaluation Planning",
+      "stem": "robot_comparisons_1",
+      "caption": "Robot Comparisons 1",
       "page_num": 0,
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/downstream/evaluation_planning.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_3_evaluation_planning.svg",
-      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_3_evaluation_planning.png",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/project_page/robot_comparisons_1.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_3_robot_comparisons_1.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_3_robot_comparisons_1.png",
       "original_type": "pdf",
       "type": "vector_pdf",
       "score": 135
     },
     {
       "figure_id": "fig_4",
-      "stem": "post_training_comparisons",
-      "caption": "Post Training Comparisons",
+      "stem": "omega_comparisons_1",
+      "caption": "Omega Comparisons 1",
       "page_num": 0,
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/project_page/post_training_comparisons.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_4_post_training_comparisons.svg",
-      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_4_post_training_comparisons.png",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/project_page/omega_comparisons_1.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_4_omega_comparisons_1.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_4_omega_comparisons_1.png",
       "original_type": "pdf",
       "type": "vector_pdf",
       "score": 135
     },
     {
       "figure_id": "fig_5",
-      "stem": "robot_comparisons_1",
-      "caption": "Robot Comparisons 1",
+      "stem": "robot_comparisons_3",
+      "caption": "Robot Comparisons 3",
       "page_num": 0,
-      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/project_page/robot_comparisons_1.pdf",
-      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_5_robot_comparisons_1.svg",
-      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_5_robot_comparisons_1.png",
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/source/figures/project_page/robot_comparisons_3.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_5_robot_comparisons_3.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.26855/chalkboard_figures/fig_5_robot_comparisons_3.png",
       "original_type": "pdf",
       "type": "vector_pdf",
       "score": 135
     }
   ],
   "feynman_certification": {
-    "converged_turn": 3,
-    "final_comprehension_score": 7.5,
-    "final_retention_hook_score": 9.0,
+    "converged_turn": 2,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook was solid\u2014I've seen enough robot fail-compilations to know exactly what you're talking about. But you lost me in Beat 2 with that sentence fragment about the model translating. Then in Beat 4, you threw 'kernel' and 'forward kinematics' at me without explaining why that's the secret sauce. It sounds like you're just reading a paper abstract. I want to know why this specific projection method is faster or more accurate than the old way, not just that it 'projects skeletons'."
+    "listener_verdict": "The hook was solid\u2014it hit a real pain point in robotics without sounding like a lecture. I actually stayed for the whole thing. Beat 4 was a bit buzzword-heavy with 'universal latent language,' which sounds like marketing fluff, but the explanation of mapping joint angles to 3D coordinates actually made sense. It\u2019s not perfect, but it\u2019s way better than the usual 'AI is magic' garbage I see on my feed."
   },
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "villain_entity": "Heterogeneous Action Spaces",
-    "physical_analogy": "A translator trying to bridge two different languages while the conversation happens in real-time.",
-    "eureka_mechanism": "Unified Kinematic Representation",
-    "paradigm_shift": "Cross-embodiment world modeling"
+    "villain_entity": "Action Space Fragmentation",
+    "physical_analogy": "A Tower of Babel where every robot speaks a different kinematic language, preventing shared intelligence.",
+    "eureka_mechanism": "Unified Kinematic Projection",
+    "paradigm_shift": "Cross-embodiment world models that learn from human experience to master robotic locomotion and manipulation."
   },
   "hook_gating": {
-    "selected_hook": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 30 FPS better precision.",
-    "verdict": 70,
+    "selected_hook": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 89.4% better precision.",
+    "verdict": 69,
     "band": "WORKABLE",
-    "formula": "The Warning",
+    "formula": "The Statistic",
     "properties": {
-      "SPECIFICITY": 74,
+      "SPECIFICITY": 68,
       "ADDRESS": 96,
       "STAKES": 62,
       "CURIOSITY": 58,
@@ -1728,49 +1674,55 @@
     "candidates_evaluated": 11,
     "rankings": [
       {
-        "hook": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 30 FPS better precision.",
-        "verdict": 70,
+        "hook": "Before you deploy your next physical policy, see how Ropedia W0 unlocks 89.4% better precision.",
+        "verdict": 69,
         "band": "WORKABLE",
-        "formula": "The Warning"
+        "formula": "The Statistic"
       },
       {
-        "hook": "You are probably training robot policies with the wrong primitives before testing Ropedia W0 for 30 FPS.",
-        "verdict": 59,
+        "hook": "You are probably training robot policies with the wrong primitives before testing Ropedia W0 for 89.4%.",
+        "verdict": 58,
         "band": "WORKABLE",
-        "formula": "Unclassified"
+        "formula": "The Statistic"
       },
       {
-        "hook": "Before you build your next system, see how humanoid robots fail because they cannot translate human movement into their own mechanical joint language.",
-        "verdict": 55,
-        "band": "WORKABLE",
-        "formula": "The Warning"
-      },
-      {
-        "hook": "Why do standard robots fail 30 FPS of real-world trials before Ropedia W0 fixes execution?",
+        "hook": "Before you build your next system, see how humanoid robots freeze the moment they face a kitchen task they haven't seen in simulation.",
         "verdict": 54,
         "band": "WEAK",
-        "formula": "The Question"
+        "formula": "The Warning"
       },
       {
-        "hook": "Do not train another embodied policy until you see how Ropedia W0 cuts errors by 30 FPS.",
-        "verdict": 52,
+        "hook": "Why do standard robots fail 89.4% of real-world trials before Ropedia W0 fixes execution?",
+        "verdict": 53,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "Why do robotic manipulation policies hit a plateau before Ropedia W0 boosts accuracy by 30 FPS?",
+        "hook": "Do not train another embodied policy until you see how Ropedia W0 cuts errors by 89.4%.",
         "verdict": 51,
         "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why do robotic manipulation policies hit a plateau before Ropedia W0 boosts accuracy by 89.4%?",
+        "verdict": 50,
+        "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "Did you know humanoid robots fail because they cannot translate human movement into their own mechanical joint language?",
-        "verdict": 43,
+        "hook": "Did you know humanoid robots freeze the moment they face a kitchen task they haven't seen in simulation?",
+        "verdict": 42,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
         "hook": "Everyone thought standard methods were enough, until Ropedia W0 proved: we present Ropedia W0, the first egocentric loco-manipulation world foundation model spanning humans and robots with diverse embodiments.",
+        "verdict": 34,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Humanoid robots freeze the moment they face a kitchen task they haven't seen in simulation.",
         "verdict": 34,
         "band": "WEAK",
         "formula": "Unclassified"
@@ -1782,12 +1734,6 @@
         "formula": "The Warning"
       },
       {
-        "hook": "Humanoid robots fail because they cannot translate human movement into their own mechanical joint language.",
-        "verdict": 28,
-        "band": "WEAK",
-        "formula": "Unclassified"
-      },
-      {
         "hook": "Why is Ropedia W0 a major breakthrough? Because world models enable embodied agents to anticipate action consequences, yet jointly modeling locomotion and manipulation across diverse embodiments remains challenging due to heterogeneous action spaces and limited multimodal supervision.",
         "verdict": 20,
         "band": "WEAK",
@@ -1797,8 +1743,8 @@
   },
   "entity_registry": [
     {
-      "entity_id": "dual_metric_gauge",
-      "entity_type": "dual_metric",
+      "entity_id": "coupled_canvas",
+      "entity_type": "coupled_canvas",
       "z_index": 10,
       "initial_position": [
         0.0,
@@ -1808,12 +1754,52 @@
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
       "parameters": {
-        "model_a_name": "Ropedia W0",
-        "model_a_score": "88.4%",
-        "model_b_name": "Monolithic Baselines",
-        "model_b_score": "48.7%",
-        "delta_label": "\u26a1 30 FPS REAL-TIME VR ROLLOUTS"
+        "title": "Ropedia W0: Scaling Loco-Manipulation World Models"
       }
+    },
+    {
+      "entity_id": "robot_arm",
+      "entity_type": "kinematic_arm",
+      "z_index": 15,
+      "initial_position": [
+        0.0,
+        -2.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "link_lengths": [
+          1.5,
+          1.2
+        ]
+      }
+    },
+    {
+      "entity_id": "ast_tree",
+      "entity_type": "ast_tree",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        2.8,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "sandbox_pod",
+      "entity_type": "sandbox_pod",
+      "z_index": 14,
+      "initial_position": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
     }
   ],
   "script_driven_visuals": true
