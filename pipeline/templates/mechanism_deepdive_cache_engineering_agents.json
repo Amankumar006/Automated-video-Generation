@@ -7,66 +7,64 @@
   "beats": [
     {
       "beat_id": 1,
-      "text": "Before you train your next model, see how Cache Engineering for Agents cuts 27.7% of memory overhead.",
-      "visual_focus": "A progress bar stuck at 99% with a red warning icon.",
+      "text": "Before you train your next model, see how Cache Engineering for Agents cuts 1.5x of memory overhead.",
+      "visual_focus": "A progress bar stalling at 99% with a red error flash.",
       "highlight_words": {
-        "redundant re-prefill": "#EF4444"
+        "re-process": "#EF4444"
       },
       "svo_action": {
-        "subject": "Redundant re-prefills",
-        "action_verb": "cripple",
-        "direct_object": "agent throughput",
-        "anchor_word": "burning",
+        "subject": "LLM Agents",
+        "action_verb": "choke",
+        "direct_object": "memory limits",
+        "anchor_word": "choke",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "grid_memory",
-        "title": "THE PREFILL TRAP",
-        "sub": "Why your agent is stalling",
+        "layout": "horizontal_race_bars",
+        "title": "THE RE-PREFILL TRAP",
+        "sub": "Why your agent is wasting compute.",
         "accent_color": "#EF4444",
         "params": {
-          "grid_title": "Active KV Cache States",
-          "active_cell_label": "Excess Trajectory Tokens",
-          "efficiency_label": "High I/O Latency"
+          "metric_name": "Cache Size",
+          "unit": "Tokens"
         }
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
       "hook_score": 70,
       "hook_band": "WORKABLE",
-      "hook_formula": "The Statistic",
+      "hook_formula": "The Warning",
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "grid_memory",
-        "title": "THE PREFILL TRAP",
-        "sub": "Why your agent is stalling",
+        "layout": "horizontal_race_bars",
+        "title": "THE RE-PREFILL TRAP",
+        "sub": "Why your agent is wasting compute.",
         "accent_color": "#EF4444",
-        "grid_title": "Active KV Cache States",
-        "active_cell_label": "Excess Trajectory Tokens",
-        "efficiency_label": "High I/O Latency"
+        "metric_name": "Cache Size",
+        "unit": "Tokens"
       },
       "kinetic_action": "blueprint_transform",
       "start": 0.0,
-      "end": 6.21,
-      "duration": 6.21,
+      "end": 5.74,
+      "duration": 5.74,
       "word_timings": [
         {
           "word": "Before",
           "clean_word": "before",
           "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
           "start": 0.01,
-          "end": 0.355,
-          "duration": 0.345,
+          "end": 0.41,
+          "duration": 0.4,
           "frame_ahead_trigger": 0.0
         },
         {
           "word": "you",
           "clean_word": "you",
           "phonemes": "ju\u02d0",
-          "start": 0.355,
+          "start": 0.41,
           "end": 0.495,
-          "duration": 0.14,
-          "frame_ahead_trigger": 0.315
+          "duration": 0.085,
+          "frame_ahead_trigger": 0.37
         },
         {
           "word": "train",
@@ -100,137 +98,136 @@
           "clean_word": "model",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
           "start": 1.33,
-          "end": 1.565,
-          "duration": 0.235,
+          "end": 1.69,
+          "duration": 0.36,
           "frame_ahead_trigger": 1.29
         },
         {
           "word": "see",
           "clean_word": "see",
           "phonemes": "s\u02c8i\u02d0",
-          "start": 1.565,
-          "end": 1.835,
-          "duration": 0.27,
-          "frame_ahead_trigger": 1.525
+          "start": 1.69,
+          "end": 1.845,
+          "duration": 0.155,
+          "frame_ahead_trigger": 1.65
         },
         {
           "word": "how",
           "clean_word": "how",
           "phonemes": "h\u02c8a\u028a",
-          "start": 1.835,
-          "end": 2.02,
-          "duration": 0.185,
-          "frame_ahead_trigger": 1.795
+          "start": 1.845,
+          "end": 2.165,
+          "duration": 0.32,
+          "frame_ahead_trigger": 1.805
         },
         {
           "word": "Cache",
           "clean_word": "cache",
           "phonemes": "k\u02c8\u00e6\u0283",
-          "start": 2.02,
-          "end": 2.165,
-          "duration": 0.145,
-          "frame_ahead_trigger": 1.98
+          "start": 2.165,
+          "end": 2.385,
+          "duration": 0.22,
+          "frame_ahead_trigger": 2.125
         },
         {
           "word": "Engineering",
           "clean_word": "engineering",
           "phonemes": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279\u026a\u014b",
-          "start": 2.165,
-          "end": 2.93,
-          "duration": 0.765,
-          "frame_ahead_trigger": 2.125
+          "start": 2.385,
+          "end": 2.935,
+          "duration": 0.55,
+          "frame_ahead_trigger": 2.345
         },
         {
           "word": "for",
           "clean_word": "for",
           "phonemes": "f\u0254\u02d0\u0279",
-          "start": 2.93,
-          "end": 3.085,
-          "duration": 0.155,
-          "frame_ahead_trigger": 2.89
+          "start": 2.935,
+          "end": 3.16,
+          "duration": 0.225,
+          "frame_ahead_trigger": 2.895
         },
         {
           "word": "Agents",
           "clean_word": "agents",
           "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
-          "start": 3.085,
-          "end": 3.485,
-          "duration": 0.4,
-          "frame_ahead_trigger": 3.045
+          "start": 3.16,
+          "end": 3.683,
+          "duration": 0.523,
+          "frame_ahead_trigger": 3.12
         },
         {
           "word": "cuts",
           "clean_word": "cuts",
           "phonemes": "k\u02c8\u028cts",
-          "start": 3.485,
-          "end": 3.76,
-          "duration": 0.275,
-          "frame_ahead_trigger": 3.445
+          "start": 3.683,
+          "end": 3.95,
+          "duration": 0.266,
+          "frame_ahead_trigger": 3.643
         },
         {
-          "word": "27.7%",
-          "clean_word": "277",
-          "phonemes": "t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad s\u02c8\u025bv\u0259nti s\u02c8\u025bv\u0259n",
-          "start": 3.76,
-          "end": 5.18,
-          "duration": 1.42,
-          "frame_ahead_trigger": 3.72
+          "word": "1.5x",
+          "clean_word": "15x",
+          "phonemes": "f\u02c8\u026afti\u02d0n \u02c8\u025bks",
+          "start": 3.95,
+          "end": 4.675,
+          "duration": 0.725,
+          "frame_ahead_trigger": 3.91
         },
         {
           "word": "of",
           "clean_word": "of",
           "phonemes": "\u028cv",
-          "start": 5.18,
-          "end": 5.262,
-          "duration": 0.082,
-          "frame_ahead_trigger": 5.14
+          "start": 4.675,
+          "end": 4.755,
+          "duration": 0.08,
+          "frame_ahead_trigger": 4.635
         },
         {
           "word": "memory",
           "clean_word": "memory",
           "phonemes": "m\u02c8\u025bm\u025a\u0279i",
-          "start": 5.262,
-          "end": 5.6,
-          "duration": 0.338,
-          "frame_ahead_trigger": 5.222
+          "start": 4.755,
+          "end": 5.17,
+          "duration": 0.415,
+          "frame_ahead_trigger": 4.715
         },
         {
           "word": "overhead.",
           "clean_word": "overhead",
           "phonemes": "\u02cco\u028av\u025ah\u02c8\u025bd",
-          "start": 5.6,
-          "end": 6.07,
-          "duration": 0.47,
-          "frame_ahead_trigger": 5.56
+          "start": 5.17,
+          "end": 5.6,
+          "duration": 0.43,
+          "frame_ahead_trigger": 5.13
         }
       ],
-      "audio_duration": 6.21,
-      "slot_duration": 6.36
+      "audio_duration": 5.74,
+      "slot_duration": 5.89
     },
     {
       "beat_id": 2,
-      "text": "The villain is history dependence. Modifying your context forces the engine to discard everything and restart from scratch.",
-      "visual_focus": "A stack of cards collapsing as one is pulled from the bottom.",
+      "text": "The villain is the re-prefill. It\u2019s like forcing a marathon runner to stop and re-tie their shoes every single mile.",
+      "visual_focus": "A runner stopping on a track, zoomed into shoelaces.",
       "highlight_words": {
-        "history dependence": "#EF4444"
+        "re-prefill": "#EF4444"
       },
       "svo_action": {
-        "subject": "History dependence",
-        "action_verb": "invalidates",
-        "direct_object": "cached states",
-        "anchor_word": "discard",
-        "semantic_role": "causality"
+        "subject": "Re-prefill",
+        "action_verb": "stalls",
+        "direct_object": "throughput",
+        "anchor_word": "stalls",
+        "semantic_role": "bottleneck_identification"
       },
       "visual_blueprint": {
         "layout": "barrier_separation",
-        "title": "THE CACHE COLLAPSE",
-        "sub": "One change ruins the entire state",
+        "title": "THE SHOE-TIE PENALTY",
+        "sub": "Redundant computation cycles.",
         "accent_color": "#EF4444",
         "params": {
           "stream_a_label": "Valid Cache",
-          "stream_b_label": "Invalidated State",
-          "barrier_label": "Prefix Boundary",
-          "barrier_sub": "Hard coupling"
+          "stream_b_label": "Invalidated Re-fill",
+          "barrier_label": "Prefix Modification"
         }
       },
       "thriller_role": "villain_bottleneck",
@@ -238,215 +235,232 @@
       "motif_type": "visual_composition",
       "motif_params": {
         "layout": "barrier_separation",
-        "title": "THE CACHE COLLAPSE",
-        "sub": "One change ruins the entire state",
+        "title": "THE SHOE-TIE PENALTY",
+        "sub": "Redundant computation cycles.",
         "accent_color": "#EF4444",
         "stream_a_label": "Valid Cache",
-        "stream_b_label": "Invalidated State",
-        "barrier_label": "Prefix Boundary",
-        "barrier_sub": "Hard coupling"
+        "stream_b_label": "Invalidated Re-fill",
+        "barrier_label": "Prefix Modification"
       },
       "kinetic_action": "blueprint_transform",
-      "start": 6.36,
-      "end": 12.84,
-      "duration": 6.49,
+      "start": 5.89,
+      "end": 11.54,
+      "duration": 5.65,
       "word_timings": [
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 6.378,
-          "end": 6.478,
-          "duration": 0.1,
-          "frame_ahead_trigger": 6.488
+          "start": 5.909,
+          "end": 6.004,
+          "duration": 0.095,
+          "frame_ahead_trigger": 6.019
         },
         {
           "word": "villain",
           "clean_word": "villain",
           "phonemes": "v\u02c8\u026al\u0259n",
-          "start": 6.478,
-          "end": 6.818,
-          "duration": 0.34,
-          "frame_ahead_trigger": 6.588
+          "start": 6.004,
+          "end": 6.329,
+          "duration": 0.325,
+          "frame_ahead_trigger": 6.114
         },
         {
           "word": "is",
           "clean_word": "is",
           "phonemes": "\u026az",
-          "start": 6.818,
-          "end": 7.013,
-          "duration": 0.195,
-          "frame_ahead_trigger": 6.928
-        },
-        {
-          "word": "history",
-          "clean_word": "history",
-          "phonemes": "h\u02c8\u026ast\u025a\u0279i",
-          "start": 7.013,
-          "end": 7.408,
-          "duration": 0.395,
-          "frame_ahead_trigger": 7.123
-        },
-        {
-          "word": "dependence.",
-          "clean_word": "dependence",
-          "phonemes": "d\u1d7bp\u02c8\u025bnd\u0259ns",
-          "start": 7.408,
-          "end": 7.863,
-          "duration": 0.455,
-          "frame_ahead_trigger": 7.518
-        },
-        {
-          "word": "Modifying",
-          "clean_word": "modifying",
-          "phonemes": "m\u02c8\u0251\u02d0d\u1d7bf\u02cca\u026a\u026a\u014b",
-          "start": 7.863,
-          "end": 8.558,
-          "duration": 0.695,
-          "frame_ahead_trigger": 7.973
-        },
-        {
-          "word": "your",
-          "clean_word": "your",
-          "phonemes": "j\u028a\u0279",
-          "start": 8.558,
-          "end": 8.773,
-          "duration": 0.215,
-          "frame_ahead_trigger": 8.668
-        },
-        {
-          "word": "context",
-          "clean_word": "context",
-          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
-          "start": 8.773,
-          "end": 9.328,
-          "duration": 0.555,
-          "frame_ahead_trigger": 8.883
-        },
-        {
-          "word": "forces",
-          "clean_word": "forces",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
-          "start": 9.328,
-          "end": 9.698,
-          "duration": 0.37,
-          "frame_ahead_trigger": 9.438
+          "start": 6.329,
+          "end": 6.479,
+          "duration": 0.15,
+          "frame_ahead_trigger": 6.439
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 9.698,
-          "end": 9.908,
-          "duration": 0.21,
-          "frame_ahead_trigger": 9.808
+          "start": 6.479,
+          "end": 6.574,
+          "duration": 0.095,
+          "frame_ahead_trigger": 6.589
         },
         {
-          "word": "engine",
-          "clean_word": "engine",
-          "phonemes": "\u02c8\u025bnd\u0292\u026an",
-          "start": 9.908,
-          "end": 10.363,
-          "duration": 0.455,
-          "frame_ahead_trigger": 10.018
+          "word": "re-prefill.",
+          "clean_word": "reprefill",
+          "phonemes": "\u0279\u1d7bp\u0279\u02c8\u025bf\u026al",
+          "start": 6.574,
+          "end": 7.094,
+          "duration": 0.52,
+          "frame_ahead_trigger": 6.684
+        },
+        {
+          "word": "It\u2019s",
+          "clean_word": "its",
+          "phonemes": "\u026ats",
+          "start": 7.094,
+          "end": 7.263,
+          "duration": 0.169,
+          "frame_ahead_trigger": 7.204
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 7.263,
+          "end": 7.504,
+          "duration": 0.24,
+          "frame_ahead_trigger": 7.373
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 7.504,
+          "end": 8.034,
+          "duration": 0.53,
+          "frame_ahead_trigger": 7.614
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 8.034,
+          "end": 8.229,
+          "duration": 0.195,
+          "frame_ahead_trigger": 8.144
+        },
+        {
+          "word": "marathon",
+          "clean_word": "marathon",
+          "phonemes": "m\u02c8\u00e6\u0279\u0259\u03b8\u02cc\u0251\u02d0n",
+          "start": 8.229,
+          "end": 8.839,
+          "duration": 0.61,
+          "frame_ahead_trigger": 8.339
+        },
+        {
+          "word": "runner",
+          "clean_word": "runner",
+          "phonemes": "\u0279\u02c8\u028cn\u025a",
+          "start": 8.839,
+          "end": 8.974,
+          "duration": 0.135,
+          "frame_ahead_trigger": 8.949
         },
         {
           "word": "to",
           "clean_word": "to",
           "phonemes": "tu\u02d0",
-          "start": 10.363,
-          "end": 10.457,
-          "duration": 0.094,
-          "frame_ahead_trigger": 10.473
+          "start": 8.974,
+          "end": 9.159,
+          "duration": 0.185,
+          "frame_ahead_trigger": 9.084
         },
         {
-          "word": "discard",
-          "clean_word": "discard",
-          "phonemes": "d\u026ask\u02c8\u0251\u02d0\u0279d",
-          "start": 10.457,
-          "end": 10.96,
-          "duration": 0.503,
-          "frame_ahead_trigger": 10.567
-        },
-        {
-          "word": "everything",
-          "clean_word": "everything",
-          "phonemes": "\u02c8\u025bv\u0279\u026a\u03b8\u02cc\u026a\u014b",
-          "start": 10.96,
-          "end": 11.413,
-          "duration": 0.453,
-          "frame_ahead_trigger": 11.07
+          "word": "stop",
+          "clean_word": "stop",
+          "phonemes": "st\u02c8\u0251\u02d0p",
+          "start": 9.159,
+          "end": 9.521,
+          "duration": 0.362,
+          "frame_ahead_trigger": 9.269
         },
         {
           "word": "and",
           "clean_word": "and",
           "phonemes": "\u00e6nd",
-          "start": 11.413,
-          "end": 11.623,
-          "duration": 0.21,
-          "frame_ahead_trigger": 11.523
+          "start": 9.521,
+          "end": 9.669,
+          "duration": 0.148,
+          "frame_ahead_trigger": 9.631
         },
         {
-          "word": "restart",
-          "clean_word": "restart",
-          "phonemes": "\u0279\u1d7bst\u02c8\u0251\u02d0\u0279t",
-          "start": 11.623,
-          "end": 12.148,
-          "duration": 0.525,
-          "frame_ahead_trigger": 11.733
+          "word": "re-tie",
+          "clean_word": "retie",
+          "phonemes": "\u0279\u02c8\u025b\u027ei",
+          "start": 9.669,
+          "end": 9.904,
+          "duration": 0.235,
+          "frame_ahead_trigger": 9.779
         },
         {
-          "word": "from",
-          "clean_word": "from",
-          "phonemes": "f\u0279\u028cm",
-          "start": 12.148,
-          "end": 12.388,
-          "duration": 0.24,
-          "frame_ahead_trigger": 12.258
+          "word": "their",
+          "clean_word": "their",
+          "phonemes": "\u00f0\u025b\u0279",
+          "start": 9.904,
+          "end": 10.134,
+          "duration": 0.23,
+          "frame_ahead_trigger": 10.014
         },
         {
-          "word": "scratch.",
-          "clean_word": "scratch",
-          "phonemes": "sk\u0279\u02c8\u00e6t\u0283",
-          "start": 12.388,
-          "end": 12.748,
-          "duration": 0.36,
-          "frame_ahead_trigger": 12.498
+          "word": "shoes",
+          "clean_word": "shoes",
+          "phonemes": "\u0283\u02c8u\u02d0z",
+          "start": 10.134,
+          "end": 10.424,
+          "duration": 0.29,
+          "frame_ahead_trigger": 10.244
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 10.424,
+          "end": 10.779,
+          "duration": 0.355,
+          "frame_ahead_trigger": 10.534
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "s\u02c8\u026a\u014b\u0261\u0259l",
+          "start": 10.779,
+          "end": 11.079,
+          "duration": 0.3,
+          "frame_ahead_trigger": 10.889
+        },
+        {
+          "word": "mile.",
+          "clean_word": "mile",
+          "phonemes": "m\u02c8a\u026al",
+          "start": 11.079,
+          "end": 11.384,
+          "duration": 0.305,
+          "frame_ahead_trigger": 11.189
         }
       ],
-      "audio_duration": 6.49,
-      "slot_duration": 6.63
+      "audio_duration": 5.65,
+      "slot_duration": 5.8
     },
     {
       "beat_id": 3,
-      "text": "Enter AKV Cache Engineering. It surgically drops tokens and adjusts position encodings without ever touching the original trajectory.",
-      "visual_focus": "A scalpel cutting a single thread in a complex web.",
+      "text": "Enter AKV. It performs live surgery on your KV cache tensors, bypassing the need to re-process stale history.",
+      "visual_focus": "A surgical scalpel cutting into a data tensor block.",
       "highlight_words": {
-        "AKV Cache Engineering": "#10B981"
+        "AKV": "#22C55E"
       },
       "svo_action": {
         "subject": "AKV",
-        "action_verb": "decouples",
-        "direct_object": "cache state",
-        "anchor_word": "surgically",
-        "semantic_role": "breakthrough"
+        "action_verb": "patches",
+        "direct_object": "tensors",
+        "anchor_word": "patches",
+        "semantic_role": "eureka_pivot"
       },
       "visual_blueprint": {
         "layout": "paper_figure",
         "title": "CACHE ENGINEERING  ARCHITECTURE",
-        "sub": "A scalpel cutting a single thread in a complex web.",
+        "sub": "A surgical scalpel cutting into a data tensor block.",
         "params": {
           "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.28577/chalkboard_figures/fig_1_serving_total_throughput.svg",
           "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.28577/chalkboard_figures/fig_1_serving_total_throughput.png",
           "arxiv_id": "2610.28577",
           "title": "CACHE ENGINEERING  ARCHITECTURE",
-          "sub": "A scalpel cutting a single thread in a complex web.",
+          "sub": "A surgical scalpel cutting into a data tensor block.",
           "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
           "caption": "Serving Total Throughput",
           "preferred_renderer": "vector"
         }
       },
-      "thriller_role": "eureka_pivot",
+      "thriller_role": "eureka_mechanism",
       "act": 3,
       "motif_type": "paper_figure",
       "motif_params": {
@@ -454,217 +468,218 @@
         "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.28577/chalkboard_figures/fig_1_serving_total_throughput.png",
         "arxiv_id": "2610.28577",
         "title": "CACHE ENGINEERING  ARCHITECTURE",
-        "sub": "A scalpel cutting a single thread in a complex web.",
+        "sub": "A surgical scalpel cutting into a data tensor block.",
         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
         "caption": "Serving Total Throughput",
         "preferred_renderer": "vector"
       },
       "kinetic_action": "figure_scan",
-      "start": 12.99,
-      "end": 20.4,
-      "duration": 7.4,
+      "start": 11.69,
+      "end": 17.79,
+      "duration": 6.1,
       "word_timings": [
         {
           "word": "Enter",
           "clean_word": "enter",
           "phonemes": "\u02c8\u025bnt\u025a",
-          "start": 13.003,
-          "end": 13.283,
-          "duration": 0.28,
-          "frame_ahead_trigger": 13.263
+          "start": 11.702,
+          "end": 11.977,
+          "duration": 0.275,
+          "frame_ahead_trigger": 11.962
         },
         {
-          "word": "AKV",
+          "word": "AKV.",
           "clean_word": "akv",
           "phonemes": "\u02c8\u00e6kv",
-          "start": 13.283,
-          "end": 13.478,
-          "duration": 0.195,
-          "frame_ahead_trigger": 13.543
-        },
-        {
-          "word": "Cache",
-          "clean_word": "cache",
-          "phonemes": "k\u02c8\u00e6\u0283",
-          "start": 13.478,
-          "end": 13.703,
-          "duration": 0.225,
-          "frame_ahead_trigger": 13.738
-        },
-        {
-          "word": "Engineering.",
-          "clean_word": "engineering",
-          "phonemes": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279\u026a\u014b",
-          "start": 13.703,
-          "end": 14.475,
-          "duration": 0.772,
-          "frame_ahead_trigger": 13.963
+          "start": 11.977,
+          "end": 12.182,
+          "duration": 0.205,
+          "frame_ahead_trigger": 12.237
         },
         {
           "word": "It",
           "clean_word": "it",
           "phonemes": "\u026at",
-          "start": 14.475,
-          "end": 14.593,
-          "duration": 0.118,
-          "frame_ahead_trigger": 14.735
+          "start": 12.182,
+          "end": 12.372,
+          "duration": 0.19,
+          "frame_ahead_trigger": 12.442
         },
         {
-          "word": "surgically",
-          "clean_word": "surgically",
-          "phonemes": "s\u02c8\u025c\u02d0d\u0292\u026akli",
-          "start": 14.593,
-          "end": 15.218,
-          "duration": 0.626,
-          "frame_ahead_trigger": 14.853
-        },
-        {
-          "word": "drops",
-          "clean_word": "drops",
-          "phonemes": "d\u0279\u02c8\u0251\u02d0ps",
-          "start": 15.218,
-          "end": 15.628,
-          "duration": 0.41,
-          "frame_ahead_trigger": 15.478
-        },
-        {
-          "word": "tokens",
-          "clean_word": "tokens",
-          "phonemes": "t\u02c8o\u028ak\u0259nz",
-          "start": 15.628,
-          "end": 16.153,
+          "word": "performs",
+          "clean_word": "performs",
+          "phonemes": "p\u025af\u02c8\u0254\u02d0\u0279mz",
+          "start": 12.372,
+          "end": 12.897,
           "duration": 0.525,
-          "frame_ahead_trigger": 15.888
+          "frame_ahead_trigger": 12.632
         },
         {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 16.153,
-          "end": 16.258,
-          "duration": 0.105,
-          "frame_ahead_trigger": 16.413
+          "word": "live",
+          "clean_word": "live",
+          "phonemes": "l\u02c8a\u026av",
+          "start": 12.897,
+          "end": 13.227,
+          "duration": 0.33,
+          "frame_ahead_trigger": 13.157
         },
         {
-          "word": "adjusts",
-          "clean_word": "adjusts",
-          "phonemes": "\u0250d\u0292\u02c8\u028csts",
-          "start": 16.258,
-          "end": 16.743,
-          "duration": 0.485,
-          "frame_ahead_trigger": 16.518
+          "word": "surgery",
+          "clean_word": "surgery",
+          "phonemes": "s\u02c8\u025c\u02d0d\u0292\u025a\u0279i",
+          "start": 13.227,
+          "end": 13.687,
+          "duration": 0.46,
+          "frame_ahead_trigger": 13.487
         },
         {
-          "word": "position",
-          "clean_word": "position",
-          "phonemes": "p\u0259z\u02c8\u026a\u0283\u0259n",
-          "start": 16.743,
-          "end": 17.263,
-          "duration": 0.52,
-          "frame_ahead_trigger": 17.003
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 13.687,
+          "end": 13.887,
+          "duration": 0.2,
+          "frame_ahead_trigger": 13.947
         },
         {
-          "word": "encodings",
-          "clean_word": "encodings",
-          "phonemes": "\u025b\u014bk\u02c8o\u028ad\u026a\u014bz",
-          "start": 17.263,
-          "end": 17.788,
-          "duration": 0.525,
-          "frame_ahead_trigger": 17.523
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 13.887,
+          "end": 14.107,
+          "duration": 0.22,
+          "frame_ahead_trigger": 14.147
         },
         {
-          "word": "without",
-          "clean_word": "without",
-          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
-          "start": 17.788,
-          "end": 18.283,
-          "duration": 0.495,
-          "frame_ahead_trigger": 18.048
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "k\u02cce\u026av\u02c8i\u02d0",
+          "start": 14.107,
+          "end": 14.512,
+          "duration": 0.405,
+          "frame_ahead_trigger": 14.367
         },
         {
-          "word": "ever",
-          "clean_word": "ever",
-          "phonemes": "\u02c8\u025bv\u025a",
-          "start": 18.283,
-          "end": 18.388,
-          "duration": 0.105,
-          "frame_ahead_trigger": 18.543
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 14.512,
+          "end": 14.687,
+          "duration": 0.175,
+          "frame_ahead_trigger": 14.772
         },
         {
-          "word": "touching",
-          "clean_word": "touching",
-          "phonemes": "t\u02c8\u028ct\u0283\u026a\u014b",
-          "start": 18.388,
-          "end": 18.813,
-          "duration": 0.425,
-          "frame_ahead_trigger": 18.648
+          "word": "tensors,",
+          "clean_word": "tensors",
+          "phonemes": "t\u02c8\u025bns\u025az",
+          "start": 14.687,
+          "end": 15.137,
+          "duration": 0.45,
+          "frame_ahead_trigger": 14.947
+        },
+        {
+          "word": "bypassing",
+          "clean_word": "bypassing",
+          "phonemes": "b\u02c8a\u026ap\u00e6s\u026a\u014b",
+          "start": 15.137,
+          "end": 15.642,
+          "duration": 0.505,
+          "frame_ahead_trigger": 15.397
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 18.813,
-          "end": 18.998,
-          "duration": 0.185,
-          "frame_ahead_trigger": 19.073
+          "start": 15.642,
+          "end": 15.747,
+          "duration": 0.105,
+          "frame_ahead_trigger": 15.902
         },
         {
-          "word": "original",
-          "clean_word": "original",
-          "phonemes": "\u025a\u0279\u02c8\u026ad\u0292\u026an\u0259l",
-          "start": 18.998,
-          "end": 19.478,
-          "duration": 0.48,
-          "frame_ahead_trigger": 19.258
+          "word": "need",
+          "clean_word": "need",
+          "phonemes": "n\u02c8i\u02d0d",
+          "start": 15.747,
+          "end": 16.127,
+          "duration": 0.38,
+          "frame_ahead_trigger": 16.007
         },
         {
-          "word": "trajectory.",
-          "clean_word": "trajectory",
-          "phonemes": "t\u0279\u0259d\u0292\u02c8\u025bkt\u025a\u0279i",
-          "start": 19.478,
-          "end": 20.243,
-          "duration": 0.765,
-          "frame_ahead_trigger": 19.738
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 16.127,
+          "end": 16.241,
+          "duration": 0.114,
+          "frame_ahead_trigger": 16.387
+        },
+        {
+          "word": "re-process",
+          "clean_word": "reprocess",
+          "phonemes": "\u0279\u1d7bp\u0279\u02c8\u0251\u02d0s\u025bs",
+          "start": 16.241,
+          "end": 16.817,
+          "duration": 0.576,
+          "frame_ahead_trigger": 16.501
+        },
+        {
+          "word": "stale",
+          "clean_word": "stale",
+          "phonemes": "st\u02c8e\u026al",
+          "start": 16.817,
+          "end": 17.272,
+          "duration": 0.455,
+          "frame_ahead_trigger": 17.077
+        },
+        {
+          "word": "history.",
+          "clean_word": "history",
+          "phonemes": "h\u02c8\u026ast\u025a\u0279i",
+          "start": 17.272,
+          "end": 17.637,
+          "duration": 0.365,
+          "frame_ahead_trigger": 17.532
         }
       ],
-      "audio_duration": 7.4,
-      "slot_duration": 7.56
+      "audio_duration": 6.1,
+      "slot_duration": 6.25
     },
     {
       "beat_id": 4,
-      "text": "The AKV engine manages stateful reuse through a stateless interface, using proactive drop and repos operations to maintain accuracy.",
-      "visual_focus": "Code block showing a stateless API wrapper calling stateful cache operations.",
+      "text": "It uses proactive drop operations to exclude cache from attention and re-indexes positional embeddings in-place without invalidating the entire sequence.",
+      "visual_focus": "Animated indices shifting positions within a memory grid.",
       "highlight_words": {
-        "stateless interface": "#10B981"
+        "re-indexes": "#22C55E"
       },
       "svo_action": {
-        "subject": "AKV engine",
-        "action_verb": "abstracts",
-        "direct_object": "cache complexity",
-        "anchor_word": "interface",
-        "semantic_role": "mechanism"
+        "subject": "AKV",
+        "action_verb": "re-indexes",
+        "direct_object": "embeddings",
+        "anchor_word": "re-indexes",
+        "semantic_role": "technical_breakthrough"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code_block",
         "title": "KERNEL CODE: CACHE ENGINEERING ",
-        "sub": "Code block showing a stateless API wrapper calling stateful cache",
+        "sub": "Animated indices shifting positions within a memory grid.",
         "params": {
           "title": "KERNEL CODE: CACHE ENGINEERING ",
-          "sub": "Code block showing a stateless API wrapper calling stateful cache",
-          "filename": "akv_interface.py",
+          "sub": "Animated indices shifting positions within a memory grid.",
+          "filename": "akv_kernel.py",
           "language": "python",
           "lines": [
-            "def process_step(trajectory):",
-            "cache_op = select_drop_policy(trajectory)",
-            "return akv_engine.apply(cache_op, trajectory)",
-            "// AKV manages stateful reuse internally"
+            "def update_cache(self, request):",
+            "# AKV surgery operation",
+            "mask = self.drop_stale_keys(request)",
+            "new_pos = self.repos_keys(mask)",
+            "return self.execute_forward(new_pos)"
           ],
           "highlight_lines": [
-            2,
-            3
+            3,
+            4
           ],
-          "trace_register": "\u26a1 AKV CACHE OPERATIONS REGISTER",
-          "delta_badge": "Decoupled cache pruning logic"
+          "trace_register": "\u26a1 AKV STATEFUL CACHE REUSE",
+          "delta_badge": "Zero memory-copy hardware acceleration"
         }
       },
       "thriller_role": "technical_deep_dive",
@@ -673,241 +688,251 @@
       "kinetic_action": "pulse",
       "motif_params": {
         "title": "KERNEL CODE: CACHE ENGINEERING ",
-        "sub": "Code block showing a stateless API wrapper calling stateful cache",
-        "filename": "akv_interface.py",
+        "sub": "Animated indices shifting positions within a memory grid.",
+        "filename": "akv_kernel.py",
         "language": "python",
         "lines": [
-          "def process_step(trajectory):",
-          "cache_op = select_drop_policy(trajectory)",
-          "return akv_engine.apply(cache_op, trajectory)",
-          "// AKV manages stateful reuse internally"
+          "def update_cache(self, request):",
+          "# AKV surgery operation",
+          "mask = self.drop_stale_keys(request)",
+          "new_pos = self.repos_keys(mask)",
+          "return self.execute_forward(new_pos)"
         ],
         "highlight_lines": [
-          2,
-          3
+          3,
+          4
         ],
-        "trace_register": "\u26a1 AKV CACHE OPERATIONS REGISTER",
-        "delta_badge": "Decoupled cache pruning logic"
+        "trace_register": "\u26a1 AKV STATEFUL CACHE REUSE",
+        "delta_badge": "Zero memory-copy hardware acceleration"
       },
-      "start": 20.55,
-      "end": 28.38,
-      "duration": 7.83,
+      "start": 17.94,
+      "end": 26.41,
+      "duration": 8.47,
       "word_timings": [
         {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 20.561,
-          "end": 20.666,
-          "duration": 0.105,
-          "frame_ahead_trigger": 20.971
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 17.963,
+          "end": 18.076,
+          "duration": 0.113,
+          "frame_ahead_trigger": 18.373
         },
         {
-          "word": "AKV",
-          "clean_word": "akv",
-          "phonemes": "\u02c8\u00e6kv",
-          "start": 20.666,
-          "end": 20.846,
-          "duration": 0.18,
-          "frame_ahead_trigger": 21.076
-        },
-        {
-          "word": "engine",
-          "clean_word": "engine",
-          "phonemes": "\u02c8\u025bnd\u0292\u026an",
-          "start": 20.846,
-          "end": 21.241,
-          "duration": 0.395,
-          "frame_ahead_trigger": 21.256
-        },
-        {
-          "word": "manages",
-          "clean_word": "manages",
-          "phonemes": "m\u02c8\u00e6n\u026ad\u0292\u1d7bz",
-          "start": 21.241,
-          "end": 21.731,
-          "duration": 0.49,
-          "frame_ahead_trigger": 21.651
-        },
-        {
-          "word": "stateful",
-          "clean_word": "stateful",
-          "phonemes": "st\u02c8e\u026atf\u0259l",
-          "start": 21.731,
-          "end": 22.306,
-          "duration": 0.575,
-          "frame_ahead_trigger": 22.141
-        },
-        {
-          "word": "reuse",
-          "clean_word": "reuse",
-          "phonemes": "\u0279i\u02d0j\u02c8u\u02d0z",
-          "start": 22.306,
-          "end": 22.831,
-          "duration": 0.525,
-          "frame_ahead_trigger": 22.716
-        },
-        {
-          "word": "through",
-          "clean_word": "through",
-          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
-          "start": 22.831,
-          "end": 23.116,
-          "duration": 0.285,
-          "frame_ahead_trigger": 23.241
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 23.116,
-          "end": 23.244,
-          "duration": 0.128,
-          "frame_ahead_trigger": 23.526
-        },
-        {
-          "word": "stateless",
-          "clean_word": "stateless",
-          "phonemes": "st\u02c8e\u026atl\u0259s",
-          "start": 23.244,
-          "end": 23.766,
-          "duration": 0.522,
-          "frame_ahead_trigger": 23.654
-        },
-        {
-          "word": "interface,",
-          "clean_word": "interface",
-          "phonemes": "\u02c8\u026ant\u025af\u02cce\u026as",
-          "start": 23.766,
-          "end": 24.329,
-          "duration": 0.563,
-          "frame_ahead_trigger": 24.176
-        },
-        {
-          "word": "using",
-          "clean_word": "using",
-          "phonemes": "j\u02c8u\u02d0z\u026a\u014b",
-          "start": 24.329,
-          "end": 24.801,
-          "duration": 0.472,
-          "frame_ahead_trigger": 24.739
+          "word": "uses",
+          "clean_word": "uses",
+          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
+          "start": 18.076,
+          "end": 18.543,
+          "duration": 0.467,
+          "frame_ahead_trigger": 18.486
         },
         {
           "word": "proactive",
           "clean_word": "proactive",
           "phonemes": "p\u0279o\u028a\u02c8\u00e6kt\u026av",
-          "start": 24.801,
-          "end": 25.376,
-          "duration": 0.575,
-          "frame_ahead_trigger": 25.211
+          "start": 18.543,
+          "end": 18.958,
+          "duration": 0.415,
+          "frame_ahead_trigger": 18.953
         },
         {
           "word": "drop",
           "clean_word": "drop",
           "phonemes": "d\u0279\u02c8\u0251\u02d0p",
-          "start": 25.376,
-          "end": 25.581,
-          "duration": 0.205,
-          "frame_ahead_trigger": 25.786
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 25.581,
-          "end": 25.896,
-          "duration": 0.315,
-          "frame_ahead_trigger": 25.991
-        },
-        {
-          "word": "repos",
-          "clean_word": "repos",
-          "phonemes": "\u0279\u02c8i\u02d0po\u028az",
-          "start": 25.896,
-          "end": 26.226,
-          "duration": 0.33,
-          "frame_ahead_trigger": 26.306
+          "start": 18.958,
+          "end": 19.323,
+          "duration": 0.365,
+          "frame_ahead_trigger": 19.368
         },
         {
           "word": "operations",
           "clean_word": "operations",
           "phonemes": "\u02cc\u0251\u02d0p\u025a\u0279\u02c8e\u026a\u0283\u0259nz",
-          "start": 26.226,
-          "end": 27.106,
-          "duration": 0.88,
-          "frame_ahead_trigger": 26.636
+          "start": 19.323,
+          "end": 20.058,
+          "duration": 0.735,
+          "frame_ahead_trigger": 19.733
         },
         {
           "word": "to",
           "clean_word": "to",
           "phonemes": "tu\u02d0",
-          "start": 27.106,
-          "end": 27.183,
-          "duration": 0.077,
-          "frame_ahead_trigger": 27.516
+          "start": 20.058,
+          "end": 20.178,
+          "duration": 0.12,
+          "frame_ahead_trigger": 20.468
         },
         {
-          "word": "maintain",
-          "clean_word": "maintain",
-          "phonemes": "me\u026ant\u02c8e\u026an",
-          "start": 27.183,
-          "end": 27.701,
-          "duration": 0.518,
-          "frame_ahead_trigger": 27.593
+          "word": "exclude",
+          "clean_word": "exclude",
+          "phonemes": "\u025bkskl\u02c8u\u02d0d",
+          "start": 20.178,
+          "end": 20.833,
+          "duration": 0.655,
+          "frame_ahead_trigger": 20.588
         },
         {
-          "word": "accuracy.",
-          "clean_word": "accuracy",
-          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
-          "start": 27.701,
-          "end": 28.211,
-          "duration": 0.51,
-          "frame_ahead_trigger": 28.111
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 20.833,
+          "end": 21.018,
+          "duration": 0.185,
+          "frame_ahead_trigger": 21.243
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 21.018,
+          "end": 21.288,
+          "duration": 0.27,
+          "frame_ahead_trigger": 21.428
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 21.288,
+          "end": 21.623,
+          "duration": 0.335,
+          "frame_ahead_trigger": 21.698
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 21.623,
+          "end": 21.778,
+          "duration": 0.155,
+          "frame_ahead_trigger": 22.033
+        },
+        {
+          "word": "re-indexes",
+          "clean_word": "reindexes",
+          "phonemes": "\u0279\u02cci\u02d0\u02c8\u026and\u025bks\u1d7bz",
+          "start": 21.778,
+          "end": 22.513,
+          "duration": 0.735,
+          "frame_ahead_trigger": 22.188
+        },
+        {
+          "word": "positional",
+          "clean_word": "positional",
+          "phonemes": "p\u0259z\u02c8\u026a\u0283\u0259n\u0259l",
+          "start": 22.513,
+          "end": 23.118,
+          "duration": 0.605,
+          "frame_ahead_trigger": 22.923
+        },
+        {
+          "word": "embeddings",
+          "clean_word": "embeddings",
+          "phonemes": "\u025bmb\u02c8\u025bd\u026a\u014bz",
+          "start": 23.118,
+          "end": 23.662,
+          "duration": 0.543,
+          "frame_ahead_trigger": 23.528
+        },
+        {
+          "word": "in-place",
+          "clean_word": "inplace",
+          "phonemes": "\u02c8\u026anple\u026as",
+          "start": 23.662,
+          "end": 23.993,
+          "duration": 0.332,
+          "frame_ahead_trigger": 24.072
+        },
+        {
+          "word": "without",
+          "clean_word": "without",
+          "phonemes": "w\u026a\u00f0\u02c8a\u028at",
+          "start": 23.993,
+          "end": 24.513,
+          "duration": 0.52,
+          "frame_ahead_trigger": 24.403
+        },
+        {
+          "word": "invalidating",
+          "clean_word": "invalidating",
+          "phonemes": "\u026anv\u02c8\u00e6l\u1d7bd\u02cce\u026a\u027e\u026a\u014b",
+          "start": 24.513,
+          "end": 25.253,
+          "duration": 0.74,
+          "frame_ahead_trigger": 24.923
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 25.253,
+          "end": 25.528,
+          "duration": 0.275,
+          "frame_ahead_trigger": 25.663
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "\u025bnt\u02c8a\u026a\u025a",
+          "start": 25.528,
+          "end": 25.793,
+          "duration": 0.265,
+          "frame_ahead_trigger": 25.938
+        },
+        {
+          "word": "sequence.",
+          "clean_word": "sequence",
+          "phonemes": "s\u02c8i\u02d0kw\u0259ns",
+          "start": 25.793,
+          "end": 26.313,
+          "duration": 0.52,
+          "frame_ahead_trigger": 26.203
         }
       ],
-      "audio_duration": 7.83,
-      "slot_duration": 7.98
+      "audio_duration": 8.47,
+      "slot_duration": 8.62
     },
     {
       "beat_id": 5,
-      "text": "The results? A 1.5x speedup in P95 latency and 27.7% lower costs, proving that smarter caching beats brute force.",
-      "visual_focus": "Bar chart showing latency dropping and cost shrinking.",
+      "text": "The result? A 1.5x speedup in P95 latency and a 27.7% cost reduction, proving that cache engineering beats simple summarization.",
+      "visual_focus": "A bar chart showing latency dropping by 50%.",
       "highlight_words": {
-        "1.5x speedup": "#10B981"
+        "1.5x": "#22C55E"
       },
       "svo_action": {
         "subject": "AKV",
-        "action_verb": "delivers",
-        "direct_object": "massive efficiency gains",
-        "anchor_word": "speedup",
-        "semantic_role": "validation"
+        "action_verb": "slashes",
+        "direct_object": "latency",
+        "anchor_word": "slashes",
+        "semantic_role": "empirical_payoff"
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
-        "title": "EFFICIENCY BENCHMARK",
-        "sub": "Bar chart showing latency dropping and cost shrinking.",
+        "title": "BENCHMARK SHOWDOWN: LATENCY AND COST",
+        "sub": "A bar chart showing latency dropping by 50%.",
         "params": {
-          "title": "EFFICIENCY BENCHMARK",
-          "sub": "Bar chart showing latency dropping and cost shrinking.",
-          "metric_name": "P95 Request Latency Speedup",
-          "unit": "Multiplier",
+          "title": "BENCHMARK SHOWDOWN: LATENCY AND COST",
+          "sub": "A bar chart showing latency dropping by 50%.",
+          "metric_name": "P95 Speedup",
+          "unit": "x",
           "contestants": [
             {
-              "name": "AKV Engine",
+              "name": "AKV Agent",
               "value": 1.5,
-              "display_val": "1.5x Faster",
+              "display_val": "1.5x Speedup",
               "is_hero": true,
               "color": "#10B981"
             },
             {
-              "name": "Baseline",
+              "name": "Threshold Summary",
               "value": 1.0,
-              "display_val": "1.0x",
+              "display_val": "Baseline",
               "is_hero": false,
               "color": "#38BDF8"
             }
           ],
-          "delta_badge": "\u26a1 +50% P95 LATENCY GAIN"
+          "delta_badge": "\u26a1 +27.7% SOTA EFFICIENCY GAIN"
         }
       },
       "thriller_role": "empirical_victory",
@@ -915,473 +940,499 @@
       "motif_type": "horizontal_race_bars",
       "kinetic_action": "bar_fill",
       "motif_params": {
-        "title": "EFFICIENCY BENCHMARK",
-        "sub": "Bar chart showing latency dropping and cost shrinking.",
-        "metric_name": "P95 Request Latency Speedup",
-        "unit": "Multiplier",
+        "title": "BENCHMARK SHOWDOWN: LATENCY AND COST",
+        "sub": "A bar chart showing latency dropping by 50%.",
+        "metric_name": "P95 Speedup",
+        "unit": "x",
         "contestants": [
           {
-            "name": "AKV Engine",
+            "name": "AKV Agent",
             "value": 1.5,
-            "display_val": "1.5x Faster",
+            "display_val": "1.5x Speedup",
             "is_hero": true,
             "color": "#10B981"
           },
           {
-            "name": "Baseline",
+            "name": "Threshold Summary",
             "value": 1.0,
-            "display_val": "1.0x",
+            "display_val": "Baseline",
             "is_hero": false,
             "color": "#38BDF8"
           }
         ],
-        "delta_badge": "\u26a1 +50% P95 LATENCY GAIN"
+        "delta_badge": "\u26a1 +27.7% SOTA EFFICIENCY GAIN"
       },
-      "start": 28.53,
-      "end": 36.91,
-      "duration": 8.38,
+      "start": 26.56,
+      "end": 35.97,
+      "duration": 9.41,
       "word_timings": [
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 28.535,
-          "end": 28.735,
+          "start": 26.573,
+          "end": 26.773,
           "duration": 0.2,
-          "frame_ahead_trigger": 29.095
+          "frame_ahead_trigger": 27.133
         },
         {
-          "word": "results?",
-          "clean_word": "results",
-          "phonemes": "\u0279\u026az\u02c8\u028clts",
-          "start": 28.735,
-          "end": 29.145,
-          "duration": 0.41,
-          "frame_ahead_trigger": 29.295
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 26.773,
+          "end": 27.033,
+          "duration": 0.26,
+          "frame_ahead_trigger": 27.333
         },
         {
           "word": "A",
           "clean_word": "a",
           "phonemes": "\u02c8e\u026a",
-          "start": 29.145,
-          "end": 29.252,
-          "duration": 0.107,
-          "frame_ahead_trigger": 29.705
+          "start": 27.033,
+          "end": 27.183,
+          "duration": 0.15,
+          "frame_ahead_trigger": 27.593
         },
         {
           "word": "1.5x",
           "clean_word": "15x",
           "phonemes": "f\u02c8\u026afti\u02d0n \u02c8\u025bks",
-          "start": 29.252,
-          "end": 29.925,
-          "duration": 0.673,
-          "frame_ahead_trigger": 29.812
+          "start": 27.183,
+          "end": 27.983,
+          "duration": 0.8,
+          "frame_ahead_trigger": 27.743
         },
         {
           "word": "speedup",
           "clean_word": "speedup",
           "phonemes": "sp\u02c8i\u02d0d\u028cp",
-          "start": 29.925,
-          "end": 30.37,
-          "duration": 0.445,
-          "frame_ahead_trigger": 30.485
+          "start": 27.983,
+          "end": 28.433,
+          "duration": 0.45,
+          "frame_ahead_trigger": 28.543
         },
         {
           "word": "in",
           "clean_word": "in",
           "phonemes": "\u02c8\u026an",
-          "start": 30.37,
-          "end": 30.495,
+          "start": 28.433,
+          "end": 28.558,
           "duration": 0.125,
-          "frame_ahead_trigger": 30.93
+          "frame_ahead_trigger": 28.993
         },
         {
           "word": "P95",
           "clean_word": "p95",
           "phonemes": "p\u02c8i\u02d0 n\u02c8a\u026anti f\u02c8a\u026av",
-          "start": 30.495,
-          "end": 31.6,
-          "duration": 1.105,
-          "frame_ahead_trigger": 31.055
+          "start": 28.558,
+          "end": 29.528,
+          "duration": 0.97,
+          "frame_ahead_trigger": 29.118
         },
         {
           "word": "latency",
           "clean_word": "latency",
           "phonemes": "l\u02c8e\u026at\u0259nsi",
-          "start": 31.6,
-          "end": 32.135,
-          "duration": 0.535,
-          "frame_ahead_trigger": 32.16
+          "start": 29.528,
+          "end": 30.079,
+          "duration": 0.552,
+          "frame_ahead_trigger": 30.088
         },
         {
           "word": "and",
           "clean_word": "and",
           "phonemes": "\u00e6nd",
-          "start": 32.135,
-          "end": 32.229,
-          "duration": 0.094,
-          "frame_ahead_trigger": 32.695
+          "start": 30.079,
+          "end": 30.333,
+          "duration": 0.253,
+          "frame_ahead_trigger": 30.639
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 30.333,
+          "end": 30.413,
+          "duration": 0.081,
+          "frame_ahead_trigger": 30.893
         },
         {
           "word": "27.7%",
           "clean_word": "277",
           "phonemes": "t\u02c8u\u02d0h\u02c8\u028cnd\u0279\u026ad s\u02c8\u025bv\u0259nti s\u02c8\u025bv\u0259n",
-          "start": 32.229,
-          "end": 33.87,
-          "duration": 1.641,
-          "frame_ahead_trigger": 32.789
+          "start": 30.413,
+          "end": 31.933,
+          "duration": 1.519,
+          "frame_ahead_trigger": 30.973
         },
         {
-          "word": "lower",
-          "clean_word": "lower",
-          "phonemes": "l\u02c8o\u028a\u025a",
-          "start": 33.87,
-          "end": 34.049,
-          "duration": 0.178,
-          "frame_ahead_trigger": 34.43
+          "word": "cost",
+          "clean_word": "cost",
+          "phonemes": "k\u02c8\u0254st",
+          "start": 31.933,
+          "end": 32.208,
+          "duration": 0.275,
+          "frame_ahead_trigger": 32.493
         },
         {
-          "word": "costs,",
-          "clean_word": "costs",
-          "phonemes": "k\u02c8\u0254sts",
-          "start": 34.049,
-          "end": 34.379,
-          "duration": 0.331,
-          "frame_ahead_trigger": 34.609
+          "word": "reduction,",
+          "clean_word": "reduction",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028ck\u0283\u0259n",
+          "start": 32.208,
+          "end": 32.751,
+          "duration": 0.544,
+          "frame_ahead_trigger": 32.768
         },
         {
           "word": "proving",
           "clean_word": "proving",
           "phonemes": "p\u0279\u02c8u\u02d0v\u026a\u014b",
-          "start": 34.379,
-          "end": 34.83,
-          "duration": 0.451,
-          "frame_ahead_trigger": 34.939
+          "start": 32.751,
+          "end": 33.118,
+          "duration": 0.366,
+          "frame_ahead_trigger": 33.311
         },
         {
           "word": "that",
           "clean_word": "that",
           "phonemes": "\u00f0\u02c8\u00e6t",
-          "start": 34.83,
-          "end": 35.08,
-          "duration": 0.25,
-          "frame_ahead_trigger": 35.39
+          "start": 33.118,
+          "end": 33.413,
+          "duration": 0.295,
+          "frame_ahead_trigger": 33.678
         },
         {
-          "word": "smarter",
-          "clean_word": "smarter",
-          "phonemes": "sm\u02c8\u0251\u02d0\u0279\u027e\u025a",
-          "start": 35.08,
-          "end": 35.495,
-          "duration": 0.415,
-          "frame_ahead_trigger": 35.64
+          "word": "cache",
+          "clean_word": "cache",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 33.413,
+          "end": 33.623,
+          "duration": 0.21,
+          "frame_ahead_trigger": 33.973
         },
         {
-          "word": "caching",
-          "clean_word": "caching",
-          "phonemes": "k\u02c8\u00e6\u0283\u026a\u014b",
-          "start": 35.495,
-          "end": 35.735,
-          "duration": 0.24,
-          "frame_ahead_trigger": 36.055
+          "word": "engineering",
+          "clean_word": "engineering",
+          "phonemes": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279\u026a\u014b",
+          "start": 33.623,
+          "end": 34.31,
+          "duration": 0.687,
+          "frame_ahead_trigger": 34.183
         },
         {
           "word": "beats",
           "clean_word": "beats",
           "phonemes": "b\u02c8i\u02d0ts",
-          "start": 35.735,
-          "end": 36.09,
-          "duration": 0.355,
-          "frame_ahead_trigger": 36.295
+          "start": 34.31,
+          "end": 34.728,
+          "duration": 0.418,
+          "frame_ahead_trigger": 34.87
         },
         {
-          "word": "brute",
-          "clean_word": "brute",
-          "phonemes": "b\u0279\u02c8u\u02d0t",
-          "start": 36.09,
-          "end": 36.395,
-          "duration": 0.305,
-          "frame_ahead_trigger": 36.65
+          "word": "simple",
+          "clean_word": "simple",
+          "phonemes": "s\u02c8\u026amp\u0259l",
+          "start": 34.728,
+          "end": 35.003,
+          "duration": 0.275,
+          "frame_ahead_trigger": 35.288
         },
         {
-          "word": "force.",
-          "clean_word": "force",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279s",
-          "start": 36.395,
-          "end": 36.805,
-          "duration": 0.41,
-          "frame_ahead_trigger": 36.955
+          "word": "summarization.",
+          "clean_word": "summarization",
+          "phonemes": "s\u02cc\u028cm\u025a\u0279\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 35.003,
+          "end": 35.813,
+          "duration": 0.81,
+          "frame_ahead_trigger": 35.563
         }
       ],
-      "audio_duration": 8.38,
-      "slot_duration": 8.53
+      "audio_duration": 9.41,
+      "slot_duration": 9.56
     },
     {
       "beat_id": 6,
-      "text": "Stop wasting cycles on redundant re-prefills. Follow The Model Verse for daily deep-dives into hardware-aware AI architectures.",
-      "visual_focus": "Logo animation with a looping arrow.",
+      "text": "Stop re-prefilling. Follow The Model Verse for daily deep-dives into how we optimize the next generation of AI.",
+      "visual_focus": "A seamless loop of the runner sprinting without stopping.",
       "highlight_words": {
-        "hardware-aware": "#10B981"
+        "optimize": "#22C55E"
       },
       "svo_action": {
-        "subject": "You",
-        "action_verb": "master",
-        "direct_object": "AI efficiency",
-        "anchor_word": "loop",
-        "semantic_role": "call_to_action"
+        "subject": "The Model Verse",
+        "action_verb": "decodes",
+        "direct_object": "AI architecture",
+        "anchor_word": "decodes",
+        "semantic_role": "paradigm_shift"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code_block",
-        "title": "THE MODEL VERSE",
-        "sub": "Master the architecture",
+        "title": "THE NEW STANDARD",
+        "sub": "Looping back to efficiency.",
         "accent_color": "#34D399",
         "params": {
-          "code_block": "while True: \n  await explore_paper()\n  subscribe()"
+          "trace_register": "SUBSCRIBE FOR ARCHITECTURE"
         }
       },
       "thriller_role": "paradigm_shift",
       "act": 4,
-      "start": 37.06,
-      "end": 44.29,
-      "duration": 7.23,
+      "start": 36.12,
+      "end": 42.2,
+      "duration": 6.08,
       "word_timings": [
         {
           "word": "Stop",
           "clean_word": "stop",
           "phonemes": "st\u02c8\u0251\u02d0p",
-          "start": 37.084,
-          "end": 37.374,
-          "duration": 0.29,
-          "frame_ahead_trigger": 37.794
+          "start": 36.136,
+          "end": 36.481,
+          "duration": 0.345,
+          "frame_ahead_trigger": 36.846
         },
         {
-          "word": "wasting",
-          "clean_word": "wasting",
-          "phonemes": "w\u02c8e\u026ast\u026a\u014b",
-          "start": 37.374,
-          "end": 37.889,
-          "duration": 0.515,
-          "frame_ahead_trigger": 38.084
-        },
-        {
-          "word": "cycles",
-          "clean_word": "cycles",
-          "phonemes": "s\u02c8a\u026ak\u0259lz",
-          "start": 37.889,
-          "end": 38.299,
-          "duration": 0.41,
-          "frame_ahead_trigger": 38.599
-        },
-        {
-          "word": "on",
-          "clean_word": "on",
-          "phonemes": "\u02c8\u0254n",
-          "start": 38.299,
-          "end": 38.464,
-          "duration": 0.165,
-          "frame_ahead_trigger": 39.009
-        },
-        {
-          "word": "redundant",
-          "clean_word": "redundant",
-          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
-          "start": 38.464,
-          "end": 39.114,
-          "duration": 0.65,
-          "frame_ahead_trigger": 39.174
-        },
-        {
-          "word": "re-prefills.",
-          "clean_word": "reprefills",
-          "phonemes": "\u0279\u1d7bp\u0279\u02c8\u025bf\u026alz",
-          "start": 39.114,
-          "end": 39.694,
-          "duration": 0.58,
-          "frame_ahead_trigger": 39.824
+          "word": "re-prefilling.",
+          "clean_word": "reprefilling",
+          "phonemes": "\u0279\u1d7bp\u0279\u02c8\u025bf\u026al\u026a\u014b",
+          "start": 36.481,
+          "end": 37.055,
+          "duration": 0.574,
+          "frame_ahead_trigger": 37.191
         },
         {
           "word": "Follow",
           "clean_word": "follow",
           "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 39.694,
-          "end": 40.072,
-          "duration": 0.378,
-          "frame_ahead_trigger": 40.404
+          "start": 37.055,
+          "end": 37.486,
+          "duration": 0.431,
+          "frame_ahead_trigger": 37.765
         },
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 40.072,
-          "end": 40.274,
-          "duration": 0.202,
-          "frame_ahead_trigger": 40.782
+          "start": 37.486,
+          "end": 37.542,
+          "duration": 0.056,
+          "frame_ahead_trigger": 38.196
         },
         {
           "word": "Model",
           "clean_word": "model",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 40.274,
-          "end": 40.669,
-          "duration": 0.395,
-          "frame_ahead_trigger": 40.984
+          "start": 37.542,
+          "end": 37.866,
+          "duration": 0.324,
+          "frame_ahead_trigger": 38.252
         },
         {
           "word": "Verse",
           "clean_word": "verse",
           "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 40.669,
-          "end": 40.814,
-          "duration": 0.145,
-          "frame_ahead_trigger": 41.379
+          "start": 37.866,
+          "end": 38.136,
+          "duration": 0.27,
+          "frame_ahead_trigger": 38.576
         },
         {
           "word": "for",
           "clean_word": "for",
           "phonemes": "f\u0254\u02d0\u0279",
-          "start": 40.814,
-          "end": 41.099,
-          "duration": 0.285,
-          "frame_ahead_trigger": 41.524
+          "start": 38.136,
+          "end": 38.407,
+          "duration": 0.271,
+          "frame_ahead_trigger": 38.846
         },
         {
           "word": "daily",
           "clean_word": "daily",
           "phonemes": "d\u02c8e\u026ali",
-          "start": 41.099,
-          "end": 41.389,
-          "duration": 0.29,
-          "frame_ahead_trigger": 41.809
+          "start": 38.407,
+          "end": 38.701,
+          "duration": 0.294,
+          "frame_ahead_trigger": 39.117
         },
         {
           "word": "deep-dives",
           "clean_word": "deepdives",
           "phonemes": "d\u02c8i\u02d0pd\u026avz",
-          "start": 41.389,
-          "end": 41.968,
-          "duration": 0.579,
-          "frame_ahead_trigger": 42.099
+          "start": 38.701,
+          "end": 39.181,
+          "duration": 0.48,
+          "frame_ahead_trigger": 39.411
         },
         {
           "word": "into",
           "clean_word": "into",
           "phonemes": "\u02cc\u026ant\u028a",
-          "start": 41.968,
-          "end": 42.229,
-          "duration": 0.261,
-          "frame_ahead_trigger": 42.678
+          "start": 39.181,
+          "end": 39.556,
+          "duration": 0.375,
+          "frame_ahead_trigger": 39.891
         },
         {
-          "word": "hardware-aware",
-          "clean_word": "hardwareaware",
-          "phonemes": "h\u02c8\u0251\u02d0\u0279dw\u025b\u0279\u02cc\u00e6w\u025b\u0279",
-          "start": 42.229,
-          "end": 43.039,
-          "duration": 0.81,
-          "frame_ahead_trigger": 42.939
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 39.556,
+          "end": 39.681,
+          "duration": 0.125,
+          "frame_ahead_trigger": 40.266
         },
         {
-          "word": "AI",
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 39.681,
+          "end": 39.866,
+          "duration": 0.185,
+          "frame_ahead_trigger": 40.391
+        },
+        {
+          "word": "optimize",
+          "clean_word": "optimize",
+          "phonemes": "\u02c8\u0251\u02d0pt\u026am\u02cca\u026az",
+          "start": 39.866,
+          "end": 40.461,
+          "duration": 0.595,
+          "frame_ahead_trigger": 40.576
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.461,
+          "end": 40.631,
+          "duration": 0.17,
+          "frame_ahead_trigger": 41.171
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 40.631,
+          "end": 40.886,
+          "duration": 0.255,
+          "frame_ahead_trigger": 41.341
+        },
+        {
+          "word": "generation",
+          "clean_word": "generation",
+          "phonemes": "d\u0292\u02cc\u025bn\u025a\u0279\u02c8e\u026a\u0283\u0259n",
+          "start": 40.886,
+          "end": 41.591,
+          "duration": 0.705,
+          "frame_ahead_trigger": 41.596
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "\u028cv",
+          "start": 41.591,
+          "end": 41.706,
+          "duration": 0.116,
+          "frame_ahead_trigger": 42.301
+        },
+        {
+          "word": "AI.",
           "clean_word": "ai",
           "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 43.039,
-          "end": 43.444,
-          "duration": 0.405,
-          "frame_ahead_trigger": 43.749
-        },
-        {
-          "word": "architectures.",
-          "clean_word": "architectures",
-          "phonemes": "\u02c8\u0251\u02d0\u0279k\u026at\u02cc\u025bkt\u0283\u025az",
-          "start": 43.444,
-          "end": 44.209,
-          "duration": 0.765,
-          "frame_ahead_trigger": 44.154
+          "start": 41.706,
+          "end": 42.031,
+          "duration": 0.324,
+          "frame_ahead_trigger": 42.416
         }
       ],
-      "audio_duration": 7.23,
-      "slot_duration": 7.23
+      "audio_duration": 6.08,
+      "slot_duration": 6.08
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$L_{\\mathrm{trajectory}} > L_{\\mathrm{context}}$",
+      "latex": "$L_{\\mathrm{cache}} = \\sum_{t=1}^{T} \\mathrm{KV}_{t} > \\mathrm{Limit}_{\\mathrm{max}}$",
       "filename": "cache_engineering_agents_beat1_formula.svg",
       "fontsize": 24,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "L_{\\mathrm{trajectory}}",
-          "label": "Full History Length"
+          "term": "L_{cache}",
+          "label": "Total Cache Memory"
         },
         {
-          "term": "L_{\\mathrm{context}}",
-          "label": "Max Window Size"
+          "term": "Limit_{max}",
+          "label": "Max Context Length"
         }
       ],
       "svg_filename": "cache_engineering_agents_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(N^2)$",
+      "latex": "$\\mathcal{C}_{\\mathrm{invalid}} = f(\\mathrm{drop}) \\to \\mathrm{Re-prefill} \\propto \\mathcal{O}(T)$",
       "filename": "cache_engineering_agents_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "N",
-          "label": "Sequence Token Count"
+          "term": "Re-prefill",
+          "label": "Compute Penalty"
+        },
+        {
+          "term": "\\mathcal{O}(T)",
+          "label": "Linear Cost"
         }
       ],
       "svg_filename": "cache_engineering_agents_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathcal{C} = \\{K, V\\}_{\\mathrm{subset}}$",
+      "latex": "$\\mathcal{O}_{\\mathrm{AKV}} = \\{\\mathrm{Drop}(k), \\mathrm{Repos}(p)\\}$",
       "filename": "cache_engineering_agents_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\mathcal{C}",
-          "label": "Active Cache"
+          "term": "Drop",
+          "label": "Exclude Cache Key"
+        },
+        {
+          "term": "Repos",
+          "label": "Position Shift"
         }
       ],
       "svg_filename": "cache_engineering_agents_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$P' = \\mathrm{repos}(P, \\Delta)$",
+      "latex": "$\\mathrm{Cache}_{t} = \\mathrm{f}(\\mathrm{prefix}, \\{ops_1, \\dots, ops_n\\})$",
       "filename": "cache_engineering_agents_beat4_formula.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "P",
-          "label": "Position Indices"
+          "term": "ops_n",
+          "label": "Cache Operations"
         },
         {
-          "term": "\\Delta",
-          "label": "Shift Offset"
+          "term": "Cache_t",
+          "label": "Internal Stateful State"
         }
       ],
       "svg_filename": "cache_engineering_agents_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\mathrm{Gain} = \\frac{1}{T} \\sum R_t - C_t$",
+      "latex": "$\\Delta \\mathrm{Latency} = \\frac{\\mathrm{P95}_{\\mathrm{base}}}{\\mathrm{P95}_{\\mathrm{AKV}}} = 1.5\\times$",
       "filename": "cache_engineering_agents_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "R_t",
-          "label": "Reward/Accuracy"
+          "term": "\\Delta \\mathrm{Latency}",
+          "label": "Speedup Factor"
         },
         {
-          "term": "C_t",
-          "label": "Compute Cost"
+          "term": "1.5x",
+          "label": "Metric Gain"
         }
       ],
       "svg_filename": "cache_engineering_agents_beat5_formula.svg"
@@ -1429,144 +1480,147 @@
     "visual_entities": {
       "clusters": [
         {
-          "name": "CACHE_MANAGEMENT",
+          "name": "CACHE_POLICY",
           "color": "#38BDF8",
           "items": [
             "drop",
             "repos",
-            "KV"
+            "akv"
           ]
         },
         {
-          "name": "AGENT_LOGIC",
+          "name": "MEMORY_STATE",
           "color": "#10B981",
           "items": [
-            "trajectory",
-            "history"
+            "kv_cache",
+            "prefix",
+            "tokens"
           ]
         },
         {
-          "name": "SERVING_ENGINE",
+          "name": "LATENCY_COST",
           "color": "#F59E0B",
           "items": [
-            "AKV",
-            "re-prefill"
+            "re-prefill",
+            "p95",
+            "throughput"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: \"new_action\"",
-        "target_cluster": "CACHE_MANAGEMENT",
-        "token": "\"new_action\""
+        "label": "Token: \"CacheOps\"",
+        "target_cluster": "CACHE_POLICY",
+        "token": "\"CacheOps\""
       },
       "bottleneck_tokens": [
         {
-          "word": "Token 'Prefix'",
+          "word": "Token 'Re-prefill'",
           "color": "#EF4444"
         },
         {
-          "word": "Token 'Invalid'",
+          "word": "Token 'MemoryWall'",
           "color": "#F59E0B"
         }
       ]
     },
-    "model_a": "AKV Engine",
+    "model_a": "AKV-Optimized Agent",
     "model_a_specs": [
-      "Stateful Cache Reuse",
-      "Stateless API Interface",
-      "Proactive Pruning"
+      "Direct KV Drop",
+      "Stateless API",
+      "Position Re-encoding"
     ],
-    "model_b": "Conventional Summarization",
+    "model_b": "Standard Agent",
     "model_b_specs": [
-      "Prefix Invalidation",
-      "Heavy Re-prefill",
-      "Static Thresholds"
+      "Full Re-prefill",
+      "Context Trimming",
+      "Threshold Summarization"
     ],
-    "divide_title": "ENGINEERING VS THRESHOLD",
-    "model_a_stat": "98.2%",
-    "model_a_stat_label": "Benchmark Recovery",
-    "model_b_stat": "41.5%",
-    "model_b_stat_label": "Legacy Baseline",
-    "efficiency_badge": "\u26a1 1.5x P95 LATENCY SPEEDUP",
+    "divide_title": "CACHE MANAGEMENT DIVIDE",
+    "model_a_stat": "1.5x",
+    "model_a_stat_label": "LATENCY SPEEDUP",
+    "model_b_stat": "1.0x",
+    "model_b_stat_label": "BASELINE LATENCY",
+    "efficiency_badge": "\u26a1 +27.7% COST REDUCTION",
     "benchmarks": [
       {
-        "name": "Accuracy Gain",
-        "score_a": "1.7pt",
-        "score_b": "0"
-      },
-      {
-        "name": "Cost Savings",
-        "score_a": "27.7%",
-        "score_b": "0%"
-      },
-      {
-        "name": "Throughput",
-        "score_a": "1.2x",
+        "name": "P95 Latency",
+        "score_a": "1.5x",
         "score_b": "1.0x"
+      },
+      {
+        "name": "Benchmark Score",
+        "score_a": "+1.7 pts",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Re-prefill",
+        "score_a": "Zero",
+        "score_b": "High"
       }
     ],
-    "scale_metric": "1.5x",
-    "scale_label": "P95 Speedup",
-    "bottleneck_title": "MONOLITHIC KV CACHE",
-    "bottleneck_desc": "Fragmented state due to hard prefix coupling",
+    "scale_metric": "27.7%",
+    "scale_label": "AVERAGE COST REDUCTION",
+    "bottleneck_title": "MONOLITHIC RE-PREFILL BOTTLENECK",
+    "bottleneck_desc": "Invalidated states trigger expensive re-compute cycles",
     "solution_title": "AKV CACHE ENGINEERING",
-    "solution_components": "Proactive Drop & Position Repos",
+    "solution_components": "Drop & Repos Operations",
     "mechanism_title": "STATEFUL CACHE REUSE",
-    "payoff_stat": "27.7%",
-    "payoff_label": "COST REDUCTION",
-    "payoff_sub": "Optimized Agent Trajectories",
-    "payoff_hero_stat": 98.2,
-    "payoff_hero_label": "Sparse SAE Latents",
-    "payoff_base_stat": 41.5,
-    "payoff_base_label": "Dense Baseline",
-    "payoff_delta_badge": "\u26a1 +27.7% COST EFFICIENCY",
-    "challenger": "AKV",
+    "payoff_stat": "1.5x",
+    "payoff_label": "LATENCY SPEEDUP",
+    "payoff_sub": "Outperforming conventional threshold-triggered summarization",
+    "payoff_hero_stat": 1.5,
+    "payoff_hero_label": "AKV Speedup",
+    "payoff_base_stat": 1.0,
+    "payoff_base_label": "Conventional Baseline",
+    "payoff_delta_badge": "\u26a1 +27.7% COST SAVINGS",
+    "challenger": "AKV Engine",
     "incumbent": "Conventional Summarization"
   },
   "benchmark_comparison": {
-    "title": "EFFICIENCY BENCHMARK",
-    "metric_name": "P95 Request Latency Speedup",
-    "unit": "Multiplier",
+    "title": "BENCHMARK SHOWDOWN: LATENCY AND COST",
+    "metric_name": "P95 Speedup",
+    "unit": "x",
     "contestants": [
       {
-        "name": "AKV Engine",
+        "name": "AKV Agent",
         "value": 1.5,
-        "display_val": "1.5x Faster",
+        "display_val": "1.5x Speedup",
         "is_hero": true,
         "color": "#10B981"
       },
       {
-        "name": "Baseline",
+        "name": "Threshold Summary",
         "value": 1.0,
-        "display_val": "1.0x",
+        "display_val": "Baseline",
         "is_hero": false,
         "color": "#38BDF8"
       }
     ],
-    "delta_badge": "\u26a1 +50% P95 LATENCY GAIN",
+    "delta_badge": "\u26a1 +27.7% SOTA EFFICIENCY GAIN",
     "radar_axes": [
-      "Throughput",
-      "VRAM Efficiency",
+      "Latency",
+      "Memory Footprint",
       "Accuracy",
       "Context Length",
       "Cost Efficiency"
     ]
   },
   "code_snippet": {
-    "filename": "akv_interface.py",
+    "filename": "akv_kernel.py",
     "language": "python",
     "lines": [
-      "def process_step(trajectory):",
-      "cache_op = select_drop_policy(trajectory)",
-      "return akv_engine.apply(cache_op, trajectory)",
-      "// AKV manages stateful reuse internally"
+      "def update_cache(self, request):",
+      "# AKV surgery operation",
+      "mask = self.drop_stale_keys(request)",
+      "new_pos = self.repos_keys(mask)",
+      "return self.execute_forward(new_pos)"
     ],
     "highlight_lines": [
-      2,
-      3
+      3,
+      4
     ],
-    "trace_register": "\u26a1 AKV CACHE OPERATIONS REGISTER",
-    "explanation": "Decoupled cache pruning logic"
+    "trace_register": "\u26a1 AKV STATEFUL CACHE REUSE",
+    "explanation": "Zero memory-copy hardware acceleration"
   },
   "arxiv_id": "2610.28577",
   "paper_figures": [
@@ -1632,25 +1686,25 @@
     }
   ],
   "feynman_certification": {
-    "converged_turn": 1,
+    "converged_turn": 2,
     "final_comprehension_score": 8.8,
-    "final_retention_hook_score": 9.2,
+    "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook was solid\u2014I've definitely felt the pain of KV cache re-prefilling when building agents, so you had me immediately. I like that you didn't waste time with a 'Hey guys' intro. My only issue is that 'AKV Cache' sounds like a specific library or paper, but you didn't explain if it's a technique or a tool I can actually use. Also, 'surgically drop tokens' is a cool visual, but I'm curious how you handle the position encoding shift without breaking the attention mechanism."
+    "listener_verdict": "The hook was solid\u2014I've definitely dealt with the pain of context window bloat, so calling out the re-prefill bottleneck immediately got me. I like that you didn't use 'smart AI tools' or other cringe marketing speak. My only hang-up is in Beat 4; 'patching attention masks' sounds cool, but I'm not 100% sure how you're handling the KV cache eviction without breaking the causal masking or the positional encoding logic. It's a bit of a 'trust me bro' moment on the implementation details."
   },
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "villain_entity": "History Dependence",
-    "physical_analogy": "A library index card system where changing one entry forces you to rewrite the entire catalog.",
+    "villain_entity": "The Re-prefill Penalty",
+    "physical_analogy": "A marathon runner forced to stop and re-tie their shoes every single mile.",
     "eureka_mechanism": "AKV Cache Engineering",
-    "paradigm_shift": "Stateless interface for stateful cache management"
+    "paradigm_shift": "Direct stateful manipulation of KV cache tensors without re-computation."
   },
   "hook_gating": {
-    "selected_hook": "Before you train your next model, see how Cache Engineering for Agents cuts 27.7% of memory overhead.",
+    "selected_hook": "Before you train your next model, see how Cache Engineering for Agents cuts 1.5x of memory overhead.",
     "verdict": 70,
     "band": "WORKABLE",
-    "formula": "The Statistic",
+    "formula": "The Warning",
     "properties": {
       "SPECIFICITY": 74,
       "ADDRESS": 96,
@@ -1659,16 +1713,16 @@
       "BREVITY": 100
     },
     "weakest_property": "CURIOSITY",
-    "candidates_evaluated": 10,
+    "candidates_evaluated": 11,
     "rankings": [
       {
-        "hook": "Before you train your next model, see how Cache Engineering for Agents cuts 27.7% of memory overhead.",
+        "hook": "Before you train your next model, see how Cache Engineering for Agents cuts 1.5x of memory overhead.",
         "verdict": 70,
         "band": "WORKABLE",
-        "formula": "The Statistic"
+        "formula": "The Warning"
       },
       {
-        "hook": "Do not scale your next training run before you see how Cache Engineering for Agents delivers 27.7%.",
+        "hook": "Do not scale your next training run before you see how Cache Engineering for Agents delivers 1.5x.",
         "verdict": 70,
         "band": "WORKABLE",
         "formula": "The Warning"
@@ -1680,25 +1734,31 @@
         "formula": "The Warning"
       },
       {
-        "hook": "Why do standard transformer architectures hit a memory wall before Cache Engineering for Agents unlocks 27.7% gains?",
+        "hook": "Before you build your next system, see how lLM agents choke because they re-process entire histories every time their memory hits the limit.",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before Cache Engineering for Agents unlocks 1.5x gains?",
         "verdict": 51,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "You might be leaving 27.7% of your hardware performance on the table without Cache Engineering for Agents.",
+        "hook": "You might be leaving 1.5x of your hardware performance on the table without Cache Engineering for Agents.",
         "verdict": 49,
         "band": "WEAK",
-        "formula": "The Statistic"
+        "formula": "The Impossible Claim"
       },
       {
-        "hook": "Everyone assumed standard attention was optimal, until Cache Engineering for Agents proved a 27.7% leap.",
+        "hook": "Everyone assumed standard attention was optimal, until Cache Engineering for Agents proved a 1.5x leap.",
         "verdict": 44,
         "band": "WEAK",
-        "formula": "The Statistic"
+        "formula": "Unclassified"
       },
       {
-        "hook": "Why should you care about Cache Engineering for Agents? Because your AI agent is burning cycles because every minor memory update triggers a massive, redundant re-prefill.",
+        "hook": "Did you know lLM agents choke because they re-process entire histories every time their memory hits the limit?",
         "verdict": 40,
         "band": "WEAK",
         "formula": "The Question"
@@ -1716,8 +1776,8 @@
         "formula": "The Question"
       },
       {
-        "hook": "Your AI agent is burning cycles because every minor memory update triggers a massive, redundant re-prefill.",
-        "verdict": 30,
+        "hook": "LLM agents choke because they re-process entire histories every time their memory hits the limit.",
+        "verdict": 25,
         "band": "WEAK",
         "formula": "Unclassified"
       }
@@ -1736,11 +1796,11 @@
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
       "parameters": {
-        "model_a_name": "AKV Engine",
-        "model_a_score": "98.2%",
-        "model_b_name": "Conventional Summarization",
-        "model_b_score": "41.5%",
-        "delta_label": "\u26a1 1.5x P95 LATENCY SPEEDUP"
+        "model_a_name": "AKV-Optimized Agent",
+        "model_a_score": "1.5x",
+        "model_b_name": "Standard Agent",
+        "model_b_score": "1.0x",
+        "delta_label": "\u26a1 +27.7% COST REDUCTION"
       }
     }
   ],
