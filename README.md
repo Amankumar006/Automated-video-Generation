@@ -83,7 +83,7 @@ PYTHONPATH=_archive python3 -m aether.director --brief "Quantum computing cryoge
 
 ### 3. Run Test Suite
 ```bash
-# Run all unit and integration tests across both engines (367+ tests)
+# Run all unit and integration tests across both engines
 pytest
 
 # Run only Project Aether tests
