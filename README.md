@@ -70,6 +70,9 @@ python3 pipeline/daily_shorts_daemon.py --dry-run --count 1
 
 # Full pipeline validation with temporary, repository-isolated outputs
 python3 pipeline/run_pipeline.py --dry-run
+
+# Generate the local Kokoro narration used by the Remotion preview
+make generate-kokoro-audio
 ```
 
 ### 2. Project Aether 3D Autonomous Cinematic Director

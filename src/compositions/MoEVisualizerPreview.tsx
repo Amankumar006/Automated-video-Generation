@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { DeepSeekV3MoEVisualizer } from "../components/DeepSeekV3MoEVisualizer";
 import { KineticCaptions } from "../components/KineticCaptions";
 import { DEEPSEEK_V3_SPEC } from "../data/deepseek-v3";
@@ -23,13 +23,16 @@ const SAMPLE_WORDS: WordToken[] = [
 
 export interface MoEVisualizerPreviewProps {
   showSafeZoneOverlay?: boolean;
+  audioSrc?: string;
 }
 
 export const MoEVisualizerPreview: React.FC<MoEVisualizerPreviewProps> = ({
   showSafeZoneOverlay = false,
+  audioSrc,
 }) => {
   return (
     <AbsoluteFill className="bg-[#06080F]">
+      <Audio src={audioSrc ?? staticFile("audio/kokoro_narration.wav")} volume={1} />
       {/* 1. Main Architecture Visualizer */}
       <DeepSeekV3MoEVisualizer
         spec={DEEPSEEK_V3_SPEC}

@@ -2,7 +2,7 @@ PYTHON ?= python3
 PIP := $(PYTHON) -m pip
 
 .PHONY: setup setup-python setup-web doctor clean-generated clean-generated-apply \
-	test test-python test-web lint render-smoke
+	test test-python test-web lint render-smoke generate-kokoro-audio
 
 setup: setup-python setup-web
 
@@ -36,3 +36,6 @@ lint:
 
 render-smoke:
 	manim -ql -s -r 540,960 --fps 15 test/test_code_execution_engine.py TestChalkboardCodeBlockScene
+
+generate-kokoro-audio:
+	$(PYTHON) scripts/generate_remotion_kokoro_audio.py

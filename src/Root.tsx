@@ -9,7 +9,7 @@ export const Root: React.FC = () => {
       <Composition
         id="MoEVisualizerPreview"
         component={MoEVisualizerPreview}
-        durationInFrames={180} // 6 seconds at 30fps
+        durationInFrames={210} // 7 seconds at 30fps; fits Kokoro narration
         fps={30}
         width={1080}
         height={1920}
@@ -20,7 +20,7 @@ export const Root: React.FC = () => {
       <Composition
         id="MoEVisualizerWithSafeZone"
         component={MoEVisualizerPreview}
-        durationInFrames={180}
+        durationInFrames={210}
         fps={30}
         width={1080}
         height={1920}
