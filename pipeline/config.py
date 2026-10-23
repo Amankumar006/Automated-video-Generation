@@ -165,6 +165,8 @@ CUSTOM_BG_MUSIC_PATH = str(WORKSPACE_ROOT / "public" / "audio" / "bg_music.wav")
 MAX_CONTENT_AGE_DAYS: int = int(os.environ.get("MAX_CONTENT_AGE_DAYS", "45"))
 MAX_PERK_VERIFICATION_AGE_DAYS: int = int(os.environ.get("MAX_PERK_VERIFICATION_AGE_DAYS", "60"))
 STRICT_RECENCY_ENFORCEMENT: bool = os.environ.get("STRICT_RECENCY_ENFORCEMENT", "true").lower() in ("true", "1", "yes")
+# Production topic policy. `latest_or_viral` refuses candidates without current evidence.
+TOPIC_SELECTION_MODE: str = os.environ.get("TOPIC_SELECTION_MODE", "latest_or_viral").lower()
 
 
 def parse_content_date(date_str_or_id: Optional[str]) -> Optional[datetime.date]:

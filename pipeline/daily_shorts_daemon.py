@@ -31,6 +31,7 @@ from pipeline.config import (
     BROADCAST_FPS,
     MAX_CONTENT_AGE_DAYS,
     MAX_PERK_VERIFICATION_AGE_DAYS,
+    TOPIC_SELECTION_MODE,
     is_content_recent,
     calculate_content_age_days,
 )
@@ -39,6 +40,7 @@ from pipeline.analytics_feedback import (
     get_performance_category_bias,
     get_recommended_pacing
 )
+from pipeline.topic_gate import filter_topic_candidates
 
 DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -234,7 +236,23 @@ def is_candidate_eligible_for_production(
             reference_date=reference_date,
         )
 
-    # 3. ArXiv / academic papers check
+    # 3. GitHub freshness is based on observable repository activity, not lifetime stars.
+    if src in ("github", "github_api", "github_search_api", "curated_trending") or c_id.startswith("gh_"):
+        repo_meta = candidate.get("repo_metadata", {})
+        activity_date = (
+            repo_meta.get("pushed_at")
+            or repo_meta.get("updated_at")
+            or candidate.get("updated_at")
+        )
+        if not activity_date:
+            return False
+        return is_content_recent(
+            activity_date,
+            max_age_days=effective_max_age,
+            reference_date=reference_date,
+        )
+
+    # 4. ArXiv / academic papers check
     p_date = candidate.get("published_at") or candidate.get("published_date") or candidate.get("date") or c_id
     return is_content_recent(
         p_date,
@@ -250,6 +268,7 @@ def fetch_candidates_for_pillar(
     max_age_days: Optional[int] = None,
     allow_stale: bool = False,
     reference_date: Optional[datetime.date] = None,
+    topic_mode: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """Fetches candidate specifications for a specific content pillar, strictly enforcing content recency."""
     if history is None:
@@ -301,6 +320,12 @@ def fetch_candidates_for_pillar(
             reference_date=reference_date,
         )
     ]
+    if topic_mode:
+        eligible = filter_topic_candidates(
+            eligible,
+            reference_date=reference_date,
+            mode=topic_mode,
+        )
     return eligible[:limit]
 
 
@@ -507,12 +532,35 @@ class DailyShortsDaemon:
         preferred_category: Optional[str] = None,
         source: str = "mixed",
         reference_date: Optional[datetime.date] = None,
+        topic_mode: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        effective_topic_mode = (topic_mode or TOPIC_SELECTION_MODE).lower()
+
+        def fetch_pool(pillar: str, limit: int, history: Dict[str, Any]) -> List[Dict[str, Any]]:
+            """Call candidate discovery while keeping older test doubles compatible."""
+            try:
+                return fetch_candidates_for_pillar(
+                    pillar,
+                    limit=limit,
+                    history=history,
+                    reference_date=reference_date,
+                    topic_mode=effective_topic_mode,
+                )
+            except TypeError as exc:
+                if "topic_mode" not in str(exc):
+                    raise
+                return fetch_candidates_for_pillar(
+                    pillar,
+                    limit=limit,
+                    history=history,
+                    reference_date=reference_date,
+                )
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
         print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s) | Source: {source.upper()}")
+        print(f"🛡️ Topic Gate: {effective_topic_mode.upper()} (no evidence, no video)")
         if target_slot_hour is not None and target_slot_hour in SLOT_SCHEDULE:
             slot_info = SLOT_SCHEDULE[target_slot_hour]
             print(f"🎯 Automated Window: {slot_info['slot_name']}")
@@ -619,12 +667,7 @@ class DailyShortsDaemon:
                     chosen_pillar = None
 
                     for target_pillar in curr_rotation:
-                        pool = fetch_candidates_for_pillar(
-                            target_pillar,
-                            limit=10,
-                            history=working_history,
-                            reference_date=reference_date,
-                        )
+                        pool = fetch_pool(target_pillar, limit=10, history=working_history)
                         available_candidates = [c for c in pool if c["id"] not in selected_ids]
                         if preferred_category:
                             matching = [c for c in available_candidates if c.get("recommended_category") == preferred_category or c.get("category") == preferred_category]
@@ -668,10 +711,10 @@ class DailyShortsDaemon:
             else:
                 target_pillar = "blogs" if normalized_source == "news" else normalized_source
                 print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {target_pillar.upper()})...")
-                unprocessed = fetch_candidates_for_pillar(
+                unprocessed = fetch_pool(
                     target_pillar,
                     limit=35 if target_pillar == "arxiv" else 10,
-                    reference_date=reference_date,
+                    history=load_history(),
                 )
 
                 if preferred_category:
@@ -697,6 +740,10 @@ class DailyShortsDaemon:
             mult = p.get("analytics_multiplier", 1.0)
             print(f"   [{idx+1}/{len(selected_papers)}] {p['title']} ({p['id']})")
             print(f"       Domain: {tax.upper()} ({mult:.2f}x velocity) | Category: {p.get('recommended_category', 'mechanism_deepdive').upper()}")
+            gate = p.get("topic_gate", {})
+            if gate:
+                print(f"       Topic Gate: {gate.get('classification', 'rejected').upper()} — {gate.get('reason', '')}")
+                print(f"       Evidence: {', '.join(gate.get('evidence', [])) or 'none'}")
             if notes.get("recommended_hook"):
                 print(f"       💡 Hook: {notes.get('recommended_hook')}")
             if notes.get("suggested_everyday_analogy"):
@@ -879,6 +926,7 @@ def main():
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
     parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed", "auto"], default="mixed", help="Candidate source: 'mixed' (auto-rotate between arxiv, blogs, perks), 'arxiv', 'blogs', 'perks', 'github', or 'auto' (default: mixed)")
+    parser.add_argument("--topic-mode", choices=["latest_or_viral", "recent", "legacy"], default=TOPIC_SELECTION_MODE, help="Topic gate policy; production defaults to latest-or-viral evidence")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
     parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "developer_perks", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
@@ -914,7 +962,8 @@ def main():
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
-            source=args.source
+            source=args.source,
+            topic_mode=args.topic_mode
         )
     elif args.daemon:
         daemon.start_standing_daemon()
@@ -930,7 +979,8 @@ def main():
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
-            source=args.source
+            source=args.source,
+            topic_mode=args.topic_mode
         )
         if not produced:
             print("❌ Production cycle completed with 0 reels produced. Marking run as failed.")

@@ -8,6 +8,7 @@ high-dopamine Manim chalkboard code and AST visualizations.
 import os
 import re
 import json
+import datetime as dt
 import urllib.request
 from pathlib import Path
 from typing import Dict, Any, List, Optional
@@ -37,12 +38,16 @@ class TrendingRepo:
     topics: List[str]
     code_kernel: CodeKernelSnippet
     source: str = "github_api"
+    pushed_at: Optional[str] = None
+    updated_at: Optional[str] = None
+    forks: int = 0
 
     def to_spec_candidate(self) -> Dict[str, Any]:
         """Converts repository record to an auto-producer candidate spec."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.repo_name.replace("/", "_").replace("-", "_")).lower()
         return {
             "id": f"gh_{clean_id}",
+            "source": self.source,
             "title": self.title,
             "recommended_category": "mechanism_deepdive",
             "domain_taxonomy": "hardware_efficiency" if any(k in self.repo_name.lower() for k in ["vllm", "sglang", "kernel", "cuda", "bitnet"]) else "neural_attention",
@@ -50,8 +55,11 @@ class TrendingRepo:
             "repo_metadata": {
                 "repo_name": self.repo_name,
                 "stars": self.stars,
+                "forks": self.forks,
                 "language": self.language,
-                "url": self.url
+                "url": self.url,
+                "pushed_at": self.pushed_at,
+                "updated_at": self.updated_at,
             },
             "code_snippet": asdict(self.code_kernel),
             "editorial_notes": {
@@ -217,7 +225,11 @@ class GitHubTrendingFetcher:
         falling back gracefully to curated breakthroughs on rate limit.
         """
         results: List[TrendingRepo] = []
-        req_url = f"{self.SEARCH_API_URL}?q=topic:llm+stars:>1000&sort=stars&order=desc&per_page={limit}"
+        recent_cutoff = (dt.datetime.now(dt.timezone.utc).date() - dt.timedelta(days=30)).isoformat()
+        req_url = (
+            f"{self.SEARCH_API_URL}?q=topic:llm+stars:>1000+pushed:>{recent_cutoff}"
+            f"&sort=updated&order=desc&per_page={limit}"
+        )
 
         try:
             req = urllib.request.Request(req_url, headers=self._get_headers())
@@ -228,6 +240,7 @@ class GitHubTrendingFetcher:
                     full_name = item.get("full_name", "")
                     desc = item.get("description") or f"Open-source AI innovation: {full_name}"
                     stars = item.get("stargazers_count", 0)
+                    forks = item.get("forks_count", 0)
                     lang = item.get("language") or "Python"
                     url = item.get("html_url", "")
                     topics = item.get("topics", [])
@@ -242,7 +255,10 @@ class GitHubTrendingFetcher:
                         url=url,
                         topics=topics,
                         code_kernel=kernel,
-                        source="github_search_api"
+                        source="github_search_api",
+                        pushed_at=item.get("pushed_at"),
+                        updated_at=item.get("updated_at"),
+                        forks=forks,
                     ))
         except Exception as e:
             print(f"⚠️ GitHub API query notice ({e}). Falling back to curated trending AI breakthroughs.")
