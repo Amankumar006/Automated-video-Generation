@@ -295,8 +295,8 @@ def test_run_pipeline_bypasses_arxiv_figure_extraction_for_blogs(monkeypatch):
     from pipeline.run_pipeline import main as run_pipeline_main
 
     mock_spec = {
-        "id": "blog_openai_o3_mini",
-        "title": "OpenAI o3-mini: High-Speed STEM Reasoning Model",
+        "id": "blog_openai_gpt_6_intelligent_ui",
+        "title": "GPT-6 and Intelligent UI for Everyone",
         "category": "tech_news",
         "beats": [
             {
@@ -318,7 +318,7 @@ def test_run_pipeline_bypasses_arxiv_figure_extraction_for_blogs(monkeypatch):
         figure_extraction_called = True
         return []
 
-    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--blog", "blog_openai_o3_mini", "--dry-run"])
+    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--blog", "blog_openai_gpt_6_intelligent_ui", "--dry-run"])
     monkeypatch.setattr("pipeline.run_pipeline.generate_script", lambda **kwargs: mock_spec)
     monkeypatch.setattr("pipeline.run_pipeline.synthesize_audio_for_spec", lambda *args, **kwargs: mock_audio)
     monkeypatch.setattr("pipeline.arxiv_vector_extractor.extract_paper_figures", mock_extract_figures)

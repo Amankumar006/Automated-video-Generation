@@ -190,7 +190,8 @@ def get_content_rotation_order(
 def is_candidate_eligible_for_production(
     candidate: Dict[str, Any],
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
 ) -> bool:
     """
     Validates that a candidate specification is fresh and eligible for publication.
@@ -213,7 +214,11 @@ def is_candidate_eligible_for_production(
         vdate = perk_meta.get("last_verified_date") or candidate.get("last_verified_date")
         if not vdate:
             return False
-        return is_content_recent(vdate, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS)
+        return is_content_recent(
+            vdate,
+            max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS,
+            reference_date=reference_date,
+        )
 
     # 2. Official blogs check
     if src in ("blogs", "official_blogs") or cat in ("tech_news", "official_blogs") or c_id.startswith(("blog_", "news_")):
@@ -223,11 +228,19 @@ def is_candidate_eligible_for_production(
             b_date = blog_meta.get("published_date")
         if not b_date:
             return False
-        return is_content_recent(b_date, max_age_days=effective_max_age)
+        return is_content_recent(
+            b_date,
+            max_age_days=effective_max_age,
+            reference_date=reference_date,
+        )
 
     # 3. ArXiv / academic papers check
     p_date = candidate.get("published_at") or candidate.get("published_date") or candidate.get("date") or c_id
-    return is_content_recent(p_date, max_age_days=effective_max_age)
+    return is_content_recent(
+        p_date,
+        max_age_days=effective_max_age,
+        reference_date=reference_date,
+    )
 
 
 def fetch_candidates_for_pillar(
@@ -235,7 +248,8 @@ def fetch_candidates_for_pillar(
     limit: int = 10,
     history: Optional[Dict[str, Any]] = None,
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
 ) -> List[Dict[str, Any]]:
     """Fetches candidate specifications for a specific content pillar, strictly enforcing content recency."""
     if history is None:
@@ -247,16 +261,30 @@ def fetch_candidates_for_pillar(
     candidates: List[Dict[str, Any]] = []
 
     if pillar == "arxiv":
-        papers = get_trending_digest(limit=max(limit * 3, 50), max_age_days=effective_max_age, allow_stale=allow_stale)
+        papers = get_trending_digest(
+            limit=max(limit * 3, 50),
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+        )
         candidates = [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids]
 
     elif pillar in ("blogs", "news"):
-        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100), max_age_days=effective_max_age, allow_stale=allow_stale)
+        blog_candidates = get_official_blogs_digest(
+            limit=max(limit * 5, 100),
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
         candidates = [b for b in blog_candidates if b["id"] not in proc_ids]
 
     elif pillar == "perks":
         from pipeline.tech_perks_fetcher import get_verified_perks_digest
-        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50), max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS, allow_stale=allow_stale)
+        perk_candidates = get_verified_perks_digest(
+            limit=max(limit * 5, 50),
+            max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
         candidates = [p for p in perk_candidates if p["id"] not in proc_ids]
 
     elif pillar == "github":
@@ -266,7 +294,12 @@ def fetch_candidates_for_pillar(
     # Enforce second-layer defensive check on all candidates
     eligible = [
         c for c in candidates
-        if is_candidate_eligible_for_production(c, max_age_days=effective_max_age, allow_stale=allow_stale)
+        if is_candidate_eligible_for_production(
+            c,
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
     ]
     return eligible[:limit]
 
@@ -472,7 +505,8 @@ class DailyShortsDaemon:
         target_slot_hour: Optional[int] = None,
         preferred_taxonomy: Optional[str] = None,
         preferred_category: Optional[str] = None,
-        source: str = "mixed"
+        source: str = "mixed",
+        reference_date: Optional[datetime.date] = None,
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -585,7 +619,12 @@ class DailyShortsDaemon:
                     chosen_pillar = None
 
                     for target_pillar in curr_rotation:
-                        pool = fetch_candidates_for_pillar(target_pillar, limit=10, history=working_history)
+                        pool = fetch_candidates_for_pillar(
+                            target_pillar,
+                            limit=10,
+                            history=working_history,
+                            reference_date=reference_date,
+                        )
                         available_candidates = [c for c in pool if c["id"] not in selected_ids]
                         if preferred_category:
                             matching = [c for c in available_candidates if c.get("recommended_category") == preferred_category or c.get("category") == preferred_category]
@@ -629,7 +668,11 @@ class DailyShortsDaemon:
             else:
                 target_pillar = "blogs" if normalized_source == "news" else normalized_source
                 print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {target_pillar.upper()})...")
-                unprocessed = fetch_candidates_for_pillar(target_pillar, limit=35 if target_pillar == "arxiv" else 10)
+                unprocessed = fetch_candidates_for_pillar(
+                    target_pillar,
+                    limit=35 if target_pillar == "arxiv" else 10,
+                    reference_date=reference_date,
+                )
 
                 if preferred_category:
                     unprocessed = (

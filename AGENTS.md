@@ -179,8 +179,8 @@ python3 pipeline/daily_shorts_daemon.py --daemon
 
 ---
 ## Project Aether (v2) Instructions
-All agents working on Project Aether must refer to the foundational documentation located in `project-aether-docs/`. 
-All new video generation architectures must follow the Aether v2 specifications detailed in `project-aether-docs/architecture.md`.
+All agents working on Project Aether must refer to the archived foundational documentation located in `_archive/project-aether-docs/`.
+All new video generation architectures must follow the Aether v2 specifications detailed in `_archive/project-aether-docs/architecture.md`.
 
 **Agent Skills Policy:** 
 If new external agent skills are needed (e.g., interacting with new APIs or tooling discovered on https://www.skills.sh/), agents are instructed to retrieve the logic, adapt it, and save it in the `.gemini/config/skills` standard format as `SKILL.md` files.

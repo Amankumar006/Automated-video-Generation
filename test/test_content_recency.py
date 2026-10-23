@@ -122,7 +122,11 @@ def test_official_blogs_digest_excludes_stale_news():
     Validates that get_official_blogs_digest() returns ONLY fresh late Sept / Oct 2026 drops
     and strictly excludes stale 2024 and early 2025 announcements.
     """
-    digest = get_official_blogs_digest(limit=20, offline_only=True)
+    digest = get_official_blogs_digest(
+        limit=20,
+        offline_only=True,
+        reference_date=REF_DATE,
+    )
 
     assert len(digest) > 0
 
@@ -158,13 +162,13 @@ def test_official_blog_record_stale_properties():
     """Validates that OfficialBlogRecord properties correctly flag stale records."""
     fresh_rec = get_official_blog("blog_openai_gpt_6_intelligent_ui")
     assert fresh_rec is not None
-    assert fresh_rec.is_stale is False
-    assert fresh_rec.age_days <= 10
+    assert fresh_rec.is_stale_at(REF_DATE) is False
+    assert fresh_rec.age_days_at(REF_DATE) <= 10
 
     stale_rec = get_official_blog("blog_openai_o3_mini")
     assert stale_rec is not None
-    assert stale_rec.is_stale is True
-    assert stale_rec.age_days > 500
+    assert stale_rec.is_stale_at(REF_DATE) is True
+    assert stale_rec.age_days_at(REF_DATE) > 500
 
 
 # ==============================================================================
@@ -173,7 +177,7 @@ def test_official_blog_record_stale_properties():
 
 def test_tech_perks_digest_excludes_stale_and_expired_perks():
     """Validates that get_verified_perks_digest() strictly enforces recency verification."""
-    perks = get_verified_perks_digest(limit=10)
+    perks = get_verified_perks_digest(limit=10, reference_date=REF_DATE)
     assert len(perks) > 0
 
     for p in perks:
@@ -254,17 +258,36 @@ def test_batch_digest_filters_out_stale_papers():
 def test_daemon_candidate_selection_only_emits_fresh_content():
     """Validates that fetch_candidates_for_pillar() only emits fresh candidates across all pillars."""
     # 1. Blogs pillar
-    blog_cands = fetch_candidates_for_pillar("blogs", limit=5)
+    stable_history = {"processed_papers": {}}
+    blog_cands = fetch_candidates_for_pillar(
+        "blogs",
+        limit=5,
+        history=stable_history,
+        reference_date=REF_DATE,
+    )
     assert len(blog_cands) > 0
     for b in blog_cands:
-        assert is_candidate_eligible_for_production(b, max_age_days=45) is True
+        assert is_candidate_eligible_for_production(
+            b,
+            max_age_days=45,
+            reference_date=REF_DATE,
+        ) is True
         assert b["id"] not in ("blog_openai_o3_mini", "blog_claude_3_7_sonnet")
 
     # 2. Perks pillar
-    perk_cands = fetch_candidates_for_pillar("perks", limit=5)
+    perk_cands = fetch_candidates_for_pillar(
+        "perks",
+        limit=5,
+        history=stable_history,
+        reference_date=REF_DATE,
+    )
     assert len(perk_cands) > 0
     for p in perk_cands:
-        assert is_candidate_eligible_for_production(p, max_age_days=60) is True
+        assert is_candidate_eligible_for_production(
+            p,
+            max_age_days=60,
+            reference_date=REF_DATE,
+        ) is True
 
 
 def test_is_candidate_eligible_for_production_rejects_stale_entries():

@@ -423,6 +423,7 @@ class TestTier4RealWorldApplicationScenario:
             "--category", "architecture_breakdown",
             "--skip-render",
             "--no-music",
+            "--allow-stale",
         ]
 
         with patch("sys.argv", test_args), \

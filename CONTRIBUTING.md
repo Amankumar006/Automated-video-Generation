@@ -14,6 +14,19 @@ The core engine is Python and Manim-based. **Do not modify, refactor, or write f
 - Never edit production files directly or push directly to `main`.
 - Always create a dedicated feature branch (`feat/<feature-name>` or `fix/<bug-name>`), verify all tests locally, and open a GitHub Pull Request with full verification details.
 
+### Quick Start
+
+```bash
+cp .env.example .env
+make setup
+make test
+```
+
+See [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) for system packages,
+provider configuration, dry runs, and the render smoke test. See
+[`docs/REPOSITORY_LAYOUT.md`](docs/REPOSITORY_LAYOUT.md) before adding assets
+or generated output.
+
 ---
 
 ## 2. Environment Setup
