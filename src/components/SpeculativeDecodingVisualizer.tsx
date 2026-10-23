@@ -13,10 +13,13 @@ export const SpeculativeDecodingVisualizer: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const intro = spring({ frame, fps, config: { damping: 16, stiffness: 110 } });
-  const draftOpacity = fade(frame, fps, 0.05, 0.35);
-  const verifyOpacity = fade(frame, fps, 2.15, 2.45);
-  const resultOpacity = fade(frame, fps, 4.45, 4.8);
-  const outroOpacity = fade(frame, fps, 6.65, 7.0);
+  const draftOpacity = fade(frame, fps, 1.9, 2.2);
+  const verifyOpacity = fade(frame, fps, 6.0, 6.35);
+  const resultOpacity = fade(frame, fps, 10.7, 11.05);
+  const outroOpacity = fade(frame, fps, 18.45, 18.9);
+  const thesisIn = fade(frame, fps, 0.65, 0.95);
+  const thesisOut = fade(frame, fps, 1.65, 2.05);
+  const thesisOpacity = Math.min(thesisIn, 1 - thesisOut);
 
   return (
     <div className="relative h-[1920px] w-[1080px] overflow-hidden bg-[#081018] font-sans text-white select-none">
@@ -34,12 +37,18 @@ export const SpeculativeDecodingVisualizer: React.FC = () => {
         <div className="mt-4 text-[25px] font-mono text-slate-300">Then let the big model verify in one batch.</div>
       </div>
 
+      <div className="absolute left-[140px] top-[430px] flex w-[800px] items-center justify-center gap-6" style={{ opacity: thesisOpacity }}>
+        <div className="rounded-2xl border-2 border-cyan-300 bg-cyan-950/80 px-8 py-5 text-[26px] font-mono font-bold text-cyan-100">SMALL MODEL<br /><span className="text-[20px] text-cyan-300">proposes</span></div>
+        <div className="text-[34px] font-black text-amber-300">→</div>
+        <div className="rounded-2xl border-2 border-amber-300 bg-amber-950/70 px-8 py-5 text-[26px] font-mono font-bold text-amber-100">BIG MODEL<br /><span className="text-[20px] text-amber-300">verifies</span></div>
+      </div>
+
       <div className="absolute left-[140px] top-[450px] w-[800px] text-center" style={{ opacity: draftOpacity }}>
         <div className="text-[25px] font-mono font-bold tracking-widest text-cyan-300">01 · DRAFT MODEL</div>
         <div className="mt-3 text-[32px] font-black">Four cheap guesses</div>
         <div className="mt-8 flex justify-center gap-4">
           {tokens.map((token, index) => {
-            const tokenIn = fade(frame, fps, 0.55 + index * 0.25, 0.8 + index * 0.25);
+              const tokenIn = fade(frame, fps, 2.35 + index * 0.45, 2.7 + index * 0.45);
             return (
               <div
                 key={token}
@@ -64,18 +73,17 @@ export const SpeculativeDecodingVisualizer: React.FC = () => {
         <div className="text-[25px] font-mono font-bold tracking-widest text-amber-300">02 · VERIFIER MODEL</div>
         <div className="mt-3 text-[32px] font-black">One forward pass checks them all</div>
         <div className="relative mx-auto mt-8 h-[180px] w-[760px] rounded-3xl border-2 border-amber-300/80 bg-amber-950/40 px-8 py-7 shadow-[0_0_36px_rgba(251,191,36,.2)]">
-          <div className="absolute bottom-3 right-8 text-[18px] font-mono font-bold tracking-widest text-amber-200">GREEN = REUSE · RED = RUN AGAIN</div>
           <div className="absolute left-[38px] right-[38px] top-[88px] h-[4px] bg-amber-300/70" />
           <div className="relative z-10 flex justify-center gap-4">
             {tokens.map((token, index) => {
-              const check = fade(frame, fps, 2.55 + index * 0.18, 2.85 + index * 0.18);
+              const check = fade(frame, fps, 6.55 + index * 0.65, 6.95 + index * 0.65);
               const accepted = index < 3;
               return (
                 <div key={token} className="flex w-[150px] flex-col items-center gap-3" style={{ opacity: check }}>
                   <div className={`flex h-[60px] w-[140px] items-center justify-center rounded-xl border-2 text-[23px] font-mono font-bold ${accepted ? "border-emerald-300 bg-emerald-950 text-emerald-100" : "border-rose-300 bg-rose-950 text-rose-100"}`}>
                     {token}
                   </div>
-                  <div className={`text-[24px] font-black ${accepted ? "text-emerald-300" : "text-rose-300"}`}>{accepted ? "✓ REUSE" : "↻ RUN AGAIN"}</div>
+                  <div className={`text-[22px] font-black ${accepted ? "text-emerald-300" : "text-rose-300"}`}>{accepted ? "✓ REUSE" : "↻ RETRY TOKEN"}</div>
                 </div>
               );
             })}
