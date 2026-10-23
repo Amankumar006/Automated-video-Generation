@@ -67,6 +67,9 @@ python3 pipeline/daily_shorts_daemon.py --run-now --source mixed --count 1
 
 # Dry-run paper discovery, script synthesis, and pedagogy audit without rendering
 python3 pipeline/daily_shorts_daemon.py --dry-run --count 1
+
+# Full pipeline validation with temporary, repository-isolated outputs
+python3 pipeline/run_pipeline.py --dry-run
 ```
 
 ### 2. Project Aether 3D Autonomous Cinematic Director

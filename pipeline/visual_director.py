@@ -305,7 +305,11 @@ class VisualDirector:
         # If all candidates used, fallback to the top match
         return sorted_candidates[0]
 
-    def prepare_storyboard_for_spec(self, spec: Dict[str, Any]) -> Dict[str, Any]:
+    def prepare_storyboard_for_spec(
+        self,
+        spec: Dict[str, Any],
+        allow_figure_extraction: bool = True,
+    ) -> Dict[str, Any]:
         """
         Plans the visual choreography for each beat based on the voiceover script.
         Assigns:
@@ -318,7 +322,13 @@ class VisualDirector:
         beats = spec.get("beats", [])
         paper_figures = [f for f in spec.get("paper_figures", []) if isinstance(f, dict)]
         arxiv_target = spec.get("arxiv_id")
-        if not paper_figures and arxiv_target and not str(arxiv_target).startswith("perk_") and not str(arxiv_target).startswith("gh_"):
+        if (
+            allow_figure_extraction
+            and not paper_figures
+            and arxiv_target
+            and not str(arxiv_target).startswith("perk_")
+            and not str(arxiv_target).startswith("gh_")
+        ):
             try:
                 from pipeline.arxiv_vector_extractor import extract_paper_figures, clean_arxiv_id
                 clean_id = clean_arxiv_id(str(arxiv_target))

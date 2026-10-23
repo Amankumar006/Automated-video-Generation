@@ -425,7 +425,10 @@ def test_run_pipeline_invokes_bespoke_synthesis_loop(monkeypatch, tmp_path):
         synthesized_beats.append(b_id)
         return f"/mock/path/beat_{b_id}.py"
 
-    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--topic", "test_wiring_e2e", "--dry-run"])
+    monkeypatch.setattr(
+        "sys.argv",
+        ["run_pipeline.py", "--topic", "test_wiring_e2e", "--dry-run", "--validate-visuals"],
+    )
     monkeypatch.setattr("pipeline.run_pipeline.load_template", lambda t: (mock_spec, template_file))
     monkeypatch.setattr("pipeline.run_pipeline.synthesize_audio_for_spec", lambda *args, **kwargs: mock_audio)
     monkeypatch.setattr("pipeline.bespoke_visual_synthesizer.bespoke_synthesizer.synthesize_visual_for_beat", mock_synthesize)

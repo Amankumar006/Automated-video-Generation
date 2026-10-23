@@ -196,11 +196,19 @@ DEDICATED FULL-SCREEN VISUAL BLUEPRINTS (CRITICAL ARCHITECTURAL DIRECTIVE):
 - STRICT BAN ON CARTOON X AND CHECKMARKS: Never draw crude red 'X' and green checkmark boxes like cheap clickbait. All visuals must feature real scientific hardware telemetry, mathematical equations, and technical flow mechanics!
 """
 
-def _persist_and_finalize_spec(spec: Dict[str, Any], topic: str, default_category: str) -> Dict[str, Any]:
+def _persist_and_finalize_spec(
+    spec: Dict[str, Any],
+    topic: str,
+    default_category: str,
+    persist: bool = True,
+    output_root: Optional[str | Path] = None,
+) -> Dict[str, Any]:
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", topic)).lower()
     spec["id"] = clean_id
     cat_slug = spec.get("category") or default_category
     spec["category"] = cat_slug
+    output_base = Path(output_root) if output_root else PROJECT_ROOT
+    math_output_dir = output_base / "public" / "math_svgs"
 
     # Auto-generate LaTeX SVGs with topic-scoped unique filenames
     if spec.get("math_formulas"):
@@ -218,19 +226,34 @@ def _persist_and_finalize_spec(spec: Dict[str, Any], topic: str, default_categor
             f["svg_filename"] = clean_fname
             fontsize = f.get("fontsize", 24)
             color = f.get("color", "white")
-            if latex and clean_fname:
+            if persist and latex and clean_fname:
                 try:
-                    render_math_to_svg(latex, clean_fname, fontsize=fontsize, color=color)
+                    render_math_to_svg(
+                        latex,
+                        clean_fname,
+                        fontsize=fontsize,
+                        color=color,
+                        output_dir=math_output_dir,
+                    )
                 except Exception as e:
                     print(f"⚠️ Warning: Could not render math SVG '{clean_fname}': {e}")
 
-    templates_dir = PROJECT_ROOT / "pipeline" / "templates"
-    templates_dir.mkdir(parents=True, exist_ok=True)
+    templates_dir = output_base / "pipeline" / "templates"
+    if persist:
+        templates_dir.mkdir(parents=True, exist_ok=True)
     out_file = templates_dir / f"{cat_slug}_{clean_id}.json"
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(spec, f, indent=2)
+    if persist:
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(spec, f, indent=2)
 
-    print(f"✅ Generated and saved template to: {out_file.relative_to(PROJECT_ROOT)}")
+    if persist:
+        try:
+            display_path = out_file.relative_to(PROJECT_ROOT)
+        except ValueError:
+            display_path = out_file
+        print(f"✅ Generated and saved template to: {display_path}")
+    else:
+        print("🧪 [Dry-Run] Finalized script in memory without writing templates or math assets.")
     return spec
 
 
@@ -238,7 +261,10 @@ def generate_script(
     topic: str,
     category: Optional[str] = None,
     context: Optional[str] = None,
-    arxiv_meta: Optional[Dict[str, Any]] = None
+    arxiv_meta: Optional[Dict[str, Any]] = None,
+    persist: bool = True,
+    output_root: Optional[str | Path] = None,
+    extract_figures: bool = True,
 ) -> Dict[str, Any]:
     """
     Unified multi-track script generation dispatch:
@@ -264,13 +290,17 @@ def generate_script(
         from pipeline.developer_perks_script_engine import developer_perks_script_engine
         print(f"🎁 [Track 3] Routing to Developer Perks Script Engine: '{topic}'...")
         spec = developer_perks_script_engine.generate_perks_script(topic=topic, perk_meta=arxiv_meta, context=context)
-        return _persist_and_finalize_spec(spec, topic, "developer_perks")
+        return _persist_and_finalize_spec(
+            spec, topic, "developer_perks", persist=persist, output_root=output_root
+        )
 
     if is_news:
         from pipeline.tech_news_script_engine import tech_news_script_engine
         print(f"📰 [Track 2] Routing to Tech News Script Engine: '{topic}'...")
         spec = tech_news_script_engine.generate_news_script(topic=topic, blog_meta=arxiv_meta, context=context)
-        return _persist_and_finalize_spec(spec, topic, "tech_news")
+        return _persist_and_finalize_spec(
+            spec, topic, "tech_news", persist=persist, output_root=output_root
+        )
 
     cat_hint = f"Target Category: {category or 'academic_breakdown'}" if category else "Choose the best matching category from: academic_breakdown, architecture_breakdown, model_showdown, mechanism_deepdive."
 
@@ -520,7 +550,7 @@ Generate the complete JSON specification strictly adhering to this structure:
         if arxiv_meta and arxiv_meta.get("paper_figures"):
             spec["paper_figures"] = arxiv_meta["paper_figures"]
             print(f"📊 Transferred {len(spec['paper_figures'])} paper figures from arxiv_meta into spec['paper_figures']")
-        elif not spec.get("paper_figures"):
+        elif not spec.get("paper_figures") and extract_figures:
             try:
                 print(f"📊 Ingesting paper figures for arXiv '{clean_arxiv}' into script spec...")
                 figs = extract_paper_figures(clean_arxiv, max_figures=5)
@@ -623,42 +653,13 @@ Generate the complete JSON specification strictly adhering to this structure:
     except Exception as e:
         print(f"⚠️ Warning: Could not enrich spec with VSG schema: {e}")
 
-    # Auto-generate LaTeX SVGs with topic-scoped unique filenames
-    print(f"📐 Auto-synthesizing {len(spec.get('math_formulas', []))} LaTeX mathematical SVGs...")
-    for f in spec.get("math_formulas", []):
-        latex = f.get("latex", "")
-        orig_fname = f.get("filename") or f.get("svg_filename") or ""
-        bid = f.get("beat_id", 1)
-        # Ensure filename is uniquely scoped to this paper ID to prevent cross-paper collisions
-        generic_names = {"formula.svg", "beat1_scale.svg", "beat2_bottleneck.svg", "beat3_architecture.svg", "beat4_mechanism.svg", "beat5_payoff.svg"}
-        if not orig_fname or orig_fname in generic_names or not orig_fname.startswith(clean_id):
-            clean_fname = f"{clean_id}_beat{bid}_formula.svg"
-        else:
-            clean_fname = orig_fname
-
-        # Set BOTH keys so every consumer resolves the file unambiguously
-        f["filename"] = clean_fname
-        f["svg_filename"] = clean_fname
-
-        fontsize = f.get("fontsize", 26)
-        color = f.get("color", "white")
-        if latex and clean_fname:
-            try:
-                render_math_to_svg(latex, clean_fname, fontsize=fontsize, color=color)
-            except Exception as e:
-                print(f"⚠️ Warning: Could not render math SVG '{clean_fname}': {e}")
-
-    # Save to templates directory
-    templates_dir = PROJECT_ROOT / "pipeline" / "templates"
-    templates_dir.mkdir(parents=True, exist_ok=True)
-    cat_slug = spec.get("category") or category or "mechanism_deepdive"
-    spec["category"] = cat_slug
-    out_file = templates_dir / f"{cat_slug}_{clean_id}.json"
-    with open(out_file, "w", encoding="utf-8") as f:
-        json.dump(spec, f, indent=2)
-
-    print(f"✅ Generated and saved template to: {out_file.relative_to(PROJECT_ROOT)}")
-    return spec
+    return _persist_and_finalize_spec(
+        spec,
+        topic,
+        category or "mechanism_deepdive",
+        persist=persist,
+        output_root=output_root,
+    )
 
 def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Autonomous Script Generator")

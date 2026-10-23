@@ -257,7 +257,8 @@ def _fetch_from_local_cache(arxiv_id: str) -> Optional[Dict[str, Any]]:
 def fetch_arxiv_paper(
     query: str,
     extract_figures: bool = True,
-    max_figures: int = 5
+    max_figures: int = 5,
+    write_cache: bool = True,
 ) -> Optional[Dict[str, Any]]:
     """
     Fetches paper metadata from arXiv given an ID or arXiv URL using a resilient
@@ -270,7 +271,8 @@ def fetch_arxiv_paper(
       Tier 5: Local Source Fallback
 
     When extract_figures=True, automatically invokes extract_paper_figures() and
-    populates res['paper_figures'].
+    populates res['paper_figures']. Set write_cache=False for read-only validation
+    runs that must not create metadata in the repository cache.
     """
     from pipeline.arxiv_vector_extractor import clean_arxiv_id, extract_paper_figures
 
@@ -299,7 +301,7 @@ def fetch_arxiv_paper(
             res = _fetch_from_semanticscholar(arxiv_id)
 
         # Save successful metadata to local cache
-        if res:
+        if res and write_cache:
             try:
                 paper_dir.mkdir(parents=True, exist_ok=True)
                 clean_meta = {k: v for k, v in res.items() if k != "paper_figures"}

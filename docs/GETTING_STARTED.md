@@ -73,6 +73,22 @@ Dry-run discovery and script generation:
 python3 pipeline/daily_shorts_daemon.py --dry-run --count 1 --source mixed
 ```
 
+For the full pipeline validation mode, `run_pipeline.py --dry-run` is
+repository-read-only: it writes temporary audio, captions, templates, visual
+modules, and preview frames outside the checkout, then removes that workspace
+when validation finishes.
+
+```bash
+python3 pipeline/run_pipeline.py --dry-run
+```
+
+Use `--validate-visuals` only when you explicitly want the dry run to invoke
+the LLM-backed bespoke visual synthesizer and sandbox checks:
+
+```bash
+python3 pipeline/run_pipeline.py --dry-run --validate-visuals
+```
+
 Render a specific paper locally:
 
 ```bash

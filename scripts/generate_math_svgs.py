@@ -4,6 +4,7 @@ Provides authentic Computer Modern / LaTeX mathematical notation without requiri
 """
 
 import os
+from pathlib import Path
 import matplotlib.pyplot as plt
 
 os.makedirs("public/math_svgs", exist_ok=True)
@@ -31,14 +32,22 @@ def sanitize_latex(latex_str: str) -> str:
     cleaned = cleaned.strip("$").strip()
     return f"${cleaned}$"
 
-def render_math_to_svg(latex_str: str, filename: str, fontsize: int = 24, color: str = "white"):
+def render_math_to_svg(
+    latex_str: str,
+    filename: str,
+    fontsize: int = 24,
+    color: str = "white",
+    output_dir: str | os.PathLike[str] = "public/math_svgs",
+):
     clean_latex = sanitize_latex(latex_str)
     fig = plt.figure(figsize=(6, 1.2))
     fig.patch.set_alpha(0.0)
     # Render with Computer Modern math font
     plt.rcParams['mathtext.fontset'] = 'cm'
     fig.text(0.5, 0.5, clean_latex, fontsize=fontsize, color=color, ha='center', va='center')
-    filepath = os.path.join("public/math_svgs", filename)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+    filepath = str(output_path / filename)
     plt.savefig(filepath, format='svg', transparent=True, bbox_inches='tight', pad_inches=0.05)
     plt.close(fig)
     
