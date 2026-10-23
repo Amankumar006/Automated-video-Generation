@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition } from "remotion";
 import { MoEVisualizerPreview } from "./compositions/MoEVisualizerPreview";
+import { SpeculativeDecodingPreview } from "./compositions/SpeculativeDecodingPreview";
 import "./style.css";
 
 export const Root: React.FC = () => {
@@ -27,6 +28,14 @@ export const Root: React.FC = () => {
         defaultProps={{
           showSafeZoneOverlay: true,
         }}
+      />
+      <Composition
+        id="SpeculativeDecodingPreview"
+        component={SpeculativeDecodingPreview}
+        durationInFrames={255}
+        fps={30}
+        width={1080}
+        height={1920}
       />
     </>
   );
