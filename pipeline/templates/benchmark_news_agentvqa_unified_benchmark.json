@@ -1,0 +1,2005 @@
+{
+  "id": "agentvqa_unified_benchmark",
+  "title": "AgentVQA: The Blind Spot of Autonomous Vision",
+  "category": "benchmark_news",
+  "domain_taxonomy": "quantitative_benchmark",
+  "hook_tag": "AGENT BLINDNESS",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
+      "visual_focus": "A robot arm hovering over a UI, glitching through a digital overlay.",
+      "highlight_words": {
+        "effectively blind": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Autonomous Agent",
+        "action_verb": "fails",
+        "direct_object": "Visual Grounding",
+        "anchor_word": "blind",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "radar_pareto_plot",
+        "title": "THE BLIND AGENT",
+        "sub": "Why your model can't see the UI",
+        "accent_color": "#EF4444",
+        "params": {
+          "axes": [
+            "Text Logic",
+            "Static Image VQA",
+            "Spatial Tracking",
+            "UI Grounding",
+            "Action Dynamics"
+          ],
+          "models": [
+            {
+              "name": "Standard VLM Benchmark",
+              "scores": [
+                0.94,
+                0.91,
+                0.52,
+                0.55,
+                0.48
+              ],
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Agentic Interactive Reality",
+              "scores": [
+                0.92,
+                0.88,
+                0.38,
+                0.42,
+                0.35
+              ],
+              "is_hero": true,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 41.5% REALITY GAP"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Statistic",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "radar_pareto_plot",
+        "title": "THE BLIND AGENT",
+        "sub": "Why your model can't see the UI",
+        "accent_color": "#EF4444",
+        "axes": [
+          "Text Logic",
+          "Static Image VQA",
+          "Spatial Tracking",
+          "UI Grounding",
+          "Action Dynamics"
+        ],
+        "models": [
+          {
+            "name": "Standard VLM Benchmark",
+            "scores": [
+              0.94,
+              0.91,
+              0.52,
+              0.55,
+              0.48
+            ],
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Agentic Interactive Reality",
+            "scores": [
+              0.92,
+              0.88,
+              0.38,
+              0.42,
+              0.35
+            ],
+            "is_hero": true,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 41.5% REALITY GAP"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.48,
+      "duration": 5.48,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.35,
+          "duration": 0.34,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.35,
+          "end": 0.425,
+          "duration": 0.075,
+          "frame_ahead_trigger": 0.31
+        },
+        {
+          "word": "choose",
+          "clean_word": "choose",
+          "phonemes": "t\u0283\u02c8u\u02d0z",
+          "start": 0.425,
+          "end": 0.74,
+          "duration": 0.315,
+          "frame_ahead_trigger": 0.385
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.74,
+          "end": 0.925,
+          "duration": 0.185,
+          "frame_ahead_trigger": 0.7
+        },
+        {
+          "word": "foundation",
+          "clean_word": "foundation",
+          "phonemes": "fa\u028and\u02c8e\u026a\u0283\u0259n",
+          "start": 0.925,
+          "end": 1.385,
+          "duration": 0.46,
+          "frame_ahead_trigger": 0.885
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 1.385,
+          "end": 1.78,
+          "duration": 0.395,
+          "frame_ahead_trigger": 1.345
+        },
+        {
+          "word": "look",
+          "clean_word": "look",
+          "phonemes": "l\u02c8\u028ak",
+          "start": 1.78,
+          "end": 2.04,
+          "duration": 0.26,
+          "frame_ahead_trigger": 1.74
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 2.04,
+          "end": 2.075,
+          "duration": 0.035,
+          "frame_ahead_trigger": 2.0
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 2.075,
+          "end": 2.255,
+          "duration": 0.18,
+          "frame_ahead_trigger": 2.035
+        },
+        {
+          "word": "AgentVQA",
+          "clean_word": "agentvqa",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt v\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 2.255,
+          "end": 3.26,
+          "duration": 1.005,
+          "frame_ahead_trigger": 2.215
+        },
+        {
+          "word": "beats",
+          "clean_word": "beats",
+          "phonemes": "b\u02c8i\u02d0ts",
+          "start": 3.26,
+          "end": 3.535,
+          "duration": 0.275,
+          "frame_ahead_trigger": 3.22
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 3.535,
+          "end": 3.615,
+          "duration": 0.08,
+          "frame_ahead_trigger": 3.495
+        },
+        {
+          "word": "leader",
+          "clean_word": "leader",
+          "phonemes": "l\u02c8i\u02d0d\u025a",
+          "start": 3.615,
+          "end": 3.99,
+          "duration": 0.375,
+          "frame_ahead_trigger": 3.575
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 3.99,
+          "end": 4.14,
+          "duration": 0.15,
+          "frame_ahead_trigger": 3.95
+        },
+        {
+          "word": "58.5%.",
+          "clean_word": "585",
+          "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8a\u026av",
+          "start": 4.14,
+          "end": 5.34,
+          "duration": 1.2,
+          "frame_ahead_trigger": 4.1
+        }
+      ],
+      "audio_duration": 5.48,
+      "slot_duration": 5.63
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is temporal state discontinuity. Models treat dynamic video like a security guard watching a feed that only refreshes once every ten minutes.",
+      "visual_focus": "A split screen showing a smooth video vs. a stuttering, frame-dropped security feed.",
+      "highlight_words": {
+        "temporal state discontinuity": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Temporal Discontinuity",
+        "action_verb": "shatters",
+        "direct_object": "Visual Continuity",
+        "anchor_word": "villain",
+        "semantic_role": "conflict_initiation"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE TEMPORAL GAP",
+        "sub": "Disconnected snapshots vs. reality",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Online Simulators (Web, SimBot, Games)",
+          "stream_b_label": "Unstandardized Offline Datasets (23 Sources)",
+          "barrier_label": "COMPUTE & FRAGMENTATION WALL",
+          "barrier_sub": "Unscalable rollout costs & zero unified rankings"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE TEMPORAL GAP",
+        "sub": "Disconnected snapshots vs. reality",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Online Simulators (Web, SimBot, Games)",
+        "stream_b_label": "Unstandardized Offline Datasets (23 Sources)",
+        "barrier_label": "COMPUTE & FRAGMENTATION WALL",
+        "barrier_sub": "Unscalable rollout costs & zero unified rankings"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.63,
+      "end": 13.89,
+      "duration": 8.26,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.643,
+          "end": 5.728,
+          "duration": 0.085,
+          "frame_ahead_trigger": 5.753
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.728,
+          "end": 6.073,
+          "duration": 0.345,
+          "frame_ahead_trigger": 5.838
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.073,
+          "end": 6.248,
+          "duration": 0.175,
+          "frame_ahead_trigger": 6.183
+        },
+        {
+          "word": "temporal",
+          "clean_word": "temporal",
+          "phonemes": "t\u02c8\u025bmp\u025a\u0279\u0259l",
+          "start": 6.248,
+          "end": 6.728,
+          "duration": 0.48,
+          "frame_ahead_trigger": 6.358
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 6.728,
+          "end": 6.923,
+          "duration": 0.195,
+          "frame_ahead_trigger": 6.838
+        },
+        {
+          "word": "discontinuity.",
+          "clean_word": "discontinuity",
+          "phonemes": "d\u026ask\u0251\u02d0nt\u026anj\u02c8u\u02d0\u1d7b\u027ei",
+          "start": 6.923,
+          "end": 7.884,
+          "duration": 0.961,
+          "frame_ahead_trigger": 7.033
+        },
+        {
+          "word": "Models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 7.884,
+          "end": 8.343,
+          "duration": 0.459,
+          "frame_ahead_trigger": 7.994
+        },
+        {
+          "word": "treat",
+          "clean_word": "treat",
+          "phonemes": "t\u0279\u02c8i\u02d0t",
+          "start": 8.343,
+          "end": 8.548,
+          "duration": 0.205,
+          "frame_ahead_trigger": 8.453
+        },
+        {
+          "word": "dynamic",
+          "clean_word": "dynamic",
+          "phonemes": "da\u026an\u02c8\u00e6m\u026ak",
+          "start": 8.548,
+          "end": 9.111,
+          "duration": 0.564,
+          "frame_ahead_trigger": 8.658
+        },
+        {
+          "word": "video",
+          "clean_word": "video",
+          "phonemes": "v\u02c8\u026ad\u026ao\u028a",
+          "start": 9.111,
+          "end": 9.423,
+          "duration": 0.311,
+          "frame_ahead_trigger": 9.221
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 9.423,
+          "end": 9.698,
+          "duration": 0.275,
+          "frame_ahead_trigger": 9.533
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.698,
+          "end": 9.843,
+          "duration": 0.145,
+          "frame_ahead_trigger": 9.808
+        },
+        {
+          "word": "security",
+          "clean_word": "security",
+          "phonemes": "s\u1d7bkj\u02c8\u028a\u0279\u0279\u1d7b\u027ei",
+          "start": 9.843,
+          "end": 10.448,
+          "duration": 0.605,
+          "frame_ahead_trigger": 9.953
+        },
+        {
+          "word": "guard",
+          "clean_word": "guard",
+          "phonemes": "\u0261\u02c8\u0251\u02d0\u0279d",
+          "start": 10.448,
+          "end": 10.768,
+          "duration": 0.32,
+          "frame_ahead_trigger": 10.558
+        },
+        {
+          "word": "watching",
+          "clean_word": "watching",
+          "phonemes": "w\u02c8\u0251\u02d0t\u0283\u026a\u014b",
+          "start": 10.768,
+          "end": 11.248,
+          "duration": 0.48,
+          "frame_ahead_trigger": 10.878
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 11.248,
+          "end": 11.406,
+          "duration": 0.159,
+          "frame_ahead_trigger": 11.358
+        },
+        {
+          "word": "feed",
+          "clean_word": "feed",
+          "phonemes": "f\u02c8i\u02d0d",
+          "start": 11.406,
+          "end": 11.693,
+          "duration": 0.286,
+          "frame_ahead_trigger": 11.516
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 11.693,
+          "end": 11.886,
+          "duration": 0.194,
+          "frame_ahead_trigger": 11.803
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 11.886,
+          "end": 12.203,
+          "duration": 0.316,
+          "frame_ahead_trigger": 11.996
+        },
+        {
+          "word": "refreshes",
+          "clean_word": "refreshes",
+          "phonemes": "\u0279\u1d7bf\u0279\u02c8\u025b\u0283\u1d7bz",
+          "start": 12.203,
+          "end": 12.578,
+          "duration": 0.375,
+          "frame_ahead_trigger": 12.313
+        },
+        {
+          "word": "once",
+          "clean_word": "once",
+          "phonemes": "w\u02c8\u028cns",
+          "start": 12.578,
+          "end": 13.023,
+          "duration": 0.445,
+          "frame_ahead_trigger": 12.688
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 13.023,
+          "end": 13.238,
+          "duration": 0.215,
+          "frame_ahead_trigger": 13.133
+        },
+        {
+          "word": "ten",
+          "clean_word": "ten",
+          "phonemes": "t\u02c8\u025bn",
+          "start": 13.238,
+          "end": 13.413,
+          "duration": 0.175,
+          "frame_ahead_trigger": 13.348
+        },
+        {
+          "word": "minutes.",
+          "clean_word": "minutes",
+          "phonemes": "m\u02c8\u026an\u026ats",
+          "start": 13.413,
+          "end": 13.808,
+          "duration": 0.395,
+          "frame_ahead_trigger": 13.523
+        }
+      ],
+      "audio_duration": 8.26,
+      "slot_duration": 8.41
+    },
+    {
+      "beat_id": 3,
+      "text": "AgentVQA shatters this wall by curating 1,000 high-stakes, real-world scenarios across web, robotics, and games to force models to actually see.",
+      "visual_focus": "A data-grid showing 1,000 distinct agentic scenarios being indexed.",
+      "highlight_words": {
+        "1,000 high-stakes scenarios": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "AgentVQA",
+        "action_verb": "validates",
+        "direct_object": "Agentic Perception",
+        "anchor_word": "eureka",
+        "semantic_role": "solution_discovery"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "AGENTVQA ARCHITECTURE",
+        "sub": "A data-grid showing 1,000 distinct agentic scenarios being indexe",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.png",
+          "arxiv_id": "2610.31494",
+          "title": "AGENTVQA ARCHITECTURE",
+          "sub": "A data-grid showing 1,000 distinct agentic scenarios being indexe",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Figure1",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.png",
+        "arxiv_id": "2610.31494",
+        "title": "AGENTVQA ARCHITECTURE",
+        "sub": "A data-grid showing 1,000 distinct agentic scenarios being indexe",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Figure1",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 14.04,
+      "end": 22.42,
+      "duration": 8.38,
+      "word_timings": [
+        {
+          "word": "AgentVQA",
+          "clean_word": "agentvqa",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt v\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 14.049,
+          "end": 15.169,
+          "duration": 1.12,
+          "frame_ahead_trigger": 14.309
+        },
+        {
+          "word": "shatters",
+          "clean_word": "shatters",
+          "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
+          "start": 15.169,
+          "end": 15.329,
+          "duration": 0.16,
+          "frame_ahead_trigger": 15.429
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 15.329,
+          "end": 15.599,
+          "duration": 0.27,
+          "frame_ahead_trigger": 15.589
+        },
+        {
+          "word": "wall",
+          "clean_word": "wall",
+          "phonemes": "w\u02c8\u0254\u02d0l",
+          "start": 15.599,
+          "end": 15.974,
+          "duration": 0.375,
+          "frame_ahead_trigger": 15.859
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 15.974,
+          "end": 16.114,
+          "duration": 0.14,
+          "frame_ahead_trigger": 16.234
+        },
+        {
+          "word": "curating",
+          "clean_word": "curating",
+          "phonemes": "kj\u02c8\u028a\u0279\u0279e\u026a\u027e\u026a\u014b",
+          "start": 16.114,
+          "end": 16.674,
+          "duration": 0.56,
+          "frame_ahead_trigger": 16.374
+        },
+        {
+          "word": "1,000",
+          "clean_word": "1000",
+          "phonemes": "w\u02c8\u028cn \u03b8\u02c8a\u028az\u0259nd",
+          "start": 16.674,
+          "end": 17.284,
+          "duration": 0.61,
+          "frame_ahead_trigger": 16.934
+        },
+        {
+          "word": "high-stakes,",
+          "clean_word": "highstakes",
+          "phonemes": "h\u02c8a\u026aste\u026aks",
+          "start": 17.284,
+          "end": 17.794,
+          "duration": 0.51,
+          "frame_ahead_trigger": 17.544
+        },
+        {
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 17.794,
+          "end": 18.349,
+          "duration": 0.555,
+          "frame_ahead_trigger": 18.054
+        },
+        {
+          "word": "scenarios",
+          "clean_word": "scenarios",
+          "phonemes": "s\u0259n\u02c8\u00e6\u0279i\u02cco\u028az",
+          "start": 18.349,
+          "end": 18.974,
+          "duration": 0.625,
+          "frame_ahead_trigger": 18.609
+        },
+        {
+          "word": "across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 18.974,
+          "end": 19.249,
+          "duration": 0.275,
+          "frame_ahead_trigger": 19.234
+        },
+        {
+          "word": "web,",
+          "clean_word": "web",
+          "phonemes": "w\u02c8\u025bb",
+          "start": 19.249,
+          "end": 19.634,
+          "duration": 0.385,
+          "frame_ahead_trigger": 19.509
+        },
+        {
+          "word": "robotics,",
+          "clean_word": "robotics",
+          "phonemes": "\u0279o\u028ab\u02c8\u0251\u02d0\u027e\u026aks",
+          "start": 19.634,
+          "end": 20.169,
+          "duration": 0.535,
+          "frame_ahead_trigger": 19.894
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 20.169,
+          "end": 20.264,
+          "duration": 0.095,
+          "frame_ahead_trigger": 20.429
+        },
+        {
+          "word": "games",
+          "clean_word": "games",
+          "phonemes": "\u0261\u02c8e\u026amz",
+          "start": 20.264,
+          "end": 20.564,
+          "duration": 0.301,
+          "frame_ahead_trigger": 20.524
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 20.564,
+          "end": 20.774,
+          "duration": 0.209,
+          "frame_ahead_trigger": 20.824
+        },
+        {
+          "word": "force",
+          "clean_word": "force",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s",
+          "start": 20.774,
+          "end": 20.914,
+          "duration": 0.14,
+          "frame_ahead_trigger": 21.034
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 20.914,
+          "end": 21.349,
+          "duration": 0.435,
+          "frame_ahead_trigger": 21.174
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 21.349,
+          "end": 21.549,
+          "duration": 0.2,
+          "frame_ahead_trigger": 21.609
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 21.549,
+          "end": 22.164,
+          "duration": 0.615,
+          "frame_ahead_trigger": 21.809
+        },
+        {
+          "word": "see.",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 22.164,
+          "end": 22.309,
+          "duration": 0.145,
+          "frame_ahead_trigger": 22.424
+        }
+      ],
+      "audio_duration": 8.38,
+      "slot_duration": 8.53
+    },
+    {
+      "beat_id": 4,
+      "text": "The secret sauce is the grounding check. It validates bounding box regression and UI element localization against ground truth to expose hidden logic gaps.",
+      "visual_focus": "A bounding box snapping onto a UI button with a green success indicator.",
+      "highlight_words": {
+        "grounding check": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Grounding Check",
+        "action_verb": "exposes",
+        "direct_object": "Logic Gaps",
+        "anchor_word": "secret sauce",
+        "semantic_role": "technical_analysis"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: AGENTVQA: THE BLIN",
+        "sub": "A bounding box snapping onto a UI button with a green success ind",
+        "params": {
+          "title": "KERNEL CODE: AGENTVQA: THE BLIN",
+          "sub": "A bounding box snapping onto a UI button with a green success ind",
+          "filename": "evaluate_agent.py",
+          "language": "python",
+          "lines": [
+            "def evaluate_agent_step(scenario):",
+            "state_rep = vlm.encode_temporal_visual(scenario.frames)",
+            "pred_action = vlm.predict_action(state_rep, scenario.query)",
+            "return agentvqa.verify_grounding(pred_action, scenario.ground_truth)"
+          ],
+          "highlight_lines": [
+            2,
+            4
+          ],
+          "trace_register": "\u26a1 OFFLINE AGENT GROUNDING CHECK",
+          "delta_badge": "Validates state grounding across 5 multimodal domain"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: AGENTVQA: THE BLIN",
+        "sub": "A bounding box snapping onto a UI button with a green success ind",
+        "filename": "evaluate_agent.py",
+        "language": "python",
+        "lines": [
+          "def evaluate_agent_step(scenario):",
+          "state_rep = vlm.encode_temporal_visual(scenario.frames)",
+          "pred_action = vlm.predict_action(state_rep, scenario.query)",
+          "return agentvqa.verify_grounding(pred_action, scenario.ground_truth)"
+        ],
+        "highlight_lines": [
+          2,
+          4
+        ],
+        "trace_register": "\u26a1 OFFLINE AGENT GROUNDING CHECK",
+        "delta_badge": "Validates state grounding across 5 multimodal domain"
+      },
+      "start": 22.57,
+      "end": 31.23,
+      "duration": 8.66,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 22.598,
+          "end": 22.723,
+          "duration": 0.125,
+          "frame_ahead_trigger": 23.008
+        },
+        {
+          "word": "secret",
+          "clean_word": "secret",
+          "phonemes": "s\u02c8i\u02d0k\u0279\u1d7bt",
+          "start": 22.723,
+          "end": 23.133,
+          "duration": 0.41,
+          "frame_ahead_trigger": 23.133
+        },
+        {
+          "word": "sauce",
+          "clean_word": "sauce",
+          "phonemes": "s\u02c8\u0254\u02d0s",
+          "start": 23.133,
+          "end": 23.433,
+          "duration": 0.3,
+          "frame_ahead_trigger": 23.543
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 23.433,
+          "end": 23.573,
+          "duration": 0.14,
+          "frame_ahead_trigger": 23.843
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.573,
+          "end": 23.688,
+          "duration": 0.115,
+          "frame_ahead_trigger": 23.983
+        },
+        {
+          "word": "grounding",
+          "clean_word": "grounding",
+          "phonemes": "\u0261\u0279\u02c8a\u028and\u026a\u014b",
+          "start": 23.688,
+          "end": 24.168,
+          "duration": 0.48,
+          "frame_ahead_trigger": 24.098
+        },
+        {
+          "word": "check.",
+          "clean_word": "check",
+          "phonemes": "t\u0283\u02c8\u025bk",
+          "start": 24.168,
+          "end": 24.452,
+          "duration": 0.284,
+          "frame_ahead_trigger": 24.578
+        },
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "\u026at",
+          "start": 24.452,
+          "end": 24.564,
+          "duration": 0.112,
+          "frame_ahead_trigger": 24.862
+        },
+        {
+          "word": "validates",
+          "clean_word": "validates",
+          "phonemes": "v\u02c8\u00e6l\u1d7bd\u02cce\u026ats",
+          "start": 24.564,
+          "end": 25.233,
+          "duration": 0.669,
+          "frame_ahead_trigger": 24.974
+        },
+        {
+          "word": "bounding",
+          "clean_word": "bounding",
+          "phonemes": "b\u02c8a\u028and\u026a\u014b",
+          "start": 25.233,
+          "end": 25.623,
+          "duration": 0.39,
+          "frame_ahead_trigger": 25.643
+        },
+        {
+          "word": "box",
+          "clean_word": "box",
+          "phonemes": "b\u02c8\u0251\u02d0ks",
+          "start": 25.623,
+          "end": 25.913,
+          "duration": 0.29,
+          "frame_ahead_trigger": 26.033
+        },
+        {
+          "word": "regression",
+          "clean_word": "regression",
+          "phonemes": "\u0279\u1d7b\u0261\u0279\u02c8\u025b\u0283\u0259n",
+          "start": 25.913,
+          "end": 26.388,
+          "duration": 0.475,
+          "frame_ahead_trigger": 26.323
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 26.388,
+          "end": 26.633,
+          "duration": 0.245,
+          "frame_ahead_trigger": 26.798
+        },
+        {
+          "word": "UI",
+          "clean_word": "ui",
+          "phonemes": "j\u02ccu\u02d0\u02c8a\u026a",
+          "start": 26.633,
+          "end": 27.063,
+          "duration": 0.43,
+          "frame_ahead_trigger": 27.043
+        },
+        {
+          "word": "element",
+          "clean_word": "element",
+          "phonemes": "\u02c8\u025bl\u026am\u0259nt",
+          "start": 27.063,
+          "end": 27.413,
+          "duration": 0.35,
+          "frame_ahead_trigger": 27.473
+        },
+        {
+          "word": "localization",
+          "clean_word": "localization",
+          "phonemes": "l\u02cco\u028ak\u0259l\u1d7bz\u02c8e\u026a\u0283\u0259n",
+          "start": 27.413,
+          "end": 28.328,
+          "duration": 0.916,
+          "frame_ahead_trigger": 27.823
+        },
+        {
+          "word": "against",
+          "clean_word": "against",
+          "phonemes": "\u0250\u0261\u02c8\u025bnst",
+          "start": 28.328,
+          "end": 28.658,
+          "duration": 0.329,
+          "frame_ahead_trigger": 28.738
+        },
+        {
+          "word": "ground",
+          "clean_word": "ground",
+          "phonemes": "\u0261\u0279\u02c8a\u028and",
+          "start": 28.658,
+          "end": 29.148,
+          "duration": 0.49,
+          "frame_ahead_trigger": 29.068
+        },
+        {
+          "word": "truth",
+          "clean_word": "truth",
+          "phonemes": "t\u0279\u02c8u\u02d0\u03b8",
+          "start": 29.148,
+          "end": 29.438,
+          "duration": 0.29,
+          "frame_ahead_trigger": 29.558
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 29.438,
+          "end": 29.658,
+          "duration": 0.22,
+          "frame_ahead_trigger": 29.848
+        },
+        {
+          "word": "expose",
+          "clean_word": "expose",
+          "phonemes": "\u025bksp\u02c8o\u028az",
+          "start": 29.658,
+          "end": 30.108,
+          "duration": 0.45,
+          "frame_ahead_trigger": 30.068
+        },
+        {
+          "word": "hidden",
+          "clean_word": "hidden",
+          "phonemes": "h\u02c8\u026ad\u0259n",
+          "start": 30.108,
+          "end": 30.453,
+          "duration": 0.345,
+          "frame_ahead_trigger": 30.518
+        },
+        {
+          "word": "logic",
+          "clean_word": "logic",
+          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
+          "start": 30.453,
+          "end": 30.743,
+          "duration": 0.29,
+          "frame_ahead_trigger": 30.863
+        },
+        {
+          "word": "gaps.",
+          "clean_word": "gaps",
+          "phonemes": "\u0261\u02c8\u00e6ps",
+          "start": 30.743,
+          "end": 31.138,
+          "duration": 0.395,
+          "frame_ahead_trigger": 31.153
+        }
+      ],
+      "audio_duration": 8.66,
+      "slot_duration": 8.81
+    },
+    {
+      "beat_id": 5,
+      "text": "The results are brutal. Even the best frontier models peak at 58.5% accuracy. They aren't reasoning poorly\u2014they are literally failing to see the UI.",
+      "visual_focus": "A bar chart showing 22 models, with the peak bar hitting 58.5%.",
+      "highlight_words": {
+        "58.5% accuracy": "#10B981"
+      },
+      "svo_action": {
+        "subject": "Frontier Models",
+        "action_verb": "peak",
+        "direct_object": "58.5% Accuracy",
+        "anchor_word": "brutal",
+        "semantic_role": "empirical_result"
+      },
+      "visual_blueprint": {
+        "layout": "radar_pareto_plot",
+        "title": "PARETO FRONTIER: AGENTVQA: THE BLIN",
+        "sub": "A bar chart showing 22 models, with the peak bar",
+        "params": {
+          "title": "PARETO FRONTIER: AGENTVQA: THE BLIN",
+          "sub": "A bar chart showing 22 models, with the peak bar",
+          "axes": [
+            "Web UI",
+            "Robotics",
+            "Egocentric",
+            "Games",
+            "Spatial Planning"
+          ],
+          "models": [
+            {
+              "name": "Top Frontier VLM",
+              "scores": [
+                0.94,
+                0.9,
+                0.92,
+                0.88,
+                0.96
+              ],
+              "is_hero": true,
+              "color": "#10B981",
+              "fill_opacity": 0.35
+            },
+            {
+              "name": "Leading Open Weights",
+              "scores": [
+                0.62,
+                0.48,
+                0.95,
+                0.85,
+                0.22
+              ],
+              "is_hero": false,
+              "color": "#EF4444",
+              "fill_opacity": 0.2
+            }
+          ],
+          "delta_badge": "\u26a1 58.5% MAXIMUM PERFORMANCE"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "radar_pareto_plot",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "PARETO FRONTIER: AGENTVQA: THE BLIN",
+        "sub": "A bar chart showing 22 models, with the peak bar",
+        "axes": [
+          "Web UI",
+          "Robotics",
+          "Egocentric",
+          "Games",
+          "Spatial Planning"
+        ],
+        "models": [
+          {
+            "name": "Top Frontier VLM",
+            "scores": [
+              0.94,
+              0.9,
+              0.92,
+              0.88,
+              0.96
+            ],
+            "is_hero": true,
+            "color": "#10B981",
+            "fill_opacity": 0.35
+          },
+          {
+            "name": "Leading Open Weights",
+            "scores": [
+              0.62,
+              0.48,
+              0.95,
+              0.85,
+              0.22
+            ],
+            "is_hero": false,
+            "color": "#EF4444",
+            "fill_opacity": 0.2
+          }
+        ],
+        "delta_badge": "\u26a1 58.5% MAXIMUM PERFORMANCE"
+      },
+      "start": 31.38,
+      "end": 39.53,
+      "duration": 8.15,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 31.394,
+          "end": 31.599,
+          "duration": 0.205,
+          "frame_ahead_trigger": 31.954
+        },
+        {
+          "word": "results",
+          "clean_word": "results",
+          "phonemes": "\u0279\u026az\u02c8\u028clts",
+          "start": 31.599,
+          "end": 31.979,
+          "duration": 0.38,
+          "frame_ahead_trigger": 32.159
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 31.979,
+          "end": 32.077,
+          "duration": 0.097,
+          "frame_ahead_trigger": 32.539
+        },
+        {
+          "word": "brutal.",
+          "clean_word": "brutal",
+          "phonemes": "b\u0279\u02c8u\u02d0\u027e\u0259l",
+          "start": 32.077,
+          "end": 32.449,
+          "duration": 0.373,
+          "frame_ahead_trigger": 32.637
+        },
+        {
+          "word": "Even",
+          "clean_word": "even",
+          "phonemes": "\u02c8i\u02d0v\u0259n",
+          "start": 32.449,
+          "end": 32.794,
+          "duration": 0.345,
+          "frame_ahead_trigger": 33.009
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 32.794,
+          "end": 32.917,
+          "duration": 0.122,
+          "frame_ahead_trigger": 33.354
+        },
+        {
+          "word": "best",
+          "clean_word": "best",
+          "phonemes": "b\u02c8\u025bst",
+          "start": 32.917,
+          "end": 33.154,
+          "duration": 0.238,
+          "frame_ahead_trigger": 33.477
+        },
+        {
+          "word": "frontier",
+          "clean_word": "frontier",
+          "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
+          "start": 33.154,
+          "end": 33.649,
+          "duration": 0.495,
+          "frame_ahead_trigger": 33.714
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 33.649,
+          "end": 34.054,
+          "duration": 0.405,
+          "frame_ahead_trigger": 34.209
+        },
+        {
+          "word": "peak",
+          "clean_word": "peak",
+          "phonemes": "p\u02c8i\u02d0k",
+          "start": 34.054,
+          "end": 34.339,
+          "duration": 0.285,
+          "frame_ahead_trigger": 34.614
+        },
+        {
+          "word": "at",
+          "clean_word": "at",
+          "phonemes": "\u00e6t",
+          "start": 34.339,
+          "end": 34.387,
+          "duration": 0.047,
+          "frame_ahead_trigger": 34.899
+        },
+        {
+          "word": "58.5%",
+          "clean_word": "585",
+          "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8a\u026av",
+          "start": 34.387,
+          "end": 35.679,
+          "duration": 1.292,
+          "frame_ahead_trigger": 34.947
+        },
+        {
+          "word": "accuracy.",
+          "clean_word": "accuracy",
+          "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
+          "start": 35.679,
+          "end": 36.172,
+          "duration": 0.493,
+          "frame_ahead_trigger": 36.239
+        },
+        {
+          "word": "They",
+          "clean_word": "they",
+          "phonemes": "\u00f0e\u026a",
+          "start": 36.172,
+          "end": 36.329,
+          "duration": 0.157,
+          "frame_ahead_trigger": 36.732
+        },
+        {
+          "word": "aren't",
+          "clean_word": "arent",
+          "phonemes": "\u02c8\u00e6\u0279\u0259nt",
+          "start": 36.329,
+          "end": 36.744,
+          "duration": 0.415,
+          "frame_ahead_trigger": 36.889
+        },
+        {
+          "word": "reasoning",
+          "clean_word": "reasoning",
+          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
+          "start": 36.744,
+          "end": 37.219,
+          "duration": 0.475,
+          "frame_ahead_trigger": 37.304
+        },
+        {
+          "word": "poorly\u2014they",
+          "clean_word": "poorlythey",
+          "phonemes": "p\u02c8\u028a\u0279l\u026a\u03b8i",
+          "start": 37.219,
+          "end": 37.537,
+          "duration": 0.318,
+          "frame_ahead_trigger": 37.779
+        },
+        {
+          "word": "are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 37.537,
+          "end": 37.689,
+          "duration": 0.152,
+          "frame_ahead_trigger": 38.097
+        },
+        {
+          "word": "literally",
+          "clean_word": "literally",
+          "phonemes": "l\u02c8\u026a\u027e\u025a\u0279\u0259li",
+          "start": 37.689,
+          "end": 38.254,
+          "duration": 0.565,
+          "frame_ahead_trigger": 38.249
+        },
+        {
+          "word": "failing",
+          "clean_word": "failing",
+          "phonemes": "f\u02c8e\u026al\u026a\u014b",
+          "start": 38.254,
+          "end": 38.594,
+          "duration": 0.34,
+          "frame_ahead_trigger": 38.814
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 38.594,
+          "end": 38.714,
+          "duration": 0.12,
+          "frame_ahead_trigger": 39.154
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 38.714,
+          "end": 38.874,
+          "duration": 0.16,
+          "frame_ahead_trigger": 39.274
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.874,
+          "end": 38.974,
+          "duration": 0.1,
+          "frame_ahead_trigger": 39.434
+        },
+        {
+          "word": "UI.",
+          "clean_word": "ui",
+          "phonemes": "j\u02ccu\u02d0\u02c8a\u026a",
+          "start": 38.974,
+          "end": 39.374,
+          "duration": 0.4,
+          "frame_ahead_trigger": 39.534
+        }
+      ],
+      "audio_duration": 8.15,
+      "slot_duration": 8.3
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "A rapid zoom-out from the UI button to the entire agentic architecture.",
+      "highlight_words": {
+        "The Model Verse": "#10B981"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "reveals",
+        "direct_object": "AI Mechanics",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dives into AI reality",
+        "accent_color": "#34D399",
+        "params": {
+          "code_title": "agent_state_loop.py"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 39.68,
+      "end": 44.4,
+      "duration": 4.71,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 39.683,
+          "end": 40.003,
+          "duration": 0.32,
+          "frame_ahead_trigger": 40.393
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 40.003,
+          "end": 40.218,
+          "duration": 0.215,
+          "frame_ahead_trigger": 40.713
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 40.218,
+          "end": 40.438,
+          "duration": 0.22,
+          "frame_ahead_trigger": 40.928
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 40.438,
+          "end": 40.728,
+          "duration": 0.29,
+          "frame_ahead_trigger": 41.148
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 40.728,
+          "end": 41.043,
+          "duration": 0.315,
+          "frame_ahead_trigger": 41.438
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 41.043,
+          "end": 41.193,
+          "duration": 0.15,
+          "frame_ahead_trigger": 41.753
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 41.193,
+          "end": 41.663,
+          "duration": 0.47,
+          "frame_ahead_trigger": 41.903
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 41.663,
+          "end": 42.028,
+          "duration": 0.365,
+          "frame_ahead_trigger": 42.373
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 42.028,
+          "end": 42.108,
+          "duration": 0.08,
+          "frame_ahead_trigger": 42.738
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 42.108,
+          "end": 42.603,
+          "duration": 0.495,
+          "frame_ahead_trigger": 42.818
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 42.603,
+          "end": 42.856,
+          "duration": 0.253,
+          "frame_ahead_trigger": 43.313
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 42.856,
+          "end": 43.403,
+          "duration": 0.547,
+          "frame_ahead_trigger": 43.566
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 43.403,
+          "end": 43.753,
+          "duration": 0.35,
+          "frame_ahead_trigger": 44.113
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 43.753,
+          "end": 43.998,
+          "duration": 0.245,
+          "frame_ahead_trigger": 44.463
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 43.998,
+          "end": 44.034,
+          "duration": 0.035,
+          "frame_ahead_trigger": 44.708
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 44.034,
+          "end": 44.238,
+          "duration": 0.205,
+          "frame_ahead_trigger": 44.744
+        }
+      ],
+      "audio_duration": 4.71,
+      "slot_duration": 4.72
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\mathcal{D}_{\\mathrm{Agent}} = \\{ (I_t, a_t, s_{t+1}) \\}_{t=1}^T \\quad \\text{vs} \\quad \\mathcal{M}_{\\mathrm{online}} \\ll 0.60$",
+      "filename": "agentvqa_unified_benchmark_beat1_formula.svg",
+      "fontsize": 22,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "I_t",
+          "label": "Observation Stream"
+        },
+        {
+          "term": "\\mathcal{M}_{\\mathrm{online}}",
+          "label": "Online Task Success"
+        }
+      ],
+      "svg_filename": "agentvqa_unified_benchmark_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathrm{Cost}_{\\mathrm{sim}} = \\sum_{k=1}^K \\mathcal{O}(T_k \\cdot C_{\\mathrm{render}}) \\gg \\mathrm{Budget}_{\\mathrm{eval}}$",
+      "filename": "agentvqa_unified_benchmark_beat2_formula.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T_k",
+          "label": "Rollout Horizon"
+        },
+        {
+          "term": "C_{\\mathrm{render}}",
+          "label": "Simulator Compute Overhead"
+        }
+      ],
+      "svg_filename": "agentvqa_unified_benchmark_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathcal{D}_{\\mathrm{AgentVQA}} = \\bigcup_{d \\in \\{ \\mathrm{Web, Rob, Ego, Game, Spatial} \\}} \\mathcal{S}_{1000}^{(d)}$",
+      "filename": "agentvqa_unified_benchmark_beat3_formula.svg",
+      "fontsize": 22,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "d",
+          "label": "Agent Modality Domain"
+        },
+        {
+          "term": "\\mathcal{S}_{1000}",
+          "label": "Curated Offline Scenarios"
+        }
+      ],
+      "svg_filename": "agentvqa_unified_benchmark_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathcal{P}(\\mathrm{Error}) = \\mathcal{P}(\\Delta s_t \\mid I_{t}, I_{t-1}) + \\mathcal{P}(\\mathbf{x}_{\\mathrm{UI}} \\notin \\hat{\\mathbf{x}})$",
+      "filename": "agentvqa_unified_benchmark_beat4_formula.svg",
+      "fontsize": 22,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\Delta s_t",
+          "label": "State Tracking Latent"
+        },
+        {
+          "term": "\\mathbf{x}_{\\mathrm{UI}}",
+          "label": "Grounding Bounding Box"
+        }
+      ],
+      "svg_filename": "agentvqa_unified_benchmark_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\mathrm{Top1}_{\\mathrm{Accuracy}} = 58.5\\% \\quad (N_{\\mathrm{models}} = 22)$",
+      "filename": "agentvqa_unified_benchmark_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "58.5\\%",
+          "label": "SOTA Frontier Accuracy"
+        },
+        {
+          "term": "N_{\\mathrm{models}}",
+          "label": "Evaluated Systems"
+        }
+      ],
+      "svg_filename": "agentvqa_unified_benchmark_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "semantic_clusters",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "Web & UI Agents",
+          "color": "#38BDF8",
+          "items": [
+            "DOM Elements",
+            "Bounding Boxes",
+            "Action Anchors"
+          ]
+        },
+        {
+          "name": "Robotics & Egocentric",
+          "color": "#10B981",
+          "items": [
+            "Trajectory",
+            "3D Gripper",
+            "Motion Field"
+          ]
+        },
+        {
+          "name": "Spatial & Games",
+          "color": "#F59E0B",
+          "items": [
+            "Coordinate Map",
+            "State Transition",
+            "Occlusion"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Scenario: 'Locate submit button after modal scroll'",
+        "target_cluster": "Web & UI Agents",
+        "token": "'Visual Grounding Query'"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "UI Drift",
+          "color": "#EF4444"
+        },
+        {
+          "word": "3D Mislocalization",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Top Frontier VLM (AgentVQA SOTA)",
+    "model_a_specs": [
+      "Multimodal Vision Transformer",
+      "Instruction Fine-tuned",
+      "Highest General VQA Score"
+    ],
+    "model_b": "Interactive Online Agent Target",
+    "model_b_specs": [
+      "Continuous Dynamic State Tracking",
+      "Fine-grained 3D UI Grounding",
+      "Temporal Motion Modeling"
+    ],
+    "divide_title": "OFFLINE PERCEPTION VS INTERACTIVE DEPLOYMENT",
+    "model_a_stat": "58.5%",
+    "model_a_stat_label": "AGENTVQA ACCURACY",
+    "model_b_stat": "41.5%",
+    "model_b_stat_label": "UNRESOLVED FAILURE GAP",
+    "efficiency_badge": "\u26a1 SOTA CEILING AT 58.5%",
+    "benchmarks": [
+      {
+        "name": "AgentVQA Web & UI",
+        "score_a": "61.2%",
+        "score_b": "38.8% Error"
+      },
+      {
+        "name": "AgentVQA Robotics & Sim",
+        "score_a": "54.1%",
+        "score_b": "45.9% Error"
+      },
+      {
+        "name": "AgentVQA Spatial Planning",
+        "score_a": "56.4%",
+        "score_b": "43.6% Error"
+      }
+    ],
+    "scale_metric": "1,000",
+    "scale_label": "Curated Agent Scenarios",
+    "bottleneck_title": "DYNAMIC STATE TRACKING FAILURE",
+    "bottleneck_desc": "Models fail to preserve continuous 3D coordinate and UI states across sequential interactions",
+    "solution_title": "AGENTVQA UNIFIED TESTBED",
+    "solution_components": "5 Agent Domains across 23 Datasets",
+    "mechanism_title": "PERCEPTION VS REASONING DECOUPLING",
+    "payoff_stat": "58.5%",
+    "payoff_label": "TOP FRONTIER ACCURACY",
+    "payoff_sub": "Evaluating 22 Models on 1,000 Real-World Agent Tasks",
+    "payoff_hero_stat": 58.5,
+    "payoff_hero_label": "Top Model Accuracy",
+    "payoff_base_stat": 31.8,
+    "payoff_base_label": "Baseline Model",
+    "payoff_delta_badge": "\u26a1 BEST MODEL ONLY REACHES 58.5%",
+    "challenger": "AgentVQA Benchmark",
+    "incumbent": "Fragmented Online Simulators"
+  },
+  "benchmark_comparison": {
+    "title": "AGENTVQA BENCHMARK: 22 MODEL SHOWDOWN",
+    "metric_name": "Accuracy",
+    "unit": "%",
+    "contestants": [
+      {
+        "name": "Top Frontier VLM",
+        "value": 58.5,
+        "display_val": "58.5%",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Leading Open Weights VLM",
+        "value": 44.2,
+        "display_val": "44.2%",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Standard Multimodal Baseline",
+        "value": 31.8,
+        "display_val": "31.8%",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 58.5% MAXIMUM PERFORMANCE",
+    "radar_axes": [
+      "Web UI",
+      "Robotics",
+      "Egocentric",
+      "Games",
+      "Spatial Planning"
+    ]
+  },
+  "code_snippet": {
+    "filename": "evaluate_agent.py",
+    "language": "python",
+    "lines": [
+      "def evaluate_agent_step(scenario):",
+      "state_rep = vlm.encode_temporal_visual(scenario.frames)",
+      "pred_action = vlm.predict_action(state_rep, scenario.query)",
+      "return agentvqa.verify_grounding(pred_action, scenario.ground_truth)"
+    ],
+    "highlight_lines": [
+      2,
+      4
+    ],
+    "trace_register": "\u26a1 OFFLINE AGENT GROUNDING CHECK",
+    "explanation": "Validates state grounding across 5 multimodal domains without costly simulation rollouts"
+  },
+  "arxiv_id": "2610.31494",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "Figure1",
+      "caption": "Figure1",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/source/figures/Figure1.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "Fig1_Updated",
+      "caption": "Fig1 Updated",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/source/figures/Fig1_Updated.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_2_Fig1_Updated.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_2_Fig1_Updated.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "Benchmark-Pipeline-print-2",
+      "caption": "Benchmark-Pipeline-Print-2",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/source/figures/Benchmark-Pipeline-print-2.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_3_Benchmark-Pipeline-print-2.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_3_Benchmark-Pipeline-print-2.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "atriple_model_rank_comparison_with_openeqa2",
+      "caption": "Atriple Model Rank Comparison With Openeqa2",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/source/figures/atriple_model_rank_comparison_with_openeqa2.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_4_atriple_model_rank_comparison_with_openeqa2.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_4_atriple_model_rank_comparison_with_openeqa2.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "Fig1",
+      "caption": "Fig1",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/source/figures/Fig1.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_5_Fig1.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_5_Fig1.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 150
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 3,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014it hit that 'wait, my agent is actually blind?' nerve immediately. I liked that you didn't waste time with a 'Hey guys' intro. Beat 4 got a little dense with the 'bounding box regression' mention; I know what that is, but it felt like you were just throwing jargon at the wall to sound smart. The rest was clean and actually explained why these models fail."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Temporal State Discontinuity",
+    "physical_analogy": "A security guard watching a live feed that only refreshes once every ten minutes.",
+    "eureka_mechanism": "Unified Offline Agentic Grounding",
+    "paradigm_shift": "Moving from static image captioning to dynamic agentic state tracking."
+  },
+  "hook_gating": {
+    "selected_hook": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Statistic",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 10,
+    "rankings": [
+      {
+        "hook": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Do not lock in your LLM provider before reviewing AgentVQA's 58.5% benchmark lead.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Everyone tells you to use the reigning model, but AgentVQA outperforms it by 58.5%.",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Vision-language models (VLMs) can perform a broad range of tasks across diverse settings, yet their performance in agentic contexts remains poorly understood.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why are top engineering teams switching models for AgentVQA's 58.5% gain?",
+        "verdict": 44,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Does AgentVQA actually crush the competition by 58.5%, or is it just benchmark hype?",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Why should you care about AgentVQA? Because your autonomous agent writes perfect code, yet it is effectively blind in the real world.",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Your autonomous agent writes perfect code, yet it is effectively blind in the real world.",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is AgentVQA a major breakthrough? Because vision-language models (VLMs) can perform a broad range of tasks across diverse settings, yet their performance in agentic contexts remains poorly understood.",
+        "verdict": 30,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until AgentVQA proved: although online evaluations in simulators and real-world environments are essential for measuring interactive agent performance, they are costly and challenging to scale.",
+        "verdict": 30,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "Top Frontier VLM (AgentVQA SOTA)",
+        "model_a_score": "58.5%",
+        "model_b_name": "Interactive Online Agent Target",
+        "model_b_score": "41.5%",
+        "delta_label": "\u26a1 SOTA CEILING AT 58.5%"
+      }
+    }
+  ],
+  "script_driven_visuals": true
+}
