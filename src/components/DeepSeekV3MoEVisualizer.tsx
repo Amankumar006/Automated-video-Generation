@@ -101,9 +101,40 @@ export const DeepSeekV3MoEVisualizer: React.FC<DeepSeekMoEVisualizerProps> = ({
         </span>
       </div>
 
+      {/* Explicit routing trace: token -> gate -> selected expert lanes. */}
+      <div className="absolute inset-0 pointer-events-none z-[5]">
+        <div className="absolute top-[605px] left-1/2 -translate-x-1/2 h-[45px] border-l-2 border-dashed border-cyan-400/70" />
+        <div className="absolute top-[780px] left-1/2 -translate-x-1/2 h-[100px] border-l-2 border-dashed border-cyan-400/45" />
+        <svg
+          className="absolute top-[875px] left-[160px] w-[760px] h-[48px] overflow-visible"
+          viewBox="0 0 760 48"
+          aria-hidden="true"
+        >
+          {selectedExpertIds.map((expertId, idx) => {
+            const column = expertId % 16;
+            const row = Math.floor(expertId / 16);
+            const targetX = 35.2 + column * 43.3;
+            const targetY = 67 + row * 17.1;
+            const bendX = 380 + (targetX - 380) * 0.45;
+            return (
+              <path
+                key={expertId}
+                d={`M 380 0 C ${bendX} 24, ${bendX} 48, ${targetX} ${targetY}`}
+                stroke="#38BDF8"
+                strokeOpacity={(0.45 + idx * 0.05) * routeProgress}
+                strokeWidth="3"
+                strokeDasharray="8 6"
+                strokeDashoffset={`${(1 - routeProgress) * 80}`}
+                fill="none"
+              />
+            );
+          })}
+        </svg>
+      </div>
+
       {/* 256-ROUTED EXPERT MATRIX GRID (Y = 920px to 1320px) */}
       <div className="absolute top-[920px] left-[160px] w-[760px] flex flex-col items-center">
-        <span className="text-[22px] font-mono text-slate-400 uppercase tracking-widest mb-3">
+        <span className="text-[26px] font-mono text-slate-300 uppercase tracking-widest mb-3">
           {spec.routedExperts} Routed Expert Pool
         </span>
 
@@ -133,7 +164,7 @@ export const DeepSeekV3MoEVisualizer: React.FC<DeepSeekMoEVisualizerProps> = ({
                 className="w-full h-full rounded-[3px]"
                 style={{
                   backgroundColor: bg,
-                  opacity,
+                  opacity: isSelected ? opacity : 0.36,
                   boxShadow: shadow,
                 }}
               />
@@ -142,11 +173,11 @@ export const DeepSeekV3MoEVisualizer: React.FC<DeepSeekMoEVisualizerProps> = ({
         </div>
 
         {/* Selected expert callout tags */}
-        <div className="mt-4 flex flex-wrap justify-center gap-2 max-w-[720px]">
+        <div className="mt-4 h-[34px] w-[760px] flex flex-nowrap items-center justify-center gap-1 overflow-visible">
           {selectedExpertIds.map((expertId, idx) => (
             <span
               key={idx}
-              className="px-3 py-1 rounded-lg bg-[#0ea5e9]/20 border border-[#38BDF8]/60 text-[#38BDF8] text-[20px] font-mono font-bold"
+              className="px-2 py-1 rounded-lg bg-[#0ea5e9]/25 border border-[#38BDF8]/70 text-[#7DD3FC] text-[18px] font-mono font-bold whitespace-nowrap"
               style={{
                 opacity: interpolate(
                   routeProgress,
@@ -166,9 +197,9 @@ export const DeepSeekV3MoEVisualizer: React.FC<DeepSeekMoEVisualizerProps> = ({
       </div>
 
       {/* BOTTOM SAFE-ZONE BRAND FOOTER (Y = 1460px) */}
-      <div className="absolute top-[1460px] left-[160px] w-[760px] flex items-center justify-center space-x-3 text-slate-400">
+      <div className="absolute top-[1510px] left-[160px] w-[760px] flex items-center justify-center space-x-3 text-slate-300">
         <span className="w-3 h-3 rounded-full bg-[#38BDF8]" />
-        <span className="text-[26px] font-mono tracking-wider font-semibold">
+        <span className="text-[24px] font-mono tracking-wider font-semibold">
           THEMODELVERSE.IN / ARCHITECTURE
         </span>
       </div>
