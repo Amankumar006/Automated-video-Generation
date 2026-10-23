@@ -25,6 +25,25 @@ cp .env.example .env
 make setup
 ```
 
+Run the local environment doctor before a first render. It reports missing
+native tools without inspecting or printing secret values:
+
+```bash
+make doctor
+```
+
+Generated videos, render frames, caches, and Python bytecode are never source
+of truth. To inspect reclaimable generated paths, use the safe dry run:
+
+```bash
+make clean-generated
+```
+
+When the report is correct, `make clean-generated-apply` moves those paths to a
+recoverable quarantine outside the repository. It does not permanently delete
+anything and intentionally leaves source code, curated assets, model weights,
+and historical documentation untouched.
+
 The Kokoro voice models are downloaded on first use and are intentionally
 ignored by Git. Do not commit model weights, OAuth tokens, generated videos,
 or render caches.

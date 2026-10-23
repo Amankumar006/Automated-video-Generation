@@ -1,8 +1,8 @@
 # 📐 The Model Verse & Project Aether — Autonomous Video Production Platform
 
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11 | 3.12](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![Manim CE](https://img.shields.io/badge/Manim%20CE-v0.19%2B-brightgreen.svg)](https://www.manim.community/)
-[![Tests](https://img.shields.io/badge/tests-367%20passed-success.svg)](test/)
+[![Pull Request CI](https://github.com/Amankumar006/Automated-video-Generation/actions/workflows/pr-ci.yml/badge.svg)](https://github.com/Amankumar006/Automated-video-Generation/actions/workflows/pr-ci.yml)
 [![Style: 3Blue1Brown](https://img.shields.io/badge/style-3Blue1Brown%20Chalkboard-9cf.svg)](manim_engine/)
 [![Aether: 3D Virtual Studio](https://img.shields.io/badge/Aether-3D%20Cinematic-purple.svg)](_archive/aether/)
 
@@ -97,5 +97,5 @@ pytest test/test_arxiv_figure_extraction.py
 - [**`_archive/aether/`**](_archive/aether/): Archived Project Aether 3D cinematic virtual studio (world state graph, complexity compiler, council critics, surgical repair, Dream-RSI teacher, and shared contract adapter).
 - [**`pipeline/`**](pipeline/): Ingestion, scriptwriting, pedagogy critic, visual director, acoustic aligner, and YouTube publisher. The archived Aether wrapper is in `_archive/pipeline/aether_director.py`.
 - [**`manim_engine/`**](manim_engine/): 3Blue1Brown chalkboard primitives, visual blueprints, showdown engine, code block visualizer.
-- [**`public/`**](public/): Zero-license Foley SFX library, rendered video archive, math SVGs, and arXiv chalkboard figure cache.
-- [**`test/`**](test/): Comprehensive automated test suite (367+ unit and integration tests).
+- [**`public/`**](public/): Curated zero-license Foley SFX, brand assets, math SVGs, and reusable visual fixtures. Generated videos and downloads stay ignored.
+- [**`test/`**](test/): Automated unit, integration, and render-oriented tests.

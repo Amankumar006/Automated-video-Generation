@@ -32,8 +32,8 @@ or generated output.
 ## 2. Environment Setup
 
 ### Prerequisites
-- **Python:** 3.12+ (managed via `pyenv` or `venv`)
-- **System Binaries:** `ffmpeg`, `cairosvg`, `pango`, `pkg-config`
+- **Python:** 3.11 or 3.12 (managed via `pyenv` or `venv`)
+- **System Binaries:** `ffmpeg`, Cairo, Pango, LaTeX, `dvisvgm`, and `espeak-ng`
   ```bash
   # macOS (Homebrew)
   brew install ffmpeg pango cairo pkg-config
@@ -47,6 +47,7 @@ or generated output.
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+python scripts/doctor.py
 ```
 
 ### Environment Variables (`.env`)

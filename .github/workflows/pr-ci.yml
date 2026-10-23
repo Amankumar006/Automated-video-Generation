@@ -45,6 +45,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
+      - name: Verify contributor environment
+        run: |
+          set -euo pipefail
+          python scripts/doctor.py --strict
+
       - name: Run Python Test Suite
         run: |
           set -euo pipefail
@@ -73,11 +78,12 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
+          cache: npm
 
       - name: Install Node Dependencies
         run: |
           set -euo pipefail
-          npm install --package-lock=false --no-audit --no-fund
+          npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Typecheck TypeScript
         run: |

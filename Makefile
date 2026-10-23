@@ -1,7 +1,8 @@
 PYTHON ?= python3
 PIP := $(PYTHON) -m pip
 
-.PHONY: setup setup-python setup-web test test-python test-web lint render-smoke
+.PHONY: setup setup-python setup-web doctor clean-generated clean-generated-apply \
+	test test-python test-web lint render-smoke
 
 setup: setup-python setup-web
 
@@ -12,6 +13,15 @@ setup-python:
 
 setup-web:
 	npm ci
+
+doctor:
+	$(PYTHON) scripts/doctor.py
+
+clean-generated:
+	$(PYTHON) scripts/clean_generated.py
+
+clean-generated-apply:
+	$(PYTHON) scripts/clean_generated.py --apply
 
 test: test-python test-web
 
