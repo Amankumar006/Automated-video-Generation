@@ -523,7 +523,7 @@ class ScriptDrivenScene(MovingCameraScene):
             bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
             motif = None
 
-            bespoke_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "false").lower() in {"1", "true", "yes"}
+            bespoke_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
             if bespoke_enabled and bespoke_module_path.exists() and not visual_blueprint:
                 try:
                     mod_name = f"bespoke_{spec_clean_id}_beat_{beat_id}"

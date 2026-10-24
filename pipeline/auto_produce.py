@@ -271,7 +271,7 @@ def auto_produce(
     # Generated Manim snippets are experimental and must not silently replace
     # validated visual blueprints in production renders. Opt in explicitly
     # when experimenting with the bespoke synthesizer.
-    bespoke_visuals_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "false").lower() in {"1", "true", "yes"}
+    bespoke_visuals_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
     if track == TRACK_ACADEMIC and bespoke_visuals_enabled:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
