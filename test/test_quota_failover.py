@@ -735,6 +735,46 @@ def test_provider_pref_groq_and_openrouter_routing():
         assert mock_gemini.call_count == 0
 
 
+def test_provider_pref_inception_routes_mercury_json():
+    """Verify Mercury can be selected explicitly through the OpenAI-compatible router."""
+    router = LLMRouter()
+    mercury_spec = {
+        "id": "mercury_test",
+        "title": "Mercury Script",
+        "category": "mechanism_deepdive",
+        "beats": [{"beat_id": i, "text": f"Beat {i}"} for i in range(1, 7)],
+    }
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.text = json.dumps({"choices": [{"message": {"content": json.dumps(mercury_spec)}}]})
+    mock_resp.json.return_value = json.loads(mock_resp.text)
+
+    with patch.dict(os.environ, {"LLM_PROVIDER": "inception", "INCEPTION_API_KEY": "test_key"}, clear=False), \
+         patch("requests.post", return_value=mock_resp), \
+         patch.object(router, "call_gemini") as mock_gemini:
+        spec, provider = router.route_script_generation("Prompt", topic="Mercury Priority")
+
+    assert provider == "inception"
+    assert spec["id"] == "mercury_test"
+    assert mock_gemini.call_count == 0
+
+
+def test_inception_empty_content_cascades_to_deterministic_fallback():
+    """Verify empty Mercury output is treated as a provider failure, not a valid response."""
+    router = LLMRouter()
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.text = '{"choices":[{"message":{"content":null}}]}'
+    mock_resp.json.return_value = {"choices": [{"message": {"content": None}}]}
+
+    with patch.dict(os.environ, {"INCEPTION_API_KEY": "test_key", "LLM_PROVIDER": "inception"}, clear=False), \
+         patch("requests.post", return_value=mock_resp):
+        spec, provider = router.route_script_generation("Prompt", topic="Mercury Empty")
+
+    assert provider == "deterministic_fallback"
+    assert len(spec["beats"]) == 6
+
+
 def test_is_quota_error_extended_patterns():
     """Verify newly added natural quota error phrases and exception classes are detected."""
     phrases = [
