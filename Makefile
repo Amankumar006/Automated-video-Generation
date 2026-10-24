@@ -1,32 +1,36 @@
 PYTHON ?= python3
-PIP := $(PYTHON) -m pip
+VENV_DIR ?= .venv
+VENV_PYTHON := $(VENV_DIR)/bin/python
+RUN_PYTHON = $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),$(PYTHON))
 
 .PHONY: setup setup-python setup-web doctor clean-generated clean-generated-apply \
-	test test-python test-web lint render-smoke generate-kokoro-audio
+	test test-python test-web lint deps-check deps-audit render-smoke \
+	generate-kokoro-audio
 
 setup: setup-python setup-web
 
 setup-python:
-	$(PYTHON) -m venv .venv
-	.venv/bin/python -m pip install --upgrade pip
-	.venv/bin/python -m pip install -r requirements.txt
+	$(PYTHON) -m venv $(VENV_DIR)
+	$(VENV_PYTHON) -m pip install --upgrade pip
+	$(VENV_PYTHON) -m pip install -r requirements-dev.txt
 
 setup-web:
-	npm ci
+	npm ci --ignore-scripts --no-audit --no-fund
 
 doctor:
-	$(PYTHON) scripts/doctor.py
+	$(RUN_PYTHON) scripts/doctor.py
 
 clean-generated:
-	$(PYTHON) scripts/clean_generated.py
+	$(RUN_PYTHON) scripts/clean_generated.py
 
 clean-generated-apply:
-	$(PYTHON) scripts/clean_generated.py --apply
+	$(RUN_PYTHON) scripts/clean_generated.py --apply
 
 test: test-python test-web
 
 test-python:
-	$(PYTHON) -m pytest -q
+	@test -x "$(VENV_PYTHON)" || (echo "Run 'make setup-python' first." && exit 1)
+	$(VENV_PYTHON) -m pytest -q
 
 test-web:
 	npm test
@@ -34,8 +38,19 @@ test-web:
 lint:
 	npm run lint
 
+deps-check:
+	@test -x "$(VENV_PYTHON)" || (echo "Run 'make setup-python' first." && exit 1)
+	$(VENV_PYTHON) -m pip check
+	npm ci --dry-run --ignore-scripts --no-audit --no-fund
+
+deps-audit:
+	@test -x "$(VENV_PYTHON)" || (echo "Run 'make setup-python' first." && exit 1)
+	@$(VENV_PYTHON) -c "import pip_audit" >/dev/null 2>&1 || (echo "Install pip-audit separately: .venv/bin/python -m pip install pip-audit" && exit 1)
+	$(VENV_PYTHON) -m pip_audit -r requirements.txt
+	npm audit --audit-level=high
+
 render-smoke:
-	manim -ql -s -r 540,960 --fps 15 test/test_code_execution_engine.py TestChalkboardCodeBlockScene
+	$(RUN_PYTHON) -m manim -ql -s -r 540,960 --fps 15 test/test_code_execution_engine.py TestChalkboardCodeBlockScene
 
 generate-kokoro-audio:
-	$(PYTHON) scripts/generate_remotion_kokoro_audio.py
+	$(RUN_PYTHON) scripts/generate_remotion_kokoro_audio.py

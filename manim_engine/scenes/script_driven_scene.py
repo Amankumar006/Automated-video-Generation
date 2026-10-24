@@ -22,7 +22,7 @@ from pipeline.config import (
     VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON,
     FONT_HELVETICA
 )
-from manim_engine.primitives.typography import CleanText, clean_text
+from manim_engine.primitives.typography import CleanText, clean_text, word_safe_truncate
 
 # Alias Text -> CleanText so HUD headers and brand watermarks render with flawless subpixel typography
 Text = CleanText
@@ -190,8 +190,8 @@ class ScriptDrivenScene(MovingCameraScene):
             print(f"⚠️ Kinetic subtitle setup notice: {e}")
             self.caption_chunks = []
 
-        self.caption_target_y = -3.85
-        self.caption_container = VGroup().move_to([0, -3.85, 0])
+        self.caption_target_y = -3.45
+        self.caption_container = VGroup().move_to([0, self.caption_target_y, 0])
         self.caption_container.set_z_index(60)
         self.add(self.caption_container)
 
@@ -235,7 +235,7 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_width=1.4
                         )
                         cam_center = self.camera.frame.get_center()
-                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.85, 0]))
+                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] + self.caption_target_y, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
@@ -510,9 +510,9 @@ class ScriptDrivenScene(MovingCameraScene):
                     motif_params["image_path"] = current_img
 
                 if not motif_params.get("title"):
-                    motif_params["title"] = f"{self.spec.get('title', 'AI')[:22].upper()}: BEAT {beat_id}"
+                    motif_params["title"] = f"{word_safe_truncate(self.spec.get('title', 'AI').upper(), 22)}: BEAT {beat_id}"
                 if not motif_params.get("sub"):
-                    motif_params["sub"] = v_focus[:55] or "Official architectural diagram tailored to narrative beat"
+                    motif_params["sub"] = word_safe_truncate(v_focus, 55) or "Official architectural diagram tailored to narrative beat"
                 if not motif_params.get("arxiv_id") and self.spec.get("arxiv_id"):
                     motif_params["arxiv_id"] = self.spec.get("arxiv_id")
 
@@ -548,8 +548,8 @@ class ScriptDrivenScene(MovingCameraScene):
             if not isinstance(motif, BaseBlueprintComposition):
                 motif.move_to([0, 0.75, 0])
             else:
-                if motif.get_bottom()[1] < -2.2:
-                    shift_up = -2.2 - motif.get_bottom()[1]
+                if motif.get_bottom()[1] < -2.40:
+                    shift_up = -2.40 - motif.get_bottom()[1]
                     if motif.get_top()[1] + shift_up <= 6.2:
                         motif.shift(UP * shift_up)
                     else:

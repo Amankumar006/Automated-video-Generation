@@ -86,14 +86,14 @@ PYTHONPATH=_archive python3 -m aether.director --brief "Quantum computing cryoge
 
 ### 3. Run Test Suite
 ```bash
-# Run all unit and integration tests across both engines
-pytest
+# Run active unit and integration tests through the configured virtualenv
+make test-python
 
-# Run only Project Aether tests
-pytest _archive/test/test_aether_*.py
+# Run archived Project Aether tests explicitly
+PYTHONPATH=_archive .venv/bin/python -m pytest _archive/test/test_aether_*.py
 
 # Run only arXiv figure extraction tests
-pytest test/test_arxiv_figure_extraction.py
+.venv/bin/python -m pytest test/test_arxiv_figure_extraction.py
 ```
 
 ---

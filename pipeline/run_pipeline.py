@@ -166,14 +166,32 @@ def render_scene(scene_file: str, scene_class: str, quality: str = "-qh", spec_p
                 recent.sort(key=lambda p: p.stat().st_mtime, reverse=True)
                 rendered_file = str(recent[0])
             else:
-                candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-                rendered_file = str(candidates[0])
+                raise RuntimeError(
+                    f"Manim completed without a fresh output for {scene_class}; refusing to reuse a stale render."
+                )
 
     if not rendered_file or not os.path.exists(rendered_file):
         raise FileNotFoundError(f"Could not locate rendered video for {scene_class} in {scene_file}")
 
     print(f"✅ Scene {scene_class} rendered successfully: {rendered_file}")
     return rendered_file
+
+def _probe_duration(path: str, stream: str | None = None) -> float:
+    """Return container or stream duration in seconds, failing closed on bad media."""
+    ffprobe = shutil.which("ffprobe") or str(Path(FFMPEG_BIN).with_name("ffprobe"))
+    selector = ["-select_streams", stream] if stream else []
+    entry = "stream=duration" if stream else "format=duration"
+    result = subprocess.run(
+        [ffprobe, "-v", "error", *selector, "-show_entries", entry, "-of", "default=noprint_wrappers=1:nokey=1", path],
+        capture_output=True, text=True, check=False
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"Unable to inspect media duration for {path}: {result.stderr.strip()}")
+    try:
+        return float(result.stdout.strip())
+    except ValueError as exc:
+        raise RuntimeError(f"Invalid media duration returned for {path}: {result.stdout!r}") from exc
+
 
 def mux_final_short(video_path: str, audio_path: str, output_path: str, master_quality: bool = True):
     """
@@ -189,12 +207,20 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
     out_dir = os.path.dirname(output_path)
     if out_dir:
         os.makedirs(out_dir, exist_ok=True)
+    video_duration = _probe_duration(video_path)
+    audio_duration = _probe_duration(audio_path)
+    target_duration = max(video_duration, audio_duration)
+    duration_delta = abs(video_duration - audio_duration)
+    if duration_delta > 2.0:
+        raise RuntimeError(
+            f"Audio/video duration mismatch is {duration_delta:.2f}s ({video_duration:.2f}s vs {audio_duration:.2f}s); refusing to mux."
+        )
     if master_quality:
         cmd = [
             FFMPEG_BIN, "-y",
             "-i", video_path,
             "-i", audio_path,
-            "-vf", f"scale={BROADCAST_WIDTH}:{BROADCAST_HEIGHT}",
+            "-vf", f"scale={BROADCAST_WIDTH}:{BROADCAST_HEIGHT},tpad=stop_mode=clone:stop_duration=2",
             "-r", str(BROADCAST_FPS),
             "-c:v", "libx264",
             "-preset", "slow",
@@ -208,8 +234,9 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
             "-color_range", "tv",
             "-c:a", "aac",
             "-b:a", "320k",
+            "-af", "apad",
             "-movflags", "+faststart",
-            "-shortest",
+            "-t", f"{target_duration:.3f}",
             output_path
         ]
     else:
@@ -220,7 +247,7 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
             "-c:v", "copy",
             "-c:a", "aac",
             "-b:a", "192k",
-            "-shortest",
+            "-t", f"{target_duration:.3f}",
             output_path
         ]
     print(f"🚀 Muxing and broadcast mastering final short into: {output_path} ({BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps, CRF {BROADCAST_CRF})...")
@@ -228,6 +255,12 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
     if res.returncode != 0:
         print("FFmpeg Error:\n", res.stderr)
         raise RuntimeError("FFmpeg muxing failed.")
+    final_video_duration = _probe_duration(output_path, "v:0")
+    final_audio_duration = _probe_duration(output_path, "a:0")
+    if abs(final_video_duration - final_audio_duration) > (1.0 / BROADCAST_FPS) + 0.03:
+        raise RuntimeError(
+            f"Muxed streams are not frame-aligned: {final_video_duration:.3f}s vs {final_audio_duration:.3f}s."
+        )
     print(f"🎉 Final broadcast short ready at: {output_path}")
 
 def extract_frames(video_path: str, output_dir: str, category: str = "architecture_breakdown", spec: dict = None):

@@ -25,12 +25,19 @@ cp .env.example .env
 make setup
 ```
 
+This installs runtime dependencies from `requirements.txt`, contributor and
+CI test tooling from `requirements-dev.txt`, and the exact Node dependency
+tree recorded in `package-lock.json`.
+
 Run the local environment doctor before a first render. It reports missing
 native tools without inspecting or printing secret values:
 
 ```bash
 make doctor
 ```
+
+Missing LaTeX, `dvisvgm`, or `espeak-ng` tools block full rendering but do not
+prevent source inspection or frontend work.
 
 Generated videos, render frames, caches, and Python bytecode are never source
 of truth. To inspect reclaimable generated paths, use the safe dry run:
@@ -57,11 +64,28 @@ make lint
 make render-smoke
 ```
 
+The Python targets use `.venv/bin/python` created by `make setup`. Check
+resolved package consistency before testing with:
+
+```bash
+make deps-check
+```
+
+Optional advisory checks are separate and non-mutating:
+
+```bash
+.venv/bin/python -m pip install pip-audit
+make deps-audit
+```
+
+Review dependency updates manually. Do not run `npm audit fix --force` without
+reviewing its proposed major-version changes.
+
 The Python suite includes network-aware integrations. For a fast local check,
 run the focused tests first:
 
 ```bash
-pytest -q test/test_github_trending_fetcher.py \
+.venv/bin/python -m pytest -q test/test_github_trending_fetcher.py \
   test/test_code_execution_engine.py
 ```
 

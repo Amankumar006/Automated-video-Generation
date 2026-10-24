@@ -27,7 +27,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
 from pipeline.config import FONT_HELVETICA
-from manim_engine.primitives.typography import CleanText
+from manim_engine.primitives.typography import CleanText, word_safe_truncate
 from manim_engine.primitives.isometric import create_isometric_slab, create_isometric_layer_stack
 
 # Standard 3b1b Palette
@@ -58,7 +58,7 @@ class BaseBlueprintComposition(Group):
 
         # Clean top titles formatted for 9:16 mobile canvas
         self.title = CleanText(
-            title.upper()[:48],
+            word_safe_truncate(title.upper(), 48),
             font=FONT_HELVETICA,
             font_size=16,
             color=accent_color,
@@ -68,7 +68,7 @@ class BaseBlueprintComposition(Group):
             self.title.scale_to_fit_width(7.2)
 
         self.sub = CleanText(
-            sub[:80],
+            word_safe_truncate(sub, 80),
             font=FONT_HELVETICA,
             font_size=11,
             color=COLOR_SLATE,

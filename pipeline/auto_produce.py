@@ -38,7 +38,7 @@ def auto_produce(
     skip_script: bool = False,
     template: str = None,
     publish: bool = False,
-    privacy: str = "public",
+    privacy: str = "unlisted",
     dry_run_publish: bool = False,
     enable_music: bool = True,
     legacy_engine: bool = False,
@@ -320,6 +320,8 @@ def auto_produce(
     master_audio = audio_results["master_audio"]
     audio_duration = audio_results.get("total_duration", 40.0)
     timing_data = audio_results.get("timing_data", [])
+    if not master_audio or not Path(master_audio).exists() or audio_duration <= 0:
+        raise RuntimeError("Audio synthesis did not produce a valid master audio artifact.")
 
     # Enrich spec with millisecond-exact beat durations & acoustic word timings
     for b in spec.get("beats", []):
@@ -490,10 +492,14 @@ def auto_produce(
             print("   ✅ VLM Critic Quality Gate: PASSED (Broadcast Quality)")
         else:
             print("   ℹ️ VLM Critic Quality Gate: Best-effort self-healing completed.")
+            if os.getenv("REQUIRE_VLM_QA", "false").lower() in {"1", "true", "yes"}:
+                raise RuntimeError("VLM quality gate did not pass; production publishing is blocked.")
     except Exception as e:
         import traceback
         print(f"   ⚠️ VLM Critic Audit bypassed: {e}")
         traceback.print_exc()
+        if os.getenv("REQUIRE_VLM_QA", "false").lower() in {"1", "true", "yes"}:
+            raise RuntimeError("VLM quality audit failed; production publishing is blocked.") from e
 
 
     # Step 7: Automated YouTube Shorts Distribution
@@ -647,7 +653,7 @@ def main():
     parser.add_argument("--publish-instagram", action="store_true", help="Also publish produced video as an Instagram Reel via Meta Graph API")
     parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Also publish produced video as a 4-tweet thread to X (Twitter)")
     parser.add_argument("--publish-linkedin", action="store_true", help="Also publish produced video as a post to LinkedIn")
-    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
+    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
     parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")

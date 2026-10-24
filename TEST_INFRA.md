@@ -8,8 +8,8 @@ This document defines the architectural testing philosophy, four-tier methodolog
 
 The repository harmonizes two complementary video synthesis engines:
 1. **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)**: 2D programmatic, mathematical, and algorithmic motion graphics explainer shorts (Manim Community, Cairo/FFmpeg, 9:16 vertical canvas).
-2. **Project Aether (`aether/`)**: Multi-shot 3D generative cinematic virtual studio (world state graph, 6-critic Council with hard gates, surgical temporal inpainting, Complexity Levels 0–5).
-3. **Shared Contract Adapter Layer (`aether/shared_contract.py`)**: Clean, decoupled inter-engine bridge (`ScriptToFilmSceneAdapter`, `EducationalAssetConditioningPackage`, `DualEnginePipelineConfig`) enabling Aether to consume Model Verse educational scripts and paper figure visual assets with zero cyclic dependencies.
+2. **Project Aether (`_archive/aether/`)**: Archived multi-shot 3D generative cinematic virtual studio (world state graph, 6-critic Council with hard gates, surgical temporal inpainting, Complexity Levels 0–5).
+3. **Shared Contract Adapter Layer (`_archive/aether/shared_contract.py`)**: Archived inter-engine bridge (`ScriptToFilmSceneAdapter`, `EducationalAssetConditioningPackage`, `DualEnginePipelineConfig`) enabling Aether to consume Model Verse educational scripts and paper figure visual assets with zero cyclic dependencies.
 
 ### Core Testing Tenets
 
@@ -89,19 +89,20 @@ Validates complete user-facing workflows matching production usage:
 
 ```bash
 # 1. Run the comprehensive 4-Tier E2E & Subsystem Test Suite
-pytest test/test_e2e_figure_and_subsystem.py -v
+.venv/bin/python -m pytest test/test_e2e_figure_and_subsystem.py -v
 
 # 2. Run the arXiv Figure Extraction Test Suite
-pytest test/test_arxiv_figure_extraction.py -v
+.venv/bin/python -m pytest test/test_arxiv_figure_extraction.py -v
 
-# 3. Run the Aether Shared Contract Test Suite
-pytest test/test_aether_shared_contract.py -v
+# 3. Run the archived Aether Shared Contract Test Suite
+PYTHONPATH=_archive .venv/bin/python -m pytest _archive/test/test_aether_shared_contract.py -v
 
-# 4. Run all Project Aether Regression Test Suites (345+ tests)
-pytest test/test_aether_*.py -v
+# 4. Run all archived Project Aether Regression Test Suites
+PYTHONPATH=_archive .venv/bin/python -m pytest _archive/test/test_aether_*.py -v
 
-# 5. Run the Full Acceptance Regression Suite (All M1, M2, M3 targets)
-pytest test/test_arxiv_figure_extraction.py test/test_aether_*.py test/test_e2e_figure_and_subsystem.py -v
+# 5. Run the active acceptance suite plus archived Aether tests
+.venv/bin/python -m pytest test/test_arxiv_figure_extraction.py test/test_e2e_figure_and_subsystem.py -v
+PYTHONPATH=_archive .venv/bin/python -m pytest _archive/test/test_aether_*.py -v
 ```
 
 ### Execution Performance Benchmarks
@@ -110,9 +111,9 @@ pytest test/test_arxiv_figure_extraction.py test/test_aether_*.py test/test_e2e_
 |---|---|---|---|
 | `test/test_e2e_figure_and_subsystem.py` | 16+ tests | < 6.0s | PyMuPDF, PIL, in-memory fixtures |
 | `test/test_arxiv_figure_extraction.py` | 6 tests | < 7.0s | Manim CE, PyMuPDF, PIL |
-| `test/test_aether_shared_contract.py` | 22 tests | < 1.0s | Pydantic V2 |
-| `test/test_aether_*.py` (Aether Core) | 345 tests | < 4.0s | Pydantic V2, numpy |
-| **Combined Acceptance Suite** | **389+ tests** | **< 16.0s** | Zero network, zero GPU |
+| `_archive/test/test_aether_shared_contract.py` | Archived tests | Not part of default discovery | Pydantic V2 |
+| `_archive/test/test_aether_*.py` (archived Aether Core) | Archived tests | Not part of default discovery | Pydantic V2, numpy |
+| **Combined Acceptance Suite** | Active tests plus explicitly invoked archived tests | Environment-dependent | Zero network, zero GPU |
 
 ---
 
@@ -125,9 +126,9 @@ pytest test/test_arxiv_figure_extraction.py test/test_aether_*.py test/test_e2e_
 | **F3** | Figure Passthrough in `script_generator.py` | M1 | `pipeline/script_generator.py` | `test_tier1_generate_script_propagates_paper_figures` | Tier 1 | ✅ Covered |
 | **F4** | CLI Pipeline Integration in `run_pipeline.py` | M1 | `pipeline/run_pipeline.py` | `test_tier1_run_pipeline_cli_figure_wiring`, `test_tier4_e2e_run_pipeline_execution` | Tier 1, Tier 4 | ✅ Covered |
 | **F5** | Beat 3 Blueprint Binding in `visual_director.py` | M1 | `pipeline/visual_director.py` | `test_tier1_visual_director_binds_beat3_figure`, `test_tier2_empty_figures_fallback` | Tier 1, Tier 2 | ✅ Covered |
-| **F6** | Clean Shared Contract for Aether | M2 | `aether/shared_contract.py` | `test_tier1_aether_adapter_spec_to_brief_conversion`, `test_tier3_aether_conditioning_asset_pipeline` | Tier 1, Tier 3 | ✅ Covered |
+| **F6** | Archived Aether Shared Contract | M2 | `_archive/aether/shared_contract.py` | Explicit archived Aether test command above | Archived | Maintained separately |
 | **F7** | Architectural Boundaries & File Audit Documentation | M2 | `ARCHITECTURE.md`, `README.md` | Audit verification in `ARCHITECTURE.md` Section 4 & 5 | N/A (Doc) | ✅ Covered |
-| **F8** | End-to-End Verification & Test Suite Hardening | M3 | Full test suite | Full pytest regression pass: `test/test_arxiv_figure_extraction.py`, `test/test_aether_*.py`, `test/test_e2e_figure_and_subsystem.py` | Tier 1–4 | ✅ Covered |
+| **F8** | End-to-End Verification & Test Suite Hardening | M3 | Active test suite | `pytest` plus the explicit archived Aether command above | Tier 1–4 | ✅ Covered |
 
 ---
 

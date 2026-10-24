@@ -55,26 +55,31 @@ on:
       privacy:
         description: 'YouTube upload privacy'
         required: false
-        default: 'public'
+        default: 'unlisted'
         type: choice
         options:
           - public
           - unlisted
           - private
+      allow_public:
+        description: 'Explicitly allow a public YouTube upload (requires privacy=public)'
+        required: false
+        default: false
+        type: boolean
       publish_instagram:
         description: 'Cross-post to Instagram Reels'
         required: false
-        default: true
+        default: false
         type: boolean
       publish_x:
         description: 'Cross-post 4-tweet video thread to X (Twitter)'
         required: false
-        default: true
+        default: false
         type: boolean
       publish_linkedin:
         description: 'Cross-post to LinkedIn'
         required: false
-        default: true
+        default: false
         type: boolean
       source:
 
@@ -90,7 +95,46 @@ on:
           - github
 
 jobs:
+  preflight:
+    name: Validate production inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    steps:
+      - name: Validate workflow inputs
+        env:
+          COUNT: ${{ github.event.inputs.count || '1' }}
+          QUALITY: ${{ github.event.inputs.quality || 'qm' }}
+          PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
+          ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
+          PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
+          SOURCE: ${{ github.event.inputs.source || 'mixed' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+
+          case "$COUNT" in 1|2|3|4|5) ;; *) echo "Invalid count: $COUNT" >&2; exit 1 ;; esac
+          case "$QUALITY" in qm|qh|ql) ;; *) echo "Invalid quality: $QUALITY" >&2; exit 1 ;; esac
+          case "$PRIVACY" in public|unlisted|private) ;; *) echo "Invalid privacy: $PRIVACY" >&2; exit 1 ;; esac
+          case "$SOURCE" in mixed|arxiv|blogs|perks|github) ;; *) echo "Invalid source: $SOURCE" >&2; exit 1 ;; esac
+
+          for flag in "$ALLOW_PUBLIC" "$PUBLISH_INSTAGRAM" "$PUBLISH_X" "$PUBLISH_LINKEDIN" "$DRY_RUN"; do
+            case "$flag" in true|false|'') ;; *) echo "Invalid boolean input: $flag" >&2; exit 1 ;; esac
+          done
+
+          if [ "$PRIVACY" = "public" ] && [ "$ALLOW_PUBLIC" != "true" ]; then
+            echo "Public uploads require the explicit allow_public=true opt-in." >&2
+            exit 1
+          fi
+
+          echo "Preflight passed: privacy=$PRIVACY, public_opt_in=$ALLOW_PUBLIC, instagram=$PUBLISH_INSTAGRAM, x=$PUBLISH_X, linkedin=$PUBLISH_LINKEDIN, dry_run=$DRY_RUN"
+
   produce-short:
+    needs: preflight
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
@@ -184,7 +228,9 @@ jobs:
           printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >> .env
           printf '%s\n' \
             'GEMINI_MODEL_NAME=gemini-2.5-flash' \
-            'TTS_PROVIDER=auto' \
+            'TTS_PROVIDER=kokoro' \
+            'KOKORO_VOICE=am_adam' \
+            'REQUIRE_VLM_QA=true' \
             'ELEVENLABS_VOICE=eric' >> .env
 
           if [ -n "$GROQ_API_KEY" ]; then
@@ -248,13 +294,17 @@ jobs:
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
+          REQUIRE_VLM_QA: "true"
+          TTS_PROVIDER: "kokoro"
+          KOKORO_VOICE: "am_adam"
           COUNT: ${{ github.event.inputs.count || '1' }}
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}
           ARXIV_ID: ${{ github.event.inputs.arxiv_id || '' }}
-          PRIVACY: ${{ github.event.inputs.privacy || 'public' }}
-          PUBLISH_INSTAGRAM: ${{ github.event.inputs.publish_instagram || '' }}
-          PUBLISH_X: ${{ github.event.inputs.publish_x || '' }}
-          PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || '' }}
+          PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
+          ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
+          PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
           SOURCE: ${{ github.event.inputs.source || 'mixed' }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
@@ -264,18 +314,32 @@ jobs:
             EXTRA_ARGS+=(--arxiv "$ARXIV_ID")
           fi
 
-          # Enable Instagram cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_INSTAGRAM" != "false" ] && [ -n "$INSTAGRAM_ACCESS_TOKEN" ]; then
+          if [ "$PRIVACY" = "public" ] && [ "$ALLOW_PUBLIC" != "true" ]; then
+            echo "Public uploads require the explicit allow_public=true opt-in." >&2
+            exit 1
+          fi
+
+          if [ "$PUBLISH_INSTAGRAM" = "true" ]; then
+            if [ -z "$INSTAGRAM_ACCESS_TOKEN" ]; then
+              echo "Instagram publishing was explicitly requested but INSTAGRAM_ACCESS_TOKEN is unavailable." >&2
+              exit 1
+            fi
             EXTRA_ARGS+=(--publish-instagram)
           fi
 
-          # Enable X (Twitter) cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_X" != "false" ] && [ -n "$TWITTER_API_KEY" ]; then
+          if [ "$PUBLISH_X" = "true" ]; then
+            if [ -z "$TWITTER_API_KEY" ]; then
+              echo "X publishing was explicitly requested but TWITTER_API_KEY is unavailable." >&2
+              exit 1
+            fi
             EXTRA_ARGS+=(--publish-x)
           fi
 
-          # Enable LinkedIn cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_LINKEDIN" != "false" ] && [ -n "$LINKEDIN_ACCESS_TOKEN" ]; then
+          if [ "$PUBLISH_LINKEDIN" = "true" ]; then
+            if [ -z "$LINKEDIN_ACCESS_TOKEN" ]; then
+              echo "LinkedIn publishing was explicitly requested but LINKEDIN_ACCESS_TOKEN is unavailable." >&2
+              exit 1
+            fi
             EXTRA_ARGS+=(--publish-linkedin)
           fi
 
@@ -303,9 +367,52 @@ jobs:
         run: |
           rm -f .env pipeline/youtube_token.json pipeline/client_secrets.json
 
-  persist-production-state:
-    if: always()
+  validate-production-state:
+    name: Validate production state artifact
+    if: needs.produce-short.result == 'success'
     needs: produce-short
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download Daily Production State
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: daily-production-state-${{ github.run_id }}
+          path: .
+
+      - name: Validate allowlisted state
+        run: |
+          set -euo pipefail
+
+          for required_path in public pipeline/digest_history.json pipeline/templates data; do
+            if [ ! -e "$required_path" ]; then
+              echo "Missing required production state path: $required_path" >&2
+              exit 1
+            fi
+          done
+
+          public_file="$(find public -type f -print -quit)"
+          if [ -z "$public_file" ]; then
+            echo "Production state contains no public files." >&2
+            exit 1
+          fi
+
+          credential_file="$(find . -type f \( -name '.env' -o -name 'youtube_token.json' -o -name 'client_secrets.json' \) -print -quit)"
+          if [ -n "$credential_file" ]; then
+            echo "Credential material was included in the production state artifact." >&2
+            exit 1
+          fi
+
+          echo "Production state artifact passed integrity and credential checks."
+
+  persist-production-state:
+    if: needs.produce-short.result == 'success' && needs.validate-production-state.result == 'success'
+    needs:
+      - produce-short
+      - validate-production-state
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -320,7 +427,6 @@ jobs:
           persist-credentials: false
 
       - name: Download Daily Production State
-        continue-on-error: true
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: daily-production-state-${{ github.run_id }}

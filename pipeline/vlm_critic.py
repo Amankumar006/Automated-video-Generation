@@ -274,6 +274,9 @@ class VLMCritic:
                         data["beat_id"] = beat_id
                         data["model_used"] = getattr(resp, "model", "gemma4:31b:cloud")
                         if getattr(resp, "model", "").startswith("fallback"):
+                            data["overall_score"] = min(float(data.get("overall_score", 6.0)), 6.0)
+                            data["passed"] = False
+                            data["primary_observation"] = "Vision provider unavailable; deterministic fallback did not inspect image semantics."
                             quota_tracker.record_exhausted("ollama_vision", "Ollama vision unreachable; used heuristic fallback")
                         else:
                             quota_tracker.record_success("ollama_vision")
@@ -286,14 +289,14 @@ class VLMCritic:
         if data is None:
             print(f"⚠️ VLM Critic API fallback triggered ({last_error})")
             data = {
-                "overall_score": 8.8,
-                "passed": True,
-                "semantic_alignment_score": 9.0,
-                "chalkboard_compliance_score": 9.2,
-                "safe_zone_score": 9.0,
-                "pedagogical_clarity_score": 8.7,
-                "primary_observation": "Automated fallback audit: Image inspected successfully via deterministic layout solver.",
-                "critique": f"API audit soft fallback (primary vision failed: {last_error})",
+                "overall_score": 6.0,
+                "passed": False,
+                "semantic_alignment_score": 6.0,
+                "chalkboard_compliance_score": 6.0,
+                "safe_zone_score": 6.0,
+                "pedagogical_clarity_score": 6.0,
+                "primary_observation": "Vision provider unavailable; deterministic layout solver cannot inspect image semantics.",
+                "critique": f"API audit unavailable (primary vision failed: {last_error})",
                 "detected_entities": [],
                 "suggested_patches": [],
                 "image_file": img_path.name,
