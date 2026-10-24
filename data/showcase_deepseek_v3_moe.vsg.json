@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "project_id": "showcase_deepseek_v3_moe",
+    "title": "DeepSeek-V3 MoE Architecture Breakdown",
+    "domain_taxonomy": "frontier_ai_architectures",
+    "aspect_ratio": "9:16",
+    "canvas": {
+      "width_px": 1080,
+      "height_px": 1920,
+      "fps": 60,
+      "duration_seconds": 6.0,
+      "total_frames": 360
+    },
+    "audio": {
+      "master_voiceover_path": "audio/deepseek_v3_voice.wav",
+      "sample_rate_hz": 24000,
+      "music_ducking_db": -18.0
+    }
+  },
+  "theme": {
+    "theme_id": "cyber_cyan",
+    "colors": {
+      "canvas_void": "#06080F",
+      "surface_recessed": "#0B101D",
+      "surface_primary": "rgba(15, 23, 42, 0.82)",
+      "surface_elevated": "rgba(30, 41, 59, 0.92)",
+      "surface_border": "rgba(255, 255, 255, 0.15)",
+      "text_primary": "#F8FAFC",
+      "text_secondary": "#94A3B8",
+      "text_tertiary": "#64748B",
+      "hero_accent": "#38BDF8",
+      "secondary_accent": "#10B981",
+      "status_gain": "#10B981",
+      "status_loss": "#EF4444",
+      "status_warning": "#F59E0B"
+    },
+    "materials": {
+      "card_blur_px": 24.0,
+      "border_radius_px": 20.0,
+      "border_width_px": 1.5,
+      "shadow_elevation": "0 24px 48px -12px rgba(0, 0, 0, 0.65)",
+      "vignette_intensity": 0.35
+    },
+    "typography": {
+      "font_family_display": "Inter Display",
+      "font_family_code": "JetBrains Mono",
+      "font_family_math": "KaTeX Main",
+      "open_type_features": "cv05=1, cv08=1, zero=1, tnum=1"
+    }
+  },
+  "beats": [
+    {
+      "beat_id": 1,
+      "time_range": {
+        "start_sec": 0.0,
+        "end_sec": 2.0,
+        "start_frame": 0,
+        "end_frame": 120
+      },
+      "narrative": {
+        "spoken_text": "DeepSeek V3 routes 8 routed experts dynamically per token.",
+        "intent": "Introduce sparse mixture-of-experts routing",
+        "visual_metaphor": "MoERouterMatrix",
+        "primary_focus_node_id": "moe_matrix_node"
+      },
+      "acoustic_anchors": [
+        { "word": "DEEPSEEK", "timestamp_sec": 0.2, "frame_trigger": 12 },
+        { "word": "V3", "timestamp_sec": 0.6, "frame_trigger": 36 },
+        { "word": "ROUTES", "timestamp_sec": 1.0, "frame_trigger": 60 },
+        { "word": "EXPERTS", "timestamp_sec": 1.4, "frame_trigger": 84 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b1",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 650 },
+          "nodes": [
+            {
+              "id": "moe_matrix_node",
+              "node_type": "MoERouterMatrix",
+              "props": {
+                "tokenText": "deepseek_r1",
+                "totalExperts": 256,
+                "activeRouted": 8,
+                "sharedExperts": 1
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 650 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 0, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 2,
+      "time_range": {
+        "start_sec": 2.0,
+        "end_sec": 4.0,
+        "start_frame": 120,
+        "end_frame": 240
+      },
+      "narrative": {
+        "spoken_text": "Multi-Head Attention compresses query key states without memory overhead.",
+        "intent": "Explain multi-head latent attention mechanism",
+        "visual_metaphor": "AttentionHeatmap",
+        "primary_focus_node_id": "attn_map_node"
+      },
+      "acoustic_anchors": [
+        { "word": "MULTI-HEAD", "timestamp_sec": 2.2, "frame_trigger": 132 },
+        { "word": "ATTENTION", "timestamp_sec": 2.6, "frame_trigger": 156 },
+        { "word": "COMPRESSES", "timestamp_sec": 3.0, "frame_trigger": 180 },
+        { "word": "STATES", "timestamp_sec": 3.4, "frame_trigger": 204 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b2",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 580 },
+          "nodes": [
+            {
+              "id": "attn_map_node",
+              "node_type": "AttentionHeatmap",
+              "props": {
+                "tokens": ["Prompt", "MLA", "Cache", "TopK", "Output"],
+                "headCount": 16,
+                "activeHead": 1
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 580 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 120, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "beat_id": 3,
+      "time_range": {
+        "start_sec": 4.0,
+        "end_sec": 6.0,
+        "start_frame": 240,
+        "end_frame": 360
+      },
+      "narrative": {
+        "spoken_text": "DeepSeek V3 matches leading closed frontier models at fraction of training cost.",
+        "intent": "Empirical benchmark showdown payoff",
+        "visual_metaphor": "HorizontalRaceBars",
+        "primary_focus_node_id": "race_bars_node"
+      },
+      "acoustic_anchors": [
+        { "word": "DEEPSEEK", "timestamp_sec": 4.2, "frame_trigger": 252 },
+        { "word": "MATCHES", "timestamp_sec": 4.6, "frame_trigger": 276 },
+        { "word": "FRONTIER", "timestamp_sec": 5.0, "frame_trigger": 300 },
+        { "word": "MODELS", "timestamp_sec": 5.4, "frame_trigger": 324 }
+      ],
+      "layout_containers": [
+        {
+          "container_id": "stage_b3",
+          "band": "BAND_3_STAGE",
+          "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 540 },
+          "nodes": [
+            {
+              "id": "race_bars_node",
+              "node_type": "HorizontalRaceBars",
+              "props": {
+                "title": "MMLU-Pro Accuracy Showdown",
+                "benchmarkName": "Benchmark Score",
+                "items": [
+                  { "name": "DeepSeek-V3", "score": 88.5, "maxScore": 100, "isHero": true, "pillTag": "SOTA" },
+                  { "name": "Claude 3.5 Sonnet", "score": 85.1, "maxScore": 100 },
+                  { "name": "GPT-4o (0513)", "score": 84.8, "maxScore": 100 }
+                ]
+              },
+              "bounds": { "x_min_px": 140, "y_min_px": 500, "width_px": 760, "height_px": 540 },
+              "motion_track": {
+                "enter": { "type": "SPRING_DAMPED", "start_frame": 240, "duration_frames": 30 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

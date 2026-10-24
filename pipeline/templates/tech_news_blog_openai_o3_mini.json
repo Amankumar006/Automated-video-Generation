@@ -2,832 +2,97 @@
   "id": "blog_openai_o3_mini",
   "title": "OpenAI o3-mini: High-Speed STEM Reasoning Model",
   "category": "tech_news",
-  "tech_news_metadata": {
-    "provider": "OpenAI",
-    "model_name": "o3-mini",
-    "throughput_delta": "3.2x FASTER",
-    "throughput_sub": "THROUGHPUT VS PREDECESSOR REASONING MODELS",
-    "price_input": "$1.10 / 1M",
-    "price_output": "$4.40 / 1M"
-  },
   "beats": [
     {
       "beat_id": 1,
-      "text": "Before you update your stack, see what just dropped with OpenAI o3-mini.",
-      "highlight_words": {
-        "OpenAI o3-mini": "#38BDF8",
-        "dropped": "#F59E0B"
+      "text": "Every engineer burns tokens before seeing new reasoning benchmarks.",
+      "duration": 5.0,
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK RACE: SIGNAL STREAM",
+        "sub": "Hardware throughput and execution speed drag race",
+        "accent_color": "#10B981",
+        "metric_name": "THROUGHPUT",
+        "unit": "TFLOPS",
+        "contestants": [
+          {
+            "name": "Signal Stream (Ours)",
+            "value": 1180.0,
+            "display_val": "1,180 TFLOPS",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Prior SOTA",
+            "value": 660.0,
+            "display_val": "660 TFLOPS",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "cuDNN Native",
+            "value": 610.0,
+            "display_val": "610 TFLOPS",
+            "is_hero": false,
+            "color": "#A855F7"
+          },
+          {
+            "name": "PyTorch Baseline",
+            "value": 240.0,
+            "display_val": "240 TFLOPS",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +78.8% SPEEDUP OVER PRIOR SOTA"
       },
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK RACE: SIGNAL STREAM",
+        "sub": "Hardware throughput and execution speed drag race",
+        "accent_color": "#10B981",
+        "metric_name": "THROUGHPUT",
+        "unit": "TFLOPS",
+        "contestants": [
+          {
+            "name": "Signal Stream (Ours)",
+            "value": 1180.0,
+            "display_val": "1,180 TFLOPS",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Prior SOTA",
+            "value": 660.0,
+            "display_val": "660 TFLOPS",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "cuDNN Native",
+            "value": 610.0,
+            "display_val": "610 TFLOPS",
+            "is_hero": false,
+            "color": "#A855F7"
+          },
+          {
+            "name": "PyTorch Baseline",
+            "value": 240.0,
+            "display_val": "240 TFLOPS",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +78.8% SPEEDUP OVER PRIOR SOTA"
+      },
+      "kinetic_action": "blueprint_transform",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
       "start": 0.0,
-      "end": 3.84,
-      "duration": 3.84,
-      "word_timings": [
-        {
-          "word": "Before",
-          "clean_word": "before",
-          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
-          "start": 0.01,
-          "end": 0.27,
-          "duration": 0.26,
-          "frame_ahead_trigger": 0.0
-        },
-        {
-          "word": "you",
-          "clean_word": "you",
-          "phonemes": "ju\u02d0",
-          "start": 0.27,
-          "end": 0.475,
-          "duration": 0.205,
-          "frame_ahead_trigger": 0.23
-        },
-        {
-          "word": "update",
-          "clean_word": "update",
-          "phonemes": "\u02c8\u028cpde\u026at",
-          "start": 0.475,
-          "end": 0.82,
-          "duration": 0.345,
-          "frame_ahead_trigger": 0.435
-        },
-        {
-          "word": "your",
-          "clean_word": "your",
-          "phonemes": "j\u028a\u0279",
-          "start": 0.82,
-          "end": 0.933,
-          "duration": 0.113,
-          "frame_ahead_trigger": 0.78
-        },
-        {
-          "word": "stack,",
-          "clean_word": "stack",
-          "phonemes": "st\u02c8\u00e6k",
-          "start": 0.933,
-          "end": 1.15,
-          "duration": 0.217,
-          "frame_ahead_trigger": 0.893
-        },
-        {
-          "word": "see",
-          "clean_word": "see",
-          "phonemes": "s\u02c8i\u02d0",
-          "start": 1.15,
-          "end": 1.365,
-          "duration": 0.215,
-          "frame_ahead_trigger": 1.11
-        },
-        {
-          "word": "what",
-          "clean_word": "what",
-          "phonemes": "w\u02cc\u028ct",
-          "start": 1.365,
-          "end": 1.47,
-          "duration": 0.105,
-          "frame_ahead_trigger": 1.325
-        },
-        {
-          "word": "just",
-          "clean_word": "just",
-          "phonemes": "d\u0292\u02c8\u028cst",
-          "start": 1.47,
-          "end": 1.811,
-          "duration": 0.341,
-          "frame_ahead_trigger": 1.43
-        },
-        {
-          "word": "dropped",
-          "clean_word": "dropped",
-          "phonemes": "d\u0279\u02c8\u0251\u02d0pt",
-          "start": 1.811,
-          "end": 2.2,
-          "duration": 0.389,
-          "frame_ahead_trigger": 1.771
-        },
-        {
-          "word": "with",
-          "clean_word": "with",
-          "phonemes": "w\u026a\u00f0",
-          "start": 2.2,
-          "end": 2.272,
-          "duration": 0.072,
-          "frame_ahead_trigger": 2.16
-        },
-        {
-          "word": "OpenAI",
-          "clean_word": "openai",
-          "phonemes": "\u02c8o\u028ap\u0259n \u02cce\u026a\u02c8a\u026a",
-          "start": 2.272,
-          "end": 2.975,
-          "duration": 0.703,
-          "frame_ahead_trigger": 2.232
-        },
-        {
-          "word": "o3-mini.",
-          "clean_word": "o3mini",
-          "phonemes": "\u02c8o\u028a \u03b8\u0279\u02c8i\u02d0 m\u02c8\u026ani",
-          "start": 2.975,
-          "end": 3.565,
-          "duration": 0.59,
-          "frame_ahead_trigger": 2.935
-        }
-      ],
-      "audio_duration": 3.84,
-      "slot_duration": 3.99
-    },
-    {
-      "beat_id": 2,
-      "text": "Prior reasoning models were powerful but suffered from high latency and steep token prices.",
-      "highlight_words": {
-        "latency": "#EF4444",
-        "steep token prices": "#F59E0B"
-      },
-      "start": 3.99,
-      "end": 8.73,
-      "duration": 4.74,
-      "word_timings": [
-        {
-          "word": "Prior",
-          "clean_word": "prior",
-          "phonemes": "p\u0279\u02c8a\u026a\u025a",
-          "start": 3.99,
-          "end": 4.28,
-          "duration": 0.29,
-          "frame_ahead_trigger": 4.1
-        },
-        {
-          "word": "reasoning",
-          "clean_word": "reasoning",
-          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
-          "start": 4.28,
-          "end": 4.845,
-          "duration": 0.565,
-          "frame_ahead_trigger": 4.39
-        },
-        {
-          "word": "models",
-          "clean_word": "models",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
-          "start": 4.845,
-          "end": 5.17,
-          "duration": 0.325,
-          "frame_ahead_trigger": 4.955
-        },
-        {
-          "word": "were",
-          "clean_word": "were",
-          "phonemes": "w\u025c\u02d0",
-          "start": 5.17,
-          "end": 5.29,
-          "duration": 0.12,
-          "frame_ahead_trigger": 5.28
-        },
-        {
-          "word": "powerful",
-          "clean_word": "powerful",
-          "phonemes": "p\u02c8a\u028a\u025af\u0259l",
-          "start": 5.29,
-          "end": 5.805,
-          "duration": 0.515,
-          "frame_ahead_trigger": 5.4
-        },
-        {
-          "word": "but",
-          "clean_word": "but",
-          "phonemes": "b\u02cc\u028ct",
-          "start": 5.805,
-          "end": 6.12,
-          "duration": 0.315,
-          "frame_ahead_trigger": 5.915
-        },
-        {
-          "word": "suffered",
-          "clean_word": "suffered",
-          "phonemes": "s\u02c8\u028cf\u025ad",
-          "start": 6.12,
-          "end": 6.28,
-          "duration": 0.16,
-          "frame_ahead_trigger": 6.23
-        },
-        {
-          "word": "from",
-          "clean_word": "from",
-          "phonemes": "f\u0279\u028cm",
-          "start": 6.28,
-          "end": 6.465,
-          "duration": 0.185,
-          "frame_ahead_trigger": 6.39
-        },
-        {
-          "word": "high",
-          "clean_word": "high",
-          "phonemes": "h\u02c8a\u026a",
-          "start": 6.465,
-          "end": 6.725,
-          "duration": 0.26,
-          "frame_ahead_trigger": 6.575
-        },
-        {
-          "word": "latency",
-          "clean_word": "latency",
-          "phonemes": "l\u02c8e\u026at\u0259nsi",
-          "start": 6.725,
-          "end": 7.215,
-          "duration": 0.49,
-          "frame_ahead_trigger": 6.835
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 7.215,
-          "end": 7.455,
-          "duration": 0.24,
-          "frame_ahead_trigger": 7.325
-        },
-        {
-          "word": "steep",
-          "clean_word": "steep",
-          "phonemes": "st\u02c8i\u02d0p",
-          "start": 7.455,
-          "end": 7.69,
-          "duration": 0.235,
-          "frame_ahead_trigger": 7.565
-        },
-        {
-          "word": "token",
-          "clean_word": "token",
-          "phonemes": "t\u02c8o\u028ak\u0259n",
-          "start": 7.69,
-          "end": 8.05,
-          "duration": 0.36,
-          "frame_ahead_trigger": 7.8
-        },
-        {
-          "word": "prices.",
-          "clean_word": "prices",
-          "phonemes": "p\u0279\u02c8a\u026as\u1d7bz",
-          "start": 8.05,
-          "end": 8.53,
-          "duration": 0.48,
-          "frame_ahead_trigger": 8.16
-        }
-      ],
-      "audio_duration": 4.74,
-      "slot_duration": 4.89
-    },
-    {
-      "beat_id": 3,
-      "text": "Enter o3-mini. It uses distilled reasoning tokens to deliver frontier intelligence at speed.",
-      "highlight_words": {
-        "o3-mini": "#10B981",
-        "distilled": "#38BDF8"
-      },
-      "start": 8.88,
-      "end": 14.15,
-      "duration": 5.27,
-      "word_timings": [
-        {
-          "word": "Enter",
-          "clean_word": "enter",
-          "phonemes": "\u02c8\u025bnt\u025a",
-          "start": 8.886,
-          "end": 9.161,
-          "duration": 0.275,
-          "frame_ahead_trigger": 9.146
-        },
-        {
-          "word": "o3-mini.",
-          "clean_word": "o3mini",
-          "phonemes": "\u02c8o\u028a \u03b8\u0279\u02c8i\u02d0 m\u02c8\u026ani",
-          "start": 9.161,
-          "end": 9.994,
-          "duration": 0.833,
-          "frame_ahead_trigger": 9.421
-        },
-        {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 9.994,
-          "end": 10.181,
-          "duration": 0.187,
-          "frame_ahead_trigger": 10.254
-        },
-        {
-          "word": "uses",
-          "clean_word": "uses",
-          "phonemes": "j\u02c8u\u02d0s\u1d7bz",
-          "start": 10.181,
-          "end": 10.461,
-          "duration": 0.28,
-          "frame_ahead_trigger": 10.441
-        },
-        {
-          "word": "distilled",
-          "clean_word": "distilled",
-          "phonemes": "d\u026ast\u02c8\u026ald",
-          "start": 10.461,
-          "end": 11.006,
-          "duration": 0.545,
-          "frame_ahead_trigger": 10.721
-        },
-        {
-          "word": "reasoning",
-          "clean_word": "reasoning",
-          "phonemes": "\u0279\u02c8i\u02d0z\u0259n\u026a\u014b",
-          "start": 11.006,
-          "end": 11.516,
-          "duration": 0.51,
-          "frame_ahead_trigger": 11.266
-        },
-        {
-          "word": "tokens",
-          "clean_word": "tokens",
-          "phonemes": "t\u02c8o\u028ak\u0259nz",
-          "start": 11.516,
-          "end": 11.981,
-          "duration": 0.465,
-          "frame_ahead_trigger": 11.776
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 11.981,
-          "end": 12.101,
-          "duration": 0.12,
-          "frame_ahead_trigger": 12.241
-        },
-        {
-          "word": "deliver",
-          "clean_word": "deliver",
-          "phonemes": "d\u1d7bl\u02c8\u026av\u025a",
-          "start": 12.101,
-          "end": 12.461,
-          "duration": 0.36,
-          "frame_ahead_trigger": 12.361
-        },
-        {
-          "word": "frontier",
-          "clean_word": "frontier",
-          "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
-          "start": 12.461,
-          "end": 12.873,
-          "duration": 0.412,
-          "frame_ahead_trigger": 12.721
-        },
-        {
-          "word": "intelligence",
-          "clean_word": "intelligence",
-          "phonemes": "\u026ant\u02c8\u025bl\u026ad\u0292\u0259ns",
-          "start": 12.873,
-          "end": 13.486,
-          "duration": 0.613,
-          "frame_ahead_trigger": 13.133
-        },
-        {
-          "word": "at",
-          "clean_word": "at",
-          "phonemes": "\u00e6t",
-          "start": 13.486,
-          "end": 13.606,
-          "duration": 0.12,
-          "frame_ahead_trigger": 13.746
-        },
-        {
-          "word": "speed.",
-          "clean_word": "speed",
-          "phonemes": "sp\u02c8i\u02d0d",
-          "start": 13.606,
-          "end": 13.981,
-          "duration": 0.375,
-          "frame_ahead_trigger": 13.866
-        }
-      ],
-      "audio_duration": 5.27,
-      "slot_duration": 5.42
-    },
-    {
-      "beat_id": 4,
-      "text": "On SWE-bench Verified, it hits forty-nine percent, dominating competitive math and coding benchmarks.",
-      "highlight_words": {
-        "forty-nine percent": "#10B981",
-        "SWE-bench": "#38BDF8"
-      },
-      "start": 14.3,
-      "end": 20.18,
-      "duration": 5.89,
-      "word_timings": [
-        {
-          "word": "On",
-          "clean_word": "on",
-          "phonemes": "\u02c8\u0254n",
-          "start": 14.31,
-          "end": 14.425,
-          "duration": 0.115,
-          "frame_ahead_trigger": 14.72
-        },
-        {
-          "word": "SWE-bench",
-          "clean_word": "swebench",
-          "phonemes": "\u02cc\u025bsd\u02c8\u028cb\u0259lj\u02ccu\u02d0 \u02c8\u025bb\u025bnt\u0283",
-          "start": 14.425,
-          "end": 15.625,
-          "duration": 1.2,
-          "frame_ahead_trigger": 14.835
-        },
-        {
-          "word": "Verified,",
-          "clean_word": "verified",
-          "phonemes": "v\u02c8\u025b\u0279\u1d7bf\u02cca\u026ad",
-          "start": 15.625,
-          "end": 16.18,
-          "duration": 0.555,
-          "frame_ahead_trigger": 16.035
-        },
-        {
-          "word": "it",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 16.18,
-          "end": 16.187,
-          "duration": 0.006,
-          "frame_ahead_trigger": 16.59
-        },
-        {
-          "word": "hits",
-          "clean_word": "hits",
-          "phonemes": "h\u02c8\u026ats",
-          "start": 16.187,
-          "end": 16.495,
-          "duration": 0.309,
-          "frame_ahead_trigger": 16.597
-        },
-        {
-          "word": "forty-nine",
-          "clean_word": "fortynine",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279t\u026an\u02cca\u026an",
-          "start": 16.495,
-          "end": 17.01,
-          "duration": 0.515,
-          "frame_ahead_trigger": 16.905
-        },
-        {
-          "word": "percent,",
-          "clean_word": "percent",
-          "phonemes": "p\u025as\u02c8\u025bnt",
-          "start": 17.01,
-          "end": 17.437,
-          "duration": 0.427,
-          "frame_ahead_trigger": 17.42
-        },
-        {
-          "word": "dominating",
-          "clean_word": "dominating",
-          "phonemes": "d\u02c8\u0251\u02d0m\u1d7bn\u02cce\u026a\u027e\u026a\u014b",
-          "start": 17.437,
-          "end": 18.11,
-          "duration": 0.673,
-          "frame_ahead_trigger": 17.847
-        },
-        {
-          "word": "competitive",
-          "clean_word": "competitive",
-          "phonemes": "k\u0259mp\u02c8\u025b\u027e\u1d7bt\u02cc\u026av",
-          "start": 18.11,
-          "end": 18.64,
-          "duration": 0.53,
-          "frame_ahead_trigger": 18.52
-        },
-        {
-          "word": "math",
-          "clean_word": "math",
-          "phonemes": "m\u02c8\u00e6\u03b8",
-          "start": 18.64,
-          "end": 18.965,
-          "duration": 0.325,
-          "frame_ahead_trigger": 19.05
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 18.965,
-          "end": 19.13,
-          "duration": 0.165,
-          "frame_ahead_trigger": 19.375
-        },
-        {
-          "word": "coding",
-          "clean_word": "coding",
-          "phonemes": "k\u02c8o\u028ad\u026a\u014b",
-          "start": 19.13,
-          "end": 19.505,
-          "duration": 0.375,
-          "frame_ahead_trigger": 19.54
-        },
-        {
-          "word": "benchmarks.",
-          "clean_word": "benchmarks",
-          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
-          "start": 19.505,
-          "end": 20.095,
-          "duration": 0.59,
-          "frame_ahead_trigger": 19.915
-        }
-      ],
-      "audio_duration": 5.89,
-      "slot_duration": 6.03
-    },
-    {
-      "beat_id": 5,
-      "text": "The pricing delta is wild: just one dollar and ten cents per million tokens, available now.",
-      "highlight_words": {
-        "one dollar and ten cents": "#10B981",
-        "available now": "#38BDF8"
-      },
-      "start": 20.33,
-      "end": 25.2,
-      "duration": 4.86,
-      "word_timings": [
-        {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 20.348,
-          "end": 20.448,
-          "duration": 0.1,
-          "frame_ahead_trigger": 20.908
-        },
-        {
-          "word": "pricing",
-          "clean_word": "pricing",
-          "phonemes": "p\u0279\u02c8a\u026as\u026a\u014b",
-          "start": 20.448,
-          "end": 20.853,
-          "duration": 0.405,
-          "frame_ahead_trigger": 21.008
-        },
-        {
-          "word": "delta",
-          "clean_word": "delta",
-          "phonemes": "d\u02c8\u025blt\u0259",
-          "start": 20.853,
-          "end": 21.263,
-          "duration": 0.41,
-          "frame_ahead_trigger": 21.413
-        },
-        {
-          "word": "is",
-          "clean_word": "is",
-          "phonemes": "\u026az",
-          "start": 21.263,
-          "end": 21.418,
-          "duration": 0.155,
-          "frame_ahead_trigger": 21.823
-        },
-        {
-          "word": "wild:",
-          "clean_word": "wild",
-          "phonemes": "w\u02c8a\u026ald",
-          "start": 21.418,
-          "end": 21.681,
-          "duration": 0.263,
-          "frame_ahead_trigger": 21.978
-        },
-        {
-          "word": "just",
-          "clean_word": "just",
-          "phonemes": "d\u0292\u02c8\u028cst",
-          "start": 21.681,
-          "end": 21.968,
-          "duration": 0.287,
-          "frame_ahead_trigger": 22.241
-        },
-        {
-          "word": "one",
-          "clean_word": "one",
-          "phonemes": "w\u02cc\u028cn",
-          "start": 21.968,
-          "end": 22.308,
-          "duration": 0.34,
-          "frame_ahead_trigger": 22.528
-        },
-        {
-          "word": "dollar",
-          "clean_word": "dollar",
-          "phonemes": "d\u02c8\u0251\u02d0l\u025a",
-          "start": 22.308,
-          "end": 22.518,
-          "duration": 0.21,
-          "frame_ahead_trigger": 22.868
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 22.518,
-          "end": 22.778,
-          "duration": 0.26,
-          "frame_ahead_trigger": 23.078
-        },
-        {
-          "word": "ten",
-          "clean_word": "ten",
-          "phonemes": "t\u02c8\u025bn",
-          "start": 22.778,
-          "end": 22.928,
-          "duration": 0.15,
-          "frame_ahead_trigger": 23.338
-        },
-        {
-          "word": "cents",
-          "clean_word": "cents",
-          "phonemes": "s\u02c8\u025bnts",
-          "start": 22.928,
-          "end": 23.388,
-          "duration": 0.46,
-          "frame_ahead_trigger": 23.488
-        },
-        {
-          "word": "per",
-          "clean_word": "per",
-          "phonemes": "p\u025c\u02d0",
-          "start": 23.388,
-          "end": 23.458,
-          "duration": 0.07,
-          "frame_ahead_trigger": 23.948
-        },
-        {
-          "word": "million",
-          "clean_word": "million",
-          "phonemes": "m\u02c8\u026ali\u0259n",
-          "start": 23.458,
-          "end": 23.843,
-          "duration": 0.385,
-          "frame_ahead_trigger": 24.018
-        },
-        {
-          "word": "tokens,",
-          "clean_word": "tokens",
-          "phonemes": "t\u02c8o\u028ak\u0259nz",
-          "start": 23.843,
-          "end": 24.348,
-          "duration": 0.505,
-          "frame_ahead_trigger": 24.403
-        },
-        {
-          "word": "available",
-          "clean_word": "available",
-          "phonemes": "\u0250v\u02c8e\u026al\u0259b\u0259l",
-          "start": 24.348,
-          "end": 24.823,
-          "duration": 0.475,
-          "frame_ahead_trigger": 24.908
-        },
-        {
-          "word": "now.",
-          "clean_word": "now",
-          "phonemes": "n\u02c8a\u028a",
-          "start": 24.823,
-          "end": 25.068,
-          "duration": 0.245,
-          "frame_ahead_trigger": 25.383
-        }
-      ],
-      "audio_duration": 4.86,
-      "slot_duration": 5.02
-    },
-    {
-      "beat_id": 6,
-      "text": "Follow The Model Verse for instant breakdowns of every major AI lab release.",
-      "highlight_words": {
-        "The Model Verse": "#10B981"
-      },
-      "start": 25.35,
-      "end": 29.4,
-      "duration": 4.05,
-      "word_timings": [
-        {
-          "word": "Follow",
-          "clean_word": "follow",
-          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 25.347,
-          "end": 25.672,
-          "duration": 0.325,
-          "frame_ahead_trigger": 26.057
-        },
-        {
-          "word": "The",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 25.672,
-          "end": 25.862,
-          "duration": 0.19,
-          "frame_ahead_trigger": 26.382
-        },
-        {
-          "word": "Model",
-          "clean_word": "model",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 25.862,
-          "end": 26.082,
-          "duration": 0.22,
-          "frame_ahead_trigger": 26.572
-        },
-        {
-          "word": "Verse",
-          "clean_word": "verse",
-          "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 26.082,
-          "end": 26.477,
-          "duration": 0.395,
-          "frame_ahead_trigger": 26.792
-        },
-        {
-          "word": "for",
-          "clean_word": "for",
-          "phonemes": "f\u0254\u02d0\u0279",
-          "start": 26.477,
-          "end": 26.667,
-          "duration": 0.19,
-          "frame_ahead_trigger": 27.187
-        },
-        {
-          "word": "instant",
-          "clean_word": "instant",
-          "phonemes": "\u02c8\u026anst\u0259nt",
-          "start": 26.667,
-          "end": 27.037,
-          "duration": 0.37,
-          "frame_ahead_trigger": 27.377
-        },
-        {
-          "word": "breakdowns",
-          "clean_word": "breakdowns",
-          "phonemes": "b\u0279\u02c8e\u026akda\u028anz",
-          "start": 27.037,
-          "end": 27.662,
-          "duration": 0.625,
-          "frame_ahead_trigger": 27.747
-        },
-        {
-          "word": "of",
-          "clean_word": "of",
-          "phonemes": "\u028cv",
-          "start": 27.662,
-          "end": 27.776,
-          "duration": 0.114,
-          "frame_ahead_trigger": 28.372
-        },
-        {
-          "word": "every",
-          "clean_word": "every",
-          "phonemes": "\u02c8\u025bv\u0279i",
-          "start": 27.776,
-          "end": 28.067,
-          "duration": 0.291,
-          "frame_ahead_trigger": 28.486
-        },
-        {
-          "word": "major",
-          "clean_word": "major",
-          "phonemes": "m\u02c8e\u026ad\u0292\u025a",
-          "start": 28.067,
-          "end": 28.457,
-          "duration": 0.39,
-          "frame_ahead_trigger": 28.777
-        },
-        {
-          "word": "AI",
-          "clean_word": "ai",
-          "phonemes": "\u02cce\u026a\u02c8a\u026a",
-          "start": 28.457,
-          "end": 28.607,
-          "duration": 0.15,
-          "frame_ahead_trigger": 29.167
-        },
-        {
-          "word": "lab",
-          "clean_word": "lab",
-          "phonemes": "l\u02c8\u00e6b",
-          "start": 28.607,
-          "end": 28.852,
-          "duration": 0.245,
-          "frame_ahead_trigger": 29.317
-        },
-        {
-          "word": "release.",
-          "clean_word": "release",
-          "phonemes": "\u0279\u1d7bl\u02c8i\u02d0s",
-          "start": 28.852,
-          "end": 29.307,
-          "duration": 0.455,
-          "frame_ahead_trigger": 29.562
-        }
-      ],
-      "audio_duration": 4.05,
-      "slot_duration": 4.05
+      "end": 5.0,
+      "word_timings": []
     }
-  ]
+  ],
+  "script_driven_visuals": true
 }
