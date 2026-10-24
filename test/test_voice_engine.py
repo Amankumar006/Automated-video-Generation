@@ -32,9 +32,11 @@ from pipeline.voice_engine import (
     ElevenLabsVoiceProvider,
     SarvamVoiceProvider,
     KokoroVoiceProvider,
+    PocketTTSVoiceProvider,
     UnifiedVoiceRouter,
     VoiceQuotaExceededError,
     VoiceAuthError,
+    VoiceEngineError,
     resample_audio
 )
 from pipeline.config import SAMPLE_RATE
@@ -130,6 +132,14 @@ def test_resample_audio_44k_to_24k():
     audio_24k = resample_audio(audio_44k, sr_in, sr_out)
     assert audio_24k.dtype == np.float32
     assert abs(len(audio_24k) - sr_out) <= 2
+
+
+def test_pocket_tts_provider_fails_with_actionable_setup_error(monkeypatch):
+    """Pocket TTS remains optional and reports a clear setup error when absent."""
+    monkeypatch.setenv("POCKET_TTS_BIN", "/tmp/definitely-missing-pocket-tts")
+    provider = PocketTTSVoiceProvider()
+    with pytest.raises(VoiceEngineError, match="POCKET_TTS_BIN"):
+        provider.synthesize("A local voice test.")
 
 
 # ==============================================================================

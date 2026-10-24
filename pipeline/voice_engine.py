@@ -27,6 +27,9 @@ import json
 import base64
 import hashlib
 import logging
+import shutil
+import subprocess
+import tempfile
 from typing import Tuple, Dict, Any, Optional
 import numpy as np
 import soundfile as sf
@@ -508,6 +511,105 @@ class KokoroVoiceProvider(BaseVoiceProvider):
         return samples, SAMPLE_RATE, meta
 
 
+class PocketTTSVoiceProvider(BaseVoiceProvider):
+    """Optional Kyutai Pocket TTS CLI provider for reliable local CPU speech."""
+
+    def __init__(self):
+        self.binary_path = os.environ.get("POCKET_TTS_BIN") or shutil.which("pocket-tts")
+        self.language = os.environ.get("POCKET_TTS_LANGUAGE", "english_18m_2026-10")
+        self.voice = os.environ.get("POCKET_TTS_VOICE", "")
+        self.timeout = float(os.environ.get("POCKET_TTS_TIMEOUT_SECONDS", "90"))
+
+    def _resolve_binary(self) -> str:
+        path = self.binary_path or shutil.which("pocket-tts")
+        if not path or not os.path.isfile(path) or not os.access(path, os.X_OK):
+            raise VoiceEngineError(
+                "Pocket TTS binary unavailable. Install the official Kyutai binary and set POCKET_TTS_BIN."
+            )
+        return path
+
+    def resolve_voice(self, voice_name: Optional[str]) -> str:
+        """Pocket's CLI accepts a conditioning-file path; otherwise use alba."""
+        candidate = voice_name or self.voice
+        return candidate if candidate and os.path.isfile(candidate) else "alba"
+
+    @staticmethod
+    def _apply_speed(audio: np.ndarray, sample_rate: int, speed: float) -> np.ndarray:
+        """Apply pitch-preserving speed where ffmpeg is available."""
+        if abs(speed - 1.0) < 0.01 or len(audio) == 0:
+            return audio.astype(np.float32)
+        ffmpeg = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg")
+        if not ffmpeg:
+            # Keep the provider usable in minimal environments; duration is
+            # still adjusted, with a small pitch trade-off as the last resort.
+            return resample_audio(audio, sample_rate, int(sample_rate * speed))
+        with tempfile.TemporaryDirectory(prefix="pocket_tts_speed_") as tmp:
+            source = os.path.join(tmp, "source.wav")
+            target = os.path.join(tmp, "target.wav")
+            sf.write(source, audio, sample_rate)
+            result = subprocess.run(
+                [ffmpeg, "-y", "-loglevel", "error", "-i", source,
+                 "-filter:a", f"atempo={max(0.5, min(2.0, speed))}",
+                 "-ar", str(sample_rate), "-ac", "1", target],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if result.returncode == 0 and os.path.exists(target):
+                adjusted, adjusted_sr = sf.read(target, dtype="float32")
+                return resample_audio(adjusted, adjusted_sr, sample_rate)
+        return audio.astype(np.float32)
+
+    def synthesize(
+        self,
+        text: str,
+        voice: Optional[str] = None,
+        speed: Optional[float] = None,
+        language: str = "en"
+    ) -> Tuple[np.ndarray, int, Dict[str, Any]]:
+        if not language.lower().startswith("en"):
+            raise VoiceEngineError("Pocket TTS is configured for English narration in this pipeline.")
+        binary = self._resolve_binary()
+        norm_text = normalize_narration_text(text, model_id="pocket-tts", language=language)
+        target_speed = float(speed) if speed is not None else DEFAULT_SPEED
+        with tempfile.TemporaryDirectory(prefix="pocket_tts_") as tmp:
+            output_path = os.path.join(tmp, "speech.wav")
+            command = [
+                binary, "generate", "--language", self.language,
+                "--text", norm_text, "--output-path", output_path, "--quiet"
+            ]
+            # Pocket's built-in voices are selected by omission. A supplied
+            # path is supported for future voice cloning without treating
+            # Kokoro aliases such as am_eric as Pocket files.
+            voice_path = self.resolve_voice(voice)
+            if voice_path and os.path.isfile(voice_path):
+                command.extend(["--voice", voice_path])
+            try:
+                result = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=self.timeout,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise VoiceEngineError(f"Pocket TTS timed out after {self.timeout:.0f}s") from exc
+            if result.returncode != 0 or not os.path.exists(output_path):
+                detail = (result.stderr or result.stdout or "unknown Pocket TTS failure").strip()
+                raise VoiceEngineError(f"Pocket TTS failed: {detail[:240]}")
+            audio, source_sr = sf.read(output_path, dtype="float32")
+
+        audio = sanitize_audio_samples(audio, source_sr)
+        audio = self._apply_speed(audio, source_sr, target_speed)
+        return audio, SAMPLE_RATE, {
+            "provider": "pocket",
+            "model": self.language,
+            "voice": voice_path,
+            "speed": target_speed,
+            "char_count": len(norm_text),
+            "binary": binary,
+        }
+
+
 class UnifiedVoiceRouter:
     """
     Intelligent router selecting the optimal speech synthesis engine
@@ -519,6 +621,7 @@ class UnifiedVoiceRouter:
         self.elevenlabs = ElevenLabsVoiceProvider()
         self.sarvam = SarvamVoiceProvider()
         self.kokoro = KokoroVoiceProvider()
+        self.pocket = PocketTTSVoiceProvider()
 
     def synthesize_beat(
         self,
@@ -557,6 +660,10 @@ class UnifiedVoiceRouter:
             resolved_model = self.sarvam.model
             resolved_voice = self.sarvam.resolve_speaker(voice)
             active_speed = float(speed) if speed is not None else 1.05
+        elif target_provider == "pocket":
+            resolved_model = self.pocket.language
+            resolved_voice = self.pocket.resolve_voice(voice)
+            active_speed = float(speed) if speed is not None else DEFAULT_SPEED
         else:
             target_provider = "kokoro"
             resolved_model = "kokoro-v1.0"
@@ -618,6 +725,14 @@ class UnifiedVoiceRouter:
                     language=lang_norm
                 )
                 quota_tracker.record_success("sarvam")
+            elif target_provider == "pocket":
+                logger.info(f"🎙️ [Pocket TTS] Synthesizing local CPU beat with voice '{resolved_voice}'...")
+                audio, sr, meta = self.pocket.synthesize(
+                    text=clean_text,
+                    voice=resolved_voice,
+                    speed=active_speed,
+                    language=lang_norm
+                )
             else:
                 logger.info(f"🎙️ [Kokoro ONNX] Synthesizing offline beat with voice '{resolved_voice}'...")
                 audio, sr, meta = self.kokoro.synthesize(
@@ -628,7 +743,7 @@ class UnifiedVoiceRouter:
                 )
             audio = sanitize_audio_samples(audio, sr)
         except (VoiceQuotaExceededError, VoiceAuthError, VoiceEngineError, Exception) as exc:
-            if target_provider in ("elevenlabs", "sarvam"):
+            if target_provider in ("elevenlabs", "sarvam", "pocket"):
                 err_msg = str(exc)
                 if (
                     is_quota_error(exc)

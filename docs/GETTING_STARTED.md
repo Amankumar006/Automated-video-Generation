@@ -55,6 +55,12 @@ The Kokoro voice models are downloaded on first use and are intentionally
 ignored by Git. Do not commit model weights, OAuth tokens, generated videos,
 or render caches.
 
+For a lightweight CPU-only English alternative, install Kyutai's official
+`pocket-tts` binary and set `TTS_PROVIDER=pocket` plus
+`POCKET_TTS_BIN=/absolute/path/to/pocket-tts`. The recommended local profile
+is `POCKET_TTS_LANGUAGE=english_18m_2026-10`; the pipeline falls back to
+Kokoro if Pocket TTS is unavailable or fails during a beat.
+
 ## Validate the installation
 
 ```bash

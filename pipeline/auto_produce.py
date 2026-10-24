@@ -645,7 +645,7 @@ def main():
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
-    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro, pocket)")
     parser.add_argument("--lang", "--language", dest="lang", choices=["en", "hi", "both", "all"], default="en", help="Narration language code: 'en' (ElevenLabs), 'hi' (Sarvam AI), or 'both' (dual-production)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
