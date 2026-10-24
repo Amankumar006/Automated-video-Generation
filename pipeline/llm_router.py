@@ -499,7 +499,7 @@ def generate_deterministic_fallback_script(
         beats = [
             {
                 "beat_id": 1,
-                "text": f"Before you update your production stack, see what just dropped with {clean_topic}.",
+                "text": f"The release is live: here is what {clean_topic} changes in a production stack.",
                 "visual_focus": f"Headline banner announcing official launch details for {clean_topic}.",
                 "highlight_words": {clean_topic: "#38BDF8"},
                 "svo_action": {"subject": clean_topic, "action_verb": "launches", "direct_object": "New Capabilities", "anchor_word": "dropped", "semantic_role": "state_transition"},

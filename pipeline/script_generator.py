@@ -66,6 +66,8 @@ Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
 - STRICTLY BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
   * NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
   * The first 3 seconds must be an ABSURD PARADOX or PATTERN INTERRUPT grounded in the paper that stops the viewer from swiping away.
+  * Do not default to the generic imperative "Before you...". Use it only when the paper's actual claim is time-sensitive; otherwise vary the opening across a lived scene, a contradiction, a sharp question, a concrete consequence, or a surprising observation.
+  * Write the first line as something a technically curious human would say aloud to a friend—not as a headline template or a call to action.
 - Ground abstract AI in real developer tools and crisp physical analogies relevant to the paper:
   * Name REAL models, frameworks, and hardware when appropriate.
   * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation.

@@ -71,6 +71,7 @@ Details: {abstract}
 Voice & Newsroom Persona:
 - Tone: Fast-paced, authoritative, breaking tech newsroom reporter (like MKBHD meets Bloomberg Tech).
 - Strictly ban academic paper clichés ("Today we explore", "In this paper", "Researchers have proposed").
+- Do not default to "Before you...". Lead with the live event, a concrete consequence, or a surprising contradiction; use time-order language only when the news itself depends on it.
 - Focus on real developer implications: token pricing, throughput leaps, verified benchmarks, and availability.
 
 6-Beat Structure (Exactly 125-155 words total):
@@ -122,7 +123,7 @@ Output ONLY valid JSON matching this schema:
             {
                 "beat_id": 1,
                 "name": "b1_hook",
-                "text": f"Before you update your production AI stack, see what {prov} just officially dropped with {model_name}.",
+                "text": f"The release is live: {prov} just dropped {model_name} for production AI stacks.",
                 "visual_focus": f"Hero announcement card with official {prov} vector logo and launch tag.",
                 "highlight_words": {model_name: COLOR_CYAN, "officially dropped": COLOR_GOLD},
                 "svo_action": {"subject": prov, "action_verb": "launches", "direct_object": model_name, "anchor_word": "dropped", "semantic_role": "state_transition"},

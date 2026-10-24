@@ -32,7 +32,8 @@ from pipeline.hook_optimizer import (
     score_hook,
     generate_hook_candidates,
     gate_and_select_best_hook,
-    optimize_script_hook
+    optimize_script_hook,
+    is_generic_before_opening,
 )
 from pipeline.audio_generator import (
     detect_dead_air_gaps,
@@ -100,6 +101,31 @@ def test_hook_candidate_generation_archetypes():
     assert any("everyone" in c.lower() or "do not" in c.lower() or "stop" in c.lower() for c in candidates)
     # 4. Question ("why")
     assert any("why" in c.lower() for c in candidates)
+
+
+def test_hook_candidates_do_not_default_to_generic_before_opening():
+    """The reusable 'Before you...' frame must not be the default hook style."""
+    candidates = generate_hook_candidates(
+        topic="Mercury 3 diffusion language models",
+        metadata={"payoff_stat": "3x", "abstract": "Sequential decoding repeats expensive work."},
+        category="mechanism_deepdive",
+    )
+    assert candidates
+    assert not any(is_generic_before_opening(candidate) for candidate in candidates)
+
+
+def test_generic_before_source_hook_is_replaced_by_ranked_alternative():
+    """A provider fallback must not survive hook ranking just because it scores well."""
+    spec = {
+        "id": "mercury_3",
+        "title": "Mercury 3 diffusion language models",
+        "category": "mechanism_deepdive",
+        "beats": [{"beat_id": 1, "text": "Before you scale your next model, see how Mercury 3 works."}],
+    }
+    optimized = optimize_script_hook(spec)
+    selected = optimized["beats"][0]["text"]
+    assert not is_generic_before_opening(selected)
+    assert optimized["hook_gating"]["opening_style"] == "generic_before_replaced"
 
 
 def test_hook_gating_selects_highest_score():
