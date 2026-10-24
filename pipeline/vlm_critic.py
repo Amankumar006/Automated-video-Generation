@@ -106,7 +106,10 @@ class VLMCritic:
     """Automated visual quality auditor powered by multimodal Gemini & deterministic layout solver."""
 
     def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or API_KEY
+        # Resolve the environment at construction time as well as import time.
+        # This keeps test runners, containers, and long-lived workers that inject
+        # secrets after module import from silently skipping the Gemini path.
+        self.api_key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or API_KEY
         self.request_timeout_seconds = float(os.getenv("VLM_CRITIC_TIMEOUT_SECONDS", "30"))
         if self.api_key:
             genai.configure(api_key=self.api_key)

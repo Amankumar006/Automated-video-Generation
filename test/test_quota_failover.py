@@ -122,7 +122,8 @@ def test_script_generation_gemini_429_failover():
     router = LLMRouter()
 
     # Simulate Gemini failing with ResourceExhausted / 429
-    with patch("google.generativeai.GenerativeModel") as mock_model_cls:
+    with patch.dict(os.environ, {"GEMINI_API_KEY": "test_key", "GOOGLE_API_KEY": "test_key"}, clear=False), \
+         patch("google.generativeai.GenerativeModel") as mock_model_cls:
         mock_instance = MagicMock()
         mock_instance.generate_content.side_effect = Exception("429 ResourceExhausted: Quota exceeded for project")
         mock_model_cls.return_value = mock_instance
@@ -298,7 +299,8 @@ def test_voice_engine_sarvam_quota_exceeded_failover(tmp_path):
 
 def test_vlm_critic_gemini_vision_429_failover_produces_patches():
     """Verify VLM Critic detects quota exhaustion and produces valid evaluation report and layout patch proposals."""
-    critic = VLMCritic()
+    with patch.dict(os.environ, {"GEMINI_API_KEY": "test_key", "GOOGLE_API_KEY": "test_key"}, clear=False):
+        critic = VLMCritic()
 
     test_image = PROJECT_ROOT / "public" / "test_frame.png"
     if not test_image.exists():
@@ -322,7 +324,8 @@ def test_vlm_critic_gemini_vision_429_failover_produces_patches():
     }
 
     # Simulate Gemini Vision raising 429
-    with patch("google.generativeai.GenerativeModel") as mock_genai_model:
+    with patch.dict(os.environ, {"GEMINI_API_KEY": "test_key", "GOOGLE_API_KEY": "test_key"}, clear=False), \
+         patch("google.generativeai.GenerativeModel") as mock_genai_model:
         mock_instance = MagicMock()
         mock_instance.generate_content.side_effect = Exception("429 ResourceExhausted: Quota exceeded")
         mock_genai_model.return_value = mock_instance
@@ -864,7 +867,8 @@ def test_voice_engine_connection_error_cascades_to_kokoro_and_records_exhausted(
 
 def test_vlm_critic_all_gemini_models_failing_syncs_quota_tracker():
     """Verify that when all Gemini Vision models fail, gemini_vision is marked exhausted and subsequent audits skip."""
-    critic = VLMCritic()
+    with patch.dict(os.environ, {"GEMINI_API_KEY": "test_key", "GOOGLE_API_KEY": "test_key"}, clear=False):
+        critic = VLMCritic()
 
     test_image = PROJECT_ROOT / "public" / "test_frame.png"
     if not test_image.exists():
@@ -880,7 +884,8 @@ def test_vlm_critic_all_gemini_models_failing_syncs_quota_tracker():
     }
 
     # Simulate all Gemini Vision models failing with 503
-    with patch("google.generativeai.GenerativeModel") as mock_model_cls:
+    with patch.dict(os.environ, {"GEMINI_API_KEY": "test_key", "GOOGLE_API_KEY": "test_key"}, clear=False), \
+         patch("google.generativeai.GenerativeModel") as mock_model_cls:
         mock_instance = MagicMock()
         mock_instance.generate_content.side_effect = Exception("503 The model is overloaded. Please try again later.")
         mock_model_cls.return_value = mock_instance
