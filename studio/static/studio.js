@@ -78,7 +78,7 @@ async function loadSystemStatus() {
   try {
     const res = await fetch("/api/status");
     const data = await res.json();
-    document.getElementById("statusKokoro").textContent = data.kokoro_ready ? "ONLINE" : "OFFLINE";
+    document.getElementById("statusPocket").textContent = data.pocket_ready ? "ONLINE" : "OFFLINE";
     document.getElementById("statusFFmpeg").textContent = data.ffmpeg_ready ? "READY" : "MISSING";
     document.getElementById("videoCountBadge").textContent = `${data.video_count} Produced`;
   } catch (err) {

@@ -71,8 +71,8 @@ python3 pipeline/daily_shorts_daemon.py --dry-run --count 1
 # Full pipeline validation with temporary, repository-isolated outputs
 python3 pipeline/run_pipeline.py --dry-run
 
-# Generate the local Kokoro narration used by the Remotion preview
-make generate-kokoro-audio
+# Generate local Pocket TTS narration through the unified audio engine
+python3 -c "from pipeline.voice_engine import UnifiedVoiceRouter; import soundfile as sf; a,sr,_=UnifiedVoiceRouter().synthesize_beat('Pocket TTS is ready.', provider='pocket'); sf.write('public/audio/pocket_narration.wav', a, sr)"
 ```
 
 ### 2. Project Aether 3D Autonomous Cinematic Director

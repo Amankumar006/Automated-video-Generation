@@ -18,7 +18,7 @@ separate from source code.
 | `pipeline/templates/` | Reusable script/scene specifications | Source fixtures |
 | `_archive/` | Historical Aether and superseded experiments | Not imported at runtime |
 | `media/`, `output/`, `frames_*`, `final_*.mp4` | Local render products and inspection output | Ignored |
-| `kokoro_models/`, `node_modules/`, caches | Downloaded dependencies and caches | Ignored |
+| `node_modules/`, caches | Downloaded dependencies and caches | Ignored |
 
 GitHub contribution forms, ownership, and maintainer settings live under
 `.github/`. Remote branch protection and required-check settings are documented

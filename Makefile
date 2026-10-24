@@ -4,8 +4,7 @@ VENV_PYTHON := $(VENV_DIR)/bin/python
 RUN_PYTHON = $(if $(wildcard $(VENV_PYTHON)),$(VENV_PYTHON),$(PYTHON))
 
 .PHONY: setup setup-python setup-web doctor clean-generated clean-generated-apply \
-	test test-python test-web lint deps-check deps-audit render-smoke \
-	generate-kokoro-audio
+	test test-python test-web lint deps-check deps-audit render-smoke
 
 setup: setup-python setup-web
 
@@ -51,6 +50,3 @@ deps-audit:
 
 render-smoke:
 	$(RUN_PYTHON) -m manim -ql -s -r 540,960 --fps 15 test/test_code_execution_engine.py TestChalkboardCodeBlockScene
-
-generate-kokoro-audio:
-	$(RUN_PYTHON) scripts/generate_remotion_kokoro_audio.py

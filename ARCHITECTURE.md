@@ -16,7 +16,7 @@ flowchart TD
         ScriptGen --> ScriptCritic["Script Pedagogy Critic"]
         ScriptCritic --> VisualDir["Visual Director (3b1b Blueprints)"]
         VisualDir --> ManimEngine["Manim CE 2D Vector Renderer"]
-        ScriptCritic --> AudioSynth["Kokoro TTS & Forced Aligner"]
+        ScriptCritic --> AudioSynth["Pocket TTS & Forced Aligner"]
         ManimEngine --> Muxer["FFmpeg Master Muxer"]
         AudioSynth --> Muxer
         Muxer --> VLMCritic["VLM Layout Critic"]
@@ -66,7 +66,7 @@ flowchart TD
 
 > [!NOTE]
 > **Operational Deployment & Compute Strategy**:
-> - **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)** is the active daily production system. It runs at zero API credit cost utilizing local/free Ollama Cloud models (`gpt-oss:120b:cloud`), Kokoro offline TTS, and deterministic Manim 2D chalkboard rendering.
+> - **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)** is the active daily production system. It runs at zero API credit cost utilizing local/free Ollama Cloud models (`gpt-oss:120b:cloud`), Pocket TTS offline speech, and deterministic Manim 2D chalkboard rendering.
 > - **Project Aether (`_archive/aether/`)** is fully implemented and test-verified across all 6 pillars (394+ passing tests). It is currently held in Standby / Simulation Readiness mode, and will be activated for live generative video rendering once dedicated commercial video API credits (Google Veo 3.1, Kling 3.0, Runway Gen-4.5) and cloud GPU clusters (ComfyUI / CogVideoX / HunyuanVideo) are funded.
 
 ---
@@ -94,7 +94,7 @@ The Model Verse converts cutting-edge research publications (arXiv, Hugging Face
   - **Chalkboard Code Execution (`manim_engine/primitives/code_execution_engine.py`)**: macOS window chrome, syntax tokenization (Python, CUDA, C++), active line scanning, and live GPU register monitors.
 
 ### Stage 4: Neural Acoustics & Tactile Foley Engine
-- **Neural Speech (`pipeline/audio_synthesizer.py`)**: Kokoro-82M ONNX model (`am_adam` voice) rendered with dynamic pacing (1.12x speedup calibrated to YouTube retention).
+- **Neural Speech (`pipeline/audio_synthesizer.py`)**: Pocket TTS local CPU speech rendered with dynamic pacing (1.12x speedup calibrated to YouTube retention).
 - **Acoustic Forced Alignment (`pipeline/aligner.py`)**: 200 Hz (5ms hop) Savitzky-Golay smoothed RMS energy envelope tracking that snaps word boundaries to acoustic dips with $\pm 75\text{ms}$ precision. Enforces the **Frame-Ahead Rule** (-33ms to -66ms) so animation motion leads auditory perception.
 - **Tactile Foley SFX Mixdown (`public/sfx/`)**: Procedural layering of sub-bass impacts, laser sweeps, camera whooshes, mechanical clicks, and glass chimes at exact millisecond animation triggers.
 
@@ -215,7 +215,7 @@ The following audit matrix compares all 38 files in Project Aether (`_archive/ae
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Speech Generation** | `_archive/aether/compiler/schemas.py` (`AudioRequirement`), `_archive/aether/repair/executor.py` (`_execute_voice_remaster`) | `pipeline/audio_synthesizer.py` (450 lines), `pipeline/voice_engine.py` (280 lines) | **Aether**: Defines dialogue requirements and mood; executes voice remastering via external audio asset URI replacement.<br>**Shorts**: Directly synthesizes speech using local Kokoro-82M ONNX (`am_adam`), ElevenLabs, or Sarvam AI with dynamic retention pacing (1.12x). |
+| **Speech Generation** | `_archive/aether/compiler/schemas.py` (`AudioRequirement`), `_archive/aether/repair/executor.py` (`_execute_voice_remaster`) | `pipeline/audio_synthesizer.py` (450 lines), `pipeline/voice_engine.py` (280 lines) | **Aether**: Defines dialogue requirements and mood; executes voice remastering via external audio asset URI replacement.<br>**Shorts**: Directly synthesizes speech using local Pocket TTS, ElevenLabs, or Sarvam AI with dynamic retention pacing (1.12x). |
 | **Acoustic Forced Alignment** | *(None / External Timestamps)* | `pipeline/aligner.py` (210 lines) | **Aether**: Relies on fixed shot durations (e.g. 5.0s per shot).<br>**Shorts**: 200 Hz (5ms hop) Savitzky-Golay smoothed RMS energy envelope tracking that snaps word boundaries to acoustic dips with $\pm 75\text{ms}$ precision. |
 | **Tactile Foley Sound Design** | `_archive/aether/repair/executor.py` (`_execute_foley_remaster`) | `pipeline/audio_synthesizer.py` (`mix_sfx_and_music`), `public/sfx/*.wav` | **Aether**: Flags missing sound effects and remuxes ambient stems during repair.<br>**Shorts**: Procedurally layers sub-bass impacts, laser sweeps, mechanical clicks, and glass chimes at exact millisecond timestamps where visual primitives trigger. |
 
@@ -321,7 +321,7 @@ themodelverse-shorts/
 │   ├── arxiv_fetcher.py               # arXiv paper ingestion & figure extraction coordinator
 │   ├── arxiv_vector_extractor.py      # Native PDF/EPS vector figure & raster extractor
 │   ├── aligner.py                     # 200 Hz acoustic forced aligner (energy snapping)
-│   ├── audio_synthesizer.py           # Kokoro-82M TTS & Tactile Foley SFX mixdown
+│   ├── audio_synthesizer.py           # Pocket TTS & Tactile Foley SFX mixdown
 │   ├── analytics_feedback.py          # Real-time YouTube retention feedback loop
 │   ├── publisher.py                   # YouTube Data API v3 publisher
 │   ├── layout_solver.py               # Deterministic spatial repulsion collision solver

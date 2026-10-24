@@ -29,8 +29,6 @@ WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(WORKSPACE_ROOT / ".env")
 
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg") or "/Users/amankumar/bin/ffmpeg"
-KOKORO_MODEL_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "kokoro-v1.0.onnx")
-KOKORO_VOICES_PATH = str(WORKSPACE_ROOT / "kokoro_models" / "voices-v1.0.bin")
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
 GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL_NAME", "gemini-flash-latest")
@@ -74,7 +72,6 @@ SAFE_Y_MAX = 5.8
 # Audio Configuration
 SAMPLE_RATE = 24000
 DEFAULT_VOICE = os.environ.get("ELEVENLABS_VOICE") or "eric"
-DEFAULT_KOKORO_VOICE = os.environ.get("KOKORO_VOICE", "am_eric")
 DEFAULT_SPEED = 1.12
 DEFAULT_TTS_PROVIDER = os.environ.get("TTS_PROVIDER", "auto")
 TTS_CACHE_DIR = os.path.join(PUBLIC_DIR, "audio_cache")

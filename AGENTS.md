@@ -46,7 +46,7 @@ flowchart TD
     end
 
     subgraph AudioEngine ["4. Acoustics & Foley Engine"]
-        A1["Kokoro Neural TTS Agent (am_adam)"]
+        A1["Pocket TTS Neural TTS Agent"]
         A2["Acoustic Forced Alignment Agent (200 Hz RMS)"]
         A3["Tactile Foley SFX Mixdown Engine"]
     end

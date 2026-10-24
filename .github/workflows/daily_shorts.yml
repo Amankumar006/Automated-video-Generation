@@ -159,22 +159,25 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Cache Kokoro Neural Voice Models
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        id: cache-kokoro
-        with:
-          path: kokoro_models/
-          key: kokoro-v1.0-models
-
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - name: Ensure Kokoro Models
-        if: steps.cache-kokoro.outputs.cache-hit != 'true'
+      - name: Install Pocket TTS
         run: |
-          python3 -c "from pipeline.audio_synthesizer import ensure_kokoro_models; ensure_kokoro_models()"
+          set -euo pipefail
+          version="3.3.0"
+          asset="pocket-tts-${version}-x86_64-unknown-linux-gnu.tar.gz"
+          expected_sha="9abff0aa138a804e44052952d8c3bdaae247fb267ca8f4b83fe178897d1a0559"
+          mkdir -p "$HOME/.local/bin"
+          curl --fail --location --retry 3 --output "/tmp/$asset" \
+            "https://github.com/kyutai-labs/pocket-tts/releases/download/v4.0.1/$asset"
+          echo "$expected_sha  /tmp/$asset" | sha256sum --check --status
+          tar -xzf "/tmp/$asset" --strip-components=1 -C "$HOME/.local/bin"
+          chmod +x "$HOME/.local/bin/pocket-tts"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          pocket-tts --version
 
       - name: Configure Credentials
         env:
@@ -228,8 +231,8 @@ jobs:
           printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >> .env
           printf '%s\n' \
             'GEMINI_MODEL_NAME=gemini-2.5-flash' \
-            'TTS_PROVIDER=kokoro' \
-            'KOKORO_VOICE=am_adam' \
+            'TTS_PROVIDER=pocket' \
+            'POCKET_TTS_LANGUAGE=english_18m_2026-10' \
             'REQUIRE_VLM_QA=true' \
             'ELEVENLABS_VOICE=eric' >> .env
 
@@ -295,8 +298,8 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           REQUIRE_VLM_QA: "true"
-          TTS_PROVIDER: "kokoro"
-          KOKORO_VOICE: "am_adam"
+          TTS_PROVIDER: "pocket"
+          POCKET_TTS_LANGUAGE: "english_18m_2026-10"
           COUNT: ${{ github.event.inputs.count || '1' }}
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}
           ARXIV_ID: ${{ github.event.inputs.arxiv_id || '' }}

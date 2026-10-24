@@ -4,7 +4,7 @@ Unit and Integration Tests for The Model Verse Unified Voice Engine:
 - Text normalization & phonetic rules
 - ElevenLabs provider & voice resolution
 - Sarvam AI provider & Hindi decoding
-- Seamless fallback to Kokoro on quota exhaustion or error
+- Seamless fallback to Pocket TTS on quota exhaustion or error
 """
 
 import io
@@ -31,7 +31,6 @@ from pipeline.voice_engine import (
     DiskAudioCache,
     ElevenLabsVoiceProvider,
     SarvamVoiceProvider,
-    KokoroVoiceProvider,
     PocketTTSVoiceProvider,
     UnifiedVoiceRouter,
     VoiceQuotaExceededError,
@@ -151,7 +150,7 @@ def test_elevenlabs_resolve_voice_id():
     # Friendly alias
     assert provider.resolve_voice_id("eric") == "cjVigY5qzO86Huf0OWal"
     assert provider.resolve_voice_id("adam") == "pNInz6obpgDQGcFmaJgB"
-    # Kokoro voice name stripped
+    # Provider voice alias is normalized
     assert provider.resolve_voice_id("am_eric") == "cjVigY5qzO86Huf0OWal"
     # Direct ID pass-through
     assert provider.resolve_voice_id("custom123456789012") == "custom123456789012"
@@ -240,7 +239,7 @@ def test_sarvam_synthesize_mock_success(mock_post):
 
 
 # ==============================================================================
-# 6. Unified Voice Router & Automatic Kokoro Fallback Tests
+# 6. Unified Voice Router & Automatic Pocket TTS Fallback Tests
 # ==============================================================================
 
 def test_unified_voice_router_cache_hit_avoids_api(tmp_path):
@@ -272,7 +271,7 @@ def test_unified_voice_router_cache_hit_avoids_api(tmp_path):
         assert router.cache.stats["hits"] == 1
 
 
-def test_unified_voice_router_seamless_kokoro_fallback_on_quota(tmp_path):
+def test_unified_voice_router_seamless_pocket_fallback_on_quota(tmp_path):
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     # Mock ElevenLabs raising QuotaExceededError
@@ -282,17 +281,17 @@ def test_unified_voice_router_seamless_kokoro_fallback_on_quota(tmp_path):
         side_effect=VoiceQuotaExceededError("Credit exhausted")
     ):
         with patch.object(
-            router.kokoro,
+            router.pocket,
             "synthesize",
-            return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "kokoro"})
-        ) as mock_kokoro:
+            return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "pocket"})
+        ) as mock_pocket:
             audio, sr, meta = router.synthesize_beat(
-                text="Fall back to offline Kokoro",
+                text="Fall back to offline Pocket TTS",
                 voice="eric",
                 language="en",
                 provider="elevenlabs"
             )
-            mock_kokoro.assert_called_once()
+            mock_pocket.assert_called_once()
             assert meta["fallback_from"] == "elevenlabs"
             assert "Credit exhausted" in meta["fallback_reason"]
 
@@ -329,19 +328,19 @@ def test_synthesize_audio_for_spec_integration(tmp_path):
         assert os.path.exists(result["master_audio"])
 
 
-def test_default_tts_provider_is_elevenlabs():
+def test_default_tts_provider_is_supported():
     from pipeline.config import DEFAULT_TTS_PROVIDER, DEFAULT_VOICE
-    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "auto")
-    assert DEFAULT_VOICE in ("eric", "am_eric")
+    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "auto", "pocket")
+    assert DEFAULT_VOICE in ("eric", "am_eric", "")
 
     router = UnifiedVoiceRouter()
-    with patch.object(router.elevenlabs, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "elevenlabs", "voice_id": "eric"})):
+    with patch.object(router.pocket, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "pocket", "voice": "alba"})):
         audio, sr, meta = router.synthesize_beat(
             text="Testing default ElevenLabs routing",
             language="en"
         )
-        assert meta["provider"] == "elevenlabs"
-        assert meta["voice_id"] == "eric"
+        assert meta["provider"] == "pocket"
+        assert meta["voice"] == "alba"
 
 
 def test_kinetic_sfx_cues_synchronized_transitions():
@@ -391,35 +390,26 @@ def test_kinetic_sfx_cues_synchronized_transitions():
     assert any(c["sound_type"] == "whoosh" and c["timestamp"] == 5.05 for c in beat_2_cues)
 
 
-def test_kokoro_voice_provider_resolve_voice():
-    from pipeline.voice_engine import KokoroVoiceProvider
-    p = KokoroVoiceProvider()
-
-    # Friendly name 'eric' should resolve to 'am_eric'
-    assert p.resolve_voice("eric") == "am_eric"
-    assert p.resolve_voice("adam") == "am_adam"
-    assert p.resolve_voice("bella") == "af_bella"
-    assert p.resolve_voice("alice") == "bf_alice"
-    # Exact Kokoro voice name should remain exact
-    assert p.resolve_voice("am_eric") == "am_eric"
-    # None should resolve to a valid default Kokoro voice
-    assert p.resolve_voice(None) in ("am_eric", "am_adam")
+def test_pocket_voice_provider_defaults_to_builtin_voice():
+    p = PocketTTSVoiceProvider()
+    assert p.resolve_voice("eric") == "alba"
+    assert p.resolve_voice(None) == "alba"
 
 
-def test_unified_voice_router_fallback_maps_eric_to_am_eric(tmp_path):
+def test_unified_voice_router_fallback_uses_pocket_builtin_voice(tmp_path):
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
     # Simulate ElevenLabs quota failure
     with patch.object(router.elevenlabs, "synthesize", side_effect=VoiceQuotaExceededError("Quota exceeded")):
         dummy_audio = np.zeros(24000, dtype=np.float32)
-        with patch.object(router.kokoro, "synthesize", return_value=(dummy_audio, 24000, {"provider": "kokoro", "voice": "am_eric"})) as mock_kokoro:
+        with patch.object(router.pocket, "synthesize", return_value=(dummy_audio, 24000, {"provider": "pocket", "voice": "alba"})) as mock_pocket:
             audio, sr, meta = router.synthesize_beat(
-                text="Testing fallback from ElevenLabs to Kokoro",
+                text="Testing fallback from ElevenLabs to Pocket TTS",
                 voice="eric",
                 provider="elevenlabs"
             )
-            mock_kokoro.assert_called_once()
-            _, kwargs = mock_kokoro.call_args
-            assert kwargs["voice"] == "am_eric"
+            mock_pocket.assert_called_once()
+            _, kwargs = mock_pocket.call_args
+            assert kwargs["voice"] == "alba"
             assert meta["fallback_from"] == "elevenlabs"
 
 

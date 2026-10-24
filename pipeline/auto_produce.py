@@ -4,7 +4,7 @@ Executes full-pipeline video generation from a single topic name, model profile,
   1. Ingests topic or arXiv metadata
   2. Generates 6-beat narrative script via Gemini 2.5 Flash
   3. Auto-synthesizes Computer Modern LaTeX vector SVGs
-  4. Synthesizes Kokoro neural audio narration + procedural SFX
+  4. Synthesizes Pocket TTS neural audio narration + procedural SFX
   5. Renders 3Blue1Brown chalkboard Manim scene with kinetic captions
   6. Muxes broadcast MP4 with FFmpeg and extracts verification keyframes
 """
@@ -645,7 +645,7 @@ def main():
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
-    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro, pocket)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, pocket)")
     parser.add_argument("--lang", "--language", dest="lang", choices=["en", "hi", "both", "all"], default="en", help="Narration language code: 'en' (ElevenLabs), 'hi' (Sarvam AI), or 'both' (dual-production)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")

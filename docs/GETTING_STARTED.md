@@ -51,15 +51,12 @@ recoverable quarantine outside the repository. It does not permanently delete
 anything and intentionally leaves source code, curated assets, model weights,
 and historical documentation untouched.
 
-The Kokoro voice models are downloaded on first use and are intentionally
-ignored by Git. Do not commit model weights, OAuth tokens, generated videos,
-or render caches.
-
 For a lightweight CPU-only English alternative, install Kyutai's official
 `pocket-tts` binary and set `TTS_PROVIDER=pocket` plus
 `POCKET_TTS_BIN=/absolute/path/to/pocket-tts`. The recommended local profile
-is `POCKET_TTS_LANGUAGE=english_18m_2026-10`; the pipeline falls back to
-Kokoro if Pocket TTS is unavailable or fails during a beat.
+is `POCKET_TTS_LANGUAGE=english_18m_2026-10`. Pocket TTS is the local offline
+fallback; if it is unavailable, the pipeline fails clearly rather than
+silently downloading another model.
 
 ## Validate the installation
 

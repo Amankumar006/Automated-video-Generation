@@ -2,7 +2,7 @@
 Unit and Integration Tests for Autonomous API Quota Failover Engine:
 - QuotaHealthTracker in-memory state tracking and error detection
 - Resilient Cascading LLM Script Failover (Gemini -> Groq -> OpenRouter -> Ollama Cloud -> Fallback)
-- Self-Healing Voice Failover (ElevenLabs / Sarvam -> Kokoro ONNX offline synthesis)
+- Self-Healing Voice Failover (ElevenLabs / Sarvam -> Pocket TTS offline synthesis)
 - Self-Healing Vision Failover (Gemini Vision -> Ollama Cloud Vision -> Deterministic Layout Solver)
 - End-to-end pipeline dry-run verification
 """
@@ -35,6 +35,7 @@ from pipeline.voice_engine import (
     SarvamVoiceProvider,
     VoiceQuotaExceededError,
     VoiceAuthError,
+    VoiceEngineError,
     SAMPLE_RATE
 )
 from pipeline.vlm_critic import VLMCritic
@@ -216,8 +217,8 @@ def test_script_generation_strips_thinking_tags_and_markdown():
 # 3. Self-Healing Voice Failovers (Requirement R2)
 # ==============================================================================
 
-def test_voice_engine_elevenlabs_quota_exceeded_failover_to_kokoro(tmp_path):
-    """Verify voice engine produces full 24kHz audio via Kokoro fallback when ElevenLabs returns quota_exceeded."""
+def test_voice_engine_elevenlabs_quota_exceeded_failover_to_pocket(tmp_path):
+    """Verify voice engine produces full 24kHz audio via Pocket fallback when ElevenLabs returns quota_exceeded."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     # Simulate ElevenLabs returning HTTP 401 with quota_exceeded body
@@ -238,7 +239,7 @@ def test_voice_engine_elevenlabs_quota_exceeded_failover_to_kokoro(tmp_path):
             provider="elevenlabs"
         )
 
-        # Verification: Kokoro fallback was used
+        # Verification: Pocket fallback was used
         assert sr == SAMPLE_RATE  # Must be 24000 Hz
         assert isinstance(audio, np.ndarray)
         assert len(audio) > 0
@@ -251,7 +252,7 @@ def test_voice_engine_elevenlabs_quota_exceeded_failover_to_kokoro(tmp_path):
 
 
 def test_voice_engine_skips_exhausted_elevenlabs_without_network_call(tmp_path):
-    """Verify subsequent voice synthesis in same run immediately uses Kokoro without calling ElevenLabs."""
+    """Verify subsequent voice synthesis in same run immediately uses Pocket without calling ElevenLabs."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     # Mark elevenlabs exhausted in QuotaTracker
@@ -272,7 +273,7 @@ def test_voice_engine_skips_exhausted_elevenlabs_without_network_call(tmp_path):
 
 
 def test_voice_engine_sarvam_quota_exceeded_failover(tmp_path):
-    """Verify Sarvam AI Hindi synthesis cascades cleanly to Kokoro on 429."""
+    """Verify Hindi does not silently fall back to English Pocket TTS on 429."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     mock_resp = MagicMock()
@@ -280,17 +281,14 @@ def test_voice_engine_sarvam_quota_exceeded_failover(tmp_path):
     mock_resp.text = "429 Rate limit exceeded for Sarvam AI"
 
     with patch("requests.post", return_value=mock_resp):
-        audio, sr, meta = router.synthesize_beat(
-            text="यह मॉडल अत्यधिक कुशल है।",
-            voice="shubh",
-            language="hi",
-            provider="sarvam"
-        )
-
-        assert sr == SAMPLE_RATE
-        assert len(audio) > 0
+        with pytest.raises(VoiceEngineError, match="English-only"):
+            router.synthesize_beat(
+                text="यह मॉडल अत्यधिक कुशल है।",
+                voice="shubh",
+                language="hi",
+                provider="sarvam"
+            )
         assert quota_tracker.is_exhausted("sarvam") is True
-        assert meta["fallback_from"] == "sarvam"
 
 
 # ==============================================================================
@@ -479,31 +477,22 @@ def test_script_generation_full_cascade_to_deterministic():
 
 
 def test_voice_engine_sarvam_hindi_fallback_preserves_language(tmp_path):
-    """Verify Sarvam AI Hindi synthesis falls back to Kokoro with language='hi' passed through."""
+    """Verify Sarvam AI Hindi failure is surfaced instead of producing incorrect English audio."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     mock_resp = MagicMock()
     mock_resp.status_code = 401
     mock_resp.text = "quota_exceeded: Sarvam credits finished"
 
-    with patch("requests.post", return_value=mock_resp), \
-         patch.object(router.kokoro, "synthesize", wraps=router.kokoro.synthesize) as mock_synth:
-
-        audio, sr, meta = router.synthesize_beat(
-            text="यह एक परीक्षण वाक्य है।",
-            voice="shubh",
-            language="hi",
-            provider="sarvam"
-        )
-
-        assert sr == SAMPLE_RATE
-        assert meta["fallback_from"] == "sarvam"
+    with patch("requests.post", return_value=mock_resp):
+        with pytest.raises(VoiceEngineError, match="English-only"):
+            router.synthesize_beat(
+                text="यह एक परीक्षण वाक्य है।",
+                voice="shubh",
+                language="hi",
+                provider="sarvam"
+            )
         assert quota_tracker.is_exhausted("sarvam") is True
-
-        # Kokoro synthesize must have received language="hi" (not hardcoded en-us)
-        mock_synth.assert_called_once()
-        _, kwargs = mock_synth.call_args
-        assert kwargs.get("language") == "hi"
 
 
 def test_sanitize_audio_samples_stereo_and_artifacts():
@@ -591,7 +580,7 @@ def test_is_quota_error_requests_http_error():
 
 
 def test_voice_engine_elevenlabs_natural_quota_phrasing(tmp_path):
-    """Verify ElevenLabs 401 with natural quota phrasing raises VoiceQuotaExceededError and cascades to Kokoro."""
+    """Verify ElevenLabs 401 with natural quota phrasing cascades to Pocket TTS."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     mock_resp = MagicMock()
@@ -611,7 +600,7 @@ def test_voice_engine_elevenlabs_natural_quota_phrasing(tmp_path):
 
 
 def test_voice_engine_sarvam_natural_credits_phrasing(tmp_path):
-    """Verify Sarvam 401 with 'credits exhausted' raises VoiceQuotaExceededError and cascades to Kokoro."""
+    """Verify Sarvam 401 with 'credits exhausted' cascades to Pocket TTS."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     mock_resp = MagicMock()
@@ -619,31 +608,26 @@ def test_voice_engine_sarvam_natural_credits_phrasing(tmp_path):
     mock_resp.text = json.dumps({"detail": "User credits exhausted for this account"})
 
     with patch("requests.post", return_value=mock_resp):
-        audio, sr, meta = router.synthesize_beat(
-            text="नमस्ते यह क्रेडिट समाप्त परीक्षण है।",
-            voice="shubh",
-            language="hi",
-            provider="sarvam"
-        )
-        assert sr == SAMPLE_RATE
-        assert len(audio) > 0
-        assert meta["fallback_from"] == "sarvam"
+        with pytest.raises(VoiceEngineError, match="English-only"):
+            router.synthesize_beat(
+                text="नमस्ते यह क्रेडिट समाप्त परीक्षण है।",
+                voice="shubh",
+                language="hi",
+                provider="sarvam"
+            )
         assert quota_tracker.is_exhausted("sarvam") is True
 
 
-def test_voice_engine_kokoro_direct_failure_does_not_mark_quota_exhausted(tmp_path):
-    """Verify that a direct Kokoro synthesis failure does not mark Kokoro as quota exhausted and re-raises."""
+def test_voice_engine_pocket_direct_failure_does_not_mark_quota_exhausted(tmp_path):
+    """Verify that a direct Pocket failure is surfaced without quota bookkeeping."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
-    with patch.object(router.kokoro, "synthesize", side_effect=RuntimeError("ONNX engine corrupted")):
-        with pytest.raises(RuntimeError, match="ONNX engine corrupted"):
+    with patch.object(router.pocket, "synthesize", side_effect=RuntimeError("Pocket engine corrupted")):
+        with pytest.raises(RuntimeError, match="Pocket engine corrupted"):
             router.synthesize_beat(
-                text="Offline Kokoro direct failure test.",
-                provider="kokoro"
+                text="Offline Pocket direct failure test.",
+                provider="pocket"
             )
-
-    # Kokoro must NOT be marked exhausted (it is an offline engine with no quota)
-    assert quota_tracker.is_healthy("kokoro") is True
 
 
 def test_script_generation_gemini_exhaustion_syncs_gemini_vision():
@@ -807,8 +791,8 @@ def test_is_quota_error_extended_patterns():
         assert is_quota_error(exc_cls("Custom error message")) is True, f"Failed on class {exc_cls.__name__}"
 
 
-def test_voice_engine_http_503_cascades_to_kokoro_and_records_exhausted(tmp_path):
-    """Verify ElevenLabs returning HTTP 503 cascades to Kokoro and marks ElevenLabs exhausted."""
+def test_voice_engine_http_503_cascades_to_pocket_and_records_exhausted(tmp_path):
+    """Verify ElevenLabs returning HTTP 503 cascades to Pocket and marks ElevenLabs exhausted."""
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 
     mock_resp = MagicMock()
@@ -838,8 +822,8 @@ def test_voice_engine_http_503_cascades_to_kokoro_and_records_exhausted(tmp_path
         assert meta2["fallback_from"] == "elevenlabs"
 
 
-def test_voice_engine_connection_error_cascades_to_kokoro_and_records_exhausted(tmp_path):
-    """Verify network connection drop on ElevenLabs cascades to Kokoro and records exhaustion."""
+def test_voice_engine_connection_error_cascades_to_pocket_and_records_exhausted(tmp_path):
+    """Verify network connection drop on ElevenLabs cascades to Pocket and records exhaustion."""
     import requests
     router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
 

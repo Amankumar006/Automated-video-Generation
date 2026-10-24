@@ -11,6 +11,7 @@ import time
 import glob
 import asyncio
 import subprocess
+import shutil
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
@@ -25,7 +26,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from pipeline.config import (
-    WORKSPACE_ROOT, FFMPEG_BIN, KOKORO_MODEL_PATH, KOKORO_VOICES_PATH,
+    WORKSPACE_ROOT, FFMPEG_BIN,
     PUBLIC_DIR, DEFAULT_VOICE, DEFAULT_SPEED,
     ENABLE_BG_MUSIC, DEFAULT_DUCK_GAIN, DEFAULT_NORMAL_GAIN
 )
@@ -183,14 +184,14 @@ async def serve_index():
 
 @app.get("/api/status")
 def get_system_status():
-    kokoro_ready = os.path.exists(KOKORO_MODEL_PATH) and os.path.exists(KOKORO_VOICES_PATH)
+    pocket_ready = bool(os.environ.get("POCKET_TTS_BIN")) or bool(shutil.which("pocket-tts"))
     ffmpeg_ready = os.path.exists(FFMPEG_BIN)
     templates = list((PROJECT_ROOT / "pipeline" / "templates").glob("*.json"))
     videos = list(PROJECT_ROOT.glob("final_*.mp4"))
 
     return {
         "status": "online",
-        "kokoro_ready": kokoro_ready,
+        "pocket_ready": pocket_ready,
         "ffmpeg_ready": ffmpeg_ready,
         "ffmpeg_path": FFMPEG_BIN,
         "template_count": len(templates),

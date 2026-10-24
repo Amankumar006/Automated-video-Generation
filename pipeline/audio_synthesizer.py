@@ -1,6 +1,6 @@
 """
 The Model Verse — Multi-Category Audio Synthesizer, SFX Mixer & Lo-Fi Ducking Engine
-Synthesizes Kokoro-82M neural speech (am_adam), procedural SFX, and mixes
+Synthesizes local Pocket TTS neural speech, procedural SFX, and mixes
 procedural Lo-Fi ambient synthpad soundtracks with dynamic sidechain ducking.
 """
 
@@ -10,9 +10,8 @@ import numpy as np
 import soundfile as sf
 from pathlib import Path
 from typing import Optional
-from kokoro_onnx import Kokoro
 from pipeline.config import (
-    KOKORO_MODEL_PATH, KOKORO_VOICES_PATH, SAMPLE_RATE,
+    SAMPLE_RATE,
     DEFAULT_VOICE, DEFAULT_SPEED, PUBLIC_DIR,
     ENABLE_BG_MUSIC, DEFAULT_DUCK_GAIN, DEFAULT_NORMAL_GAIN, CUSTOM_BG_MUSIC_PATH
 )
@@ -25,24 +24,6 @@ from scripts.synth_music_generator import (
     generate_lofi_ambient_soundtrack, mix_master_audio
 )
 from pipeline.aligner import AcousticForcedAligner, generate_kinetic_sfx_cues
-
-def ensure_kokoro_models():
-    """Ensures Kokoro ONNX model and voices are downloaded."""
-    os.makedirs(os.path.dirname(KOKORO_MODEL_PATH), exist_ok=True)
-    import urllib.request
-    
-    if not os.path.exists(KOKORO_MODEL_PATH):
-        print(f"📥 Downloading kokoro-v1.0.onnx from official release...")
-        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx"
-        urllib.request.urlretrieve(url, KOKORO_MODEL_PATH)
-        print("✅ kokoro-v1.0.onnx downloaded successfully.")
-
-    if not os.path.exists(KOKORO_VOICES_PATH):
-        print(f"📥 Downloading voices-v1.0.bin from official release...")
-        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
-        urllib.request.urlretrieve(url, KOKORO_VOICES_PATH)
-        print("✅ voices-v1.0.bin downloaded successfully.")
-
 
 def synthesize_audio_for_spec(
     spec_data: dict,
@@ -58,7 +39,7 @@ def synthesize_audio_for_spec(
     cache_dir: Optional[str] = None,
 ) -> dict:
     """
-    Synthesizes speech using the unified neural voice router (ElevenLabs, Sarvam AI, Kokoro fallback),
+    Synthesizes speech using the unified voice router (ElevenLabs, Sarvam AI, Pocket TTS fallback),
     generates procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
     Returns: {"master_audio": str, "narration_audio": str, "soundtrack_audio": str, "timing_data": list, "total_duration": float}
     """
@@ -80,15 +61,10 @@ def synthesize_audio_for_spec(
 
     router = UnifiedVoiceRouter(cache_dir=cache_dir) if cache_dir else UnifiedVoiceRouter()
     
-    # Initialize acoustic aligner (using Kokoro tokenizer if available for phonetic precision)
-    tokenizer = None
-    try:
-        if os.path.exists(KOKORO_MODEL_PATH) and os.path.exists(KOKORO_VOICES_PATH):
-            kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
-            tokenizer = kokoro.tokenizer
-    except Exception:
-        tokenizer = None
-    aligner = AcousticForcedAligner(tokenizer=tokenizer)
+    # Pocket TTS does not expose a tokenizer. The aligner has a deterministic
+    # text fallback, so alignment remains available without a model-specific
+    # dependency.
+    aligner = AcousticForcedAligner(tokenizer=None)
 
     sr = SAMPLE_RATE
     all_audio = []
