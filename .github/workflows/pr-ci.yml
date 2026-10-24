@@ -44,6 +44,8 @@ jobs:
           set -euo pipefail
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
+          # pytest is a contributor/CI tool, not a runtime dependency.
+          python -m pip install "pytest>=8,<9"
 
       - name: Verify contributor environment
         run: |
@@ -53,7 +55,7 @@ jobs:
       - name: Run Python Test Suite
         run: |
           set -euo pipefail
-          pytest -q
+          python -m pytest -q
 
       - name: Run Manim Render Smoke Test
         if: always()
