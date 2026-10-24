@@ -717,9 +717,25 @@ class LLMRouter:
         messages.append({"role": "user", "content": prompt})
 
         for model_name in self.inception_models:
-            try:
-                logger.info(f"🧠 [LLMRouter] Attempting Inception model '{model_name}'...")
-                response = requests.post(
+            # Mercury can spend the entire first token budget in hidden
+            # reasoning on large structured prompts and return an empty
+            # visible message. Retry once with reasoning disabled before
+            # treating the provider as unavailable.
+            attempts = [
+                (os.getenv("INCEPTION_REASONING_EFFORT", "low"), max_tokens),
+                ("none", max_tokens),
+            ]
+            seen_attempts = set()
+            for reasoning_effort, attempt_tokens in attempts:
+                if (reasoning_effort, attempt_tokens) in seen_attempts:
+                    continue
+                seen_attempts.add((reasoning_effort, attempt_tokens))
+                try:
+                    logger.info(
+                        f"🧠 [LLMRouter] Attempting Inception model '{model_name}' "
+                        f"(reasoning_effort={reasoning_effort})..."
+                    )
+                    response = requests.post(
                     f"{base_url}/chat/completions",
                     headers={
                         "Authorization": f"Bearer {api_key}",
@@ -728,39 +744,42 @@ class LLMRouter:
                     json={
                         "model": model_name,
                         "messages": messages,
-                        "max_tokens": max_tokens,
+                        "max_tokens": attempt_tokens,
                         "temperature": 0.2,
-                        "reasoning_effort": os.getenv("INCEPTION_REASONING_EFFORT", "low"),
+                        "reasoning_effort": reasoning_effort,
                     },
                     timeout=float(os.getenv("INCEPTION_TIMEOUT_SECONDS", "45")),
                 )
 
-                if is_quota_error(response.status_code) or is_quota_error(response.text):
-                    quota_tracker.record_exhausted("inception", f"Status {response.status_code}: {response.text[:500]}")
-                    break
+                    if is_quota_error(response.status_code) or is_quota_error(response.text):
+                        quota_tracker.record_exhausted("inception", f"Status {response.status_code}: {response.text[:500]}")
+                        break
 
-                if response.status_code != 200:
-                    logger.warning(f"⚠️ [LLMRouter] Inception HTTP {response.status_code}: {response.text[:200]}")
-                    continue
+                    if response.status_code != 200:
+                        logger.warning(f"⚠️ [LLMRouter] Inception HTTP {response.status_code}: {response.text[:200]}")
+                        continue
 
-                data = response.json()
-                choices = data.get("choices") if isinstance(data, dict) else None
-                content = (
-                    choices[0].get("message", {}).get("content", "")
-                    if choices and isinstance(choices[0], dict)
-                    else ""
-                )
-                if content and str(content).strip():
-                    quota_tracker.record_success("inception")
-                    logger.info(f"✅ [LLMRouter] Inception generation succeeded via '{model_name}'")
-                    return str(content).strip()
+                    data = response.json()
+                    choices = data.get("choices") if isinstance(data, dict) else None
+                    content = (
+                        choices[0].get("message", {}).get("content", "")
+                        if choices and isinstance(choices[0], dict)
+                        else ""
+                    )
+                    if content and str(content).strip():
+                        quota_tracker.record_success("inception")
+                        logger.info(f"✅ [LLMRouter] Inception generation succeeded via '{model_name}'")
+                        return str(content).strip()
 
-                logger.warning("⚠️ [LLMRouter] Inception returned no visible content; trying the next provider.")
-            except Exception as exc:
-                if is_quota_error(exc):
-                    quota_tracker.record_exhausted("inception", str(exc))
-                    break
-                logger.warning(f"⚠️ [LLMRouter] Inception error on '{model_name}': {exc}")
+                    logger.warning(
+                        "⚠️ [LLMRouter] Inception returned no visible content "
+                        f"(reasoning_effort={reasoning_effort}); retrying with a simpler request."
+                    )
+                except Exception as exc:
+                    if is_quota_error(exc):
+                        quota_tracker.record_exhausted("inception", str(exc))
+                        break
+                    logger.warning(f"⚠️ [LLMRouter] Inception error on '{model_name}': {exc}")
 
         quota_tracker.record_exhausted("inception", "All Inception models failed or returned empty content")
         return None

@@ -215,6 +215,12 @@ def _persist_and_finalize_spec(
         print(f"📐 Auto-synthesizing {len(spec.get('math_formulas', []))} LaTeX mathematical SVGs...")
         for f in spec.get("math_formulas", []):
             latex = f.get("latex", "")
+            # Matplotlib mathtext does not accept the bare TeX aliases that
+            # LLMs commonly emit. Normalize them before SVG generation so a
+            # failed render cannot leak raw LaTeX into the final video.
+            if isinstance(latex, str):
+                latex = latex.replace(r"\ge ", r"\geq ").replace(r"\le ", r"\leq ")
+                f["latex"] = latex
             orig_fname = f.get("filename") or f.get("svg_filename") or ""
             bid = f.get("beat_id", 1)
             generic_names = {"formula.svg", "beat1_scale.svg", "beat2_bottleneck.svg", "beat3_architecture.svg", "beat4_mechanism.svg", "beat5_payoff.svg"}
