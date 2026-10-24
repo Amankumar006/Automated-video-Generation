@@ -24,6 +24,7 @@ class Check:
     ok: bool
     detail: str
     required: bool = True
+    strict_required: bool = True
 
 
 REQUIRED_FILES = (
@@ -100,6 +101,7 @@ def check_repository(root: Path = ROOT) -> list[Check]:
             env_path.is_file(),
             "present (values not inspected)" if env_path.is_file() else "not found; copy .env.example to .env",
             required=False,
+            strict_required=False,
         )
     )
     return checks
@@ -123,7 +125,10 @@ def main(argv: list[str] | None = None) -> int:
         label = "OK" if check.ok else ("MISSING" if check.required else "INFO")
         print(f"[{label:7}] {check.name}: {check.detail}")
 
-    failures = [check for check in checks if not check.ok and (args.strict or check.required)]
+    failures = [
+        check for check in checks
+        if not check.ok and (check.required or (args.strict and check.strict_required))
+    ]
     print()
     if failures:
         print(f"Doctor found {len(failures)} blocking issue(s).")
