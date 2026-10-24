@@ -9,6 +9,8 @@ import os
 import re
 import sys
 import json
+import queue
+import threading
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from PIL import Image
@@ -105,8 +107,31 @@ class VLMCritic:
 
     def __init__(self, api_key: Optional[str] = None):
         self.api_key = api_key or API_KEY
+        self.request_timeout_seconds = float(os.getenv("VLM_CRITIC_TIMEOUT_SECONDS", "30"))
         if self.api_key:
             genai.configure(api_key=self.api_key)
+
+    def _generate_with_timeout(self, model: Any, prompt: str, pil_img: Image.Image):
+        """Run a remote vision request without allowing it to block production."""
+        result_queue = queue.Queue(maxsize=1)
+
+        def worker():
+            try:
+                result_queue.put((True, model.generate_content([prompt, pil_img])))
+            except Exception as exc:  # pragma: no cover - provider-specific errors
+                result_queue.put((False, exc))
+
+        thread = threading.Thread(target=worker, daemon=True)
+        thread.start()
+        try:
+            ok, value = result_queue.get(timeout=self.request_timeout_seconds)
+        except queue.Empty as exc:
+            raise TimeoutError(
+                f"Vision critic request exceeded {self.request_timeout_seconds:.0f}s"
+            ) from exc
+        if not ok:
+            raise value
+        return value
 
     def audit_keyframe(
         self,
@@ -163,7 +188,7 @@ class VLMCritic:
             for model_cand in MODEL_FALLBACKS:
                 try:
                     model = genai.GenerativeModel(model_cand)
-                    response = model.generate_content([prompt, pil_img])
+                    response = self._generate_with_timeout(model, prompt, pil_img)
                     raw_text = response.text.strip()
 
                     # Clean markdown fences
@@ -182,6 +207,9 @@ class VLMCritic:
                     last_error = e
                     primary_failed = True
                     err_msg = str(e)
+                    if isinstance(e, TimeoutError):
+                        print(f"⏱️ [VLMCritic] Gemini Vision timed out after {self.request_timeout_seconds:.0f}s; using fallback.")
+                        break
                     if is_quota_error(e) or "resourceexhausted" in err_msg.lower() or "429" in err_msg:
                         quota_tracker.record_exhausted("gemini_vision", f"Quota error on {model_cand}: {err_msg}")
                         quota_tracker.record_exhausted("gemini", f"Quota error on {model_cand}: {err_msg}")

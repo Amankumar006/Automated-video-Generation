@@ -268,7 +268,11 @@ def auto_produce(
     track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Papers)
-    if track == TRACK_ACADEMIC:
+    # Generated Manim snippets are experimental and must not silently replace
+    # validated visual blueprints in production renders. Opt in explicitly
+    # when experimenting with the bespoke synthesizer.
+    bespoke_visuals_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "false").lower() in {"1", "true", "yes"}
+    if track == TRACK_ACADEMIC and bespoke_visuals_enabled:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -280,6 +284,8 @@ def auto_produce(
                 bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
         except Exception as e:
             print(f"⚠️ Bespoke visual synthesis notice: {e}")
+    elif track == TRACK_ACADEMIC:
+        print("\n🔬 Step 2.9: Bespoke visual synthesis disabled; using validated blueprint compositions.")
 
     if not legacy_engine:
         scene_file = track_meta["scene_file"]

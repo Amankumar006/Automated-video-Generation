@@ -70,14 +70,26 @@ class PerkEvidenceRecord:
     @property
     def age_days(self) -> Optional[int]:
         """Calculates days elapsed since last verification date."""
-        return calculate_content_age_days(self.last_verified_date)
+        return self.age_days_at()
+
+    def age_days_at(self, reference_date: Optional[datetime.date] = None) -> Optional[int]:
+        """Calculates verification age relative to an explicit date."""
+        return calculate_content_age_days(self.last_verified_date, reference_date=reference_date)
 
     @property
     def is_stale(self) -> bool:
         """Determines if the perk has not been verified within MAX_PERK_VERIFICATION_AGE_DAYS."""
-        return not is_content_recent(self.last_verified_date, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS)
+        return self.is_stale_at()
 
-    def to_candidate_spec(self) -> Dict[str, Any]:
+    def is_stale_at(self, reference_date: Optional[datetime.date] = None) -> bool:
+        """Determines staleness relative to an explicit date."""
+        return not is_content_recent(
+            self.last_verified_date,
+            max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS,
+            reference_date=reference_date,
+        )
+
+    def to_candidate_spec(self, reference_date: Optional[datetime.date] = None) -> Dict[str, Any]:
         """Converts verified perk into standard pipeline candidate specification."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.program_id.lower())
         steps_summary = " -> ".join([s.split(". ")[-1] for s in self.step_by_step_application[:3]])
@@ -86,8 +98,8 @@ class PerkEvidenceRecord:
             "title": self.headline,
             "provider": self.provider,
             "last_verified_date": self.last_verified_date,
-            "age_days": self.age_days,
-            "is_stale": self.is_stale,
+            "age_days": self.age_days_at(reference_date=reference_date),
+            "is_stale": self.is_stale_at(reference_date=reference_date),
             "recommended_category": "developer_perks",
             "domain_taxonomy": "developer_perks",
             "taxonomy": "developer_perks",
@@ -638,7 +650,8 @@ class TechPerksFetcher:
     def get_all_verified_perks(
         self,
         max_age_days: Optional[int] = None,
-        allow_stale: bool = False
+        allow_stale: bool = False,
+        reference_date: Optional[datetime.date] = None,
     ) -> List[PerkEvidenceRecord]:
         """
         Returns all currently active verified perks.
@@ -651,7 +664,11 @@ class TechPerksFetcher:
         if not allow_stale:
             active_perks = [
                 p for p in active_perks
-                if is_content_recent(p.last_verified_date, max_age_days=effective_max_age)
+                if is_content_recent(
+                    p.last_verified_date,
+                    max_age_days=effective_max_age,
+                    reference_date=reference_date,
+                )
             ]
 
         return active_perks
@@ -660,15 +677,20 @@ class TechPerksFetcher:
         self,
         limit: int = 5,
         max_age_days: Optional[int] = None,
-        allow_stale: bool = False
+        allow_stale: bool = False,
+        reference_date: Optional[datetime.date] = None,
     ) -> List[Dict[str, Any]]:
         """
         Returns structured candidate specifications ready for ingestion by
         DailyShortsDaemon, auto_produce, or run_pipeline.
         Filters out expired or unverified perks older than max_age_days.
         """
-        verified = self.get_all_verified_perks(max_age_days=max_age_days, allow_stale=allow_stale)
-        candidates = [p.to_candidate_spec() for p in verified]
+        verified = self.get_all_verified_perks(
+            max_age_days=max_age_days,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
+        candidates = [p.to_candidate_spec(reference_date=reference_date) for p in verified]
         # Prioritize high-value and easily accessible programs first
         candidates.sort(key=lambda x: x.get("impact_score", 0), reverse=True)
         return candidates[:limit]
@@ -681,11 +703,13 @@ tech_perks_fetcher = TechPerksFetcher()
 def get_verified_perks_digest(
     limit: int = 5,
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
 ) -> List[Dict[str, Any]]:
     """Helper for daemon and scheduler discovery."""
     return tech_perks_fetcher.get_trending_perks_digest(
         limit=limit,
         max_age_days=max_age_days,
-        allow_stale=allow_stale
+        allow_stale=allow_stale,
+        reference_date=reference_date,
     )

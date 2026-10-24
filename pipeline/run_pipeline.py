@@ -11,6 +11,8 @@ import sys
 import json
 import argparse
 import subprocess
+import shutil
+import tempfile
 from pathlib import Path
 
 # Add project root to sys.path
@@ -290,6 +292,40 @@ def extract_frames(video_path: str, output_dir: str, category: str = "architectu
     print(f"📸 Extracted {len(timestamps)} inspection keyframes to {output_dir}/")
 
 
+def build_dry_run_audio_result(spec: dict) -> dict:
+    """Build deterministic timing data without invoking a TTS provider.
+
+    Dry-run validates orchestration and storyboard contracts. It must not spend
+    provider credits, wait on network retries, or create audio cache entries.
+    """
+    timing_data = []
+    current_time = 0.0
+    beats = spec.get("beats", [])
+    for index, beat in enumerate(beats):
+        duration = float(beat.get("duration") or beat.get("slot_duration") or 5.0)
+        pause_duration = 0.30 if index < len(beats) - 1 else 0.50
+        timing_data.append(
+            {
+                "beat_id": beat.get("beat_id", index + 1),
+                "text": beat.get("text", ""),
+                "visual_focus": beat.get("visual_focus", ""),
+                "start": round(current_time, 2),
+                "end": round(current_time + duration, 2),
+                "duration": round(duration, 2),
+                "slot_duration": round(duration + pause_duration, 2),
+                "word_timings": [],
+                "provider": "dry-run",
+                "model": "deterministic-timing",
+            }
+        )
+        current_time += duration + pause_duration
+    return {
+        "master_audio": "",
+        "timing_data": timing_data,
+        "total_duration": round(current_time, 2),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
     parser.add_argument("--topic", default=None, help="Topic ID or title")
@@ -310,7 +346,23 @@ def main():
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
     parser.add_argument("--allow-stale", action="store_true", help="Bypass content recency filter for historical testing")
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
+    parser.add_argument(
+        "--validate-visuals",
+        action="store_true",
+        help="During dry-run, also synthesize and sandbox-check bespoke visuals (may call an LLM)",
+    )
     args = parser.parse_args()
+
+    # Dry runs must be genuinely read-only from the repository's perspective.
+    # Keep generated audio, subtitles, synthesized visuals, templates, and
+    # preview frames in a disposable temporary workspace instead.
+    dry_run_workspace = None
+    original_generated_visuals_dir = None
+    if args.dry_run:
+        dry_run_workspace = Path(tempfile.mkdtemp(prefix="themodelverse-dry-run-"))
+        (dry_run_workspace / "public").mkdir(parents=True, exist_ok=True)
+        (dry_run_workspace / "audio_cache").mkdir(parents=True, exist_ok=True)
+        print(f"🧪 [Dry-Run] Isolated workspace: {dry_run_workspace}")
 
     if args.dry_run and not args.topic and not args.arxiv and not args.perk and not args.blog and not args.news:
         args.topic = "speculative_decoding"
@@ -369,7 +421,11 @@ def main():
         print(f"✅ Official Blog Ingested: {cand['title']} ({blog_rec.provider})")
     elif args.arxiv:
         print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
-        arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
+        arxiv_meta = fetch_arxiv_paper(
+            args.arxiv,
+            extract_figures=not args.dry_run,
+            write_cache=not args.dry_run,
+        )
         if not arxiv_meta:
             raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
 
@@ -402,7 +458,10 @@ def main():
             spec = generate_script(
                 topic=topic,
                 category=args.category,
-                arxiv_meta=arxiv_meta
+                arxiv_meta=arxiv_meta,
+                persist=not args.dry_run,
+                output_root=dry_run_workspace,
+                extract_figures=not args.dry_run,
             )
             template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
     else:
@@ -410,9 +469,18 @@ def main():
         spec = generate_script(
             topic=topic,
             category=args.category,
-            arxiv_meta=arxiv_meta
+            arxiv_meta=arxiv_meta,
+            persist=not args.dry_run,
+            output_root=dry_run_workspace,
+            extract_figures=not args.dry_run,
         )
         template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
+
+    if args.dry_run and dry_run_workspace is not None:
+        isolated_template = dry_run_workspace / "templates" / Path(template_path).name
+        isolated_template.parent.mkdir(parents=True, exist_ok=True)
+        isolated_template.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+        template_path = isolated_template
 
     # Ingest / bind native arXiv paper figures
     target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
@@ -424,6 +492,8 @@ def main():
             if arxiv_meta and arxiv_meta.get("paper_figures"):
                 spec["paper_figures"] = arxiv_meta["paper_figures"]
                 print(f"📊 Transferred {len(spec['paper_figures'])} paper figures from arXiv metadata into spec['paper_figures'].")
+            elif args.dry_run:
+                print("   ℹ️ [Dry-Run] Skipping arXiv figure extraction; repository cache is read-only.")
             else:
                 print(f"\n📊 Ingesting native paper figures for arXiv '{clean_id}'...")
                 try:
@@ -453,7 +523,10 @@ def main():
     try:
         from pipeline.visual_director import VisualDirector
         visual_director = VisualDirector()
-        spec = visual_director.prepare_storyboard_for_spec(spec)
+        spec = visual_director.prepare_storyboard_for_spec(
+            spec,
+            allow_figure_extraction=not args.dry_run,
+        )
         with open(template_path, "w", encoding="utf-8") as f:
             json.dump(spec, f, indent=2)
     except Exception as e_vd:
@@ -463,7 +536,7 @@ def main():
     track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Breakdown)
-    if track == TRACK_ACADEMIC:
+    if track == TRACK_ACADEMIC and (not args.dry_run or args.validate_visuals):
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -472,16 +545,23 @@ def main():
                 # Prioritize authentic arXiv figures for Beat 3 if available
                 if b_id == 3 and spec.get("paper_figures"):
                     continue
+                if args.dry_run and dry_run_workspace is not None:
+                    from pipeline import bespoke_visual_synthesizer as bespoke_module
+                    if original_generated_visuals_dir is None:
+                        original_generated_visuals_dir = bespoke_module.GENERATED_VISUALS_DIR
+                    bespoke_module.GENERATED_VISUALS_DIR = dry_run_workspace / "generated_visuals"
                 bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
         except Exception as e_synth:
             print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+    elif track == TRACK_ACADEMIC:
+        print("🧪 [Dry-Run] Skipping bespoke visual synthesis; use --validate-visuals for the expensive sandbox path.")
 
+    scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
     if not args.legacy_engine:
         scene_file = track_meta["scene_file"]
         scene_class = track_meta["scene_class"]
         engine_label = f"{track_meta['display_name']} ({track_meta['badge']})"
     else:
-        scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"
@@ -497,15 +577,19 @@ def main():
     print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {args.voice or 'default'}) + Ambient Synth + SFX")
     print("=======================================================\n")
 
-    # Step 1: Synthesize Audio & SFX
-    audio_results = synthesize_audio_for_spec(
-        spec,
-        voice=args.voice,
-        speed=args.speed,
-        enable_music=not args.no_music,
-        provider=resolved_prov,
-        language=resolved_lang
-    )
+    # Step 1: Synthesize Audio & SFX, or use deterministic timing in dry-run.
+    if args.dry_run:
+        print("🧪 [Dry-Run] Skipping TTS, provider calls, audio cache, and media writes.")
+        audio_results = build_dry_run_audio_result(spec)
+    else:
+        audio_results = synthesize_audio_for_spec(
+            spec,
+            voice=args.voice,
+            speed=args.speed,
+            enable_music=not args.no_music,
+            provider=resolved_prov,
+            language=resolved_lang,
+        )
     master_audio = audio_results["master_audio"]
     timing_data = audio_results.get("timing_data", [])
 
@@ -546,7 +630,11 @@ def main():
         print("⏩ [Dry-Run] Bypassing final muxing.")
 
     # Step 4: Extract Keyframes
-    frames_dir = str(PROJECT_ROOT / f"frames_{spec['id']}")
+    frames_dir = str(
+        (dry_run_workspace / f"frames_{spec['id']}")
+        if dry_run_workspace
+        else (PROJECT_ROOT / f"frames_{spec['id']}")
+    )
     if args.dry_run:
         os.makedirs(frames_dir, exist_ok=True)
         for b in spec.get("beats", []):
@@ -564,20 +652,28 @@ def main():
 
     # Step 5: Master Multimodal Vision Critic & Visual Diversity Gatekeeping
     print("\n=======================================================")
-    print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
-    print("=======================================================\n")
-    try:
-        from pipeline.vlm_critic import vlm_critic
-        audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
-        status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
-        print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
-        if audit_report.get("diversity_violations"):
-            print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
-    except Exception as e_vlm:
-        print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
+    if args.dry_run:
+        print("🧪 [Dry-Run] Skipping VLM frame scoring because no rendered frames exist.")
+    else:
+        print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
+        print("=======================================================\n")
+        try:
+            from pipeline.vlm_critic import vlm_critic
+            audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
+            status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
+            print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
+            if audit_report.get("diversity_violations"):
+                print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
+        except Exception as e_vlm:
+            print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
 
     if args.dry_run:
         print("\n✅ End-to-end dry-run test completed successfully with 0 errors.")
+        if dry_run_workspace:
+            if original_generated_visuals_dir is not None:
+                from pipeline import bespoke_visual_synthesizer as bespoke_module
+                bespoke_module.GENERATED_VISUALS_DIR = original_generated_visuals_dir
+            shutil.rmtree(dry_run_workspace, ignore_errors=True)
         return 0
 
 if __name__ == "__main__":

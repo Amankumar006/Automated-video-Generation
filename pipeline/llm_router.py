@@ -2,10 +2,11 @@
 The Model Verse — Unified Multi-Provider LLM Fallback Router
 Cascades across healthy providers:
 1. Gemini (Primary: gemini-3.1-flash-lite, gemini-2.5-flash, gemini-flash-latest)
-2. Groq (Secondary cloud: llama-3.3-70b-versatile, llama-3.1-8b-instant)
-3. OpenRouter (Tertiary cloud free tier: meta-llama/llama-3.3-70b-instruct:free, google/gemini-2.0-flash-exp:free)
-4. Ollama Cloud (gpt-oss:120b:cloud, gemma4:31b:cloud)
-5. Deterministic Architectural Fallback (Zero-failure guarantee for offline / test environments)
+2. Mercury 3 (Fast OpenAI-compatible fallback when configured)
+3. Groq (Secondary cloud: llama-3.3-70b-versatile, llama-3.1-8b-instant)
+4. OpenRouter (Tertiary cloud free tier: meta-llama/llama-3.3-70b-instruct:free, google/gemini-2.0-flash-exp:free)
+5. Ollama Cloud (gpt-oss:120b:cloud, gemma4:31b:cloud)
+6. Deterministic Architectural Fallback (Zero-failure guarantee for offline / test environments)
 
 Features:
 - Catches ResourceExhausted, 429 Too Many Requests, and quota errors
@@ -667,6 +668,9 @@ class LLMRouter:
     """
 
     def __init__(self) -> None:
+        self.inception_models = [
+            os.getenv("INCEPTION_MODEL", "mercury-3"),
+        ]
         self.gemini_models = [
             os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
             "gemini-2.5-flash",
@@ -690,6 +694,124 @@ class LLMRouter:
             "gemma4:31b:cloud",
             "gpt-oss:20b:cloud",
         ]
+
+    def _inception_request(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None,
+        max_tokens: int = 8192,
+    ) -> Optional[str]:
+        """Call Inception's OpenAI-compatible Mercury API and return text."""
+        if not quota_tracker.is_healthy("inception"):
+            logger.info("⏩ [LLMRouter] Inception is marked EXHAUSTED in QuotaTracker. Skipping immediately.")
+            return None
+
+        api_key = os.getenv("INCEPTION_API_KEY")
+        if not api_key:
+            return None
+
+        base_url = os.getenv("INCEPTION_BASE_URL", "https://api.inceptionlabs.ai/v1").rstrip("/")
+        messages = []
+        if system_instruction:
+            messages.append({"role": "system", "content": system_instruction})
+        messages.append({"role": "user", "content": prompt})
+
+        for model_name in self.inception_models:
+            # Mercury can spend the entire first token budget in hidden
+            # reasoning on large structured prompts and return an empty
+            # visible message. Retry once with reasoning disabled before
+            # treating the provider as unavailable.
+            attempts = [
+                (os.getenv("INCEPTION_REASONING_EFFORT", "low"), max_tokens),
+                ("none", max_tokens),
+            ]
+            seen_attempts = set()
+            for reasoning_effort, attempt_tokens in attempts:
+                if (reasoning_effort, attempt_tokens) in seen_attempts:
+                    continue
+                seen_attempts.add((reasoning_effort, attempt_tokens))
+                try:
+                    logger.info(
+                        f"🧠 [LLMRouter] Attempting Inception model '{model_name}' "
+                        f"(reasoning_effort={reasoning_effort})..."
+                    )
+                    response = requests.post(
+                    f"{base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": model_name,
+                        "messages": messages,
+                        "max_tokens": attempt_tokens,
+                        "temperature": 0.2,
+                        "reasoning_effort": reasoning_effort,
+                    },
+                    timeout=float(os.getenv("INCEPTION_TIMEOUT_SECONDS", "45")),
+                )
+
+                    if is_quota_error(response.status_code) or is_quota_error(response.text):
+                        quota_tracker.record_exhausted("inception", f"Status {response.status_code}: {response.text[:500]}")
+                        break
+
+                    if response.status_code != 200:
+                        logger.warning(f"⚠️ [LLMRouter] Inception HTTP {response.status_code}: {response.text[:200]}")
+                        continue
+
+                    data = response.json()
+                    choices = data.get("choices") if isinstance(data, dict) else None
+                    content = (
+                        choices[0].get("message", {}).get("content", "")
+                        if choices and isinstance(choices[0], dict)
+                        else ""
+                    )
+                    if content and str(content).strip():
+                        quota_tracker.record_success("inception")
+                        logger.info(f"✅ [LLMRouter] Inception generation succeeded via '{model_name}'")
+                        return str(content).strip()
+
+                    logger.warning(
+                        "⚠️ [LLMRouter] Inception returned no visible content "
+                        f"(reasoning_effort={reasoning_effort}); retrying with a simpler request."
+                    )
+                except Exception as exc:
+                    if is_quota_error(exc):
+                        quota_tracker.record_exhausted("inception", str(exc))
+                        break
+                    logger.warning(f"⚠️ [LLMRouter] Inception error on '{model_name}': {exc}")
+
+        quota_tracker.record_exhausted("inception", "All Inception models failed or returned empty content")
+        return None
+
+    def call_inception(self, prompt: str) -> Optional[Dict[str, Any]]:
+        """Generate a strict JSON script through Mercury, then parse it safely."""
+        content = self._inception_request(
+            prompt,
+            system_instruction="You are a professional educational video director. Respond strictly with valid JSON.",
+        )
+        if not content:
+            return None
+        try:
+            return robust_json_loads(sanitize_markdown_json(content))
+        except Exception as exc:
+            logger.warning(f"⚠️ [LLMRouter] Inception JSON parsing failed: {exc}")
+            return None
+
+    def call_inception_text(
+        self,
+        prompt: str,
+        system_instruction: Optional[str] = None,
+    ) -> Optional[str]:
+        """Generate raw text/code through Mercury."""
+        return self._inception_request(prompt, system_instruction=system_instruction, max_tokens=4096)
+
+    @staticmethod
+    def _inception_enabled(provider_pref: str) -> bool:
+        """Keep Mercury opt-in so merely storing a key never changes default routing."""
+        return provider_pref == "inception" or os.getenv("ENABLE_INCEPTION_FALLBACK", "false").lower() in {
+            "1", "true", "yes"
+        }
 
     def call_gemini(self, prompt: str) -> Optional[Dict[str, Any]]:
         """Invokes primary Gemini API, respecting QuotaHealthTracker and active mock hooks."""
@@ -944,9 +1066,14 @@ class LLMRouter:
         Returns (spec_dict, provider_name).
         """
         provider_pref = os.getenv("LLM_PROVIDER", "").lower()
+        inception_enabled = self._inception_enabled(provider_pref)
 
         # If user explicitly requested a specific provider, try it first
-        if provider_pref == "ollama":
+        if provider_pref == "inception":
+            raw_spec = self.call_inception(prompt)
+            if raw_spec:
+                return enforce_script_schema(raw_spec, topic, category), "inception"
+        elif provider_pref == "ollama":
             raw_spec = self.call_ollama(prompt)
             if raw_spec:
                 return enforce_script_schema(raw_spec, topic, category), "ollama"
@@ -960,24 +1087,30 @@ class LLMRouter:
                 return enforce_script_schema(raw_spec, topic, category), "openrouter"
 
         # 1. Primary: Gemini (if not already tried via provider_pref)
-        if provider_pref not in ("ollama", "groq", "openrouter"):
+        if provider_pref not in ("ollama", "groq", "openrouter", "inception"):
             raw_spec = self.call_gemini(prompt)
             if raw_spec:
                 return enforce_script_schema(raw_spec, topic, category), "gemini"
 
-        # 2. Secondary: Groq (if not already tried)
+        # 2. Fast OpenAI-compatible fallback: Mercury 3
+        if inception_enabled and provider_pref != "inception":
+            raw_spec = self.call_inception(prompt)
+            if raw_spec:
+                return enforce_script_schema(raw_spec, topic, category), "inception"
+
+        # 3. Secondary: Groq (if not already tried)
         if provider_pref != "groq":
             raw_spec = self.call_groq(prompt)
             if raw_spec:
                 return enforce_script_schema(raw_spec, topic, category), "groq"
 
-        # 3. Tertiary: OpenRouter Free Tier (if not already tried)
+        # 4. Tertiary: OpenRouter Free Tier (if not already tried)
         if provider_pref != "openrouter":
             raw_spec = self.call_openrouter(prompt)
             if raw_spec:
                 return enforce_script_schema(raw_spec, topic, category), "openrouter"
 
-        # 4. Quaternary: Ollama Cloud (if not already tried)
+        # 5. Quaternary: Ollama Cloud (if not already tried)
         if provider_pref != "ollama":
             raw_spec = self.call_ollama(prompt)
             if raw_spec:
@@ -1267,9 +1400,14 @@ class LLMRouter:
         Catches 429 and quota exhaustion and seamlessly fails over to healthy providers.
         """
         provider_pref = os.getenv("LLM_PROVIDER", "").lower()
+        inception_enabled = self._inception_enabled(provider_pref)
 
         # If user explicitly specified a provider preference, try it first
-        if provider_pref == "ollama":
+        if provider_pref == "inception":
+            res = self.call_inception_text(prompt, system_instruction)
+            if res:
+                return res
+        elif provider_pref == "ollama":
             res = self.call_ollama_text(prompt, system_instruction)
             if res:
                 return res
@@ -1283,24 +1421,30 @@ class LLMRouter:
                 return res
 
         # 1. Primary: Gemini (if not already tried)
-        if provider_pref not in ("ollama", "groq", "openrouter"):
+        if provider_pref not in ("ollama", "groq", "openrouter", "inception"):
             res = self.call_gemini_text(prompt, system_instruction, preferred_model=preferred_model)
             if res:
                 return res
 
-        # 2. Secondary: Groq (if not already tried)
+        # 2. Fast OpenAI-compatible fallback: Mercury 3
+        if inception_enabled and provider_pref != "inception":
+            res = self.call_inception_text(prompt, system_instruction)
+            if res:
+                return res
+
+        # 3. Secondary: Groq (if not already tried)
         if provider_pref != "groq":
             res = self.call_groq_text(prompt, system_instruction)
             if res:
                 return res
 
-        # 3. Tertiary: OpenRouter (if not already tried)
+        # 4. Tertiary: OpenRouter (if not already tried)
         if provider_pref != "openrouter":
             res = self.call_openrouter_text(prompt, system_instruction)
             if res:
                 return res
 
-        # 4. Quaternary: Ollama Cloud (if not already tried)
+        # 5. Quaternary: Ollama Cloud (if not already tried)
         if provider_pref != "ollama":
             res = self.call_ollama_text(prompt, system_instruction)
             if res:

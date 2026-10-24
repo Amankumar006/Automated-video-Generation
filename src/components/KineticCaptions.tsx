@@ -39,15 +39,15 @@ export const KineticCaptions: React.FC<KineticCaptionsProps> = ({ words }) => {
   const currentChunk = words.slice(chunkStart, chunkStart + chunkSize);
 
   return (
-    <div className="absolute top-[1280px] left-[160px] w-[760px] flex justify-center pointer-events-none z-50 select-none">
-      <div className="px-8 py-4 rounded-3xl bg-black/80 border border-white/15 backdrop-blur-md flex flex-wrap justify-center gap-4 shadow-2xl">
+    <div className="absolute top-[1635px] left-[160px] w-[760px] flex justify-center pointer-events-none z-50 select-none">
+      <div className="min-h-[100px] min-w-[760px] border-t border-slate-800/70 px-5 pt-4 flex flex-nowrap items-start justify-center gap-3">
         {currentChunk.map((item, idx) => {
           const isCurrent =
             currentTime >= item.start && currentTime <= item.end;
           return (
             <span
               key={idx}
-              className="text-[64px] font-black uppercase tracking-tight"
+              className="text-[36px] font-black uppercase tracking-tight whitespace-nowrap"
               style={{
                 color: isCurrent ? "#38BDF8" : "#F8FAFC",
                 textShadow: isCurrent

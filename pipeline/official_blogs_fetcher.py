@@ -353,14 +353,26 @@ class OfficialBlogRecord:
     @property
     def age_days(self) -> Optional[int]:
         """Calculates age in days relative to current date."""
-        return calculate_content_age_days(self.published_date)
+        return self.age_days_at()
+
+    def age_days_at(self, reference_date: Optional[datetime.date] = None) -> Optional[int]:
+        """Calculates age relative to an explicit date for replayable evaluations."""
+        return calculate_content_age_days(self.published_date, reference_date=reference_date)
 
     @property
     def is_stale(self) -> bool:
         """Determines if the blog post is older than MAX_CONTENT_AGE_DAYS."""
-        return not is_content_recent(self.published_date, max_age_days=MAX_CONTENT_AGE_DAYS)
+        return self.is_stale_at()
 
-    def to_candidate_spec(self) -> Dict[str, Any]:
+    def is_stale_at(self, reference_date: Optional[datetime.date] = None) -> bool:
+        """Determines staleness relative to an explicit date for replayable evaluations."""
+        return not is_content_recent(
+            self.published_date,
+            max_age_days=MAX_CONTENT_AGE_DAYS,
+            reference_date=reference_date,
+        )
+
+    def to_candidate_spec(self, reference_date: Optional[datetime.date] = None) -> Dict[str, Any]:
         """Converts official blog record into a standard pipeline candidate specification."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.id.lower())
         facts_summary = self._format_facts_summary()
@@ -370,8 +382,8 @@ class OfficialBlogRecord:
             "title": self.title,
             "provider": self.provider,
             "published_date": self.published_date,
-            "age_days": self.age_days,
-            "is_stale": self.is_stale,
+            "age_days": self.age_days_at(reference_date=reference_date),
+            "is_stale": self.is_stale_at(reference_date=reference_date),
             "recommended_category": self.category,
             "category": self.category,
             "taxonomy": self.domain_taxonomy,
@@ -1210,7 +1222,8 @@ class OfficialBlogsFetcher:
         limit: int = 10,
         offline_only: Optional[bool] = None,
         max_age_days: Optional[int] = None,
-        allow_stale: bool = False
+        allow_stale: bool = False,
+        reference_date: Optional[datetime.date] = None,
     ) -> List[Dict[str, Any]]:
         """
         Produces pipeline candidate specifications for the top official blog drops.
@@ -1225,7 +1238,11 @@ class OfficialBlogsFetcher:
         if not allow_stale:
             records = [
                 r for r in records
-                if is_content_recent(r.published_date, max_age_days=effective_max_age)
+                if is_content_recent(
+                    r.published_date,
+                    max_age_days=effective_max_age,
+                    reference_date=reference_date,
+                )
             ]
 
         # Sort by published date descending and impact score descending
@@ -1239,7 +1256,7 @@ class OfficialBlogsFetcher:
         for r in sorted_records:
             clean_id = r.id
             if clean_id not in seen_ids:
-                candidates.append(r.to_candidate_spec())
+                candidates.append(r.to_candidate_spec(reference_date=reference_date))
                 seen_ids.add(clean_id)
             if len(candidates) >= limit:
                 break
@@ -1255,14 +1272,16 @@ def get_official_blogs_digest(
     limit: int = 10,
     offline_only: Optional[bool] = None,
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
 ) -> List[Dict[str, Any]]:
     """Convenience helper to retrieve candidate specifications for top official blog announcements."""
     return official_blogs_fetcher.get_official_blogs_digest(
         limit=limit,
         offline_only=offline_only,
         max_age_days=max_age_days,
-        allow_stale=allow_stale
+        allow_stale=allow_stale,
+        reference_date=reference_date,
     )
 
 

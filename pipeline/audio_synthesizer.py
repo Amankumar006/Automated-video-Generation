@@ -53,7 +53,9 @@ def synthesize_audio_for_spec(
     normal_gain: float = DEFAULT_NORMAL_GAIN,
     custom_music_path: Optional[str] = None,
     provider: Optional[str] = None,
-    language: Optional[str] = None
+    language: Optional[str] = None,
+    output_dir: Optional[str] = None,
+    cache_dir: Optional[str] = None,
 ) -> dict:
     """
     Synthesizes speech using the unified neural voice router (ElevenLabs, Sarvam AI, Kokoro fallback),
@@ -62,11 +64,12 @@ def synthesize_audio_for_spec(
     """
     from pipeline.voice_engine import UnifiedVoiceRouter
 
-    os.makedirs(PUBLIC_DIR, exist_ok=True)
+    output_root = output_dir or PUBLIC_DIR
+    os.makedirs(output_root, exist_ok=True)
     spec_id = spec_data.get("id", "short")
-    narration_out = os.path.join(PUBLIC_DIR, f"{spec_id}_narration.wav")
-    soundtrack_out = os.path.join(PUBLIC_DIR, f"{spec_id}_soundtrack.wav")
-    master_out = os.path.join(PUBLIC_DIR, f"{spec_id}_master_audio.wav")
+    narration_out = os.path.join(output_root, f"{spec_id}_narration.wav")
+    soundtrack_out = os.path.join(output_root, f"{spec_id}_soundtrack.wav")
+    master_out = os.path.join(output_root, f"{spec_id}_master_audio.wav")
 
     lang = language or spec_data.get("language") or spec_data.get("lang") or "en"
     prov = provider or spec_data.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
@@ -75,7 +78,7 @@ def synthesize_audio_for_spec(
 
     print(f"🎙️ Synthesizing narration for '{spec_data.get('title', spec_id)}' (Provider: {prov}, Lang: {lang}, Voice: {effective_voice or 'default'}, Speed: {effective_speed}x)...")
 
-    router = UnifiedVoiceRouter()
+    router = UnifiedVoiceRouter(cache_dir=cache_dir) if cache_dir else UnifiedVoiceRouter()
     
     # Initialize acoustic aligner (using Kokoro tokenizer if available for phonetic precision)
     tokenizer = None
@@ -174,8 +177,8 @@ def synthesize_audio_for_spec(
     print(f"   Total speech duration: {total_duration:.2f}s (Cache hits: {router.cache.stats['hits']})")
 
     # Kinetic Subtitles & Phrase Chunks (SRT & ASS Export)
-    srt_out = os.path.join(PUBLIC_DIR, f"{spec_id}.srt")
-    ass_out = os.path.join(PUBLIC_DIR, f"{spec_id}.ass")
+    srt_out = os.path.join(output_root, f"{spec_id}.srt")
+    ass_out = os.path.join(output_root, f"{spec_id}.ass")
     caption_chunks = []
     try:
         from pipeline.subtitle_generator import generate_phrase_chunks, export_srt, export_ass
@@ -195,7 +198,7 @@ def synthesize_audio_for_spec(
         print(f"⚠️ Notice generating subtitles: {e}")
 
     # Tactile Foley SFX Synthesizer & Spatial Track Mixer
-    sfx_out = os.path.join(PUBLIC_DIR, f"{spec_id}_sfx_track.wav")
+    sfx_out = os.path.join(output_root, f"{spec_id}_sfx_track.wav")
     sfx_track = np.zeros(total_len, dtype=np.float32)
 
     # Procedurally align SFX cues to exact acoustic word boundaries & Manim visual moments
