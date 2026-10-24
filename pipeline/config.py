@@ -9,6 +9,21 @@ from typing import Optional, Dict, Any, List
 from pathlib import Path
 from dotenv import load_dotenv
 
+# Safeguard: Manim CE Camera.display_image_mobject passes a 2D float array with mode="RGBA"
+# to Image.fromarray(), which raises ValueError in Pillow >= 13.0.0.
+try:
+    from PIL import Image as _PILImage
+    _orig_fromarray = _PILImage.fromarray
+
+    def _patched_fromarray(obj, mode=None):
+        if mode == "RGBA" and hasattr(obj, "shape") and len(obj.shape) == 2:
+            return _PILImage.new("RGBA", (obj.shape[1], obj.shape[0]), (0, 0, 0, 0))
+        return _orig_fromarray(obj, mode=mode)
+
+    _PILImage.fromarray = _patched_fromarray
+except Exception:
+    pass
+
 # Paths (Dynamic for local macOS and cloud Linux)
 WORKSPACE_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(WORKSPACE_ROOT / ".env")
