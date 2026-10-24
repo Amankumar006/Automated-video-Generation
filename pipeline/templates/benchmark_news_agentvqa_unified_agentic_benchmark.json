@@ -1,417 +1,430 @@
 {
   "id": "agentvqa_unified_agentic_benchmark",
-  "title": "AgentVQA: The Reality Check for AI Agents",
+  "title": "AgentVQA: Why Frontier VLMs Fail Real-World Agents",
   "category": "benchmark_news",
   "domain_taxonomy": "quantitative_benchmark",
-  "hook_tag": "AGENTIC BLINDNESS",
+  "hook_tag": "AGENTIC FAILURE",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
-      "visual_focus": "A split screen showing a solved logic puzzle vs a chaotic, failing web browser interface.",
+      "text": "Are you burning your own cash on API bills before claiming this 58.5% grant from AgentVQA?",
+      "visual_focus": "Split screen showing a legal document and a failed UI interaction.",
       "highlight_words": {
-        "effectively blind": "#EF4444"
+        "cannot find": "#EF4444"
       },
       "svo_action": {
-        "subject": "Frontier Models",
+        "subject": "Frontier models",
         "action_verb": "fail",
-        "direct_object": "agentic navigation",
-        "anchor_word": "blind",
+        "direct_object": "UI interaction",
+        "anchor_word": "fail",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
-        "layout": "side_by_side",
-        "title": "THE AGENTIC PARADOX",
-        "sub": "Logic vs. Sight",
+        "layout": "barrier_separation",
+        "title": "THE AGENTIC GAP",
+        "sub": "Why models fail at real-world tasks",
         "accent_color": "#EF4444",
-        "params": {}
+        "params": {
+          "stream_a_label": "Abstract Semantic Logic (90%+)",
+          "stream_b_label": "Spatial UI Action (Fails)",
+          "barrier_label": "Grounding Disconnect",
+          "barrier_sub": "State Tracking Collapse"
+        }
       },
       "thriller_role": "pattern_interrupt_hook",
       "act": 1,
-      "hook_score": 69,
+      "hook_score": 70,
       "hook_band": "WORKABLE",
       "hook_formula": "The Statistic",
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "side_by_side",
-        "title": "THE AGENTIC PARADOX",
-        "sub": "Logic vs. Sight",
-        "accent_color": "#EF4444"
+        "layout": "barrier_separation",
+        "title": "THE AGENTIC GAP",
+        "sub": "Why models fail at real-world tasks",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Abstract Semantic Logic (90%+)",
+        "stream_b_label": "Spatial UI Action (Fails)",
+        "barrier_label": "Grounding Disconnect",
+        "barrier_sub": "State Tracking Collapse"
       },
       "kinetic_action": "blueprint_transform",
       "start": 0.0,
-      "end": 5.5,
-      "duration": 5.5,
+      "end": 6.04,
+      "duration": 6.04,
       "word_timings": [
         {
-          "word": "Before",
-          "clean_word": "before",
-          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
-          "start": 0.01,
-          "end": 0.355,
-          "duration": 0.345,
+          "word": "Are",
+          "clean_word": "are",
+          "phonemes": "\u0251\u02d0\u0279",
+          "start": 0.015,
+          "end": 0.12,
+          "duration": 0.105,
           "frame_ahead_trigger": 0.0
         },
         {
           "word": "you",
           "clean_word": "you",
           "phonemes": "ju\u02d0",
-          "start": 0.355,
-          "end": 0.505,
-          "duration": 0.15,
-          "frame_ahead_trigger": 0.315
+          "start": 0.12,
+          "end": 0.385,
+          "duration": 0.265,
+          "frame_ahead_trigger": 0.08
         },
         {
-          "word": "choose",
-          "clean_word": "choose",
-          "phonemes": "t\u0283\u02c8u\u02d0z",
-          "start": 0.505,
-          "end": 0.74,
-          "duration": 0.235,
-          "frame_ahead_trigger": 0.465
+          "word": "burning",
+          "clean_word": "burning",
+          "phonemes": "b\u02c8\u025c\u02d0n\u026a\u014b",
+          "start": 0.385,
+          "end": 0.625,
+          "duration": 0.24,
+          "frame_ahead_trigger": 0.345
         },
         {
           "word": "your",
           "clean_word": "your",
           "phonemes": "j\u028a\u0279",
-          "start": 0.74,
-          "end": 0.925,
-          "duration": 0.185,
-          "frame_ahead_trigger": 0.7
-        },
-        {
-          "word": "foundation",
-          "clean_word": "foundation",
-          "phonemes": "fa\u028and\u02c8e\u026a\u0283\u0259n",
-          "start": 0.925,
-          "end": 1.39,
-          "duration": 0.465,
-          "frame_ahead_trigger": 0.885
-        },
-        {
-          "word": "model,",
-          "clean_word": "model",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 1.39,
-          "end": 1.78,
-          "duration": 0.39,
-          "frame_ahead_trigger": 1.35
-        },
-        {
-          "word": "look",
-          "clean_word": "look",
-          "phonemes": "l\u02c8\u028ak",
-          "start": 1.78,
-          "end": 2.04,
-          "duration": 0.26,
-          "frame_ahead_trigger": 1.74
-        },
-        {
-          "word": "at",
-          "clean_word": "at",
-          "phonemes": "\u00e6t",
-          "start": 2.04,
-          "end": 2.075,
-          "duration": 0.035,
-          "frame_ahead_trigger": 2.0
-        },
-        {
-          "word": "how",
-          "clean_word": "how",
-          "phonemes": "h\u02c8a\u028a",
-          "start": 2.075,
-          "end": 2.255,
-          "duration": 0.18,
-          "frame_ahead_trigger": 2.035
-        },
-        {
-          "word": "AgentVQA",
-          "clean_word": "agentvqa",
-          "phonemes": "\u02c8e\u026ad\u0292\u0259nt v\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
-          "start": 2.255,
-          "end": 3.26,
-          "duration": 1.005,
-          "frame_ahead_trigger": 2.215
-        },
-        {
-          "word": "beats",
-          "clean_word": "beats",
-          "phonemes": "b\u02c8i\u02d0ts",
-          "start": 3.26,
-          "end": 3.535,
-          "duration": 0.275,
-          "frame_ahead_trigger": 3.22
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 3.535,
-          "end": 3.615,
-          "duration": 0.08,
-          "frame_ahead_trigger": 3.495
-        },
-        {
-          "word": "leader",
-          "clean_word": "leader",
-          "phonemes": "l\u02c8i\u02d0d\u025a",
-          "start": 3.615,
-          "end": 3.99,
-          "duration": 0.375,
-          "frame_ahead_trigger": 3.575
-        },
-        {
-          "word": "by",
-          "clean_word": "by",
-          "phonemes": "b\u02c8a\u026a",
-          "start": 3.99,
-          "end": 4.14,
+          "start": 0.625,
+          "end": 0.775,
           "duration": 0.15,
-          "frame_ahead_trigger": 3.95
+          "frame_ahead_trigger": 0.585
         },
         {
-          "word": "58.5%.",
+          "word": "own",
+          "clean_word": "own",
+          "phonemes": "\u02c8o\u028an",
+          "start": 0.775,
+          "end": 0.92,
+          "duration": 0.145,
+          "frame_ahead_trigger": 0.735
+        },
+        {
+          "word": "cash",
+          "clean_word": "cash",
+          "phonemes": "k\u02c8\u00e6\u0283",
+          "start": 0.92,
+          "end": 1.19,
+          "duration": 0.27,
+          "frame_ahead_trigger": 0.88
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 1.19,
+          "end": 1.365,
+          "duration": 0.175,
+          "frame_ahead_trigger": 1.15
+        },
+        {
+          "word": "API",
+          "clean_word": "api",
+          "phonemes": "\u02cce\u026ap\u02cci\u02d0\u02c8a\u026a",
+          "start": 1.365,
+          "end": 1.845,
+          "duration": 0.48,
+          "frame_ahead_trigger": 1.325
+        },
+        {
+          "word": "bills",
+          "clean_word": "bills",
+          "phonemes": "b\u02c8\u026alz",
+          "start": 1.845,
+          "end": 2.145,
+          "duration": 0.3,
+          "frame_ahead_trigger": 1.805
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 2.145,
+          "end": 2.515,
+          "duration": 0.37,
+          "frame_ahead_trigger": 2.105
+        },
+        {
+          "word": "claiming",
+          "clean_word": "claiming",
+          "phonemes": "kl\u02c8e\u026am\u026a\u014b",
+          "start": 2.515,
+          "end": 2.805,
+          "duration": 0.29,
+          "frame_ahead_trigger": 2.475
+        },
+        {
+          "word": "this",
+          "clean_word": "this",
+          "phonemes": "\u00f0\u02c8\u026as",
+          "start": 2.805,
+          "end": 2.965,
+          "duration": 0.16,
+          "frame_ahead_trigger": 2.765
+        },
+        {
+          "word": "58.5%",
           "clean_word": "585",
           "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8a\u026av",
-          "start": 4.14,
-          "end": 5.34,
-          "duration": 1.2,
-          "frame_ahead_trigger": 4.1
+          "start": 2.965,
+          "end": 4.3,
+          "duration": 1.335,
+          "frame_ahead_trigger": 2.925
+        },
+        {
+          "word": "grant",
+          "clean_word": "grant",
+          "phonemes": "\u0261\u0279\u02c8\u00e6nt",
+          "start": 4.3,
+          "end": 4.67,
+          "duration": 0.37,
+          "frame_ahead_trigger": 4.26
+        },
+        {
+          "word": "from",
+          "clean_word": "from",
+          "phonemes": "f\u0279\u028cm",
+          "start": 4.67,
+          "end": 4.94,
+          "duration": 0.27,
+          "frame_ahead_trigger": 4.63
+        },
+        {
+          "word": "AgentVQA?",
+          "clean_word": "agentvqa",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt v\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
+          "start": 4.94,
+          "end": 5.895,
+          "duration": 0.955,
+          "frame_ahead_trigger": 4.9
         }
       ],
-      "audio_duration": 5.5,
-      "slot_duration": 5.65
+      "audio_duration": 6.04,
+      "slot_duration": 6.19
     },
     {
       "beat_id": 2,
-      "text": "The villain is visual grounding. It\u2019s like driving a car while constantly forgetting where the steering wheel is.",
-      "visual_focus": "A neural network struggling to map UI elements in a web browser, flickering with red error boxes.",
+      "text": "The villain is temporal blindness. Models treat the world like a static photo, ignoring the evolving 3D state.",
+      "visual_focus": "A camera shutter closing repeatedly over a shifting environment.",
       "highlight_words": {
-        "visual grounding": "#EF4444"
+        "temporal blindness": "#EF4444"
       },
       "svo_action": {
-        "subject": "Grounding",
-        "action_verb": "obstructs",
-        "direct_object": "visual state",
-        "anchor_word": "bottleneck",
-        "semantic_role": "causal_link"
+        "subject": "Temporal blindness",
+        "action_verb": "masks",
+        "direct_object": "evolving reality",
+        "anchor_word": "blindness",
+        "semantic_role": "bottleneck_definition"
       },
       "visual_blueprint": {
-        "layout": "optimization_landscape",
-        "title": "THE GROUNDING GAP",
-        "sub": "Spatial Disorientation",
-        "accent_color": "#EF4444",
-        "params": {
-          "landscape_title": "Evaluation Cost & Flakiness Surface",
-          "optima_label": "Ideal Offline Ground Truth"
-        }
+        "layout": "split_flow",
+        "title": "TEMPORAL BLINDNESS",
+        "sub": "The static snapshot trap",
+        "accent_color": "#F59E0B",
+        "params": {}
       },
       "thriller_role": "villain_bottleneck",
       "act": 2,
       "motif_type": "visual_composition",
       "motif_params": {
-        "layout": "optimization_landscape",
-        "title": "THE GROUNDING GAP",
-        "sub": "Spatial Disorientation",
-        "accent_color": "#EF4444",
-        "landscape_title": "Evaluation Cost & Flakiness Surface",
-        "optima_label": "Ideal Offline Ground Truth"
+        "layout": "split_flow",
+        "title": "TEMPORAL BLINDNESS",
+        "sub": "The static snapshot trap",
+        "accent_color": "#F59E0B"
       },
       "kinetic_action": "blueprint_transform",
-      "start": 5.65,
-      "end": 10.8,
-      "duration": 5.14,
+      "start": 6.19,
+      "end": 11.97,
+      "duration": 5.78,
       "word_timings": [
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 5.664,
-          "end": 5.774,
-          "duration": 0.11,
-          "frame_ahead_trigger": 5.774
+          "start": 6.207,
+          "end": 6.307,
+          "duration": 0.1,
+          "frame_ahead_trigger": 6.317
         },
         {
           "word": "villain",
           "clean_word": "villain",
           "phonemes": "v\u02c8\u026al\u0259n",
-          "start": 5.774,
-          "end": 6.094,
+          "start": 6.307,
+          "end": 6.627,
           "duration": 0.32,
-          "frame_ahead_trigger": 5.884
+          "frame_ahead_trigger": 6.417
         },
         {
           "word": "is",
           "clean_word": "is",
           "phonemes": "\u026az",
-          "start": 6.094,
-          "end": 6.249,
-          "duration": 0.155,
-          "frame_ahead_trigger": 6.204
+          "start": 6.627,
+          "end": 6.772,
+          "duration": 0.145,
+          "frame_ahead_trigger": 6.737
         },
         {
-          "word": "visual",
-          "clean_word": "visual",
-          "phonemes": "v\u02c8\u026a\u0292u\u02d0\u0259l",
-          "start": 6.249,
-          "end": 6.674,
-          "duration": 0.425,
-          "frame_ahead_trigger": 6.359
+          "word": "temporal",
+          "clean_word": "temporal",
+          "phonemes": "t\u02c8\u025bmp\u025a\u0279\u0259l",
+          "start": 6.772,
+          "end": 7.147,
+          "duration": 0.375,
+          "frame_ahead_trigger": 6.882
         },
         {
-          "word": "grounding.",
-          "clean_word": "grounding",
-          "phonemes": "\u0261\u0279\u02c8a\u028and\u026a\u014b",
-          "start": 6.674,
-          "end": 7.084,
-          "duration": 0.41,
-          "frame_ahead_trigger": 6.784
+          "word": "blindness.",
+          "clean_word": "blindness",
+          "phonemes": "bl\u02c8a\u026andn\u0259s",
+          "start": 7.147,
+          "end": 7.696,
+          "duration": 0.549,
+          "frame_ahead_trigger": 7.257
         },
         {
-          "word": "It\u2019s",
-          "clean_word": "its",
-          "phonemes": "\u026ats",
-          "start": 7.084,
-          "end": 7.242,
-          "duration": 0.158,
-          "frame_ahead_trigger": 7.194
+          "word": "Models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 7.696,
+          "end": 8.022,
+          "duration": 0.326,
+          "frame_ahead_trigger": 7.806
         },
         {
-          "word": "like",
-          "clean_word": "like",
-          "phonemes": "l\u02c8a\u026ak",
-          "start": 7.242,
-          "end": 7.539,
-          "duration": 0.297,
-          "frame_ahead_trigger": 7.352
-        },
-        {
-          "word": "driving",
-          "clean_word": "driving",
-          "phonemes": "d\u0279\u02c8a\u026av\u026a\u014b",
-          "start": 7.539,
-          "end": 7.894,
-          "duration": 0.355,
-          "frame_ahead_trigger": 7.649
-        },
-        {
-          "word": "a",
-          "clean_word": "a",
-          "phonemes": "\u02c8e\u026a",
-          "start": 7.894,
-          "end": 7.999,
-          "duration": 0.105,
-          "frame_ahead_trigger": 8.004
-        },
-        {
-          "word": "car",
-          "clean_word": "car",
-          "phonemes": "k\u02c8\u0251\u02d0\u0279",
-          "start": 7.999,
-          "end": 8.347,
-          "duration": 0.348,
-          "frame_ahead_trigger": 8.109
-        },
-        {
-          "word": "while",
-          "clean_word": "while",
-          "phonemes": "w\u02c8a\u026al",
-          "start": 8.347,
-          "end": 8.669,
-          "duration": 0.322,
-          "frame_ahead_trigger": 8.457
-        },
-        {
-          "word": "constantly",
-          "clean_word": "constantly",
-          "phonemes": "k\u02c8\u0251\u02d0nst\u0259ntli",
-          "start": 8.669,
-          "end": 9.204,
-          "duration": 0.535,
-          "frame_ahead_trigger": 8.779
-        },
-        {
-          "word": "forgetting",
-          "clean_word": "forgetting",
-          "phonemes": "f\u025a\u0261\u02c8\u025b\u027e\u026a\u014b",
-          "start": 9.204,
-          "end": 9.744,
-          "duration": 0.54,
-          "frame_ahead_trigger": 9.314
-        },
-        {
-          "word": "where",
-          "clean_word": "where",
-          "phonemes": "w\u02c8\u025b\u0279",
-          "start": 9.744,
-          "end": 9.899,
-          "duration": 0.155,
-          "frame_ahead_trigger": 9.854
+          "word": "treat",
+          "clean_word": "treat",
+          "phonemes": "t\u0279\u02c8i\u02d0t",
+          "start": 8.022,
+          "end": 8.422,
+          "duration": 0.4,
+          "frame_ahead_trigger": 8.132
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 9.899,
-          "end": 9.978,
-          "duration": 0.079,
-          "frame_ahead_trigger": 10.009
+          "start": 8.422,
+          "end": 8.517,
+          "duration": 0.095,
+          "frame_ahead_trigger": 8.532
         },
         {
-          "word": "steering",
-          "clean_word": "steering",
-          "phonemes": "st\u02c8\u026a\u0279\u026a\u014b",
-          "start": 9.978,
-          "end": 10.346,
-          "duration": 0.368,
-          "frame_ahead_trigger": 10.088
+          "word": "world",
+          "clean_word": "world",
+          "phonemes": "w\u02c8\u025c\u02d0ld",
+          "start": 8.517,
+          "end": 8.747,
+          "duration": 0.23,
+          "frame_ahead_trigger": 8.627
         },
         {
-          "word": "wheel",
-          "clean_word": "wheel",
-          "phonemes": "w\u02c8i\u02d0l",
-          "start": 10.346,
-          "end": 10.569,
-          "duration": 0.223,
-          "frame_ahead_trigger": 10.456
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "l\u02c8a\u026ak",
+          "start": 8.747,
+          "end": 9.142,
+          "duration": 0.395,
+          "frame_ahead_trigger": 8.857
         },
         {
-          "word": "is.",
-          "clean_word": "is",
-          "phonemes": "\u026az",
-          "start": 10.569,
-          "end": 10.714,
-          "duration": 0.145,
-          "frame_ahead_trigger": 10.679
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 9.142,
+          "end": 9.307,
+          "duration": 0.165,
+          "frame_ahead_trigger": 9.252
+        },
+        {
+          "word": "static",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 9.307,
+          "end": 9.677,
+          "duration": 0.37,
+          "frame_ahead_trigger": 9.417
+        },
+        {
+          "word": "photo,",
+          "clean_word": "photo",
+          "phonemes": "f\u02c8o\u028a\u027eo\u028a",
+          "start": 9.677,
+          "end": 9.877,
+          "duration": 0.2,
+          "frame_ahead_trigger": 9.787
+        },
+        {
+          "word": "ignoring",
+          "clean_word": "ignoring",
+          "phonemes": "\u026a\u0261n\u02c8\u0254\u02d0\u0279\u026a\u014b",
+          "start": 9.877,
+          "end": 10.517,
+          "duration": 0.64,
+          "frame_ahead_trigger": 9.987
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 10.517,
+          "end": 10.519,
+          "duration": 0.002,
+          "frame_ahead_trigger": 10.627
+        },
+        {
+          "word": "evolving",
+          "clean_word": "evolving",
+          "phonemes": "\u026av\u02c8\u0251\u02d0lv\u026a\u014b",
+          "start": 10.519,
+          "end": 10.977,
+          "duration": 0.458,
+          "frame_ahead_trigger": 10.629
+        },
+        {
+          "word": "3D",
+          "clean_word": "3d",
+          "phonemes": "\u03b8\u0279\u02c8i\u02d0 d\u02c8i\u02d0",
+          "start": 10.977,
+          "end": 11.402,
+          "duration": 0.425,
+          "frame_ahead_trigger": 11.087
+        },
+        {
+          "word": "state.",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 11.402,
+          "end": 11.802,
+          "duration": 0.4,
+          "frame_ahead_trigger": 11.512
         }
       ],
-      "audio_duration": 5.14,
-      "slot_duration": 5.3
+      "audio_duration": 5.78,
+      "slot_duration": 5.93
     },
     {
       "beat_id": 3,
-      "text": "AgentVQA shatters this wall by curating 1,000 real-world scenarios across web, robotics, and games for reliable offline evaluation.",
-      "visual_focus": "A massive dataset grid populating with 1,000 distinct, high-stakes agentic interaction points.",
+      "text": "AgentVQA shatters this by forcing models to track state changes across 1,000 real-world agent scenarios.",
+      "visual_focus": "A database icon expanding into five distinct agent domains.",
       "highlight_words": {
-        "1,000 real-world scenarios": "#3B82F6"
+        "AgentVQA": "#22C55E"
       },
       "svo_action": {
         "subject": "AgentVQA",
-        "action_verb": "standardizes",
-        "direct_object": "agentic performance",
-        "anchor_word": "breakthrough",
+        "action_verb": "forces",
+        "direct_object": "state tracking",
+        "anchor_word": "shatters",
         "semantic_role": "solution_pivot"
       },
       "visual_blueprint": {
         "layout": "paper_figure",
         "title": "AGENTVQA ARCHITECTURE",
-        "sub": "A massive dataset grid populating with 1,000 distinct, high-stake",
+        "sub": "A database icon expanding into five distinct agent domains.",
         "params": {
           "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.svg",
           "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.png",
           "arxiv_id": "2610.31494",
           "title": "AGENTVQA ARCHITECTURE",
-          "sub": "A massive dataset grid populating with 1,000 distinct, high-stake",
+          "sub": "A database icon expanding into five distinct agent domains.",
           "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
           "caption": "Figure1",
           "preferred_renderer": "vector"
@@ -425,217 +438,190 @@
         "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.31494/chalkboard_figures/fig_1_Figure1.png",
         "arxiv_id": "2610.31494",
         "title": "AGENTVQA ARCHITECTURE",
-        "sub": "A massive dataset grid populating with 1,000 distinct, high-stake",
+        "sub": "A database icon expanding into five distinct agent domains.",
         "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
         "caption": "Figure1",
         "preferred_renderer": "vector"
       },
       "kinetic_action": "figure_scan",
-      "start": 10.95,
-      "end": 19.16,
-      "duration": 8.21,
+      "start": 12.12,
+      "end": 18.26,
+      "duration": 6.14,
       "word_timings": [
         {
           "word": "AgentVQA",
           "clean_word": "agentvqa",
           "phonemes": "\u02c8e\u026ad\u0292\u0259nt v\u02cci\u02d0kj\u02ccu\u02d0\u02c8e\u026a",
-          "start": 10.955,
-          "end": 12.03,
-          "duration": 1.075,
-          "frame_ahead_trigger": 11.215
+          "start": 12.129,
+          "end": 13.169,
+          "duration": 1.04,
+          "frame_ahead_trigger": 12.389
         },
         {
           "word": "shatters",
           "clean_word": "shatters",
           "phonemes": "\u0283\u02c8\u00e6\u027e\u025az",
-          "start": 12.03,
-          "end": 12.455,
-          "duration": 0.425,
-          "frame_ahead_trigger": 12.29
+          "start": 13.169,
+          "end": 13.389,
+          "duration": 0.22,
+          "frame_ahead_trigger": 13.429
         },
         {
           "word": "this",
           "clean_word": "this",
           "phonemes": "\u00f0\u02c8\u026as",
-          "start": 12.455,
-          "end": 12.63,
-          "duration": 0.175,
-          "frame_ahead_trigger": 12.715
-        },
-        {
-          "word": "wall",
-          "clean_word": "wall",
-          "phonemes": "w\u02c8\u0254\u02d0l",
-          "start": 12.63,
-          "end": 12.805,
-          "duration": 0.175,
-          "frame_ahead_trigger": 12.89
+          "start": 13.389,
+          "end": 13.604,
+          "duration": 0.215,
+          "frame_ahead_trigger": 13.649
         },
         {
           "word": "by",
           "clean_word": "by",
           "phonemes": "b\u02c8a\u026a",
-          "start": 12.805,
-          "end": 13.135,
-          "duration": 0.33,
-          "frame_ahead_trigger": 13.065
+          "start": 13.604,
+          "end": 13.804,
+          "duration": 0.2,
+          "frame_ahead_trigger": 13.864
         },
         {
-          "word": "curating",
-          "clean_word": "curating",
-          "phonemes": "kj\u02c8\u028a\u0279\u0279e\u026a\u027e\u026a\u014b",
-          "start": 13.135,
-          "end": 13.605,
-          "duration": 0.47,
-          "frame_ahead_trigger": 13.395
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 13.804,
+          "end": 14.206,
+          "duration": 0.403,
+          "frame_ahead_trigger": 14.064
         },
         {
-          "word": "1,000",
-          "clean_word": "1000",
-          "phonemes": "w\u02c8\u028cn \u03b8\u02c8a\u028az\u0259nd",
-          "start": 13.605,
-          "end": 14.35,
-          "duration": 0.745,
-          "frame_ahead_trigger": 13.865
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 14.206,
+          "end": 14.549,
+          "duration": 0.342,
+          "frame_ahead_trigger": 14.466
         },
         {
-          "word": "real-world",
-          "clean_word": "realworld",
-          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
-          "start": 14.35,
-          "end": 14.9,
-          "duration": 0.55,
-          "frame_ahead_trigger": 14.61
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 14.549,
+          "end": 14.679,
+          "duration": 0.13,
+          "frame_ahead_trigger": 14.809
         },
         {
-          "word": "scenarios",
-          "clean_word": "scenarios",
-          "phonemes": "s\u0259n\u02c8\u00e6\u0279i\u02cco\u028az",
-          "start": 14.9,
-          "end": 15.487,
-          "duration": 0.587,
-          "frame_ahead_trigger": 15.16
+          "word": "track",
+          "clean_word": "track",
+          "phonemes": "t\u0279\u02c8\u00e6k",
+          "start": 14.679,
+          "end": 14.984,
+          "duration": 0.305,
+          "frame_ahead_trigger": 14.939
+        },
+        {
+          "word": "state",
+          "clean_word": "state",
+          "phonemes": "st\u02c8e\u026at",
+          "start": 14.984,
+          "end": 15.299,
+          "duration": 0.315,
+          "frame_ahead_trigger": 15.244
+        },
+        {
+          "word": "changes",
+          "clean_word": "changes",
+          "phonemes": "t\u0283\u02c8e\u026and\u0292\u1d7bz",
+          "start": 15.299,
+          "end": 15.734,
+          "duration": 0.435,
+          "frame_ahead_trigger": 15.559
         },
         {
           "word": "across",
           "clean_word": "across",
           "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
-          "start": 15.487,
-          "end": 15.76,
-          "duration": 0.273,
-          "frame_ahead_trigger": 15.747
+          "start": 15.734,
+          "end": 15.999,
+          "duration": 0.265,
+          "frame_ahead_trigger": 15.994
         },
         {
-          "word": "web,",
-          "clean_word": "web",
-          "phonemes": "w\u02c8\u025bb",
-          "start": 15.76,
-          "end": 15.965,
-          "duration": 0.205,
-          "frame_ahead_trigger": 16.02
+          "word": "1,000",
+          "clean_word": "1000",
+          "phonemes": "w\u02c8\u028cn \u03b8\u02c8a\u028az\u0259nd",
+          "start": 15.999,
+          "end": 16.634,
+          "duration": 0.635,
+          "frame_ahead_trigger": 16.259
         },
         {
-          "word": "robotics,",
-          "clean_word": "robotics",
-          "phonemes": "\u0279o\u028ab\u02c8\u0251\u02d0\u027e\u026aks",
-          "start": 15.965,
-          "end": 16.67,
-          "duration": 0.705,
-          "frame_ahead_trigger": 16.225
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 16.634,
+          "end": 17.169,
+          "duration": 0.535,
+          "frame_ahead_trigger": 16.894
         },
         {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 16.67,
-          "end": 16.835,
-          "duration": 0.165,
-          "frame_ahead_trigger": 16.93
+          "word": "agent",
+          "clean_word": "agent",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nt",
+          "start": 17.169,
+          "end": 17.584,
+          "duration": 0.415,
+          "frame_ahead_trigger": 17.429
         },
         {
-          "word": "games",
-          "clean_word": "games",
-          "phonemes": "\u0261\u02c8e\u026amz",
-          "start": 16.835,
-          "end": 17.22,
-          "duration": 0.385,
-          "frame_ahead_trigger": 17.095
-        },
-        {
-          "word": "for",
-          "clean_word": "for",
-          "phonemes": "f\u0254\u02d0\u0279",
-          "start": 17.22,
-          "end": 17.33,
-          "duration": 0.11,
-          "frame_ahead_trigger": 17.48
-        },
-        {
-          "word": "reliable",
-          "clean_word": "reliable",
-          "phonemes": "\u0279\u1d7bl\u02c8a\u026a\u0259b\u0259l",
-          "start": 17.33,
-          "end": 17.91,
-          "duration": 0.58,
-          "frame_ahead_trigger": 17.59
-        },
-        {
-          "word": "offline",
-          "clean_word": "offline",
-          "phonemes": "\u02c8\u0254fla\u026an",
-          "start": 17.91,
-          "end": 18.15,
-          "duration": 0.24,
-          "frame_ahead_trigger": 18.17
-        },
-        {
-          "word": "evaluation.",
-          "clean_word": "evaluation",
-          "phonemes": "\u026av\u02cc\u00e6lju\u02d0\u02c8e\u026a\u0283\u0259n",
-          "start": 18.15,
-          "end": 18.965,
-          "duration": 0.815,
-          "frame_ahead_trigger": 18.41
+          "word": "scenarios.",
+          "clean_word": "scenarios",
+          "phonemes": "s\u0259n\u02c8\u00e6\u0279i\u02cco\u028az",
+          "start": 17.584,
+          "end": 18.169,
+          "duration": 0.585,
+          "frame_ahead_trigger": 17.844
         }
       ],
-      "audio_duration": 8.21,
-      "slot_duration": 8.36
+      "audio_duration": 6.14,
+      "slot_duration": 6.29
     },
     {
       "beat_id": 4,
-      "text": "It forces models to track state changes and 3D spatial relationships, exposing their inability to interpret motion over time.",
-      "visual_focus": "A 3D spatial map overlaying a video frame, highlighting tracking errors in real-time.",
+      "text": "We evaluate grounding by forcing models to localize UI elements and interpret motion across web, robotics, and games.",
+      "visual_focus": "Bounding boxes appearing on UI elements and robot grippers in real-time.",
       "highlight_words": {
-        "3D spatial relationships": "#3B82F6"
+        "grounding": "#22C55E"
       },
       "svo_action": {
-        "subject": "Models",
-        "action_verb": "struggle",
-        "direct_object": "temporal state",
-        "anchor_word": "mechanism",
-        "semantic_role": "technical_analysis"
+        "subject": "Grounding metrics",
+        "action_verb": "verify",
+        "direct_object": "spatial relationships",
+        "anchor_word": "verify",
+        "semantic_role": "technical_mechanism"
       },
       "visual_blueprint": {
         "layout": "chalkboard_code_block",
-        "title": "KERNEL CODE: AGENTVQA: THE REAL",
-        "sub": "A 3D spatial map overlaying a video frame, highlighting tracking ",
+        "title": "KERNEL CODE: AGENTVQA: WHY FRON",
+        "sub": "Bounding boxes appearing on UI elements and robot grippers in rea",
         "params": {
-          "title": "KERNEL CODE: AGENTVQA: THE REAL",
-          "sub": "A 3D spatial map overlaying a video frame, highlighting tracking ",
-          "filename": "eval_agentvqa.py",
+          "title": "KERNEL CODE: AGENTVQA: WHY FRON",
+          "sub": "Bounding boxes appearing on UI elements and robot grippers in rea",
+          "filename": "eval_agent_vqa.py",
           "language": "python",
           "lines": [
-            "def evaluate_agentic_grounding(frame_sequence, target_action):",
-            "state_rep = vlm.track_evolving_visual_state(frame_sequence)",
-            "grounded_ui = vlm.localize_coordinates(state_rep.ui_elements)",
-            "return score_spatial_fidelity(grounded_ui, target_action)"
+            "def evaluate_agent_step(trajectory, vlm):",
+            "state_repr = vlm.track_evolving_state(trajectory.frames)",
+            "pred_action = vlm.ground_action(state_repr, query=trajectory.goal)",
+            "return compute_rank_metric(pred_action, trajectory.ground_truth)"
           ],
           "highlight_lines": [
             2,
             3
           ],
-          "trace_register": "\u26a1 OFFLINE AGENTIC STATE GROUNDING",
-          "delta_badge": "Evaluating dynamic visual state maintenance without "
+          "trace_register": "\u26a1 OFFLINE AGENT STATE LOCALIZATION",
+          "delta_badge": "Deterministic grounding evaluation tracking online a"
         }
       },
       "thriller_role": "technical_deep_dive",
@@ -643,233 +629,224 @@
       "motif_type": "chalkboard_code_block",
       "kinetic_action": "pulse",
       "motif_params": {
-        "title": "KERNEL CODE: AGENTVQA: THE REAL",
-        "sub": "A 3D spatial map overlaying a video frame, highlighting tracking ",
-        "filename": "eval_agentvqa.py",
+        "title": "KERNEL CODE: AGENTVQA: WHY FRON",
+        "sub": "Bounding boxes appearing on UI elements and robot grippers in rea",
+        "filename": "eval_agent_vqa.py",
         "language": "python",
         "lines": [
-          "def evaluate_agentic_grounding(frame_sequence, target_action):",
-          "state_rep = vlm.track_evolving_visual_state(frame_sequence)",
-          "grounded_ui = vlm.localize_coordinates(state_rep.ui_elements)",
-          "return score_spatial_fidelity(grounded_ui, target_action)"
+          "def evaluate_agent_step(trajectory, vlm):",
+          "state_repr = vlm.track_evolving_state(trajectory.frames)",
+          "pred_action = vlm.ground_action(state_repr, query=trajectory.goal)",
+          "return compute_rank_metric(pred_action, trajectory.ground_truth)"
         ],
         "highlight_lines": [
           2,
           3
         ],
-        "trace_register": "\u26a1 OFFLINE AGENTIC STATE GROUNDING",
-        "delta_badge": "Evaluating dynamic visual state maintenance without "
+        "trace_register": "\u26a1 OFFLINE AGENT STATE LOCALIZATION",
+        "delta_badge": "Deterministic grounding evaluation tracking online a"
       },
-      "start": 19.31,
-      "end": 26.43,
-      "duration": 7.13,
+      "start": 18.41,
+      "end": 25.07,
+      "duration": 6.66,
       "word_timings": [
         {
-          "word": "It",
-          "clean_word": "it",
-          "phonemes": "\u026at",
-          "start": 19.324,
-          "end": 19.444,
-          "duration": 0.12,
-          "frame_ahead_trigger": 19.734
+          "word": "We",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 18.423,
+          "end": 18.568,
+          "duration": 0.145,
+          "frame_ahead_trigger": 18.833
         },
         {
-          "word": "forces",
-          "clean_word": "forces",
-          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u1d7bz",
-          "start": 19.444,
-          "end": 19.779,
-          "duration": 0.335,
-          "frame_ahead_trigger": 19.854
+          "word": "evaluate",
+          "clean_word": "evaluate",
+          "phonemes": "\u026av\u02c8\u00e6lju\u02d0\u02cce\u026at",
+          "start": 18.568,
+          "end": 19.253,
+          "duration": 0.685,
+          "frame_ahead_trigger": 18.978
+        },
+        {
+          "word": "grounding",
+          "clean_word": "grounding",
+          "phonemes": "\u0261\u0279\u02c8a\u028and\u026a\u014b",
+          "start": 19.253,
+          "end": 19.623,
+          "duration": 0.37,
+          "frame_ahead_trigger": 19.663
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 19.623,
+          "end": 19.878,
+          "duration": 0.255,
+          "frame_ahead_trigger": 20.033
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 19.878,
+          "end": 20.373,
+          "duration": 0.495,
+          "frame_ahead_trigger": 20.288
         },
         {
           "word": "models",
           "clean_word": "models",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
-          "start": 19.779,
-          "end": 20.344,
-          "duration": 0.565,
-          "frame_ahead_trigger": 20.189
+          "start": 20.373,
+          "end": 20.673,
+          "duration": 0.3,
+          "frame_ahead_trigger": 20.783
         },
         {
           "word": "to",
           "clean_word": "to",
           "phonemes": "tu\u02d0",
-          "start": 20.344,
-          "end": 20.446,
-          "duration": 0.103,
-          "frame_ahead_trigger": 20.754
+          "start": 20.673,
+          "end": 20.887,
+          "duration": 0.215,
+          "frame_ahead_trigger": 21.083
         },
         {
-          "word": "track",
-          "clean_word": "track",
-          "phonemes": "t\u0279\u02c8\u00e6k",
-          "start": 20.446,
-          "end": 20.649,
-          "duration": 0.202,
-          "frame_ahead_trigger": 20.856
+          "word": "localize",
+          "clean_word": "localize",
+          "phonemes": "l\u02c8o\u028ak\u0259l\u02cca\u026az",
+          "start": 20.887,
+          "end": 21.428,
+          "duration": 0.54,
+          "frame_ahead_trigger": 21.297
         },
         {
-          "word": "state",
-          "clean_word": "state",
-          "phonemes": "st\u02c8e\u026at",
-          "start": 20.649,
-          "end": 20.989,
-          "duration": 0.34,
-          "frame_ahead_trigger": 21.059
+          "word": "UI",
+          "clean_word": "ui",
+          "phonemes": "j\u02ccu\u02d0\u02c8a\u026a",
+          "start": 21.428,
+          "end": 21.788,
+          "duration": 0.36,
+          "frame_ahead_trigger": 21.838
         },
         {
-          "word": "changes",
-          "clean_word": "changes",
-          "phonemes": "t\u0283\u02c8e\u026and\u0292\u1d7bz",
-          "start": 20.989,
-          "end": 21.599,
-          "duration": 0.61,
-          "frame_ahead_trigger": 21.399
+          "word": "elements",
+          "clean_word": "elements",
+          "phonemes": "\u02c8\u025bl\u026am\u0259nts",
+          "start": 21.788,
+          "end": 22.343,
+          "duration": 0.555,
+          "frame_ahead_trigger": 22.198
         },
         {
           "word": "and",
           "clean_word": "and",
           "phonemes": "\u00e6nd",
-          "start": 21.599,
-          "end": 21.849,
-          "duration": 0.25,
-          "frame_ahead_trigger": 22.009
-        },
-        {
-          "word": "3D",
-          "clean_word": "3d",
-          "phonemes": "\u03b8\u0279\u02c8i\u02d0 d\u02c8i\u02d0",
-          "start": 21.849,
-          "end": 22.309,
-          "duration": 0.46,
-          "frame_ahead_trigger": 22.259
-        },
-        {
-          "word": "spatial",
-          "clean_word": "spatial",
-          "phonemes": "sp\u02c8e\u026a\u0283\u0259l",
-          "start": 22.309,
-          "end": 22.754,
-          "duration": 0.445,
-          "frame_ahead_trigger": 22.719
-        },
-        {
-          "word": "relationships,",
-          "clean_word": "relationships",
-          "phonemes": "\u0279\u1d7bl\u02c8e\u026a\u0283\u0259n\u0283\u02cc\u026aps",
-          "start": 22.754,
-          "end": 23.529,
-          "duration": 0.775,
-          "frame_ahead_trigger": 23.164
-        },
-        {
-          "word": "exposing",
-          "clean_word": "exposing",
-          "phonemes": "\u025bksp\u02c8o\u028az\u026a\u014b",
-          "start": 23.529,
-          "end": 23.964,
-          "duration": 0.435,
-          "frame_ahead_trigger": 23.939
-        },
-        {
-          "word": "their",
-          "clean_word": "their",
-          "phonemes": "\u00f0\u025b\u0279",
-          "start": 23.964,
-          "end": 24.099,
-          "duration": 0.135,
-          "frame_ahead_trigger": 24.374
-        },
-        {
-          "word": "inability",
-          "clean_word": "inability",
-          "phonemes": "\u026an\u0250b\u02c8\u026al\u0259\u027ei",
-          "start": 24.099,
-          "end": 24.599,
-          "duration": 0.5,
-          "frame_ahead_trigger": 24.509
-        },
-        {
-          "word": "to",
-          "clean_word": "to",
-          "phonemes": "tu\u02d0",
-          "start": 24.599,
-          "end": 24.769,
-          "duration": 0.17,
-          "frame_ahead_trigger": 25.009
+          "start": 22.343,
+          "end": 22.461,
+          "duration": 0.118,
+          "frame_ahead_trigger": 22.753
         },
         {
           "word": "interpret",
           "clean_word": "interpret",
           "phonemes": "\u026ant\u02c8\u025c\u02d0p\u0279\u026at",
-          "start": 24.769,
-          "end": 25.354,
-          "duration": 0.585,
-          "frame_ahead_trigger": 25.179
+          "start": 22.461,
+          "end": 22.963,
+          "duration": 0.502,
+          "frame_ahead_trigger": 22.871
         },
         {
           "word": "motion",
           "clean_word": "motion",
           "phonemes": "m\u02c8o\u028a\u0283\u0259n",
-          "start": 25.354,
-          "end": 25.734,
+          "start": 22.963,
+          "end": 23.468,
+          "duration": 0.505,
+          "frame_ahead_trigger": 23.373
+        },
+        {
+          "word": "across",
+          "clean_word": "across",
+          "phonemes": "\u0259k\u0279\u02c8\u0251\u02d0s",
+          "start": 23.468,
+          "end": 23.719,
+          "duration": 0.251,
+          "frame_ahead_trigger": 23.878
+        },
+        {
+          "word": "web,",
+          "clean_word": "web",
+          "phonemes": "w\u02c8\u025bb",
+          "start": 23.719,
+          "end": 23.843,
+          "duration": 0.124,
+          "frame_ahead_trigger": 24.129
+        },
+        {
+          "word": "robotics,",
+          "clean_word": "robotics",
+          "phonemes": "\u0279o\u028ab\u02c8\u0251\u02d0\u027e\u026aks",
+          "start": 23.843,
+          "end": 24.453,
+          "duration": 0.61,
+          "frame_ahead_trigger": 24.253
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 24.453,
+          "end": 24.598,
+          "duration": 0.145,
+          "frame_ahead_trigger": 24.863
+        },
+        {
+          "word": "games.",
+          "clean_word": "games",
+          "phonemes": "\u0261\u02c8e\u026amz",
+          "start": 24.598,
+          "end": 24.978,
           "duration": 0.38,
-          "frame_ahead_trigger": 25.764
-        },
-        {
-          "word": "over",
-          "clean_word": "over",
-          "phonemes": "\u02c8o\u028av\u025a",
-          "start": 25.734,
-          "end": 25.994,
-          "duration": 0.26,
-          "frame_ahead_trigger": 26.144
-        },
-        {
-          "word": "time.",
-          "clean_word": "time",
-          "phonemes": "t\u02c8a\u026am",
-          "start": 25.994,
-          "end": 26.274,
-          "duration": 0.28,
-          "frame_ahead_trigger": 26.404
+          "frame_ahead_trigger": 25.008
         }
       ],
-      "audio_duration": 7.13,
-      "slot_duration": 7.27
+      "audio_duration": 6.66,
+      "slot_duration": 6.81
     },
     {
       "beat_id": 5,
-      "text": "The verdict? Even the best frontier models are capped at 58.5% accuracy. They aren't smart; they're just guessing.",
-      "visual_focus": "A bar chart showing 22 models hitting a hard ceiling at 58.5%.",
+      "text": "The result? Even the top frontier model hits a hard ceiling at only 58.5% accuracy.",
+      "visual_focus": "A bar chart showing a plateau at 58.5%.",
       "highlight_words": {
-        "58.5% accuracy": "#10B981"
+        "58.5%": "#EF4444"
       },
       "svo_action": {
-        "subject": "Frontier Models",
+        "subject": "Frontier models",
         "action_verb": "hit",
-        "direct_object": "performance ceiling",
-        "anchor_word": "benchmark",
-        "semantic_role": "empirical_proof"
+        "direct_object": "accuracy ceiling",
+        "anchor_word": "ceiling",
+        "semantic_role": "empirical_payoff"
       },
       "visual_blueprint": {
         "layout": "radar_pareto_plot",
-        "title": "PARETO FRONTIER: AGENTVQA: THE REAL",
-        "sub": "A bar chart showing 22 models hitting a hard ceiling",
+        "title": "PARETO FRONTIER: AGENTVQA: WHY FRON",
+        "sub": "A bar chart showing a plateau at 58.5%.",
         "params": {
-          "title": "PARETO FRONTIER: AGENTVQA: THE REAL",
-          "sub": "A bar chart showing 22 models hitting a hard ceiling",
+          "title": "PARETO FRONTIER: AGENTVQA: WHY FRON",
+          "sub": "A bar chart showing a plateau at 58.5%.",
           "axes": [
             "Web Agents",
             "Robotics",
-            "Egocentric Video",
-            "Games",
+            "Egocentric",
+            "Gaming",
             "Spatial Planning"
           ],
           "models": [
             {
-              "name": "Top VLM (Best Model)",
+              "name": "Top Frontier VLM",
               "scores": [
                 0.94,
                 0.9,
@@ -882,7 +859,7 @@
               "fill_opacity": 0.35
             },
             {
-              "name": "Runner-Up Frontier V",
+              "name": "Second Runner-up",
               "scores": [
                 0.62,
                 0.48,
@@ -895,7 +872,7 @@
               "fill_opacity": 0.2
             }
           ],
-          "delta_badge": "\u26a1 SOTA CAPPED AT 58.5%"
+          "delta_badge": "\u26a1 SOTA SCORE CEILING: 58.5%"
         }
       },
       "thriller_role": "empirical_victory",
@@ -903,18 +880,18 @@
       "motif_type": "radar_pareto_plot",
       "kinetic_action": "pulse",
       "motif_params": {
-        "title": "PARETO FRONTIER: AGENTVQA: THE REAL",
-        "sub": "A bar chart showing 22 models hitting a hard ceiling",
+        "title": "PARETO FRONTIER: AGENTVQA: WHY FRON",
+        "sub": "A bar chart showing a plateau at 58.5%.",
         "axes": [
           "Web Agents",
           "Robotics",
-          "Egocentric Video",
-          "Games",
+          "Egocentric",
+          "Gaming",
           "Spatial Planning"
         ],
         "models": [
           {
-            "name": "Top VLM (Best Model)",
+            "name": "Top Frontier VLM",
             "scores": [
               0.94,
               0.9,
@@ -927,7 +904,7 @@
             "fill_opacity": 0.35
           },
           {
-            "name": "Runner-Up Frontier V",
+            "name": "Second Runner-up",
             "scores": [
               0.62,
               0.48,
@@ -940,485 +917,458 @@
             "fill_opacity": 0.2
           }
         ],
-        "delta_badge": "\u26a1 SOTA CAPPED AT 58.5%"
+        "delta_badge": "\u26a1 SOTA SCORE CEILING: 58.5%"
       },
-      "start": 26.58,
-      "end": 32.98,
-      "duration": 6.4,
+      "start": 25.22,
+      "end": 30.53,
+      "duration": 5.31,
       "word_timings": [
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 26.599,
-          "end": 26.709,
-          "duration": 0.11,
-          "frame_ahead_trigger": 27.159
+          "start": 25.229,
+          "end": 25.429,
+          "duration": 0.2,
+          "frame_ahead_trigger": 25.789
         },
         {
-          "word": "verdict?",
-          "clean_word": "verdict",
-          "phonemes": "v\u02c8\u025c\u02d0d\u026akt",
-          "start": 26.709,
-          "end": 27.159,
-          "duration": 0.45,
-          "frame_ahead_trigger": 27.269
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 25.429,
+          "end": 25.724,
+          "duration": 0.295,
+          "frame_ahead_trigger": 25.989
         },
         {
           "word": "Even",
           "clean_word": "even",
           "phonemes": "\u02c8i\u02d0v\u0259n",
-          "start": 27.159,
-          "end": 27.524,
-          "duration": 0.365,
-          "frame_ahead_trigger": 27.719
+          "start": 25.724,
+          "end": 25.974,
+          "duration": 0.25,
+          "frame_ahead_trigger": 26.284
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 27.524,
-          "end": 27.568,
-          "duration": 0.044,
-          "frame_ahead_trigger": 28.084
+          "start": 25.974,
+          "end": 26.069,
+          "duration": 0.095,
+          "frame_ahead_trigger": 26.534
         },
         {
-          "word": "best",
-          "clean_word": "best",
-          "phonemes": "b\u02c8\u025bst",
-          "start": 27.568,
-          "end": 27.799,
-          "duration": 0.231,
-          "frame_ahead_trigger": 28.128
+          "word": "top",
+          "clean_word": "top",
+          "phonemes": "t\u02c8\u0251\u02d0p",
+          "start": 26.069,
+          "end": 26.324,
+          "duration": 0.255,
+          "frame_ahead_trigger": 26.629
         },
         {
           "word": "frontier",
           "clean_word": "frontier",
           "phonemes": "f\u0279\u028cnt\u02c8\u026a\u0279",
-          "start": 27.799,
-          "end": 28.169,
-          "duration": 0.37,
-          "frame_ahead_trigger": 28.359
+          "start": 26.324,
+          "end": 26.729,
+          "duration": 0.405,
+          "frame_ahead_trigger": 26.884
         },
         {
-          "word": "models",
-          "clean_word": "models",
-          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
-          "start": 28.169,
-          "end": 28.679,
-          "duration": 0.51,
-          "frame_ahead_trigger": 28.729
+          "word": "model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 26.729,
+          "end": 27.209,
+          "duration": 0.48,
+          "frame_ahead_trigger": 27.289
         },
         {
-          "word": "are",
-          "clean_word": "are",
-          "phonemes": "\u0251\u02d0\u0279",
-          "start": 28.679,
-          "end": 28.914,
-          "duration": 0.235,
-          "frame_ahead_trigger": 29.239
+          "word": "hits",
+          "clean_word": "hits",
+          "phonemes": "h\u02c8\u026ats",
+          "start": 27.209,
+          "end": 27.364,
+          "duration": 0.155,
+          "frame_ahead_trigger": 27.769
         },
         {
-          "word": "capped",
-          "clean_word": "capped",
-          "phonemes": "k\u02c8\u00e6pt",
-          "start": 28.914,
-          "end": 29.074,
-          "duration": 0.16,
-          "frame_ahead_trigger": 29.474
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 27.364,
+          "end": 27.546,
+          "duration": 0.183,
+          "frame_ahead_trigger": 27.924
+        },
+        {
+          "word": "hard",
+          "clean_word": "hard",
+          "phonemes": "h\u02c8\u0251\u02d0\u0279d",
+          "start": 27.546,
+          "end": 27.849,
+          "duration": 0.302,
+          "frame_ahead_trigger": 28.106
+        },
+        {
+          "word": "ceiling",
+          "clean_word": "ceiling",
+          "phonemes": "s\u02c8i\u02d0l\u026a\u014b",
+          "start": 27.849,
+          "end": 28.334,
+          "duration": 0.485,
+          "frame_ahead_trigger": 28.409
         },
         {
           "word": "at",
           "clean_word": "at",
           "phonemes": "\u00e6t",
-          "start": 29.074,
-          "end": 29.214,
-          "duration": 0.14,
-          "frame_ahead_trigger": 29.634
+          "start": 28.334,
+          "end": 28.319,
+          "duration": -0.015,
+          "frame_ahead_trigger": 28.894
+        },
+        {
+          "word": "only",
+          "clean_word": "only",
+          "phonemes": "\u02c8o\u028anli",
+          "start": 28.319,
+          "end": 28.584,
+          "duration": 0.265,
+          "frame_ahead_trigger": 28.879
         },
         {
           "word": "58.5%",
           "clean_word": "585",
           "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei f\u02c8a\u026av",
-          "start": 29.214,
-          "end": 30.534,
-          "duration": 1.32,
-          "frame_ahead_trigger": 29.774
+          "start": 28.584,
+          "end": 29.869,
+          "duration": 1.285,
+          "frame_ahead_trigger": 29.144
         },
         {
           "word": "accuracy.",
           "clean_word": "accuracy",
           "phonemes": "\u02c8\u00e6kj\u028a\u0279\u0259si",
-          "start": 30.534,
-          "end": 31.067,
-          "duration": 0.533,
-          "frame_ahead_trigger": 31.094
-        },
-        {
-          "word": "They",
-          "clean_word": "they",
-          "phonemes": "\u00f0e\u026a",
-          "start": 31.067,
-          "end": 31.299,
-          "duration": 0.232,
-          "frame_ahead_trigger": 31.627
-        },
-        {
-          "word": "aren't",
-          "clean_word": "arent",
-          "phonemes": "\u02c8\u00e6\u0279\u0259nt",
-          "start": 31.299,
-          "end": 31.594,
-          "duration": 0.295,
-          "frame_ahead_trigger": 31.859
-        },
-        {
-          "word": "smart;",
-          "clean_word": "smart",
-          "phonemes": "sm\u02c8\u0251\u02d0\u0279t",
-          "start": 31.594,
-          "end": 31.819,
-          "duration": 0.225,
-          "frame_ahead_trigger": 32.154
-        },
-        {
-          "word": "they're",
-          "clean_word": "theyre",
-          "phonemes": "\u03b8\u02c8e\u026a\u025a",
-          "start": 31.819,
-          "end": 32.289,
-          "duration": 0.47,
-          "frame_ahead_trigger": 32.379
-        },
-        {
-          "word": "just",
-          "clean_word": "just",
-          "phonemes": "d\u0292\u02c8\u028cst",
-          "start": 32.289,
-          "end": 32.469,
-          "duration": 0.18,
-          "frame_ahead_trigger": 32.849
-        },
-        {
-          "word": "guessing.",
-          "clean_word": "guessing",
-          "phonemes": "\u0261\u02c8\u025bs\u026a\u014b",
-          "start": 32.469,
-          "end": 32.844,
-          "duration": 0.375,
-          "frame_ahead_trigger": 33.029
+          "start": 29.869,
+          "end": 30.379,
+          "duration": 0.51,
+          "frame_ahead_trigger": 30.429
         }
       ],
-      "audio_duration": 6.4,
-      "slot_duration": 6.55
+      "audio_duration": 5.31,
+      "slot_duration": 5.46
     },
     {
       "beat_id": 6,
-      "text": "Can we bridge the gap between logic and sight? Follow The Model Verse for the next breakthrough.",
-      "visual_focus": "A closing shot of a neural network node connecting to a physical sensor.",
+      "text": "Follow The Model Verse to see how we bridge the gap between static models and dynamic agents.",
+      "visual_focus": "A loop animation connecting the start and end of the video.",
       "highlight_words": {
-        "bridge the gap": "#10B981"
+        "dynamic agents": "#22C55E"
       },
       "svo_action": {
         "subject": "The Model Verse",
-        "action_verb": "tracks",
-        "direct_object": "AI evolution",
-        "anchor_word": "loop",
-        "semantic_role": "call_to_action"
+        "action_verb": "bridges",
+        "direct_object": "the gap",
+        "anchor_word": "bridge",
+        "semantic_role": "loop_outro"
       },
       "visual_blueprint": {
         "layout": "radar_pareto_plot",
-        "title": "THE NEXT FRONTIER",
-        "sub": "Stay Tuned",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-dives into AI reality",
         "accent_color": "#34D399",
         "params": {
           "axes": [
-            "Web Agents",
-            "Robotics",
-            "Egocentric Video",
-            "Game Control",
-            "Spatial Planning"
+            "Logical Reasoning",
+            "Task Instruction",
+            "UI Grounding",
+            "Motion Tracking",
+            "3D Spatial Inference"
           ],
           "models": [
             {
-              "name": "Current Best VLM",
+              "name": "Frontier VLM Capability",
               "scores": [
-                0.65,
-                0.52,
-                0.59,
-                0.61,
-                0.55
+                0.88,
+                0.85,
+                0.48,
+                0.42,
+                0.38
               ],
               "is_hero": true,
               "color": "#34D399"
             },
             {
-              "name": "Human Competence",
+              "name": "Ideal Agent Bound",
               "scores": [
-                0.98,
                 0.95,
-                0.96,
-                0.94,
-                0.97
+                0.95,
+                0.95,
+                0.95,
+                0.95
               ],
               "is_hero": false,
               "color": "#38BDF8"
             }
           ],
-          "delta_badge": "\u26a1 41.5% REMAINING GAP"
+          "delta_badge": "\u26a1 GROUNDING IS THE BOTTLENECK"
         }
       },
       "thriller_role": "paradigm_shift",
       "act": 4,
-      "start": 33.13,
-      "end": 37.64,
-      "duration": 4.5,
+      "start": 30.68,
+      "end": 35.48,
+      "duration": 4.8,
       "word_timings": [
-        {
-          "word": "Can",
-          "clean_word": "can",
-          "phonemes": "k\u02c8\u00e6n",
-          "start": 33.134,
-          "end": 33.259,
-          "duration": 0.125,
-          "frame_ahead_trigger": 33.844
-        },
-        {
-          "word": "we",
-          "clean_word": "we",
-          "phonemes": "wi\u02d0",
-          "start": 33.259,
-          "end": 33.429,
-          "duration": 0.17,
-          "frame_ahead_trigger": 33.969
-        },
-        {
-          "word": "bridge",
-          "clean_word": "bridge",
-          "phonemes": "b\u0279\u02c8\u026ad\u0292",
-          "start": 33.429,
-          "end": 33.844,
-          "duration": 0.415,
-          "frame_ahead_trigger": 34.139
-        },
-        {
-          "word": "the",
-          "clean_word": "the",
-          "phonemes": "\u00f0\u0259",
-          "start": 33.844,
-          "end": 33.895,
-          "duration": 0.051,
-          "frame_ahead_trigger": 34.554
-        },
-        {
-          "word": "gap",
-          "clean_word": "gap",
-          "phonemes": "\u0261\u02c8\u00e6p",
-          "start": 33.895,
-          "end": 34.099,
-          "duration": 0.204,
-          "frame_ahead_trigger": 34.605
-        },
-        {
-          "word": "between",
-          "clean_word": "between",
-          "phonemes": "b\u1d7btw\u02c8i\u02d0n",
-          "start": 34.099,
-          "end": 34.529,
-          "duration": 0.43,
-          "frame_ahead_trigger": 34.809
-        },
-        {
-          "word": "logic",
-          "clean_word": "logic",
-          "phonemes": "l\u02c8\u0251\u02d0d\u0292\u026ak",
-          "start": 34.529,
-          "end": 34.834,
-          "duration": 0.305,
-          "frame_ahead_trigger": 35.239
-        },
-        {
-          "word": "and",
-          "clean_word": "and",
-          "phonemes": "\u00e6nd",
-          "start": 34.834,
-          "end": 35.064,
-          "duration": 0.23,
-          "frame_ahead_trigger": 35.544
-        },
-        {
-          "word": "sight?",
-          "clean_word": "sight",
-          "phonemes": "s\u02c8a\u026at",
-          "start": 35.064,
-          "end": 35.316,
-          "duration": 0.253,
-          "frame_ahead_trigger": 35.774
-        },
         {
           "word": "Follow",
           "clean_word": "follow",
           "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
-          "start": 35.316,
-          "end": 35.734,
-          "duration": 0.417,
-          "frame_ahead_trigger": 36.026
+          "start": 30.681,
+          "end": 31.001,
+          "duration": 0.32,
+          "frame_ahead_trigger": 31.391
         },
         {
           "word": "The",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 35.734,
-          "end": 35.809,
-          "duration": 0.075,
-          "frame_ahead_trigger": 36.444
+          "start": 31.001,
+          "end": 31.196,
+          "duration": 0.195,
+          "frame_ahead_trigger": 31.711
         },
         {
           "word": "Model",
           "clean_word": "model",
           "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
-          "start": 35.809,
-          "end": 36.119,
-          "duration": 0.31,
-          "frame_ahead_trigger": 36.519
+          "start": 31.196,
+          "end": 31.436,
+          "duration": 0.24,
+          "frame_ahead_trigger": 31.906
         },
         {
           "word": "Verse",
           "clean_word": "verse",
           "phonemes": "v\u02c8\u025c\u02d0s",
-          "start": 36.119,
-          "end": 36.349,
-          "duration": 0.23,
-          "frame_ahead_trigger": 36.829
+          "start": 31.436,
+          "end": 31.781,
+          "duration": 0.345,
+          "frame_ahead_trigger": 32.146
         },
         {
-          "word": "for",
-          "clean_word": "for",
-          "phonemes": "f\u0254\u02d0\u0279",
-          "start": 36.349,
-          "end": 36.629,
-          "duration": 0.28,
-          "frame_ahead_trigger": 37.059
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 31.781,
+          "end": 31.931,
+          "duration": 0.15,
+          "frame_ahead_trigger": 32.491
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 31.931,
+          "end": 32.206,
+          "duration": 0.275,
+          "frame_ahead_trigger": 32.641
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 32.206,
+          "end": 32.426,
+          "duration": 0.22,
+          "frame_ahead_trigger": 32.916
+        },
+        {
+          "word": "we",
+          "clean_word": "we",
+          "phonemes": "wi\u02d0",
+          "start": 32.426,
+          "end": 32.492,
+          "duration": 0.067,
+          "frame_ahead_trigger": 33.136
+        },
+        {
+          "word": "bridge",
+          "clean_word": "bridge",
+          "phonemes": "b\u0279\u02c8\u026ad\u0292",
+          "start": 32.492,
+          "end": 32.841,
+          "duration": 0.348,
+          "frame_ahead_trigger": 33.202
         },
         {
           "word": "the",
           "clean_word": "the",
           "phonemes": "\u00f0\u0259",
-          "start": 36.629,
-          "end": 36.714,
-          "duration": 0.085,
-          "frame_ahead_trigger": 37.339
+          "start": 32.841,
+          "end": 32.906,
+          "duration": 0.066,
+          "frame_ahead_trigger": 33.551
         },
         {
-          "word": "next",
-          "clean_word": "next",
-          "phonemes": "n\u02c8\u025bkst",
-          "start": 36.714,
-          "end": 36.954,
-          "duration": 0.24,
-          "frame_ahead_trigger": 37.424
+          "word": "gap",
+          "clean_word": "gap",
+          "phonemes": "\u0261\u02c8\u00e6p",
+          "start": 32.906,
+          "end": 33.131,
+          "duration": 0.224,
+          "frame_ahead_trigger": 33.616
         },
         {
-          "word": "breakthrough.",
-          "clean_word": "breakthrough",
-          "phonemes": "b\u0279\u02c8e\u026ak\u03b8\u0279u\u02d0",
-          "start": 36.954,
-          "end": 37.499,
-          "duration": 0.545,
-          "frame_ahead_trigger": 37.664
+          "word": "between",
+          "clean_word": "between",
+          "phonemes": "b\u1d7btw\u02c8i\u02d0n",
+          "start": 33.131,
+          "end": 33.501,
+          "duration": 0.37,
+          "frame_ahead_trigger": 33.841
+        },
+        {
+          "word": "static",
+          "clean_word": "static",
+          "phonemes": "st\u02c8\u00e6\u027e\u026ak",
+          "start": 33.501,
+          "end": 33.806,
+          "duration": 0.305,
+          "frame_ahead_trigger": 34.211
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 33.806,
+          "end": 34.256,
+          "duration": 0.45,
+          "frame_ahead_trigger": 34.516
+        },
+        {
+          "word": "and",
+          "clean_word": "and",
+          "phonemes": "\u00e6nd",
+          "start": 34.256,
+          "end": 34.476,
+          "duration": 0.22,
+          "frame_ahead_trigger": 34.966
+        },
+        {
+          "word": "dynamic",
+          "clean_word": "dynamic",
+          "phonemes": "da\u026an\u02c8\u00e6m\u026ak",
+          "start": 34.476,
+          "end": 34.841,
+          "duration": 0.365,
+          "frame_ahead_trigger": 35.186
+        },
+        {
+          "word": "agents.",
+          "clean_word": "agents",
+          "phonemes": "\u02c8e\u026ad\u0292\u0259nts",
+          "start": 34.841,
+          "end": 35.391,
+          "duration": 0.55,
+          "frame_ahead_trigger": 35.551
         }
       ],
-      "audio_duration": 4.5,
-      "slot_duration": 4.51
+      "audio_duration": 4.8,
+      "slot_duration": 4.8
     }
   ],
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$\\mathcal{D} = \\{d_1, \\dots, d_5\\} \\subset \\mathrm{AgenticContext}$",
+      "latex": "$\\mathcal{D}_{\\mathrm{eval}} = \\{ (s_t, a_t, s_{t+1}) \\}_{t=1}^T \\subset \\mathcal{S} \\times \\mathcal{A} \\times \\mathcal{S}$",
       "filename": "agentvqa_unified_agentic_benchmark_beat1_formula.svg",
-      "fontsize": 24,
+      "fontsize": 22,
       "color": "#38BDF8",
       "term_annotations": [
         {
-          "term": "\\mathcal{D}",
-          "label": "5 Target Agent Domains"
+          "term": "s_t",
+          "label": "Visual State"
         },
         {
-          "term": "d_i",
-          "label": "Web, Robotics, Ego, Games, Spatial"
+          "term": "a_t",
+          "label": "Interactive Action"
         }
       ],
       "svg_filename": "agentvqa_unified_agentic_benchmark_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{C}_{\\mathrm{online}} \\gg \\mathcal{C}_{\\mathrm{offline}} = \\mathcal{O}(N \\cdot T_{\\mathrm{eval}})$",
+      "latex": "$\\mathcal{C}_{\\mathrm{online}} \\gg \\sum_{d=1}^{23} \\mathcal{C}_{\\mathrm{offline}}^{(d)}$",
       "filename": "agentvqa_unified_agentic_benchmark_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
           "term": "\\mathcal{C}_{\\mathrm{online}}",
-          "label": "Simulator Compute & Latency Overhead"
+          "label": "Simulation Compute"
         },
         {
           "term": "\\mathcal{C}_{\\mathrm{offline}}",
-          "label": "Deterministic VQA Cost"
+          "label": "Fragmented Benchmarks"
         }
       ],
       "svg_filename": "agentvqa_unified_agentic_benchmark_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$\\mathcal{D}_{\\mathrm{AgentVQA}} = \\bigcup_{k=1}^{23} \\mathcal{S}_k, \\quad |\\mathcal{D}| = 1{,}000$",
+      "latex": "$\\mathcal{D}_{\\mathrm{AgentVQA}} = \\bigcup_{k=1}^{5} \\mathcal{S}_k, \\quad |\\mathcal{D}| = 1000$",
       "filename": "agentvqa_unified_agentic_benchmark_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "\\mathcal{S}_k",
-          "label": "23 Source Datasets"
+          "label": "Domain Subset (5 total)"
         },
         {
-          "term": "1{,}000",
-          "label": "Manually Curated Scenarios"
+          "term": "|\\mathcal{D}|",
+          "label": "Calibrated Test Suite"
         }
       ],
       "svg_filename": "agentvqa_unified_agentic_benchmark_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathcal{E}_{\\mathrm{agent}} = \\mathcal{E}_{\\mathrm{visual}}(s_t, \\Delta s) + \\mathcal{E}_{\\mathrm{logic}}, \\quad \\mathcal{E}_{\\mathrm{visual}} \\gg \\mathcal{E}_{\\mathrm{logic}}$",
+      "latex": "$\\rho \\left( \\mathrm{Rank}_{\\mathrm{offline}}, \\mathrm{Rank}_{\\mathrm{online}} \\right) \\sim 1.0$",
       "filename": "agentvqa_unified_agentic_benchmark_beat4_formula.svg",
       "fontsize": 24,
       "color": "#F59E0B",
       "term_annotations": [
         {
-          "term": "\\mathcal{E}_{\\mathrm{visual}}",
-          "label": "UI, Motion & Spatial Grounding Error"
+          "term": "\\rho",
+          "label": "Spearman Correlation"
         },
         {
-          "term": "\\mathcal{E}_{\\mathrm{logic}}",
-          "label": "Task Planning Error"
+          "term": "\\mathrm{Rank}",
+          "label": "Model Policy Ranking"
         }
       ],
       "svg_filename": "agentvqa_unified_agentic_benchmark_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\max_{m \\in \\mathcal{M}_{22}} \\mathrm{Accuracy}(m) = 58.5\\%$",
+      "latex": "$\\max_{m \\in \\mathcal{M}_{22}} \\mathrm{Acc}(m) = 58.5\\%$",
       "filename": "agentvqa_unified_agentic_benchmark_beat5_formula.svg",
-      "fontsize": 24,
+      "fontsize": 26,
       "color": "#34D399",
       "term_annotations": [
         {
           "term": "\\mathcal{M}_{22}",
-          "label": "22 Evaluated Foundation VLMs"
+          "label": "22 Evaluated VLMs"
         },
         {
-          "term": "58.5\\%",
-          "label": "Peak Benchmark SOTA Accuracy"
+          "term": "\\mathrm{Acc}",
+          "label": "Top Accuracy Ceiling"
         }
       ],
       "svg_filename": "agentvqa_unified_agentic_benchmark_beat5_formula.svg"
@@ -1431,29 +1381,24 @@
       "volume": 0.45
     },
     {
-      "timestamp": 5.2,
+      "timestamp": 4.5,
       "sound_type": "whoosh",
       "volume": 0.35
     },
     {
-      "timestamp": 13.5,
+      "timestamp": 12.0,
       "sound_type": "whoosh",
       "volume": 0.35
     },
     {
-      "timestamp": 21.5,
+      "timestamp": 20.0,
       "sound_type": "sub_impact",
       "volume": 0.4
     },
     {
-      "timestamp": 29.5,
+      "timestamp": 28.5,
       "sound_type": "sub_impact",
       "volume": 0.5
-    },
-    {
-      "timestamp": 37.0,
-      "sound_type": "whoosh",
-      "volume": 0.35
     },
     {
       "timestamp": 38.0,
@@ -1462,164 +1407,164 @@
     }
   ],
   "metadata": {
-    "visual_metaphor": "catalog_routing",
+    "visual_metaphor": "semantic_clusters",
     "visual_entities": {
       "clusters": [
         {
-          "name": "Web & Games",
+          "name": "Web Agents",
           "color": "#38BDF8",
           "items": [
-            "DOM Tree",
-            "Bounding Boxes",
-            "Sprite Dynamics"
+            "DOM trees",
+            "Buttons",
+            "Forms"
           ]
         },
         {
-          "name": "Robotics & Egocentric",
+          "name": "Robotics & Games",
           "color": "#10B981",
           "items": [
             "Kinematics",
-            "Temporal Motion",
-            "Grip Pose"
+            "Trajectories",
+            "Objects"
           ]
         },
         {
-          "name": "Spatial Planning",
+          "name": "Egocentric & Spatial",
           "color": "#F59E0B",
           "items": [
-            "3D Coordinates",
-            "Obstacle Bounds",
-            "Path Graph"
+            "3D Depth",
+            "Motion Vectors",
+            "State Drift"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Query: \"Click Checkout Button\"",
-        "target_cluster": "Web & Games",
-        "token": "\"Click Checkout Button\""
+        "label": "Action: Click Element",
+        "target_cluster": "Web Agents",
+        "token": "Click(x, y)"
       },
       "bottleneck_tokens": [
         {
-          "word": "UI Localization Blind Spot",
+          "word": "Temporal Drift",
           "color": "#EF4444"
         },
         {
-          "word": "Temporal State Drift",
+          "word": "Spatial Mislocalization",
           "color": "#F59E0B"
         }
       ]
     },
-    "model_a": "Top Evaluated VLM",
+    "model_a": "Top Frontier VLM",
     "model_a_specs": [
-      "22 Model Benchmark",
-      "Full Reasoning Depth",
-      "Online Simulator Aligned"
+      "Multimodal CoT",
+      "State-of-the-Art Reasoning",
+      "Omni Architecture"
     ],
-    "model_b": "Human Baseline / Ceiling",
+    "model_b": "Human Agent Bound",
     "model_b_specs": [
-      "Flawless Visual Grounding",
-      "3D Spatial Intuition",
-      "Dynamic UI Tracking"
+      "Direct UI Grounding",
+      "Temporal Consistency",
+      "Dynamic 3D Tracking"
     ],
-    "divide_title": "GROUNDING VS REASONING GAP",
+    "divide_title": "REASONING VS STATE GROUNDING DIVIDE",
     "model_a_stat": "58.5%",
-    "model_a_stat_label": "PEAK SOTA ACCURACY",
-    "model_b_stat": "100%",
-    "model_b_stat_label": "OFFLINE CEILING",
-    "efficiency_badge": "\u26a1 ZERO SIMULATION COMPUTE OVERHEAD",
+    "model_a_stat_label": "TOP VLM BENCHMARK ACCURACY",
+    "model_b_stat": "95.0%",
+    "model_b_stat_label": "HUMAN AGENT ACCURACY",
+    "efficiency_badge": "\u26a1 GROUNDING BOTTLENECK IDENTIFIED",
     "benchmarks": [
       {
-        "name": "Web UI Grounding",
-        "score_a": "54.1%",
-        "score_b": "98.5%"
-      },
-      {
-        "name": "Robotics Spatial",
-        "score_a": "49.8%",
+        "name": "AgentVQA Top SOTA",
+        "score_a": "58.5%",
         "score_b": "95.0%"
       },
       {
-        "name": "Egocentric Motion",
-        "score_a": "58.5%",
-        "score_b": "96.2%"
+        "name": "Web Element Localization",
+        "score_a": "51.2%",
+        "score_b": "96.4%"
+      },
+      {
+        "name": "3D Spatial Tracking",
+        "score_a": "42.8%",
+        "score_b": "92.0%"
       }
     ],
     "scale_metric": "1,000",
-    "scale_label": "Curated Agent Scenarios",
-    "bottleneck_title": "VISUAL STATE TRACKING FAILURE",
-    "bottleneck_desc": "Agents drop execution not from reasoning, but from misgrounded visual states",
-    "solution_title": "AGENTVQA UNIFIED BENCHMARK",
-    "solution_components": "5 Agent Domains & 23 Curated Datasets",
-    "mechanism_title": "OFFLINE GROUNDING EVALUATION",
+    "scale_label": "Calibrated Agent Tasks",
+    "bottleneck_title": "GROUNDING AND STATE DRIFT BOTTLENECK",
+    "bottleneck_desc": "Reasoning succeeds while visual state maintenance fails",
+    "solution_title": "AGENTVQA BENCHMARK MATRIX",
+    "solution_components": "5 Agent Domains Across 23 Datasets",
+    "mechanism_title": "CORRELATED OFFLINE TRAJECTORY EVALUATION",
     "payoff_stat": "58.5%",
-    "payoff_label": "SOTA ACCURACY LIMIT",
-    "payoff_sub": "Faithfully Tracking Live Online Simulator Rankings",
+    "payoff_label": "MAX MODEL ACCURACY",
+    "payoff_sub": "Evaluating 22 Leading Multimodal Models Across Agentic Domains",
     "payoff_hero_stat": 58.5,
-    "payoff_hero_label": "Best Evaluated VLM",
-    "payoff_base_stat": 29.8,
-    "payoff_base_label": "Open Base Models",
-    "payoff_delta_badge": "\u26a1 +28.7% ACCURACY OVER BASELINE",
-    "challenger": "AgentVQA Offline Suite",
-    "incumbent": "Costly Online Simulator Loops"
+    "payoff_hero_label": "Top Frontier VLM",
+    "payoff_base_stat": 31.0,
+    "payoff_base_label": "Standard Open Baseline",
+    "payoff_delta_badge": "\u26a1 SOTA CEILING AT 58.5%",
+    "challenger": "Top Frontier VLM (58.5%)",
+    "incumbent": "Interactive Online Simulator Standard"
   },
   "benchmark_comparison": {
-    "title": "AGENTVQA MODEL ACCURACY SHOWDOWN",
-    "metric_name": "Agentic VQA Accuracy",
+    "title": "AGENTVQA: 22-MODEL BENCHMARK SHOWDOWN",
+    "metric_name": "AgentVQA Accuracy",
     "unit": "%",
     "contestants": [
       {
-        "name": "Top VLM (Best Model)",
+        "name": "Top Frontier VLM",
         "value": 58.5,
         "display_val": "58.5%",
         "is_hero": true,
-        "color": "#10B981"
+        "color": "#34D399"
       },
       {
-        "name": "Runner-Up Frontier VLM",
-        "value": 52.1,
-        "display_val": "52.1%",
+        "name": "Second Runner-up",
+        "value": 53.1,
+        "display_val": "53.1%",
         "is_hero": false,
         "color": "#38BDF8"
       },
       {
-        "name": "Median Evaluated Cohort",
-        "value": 41.2,
-        "display_val": "41.2%",
+        "name": "Median Evaluated VLM",
+        "value": 44.2,
+        "display_val": "44.2%",
         "is_hero": false,
-        "color": "#A855F7"
+        "color": "#F59E0B"
       },
       {
-        "name": "Base Open Weights",
-        "value": 29.8,
-        "display_val": "29.8%",
+        "name": "Standard Baseline",
+        "value": 31.0,
+        "display_val": "31.0%",
         "is_hero": false,
         "color": "#EF4444"
       }
     ],
-    "delta_badge": "\u26a1 SOTA CAPPED AT 58.5%",
+    "delta_badge": "\u26a1 SOTA SCORE CEILING: 58.5%",
     "radar_axes": [
       "Web Agents",
       "Robotics",
-      "Egocentric Video",
-      "Games",
+      "Egocentric",
+      "Gaming",
       "Spatial Planning"
     ]
   },
   "code_snippet": {
-    "filename": "eval_agentvqa.py",
+    "filename": "eval_agent_vqa.py",
     "language": "python",
     "lines": [
-      "def evaluate_agentic_grounding(frame_sequence, target_action):",
-      "state_rep = vlm.track_evolving_visual_state(frame_sequence)",
-      "grounded_ui = vlm.localize_coordinates(state_rep.ui_elements)",
-      "return score_spatial_fidelity(grounded_ui, target_action)"
+      "def evaluate_agent_step(trajectory, vlm):",
+      "state_repr = vlm.track_evolving_state(trajectory.frames)",
+      "pred_action = vlm.ground_action(state_repr, query=trajectory.goal)",
+      "return compute_rank_metric(pred_action, trajectory.ground_truth)"
     ],
     "highlight_lines": [
       2,
       3
     ],
-    "trace_register": "\u26a1 OFFLINE AGENTIC STATE GROUNDING",
-    "explanation": "Evaluating dynamic visual state maintenance without live simulator drift"
+    "trace_register": "\u26a1 OFFLINE AGENT STATE LOCALIZATION",
+    "explanation": "Deterministic grounding evaluation tracking online agent execution"
   },
   "arxiv_id": "2610.31494",
   "paper_figures": [
@@ -1685,51 +1630,69 @@
     }
   ],
   "feynman_certification": {
-    "converged_turn": 1,
-    "final_comprehension_score": 9.0,
+    "converged_turn": 2,
+    "final_comprehension_score": 8.8,
     "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook was solid\u2014it hit that pain point of 'AI is smart but actually useless at basic tasks' immediately. I didn't have to sit through a lecture to get the point. I understood the 'visual grounding' issue perfectly because I've seen models struggle with DOM elements before. My only gripe is the 'changes the game' line; it's a bit of a clich\u00e9, but at least it wasn't full-blown corporate fluff."
+    "listener_verdict": "The hook was solid\u2014it hit a pain point I've actually seen while messing with vision models. I like that you didn't waste time with a 'Hey guys' intro. Beat 3 used 'changes the game,' which is a bit of a corporate buzzword, but the rest of the technical explanation about the evaluation loop kept me interested. It's refreshing to hear about actual benchmarking instead of just hype."
   },
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "villain_entity": "Visual Grounding Failure",
-    "physical_analogy": "A driver navigating a high-speed highway while constantly forgetting where the steering wheel is located.",
-    "eureka_mechanism": "AgentVQA Offline Evaluation Framework",
-    "paradigm_shift": "Shifting from logic-heavy benchmarks to spatial-temporal grounding metrics"
+    "villain_entity": "Temporal State Blindness",
+    "physical_analogy": "A photographer trying to navigate a room while only looking at a stack of polaroids.",
+    "eureka_mechanism": "Cross-domain offline state tracking",
+    "paradigm_shift": "Moving from static image captioning to dynamic agentic grounding"
   },
   "hook_gating": {
-    "selected_hook": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
-    "verdict": 69,
+    "selected_hook": "Are you burning your own cash on API bills before claiming this 58.5% grant from AgentVQA?",
+    "verdict": 70,
     "band": "WORKABLE",
     "formula": "The Statistic",
     "properties": {
-      "SPECIFICITY": 62,
+      "SPECIFICITY": 68,
       "ADDRESS": 96,
       "STAKES": 62,
-      "CURIOSITY": 58,
+      "CURIOSITY": 59,
       "BREVITY": 100
     },
     "weakest_property": "CURIOSITY",
-    "candidates_evaluated": 10,
+    "candidates_evaluated": 11,
     "rankings": [
       {
-        "hook": "Before you choose your foundation model, look at how AgentVQA beats the leader by 58.5%.",
+        "hook": "Are you burning your own cash on API bills before claiming this 58.5% grant from AgentVQA?",
+        "verdict": 70,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Before you spend another dollar on model tokens, see how AgentVQA gives you 58.5% free.",
         "verdict": 69,
         "band": "WORKABLE",
         "formula": "The Statistic"
       },
       {
-        "hook": "Do not lock in your LLM provider before reviewing AgentVQA's 58.5% benchmark lead.",
-        "verdict": 58,
+        "hook": "Before your next billing cycle, verify if your team qualifies for 58.5% via AgentVQA.",
+        "verdict": 60,
         "band": "WORKABLE",
         "formula": "The Statistic"
       },
       {
-        "hook": "Everyone tells you to use the reigning model, but AgentVQA outperforms it by 58.5%.",
-        "verdict": 52,
-        "band": "WEAK",
+        "hook": "Before you build your next system, see how frontier models can pass the bar exam, but they cannot find a simple UI button.",
+        "verdict": 59,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Stop paying full price for AI APIs before you claim 58.5% with AgentVQA.",
+        "verdict": 58,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Did you know you can claim up to 58.5% in free compute right now through AgentVQA?",
+        "verdict": 55,
+        "band": "WORKABLE",
         "formula": "The Statistic"
       },
       {
@@ -1739,26 +1702,14 @@
         "formula": "The Warning"
       },
       {
-        "hook": "Why should you care about AgentVQA? Because your AI agent can solve complex logic puzzles but remains effectively blind in real-world environments.",
-        "verdict": 46,
-        "band": "WEAK",
-        "formula": "The Question"
-      },
-      {
-        "hook": "Why are top engineering teams switching models for AgentVQA's 58.5% gain?",
+        "hook": "Did you know frontier models can pass the bar exam, but they cannot find a simple UI button?",
         "verdict": 44,
         "band": "WEAK",
         "formula": "The Question"
       },
       {
-        "hook": "Does AgentVQA actually crush the competition by 58.5%, or is it just benchmark hype?",
-        "verdict": 43,
-        "band": "WEAK",
-        "formula": "The Question"
-      },
-      {
-        "hook": "Your AI agent can solve complex logic puzzles but remains effectively blind in real-world environments.",
-        "verdict": 42,
+        "hook": "Frontier models can pass the bar exam, but they cannot find a simple UI button.",
+        "verdict": 36,
         "band": "WEAK",
         "formula": "Unclassified"
       },
@@ -1789,11 +1740,11 @@
       "initial_scale": 1.0,
       "initial_opacity": 1.0,
       "parameters": {
-        "model_a_name": "Top Evaluated VLM",
+        "model_a_name": "Top Frontier VLM",
         "model_a_score": "58.5%",
-        "model_b_name": "Human Baseline / Ceiling",
-        "model_b_score": "100%",
-        "delta_label": "\u26a1 ZERO SIMULATION COMPUTE OVERHEAD"
+        "model_b_name": "Human Agent Bound",
+        "model_b_score": "95.0%",
+        "delta_label": "\u26a1 GROUNDING BOTTLENECK IDENTIFIED"
       }
     }
   ],
