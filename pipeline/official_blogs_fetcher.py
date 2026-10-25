@@ -22,6 +22,7 @@ import email.utils
 import datetime
 import urllib.request
 import urllib.error
+import urllib.parse
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple, Union
@@ -125,10 +126,10 @@ def clean_html_text(raw_html: str) -> str:
     return text
 
 
-def parse_pubdate_to_iso(date_str: str) -> str:
+def parse_pubdate_to_iso(date_str: str) -> Optional[str]:
     """Parses RFC 822/2822, ISO 8601, or natural date strings into a clean ISO YYYY-MM-DD format."""
     if not date_str:
-        return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+        return None
 
     date_str = date_str.strip()
 
@@ -166,8 +167,60 @@ def parse_pubdate_to_iso(date_str: str) -> str:
         except Exception:
             pass
 
-    # Default fallback
-    return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    # Never manufacture a release date.  An unknown date must remain unknown so
+    # recency gates can exclude it from production rather than treating it as new.
+    return None
+
+
+def normalize_official_url(raw_url: str, provider: str) -> Optional[str]:
+    """Resolve and canonicalize an announcement URL without inventing one.
+
+    Feed entries frequently use relative links or append tracking parameters.
+    We resolve relative links against the configured provider domain, remove
+    fragments/tracking parameters, and return ``None`` for missing or
+    cross-provider links.  The caller can then discard an item that has no
+    attributable primary-source URL.
+    """
+    if not raw_url or not raw_url.strip():
+        return None
+
+    provider_key = provider.lower().replace(" ", "_")
+    cfg = OFFICIAL_LAB_FEEDS.get(provider_key, {})
+    allowed_domains = cfg.get("allowed_domains", [])
+    if not allowed_domains:
+        return None
+
+    candidate = html.unescape(raw_url).strip()
+    if candidate.startswith("//"):
+        candidate = f"https:{candidate}"
+    elif candidate.startswith("/"):
+        base_host = allowed_domains[0].removeprefix("www.")
+        if base_host == "anthropic.com":
+            base_host = "www.anthropic.com"
+        candidate = f"https://{base_host}{candidate}"
+
+    parsed = urllib.parse.urlparse(candidate)
+    if parsed.scheme.lower() != "https" or not parsed.netloc:
+        return None
+
+    hostname = (parsed.hostname or "").lower()
+    if not any(hostname == d or hostname.endswith("." + d) for d in allowed_domains):
+        return None
+
+    tracking_keys = {"fbclid", "gclid", "mc_cid", "mc_eid", "ref", "source"}
+    query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+    clean_query = urllib.parse.urlencode(
+        [(key, value) for key, value in query
+         if not key.lower().startswith("utm_") and key.lower() not in tracking_keys]
+    )
+    return urllib.parse.urlunparse((
+        "https",
+        parsed.netloc.lower(),
+        parsed.path or "/",
+        parsed.params,
+        clean_query,
+        "",
+    ))
 
 
 def slugify_title(title: str, max_length: int = 36) -> str:
@@ -339,15 +392,18 @@ class OfficialBlogRecord:
     id: str
     title: str
     provider: str
-    published_date: str
+    published_date: Optional[str]
     summary: str
     category: str
     key_facts: Dict[str, Any]
     canonical_url: str
     domain_taxonomy: str = "tech_news"
-    raw_impact_score: float = 92.0
-    impact_score: float = 115.0
-    analytics_multiplier: float = 1.25
+    # Live feed records do not have an evidence-backed impact score.  Curated
+    # registry records may opt into explicit values, but parsed announcements
+    # must not inherit generic fabricated defaults.
+    raw_impact_score: Optional[float] = None
+    impact_score: Optional[float] = None
+    analytics_multiplier: Optional[float] = None
     tags: List[str] = field(default_factory=list)
 
     @property
@@ -376,7 +432,7 @@ class OfficialBlogRecord:
         """Converts official blog record into a standard pipeline candidate specification."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.id.lower())
         facts_summary = self._format_facts_summary()
-        return {
+        spec = {
             "id": clean_id,
             "arxiv_id": clean_id,
             "title": self.title,
@@ -398,11 +454,18 @@ class OfficialBlogRecord:
                 "recommended_hook": f"Why {self.provider}'s new {self.title.split(':')[0]} changes modern AI for developers",
                 "suggested_everyday_analogy": "A precision engineering breakthrough redefining standard industry baselines"
             },
-            "raw_impact_score": self.raw_impact_score,
-            "impact_score": self.impact_score,
-            "analytics_multiplier": self.analytics_multiplier,
             "source": "official_blogs"
         }
+        # Scores are only present when explicitly curated.  Omitting unknown
+        # values lets downstream selectors apply their own documented policy
+        # without mistaking a synthetic score for source evidence.
+        if self.raw_impact_score is not None:
+            spec["raw_impact_score"] = self.raw_impact_score
+        if self.impact_score is not None:
+            spec["impact_score"] = self.impact_score
+        if self.analytics_multiplier is not None:
+            spec["analytics_multiplier"] = self.analytics_multiplier
+        return spec
 
     def _format_facts_summary(self) -> str:
         parts = []
@@ -861,6 +924,28 @@ class OfficialBlogsFetcher:
                 return child
         return None
 
+    def _extract_canonical_url(self, item: Any, provider: str) -> Optional[str]:
+        """Extract the item's real official link, never a provider-homepage fallback."""
+        candidates: List[Tuple[str, str]] = []
+        for child in item:
+            if child.tag.split("}")[-1].lower() != "link":
+                continue
+            raw = child.get("href") or child.text or ""
+            rel = (child.get("rel") or "").lower()
+            candidates.append((rel, raw))
+
+        # Prefer explicit canonical/alternate links, then any valid link.
+        ordered = sorted(candidates, key=lambda pair: 0 if pair[0] in {"canonical", "alternate"} else 1)
+        for _, raw in ordered:
+            normalized = normalize_official_url(raw, provider)
+            if normalized:
+                return normalized
+
+        guid_elem = self._get_child_tag(item, ["guid", "id"])
+        if guid_elem is not None:
+            return normalize_official_url(guid_elem.text or "", provider)
+        return None
+
     def parse_feed_xml(
         self,
         xml_text: str,
@@ -909,20 +994,11 @@ class OfficialBlogsFetcher:
             if not clean_title or len(clean_title) < 5:
                 continue
 
-            # Extract link / canonical URL
-            link = ""
-            link_elem = self._get_child_tag(item, ["link"])
-            if link_elem is not None:
-                link = link_elem.get("href") or link_elem.text or ""
+            # A missing or cross-provider URL is insufficient evidence for a
+            # publishable announcement.  Do not substitute a generic homepage.
+            link = self._extract_canonical_url(item, provider)
             if not link:
-                guid_elem = self._get_child_tag(item, ["guid", "id"])
-                if guid_elem is not None and (guid_elem.text or "").startswith("http"):
-                    link = guid_elem.text
-
-            # Validate official lab domain
-            if not self.validate_official_domain(link):
-                # Fallback to provider primary website if link is relative or third-party
-                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower().replace(' ', '_'), {}).get('allowed_domains', ['openai.com'])[0]}"
+                continue
 
             # Extract summary / description
             summary = ""
@@ -935,7 +1011,7 @@ class OfficialBlogsFetcher:
 
             # Limit summary to concise 2-3 sentences
             sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", summary) if s.strip()]
-            concise_summary = " ".join(sentences[:3]) if sentences else clean_title
+            concise_summary = " ".join(sentences[:3]) if sentences else ""
 
             # Extract pubDate / updated
             pubdate = ""
@@ -945,7 +1021,7 @@ class OfficialBlogsFetcher:
                     pubdate = parse_pubdate_to_iso(elem.text)
                     break
             if not pubdate:
-                pubdate = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+                pubdate = None
 
             # Extract key facts
             full_text = f"{clean_title} {summary}"
@@ -989,27 +1065,22 @@ class OfficialBlogsFetcher:
             return []
 
         records: List[OfficialBlogRecord] = []
-        domain_cfg = OFFICIAL_LAB_FEEDS.get(provider.lower().replace(" ", "_"), {})
-        allowed_domains = domain_cfg.get("allowed_domains", ["anthropic.com"])
-        primary_domain = allowed_domains[0]
-        base_domain = f"https://www.{primary_domain}" if not primary_domain.startswith("http") else primary_domain
-
         # Extract articles/links: e.g. /news/<slug> or full official links
         pattern = r'<a[^>]+href=["\']((?:/news/|/blog/|/index/)[a-zA-Z0-9\-_/]+)["\'][^>]*>(.*?)</a>'
         articles = re.findall(pattern, html_text, re.DOTALL | re.IGNORECASE)
         seen_urls = set()
 
         for href, inner in articles:
-            full_url = href if href.startswith("http") else f"{base_domain.rstrip('/')}/{href.lstrip('/')}"
+            full_url = normalize_official_url(href, provider)
 
-            if full_url in seen_urls or not self.validate_official_domain(full_url):
+            if not full_url or full_url in seen_urls:
                 continue
             seen_urls.add(full_url)
 
             # Extract date
             t_match = re.search(r'<time[^>]*>(.*?)</time>', inner, re.DOTALL | re.IGNORECASE)
             date_str = clean_html_text(t_match.group(1)) if t_match else ""
-            pubdate = parse_pubdate_to_iso(date_str) if date_str else datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+            pubdate = parse_pubdate_to_iso(date_str) if date_str else None
 
             # Strip time and meta tags to isolate title
             clean_inner = re.sub(r'<time[^>]*>.*?</time>', '', inner, flags=re.DOTALL | re.IGNORECASE)
@@ -1024,7 +1095,7 @@ class OfficialBlogsFetcher:
             title = sentences[0] if sentences else clean_inner
             if len(title) > 95 and sentences:
                 title = title[:95].rsplit(" ", 1)[0]
-            summary = " ".join(sentences[1:3]) if len(sentences) > 1 else clean_inner
+            summary = " ".join(sentences[1:3]) if len(sentences) > 1 else ""
 
             facts = extract_verified_key_facts(clean_inner)
             category, taxonomy = classify_blog_content(title, summary, default_taxonomy)
@@ -1068,10 +1139,18 @@ class OfficialBlogsFetcher:
 
             clean_title = clean_html_text(t_match.group(1))
             link = l_match.group(1).strip() if l_match else ""
-            summary = clean_html_text(d_match.group(1)) if d_match else clean_title
+            summary = clean_html_text(d_match.group(1)) if d_match else ""
 
-            if not self.validate_official_domain(link):
-                link = f"https://{OFFICIAL_LAB_FEEDS.get(provider.lower().replace(' ', '_'), {}).get('allowed_domains', ['openai.com'])[0]}"
+            link = normalize_official_url(link, provider)
+            if not link:
+                continue
+
+            date_match = re.search(
+                r"<(?:pubDate|published|updated|date)[^>]*>(.*?)</",
+                block,
+                re.DOTALL | re.IGNORECASE,
+            )
+            published_date = parse_pubdate_to_iso(date_match.group(1)) if date_match else None
 
             facts = extract_verified_key_facts(f"{clean_title} {summary}")
             category, taxonomy = classify_blog_content(clean_title, summary, default_taxonomy)
@@ -1082,7 +1161,7 @@ class OfficialBlogsFetcher:
                 id=record_id,
                 title=clean_title,
                 provider=provider,
-                published_date=datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d"),
+                published_date=published_date,
                 summary=summary[:300],
                 category=category,
                 key_facts=facts,
@@ -1247,7 +1326,7 @@ class OfficialBlogsFetcher:
 
         # Sort by published date descending and impact score descending
         def sort_key(r: OfficialBlogRecord):
-            return (r.published_date, r.impact_score)
+            return (r.published_date or "", r.impact_score if r.impact_score is not None else 0.0)
 
         sorted_records = sorted(records, key=sort_key, reverse=True)
 
