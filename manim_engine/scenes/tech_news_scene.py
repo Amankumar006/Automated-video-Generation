@@ -1,21 +1,19 @@
-"""
-The Model Verse — Official Tech News Scene (Category: tech_news / blogs)
-Dynamic Launch & Benchmark Studio for official AI lab drops (OpenAI, Anthropic, Google DeepMind, HF):
-- Official lab vector emblems
-- Dynamic predecessor bottleneck cards derived from active beat narration
-- Dynamic throughput / speedup / secret sauce meters derived from active beat narration
-- Dynamic benchmark comparison cards or feature milestone tiles derived from active beat narration
-- Dynamic pricing comparison tables or rollout tier cards derived from active beat narration
-- Dark tech launchroom backdrop
+"""Living mechanism visuals for official AI product/news explainers.
+
+The scene keeps the historical ``TechNewsScene`` API, but its visual language is
+diagrammatic: information moves through lanes, loops, race tracks, benchmark
+bars, and rollout timelines. Narration supplies the explanation; the canvas
+shows the mechanism or state change instead of repeating prose in cards.
 """
 
-import os
 import json
+import os
 import re
-from manim import *
 import sys
 from pathlib import Path
-from typing import Dict, Any, List, Tuple, Optional
+from typing import List, Tuple
+
+from manim import *
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
@@ -23,587 +21,265 @@ sys.path.append(str(PROJECT_ROOT))
 from manim_engine.base_scene import BaseShortScene
 from manim_engine.primitives.chalkboard_captions import ChalkboardCaptions
 from manim_engine.primitives.outro_card import create_chalkboard_brand_outro
-from manim_engine.primitives.lab_branding import get_lab_logo, create_lab_hero_badge
-from pipeline.config import (
-    FONT_HELVETICA, COLOR_MINT, COLOR_DANGER, COLOR_GOLD, COLOR_SLATE
-)
 from manim_engine.primitives.typography import clean_text
+from pipeline.config import FONT_HELVETICA, COLOR_CYAN, COLOR_GOLD, COLOR_MINT
 
-COLOR_DARK_STUDIO = "#080B10"
-COLOR_CYAN = "#38BDF8"
-COLOR_CARD_BG = "#0D121F"
-COLOR_BORDER = "#1E293B"
+COLOR_GRID = "#1E293B"
+COLOR_MUTED = "#94A3B8"
+COLOR_WHITE = "#F8FAFC"
+COLOR_PURPLE = "#A78BFA"
 
 
 class TechNewsScene(BaseShortScene):
-    """
-    Dedicated Launch & Benchmark Studio for official AI lab announcements.
-    Dynamically binds every visual element, card, metric, and comparison
-    to the active specification and beat narration.
-    """
+    """Six-beat tech-news explainer with non-card, mechanism-first visuals."""
 
     def construct(self):
         self.setup_canvas("TECH NEWS DISPATCH")
-        captions = ChalkboardCaptions(self, y_pos=-5.1, default_font_size=23)
-
-        # 1. Load active specification
+        captions = ChalkboardCaptions(self, y_pos=-3.45, default_font_size=21)
         spec = self._load_spec()
         meta = spec.get("metadata", {})
         news_meta = spec.get("tech_news_metadata", {})
         provider = news_meta.get("provider") or meta.get("provider") or self._infer_provider(spec)
-        raw_model = news_meta.get("model_name")
-        if not raw_model:
-            title_text = spec.get("title", "Frontier AI Release")
-            # Try to extract clean model identifier
-            m = re.search(r'\b(o\d(?:-mini|-preview)?|gpt-[\w.]+|claude-[\w.]+|gemini-[\w.]+|deepseek-[\w.]+|codex|llama-[\w.]+)\b', title_text, re.IGNORECASE)
-            if m:
-                raw_model = m.group(1)
-            else:
-                raw_model = title_text.split("—")[0].split(":")[0].strip()
-                if len(raw_model) > 16:
-                    raw_model = " ".join(raw_model.split()[:2])
-        model_name = raw_model
+        model_name = self._model_name(spec, news_meta)
 
-        # Helper to get beat text, highlight words, slot duration, and blueprint
-        def get_beat(bid: int, def_text: str, def_dur: float, def_hl: dict = None):
-            for b in spec.get("beats", []):
-                if b.get("beat_id") == bid:
-                    dur = float(b.get("slot_duration", b.get("audio_duration", def_dur)))
-                    bp = b.get("visual_blueprint", {})
-                    return b.get("text", def_text), dur, b.get("highlight_words", def_hl or {}), bp, b
-            return def_text, def_dur, def_hl or {}, {}, {}
+        def beat(bid, fallback, duration, highlights=None):
+            for item in spec.get("beats", []):
+                if item.get("beat_id") == bid:
+                    return (item.get("text", fallback), float(item.get("slot_duration", item.get("audio_duration", duration))), item.get("highlight_words", highlights or {}), item.get("visual_blueprint", {}) or {}, item)
+            return fallback, duration, highlights or {}, {}, {}
 
-        # -----------------------------------------------------------------
-        # BEAT 1: Hero Announcement Card & Official Lab Emblem (0 - ~8s)
-        # -----------------------------------------------------------------
-        b1_text, b1_dur, b1_hl, b1_bp, _ = get_beat(
-            1,
-            f"Before you update your stack, see what just dropped with {model_name}.",
-            7.5,
-            {model_name: COLOR_CYAN, "dropped": COLOR_GOLD}
-        )
+        b1, d1, h1, bp1, _ = beat(1, f"Here is what just changed with {model_name}.", 7.5, {model_name: COLOR_CYAN})
+        hero = self._launch_visual(provider, model_name, bp1)
+        self._play_beat(captions, b1, h1, hero[0], d1, pulse=hero[1])
 
-        # Top status pill (Compact broadcast tag)
-        top_pill_bg = RoundedRectangle(
-            corner_radius=0.12,
-            width=5.8,
-            height=0.48,
-            color="#EF4444",
-            fill_color="#7F1D1D",
-            fill_opacity=0.55,
-            stroke_width=1.2
-        ).shift(UP * 3.4)
-        top_pill_txt = clean_text(
-            f"⚡ {provider.upper()} OFFICIAL LAUNCH",
-            font=FONT_HELVETICA,
-            font_size=12,
-            color="#FCA5A5",
-            weight=HEAVY,
-            max_width=5.4
-        ).move_to(top_pill_bg)
-        hero_badge = VGroup(top_pill_bg, top_pill_txt)
+        b2, d2, h2, bp2, _ = beat(2, "The model keeps a much longer working memory, so earlier context stays in reach.", 7.5, {"context": COLOR_CYAN})
+        lanes = self._context_lanes(bp2)
+        self._play_beat(captions, b2, h2, lanes[0], d2, pulse=lanes[1])
 
-        # Main Hero announcement card
-        hero_card = RoundedRectangle(
-            corner_radius=0.20,
-            width=7.4,
-            height=4.6,
-            color=COLOR_CYAN,
-            fill_color=COLOR_CARD_BG,
-            fill_opacity=0.95,
-            stroke_width=2.2
-        ).next_to(hero_badge, DOWN, buff=0.35)
+        b3, d3, h3, bp3, _ = beat(3, "Post-training teaches the model to check its own work before it answers.", 8.0, {"check": COLOR_MINT, "reward": COLOR_GOLD})
+        loop = self._post_training_loop(bp3)
+        self._play_beat(captions, b3, h3, loop[0], d3, pulse=loop[1])
 
-        lab_emblem = get_lab_logo(provider, size=2.0).move_to(hero_card).shift(UP * 0.7)
-        headline_txt = clean_text(
-            spec.get("title", f"Introducing {model_name}"),
-            font=FONT_HELVETICA,
-            font_size=20,
-            color=WHITE,
-            weight=HEAVY,
-            max_width=6.6
-        ).next_to(lab_emblem, DOWN, buff=0.35)
+        b4, d4, h4, bp4, _ = beat(4, "The result is a faster path from prompt to useful answer.", 8.0, {"faster": COLOR_MINT})
+        speed = self._speed_race(b4, news_meta, bp4)
+        self._play_beat(captions, b4, h4, speed[0], d4, pulse=speed[1])
 
-        b1_sub = b1_bp.get("sub") or spec.get("domain_taxonomy", "").replace("_", " ").upper()
-        if not b1_sub or len(b1_sub) < 3:
-            b1_sub = "FRONTIER AI RELEASE & VERIFIED BENCHMARKS"
+        b5, d5, h5, bp5, raw5 = beat(5, "On the published tests, the new model clears real baselines.", 8.0, {"published tests": COLOR_CYAN})
+        bench, pulse = self._benchmark_bars(b5, news_meta, model_name, bp5, raw5)
+        self._play_beat(captions, b5, h5, bench, d5, pulse=pulse)
 
-        status_tag = clean_text(
-            b1_sub.upper(),
-            font=FONT_HELVETICA,
-            font_size=12,
-            color=COLOR_CYAN,
-            weight=BOLD,
-            max_width=6.6
-        ).next_to(headline_txt, DOWN, buff=0.22)
+        b6, d6, h6, bp6, _ = beat(6, "You can follow the release from announcement to API and production access.", 8.0, {"API": COLOR_CYAN, "production": COLOR_MINT})
+        timeline = self._availability_timeline(b6, news_meta, bp6)
+        self._play_beat(captions, b6, h6, timeline[0], d6, pulse=timeline[1])
 
-        hero_group = VGroup(hero_badge, hero_card, lab_emblem, headline_txt, status_tag)
-        t_in = 0.8
-        t_out = 0.35
-        t_action = max(0.2, b1_dur - t_in - t_out)
-        self.play(
-            captions.show(b1_text, highlights=b1_hl, run_time=t_in),
-            FadeIn(hero_group, scale=0.94),
-            run_time=t_in
-        )
-        
-        # Subtle kinetic breathing while narration plays
-        self.play(
-            lab_emblem.animate(rate_func=there_and_back, run_time=t_action).scale(1.06),
-            hero_card.animate(rate_func=there_and_back, run_time=t_action).set_stroke(color=COLOR_MINT, width=2.8)
-        )
-        self.clean_transition([hero_group], run_time=t_out)
-
-        # -----------------------------------------------------------------
-        # BEAT 2: Predecessor Ceiling & Pain Points (~8s - ~16s)
-        # -----------------------------------------------------------------
-        b2_text, b2_dur, b2_hl, b2_bp, _ = get_beat(
-            2,
-            "Prior reasoning models were powerful but suffered from high latency and steep token prices.",
-            7.5,
-            {"latency": COLOR_DANGER, "token prices": COLOR_GOLD}
-        )
-
-        ceiling_card = RoundedRectangle(
-            corner_radius=0.18,
-            width=7.4,
-            height=5.2,
-            color=COLOR_DANGER,
-            fill_color=COLOR_CARD_BG,
-            fill_opacity=0.95,
-            stroke_width=2.0
-        ).shift(UP * 1.2)
-
-        b2_title_text = b2_bp.get("title") or "PREDECESSOR BOTTLENECKS"
-        ceiling_title = clean_text(b2_title_text.upper(), font=FONT_HELVETICA, font_size=18, color=COLOR_DANGER, weight=HEAVY)
-        ceiling_title.align_to(ceiling_card, UP).shift(DOWN * 0.45)
-
-        # Dynamically derive 3 pain points from beat 2 narration / highlights
-        pain_points = self._derive_pain_points(b2_text, b2_hl)
-        row_groups = []
-        for title, sub in pain_points:
-            box = RoundedRectangle(corner_radius=0.12, width=6.6, height=0.95, color="#334155", fill_color="#080C14", fill_opacity=0.9, stroke_width=1.2)
-            t_txt = clean_text(title, font=FONT_HELVETICA, font_size=13, color=WHITE, weight=BOLD, max_width=5.9).align_to(box, LEFT).shift(RIGHT * 0.35 + UP * 0.16)
-            s_txt = clean_text(sub, font=FONT_HELVETICA, font_size=10, color="#CBD5E1", weight=MEDIUM, max_width=5.9).align_to(box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.16)
-            row_groups.append(VGroup(box, t_txt, s_txt))
-
-        rows_col = VGroup(*row_groups).arrange(DOWN, buff=0.25).next_to(ceiling_title, DOWN, buff=0.35)
-        ceiling_group = VGroup(ceiling_card, ceiling_title, rows_col)
-
-        t_in = 0.8
-        t_out = 0.35
-        t_action = max(0.2, b2_dur - t_in - t_out)
-        self.play(
-            captions.morph_to(b2_text, highlights=b2_hl, run_time=t_in),
-            FadeIn(ceiling_group, shift=UP * 0.2),
-            run_time=t_in
-        )
-        self.play(
-            rows_col[1][0].animate(rate_func=there_and_back, run_time=t_action).set_stroke(color=COLOR_DANGER, width=2.2),
-            rows_col[1].animate(rate_func=there_and_back, run_time=t_action).scale(1.03)
-        )
-        self.clean_transition([ceiling_group], run_time=t_out)
-
-        # -----------------------------------------------------------------
-        # BEAT 3: Core Secret Sauce & Throughput / Speedup (~16s - ~24s)
-        # -----------------------------------------------------------------
-        b3_text, b3_dur, b3_hl, b3_bp, _ = get_beat(
-            3,
-            f"Enter {model_name}. It uses distilled reasoning tokens to deliver frontier intelligence at speed.",
-            8.0,
-            {model_name: COLOR_MINT, "distilled": COLOR_CYAN}
-        )
-
-        arch_card = RoundedRectangle(
-            corner_radius=0.18,
-            width=7.4,
-            height=5.2,
-            color=COLOR_MINT,
-            fill_color=COLOR_CARD_BG,
-            fill_opacity=0.95,
-            stroke_width=2.0
-        ).shift(UP * 1.2)
-
-        b3_title_text = b3_bp.get("title") or "CORE BREAKTHROUGH ARCHITECTURE"
-        arch_title = clean_text(b3_title_text.upper(), font=FONT_HELVETICA, font_size=18, color=COLOR_MINT, weight=HEAVY)
-        arch_title.align_to(arch_card, UP).shift(DOWN * 0.45)
-
-        # Dynamically derive hero metric from beat 3 text / speedups
-        hero_val_str, hero_sub_str, feat_1_data, feat_2_data = self._derive_breakthrough_metrics(b3_text, news_meta, b3_hl)
-
-        # Throughput speedup / hero metric meter
-        meter_bg = RoundedRectangle(corner_radius=0.14, width=6.6, height=1.6, color="#334155", fill_color="#080C14", fill_opacity=0.95, stroke_width=1.4)
-        meter_val = clean_text(hero_val_str, font=FONT_HELVETICA, font_size=30, color=COLOR_MINT, weight=HEAVY).move_to(meter_bg).shift(UP * 0.18)
-        meter_sub = clean_text(hero_sub_str, font=FONT_HELVETICA, font_size=10, color="#CBD5E1", weight=BOLD, max_width=6.2).next_to(meter_val, DOWN, buff=0.15)
-        meter_grp = VGroup(meter_bg, meter_val, meter_sub).next_to(arch_title, DOWN, buff=0.35)
-
-        # Features grid
-        feat_1 = RoundedRectangle(corner_radius=0.12, width=3.15, height=1.4, color=COLOR_CYAN, fill_color="#080C14", fill_opacity=0.9, stroke_width=1.4)
-        feat_1_t = clean_text(feat_1_data[0], font=FONT_HELVETICA, font_size=13, color=COLOR_CYAN, weight=BOLD, max_width=2.8).align_to(feat_1, UP).shift(DOWN * 0.3)
-        feat_1_s = clean_text(feat_1_data[1], font=FONT_HELVETICA, font_size=11, color=WHITE, weight=SEMIBOLD, max_width=2.8).next_to(feat_1_t, DOWN, buff=0.15)
-        feat_1_grp = VGroup(feat_1, feat_1_t, feat_1_s)
-
-        feat_2 = RoundedRectangle(corner_radius=0.12, width=3.15, height=1.4, color=COLOR_GOLD, fill_color="#080C14", fill_opacity=0.9, stroke_width=1.4)
-        feat_2_t = clean_text(feat_2_data[0], font=FONT_HELVETICA, font_size=13, color=COLOR_GOLD, weight=BOLD, max_width=2.8).align_to(feat_2, UP).shift(DOWN * 0.3)
-        feat_2_s = clean_text(feat_2_data[1], font=FONT_HELVETICA, font_size=11, color=WHITE, weight=SEMIBOLD, max_width=2.8).next_to(feat_2_t, DOWN, buff=0.15)
-        feat_2_grp = VGroup(feat_2, feat_2_t, feat_2_s)
-
-        feats_row = VGroup(feat_1_grp, feat_2_grp).arrange(RIGHT, buff=0.3).next_to(meter_grp, DOWN, buff=0.25)
-        arch_group = VGroup(arch_card, arch_title, meter_grp, feats_row)
-
-        t_in = 0.8
-        t_out = 0.35
-        t_action = max(0.2, b3_dur - t_in - t_out)
-        self.play(
-            captions.morph_to(b3_text, highlights=b3_hl, run_time=t_in),
-            FadeIn(arch_group, scale=0.96),
-            run_time=t_in
-        )
-        self.play(meter_val.animate(rate_func=there_and_back, run_time=t_action).scale(1.08))
-        self.clean_transition([arch_group], run_time=t_out)
-
-        # -----------------------------------------------------------------
-        # BEAT 4: Verified Benchmarks / Capabilities (~24s - ~33s)
-        # -----------------------------------------------------------------
-        b4_text, b4_dur, b4_hl, b4_bp, _ = get_beat(
-            4,
-            "On verified benchmarks, it shatters expectations, outperforming previous baselines.",
-            8.0,
-            {"verified benchmarks": COLOR_CYAN, "shatters": COLOR_MINT}
-        )
-
-        bench_card = RoundedRectangle(
-            corner_radius=0.18,
-            width=7.4,
-            height=5.2,
-            color=COLOR_CYAN,
-            fill_color=COLOR_CARD_BG,
-            fill_opacity=0.95,
-            stroke_width=2.0
-        ).shift(UP * 1.2)
-
-        b4_title_text = b4_bp.get("title") or "VERIFIED BENCHMARKS & RESULTS"
-        bench_title = clean_text(b4_title_text.upper(), font=FONT_HELVETICA, font_size=18, color=COLOR_CYAN, weight=HEAVY)
-        bench_title.align_to(bench_card, UP).shift(DOWN * 0.45)
-
-        # Dynamically build benchmark comparison bars or feature capability tiles
-        bench_content, sota_chip = self._derive_benchmarks_or_capabilities(b4_text, news_meta, model_name, bench_title)
-        bench_group = VGroup(bench_card, bench_title, bench_content)
-
-        t_in = 0.8
-        t_out = 0.35
-        t_action = max(0.2, b4_dur - t_in - t_out)
-        self.play(
-            captions.morph_to(b4_text, highlights=b4_hl, run_time=t_in),
-            FadeIn(bench_group, shift=UP * 0.2),
-            run_time=t_in
-        )
-        if sota_chip is not None:
-            self.play(sota_chip.animate(rate_func=there_and_back, run_time=t_action).scale(1.15))
-        else:
-            self.wait(t_action)
-        self.clean_transition([bench_group], run_time=t_out)
-
-        # -----------------------------------------------------------------
-        # BEAT 5: Pricing Table & Availability Deltas (~33s - ~42s)
-        # -----------------------------------------------------------------
-        b5_text, b5_dur, b5_hl, b5_bp, _ = get_beat(
-            5,
-            "Available right now across production tiers and cloud dashboards.",
-            8.0,
-            {"available right now": COLOR_CYAN}
-        )
-
-        price_card = RoundedRectangle(
-            corner_radius=0.18,
-            width=7.4,
-            height=5.2,
-            color=COLOR_GOLD,
-            fill_color=COLOR_CARD_BG,
-            fill_opacity=0.95,
-            stroke_width=2.0
-        ).shift(UP * 1.2)
-
-        b5_title_text = b5_bp.get("title") or "PRICING & AVAILABILITY"
-        price_title = clean_text(b5_title_text.upper(), font=FONT_HELVETICA, font_size=18, color=COLOR_GOLD, weight=HEAVY)
-        price_title.align_to(price_card, UP).shift(DOWN * 0.45)
-
-        # Dynamically build pricing cards or deployment rollout cards
-        price_content, anim_target = self._derive_pricing_or_deployment(b5_text, news_meta, price_title)
-        price_group = VGroup(price_card, price_title, price_content)
-
-        t_in = 0.8
-        t_out = 0.35
-        t_action = max(0.2, b5_dur - t_in - t_out)
-        self.play(
-            captions.morph_to(b5_text, highlights=b5_hl, run_time=t_in),
-            FadeIn(price_group, scale=0.96),
-            run_time=t_in
-        )
-        if anim_target is not None:
-            self.play(anim_target.animate(rate_func=there_and_back, run_time=t_action).scale(1.10))
-        else:
-            self.wait(t_action)
-        self.clean_transition([price_group], run_time=t_out)
-
-        # -----------------------------------------------------------------
-        # BEAT 6: Outro & The Model Verse Brand Signature (~42s - 48s)
-        # -----------------------------------------------------------------
-        b6_text, b6_dur, b6_hl, _, _ = get_beat(
-            6,
-            "Follow The Model Verse for instant breakdowns of every major AI lab release.",
-            5.0,
-            {"The Model Verse": COLOR_MINT}
-        )
-        logo_icon, brand_text, sub = create_chalkboard_brand_outro(
-            logo_title="THE MODEL VERSE",
-            tagline="Follow for Daily AI Lab Drops",
-            url="themodelverse.in",
-            y_center=0.8
-        )
+        logo_icon, brand_text, sub = create_chalkboard_brand_outro(logo_title="THE MODEL VERSE", tagline="Follow for Daily AI Lab Drops", url="themodelverse.in", y_center=0.3)
         outro = Group(logo_icon, brand_text, sub)
-        t_in = 0.8
-        t_hold = max(0.2, b6_dur - t_in)
-        self.play(
-            captions.morph_to(b6_text, highlights=b6_hl, run_time=t_in),
-            FadeIn(outro, scale=0.92),
-            run_time=t_in
-        )
-        self.wait(t_hold)
+        self.play(FadeIn(outro, scale=0.94), captions.hide(run_time=0.25), run_time=0.45)
+        self.wait(0.6)
 
-    # =========================================================================
-    # DYNAMIC CONTENT SYNTHESIZERS (ZERO STATIC DUMMY DATA)
-    # =========================================================================
+    def _play_beat(self, captions, text, highlights, group, duration, pulse=None):
+        enter = min(0.7, max(0.35, duration * 0.12))
+        leave = min(0.35, max(0.2, duration * 0.06))
+        active = max(0.25, duration - enter - leave)
+        self.play(captions.morph_to(text, highlights=highlights, run_time=enter), FadeIn(group, shift=UP * 0.12), run_time=enter)
+        self.play(pulse.animate(rate_func=there_and_back, run_time=active).scale(1.06)) if pulse is not None else self.wait(active)
+        self.clean_transition([group], run_time=leave)
 
-    def _derive_pain_points(self, text: str, hl: dict) -> List[Tuple[str, str]]:
-        """Dynamically synthesizes 3 relevant pain points from beat 2 narration."""
-        low_t = text.lower()
-        pain = []
+    def _launch_visual(self, provider, model_name, blueprint):
+        title = clean_text(model_name, font=FONT_HELVETICA, font_size=29, color=COLOR_WHITE, weight=HEAVY, max_width=7.4).move_to([0, 4.35, 0])
+        source = clean_text(f"{provider.upper()}  /  RELEASE SIGNAL", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD).move_to([0, 5.05, 0])
+        core = Circle(radius=0.72, color=COLOR_CYAN, stroke_width=3).move_to([0, 1.35, 0])
+        core_label = clean_text("MODEL", font=FONT_HELVETICA, font_size=13, color=COLOR_WHITE, weight=BOLD).move_to(core)
+        rays = VGroup(*[Line([0, 0, 0], [0.52 * np.cos(a), 0.52 * np.sin(a), 0], color=COLOR_MINT, stroke_width=2).move_to(core.get_center()) for a in np.linspace(0, TAU, 8, endpoint=False)])
+        token_stream = VGroup(*[self._token_tile(i, COLOR_GOLD if i % 3 == 0 else COLOR_CYAN) for i in range(9)])
+        token_stream.arrange(RIGHT, buff=0.16).move_to([0, -0.15, 0])
+        arrows = VGroup(*[Arrow(tile.get_bottom(), core.get_top(), buff=0.12, color=COLOR_CYAN, stroke_width=1.7, max_tip_length_to_length_ratio=0.18) for tile in token_stream])
+        signal = DashedLine([-3.5, 2.8, 0], [3.5, 2.8, 0], dash_length=0.12, color=COLOR_GRID)
+        signal_label = clean_text("PROMPT  →  ROUTE  →  ANSWER", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).next_to(signal, UP, buff=0.16)
+        return VGroup(source, title, signal, signal_label, token_stream, arrows, rays, core, core_label), token_stream
 
-        if any(w in low_t for w in ("cost", "expensive", "price", "runway", "bills", "burn", "spend")):
-            # Extract number if present
-            m_cost = re.search(r'(\$[\d.,]+(?:\s*-\s*\$[\d.,]+)?|\d+%)', text)
-            cost_detail = f"High token expenditure drains budgets ({m_cost.group(1)})" if m_cost else "Flagship inference expenditure drains startup runways"
-            pain.append(("EXPENSIVE INFERENCE BILLS", cost_detail))
+    def _context_lanes(self, blueprint):
+        title = clean_text("1M TOKEN CONTEXT", font=FONT_HELVETICA, font_size=24, color=COLOR_CYAN, weight=HEAVY).move_to([0, 4.6, 0])
+        sub = clean_text("old context stays addressable", font=FONT_HELVETICA, font_size=13, color=COLOR_MUTED, weight=BOLD).next_to(title, DOWN, buff=0.16)
+        lanes, moving = VGroup(), VGroup()
+        for row in range(6):
+            y = 2.95 - row * 0.72
+            line = Line([-3.45, y, 0], [3.45, y, 0], color=COLOR_GRID, stroke_width=2)
+            blocks = VGroup(*[Rectangle(width=0.34, height=0.22, color=COLOR_GRID, fill_color=COLOR_GRID, fill_opacity=0.9, stroke_width=0).move_to([-3.15 + col * 0.43, y, 0]) for col in range(15)])
+            active = VGroup(*[Rectangle(width=0.34, height=0.22, color=COLOR_CYAN, fill_color=COLOR_CYAN, fill_opacity=1, stroke_width=0).move_to([-2.9 + (col + row) * 0.43, y, 0]) for col in range(2)])
+            lanes.add(VGroup(line, blocks))
+            moving.add(active)
+        window = DashedLine([-1.35, -1.05, 0], [-1.35, 3.25, 0], dash_length=0.12, color=COLOR_GOLD, stroke_width=2)
+        window_label = clean_text("attention window", font=FONT_HELVETICA, font_size=12, color=COLOR_GOLD, weight=BOLD).rotate(PI / 2).next_to(window, LEFT, buff=0.16)
+        tag_old = clean_text("earlier tokens", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).move_to([-2.45, -1.65, 0])
+        tag_new = clean_text("new request", font=FONT_HELVETICA, font_size=12, color=COLOR_MINT, weight=BOLD).move_to([2.2, -1.65, 0])
+        return VGroup(title, sub, lanes, moving, window, window_label, tag_old, tag_new), moving
 
-        if any(w in low_t for w in ("latency", "slow", "delay", "lag", "seconds", "ttft", "wait")):
-            pain.append(("HIGH INFERENCE LATENCY", "Slow token throughput blocks real-time developer feedback"))
+    def _post_training_loop(self, blueprint):
+        title = clean_text("POST-TRAINING LOOP", font=FONT_HELVETICA, font_size=24, color=COLOR_MINT, weight=HEAVY).move_to([0, 4.55, 0])
+        labels = [("THINK", COLOR_CYAN), ("CHECK", COLOR_GOLD), ("REWARD", COLOR_MINT), ("UPDATE", COLOR_PURPLE)]
+        nodes, points = VGroup(), [np.array([-2.35, 1.15, 0]), np.array([0, 2.7, 0]), np.array([2.35, 1.15, 0]), np.array([0, -0.55, 0])]
+        for point, (label, color) in zip(points, labels):
+            node = Circle(radius=0.58, color=color, stroke_width=3).move_to(point)
+            txt = clean_text(label, font=FONT_HELVETICA, font_size=11, color=color, weight=BOLD).move_to(point)
+            nodes.add(VGroup(node, txt))
+        arrows = VGroup(*[Arrow(points[i], points[(i + 1) % 4], buff=0.66, color=COLOR_MUTED, stroke_width=2, max_tip_length_to_length_ratio=0.15) for i in range(4)])
+        center = clean_text("better\nanswers", font=FONT_HELVETICA, font_size=16, color=COLOR_WHITE, weight=HEAVY, line_spacing=0.8).move_to([0, 1.05, 0])
+        loop_dot = Dot(points[0], radius=0.08, color=COLOR_WHITE)
+        return VGroup(title, arrows, nodes, center, loop_dot), loop_dot
 
-        if any(w in low_t for w in ("concurrency", "rate limit", "queue", "capacity", "throttle", "server")):
-            pain.append(("RESTRICTED CONCURRENCY", "Strict API rate limits cause severe production queueing"))
-
-        if any(w in low_t for w in ("accuracy", "hallucinat", "error", "fail", "fragile", "drift")):
-            pain.append(("REASONING DRIFT & ERRORS", "Prior architectures stumble on complex multi-step logical edge cases"))
-
-        if any(w in low_t for w in ("memory", "context", "ram", "vram", "footprint", "heavy")):
-            pain.append(("MASSIVE MEMORY OVERHEAD", "Ballooning KV cache exhausts hardware memory limits"))
-
-        # Fallbacks derived from highlighted words or generic tech friction
-        if len(pain) < 3:
-            hl_words = [w.upper() for w in hl.keys() if len(w) > 3]
-            for w in hl_words:
-                if len(pain) >= 3:
-                    break
-                pain.append((f"{w} BOTTLENECK", f"Legacy systems struggle with unoptimized {w.lower()} overhead"))
-
-        defaults = [
-            ("HIGH INFERENCE LATENCY", "Slow generation delays interactive workflows"),
-            ("EXPENSIVE API BILLS", "Heavy consumption drains development resources"),
-            ("DEPLOYMENT FRICTION", "Complex infrastructure stalls rapid iteration")
-        ]
-        for d in defaults:
-            if len(pain) >= 3:
-                break
-            if not any(p[0] == d[0] for p in pain):
-                pain.append(d)
-
-        return pain[:3]
-
-    def _derive_breakthrough_metrics(
-        self, text: str, news_meta: dict, hl: dict
-    ) -> Tuple[str, str, Tuple[str, str], Tuple[str, str]]:
-        """Dynamically extracts hero metrics and architectural pillars for Beat 3."""
-        low_t = text.lower()
-
-        # 1. Hero Metric
-        # Check speedups in metadata
+    def _speed_race(self, text, news_meta, blueprint):
+        title = clean_text("HIGHSPEED INFERENCE", font=FONT_HELVETICA, font_size=24, color=COLOR_GOLD, weight=HEAVY).move_to([0, 4.55, 0])
+        subtitle = clean_text("same finish line, less waiting", font=FONT_HELVETICA, font_size=13, color=COLOR_MUTED, weight=BOLD).next_to(title, DOWN, buff=0.14)
         speedups = news_meta.get("speedups", [])
-        m_speed = re.search(r'(\d+(?:\.\d+)?\s*[xX])\b', text)
-        m_pct = re.search(r'(\d+(?:\.\d+)?\s*%)', text)
+        match = re.search(r"(\d+(?:\.\d+)?)\s*[xX]", text)
+        ratio = float(match.group(1)) if match else (float(str(speedups[0]).rstrip("xX")) if speedups and re.match(r"\d", str(speedups[0])) else 2.0)
+        ratio = max(1.2, min(ratio, 8.0))
+        tracks, pulse = VGroup(), None
+        for idx, (label, color) in enumerate((("PREVIOUS", COLOR_MUTED), ("NEW PATH", COLOR_MINT))):
+            y = 2.05 - idx * 1.55
+            name = clean_text(label, font=FONT_HELVETICA, font_size=13, color=color, weight=BOLD).move_to([-2.85, y + 0.35, 0])
+            rail = Line([-1.55, y, 0], [3.35, y, 0], color=COLOR_GRID, stroke_width=6)
+            finish = Line([3.35, y - 0.35, 0], [3.35, y + 0.35, 0], color=COLOR_GOLD, stroke_width=2)
+            finish_label = clean_text("ANSWER", font=FONT_HELVETICA, font_size=10, color=COLOR_GOLD, weight=BOLD).rotate(PI / 2).next_to(finish, RIGHT, buff=0.12)
+            distance = 3.7 if idx else 2.0
+            trace = Line([-1.55, y, 0], [-1.55 + distance, y, 0], color=color, stroke_width=8)
+            marker = Dot(trace.get_end(), radius=0.13, color=color)
+            value = clean_text(f"{ratio:.1f}×" if idx else "1×", font=FONT_HELVETICA, font_size=18, color=color, weight=HEAVY).next_to(trace, UP, buff=0.16)
+            tracks.add(VGroup(name, rail, finish, finish_label, trace, marker, value))
+            if idx:
+                pulse = marker
+        return VGroup(title, subtitle, tracks), pulse
 
-        if m_speed:
-            hero_val = f"{m_speed.group(1).upper()} FASTER"
-            hero_sub = "THROUGHPUT VS PREDECESSOR MODELS"
-        elif m_pct:
-            hero_val = f"{m_pct.group(1)} GAIN"
-            hero_sub = "VERIFIED EFFICIENCY IMPROVEMENT"
+    def _benchmark_bars(self, text, news_meta, model_name, blueprint, raw_beat=None):
+        title = clean_text("PUBLISHED BENCHMARKS", font=FONT_HELVETICA, font_size=24, color=COLOR_CYAN, weight=HEAVY).move_to([0, 4.55, 0])
+        subtitle = clean_text("higher is better · source values only", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).next_to(title, DOWN, buff=0.14)
+        values = self._benchmark_values(text, news_meta, model_name, raw_beat)
+        rows = VGroup()
+        for idx, (label, value, color) in enumerate(values[:4]):
+            y = 2.65 - idx * 1.05
+            name = clean_text(label, font=FONT_HELVETICA, font_size=12, color=COLOR_WHITE, weight=BOLD, max_width=1.75).move_to([-2.85, y, 0])
+            base = Line([-1.75, y, 2.75, y], color=COLOR_GRID, stroke_width=10)
+            fill = Line([-1.75, y, -1.75 + 4.5 * value / 100.0, y], color=color, stroke_width=10)
+            score = clean_text(f"{value:g}%", font=FONT_HELVETICA, font_size=18, color=color, weight=HEAVY).move_to([3.35, y, 0])
+            rows.add(VGroup(name, base, fill, score))
+        if not values:
+            rows.add(clean_text("No published score in this release", font=FONT_HELVETICA, font_size=16, color=COLOR_MUTED, weight=BOLD).move_to([0, 1.1, 0]))
+        return VGroup(title, subtitle, rows), (rows[-1] if len(rows) else None)
+
+    def _availability_timeline(self, text, news_meta, blueprint):
+        title = clean_text("FROM ANNOUNCEMENT TO ACCESS", font=FONT_HELVETICA, font_size=22, color=COLOR_GOLD, weight=HEAVY).move_to([0, 4.55, 0])
+        timeline = Line([-3.2, 1.2, 0], [3.2, 1.2, 0], color=COLOR_GRID, stroke_width=4)
+        nodes = VGroup()
+        for idx, (label, color) in enumerate((("ANNOUNCED", COLOR_CYAN), ("API", COLOR_MINT), ("WEB", COLOR_GOLD), ("PRODUCTION", COLOR_PURPLE))):
+            x = -3.0 + idx * 2.0
+            node = Circle(radius=0.22, color=color, fill_color=color, fill_opacity=1, stroke_width=2).move_to([x, 1.2, 0])
+            caption = clean_text(label, font=FONT_HELVETICA, font_size=11, color=color, weight=BOLD, max_width=1.55).move_to([x, 0.45 if idx % 2 == 0 else 2.0, 0])
+            nodes.add(VGroup(node, caption))
+        route = CurvedArrow([-3.0, 1.2, 0], [3.0, 1.2, 0], angle=-PI / 5, color=COLOR_CYAN, stroke_width=2)
+        status = clean_text("availability is a sequence, not a single switch", font=FONT_HELVETICA, font_size=14, color=COLOR_WHITE, weight=BOLD).move_to([0, -0.6, 0])
+        source = clean_text("VERIFY THE RELEASE CHANNEL BEFORE YOU SHIP", font=FONT_HELVETICA, font_size=11, color=COLOR_MUTED, weight=BOLD).move_to([0, -1.25, 0])
+        return VGroup(title, timeline, route, nodes, status, source), nodes[-1]
+
+    # Compatibility helpers retained for routing and existing tests.
+    def _derive_pain_points(self, text: str, hl: dict) -> List[Tuple[str, str]]:
+        low = text.lower()
+        candidates = []
+        if any(w in low for w in ("cost", "expensive", "price", "bills", "burn", "compute")):
+            candidates.append(("EXPENSIVE INFERENCE COST", "Token spend constrains useful work"))
+        if any(w in low for w in ("latency", "slow", "delay", "lag", "wait")):
+            candidates.append(("HIGH LATENCY", "Slow generation blocks interaction"))
+        if any(w in low for w in ("memory", "context", "vram", "kv cache")):
+            candidates.append(("MEMORY PRESSURE", "Working state competes for hardware memory"))
+        if any(w in low for w in ("concurrency", "queue", "server", "rate limit")):
+            candidates.append(("QUEUEING", "Traffic turns useful work into waiting"))
+        for word in hl:
+            if len(candidates) >= 3:
+                break
+            candidates.append((f"{word.upper()} BOTTLENECK", f"Earlier systems spend more effort on {word.lower()}"))
+        for item in (("DEPLOYMENT FRICTION", "Complex infrastructure slows iteration"), ("REASONING DRIFT", "Long tasks can lose the thread")):
+            if len(candidates) >= 3:
+                break
+            if item[0] not in {x[0] for x in candidates}:
+                candidates.append(item)
+        return candidates[:3]
+
+    def _derive_breakthrough_metrics(self, text: str, news_meta: dict, hl: dict):
+        speedups = news_meta.get("speedups", [])
+        speed = re.search(r"(\d+(?:\.\d+)?)\s*[xX]", text)
+        pct = re.search(r"(\d+(?:\.\d+)?)\s*%", text)
+        if speed:
+            hero, sub = f"{speed.group(1).upper()}X FASTER", "THROUGHPUT VS PREDECESSOR"
+        elif pct:
+            hero, sub = f"{pct.group(1)}% GAIN", "PUBLISHED EFFICIENCY RESULT"
         elif speedups:
-            hero_val = str(speedups[0]).upper()
-            hero_sub = "BENCHMARKED PERFORMANCE LEAP"
+            hero, sub = str(speedups[0]).upper(), "BENCHMARKED PERFORMANCE LEAP"
         else:
-            hero_val = "FRONTIER LEAP"
-            hero_sub = "ENGINEERED FOR REAL-TIME ACCELERATION"
+            hero, sub = "FRONTIER LEAP", "ENGINEERED FOR REAL-TIME WORK"
+        words = list(hl) or ["context", "reasoning"]
+        return hero, sub, ("CORE", str(words[0])[:18]), ("IMPACT", str(words[1] if len(words) > 1 else "speed")[:18])
 
-        # 2. Features Grid
-        hl_items = list(hl.keys())
-        feat1_val = hl_items[0].title() if len(hl_items) > 0 else "Optimized Core"
-        feat2_val = hl_items[1].title() if len(hl_items) > 1 else "High Precision"
+    def _derive_benchmarks_or_capabilities(self, text: str, news_meta: dict, model_name: str, title_mob: Mobject):
+        values = self._benchmark_values(text, news_meta, model_name)
+        if values:
+            rows = VGroup(*[VGroup(clean_text(f"{label}: {value:g}%", font=FONT_HELVETICA, font_size=14, color=color, weight=BOLD)) for label, value, color in values[:2]])
+            return rows, rows[-1]
+        return VGroup(clean_text("MECHANISM", font=FONT_HELVETICA, font_size=14, color=COLOR_MINT, weight=BOLD), clean_text("IMPACT", font=FONT_HELVETICA, font_size=14, color=COLOR_CYAN, weight=BOLD)), None
 
-        feat1_title = "DISTILLED ENGINE" if "distill" in low_t else "CORE ARCHITECTURE"
-        feat2_title = "SOTA VELOCITY" if any(w in low_t for w in ("speed", "fast", "velocity")) else "EFFICIENCY LEAP"
+    def _derive_pricing_or_deployment(self, text: str, news_meta: dict, title_mob: Mobject):
+        timeline, target = self._availability_timeline(text, news_meta, {})
+        return timeline, target
 
-        return (hero_val, hero_sub, (feat1_title, feat1_val[:18]), (feat2_title, feat2_val[:18]))
+    def _benchmark_values(self, text, news_meta, model_name, raw_beat=None):
+        values = []
+        benchmarks = news_meta.get("benchmarks", {}) or {}
+        for key, raw in benchmarks.items() if isinstance(benchmarks, dict) else []:
+            match = re.search(r"(\d+(?:\.\d+)?)", str(raw))
+            if match:
+                values.append((str(key).upper()[:18], float(match.group(1)), COLOR_MINT))
+        if not values:
+            names = re.findall(r"(?:SWE-bench|AIME|GPQA|HumanEval|MATH|MMLU|ARC|LiveCode)", text, flags=re.IGNORECASE)
+            pcts = [float(x) for x in re.findall(r"(\d+(?:\.\d+)?)\s*%", text)]
+            for idx, score in enumerate(pcts):
+                values.append(((names[idx] if idx < len(names) else f"RESULT {idx + 1}").upper(), score, COLOR_MINT if idx == 0 else COLOR_CYAN))
+        return [(label, max(0, min(100, value)), color) for label, value, color in values[:4]]
 
-    def _derive_benchmarks_or_capabilities(
-        self, text: str, news_meta: dict, model_name: str, title_mob: Mobject
-    ) -> Tuple[VGroup, Optional[Mobject]]:
-        """Dynamically synthesizes benchmark bar comparisons or capability highlight cards."""
-        low_t = text.lower()
-        benchmarks = news_meta.get("benchmarks", {})
+    def _token_tile(self, index: int, color: str):
+        return RoundedRectangle(corner_radius=0.05, width=0.5, height=0.3, color=color, fill_color=color, fill_opacity=0.85, stroke_width=1)
 
-        # Extract percentages
-        pcts = re.findall(r'(\d+(?:\.\d+)?)\s*%', text)
-
-        # Detect benchmark names
-        b_names = []
-        for name in ["SWE-bench", "AIME", "GPQA", "HumanEval", "MATH", "MMLU", "ARC", "LiveCode"]:
-            if name.lower() in low_t:
-                b_names.append(name)
-
-        if pcts and len(pcts) >= 1:
-            # Build Real Comparison Bars
-            b1_name = b_names[0] if b_names else "PRIMARY BENCHMARK"
-            val1_num = float(pcts[0])
-
-            b1_container = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.75, color="#334155", fill_color="#080C14", fill_opacity=0.95, stroke_width=1.2)
-            b1_lbl = clean_text(f"{b1_name.upper()} SCORE", font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=4.0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + UP * 0.55)
-
-            bar_w_max = 3.3
-            bar_new_w = min(bar_w_max, max(0.6, bar_w_max * (val1_num / 100.0)))
-            bar_new = Rectangle(width=bar_new_w, height=0.28, color=COLOR_MINT, fill_color=COLOR_MINT, fill_opacity=1.0, stroke_width=0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + UP * 0.12)
-            val_new = clean_text(f"{model_name}: {pcts[0]}%", font=FONT_HELVETICA, font_size=12, color=COLOR_MINT, weight=BOLD, max_width=2.8).next_to(bar_new, RIGHT, buff=0.15)
-
-            baseline_val = max(10.0, val1_num - 12.0)
-            bar_old_w = min(bar_w_max, max(0.5, bar_w_max * (baseline_val / 100.0)))
-            bar_old = Rectangle(width=bar_old_w, height=0.22, color="#475569", fill_color="#475569", fill_opacity=0.8, stroke_width=0).align_to(b1_container, LEFT).shift(RIGHT * 0.35 + DOWN * 0.28)
-            val_old = clean_text(f"Baseline: {baseline_val:.1f}%", font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=2.8).next_to(bar_old, RIGHT, buff=0.15)
-
-            chip_bg = RoundedRectangle(corner_radius=0.08, width=1.8, height=0.32, color=COLOR_GOLD, fill_color="#78350F", fill_opacity=0.8, stroke_width=1.0)
-            chip_txt = clean_text("+SOTA LEAP", font=FONT_HELVETICA, font_size=10, color=COLOR_GOLD, weight=BOLD, max_width=1.6).move_to(chip_bg)
-            sota_chip = VGroup(chip_bg, chip_txt).align_to(b1_container, RIGHT).shift(LEFT * 0.35 + UP * 0.55)
-
-            b1_group = VGroup(b1_container, b1_lbl, bar_new, val_new, bar_old, val_old, sota_chip).next_to(title_mob, DOWN, buff=0.25)
-
-            # Benchmark 2
-            val2_str = pcts[1] if len(pcts) > 1 else f"{min(99.0, val1_num * 1.08):.1f}"
-            val2_num = float(val2_str)
-            b2_name = b_names[1] if len(b_names) > 1 else "REASONING RIGOR"
-
-            b2_container = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.5, color="#334155", fill_color="#080C14", fill_opacity=0.95, stroke_width=1.2)
-            b2_lbl = clean_text(b2_name.upper(), font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=4.0).align_to(b2_container, LEFT).shift(RIGHT * 0.35 + UP * 0.42)
-            bar_2_w = min(bar_w_max, max(0.6, bar_w_max * (val2_num / 100.0)))
-            bar_2 = Rectangle(width=bar_2_w, height=0.26, color=COLOR_CYAN, fill_color=COLOR_CYAN, fill_opacity=1.0, stroke_width=0).align_to(b2_container, LEFT).shift(RIGHT * 0.35 + DOWN * 0.08)
-            val_2 = clean_text(f"{model_name}: {val2_str}%", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD, max_width=2.8).next_to(bar_2, RIGHT, buff=0.15)
-            b2_group = VGroup(b2_container, b2_lbl, bar_2, val_2).next_to(b1_group, DOWN, buff=0.2)
-
-            return VGroup(b1_group, b2_group), sota_chip
-
-        # Non-benchmark news (Feature launches, UI improvements, tool agents)
-        # Render dynamic capability cards derived from text
-        c1_box = RoundedRectangle(corner_radius=0.14, width=6.6, height=1.75, color=COLOR_MINT, fill_color="#080C14", fill_opacity=0.95, stroke_width=1.4)
-        c1_t = clean_text("PRIMARY PERFORMANCE LEAP", font=FONT_HELVETICA, font_size=13, color=COLOR_MINT, weight=BOLD).align_to(c1_box, LEFT).shift(RIGHT * 0.35 + UP * 0.45)
-        sentences = [s.strip() for s in text.split(".") if s.strip()]
-        c1_s_txt = sentences[0][:90] if sentences else "Major capability verified in production workflows"
-        c1_s = clean_text(c1_s_txt, font=FONT_HELVETICA, font_size=11, color=WHITE, weight=MEDIUM, max_width=5.9).next_to(c1_t, DOWN, buff=0.18).align_to(c1_box, LEFT).shift(RIGHT * 0.35)
-        c1_grp = VGroup(c1_box, c1_t, c1_s).next_to(title_mob, DOWN, buff=0.25)
-
-        c2_box = RoundedRectangle(corner_radius=0.14, width=6.6, height=1.65, color=COLOR_CYAN, fill_color="#080C14", fill_opacity=0.95, stroke_width=1.4)
-        c2_t = clean_text("DEVELOPER PRODUCTIVITY IMPACT", font=FONT_HELVETICA, font_size=13, color=COLOR_CYAN, weight=BOLD).align_to(c2_box, LEFT).shift(RIGHT * 0.35 + UP * 0.40)
-        c2_s_txt = sentences[1][:90] if len(sentences) > 1 else "Seamless integration with zero workflow regression"
-        c2_s = clean_text(c2_s_txt, font=FONT_HELVETICA, font_size=11, color="#CBD5E1", weight=MEDIUM, max_width=5.9).next_to(c2_t, DOWN, buff=0.16).align_to(c2_box, LEFT).shift(RIGHT * 0.35)
-        c2_grp = VGroup(c2_box, c2_t, c2_s).next_to(c1_grp, DOWN, buff=0.2)
-
-        return VGroup(c1_grp, c2_grp), None
-
-    def _derive_pricing_or_deployment(
-        self, text: str, news_meta: dict, title_mob: Mobject
-    ) -> Tuple[VGroup, Optional[Mobject]]:
-        """Dynamically synthesizes pricing comparison cards or deployment rollout tiers."""
-        low_t = text.lower()
-        pricing_data = news_meta.get("pricing", [])
-
-        # Check for dollar pricing in text
-        costs = re.findall(r'(\$[\d.,]+(?:\s*/\s*[\w\d]+)?)', text)
-
-        if costs or pricing_data:
-            c1_str = costs[0] if costs else str(pricing_data[0])
-            c2_str = costs[1] if len(costs) > 1 else (str(pricing_data[1]) if len(pricing_data) > 1 else "Flexible Scale")
-
-            p1_box = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.35, color="#334155", fill_color="#080C14", fill_opacity=0.95, stroke_width=1.2)
-            p1_lbl = clean_text("PRIMARY COST TIER", font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=3.0).align_to(p1_box, LEFT).shift(RIGHT * 0.35 + UP * 0.32)
-            p1_val = clean_text(c1_str, font=FONT_HELVETICA, font_size=20, color=COLOR_MINT, weight=HEAVY, max_width=3.0).align_to(p1_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.22)
-            p1_old = clean_text("Instant Cost Reduction", font=FONT_HELVETICA, font_size=12, color="#10B981", weight=BOLD, max_width=3.0).align_to(p1_box, RIGHT).shift(LEFT * 0.35 + DOWN * 0.22)
-            p1_grp = VGroup(p1_box, p1_lbl, p1_val, p1_old).next_to(title_mob, DOWN, buff=0.3)
-
-            p2_box = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.35, color="#334155", fill_color="#080C14", fill_opacity=0.95, stroke_width=1.2)
-            p2_lbl = clean_text("SECONDARY / OUTPUT TIER", font=FONT_HELVETICA, font_size=12, color="#CBD5E1", weight=BOLD, max_width=3.0).align_to(p2_box, LEFT).shift(RIGHT * 0.35 + UP * 0.32)
-            p2_val = clean_text(c2_str, font=FONT_HELVETICA, font_size=20, color=COLOR_MINT, weight=HEAVY, max_width=3.0).align_to(p2_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.22)
-            p2_grp = VGroup(p2_box, p2_lbl, p2_val).next_to(p1_grp, DOWN, buff=0.2)
-
-            t1 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.45, color=COLOR_CYAN, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-            t1_txt = clean_text("API ACCESS", font=FONT_HELVETICA, font_size=10, color=COLOR_CYAN, weight=BOLD, max_width=1.8).move_to(t1)
-            t2 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.45, color=COLOR_MINT, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-            t2_txt = clean_text("LIVE TODAY", font=FONT_HELVETICA, font_size=10, color=COLOR_MINT, weight=BOLD, max_width=1.8).move_to(t2)
-            t3 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.45, color=COLOR_GOLD, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-            t3_txt = clean_text("ENTERPRISE", font=FONT_HELVETICA, font_size=9, color=COLOR_GOLD, weight=BOLD, max_width=1.8).move_to(t3)
-            tiers_row = VGroup(VGroup(t1, t1_txt), VGroup(t2, t2_txt), VGroup(t3, t3_txt)).arrange(RIGHT, buff=0.25).next_to(p2_grp, DOWN, buff=0.25)
-
-            return VGroup(p1_grp, p2_grp, tiers_row), p1_val
-
-        # Non-pricing news: Render Deployment & Platform Rollout Cards
-        d1_box = RoundedRectangle(corner_radius=0.12, width=6.6, height=1.65, color=COLOR_GOLD, fill_color="#080C14", fill_opacity=0.95, stroke_width=1.4)
-        d1_lbl = clean_text("PRODUCTION ROLLOUT STATUS", font=FONT_HELVETICA, font_size=12, color=COLOR_GOLD, weight=BOLD, max_width=4.0).align_to(d1_box, LEFT).shift(RIGHT * 0.35 + UP * 0.40)
-        d1_val = clean_text("AVAILABLE RIGHT NOW", font=FONT_HELVETICA, font_size=18, color=COLOR_MINT, weight=HEAVY, max_width=4.0).align_to(d1_box, LEFT).shift(RIGHT * 0.35 + DOWN * 0.15)
-        d1_grp = VGroup(d1_box, d1_lbl, d1_val).next_to(title_mob, DOWN, buff=0.3)
-
-        t1 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.55, color=COLOR_CYAN, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-        t1_txt = clean_text("WEB & CLOUD", font=FONT_HELVETICA, font_size=11, color=COLOR_CYAN, weight=BOLD, max_width=1.8).move_to(t1)
-        t2 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.55, color=COLOR_MINT, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-        t2_txt = clean_text("MOBILE APPS", font=FONT_HELVETICA, font_size=11, color=COLOR_MINT, weight=BOLD, max_width=1.8).move_to(t2)
-        t3 = RoundedRectangle(corner_radius=0.08, width=2.0, height=0.55, color=COLOR_GOLD, fill_color="#0F172A", fill_opacity=0.8, stroke_width=1.2)
-        t3_txt = clean_text("DEVELOPER API", font=FONT_HELVETICA, font_size=11, color=COLOR_GOLD, weight=BOLD, max_width=1.8).move_to(t3)
-        tiers_row = VGroup(VGroup(t1, t1_txt), VGroup(t2, t2_txt), VGroup(t3, t3_txt)).arrange(RIGHT, buff=0.25).next_to(d1_grp, DOWN, buff=0.3)
-
-        return VGroup(d1_grp, tiers_row), d1_val
+    def _model_name(self, spec: dict, news_meta: dict) -> str:
+        raw = news_meta.get("model_name") or spec.get("title") or "Frontier AI Release"
+        if news_meta.get("model_name"):
+            return str(raw)
+        match = re.search(r"\b(o\d(?:-mini|-preview)?|gpt-[\w.]+|claude-[\w.]+|gemini-[\w.]+|deepseek-[\w.]+|kimi-[\w.]+|llama-[\w.]+)\b", str(raw), re.IGNORECASE)
+        return match.group(1) if match else str(raw).split("—")[0].split(":")[0].strip()[:30]
 
     def _load_spec(self) -> dict:
         spec_path = os.environ.get("ACTIVE_SPEC_PATH")
         if spec_path and os.path.exists(spec_path):
             try:
-                with open(spec_path, "r", encoding="utf-8") as f:
-                    return json.load(f)
-            except Exception:
+                with open(spec_path, "r", encoding="utf-8") as handle:
+                    return json.load(handle)
+            except (OSError, json.JSONDecodeError):
                 pass
-        return {
-            "title": "OpenAI o3-mini Reasoning Breakthrough",
-            "category": "tech_news",
-            "beats": []
-        }
+        return {"title": "OpenAI o3-mini Reasoning Breakthrough", "category": "tech_news", "beats": []}
 
     def _infer_provider(self, spec: dict) -> str:
         text = (spec.get("title", "") + " " + spec.get("id", "")).lower()
         if "openai" in text or "o3" in text or "gpt" in text or "codex" in text:
             return "OpenAI"
-        elif "anthropic" in text or "claude" in text:
+        if "anthropic" in text or "claude" in text:
             return "Anthropic"
-        elif "deepmind" in text or "google" in text or "gemini" in text:
+        if "deepmind" in text or "google" in text or "gemini" in text:
             return "Google DeepMind"
-        elif "hugging" in text or "hf" in text:
+        if "hugging" in text or "hf" in text:
             return "Hugging Face"
-        elif "github" in text:
+        if "github" in text:
             return "GitHub"
-        elif "meta" in text or "llama" in text:
+        if "meta" in text or "llama" in text:
             return "Meta"
-        elif "microsoft" in text or "azure" in text:
+        if "microsoft" in text or "azure" in text:
             return "Microsoft"
+        if "kimi" in text or "moonshot" in text:
+            return "Moonshot AI"
         return "AI Frontier"
