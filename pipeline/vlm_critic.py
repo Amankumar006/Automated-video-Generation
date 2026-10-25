@@ -11,6 +11,7 @@ import sys
 import json
 import queue
 import threading
+import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from PIL import Image
@@ -110,7 +111,8 @@ class VLMCritic:
         # This keeps test runners, containers, and long-lived workers that inject
         # secrets after module import from silently skipping the Gemini path.
         self.api_key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or API_KEY
-        self.request_timeout_seconds = float(os.getenv("VLM_CRITIC_TIMEOUT_SECONDS", "30"))
+        self.request_timeout_seconds = float(os.getenv("VLM_CRITIC_TIMEOUT_SECONDS", "20"))
+        self.batch_timeout_seconds = float(os.getenv("VLM_CRITIC_BATCH_TIMEOUT_SECONDS", "120"))
         if self.api_key:
             genai.configure(api_key=self.api_key)
 
@@ -236,7 +238,7 @@ class VLMCritic:
                         image_paths=[img_path],
                         model="gemma4:31b:cloud",
                         format="json",
-                        timeout=60.0
+                        timeout=float(os.getenv("VLM_OLLAMA_TIMEOUT_SECONDS", "30"))
                     )
                     parsed_payload = resp.to_dict() if hasattr(resp, "to_dict") else dict(resp)
                     if parsed_payload:
@@ -411,8 +413,19 @@ class VLMCritic:
             beats = [{"beat_id": i} for i in range(1, 7)]
 
         results = []
+        expected_ids = {b.get("beat_id", 1) for b in beats}
+        started_at = time.monotonic()
+        audit_timeout = False
         for b in beats:
             b_id = b.get("beat_id", 1)
+            elapsed = time.monotonic() - started_at
+            if elapsed >= self.batch_timeout_seconds:
+                audit_timeout = True
+                print(
+                    f"⏱️ [VLMCritic] Batch deadline reached after {elapsed:.1f}s; "
+                    f"stopping before Beat {b_id}."
+                )
+                break
             # Preference: repaired frame > canonical beat frame > any matching pattern
             candidates = [
                 p_dir / f"{b_id:02d}_beat_{b_id}_repaired.png",
@@ -461,7 +474,15 @@ class VLMCritic:
         scores = [r.get("overall_score", 0.0) for r in results if "overall_score" in r]
         avg_score = round(sum(scores) / len(scores), 2) if scores else 0.0
         diversity_passed = len(diversity_violations) == 0
-        all_passed = avg_score >= 8.5 and diversity_passed and all(r.get("passed", True) for r in results)
+        audited_ids = {r.get("beat_id") for r in results}
+        incomplete_audit = expected_ids != audited_ids
+        all_passed = (
+            not audit_timeout
+            and not incomplete_audit
+            and avg_score >= 8.5
+            and diversity_passed
+            and all(r.get("passed", True) for r in results)
+        )
 
         if diversity_violations:
             print(f"⚠️ [Visual Diversity Warning] Detected layout issues: {diversity_violations}")
@@ -474,6 +495,9 @@ class VLMCritic:
             "average_score": avg_score,
             "visual_diversity_passed": diversity_passed,
             "diversity_violations": diversity_violations,
+            "audit_timeout": audit_timeout,
+            "incomplete_audit": incomplete_audit,
+            "audited_beat_ids": sorted(audited_ids),
             "unique_layouts_count": len(layout_counts),
             "passed_quality_gate": all_passed,
             "beat_evaluations": results

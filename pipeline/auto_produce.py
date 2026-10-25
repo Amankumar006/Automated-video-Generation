@@ -488,17 +488,28 @@ def auto_produce(
             extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
             print("   ✅ Master render and keyframes updated with patched layout.")
 
+        production_publish = publish or publish_instagram or publish_x or publish_linkedin
+        require_vlm_qa = os.getenv(
+            "REQUIRE_VLM_QA",
+            "true" if production_publish else "false",
+        ).lower() in {"1", "true", "yes"}
+
         if audit_report.get("passed_quality_gate"):
             print("   ✅ VLM Critic Quality Gate: PASSED (Broadcast Quality)")
         else:
             print("   ℹ️ VLM Critic Quality Gate: Best-effort self-healing completed.")
-            if os.getenv("REQUIRE_VLM_QA", "false").lower() in {"1", "true", "yes"}:
+            if require_vlm_qa:
                 raise RuntimeError("VLM quality gate did not pass; production publishing is blocked.")
     except Exception as e:
         import traceback
         print(f"   ⚠️ VLM Critic Audit bypassed: {e}")
         traceback.print_exc()
-        if os.getenv("REQUIRE_VLM_QA", "false").lower() in {"1", "true", "yes"}:
+        production_publish = publish or publish_instagram or publish_x or publish_linkedin
+        require_vlm_qa = os.getenv(
+            "REQUIRE_VLM_QA",
+            "true" if production_publish else "false",
+        ).lower() in {"1", "true", "yes"}
+        if require_vlm_qa:
             raise RuntimeError("VLM quality audit failed; production publishing is blocked.") from e
 
 
