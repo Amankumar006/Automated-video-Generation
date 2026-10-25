@@ -28,6 +28,8 @@ from pipeline.daily_shorts_daemon import (
     parse_iso_datetime,
     classify_history_entry_pillar,
     get_content_rotation_order,
+    get_content_format_rotation_order,
+    CONTENT_FORMAT_PROFILES,
     fetch_candidates_for_pillar,
     evaluate_pedagogical_viability,
     SLOT_SCHEDULE
@@ -177,6 +179,26 @@ def test_rotation_order_empty_history():
     order = get_content_rotation_order({"processed_papers": {}})
     # Starts with canonical cycle: arxiv -> blogs -> perks
     assert order == ["arxiv", "blogs", "perks"]
+
+
+def test_creative_format_rotation_prioritizes_unseen_formats():
+    """Mixed production must rotate creative treatment independently of source."""
+    order = get_content_format_rotation_order({"processed_papers": {}})
+    assert order == list(CONTENT_FORMAT_PROFILES)
+
+
+def test_creative_format_rotation_moves_recent_format_to_the_back():
+    history = {
+        "processed_papers": {
+            "recent": {
+                "content_format": "character_analogy",
+                "produced_at": "2026-10-10T16:00:00+00:00",
+            }
+        }
+    }
+    order = get_content_format_rotation_order(history)
+    assert order[0] == "tool_reaction"
+    assert order[-1] == "character_analogy"
 
 
 def test_rotation_order_when_only_arxiv_in_history():

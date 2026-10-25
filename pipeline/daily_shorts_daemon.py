@@ -82,11 +82,62 @@ SLOT_SCHEDULE: Dict[int, Dict[str, Any]] = {
 # (3) Actionable developer perks and startup credits ('perks')
 CONTENT_PILLARS = ["arxiv", "blogs", "perks"]
 
+# Creative formats rotate independently from source pillars so mixed runs do
+# not become a week of visually identical architecture explainers.
+CONTENT_FORMAT_PROFILES: Dict[str, Dict[str, Any]] = {
+    "character_analogy": {
+        "label": "Character analogy",
+        "brief": "Use a recurring simple character or object in a concrete mini-scene. Let the mechanism solve a visible problem; keep humour dry and human.",
+        "best_for": "beginner concepts, APIs, tokens, agents, developer frustrations",
+        "visual_language": "expressive character blocking, props, one clear transformation per beat",
+    },
+    "tool_reaction": {
+        "label": "Tool reaction",
+        "brief": "Open with a surprising real tool behaviour or result, then show the smallest reproducible workflow and its limitation.",
+        "best_for": "new tools, model launches, demos, workflows, open-source projects",
+        "visual_language": "screen-like live demo framing, cursor/state changes, before/after proof",
+    },
+    "system_reveal": {
+        "label": "System reveal",
+        "brief": "Reveal the system as real inputs, decisions, transformations, and outputs; avoid vague claims of automation.",
+        "best_for": "agents, pipelines, creator workflows, benchmarks, infrastructure",
+        "visual_language": "causal pipeline, evidence labels, human checkpoints, explicit failure paths",
+    },
+    "motion_story": {
+        "label": "Motion story",
+        "brief": "Tell one visual story with a clean physical transformation and sparse text. Animation carries the explanation instead of mirroring narration.",
+        "best_for": "architecture, physics-like mechanisms, performance comparisons, visual breakthroughs",
+        "visual_language": "cinematic camera movement, one hero object, grounded geometry, restrained labels",
+    },
+}
+
 PILLAR_DISPLAY_NAMES: Dict[str, str] = {
     "arxiv": "Academic Mechanism Deep Dives (arXiv / HF)",
     "blogs": "Official AI Lab Releases & Tech News (OpenAI, Anthropic, Google DeepMind, HF)",
     "perks": "Actionable Developer Perks & Startup Credits (Anthropic, Microsoft, Google, AWS)"
 }
+
+
+def get_content_format_rotation_order(
+    history: Optional[Dict[str, Any]] = None,
+) -> List[str]:
+    """Return least-recently-used creative formats first."""
+    if history is None:
+        history = load_history()
+    latest: Dict[str, Optional[datetime.datetime]] = {
+        name: None for name in CONTENT_FORMAT_PROFILES
+    }
+    for record in history.get("processed_papers", {}).values():
+        fmt = record.get("content_format")
+        if fmt not in latest:
+            continue
+        dt = parse_iso_datetime(record.get("produced_at"))
+        if dt and (latest[fmt] is None or dt > latest[fmt]):
+            latest[fmt] = dt
+    return sorted(
+        latest,
+        key=lambda fmt: latest[fmt].timestamp() if latest[fmt] else float("-inf"),
+    )
 
 
 def parse_iso_datetime(dt_str: Optional[str]) -> Optional[datetime.datetime]:
@@ -660,6 +711,7 @@ class DailyShortsDaemon:
                 selected_ids = set()
                 # Deep copy of history for multi-reel cycles so each reel in this cycle rotates to next pillar
                 working_history = json.loads(json.dumps(history))
+                selected_formats = get_content_format_rotation_order(working_history)
 
                 for reel_idx in range(count):
                     curr_rotation = get_content_rotation_order(working_history)
@@ -686,6 +738,9 @@ class DailyShortsDaemon:
                                 break
 
                     if chosen_candidate:
+                        content_format = selected_formats[reel_idx % len(selected_formats)]
+                        chosen_candidate["content_format"] = content_format
+                        chosen_candidate["format_profile"] = CONTENT_FORMAT_PROFILES[content_format]
                         selected_papers.append(chosen_candidate)
                         selected_ids.add(chosen_candidate["id"])
                         print(f"   Reel {reel_idx + 1}/{count} assigned to [{chosen_pillar.upper()}]: {chosen_candidate['title']} ({chosen_candidate['id']})")
@@ -698,7 +753,8 @@ class DailyShortsDaemon:
                             "category": chosen_candidate.get("recommended_category", "general"),
                             "source": chosen_pillar,
                             "produced_at": simulated_ts,
-                            "status": "completed"
+                            "status": "completed",
+                            "content_format": content_format,
                         }
                     else:
                         print(f"   ⚠️ No unprocessed candidates found across any content pillars for reel {reel_idx + 1}.")
@@ -757,6 +813,12 @@ class DailyShortsDaemon:
             arxiv_id = top_paper["id"]
             category = top_paper.get("recommended_category", "mechanism_deepdive")
             notes = top_paper.get("editorial_notes", {})
+            content_format = top_paper.get("content_format")
+            if content_format not in CONTENT_FORMAT_PROFILES:
+                content_format = get_content_format_rotation_order(load_history())[0]
+                top_paper["content_format"] = content_format
+            top_paper["format_profile"] = CONTENT_FORMAT_PROFILES[content_format]
+            print(f"   🎬 Creative format: {CONTENT_FORMAT_PROFILES[content_format]['label']} ({content_format})")
 
             print("\n" + "-" * 70)
             print(f"🎬 Producing Reel [{idx+1}/{len(selected_papers)}]: {title}")
@@ -784,7 +846,19 @@ class DailyShortsDaemon:
             if dry_run:
                 print("🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
                 from pipeline.script_generator import generate_script
-                spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
+                try:
+                    spec = generate_script(
+                        topic=title,
+                        category=category,
+                        arxiv_meta=top_paper,
+                        context=json.dumps(top_paper["format_profile"], sort_keys=True),
+                    )
+                except TypeError as exc:
+                    # Keep legacy test doubles and downstream integrations that
+                    # still implement the pre-format function signature working.
+                    if "context" not in str(exc):
+                        raise
+                    spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
                 audit = self.critic.evaluate_script(spec, use_llm=False)
                 print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon} | Slop Cliches: {audit.total_slop_cliches}")
                 if spec.get("feynman_certification"):
@@ -841,7 +915,8 @@ class DailyShortsDaemon:
                     "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
                     "video_path": video_out,
                     "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
-                    "editorial_notes": notes
+                    "editorial_notes": notes,
+                    "content_format": content_format
                 }
                 reports.append(report_item)
 

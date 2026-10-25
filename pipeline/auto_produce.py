@@ -200,7 +200,12 @@ def auto_produce(
         spec = generate_script(
             topic=topic,
             category=category,
-            arxiv_meta=arxiv_meta
+            arxiv_meta=arxiv_meta,
+            context=(
+                json.dumps(arxiv_meta.get("format_profile"), sort_keys=True)
+                if arxiv_meta and arxiv_meta.get("format_profile")
+                else None
+            )
         )
         template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
 
@@ -229,6 +234,9 @@ def auto_produce(
         spec["repo_metadata"] = arxiv_meta["repo_metadata"]
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("perk_metadata"):
         spec["perk_metadata"] = arxiv_meta["perk_metadata"]
+    if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("format_profile"):
+        spec["content_format"] = arxiv_meta.get("content_format")
+        spec["format_profile"] = arxiv_meta["format_profile"]
 
     # Step 2.4: Localize script into Hindi/Hinglish if requested
     if language in ("hi", "hindi") and spec.get("language") != "hi":

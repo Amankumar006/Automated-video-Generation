@@ -109,7 +109,7 @@ jobs:
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}
           PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
           ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
-          PUBLISH_INSTAGRAM: ${{ github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ (github.event_name == 'schedule' && vars.ENABLE_INSTAGRAM_AUTOPUBLISH == 'true') || github.event.inputs.publish_instagram || 'false' }}
           PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
           PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
           SOURCE: ${{ github.event.inputs.source || 'mixed' }}
@@ -305,7 +305,7 @@ jobs:
           ARXIV_ID: ${{ github.event.inputs.arxiv_id || '' }}
           PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
           ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
-          PUBLISH_INSTAGRAM: ${{ github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ (github.event_name == 'schedule' && vars.ENABLE_INSTAGRAM_AUTOPUBLISH == 'true') || github.event.inputs.publish_instagram || 'false' }}
           PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
           PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
           SOURCE: ${{ github.event.inputs.source || 'mixed' }}
