@@ -17,6 +17,21 @@ COLOR_CYAN = "#38BDF8"
 COLOR_GOLD = "#F59E0B"
 COLOR_WHITE = "#FFFFFF"
 
+# These are explanatory metaphors, not additional product claims.  They give
+# the viewer one familiar mental model while leaving source facts untouched.
+_ANALOGY_BY_SIGNAL = (
+    (re.compile(r"\b(context|token|window|memory|long[- ]horizon)\b", re.I),
+     "Think of it like keeping an entire bookshelf open instead of fetching one book at a time."),
+    (re.compile(r"\b(agent|tool|workflow|planner|task|route)\b", re.I),
+     "Think of it like handing a teammate a checklist instead of one instruction at a time."),
+    (re.compile(r"\b(speed|fast|latency|response|faster|slow)\b", re.I),
+     "It is like moving from one checkout line to an express lane: the job is the same, but the wait changes."),
+)
+_GENERIC_BEFORE_OPENING = re.compile(
+    r"^\s*before\s+(?:you|your|we|the\s+next|another|updating|deploying|training|rendering|scaling)\b",
+    re.I,
+)
+
 
 class TechNewsScriptEngine:
     """
@@ -213,7 +228,7 @@ Output ONLY valid JSON matching this schema:
             },
             "math_formulas": self._build_fact_formulas(clean_id, benchmarks, speedups, pricing)
         }
-        return spec
+        return self._finalize_spec(spec, topic, blog_meta)
 
     def _normalise_facts(self, blog_meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         """Read facts from both current and legacy fetcher shapes without adding defaults."""
@@ -291,7 +306,46 @@ Output ONLY valid JSON matching this schema:
                 "model_name": self._extract_model_name(spec.get("title", topic)),
                 "official_url": (blog_meta.get("official_url") or blog_meta.get("url", "")) if blog_meta else ""
             }
+        self._apply_narration_contract(spec)
         return spec
+
+    def _apply_narration_contract(self, spec: Dict[str, Any]) -> None:
+        """Apply final narration quality rules to both LLM and fallback output.
+
+        This is deliberately a small, deterministic post-pass: it does not
+        rewrite source facts or invent metrics. It only repairs a repetitive
+        opening and adds one topic-matched mental model when the script has no
+        concrete explanatory analogy at all.
+        """
+        beats = spec.get("beats") or []
+        if not beats:
+            return
+
+        first_text = str(beats[0].get("text") or "").strip()
+        before_repaired = False
+        if _GENERIC_BEFORE_OPENING.match(first_text):
+            remainder = re.sub(r"^\s*before\s+", "", first_text, count=1, flags=re.I).strip()
+            beats[0]["text"] = f"Here is the actual update: {remainder}"
+            before_repaired = True
+
+        all_text = " ".join(str(beat.get("text") or "") for beat in beats)
+        has_analogy = bool(re.search(r"\b(?:think of it like|it is like|it's like|imagine)\b", all_text, re.I))
+        analogy_added = False
+        if not has_analogy:
+            analogy = next(
+                (phrase for signal, phrase in _ANALOGY_BY_SIGNAL if signal.search(all_text)),
+                "Think of it like a map: the useful part is finding the route you need, not collecting more paper.",
+            )
+            target = next((beat for beat in beats if beat.get("beat_id") == 2), beats[min(1, len(beats) - 1)])
+            target_text = str(target.get("text") or "").strip().rstrip(".")
+            target["text"] = f"{target_text}. {analogy}"
+            analogy_added = True
+
+        spec["narration_contract"] = {
+            "generic_before_repaired": before_repaired,
+            "analogy_added": analogy_added,
+            "analogy_required": True,
+        }
 
     def _detect_provider(self, topic: str, blog_meta: Optional[Dict[str, Any]] = None) -> str:
         t = topic.lower()

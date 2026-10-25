@@ -89,6 +89,7 @@ EVERYDAY_ANALOGY_ANCHORS = [
     "water", "pipe", "dam", "funnel", "filter", "sieve", "colander", "train", "wagon",
     "shadow", "magnifying glass", "telescope", "ice cream", "coin toss", "roulette",
     "director", "movie", "film", "play", "actor", "sea", "ocean", "map", "blueprint", "carve", "chip away",
+    "checklist", "teammate",
     # Developer & Operational physical analogies
     "relay race", "baton", "relay", "assembly line", "factory", "express lane", "cashier", "clerk", "waiter",
     "bottleneck", "barrier", "wall", "stall", "bridge", "lane", "conveyor", "traffic jam"

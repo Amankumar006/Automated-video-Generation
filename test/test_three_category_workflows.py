@@ -94,6 +94,31 @@ def test_tech_news_engine_does_not_invent_metrics_or_generic_before_opening():
     assert "not reported" in all_text.lower()
 
 
+def test_tech_news_engine_adds_topic_matched_analogy_and_repairs_llm_style_opening():
+    """The final contract applies to fallback and provider-returned specs alike."""
+    engine = TechNewsScriptEngine()
+    spec = {
+        "title": "Aster One",
+        "category": "tech_news",
+        "beats": [
+            {"beat_id": 1, "text": "Before you deploy, see the release."},
+            {"beat_id": 2, "text": "The model keeps a longer context window."},
+            {"beat_id": 3, "text": "The source describes the capability."},
+        ],
+    }
+
+    finalized = engine._finalize_spec(spec, "Aster One", {})
+    text = " ".join(beat["text"] for beat in finalized["beats"])
+
+    assert not finalized["beats"][0]["text"].lower().startswith("before")
+    assert "bookshelf" in text.lower()
+    assert finalized["narration_contract"] == {
+        "generic_before_repaired": True,
+        "analogy_added": True,
+        "analogy_required": True,
+    }
+
+
 def test_tech_news_engine_uses_explicit_facts_and_keeps_six_beat_arc():
     """Facts supplied by fetchers should reach the narration and visual params."""
     spec = TechNewsScriptEngine().generate_news_script(
