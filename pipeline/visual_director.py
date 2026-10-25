@@ -32,6 +32,34 @@ class VisualDirector:
         self.api_key = os.environ.get("GEMINI_API_KEY")
 
     @staticmethod
+    def _tech_news_semantic_role(beat: Dict[str, Any], beat_id: int) -> str:
+        """Return the meaning-driven visual role for a tech-news beat.
+
+        Beat order remains the compatibility fallback, but generated scripts now
+        carry an explicit semantic role so renderers do not have to guess from
+        position alone.
+        """
+        text = " ".join(
+            str(beat.get(key, ""))
+            for key in ("text", "visual_focus", "everyday_analogy")
+        ).lower()
+        if beat_id == 1:
+            return "launch"
+        if any(k in text for k in ("benchmark", "score", "leaderboard", "baseline", "percent", "%")):
+            return "benchmark"
+        if any(k in text for k in ("post-training", "post training", "agent", "training compute", "reinforcement", "reward", "self-check")):
+            return "training_loop"
+        if any(k in text for k in ("context", "token window", "latency", "faster", "speed", "throughput", "memory")):
+            return "context_speed"
+        if any(k in text for k in ("api", "available", "availability", "access", "pricing", "price", "weights")):
+            return "availability"
+        if any(k in text for k in ("launched", "launch", "release", "announced", "introducing", "new model")):
+            return "launch"
+        if beat_id == 6:
+            return "product"
+        return {1: "launch", 2: "context_speed", 3: "training_loop", 4: "benchmark", 5: "availability", 6: "product"}.get(beat_id, "product")
+
+    @staticmethod
     def _tech_news_blueprint(
         beat: Dict[str, Any],
         topic: str,
@@ -56,6 +84,7 @@ class VisualDirector:
         obj = str(svo.get("direct_object") or "production output").strip()
         title = str(existing.get("title") or f"{topic.upper()[:22]}: BEAT {beat_id}")
         sub = focus[:65] or str(existing.get("sub") or "Mechanism-driven technology news visual")
+        semantic_role = VisualDirector._tech_news_semantic_role(beat, beat_id)
 
         # The beat number is the primary narrative contract. Keyword checks
         # below only refine the title/labels; they never permit a duplicate
@@ -63,6 +92,7 @@ class VisualDirector:
         if beat_id == 1:
             return {
                 "layout": "pipeline_stages",
+                "semantic_role": semantic_role,
                 "title": title,
                 "sub": sub,
                 "accent_color": "#38BDF8",
@@ -77,6 +107,7 @@ class VisualDirector:
         if beat_id == 2:
             return {
                 "layout": "comparison_side_by_side",
+                "semantic_role": semantic_role,
                 "title": title,
                 "sub": sub,
                 "accent_color": "#F59E0B",
@@ -89,6 +120,7 @@ class VisualDirector:
         if beat_id == 3:
             return {
                 "layout": "layer_stack",
+                "semantic_role": semantic_role,
                 "title": title,
                 "sub": sub,
                 "accent_color": "#A855F7",
@@ -100,6 +132,7 @@ class VisualDirector:
         if beat_id == 4:
             return {
                 "layout": "horizontal_race_bars",
+                "semantic_role": semantic_role,
                 "title": title,
                 "sub": sub,
                 "accent_color": "#10B981",
@@ -135,6 +168,7 @@ class VisualDirector:
         # routing/access decision, not another benchmark chart.
         return {
             "layout": "catalog_routing",
+            "semantic_role": semantic_role,
             "title": title,
             "sub": sub,
             "accent_color": "#34D399",

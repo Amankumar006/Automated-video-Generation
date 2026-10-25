@@ -48,25 +48,40 @@ class TechNewsScene(BaseShortScene):
                     return (item.get("text", fallback), float(item.get("slot_duration", item.get("audio_duration", duration))), item.get("highlight_words", highlights or {}), item.get("visual_blueprint", {}) or {}, item)
             return fallback, duration, highlights or {}, {}, {}
 
+        def role(bid, text, blueprint):
+            explicit = blueprint.get("semantic_role") if isinstance(blueprint, dict) else None
+            if explicit:
+                return explicit
+            low = text.lower()
+            if any(k in low for k in ("benchmark", "score", "leaderboard", "baseline", "percent", "%")):
+                return "benchmark"
+            if any(k in low for k in ("api", "available", "access", "pricing", "price", "weights")):
+                return "availability"
+            if any(k in low for k in ("post-training", "post training", "agent", "training compute", "reward")):
+                return "training_loop"
+            if any(k in low for k in ("context", "token window", "latency", "faster", "speed", "throughput", "memory")):
+                return "context_speed"
+            return {1: "launch", 2: "context_speed", 3: "training_loop", 4: "benchmark", 5: "availability", 6: "product"}.get(bid, "product")
+
         b1, d1, h1, bp1, _ = beat(1, f"Here is what just changed with {model_name}.", 7.5, {model_name: COLOR_CYAN})
         hero = self._launch_visual(provider, model_name, bp1)
         self._play_beat(captions, b1, h1, hero[0], d1, pulse=hero[1])
 
         b2, d2, h2, bp2, _ = beat(2, "Post-training teaches the model to check its own work before it answers.", 7.5, {"post-training": COLOR_CYAN, "agent": COLOR_MINT})
-        loop = self._post_training_loop(bp2)
-        self._play_beat(captions, b2, h2, loop[0], d2, pulse=loop[1])
+        visual2 = self._post_training_loop(bp2) if role(2, b2, bp2) == "training_loop" else self._speed_race(b2, news_meta, bp2)
+        self._play_beat(captions, b2, h2, visual2[0], d2, pulse=visual2[1])
 
         b3, d3, h3, bp3, _ = beat(3, "The model keeps a much longer working memory, so earlier context stays in reach.", 8.0, {"context": COLOR_CYAN, "faster": COLOR_MINT})
-        lanes = self._context_lanes(bp3)
-        self._play_beat(captions, b3, h3, lanes[0], d3, pulse=lanes[1])
+        visual3 = self._context_lanes(bp3) if role(3, b3, bp3) == "context_speed" else self._post_training_loop(bp3)
+        self._play_beat(captions, b3, h3, visual3[0], d3, pulse=visual3[1])
 
         b4, d4, h4, bp4, raw4 = beat(4, "On the published tests, the new model clears real baselines.", 8.0, {"published tests": COLOR_CYAN})
-        bench, pulse = self._benchmark_bars(b4, news_meta, model_name, bp4, raw4)
-        self._play_beat(captions, b4, h4, bench, d4, pulse=pulse)
+        visual4 = self._benchmark_bars(b4, news_meta, model_name, bp4, raw4) if role(4, b4, bp4) == "benchmark" else self._speed_race(b4, news_meta, bp4)
+        self._play_beat(captions, b4, h4, visual4[0], d4, pulse=visual4[1])
 
         b5, d5, h5, bp5, _ = beat(5, "You can follow the release from announcement to API and production access.", 8.0, {"API": COLOR_CYAN, "available": COLOR_MINT})
-        timeline = self._availability_timeline(b5, news_meta, bp5)
-        self._play_beat(captions, b5, h5, timeline[0], d5, pulse=timeline[1])
+        visual5 = self._availability_timeline(b5, news_meta, bp5) if role(5, b5, bp5) == "availability" else self._benchmark_bars(b5, news_meta, model_name, bp5, {})
+        self._play_beat(captions, b5, h5, visual5[0], d5, pulse=visual5[1])
 
         b6, d6, h6, bp6, _ = beat(6, "K3.1 Pro turns long-horizon work into a product feature.", 8.0, {"product feature": COLOR_CYAN})
         feature = self._product_feature(model_name)

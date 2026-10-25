@@ -69,3 +69,11 @@ def test_tech_news_pricing_beat_does_not_become_benchmark():
 
     assert pricing_beat["visual_blueprint"]["layout"] == "catalog_routing"
     assert pricing_beat["motif_params"]["drawer_c_label"] == "AVAILABLE NOW"
+
+
+def test_tech_news_blueprints_expose_semantic_roles():
+    spec = VisualDirector().prepare_storyboard_for_spec(_tech_news_spec(), allow_figure_extraction=False)
+
+    roles = [beat["visual_blueprint"]["semantic_role"] for beat in spec["beats"]]
+
+    assert roles == ["launch", "context_speed", "training_loop", "benchmark", "availability"]
