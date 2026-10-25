@@ -8,6 +8,8 @@ import os
 import sys
 import json
 import glob
+import re
+from urllib.parse import urlparse
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple, List
 
@@ -58,51 +60,104 @@ CATEGORY_PROFILES = {
         "pill_label": "BENCHMARK NEWS",
         "theme_color": (245, 158, 11),       # Gold
         "glow_color": (245, 158, 11, 180),
-        "default_badge": "27x CHEAPER THAN o1",
         "badge_icon": "bolt",
-        "default_svg": "grpo_formula.svg",
-        "stat_label_1": "AIME 2024 ACCURACY:",
-        "stat_val_1": "79.8% (#1 SOTA)",
-        "stat_label_2": "INFERENCE COST:",
-        "stat_val_2": "$0.55 vs $15.00"
     },
     "architecture_breakdown": {
         "pill_label": "ARCHITECTURE BREAKDOWN",
         "theme_color": (16, 185, 129),       # Mint
         "glow_color": (16, 185, 129, 180),
-        "default_badge": "94.5% COMPUTE SAVED",
         "badge_icon": "rocket",
-        "default_svg": "efficiency_math.svg",
-        "stat_label_1": "ACTIVE PARAMETERS:",
-        "stat_val_1": "37B / 671B (5.5%)",
-        "stat_label_2": "ROUTING LATENCY:",
-        "stat_val_2": "TOP-8 LASERS"
     },
     "mechanism_deepdive": {
         "pill_label": "MECHANISM DEEP DIVE",
         "theme_color": (0, 240, 255),        # Cyan
         "glow_color": (0, 240, 255, 180),
-        "default_badge": "3x FASTER ATTENTION",
         "badge_icon": "bolt",
-        "default_svg": "attention_equation.svg",
-        "stat_label_1": "VRAM COMPLEXITY:",
-        "stat_val_1": "O(1) SRAM TILES",
-        "stat_label_2": "HARDWARE SPEED:",
-        "stat_val_2": "HOPPER ASYNC TMA"
     },
     "model_showdown": {
         "pill_label": "MODEL SHOWDOWN",
         "theme_color": (255, 51, 102),       # Danger / Neon Red
         "glow_color": (255, 51, 102, 180),
-        "default_badge": "OPEN WEIGHTS SHOCK",
         "badge_icon": "flame",
-        "default_svg": "cost_disparity_r1.svg",
-        "stat_label_1": "BENCHMARK PARITY:",
-        "stat_val_1": "MATH-500: 97.3%",
-        "stat_label_2": "API COST SPREAD:",
-        "stat_val_2": "96% SAVINGS"
     }
 }
+
+
+def _explicit_thumbnail_content(
+    spec: Dict[str, Any],
+    custom_badge: Optional[str] = None,
+) -> Dict[str, str]:
+    """Resolve thumbnail copy from this spec only; never borrow another video's claims."""
+    meta = spec.get("metadata") if isinstance(spec.get("metadata"), dict) else {}
+    title = str(spec.get("title") or spec.get("topic") or spec.get("id") or "Topic").strip()
+    title = re.sub(r"\s+", " ", title)
+
+    badge = (
+        custom_badge
+        or meta.get("efficiency_badge")
+        or meta.get("payoff_badge")
+        or (
+            f"{meta['payoff_stat']} {meta['payoff_label']}"
+            if meta.get("payoff_stat") and meta.get("payoff_label")
+            else None
+        )
+        or "TOPIC BREAKDOWN"
+    )
+
+    stat_1_label = meta.get("model_a_stat_label") or meta.get("payoff_label") or meta.get("benchmark_label")
+    stat_1_value = meta.get("model_a_stat") or meta.get("payoff_stat") or meta.get("benchmark_value")
+    if not stat_1_label:
+        stat_1_label = "SOURCE METRIC"
+    if not stat_1_value:
+        stat_1_value = "NOT PROVIDED"
+
+    model_name = (
+        spec.get("model_name")
+        or spec.get("model")
+        or meta.get("model_name")
+        or meta.get("model")
+    )
+    stat_2_label = meta.get("scale_label") or ("MODEL" if model_name else "SOURCE DETAIL")
+    stat_2_value = meta.get("scale_metric") or meta.get("solution_title") or model_name or "NOT PROVIDED"
+
+    source_url = next(
+        (
+            value.strip()
+            for value in (
+                spec.get("source_url"),
+                spec.get("canonical_url"),
+                spec.get("claim_url"),
+                spec.get("arxiv_url"),
+                meta.get("source_url"),
+                meta.get("canonical_url"),
+                meta.get("claim_url"),
+                meta.get("arxiv_url"),
+            )
+            if isinstance(value, str) and value.strip().startswith(("https://", "http://"))
+        ),
+        None,
+    )
+    provider = spec.get("source_provider") or spec.get("provider") or meta.get("source_provider") or meta.get("provider")
+    tts_provider = spec.get("tts_provider") or meta.get("tts_provider")
+    if source_url:
+        source_label = urlparse(source_url).netloc or source_url
+    elif provider:
+        source_label = str(provider)
+    elif tts_provider:
+        source_label = f"Voice: {tts_provider}"
+    else:
+        source_label = "Source not provided"
+
+    return {
+        "badge": str(badge).strip(),
+        "stat_label_1": str(stat_1_label).strip(),
+        "stat_value_1": str(stat_1_value).strip(),
+        "stat_label_2": str(stat_2_label).strip(),
+        "stat_value_2": str(stat_2_value).strip(),
+        "source_label": source_label,
+        "model": str(model_name).strip() if model_name else "",
+        "provider": str(provider).strip() if provider else "",
+    }
 
 # -------------------------------------------------------------
 # Vector Icon Drawer
@@ -224,6 +279,8 @@ class ShortsThumbnailGenerator:
         spec_id = spec.get("id", "short")
         category = spec.get("category", "mechanism_deepdive")
         profile = CATEGORY_PROFILES.get(category, CATEGORY_PROFILES["mechanism_deepdive"])
+        clean_id = re.sub(r"[^A-Za-z0-9_-]+", "_", str(spec_id)).strip("_") or "short"
+        content = _explicit_thumbnail_content(spec, custom_badge=custom_badge)
 
         if not output_path:
             output_path = str(THUMBNAILS_DIR / f"{spec_id}_poster.png")
@@ -316,16 +373,10 @@ class ShortsThumbnailGenerator:
         draw.text((63, 228), topic_part or "ARCHITECTURE & MATHEMATICS", font=font_subtitle, fill=(0, 0, 0, 220))
         draw.text((60, 225), topic_part or "ARCHITECTURE & MATHEMATICS", font=font_subtitle, fill=(248, 250, 252, 255))
 
-        meta = spec.get("metadata", {})
+        meta = spec.get("metadata") if isinstance(spec.get("metadata"), dict) else {}
 
         # --- Hero Stat / Hook Badge (Y = 300 to 410) ---
-        badge_candidate = (
-            custom_badge
-            or meta.get("efficiency_badge")
-            or meta.get("payoff_badge")
-            or (f"{meta['payoff_stat']} {meta['payoff_label']}" if "payoff_stat" in meta and "payoff_label" in meta else None)
-            or profile["default_badge"]
-        )
+        badge_candidate = content["badge"]
         # Clean leading emoji symbols for cleaner vector icon placement
         badge_text = badge_candidate.replace("⚡", "").replace("🔥", "").replace("🚀", "").strip()
 
@@ -395,11 +446,10 @@ class ShortsThumbnailGenerator:
                             except Exception as e:
                                 print(f"⚠️ Thumbnail on-the-fly math render failed: {e}")
 
-        if not svg_filename:
-            svg_filename = profile.get("default_svg")
-
-        math_svg_path = PROJECT_ROOT / "public" / "math_svgs" / svg_filename
-        rendered_png = render_math_svg_to_png(math_svg_path, output_width=860)
+        rendered_png = None
+        if svg_filename:
+            math_svg_path = PROJECT_ROOT / "public" / "math_svgs" / svg_filename
+            rendered_png = render_math_svg_to_png(math_svg_path, output_width=860)
 
         if rendered_png and rendered_png.exists():
             plate_rect = (60, 1140, W - 60, 1360)
@@ -429,21 +479,15 @@ class ShortsThumbnailGenerator:
             overlay.paste(math_resized, (mx, my), math_resized)
 
         # --- Impact Metrics Footer (Y = 1390 to 1570) ---
-        stat_l1 = (
-            (meta.get("model_a_stat_label") or meta.get("payoff_label") or profile.get("stat_label_1", "PRIMARY METRIC:"))
-            .upper()
-        )
+        stat_l1 = content["stat_label_1"].upper()
         if not stat_l1.endswith(":"):
             stat_l1 += ":"
-        stat_v1 = meta.get("model_a_stat") or meta.get("payoff_stat") or profile.get("stat_val_1", "SOTA BREAKTHROUGH")
+        stat_v1 = content["stat_value_1"]
 
-        stat_l2 = (
-            (meta.get("scale_label") or profile.get("stat_label_2", "ARCHITECTURE:"))
-            .upper()
-        )
+        stat_l2 = content["stat_label_2"].upper()
         if not stat_l2.endswith(":"):
             stat_l2 += ":"
-        stat_v2 = meta.get("scale_metric") or meta.get("solution_title") or profile.get("stat_val_2", "THE MODEL VERSE")
+        stat_v2 = content["stat_value_2"]
 
         # Format label and val neatly with dynamic offset
         bb_l1 = font_meta.getbbox(stat_l1)
@@ -457,8 +501,7 @@ class ShortsThumbnailGenerator:
         draw.text((val_x, 1470), stat_v2, font=font_stat_val, fill=(*theme_col, 255))
 
         draw.line([(60, 1545), (W - 60, 1545)], fill=(31, 41, 55, 255), width=2)
-        arxiv_id = spec.get("arxiv_id", "")
-        cite_str = f"themodelverse.in • arXiv:{arxiv_id}" if arxiv_id else "themodelverse.in • Full Breakdown"
+        cite_str = content["source_label"]
         draw.text((60, 1565), cite_str, font=font_meta, fill=(100, 116, 139, 255))
 
         # --- Final Composite & Export ---
