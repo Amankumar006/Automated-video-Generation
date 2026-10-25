@@ -11,6 +11,8 @@ import sys
 import json
 import argparse
 import subprocess
+import shutil
+import tempfile
 from pathlib import Path
 
 # Add project root to sys.path
@@ -164,14 +166,32 @@ def render_scene(scene_file: str, scene_class: str, quality: str = "-qh", spec_p
                 recent.sort(key=lambda p: p.stat().st_mtime, reverse=True)
                 rendered_file = str(recent[0])
             else:
-                candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-                rendered_file = str(candidates[0])
+                raise RuntimeError(
+                    f"Manim completed without a fresh output for {scene_class}; refusing to reuse a stale render."
+                )
 
     if not rendered_file or not os.path.exists(rendered_file):
         raise FileNotFoundError(f"Could not locate rendered video for {scene_class} in {scene_file}")
 
     print(f"✅ Scene {scene_class} rendered successfully: {rendered_file}")
     return rendered_file
+
+def _probe_duration(path: str, stream: str | None = None) -> float:
+    """Return container or stream duration in seconds, failing closed on bad media."""
+    ffprobe = shutil.which("ffprobe") or str(Path(FFMPEG_BIN).with_name("ffprobe"))
+    selector = ["-select_streams", stream] if stream else []
+    entry = "stream=duration" if stream else "format=duration"
+    result = subprocess.run(
+        [ffprobe, "-v", "error", *selector, "-show_entries", entry, "-of", "default=noprint_wrappers=1:nokey=1", path],
+        capture_output=True, text=True, check=False
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"Unable to inspect media duration for {path}: {result.stderr.strip()}")
+    try:
+        return float(result.stdout.strip())
+    except ValueError as exc:
+        raise RuntimeError(f"Invalid media duration returned for {path}: {result.stdout!r}") from exc
+
 
 def mux_final_short(video_path: str, audio_path: str, output_path: str, master_quality: bool = True):
     """
@@ -187,12 +207,20 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
     out_dir = os.path.dirname(output_path)
     if out_dir:
         os.makedirs(out_dir, exist_ok=True)
+    video_duration = _probe_duration(video_path)
+    audio_duration = _probe_duration(audio_path)
+    target_duration = max(video_duration, audio_duration)
+    duration_delta = abs(video_duration - audio_duration)
+    if duration_delta > 2.0:
+        raise RuntimeError(
+            f"Audio/video duration mismatch is {duration_delta:.2f}s ({video_duration:.2f}s vs {audio_duration:.2f}s); refusing to mux."
+        )
     if master_quality:
         cmd = [
             FFMPEG_BIN, "-y",
             "-i", video_path,
             "-i", audio_path,
-            "-vf", f"scale={BROADCAST_WIDTH}:{BROADCAST_HEIGHT}",
+            "-vf", f"scale={BROADCAST_WIDTH}:{BROADCAST_HEIGHT},tpad=stop_mode=clone:stop_duration=2",
             "-r", str(BROADCAST_FPS),
             "-c:v", "libx264",
             "-preset", "slow",
@@ -206,8 +234,9 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
             "-color_range", "tv",
             "-c:a", "aac",
             "-b:a", "320k",
+            "-af", "apad",
             "-movflags", "+faststart",
-            "-shortest",
+            "-t", f"{target_duration:.3f}",
             output_path
         ]
     else:
@@ -218,7 +247,7 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
             "-c:v", "copy",
             "-c:a", "aac",
             "-b:a", "192k",
-            "-shortest",
+            "-t", f"{target_duration:.3f}",
             output_path
         ]
     print(f"🚀 Muxing and broadcast mastering final short into: {output_path} ({BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps, CRF {BROADCAST_CRF})...")
@@ -226,6 +255,12 @@ def mux_final_short(video_path: str, audio_path: str, output_path: str, master_q
     if res.returncode != 0:
         print("FFmpeg Error:\n", res.stderr)
         raise RuntimeError("FFmpeg muxing failed.")
+    final_video_duration = _probe_duration(output_path, "v:0")
+    final_audio_duration = _probe_duration(output_path, "a:0")
+    if abs(final_video_duration - final_audio_duration) > (1.0 / BROADCAST_FPS) + 0.03:
+        raise RuntimeError(
+            f"Muxed streams are not frame-aligned: {final_video_duration:.3f}s vs {final_audio_duration:.3f}s."
+        )
     print(f"🎉 Final broadcast short ready at: {output_path}")
 
 def extract_frames(video_path: str, output_dir: str, category: str = "architecture_breakdown", spec: dict = None):
@@ -290,6 +325,40 @@ def extract_frames(video_path: str, output_dir: str, category: str = "architectu
     print(f"📸 Extracted {len(timestamps)} inspection keyframes to {output_dir}/")
 
 
+def build_dry_run_audio_result(spec: dict) -> dict:
+    """Build deterministic timing data without invoking a TTS provider.
+
+    Dry-run validates orchestration and storyboard contracts. It must not spend
+    provider credits, wait on network retries, or create audio cache entries.
+    """
+    timing_data = []
+    current_time = 0.0
+    beats = spec.get("beats", [])
+    for index, beat in enumerate(beats):
+        duration = float(beat.get("duration") or beat.get("slot_duration") or 5.0)
+        pause_duration = 0.30 if index < len(beats) - 1 else 0.50
+        timing_data.append(
+            {
+                "beat_id": beat.get("beat_id", index + 1),
+                "text": beat.get("text", ""),
+                "visual_focus": beat.get("visual_focus", ""),
+                "start": round(current_time, 2),
+                "end": round(current_time + duration, 2),
+                "duration": round(duration, 2),
+                "slot_duration": round(duration + pause_duration, 2),
+                "word_timings": [],
+                "provider": "dry-run",
+                "model": "deterministic-timing",
+            }
+        )
+        current_time += duration + pause_duration
+    return {
+        "master_audio": "",
+        "timing_data": timing_data,
+        "total_duration": round(current_time, 2),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="The Model Verse — Multi-Category Automated Video Engine")
     parser.add_argument("--topic", default=None, help="Topic ID or title")
@@ -300,7 +369,7 @@ def main():
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=None, help="Speech speed (default: 1.12)")
-    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, pocket)")
     parser.add_argument("--lang", "--language", dest="lang", default=None, help="Narration language code (en or hi)")
     parser.add_argument("--quality", default="-qm", choices=["ql", "qm", "qh", "-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")
@@ -310,7 +379,23 @@ def main():
     parser.add_argument("--legacy-engine", action="store_true", help="Use legacy monolithic scene templates instead of Visual Engine 2.0 DynamicCompositeScene")
     parser.add_argument("--allow-stale", action="store_true", help="Bypass content recency filter for historical testing")
     parser.add_argument("--dry-run", action="store_true", help="Fast dry-run mode verifying end-to-end pipeline execution with 0 errors")
+    parser.add_argument(
+        "--validate-visuals",
+        action="store_true",
+        help="During dry-run, also synthesize and sandbox-check bespoke visuals (may call an LLM)",
+    )
     args = parser.parse_args()
+
+    # Dry runs must be genuinely read-only from the repository's perspective.
+    # Keep generated audio, subtitles, synthesized visuals, templates, and
+    # preview frames in a disposable temporary workspace instead.
+    dry_run_workspace = None
+    original_generated_visuals_dir = None
+    if args.dry_run:
+        dry_run_workspace = Path(tempfile.mkdtemp(prefix="themodelverse-dry-run-"))
+        (dry_run_workspace / "public").mkdir(parents=True, exist_ok=True)
+        (dry_run_workspace / "audio_cache").mkdir(parents=True, exist_ok=True)
+        print(f"🧪 [Dry-Run] Isolated workspace: {dry_run_workspace}")
 
     if args.dry_run and not args.topic and not args.arxiv and not args.perk and not args.blog and not args.news:
         args.topic = "speculative_decoding"
@@ -369,7 +454,11 @@ def main():
         print(f"✅ Official Blog Ingested: {cand['title']} ({blog_rec.provider})")
     elif args.arxiv:
         print(f"🔍 Reading arXiv paper '{args.arxiv}'...")
-        arxiv_meta = fetch_arxiv_paper(args.arxiv, extract_figures=True)
+        arxiv_meta = fetch_arxiv_paper(
+            args.arxiv,
+            extract_figures=not args.dry_run,
+            write_cache=not args.dry_run,
+        )
         if not arxiv_meta:
             raise RuntimeError(f"Could not retrieve paper details for '{args.arxiv}'")
 
@@ -402,7 +491,10 @@ def main():
             spec = generate_script(
                 topic=topic,
                 category=args.category,
-                arxiv_meta=arxiv_meta
+                arxiv_meta=arxiv_meta,
+                persist=not args.dry_run,
+                output_root=dry_run_workspace,
+                extract_figures=not args.dry_run,
             )
             template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
     else:
@@ -410,9 +502,18 @@ def main():
         spec = generate_script(
             topic=topic,
             category=args.category,
-            arxiv_meta=arxiv_meta
+            arxiv_meta=arxiv_meta,
+            persist=not args.dry_run,
+            output_root=dry_run_workspace,
+            extract_figures=not args.dry_run,
         )
         template_path = templates_dir / f"{spec.get('category', 'custom')}_{spec['id']}.json"
+
+    if args.dry_run and dry_run_workspace is not None:
+        isolated_template = dry_run_workspace / "templates" / Path(template_path).name
+        isolated_template.parent.mkdir(parents=True, exist_ok=True)
+        isolated_template.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+        template_path = isolated_template
 
     # Ingest / bind native arXiv paper figures
     target_arxiv_id = args.arxiv or spec.get("arxiv_id") or (arxiv_meta.get("arxiv_id") if arxiv_meta else None)
@@ -424,6 +525,8 @@ def main():
             if arxiv_meta and arxiv_meta.get("paper_figures"):
                 spec["paper_figures"] = arxiv_meta["paper_figures"]
                 print(f"📊 Transferred {len(spec['paper_figures'])} paper figures from arXiv metadata into spec['paper_figures'].")
+            elif args.dry_run:
+                print("   ℹ️ [Dry-Run] Skipping arXiv figure extraction; repository cache is read-only.")
             else:
                 print(f"\n📊 Ingesting native paper figures for arXiv '{clean_id}'...")
                 try:
@@ -453,7 +556,10 @@ def main():
     try:
         from pipeline.visual_director import VisualDirector
         visual_director = VisualDirector()
-        spec = visual_director.prepare_storyboard_for_spec(spec)
+        spec = visual_director.prepare_storyboard_for_spec(
+            spec,
+            allow_figure_extraction=not args.dry_run,
+        )
         with open(template_path, "w", encoding="utf-8") as f:
             json.dump(spec, f, indent=2)
     except Exception as e_vd:
@@ -463,7 +569,7 @@ def main():
     track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Breakdown)
-    if track == TRACK_ACADEMIC:
+    if track == TRACK_ACADEMIC and (not args.dry_run or args.validate_visuals):
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -472,16 +578,23 @@ def main():
                 # Prioritize authentic arXiv figures for Beat 3 if available
                 if b_id == 3 and spec.get("paper_figures"):
                     continue
+                if args.dry_run and dry_run_workspace is not None:
+                    from pipeline import bespoke_visual_synthesizer as bespoke_module
+                    if original_generated_visuals_dir is None:
+                        original_generated_visuals_dir = bespoke_module.GENERATED_VISUALS_DIR
+                    bespoke_module.GENERATED_VISUALS_DIR = dry_run_workspace / "generated_visuals"
                 bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
         except Exception as e_synth:
             print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+    elif track == TRACK_ACADEMIC:
+        print("🧪 [Dry-Run] Skipping bespoke visual synthesis; use --validate-visuals for the expensive sandbox path.")
 
+    scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
     if not args.legacy_engine:
         scene_file = track_meta["scene_file"]
         scene_class = track_meta["scene_class"]
         engine_label = f"{track_meta['display_name']} ({track_meta['badge']})"
     else:
-        scene_info = CATEGORY_SCENE_MAP.get(category, CATEGORY_SCENE_MAP["mechanism_deepdive"])
         scene_file = scene_info["file"]
         scene_class = scene_info["class"]
         engine_label = f"Legacy Template ({scene_class})"
@@ -497,15 +610,19 @@ def main():
     print(f"🎙️ Narration: {resolved_prov.upper()} ({resolved_lang}, {args.voice or 'default'}) + Ambient Synth + SFX")
     print("=======================================================\n")
 
-    # Step 1: Synthesize Audio & SFX
-    audio_results = synthesize_audio_for_spec(
-        spec,
-        voice=args.voice,
-        speed=args.speed,
-        enable_music=not args.no_music,
-        provider=resolved_prov,
-        language=resolved_lang
-    )
+    # Step 1: Synthesize Audio & SFX, or use deterministic timing in dry-run.
+    if args.dry_run:
+        print("🧪 [Dry-Run] Skipping TTS, provider calls, audio cache, and media writes.")
+        audio_results = build_dry_run_audio_result(spec)
+    else:
+        audio_results = synthesize_audio_for_spec(
+            spec,
+            voice=args.voice,
+            speed=args.speed,
+            enable_music=not args.no_music,
+            provider=resolved_prov,
+            language=resolved_lang,
+        )
     master_audio = audio_results["master_audio"]
     timing_data = audio_results.get("timing_data", [])
 
@@ -546,7 +663,11 @@ def main():
         print("⏩ [Dry-Run] Bypassing final muxing.")
 
     # Step 4: Extract Keyframes
-    frames_dir = str(PROJECT_ROOT / f"frames_{spec['id']}")
+    frames_dir = str(
+        (dry_run_workspace / f"frames_{spec['id']}")
+        if dry_run_workspace
+        else (PROJECT_ROOT / f"frames_{spec['id']}")
+    )
     if args.dry_run:
         os.makedirs(frames_dir, exist_ok=True)
         for b in spec.get("beats", []):
@@ -564,20 +685,28 @@ def main():
 
     # Step 5: Master Multimodal Vision Critic & Visual Diversity Gatekeeping
     print("\n=======================================================")
-    print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
-    print("=======================================================\n")
-    try:
-        from pipeline.vlm_critic import vlm_critic
-        audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
-        status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
-        print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
-        if audit_report.get("diversity_violations"):
-            print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
-    except Exception as e_vlm:
-        print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
+    if args.dry_run:
+        print("🧪 [Dry-Run] Skipping VLM frame scoring because no rendered frames exist.")
+    else:
+        print("👁️ MASTER MULTIMODAL VISION CRITIC (OLLAMA / VLM QA)")
+        print("=======================================================\n")
+        try:
+            from pipeline.vlm_critic import vlm_critic
+            audit_report = vlm_critic.audit_batch_keyframes(frames_dir, spec)
+            status_str = "✅ PASSED" if audit_report.get("passed_quality_gate") else "⚠️ FLAGGED"
+            print(f"\n🎯 [Vision Critic Verdict] {status_str} | Visual Score: {audit_report.get('average_score')}/10 | Unique Layouts: {audit_report.get('unique_layouts_count')}")
+            if audit_report.get("diversity_violations"):
+                print(f"⚠️ Monotony Violations: {audit_report.get('diversity_violations')}")
+        except Exception as e_vlm:
+            print(f"⚠️ Vision Critic invocation notice: {e_vlm}")
 
     if args.dry_run:
         print("\n✅ End-to-end dry-run test completed successfully with 0 errors.")
+        if dry_run_workspace:
+            if original_generated_visuals_dir is not None:
+                from pipeline import bespoke_visual_synthesizer as bespoke_module
+                bespoke_module.GENERATED_VISUALS_DIR = original_generated_visuals_dir
+            shutil.rmtree(dry_run_workspace, ignore_errors=True)
         return 0
 
 if __name__ == "__main__":

@@ -9,6 +9,9 @@ import os
 import re
 import sys
 import json
+import queue
+import threading
+import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from PIL import Image
@@ -104,9 +107,36 @@ class VLMCritic:
     """Automated visual quality auditor powered by multimodal Gemini & deterministic layout solver."""
 
     def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or API_KEY
+        # Resolve the environment at construction time as well as import time.
+        # This keeps test runners, containers, and long-lived workers that inject
+        # secrets after module import from silently skipping the Gemini path.
+        self.api_key = api_key or os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or API_KEY
+        self.request_timeout_seconds = float(os.getenv("VLM_CRITIC_TIMEOUT_SECONDS", "20"))
+        self.batch_timeout_seconds = float(os.getenv("VLM_CRITIC_BATCH_TIMEOUT_SECONDS", "120"))
         if self.api_key:
             genai.configure(api_key=self.api_key)
+
+    def _generate_with_timeout(self, model: Any, prompt: str, pil_img: Image.Image):
+        """Run a remote vision request without allowing it to block production."""
+        result_queue = queue.Queue(maxsize=1)
+
+        def worker():
+            try:
+                result_queue.put((True, model.generate_content([prompt, pil_img])))
+            except Exception as exc:  # pragma: no cover - provider-specific errors
+                result_queue.put((False, exc))
+
+        thread = threading.Thread(target=worker, daemon=True)
+        thread.start()
+        try:
+            ok, value = result_queue.get(timeout=self.request_timeout_seconds)
+        except queue.Empty as exc:
+            raise TimeoutError(
+                f"Vision critic request exceeded {self.request_timeout_seconds:.0f}s"
+            ) from exc
+        if not ok:
+            raise value
+        return value
 
     def audit_keyframe(
         self,
@@ -163,7 +193,7 @@ class VLMCritic:
             for model_cand in MODEL_FALLBACKS:
                 try:
                     model = genai.GenerativeModel(model_cand)
-                    response = model.generate_content([prompt, pil_img])
+                    response = self._generate_with_timeout(model, prompt, pil_img)
                     raw_text = response.text.strip()
 
                     # Clean markdown fences
@@ -182,6 +212,9 @@ class VLMCritic:
                     last_error = e
                     primary_failed = True
                     err_msg = str(e)
+                    if isinstance(e, TimeoutError):
+                        print(f"⏱️ [VLMCritic] Gemini Vision timed out after {self.request_timeout_seconds:.0f}s; using fallback.")
+                        break
                     if is_quota_error(e) or "resourceexhausted" in err_msg.lower() or "429" in err_msg:
                         quota_tracker.record_exhausted("gemini_vision", f"Quota error on {model_cand}: {err_msg}")
                         quota_tracker.record_exhausted("gemini", f"Quota error on {model_cand}: {err_msg}")
@@ -205,7 +238,7 @@ class VLMCritic:
                         image_paths=[img_path],
                         model="gemma4:31b:cloud",
                         format="json",
-                        timeout=60.0
+                        timeout=float(os.getenv("VLM_OLLAMA_TIMEOUT_SECONDS", "30"))
                     )
                     parsed_payload = resp.to_dict() if hasattr(resp, "to_dict") else dict(resp)
                     if parsed_payload:
@@ -242,7 +275,29 @@ class VLMCritic:
                         data["image_file"] = img_path.name
                         data["beat_id"] = beat_id
                         data["model_used"] = getattr(resp, "model", "gemma4:31b:cloud")
+                        try:
+                            reported_score = float(data.get("overall_score", 0.0))
+                        except (TypeError, ValueError):
+                            reported_score = 0.0
+                        if reported_score <= 0.0:
+                            # Providers use zero for "could not inspect";
+                            # expose a low, explicit failure score instead of
+                            # violating the critic result contract.
+                            data["overall_score"] = 1.0
+                            data["passed"] = False
                         if getattr(resp, "model", "").startswith("fallback"):
+                            # Heuristic fallback payloads may carry an
+                            # explicit zero to mean "not inspected". Keep
+                            # the critic contract useful and non-zero while
+                            # still clearly failing the semantic QA gate.
+                            fallback_score = float(
+                                data.get("overall_score")
+                                or data.get("visual_score")
+                                or 6.0
+                            )
+                            data["overall_score"] = min(max(fallback_score, 1.0), 6.0)
+                            data["passed"] = False
+                            data["primary_observation"] = "Vision provider unavailable; deterministic fallback did not inspect image semantics."
                             quota_tracker.record_exhausted("ollama_vision", "Ollama vision unreachable; used heuristic fallback")
                         else:
                             quota_tracker.record_success("ollama_vision")
@@ -255,14 +310,14 @@ class VLMCritic:
         if data is None:
             print(f"⚠️ VLM Critic API fallback triggered ({last_error})")
             data = {
-                "overall_score": 8.8,
-                "passed": True,
-                "semantic_alignment_score": 9.0,
-                "chalkboard_compliance_score": 9.2,
-                "safe_zone_score": 9.0,
-                "pedagogical_clarity_score": 8.7,
-                "primary_observation": "Automated fallback audit: Image inspected successfully via deterministic layout solver.",
-                "critique": f"API audit soft fallback (primary vision failed: {last_error})",
+                "overall_score": 6.0,
+                "passed": False,
+                "semantic_alignment_score": 6.0,
+                "chalkboard_compliance_score": 6.0,
+                "safe_zone_score": 6.0,
+                "pedagogical_clarity_score": 6.0,
+                "primary_observation": "Vision provider unavailable; deterministic layout solver cannot inspect image semantics.",
+                "critique": f"API audit unavailable (primary vision failed: {last_error})",
                 "detected_entities": [],
                 "suggested_patches": [],
                 "image_file": img_path.name,
@@ -377,8 +432,19 @@ class VLMCritic:
             beats = [{"beat_id": i} for i in range(1, 7)]
 
         results = []
+        expected_ids = {b.get("beat_id", 1) for b in beats}
+        started_at = time.monotonic()
+        audit_timeout = False
         for b in beats:
             b_id = b.get("beat_id", 1)
+            elapsed = time.monotonic() - started_at
+            if elapsed >= self.batch_timeout_seconds:
+                audit_timeout = True
+                print(
+                    f"⏱️ [VLMCritic] Batch deadline reached after {elapsed:.1f}s; "
+                    f"stopping before Beat {b_id}."
+                )
+                break
             # Preference: repaired frame > canonical beat frame > any matching pattern
             candidates = [
                 p_dir / f"{b_id:02d}_beat_{b_id}_repaired.png",
@@ -427,7 +493,15 @@ class VLMCritic:
         scores = [r.get("overall_score", 0.0) for r in results if "overall_score" in r]
         avg_score = round(sum(scores) / len(scores), 2) if scores else 0.0
         diversity_passed = len(diversity_violations) == 0
-        all_passed = avg_score >= 8.5 and diversity_passed and all(r.get("passed", True) for r in results)
+        audited_ids = {r.get("beat_id") for r in results}
+        incomplete_audit = expected_ids != audited_ids
+        all_passed = (
+            not audit_timeout
+            and not incomplete_audit
+            and avg_score >= 8.5
+            and diversity_passed
+            and all(r.get("passed", True) for r in results)
+        )
 
         if diversity_violations:
             print(f"⚠️ [Visual Diversity Warning] Detected layout issues: {diversity_violations}")
@@ -440,6 +514,9 @@ class VLMCritic:
             "average_score": avg_score,
             "visual_diversity_passed": diversity_passed,
             "diversity_violations": diversity_violations,
+            "audit_timeout": audit_timeout,
+            "incomplete_audit": incomplete_audit,
+            "audited_beat_ids": sorted(audited_ids),
             "unique_layouts_count": len(layout_counts),
             "passed_quality_gate": all_passed,
             "beat_evaluations": results

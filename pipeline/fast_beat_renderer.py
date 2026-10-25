@@ -65,7 +65,22 @@ def _render_draft_video(
         scene_file,
         scene_class
     ]
-    res = subprocess.run(cmd, cwd=str(PROJECT_ROOT), env=env, capture_output=True, text=True)
+    render_timeout = float(os.getenv("REPAIR_RENDER_TIMEOUT_SECONDS", "180"))
+    try:
+        res = subprocess.run(
+            cmd,
+            cwd=str(PROJECT_ROOT),
+            env=env,
+            capture_output=True,
+            text=True,
+            timeout=render_timeout,
+        )
+    except subprocess.TimeoutExpired:
+        print(
+            f"⚠️ Draft render exceeded {render_timeout:.0f}s; "
+            "aborting this repair candidate and preserving the last accepted layout."
+        )
+        return None
     if res.returncode != 0:
         print(f"⚠️ Draft render error:\n{res.stderr[-800:]}")
         return None

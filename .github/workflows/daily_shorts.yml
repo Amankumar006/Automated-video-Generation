@@ -1,5 +1,12 @@
 name: Autonomous Daily Shorts Daemon
 
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-shorts-production
+  cancel-in-progress: false
+
 on:
   schedule:
     # 5 Research-Backed Pre-Peak Upload Windows (UTC / IST / EST):
@@ -48,26 +55,31 @@ on:
       privacy:
         description: 'YouTube upload privacy'
         required: false
-        default: 'public'
+        default: 'unlisted'
         type: choice
         options:
           - public
           - unlisted
           - private
+      allow_public:
+        description: 'Explicitly allow a public YouTube upload (requires privacy=public)'
+        required: false
+        default: false
+        type: boolean
       publish_instagram:
         description: 'Cross-post to Instagram Reels'
         required: false
-        default: true
+        default: false
         type: boolean
       publish_x:
         description: 'Cross-post 4-tweet video thread to X (Twitter)'
         required: false
-        default: true
+        default: false
         type: boolean
       publish_linkedin:
         description: 'Cross-post to LinkedIn'
         required: false
-        default: true
+        default: false
         type: boolean
       source:
 
@@ -83,17 +95,57 @@ on:
           - github
 
 jobs:
+  preflight:
+    name: Validate production inputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+
+    steps:
+      - name: Validate workflow inputs
+        env:
+          COUNT: ${{ github.event.inputs.count || '1' }}
+          QUALITY: ${{ github.event.inputs.quality || 'qm' }}
+          PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
+          ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ (github.event_name == 'schedule' && vars.ENABLE_INSTAGRAM_AUTOPUBLISH == 'true') || github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
+          PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
+          SOURCE: ${{ github.event.inputs.source || 'mixed' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: |
+          set -euo pipefail
+
+          case "$COUNT" in 1|2|3|4|5) ;; *) echo "Invalid count: $COUNT" >&2; exit 1 ;; esac
+          case "$QUALITY" in qm|qh|ql) ;; *) echo "Invalid quality: $QUALITY" >&2; exit 1 ;; esac
+          case "$PRIVACY" in public|unlisted|private) ;; *) echo "Invalid privacy: $PRIVACY" >&2; exit 1 ;; esac
+          case "$SOURCE" in mixed|arxiv|blogs|perks|github) ;; *) echo "Invalid source: $SOURCE" >&2; exit 1 ;; esac
+
+          for flag in "$ALLOW_PUBLIC" "$PUBLISH_INSTAGRAM" "$PUBLISH_X" "$PUBLISH_LINKEDIN" "$DRY_RUN"; do
+            case "$flag" in true|false|'') ;; *) echo "Invalid boolean input: $flag" >&2; exit 1 ;; esac
+          done
+
+          if [ "$PRIVACY" = "public" ] && [ "$ALLOW_PUBLIC" != "true" ]; then
+            echo "Public uploads require the explicit allow_public=true opt-in." >&2
+            exit 1
+          fi
+
+          echo "Preflight passed: privacy=$PRIVACY, public_opt_in=$ALLOW_PUBLIC, instagram=$PUBLISH_INSTAGRAM, x=$PUBLISH_X, linkedin=$PUBLISH_LINKEDIN, dry_run=$DRY_RUN"
+
   produce-short:
+    needs: preflight
     runs-on: ubuntu-latest
     timeout-minutes: 60
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       - name: Install System Dependencies
         run: |
@@ -102,27 +154,30 @@ jobs:
             texlive-latex-extra texlive-fonts-recommended dvisvgm espeak-ng
 
       - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Cache Kokoro Neural Voice Models
-        uses: actions/cache@v4
-        id: cache-kokoro
-        with:
-          path: kokoro_models/
-          key: kokoro-v1.0-models
-
       - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
-      - name: Ensure Kokoro Models
-        if: steps.cache-kokoro.outputs.cache-hit != 'true'
+      - name: Install Pocket TTS
         run: |
-          python3 -c "from pipeline.audio_synthesizer import ensure_kokoro_models; ensure_kokoro_models()"
+          set -euo pipefail
+          version="3.3.0"
+          asset="pocket-tts-${version}-x86_64-unknown-linux-gnu.tar.gz"
+          expected_sha="9abff0aa138a804e44052952d8c3bdaae247fb267ca8f4b83fe178897d1a0559"
+          mkdir -p "$HOME/.local/bin"
+          curl --fail --location --retry 3 --output "/tmp/$asset" \
+            "https://github.com/kyutai-labs/pocket-tts/releases/download/v4.0.1/$asset"
+          echo "$expected_sha  /tmp/$asset" | sha256sum --check --status
+          tar -xzf "/tmp/$asset" --strip-components=1 -C "$HOME/.local/bin"
+          chmod +x "$HOME/.local/bin/pocket-tts"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          pocket-tts --version
 
       - name: Configure Credentials
         env:
@@ -145,53 +200,86 @@ jobs:
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
         run: |
-          echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
-          echo "GEMINI_MODEL_NAME=gemini-2.5-flash" >> .env
-          echo "TTS_PROVIDER=auto" >> .env
-          echo "ELEVENLABS_VOICE=eric" >> .env
+          set -euo pipefail
+          umask 077
+
+          mask_secret() {
+            if [ -n "${1:-}" ]; then
+              printf '::add-mask::%s\n' "$1"
+            fi
+          }
+
+          mask_secret "$GEMINI_API_KEY"
+          mask_secret "$ELEVENLABS_API_KEY"
+          mask_secret "$SARVAM_API_KEY"
+          mask_secret "$GROQ_API_KEY"
+          mask_secret "$OPENROUTER_API_KEY"
+          mask_secret "$YOUTUBE_TOKEN_JSON_BASE64"
+          mask_secret "$YOUTUBE_CLIENT_SECRETS_BASE64"
+          mask_secret "$INSTAGRAM_ACCESS_TOKEN"
+          mask_secret "$TWITTER_API_KEY"
+          mask_secret "$TWITTER_API_SECRET"
+          mask_secret "$TWITTER_ACCESS_TOKEN"
+          mask_secret "$TWITTER_ACCESS_TOKEN_SECRET"
+          mask_secret "$TWITTER_CLIENT_ID"
+          mask_secret "$TWITTER_CLIENT_SECRET"
+          mask_secret "$LINKEDIN_CLIENT_ID"
+          mask_secret "$LINKEDIN_CLIENT_SECRET"
+          mask_secret "$LINKEDIN_ACCESS_TOKEN"
+
+          : > .env
+          printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >> .env
+          printf '%s\n' \
+            'GEMINI_MODEL_NAME=gemini-2.5-flash' \
+            'TTS_PROVIDER=pocket' \
+            'POCKET_TTS_LANGUAGE=english_18m_2026-10' \
+            'REQUIRE_VLM_QA=true' \
+            'ELEVENLABS_VOICE=eric' >> .env
 
           if [ -n "$GROQ_API_KEY" ]; then
-            echo "GROQ_API_KEY=$GROQ_API_KEY" >> .env
+            printf 'GROQ_API_KEY=%s\n' "$GROQ_API_KEY" >> .env
           fi
 
           if [ -n "$OPENROUTER_API_KEY" ]; then
-            echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY" >> .env
+            printf 'OPENROUTER_API_KEY=%s\n' "$OPENROUTER_API_KEY" >> .env
           fi
 
           if [ -n "$ELEVENLABS_API_KEY" ]; then
-            echo "ELEVENLABS_API_KEY=$ELEVENLABS_API_KEY" >> .env
+            printf 'ELEVENLABS_API_KEY=%s\n' "$ELEVENLABS_API_KEY" >> .env
           fi
 
           if [ -n "$SARVAM_API_KEY" ]; then
-            echo "SARVAM_API_KEY=$SARVAM_API_KEY" >> .env
+            printf 'SARVAM_API_KEY=%s\n' "$SARVAM_API_KEY" >> .env
           fi
 
           if [ -n "$INSTAGRAM_ACCESS_TOKEN" ]; then
-            echo "INSTAGRAM_ACCESS_TOKEN=$INSTAGRAM_ACCESS_TOKEN" >> .env
-            echo "INSTAGRAM_ACCOUNT_ID=${INSTAGRAM_ACCOUNT_ID:-17841425926885618}" >> .env
+            printf 'INSTAGRAM_ACCESS_TOKEN=%s\n' "$INSTAGRAM_ACCESS_TOKEN" >> .env
+            printf 'INSTAGRAM_ACCOUNT_ID=%s\n' "${INSTAGRAM_ACCOUNT_ID:-17841425926885618}" >> .env
           fi
 
           if [ -n "$TWITTER_API_KEY" ]; then
-            echo "TWITTER_API_KEY=$TWITTER_API_KEY" >> .env
-            echo "TWITTER_API_SECRET=$TWITTER_API_SECRET" >> .env
-            echo "TWITTER_ACCESS_TOKEN=$TWITTER_ACCESS_TOKEN" >> .env
-            echo "TWITTER_ACCESS_TOKEN_SECRET=$TWITTER_ACCESS_TOKEN_SECRET" >> .env
-            echo "TWITTER_CLIENT_ID=$TWITTER_CLIENT_ID" >> .env
-            echo "TWITTER_CLIENT_SECRET=$TWITTER_CLIENT_SECRET" >> .env
+            printf '%s\n' \
+              "TWITTER_API_KEY=$TWITTER_API_KEY" \
+              "TWITTER_API_SECRET=$TWITTER_API_SECRET" \
+              "TWITTER_ACCESS_TOKEN=$TWITTER_ACCESS_TOKEN" \
+              "TWITTER_ACCESS_TOKEN_SECRET=$TWITTER_ACCESS_TOKEN_SECRET" \
+              "TWITTER_CLIENT_ID=$TWITTER_CLIENT_ID" \
+              "TWITTER_CLIENT_SECRET=$TWITTER_CLIENT_SECRET" >> .env
           fi
 
           if [ -n "$LINKEDIN_ACCESS_TOKEN" ]; then
-            echo "LINKEDIN_ACCESS_TOKEN=$LINKEDIN_ACCESS_TOKEN" >> .env
-            echo "LINKEDIN_CLIENT_ID=$LINKEDIN_CLIENT_ID" >> .env
-            echo "LINKEDIN_CLIENT_SECRET=$LINKEDIN_CLIENT_SECRET" >> .env
+            printf '%s\n' \
+              "LINKEDIN_ACCESS_TOKEN=$LINKEDIN_ACCESS_TOKEN" \
+              "LINKEDIN_CLIENT_ID=$LINKEDIN_CLIENT_ID" \
+              "LINKEDIN_CLIENT_SECRET=$LINKEDIN_CLIENT_SECRET" >> .env
           fi
 
           if [ -n "$YOUTUBE_TOKEN_JSON_BASE64" ]; then
-            echo "$YOUTUBE_TOKEN_JSON_BASE64" | base64 -d > pipeline/youtube_token.json
+            printf '%s' "$YOUTUBE_TOKEN_JSON_BASE64" | base64 --decode > pipeline/youtube_token.json
           fi
 
           if [ -n "$YOUTUBE_CLIENT_SECRETS_BASE64" ]; then
-            echo "$YOUTUBE_CLIENT_SECRETS_BASE64" | base64 -d > pipeline/client_secrets.json
+            printf '%s' "$YOUTUBE_CLIENT_SECRETS_BASE64" | base64 --decode > pipeline/client_secrets.json
           fi
 
       - name: Run Daily Shorts Daemon
@@ -209,47 +297,172 @@ jobs:
           LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
+          REQUIRE_VLM_QA: "true"
+          TTS_PROVIDER: "pocket"
+          POCKET_TTS_LANGUAGE: "english_18m_2026-10"
+          COUNT: ${{ github.event.inputs.count || '1' }}
+          QUALITY: ${{ github.event.inputs.quality || 'qm' }}
+          ARXIV_ID: ${{ github.event.inputs.arxiv_id || '' }}
+          PRIVACY: ${{ github.event.inputs.privacy || 'unlisted' }}
+          ALLOW_PUBLIC: ${{ github.event.inputs.allow_public || 'false' }}
+          PUBLISH_INSTAGRAM: ${{ (github.event_name == 'schedule' && vars.ENABLE_INSTAGRAM_AUTOPUBLISH == 'true') || github.event.inputs.publish_instagram || 'false' }}
+          PUBLISH_X: ${{ github.event.inputs.publish_x || 'false' }}
+          PUBLISH_LINKEDIN: ${{ github.event.inputs.publish_linkedin || 'false' }}
+          SOURCE: ${{ github.event.inputs.source || 'mixed' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
-          COUNT="${{ github.event.inputs.count || '1' }}"
-          QUALITY="${{ github.event.inputs.quality || 'qm' }}"
-          ARXIV_ID="${{ github.event.inputs.arxiv_id || '' }}"
-          PRIVACY="${{ github.event.inputs.privacy || 'public' }}"
-          PUBLISH_INSTAGRAM="${{ github.event.inputs.publish_instagram }}"
-          PUBLISH_X="${{ github.event.inputs.publish_x }}"
-          PUBLISH_LINKEDIN="${{ github.event.inputs.publish_linkedin }}"
-          SOURCE="${{ github.event.inputs.source || 'mixed' }}"
-
-          EXTRA_ARGS="--source $SOURCE"
+          set -euo pipefail
+          EXTRA_ARGS=(--source "$SOURCE")
           if [ -n "$ARXIV_ID" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --arxiv $ARXIV_ID"
+            EXTRA_ARGS+=(--arxiv "$ARXIV_ID")
           fi
 
-          # Enable Instagram cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_INSTAGRAM" != "false" ] && [ -n "$INSTAGRAM_ACCESS_TOKEN" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --publish-instagram"
+          if [ "$PRIVACY" = "public" ] && [ "$ALLOW_PUBLIC" != "true" ]; then
+            echo "Public uploads require the explicit allow_public=true opt-in." >&2
+            exit 1
           fi
 
-          # Enable X (Twitter) cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_X" != "false" ] && [ -n "$TWITTER_API_KEY" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --publish-x"
+          if [ "$PUBLISH_INSTAGRAM" = "true" ]; then
+            if [ -z "$INSTAGRAM_ACCESS_TOKEN" ]; then
+              echo "Instagram publishing was explicitly requested but INSTAGRAM_ACCESS_TOKEN is unavailable." >&2
+              exit 1
+            fi
+            EXTRA_ARGS+=(--publish-instagram)
           fi
 
-          # Enable LinkedIn cross-posting by default on scheduled runs, or when input is true
-          if [ "$PUBLISH_LINKEDIN" != "false" ] && [ -n "$LINKEDIN_ACCESS_TOKEN" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --publish-linkedin"
+          if [ "$PUBLISH_X" = "true" ]; then
+            if [ -z "$TWITTER_API_KEY" ]; then
+              echo "X publishing was explicitly requested but TWITTER_API_KEY is unavailable." >&2
+              exit 1
+            fi
+            EXTRA_ARGS+=(--publish-x)
           fi
 
+          if [ "$PUBLISH_LINKEDIN" = "true" ]; then
+            if [ -z "$LINKEDIN_ACCESS_TOKEN" ]; then
+              echo "LinkedIn publishing was explicitly requested but LINKEDIN_ACCESS_TOKEN is unavailable." >&2
+              exit 1
+            fi
+            EXTRA_ARGS+=(--publish-linkedin)
+          fi
 
-          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
-            python3 pipeline/daily_shorts_daemon.py --dry-run --count "$COUNT" $EXTRA_ARGS
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 pipeline/daily_shorts_daemon.py --dry-run --count "$COUNT" "${EXTRA_ARGS[@]}"
           else
-            python3 pipeline/daily_shorts_daemon.py --run-now --count "$COUNT" --privacy "$PRIVACY" --quality "$QUALITY" $EXTRA_ARGS
+            python3 pipeline/daily_shorts_daemon.py --run-now --count "$COUNT" --privacy "$PRIVACY" --quality "$QUALITY" "${EXTRA_ARGS[@]}"
           fi
 
-      - name: Commit & Push Daily Production Logs
+      - name: Upload Daily Production State
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: daily-production-state-${{ github.run_id }}
+          if-no-files-found: ignore
+          retention-days: 7
+          path: |
+            public/**
+            pipeline/digest_history.json
+            pipeline/templates/**
+            data/**
+
+      - name: Remove Credentials From Runner
         if: always()
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A public/ pipeline/digest_history.json pipeline/templates/ data/ || true
-          git diff --staged --quiet || (git commit -m "chore(daemon): update daily production & analytics logs [skip ci]" && git pull --rebase --autostash origin main && git push origin main)
+          rm -f .env pipeline/youtube_token.json pipeline/client_secrets.json
+
+  validate-production-state:
+    name: Validate production state artifact
+    if: needs.produce-short.result == 'success'
+    needs: produce-short
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download Daily Production State
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: daily-production-state-${{ github.run_id }}
+          path: .
+
+      - name: Validate allowlisted state
+        run: |
+          set -euo pipefail
+
+          for required_path in public pipeline/digest_history.json pipeline/templates data; do
+            if [ ! -e "$required_path" ]; then
+              echo "Missing required production state path: $required_path" >&2
+              exit 1
+            fi
+          done
+
+          public_file="$(find public -type f -print -quit)"
+          if [ -z "$public_file" ]; then
+            echo "Production state contains no public files." >&2
+            exit 1
+          fi
+
+          credential_file="$(find . -type f \( -name '.env' -o -name 'youtube_token.json' -o -name 'client_secrets.json' \) -print -quit)"
+          if [ -n "$credential_file" ]; then
+            echo "Credential material was included in the production state artifact." >&2
+            exit 1
+          fi
+
+          echo "Production state artifact passed integrity and credential checks."
+
+  persist-production-state:
+    if: needs.produce-short.result == 'success' && needs.validate-production-state.result == 'success'
+    needs:
+      - produce-short
+      - validate-production-state
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main for production state persistence
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Synchronize main before applying production state
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
+          git -c http.extraheader="$auth_header" fetch origin main
+          git reset --hard origin/main
+
+      - name: Download Daily Production State
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: daily-production-state-${{ github.run_id }}
+          path: .
+
+      - name: Commit and Push Allowlisted Production State
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          for path in public pipeline/digest_history.json pipeline/templates data; do
+            if [ -e "$path" ]; then
+              git add -A -- "$path"
+            fi
+          done
+
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+
+          git diff --cached --check
+          git commit -m "chore(daemon): update daily production & analytics logs [skip ci]"
+          auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
+          git -c http.extraheader="$auth_header" push origin HEAD:main

@@ -1,7 +1,7 @@
 """
 The Model Verse — Procedural Lo-Fi Ambient Synth Generator & Dynamic Ducking Engine
 Generates copyright-free mathematical synthwave pad progressions (3Blue1Brown aesthetic)
-and applies sample-accurate sidechain ducking under Kokoro neural narration.
+and applies sample-accurate sidechain ducking under local neural narration.
 """
 
 import os

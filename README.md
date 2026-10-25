@@ -1,15 +1,15 @@
 # 📐 The Model Verse & Project Aether — Autonomous Video Production Platform
 
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11 | 3.12](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue.svg)](https://www.python.org/downloads/)
 [![Manim CE](https://img.shields.io/badge/Manim%20CE-v0.19%2B-brightgreen.svg)](https://www.manim.community/)
-[![Tests](https://img.shields.io/badge/tests-367%20passed-success.svg)](test/)
+[![Pull Request CI](https://github.com/Amankumar006/Automated-video-Generation/actions/workflows/pr-ci.yml/badge.svg)](https://github.com/Amankumar006/Automated-video-Generation/actions/workflows/pr-ci.yml)
 [![Style: 3Blue1Brown](https://img.shields.io/badge/style-3Blue1Brown%20Chalkboard-9cf.svg)](manim_engine/)
-[![Aether: 3D Virtual Studio](https://img.shields.io/badge/Aether-3D%20Cinematic-purple.svg)](aether/)
+[![Aether: 3D Virtual Studio](https://img.shields.io/badge/Aether-3D%20Cinematic-purple.svg)](_archive/aether/)
 
 The Model Verse is an autonomous video production platform housing two distinct, high-capability video generation engines operating independently and bridged by a clean, decoupled shared contract layer:
 
 1. **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)**: A deterministic, 2D programmatic mathematical and educational motion graphics studio rendering broadcast-grade, **3Blue1Brown-style vertical explainer videos (9:16 at 1440p60 QHD)** for YouTube Shorts, Instagram Reels, and TikTok.
-2. **Project Aether (`aether/`)**: An autonomous, multi-shot 3D cinematic generative virtual studio utilizing state-of-the-art video foundation models (Google Veo 3.1, Kling 3.0, Runway Gen-4.5, CogVideoX), persistent 3D world state tracking, 6-tier complexity planning, speculative 480p draft gating, a 6-critic Council, surgical inpainting repair, and offline Dream-RSI meta-learning.
+2. **Project Aether (`_archive/aether/`)**: An archived autonomous, multi-shot 3D cinematic generative virtual studio utilizing state-of-the-art video foundation models (Google Veo 3.1, Kling 3.0, Runway Gen-4.5, CogVideoX), persistent 3D world state tracking, 6-tier complexity planning, speculative 480p draft gating, a 6-critic Council, surgical inpainting repair, and offline Dream-RSI meta-learning.
 
 ---
 
@@ -22,7 +22,7 @@ The Model Verse is an autonomous video production platform housing two distinct,
 
 ---
 
-## 🔗 Unified Yet Decoupled Architecture (`aether/shared_contract.py`)
+## 🔗 Unified Yet Decoupled Architecture (`_archive/aether/shared_contract.py`)
 
 The platform connects both engines without circular dependencies through a dedicated shared contract layer:
 
@@ -52,6 +52,11 @@ The platform connects both engines without circular dependencies through a dedic
 
 ## 🚀 Quick Start
 
+For a clean contributor setup, start with [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md)
+and [`docs/REPOSITORY_LAYOUT.md`](docs/REPOSITORY_LAYOUT.md). The repository
+uses MIT licensing; see [`LICENSE`](LICENSE). Generated videos, frames,
+downloads, credentials, caches, and model weights stay outside Git.
+
 ### 1. The Model Verse 2D Shorts Pipeline
 ```bash
 # Ingest an arXiv paper and run full 2D Manim production
@@ -62,35 +67,41 @@ python3 pipeline/daily_shorts_daemon.py --run-now --source mixed --count 1
 
 # Dry-run paper discovery, script synthesis, and pedagogy audit without rendering
 python3 pipeline/daily_shorts_daemon.py --dry-run --count 1
+
+# Full pipeline validation with temporary, repository-isolated outputs
+python3 pipeline/run_pipeline.py --dry-run
+
+# Generate local Pocket TTS narration through the unified audio engine
+python3 -c "from pipeline.voice_engine import UnifiedVoiceRouter; import soundfile as sf; a,sr,_=UnifiedVoiceRouter().synthesize_beat('Pocket TTS is ready.', provider='pocket'); sf.write('public/audio/pocket_narration.wav', a, sr)"
 ```
 
 ### 2. Project Aether 3D Autonomous Cinematic Director
 ```bash
 # Run autonomous director simulation on a narrative premise (dry-run mode)
-python3 -m aether.director --brief "Autonomous robotics in silicon cleanroom" --dry-run
+PYTHONPATH=_archive python3 -m aether.director --brief "Autonomous robotics in silicon cleanroom" --dry-run
 
 # Run Aether with budget limits and target model engines
-python3 -m aether.director --brief "Quantum computing cryogenic breakthrough" --budget 50.0 --models veo_3_1 kling_3_0
+PYTHONPATH=_archive python3 -m aether.director --brief "Quantum computing cryogenic breakthrough" --budget 50.0 --models veo_3_1 kling_3_0
 ```
 
 ### 3. Run Test Suite
 ```bash
-# Run all unit and integration tests across both engines (367+ tests)
-pytest
+# Run active unit and integration tests through the configured virtualenv
+make test-python
 
-# Run only Project Aether tests
-pytest test/test_aether_*.py
+# Run archived Project Aether tests explicitly
+PYTHONPATH=_archive .venv/bin/python -m pytest _archive/test/test_aether_*.py
 
 # Run only arXiv figure extraction tests
-pytest test/test_arxiv_figure_extraction.py
+.venv/bin/python -m pytest test/test_arxiv_figure_extraction.py
 ```
 
 ---
 
 ## 📂 Repository Structure
 
-- [**`aether/`**](aether/): Project Aether 3D cinematic virtual studio (world state graph, complexity compiler, council critics, surgical repair, Dream-RSI teacher, and shared contract adapter).
-- [**`pipeline/`**](pipeline/): Ingestion, scriptwriting, pedagogy critic, visual director, acoustic aligner, YouTube publisher, and Aether director pipeline wrapper.
+- [**`_archive/aether/`**](_archive/aether/): Archived Project Aether 3D cinematic virtual studio (world state graph, complexity compiler, council critics, surgical repair, Dream-RSI teacher, and shared contract adapter).
+- [**`pipeline/`**](pipeline/): Ingestion, scriptwriting, pedagogy critic, visual director, acoustic aligner, and YouTube publisher. The archived Aether wrapper is in `_archive/pipeline/aether_director.py`.
 - [**`manim_engine/`**](manim_engine/): 3Blue1Brown chalkboard primitives, visual blueprints, showdown engine, code block visualizer.
-- [**`public/`**](public/): Zero-license Foley SFX library, rendered video archive, math SVGs, and arXiv chalkboard figure cache.
-- [**`test/`**](test/): Comprehensive automated test suite (367+ unit and integration tests).
+- [**`public/`**](public/): Curated zero-license Foley SFX, brand assets, math SVGs, and reusable visual fixtures. Generated videos and downloads stay ignored.
+- [**`test/`**](test/): Automated unit, integration, and render-oriented tests.

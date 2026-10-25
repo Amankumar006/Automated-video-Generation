@@ -12,6 +12,7 @@ import os
 import sys
 import json
 import argparse
+import re
 from pathlib import Path
 from typing import Dict, Any, Optional
 
@@ -106,36 +107,127 @@ def get_authenticated_service(
     return build("youtube", "v3", credentials=creds)
 
 
+def _first_http_url(*values: Any) -> Optional[str]:
+    """Return the first explicit HTTP(S) source URL, never an invented fallback."""
+    for value in values:
+        if isinstance(value, str):
+            candidate = value.strip()
+            if candidate.startswith(("https://", "http://")):
+                return candidate
+    return None
+
+
+def _explicit_provenance(spec: Dict[str, Any], meta: Dict[str, Any]) -> Dict[str, str]:
+    """Collect source/provider/model fields only when the spec explicitly supplies them."""
+    values = {
+        "source_url": _first_http_url(
+            spec.get("source_url"),
+            spec.get("canonical_url"),
+            spec.get("claim_url"),
+            spec.get("arxiv_url"),
+            meta.get("source_url"),
+            meta.get("canonical_url"),
+            meta.get("claim_url"),
+            meta.get("arxiv_url"),
+        ),
+        "provider": next(
+            (
+                str(value).strip()
+                for value in (
+                    spec.get("source_provider"),
+                    spec.get("provider"),
+                    meta.get("source_provider"),
+                    meta.get("provider"),
+                )
+                if isinstance(value, str) and value.strip()
+            ),
+            None,
+        ),
+        "model": next(
+            (
+                str(value).strip()
+                for value in (
+                    spec.get("model_name"),
+                    spec.get("model"),
+                    meta.get("model_name"),
+                    meta.get("model"),
+                )
+                if isinstance(value, str) and value.strip()
+            ),
+            None,
+        ),
+        "tts_provider": next(
+            (
+                str(value).strip()
+                for value in (
+                    spec.get("tts_provider"),
+                    meta.get("tts_provider"),
+                )
+                if isinstance(value, str) and value.strip()
+            ),
+            None,
+        ),
+    }
+    return {key: value for key, value in values.items() if value}
+
+
+def _topic_tags(spec: Dict[str, Any], title_raw: str, provenance: Dict[str, str]) -> set[str]:
+    """Build tags from the current topic and explicit provenance, not historical video claims."""
+    blob = " ".join(
+        str(value)
+        for value in (
+            title_raw,
+            spec.get("id", ""),
+            spec.get("abstract", ""),
+            spec.get("topic", ""),
+            provenance.get("provider", ""),
+            provenance.get("model", ""),
+        )
+    ).lower()
+    tags: set[str] = set()
+    keyword_tags = {
+        "diffusion": {"DiffusionModels", "GenerativeAI"},
+        "robot": {"Robotics", "EmbodiedAI"},
+        "humanoid": {"Robotics", "Humanoid"},
+        "transformer": {"Transformer", "AttentionMechanism"},
+        "attention": {"AttentionMechanism", "GPUOptimization"},
+        "flashattention": {"FlashAttention", "GPUOptimization"},
+        "mixture of experts": {"MixtureOfExperts", "SparseModels"},
+        "moe": {"MixtureOfExperts", "SparseModels"},
+        "reasoning": {"ReasoningModels", "Inference"},
+        "agent": {"AIAgents", "ToolUse"},
+        "inference": {"Inference", "ModelServing"},
+        "quant": {"Quantization", "EfficientAI"},
+    }
+    for keyword, additions in keyword_tags.items():
+        if keyword in blob:
+            tags.update(additions)
+
+    for name in ("Kimi", "OpenAI", "Anthropic", "DeepSeek", "Google", "Meta", "Mistral", "Qwen"):
+        if name.lower() in blob:
+            tags.add(name)
+
+    # Preserve recognizable model/provider names as searchable tags when explicit.
+    for key in ("provider", "model"):
+        value = provenance.get(key)
+        if value:
+            normalized = re.sub(r"[^A-Za-z0-9]+", "", value)
+            if 2 <= len(normalized) <= 40:
+                tags.add(normalized)
+    return tags
+
+
 def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str, Any]:
     """Generates viral, SEO-optimized title, description, tags, and pinned comment from spec."""
-    title_raw = spec.get("title", "AI Architecture Deep Dive")
+    title_raw = str(spec.get("title") or spec.get("topic") or "AI Architecture Deep Dive").strip()
     category = spec.get("category", "mechanism_deepdive")
-    meta = spec.get("metadata", {})
-    arxiv_id = spec.get("id", "").replace("arxiv_", "")
+    meta = spec.get("metadata") if isinstance(spec.get("metadata"), dict) else {}
+    provenance = _explicit_provenance(spec, meta)
 
-    if "tv static" in title_raw.lower() or "creates images" in title_raw.lower() or "diffusion" in title_raw.lower():
-        title = "How AI Creates Images From TV Static #Shorts"
-    elif "one second" in title_raw.lower() or "ai thinks" in title_raw.lower() or "how_ai_thinks" in spec.get("id", "").lower():
-        title = "How an AI Thinks in One Second #Shorts"
-    elif "flashattention" in title_raw.lower():
-        title = "FlashAttention-3: How GPUs Hit 1.2 PFLOPS #Shorts"
-    elif "r1" in title_raw.lower() or "r1" in spec.get("id", "").lower():
-        title = "DeepSeek-R1: Open Weights Shock OpenAI o1 #Shorts"
-    elif "deepseek" in title_raw.lower() and "gpt" in title_raw.lower():
-        title = "DeepSeek-V3 vs GPT-4o: 18x Cheaper AI? #Shorts"
-    elif "deepseek" in title_raw.lower():
-        title = "How DeepSeek-V3 Saved 94% of Compute #Shorts"
-    elif "kv" in title_raw.lower() and "cache" in title_raw.lower():
-        title = "KV Cache Explained: How LLMs Generate Fast #Shorts"
-    elif "sae" in title_raw.lower() or "latent" in title_raw.lower() or "parts-of-speech" in title_raw.lower():
-        title = "Do Sparse Autoencoders Learn Grammar? #Shorts"
-    elif "tamp" in title_raw.lower() or "motion planning" in title_raw.lower() or "coding agents" in title_raw.lower():
-        title = "Coding Agents for Robotic Task & Motion Planning #Shorts"
-    else:
-        clean_t = title_raw.split(":")[0].strip()
-        if len(clean_t) > 42:
-            clean_t = clean_t[:39] + "..."
-        title = f"{clean_t} Explained #Shorts"
+    clean_t = re.sub(r"\s+", " ", title_raw).strip()
+    if len(clean_t) > 42:
+        clean_t = clean_t[:39].rsplit(" ", 1)[0] + "..."
+    title = f"{clean_t} #Shorts"
 
     if spec.get("language") in ("hi", "hindi") and "(Hindi)" not in title:
         title = title.replace(" #Shorts", " (Hindi) #Shorts")
@@ -177,56 +269,53 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
     b1_text = beats[0].get("text", "") if len(beats) > 0 else ""
     b5_text = beats[-2].get("text", "") if len(beats) >= 2 else ""
 
-    import re
-    arxiv_url = spec.get("arxiv_url") or spec.get("metadata", {}).get("arxiv_url")
+    arxiv_url = provenance.get("source_url")
     if not arxiv_url:
-        search_blob = f"{spec.get('id', '')} {spec.get('arxiv_id', '')} {spec.get('title', '')} {video_path}"
-        m = re.search(r'\d{4}\.\d{4,5}', search_blob)
+        m = re.search(r"(?<!\d)(\d{4}\.\d{4,5})(?!\d)", str(spec.get("arxiv_id") or spec.get("id") or ""))
         if m:
-            arxiv_url = f"https://arxiv.org/abs/{m.group(0)}"
-        else:
-            arxiv_url = "https://themodelverse.in"
+            arxiv_url = f"https://arxiv.org/abs/{m.group(1)}"
+            provenance["source_url"] = arxiv_url
 
     # 4. Canonical track resolution and references block
     track = resolve_track(spec.get("category") or spec.get("metadata", {}).get("category", ""))
     track_meta = TRACK_METADATA.get(track, TRACK_METADATA[TRACK_ACADEMIC])
 
     if track == TRACK_TECH_NEWS:
-        source_url = spec.get("canonical_url") or spec.get("metadata", {}).get("canonical_url") or arxiv_url
+        source_url = arxiv_url
         ref_block = f"""📰 OFFICIAL SOURCE & ANNOUNCEMENT:
 • Breakthrough: {title_raw}
-• Source Link: {source_url}
+• Source Link: {source_url or 'Not provided in source record'}
 • Track: {track_meta['display_name']} // {track_meta['badge']}
 • Visuals: Powered by The Model Verse Engine"""
     elif track == TRACK_DEVELOPER_PERKS:
-        perk_url = spec.get("claim_url") or spec.get("canonical_url") or spec.get("metadata", {}).get("claim_url") or arxiv_url
+        perk_url = arxiv_url
         ref_block = f"""🎁 DEVELOPER PERK DETAILS:
 • Program: {title_raw}
-• Claim Portal: {perk_url}
+• Claim Portal: {perk_url or 'Not provided in source record'}
 • Track: {track_meta['display_name']} // {track_meta['badge']}
 • Verification: Ground-truth audited by The Model Verse"""
     else:
         ref_block = f"""📄 PAPER & REFERENCES:
 • Title: {title_raw}
-• Paper link: {arxiv_url}
+• Paper link: {arxiv_url or 'Not provided in source record'}
 • Track: {track_meta['display_name']} // {track_meta['badge']}
 • Visuals: Powered by The Model Verse Engine"""
+
+    provenance_lines = []
+    if provenance.get("provider"):
+        provenance_lines.append(f"• Source provider: {provenance['provider']}")
+    if provenance.get("model"):
+        provenance_lines.append(f"• Model: {provenance['model']}")
+    if provenance.get("tts_provider"):
+        provenance_lines.append(f"• Voice provider: {provenance['tts_provider']}")
+    if provenance_lines:
+        ref_block += "\n" + "\n".join(provenance_lines)
 
     # 5. Hashtags construction (dynamically category-aware)
     tag_set = set(track_meta.get("default_tags", ["AI", "MachineLearning", "Shorts"]))
     title_lower = title_raw.lower()
     spec_id_lower = str(spec.get("id", "")).lower()
-
-    if any(k in title_lower for k in ["diffusion", "tv static", "creates images"]):
-        tag_set.update(["DiffusionModels", "StableDiffusion", "GenerativeAI", "ComputerVision"])
-    if any(k in title_lower or k in spec_id_lower for k in ["robot", "humanoid", "reflex", "kinematic", "locomotion"]):
-        tag_set.update(["Robotics", "Humanoid", "EmbodiedAI", "ControlSystems"])
-    if any(k in title_lower or k in spec_id_lower for k in ["transformer", "attention", "flashattention"]):
-        tag_set.update(["Transformer", "AttentionMechanism", "GPUOptimization"])
-    if "deepseek" in title_lower or "deepseek" in spec_id_lower:
-        tag_set.update(["DeepSeek", "DeepSeekV3", "MoE"])
-    if any(k in title_lower or k in spec_id_lower for k in ["r1", "reasoning", "grpo"]):
-        tag_set.update(["ReasoningModels", "ReinforcementLearning", "GRPO"])
+    tag_set.update(_topic_tags(spec, title_raw, provenance))
 
     hashtags = [f"#{t.replace(' ', '')}" for t in sorted(tag_set)]
     hashtags_str = " ".join(hashtags[:12])
@@ -276,7 +365,7 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
     else:
         pinned_comment = track_meta.get("pinned_comment", "💡 What topic or architectural breakthrough should we break down next? Let us know below! 👇")
 
-    return {
+    result = {
         "title": title,
         "description": description.strip(),
         "tags": base_tags[:20],
@@ -286,6 +375,8 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
         "language": spec.get("language", "en"),
         "title_lint": title_lint_report
     }
+    result.update(provenance)
+    return result
 
 
 def upload_short(

@@ -292,13 +292,22 @@ class TestTier2BoundaryAndCornerCases:
     def test_tier2_svg_vs_raster_preferred_renderer_selection(
         self,
         mock_base_6beat_spec: Dict[str, Any],
+        tmp_path: Path,
     ):
         """Edge case: Preferred renderer selection for SVG-only vs Raster-only figures."""
         director = VisualDirector()
 
+        fixture_png = tmp_path / "figure.png"
+        Image.new("RGB", (1200, 800), color=(10, 13, 20)).save(fixture_png)
+        fixture_svg = tmp_path / "figure.svg"
+        fixture_svg.write_text(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800"><path d="M0 0 L1200 800" /></svg>',
+            encoding="utf-8",
+        )
+
         # 1. Raster-only scenario
         raster_spec = copy.deepcopy(mock_base_6beat_spec)
-        test_png = str(PROJECT_ROOT / "public" / "arxiv_cache" / "2407.08608" / "chalkboard_figures" / "fig_1_3_stage_pipelining.png")
+        test_png = str(fixture_png)
         raster_spec["paper_figures"] = [{
             "figure_id": "fig_raster_only",
             "svg_path": None,
@@ -311,7 +320,7 @@ class TestTier2BoundaryAndCornerCases:
 
         # 2. Vector scenario (with valid SVG)
         vector_spec = copy.deepcopy(mock_base_6beat_spec)
-        test_svg = str(PROJECT_ROOT / "public" / "arxiv_cache" / "2407.08608" / "chalkboard_figures" / "fig_4_flash3_h100_causal_False_hdim_128_fwd_speed.svg")
+        test_svg = str(fixture_svg)
         vector_spec["paper_figures"] = [{
             "figure_id": "fig_vector_only",
             "svg_path": test_svg,
@@ -423,6 +432,7 @@ class TestTier4RealWorldApplicationScenario:
             "--category", "architecture_breakdown",
             "--skip-render",
             "--no-music",
+            "--allow-stale",
         ]
 
         with patch("sys.argv", test_args), \

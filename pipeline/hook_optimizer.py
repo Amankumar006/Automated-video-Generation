@@ -33,6 +33,27 @@ YOU = re.compile(r"\b(you|your|you're|youre|yourself)\b", re.I)
 STAKE = re.compile(r"\b(lose|lost|wasting|waste|quit|fail|broke|cost|risk|before|stop|never|die|dying|dead)\b", re.I)
 CURIOSITY = re.compile(r"\b(why|how|what|which|until|before|but|nobody|almost|except|reason|actually)\b", re.I)
 
+# Human-written explainer openings in the research sample almost never use a
+# generic imperative "Before you..." frame. Keep the word available when it
+# is part of the actual story, but do not let a reusable template win every
+# category by default.
+GENERIC_BEFORE_OPENING = re.compile(
+    r"^\s*before\s+(?:you|your|the\s+next|another|updating|deploying|training|rendering|scaling)\b",
+    re.I,
+)
+
+
+def is_generic_before_opening(text: str) -> bool:
+    """Return True for the repetitive call-to-action-shaped opening pattern."""
+    normalized = (text or "").strip()
+    if not GENERIC_BEFORE_OPENING.search(normalized):
+        return False
+    # Time-sensitive offers and deadlines are legitimate uses of temporal
+    # language; they are not the repetitive architecture-hook pattern.
+    if re.search(r"\b(pay|billing|expire|expires|deadline|cohort|launch)\b", normalized, re.I):
+        return False
+    return True
+
 # Load formulas from hooks.json
 HOOKS_JSON_PATH = SKILLS_YT_SCRIPT_DIR / "hooks.json"
 FORMULAS: List[Dict[str, Any]] = []
@@ -263,16 +284,16 @@ def get_domain_context_parameters(
             "metric_templates": [
                 "Stop paying full price for AI APIs before you claim {metric} with {clean_topic}.",
                 "Are you burning your own cash on API bills before claiming this {metric} grant from {clean_topic}?",
-                "Before you spend another dollar on model tokens, see how {clean_topic} gives you {metric} free.",
+                "The next model bill can erase your runway; {clean_topic} gives qualifying teams {metric} free.",
                 "Did you know you can claim up to {metric} in free compute right now through {clean_topic}?",
-                "Before your next billing cycle, verify if your team qualifies for {metric} via {clean_topic}."
+                "Your next billing cycle may look different if your team qualifies for {metric} via {clean_topic}."
             ],
             "general_templates": [
-                "Stop paying full price for AI tokens before checking out {clean_topic}.",
+                "AI tokens do not have to consume your whole budget; {clean_topic} may change the bill.",
                 "Are you burning your startup budget on API calls before claiming {clean_topic}?",
-                "Before you pay your next cloud bill, make sure you aren't missing out on {clean_topic}.",
+                "That cloud bill gets easier to justify when {clean_topic} is subsidizing the work.",
                 "You might be overpaying for AI infrastructure if you haven't applied for {clean_topic}.",
-                "Before you ship your next application, claim these developer resources from {clean_topic}."
+                "Ship the application first; let {clean_topic} handle the resource gap behind it."
             ]
         }
 
@@ -281,14 +302,14 @@ def get_domain_context_parameters(
             "domain": "robotics_tamp",
             "metric_templates": [
                 "Why do standard robots fail {metric} of real-world trials before {clean_topic} fixes execution?",
-                "Before you deploy your next physical policy, see how {clean_topic} unlocks {metric} better precision.",
-                "You are probably training robot policies with the wrong primitives before testing {clean_topic} for {metric}.",
+                "A robot can miss one simple object and lose the whole task; {clean_topic} unlocks {metric} better precision.",
+                "The primitive may be the problem: {clean_topic} tests robot policies for {metric} precision.",
                 "Why do robotic manipulation policies hit a plateau before {clean_topic} boosts accuracy by {metric}?",
                 "Do not train another embodied policy until you see how {clean_topic} cuts errors by {metric}."
             ],
             "general_templates": [
-                "Why do multi-task robots struggle in the real world before {clean_topic} fixes their execution?",
-                "Before you train your next physical robot policy, see how {clean_topic} bridges the sim-to-real gap.",
+                "Why do multi-task robots struggle the moment the room changes? {clean_topic} targets that gap.",
+                "A robot can ace simulation and still fumble the real room; {clean_topic} bridges that gap.",
                 "Most robot foundation models fail on complex manipulation, but {clean_topic} proves a working fix.",
                 "Why is real-world robot execution so brittle before {clean_topic} restructures physical actions?",
                 "Do not deploy your next robotic manipulation model before understanding how {clean_topic} works."
@@ -299,15 +320,15 @@ def get_domain_context_parameters(
         return {
             "domain": "multimodal_diffusion",
             "metric_templates": [
-                "Why do standard diffusion models waste {metric} of render latency before {clean_topic}?",
-                "Before you generate another frame, see how {clean_topic} cuts render latency by {metric}.",
+                "Why do standard diffusion models spend {metric} of render latency repeating work? {clean_topic} cuts into it.",
+                "One more generated frame can expose the whole latency bill; {clean_topic} cuts it by {metric}.",
                 "Why do generative video pipelines lose consistency before {clean_topic} delivers {metric} speedups?",
-                "You might be leaving {metric} of generation quality behind before trying {clean_topic}.",
+                "The missing {metric} of generation quality is not magic—it is the problem {clean_topic} targets.",
                 "Do not render your next diffusion batch before testing how {clean_topic} gains {metric}."
             ],
             "general_templates": [
                 "Why do standard video and 3D models lose temporal coherence before {clean_topic} fixes it?",
-                "Before you render your next diffusion frame, see how {clean_topic} solves the consistency bottleneck.",
+                "The frame looks fine until motion starts; {clean_topic} attacks that consistency bottleneck.",
                 "You are probably wasting render cycles if you haven't seen how {clean_topic} handles generation.",
                 "Why does generative video struggle with motion blur before {clean_topic} stabilizes the latent space?",
                 "Do not scale your diffusion models before seeing how {clean_topic} handles temporal frames."
@@ -319,14 +340,14 @@ def get_domain_context_parameters(
             "domain": "model_showdown",
             "metric_templates": [
                 "Does {clean_topic} actually crush the competition by {metric}, or is it just benchmark hype?",
-                "Before you choose your foundation model, look at how {clean_topic} beats the leader by {metric}.",
+                "The leaderboard changes when {clean_topic} beats the leader by {metric}; the catch is why.",
                 "Why are top engineering teams switching models for {clean_topic}'s {metric} gain?",
                 "Everyone tells you to use the reigning model, but {clean_topic} outperforms it by {metric}.",
                 "Do not lock in your LLM provider before reviewing {clean_topic}'s {metric} benchmark lead."
             ],
             "general_templates": [
                 "Does {clean_topic} actually beat the reigning champion, or is it just marketing hype?",
-                "Before you lock in your foundation model, see who actually wins this showdown with {clean_topic}.",
+                "The leaderboard is not settled: {clean_topic} is the contender worth comparing under pressure.",
                 "You might be betting on the wrong AI architecture before you see this benchmark breakdown.",
                 "Everyone assumed the leaderboard was settled, until {clean_topic} entered the ring.",
                 "Do not pick your next LLM before seeing how {clean_topic} performs under pressure."
@@ -337,14 +358,14 @@ def get_domain_context_parameters(
         return {
             "domain": "tech_news",
             "metric_templates": [
-                "Before you deploy your next model, see how {clean_topic} cuts costs by {metric}.",
+                "A new model just changed the deployment math: {clean_topic} cuts costs by {metric}.",
                 "Why are leading AI teams switching to {clean_topic} after this {metric} breakthrough?",
                 "You might be running outdated architecture before you test the {metric} speedup in {clean_topic}.",
                 "Everyone thought frontier models reached a ceiling, until {clean_topic} improved by {metric}.",
                 "Do not finalize your AI roadmap before seeing how {clean_topic} delivers {metric}."
             ],
             "general_templates": [
-                "Before you build your next AI workflow, see what {clean_topic} just dropped.",
+                "The release already landed; here is what {clean_topic} changes in an AI workflow.",
                 "Why is everyone in the AI community talking about {clean_topic} today?",
                 "You might be building on outdated tech before you test what {clean_topic} can do.",
                 "Everyone assumed standard models were good enough, until {clean_topic} changed the game.",
@@ -356,18 +377,18 @@ def get_domain_context_parameters(
     return {
         "domain": "hardware_efficiency",
         "metric_templates": [
-            "Before you train your next model, see how {clean_topic} cuts {metric} of memory overhead.",
+            "Your GPU can spend {metric} of its memory budget moving data; {clean_topic} cuts that overhead.",
             "Why do standard transformer architectures hit a memory wall before {clean_topic} unlocks {metric} gains?",
             "You might be leaving {metric} of your hardware performance on the table without {clean_topic}.",
             "Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap.",
             "Do not scale your next training run before you see how {clean_topic} delivers {metric}."
         ],
         "general_templates": [
-            "Before you scale your next model, see why {clean_topic} completely rethinks standard architecture.",
+            "Scaling exposes the weak seam in standard architecture; {clean_topic} rethinks that seam.",
             "Why do standard deep learning models hit a scaling bottleneck before {clean_topic} restructures it?",
-            "You might be building on a flawed architecture before you understand how {clean_topic} works.",
+            "The architecture looks efficient until the workload grows; {clean_topic} shows where it breaks.",
             "Everyone assumed scaling parameters was the only answer, until {clean_topic} proved otherwise.",
-            "Do not deploy your next AI architecture before testing how {clean_topic} operates."
+            "The real test is the workload, not the diagram: watch how {clean_topic} operates under pressure."
         ]
     }
 
@@ -391,13 +412,16 @@ def generate_hook_candidates(
     # 1. Base hook and authentic dynamic linguistic reframings
     if base_hook and base_hook.strip():
         b_clean = base_hook.strip()
-        candidates.append(b_clean)
+        # Preserve bespoke model-written hooks, but do not let the known
+        # repetitive "Before you..." frame re-enter the ranking as a winner.
+        if not is_generic_before_opening(b_clean):
+            candidates.append(b_clean)
 
         b_core = b_clean.rstrip(".?! ")
         if len(b_core) > 10 and not any(w in b_core.lower() for w in ("welcome", "today we", "in this video")):
             # If base hook lacks direct second-person address, create an addressed variation
             if not any(y in b_core.lower() for y in ("you", "your")):
-                candidates.append(f"Before you build your next system, see how {b_core[0].lower() + b_core[1:]}.")
+                candidates.append(f"The catch with {clean_topic}: {b_core[0].lower() + b_core[1:]}.")
                 if not b_core.endswith("?"):
                     candidates.append(f"Did you know {b_core[0].lower() + b_core[1:]}?")
             else:
@@ -417,7 +441,7 @@ def generate_hook_candidates(
             s0 = raw_sentences[0].rstrip(".?! ")
             # Transform the paper's actual thesis into question / warning / address archetypes
             if not any(y in s0.lower() for y in ("you", "your")):
-                candidates.append(f"Before you deploy your next architecture, consider this: {s0}.")
+                candidates.append(f"Here is the uncomfortable part of {clean_topic}: {s0}.")
                 candidates.append(f"Why is {clean_topic} a major breakthrough? Because {s0[0].lower() + s0[1:]}.")
             else:
                 candidates.append(s0 + ".")
@@ -524,7 +548,7 @@ def optimize_script_hook(
     # If the base hook from the LLM has a solid score (>= 58, WORKABLE/STRONG) and is
     # reasonably close to the top synthetic candidate (<= 8 points), prefer keeping
     # the LLM's bespoke narrative to avoid generic repetitive templates!
-    if base_hook and base_hook.strip():
+    if base_hook and base_hook.strip() and not is_generic_before_opening(base_hook):
         base_eval = score_hook(base_hook.strip())
         if base_eval["verdict"] >= 58 and (winner_eval["verdict"] - base_eval["verdict"] <= 8):
             winning_hook = base_hook.strip()
@@ -544,6 +568,13 @@ def optimize_script_hook(
         "formula": winner_eval["formula"],
         "properties": winner_eval["properties"],
         "weakest_property": winner_eval["weakest_property"],
+        "opening_style": (
+            "generic_before_replaced"
+            if is_generic_before_opening(base_hook) and not is_generic_before_opening(winning_hook)
+            else "source_preserved"
+            if winning_hook == base_hook.strip()
+            else "candidate_selected"
+        ),
         "candidates_evaluated": len(all_evals),
         "rankings": [
             {

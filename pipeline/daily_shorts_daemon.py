@@ -31,6 +31,7 @@ from pipeline.config import (
     BROADCAST_FPS,
     MAX_CONTENT_AGE_DAYS,
     MAX_PERK_VERIFICATION_AGE_DAYS,
+    TOPIC_SELECTION_MODE,
     is_content_recent,
     calculate_content_age_days,
 )
@@ -39,6 +40,7 @@ from pipeline.analytics_feedback import (
     get_performance_category_bias,
     get_recommended_pacing
 )
+from pipeline.topic_gate import filter_topic_candidates
 
 DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -80,11 +82,62 @@ SLOT_SCHEDULE: Dict[int, Dict[str, Any]] = {
 # (3) Actionable developer perks and startup credits ('perks')
 CONTENT_PILLARS = ["arxiv", "blogs", "perks"]
 
+# Creative formats rotate independently from source pillars so mixed runs do
+# not become a week of visually identical architecture explainers.
+CONTENT_FORMAT_PROFILES: Dict[str, Dict[str, Any]] = {
+    "character_analogy": {
+        "label": "Character analogy",
+        "brief": "Use a recurring simple character or object in a concrete mini-scene. Let the mechanism solve a visible problem; keep humour dry and human.",
+        "best_for": "beginner concepts, APIs, tokens, agents, developer frustrations",
+        "visual_language": "expressive character blocking, props, one clear transformation per beat",
+    },
+    "tool_reaction": {
+        "label": "Tool reaction",
+        "brief": "Open with a surprising real tool behaviour or result, then show the smallest reproducible workflow and its limitation.",
+        "best_for": "new tools, model launches, demos, workflows, open-source projects",
+        "visual_language": "screen-like live demo framing, cursor/state changes, before/after proof",
+    },
+    "system_reveal": {
+        "label": "System reveal",
+        "brief": "Reveal the system as real inputs, decisions, transformations, and outputs; avoid vague claims of automation.",
+        "best_for": "agents, pipelines, creator workflows, benchmarks, infrastructure",
+        "visual_language": "causal pipeline, evidence labels, human checkpoints, explicit failure paths",
+    },
+    "motion_story": {
+        "label": "Motion story",
+        "brief": "Tell one visual story with a clean physical transformation and sparse text. Animation carries the explanation instead of mirroring narration.",
+        "best_for": "architecture, physics-like mechanisms, performance comparisons, visual breakthroughs",
+        "visual_language": "cinematic camera movement, one hero object, grounded geometry, restrained labels",
+    },
+}
+
 PILLAR_DISPLAY_NAMES: Dict[str, str] = {
     "arxiv": "Academic Mechanism Deep Dives (arXiv / HF)",
     "blogs": "Official AI Lab Releases & Tech News (OpenAI, Anthropic, Google DeepMind, HF)",
     "perks": "Actionable Developer Perks & Startup Credits (Anthropic, Microsoft, Google, AWS)"
 }
+
+
+def get_content_format_rotation_order(
+    history: Optional[Dict[str, Any]] = None,
+) -> List[str]:
+    """Return least-recently-used creative formats first."""
+    if history is None:
+        history = load_history()
+    latest: Dict[str, Optional[datetime.datetime]] = {
+        name: None for name in CONTENT_FORMAT_PROFILES
+    }
+    for record in history.get("processed_papers", {}).values():
+        fmt = record.get("content_format")
+        if fmt not in latest:
+            continue
+        dt = parse_iso_datetime(record.get("produced_at"))
+        if dt and (latest[fmt] is None or dt > latest[fmt]):
+            latest[fmt] = dt
+    return sorted(
+        latest,
+        key=lambda fmt: latest[fmt].timestamp() if latest[fmt] else float("-inf"),
+    )
 
 
 def parse_iso_datetime(dt_str: Optional[str]) -> Optional[datetime.datetime]:
@@ -190,7 +243,8 @@ def get_content_rotation_order(
 def is_candidate_eligible_for_production(
     candidate: Dict[str, Any],
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
 ) -> bool:
     """
     Validates that a candidate specification is fresh and eligible for publication.
@@ -213,7 +267,11 @@ def is_candidate_eligible_for_production(
         vdate = perk_meta.get("last_verified_date") or candidate.get("last_verified_date")
         if not vdate:
             return False
-        return is_content_recent(vdate, max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS)
+        return is_content_recent(
+            vdate,
+            max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS,
+            reference_date=reference_date,
+        )
 
     # 2. Official blogs check
     if src in ("blogs", "official_blogs") or cat in ("tech_news", "official_blogs") or c_id.startswith(("blog_", "news_")):
@@ -223,11 +281,35 @@ def is_candidate_eligible_for_production(
             b_date = blog_meta.get("published_date")
         if not b_date:
             return False
-        return is_content_recent(b_date, max_age_days=effective_max_age)
+        return is_content_recent(
+            b_date,
+            max_age_days=effective_max_age,
+            reference_date=reference_date,
+        )
 
-    # 3. ArXiv / academic papers check
+    # 3. GitHub freshness is based on observable repository activity, not lifetime stars.
+    if src in ("github", "github_api", "github_search_api", "curated_trending") or c_id.startswith("gh_"):
+        repo_meta = candidate.get("repo_metadata", {})
+        activity_date = (
+            repo_meta.get("pushed_at")
+            or repo_meta.get("updated_at")
+            or candidate.get("updated_at")
+        )
+        if not activity_date:
+            return False
+        return is_content_recent(
+            activity_date,
+            max_age_days=effective_max_age,
+            reference_date=reference_date,
+        )
+
+    # 4. ArXiv / academic papers check
     p_date = candidate.get("published_at") or candidate.get("published_date") or candidate.get("date") or c_id
-    return is_content_recent(p_date, max_age_days=effective_max_age)
+    return is_content_recent(
+        p_date,
+        max_age_days=effective_max_age,
+        reference_date=reference_date,
+    )
 
 
 def fetch_candidates_for_pillar(
@@ -235,7 +317,9 @@ def fetch_candidates_for_pillar(
     limit: int = 10,
     history: Optional[Dict[str, Any]] = None,
     max_age_days: Optional[int] = None,
-    allow_stale: bool = False
+    allow_stale: bool = False,
+    reference_date: Optional[datetime.date] = None,
+    topic_mode: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """Fetches candidate specifications for a specific content pillar, strictly enforcing content recency."""
     if history is None:
@@ -247,16 +331,30 @@ def fetch_candidates_for_pillar(
     candidates: List[Dict[str, Any]] = []
 
     if pillar == "arxiv":
-        papers = get_trending_digest(limit=max(limit * 3, 50), max_age_days=effective_max_age, allow_stale=allow_stale)
+        papers = get_trending_digest(
+            limit=max(limit * 3, 50),
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+        )
         candidates = [p for p in papers if not p.get("is_processed") and p["id"] not in proc_ids]
 
     elif pillar in ("blogs", "news"):
-        blog_candidates = get_official_blogs_digest(limit=max(limit * 5, 100), max_age_days=effective_max_age, allow_stale=allow_stale)
+        blog_candidates = get_official_blogs_digest(
+            limit=max(limit * 5, 100),
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
         candidates = [b for b in blog_candidates if b["id"] not in proc_ids]
 
     elif pillar == "perks":
         from pipeline.tech_perks_fetcher import get_verified_perks_digest
-        perk_candidates = get_verified_perks_digest(limit=max(limit * 5, 50), max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS, allow_stale=allow_stale)
+        perk_candidates = get_verified_perks_digest(
+            limit=max(limit * 5, 50),
+            max_age_days=MAX_PERK_VERIFICATION_AGE_DAYS,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
         candidates = [p for p in perk_candidates if p["id"] not in proc_ids]
 
     elif pillar == "github":
@@ -266,8 +364,19 @@ def fetch_candidates_for_pillar(
     # Enforce second-layer defensive check on all candidates
     eligible = [
         c for c in candidates
-        if is_candidate_eligible_for_production(c, max_age_days=effective_max_age, allow_stale=allow_stale)
+        if is_candidate_eligible_for_production(
+            c,
+            max_age_days=effective_max_age,
+            allow_stale=allow_stale,
+            reference_date=reference_date,
+        )
     ]
+    if topic_mode:
+        eligible = filter_topic_candidates(
+            eligible,
+            reference_date=reference_date,
+            mode=topic_mode,
+        )
     return eligible[:limit]
 
 
@@ -472,13 +581,37 @@ class DailyShortsDaemon:
         target_slot_hour: Optional[int] = None,
         preferred_taxonomy: Optional[str] = None,
         preferred_category: Optional[str] = None,
-        source: str = "mixed"
+        source: str = "mixed",
+        reference_date: Optional[datetime.date] = None,
+        topic_mode: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        effective_topic_mode = (topic_mode or TOPIC_SELECTION_MODE).lower()
+
+        def fetch_pool(pillar: str, limit: int, history: Dict[str, Any]) -> List[Dict[str, Any]]:
+            """Call candidate discovery while keeping older test doubles compatible."""
+            try:
+                return fetch_candidates_for_pillar(
+                    pillar,
+                    limit=limit,
+                    history=history,
+                    reference_date=reference_date,
+                    topic_mode=effective_topic_mode,
+                )
+            except TypeError as exc:
+                if "topic_mode" not in str(exc):
+                    raise
+                return fetch_candidates_for_pillar(
+                    pillar,
+                    limit=limit,
+                    history=history,
+                    reference_date=reference_date,
+                )
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
         print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s) | Source: {source.upper()}")
+        print(f"🛡️ Topic Gate: {effective_topic_mode.upper()} (no evidence, no video)")
         if target_slot_hour is not None and target_slot_hour in SLOT_SCHEDULE:
             slot_info = SLOT_SCHEDULE[target_slot_hour]
             print(f"🎯 Automated Window: {slot_info['slot_name']}")
@@ -578,6 +711,7 @@ class DailyShortsDaemon:
                 selected_ids = set()
                 # Deep copy of history for multi-reel cycles so each reel in this cycle rotates to next pillar
                 working_history = json.loads(json.dumps(history))
+                selected_formats = get_content_format_rotation_order(working_history)
 
                 for reel_idx in range(count):
                     curr_rotation = get_content_rotation_order(working_history)
@@ -585,7 +719,7 @@ class DailyShortsDaemon:
                     chosen_pillar = None
 
                     for target_pillar in curr_rotation:
-                        pool = fetch_candidates_for_pillar(target_pillar, limit=10, history=working_history)
+                        pool = fetch_pool(target_pillar, limit=10, history=working_history)
                         available_candidates = [c for c in pool if c["id"] not in selected_ids]
                         if preferred_category:
                             matching = [c for c in available_candidates if c.get("recommended_category") == preferred_category or c.get("category") == preferred_category]
@@ -604,6 +738,9 @@ class DailyShortsDaemon:
                                 break
 
                     if chosen_candidate:
+                        content_format = selected_formats[reel_idx % len(selected_formats)]
+                        chosen_candidate["content_format"] = content_format
+                        chosen_candidate["format_profile"] = CONTENT_FORMAT_PROFILES[content_format]
                         selected_papers.append(chosen_candidate)
                         selected_ids.add(chosen_candidate["id"])
                         print(f"   Reel {reel_idx + 1}/{count} assigned to [{chosen_pillar.upper()}]: {chosen_candidate['title']} ({chosen_candidate['id']})")
@@ -616,7 +753,8 @@ class DailyShortsDaemon:
                             "category": chosen_candidate.get("recommended_category", "general"),
                             "source": chosen_pillar,
                             "produced_at": simulated_ts,
-                            "status": "completed"
+                            "status": "completed",
+                            "content_format": content_format,
                         }
                     else:
                         print(f"   ⚠️ No unprocessed candidates found across any content pillars for reel {reel_idx + 1}.")
@@ -629,7 +767,11 @@ class DailyShortsDaemon:
             else:
                 target_pillar = "blogs" if normalized_source == "news" else normalized_source
                 print(f"\n🔍 Step 1: Scanning trending breakthrough candidates (Source: {target_pillar.upper()})...")
-                unprocessed = fetch_candidates_for_pillar(target_pillar, limit=35 if target_pillar == "arxiv" else 10)
+                unprocessed = fetch_pool(
+                    target_pillar,
+                    limit=35 if target_pillar == "arxiv" else 10,
+                    history=load_history(),
+                )
 
                 if preferred_category:
                     unprocessed = (
@@ -654,6 +796,10 @@ class DailyShortsDaemon:
             mult = p.get("analytics_multiplier", 1.0)
             print(f"   [{idx+1}/{len(selected_papers)}] {p['title']} ({p['id']})")
             print(f"       Domain: {tax.upper()} ({mult:.2f}x velocity) | Category: {p.get('recommended_category', 'mechanism_deepdive').upper()}")
+            gate = p.get("topic_gate", {})
+            if gate:
+                print(f"       Topic Gate: {gate.get('classification', 'rejected').upper()} — {gate.get('reason', '')}")
+                print(f"       Evidence: {', '.join(gate.get('evidence', [])) or 'none'}")
             if notes.get("recommended_hook"):
                 print(f"       💡 Hook: {notes.get('recommended_hook')}")
             if notes.get("suggested_everyday_analogy"):
@@ -667,6 +813,12 @@ class DailyShortsDaemon:
             arxiv_id = top_paper["id"]
             category = top_paper.get("recommended_category", "mechanism_deepdive")
             notes = top_paper.get("editorial_notes", {})
+            content_format = top_paper.get("content_format")
+            if content_format not in CONTENT_FORMAT_PROFILES:
+                content_format = get_content_format_rotation_order(load_history())[0]
+                top_paper["content_format"] = content_format
+            top_paper["format_profile"] = CONTENT_FORMAT_PROFILES[content_format]
+            print(f"   🎬 Creative format: {CONTENT_FORMAT_PROFILES[content_format]['label']} ({content_format})")
 
             print("\n" + "-" * 70)
             print(f"🎬 Producing Reel [{idx+1}/{len(selected_papers)}]: {title}")
@@ -675,10 +827,38 @@ class DailyShortsDaemon:
 
             cand_source = classify_history_entry_pillar(arxiv_id, top_paper)
 
+            # Freeze one official source image before rendering tech-news
+            # stories. The scene may use it as visual evidence; it never falls
+            # back to unrelated stock imagery.
+            if category == "tech_news" and os.getenv("RESOLVE_SOURCE_ASSETS", "true").lower() not in {"0", "false", "no"}:
+                try:
+                    from pipeline.source_asset_resolver import resolve_official_source_image
+                    blog_meta = top_paper.get("blog_metadata", {}) or {}
+                    source_url = blog_meta.get("canonical_url") or blog_meta.get("official_url") or top_paper.get("official_url")
+                    asset = resolve_official_source_image(source_url, arxiv_id) if source_url else None
+                    if asset:
+                        top_paper.setdefault("source_assets", []).append(asset)
+                        top_paper.setdefault("blog_metadata", {})["source_assets"] = top_paper["source_assets"]
+                        print(f"   🖼️ Official source asset frozen: {asset['path']}")
+                except Exception as asset_err:
+                    print(f"   ⚠️ Source asset notice: {asset_err}")
+
             if dry_run:
                 print("🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
                 from pipeline.script_generator import generate_script
-                spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
+                try:
+                    spec = generate_script(
+                        topic=title,
+                        category=category,
+                        arxiv_meta=top_paper,
+                        context=json.dumps(top_paper["format_profile"], sort_keys=True),
+                    )
+                except TypeError as exc:
+                    # Keep legacy test doubles and downstream integrations that
+                    # still implement the pre-format function signature working.
+                    if "context" not in str(exc):
+                        raise
+                    spec = generate_script(topic=title, category=category, arxiv_meta=top_paper)
                 audit = self.critic.evaluate_script(spec, use_llm=False)
                 print(f"   💡 Analogies Found: {audit.total_analogies} | Jargon Count: {audit.total_critical_jargon} | Slop Cliches: {audit.total_slop_cliches}")
                 if spec.get("feynman_certification"):
@@ -735,7 +915,8 @@ class DailyShortsDaemon:
                     "analytics_multiplier": top_paper.get("analytics_multiplier", 1.0),
                     "video_path": video_out,
                     "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
-                    "editorial_notes": notes
+                    "editorial_notes": notes,
+                    "content_format": content_format
                 }
                 reports.append(report_item)
 
@@ -836,6 +1017,7 @@ def main():
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
     parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed", "auto"], default="mixed", help="Candidate source: 'mixed' (auto-rotate between arxiv, blogs, perks), 'arxiv', 'blogs', 'perks', 'github', or 'auto' (default: mixed)")
+    parser.add_argument("--topic-mode", choices=["latest_or_viral", "recent", "legacy"], default=TOPIC_SELECTION_MODE, help="Topic gate policy; production defaults to latest-or-viral evidence")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
     parser.add_argument("--preferred-taxonomy", choices=["multimodal_diffusion", "hardware_efficiency", "developer_perks", "reasoning_models", "efficient_architectures", "robotics_tamp", "mechanistic_interpretability"], help="Override preferred domain taxonomy for selection")
@@ -871,7 +1053,8 @@ def main():
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
-            source=args.source
+            source=args.source,
+            topic_mode=args.topic_mode
         )
     elif args.daemon:
         daemon.start_standing_daemon()
@@ -887,7 +1070,8 @@ def main():
             target_slot_hour=args.slot_hour,
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
-            source=args.source
+            source=args.source,
+            topic_mode=args.topic_mode
         )
         if not produced:
             print("❌ Production cycle completed with 0 reels produced. Marking run as failed.")

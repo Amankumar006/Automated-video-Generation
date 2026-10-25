@@ -4,7 +4,7 @@ Executes full-pipeline video generation from a single topic name, model profile,
   1. Ingests topic or arXiv metadata
   2. Generates 6-beat narrative script via Gemini 2.5 Flash
   3. Auto-synthesizes Computer Modern LaTeX vector SVGs
-  4. Synthesizes Kokoro neural audio narration + procedural SFX
+  4. Synthesizes Pocket TTS neural audio narration + procedural SFX
   5. Renders 3Blue1Brown chalkboard Manim scene with kinetic captions
   6. Muxes broadcast MP4 with FFmpeg and extracts verification keyframes
 """
@@ -38,7 +38,7 @@ def auto_produce(
     skip_script: bool = False,
     template: str = None,
     publish: bool = False,
-    privacy: str = "public",
+    privacy: str = "unlisted",
     dry_run_publish: bool = False,
     enable_music: bool = True,
     legacy_engine: bool = False,
@@ -200,7 +200,12 @@ def auto_produce(
         spec = generate_script(
             topic=topic,
             category=category,
-            arxiv_meta=arxiv_meta
+            arxiv_meta=arxiv_meta,
+            context=(
+                json.dumps(arxiv_meta.get("format_profile"), sort_keys=True)
+                if arxiv_meta and arxiv_meta.get("format_profile")
+                else None
+            )
         )
         template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
 
@@ -229,6 +234,9 @@ def auto_produce(
         spec["repo_metadata"] = arxiv_meta["repo_metadata"]
     if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("perk_metadata"):
         spec["perk_metadata"] = arxiv_meta["perk_metadata"]
+    if arxiv_meta and isinstance(arxiv_meta, dict) and arxiv_meta.get("format_profile"):
+        spec["content_format"] = arxiv_meta.get("content_format")
+        spec["format_profile"] = arxiv_meta["format_profile"]
 
     # Step 2.4: Localize script into Hindi/Hinglish if requested
     if language in ("hi", "hindi") and spec.get("language") != "hi":
@@ -268,7 +276,11 @@ def auto_produce(
     track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Papers)
-    if track == TRACK_ACADEMIC:
+    # Generated Manim snippets are experimental and must not silently replace
+    # validated visual blueprints in production renders. Opt in explicitly
+    # when experimenting with the bespoke synthesizer.
+    bespoke_visuals_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+    if track == TRACK_ACADEMIC and bespoke_visuals_enabled:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
@@ -280,6 +292,8 @@ def auto_produce(
                 bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
         except Exception as e:
             print(f"⚠️ Bespoke visual synthesis notice: {e}")
+    elif track == TRACK_ACADEMIC:
+        print("\n🔬 Step 2.9: Bespoke visual synthesis disabled; using validated blueprint compositions.")
 
     if not legacy_engine:
         scene_file = track_meta["scene_file"]
@@ -314,6 +328,8 @@ def auto_produce(
     master_audio = audio_results["master_audio"]
     audio_duration = audio_results.get("total_duration", 40.0)
     timing_data = audio_results.get("timing_data", [])
+    if not master_audio or not Path(master_audio).exists() or audio_duration <= 0:
+        raise RuntimeError("Audio synthesis did not produce a valid master audio artifact.")
 
     # Enrich spec with millisecond-exact beat durations & acoustic word timings
     for b in spec.get("beats", []):
@@ -480,14 +496,29 @@ def auto_produce(
             extract_frames(final_output, frames_dir, category=resolved_category, spec=spec)
             print("   ✅ Master render and keyframes updated with patched layout.")
 
+        production_publish = publish or publish_instagram or publish_x or publish_linkedin
+        require_vlm_qa = os.getenv(
+            "REQUIRE_VLM_QA",
+            "true" if production_publish else "false",
+        ).lower() in {"1", "true", "yes"}
+
         if audit_report.get("passed_quality_gate"):
             print("   ✅ VLM Critic Quality Gate: PASSED (Broadcast Quality)")
         else:
             print("   ℹ️ VLM Critic Quality Gate: Best-effort self-healing completed.")
+            if require_vlm_qa:
+                raise RuntimeError("VLM quality gate did not pass; production publishing is blocked.")
     except Exception as e:
         import traceback
         print(f"   ⚠️ VLM Critic Audit bypassed: {e}")
         traceback.print_exc()
+        production_publish = publish or publish_instagram or publish_x or publish_linkedin
+        require_vlm_qa = os.getenv(
+            "REQUIRE_VLM_QA",
+            "true" if production_publish else "false",
+        ).lower() in {"1", "true", "yes"}
+        if require_vlm_qa:
+            raise RuntimeError("VLM quality audit failed; production publishing is blocked.") from e
 
 
     # Step 7: Automated YouTube Shorts Distribution
@@ -633,7 +664,7 @@ def main():
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=1.10, help="Speech speed (default: 1.10)")
-    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "kokoro"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, kokoro)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "sarvam", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, sarvam, pocket)")
     parser.add_argument("--lang", "--language", dest="lang", choices=["en", "hi", "both", "all"], default="en", help="Narration language code: 'en' (ElevenLabs), 'hi' (Sarvam AI), or 'both' (dual-production)")
     parser.add_argument("--quality", default="-qh", help="Manim render quality (-ql, -qm, -qh)")
     parser.add_argument("--skip-script", action="store_true", help="Skip script generation if template exists")
@@ -641,7 +672,7 @@ def main():
     parser.add_argument("--publish-instagram", action="store_true", help="Also publish produced video as an Instagram Reel via Meta Graph API")
     parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Also publish produced video as a 4-tweet thread to X (Twitter)")
     parser.add_argument("--publish-linkedin", action="store_true", help="Also publish produced video as a post to LinkedIn")
-    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="public", help="Upload privacy status (default: public)")
+    parser.add_argument("--privacy", choices=["unlisted", "public", "private"], default="unlisted", help="Upload privacy status (default: unlisted)")
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
     parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")

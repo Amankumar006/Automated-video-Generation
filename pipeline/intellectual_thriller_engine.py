@@ -72,6 +72,7 @@ Keep the humor dry, sharp, and grounded directly in the paper's actual friction.
 STRICT CONSTRAINTS & BANNED PATTERNS:
 1. BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
    - NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
+   - Do not use "Before you..." as a default hook. Reserve it for a real time-order claim; otherwise open on a concrete scene, contradiction, question, consequence, or observation.
    - Treat those as immediate swipe-aways. Every word in the first 3 seconds must create intense curiosity or high-stakes friction.
 2. BAN AI SLOP & BABY-TALK METAPHORS:
    - Strictly forbidden: "smart tool", "safe drawers", "open desk", "magic box", "delve into", "tapestry", "game changer".

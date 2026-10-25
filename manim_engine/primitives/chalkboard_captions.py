@@ -44,20 +44,16 @@ class ChalkboardCaptions:
             max_width=self.max_width - 0.70
         )
 
+        # Captions are subtitles, not presentation cards. Keep the words
+        # readable in the parafoveal safe zone while leaving the mechanism
+        # visible behind them. A thin baseline provides rhythm without an
+        # opaque rounded rectangle that turns every beat into a SaaS card.
         pill_width = min(txt.width + 0.65, self.max_width)
-        pill_height = txt.height + 0.40
-
-        bg = RoundedRectangle(
-            corner_radius=0.20,
-            width=pill_width,
-            height=pill_height,
-            fill_color="#080C14",
-            fill_opacity=0.92,
-            stroke_color="#334155",
-            stroke_width=1.6
-        )
-
-        group = VGroup(bg, txt).move_to([0, self.y_pos, 0])
+        underline = Line(
+            LEFT * (pill_width / 2), RIGHT * (pill_width / 2),
+            color="#334155", stroke_width=1.2,
+        ).next_to(txt, DOWN, buff=0.14)
+        group = VGroup(txt, underline).move_to([0, self.y_pos, 0])
         return group
 
     def show(self, text: str, highlights: dict = None, run_time: float = 0.25) -> Animation:

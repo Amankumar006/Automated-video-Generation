@@ -1,6 +1,6 @@
 """
 The Model Verse — Multi-Category Audio Synthesizer, SFX Mixer & Lo-Fi Ducking Engine
-Synthesizes Kokoro-82M neural speech (am_adam), procedural SFX, and mixes
+Synthesizes local Pocket TTS neural speech, procedural SFX, and mixes
 procedural Lo-Fi ambient synthpad soundtracks with dynamic sidechain ducking.
 """
 
@@ -10,9 +10,8 @@ import numpy as np
 import soundfile as sf
 from pathlib import Path
 from typing import Optional
-from kokoro_onnx import Kokoro
 from pipeline.config import (
-    KOKORO_MODEL_PATH, KOKORO_VOICES_PATH, SAMPLE_RATE,
+    SAMPLE_RATE,
     DEFAULT_VOICE, DEFAULT_SPEED, PUBLIC_DIR,
     ENABLE_BG_MUSIC, DEFAULT_DUCK_GAIN, DEFAULT_NORMAL_GAIN, CUSTOM_BG_MUSIC_PATH
 )
@@ -26,24 +25,6 @@ from scripts.synth_music_generator import (
 )
 from pipeline.aligner import AcousticForcedAligner, generate_kinetic_sfx_cues
 
-def ensure_kokoro_models():
-    """Ensures Kokoro ONNX model and voices are downloaded."""
-    os.makedirs(os.path.dirname(KOKORO_MODEL_PATH), exist_ok=True)
-    import urllib.request
-    
-    if not os.path.exists(KOKORO_MODEL_PATH):
-        print(f"📥 Downloading kokoro-v1.0.onnx from official release...")
-        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx"
-        urllib.request.urlretrieve(url, KOKORO_MODEL_PATH)
-        print("✅ kokoro-v1.0.onnx downloaded successfully.")
-
-    if not os.path.exists(KOKORO_VOICES_PATH):
-        print(f"📥 Downloading voices-v1.0.bin from official release...")
-        url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
-        urllib.request.urlretrieve(url, KOKORO_VOICES_PATH)
-        print("✅ voices-v1.0.bin downloaded successfully.")
-
-
 def synthesize_audio_for_spec(
     spec_data: dict,
     voice: Optional[str] = None,
@@ -53,20 +34,23 @@ def synthesize_audio_for_spec(
     normal_gain: float = DEFAULT_NORMAL_GAIN,
     custom_music_path: Optional[str] = None,
     provider: Optional[str] = None,
-    language: Optional[str] = None
+    language: Optional[str] = None,
+    output_dir: Optional[str] = None,
+    cache_dir: Optional[str] = None,
 ) -> dict:
     """
-    Synthesizes speech using the unified neural voice router (ElevenLabs, Sarvam AI, Kokoro fallback),
+    Synthesizes speech using the unified voice router (ElevenLabs, Sarvam AI, Pocket TTS fallback),
     generates procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
     Returns: {"master_audio": str, "narration_audio": str, "soundtrack_audio": str, "timing_data": list, "total_duration": float}
     """
     from pipeline.voice_engine import UnifiedVoiceRouter
 
-    os.makedirs(PUBLIC_DIR, exist_ok=True)
+    output_root = output_dir or PUBLIC_DIR
+    os.makedirs(output_root, exist_ok=True)
     spec_id = spec_data.get("id", "short")
-    narration_out = os.path.join(PUBLIC_DIR, f"{spec_id}_narration.wav")
-    soundtrack_out = os.path.join(PUBLIC_DIR, f"{spec_id}_soundtrack.wav")
-    master_out = os.path.join(PUBLIC_DIR, f"{spec_id}_master_audio.wav")
+    narration_out = os.path.join(output_root, f"{spec_id}_narration.wav")
+    soundtrack_out = os.path.join(output_root, f"{spec_id}_soundtrack.wav")
+    master_out = os.path.join(output_root, f"{spec_id}_master_audio.wav")
 
     lang = language or spec_data.get("language") or spec_data.get("lang") or "en"
     prov = provider or spec_data.get("tts_provider") or os.environ.get("TTS_PROVIDER", "auto")
@@ -75,17 +59,12 @@ def synthesize_audio_for_spec(
 
     print(f"🎙️ Synthesizing narration for '{spec_data.get('title', spec_id)}' (Provider: {prov}, Lang: {lang}, Voice: {effective_voice or 'default'}, Speed: {effective_speed}x)...")
 
-    router = UnifiedVoiceRouter()
+    router = UnifiedVoiceRouter(cache_dir=cache_dir) if cache_dir else UnifiedVoiceRouter()
     
-    # Initialize acoustic aligner (using Kokoro tokenizer if available for phonetic precision)
-    tokenizer = None
-    try:
-        if os.path.exists(KOKORO_MODEL_PATH) and os.path.exists(KOKORO_VOICES_PATH):
-            kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
-            tokenizer = kokoro.tokenizer
-    except Exception:
-        tokenizer = None
-    aligner = AcousticForcedAligner(tokenizer=tokenizer)
+    # Pocket TTS does not expose a tokenizer. The aligner has a deterministic
+    # text fallback, so alignment remains available without a model-specific
+    # dependency.
+    aligner = AcousticForcedAligner(tokenizer=None)
 
     sr = SAMPLE_RATE
     all_audio = []
@@ -174,8 +153,8 @@ def synthesize_audio_for_spec(
     print(f"   Total speech duration: {total_duration:.2f}s (Cache hits: {router.cache.stats['hits']})")
 
     # Kinetic Subtitles & Phrase Chunks (SRT & ASS Export)
-    srt_out = os.path.join(PUBLIC_DIR, f"{spec_id}.srt")
-    ass_out = os.path.join(PUBLIC_DIR, f"{spec_id}.ass")
+    srt_out = os.path.join(output_root, f"{spec_id}.srt")
+    ass_out = os.path.join(output_root, f"{spec_id}.ass")
     caption_chunks = []
     try:
         from pipeline.subtitle_generator import generate_phrase_chunks, export_srt, export_ass
@@ -195,7 +174,7 @@ def synthesize_audio_for_spec(
         print(f"⚠️ Notice generating subtitles: {e}")
 
     # Tactile Foley SFX Synthesizer & Spatial Track Mixer
-    sfx_out = os.path.join(PUBLIC_DIR, f"{spec_id}_sfx_track.wav")
+    sfx_out = os.path.join(output_root, f"{spec_id}_sfx_track.wav")
     sfx_track = np.zeros(total_len, dtype=np.float32)
 
     # Procedurally align SFX cues to exact acoustic word boundaries & Manim visual moments

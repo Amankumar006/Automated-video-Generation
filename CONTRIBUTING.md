@@ -14,13 +14,31 @@ The core engine is Python and Manim-based. **Do not modify, refactor, or write f
 - Never edit production files directly or push directly to `main`.
 - Always create a dedicated feature branch (`feat/<feature-name>` or `fix/<bug-name>`), verify all tests locally, and open a GitHub Pull Request with full verification details.
 
+### Quick Start
+
+```bash
+cp .env.example .env
+make setup
+make test
+```
+
+`make setup` creates `.venv`, installs runtime dependencies from
+`requirements.txt`, installs contributor and CI tooling from
+`requirements-dev.txt`, and installs the locked Node dependency tree with
+`npm ci`. Make targets use `.venv/bin/python` automatically after setup.
+
+See [`docs/GETTING_STARTED.md`](docs/GETTING_STARTED.md) for system packages,
+provider configuration, dry runs, and the render smoke test. See
+[`docs/REPOSITORY_LAYOUT.md`](docs/REPOSITORY_LAYOUT.md) before adding assets
+or generated output.
+
 ---
 
 ## 2. Environment Setup
 
 ### Prerequisites
-- **Python:** 3.12+ (managed via `pyenv` or `venv`)
-- **System Binaries:** `ffmpeg`, `cairosvg`, `pango`, `pkg-config`
+- **Python:** 3.11 or 3.12 (managed via `pyenv` or `venv`)
+- **System Binaries:** `ffmpeg`, Cairo, Pango, LaTeX, `dvisvgm`, and `espeak-ng`
   ```bash
   # macOS (Homebrew)
   brew install ffmpeg pango cairo pkg-config
@@ -33,8 +51,25 @@ The core engine is Python and Manim-based. **Do not modify, refactor, or write f
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python scripts/doctor.py
 ```
+
+Validate dependency resolution before running tests:
+
+```bash
+make deps-check
+```
+
+Optional advisory scanning is separate and non-mutating:
+
+```bash
+.venv/bin/python -m pip install pip-audit
+make deps-audit
+```
+
+Do not use `npm audit fix --force` routinely; it may apply breaking major
+upgrades. Review manifest and lockfile changes first.
 
 ### Environment Variables (`.env`)
 Create a `.env` file in the repository root:
@@ -61,17 +96,17 @@ Every feature or bug fix must include automated unit tests and pass headless vis
 
 ### 1. Run Unit Tests
 ```bash
-# Run full repository test suite
-pytest
+# Run full active repository test suite through the configured virtualenv
+make test-python
 
 # Run targeted test suites
-pytest test/test_code_execution_engine.py test/test_github_trending_fetcher.py -v
+.venv/bin/python -m pytest test/test_code_execution_engine.py test/test_github_trending_fetcher.py -v
 ```
 
 ### 2. Verify Headless Render
 ```bash
 # Render keyframe at 540x960 vertical resolution
-manim -ql -s -r 540,960 --fps 15 test/test_code_execution_engine.py TestChalkboardCodeBlockScene
+make render-smoke
 ```
 
 ---

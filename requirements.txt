@@ -3,11 +3,12 @@ matplotlib
 numpy
 scipy
 torch
-kokoro-onnx
 onnxruntime
 soundfile
 edge-tts
-pymupdf
+# Keep the binary-wheel generation line; PyMuPDF 2.x may resolve to a source
+# distribution on contributor/CI Python versions and stall setup.
+pymupdf>=1.24,<2
 google-generativeai
 python-dotenv
 google-auth
@@ -16,6 +17,3 @@ google-auth-httplib2
 google-api-python-client
 pydantic>=2.0.0
 pillow>=10.4.0,<13.0.0
-fastapi
-uvicorn
-jinja2

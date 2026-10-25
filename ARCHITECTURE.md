@@ -16,7 +16,7 @@ flowchart TD
         ScriptGen --> ScriptCritic["Script Pedagogy Critic"]
         ScriptCritic --> VisualDir["Visual Director (3b1b Blueprints)"]
         VisualDir --> ManimEngine["Manim CE 2D Vector Renderer"]
-        ScriptCritic --> AudioSynth["Kokoro TTS & Forced Aligner"]
+        ScriptCritic --> AudioSynth["Pocket TTS & Forced Aligner"]
         ManimEngine --> Muxer["FFmpeg Master Muxer"]
         AudioSynth --> Muxer
         Muxer --> VLMCritic["VLM Layout Critic"]
@@ -24,7 +24,7 @@ flowchart TD
         LayoutSolver -. "Auto-patch layout" .-> ManimEngine
     end
 
-    subgraph Shared_Layer ["Decoupled Shared Contract Layer (aether/shared_contract.py)"]
+    subgraph Shared_Layer ["Decoupled Shared Contract Layer (_archive/aether/shared_contract.py)"]
         ScriptAdapter["ScriptToFilmSceneAdapter"]
         AssetPkg["EducationalAssetConditioningPackage"]
         HybridCfg["DualEnginePipelineConfig (HybridRenderMode)"]
@@ -51,7 +51,7 @@ flowchart TD
 
 ### Architectural Comparison Matrix
 
-| Architectural Dimension | The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`) | Project Aether (`aether/`) |
+| Architectural Dimension | The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`) | Project Aether (`_archive/aether/`) |
 | :--- | :--- | :--- |
 | **Engine Paradigm** | 2D Mathematical & Algorithmic Motion Graphics | 3D Generative Cinematic Virtual Studio |
 | **Primary Output** | 9:16 Vertical Explainer Shorts (1440p60 QHD) | Multi-Shot Cinematic Films & Dramatic Sequences |
@@ -61,13 +61,13 @@ flowchart TD
 | **Quality Verification** | Headless Keyframe VLM Critic (`vlm_critic.py`) | 6-Critic Council with 5 Binary Hard Gates (`aether.council`) |
 | **Auto-Repair Engine** | Deterministic AABB Spatial Repulsion (`layout_solver.py`) | Spatio-Temporal Inpainting & Audio Remastering (`aether.repair`) |
 | **Self-Improvement** | Real-Time YouTube Audience Retention (`analytics_feedback.py`) | Offline Dream-RSI Policy Simulation (`aether.teacher`) |
-| **Execution Entrypoint** | `python3 pipeline/run_pipeline.py --arxiv <id>` | `python3 -m aether.director --brief "<premise>"` |
+| **Execution Entrypoint** | `python3 pipeline/run_pipeline.py --arxiv <id>` | `PYTHONPATH=_archive python3 -m aether.director --brief "<premise>"` |
 | **Operational State** | **Active Production Workhorse (Zero API Cost)** | **Standby / Simulation Readiness (Budget-Contingent)** |
 
 > [!NOTE]
 > **Operational Deployment & Compute Strategy**:
-> - **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)** is the active daily production system. It runs at zero API credit cost utilizing local/free Ollama Cloud models (`gpt-oss:120b:cloud`), Kokoro offline TTS, and deterministic Manim 2D chalkboard rendering.
-> - **Project Aether (`aether/`)** is fully implemented and test-verified across all 6 pillars (394+ passing tests). It is currently held in Standby / Simulation Readiness mode, and will be activated for live generative video rendering once dedicated commercial video API credits (Google Veo 3.1, Kling 3.0, Runway Gen-4.5) and cloud GPU clusters (ComfyUI / CogVideoX / HunyuanVideo) are funded.
+> - **The Model Verse Shorts Engine (`pipeline/` + `manim_engine/`)** is the active daily production system. It runs at zero API credit cost utilizing local/free Ollama Cloud models (`gpt-oss:120b:cloud`), Pocket TTS offline speech, and deterministic Manim 2D chalkboard rendering.
+> - **Project Aether (`_archive/aether/`)** is fully implemented and test-verified across all 6 pillars (394+ passing tests). It is currently held in Standby / Simulation Readiness mode, and will be activated for live generative video rendering once dedicated commercial video API credits (Google Veo 3.1, Kling 3.0, Runway Gen-4.5) and cloud GPU clusters (ComfyUI / CogVideoX / HunyuanVideo) are funded.
 
 ---
 
@@ -94,7 +94,7 @@ The Model Verse converts cutting-edge research publications (arXiv, Hugging Face
   - **Chalkboard Code Execution (`manim_engine/primitives/code_execution_engine.py`)**: macOS window chrome, syntax tokenization (Python, CUDA, C++), active line scanning, and live GPU register monitors.
 
 ### Stage 4: Neural Acoustics & Tactile Foley Engine
-- **Neural Speech (`pipeline/audio_synthesizer.py`)**: Kokoro-82M ONNX model (`am_adam` voice) rendered with dynamic pacing (1.12x speedup calibrated to YouTube retention).
+- **Neural Speech (`pipeline/audio_synthesizer.py`)**: Pocket TTS local CPU speech rendered with dynamic pacing (1.12x speedup calibrated to YouTube retention).
 - **Acoustic Forced Alignment (`pipeline/aligner.py`)**: 200 Hz (5ms hop) Savitzky-Golay smoothed RMS energy envelope tracking that snaps word boundaries to acoustic dips with $\pm 75\text{ms}$ precision. Enforces the **Frame-Ahead Rule** (-33ms to -66ms) so animation motion leads auditory perception.
 - **Tactile Foley SFX Mixdown (`public/sfx/`)**: Procedural layering of sub-bass impacts, laser sweeps, camera whooshes, mechanical clicks, and glass chimes at exact millisecond animation triggers.
 
@@ -114,77 +114,77 @@ The Model Verse converts cutting-edge research publications (arXiv, Hugging Face
 
 ---
 
-## 3. Engine 2: Project Aether v2 (`aether/`)
+## 3. Engine 2: Project Aether v2 (`_archive/aether/`)
 
 Project Aether is an autonomous, multi-shot 3D cinematic generative virtual studio (v0.2.0, WBS 1.1–1.11) designed to translate narrative briefs into multi-model generative films while maintaining strict spatial and physical consistency across cuts.
 
-### Pillar 1: Master Autonomous Director Orchestrator (`aether/director/`)
-- **Central Coordinator (`aether/director/orchestrator.py`)**: Coordinates narrative decomposition, world setup, shot compilation, speculative draft gating, council audits, surgical defect repair, and final mastering.
-- **Production Briefs & Schemas (`aether/director/schemas.py`)**: Defines `DirectorProductionBrief`, `FilmScene`, `ShotTimelineRecord`, `MasteredFilm`, and `ProductionState` lifecycle states.
-- **CLI & Module Entrypoints (`aether/director/cli.py`, `aether/director/__main__.py`)**: Exposes `--brief`, `--duration`, `--models`, `--budget`, `--dry-run`, and `--speculative-draft` commands.
+### Pillar 1: Master Autonomous Director Orchestrator (`_archive/aether/director/`)
+- **Central Coordinator (`_archive/aether/director/orchestrator.py`)**: Coordinates narrative decomposition, world setup, shot compilation, speculative draft gating, council audits, surgical defect repair, and final mastering.
+- **Production Briefs & Schemas (`_archive/aether/director/schemas.py`)**: Defines `DirectorProductionBrief`, `FilmScene`, `ShotTimelineRecord`, `MasteredFilm`, and `ProductionState` lifecycle states.
+- **CLI & Module Entrypoints (`_archive/aether/director/cli.py`, `_archive/aether/director/__main__.py`)**: Exposes `--brief`, `--duration`, `--models`, `--budget`, `--dry-run`, and `--speculative-draft` commands.
 
-### Pillar 2: Persistent 3D World State Graph (`aether/state/`)
-- **AetherWorldModel (`aether/state/graph.py`)**: Persistent 3D world state engine maintaining characters, prop rosters, lighting, weather, and camera kinematics across sequential shots with branching and rollbacks.
-- **State Schemas (`aether/state/schemas.py`)**: Pydantic models for `CharacterState`, `PropState`, `WardrobeItemState`, `CameraState`, `HandAttachment`, and `SceneSnapshot`.
-- **Continuity Auditor (`aether/state/continuity.py`)**: Rigorous multi-shot continuity auditor checking physical velocity thresholds, prop conservation across handoffs, wardrobe damage progression, and reciprocal eyeline angles across cuts.
-- **State Ledger Store (`aether/state/store.py`)**: Persistent JSON store and time-travel query API for shot state histories.
+### Pillar 2: Persistent 3D World State Graph (`_archive/aether/state/`)
+- **AetherWorldModel (`_archive/aether/state/graph.py`)**: Persistent 3D world state engine maintaining characters, prop rosters, lighting, weather, and camera kinematics across sequential shots with branching and rollbacks.
+- **State Schemas (`_archive/aether/state/schemas.py`)**: Pydantic models for `CharacterState`, `PropState`, `WardrobeItemState`, `CameraState`, `HandAttachment`, and `SceneSnapshot`.
+- **Continuity Auditor (`_archive/aether/state/continuity.py`)**: Rigorous multi-shot continuity auditor checking physical velocity thresholds, prop conservation across handoffs, wardrobe damage progression, and reciprocal eyeline angles across cuts.
+- **State Ledger Store (`_archive/aether/state/store.py`)**: Persistent JSON store and time-travel query API for shot state histories.
 
-### Pillar 3: Complexity Planning & Multi-Model Shot Compilation (`aether/compiler/`)
-- **Complexity Planner (`aether/compiler/complexity.py`)**: Classifies shots into 6 discrete complexity tiers (Levels 0 to 5):
+### Pillar 3: Complexity Planning & Multi-Model Shot Compilation (`_archive/aether/compiler/`)
+- **Complexity Planner (`_archive/aether/compiler/complexity.py`)**: Classifies shots into 6 discrete complexity tiers (Levels 0 to 5):
   - **Level 0 (Prompt-Only)**: Atmospheric cutaways, cloudscapes, vistas, and abstract concepts with no actor interaction.
   - **Level 1 (Reference Image)**: Static portraits and establishing frames anchored by photorealistic image conditioning.
   - **Level 2 (Keyframes Interpolation)**: Straightforward camera pans, zooms, and simple actions bounded by start and end keyframes.
   - **Level 3 (2D Trajectory & Pose)**: Talking heads, walking towards camera, and gestural dialogue requiring pose and lip-sync alignment.
   - **Level 4 (3D Geometric Blocking)**: Multi-character blocking, camera crane moves, and hand-object handoffs requiring 3D spatial previs.
   - **Level 5 (Full Physical Simulation)**: Complex physical collisions, fluid dynamics, grapples, and stunts requiring deterministic simulation.
-- **Multi-Model Shot Compiler (`aether/compiler/compiler.py`)**: Compiles shot requirements into provider-specific generative payloads for Google Veo 3.1, Kling 3.0, Runway Gen-4.5, and open-weights CogVideoX (ComfyUI).
-- **Compiler Schemas (`aether/compiler/schemas.py`)**: Pydantic schemas for `ComplexityLevel`, `ProviderTarget`, `ComputeTier`, `SpatialRepresentationPackage`, and `CompiledModelPayload`.
+- **Multi-Model Shot Compiler (`_archive/aether/compiler/compiler.py`)**: Compiles shot requirements into provider-specific generative payloads for Google Veo 3.1, Kling 3.0, Runway Gen-4.5, and open-weights CogVideoX (ComfyUI).
+- **Compiler Schemas (`_archive/aether/compiler/schemas.py`)**: Pydantic schemas for `ComplexityLevel`, `ProviderTarget`, `ComputeTier`, `SpatialRepresentationPackage`, and `CompiledModelPayload`.
 
-### Pillar 4: Speculative Draft Gating & Critic Council (`aether/council/`)
+### Pillar 4: Speculative Draft Gating & Critic Council (`_archive/aether/council/`)
 - **Speculative 480p Draft Gating**: Pre-screens candidate generations using low-latency 480p renders before committing compute to expensive 1080p latent upscaling.
-- **Critic Council Aggregator (`aether/council/council.py`)**: Master voting engine aggregating 6 specialized domain critics and enforcing 5 binary hard quality gates.
-- **Specialized Critics (`aether/council/critics.py`)**:
+- **Critic Council Aggregator (`_archive/aether/council/council.py`)**: Master voting engine aggregating 6 specialized domain critics and enforcing 5 binary hard quality gates.
+- **Specialized Critics (`_archive/aether/council/critics.py`)**:
   1. *Visual & Anatomy Critic*: Detects morphological distortions, extra limbs, and texture swimming.
   2. *Temporal & Jitter Critic*: Evaluates frame-to-frame flow variance and edge flickering.
   3. *Continuity Critic*: Audits wardrobe damage, lighting direction, and prop possession across cuts.
   4. *Performance & Lip-Sync Critic*: Verifies phonetic mouth movement alignment with speech audio.
   5. *Physics & Collision Critic*: Flags unphysical floating, interpenetration, and momentum violations.
   6. *Audio & Foley Critic*: Checks sound stem mixing, voice clarity, and acoustic ambiance.
-- **Deterministic CV Analyzer (`aether/council/cv_analyzer.py`)**: OpenCV temporal and optical flow variance analyzer measuring SSIM and motion vector entropy.
-- **Council Schemas (`aether/council/schemas.py`)**: Models for `HardGateType`, `DefectSeverity`, `CriticFailureObject`, and `CouncilEvaluationReport`.
+- **Deterministic CV Analyzer (`_archive/aether/council/cv_analyzer.py`)**: OpenCV temporal and optical flow variance analyzer measuring SSIM and motion vector entropy.
+- **Council Schemas (`_archive/aether/council/schemas.py`)**: Models for `HardGateType`, `DefectSeverity`, `CriticFailureObject`, and `CouncilEvaluationReport`.
 
-### Pillar 5: Spatio-Temporal Masking & Surgical Defect Repair Engine (`aether/repair/`)
-- **Repair Planner (`aether/repair/planner.py`)**: Triage engine that maps critic failure objects into ranked, executable repair plans (`REGIONAL_TEMPORAL_INPAINTING`, `AUDIO_REMASTER`, `SPATIAL_PREVIS_REBLOCK`).
-- **Protected Region Masking (`aether/repair/masking.py`)**: Generates spatio-temporal boundary masks protecting actor faces, stable background plates, and camera motion paths from inpainting corruption.
-- **Repair Executor (`aether/repair/executor.py`)**: Dispatches localized latent diffusion inpainting, voice/foley audio remastering, or 3D previs reblocking to fix defective segments without re-rendering entire scenes.
-- **Repair Schemas (`aether/repair/schemas.py`)**: Pydantic models for `RepairActionType`, `ProtectedRegion`, `RepairTask`, `RepairPlan`, and `RepairExecutionResult`.
+### Pillar 5: Spatio-Temporal Masking & Surgical Defect Repair Engine (`_archive/aether/repair/`)
+- **Repair Planner (`_archive/aether/repair/planner.py`)**: Triage engine that maps critic failure objects into ranked, executable repair plans (`REGIONAL_TEMPORAL_INPAINTING`, `AUDIO_REMASTER`, `SPATIAL_PREVIS_REBLOCK`).
+- **Protected Region Masking (`_archive/aether/repair/masking.py`)**: Generates spatio-temporal boundary masks protecting actor faces, stable background plates, and camera motion paths from inpainting corruption.
+- **Repair Executor (`_archive/aether/repair/executor.py`)**: Dispatches localized latent diffusion inpainting, voice/foley audio remastering, or 3D previs reblocking to fix defective segments without re-rendering entire scenes.
+- **Repair Schemas (`_archive/aether/repair/schemas.py`)**: Pydantic models for `RepairActionType`, `ProtectedRegion`, `RepairTask`, `RepairPlan`, and `RepairExecutionResult`.
 
-### Pillar 6: Dream-RSI Meta-Learning Loop (`aether/teacher/`)
-- **Episode Trace Logger (`aether/teacher/trace_logger.py`)**: Persists end-to-end production runs as immutable Directed Acyclic Graph (DAG) trace trees (`DiscoveryTraceTree`, `TraceNode`).
-- **Offline Policy Dreamer (`aether/teacher/dreamer.py`)**: Implements Dream-RSI (Recursive Self-Improvement), discovering Pareto-optimal compilation policies by evaluating the objective:
+### Pillar 6: Dream-RSI Meta-Learning Loop (`_archive/aether/teacher/`)
+- **Episode Trace Logger (`_archive/aether/teacher/trace_logger.py`)**: Persists end-to-end production runs as immutable Directed Acyclic Graph (DAG) trace trees (`DiscoveryTraceTree`, `TraceNode`).
+- **Offline Policy Dreamer (`_archive/aether/teacher/dreamer.py`)**: Implements Dream-RSI (Recursive Self-Improvement), discovering Pareto-optimal compilation policies by evaluating the objective:
   $$V_{im} = \max_v s_v - \beta_1 N_{im} + \beta_2 \frac{N_{im}}{\max(1, k^*_{im})}$$
   over historical replay pools without incurring live generative API costs.
-- **Replay Simulator Pool (`aether/teacher/replay_simulator.py`)**: Simulates counterfactual compilation policies against recorded critic evaluations.
+- **Replay Simulator Pool (`_archive/aether/teacher/replay_simulator.py`)**: Simulates counterfactual compilation policies against recorded critic evaluations.
 
-### Pillar 7: AetherBench Cinematic Benchmark Suite (`aether/bench/`)
-- **Scenario Registry (`aether/bench/scenarios.py`, `aether/bench/registry.py`)**: Standardized suite of 30+ canonical cinematic stress tests (fluid simulations, stunt choreography, complex specular lighting, extreme camera velocities).
-- **Synthetic Defect Injectors (`aether/bench/defects.py`)**: Controlled defect injectors to validate critic sensitivity and calibration.
-- **Automated Runner (`aether/bench/runner.py`)**: Harness for scoring multi-model generation performance across standardized cinematic benchmarks.
+### Pillar 7: AetherBench Cinematic Benchmark Suite (`_archive/aether/bench/`)
+- **Scenario Registry (`_archive/aether/bench/scenarios.py`, `_archive/aether/bench/registry.py`)**: Standardized suite of 30+ canonical cinematic stress tests (fluid simulations, stunt choreography, complex specular lighting, extreme camera velocities).
+- **Synthetic Defect Injectors (`_archive/aether/bench/defects.py`)**: Controlled defect injectors to validate critic sensitivity and calibration.
+- **Automated Runner (`_archive/aether/bench/runner.py`)**: Harness for scoring multi-model generation performance across standardized cinematic benchmarks.
 
 ---
 
 ## 4. Comprehensive File-by-File Comparative Audit
 
-The following audit matrix compares all 38 files in Project Aether (`aether/`) against their operational counterparts and functional equivalents across The Model Verse Shorts engine (`pipeline/` + `manim_engine/`):
+The following audit matrix compares all 38 files in Project Aether (`_archive/aether/`) against their operational counterparts and functional equivalents across The Model Verse Shorts engine (`pipeline/` + `manim_engine/`):
 
 ### Table 1: Master Orchestration & Entrypoints
 
 | Module Category | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Director / Orchestrator** | `aether/director/orchestrator.py` (1,154 lines) | `pipeline/run_pipeline.py` (388 lines), `pipeline/auto_produce.py` (557 lines) | **Aether**: Assembles multi-shot 3D cinematic films via state graphs, complexity classification, multi-model compilation, speculative draft gating, council audits, and surgical repair.<br>**Shorts**: Linear 7-stage script-to-video producer coordinating TTS, forced alignment, Manim rendering, FFmpeg muxing, and YouTube upload. |
-| **CLI & Entrypoints** | `aether/director/cli.py` (190 lines), `aether/director/__main__.py` (12 lines) | `pipeline/run_pipeline.py` (lines 247–388), `pipeline/daily_shorts_daemon.py` (420 lines) | **Aether**: Accepts premise or JSON brief, budget limits, target diffusion models, and executes dry-run simulation or real production.<br>**Shorts**: Accepts `--topic`, `--arxiv`, `--category`, `--voice`, `--lang`, `--quality`, and runs automated daily production daemon. |
-| **Director Schemas** | `aether/director/schemas.py` (299 lines) | `pipeline/schemas.py` (35 lines), `pipeline/vsg_schema.py` (430 lines) | **Aether**: Defines `DirectorProductionBrief`, `FilmScene`, `ShotTimelineRecord`, `MasteredFilm`.<br>**Shorts**: Defines `VideoSpec`, `BeatSpec`, `SFXCue`, and declarative VSG entity/action primitives. |
-| **Subsystem Bridge** | `aether/shared_contract.py` (420 lines) | `pipeline/aether_director.py` (122 lines) | **Aether**: Clean shared contract providing `ScriptToFilmSceneAdapter`, `EducationalAssetConditioningPackage`, and `HybridRenderMode`.<br>**Shorts**: Pipeline wrapper providing `AetherDirectorPipeline`, `produce_aether_film`, and CLI integration. |
+| **Director / Orchestrator** | `_archive/aether/director/orchestrator.py` (1,154 lines) | `pipeline/run_pipeline.py` (388 lines), `pipeline/auto_produce.py` (557 lines) | **Aether**: Assembles multi-shot 3D cinematic films via state graphs, complexity classification, multi-model compilation, speculative draft gating, council audits, and surgical repair.<br>**Shorts**: Linear 7-stage script-to-video producer coordinating TTS, forced alignment, Manim rendering, FFmpeg muxing, and YouTube upload. |
+| **CLI & Entrypoints** | `_archive/aether/director/cli.py` (190 lines), `_archive/aether/director/__main__.py` (12 lines) | `pipeline/run_pipeline.py` (lines 247–388), `pipeline/daily_shorts_daemon.py` (420 lines) | **Aether**: Accepts premise or JSON brief, budget limits, target diffusion models, and executes dry-run simulation or real production.<br>**Shorts**: Accepts `--topic`, `--arxiv`, `--category`, `--voice`, `--lang`, `--quality`, and runs automated daily production daemon. |
+| **Director Schemas** | `_archive/aether/director/schemas.py` (299 lines) | `pipeline/schemas.py` (35 lines), `pipeline/vsg_schema.py` (430 lines) | **Aether**: Defines `DirectorProductionBrief`, `FilmScene`, `ShotTimelineRecord`, `MasteredFilm`.<br>**Shorts**: Defines `VideoSpec`, `BeatSpec`, `SFXCue`, and declarative VSG entity/action primitives. |
+| **Subsystem Bridge** | `_archive/aether/shared_contract.py` (420 lines) | `_archive/pipeline/aether_director.py` (122 lines) | **Aether**: Clean shared contract providing `ScriptToFilmSceneAdapter`, `EducationalAssetConditioningPackage`, and `HybridRenderMode`.<br>**Shorts**: Pipeline wrapper providing `AetherDirectorPipeline`, `produce_aether_film`, and CLI integration. |
 
 ---
 
@@ -192,10 +192,10 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **World State / Canvas Graph** | `aether/state/graph.py` (818 lines) | `pipeline/vsg_schema.py` (430 lines), `manim_engine/base_scene.py` (150 lines) | **Aether**: 3D persistent world state engine maintaining characters, prop rosters, lighting, weather, and camera states across sequential shots with branching and rollbacks.<br>**Shorts**: 2D declarative canvas scene graph describing on-screen geometric entities (badges, code boxes, lattices) and animations. |
-| **State Schemas & Primitives** | `aether/state/schemas.py` (712 lines) | `pipeline/vsg_schema.py` (lines 19–89), `pipeline/schemas.py` | **Aether**: Tracks physical 3D properties (`CharacterState`, `PropState`, `WardrobeItemState`, `CameraState`, `HandAttachment`).<br>**Shorts**: Tracks 2D visual primitives (`VisualPrimitiveType`, `EasingFunction`, `SFXType`, `DomainTaxonomy`). |
-| **Continuity & Transition Audit** | `aether/state/continuity.py` (885 lines) | `manim_engine/scheduler.py` (107 lines), `pipeline/aligner.py` (210 lines) | **Aether**: Audits physical velocity limits, prop conservation, wardrobe damage continuity, and reciprocal eyeline angles across shot boundaries.<br>**Shorts**: Audits temporal synchrony enforcing the Frame-Ahead Rule (-40ms) and acoustic phonemic boundary snapping. |
-| **State Persistence Ledger** | `aether/state/store.py` (345 lines) | `pipeline/templates/*.json`, `pipeline/digest_history.json` | **Aether**: Structured JSON ledger export of prop possession history, character movement paths, and wardrobe wear.<br>**Shorts**: Stores completed JSON video spec templates and daily ingestion deduplication hashes. |
+| **World State / Canvas Graph** | `_archive/aether/state/graph.py` (818 lines) | `pipeline/vsg_schema.py` (430 lines), `manim_engine/base_scene.py` (150 lines) | **Aether**: 3D persistent world state engine maintaining characters, prop rosters, lighting, weather, and camera states across sequential shots with branching and rollbacks.<br>**Shorts**: 2D declarative canvas scene graph describing on-screen geometric entities (badges, code boxes, lattices) and animations. |
+| **State Schemas & Primitives** | `_archive/aether/state/schemas.py` (712 lines) | `pipeline/vsg_schema.py` (lines 19–89), `pipeline/schemas.py` | **Aether**: Tracks physical 3D properties (`CharacterState`, `PropState`, `WardrobeItemState`, `CameraState`, `HandAttachment`).<br>**Shorts**: Tracks 2D visual primitives (`VisualPrimitiveType`, `EasingFunction`, `SFXType`, `DomainTaxonomy`). |
+| **Continuity & Transition Audit** | `_archive/aether/state/continuity.py` (885 lines) | `manim_engine/scheduler.py` (107 lines), `pipeline/aligner.py` (210 lines) | **Aether**: Audits physical velocity limits, prop conservation, wardrobe damage continuity, and reciprocal eyeline angles across shot boundaries.<br>**Shorts**: Audits temporal synchrony enforcing the Frame-Ahead Rule (-40ms) and acoustic phonemic boundary snapping. |
+| **State Persistence Ledger** | `_archive/aether/state/store.py` (345 lines) | `pipeline/templates/*.json`, `pipeline/digest_history.json` | **Aether**: Structured JSON ledger export of prop possession history, character movement paths, and wardrobe wear.<br>**Shorts**: Stores completed JSON video spec templates and daily ingestion deduplication hashes. |
 
 ---
 
@@ -203,11 +203,11 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Narrative Script Generation** | `aether/director/orchestrator.py` (`decompose_narrative_with_llm`, lines 713–785) | `pipeline/script_generator.py` (688 lines), `pipeline/feynman_dialogue_engine.py` (320 lines) | **Aether**: Prompts Ollama/LLM to break down premise into cinematic scene locations, dramatic beats, characters, and camera dolly/crane requirements.<br>**Shorts**: Prompts Gemini 2.5 Flash for 6-beat educational short scripts with SVO triples, everyday physical analogies, formula trays, and firebrand developer humor. |
+| **Narrative Script Generation** | `_archive/aether/director/orchestrator.py` (`decompose_narrative_with_llm`, lines 713–785) | `pipeline/script_generator.py` (688 lines), `pipeline/feynman_dialogue_engine.py` (320 lines) | **Aether**: Prompts Ollama/LLM to break down premise into cinematic scene locations, dramatic beats, characters, and camera dolly/crane requirements.<br>**Shorts**: Prompts Gemini 2.5 Flash for 6-beat educational short scripts with SVO triples, everyday physical analogies, formula trays, and firebrand developer humor. |
 | **Pedagogical Criticism** | *(None / Relies on Council)* | `pipeline/script_critic.py` (310 lines) | **Aether**: Evaluates visual and physical defects post-render via Critic Council.<br>**Shorts**: Pre-render text critic evaluating Flesch-Kincaid Grade Level ($\le 8.0$), reading ease ($\ge 65$), and anti-jargon constraints with automated rewriting. |
-| **Visual Direction / Blueprints** | `aether/compiler/complexity.py` (566 lines) | `pipeline/visual_director.py` (500 lines), `pipeline/bespoke_visual_synthesizer.py` (380 lines) | **Aether**: Analyzes actor counts, camera speeds, and physics challenges to assign Complexity Levels 0–5 and spatial packages.<br>**Shorts**: Analyzes spoken words and analogies to assign 3b1b visual blueprints (vector flow fields, synaptic waves, showdown races, code sweeps). |
-| **Model / Scene Compilation** | `aether/compiler/compiler.py` (1,161 lines) | `manim_engine/scenes/script_driven_scene.py` (640 lines), `pipeline/run_pipeline.py` (`render_scene`) | **Aether**: Translates scene graphs into provider-specific generative payloads (Veo 3.1, Kling 3.0, Runway Gen-4.5, CogVideoX ComfyUI workflows).<br>**Shorts**: Compiles spec into executable Python Manim Community Edition code rendered via Cairo/FFmpeg. |
-| **Compiler Schemas** | `aether/compiler/schemas.py` (750 lines) | `pipeline/vsg_schema.py` | **Aether**: Defines `ComplexityLevel` (0–5), `ProviderTarget`, `ComputeTier`, `SpatialRepresentationPackage`, `CompiledModelPayload`.<br>**Shorts**: Defines macro/micro beat timelines, entity bindings, and acoustic word anchors. |
+| **Visual Direction / Blueprints** | `_archive/aether/compiler/complexity.py` (566 lines) | `pipeline/visual_director.py` (500 lines), `pipeline/bespoke_visual_synthesizer.py` (380 lines) | **Aether**: Analyzes actor counts, camera speeds, and physics challenges to assign Complexity Levels 0–5 and spatial packages.<br>**Shorts**: Analyzes spoken words and analogies to assign 3b1b visual blueprints (vector flow fields, synaptic waves, showdown races, code sweeps). |
+| **Model / Scene Compilation** | `_archive/aether/compiler/compiler.py` (1,161 lines) | `manim_engine/scenes/script_driven_scene.py` (640 lines), `pipeline/run_pipeline.py` (`render_scene`) | **Aether**: Translates scene graphs into provider-specific generative payloads (Veo 3.1, Kling 3.0, Runway Gen-4.5, CogVideoX ComfyUI workflows).<br>**Shorts**: Compiles spec into executable Python Manim Community Edition code rendered via Cairo/FFmpeg. |
+| **Compiler Schemas** | `_archive/aether/compiler/schemas.py` (750 lines) | `pipeline/vsg_schema.py` | **Aether**: Defines `ComplexityLevel` (0–5), `ProviderTarget`, `ComputeTier`, `SpatialRepresentationPackage`, `CompiledModelPayload`.<br>**Shorts**: Defines macro/micro beat timelines, entity bindings, and acoustic word anchors. |
 
 ---
 
@@ -215,9 +215,9 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Speech Generation** | `aether/compiler/schemas.py` (`AudioRequirement`), `aether/repair/executor.py` (`_execute_voice_remaster`) | `pipeline/audio_synthesizer.py` (450 lines), `pipeline/voice_engine.py` (280 lines) | **Aether**: Defines dialogue requirements and mood; executes voice remastering via external audio asset URI replacement.<br>**Shorts**: Directly synthesizes speech using local Kokoro-82M ONNX (`am_adam`), ElevenLabs, or Sarvam AI with dynamic retention pacing (1.12x). |
+| **Speech Generation** | `_archive/aether/compiler/schemas.py` (`AudioRequirement`), `_archive/aether/repair/executor.py` (`_execute_voice_remaster`) | `pipeline/audio_synthesizer.py` (450 lines), `pipeline/voice_engine.py` (280 lines) | **Aether**: Defines dialogue requirements and mood; executes voice remastering via external audio asset URI replacement.<br>**Shorts**: Directly synthesizes speech using local Pocket TTS, ElevenLabs, or Sarvam AI with dynamic retention pacing (1.12x). |
 | **Acoustic Forced Alignment** | *(None / External Timestamps)* | `pipeline/aligner.py` (210 lines) | **Aether**: Relies on fixed shot durations (e.g. 5.0s per shot).<br>**Shorts**: 200 Hz (5ms hop) Savitzky-Golay smoothed RMS energy envelope tracking that snaps word boundaries to acoustic dips with $\pm 75\text{ms}$ precision. |
-| **Tactile Foley Sound Design** | `aether/repair/executor.py` (`_execute_foley_remaster`) | `pipeline/audio_synthesizer.py` (`mix_sfx_and_music`), `public/sfx/*.wav` | **Aether**: Flags missing sound effects and remuxes ambient stems during repair.<br>**Shorts**: Procedurally layers sub-bass impacts, laser sweeps, mechanical clicks, and glass chimes at exact millisecond timestamps where visual primitives trigger. |
+| **Tactile Foley Sound Design** | `_archive/aether/repair/executor.py` (`_execute_foley_remaster`) | `pipeline/audio_synthesizer.py` (`mix_sfx_and_music`), `public/sfx/*.wav` | **Aether**: Flags missing sound effects and remuxes ambient stems during repair.<br>**Shorts**: Procedurally layers sub-bass impacts, laser sweeps, mechanical clicks, and glass chimes at exact millisecond timestamps where visual primitives trigger. |
 
 ---
 
@@ -225,11 +225,11 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Master Quality Gatekeeper** | `aether/council/council.py` (528 lines) | `pipeline/vlm_critic.py` (420 lines) | **Aether**: Evaluates candidate videos across 6 specialized critics against 5 binary hard gates before soft aesthetic scoring.<br>**Shorts**: Headless keyframe inspector using Gemini Vision / Ollama to detect text/visual collisions, margin overflows, and layout monotony. |
-| **Specialized Critics** | `aether/council/critics.py` (1,452 lines) | `pipeline/vlm_critic.py`, `pipeline/retention_autopsy_critic.py` (260 lines) | **Aether**: 6 distinct critic domains: Visual/Anatomy, Temporal, Continuity, Performance (Lip-Sync), Physics, and Audio.<br>**Shorts**: 2 critics: Spatial Layout Critic (pre-render/post-render) and Audience Retention Drop-off Critic (post-broadcast). |
-| **Computer Vision Diagnostics** | `aether/council/cv_analyzer.py` (620 lines) | *(None / Delegates to VLM)* | **Aether**: Deterministic OpenCV pipeline measuring optical flow variance, structural similarity index (SSIM), edge stability, and frame-to-frame jitter.<br>**Shorts**: Relies directly on VLM bounding boxes and text parsing. |
-| **Council Schemas** | `aether/council/schemas.py` (391 lines) | `pipeline/layout_solver.py` (`SpatialViolation`, `ViolationType`) | **Aether**: Defines `HardGateType`, `DefectSeverity` (Negligible to Fatal), `CriticFailureObject`, `CouncilEvaluationReport`.<br>**Shorts**: Defines bounding box tuples, penetration depths, and collision violation enums. |
-| **Context Caching** | `aether/council/context_cache.py` (210 lines) | *(None)* | **Aether**: Caches multimodal embeddings and scene context to reduce token costs during repetitive critic passes.<br>**Shorts**: Evaluates keyframes independently per run. |
+| **Master Quality Gatekeeper** | `_archive/aether/council/council.py` (528 lines) | `pipeline/vlm_critic.py` (420 lines) | **Aether**: Evaluates candidate videos across 6 specialized critics against 5 binary hard gates before soft aesthetic scoring.<br>**Shorts**: Headless keyframe inspector using Gemini Vision / Ollama to detect text/visual collisions, margin overflows, and layout monotony. |
+| **Specialized Critics** | `_archive/aether/council/critics.py` (1,452 lines) | `pipeline/vlm_critic.py`, `pipeline/retention_autopsy_critic.py` (260 lines) | **Aether**: 6 distinct critic domains: Visual/Anatomy, Temporal, Continuity, Performance (Lip-Sync), Physics, and Audio.<br>**Shorts**: 2 critics: Spatial Layout Critic (pre-render/post-render) and Audience Retention Drop-off Critic (post-broadcast). |
+| **Computer Vision Diagnostics** | `_archive/aether/council/cv_analyzer.py` (620 lines) | *(None / Delegates to VLM)* | **Aether**: Deterministic OpenCV pipeline measuring optical flow variance, structural similarity index (SSIM), edge stability, and frame-to-frame jitter.<br>**Shorts**: Relies directly on VLM bounding boxes and text parsing. |
+| **Council Schemas** | `_archive/aether/council/schemas.py` (391 lines) | `pipeline/layout_solver.py` (`SpatialViolation`, `ViolationType`) | **Aether**: Defines `HardGateType`, `DefectSeverity` (Negligible to Fatal), `CriticFailureObject`, `CouncilEvaluationReport`.<br>**Shorts**: Defines bounding box tuples, penetration depths, and collision violation enums. |
+| **Context Caching** | `_archive/aether/council/context_cache.py` (210 lines) | *(None)* | **Aether**: Caches multimodal embeddings and scene context to reduce token costs during repetitive critic passes.<br>**Shorts**: Evaluates keyframes independently per run. |
 
 ---
 
@@ -237,10 +237,10 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Repair Planning** | `aether/repair/planner.py` (480 lines) | `pipeline/layout_solver.py` (lines 180–310) | **Aether**: Prioritizes defects by severity rank; generates sequential `RepairPlan` with targeted actions (`REGIONAL_TEMPORAL_INPAINTING`, `AUDIO_REMASTER`, `SPATIAL_PREVIS_REBLOCK`).<br>**Shorts**: Sorts spatial collisions by penetration depth and prescribes coordinate displacement vectors (`dx`, `dy`, `scale_multiplier`). |
-| **Repair Execution** | `aether/repair/executor.py` (512 lines) | `pipeline/auto_produce.py` (lines 280–360), `pipeline/layout_solver.py` (`apply_patches`) | **Aether**: Executes localized temporal diffusion inpainting, audio stem remastering, or 3D previs reblocking to fix video latents.<br>**Shorts**: Modifies Manim Python scene code / template coordinates and triggers rapid headless re-render of affected beats. |
-| **Protected Region Masking** | `aether/repair/masking.py` (390 lines) | `pipeline/layout_solver.py` (`safe_zone_bounds`) | **Aether**: Generates spatio-temporal boundary masks protecting background plates, actor faces, and camera motion trajectories from inpainting corruption.<br>**Shorts**: Enforces 2D vertical safe zones (top HUD boundary, bottom subtitle zone, side margins). |
-| **Repair Schemas** | `aether/repair/schemas.py` (433 lines) | `pipeline/layout_solver.py` (`LayoutPatch`, `SolverResult`) | **Aether**: Defines `RepairActionType`, `ProtectedRegion`, `RepairTask`, `RepairPlan`, `RepairExecutionResult`.<br>**Shorts**: Defines `EntityPatch`, `SpatialViolation`, `SolverResult`. |
+| **Repair Planning** | `_archive/aether/repair/planner.py` (480 lines) | `pipeline/layout_solver.py` (lines 180–310) | **Aether**: Prioritizes defects by severity rank; generates sequential `RepairPlan` with targeted actions (`REGIONAL_TEMPORAL_INPAINTING`, `AUDIO_REMASTER`, `SPATIAL_PREVIS_REBLOCK`).<br>**Shorts**: Sorts spatial collisions by penetration depth and prescribes coordinate displacement vectors (`dx`, `dy`, `scale_multiplier`). |
+| **Repair Execution** | `_archive/aether/repair/executor.py` (512 lines) | `pipeline/auto_produce.py` (lines 280–360), `pipeline/layout_solver.py` (`apply_patches`) | **Aether**: Executes localized temporal diffusion inpainting, audio stem remastering, or 3D previs reblocking to fix video latents.<br>**Shorts**: Modifies Manim Python scene code / template coordinates and triggers rapid headless re-render of affected beats. |
+| **Protected Region Masking** | `_archive/aether/repair/masking.py` (390 lines) | `pipeline/layout_solver.py` (`safe_zone_bounds`) | **Aether**: Generates spatio-temporal boundary masks protecting background plates, actor faces, and camera motion trajectories from inpainting corruption.<br>**Shorts**: Enforces 2D vertical safe zones (top HUD boundary, bottom subtitle zone, side margins). |
+| **Repair Schemas** | `_archive/aether/repair/schemas.py` (433 lines) | `pipeline/layout_solver.py` (`LayoutPatch`, `SolverResult`) | **Aether**: Defines `RepairActionType`, `ProtectedRegion`, `RepairTask`, `RepairPlan`, `RepairExecutionResult`.<br>**Shorts**: Defines `EntityPatch`, `SpatialViolation`, `SolverResult`. |
 
 ---
 
@@ -248,15 +248,15 @@ The following audit matrix compares all 38 files in Project Aether (`aether/`) a
 
 | Subsystem Component | Project Aether File | The Model Verse Shorts File | Architectural Comparison & Operational Divergence |
 | :--- | :--- | :--- | :--- |
-| **Meta-Learning / Feedback** | `aether/teacher/dreamer.py` (290 lines), `aether/teacher/replay_simulator.py` (360 lines) | `pipeline/analytics_feedback.py` (240 lines), `pipeline/retention_genome.py` (350 lines) | **Aether**: Dream-RSI offline policy optimizer evaluating Pareto objective $V_{im} = \max_v s_v - \beta_1 N_{im} + \beta_2 (N_{im} / \max(1, k^*_{im}))$ over pre-recorded discovery trees at zero API cost.<br>**Shorts**: Real-time YouTube retention analytics calibrating candidate discovery multipliers (`hardware_efficiency: 1.44x`) and genetic hook mutation. |
-| **Episode Trace Logging** | `aether/teacher/trace_logger.py` (270 lines), `aether/teacher/ledger.py` (220 lines) | `pipeline/digest_history.json` | **Aether**: Persists complete render episodes as immutable DAGs (`DiscoveryTraceTree` and `TraceNode`) to disk.<br>**Shorts**: Logs processed paper IDs, video URLs, and publication timestamps to JSON. |
-| **Benchmark Suite** | `aether/bench/` (5 files, ~2,200 lines) | `test/` (29 test files, ~7,000 lines) | **Aether**: 30+ standardized cinematic scenarios testing physical phenomena (fluids, stunts, specular reflections) and synthetic defect injection.<br>**Shorts**: Pytest automated suite covering GitHub scrapers, arXiv extraction, layout repulsion, pedagogy critics, and Manim primitives. |
+| **Meta-Learning / Feedback** | `_archive/aether/teacher/dreamer.py` (290 lines), `_archive/aether/teacher/replay_simulator.py` (360 lines) | `pipeline/analytics_feedback.py` (240 lines), `pipeline/retention_genome.py` (350 lines) | **Aether**: Dream-RSI offline policy optimizer evaluating Pareto objective $V_{im} = \max_v s_v - \beta_1 N_{im} + \beta_2 (N_{im} / \max(1, k^*_{im}))$ over pre-recorded discovery trees at zero API cost.<br>**Shorts**: Real-time YouTube retention analytics calibrating candidate discovery multipliers (`hardware_efficiency: 1.44x`) and genetic hook mutation. |
+| **Episode Trace Logging** | `_archive/aether/teacher/trace_logger.py` (270 lines), `_archive/aether/teacher/ledger.py` (220 lines) | `pipeline/digest_history.json` | **Aether**: Persists complete render episodes as immutable DAGs (`DiscoveryTraceTree` and `TraceNode`) to disk.<br>**Shorts**: Logs processed paper IDs, video URLs, and publication timestamps to JSON. |
+| **Benchmark Suite** | `_archive/aether/bench/` (5 files, ~2,200 lines) | `test/` (29 test files, ~7,000 lines) | **Aether**: 30+ standardized cinematic scenarios testing physical phenomena (fluids, stunts, specular reflections) and synthetic defect injection.<br>**Shorts**: Pytest automated suite covering GitHub scrapers, arXiv extraction, layout repulsion, pedagogy critics, and Manim primitives. |
 
 ---
 
-## 5. Shared Contract & Integration Layer (`aether/shared_contract.py`)
+## 5. Shared Contract & Integration Layer (`_archive/aether/shared_contract.py`)
 
-To bridge the 2D educational shorts generator and the 3D cinematic virtual studio without cyclic dependencies, the system defines a clean shared contract layer in `aether/shared_contract.py`:
+To bridge the 2D educational shorts generator and the 3D cinematic virtual studio without cyclic dependencies, the system defines a clean shared contract layer in `_archive/aether/shared_contract.py`:
 
 ### 1. Script-to-Film-Scene Adapter (`ScriptToFilmSceneAdapter`)
 Converts the structured 6-beat `VideoSpec` generated from research papers into Aether's `DirectorProductionBrief` and `FilmScene` representations:
@@ -297,7 +297,7 @@ themodelverse-shorts/
 ├── requirements.txt                   # Core Python dependencies
 ├── package.json                       # Node dependencies for Remotion & captions
 │
-├── aether/                            # Project Aether: 3D Autonomous Cinematic Virtual Studio (39 files)
+├── _archive/aether/                   # Archived Project Aether: 3D Autonomous Cinematic Virtual Studio (39 files)
 │   ├── shared_contract.py             # Shared contracts & adapters between Shorts & Aether
 │   ├── bench/                         # AetherBench Cinematic Evaluation Suite
 │   ├── compiler/                      # Complexity Planning (L0-L5) & Multi-Model Shot Compiler
@@ -307,8 +307,11 @@ themodelverse-shorts/
 │   ├── state/                         # Persistent 3D World State Tracking Engine & Continuity Auditor
 │   └── teacher/                       # Dream-RSI Meta-Learning & Offline Policy Optimization
 │
+├── _archive/project-aether-docs/      # Archived Project Aether design documentation
+├── _archive/pipeline/aether_director.py # Archived Aether pipeline wrapper
+├── _archive/test/                     # Archived Project Aether test suite
+│
 ├── pipeline/                          # The Model Verse Shorts Production Pipeline (36 files)
-│   ├── aether_director.py             # Backwards-compatible pipeline wrapper for AetherDirector
 │   ├── run_pipeline.py                # Multi-category CLI orchestrator for 2D Manim shorts
 │   ├── daily_shorts_daemon.py         # Autonomous 5-slot daily production daemon
 │   ├── auto_produce.py                # Single-command automated production orchestrator
@@ -318,7 +321,7 @@ themodelverse-shorts/
 │   ├── arxiv_fetcher.py               # arXiv paper ingestion & figure extraction coordinator
 │   ├── arxiv_vector_extractor.py      # Native PDF/EPS vector figure & raster extractor
 │   ├── aligner.py                     # 200 Hz acoustic forced aligner (energy snapping)
-│   ├── audio_synthesizer.py           # Kokoro-82M TTS & Tactile Foley SFX mixdown
+│   ├── audio_synthesizer.py           # Pocket TTS & Tactile Foley SFX mixdown
 │   ├── analytics_feedback.py          # Real-time YouTube retention feedback loop
 │   ├── publisher.py                   # YouTube Data API v3 publisher
 │   ├── layout_solver.py               # Deterministic spatial repulsion collision solver
@@ -336,8 +339,6 @@ themodelverse-shorts/
 │   └── arxiv_cache/                   # Downloaded arXiv e-prints and extracted chalkboard figures
 │
 └── test/                              # Automated Pytest Suite (367+ tests)
-    ├── test_aether_shared_contract.py  # Unit tests for shared contract adapter & conditioning
-    ├── test_aether_*.py               # Comprehensive Project Aether test suite (345+ tests)
     ├── test_arxiv_figure_extraction.py# Unit tests for vector figure extractor
     ├── test_script_critic.py          # Unit tests for pedagogy & readability critic
     └── test_showdown_engine.py        # Unit tests for race bars & radar plots

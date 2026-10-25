@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Audio, staticFile } from "remotion";
 import { DeepSeekV3MoEVisualizer } from "../components/DeepSeekV3MoEVisualizer";
 import { KineticCaptions } from "../components/KineticCaptions";
 import { DEEPSEEK_V3_SPEC } from "../data/deepseek-v3";
@@ -7,29 +7,33 @@ import { WordToken } from "../types/aligner";
 
 // Sample aligned words for testing captions
 const SAMPLE_WORDS: WordToken[] = [
-  { word: "DeepSeek-V3", start: 0.1, end: 0.8 },
-  { word: "activates", start: 0.85, end: 1.3 },
-  { word: "only", start: 1.35, end: 1.6 },
-  { word: "37", start: 1.65, end: 1.9 },
-  { word: "billion", start: 1.95, end: 2.3 },
-  { word: "parameters", start: 2.35, end: 2.9 },
-  { word: "per", start: 2.95, end: 3.1 },
-  { word: "token", start: 3.15, end: 3.5 },
-  { word: "across", start: 3.55, end: 3.85 },
-  { word: "256", start: 3.9, end: 4.3 },
-  { word: "routed", start: 4.35, end: 4.7 },
-  { word: "experts", start: 4.75, end: 5.2 },
+  { word: "DeepSeek", start: 0.01, end: 0.74 },
+  { word: "V3", start: 0.74, end: 0.92 },
+  { word: "activates", start: 0.92, end: 1.77 },
+  { word: "only", start: 1.77, end: 2.09 },
+  { word: "37", start: 2.09, end: 2.235 },
+  { word: "billion", start: 2.235, end: 2.825 },
+  { word: "parameters", start: 2.825, end: 3.85 },
+  { word: "per", start: 3.85, end: 4.04 },
+  { word: "token", start: 4.04, end: 4.555 },
+  { word: "across", start: 4.555, end: 5.065 },
+  { word: "256", start: 5.065, end: 5.425 },
+  { word: "routed", start: 5.425, end: 5.885 },
+  { word: "experts", start: 5.885, end: 6.56 },
 ];
 
 export interface MoEVisualizerPreviewProps {
   showSafeZoneOverlay?: boolean;
+  audioSrc?: string;
 }
 
 export const MoEVisualizerPreview: React.FC<MoEVisualizerPreviewProps> = ({
   showSafeZoneOverlay = false,
+  audioSrc,
 }) => {
   return (
     <AbsoluteFill className="bg-[#06080F]">
+      <Audio src={audioSrc ?? staticFile("audio/kokoro_narration.wav")} volume={1} />
       {/* 1. Main Architecture Visualizer */}
       <DeepSeekV3MoEVisualizer
         spec={DEEPSEEK_V3_SPEC}

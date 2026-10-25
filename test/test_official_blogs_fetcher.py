@@ -33,6 +33,7 @@ from pipeline.official_blogs_fetcher import (
     OFFICIAL_LAB_DOMAINS,
     clean_html_text,
     parse_pubdate_to_iso,
+    normalize_official_url,
     slugify_title,
     extract_verified_key_facts,
     classify_blog_content,
@@ -200,6 +201,50 @@ def test_extract_verified_key_facts():
     assert any("$0.15" in p for p in facts["pricing"])
     assert any("Google AI Studio" in a for a in facts["availability"])
     assert any("Developer API" in a for a in facts["availability"])
+
+
+def test_live_feed_preserves_evidence_and_never_fabricates_defaults():
+    """Live records keep source facts and do not inherit homepage/date/score defaults."""
+    feed = """<rss><channel>
+      <item>
+        <title>Project Kimi 3.1 Pro</title>
+        <link>/news/kimi-3-1-pro?utm_source=feed&amp;ref=homepage</link>
+        <description><![CDATA[Scores 65.7% on SWE-bench Verified. Available through the Developer API at $2.00 / 1M input tokens.]]></description>
+      </item>
+      <item>
+        <title>Missing canonical link must be rejected</title>
+        <description>82% on MMLU.</description>
+      </item>
+      <item>
+        <title>Cross-provider link must be rejected</title>
+        <link>https://attacker.example/news/fake</link>
+        <pubDate>2026-10-10</pubDate>
+      </item>
+    </channel></rss>"""
+
+    records = OfficialBlogsFetcher().parse_feed_xml(
+        feed, provider="OpenAI", prefix="blog_openai"
+    )
+
+    assert len(records) == 1
+    record = records[0]
+    assert record.provider == "OpenAI"
+    assert record.canonical_url == "https://openai.com/news/kimi-3-1-pro"
+    assert record.published_date is None
+    assert record.key_facts["benchmarks"] == {"SWE-bench Verified": "65.7%"}
+    assert record.key_facts["pricing"] == ["$2.00 / 1M input tokens"]
+    assert record.key_facts["availability"] == ["Developer API"]
+    assert record.raw_impact_score is None
+    assert record.impact_score is None
+    assert record.analytics_multiplier is None
+
+
+def test_normalize_official_url_resolves_relative_and_removes_tracking():
+    assert normalize_official_url(
+        "/news/launch?utm_campaign=test&gclid=abc&view=full#details", "OpenAI"
+    ) == "https://openai.com/news/launch?view=full"
+    assert normalize_official_url("https://openai.com/news/launch", "Anthropic") is None
+    assert normalize_official_url("", "OpenAI") is None
 
 
 def test_classify_blog_content():
@@ -492,6 +537,8 @@ def test_parse_pubdate_to_iso_natural_dates():
     assert parse_pubdate_to_iso("02 Oct 2026") == "2026-10-02"
     assert parse_pubdate_to_iso("2025-01-31") == "2025-01-31"
     assert parse_pubdate_to_iso("Fri, 31 Jan 2025 18:00:00 GMT") == "2025-01-31"
+    assert parse_pubdate_to_iso("") is None
+    assert parse_pubdate_to_iso("not a date") is None
 
 
 def test_extract_verified_key_facts_steps():

@@ -425,7 +425,10 @@ def test_run_pipeline_invokes_bespoke_synthesis_loop(monkeypatch, tmp_path):
         synthesized_beats.append(b_id)
         return f"/mock/path/beat_{b_id}.py"
 
-    monkeypatch.setattr("sys.argv", ["run_pipeline.py", "--topic", "test_wiring_e2e", "--dry-run"])
+    monkeypatch.setattr(
+        "sys.argv",
+        ["run_pipeline.py", "--topic", "test_wiring_e2e", "--dry-run", "--validate-visuals"],
+    )
     monkeypatch.setattr("pipeline.run_pipeline.load_template", lambda t: (mock_spec, template_file))
     monkeypatch.setattr("pipeline.run_pipeline.synthesize_audio_for_spec", lambda *args, **kwargs: mock_audio)
     monkeypatch.setattr("pipeline.bespoke_visual_synthesizer.bespoke_synthesizer.synthesize_visual_for_beat", mock_synthesize)
@@ -630,9 +633,9 @@ def test_formula_tray_returns_none_when_no_formula_and_frosted_capsule_when_pres
     assert abs(tray_2.get_center()[1] - (-2.6)) < 0.05
 
 
-def test_kinetic_captions_positioned_at_safe_zone_y_minus_3_85():
+def test_kinetic_captions_positioned_at_safe_zone_y_minus_3_45():
     """
-    Verifies that kinetic captions are anchored at y = -3.85,
+    Verifies that kinetic captions are anchored at y = -3.45,
     leaving clean headroom for diagrams/formulas above and mobile Shorts UI below.
     """
     scene = DummyScriptDrivenScene()
@@ -643,7 +646,7 @@ def test_kinetic_captions_positioned_at_safe_zone_y_minus_3_85():
     }
     scene.setup_kinetic_captions()
     assert scene.caption_container is not None
-    assert scene.caption_target_y == -3.85
+    assert scene.caption_target_y == -3.45
 
 
 def test_seamless_cross_fade_handoff_in_play_brand_outro():

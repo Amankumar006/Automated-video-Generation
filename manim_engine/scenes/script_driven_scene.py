@@ -22,7 +22,7 @@ from pipeline.config import (
     VIDEO_WIDTH, VIDEO_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT, BG_CARBON,
     FONT_HELVETICA
 )
-from manim_engine.primitives.typography import CleanText, clean_text
+from manim_engine.primitives.typography import CleanText, clean_text, word_safe_truncate
 
 # Alias Text -> CleanText so HUD headers and brand watermarks render with flawless subpixel typography
 Text = CleanText
@@ -190,8 +190,8 @@ class ScriptDrivenScene(MovingCameraScene):
             print(f"⚠️ Kinetic subtitle setup notice: {e}")
             self.caption_chunks = []
 
-        self.caption_target_y = -3.85
-        self.caption_container = VGroup().move_to([0, -3.85, 0])
+        self.caption_target_y = -3.45
+        self.caption_container = VGroup().move_to([0, self.caption_target_y, 0])
         self.caption_container.set_z_index(60)
         self.add(self.caption_container)
 
@@ -235,7 +235,7 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_width=1.4
                         )
                         cam_center = self.camera.frame.get_center()
-                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] - 3.85, 0]))
+                        mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] + self.caption_target_y, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
@@ -263,6 +263,14 @@ class ScriptDrivenScene(MovingCameraScene):
         eliminating clutter and overlapping with subtitles or diagram motifs.
         Returns None if no formula exists for this beat.
         """
+        # The benchmark composition already owns the lower third with its
+        # metric, bars, delta badge, and synchronized narration caption.
+        # A second formula tray there creates an avoidable collision and
+        # repeats the same quantitative claim, so reserve Beat 5 for the
+        # benchmark visual only.
+        if beat_id == 5:
+            return None
+
         formulas = self.spec.get("math_formulas", [])
         matching_formula = None
         for f in formulas:
@@ -307,7 +315,9 @@ class ScriptDrivenScene(MovingCameraScene):
         if math_mobj is None:
             latex_code = matching_formula.get("latex", "")
             if latex_code:
-                clean_tex = latex_code.replace(r"\implies", r"\to").replace(r"\iff", r"\leftrightarrow")
+                clean_tex = latex_code.strip().strip("$")
+                clean_tex = clean_tex.replace(r"\implies", r"\to").replace(r"\iff", r"\leftrightarrow")
+                clean_tex = clean_tex.replace(r"\ge ", r"\geq ").replace(r"\le ", r"\leq ")
                 try:
                     math_mobj = MathTex(clean_tex, font_size=24, color="#38BDF8")
                     if math_mobj.width > 5.5:
@@ -317,7 +327,17 @@ class ScriptDrivenScene(MovingCameraScene):
                 except Exception:
                     try:
                         from manim_engine.primitives.typography import CleanText
-                        math_mobj = CleanText(clean_tex, font_size=16, color="#38BDF8")
+                        # Never expose raw TeX source in a finished video.
+                        # This fallback is intentionally human-readable when
+                        # a third-party math parser rejects a formula.
+                        readable = clean_tex
+                        readable = re.sub(r"\\mathrm\{([^{}]*)\}", r"\1", readable)
+                        readable = re.sub(r"\\text\{([^{}]*)\}", r"\1", readable)
+                        readable = re.sub(r"\\(?:mathbb|mathbf|mathcal)\{([^{}]*)\}", r"\1", readable)
+                        readable = readable.replace(r"\times", "×").replace(r"\geq", "≥").replace(r"\leq", "≤")
+                        readable = readable.replace(r"\rightarrow", "→").replace(r"\to", "→")
+                        readable = readable.replace("{", "").replace("}", "").replace("\\", "")
+                        math_mobj = CleanText(readable[:42], font_size=16, color="#38BDF8")
                         if math_mobj.width > 5.5:
                             math_mobj.scale_to_fit_width(5.5)
                     except Exception:
@@ -340,7 +360,11 @@ class ScriptDrivenScene(MovingCameraScene):
         )
         tray_group = VGroup(capsule_bg, math_mobj)
         tray_group.set_z_index(45)
-        tray_group.move_to([0, -2.6, 0])
+        # Benchmark compositions reserve the -2.6 region for their own
+        # payoff annotation. Keep the formula tray below it but above the
+        # subtitle safe zone to prevent visible overlap.
+        tray_y = -3.0 if beat_id == 5 else -2.6
+        tray_group.move_to([0, tray_y, 0])
         return tray_group
 
     def display_math_formula(self, beat_id: int, run_time: float = 0.35):
@@ -486,9 +510,9 @@ class ScriptDrivenScene(MovingCameraScene):
                     motif_params["image_path"] = current_img
 
                 if not motif_params.get("title"):
-                    motif_params["title"] = f"{self.spec.get('title', 'AI')[:22].upper()}: BEAT {beat_id}"
+                    motif_params["title"] = f"{word_safe_truncate(self.spec.get('title', 'AI').upper(), 22)}: BEAT {beat_id}"
                 if not motif_params.get("sub"):
-                    motif_params["sub"] = v_focus[:55] or "Official architectural diagram tailored to narrative beat"
+                    motif_params["sub"] = word_safe_truncate(v_focus, 55) or "Official architectural diagram tailored to narrative beat"
                 if not motif_params.get("arxiv_id") and self.spec.get("arxiv_id"):
                     motif_params["arxiv_id"] = self.spec.get("arxiv_id")
 
@@ -499,7 +523,8 @@ class ScriptDrivenScene(MovingCameraScene):
             bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
             motif = None
 
-            if bespoke_module_path.exists():
+            bespoke_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+            if bespoke_enabled and bespoke_module_path.exists() and not visual_blueprint:
                 try:
                     mod_name = f"bespoke_{spec_clean_id}_beat_{beat_id}"
                     spec_import = importlib.util.spec_from_file_location(mod_name, str(bespoke_module_path))
@@ -523,8 +548,8 @@ class ScriptDrivenScene(MovingCameraScene):
             if not isinstance(motif, BaseBlueprintComposition):
                 motif.move_to([0, 0.75, 0])
             else:
-                if motif.get_bottom()[1] < -2.2:
-                    shift_up = -2.2 - motif.get_bottom()[1]
+                if motif.get_bottom()[1] < -2.40:
+                    shift_up = -2.40 - motif.get_bottom()[1]
                     if motif.get_top()[1] + shift_up <= 6.2:
                         motif.shift(UP * shift_up)
                     else:

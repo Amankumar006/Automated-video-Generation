@@ -73,6 +73,80 @@ def test_tech_news_script_engine_generates_six_beats():
     assert spec["manim_blueprints"][4]["type"] == "pricing_and_availability"
 
 
+def test_tech_news_engine_does_not_invent_metrics_or_generic_before_opening():
+    """A sparse source must produce an honest script instead of hard-coded hype."""
+    spec = TechNewsScriptEngine().generate_news_script(
+        topic="Aster Labs announces Aster One",
+        blog_meta={
+            "title": "Aster Labs announces Aster One",
+            "provider": "Aster Labs",
+        },
+        use_llm=False,
+    )
+
+    all_text = " ".join(beat["text"] for beat in spec["beats"])
+    assert "before" not in spec["beats"][0]["text"].lower()
+    assert "3.2x" not in all_text
+    assert "49.3%" not in all_text
+    assert "-92%" not in all_text
+    assert "$1.10" not in all_text
+    assert spec["math_formulas"] == []
+    assert "not reported" in all_text.lower()
+
+
+def test_tech_news_engine_adds_topic_matched_analogy_and_repairs_llm_style_opening():
+    """The final contract applies to fallback and provider-returned specs alike."""
+    engine = TechNewsScriptEngine()
+    spec = {
+        "title": "Aster One",
+        "category": "tech_news",
+        "beats": [
+            {"beat_id": 1, "text": "Before you deploy, see the release."},
+            {"beat_id": 2, "text": "The model keeps a longer context window."},
+            {"beat_id": 3, "text": "The source describes the capability."},
+        ],
+    }
+
+    finalized = engine._finalize_spec(spec, "Aster One", {})
+    text = " ".join(beat["text"] for beat in finalized["beats"])
+
+    assert not finalized["beats"][0]["text"].lower().startswith("before")
+    assert "bookshelf" in text.lower()
+    assert finalized["narration_contract"] == {
+        "generic_before_repaired": True,
+        "analogy_added": True,
+        "analogy_required": True,
+    }
+
+
+def test_tech_news_engine_uses_explicit_facts_and_keeps_six_beat_arc():
+    """Facts supplied by fetchers should reach the narration and visual params."""
+    spec = TechNewsScriptEngine().generate_news_script(
+        topic="Nova releases Nova 2",
+        blog_meta={
+            "title": "Nova releases Nova 2",
+            "provider": "Nova Labs",
+            "summary": "Nova 2 adds controllable tool use for production workflows",
+            "architecture": "routes tool calls through a typed planner",
+            "benchmarks": {"TaskBench": "78%"},
+            "pricing": {"input": "$0.20 / 1M tokens"},
+            "availability": ["API beta"],
+            "speedups": ["18% lower latency in the release note"],
+        },
+        use_llm=False,
+    )
+
+    assert len(spec["beats"]) == 6
+    assert "controllable tool use" in spec["beats"][0]["text"]
+    assert "typed planner" in spec["beats"][2]["text"]
+    assert "TaskBench: 78%" in spec["beats"][3]["text"]
+    assert "$0.20 / 1M tokens" in spec["beats"][4]["text"]
+    assert "API beta" in spec["beats"][4]["text"]
+    assert spec["beats"][3]["visual_blueprint"]["params"]["benchmarks"] == {"TaskBench": "78%"}
+    assert spec["beats"][4]["visual_blueprint"]["params"]["availability"] == ["API beta"]
+    assert {formula["beat_id"] for formula in spec["math_formulas"]} == {3, 4, 5}
+
+
 def test_tech_news_engine_provider_detection():
     """Validates provider identification across top AI labs."""
     engine = TechNewsScriptEngine()

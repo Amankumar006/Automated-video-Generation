@@ -10,8 +10,8 @@ Coordinates high-fidelity speech synthesis across:
    - Target language: hi-IN
    - Default speaker: 'shubh' / 'aditya'
    - Base64 WAV decoding & 24kHz resampling
-3. Kokoro-82M ONNX (Offline Fallback):
-   - Zero-cost offline neural speech synthesis
+3. Pocket TTS (Offline Fallback):
+   - Zero-cost local CPU neural speech synthesis
    - Seamless fallback when API quota is exhausted or offline
 
 Features:
@@ -27,6 +27,9 @@ import json
 import base64
 import hashlib
 import logging
+import shutil
+import subprocess
+import tempfile
 from typing import Tuple, Dict, Any, Optional
 import numpy as np
 import soundfile as sf
@@ -35,7 +38,7 @@ import requests
 
 from pipeline.config import (
     SAMPLE_RATE, PUBLIC_DIR, TTS_CACHE_DIR, DEFAULT_SPEED,
-    KOKORO_MODEL_PATH, KOKORO_VOICES_PATH, DEFAULT_VOICE, DEFAULT_KOKORO_VOICE,
+    DEFAULT_VOICE,
     ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_VOICES,
     SARVAM_API_KEY, SARVAM_SPEAKER, SARVAM_MODEL, SARVAM_SPEAKERS,
     DEFAULT_TTS_PROVIDER
@@ -414,76 +417,54 @@ class SarvamVoiceProvider(BaseVoiceProvider):
         return audio_24k, SAMPLE_RATE, meta
 
 
-class KokoroVoiceProvider(BaseVoiceProvider):
-    """
-    Kokoro-82M ONNX Voice Provider.
-    Completely offline, zero API credits, high-speed execution.
-    Acts as a resilient fallback when online services are unavailable.
-    """
-
-    # Mapping common friendly names / ElevenLabs voices to valid Kokoro voice IDs
-    VOICE_MAP: Dict[str, str] = {
-        "eric": "am_eric",
-        "adam": "am_adam",
-        "alice": "bf_alice",
-        "bella": "af_bella",
-        "daniel": "bm_daniel",
-        "george": "bm_george",
-        "jessica": "af_jessica",
-        "liam": "am_liam",
-        "lily": "bf_lily",
-        "michael": "am_michael",
-        "nicole": "af_nicole",
-        "nova": "af_nova",
-        "river": "af_river",
-        "sarah": "af_sarah",
-        "sky": "af_sky",
-        "emma": "bf_emma",
-        "isabella": "bf_isabella",
-    }
+class PocketTTSVoiceProvider(BaseVoiceProvider):
+    """Optional Kyutai Pocket TTS CLI provider for reliable local CPU speech."""
 
     def __init__(self):
-        self._kokoro = None
+        self.binary_path = os.environ.get("POCKET_TTS_BIN") or shutil.which("pocket-tts")
+        self.language = os.environ.get("POCKET_TTS_LANGUAGE", "english_18m_2026-10")
+        self.voice = os.environ.get("POCKET_TTS_VOICE", "")
+        self.timeout = float(os.environ.get("POCKET_TTS_TIMEOUT_SECONDS", "90"))
 
-    def _ensure_model(self):
-        if self._kokoro is None:
-            from kokoro_onnx import Kokoro
-            from pipeline.audio_synthesizer import ensure_kokoro_models
-            ensure_kokoro_models()
-            self._kokoro = Kokoro(KOKORO_MODEL_PATH, KOKORO_VOICES_PATH)
-        return self._kokoro
+    def _resolve_binary(self) -> str:
+        path = self.binary_path or shutil.which("pocket-tts")
+        if not path or not os.path.isfile(path) or not os.access(path, os.X_OK):
+            raise VoiceEngineError(
+                "Pocket TTS binary unavailable. Install the official Kyutai binary and set POCKET_TTS_BIN."
+            )
+        return path
 
     def resolve_voice(self, voice_name: Optional[str]) -> str:
-        """Resolves any voice name or ElevenLabs alias to a guaranteed valid Kokoro voice ID."""
-        kokoro = self._ensure_model()
-        available_voices = set(kokoro.get_voices())
+        """Pocket's CLI accepts a conditioning-file path; otherwise use alba."""
+        candidate = voice_name or self.voice
+        return candidate if candidate and os.path.isfile(candidate) else "alba"
 
-        if not voice_name:
-            if DEFAULT_KOKORO_VOICE in available_voices:
-                return DEFAULT_KOKORO_VOICE
-            return "am_eric" if "am_eric" in available_voices else (list(available_voices)[0] if available_voices else "am_adam")
-
-        clean = voice_name.lower().strip()
-        # Direct match in Kokoro
-        if clean in available_voices:
-            return clean
-
-        # Map through alias dictionary
-        mapped = self.VOICE_MAP.get(clean)
-        if mapped and mapped in available_voices:
-            return mapped
-
-        # Try prefix matching (e.g. "eric" -> "am_eric" or "af_eric")
-        for prefix in ("am_", "af_", "bm_", "bf_"):
-            prefixed = f"{prefix}{clean}"
-            if prefixed in available_voices:
-                return prefixed
-
-        # If DEFAULT_KOKORO_VOICE is valid
-        if DEFAULT_KOKORO_VOICE in available_voices:
-            return DEFAULT_KOKORO_VOICE
-
-        return "am_eric" if "am_eric" in available_voices else list(available_voices)[0]
+    @staticmethod
+    def _apply_speed(audio: np.ndarray, sample_rate: int, speed: float) -> np.ndarray:
+        """Apply pitch-preserving speed where ffmpeg is available."""
+        if abs(speed - 1.0) < 0.01 or len(audio) == 0:
+            return audio.astype(np.float32)
+        ffmpeg = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg")
+        if not ffmpeg:
+            # Keep the provider usable in minimal environments; duration is
+            # still adjusted, with a small pitch trade-off as the last resort.
+            return resample_audio(audio, sample_rate, int(sample_rate * speed))
+        with tempfile.TemporaryDirectory(prefix="pocket_tts_speed_") as tmp:
+            source = os.path.join(tmp, "source.wav")
+            target = os.path.join(tmp, "target.wav")
+            sf.write(source, audio, sample_rate)
+            result = subprocess.run(
+                [ffmpeg, "-y", "-loglevel", "error", "-i", source,
+                 "-filter:a", f"atempo={max(0.5, min(2.0, speed))}",
+                 "-ar", str(sample_rate), "-ac", "1", target],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            if result.returncode == 0 and os.path.exists(target):
+                adjusted, adjusted_sr = sf.read(target, dtype="float32")
+                return resample_audio(adjusted, adjusted_sr, sample_rate)
+        return audio.astype(np.float32)
 
     def synthesize(
         self,
@@ -492,33 +473,60 @@ class KokoroVoiceProvider(BaseVoiceProvider):
         speed: Optional[float] = None,
         language: str = "en"
     ) -> Tuple[np.ndarray, int, Dict[str, Any]]:
-        kokoro = self._ensure_model()
-        v = self.resolve_voice(voice)
-        s = float(speed) if speed is not None else DEFAULT_SPEED
-        lang = "en-us" if language.lower().startswith("en") else "hi"
+        if not language.lower().startswith("en"):
+            raise VoiceEngineError("Pocket TTS is configured for English narration in this pipeline.")
+        binary = self._resolve_binary()
+        norm_text = normalize_narration_text(text, model_id="pocket-tts", language=language)
+        target_speed = float(speed) if speed is not None else DEFAULT_SPEED
+        with tempfile.TemporaryDirectory(prefix="pocket_tts_") as tmp:
+            output_path = os.path.join(tmp, "speech.wav")
+            command = [
+                binary, "generate", "--language", self.language,
+                "--text", norm_text, "--output-path", output_path, "--quiet"
+            ]
+            # Pocket's built-in voices are selected by omission. A supplied
+            # path is supported for future voice cloning without treating
+            # Voice values are conditioning-file paths for Pocket TTS.
+            voice_path = self.resolve_voice(voice)
+            if voice_path and os.path.isfile(voice_path):
+                command.extend(["--voice", voice_path])
+            try:
+                result = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=self.timeout,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise VoiceEngineError(f"Pocket TTS timed out after {self.timeout:.0f}s") from exc
+            if result.returncode != 0 or not os.path.exists(output_path):
+                detail = (result.stderr or result.stdout or "unknown Pocket TTS failure").strip()
+                raise VoiceEngineError(f"Pocket TTS failed: {detail[:240]}")
+            audio, source_sr = sf.read(output_path, dtype="float32")
 
-        samples, _ = kokoro.create(text, voice=v, speed=s, lang=lang)
-        meta = {
-            "provider": "kokoro",
-            "model": "kokoro-v1.0.onnx",
-            "voice": v,
-            "speed": s,
-            "char_count": len(text)
+        audio = sanitize_audio_samples(audio, source_sr)
+        audio = self._apply_speed(audio, source_sr, target_speed)
+        return audio, SAMPLE_RATE, {
+            "provider": "pocket",
+            "model": self.language,
+            "voice": voice_path,
+            "speed": target_speed,
+            "char_count": len(norm_text),
+            "binary": binary,
         }
-        return samples, SAMPLE_RATE, meta
 
 
 class UnifiedVoiceRouter:
     """
     Intelligent router selecting the optimal speech synthesis engine
-    with automatic persistent caching and transparent Kokoro fallback.
+    with automatic persistent caching and transparent Pocket TTS fallback.
     """
 
     def __init__(self, cache_dir: str = TTS_CACHE_DIR):
         self.cache = DiskAudioCache(cache_dir=cache_dir)
         self.elevenlabs = ElevenLabsVoiceProvider()
         self.sarvam = SarvamVoiceProvider()
-        self.kokoro = KokoroVoiceProvider()
+        self.pocket = PocketTTSVoiceProvider()
 
     def synthesize_beat(
         self,
@@ -532,7 +540,7 @@ class UnifiedVoiceRouter:
         Synthesizes a beat of speech.
         1. Checks disk cache first. If hit, returns instantly (0 credits spent).
         2. Routes to appropriate provider (ElevenLabs for EN, Sarvam for HI).
-        3. If primary provider fails or has no quota, falls back seamlessly to Kokoro.
+        3. If primary provider fails or has no quota, falls back seamlessly to Pocket TTS.
         4. Writes result to disk cache.
         """
         clean_text = text.strip()
@@ -557,11 +565,14 @@ class UnifiedVoiceRouter:
             resolved_model = self.sarvam.model
             resolved_voice = self.sarvam.resolve_speaker(voice)
             active_speed = float(speed) if speed is not None else 1.05
-        else:
-            target_provider = "kokoro"
-            resolved_model = "kokoro-v1.0"
-            resolved_voice = voice or DEFAULT_VOICE
+        elif target_provider == "pocket":
+            resolved_model = self.pocket.language
+            resolved_voice = self.pocket.resolve_voice(voice)
             active_speed = float(speed) if speed is not None else DEFAULT_SPEED
+        else:
+            raise VoiceEngineError(
+                f"Unsupported TTS provider '{target_provider}'. Choose auto, elevenlabs, sarvam, or pocket."
+            )
 
         # 1. Check Disk Cache
         cache_key = self.cache.compute_key(
@@ -579,14 +590,14 @@ class UnifiedVoiceRouter:
             logger.info(f"💾 [Audio Cache Hit] (0 credits spent) for \"{clean_text[:40]}...\"")
             return audio, sr, meta
 
-        # 2. Check Quota Health Tracker: if primary provider is already exhausted, skip directly to Kokoro
+        # 2. Check Quota Health Tracker: if primary provider is already exhausted, skip directly to Pocket TTS.
         if target_provider in ("elevenlabs", "sarvam") and not quota_tracker.is_healthy(target_provider):
             logger.info(
                 f"⏩ [VoiceRouter] Provider '{target_provider}' is marked EXHAUSTED in QuotaTracker. "
-                f"Immediately cascading to Kokoro ONNX offline synthesis."
+                f"Immediately cascading to Pocket TTS offline synthesis."
             )
-            fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
-            audio, sr, meta = self.kokoro.synthesize(
+            fallback_voice = self.pocket.resolve_voice(voice)
+            audio, sr, meta = self.pocket.synthesize(
                 text=clean_text,
                 voice=fallback_voice,
                 speed=active_speed,
@@ -618,9 +629,9 @@ class UnifiedVoiceRouter:
                     language=lang_norm
                 )
                 quota_tracker.record_success("sarvam")
-            else:
-                logger.info(f"🎙️ [Kokoro ONNX] Synthesizing offline beat with voice '{resolved_voice}'...")
-                audio, sr, meta = self.kokoro.synthesize(
+            elif target_provider == "pocket":
+                logger.info(f"🎙️ [Pocket TTS] Synthesizing local CPU beat with voice '{resolved_voice}'...")
+                audio, sr, meta = self.pocket.synthesize(
                     text=clean_text,
                     voice=resolved_voice,
                     speed=active_speed,
@@ -643,11 +654,14 @@ class UnifiedVoiceRouter:
 
                 logger.warning(
                     f"⚠️ [Voice Router] Provider '{target_provider}' encountered error: {exc}. "
-                    f"Falling back transparently to Kokoro ONNX offline speech synthesis!"
+                    f"Falling back transparently to Pocket TTS offline speech synthesis!"
                 )
-                # Seamless fallback to Kokoro with automatic voice name resolution
-                fallback_voice = self.kokoro.resolve_voice(voice or DEFAULT_VOICE)
-                audio, sr, meta = self.kokoro.synthesize(
+                if not lang_norm.startswith("en"):
+                    raise VoiceEngineError(
+                        "Pocket TTS fallback is English-only; configure Sarvam or another Hindi provider."
+                    ) from exc
+                fallback_voice = self.pocket.resolve_voice(voice)
+                audio, sr, meta = self.pocket.synthesize(
                     text=clean_text,
                     voice=fallback_voice,
                     speed=active_speed,
@@ -657,7 +671,7 @@ class UnifiedVoiceRouter:
                 meta["fallback_from"] = target_provider
                 meta["fallback_reason"] = str(exc)
             else:
-                # If target_provider is already kokoro, re-raise because there is no lower offline tier
+                # Pocket TTS is the lowest local tier; surface its failure instead of hiding it.
                 raise exc
 
         # 4. Cache the newly synthesized audio
