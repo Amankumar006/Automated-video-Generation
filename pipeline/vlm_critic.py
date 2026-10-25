@@ -275,6 +275,16 @@ class VLMCritic:
                         data["image_file"] = img_path.name
                         data["beat_id"] = beat_id
                         data["model_used"] = getattr(resp, "model", "gemma4:31b:cloud")
+                        try:
+                            reported_score = float(data.get("overall_score", 0.0))
+                        except (TypeError, ValueError):
+                            reported_score = 0.0
+                        if reported_score <= 0.0:
+                            # Providers use zero for "could not inspect";
+                            # expose a low, explicit failure score instead of
+                            # violating the critic result contract.
+                            data["overall_score"] = 1.0
+                            data["passed"] = False
                         if getattr(resp, "model", "").startswith("fallback"):
                             # Heuristic fallback payloads may carry an
                             # explicit zero to mean "not inspected". Keep
