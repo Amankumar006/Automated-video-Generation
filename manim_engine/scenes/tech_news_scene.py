@@ -101,6 +101,7 @@ class TechNewsScene(BaseShortScene):
         self.clean_transition([group], run_time=leave)
 
     def _launch_visual(self, provider, model_name, blueprint):
+        asset_backplate = self._asset_backplate(provider, model_name, blueprint)
         title = clean_text(model_name, font=FONT_HELVETICA, font_size=29, color=COLOR_WHITE, weight=HEAVY, max_width=7.4).move_to([0, 4.35, 0])
         source = clean_text(f"{provider.upper()}  /  RELEASE SIGNAL", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD).move_to([0, 5.05, 0])
         core = Circle(radius=0.72, color=COLOR_CYAN, stroke_width=3).move_to([0, 1.35, 0])
@@ -111,7 +112,56 @@ class TechNewsScene(BaseShortScene):
         arrows = VGroup(*[Arrow(tile.get_bottom(), core.get_top(), buff=0.12, color=COLOR_CYAN, stroke_width=1.7, max_tip_length_to_length_ratio=0.18) for tile in token_stream])
         signal = DashedLine([-3.5, 2.8, 0], [3.5, 2.8, 0], dash_length=0.12, color=COLOR_GRID)
         signal_label = clean_text("PROMPT  →  ROUTE  →  ANSWER", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).next_to(signal, UP, buff=0.16)
-        return VGroup(source, title, signal, signal_label, token_stream, arrows, rays, core, core_label), token_stream
+        return Group(asset_backplate, source, title, signal, signal_label, token_stream, arrows, rays, core, core_label), token_stream
+
+    def _asset_backplate(self, provider, model_name, blueprint):
+        """Add one restrained photographic layer behind the launch mechanism.
+
+        A story may provide a local ``asset_path`` in its blueprint. The
+        bundled server-rack image is a conservative infrastructure fallback;
+        it is atmosphere, never narrated evidence. Keeping it behind the
+        vectors preserves legibility and avoids the old stacked-card look.
+        """
+        params = blueprint.get("params", {}) if isinstance(blueprint, dict) else {}
+        candidate = params.get("asset_path")
+        if not candidate and isinstance(blueprint, dict):
+            candidate = blueprint.get("asset_path")
+        if not candidate:
+            candidate = PROJECT_ROOT / "public" / "assets" / "broll" / "datacenter_server_rack.jpg"
+        path = Path(candidate)
+        if not path.is_absolute():
+            path = PROJECT_ROOT / path
+        if not path.exists() or path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".webp"}:
+            return VGroup()
+
+        try:
+            image = ImageMobject(str(path))
+            image.scale_to_fit_width(7.55)
+            if image.height > 5.25:
+                image.scale_to_fit_height(5.25)
+            image.move_to([0, 1.15, -3])
+            image.set_opacity(0.34)
+            tint = RoundedRectangle(
+                corner_radius=0.18,
+                width=image.width + 0.18,
+                height=image.height + 0.18,
+                stroke_color=COLOR_CYAN,
+                stroke_width=1.1,
+                fill_color="#06111D",
+                fill_opacity=0.48,
+            ).move_to(image.get_center()).set_z_index(-2)
+            label = clean_text(
+                f"{provider.upper()}  /  COMPUTE FLOOR",
+                font=FONT_HELVETICA,
+                font_size=10,
+                color=COLOR_MUTED,
+                weight=BOLD,
+            ).move_to(image.get_bottom() + UP * 0.22).set_z_index(-1)
+            image.set_z_index(-3)
+            return Group(tint, image, label)
+        except Exception as exc:
+            print(f"⚠️ Could not load tech-news asset '{path}': {exc}")
+            return VGroup()
 
     def _context_lanes(self, blueprint):
         title = clean_text("1M TOKEN CONTEXT", font=FONT_HELVETICA, font_size=24, color=COLOR_CYAN, weight=HEAVY).move_to([0, 4.6, 0])

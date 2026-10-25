@@ -77,3 +77,15 @@ def test_tech_news_blueprints_expose_semantic_roles():
     roles = [beat["visual_blueprint"]["semantic_role"] for beat in spec["beats"]]
 
     assert roles == ["launch", "context_speed", "training_loop", "benchmark", "availability"]
+
+
+def test_tech_news_launch_visual_supports_a_real_local_asset_fallback():
+    """The launch scene should expose a grounded photographic layer without cards."""
+    from manim_engine.scenes.tech_news_scene import TechNewsScene
+
+    scene = TechNewsScene()
+    backplate = scene._asset_backplate("Anthropic", "Claude", {})
+
+    assert len(backplate.submobjects) == 3
+    assert backplate[1].__class__.__name__ == "ImageMobject"
+    assert backplate[1].get_z_index() < 0
