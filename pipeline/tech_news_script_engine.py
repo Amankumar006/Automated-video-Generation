@@ -224,6 +224,7 @@ Output ONLY valid JSON matching this schema:
                 "benchmarks": benchmarks,
                 "speedups": speedups,
                 "pricing": pricing,
+                "source_assets": (blog_meta or {}).get("source_assets", []),
                 "official_url": (blog_meta.get("official_url") or blog_meta.get("url", "")) if blog_meta else ""
             },
             "math_formulas": self._build_fact_formulas(clean_id, benchmarks, speedups, pricing)
@@ -306,6 +307,8 @@ Output ONLY valid JSON matching this schema:
                 "model_name": self._extract_model_name(spec.get("title", topic)),
                 "official_url": (blog_meta.get("official_url") or blog_meta.get("url", "")) if blog_meta else ""
             }
+        if blog_meta and blog_meta.get("source_assets"):
+            spec["tech_news_metadata"]["source_assets"] = blog_meta["source_assets"]
         self._apply_narration_contract(spec)
         return spec
 

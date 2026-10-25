@@ -79,12 +79,14 @@ def test_tech_news_blueprints_expose_semantic_roles():
     assert roles == ["launch", "context_speed", "training_loop", "benchmark", "availability"]
 
 
-def test_tech_news_launch_visual_supports_a_real_local_asset_fallback():
-    """The launch scene should expose a grounded photographic layer without cards."""
+def test_tech_news_launch_visual_requires_a_real_local_asset():
+    """The launch scene must use explicit source media, never generic stock."""
     from manim_engine.scenes.tech_news_scene import TechNewsScene
 
     scene = TechNewsScene()
-    backplate = scene._asset_backplate("Anthropic", "Claude", {})
+    assert len(scene._asset_backplate("Anthropic", "Claude", {})) == 0
+    asset_path = "public/assets/broll/datacenter_server_rack.jpg"
+    backplate = scene._asset_backplate("Anthropic", "Claude", {"asset_path": asset_path})
 
     assert len(backplate.submobjects) == 3
     assert backplate[1].__class__.__name__ == "ImageMobject"

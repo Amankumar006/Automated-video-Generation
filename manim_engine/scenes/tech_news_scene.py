@@ -64,7 +64,7 @@ class TechNewsScene(BaseShortScene):
             return {1: "launch", 2: "context_speed", 3: "training_loop", 4: "benchmark", 5: "availability", 6: "product"}.get(bid, "product")
 
         b1, d1, h1, bp1, _ = beat(1, f"Here is what just changed with {model_name}.", 7.5, {model_name: COLOR_CYAN})
-        hero = self._launch_visual(provider, model_name, bp1)
+        hero = self._launch_visual(provider, model_name, bp1, news_meta)
         self._play_beat(captions, b1, h1, hero[0], d1, pulse=hero[1])
 
         b2, d2, h2, bp2, _ = beat(2, "Post-training teaches the model to check its own work before it answers.", 7.5, {"post-training": COLOR_CYAN, "agent": COLOR_MINT})
@@ -100,8 +100,8 @@ class TechNewsScene(BaseShortScene):
         self.play(pulse.animate(rate_func=there_and_back, run_time=active).scale(1.06)) if pulse is not None else self.wait(active)
         self.clean_transition([group], run_time=leave)
 
-    def _launch_visual(self, provider, model_name, blueprint):
-        asset_backplate = self._asset_backplate(provider, model_name, blueprint)
+    def _launch_visual(self, provider, model_name, blueprint, news_meta=None):
+        asset_backplate = self._asset_backplate(provider, model_name, blueprint, news_meta or {})
         title = clean_text(model_name, font=FONT_HELVETICA, font_size=29, color=COLOR_WHITE, weight=HEAVY, max_width=7.4).move_to([0, 4.35, 0])
         source = clean_text(f"{provider.upper()}  /  RELEASE SIGNAL", font=FONT_HELVETICA, font_size=12, color=COLOR_CYAN, weight=BOLD).move_to([0, 5.05, 0])
         core = Circle(radius=0.72, color=COLOR_CYAN, stroke_width=3).move_to([0, 1.35, 0])
@@ -114,20 +114,27 @@ class TechNewsScene(BaseShortScene):
         signal_label = clean_text("PROMPT  →  ROUTE  →  ANSWER", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).next_to(signal, UP, buff=0.16)
         return Group(asset_backplate, source, title, signal, signal_label, token_stream, arrows, rays, core, core_label), token_stream
 
-    def _asset_backplate(self, provider, model_name, blueprint):
-        """Add one restrained photographic layer behind the launch mechanism.
+    def _asset_backplate(self, provider, model_name, blueprint, news_meta=None):
+        """Add the official source image behind the launch mechanism.
 
-        A story may provide a local ``asset_path`` in its blueprint. The
-        bundled server-rack image is a conservative infrastructure fallback;
-        it is atmosphere, never narrated evidence. Keeping it behind the
-        vectors preserves legibility and avoids the old stacked-card look.
+        A story must provide a local ``asset_path`` in its blueprint or
+        ``source_assets`` metadata. There is deliberately no generic stock
+        fallback: missing source media should remain visibly diagrammatic
+        rather than pretending unrelated imagery is evidence.
         """
+        news_meta = news_meta or {}
         params = blueprint.get("params", {}) if isinstance(blueprint, dict) else {}
         candidate = params.get("asset_path")
         if not candidate and isinstance(blueprint, dict):
             candidate = blueprint.get("asset_path")
         if not candidate:
-            candidate = PROJECT_ROOT / "public" / "assets" / "broll" / "datacenter_server_rack.jpg"
+            assets = news_meta.get("source_assets") or []
+            if isinstance(assets, dict):
+                assets = [assets]
+            hero_asset = next((asset for asset in assets if asset.get("role") == "hero"), None)
+            candidate = hero_asset.get("path") if hero_asset else None
+        if not candidate:
+            return VGroup()
         path = Path(candidate)
         if not path.is_absolute():
             path = PROJECT_ROOT / path
@@ -140,7 +147,7 @@ class TechNewsScene(BaseShortScene):
             if image.height > 5.25:
                 image.scale_to_fit_height(5.25)
             image.move_to([0, 1.15, -3])
-            image.set_opacity(0.34)
+            image.set_opacity(0.78)
             tint = RoundedRectangle(
                 corner_radius=0.18,
                 width=image.width + 0.18,
@@ -148,7 +155,7 @@ class TechNewsScene(BaseShortScene):
                 stroke_color=COLOR_CYAN,
                 stroke_width=1.1,
                 fill_color="#06111D",
-                fill_opacity=0.48,
+                fill_opacity=0.18,
             ).move_to(image.get_center()).set_z_index(-2)
             label = clean_text(
                 f"{provider.upper()}  /  COMPUTE FLOOR",

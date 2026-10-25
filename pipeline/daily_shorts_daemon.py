@@ -765,6 +765,22 @@ class DailyShortsDaemon:
 
             cand_source = classify_history_entry_pillar(arxiv_id, top_paper)
 
+            # Freeze one official source image before rendering tech-news
+            # stories. The scene may use it as visual evidence; it never falls
+            # back to unrelated stock imagery.
+            if category == "tech_news" and os.getenv("RESOLVE_SOURCE_ASSETS", "true").lower() not in {"0", "false", "no"}:
+                try:
+                    from pipeline.source_asset_resolver import resolve_official_source_image
+                    blog_meta = top_paper.get("blog_metadata", {}) or {}
+                    source_url = blog_meta.get("canonical_url") or blog_meta.get("official_url") or top_paper.get("official_url")
+                    asset = resolve_official_source_image(source_url, arxiv_id) if source_url else None
+                    if asset:
+                        top_paper.setdefault("source_assets", []).append(asset)
+                        top_paper.setdefault("blog_metadata", {})["source_assets"] = top_paper["source_assets"]
+                        print(f"   🖼️ Official source asset frozen: {asset['path']}")
+                except Exception as asset_err:
+                    print(f"   ⚠️ Source asset notice: {asset_err}")
+
             if dry_run:
                 print("🔍 [DRY-RUN] Simulating script generation and pedagogy evaluation...")
                 from pipeline.script_generator import generate_script
