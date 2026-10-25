@@ -7,7 +7,6 @@ separate from source code.
 | --- | --- | --- |
 | `pipeline/` | Ingestion, scripting, audio, publishing, and orchestration | Source |
 | `manim_engine/` | Manim scenes, primitives, controllers, and visual composition code | Source |
-| `studio/` | Local browser studio server and static UI | Source |
 | `scripts/` | Maintenance and asset-generation utilities | Source |
 | `test/` | Python integration and unit tests | Source |
 | `src/` | Remotion preview application | Source |
