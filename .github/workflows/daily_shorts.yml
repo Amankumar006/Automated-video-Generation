@@ -429,6 +429,15 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Synchronize main before applying production state
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
+          git -c http.extraheader="$auth_header" fetch origin main
+          git reset --hard origin/main
+
       - name: Download Daily Production State
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -456,5 +465,4 @@ jobs:
           git diff --cached --check
           git commit -m "chore(daemon): update daily production & analytics logs [skip ci]"
           auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
-          git -c http.extraheader="$auth_header" pull --rebase origin main
           git -c http.extraheader="$auth_header" push origin HEAD:main
