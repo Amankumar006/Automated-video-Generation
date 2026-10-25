@@ -52,25 +52,25 @@ class TechNewsScene(BaseShortScene):
         hero = self._launch_visual(provider, model_name, bp1)
         self._play_beat(captions, b1, h1, hero[0], d1, pulse=hero[1])
 
-        b2, d2, h2, bp2, _ = beat(2, "The model keeps a much longer working memory, so earlier context stays in reach.", 7.5, {"context": COLOR_CYAN})
-        lanes = self._context_lanes(bp2)
-        self._play_beat(captions, b2, h2, lanes[0], d2, pulse=lanes[1])
+        b2, d2, h2, bp2, _ = beat(2, "Post-training teaches the model to check its own work before it answers.", 7.5, {"post-training": COLOR_CYAN, "agent": COLOR_MINT})
+        loop = self._post_training_loop(bp2)
+        self._play_beat(captions, b2, h2, loop[0], d2, pulse=loop[1])
 
-        b3, d3, h3, bp3, _ = beat(3, "Post-training teaches the model to check its own work before it answers.", 8.0, {"check": COLOR_MINT, "reward": COLOR_GOLD})
-        loop = self._post_training_loop(bp3)
-        self._play_beat(captions, b3, h3, loop[0], d3, pulse=loop[1])
+        b3, d3, h3, bp3, _ = beat(3, "The model keeps a much longer working memory, so earlier context stays in reach.", 8.0, {"context": COLOR_CYAN, "faster": COLOR_MINT})
+        lanes = self._context_lanes(bp3)
+        self._play_beat(captions, b3, h3, lanes[0], d3, pulse=lanes[1])
 
-        b4, d4, h4, bp4, _ = beat(4, "The result is a faster path from prompt to useful answer.", 8.0, {"faster": COLOR_MINT})
-        speed = self._speed_race(b4, news_meta, bp4)
-        self._play_beat(captions, b4, h4, speed[0], d4, pulse=speed[1])
+        b4, d4, h4, bp4, raw4 = beat(4, "On the published tests, the new model clears real baselines.", 8.0, {"published tests": COLOR_CYAN})
+        bench, pulse = self._benchmark_bars(b4, news_meta, model_name, bp4, raw4)
+        self._play_beat(captions, b4, h4, bench, d4, pulse=pulse)
 
-        b5, d5, h5, bp5, raw5 = beat(5, "On the published tests, the new model clears real baselines.", 8.0, {"published tests": COLOR_CYAN})
-        bench, pulse = self._benchmark_bars(b5, news_meta, model_name, bp5, raw5)
-        self._play_beat(captions, b5, h5, bench, d5, pulse=pulse)
+        b5, d5, h5, bp5, _ = beat(5, "You can follow the release from announcement to API and production access.", 8.0, {"API": COLOR_CYAN, "available": COLOR_MINT})
+        timeline = self._availability_timeline(b5, news_meta, bp5)
+        self._play_beat(captions, b5, h5, timeline[0], d5, pulse=timeline[1])
 
-        b6, d6, h6, bp6, _ = beat(6, "You can follow the release from announcement to API and production access.", 8.0, {"API": COLOR_CYAN, "production": COLOR_MINT})
-        timeline = self._availability_timeline(b6, news_meta, bp6)
-        self._play_beat(captions, b6, h6, timeline[0], d6, pulse=timeline[1])
+        b6, d6, h6, bp6, _ = beat(6, "K3.1 Pro turns long-horizon work into a product feature.", 8.0, {"product feature": COLOR_CYAN})
+        feature = self._product_feature(model_name)
+        self._play_beat(captions, b6, h6, feature[0], d6, pulse=feature[1])
 
         logo_icon, brand_text, sub = create_chalkboard_brand_outro(logo_title="THE MODEL VERSE", tagline="Follow for Daily AI Lab Drops", url="themodelverse.in", y_center=0.3)
         outro = Group(logo_icon, brand_text, sub)
@@ -113,7 +113,8 @@ class TechNewsScene(BaseShortScene):
         window_label = clean_text("attention window", font=FONT_HELVETICA, font_size=12, color=COLOR_GOLD, weight=BOLD).rotate(PI / 2).next_to(window, LEFT, buff=0.16)
         tag_old = clean_text("earlier tokens", font=FONT_HELVETICA, font_size=12, color=COLOR_MUTED, weight=BOLD).move_to([-2.45, -1.65, 0])
         tag_new = clean_text("new request", font=FONT_HELVETICA, font_size=12, color=COLOR_MINT, weight=BOLD).move_to([2.2, -1.65, 0])
-        return VGroup(title, sub, lanes, moving, window, window_label, tag_old, tag_new), moving
+        speed = clean_text("HIGHSPEED  ·  2–3× REPORTED", font=FONT_HELVETICA, font_size=13, color=COLOR_MINT, weight=HEAVY).move_to([0, -2.1, 0])
+        return VGroup(title, sub, lanes, moving, window, window_label, tag_old, tag_new, speed), moving
 
     def _post_training_loop(self, blueprint):
         title = clean_text("POST-TRAINING LOOP", font=FONT_HELVETICA, font_size=24, color=COLOR_MINT, weight=HEAVY).move_to([0, 4.55, 0])
@@ -159,13 +160,30 @@ class TechNewsScene(BaseShortScene):
         for idx, (label, value, color) in enumerate(values[:4]):
             y = 2.65 - idx * 1.05
             name = clean_text(label, font=FONT_HELVETICA, font_size=12, color=COLOR_WHITE, weight=BOLD, max_width=1.75).move_to([-2.85, y, 0])
-            base = Line([-1.75, y, 2.75, y], color=COLOR_GRID, stroke_width=10)
-            fill = Line([-1.75, y, -1.75 + 4.5 * value / 100.0, y], color=color, stroke_width=10)
+            base = Line([-1.75, y, 0], [2.75, y, 0], color=COLOR_GRID, stroke_width=10)
+            fill = Line([-1.75, y, 0], [-1.75 + 4.5 * value / 100.0, y, 0], color=color, stroke_width=10)
             score = clean_text(f"{value:g}%", font=FONT_HELVETICA, font_size=18, color=color, weight=HEAVY).move_to([3.35, y, 0])
             rows.add(VGroup(name, base, fill, score))
         if not values:
             rows.add(clean_text("No published score in this release", font=FONT_HELVETICA, font_size=16, color=COLOR_MUTED, weight=BOLD).move_to([0, 1.1, 0]))
         return VGroup(title, subtitle, rows), (rows[-1] if len(rows) else None)
+
+    def _product_feature(self, model_name):
+        title = clean_text("LONG-HORIZON WORK  →  PRODUCT", font=FONT_HELVETICA, font_size=22, color=COLOR_CYAN, weight=HEAVY).move_to([0, 4.55, 0])
+        sub = clean_text("one capability, three useful surfaces", font=FONT_HELVETICA, font_size=13, color=COLOR_MUTED, weight=BOLD).next_to(title, DOWN, buff=0.14)
+        points = [(-2.65, 1.1, "LONG TASK", COLOR_GOLD), (0, 1.1, model_name.upper(), COLOR_CYAN), (2.65, 1.1, "REAL WORK", COLOR_MINT)]
+        nodes = VGroup()
+        for x, y, label, color in points:
+            node = Circle(radius=0.55, color=color, stroke_width=3).move_to([x, y, 0])
+            txt = clean_text(label, font=FONT_HELVETICA, font_size=10, color=color, weight=BOLD, max_width=1.0).move_to(node)
+            nodes.add(VGroup(node, txt))
+        arrows = VGroup(
+            Arrow([-2.05, 1.1, 0], [-0.62, 1.1, 0], buff=0.12, color=COLOR_MUTED, stroke_width=2),
+            Arrow([0.62, 1.1, 0], [2.05, 1.1, 0], buff=0.12, color=COLOR_MUTED, stroke_width=2),
+        )
+        note = clean_text("Kimi Code  ·  Kimi Work  ·  API", font=FONT_HELVETICA, font_size=14, color=COLOR_WHITE, weight=BOLD).move_to([0, -0.55, 0])
+        pulse = nodes[1][0]
+        return VGroup(title, sub, arrows, nodes, note), pulse
 
     def _availability_timeline(self, text, news_meta, blueprint):
         title = clean_text("FROM ANNOUNCEMENT TO ACCESS", font=FONT_HELVETICA, font_size=22, color=COLOR_GOLD, weight=HEAVY).move_to([0, 4.55, 0])
@@ -232,6 +250,20 @@ class TechNewsScene(BaseShortScene):
 
     def _benchmark_values(self, text, news_meta, model_name, raw_beat=None):
         values = []
+        blueprint = (raw_beat or {}).get("visual_blueprint", {}) if isinstance(raw_beat, dict) else {}
+        contestants = blueprint.get("contestants", []) if isinstance(blueprint, dict) else []
+        for contestant in contestants:
+            if not isinstance(contestant, dict):
+                continue
+            try:
+                value = float(contestant.get("value"))
+            except (TypeError, ValueError):
+                continue
+            label = str(contestant.get("name") or "RESULT").upper()[:18]
+            color = str(contestant.get("color") or COLOR_MINT)
+            values.append((label, value, color))
+        if values:
+            return [(label, max(0, min(100, value)), color) for label, value, color in values[:4]]
         benchmarks = news_meta.get("benchmarks", {}) or {}
         for key, raw in benchmarks.items() if isinstance(benchmarks, dict) else []:
             match = re.search(r"(\d+(?:\.\d+)?)", str(raw))
