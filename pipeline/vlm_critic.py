@@ -276,7 +276,16 @@ class VLMCritic:
                         data["beat_id"] = beat_id
                         data["model_used"] = getattr(resp, "model", "gemma4:31b:cloud")
                         if getattr(resp, "model", "").startswith("fallback"):
-                            data["overall_score"] = min(float(data.get("overall_score", 6.0)), 6.0)
+                            # Heuristic fallback payloads may carry an
+                            # explicit zero to mean "not inspected". Keep
+                            # the critic contract useful and non-zero while
+                            # still clearly failing the semantic QA gate.
+                            fallback_score = float(
+                                data.get("overall_score")
+                                or data.get("visual_score")
+                                or 6.0
+                            )
+                            data["overall_score"] = min(max(fallback_score, 1.0), 6.0)
                             data["passed"] = False
                             data["primary_observation"] = "Vision provider unavailable; deterministic fallback did not inspect image semantics."
                             quota_tracker.record_exhausted("ollama_vision", "Ollama vision unreachable; used heuristic fallback")
