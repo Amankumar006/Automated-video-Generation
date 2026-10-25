@@ -31,6 +31,124 @@ class VisualDirector:
     def __init__(self):
         self.api_key = os.environ.get("GEMINI_API_KEY")
 
+    @staticmethod
+    def _tech_news_blueprint(
+        beat: Dict[str, Any],
+        topic: str,
+        beat_id: int,
+    ) -> Optional[Dict[str, Any]]:
+        """Map a tech-news claim to one concrete mechanism visual.
+
+        Tech-news scripts have a stable narrative arc, but their generated
+        blueprint names are often presentation labels (for example,
+        ``news_pricing_table``) rather than layouts in the composition
+        registry. Keep this mapping local to the director so the scene stays
+        agnostic and each beat gets a distinct visual mechanism.
+        """
+        if beat_id not in {1, 2, 3, 4, 5}:
+            return None
+
+        existing = beat.get("visual_blueprint") or {}
+        focus = str(beat.get("visual_focus", "")).strip()
+        svo = beat.get("svo_action") or {}
+        subject = str(svo.get("subject") or topic).strip()
+        action = str(svo.get("action_verb") or "transforms").strip()
+        obj = str(svo.get("direct_object") or "production output").strip()
+        title = str(existing.get("title") or f"{topic.upper()[:22]}: BEAT {beat_id}")
+        sub = focus[:65] or str(existing.get("sub") or "Mechanism-driven technology news visual")
+
+        # The beat number is the primary narrative contract. Keyword checks
+        # below only refine the title/labels; they never permit a duplicate
+        # layout or let a pricing beat fall through to the benchmark visual.
+        if beat_id == 1:
+            return {
+                "layout": "pipeline_stages",
+                "title": title,
+                "sub": sub,
+                "accent_color": "#38BDF8",
+                "stage_1_label": f"STAGE 1: {subject.upper()[:18]}",
+                "stage_1_sub": "Official release signal",
+                "stage_2_label": f"STAGE 2: {obj.upper()[:18]}",
+                "stage_2_sub": "Model becomes available",
+                "stage_3_label": "STAGE 3: PRODUCTION STACK",
+                "stage_3_sub": "Ready for real workloads",
+            }
+
+        if beat_id == 2:
+            return {
+                "layout": "comparison_side_by_side",
+                "title": title,
+                "sub": sub,
+                "accent_color": "#F59E0B",
+                "col_a_title": "PREVIOUS GENERATION",
+                "col_a_stat": "Latency, cost, or scale ceiling",
+                "col_b_title": f"{subject.upper()[:18]} REBUILD",
+                "col_b_stat": "The constraint the release targets",
+            }
+
+        if beat_id == 3:
+            return {
+                "layout": "layer_stack",
+                "title": title,
+                "sub": sub,
+                "accent_color": "#A855F7",
+                "bottom_layer": "L1: POST-TRAINING COMPUTE",
+                "mid_layer": f"L2: {action.upper()[:18]} + AGENT LOOP",
+                "top_layer": f"L3: {obj.upper()[:18]}",
+            }
+
+        if beat_id == 4:
+            return {
+                "layout": "horizontal_race_bars",
+                "title": title,
+                "sub": sub,
+                "accent_color": "#10B981",
+                "metric_name": "VERIFIED BENCHMARK",
+                "unit": "SCORE",
+                "contestants": [
+                    {
+                        "name": f"{subject[:14]} (NEW)",
+                        "value": 100.0,
+                        "display_val": "NEW RESULT",
+                        "is_hero": True,
+                        "color": "#10B981",
+                    },
+                    {
+                        "name": "FRONTIER BASELINE",
+                        "value": 85.0,
+                        "display_val": "BASELINE",
+                        "is_hero": False,
+                        "color": "#38BDF8",
+                    },
+                    {
+                        "name": "PREVIOUS RELEASE",
+                        "value": 72.0,
+                        "display_val": "PREVIOUS",
+                        "is_hero": False,
+                        "color": "#64748B",
+                    },
+                ],
+                "delta_badge": "VERIFIED RESULT — COMPARE THE GAP",
+            }
+
+        # Beat 5 is deliberately a catalog: pricing and availability are a
+        # routing/access decision, not another benchmark chart.
+        return {
+            "layout": "catalog_routing",
+            "title": title,
+            "sub": sub,
+            "accent_color": "#34D399",
+            "index_label": f"{topic.upper()[:18]} ACCESS DESK",
+            "drawer_a_label": "API TIER",
+            "drawer_b_label": "PRICE / 1M TOKENS",
+            "drawer_c_label": "AVAILABLE NOW",
+        }
+
+    def _is_tech_news(self, spec: Dict[str, Any]) -> bool:
+        """Return whether this storyboard uses the tech-news narrative arc."""
+        category = str(spec.get("category") or spec.get("domain_taxonomy") or "").lower()
+        return category == "tech_news" or bool(spec.get("tech_news_metadata"))
+
     def synthesize_visual_blueprint(
         self,
         beat: Dict[str, Any],
@@ -348,6 +466,23 @@ class VisualDirector:
             b_id = b.get("beat_id", i + 1)
             if b_id > 5:
                 continue
+
+            # Tech-news beats use a deliberate mechanism arc rather than the
+            # generic keyword scorer. This also runs before the historical
+            # beat-5 benchmark special case, so pricing/availability remains
+            # a catalog visual instead of being misclassified as a benchmark.
+            if self._is_tech_news(spec):
+                tech_news_blueprint = self._tech_news_blueprint(b, topic, b_id)
+                if tech_news_blueprint:
+                    layout_name = tech_news_blueprint["layout"]
+                    if layout_name not in used_layouts:
+                        b["visual_blueprint"] = tech_news_blueprint
+                        b["motif_type"] = "visual_composition"
+                        b["motif_params"] = dict(tech_news_blueprint)
+                        b["kinetic_action"] = "blueprint_transform"
+                        used_layouts.add(layout_name)
+                        print(f"   ✨ Beat {b_id}: Assigned Tech News mechanism blueprint '{layout_name}'")
+                        continue
 
             # -------------------------------------------------------------
             # BEAT 5: Automated Showdown & Benchmark Visualizer (Visual Engine 5.0)
