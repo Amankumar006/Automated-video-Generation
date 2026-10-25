@@ -1,0 +1,1740 @@
+{
+  "id": "mambaact_efficient_action_experts",
+  "title": "MambaAct: 10x Smaller Action Experts for Real-Time Robots",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "robotics_tamp",
+  "hook_tag": "LATENCY KILLER",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Before you deploy your next physical policy, see how MambaAct unlocks 58.8% better precision.",
+      "visual_focus": "A robotic arm stuttering and stopping in a clean lab environment.",
+      "highlight_words": {
+        "freeze mid-motion": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Action experts",
+        "action_verb": "choke",
+        "direct_object": "robotic movement",
+        "anchor_word": "freeze",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE ROBOTIC FREEZE",
+        "sub": "Inference bottlenecks kill real-time control",
+        "accent_color": "#38BDF8",
+        "params": {
+          "field_title": "Continuous Velocity Field v_theta",
+          "source_label": "Noisy Action Prior",
+          "target_label": "Joint Trajectory Target",
+          "stream_formula": "d(a_t)/dt = v_theta(a_t, t, c)"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Statistic",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "THE ROBOTIC FREEZE",
+        "sub": "Inference bottlenecks kill real-time control",
+        "accent_color": "#38BDF8",
+        "field_title": "Continuous Velocity Field v_theta",
+        "source_label": "Noisy Action Prior",
+        "target_label": "Joint Trajectory Target",
+        "stream_formula": "d(a_t)/dt = v_theta(a_t, t, c)"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 0.0,
+      "end": 5.53,
+      "duration": 5.53,
+      "word_timings": [
+        {
+          "word": "Before",
+          "clean_word": "before",
+          "phonemes": "b\u1d7bf\u02c8\u0254\u02d0\u0279",
+          "start": 0.01,
+          "end": 0.33,
+          "duration": 0.32,
+          "frame_ahead_trigger": 0.0
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "ju\u02d0",
+          "start": 0.33,
+          "end": 0.445,
+          "duration": 0.115,
+          "frame_ahead_trigger": 0.29
+        },
+        {
+          "word": "deploy",
+          "clean_word": "deploy",
+          "phonemes": "d\u1d7bpl\u02c8\u0254\u026a",
+          "start": 0.445,
+          "end": 0.925,
+          "duration": 0.48,
+          "frame_ahead_trigger": 0.405
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "j\u028a\u0279",
+          "start": 0.925,
+          "end": 1.065,
+          "duration": 0.14,
+          "frame_ahead_trigger": 0.885
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "n\u02c8\u025bkst",
+          "start": 1.065,
+          "end": 1.28,
+          "duration": 0.215,
+          "frame_ahead_trigger": 1.025
+        },
+        {
+          "word": "physical",
+          "clean_word": "physical",
+          "phonemes": "f\u02c8\u026az\u026ak\u0259l",
+          "start": 1.28,
+          "end": 1.765,
+          "duration": 0.485,
+          "frame_ahead_trigger": 1.24
+        },
+        {
+          "word": "policy,",
+          "clean_word": "policy",
+          "phonemes": "p\u02c8\u0251\u02d0l\u026asi",
+          "start": 1.765,
+          "end": 2.18,
+          "duration": 0.415,
+          "frame_ahead_trigger": 1.725
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "s\u02c8i\u02d0",
+          "start": 2.18,
+          "end": 2.395,
+          "duration": 0.215,
+          "frame_ahead_trigger": 2.14
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 2.395,
+          "end": 2.475,
+          "duration": 0.08,
+          "frame_ahead_trigger": 2.355
+        },
+        {
+          "word": "MambaAct",
+          "clean_word": "mambaact",
+          "phonemes": "m\u02c8\u00e6mb\u0259 \u02c8\u00e6kt",
+          "start": 2.475,
+          "end": 3.125,
+          "duration": 0.65,
+          "frame_ahead_trigger": 2.435
+        },
+        {
+          "word": "unlocks",
+          "clean_word": "unlocks",
+          "phonemes": "\u028cnl\u02c8\u0251\u02d0ks",
+          "start": 3.125,
+          "end": 3.485,
+          "duration": 0.36,
+          "frame_ahead_trigger": 3.085
+        },
+        {
+          "word": "58.8%",
+          "clean_word": "588",
+          "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei \u02c8e\u026at",
+          "start": 3.485,
+          "end": 4.69,
+          "duration": 1.205,
+          "frame_ahead_trigger": 3.445
+        },
+        {
+          "word": "better",
+          "clean_word": "better",
+          "phonemes": "b\u02c8\u025b\u027e\u025a",
+          "start": 4.69,
+          "end": 4.94,
+          "duration": 0.25,
+          "frame_ahead_trigger": 4.65
+        },
+        {
+          "word": "precision.",
+          "clean_word": "precision",
+          "phonemes": "p\u0279\u026as\u02c8\u026a\u0292\u0259n",
+          "start": 4.94,
+          "end": 5.34,
+          "duration": 0.4,
+          "frame_ahead_trigger": 4.9
+        }
+      ],
+      "audio_duration": 5.53,
+      "slot_duration": 5.68
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is a bloated transformer expert, forcing the robot to re-calculate every step through redundant, heavy attention layers.",
+      "visual_focus": "A complex web of attention nodes collapsing under weight.",
+      "highlight_words": {
+        "bloated transformer": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Transformer layers",
+        "action_verb": "stifle",
+        "direct_object": "denoising throughput",
+        "anchor_word": "redundant",
+        "semantic_role": "bottleneck_definition"
+      },
+      "visual_blueprint": {
+        "layout": "layer_stack",
+        "title": "THE ATTENTION TRAP",
+        "sub": "Redundant computation at every denoising step",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "layer_stack",
+        "title": "THE ATTENTION TRAP",
+        "sub": "Redundant computation at every denoising step",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform",
+      "start": 5.68,
+      "end": 12.2,
+      "duration": 6.53,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 5.695,
+          "end": 5.795,
+          "duration": 0.1,
+          "frame_ahead_trigger": 5.805
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "v\u02c8\u026al\u0259n",
+          "start": 5.795,
+          "end": 6.115,
+          "duration": 0.32,
+          "frame_ahead_trigger": 5.905
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 6.115,
+          "end": 6.2,
+          "duration": 0.085,
+          "frame_ahead_trigger": 6.225
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 6.2,
+          "end": 6.315,
+          "duration": 0.115,
+          "frame_ahead_trigger": 6.31
+        },
+        {
+          "word": "bloated",
+          "clean_word": "bloated",
+          "phonemes": "bl\u02c8o\u028a\u027e\u1d7bd",
+          "start": 6.315,
+          "end": 6.7,
+          "duration": 0.385,
+          "frame_ahead_trigger": 6.425
+        },
+        {
+          "word": "transformer",
+          "clean_word": "transformer",
+          "phonemes": "t\u0279\u00e6nsf\u02c8\u0254\u02d0\u0279m\u025a",
+          "start": 6.7,
+          "end": 7.53,
+          "duration": 0.83,
+          "frame_ahead_trigger": 6.81
+        },
+        {
+          "word": "expert,",
+          "clean_word": "expert",
+          "phonemes": "\u02c8\u025bksp\u025c\u02d0t",
+          "start": 7.53,
+          "end": 7.889,
+          "duration": 0.359,
+          "frame_ahead_trigger": 7.64
+        },
+        {
+          "word": "forcing",
+          "clean_word": "forcing",
+          "phonemes": "f\u02c8\u0254\u02d0\u0279s\u026a\u014b",
+          "start": 7.889,
+          "end": 8.335,
+          "duration": 0.446,
+          "frame_ahead_trigger": 7.999
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 8.335,
+          "end": 8.424,
+          "duration": 0.089,
+          "frame_ahead_trigger": 8.445
+        },
+        {
+          "word": "robot",
+          "clean_word": "robot",
+          "phonemes": "\u0279\u02c8o\u028ab\u0251\u02d0t",
+          "start": 8.424,
+          "end": 8.925,
+          "duration": 0.501,
+          "frame_ahead_trigger": 8.534
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 8.925,
+          "end": 9.06,
+          "duration": 0.135,
+          "frame_ahead_trigger": 9.035
+        },
+        {
+          "word": "re-calculate",
+          "clean_word": "recalculate",
+          "phonemes": "\u0279\u1d7bk\u02c8\u00e6lkj\u028al\u02cce\u026at",
+          "start": 9.06,
+          "end": 9.84,
+          "duration": 0.78,
+          "frame_ahead_trigger": 9.17
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "\u02c8\u025bv\u0279i",
+          "start": 9.84,
+          "end": 10.07,
+          "duration": 0.23,
+          "frame_ahead_trigger": 9.95
+        },
+        {
+          "word": "step",
+          "clean_word": "step",
+          "phonemes": "st\u02c8\u025bp",
+          "start": 10.07,
+          "end": 10.27,
+          "duration": 0.2,
+          "frame_ahead_trigger": 10.18
+        },
+        {
+          "word": "through",
+          "clean_word": "through",
+          "phonemes": "\u03b8\u0279\u02c8u\u02d0",
+          "start": 10.27,
+          "end": 10.5,
+          "duration": 0.23,
+          "frame_ahead_trigger": 10.38
+        },
+        {
+          "word": "redundant,",
+          "clean_word": "redundant",
+          "phonemes": "\u0279\u1d7bd\u02c8\u028cnd\u0259nt",
+          "start": 10.5,
+          "end": 11.01,
+          "duration": 0.51,
+          "frame_ahead_trigger": 10.61
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 11.01,
+          "end": 11.385,
+          "duration": 0.375,
+          "frame_ahead_trigger": 11.12
+        },
+        {
+          "word": "attention",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 11.385,
+          "end": 11.794,
+          "duration": 0.409,
+          "frame_ahead_trigger": 11.495
+        },
+        {
+          "word": "layers.",
+          "clean_word": "layers",
+          "phonemes": "l\u02c8e\u026a\u025az",
+          "start": 11.794,
+          "end": 12.115,
+          "duration": 0.321,
+          "frame_ahead_trigger": 11.904
+        }
+      ],
+      "audio_duration": 6.53,
+      "slot_duration": 6.67
+    },
+    {
+      "beat_id": 3,
+      "text": "MambaAct pivots to a selective state-space model, compressing vision-language context into a lightweight gate to bypass heavy attention.",
+      "visual_focus": "A dense neural network simplifying into a clean, linear stream.",
+      "highlight_words": {
+        "selective state-space": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "MambaAct",
+        "action_verb": "compresses",
+        "direct_object": "context",
+        "anchor_word": "bypass",
+        "semantic_role": "architectural_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "MAMBAACT ARCHITECTURE",
+        "sub": "A dense neural network simplifying into a clean, linear stream.",
+        "params": {
+          "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.svg",
+          "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.png",
+          "arxiv_id": "2610.22951",
+          "title": "MAMBAACT ARCHITECTURE",
+          "sub": "A dense neural network simplifying into a clean, linear stream.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "Latency Decomposition",
+          "preferred_renderer": "vector"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.svg",
+        "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.png",
+        "arxiv_id": "2610.22951",
+        "title": "MAMBAACT ARCHITECTURE",
+        "sub": "A dense neural network simplifying into a clean, linear stream.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "Latency Decomposition",
+        "preferred_renderer": "vector"
+      },
+      "kinetic_action": "figure_scan",
+      "start": 12.35,
+      "end": 19.35,
+      "duration": 7.0,
+      "word_timings": [
+        {
+          "word": "MambaAct",
+          "clean_word": "mambaact",
+          "phonemes": "m\u02c8\u00e6mb\u0259 \u02c8\u00e6kt",
+          "start": 12.368,
+          "end": 12.993,
+          "duration": 0.625,
+          "frame_ahead_trigger": 12.628
+        },
+        {
+          "word": "pivots",
+          "clean_word": "pivots",
+          "phonemes": "p\u02c8\u026av\u0259ts",
+          "start": 12.993,
+          "end": 13.273,
+          "duration": 0.28,
+          "frame_ahead_trigger": 13.253
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 13.273,
+          "end": 13.543,
+          "duration": 0.27,
+          "frame_ahead_trigger": 13.533
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 13.543,
+          "end": 13.618,
+          "duration": 0.074,
+          "frame_ahead_trigger": 13.803
+        },
+        {
+          "word": "selective",
+          "clean_word": "selective",
+          "phonemes": "s\u1d7bl\u02c8\u025bkt\u026av",
+          "start": 13.618,
+          "end": 13.998,
+          "duration": 0.381,
+          "frame_ahead_trigger": 13.878
+        },
+        {
+          "word": "state-space",
+          "clean_word": "statespace",
+          "phonemes": "st\u02c8e\u026atspe\u026as",
+          "start": 13.998,
+          "end": 14.659,
+          "duration": 0.661,
+          "frame_ahead_trigger": 14.258
+        },
+        {
+          "word": "model,",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 14.659,
+          "end": 15.023,
+          "duration": 0.364,
+          "frame_ahead_trigger": 14.919
+        },
+        {
+          "word": "compressing",
+          "clean_word": "compressing",
+          "phonemes": "k\u0259mp\u0279\u02c8\u025bs\u026a\u014b",
+          "start": 15.023,
+          "end": 15.558,
+          "duration": 0.535,
+          "frame_ahead_trigger": 15.283
+        },
+        {
+          "word": "vision-language",
+          "clean_word": "visionlanguage",
+          "phonemes": "v\u02c8\u026a\u0292\u0259nl\u02cc\u00e6\u014b\u0261w\u026ad\u0292",
+          "start": 15.558,
+          "end": 16.358,
+          "duration": 0.8,
+          "frame_ahead_trigger": 15.818
+        },
+        {
+          "word": "context",
+          "clean_word": "context",
+          "phonemes": "k\u02c8\u0251\u02d0nt\u025bkst",
+          "start": 16.358,
+          "end": 16.818,
+          "duration": 0.46,
+          "frame_ahead_trigger": 16.618
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 16.818,
+          "end": 17.063,
+          "duration": 0.245,
+          "frame_ahead_trigger": 17.078
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 17.063,
+          "end": 17.238,
+          "duration": 0.175,
+          "frame_ahead_trigger": 17.323
+        },
+        {
+          "word": "lightweight",
+          "clean_word": "lightweight",
+          "phonemes": "l\u02c8a\u026atwe\u026at",
+          "start": 17.238,
+          "end": 17.713,
+          "duration": 0.475,
+          "frame_ahead_trigger": 17.498
+        },
+        {
+          "word": "gate",
+          "clean_word": "gate",
+          "phonemes": "\u0261\u02c8e\u026at",
+          "start": 17.713,
+          "end": 17.943,
+          "duration": 0.23,
+          "frame_ahead_trigger": 17.973
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "tu\u02d0",
+          "start": 17.943,
+          "end": 18.168,
+          "duration": 0.225,
+          "frame_ahead_trigger": 18.203
+        },
+        {
+          "word": "bypass",
+          "clean_word": "bypass",
+          "phonemes": "b\u02c8a\u026ap\u00e6s",
+          "start": 18.168,
+          "end": 18.543,
+          "duration": 0.375,
+          "frame_ahead_trigger": 18.428
+        },
+        {
+          "word": "heavy",
+          "clean_word": "heavy",
+          "phonemes": "h\u02c8\u025bvi",
+          "start": 18.543,
+          "end": 18.848,
+          "duration": 0.305,
+          "frame_ahead_trigger": 18.803
+        },
+        {
+          "word": "attention.",
+          "clean_word": "attention",
+          "phonemes": "\u0250t\u02c8\u025bn\u0283\u0259n",
+          "start": 18.848,
+          "end": 19.188,
+          "duration": 0.34,
+          "frame_ahead_trigger": 19.108
+        }
+      ],
+      "audio_duration": 7.0,
+      "slot_duration": 7.15
+    },
+    {
+      "beat_id": 4,
+      "text": "The secret is a Mamba-based action mixer that models sequences linearly, cutting the parameter count by ten times.",
+      "visual_focus": "A side-by-side comparison of parameter sizes shrinking.",
+      "highlight_words": {
+        "ten times": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Action mixer",
+        "action_verb": "models",
+        "direct_object": "sequences",
+        "anchor_word": "linearly",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: MAMBAACT: 10X SMAL",
+        "sub": "A side-by-side comparison of parameter sizes shrinking.",
+        "params": {
+          "title": "KERNEL CODE: MAMBAACT: 10X SMAL",
+          "sub": "A side-by-side comparison of parameter sizes shrinking.",
+          "filename": "mamba_action_expert.py",
+          "language": "python",
+          "lines": [
+            "cond_gate = context_compressor(vlm_prefix_tokens)",
+            "for step in range(flow_steps):",
+            "h_state = selective_ssm(noisy_action, h_state)",
+            "noisy_action = cond_gate * mamba_proj(h_state)"
+          ],
+          "highlight_lines": [
+            1,
+            4
+          ],
+          "trace_register": "\u26a1 ZERO TOKEN CROSS-ATTENTION PASS",
+          "delta_badge": "Visual conditioning compressed once; linear SSM hand"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: MAMBAACT: 10X SMAL",
+        "sub": "A side-by-side comparison of parameter sizes shrinking.",
+        "filename": "mamba_action_expert.py",
+        "language": "python",
+        "lines": [
+          "cond_gate = context_compressor(vlm_prefix_tokens)",
+          "for step in range(flow_steps):",
+          "h_state = selective_ssm(noisy_action, h_state)",
+          "noisy_action = cond_gate * mamba_proj(h_state)"
+        ],
+        "highlight_lines": [
+          1,
+          4
+        ],
+        "trace_register": "\u26a1 ZERO TOKEN CROSS-ATTENTION PASS",
+        "delta_badge": "Visual conditioning compressed once; linear SSM hand"
+      },
+      "start": 19.5,
+      "end": 25.56,
+      "duration": 6.06,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 19.511,
+          "end": 19.666,
+          "duration": 0.155,
+          "frame_ahead_trigger": 19.921
+        },
+        {
+          "word": "secret",
+          "clean_word": "secret",
+          "phonemes": "s\u02c8i\u02d0k\u0279\u1d7bt",
+          "start": 19.666,
+          "end": 20.106,
+          "duration": 0.44,
+          "frame_ahead_trigger": 20.076
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "\u026az",
+          "start": 20.106,
+          "end": 20.241,
+          "duration": 0.135,
+          "frame_ahead_trigger": 20.516
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 20.241,
+          "end": 20.401,
+          "duration": 0.16,
+          "frame_ahead_trigger": 20.651
+        },
+        {
+          "word": "Mamba-based",
+          "clean_word": "mambabased",
+          "phonemes": "m\u02c8\u00e6mb\u0250b\u02cce\u026ast",
+          "start": 20.401,
+          "end": 21.051,
+          "duration": 0.65,
+          "frame_ahead_trigger": 20.811
+        },
+        {
+          "word": "action",
+          "clean_word": "action",
+          "phonemes": "\u02c8\u00e6k\u0283\u0259n",
+          "start": 21.051,
+          "end": 21.326,
+          "duration": 0.275,
+          "frame_ahead_trigger": 21.461
+        },
+        {
+          "word": "mixer",
+          "clean_word": "mixer",
+          "phonemes": "m\u02c8\u026aks\u025a",
+          "start": 21.326,
+          "end": 21.661,
+          "duration": 0.335,
+          "frame_ahead_trigger": 21.736
+        },
+        {
+          "word": "that",
+          "clean_word": "that",
+          "phonemes": "\u00f0\u02c8\u00e6t",
+          "start": 21.661,
+          "end": 21.861,
+          "duration": 0.2,
+          "frame_ahead_trigger": 22.071
+        },
+        {
+          "word": "models",
+          "clean_word": "models",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259lz",
+          "start": 21.861,
+          "end": 22.391,
+          "duration": 0.53,
+          "frame_ahead_trigger": 22.271
+        },
+        {
+          "word": "sequences",
+          "clean_word": "sequences",
+          "phonemes": "s\u02c8i\u02d0kw\u0259ns\u1d7bz",
+          "start": 22.391,
+          "end": 22.967,
+          "duration": 0.576,
+          "frame_ahead_trigger": 22.801
+        },
+        {
+          "word": "linearly,",
+          "clean_word": "linearly",
+          "phonemes": "l\u02c8\u026an\u026a\u0279li",
+          "start": 22.967,
+          "end": 23.336,
+          "duration": 0.369,
+          "frame_ahead_trigger": 23.377
+        },
+        {
+          "word": "cutting",
+          "clean_word": "cutting",
+          "phonemes": "k\u02c8\u028c\u027e\u026a\u014b",
+          "start": 23.336,
+          "end": 23.766,
+          "duration": 0.43,
+          "frame_ahead_trigger": 23.746
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 23.766,
+          "end": 23.871,
+          "duration": 0.105,
+          "frame_ahead_trigger": 24.176
+        },
+        {
+          "word": "parameter",
+          "clean_word": "parameter",
+          "phonemes": "p\u025a\u0279\u02c8\u00e6m\u026a\u027e\u025a",
+          "start": 23.871,
+          "end": 24.276,
+          "duration": 0.405,
+          "frame_ahead_trigger": 24.281
+        },
+        {
+          "word": "count",
+          "clean_word": "count",
+          "phonemes": "k\u02c8a\u028ant",
+          "start": 24.276,
+          "end": 24.741,
+          "duration": 0.465,
+          "frame_ahead_trigger": 24.686
+        },
+        {
+          "word": "by",
+          "clean_word": "by",
+          "phonemes": "b\u02c8a\u026a",
+          "start": 24.741,
+          "end": 25.021,
+          "duration": 0.28,
+          "frame_ahead_trigger": 25.151
+        },
+        {
+          "word": "ten",
+          "clean_word": "ten",
+          "phonemes": "t\u02c8\u025bn",
+          "start": 25.021,
+          "end": 25.141,
+          "duration": 0.121,
+          "frame_ahead_trigger": 25.431
+        },
+        {
+          "word": "times.",
+          "clean_word": "times",
+          "phonemes": "t\u02c8a\u026amz",
+          "start": 25.141,
+          "end": 25.476,
+          "duration": 0.334,
+          "frame_ahead_trigger": 25.551
+        }
+      ],
+      "audio_duration": 6.06,
+      "slot_duration": 6.21
+    },
+    {
+      "beat_id": 5,
+      "text": "The result: a 58.8% drop in real-world latency, outperforming transformer baselines while boosting success rates on LIBERO benchmarks.",
+      "visual_focus": "A graph showing latency plummeting while success rates climb.",
+      "highlight_words": {
+        "58.8% drop": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "MambaAct",
+        "action_verb": "slashes",
+        "direct_object": "latency",
+        "anchor_word": "victory",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "FLOW-MATCHING ROBOTIC CONTROL SPEED",
+        "sub": "A graph showing latency plummeting while success rates",
+        "params": {
+          "title": "FLOW-MATCHING ROBOTIC CONTROL SPEED",
+          "sub": "A graph showing latency plummeting while success rates",
+          "metric_name": "Denoising Latency",
+          "unit": "ms",
+          "contestants": [
+            {
+              "name": "MambaAct (Physical Robot)",
+              "value": 41.2,
+              "display_val": "41.2 ms",
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "pi_0.5 Transformer Baseline",
+              "value": 100.0,
+              "display_val": "100.0 ms",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 -58.8% REAL-WORLD INFERENCE TIME"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "FLOW-MATCHING ROBOTIC CONTROL SPEED",
+        "sub": "A graph showing latency plummeting while success rates",
+        "metric_name": "Denoising Latency",
+        "unit": "ms",
+        "contestants": [
+          {
+            "name": "MambaAct (Physical Robot)",
+            "value": 41.2,
+            "display_val": "41.2 ms",
+            "is_hero": true,
+            "color": "#34D399"
+          },
+          {
+            "name": "pi_0.5 Transformer Baseline",
+            "value": 100.0,
+            "display_val": "100.0 ms",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 -58.8% REAL-WORLD INFERENCE TIME"
+      },
+      "start": 25.71,
+      "end": 33.88,
+      "duration": 8.17,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 25.719,
+          "end": 25.934,
+          "duration": 0.215,
+          "frame_ahead_trigger": 26.279
+        },
+        {
+          "word": "result:",
+          "clean_word": "result",
+          "phonemes": "\u0279\u026az\u02c8\u028clt",
+          "start": 25.934,
+          "end": 26.179,
+          "duration": 0.245,
+          "frame_ahead_trigger": 26.494
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "\u02c8e\u026a",
+          "start": 26.179,
+          "end": 26.359,
+          "duration": 0.18,
+          "frame_ahead_trigger": 26.739
+        },
+        {
+          "word": "58.8%",
+          "clean_word": "588",
+          "phonemes": "f\u02c8a\u026avh\u02c8\u028cnd\u0279\u026ad \u02c8e\u026a\u027ei \u02c8e\u026at",
+          "start": 26.359,
+          "end": 27.734,
+          "duration": 1.375,
+          "frame_ahead_trigger": 26.919
+        },
+        {
+          "word": "drop",
+          "clean_word": "drop",
+          "phonemes": "d\u0279\u02c8\u0251\u02d0p",
+          "start": 27.734,
+          "end": 28.029,
+          "duration": 0.295,
+          "frame_ahead_trigger": 28.294
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "\u02c8\u026an",
+          "start": 28.029,
+          "end": 28.244,
+          "duration": 0.215,
+          "frame_ahead_trigger": 28.589
+        },
+        {
+          "word": "real-world",
+          "clean_word": "realworld",
+          "phonemes": "\u0279\u02c8i\u02d0\u0259lw\u025c\u02d0ld",
+          "start": 28.244,
+          "end": 28.689,
+          "duration": 0.445,
+          "frame_ahead_trigger": 28.804
+        },
+        {
+          "word": "latency,",
+          "clean_word": "latency",
+          "phonemes": "l\u02c8e\u026at\u0259nsi",
+          "start": 28.689,
+          "end": 29.246,
+          "duration": 0.557,
+          "frame_ahead_trigger": 29.249
+        },
+        {
+          "word": "outperforming",
+          "clean_word": "outperforming",
+          "phonemes": "a\u028atp\u025af\u02c8\u0254\u02d0\u0279m\u026a\u014b",
+          "start": 29.246,
+          "end": 29.964,
+          "duration": 0.718,
+          "frame_ahead_trigger": 29.806
+        },
+        {
+          "word": "transformer",
+          "clean_word": "transformer",
+          "phonemes": "t\u0279\u00e6nsf\u02c8\u0254\u02d0\u0279m\u025a",
+          "start": 29.964,
+          "end": 30.584,
+          "duration": 0.62,
+          "frame_ahead_trigger": 30.524
+        },
+        {
+          "word": "baselines",
+          "clean_word": "baselines",
+          "phonemes": "b\u02c8e\u026asla\u026anz",
+          "start": 30.584,
+          "end": 31.084,
+          "duration": 0.5,
+          "frame_ahead_trigger": 31.144
+        },
+        {
+          "word": "while",
+          "clean_word": "while",
+          "phonemes": "w\u02c8a\u026al",
+          "start": 31.084,
+          "end": 31.404,
+          "duration": 0.32,
+          "frame_ahead_trigger": 31.644
+        },
+        {
+          "word": "boosting",
+          "clean_word": "boosting",
+          "phonemes": "b\u02c8u\u02d0st\u026a\u014b",
+          "start": 31.404,
+          "end": 31.809,
+          "duration": 0.405,
+          "frame_ahead_trigger": 31.964
+        },
+        {
+          "word": "success",
+          "clean_word": "success",
+          "phonemes": "s\u0259ks\u02c8\u025bs",
+          "start": 31.809,
+          "end": 32.199,
+          "duration": 0.39,
+          "frame_ahead_trigger": 32.369
+        },
+        {
+          "word": "rates",
+          "clean_word": "rates",
+          "phonemes": "\u0279\u02c8e\u026ats",
+          "start": 32.199,
+          "end": 32.574,
+          "duration": 0.375,
+          "frame_ahead_trigger": 32.759
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "\u02c8\u0254n",
+          "start": 32.574,
+          "end": 32.684,
+          "duration": 0.11,
+          "frame_ahead_trigger": 33.134
+        },
+        {
+          "word": "LIBERO",
+          "clean_word": "libero",
+          "phonemes": "l\u026ab\u02c8\u025b\u0279o\u028a",
+          "start": 32.684,
+          "end": 33.194,
+          "duration": 0.51,
+          "frame_ahead_trigger": 33.244
+        },
+        {
+          "word": "benchmarks.",
+          "clean_word": "benchmarks",
+          "phonemes": "b\u02c8\u025bnt\u0283m\u0251\u02d0\u0279ks",
+          "start": 33.194,
+          "end": 33.804,
+          "duration": 0.61,
+          "frame_ahead_trigger": 33.754
+        }
+      ],
+      "audio_duration": 8.17,
+      "slot_duration": 8.32
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "A smooth loop back to the robotic arm moving fluidly.",
+      "highlight_words": {
+        "The Model Verse": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Viewers",
+        "action_verb": "master",
+        "direct_object": "AI architecture",
+        "anchor_word": "loop",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "STAY AHEAD",
+        "sub": "The future of robotics is linear",
+        "accent_color": "#34D399",
+        "params": {
+          "runtime_badge": "\u26a1 58.8% FASTER REAL-TIME CONTROL"
+        }
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "start": 34.03,
+      "end": 38.74,
+      "duration": 4.71,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "f\u02c8\u0251\u02d0lo\u028a",
+          "start": 34.03,
+          "end": 34.35,
+          "duration": 0.32,
+          "frame_ahead_trigger": 34.74
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 34.35,
+          "end": 34.565,
+          "duration": 0.215,
+          "frame_ahead_trigger": 35.06
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "m\u02c8\u0251\u02d0d\u0259l",
+          "start": 34.565,
+          "end": 34.785,
+          "duration": 0.22,
+          "frame_ahead_trigger": 35.275
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "v\u02c8\u025c\u02d0s",
+          "start": 34.785,
+          "end": 35.075,
+          "duration": 0.29,
+          "frame_ahead_trigger": 35.495
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "f\u0254\u02d0\u0279",
+          "start": 35.075,
+          "end": 35.39,
+          "duration": 0.315,
+          "frame_ahead_trigger": 35.785
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "d\u02c8e\u026ali",
+          "start": 35.39,
+          "end": 35.54,
+          "duration": 0.15,
+          "frame_ahead_trigger": 36.1
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "d\u02c8i\u02d0pd\u026avz",
+          "start": 35.54,
+          "end": 36.01,
+          "duration": 0.47,
+          "frame_ahead_trigger": 36.25
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "\u02cc\u026ant\u028a",
+          "start": 36.01,
+          "end": 36.375,
+          "duration": 0.365,
+          "frame_ahead_trigger": 36.72
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "h\u02c8a\u028a",
+          "start": 36.375,
+          "end": 36.455,
+          "duration": 0.08,
+          "frame_ahead_trigger": 37.085
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "m\u02c8\u0251\u02d0d\u025an",
+          "start": 36.455,
+          "end": 36.95,
+          "duration": 0.495,
+          "frame_ahead_trigger": 37.165
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "\u02cce\u026a\u02c8a\u026a",
+          "start": 36.95,
+          "end": 37.203,
+          "duration": 0.253,
+          "frame_ahead_trigger": 37.66
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "\u02c8\u00e6kt\u0283u\u02d0\u0259li",
+          "start": 37.203,
+          "end": 37.75,
+          "duration": 0.547,
+          "frame_ahead_trigger": 37.913
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "w\u02c8\u025c\u02d0ks",
+          "start": 37.75,
+          "end": 38.1,
+          "duration": 0.35,
+          "frame_ahead_trigger": 38.46
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "\u02c8\u028cnd\u025a",
+          "start": 38.1,
+          "end": 38.345,
+          "duration": 0.245,
+          "frame_ahead_trigger": 38.81
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "\u00f0\u0259",
+          "start": 38.345,
+          "end": 38.38,
+          "duration": 0.035,
+          "frame_ahead_trigger": 39.055
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "h\u02c8\u028ad",
+          "start": 38.38,
+          "end": 38.585,
+          "duration": 0.205,
+          "frame_ahead_trigger": 39.09
+        }
+      ],
+      "audio_duration": 4.71,
+      "slot_duration": 4.71
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$\\frac{\\mathrm{d}\\mathbf{a}_t}{\\mathrm{d}t} = \\mathbf{v}_\\theta(\\mathbf{a}_t, t, \\mathbf{c}_{\\mathrm{vlm}})$",
+      "filename": "mambaact_efficient_action_experts_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{a}_t",
+          "label": "Continuous Action Chunk"
+        },
+        {
+          "term": "\\mathbf{v}_\\theta",
+          "label": "Flow Velocity Field"
+        }
+      ],
+      "svg_filename": "mambaact_efficient_action_experts_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}_{\\mathrm{denoise}} = K \\cdot \\mathcal{O}\\left(L_{\\mathrm{act}} L_{\\mathrm{vlm}} d + L_{\\mathrm{act}}^2 d\\right)$",
+      "filename": "mambaact_efficient_action_experts_beat2_formula.svg",
+      "fontsize": 22,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "K",
+          "label": "Iterative Steps (10x)"
+        },
+        {
+          "term": "L_{\\mathrm{vlm}}",
+          "label": "Static Prefix Tokens"
+        }
+      ],
+      "svg_filename": "mambaact_efficient_action_experts_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$\\mathbf{h}_k = \\mathbf{\\bar{A}}_k \\mathbf{h}_{k-1} + \\mathbf{\\bar{B}}_k \\mathbf{a}_k, \\quad \\mathbf{y}_k = \\mathbf{C}_k \\mathbf{h}_k$",
+      "filename": "mambaact_efficient_action_experts_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{h}_k",
+          "label": "Recurrent Latent State"
+        },
+        {
+          "term": "\\mathbf{\\bar{A}}_k",
+          "label": "Selective Transition Matrix"
+        }
+      ],
+      "svg_filename": "mambaact_efficient_action_experts_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbf{g} = \\mathrm{MLP}(\\mathbf{c}_{\\mathrm{vlm}}), \\quad \\mathbf{z} = \\mathbf{g} \\odot \\mathrm{Mamba}(\\mathbf{a}_t, t)$",
+      "filename": "mambaact_efficient_action_experts_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "\\mathbf{g}",
+          "label": "Conditioning Gate"
+        },
+        {
+          "term": "\\odot",
+          "label": "Channel-wise Modulation"
+        }
+      ],
+      "svg_filename": "mambaact_efficient_action_experts_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\Delta \\tau_{\\mathrm{real}} = -58.8\\%, \\quad |\\theta_{\\mathrm{expert}}| = 0.10 \\times |\\theta_{\\pi_{0.5}}|$",
+      "filename": "mambaact_efficient_action_experts_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "\\Delta \\tau",
+          "label": "Latency Reduction"
+        },
+        {
+          "term": "|\\theta|",
+          "label": "10x Model Compression"
+        }
+      ],
+      "svg_filename": "mambaact_efficient_action_experts_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "neural_routing",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "VLM_PREFIX",
+          "color": "#38BDF8",
+          "items": [
+            "Camera RGB",
+            "Wrist RGB",
+            "Language Goal"
+          ]
+        },
+        {
+          "name": "ACTION_EXPERT",
+          "color": "#34D399",
+          "items": [
+            "Mamba Mixer",
+            "Linear SSM",
+            "Continuous Delta"
+          ]
+        },
+        {
+          "name": "COMPRESSOR",
+          "color": "#F59E0B",
+          "items": [
+            "Pooling",
+            "Gating Signal",
+            "Modulation"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Action Vector a_t",
+        "target_cluster": "ACTION_EXPERT",
+        "token": "action_chunk[k]"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Repeated Cross-Attention",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Quadratic Memory Wall",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "MambaAct",
+    "model_a_specs": [
+      "10x Smaller Action Expert",
+      "Linear SSM Action Mixer",
+      "One-Pass Context Compressor"
+    ],
+    "model_b": "pi_0.5 Transformer",
+    "model_b_specs": [
+      "Dense Transformer Expert",
+      "Repeated Cross-Attention",
+      "Iterative Memory Thrashing"
+    ],
+    "divide_title": "TRANSFORMER VS MAMBA ACTION EXPERT",
+    "model_a_stat": "41.2 ms",
+    "model_a_stat_label": "REAL-WORLD DENOISING LATENCY",
+    "model_b_stat": "100.0 ms",
+    "model_b_stat_label": "BASELINE ROBOT LATENCY",
+    "efficiency_badge": "\u26a1 58.8% LATENCY REDUCTION",
+    "benchmarks": [
+      {
+        "name": "LIBERO Denoising Latency",
+        "score_a": "-64.8%",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Real-World Robot Latency",
+        "score_a": "-58.8%",
+        "score_b": "Baseline"
+      },
+      {
+        "name": "Expert Parameter Footprint",
+        "score_a": "0.1x",
+        "score_b": "1.0x"
+      }
+    ],
+    "scale_metric": "10x",
+    "scale_label": "Smaller Action Expert Footprint",
+    "bottleneck_title": "REPEATED CROSS-ATTENTION BOTTLENECK",
+    "bottleneck_desc": "Iterative flow-matching recomputing static visual tokens",
+    "solution_title": "SELECTIVE STATE-SPACE ACTION EXPERT",
+    "solution_components": "Linear SSM Mixer + Context Compressor",
+    "mechanism_title": "ONE-PASS FEATURE MODULATION",
+    "payoff_stat": "58.8%",
+    "payoff_label": "REAL-WORLD LATENCY CUT",
+    "payoff_sub": "10x Smaller Action Expert with Higher Success on Physical Robots",
+    "payoff_hero_stat": 58.8,
+    "payoff_hero_label": "MambaAct",
+    "payoff_base_stat": 0.0,
+    "payoff_base_label": "pi_0.5 Baseline",
+    "payoff_delta_badge": "\u26a1 -58.8% LATENCY / +1.08% SUCCESS",
+    "challenger": "MambaAct",
+    "incumbent": "pi_0.5"
+  },
+  "benchmark_comparison": {
+    "title": "FLOW-MATCHING ROBOTIC CONTROL SPEED",
+    "metric_name": "Denoising Latency",
+    "unit": "ms",
+    "contestants": [
+      {
+        "name": "MambaAct (Physical Robot)",
+        "value": 41.2,
+        "display_val": "41.2 ms",
+        "is_hero": true,
+        "color": "#34D399"
+      },
+      {
+        "name": "pi_0.5 Transformer Baseline",
+        "value": 100.0,
+        "display_val": "100.0 ms",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 -58.8% REAL-WORLD INFERENCE TIME",
+    "radar_axes": [
+      "Throughput",
+      "Action Latency",
+      "Parameter Efficiency",
+      "LIBERO Success",
+      "Physical Agility"
+    ]
+  },
+  "code_snippet": {
+    "filename": "mamba_action_expert.py",
+    "language": "python",
+    "lines": [
+      "cond_gate = context_compressor(vlm_prefix_tokens)",
+      "for step in range(flow_steps):",
+      "h_state = selective_ssm(noisy_action, h_state)",
+      "noisy_action = cond_gate * mamba_proj(h_state)"
+    ],
+    "highlight_lines": [
+      1,
+      4
+    ],
+    "trace_register": "\u26a1 ZERO TOKEN CROSS-ATTENTION PASS",
+    "explanation": "Visual conditioning compressed once; linear SSM handles action denoising"
+  },
+  "arxiv_id": "2610.22951",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "latency_decomposition",
+      "caption": "Latency Decomposition",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/source/figures/latency_decomposition.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_1_latency_decomposition.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "MambaActVer5",
+      "caption": "Mambaactver5",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/source/figures/MambaActVer5.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_2_MambaActVer5.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_2_MambaActVer5.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 105
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "real_tasks_bigfont",
+      "caption": "Real Tasks Bigfont",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/source/figures/real_tasks_bigfont.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_3_real_tasks_bigfont.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_3_real_tasks_bigfont.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 60
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "tube",
+      "caption": "Tube",
+      "page_num": 0,
+      "source_file": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/source/sections/tube.pdf",
+      "svg_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_4_tube.svg",
+      "image_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/public/arxiv_cache/2610.22951/chalkboard_figures/fig_4_tube.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 35
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "This actually slapped. You didn't waste my time with 'Hey guys' or 'In this video,' and you didn't treat me like a toddler with 'smart drawers' metaphors. I immediately got why Transformers are failing in robotics (the O(n^2) attention bottleneck) and how Mamba's linear scaling fixes the latency. It's technical enough to be useful but fast enough to keep me from scrolling."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Bloated Transformer Action Expert",
+    "physical_analogy": "A traffic jam where every car must stop and re-read the entire map at every single intersection.",
+    "eureka_mechanism": "Mamba-based Action Mixer",
+    "paradigm_shift": "Linear-time action generation for real-time robotics"
+  },
+  "hook_gating": {
+    "selected_hook": "Before you deploy your next physical policy, see how MambaAct unlocks 58.8% better precision.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Statistic",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "candidates_evaluated": 11,
+    "rankings": [
+      {
+        "hook": "Before you deploy your next physical policy, see how MambaAct unlocks 58.8% better precision.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "You are probably training robot policies with the wrong primitives before testing MambaAct for 58.8%.",
+        "verdict": 57,
+        "band": "WORKABLE",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why do standard robots fail 58.8% of real-world trials before MambaAct fixes execution?",
+        "verdict": 53,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Before you build your next system, see how generalist robots freeze mid-motion because their action experts are too slow to process reality.",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Before you deploy your next architecture, consider this: Vision-language-action (VLA) models have shown strong promise for generalist robotic manipulation, but their inference cost remains a major bottleneck for real-time control.",
+        "verdict": 51,
+        "band": "WEAK",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Do not train another embodied policy until you see how MambaAct cuts errors by 58.8%.",
+        "verdict": 51,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why do robotic manipulation policies hit a plateau before MambaAct boosts accuracy by 58.8%?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Did you know generalist robots freeze mid-motion because their action experts are too slow to process reality?",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until MambaAct proved: this limitation is especially pronounced in flow-matching VLAs such as \u03c0_{0.5}, where the action expert is evaluated repeatedly during iterative denoising.",
+        "verdict": 37,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is MambaAct a major breakthrough? Because vision-language-action (VLA) models have shown strong promise for generalist robotic manipulation, but their inference cost remains a major bottleneck for real-time control.",
+        "verdict": 35,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Generalist robots freeze mid-motion because their action experts are too slow to process reality.",
+        "verdict": 25,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "coupled_canvas",
+      "entity_type": "coupled_canvas",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "title": "MambaAct: 10x Smaller Action Experts for Real-Time Robots"
+      }
+    },
+    {
+      "entity_id": "robot_arm",
+      "entity_type": "kinematic_arm",
+      "z_index": 15,
+      "initial_position": [
+        0.0,
+        -2.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "link_lengths": [
+          1.5,
+          1.2
+        ]
+      }
+    },
+    {
+      "entity_id": "ast_tree",
+      "entity_type": "ast_tree",
+      "z_index": 12,
+      "initial_position": [
+        0.0,
+        2.8,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    },
+    {
+      "entity_id": "sandbox_pod",
+      "entity_type": "sandbox_pod",
+      "z_index": 14,
+      "initial_position": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true
+}
