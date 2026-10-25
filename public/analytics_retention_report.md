@@ -1,60 +1,60 @@
 # 📈 The Model Verse — YouTube Performance & Retention Intelligence
 
-**Generated:** 2026-10-25T06:30:05.001839+00:00  
+**Generated:** 2026-10-25T09:20:45.277344+00:00  
 **Videos Analyzed:** 50 | **Autopsies Performed:** 32  
 **Top Domain:** `robotics_tamp`  
 **Recommended Pacing:** `1.12x` TTS Speed | Hook $\le$ `7.2s`
 
 ---
 
-## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 539)
+## 🧬 Closed-Loop Retention Genome Evolution (Engine 7.0 - Gen 546)
 The autonomous pipeline continuously evolves these visual and narrative recipes based on real viewer drop-offs:
 
 | Visual Blueprint | Evolutionary Multiplier | Avg Retention | Win/Loss Track | Action Directive |
 | :--- | :--- | :--- | :--- | :--- |
-| `chalkboard_code_block` | **1.5x** | 62.21% | 2132W / 0L | Auto-discovered layout. |
-| `barrier_separation` | **1.5x** | 74.86% | 463W / 138L | Auto-discovered layout. |
+| `chalkboard_code_block` | **1.5x** | 62.21% | 2165W / 0L | Auto-discovered layout. |
+| `barrier_separation` | **1.5x** | 74.86% | 468W / 140L | Auto-discovered layout. |
 | `ast_tree` | **1.5x** | 73.29% | 133W / 0L | Auto-discovered layout. |
 | `chalkboard_code` | **1.5x** | 64.82% | 315W / 0L | Auto-discovered layout. |
-| `horizontal_race_bars` | **1.5x** | 54.12% | 1942W / 0L | Auto-discovered layout. |
+| `horizontal_race_bars` | **1.5x** | 54.12% | 1971W / 0L | Auto-discovered layout. |
 | `grid_memory` | **1.5x** | 77.96% | 142W / 76L | Auto-discovered layout. |
-| `paper_figure` | **1.5x** | 67.31% | 758W / 0L | Auto-discovered layout. |
+| `paper_figure` | **1.5x** | 67.31% | 768W / 0L | Auto-discovered layout. |
 | `convergence_funnel` | **1.5x** | 65.07% | 108W / 0L | Auto-discovered layout. |
 | `side_by_side` | **1.5x** | 48.07% | 36W / 0L | Auto-discovered layout. |
-| `layer_stack` | **1.5x** | 66.58% | 146W / 3L | Auto-discovered layout. |
-| `vector_flow_field` | **1.5x** | 69.99% | 231W / 1L | Auto-discovered layout. |
+| `layer_stack` | **1.5x** | 66.58% | 148W / 3L | Auto-discovered layout. |
+| `vector_flow_field` | **1.5x** | 69.99% | 235W / 1L | Auto-discovered layout. |
 | `projection_rays` | **1.5x** | 53.92% | 135W / 0L | Auto-discovered layout. |
-| `optimization_landscape` | **1.5x** | 62.11% | 76W / 0L | Auto-discovered layout. |
-| `neural_activation_wave` | **1.5x** | 49.62% | 67W / 0L | Auto-discovered layout. |
-| `pipeline_stages` | **1.5x** | 54.85% | 68W / 0L | Auto-discovered layout. |
+| `optimization_landscape` | **1.5x** | 62.11% | 78W / 0L | Auto-discovered layout. |
+| `neural_activation_wave` | **1.5x** | 49.62% | 68W / 0L | Auto-discovered layout. |
+| `pipeline_stages` | **1.5x** | 54.85% | 69W / 0L | Auto-discovered layout. |
 | `split_comparison_latency` | **1.5x** | 62.71% | 13W / 0L | Auto-discovered layout. |
 | `benchmark_metric_grid` | **1.5x** | 54.3% | 13W / 0L | Auto-discovered layout. |
 | `call_to_action_loop` | **1.5x** | 49.77% | 13W / 0L | Auto-discovered layout. |
-| `split_screen_comparison` | **1.5x** | 75.21% | 58W / 0L | Auto-discovered layout. |
-| `data_visualization_chart` | **1.5x** | 62.04% | 58W / 0L | Auto-discovered layout. |
-| `outro_social_call` | **1.5x** | 49.53% | 58W / 0L | Auto-discovered layout. |
-| `split_screen_deal` | **1.5x** | 68.67% | 378W / 0L | Auto-discovered layout. |
-| `step_by_step` | **1.5x** | 57.3% | 381W / 0L | Auto-discovered layout. |
-| `cta_card` | **1.5x** | 50.82% | 381W / 0L | Auto-discovered layout. |
-| `browser_walkthrough` | **1.5x** | 49.76% | 54W / 0L | Auto-discovered layout. |
-| `cta_outro` | **1.5x** | 49.76% | 54W / 0L | Auto-discovered layout. |
-| `problem_breakdown_metrics` | **1.5x** | 69.27% | 52W / 0L | Auto-discovered layout. |
-| `benchmark_comparison_card` | **1.5x** | 56.53% | 52W / 0L | Auto-discovered layout. |
-| `newsroom_outro` | **1.5x** | 50.11% | 52W / 0L | Auto-discovered layout. |
-| `data_visualization_fail` | **1.5x** | 64.16% | 49W / 0L | Auto-discovered layout. |
-| `benchmark_comparison` | **1.5x** | 56.31% | 49W / 0L | Auto-discovered layout. |
-| `outro_subscribe` | **1.5x** | 49.91% | 49W / 0L | Auto-discovered layout. |
-| `deal_breakdown_grid` | **1.5x** | 71.72% | 94W / 0L | Auto-discovered layout. |
-| `url_walkthrough` | **1.5x** | 62.25% | 94W / 0L | Auto-discovered layout. |
-| `final_cta` | **1.5x** | 54.98% | 94W / 0L | Auto-discovered layout. |
+| `split_screen_comparison` | **1.5x** | 75.21% | 59W / 0L | Auto-discovered layout. |
+| `data_visualization_chart` | **1.5x** | 62.04% | 59W / 0L | Auto-discovered layout. |
+| `outro_social_call` | **1.5x** | 49.53% | 59W / 0L | Auto-discovered layout. |
+| `split_screen_deal` | **1.5x** | 68.67% | 385W / 0L | Auto-discovered layout. |
+| `step_by_step` | **1.5x** | 57.3% | 388W / 0L | Auto-discovered layout. |
+| `cta_card` | **1.5x** | 50.82% | 388W / 0L | Auto-discovered layout. |
+| `browser_walkthrough` | **1.5x** | 49.76% | 55W / 0L | Auto-discovered layout. |
+| `cta_outro` | **1.5x** | 49.76% | 55W / 0L | Auto-discovered layout. |
+| `problem_breakdown_metrics` | **1.5x** | 69.27% | 53W / 0L | Auto-discovered layout. |
+| `benchmark_comparison_card` | **1.5x** | 56.53% | 53W / 0L | Auto-discovered layout. |
+| `newsroom_outro` | **1.5x** | 50.11% | 53W / 0L | Auto-discovered layout. |
+| `data_visualization_fail` | **1.5x** | 64.16% | 50W / 0L | Auto-discovered layout. |
+| `benchmark_comparison` | **1.5x** | 56.31% | 50W / 0L | Auto-discovered layout. |
+| `outro_subscribe` | **1.5x** | 49.91% | 50W / 0L | Auto-discovered layout. |
+| `deal_breakdown_grid` | **1.5x** | 71.72% | 96W / 0L | Auto-discovered layout. |
+| `url_walkthrough` | **1.5x** | 62.25% | 96W / 0L | Auto-discovered layout. |
+| `final_cta` | **1.5x** | 54.98% | 96W / 0L | Auto-discovered layout. |
 | `radar_pareto_plot` | **1.5x** | 52.65% | 15W / 0L | Auto-discovered layout. |
 | `problem_statement` | **1.5x** | 69.48% | 10W / 0L | Auto-discovered layout. |
 | `benchmark_chart` | **1.5x** | 58.01% | 10W / 0L | Auto-discovered layout. |
 | `outro_cta` | **1.5x** | 49.77% | 10W / 0L | Auto-discovered layout. |
-| `comparison_split` | **1.5x** | 72.61% | 114W / 0L | Auto-discovered layout. |
-| `metrics_grid` | **1.5x** | 59.92% | 114W / 0L | Auto-discovered layout. |
-| `outro_subscribe_loop` | **1.5x** | 48.66% | 114W / 0L | Auto-discovered layout. |
-| `bespoke_code` | **1.42x** | 57.95% | 2114W / 236L | Auto-discovered layout. |
+| `comparison_split` | **1.5x** | 72.61% | 117W / 0L | Auto-discovered layout. |
+| `metrics_grid` | **1.5x** | 59.92% | 117W / 0L | Auto-discovered layout. |
+| `outro_subscribe_loop` | **1.5x** | 48.66% | 117W / 0L | Auto-discovered layout. |
+| `bespoke_code` | **1.42x** | 57.95% | 2119W / 237L | Auto-discovered layout. |
 | `BlueprintHorizontalRaceBars` | **1.3x** | 78.5% | 6W / 0L | PRIORITIZE for Act 4 benchmark showdown. |
 | `catalog_routing` | **1.3x** | 70.1% | 6W / 0L | Auto-discovered layout. |
 | `BlueprintSplitFlow` | **1.25x** | 76.0% | 5W / 1L | EXCELLENT for bifurcated flows, dual-pass verification, or router dispatch. |
@@ -69,11 +69,11 @@ The autonomous pipeline continuously evolves these visual and narrative recipes 
 | `benchmark_delta_cards` | **1.1x** | 63.01% | 2W / 0L | Auto-discovered layout. |
 | `channel_outro_loop` | **1.1x** | 58.37% | 2W / 0L | Auto-discovered layout. |
 | `generic_sine_wave` | **0.5x** | 46.0% | 0W / 4L | BANNED: Flat generic animation trigger. Causes immediate cognitive drop-off. |
-| `split_flow` | **0.5x** | 71.28% | 378W / 205L | Auto-discovered layout. |
+| `split_flow` | **0.5x** | 71.28% | 383W / 210L | Auto-discovered layout. |
 | `comparison_side_by_side` | **0.4x** | 49.72% | 113W / 131L | Auto-discovered layout. |
-| `tree_hierarchy` | **0.4x** | 63.11% | 110W / 75L | Auto-discovered layout. |
+| `tree_hierarchy` | **0.4x** | 63.11% | 110W / 76L | Auto-discovered layout. |
 | `news_hero_announcement` | **0.4x** | 50.0% | 0W / 18L | Auto-discovered layout. |
-| `perks_hero_value` | **0.4x** | 50.0% | 0W / 186L | Auto-discovered layout. |
+| `perks_hero_value` | **0.4x** | 50.0% | 0W / 190L | Auto-discovered layout. |
 
 **Top Performing Hook Archetype:** `ABSURD_PARADOX` — *Shocking compute waste, paradoxical inefficiency, or inverted expectations directly from the paper.*
 
