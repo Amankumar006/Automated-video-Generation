@@ -47,6 +47,21 @@ jobs:
           # pytest is a contributor/CI tool, not a runtime dependency.
           python -m pip install "pytest>=8,<9"
 
+      - name: Install Pocket TTS fallback binary
+        run: |
+          set -euo pipefail
+          version="3.3.0"
+          asset="pocket-tts-${version}-x86_64-unknown-linux-gnu.tar.gz"
+          expected_sha="9abff0aa138a804e44052952d8c3bdaae247fb267ca8f4b83fe178897d1a0559"
+          mkdir -p "$HOME/.local/bin"
+          curl --fail --location --retry 3 --output "/tmp/$asset" \
+            "https://github.com/kyutai-labs/pocket-tts/releases/download/v4.0.1/$asset"
+          echo "$expected_sha  /tmp/$asset" | sha256sum --check --status
+          tar -xzf "/tmp/$asset" --strip-components=1 -C "$HOME/.local/bin"
+          chmod +x "$HOME/.local/bin/pocket-tts"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          pocket-tts --version
+
       - name: Verify contributor environment
         run: |
           set -euo pipefail

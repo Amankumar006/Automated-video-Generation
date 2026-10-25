@@ -80,12 +80,12 @@ def test_tech_news_blueprints_expose_semantic_roles():
 
 
 def test_tech_news_launch_visual_requires_a_real_local_asset():
-    """The launch scene must use explicit source media, never generic stock."""
+    """The launch scene accepts official source media, never generic stock."""
     from manim_engine.scenes.tech_news_scene import TechNewsScene
 
     scene = TechNewsScene()
     assert len(scene._asset_backplate("Anthropic", "Claude", {})) == 0
-    asset_path = "public/assets/broll/datacenter_server_rack.jpg"
+    asset_path = "public/source_assets/kimi-k3-1-pro_c114851e8fbc.webp"
     backplate = scene._asset_backplate("Anthropic", "Claude", {"asset_path": asset_path})
 
     assert len(backplate.submobjects) == 3
