@@ -1,24 +1,18 @@
 """
 The Model Verse — Dedicated Tech News Script Engine (Track 2)
 Engineered for official AI lab drops (OpenAI, Anthropic, Google DeepMind, Hugging Face).
-Produces breaking newsroom reporter scripts focusing on:
-- The breakthrough announcement & shock factor
-- Predecessor bottlenecks & ceilings
-- Architectural secret sauce & latency/throughput gains
-- Verified benchmarks (SWE-bench Verified, AIME, GPQA)
-- Pricing tables, token cost deltas, and model availability tiers
+Produces source-grounded newsroom scripts focusing on:
+- The announcement and its concrete consequence
+- The problem or tradeoff named by the source
+- The mechanism or capability actually described
+- Evidence that is present in the source metadata
+- Pricing and availability only when explicitly reported
 """
 
-import os
 import re
-import json
 from typing import Dict, Any, Optional, List
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 COLOR_MINT = "#34D399"
-COLOR_DANGER = "#EF4444"
 COLOR_CYAN = "#38BDF8"
 COLOR_GOLD = "#F59E0B"
 COLOR_WHITE = "#FFFFFF"
@@ -61,26 +55,29 @@ class TechNewsScriptEngine:
         prov = self._extract_provider(topic, blog_meta)
         headline = (blog_meta.get("title") if blog_meta else None) or topic
         abstract = (blog_meta.get("abstract") if blog_meta else None) or context or ""
+        source_facts = self._normalise_facts(blog_meta)
 
-        return f"""You are the Principal Breaking Tech News Reporter for 'The Model Verse' (themodelverse.in).
-Generate a fast-paced, high-retention 6-beat YouTube Shorts script covering an official frontier AI lab drop:
+        return f"""You are the Principal Tech News Reporter for 'The Model Verse' (themodelverse.in).
+Generate a human, conversational 6-beat YouTube Shorts script covering an official AI release:
 Provider: {prov}
 Headline: {headline}
 Details: {abstract}
+Verified source fields: {source_facts}
 
 Voice & Newsroom Persona:
-- Tone: Fast-paced, authoritative, breaking tech newsroom reporter (like MKBHD meets Bloomberg Tech).
+- Tone: Clear, curious, authoritative, and human. Sound like a reporter explaining why the release matters to a smart developer.
 - Strictly ban academic paper clichés ("Today we explore", "In this paper", "Researchers have proposed").
-- Do not default to "Before you...". Lead with the live event, a concrete consequence, or a surprising contradiction; use time-order language only when the news itself depends on it.
-- Focus on real developer implications: token pricing, throughput leaps, verified benchmarks, and availability.
+- Never use a generic "Before..." opening. Start with the event, a concrete consequence, or a useful question.
+- Do not invent benchmarks, prices, speedups, architecture details, availability, or superlatives. If a fact is missing, say that it was not reported in the supplied source.
+- Use the supplied evidence verbatim enough to preserve its meaning, but rewrite it into natural spoken language.
 
 6-Beat Structure (Exactly 125-155 words total):
-Beat 1 (0-3s, Breaking Hook): Shocking announcement of the drop and its headline claim.
-Beat 2 (3-12s, Predecessor Ceiling): Why prior models failed, cost too much, or lagged in latency.
-Beat 3 (12-24s, Architectural Secret Sauce): How the new distillation/routing engine delivers speed.
-Beat 4 (24-35s, Verified Benchmarks): Concrete scores on SWE-bench Verified, AIME, GPQA vs baselines.
-Beat 5 (35-44s, Pricing & Availability Deltas): Input/Output token pricing, % cost drop, and release tiers (API, Web).
-Beat 6 (44-50s, Outro & Loop): Urgent takeaway + 'Follow The Model Verse for instant breakdowns of every major AI lab drop.'
+Beat 1 (0-3s, Hook): The release is real and the most concrete headline detail.
+Beat 2 (3-12s, Why it matters): The user problem, limitation, or open question named by the source.
+Beat 3 (12-24s, What changed): The architecture, capability, or product behavior explicitly described.
+Beat 4 (24-35s, Evidence): The reported benchmark, comparison, or a transparent "not reported" caveat.
+Beat 5 (35-44s, Practical check): Pricing, access, or an explicit limitation; never fill gaps with defaults.
+Beat 6 (44-50s, Takeaway): A useful conclusion and a natural, brief follow invitation.
 
 Output ONLY valid JSON matching this schema:
 {{
@@ -109,70 +106,82 @@ Output ONLY valid JSON matching this schema:
         if not clean_id.startswith("news_") and not clean_id.startswith("blog_"):
             clean_id = f"news_{clean_id}"
 
-        # Extract verified facts if present in blog_meta
-        key_facts = blog_meta.get("key_facts", {}) if blog_meta else {}
-        benchmarks = key_facts.get("benchmarks", {})
-        speedups = key_facts.get("speedups", ["3.2x faster throughput"])
-        pricing = key_facts.get("pricing", ["$1.10 / 1M input tokens", "$4.40 / 1M output tokens"])
+        facts = self._normalise_facts(blog_meta)
+        benchmarks = facts["benchmarks"]
+        speedups = facts["speedups"]
+        pricing = facts["pricing"]
+        summary = facts["summary"]
+        architecture = facts["architecture"]
+        availability = facts["availability"]
 
-        bench_mention = "SWE-bench Verified" if "SWE-bench" in str(benchmarks) else "industry coding and math benchmarks"
-        speed_mention = speedups[0] if speedups else "sub-second latency and 3x throughput"
-        price_mention = pricing[0] if pricing else "just one dollar and ten cents per million tokens"
+        hook_detail = summary or self._first_value(speedups) or "the release details are now public"
+        why_detail = (
+            self._first_value(facts["limitations"], facts["problem"])
+            or "the source leaves the comparison open, so the useful test is how it behaves in your own workload"
+        )
+        mechanism_detail = architecture or self._first_value(facts["capabilities"]) or (
+            "the supplied release record does not describe a new internal mechanism"
+        )
+        evidence_detail = self._format_facts(benchmarks, "No benchmark result is reported in the supplied source metadata.")
+        practical_parts = [self._format_facts(pricing, ""), self._format_facts(availability, "")]
+        practical_detail = "; ".join(part for part in practical_parts if part)
+        if not practical_detail:
+            practical_detail = "Pricing and access details are not reported in the supplied source metadata"
 
         beats = [
             {
                 "beat_id": 1,
                 "name": "b1_hook",
-                "text": f"The release is live: {prov} just dropped {model_name} for production AI stacks.",
-                "visual_focus": f"Hero announcement card with official {prov} vector logo and launch tag.",
-                "highlight_words": {model_name: COLOR_CYAN, "officially dropped": COLOR_GOLD},
+                "text": f"{prov} just put {model_name} in front of developers. The release note says {hook_detail}.",
+                "visual_focus": f"A release signal travels from the official {prov} source into a developer workflow; no static announcement card.",
+                "highlight_words": {model_name: COLOR_CYAN, prov: COLOR_GOLD},
                 "svo_action": {"subject": prov, "action_verb": "launches", "direct_object": model_name, "anchor_word": "dropped", "semantic_role": "state_transition"},
-                "visual_blueprint": {"layout": "news_hero_announcement", "title": f"{prov.upper()} OFFICIAL DROP", "sub": f"Introducing {model_name}", "params": {"provider": prov, "model_name": model_name}}
+                "visual_blueprint": {"layout": "news_hero_announcement", "title": f"{prov.upper()} RELEASE", "sub": model_name, "params": {"provider": prov, "model_name": model_name, "detail": hook_detail}}
             },
             {
                 "beat_id": 2,
                 "name": "b2_predecessor",
-                "text": "The problem? Predecessor reasoning models were powerful, but suffered from high latency and steep token prices that drained startup runways.",
-                "visual_focus": "Predecessor bottlenecks card illustrating latency walls and costly inference.",
-                "highlight_words": {"latency": COLOR_DANGER, "steep token prices": COLOR_GOLD},
-                "svo_action": {"subject": "Predecessor Models", "action_verb": "drains", "direct_object": "Startup Runways", "anchor_word": "prices", "semantic_role": "causal_elimination"},
-                "visual_blueprint": {"layout": "news_predecessor_ceiling", "title": "PREDECESSOR BOTTLENECKS", "sub": "Latency & Cost Ceilings", "params": {}}
+                "text": f"Why should anyone care? {why_detail}.",
+                "visual_focus": "A measurable constraint narrows the path through a developer workflow; show the named problem, not a generic bottleneck card.",
+                "highlight_words": {"Why should anyone care?": COLOR_GOLD},
+                "svo_action": {"subject": model_name, "action_verb": "answers", "direct_object": "a developer question", "anchor_word": "care", "semantic_role": "problem_framing"},
+                "visual_blueprint": {"layout": "news_predecessor_ceiling", "title": "THE PRACTICAL QUESTION", "sub": "What the source actually says", "params": {"detail": why_detail}}
             },
             {
                 "beat_id": 3,
                 "name": "b3_core_breakthrough",
-                "text": f"Enter {model_name}. It uses distilled step-by-step reasoning tokens to deliver {speed_mention} without compromising accuracy.",
-                "visual_focus": f"Architectural breakthrough card detailing distilled reasoning tokens in {model_name}.",
-                "highlight_words": {model_name: COLOR_MINT, "distilled": COLOR_CYAN},
-                "svo_action": {"subject": model_name, "action_verb": "delivers", "direct_object": "High Throughput", "anchor_word": "distilled", "semantic_role": "agent_action"},
-                "visual_blueprint": {"layout": "news_breakthrough_architecture", "title": "DISTILLED REASONING ENGINE", "sub": "High-Throughput Token Generation", "params": {}}
+                "text": f"What changed is more specific: {model_name} {mechanism_detail}.",
+                "visual_focus": "Animate the reported capability or mechanism as a transformation through the system, with no invented internals.",
+                "highlight_words": {model_name: COLOR_MINT, "What changed": COLOR_CYAN},
+                "svo_action": {"subject": model_name, "action_verb": "changes", "direct_object": "the reported workflow", "anchor_word": "changed", "semantic_role": "mechanism_explanation"},
+                "visual_blueprint": {"layout": "news_breakthrough_architecture", "title": "WHAT CHANGED", "sub": "Source-grounded mechanism", "params": {"detail": mechanism_detail}}
             },
             {
                 "beat_id": 4,
                 "name": "b4_benchmarks",
-                "text": f"On verified benchmarks, it shatters expectations: dominating {bench_mention} while outpacing earlier frontier reasoning baselines.",
-                "visual_focus": "Verified benchmark comparison bar chart with glowing SOTA leap chip.",
-                "highlight_words": {"verified benchmarks": COLOR_CYAN, "shatters expectations": COLOR_MINT},
-                "svo_action": {"subject": model_name, "action_verb": "beats", "direct_object": "Frontier Baselines", "anchor_word": "benchmarks", "semantic_role": "metric_evaluation"},
-                "visual_blueprint": {"layout": "news_benchmark_clash", "title": "VERIFIED BENCHMARKS", "sub": "Wall-Clock SOTA Results", "params": {}}
+                "text": f"Here is the evidence: {evidence_detail}",
+                "visual_focus": "Draw only the reported benchmark values as proportional bars, or visibly mark the evidence gap when no score is supplied.",
+                "highlight_words": {"evidence": COLOR_CYAN},
+                "svo_action": {"subject": model_name, "action_verb": "reports", "direct_object": "measured evidence", "anchor_word": "evidence", "semantic_role": "metric_evaluation"},
+                "visual_blueprint": {"layout": "news_benchmark_clash", "title": "THE EVIDENCE", "sub": "Reported results only", "params": {"benchmarks": benchmarks}}
             },
             {
                 "beat_id": 5,
                 "name": "b5_pricing_availability",
-                "text": f"The pricing delta is wild: {price_mention}, available right now across API tiers and production dashboards.",
-                "visual_focus": "Token pricing comparison table and availability tier chips.",
-                "highlight_words": {price_mention.split()[0]: COLOR_MINT, "available right now": COLOR_CYAN},
-                "svo_action": {"subject": prov, "action_verb": "slashes", "direct_object": "Token Prices", "anchor_word": "pricing", "semantic_role": "metric_evaluation"},
-                "visual_blueprint": {"layout": "news_pricing_table", "title": "TOKEN PRICING DELTAS", "sub": "Instant Cost Reduction", "params": {}}
+                "text": f"For a real deployment, check this first: {practical_detail}",
+                "visual_focus": "Trace the release into an API or product path and expose the reported price/access state without implying a discount that was not published.",
+                "highlight_words": {"real deployment": COLOR_MINT, "check this first": COLOR_CYAN},
+                "svo_action": {"subject": "The release record", "action_verb": "defines", "direct_object": "the deployment check", "anchor_word": "deployment", "semantic_role": "practical_tradeoff"},
+                "visual_blueprint": {"layout": "news_pricing_table", "title": "THE DEPLOYMENT CHECK", "sub": "Price and access from the source", "params": {"pricing": pricing, "availability": availability}}
             },
             {
                 "beat_id": 6,
                 "name": "b6_brand_outro",
-                "text": "Follow The Model Verse for instant breakdowns of every major AI lab release and architectural leap.",
-                "visual_focus": "Minimalist tech newsroom outro with The Model Verse branding.",
+                "text": f"So the takeaway is simple: evaluate {model_name} against the job you actually need done. Follow The Model Verse for the next clear breakdown.",
+                "visual_focus": "A clean workflow returns to the original question, with a restrained Model Verse sign-off.",
                 "highlight_words": {"The Model Verse": COLOR_MINT},
-                "svo_action": {"subject": "The Model Verse", "action_verb": "breaks down", "direct_object": "AI Lab Releases", "anchor_word": "Model", "semantic_role": "metric_evaluation"},
-                "visual_blueprint": {"layout": "news_outro_summary", "title": "THE MODEL VERSE", "sub": "Official AI Lab Releases", "params": {}}
+                "svo_action": {"subject": "The Model Verse", "action_verb": "clarifies", "direct_object": "AI releases", "anchor_word": "takeaway", "semantic_role": "takeaway"},
+                "visual_blueprint": {"layout": "news_outro_summary", "title": "THE MODEL VERSE", "sub": "Clearer AI news", "params": {"model_name": model_name}}
             }
         ]
 
@@ -202,45 +211,76 @@ Output ONLY valid JSON matching this schema:
                 "pricing": pricing,
                 "official_url": (blog_meta.get("official_url") or blog_meta.get("url", "")) if blog_meta else ""
             },
-            "math_formulas": [
-                {
-                    "beat_id": 1,
-                    "latex": r"\Delta \mathrm{Latency} \to 0",
-                    "filename": f"{clean_id}_beat1_formula.svg",
-                    "fontsize": 24,
-                    "color": "cyan"
-                },
-                {
-                    "beat_id": 2,
-                    "latex": r"\mathrm{Cost}_{\mathrm{prior}} = \mathcal{O}(N_{\mathrm{tokens}} \cdot \$60)",
-                    "filename": f"{clean_id}_beat2_formula.svg",
-                    "fontsize": 24,
-                    "color": "red"
-                },
-                {
-                    "beat_id": 3,
-                    "latex": r"\mathrm{Speedup} = 3.2\times",
-                    "filename": f"{clean_id}_beat3_formula.svg",
-                    "fontsize": 24,
-                    "color": "mint"
-                },
-                {
-                    "beat_id": 4,
-                    "latex": r"\mathrm{SWE}_{\mathrm{verified}} = 49.3\%",
-                    "filename": f"{clean_id}_beat4_formula.svg",
-                    "fontsize": 24,
-                    "color": "gold"
-                },
-                {
-                    "beat_id": 5,
-                    "latex": r"\Delta \mathrm{Price} = -92\%",
-                    "filename": f"{clean_id}_beat5_formula.svg",
-                    "fontsize": 24,
-                    "color": "mint"
-                }
-            ]
+            "math_formulas": self._build_fact_formulas(clean_id, benchmarks, speedups, pricing)
         }
         return spec
+
+    def _normalise_facts(self, blog_meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """Read facts from both current and legacy fetcher shapes without adding defaults."""
+        meta = blog_meta or {}
+        nested = meta.get("key_facts") or {}
+        return {
+            "summary": self._clean_fact(meta.get("summary") or meta.get("abstract") or nested.get("summary")),
+            "benchmarks": meta.get("benchmarks") or nested.get("benchmarks") or {},
+            "speedups": self._as_values(meta.get("speedups") or nested.get("speedups")),
+            "pricing": meta.get("pricing") or nested.get("pricing") or {},
+            "availability": self._as_values(meta.get("availability") or nested.get("availability")),
+            "architecture": self._clean_fact(meta.get("architecture") or nested.get("architecture") or meta.get("method")),
+            "limitations": self._as_values(meta.get("limitations") or nested.get("limitations")),
+            "problem": self._as_values(meta.get("problem") or nested.get("problem") or meta.get("pain_points")),
+            "capabilities": self._as_values(meta.get("capabilities") or nested.get("capabilities")),
+        }
+
+    @staticmethod
+    def _clean_fact(value: Any) -> str:
+        if value is None:
+            return ""
+        return re.sub(r"\s+", " ", str(value)).strip().rstrip(".")
+
+    def _as_values(self, value: Any) -> List[str]:
+        if value is None:
+            return []
+        if isinstance(value, dict):
+            return [f"{key}: {self._clean_fact(item)}" for key, item in value.items() if self._clean_fact(item)]
+        if isinstance(value, (list, tuple, set)):
+            return [self._clean_fact(item) for item in value if self._clean_fact(item)]
+        cleaned = self._clean_fact(value)
+        return [cleaned] if cleaned else []
+
+    @staticmethod
+    def _first_value(*groups: Any) -> str:
+        for group in groups:
+            if isinstance(group, str) and group.strip():
+                return group.strip().rstrip(".")
+            if isinstance(group, (list, tuple)) and group:
+                return str(group[0]).strip().rstrip(".")
+        return ""
+
+    def _format_facts(self, facts: Any, fallback: str) -> str:
+        values = self._as_values(facts)
+        if not values:
+            return fallback
+        if len(values) == 1:
+            return values[0]
+        return "; ".join(values[:3])
+
+    def _build_fact_formulas(
+        self,
+        clean_id: str,
+        benchmarks: Any,
+        speedups: List[str],
+        pricing: Any,
+    ) -> List[Dict[str, Any]]:
+        """Create formula overlays only from explicit source facts."""
+        formulas: List[Dict[str, Any]] = []
+        benchmark_values = self._as_values(benchmarks)
+        if benchmark_values:
+            formulas.append({"beat_id": 4, "latex": r"\mathrm{Reported\ evidence}", "filename": f"{clean_id}_beat4_formula.svg", "fontsize": 24, "color": "gold"})
+        if speedups:
+            formulas.append({"beat_id": 3, "latex": r"\mathrm{Reported\ capability}", "filename": f"{clean_id}_beat3_formula.svg", "fontsize": 24, "color": "mint"})
+        if self._as_values(pricing):
+            formulas.append({"beat_id": 5, "latex": r"\mathrm{Price/access\ as\ reported}", "filename": f"{clean_id}_beat5_formula.svg", "fontsize": 24, "color": "cyan"})
+        return formulas
 
     def _finalize_spec(self, spec: Dict[str, Any], topic: str, blog_meta: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         spec["category"] = "tech_news"
