@@ -15,6 +15,9 @@ import sys
 import time
 import json
 import argparse
+import shutil
+import subprocess
+import tempfile
 import urllib.request
 import urllib.error
 import urllib.parse
@@ -76,6 +79,71 @@ class InstagramPublisher:
                 return False, {"message": err_body, "code": e.code}
         except Exception as e:
             return False, {"message": str(e)}
+
+    def _prepare_video_for_instagram(self, video_path: str) -> Tuple[str, Optional[str]]:
+        """Create a conservative Instagram-compatible upload copy.
+
+        The broadcast master is intentionally 1440x2560/60fps. Meta can accept
+        that profile inconsistently, so uploads use a 1080x1920/30fps H.264
+        copy with yuv420p video, AAC 48 kHz audio, and a fast-start MP4.
+        Returns (path_to_upload, temporary_path_to_remove).
+        """
+        ffmpeg = shutil.which("ffmpeg")
+        if not ffmpeg:
+            print("⚠️ ffmpeg unavailable; uploading the broadcast master directly to Instagram.")
+            return video_path, None
+
+        fd, prepared_path = tempfile.mkstemp(prefix="instagram_reel_", suffix=".mp4")
+        os.close(fd)
+        command = [
+            ffmpeg,
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-y",
+            "-i",
+            video_path,
+            "-vf",
+            "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2,format=yuv420p",
+            "-r",
+            "30",
+            "-c:v",
+            "libx264",
+            "-profile:v",
+            "high",
+            "-level",
+            "4.2",
+            "-pix_fmt",
+            "yuv420p",
+            "-preset",
+            "medium",
+            "-crf",
+            "20",
+            "-c:a",
+            "aac",
+            "-ar",
+            "48000",
+            "-ac",
+            "2",
+            "-b:a",
+            "128k",
+            "-movflags",
+            "+faststart",
+            prepared_path,
+        ]
+        try:
+            subprocess.run(command, check=True, capture_output=True, text=True)
+        except (OSError, subprocess.CalledProcessError) as exc:
+            try:
+                os.unlink(prepared_path)
+            except OSError:
+                pass
+            detail = getattr(exc, "stderr", "") or str(exc)
+            print(f"⚠️ Instagram compatibility transcode failed; using source video: {detail[:240]}")
+            return video_path, None
+
+        print(f"🎞️ Prepared Instagram-compatible upload: {prepared_path}")
+        return prepared_path, prepared_path
 
     def create_image_container(self, image_url: str, caption: str) -> str:
         """Step A for Images: Creates an Instagram image media container."""
@@ -346,55 +414,60 @@ class InstagramPublisher:
             )
 
         caption = format_full_caption_with_hashtags(post_data)
+        upload_video_path, temporary_upload_path = self._prepare_video_for_instagram(video_path)
 
-        print("\n=======================================================")
-        print("📸 THE MODEL VERSE — INSTAGRAM REELS PUBLISHER")
-        print("=======================================================\n")
-        print(f"🎬 Video: {video_path}")
-        print(f"🪝 Hook: {post_data.get('hook', '')}")
-        print(f"📝 Caption length: {len(caption)} characters")
-        if cover_url:
-            print(f"🖼️ Cover: Custom cover URL -> {cover_url}")
-        elif thumb_offset is not None:
-            print(f"🖼️ Poster Cover: Video frame at {thumb_offset}ms (eliminates 0ms black frame)")
+        try:
+            print("\n=======================================================")
+            print("📸 THE MODEL VERSE — INSTAGRAM REELS PUBLISHER")
+            print("=======================================================\n")
+            print(f"🎬 Video: {video_path}")
+            print(f"🪝 Hook: {post_data.get('hook', '')}")
+            print(f"📝 Caption length: {len(caption)} characters")
+            if cover_url:
+                print(f"🖼️ Cover: Custom cover URL -> {cover_url}")
+            elif thumb_offset is not None:
+                print(f"🖼️ Poster Cover: Video frame at {thumb_offset}ms (eliminates 0ms black frame)")
 
-        if video_url:
-            print(f"🌐 Creating Reels container via public URL: {video_url}...")
-            container_id = self.create_video_url_container(
-                video_url, caption, cover_url=cover_url, thumb_offset=thumb_offset
-            )
-        else:
-            print(f"📁 Initiating direct binary Resumable Upload for local file: {video_path}...")
-            container_id, upload_uri = self.create_resumable_reels_container(
-                video_path, caption, cover_url=cover_url, thumb_offset=thumb_offset
-            )
-            self.upload_binary_video_stream(upload_uri, video_path)
+            if video_url:
+                print(f"🌐 Creating Reels container via public URL: {video_url}...")
+                container_id = self.create_video_url_container(
+                    video_url, caption, cover_url=cover_url, thumb_offset=thumb_offset
+                )
+            else:
+                print(f"📁 Initiating direct binary Resumable Upload for local file: {upload_video_path}...")
+                container_id, upload_uri = self.create_resumable_reels_container(
+                    upload_video_path, caption, cover_url=cover_url, thumb_offset=thumb_offset
+                )
+                self.upload_binary_video_stream(upload_uri, upload_video_path)
 
-        # Poll container readiness
-        self.wait_for_container_ready(container_id)
+            self.wait_for_container_ready(container_id)
 
-        # Publish container
-        print(f"🚀 Publishing container {container_id} to Instagram...")
-        media_id = self.publish_container(container_id)
-        permalink = f"https://www.instagram.com/p/{media_id}/"
+            print(f"🚀 Publishing container {container_id} to Instagram...")
+            media_id = self.publish_container(container_id)
+            permalink = f"https://www.instagram.com/p/{media_id}/"
 
-        print("\n=======================================================")
-        print("🎉 INSTAGRAM REEL PUBLISHED SUCCESSFULLY!")
-        print(f"🆔 Media ID: {media_id}")
-        print(f"🔗 Instagram Link: {permalink}")
-        print("=======================================================\n")
+            print("\n=======================================================")
+            print("🎉 INSTAGRAM REEL PUBLISHED SUCCESSFULLY!")
+            print(f"🆔 Media ID: {media_id}")
+            print(f"🔗 Instagram Link: {permalink}")
+            print("=======================================================\n")
 
-        # Post first engagement comment
-        if post_data.get("first_comment"):
-            self.post_first_comment(media_id, post_data["first_comment"])
+            if post_data.get("first_comment"):
+                self.post_first_comment(media_id, post_data["first_comment"])
 
-        return {
-            "media_id": media_id,
-            "permalink": permalink,
-            "container_id": container_id,
-            "hook": post_data.get("hook"),
-            "caption": caption
-        }
+            return {
+                "media_id": media_id,
+                "permalink": permalink,
+                "container_id": container_id,
+                "hook": post_data.get("hook"),
+                "caption": caption
+            }
+        finally:
+            if temporary_upload_path:
+                try:
+                    os.unlink(temporary_upload_path)
+                except OSError:
+                    pass
 
 
 # Global singleton
