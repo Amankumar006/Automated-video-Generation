@@ -54,7 +54,9 @@ and historical documentation untouched.
 Production CI uses Gemini 3.8 Flash TTS with the Charon informative voice for
 English narration. Set `GEMINI_API_KEY`, `TTS_PROVIDER=gemini`,
 `GEMINI_TTS_MODEL=gemini-3.8-flash-tts`, and `GEMINI_TTS_VOICE=Charon`.
-The router falls back to Pocket TTS when the Gemini provider is unavailable.
+Set `FAIL_ON_TTS_PROVIDER_FALLBACK=true` in production so a quota outage stops
+the run instead of creating a mixed-voice short. Pocket remains available as an
+explicit offline fallback for local development.
 
 For a lightweight CPU-only English alternative, install Kyutai's official
 `pocket-tts` binary and set `TTS_PROVIDER=pocket` plus

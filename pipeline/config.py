@@ -40,6 +40,10 @@ GEMINI_TTS_STYLE = os.environ.get(
     "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace",
 )
 GEMINI_TTS_TIMEOUT_SECONDS = float(os.environ.get("GEMINI_TTS_TIMEOUT_SECONDS", "90"))
+GEMINI_TTS_MIN_INTERVAL_SECONDS = float(os.environ.get("GEMINI_TTS_MIN_INTERVAL_SECONDS", "21"))
+FAIL_ON_TTS_PROVIDER_FALLBACK = os.environ.get("FAIL_ON_TTS_PROVIDER_FALLBACK", "false").lower() in {
+    "1", "true", "yes"
+}
 
 # Typography & Visual Design Tokens
 FONT_HELVETICA = "Helvetica Neue"

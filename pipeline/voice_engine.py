@@ -34,6 +34,8 @@ import logging
 import shutil
 import subprocess
 import tempfile
+import threading
+import time
 from typing import Tuple, Dict, Any, Optional
 import numpy as np
 import soundfile as sf
@@ -46,7 +48,8 @@ from pipeline.config import (
     ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_VOICES,
     SARVAM_API_KEY, SARVAM_SPEAKER, SARVAM_MODEL, SARVAM_SPEAKERS,
     GEMINI_API_KEY, GEMINI_TTS_MODEL, GEMINI_TTS_VOICE, GEMINI_TTS_STYLE,
-    GEMINI_TTS_TIMEOUT_SECONDS,
+    GEMINI_TTS_TIMEOUT_SECONDS, GEMINI_TTS_MIN_INTERVAL_SECONDS,
+    FAIL_ON_TTS_PROVIDER_FALLBACK,
     DEFAULT_TTS_PROVIDER
 )
 from pipeline.text_normalizer import normalize_narration_text
@@ -426,6 +429,9 @@ class SarvamVoiceProvider(BaseVoiceProvider):
 class GeminiTTSVoiceProvider(BaseVoiceProvider):
     """Google Gemini native TTS provider using the Interactions REST API."""
 
+    _rate_limit_lock = threading.Lock()
+    _last_request_at = 0.0
+
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -433,12 +439,16 @@ class GeminiTTSVoiceProvider(BaseVoiceProvider):
         default_voice: Optional[str] = None,
         style: Optional[str] = None,
         timeout: Optional[float] = None,
+        min_interval: Optional[float] = None,
     ):
         self.api_key = api_key if api_key is not None else GEMINI_API_KEY
         self.model = model or GEMINI_TTS_MODEL
         self.default_voice = default_voice or GEMINI_TTS_VOICE
         self.style = style if style is not None else GEMINI_TTS_STYLE
         self.timeout = float(timeout if timeout is not None else GEMINI_TTS_TIMEOUT_SECONDS)
+        self.min_interval = float(
+            min_interval if min_interval is not None else GEMINI_TTS_MIN_INTERVAL_SECONDS
+        )
 
     def resolve_voice(self, voice_name: Optional[str]) -> str:
         return (voice_name or self.default_voice).strip()
@@ -487,6 +497,19 @@ class GeminiTTSVoiceProvider(BaseVoiceProvider):
             "response_format": {"type": "audio"},
             "generation_config": {"speech_config": [{"voice": resolved_voice}]},
         }
+
+        # Gemini's free tier is limited to roughly three TTS requests per
+        # minute. Keep every beat on the selected voice instead of silently
+        # falling back halfway through a short when the limit is reached.
+        with self._rate_limit_lock:
+            elapsed = time.monotonic() - self._last_request_at
+            wait_seconds = max(0.0, self.min_interval - elapsed)
+            if wait_seconds:
+                logger.info(
+                    f"⏳ [Gemini TTS] Rate-limit pacing: waiting {wait_seconds:.1f}s before the next beat"
+                )
+                time.sleep(wait_seconds)
+            self.__class__._last_request_at = time.monotonic()
 
         try:
             resp = requests.post(
@@ -708,6 +731,11 @@ class UnifiedVoiceRouter:
 
         # 2. Check Quota Health Tracker: if primary provider is already exhausted, skip directly to Pocket TTS.
         if target_provider in ("elevenlabs", "sarvam", "gemini") and not quota_tracker.is_healthy(target_provider):
+            if FAIL_ON_TTS_PROVIDER_FALLBACK:
+                raise VoiceEngineError(
+                    f"TTS provider '{target_provider}' is exhausted and fallback is disabled; "
+                    "refusing to create mixed-voice narration."
+                )
             logger.info(
                 f"⏩ [VoiceRouter] Provider '{target_provider}' is marked EXHAUSTED in QuotaTracker. "
                 f"Immediately cascading to Pocket TTS offline synthesis."
@@ -784,6 +812,11 @@ class UnifiedVoiceRouter:
                 if not lang_norm.startswith("en"):
                     raise VoiceEngineError(
                         "Pocket TTS fallback is English-only; configure Sarvam or another Hindi provider."
+                    ) from exc
+                if FAIL_ON_TTS_PROVIDER_FALLBACK:
+                    raise VoiceEngineError(
+                        f"TTS provider '{target_provider}' failed and fallback is disabled; "
+                        "refusing to create mixed-voice narration."
                     ) from exc
                 fallback_voice = self.pocket.resolve_voice(voice)
                 audio, sr, meta = self.pocket.synthesize(

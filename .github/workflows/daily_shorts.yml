@@ -236,6 +236,8 @@ jobs:
             'GEMINI_TTS_VOICE=Charon' \
             'GEMINI_TTS_STYLE=clear, confident, conversational science explainer; energetic but not theatrical; moderate pace' \
             'GEMINI_TTS_TIMEOUT_SECONDS=90' \
+            'GEMINI_TTS_MIN_INTERVAL_SECONDS=21' \
+            'FAIL_ON_TTS_PROVIDER_FALLBACK=true' \
             'REQUIRE_VLM_QA=true' \
             'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true' \
             'FAIL_ON_PUBLISH_ERROR=true' \
@@ -314,6 +316,8 @@ jobs:
           GEMINI_TTS_VOICE: "Charon"
           GEMINI_TTS_STYLE: "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace"
           GEMINI_TTS_TIMEOUT_SECONDS: "90"
+          GEMINI_TTS_MIN_INTERVAL_SECONDS: "21"
+          FAIL_ON_TTS_PROVIDER_FALLBACK: "true"
           POCKET_TTS_LANGUAGE: "english_18m_2026-10"
           COUNT: ${{ github.event.inputs.count || '1' }}
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}

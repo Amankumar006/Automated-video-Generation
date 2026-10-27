@@ -227,7 +227,7 @@ def test_gemini_synthesize_mock_success(mock_post):
     }
     mock_post.return_value = mock_resp
 
-    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key")
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key", min_interval=0)
     audio, sr, meta = provider.synthesize("A clear technical explanation.", voice="Charon")
 
     assert sr == 24000
@@ -246,9 +246,17 @@ def test_gemini_quota_exceeded(mock_post):
     mock_resp.text = "Resource exhausted: quota exceeded"
     mock_post.return_value = mock_resp
 
-    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key")
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key", min_interval=0)
     with pytest.raises(VoiceQuotaExceededError):
         provider.synthesize("Test out of credits")
+
+
+def test_gemini_fallback_can_be_disabled(monkeypatch, tmp_path):
+    router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
+    monkeypatch.setattr("pipeline.voice_engine.FAIL_ON_TTS_PROVIDER_FALLBACK", True)
+    with patch.object(router.gemini, "synthesize", side_effect=VoiceQuotaExceededError("quota")):
+        with pytest.raises(VoiceEngineError, match="mixed-voice"):
+            router.synthesize_beat("Keep the narration consistent.", provider="gemini")
 
 
 # ==============================================================================
