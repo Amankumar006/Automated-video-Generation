@@ -213,15 +213,32 @@ class InstagramPublisher:
             "Authorization": f"OAuth {self.access_token}",
             "offset": "0",
             "file_size": str(file_size),
+            "Content-Length": str(file_size),
             "Content-Type": "application/octet-stream"
         }
 
         print(f"📤 Uploading binary video stream ({file_size / (1024*1024):.2f} MB) to Instagram...")
         req = urllib.request.Request(upload_uri, data=video_bytes, headers=headers, method="POST")
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            res = json.loads(resp.read().decode())
-            if not res.get("success", False):
-                print(f"⚠️ Rupload response: {res}")
+        try:
+            with urllib.request.urlopen(req, timeout=120) as resp:
+                res = json.loads(resp.read().decode())
+                if not res.get("success", False):
+                    raise RuntimeError(f"Instagram binary upload returned unsuccessful response: {res}")
+        except urllib.error.HTTPError as e:
+            err_body = e.read().decode(errors="replace")
+            try:
+                err_data = json.loads(err_body)
+                err_obj = err_data.get("error", {})
+                err_msg = err_obj.get("message", err_body)
+                code = err_obj.get("code")
+                subcode = err_obj.get("error_subcode")
+                raise RuntimeError(
+                    f"Instagram binary upload failed ({e.code}; code={code}, subcode={subcode}): {err_msg}"
+                ) from e
+            except (json.JSONDecodeError, AttributeError):
+                raise RuntimeError(
+                    f"Instagram binary upload failed ({e.code}): {err_body}"
+                ) from e
 
     def wait_for_container_ready(self, container_id: str, max_wait_sec: int = 180, poll_interval: int = 5) -> bool:
         """
@@ -246,7 +263,10 @@ class InstagramPublisher:
                     elif status_code in ("IN_PROGRESS", "EXPIRED"):
                         print(f"   ... processing status: {status_code} ({elapsed}s elapsed)")
             except urllib.error.HTTPError as e:
-                print(f"   ⚠️ Polling HTTP error: {e.code}")
+                err_body = e.read().decode(errors="replace")
+                raise RuntimeError(
+                    f"Instagram container status failed ({e.code}): {err_body}"
+                ) from e
 
             time.sleep(poll_interval)
             elapsed += poll_interval
