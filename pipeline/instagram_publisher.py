@@ -17,6 +17,7 @@ import json
 import argparse
 import urllib.request
 import urllib.error
+import urllib.parse
 from pathlib import Path
 from typing import Dict, Any, Optional, Tuple
 
@@ -50,7 +51,10 @@ class InstagramPublisher:
         self.access_token = access_token or INSTAGRAM_ACCESS_TOKEN
         self.api_version = api_version
         self.graph_url = f"https://graph.facebook.com/{self.api_version}"
-        self.rupload_url = f"https://rupload.facebook.com/ig-video-upload/{self.api_version}"
+        # Meta's resumable Instagram upload endpoint is ig-api-upload. The
+        # older ig-video-upload host accepts the container request but rejects
+        # the binary stream with HTTP 400.
+        self.rupload_url = f"https://rupload.facebook.com/ig-api-upload/{self.api_version}"
 
     def check_token_validity(self) -> Tuple[bool, Dict[str, Any]]:
         """Verifies that the Instagram access token is active and valid."""

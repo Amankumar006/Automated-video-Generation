@@ -382,7 +382,11 @@ def auto_produce(
         print(f"   📊 Initial VLM Quality Score: {avg_score:.2f}/10.0")
 
         # Self-Healing Loop if score < 8.5 (and not skip_repair)
-        needs_repair = (not audit_report.get("passed_quality_gate", True)) and (not skip_repair)
+        needs_repair = (
+            not audit_report.get("passed_quality_gate", True)
+            and not audit_report.get("provider_unavailable", False)
+            and not skip_repair
+        )
         repair_iteration = 0
         max_repair_iterations = 2
         patches_applied = False
@@ -501,9 +505,17 @@ def auto_produce(
             "REQUIRE_VLM_QA",
             "true" if production_publish else "false",
         ).lower() in {"1", "true", "yes"}
+        allow_vlm_provider_outage = os.getenv(
+            "ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH", "false"
+        ).lower() in {"1", "true", "yes"}
 
         if audit_report.get("passed_quality_gate"):
             print("   ✅ VLM Critic Quality Gate: PASSED (Broadcast Quality)")
+        elif audit_report.get("provider_unavailable") and allow_vlm_provider_outage:
+            print(
+                "   ⚠️ VLM provider unavailable; deterministic render checks passed. "
+                "Continuing because ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true."
+            )
         else:
             print("   ℹ️ VLM Critic Quality Gate: Best-effort self-healing completed.")
             if require_vlm_qa:
@@ -520,6 +532,8 @@ def auto_produce(
         if require_vlm_qa:
             raise RuntimeError("VLM quality audit failed; production publishing is blocked.") from e
 
+
+    publish_failures = []
 
     # Step 7: Automated YouTube Shorts Distribution
     if publish or dry_run_publish:
@@ -542,6 +556,7 @@ def auto_produce(
             except Exception as e:
                 print(f"\n⚠️ YouTube automated upload skipped or failed: {e}")
                 print(f"💡 The produced broadcast video is saved and ready at:\n   {final_output}")
+                publish_failures.append(("YouTube", str(e)))
                 meta_dump_path = Path(final_output).with_suffix(".youtube_metadata.json")
                 try:
                     with open(meta_dump_path, "w", encoding="utf-8") as mf:
@@ -590,6 +605,7 @@ def auto_produce(
                 )
             except Exception as e_ig:
                 print(f"\n⚠️ Instagram automated publish skipped or failed: {e_ig}")
+                publish_failures.append(("Instagram", str(e_ig)))
 
     # Step 9: Automated X (Twitter) Video Thread Distribution
     should_publish_x = publish_x or (publish and os.getenv("PUBLISH_TWITTER", os.getenv("PUBLISH_X", "false")).lower() == "true")
@@ -613,6 +629,7 @@ def auto_produce(
                 x_publisher.publish_video_thread(final_output, spec)
             except Exception as e_x:
                 print(f"\n⚠️ X automated publish skipped or failed: {e_x}")
+                publish_failures.append(("X", str(e_x)))
 
     # Step 10: Automated LinkedIn Video Distribution
     should_publish_li = publish_linkedin or (publish and os.getenv("PUBLISH_LINKEDIN", "false").lower() == "true")
@@ -634,6 +651,14 @@ def auto_produce(
                 linkedin_publisher.publish_video(final_output, spec)
             except Exception as e_li:
                 print(f"\n⚠️ LinkedIn automated publish skipped or failed: {e_li}")
+                publish_failures.append(("LinkedIn", str(e_li)))
+
+    fail_on_publish_error = os.getenv(
+        "FAIL_ON_PUBLISH_ERROR", "true" if production_publish else "false"
+    ).lower() in {"1", "true", "yes"}
+    if publish_failures and fail_on_publish_error:
+        summary = "; ".join(f"{platform}: {error}" for platform, error in publish_failures)
+        raise RuntimeError(f"One or more requested publishers failed: {summary}")
 
     print("\n=======================================================")
     print("🎉 AUTONOMOUS VIDEO PRODUCTION COMPLETE!")

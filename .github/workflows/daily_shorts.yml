@@ -234,6 +234,10 @@ jobs:
             'TTS_PROVIDER=pocket' \
             'POCKET_TTS_LANGUAGE=english_18m_2026-10' \
             'REQUIRE_VLM_QA=true' \
+            'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true' \
+            'FAIL_ON_PUBLISH_ERROR=true' \
+            'VLM_CRITIC_TIMEOUT_SECONDS=45' \
+            'VLM_CRITIC_BATCH_TIMEOUT_SECONDS=300' \
             'ELEVENLABS_VOICE=eric' >> .env
 
           if [ -n "$GROQ_API_KEY" ]; then
@@ -298,6 +302,10 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           REQUIRE_VLM_QA: "true"
+          ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH: "true"
+          FAIL_ON_PUBLISH_ERROR: "true"
+          VLM_CRITIC_TIMEOUT_SECONDS: "45"
+          VLM_CRITIC_BATCH_TIMEOUT_SECONDS: "300"
           TTS_PROVIDER: "pocket"
           POCKET_TTS_LANGUAGE: "english_18m_2026-10"
           COUNT: ${{ github.event.inputs.count || '1' }}
