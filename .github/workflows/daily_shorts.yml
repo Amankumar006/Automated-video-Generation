@@ -442,7 +442,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
+          auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c http.extraheader="$auth_header" fetch origin main
           git reset --hard origin/main
 
@@ -472,5 +472,5 @@ jobs:
 
           git diff --cached --check
           git commit -m "chore(daemon): update daily production & analytics logs [skip ci]"
-          auth_header="AUTHORIZATION: bearer $GITHUB_TOKEN"
+          auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           git -c http.extraheader="$auth_header" push origin HEAD:main
