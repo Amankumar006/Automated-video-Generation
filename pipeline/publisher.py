@@ -96,7 +96,11 @@ def get_authenticated_service(
 
             print(f"🔐 Starting OAuth 2.0 browser authorization using {client_secrets_file}...")
             flow = InstalledAppFlow.from_client_secrets_file(client_secrets_file, SCOPES)
-            creds = flow.run_local_server(port=8080, prompt="consent")
+            # Port 8080 is commonly occupied by local dev servers. Port 0
+            # asks the OS for a free callback port and avoids needless auth
+            # failures on developer machines.
+            oauth_port = int(os.getenv("YOUTUBE_OAUTH_PORT", "0"))
+            creds = flow.run_local_server(port=oauth_port, prompt="consent")
 
             # Persist token for future headless runs
             os.makedirs(os.path.dirname(os.path.abspath(token_file)), exist_ok=True)
