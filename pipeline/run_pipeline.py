@@ -369,7 +369,7 @@ def main():
     parser.add_argument("--category", choices=list(CATEGORY_SCENE_MAP.keys()), help="Optional category override")
     parser.add_argument("--voice", default=None, help="TTS voice/speaker override (e.g. 'eric', 'shubh', 'am_eric')")
     parser.add_argument("--speed", type=float, default=None, help="Speech speed (default: 1.12)")
-    parser.add_argument("--provider", choices=["auto", "elevenlabs", "gemini", "sarvam", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, gemini, sarvam, pocket)")
+    parser.add_argument("--provider", choices=["auto", "elevenlabs", "gemini", "phonon", "sarvam", "pocket"], default=None, help="TTS provider override (auto, elevenlabs, gemini, phonon, sarvam, pocket)")
     parser.add_argument("--lang", "--language", dest="lang", default=None, help="Narration language code (en or hi)")
     parser.add_argument("--quality", default="-qm", choices=["ql", "qm", "qh", "-ql", "-qm", "-qh"], help="Manim render quality")
     parser.add_argument("--skip-render", action="store_true", help="Skip Manim rendering if raw video already exists")

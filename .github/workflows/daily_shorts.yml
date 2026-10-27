@@ -164,20 +164,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - name: Install Pocket TTS
+      - name: Verify Phonon TTS runtime
         run: |
           set -euo pipefail
-          version="3.3.0"
-          asset="pocket-tts-${version}-x86_64-unknown-linux-gnu.tar.gz"
-          expected_sha="9abff0aa138a804e44052952d8c3bdaae247fb267ca8f4b83fe178897d1a0559"
-          mkdir -p "$HOME/.local/bin"
-          curl --fail --location --retry 3 --output "/tmp/$asset" \
-            "https://github.com/kyutai-labs/pocket-tts/releases/download/v4.0.1/$asset"
-          echo "$expected_sha  /tmp/$asset" | sha256sum --check --status
-          tar -xzf "/tmp/$asset" --strip-components=1 -C "$HOME/.local/bin"
-          chmod +x "$HOME/.local/bin/pocket-tts"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          pocket-tts --version
+          ptts --version
+          ptts --build-info
 
       - name: Configure Credentials
         env:
@@ -231,12 +222,11 @@ jobs:
           printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >> .env
           printf '%s\n' \
             'GEMINI_MODEL_NAME=gemini-2.5-flash' \
-            'TTS_PROVIDER=gemini' \
-            'GEMINI_TTS_MODEL=gemini-3.8-flash-tts' \
-            'GEMINI_TTS_VOICE=Charon' \
-            'GEMINI_TTS_STYLE=clear, confident, conversational science explainer; energetic but not theatrical; moderate pace' \
-            'GEMINI_TTS_TIMEOUT_SECONDS=90' \
-            'GEMINI_TTS_MIN_INTERVAL_SECONDS=21' \
+            'TTS_PROVIDER=phonon' \
+            'PHONON_TTS_MODEL=hf://gradium/phonon-31m-en' \
+            'PHONON_TTS_LANGUAGE=en' \
+            'PHONON_TTS_QUANT=q8_0' \
+            'PHONON_TTS_TIMEOUT_SECONDS=180' \
             'FAIL_ON_TTS_PROVIDER_FALLBACK=true' \
             'REQUIRE_VLM_QA=true' \
             'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true' \
@@ -311,14 +301,12 @@ jobs:
           FAIL_ON_PUBLISH_ERROR: "true"
           VLM_CRITIC_TIMEOUT_SECONDS: "45"
           VLM_CRITIC_BATCH_TIMEOUT_SECONDS: "300"
-          TTS_PROVIDER: "gemini"
-          GEMINI_TTS_MODEL: "gemini-3.8-flash-tts"
-          GEMINI_TTS_VOICE: "Charon"
-          GEMINI_TTS_STYLE: "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace"
-          GEMINI_TTS_TIMEOUT_SECONDS: "90"
-          GEMINI_TTS_MIN_INTERVAL_SECONDS: "21"
+          TTS_PROVIDER: "phonon"
+          PHONON_TTS_MODEL: "hf://gradium/phonon-31m-en"
+          PHONON_TTS_LANGUAGE: "en"
+          PHONON_TTS_QUANT: "q8_0"
+          PHONON_TTS_TIMEOUT_SECONDS: "180"
           FAIL_ON_TTS_PROVIDER_FALLBACK: "true"
-          POCKET_TTS_LANGUAGE: "english_18m_2026-10"
           COUNT: ${{ github.event.inputs.count || '1' }}
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}
           ARXIV_ID: ${{ github.event.inputs.arxiv_id || '' }}

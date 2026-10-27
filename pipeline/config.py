@@ -41,6 +41,13 @@ GEMINI_TTS_STYLE = os.environ.get(
 )
 GEMINI_TTS_TIMEOUT_SECONDS = float(os.environ.get("GEMINI_TTS_TIMEOUT_SECONDS", "90"))
 GEMINI_TTS_MIN_INTERVAL_SECONDS = float(os.environ.get("GEMINI_TTS_MIN_INTERVAL_SECONDS", "21"))
+PHONON_TTS_MODEL = os.environ.get("PHONON_TTS_MODEL", "hf://gradium/phonon-31m-en")
+PHONON_TTS_VOICE = os.environ.get("PHONON_TTS_VOICE", "")
+PHONON_TTS_LANGUAGE = os.environ.get("PHONON_TTS_LANGUAGE", "en")
+PHONON_TTS_QUANT = os.environ.get("PHONON_TTS_QUANT", "q8_0")
+PHONON_TTS_BIN = os.environ.get("PHONON_TTS_BIN", "")
+PHONON_TTS_TIMEOUT_SECONDS = float(os.environ.get("PHONON_TTS_TIMEOUT_SECONDS", "180"))
+PHONON_TTS_THREADS = int(os.environ.get("PHONON_TTS_THREADS", "0"))
 FAIL_ON_TTS_PROVIDER_FALLBACK = os.environ.get("FAIL_ON_TTS_PROVIDER_FALLBACK", "false").lower() in {
     "1", "true", "yes"
 }

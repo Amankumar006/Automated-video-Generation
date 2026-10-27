@@ -14,9 +14,11 @@ Coordinates high-fidelity speech synthesis across:
    - Target language: hi-IN
    - Default speaker: 'shubh' / 'aditya'
    - Base64 WAV decoding & 24kHz resampling
-4. Pocket TTS (Offline Fallback):
+4. Phonon 31M (Production Local English):
    - Zero-cost local CPU neural speech synthesis
-   - Seamless fallback when API quota is exhausted or offline
+   - Official ptts runtime with 24kHz output and no PyTorch dependency
+5. Pocket TTS (Legacy Local Provider):
+   - Retained only for explicit backwards-compatible local runs
 
 Features:
 - Persistent SHA-256 disk audio caching (public/audio_cache/) for 100% zero-credit re-runs
@@ -36,6 +38,7 @@ import subprocess
 import tempfile
 import threading
 import time
+import sys
 from typing import Tuple, Dict, Any, Optional
 import numpy as np
 import soundfile as sf
@@ -49,6 +52,8 @@ from pipeline.config import (
     SARVAM_API_KEY, SARVAM_SPEAKER, SARVAM_MODEL, SARVAM_SPEAKERS,
     GEMINI_API_KEY, GEMINI_TTS_MODEL, GEMINI_TTS_VOICE, GEMINI_TTS_STYLE,
     GEMINI_TTS_TIMEOUT_SECONDS, GEMINI_TTS_MIN_INTERVAL_SECONDS,
+    PHONON_TTS_MODEL, PHONON_TTS_VOICE, PHONON_TTS_LANGUAGE, PHONON_TTS_QUANT,
+    PHONON_TTS_BIN, PHONON_TTS_TIMEOUT_SECONDS, PHONON_TTS_THREADS,
     FAIL_ON_TTS_PROVIDER_FALLBACK,
     DEFAULT_TTS_PROVIDER
 )
@@ -178,6 +183,31 @@ def resample_audio(audio: np.ndarray, orig_sr: int, target_sr: int = SAMPLE_RATE
         resampled = scipy.signal.resample(audio, new_len)
 
     return resampled.astype(np.float32)
+
+
+def apply_audio_speed(audio: np.ndarray, sample_rate: int, speed: float) -> np.ndarray:
+    """Adjust narration pace with ffmpeg's pitch-preserving atempo filter."""
+    if abs(speed - 1.0) < 0.01 or len(audio) == 0:
+        return audio.astype(np.float32)
+    ffmpeg = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg")
+    if not ffmpeg:
+        return resample_audio(audio, sample_rate, int(sample_rate * speed))
+    with tempfile.TemporaryDirectory(prefix="tts_speed_") as tmp:
+        source = os.path.join(tmp, "source.wav")
+        target = os.path.join(tmp, "target.wav")
+        sf.write(source, audio, sample_rate)
+        result = subprocess.run(
+            [ffmpeg, "-y", "-loglevel", "error", "-i", source,
+             "-filter:a", f"atempo={max(0.5, min(2.0, speed))}",
+             "-ar", str(sample_rate), "-ac", "1", target],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if result.returncode == 0 and os.path.exists(target):
+            adjusted, adjusted_sr = sf.read(target, dtype="float32")
+            return resample_audio(adjusted, adjusted_sr, sample_rate)
+    return audio.astype(np.float32)
 
 
 class BaseVoiceProvider:
@@ -551,6 +581,93 @@ class GeminiTTSVoiceProvider(BaseVoiceProvider):
         }
 
 
+class PhononTTSVoiceProvider(BaseVoiceProvider):
+    """Local Phonon 31M CPU provider using the official ``ptts`` runtime."""
+
+    def __init__(self):
+        self.model = os.environ.get("PHONON_TTS_MODEL", PHONON_TTS_MODEL)
+        self.default_voice = os.environ.get("PHONON_TTS_VOICE", PHONON_TTS_VOICE)
+        self.language = os.environ.get("PHONON_TTS_LANGUAGE", PHONON_TTS_LANGUAGE)
+        self.quant = os.environ.get("PHONON_TTS_QUANT", PHONON_TTS_QUANT)
+        self.binary_path = os.environ.get("PHONON_TTS_BIN", PHONON_TTS_BIN)
+        self.timeout = float(os.environ.get("PHONON_TTS_TIMEOUT_SECONDS", str(PHONON_TTS_TIMEOUT_SECONDS)))
+        self.threads = int(os.environ.get("PHONON_TTS_THREADS", str(PHONON_TTS_THREADS)))
+
+    def _resolve_command(self) -> list[str]:
+        candidate = self.binary_path or shutil.which("ptts")
+        if candidate:
+            if not os.path.isfile(candidate) or not os.access(candidate, os.X_OK):
+                raise VoiceEngineError(
+                    f"Phonon TTS binary is not executable: {candidate}. "
+                    "Install ptts==0.4.2 or set PHONON_TTS_BIN to its executable."
+                )
+            return [candidate]
+        # This keeps local virtualenvs and CI environments robust when the
+        # console-script directory is not on PATH.
+        return [sys.executable, "-m", "ptts"]
+
+    def resolve_voice(self, voice_name: Optional[str]) -> str:
+        candidate = (voice_name or self.default_voice or "").strip()
+        # Preserve compatibility with the old ElevenLabs default. Phonon
+        # should use the checkpoint voice unless a Phonon catalog ID is set.
+        if candidate.lower() in {"eric", "am_eric", "default"}:
+            return ""
+        return candidate
+
+    def synthesize(
+        self,
+        text: str,
+        voice: Optional[str] = None,
+        speed: Optional[float] = None,
+        language: str = "en"
+    ) -> Tuple[np.ndarray, int, Dict[str, Any]]:
+        if not language.lower().startswith("en"):
+            raise VoiceEngineError("Phonon 31M is configured for English narration in this pipeline.")
+
+        norm_text = normalize_narration_text(text, model_id="phonon-31m-en", language=language)
+        target_speed = float(speed) if speed is not None else DEFAULT_SPEED
+        resolved_voice = self.resolve_voice(voice)
+        with tempfile.TemporaryDirectory(prefix="phonon_tts_") as tmp:
+            output_path = os.path.join(tmp, "speech.wav")
+            command = self._resolve_command() + [
+                "--model", self.model,
+                "--lang", self.language,
+                "--quant", self.quant,
+                "--seed", "0",
+                "--output", output_path,
+            ]
+            if self.threads > 0:
+                command.extend(["--threads", str(self.threads)])
+            if resolved_voice:
+                command.extend(["--voice", resolved_voice])
+            command.append(norm_text)
+            try:
+                result = subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=self.timeout,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise VoiceEngineError(f"Phonon TTS timed out after {self.timeout:.0f}s") from exc
+            if result.returncode != 0 or not os.path.exists(output_path):
+                detail = (result.stderr or result.stdout or "unknown Phonon TTS failure").strip()
+                raise VoiceEngineError(f"Phonon TTS failed: {detail[:320]}")
+            audio, source_sr = sf.read(output_path, dtype="float32")
+
+        audio = sanitize_audio_samples(audio, source_sr)
+        audio = apply_audio_speed(audio, source_sr, target_speed)
+        return audio, SAMPLE_RATE, {
+            "provider": "phonon",
+            "model": self.model,
+            "voice": resolved_voice or "default",
+            "speed": target_speed,
+            "char_count": len(norm_text),
+            "binary": self._resolve_command()[0],
+            "quant": self.quant,
+        }
+
+
 class PocketTTSVoiceProvider(BaseVoiceProvider):
     """Optional Kyutai Pocket TTS CLI provider for reliable local CPU speech."""
 
@@ -576,29 +693,7 @@ class PocketTTSVoiceProvider(BaseVoiceProvider):
     @staticmethod
     def _apply_speed(audio: np.ndarray, sample_rate: int, speed: float) -> np.ndarray:
         """Apply pitch-preserving speed where ffmpeg is available."""
-        if abs(speed - 1.0) < 0.01 or len(audio) == 0:
-            return audio.astype(np.float32)
-        ffmpeg = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg")
-        if not ffmpeg:
-            # Keep the provider usable in minimal environments; duration is
-            # still adjusted, with a small pitch trade-off as the last resort.
-            return resample_audio(audio, sample_rate, int(sample_rate * speed))
-        with tempfile.TemporaryDirectory(prefix="pocket_tts_speed_") as tmp:
-            source = os.path.join(tmp, "source.wav")
-            target = os.path.join(tmp, "target.wav")
-            sf.write(source, audio, sample_rate)
-            result = subprocess.run(
-                [ffmpeg, "-y", "-loglevel", "error", "-i", source,
-                 "-filter:a", f"atempo={max(0.5, min(2.0, speed))}",
-                 "-ar", str(sample_rate), "-ac", "1", target],
-                capture_output=True,
-                text=True,
-                timeout=30,
-            )
-            if result.returncode == 0 and os.path.exists(target):
-                adjusted, adjusted_sr = sf.read(target, dtype="float32")
-                return resample_audio(adjusted, adjusted_sr, sample_rate)
-        return audio.astype(np.float32)
+        return apply_audio_speed(audio, sample_rate, speed)
 
     def synthesize(
         self,
@@ -661,6 +756,7 @@ class UnifiedVoiceRouter:
         self.elevenlabs = ElevenLabsVoiceProvider()
         self.sarvam = SarvamVoiceProvider()
         self.gemini = GeminiTTSVoiceProvider()
+        self.phonon = PhononTTSVoiceProvider()
         self.pocket = PocketTTSVoiceProvider()
 
     def synthesize_beat(
@@ -674,8 +770,8 @@ class UnifiedVoiceRouter:
         """
         Synthesizes a beat of speech.
         1. Checks disk cache first. If hit, returns instantly (0 credits spent).
-        2. Routes to appropriate provider (ElevenLabs for EN, Sarvam for HI).
-        3. If primary provider fails or has no quota, falls back seamlessly to Pocket TTS.
+        2. Routes to appropriate provider (Phonon/ElevenLabs for EN, Sarvam for HI).
+        3. If a remote primary provider fails, optionally falls back to Pocket TTS.
         4. Writes result to disk cache.
         """
         clean_text = text.strip()
@@ -704,13 +800,17 @@ class UnifiedVoiceRouter:
             resolved_model = self.gemini.model
             resolved_voice = self.gemini.resolve_voice(voice)
             active_speed = float(speed) if speed is not None else DEFAULT_SPEED
+        elif target_provider == "phonon":
+            resolved_model = self.phonon.model
+            resolved_voice = self.phonon.resolve_voice(voice)
+            active_speed = float(speed) if speed is not None else DEFAULT_SPEED
         elif target_provider == "pocket":
             resolved_model = self.pocket.language
             resolved_voice = self.pocket.resolve_voice(voice)
             active_speed = float(speed) if speed is not None else DEFAULT_SPEED
         else:
             raise VoiceEngineError(
-                f"Unsupported TTS provider '{target_provider}'. Choose auto, elevenlabs, gemini, sarvam, or pocket."
+                f"Unsupported TTS provider '{target_provider}'. Choose auto, elevenlabs, gemini, phonon, sarvam, or pocket."
             )
 
         # 1. Check Disk Cache
@@ -782,6 +882,14 @@ class UnifiedVoiceRouter:
                     language=lang_norm,
                 )
                 quota_tracker.record_success("gemini")
+            elif target_provider == "phonon":
+                logger.info(f"🎙️ [Phonon 31M] Synthesizing local CPU beat with voice '{resolved_voice or 'default'}', speed {active_speed:.2f}x...")
+                audio, sr, meta = self.phonon.synthesize(
+                    text=clean_text,
+                    voice=resolved_voice,
+                    speed=active_speed,
+                    language=lang_norm,
+                )
             elif target_provider == "pocket":
                 logger.info(f"🎙️ [Pocket TTS] Synthesizing local CPU beat with voice '{resolved_voice}'...")
                 audio, sr, meta = self.pocket.synthesize(
@@ -829,7 +937,8 @@ class UnifiedVoiceRouter:
                 meta["fallback_from"] = target_provider
                 meta["fallback_reason"] = str(exc)
             else:
-                # Pocket TTS is the lowest local tier; surface its failure instead of hiding it.
+                # Local providers are the lowest tier; surface their failure
+                # instead of hiding it behind a different voice.
                 raise exc
 
         # 4. Cache the newly synthesized audio
