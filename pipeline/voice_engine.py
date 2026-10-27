@@ -6,11 +6,15 @@ Coordinates high-fidelity speech synthesis across:
    - Default voice: 'eric' (cjVigY5qzO86Huf0OWal - Smooth, Trustworthy)
    - Dynamic text normalization (currencies, percentages, hardware acronyms, math)
    - Pause & phonetic control
-2. Sarvam AI Neural TTS (Hindi) — bulbul:v3 / bulbul:v1:
+2. Gemini Native TTS (English) — Gemini 3.8 Flash TTS:
+   - Default voice: Charon (informative, clear technical delivery)
+   - Style-controlled exact transcript generation via the Interactions API
+   - Base64 WAV decoding & 24kHz resampling
+3. Sarvam AI Neural TTS (Hindi) — bulbul:v3 / bulbul:v1:
    - Target language: hi-IN
    - Default speaker: 'shubh' / 'aditya'
    - Base64 WAV decoding & 24kHz resampling
-3. Pocket TTS (Offline Fallback):
+4. Pocket TTS (Offline Fallback):
    - Zero-cost local CPU neural speech synthesis
    - Seamless fallback when API quota is exhausted or offline
 
@@ -41,6 +45,8 @@ from pipeline.config import (
     DEFAULT_VOICE,
     ELEVENLABS_API_KEY, ELEVENLABS_VOICE_ID, ELEVENLABS_MODEL_ID, ELEVENLABS_VOICES,
     SARVAM_API_KEY, SARVAM_SPEAKER, SARVAM_MODEL, SARVAM_SPEAKERS,
+    GEMINI_API_KEY, GEMINI_TTS_MODEL, GEMINI_TTS_VOICE, GEMINI_TTS_STYLE,
+    GEMINI_TTS_TIMEOUT_SECONDS,
     DEFAULT_TTS_PROVIDER
 )
 from pipeline.text_normalizer import normalize_narration_text
@@ -417,6 +423,111 @@ class SarvamVoiceProvider(BaseVoiceProvider):
         return audio_24k, SAMPLE_RATE, meta
 
 
+class GeminiTTSVoiceProvider(BaseVoiceProvider):
+    """Google Gemini native TTS provider using the Interactions REST API."""
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        model: Optional[str] = None,
+        default_voice: Optional[str] = None,
+        style: Optional[str] = None,
+        timeout: Optional[float] = None,
+    ):
+        self.api_key = api_key if api_key is not None else GEMINI_API_KEY
+        self.model = model or GEMINI_TTS_MODEL
+        self.default_voice = default_voice or GEMINI_TTS_VOICE
+        self.style = style if style is not None else GEMINI_TTS_STYLE
+        self.timeout = float(timeout if timeout is not None else GEMINI_TTS_TIMEOUT_SECONDS)
+
+    def resolve_voice(self, voice_name: Optional[str]) -> str:
+        return (voice_name or self.default_voice).strip()
+
+    @staticmethod
+    def _extract_audio_b64(data: Dict[str, Any]) -> Optional[str]:
+        output_audio = data.get("output_audio")
+        if isinstance(output_audio, dict) and output_audio.get("data"):
+            return output_audio["data"]
+        for step in data.get("steps", []):
+            if not isinstance(step, dict):
+                continue
+            for item in step.get("content", []):
+                if isinstance(item, dict) and item.get("type") == "audio" and item.get("data"):
+                    return item["data"]
+        return None
+
+    def synthesize(
+        self,
+        text: str,
+        voice: Optional[str] = None,
+        speed: Optional[float] = None,
+        language: str = "en",
+    ) -> Tuple[np.ndarray, int, Dict[str, Any]]:
+        if not self.api_key:
+            raise VoiceAuthError("GEMINI_API_KEY is not configured in environment or .env")
+        if not language.lower().startswith("en"):
+            raise VoiceEngineError("Gemini TTS English production voice is configured for English narration.")
+
+        resolved_voice = self.resolve_voice(voice)
+        norm_text = normalize_narration_text(text, model_id=self.model, language=language)
+        style = self.style
+        if speed is not None:
+            style = f"{style}; target delivery speed {float(speed):.2f}x"
+
+        payload = {
+            "model": self.model,
+            "input": [{
+                "type": "user_input",
+                "content": [{
+                    "type": "text",
+                    "text": norm_text,
+                    "annotations": [{"type": "speech_metadata", "style": style}],
+                }],
+            }],
+            "response_format": {"type": "audio"},
+            "generation_config": {"speech_config": [{"voice": resolved_voice}]},
+        }
+
+        try:
+            resp = requests.post(
+                "https://generativelanguage.googleapis.com/v1beta/interactions",
+                headers={"x-goog-api-key": self.api_key, "Content-Type": "application/json"},
+                json=payload,
+                timeout=self.timeout,
+            )
+        except Exception as exc:
+            if is_quota_error(exc):
+                raise VoiceQuotaExceededError(f"Gemini TTS quota/rate limit reached: {exc}") from exc
+            raise VoiceEngineError(f"Gemini TTS network request failed: {exc}") from exc
+
+        if resp.status_code in (401, 403):
+            raise VoiceAuthError(f"Gemini TTS authorization failed ({resp.status_code}): {resp.text[:300]}")
+        if resp.status_code in (402, 429) or is_quota_error(resp.text):
+            raise VoiceQuotaExceededError(f"Gemini TTS quota/rate limit exceeded ({resp.status_code}): {resp.text[:300]}")
+        if resp.status_code != 200:
+            raise VoiceEngineError(f"Gemini TTS API error (status {resp.status_code}): {resp.text[:300]}")
+
+        try:
+            audio_b64 = self._extract_audio_b64(resp.json())
+            if not audio_b64:
+                raise ValueError("response contained no audio block")
+            raw_audio = base64.b64decode(audio_b64)
+            audio_data, source_sr = sf.read(io.BytesIO(raw_audio), dtype="float32")
+        except Exception as exc:
+            raise VoiceEngineError(f"Failed to decode Gemini TTS audio: {exc}") from exc
+
+        audio_24k = resample_audio(sanitize_audio_samples(audio_data, source_sr), source_sr, SAMPLE_RATE)
+        return audio_24k, SAMPLE_RATE, {
+            "provider": "gemini",
+            "model": self.model,
+            "voice": resolved_voice,
+            "speed": speed,
+            "style": style,
+            "char_count": len(norm_text),
+            "normalized_text": norm_text,
+        }
+
+
 class PocketTTSVoiceProvider(BaseVoiceProvider):
     """Optional Kyutai Pocket TTS CLI provider for reliable local CPU speech."""
 
@@ -526,6 +637,7 @@ class UnifiedVoiceRouter:
         self.cache = DiskAudioCache(cache_dir=cache_dir)
         self.elevenlabs = ElevenLabsVoiceProvider()
         self.sarvam = SarvamVoiceProvider()
+        self.gemini = GeminiTTSVoiceProvider()
         self.pocket = PocketTTSVoiceProvider()
 
     def synthesize_beat(
@@ -565,13 +677,17 @@ class UnifiedVoiceRouter:
             resolved_model = self.sarvam.model
             resolved_voice = self.sarvam.resolve_speaker(voice)
             active_speed = float(speed) if speed is not None else 1.05
+        elif target_provider == "gemini":
+            resolved_model = self.gemini.model
+            resolved_voice = self.gemini.resolve_voice(voice)
+            active_speed = float(speed) if speed is not None else DEFAULT_SPEED
         elif target_provider == "pocket":
             resolved_model = self.pocket.language
             resolved_voice = self.pocket.resolve_voice(voice)
             active_speed = float(speed) if speed is not None else DEFAULT_SPEED
         else:
             raise VoiceEngineError(
-                f"Unsupported TTS provider '{target_provider}'. Choose auto, elevenlabs, sarvam, or pocket."
+                f"Unsupported TTS provider '{target_provider}'. Choose auto, elevenlabs, gemini, sarvam, or pocket."
             )
 
         # 1. Check Disk Cache
@@ -591,7 +707,7 @@ class UnifiedVoiceRouter:
             return audio, sr, meta
 
         # 2. Check Quota Health Tracker: if primary provider is already exhausted, skip directly to Pocket TTS.
-        if target_provider in ("elevenlabs", "sarvam") and not quota_tracker.is_healthy(target_provider):
+        if target_provider in ("elevenlabs", "sarvam", "gemini") and not quota_tracker.is_healthy(target_provider):
             logger.info(
                 f"⏩ [VoiceRouter] Provider '{target_provider}' is marked EXHAUSTED in QuotaTracker. "
                 f"Immediately cascading to Pocket TTS offline synthesis."
@@ -629,6 +745,15 @@ class UnifiedVoiceRouter:
                     language=lang_norm
                 )
                 quota_tracker.record_success("sarvam")
+            elif target_provider == "gemini":
+                logger.info(f"🎙️ [Gemini TTS] Synthesizing beat with voice '{resolved_voice}', speed {active_speed:.2f}x...")
+                audio, sr, meta = self.gemini.synthesize(
+                    text=clean_text,
+                    voice=resolved_voice,
+                    speed=active_speed,
+                    language=lang_norm,
+                )
+                quota_tracker.record_success("gemini")
             elif target_provider == "pocket":
                 logger.info(f"🎙️ [Pocket TTS] Synthesizing local CPU beat with voice '{resolved_voice}'...")
                 audio, sr, meta = self.pocket.synthesize(
@@ -639,7 +764,7 @@ class UnifiedVoiceRouter:
                 )
             audio = sanitize_audio_samples(audio, sr)
         except (VoiceQuotaExceededError, VoiceAuthError, VoiceEngineError, Exception) as exc:
-            if target_provider in ("elevenlabs", "sarvam"):
+            if target_provider in ("elevenlabs", "sarvam", "gemini"):
                 err_msg = str(exc)
                 if (
                     is_quota_error(exc)

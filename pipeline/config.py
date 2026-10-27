@@ -31,7 +31,15 @@ load_dotenv(WORKSPACE_ROOT / ".env")
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg") or "/Users/amankumar/bin/ffmpeg"
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL_NAME", "gemini-flash-latest")
+GEMINI_TTS_MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-3.8-flash-tts")
+GEMINI_TTS_VOICE = os.environ.get("GEMINI_TTS_VOICE", "Charon")
+GEMINI_TTS_STYLE = os.environ.get(
+    "GEMINI_TTS_STYLE",
+    "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace",
+)
+GEMINI_TTS_TIMEOUT_SECONDS = float(os.environ.get("GEMINI_TTS_TIMEOUT_SECONDS", "90"))
 
 # Typography & Visual Design Tokens
 FONT_HELVETICA = "Helvetica Neue"

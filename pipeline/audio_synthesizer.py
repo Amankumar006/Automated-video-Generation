@@ -39,7 +39,7 @@ def synthesize_audio_for_spec(
     cache_dir: Optional[str] = None,
 ) -> dict:
     """
-    Synthesizes speech using the unified voice router (ElevenLabs, Sarvam AI, Pocket TTS fallback),
+    Synthesizes speech using the unified voice router (Gemini TTS, ElevenLabs, Sarvam AI, Pocket TTS fallback),
     generates procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
     Returns: {"master_audio": str, "narration_audio": str, "soundtrack_audio": str, "timing_data": list, "total_duration": float}
     """

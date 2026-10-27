@@ -51,6 +51,11 @@ recoverable quarantine outside the repository. It does not permanently delete
 anything and intentionally leaves source code, curated assets, model weights,
 and historical documentation untouched.
 
+Production CI uses Gemini 3.8 Flash TTS with the Charon informative voice for
+English narration. Set `GEMINI_API_KEY`, `TTS_PROVIDER=gemini`,
+`GEMINI_TTS_MODEL=gemini-3.8-flash-tts`, and `GEMINI_TTS_VOICE=Charon`.
+The router falls back to Pocket TTS when the Gemini provider is unavailable.
+
 For a lightweight CPU-only English alternative, install Kyutai's official
 `pocket-tts` binary and set `TTS_PROVIDER=pocket` plus
 `POCKET_TTS_BIN=/absolute/path/to/pocket-tts`. The recommended local profile

@@ -231,8 +231,11 @@ jobs:
           printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >> .env
           printf '%s\n' \
             'GEMINI_MODEL_NAME=gemini-2.5-flash' \
-            'TTS_PROVIDER=pocket' \
-            'POCKET_TTS_LANGUAGE=english_18m_2026-10' \
+            'TTS_PROVIDER=gemini' \
+            'GEMINI_TTS_MODEL=gemini-3.8-flash-tts' \
+            'GEMINI_TTS_VOICE=Charon' \
+            'GEMINI_TTS_STYLE=clear, confident, conversational science explainer; energetic but not theatrical; moderate pace' \
+            'GEMINI_TTS_TIMEOUT_SECONDS=90' \
             'REQUIRE_VLM_QA=true' \
             'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true' \
             'FAIL_ON_PUBLISH_ERROR=true' \
@@ -306,7 +309,11 @@ jobs:
           FAIL_ON_PUBLISH_ERROR: "true"
           VLM_CRITIC_TIMEOUT_SECONDS: "45"
           VLM_CRITIC_BATCH_TIMEOUT_SECONDS: "300"
-          TTS_PROVIDER: "pocket"
+          TTS_PROVIDER: "gemini"
+          GEMINI_TTS_MODEL: "gemini-3.8-flash-tts"
+          GEMINI_TTS_VOICE: "Charon"
+          GEMINI_TTS_STYLE: "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace"
+          GEMINI_TTS_TIMEOUT_SECONDS: "90"
           POCKET_TTS_LANGUAGE: "english_18m_2026-10"
           COUNT: ${{ github.event.inputs.count || '1' }}
           QUALITY: ${{ github.event.inputs.quality || 'qm' }}

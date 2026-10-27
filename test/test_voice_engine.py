@@ -30,6 +30,7 @@ from pipeline.text_normalizer import (
 from pipeline.voice_engine import (
     DiskAudioCache,
     ElevenLabsVoiceProvider,
+    GeminiTTSVoiceProvider,
     SarvamVoiceProvider,
     PocketTTSVoiceProvider,
     UnifiedVoiceRouter,
@@ -200,6 +201,57 @@ def test_elevenlabs_quota_exceeded(mock_post):
 
 
 # ==============================================================================
+# 4b. Gemini Native TTS Provider
+# ==============================================================================
+
+def test_gemini_resolve_voice_defaults():
+    provider = GeminiTTSVoiceProvider(
+        api_key="fake_key",
+        model="gemini-3.8-flash-tts",
+        default_voice="Charon",
+    )
+    assert provider.resolve_voice(None) == "Charon"
+    assert provider.resolve_voice("Kore") == "Kore"
+
+
+@patch("requests.post")
+def test_gemini_synthesize_mock_success(mock_post):
+    buf = io.BytesIO()
+    sf.write(buf, np.zeros(24000, dtype=np.float32), 24000, format="WAV")
+    encoded = base64.b64encode(buf.getvalue()).decode("ascii")
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.text = "{}"
+    mock_resp.json.return_value = {
+        "output_audio": {"data": encoded}
+    }
+    mock_post.return_value = mock_resp
+
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key")
+    audio, sr, meta = provider.synthesize("A clear technical explanation.", voice="Charon")
+
+    assert sr == 24000
+    assert len(audio) == 24000
+    assert meta["provider"] == "gemini"
+    assert meta["voice"] == "Charon"
+    request = mock_post.call_args.kwargs
+    assert request["json"]["model"] == provider.model
+    assert request["json"]["generation_config"]["speech_config"][0]["voice"] == "Charon"
+
+
+@patch("requests.post")
+def test_gemini_quota_exceeded(mock_post):
+    mock_resp = MagicMock()
+    mock_resp.status_code = 429
+    mock_resp.text = "Resource exhausted: quota exceeded"
+    mock_post.return_value = mock_resp
+
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key")
+    with pytest.raises(VoiceQuotaExceededError):
+        provider.synthesize("Test out of credits")
+
+
+# ==============================================================================
 # 5. Sarvam AI Provider Tests
 # ==============================================================================
 
@@ -330,7 +382,7 @@ def test_synthesize_audio_for_spec_integration(tmp_path):
 
 def test_default_tts_provider_is_supported():
     from pipeline.config import DEFAULT_TTS_PROVIDER, DEFAULT_VOICE
-    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "auto", "pocket")
+    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "gemini", "auto", "pocket")
     assert DEFAULT_VOICE in ("eric", "am_eric", "")
 
     router = UnifiedVoiceRouter()
