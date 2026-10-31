@@ -384,7 +384,21 @@ def main():
         action="store_true",
         help="During dry-run, also synthesize and sandbox-check bespoke visuals (may call an LLM)",
     )
+    parser.add_argument(
+        "--visual-mode",
+        choices=["blueprint", "hybrid", "on_demand"],
+        default=None,
+        help="Visual policy: fresh grammar-diverse graphics per run (default), hybrid fallback, or validated blueprints",
+    )
     args = parser.parse_args()
+
+    from pipeline.visual_generation import (
+        ensure_visual_generation_key,
+        resolve_visual_mode,
+        mark_bespoke_visual,
+        require_on_demand_visuals,
+    )
+    visual_mode = resolve_visual_mode(args.visual_mode)
 
     # Dry runs must be genuinely read-only from the repository's perspective.
     # Keep generated audio, subtitles, synthesized visuals, templates, and
@@ -565,27 +579,40 @@ def main():
     except Exception as e_vd:
         print(f"⚠️ Visual Director notice: {e_vd}")
 
+    ensure_visual_generation_key(spec, visual_mode)
+
     track = resolve_track(category)
     track_meta = TRACK_METADATA[track]
 
     # Step 2.9: Autonomous Bespoke Manim Visual Synthesis (Visual Engine 6.0 for Academic Breakdown)
-    if track == TRACK_ACADEMIC and (not args.dry_run or args.validate_visuals):
+    bespoke_visuals_enabled = (
+        visual_mode in {"hybrid", "on_demand"}
+        or os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+    )
+    if track == TRACK_ACADEMIC and bespoke_visuals_enabled and (not args.dry_run or args.validate_visuals):
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
             from pipeline.bespoke_visual_synthesizer import bespoke_synthesizer
             for idx, beat in enumerate(spec.get("beats", [])):
                 b_id = beat.get("beat_id", idx + 1)
                 # Prioritize authentic arXiv figures for Beat 3 if available
-                if b_id == 3 and spec.get("paper_figures"):
+                if b_id == 3 and spec.get("paper_figures") and visual_mode != "on_demand":
                     continue
                 if args.dry_run and dry_run_workspace is not None:
                     from pipeline import bespoke_visual_synthesizer as bespoke_module
                     if original_generated_visuals_dir is None:
                         original_generated_visuals_dir = bespoke_module.GENERATED_VISUALS_DIR
                     bespoke_module.GENERATED_VISUALS_DIR = dry_run_workspace / "generated_visuals"
-                bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+                generated_path = bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+                if visual_mode in {"hybrid", "on_demand"}:
+                    mark_bespoke_visual(beat, generated_path)
+            require_on_demand_visuals(spec, visual_mode)
+            if visual_mode in {"hybrid", "on_demand"}:
+                print(f"   🎨 Visual policy: {visual_mode} (fresh run key: {spec.get('visual_generation_key')})")
         except Exception as e_synth:
             print(f"⚠️ Bespoke visual synthesis notice: {e_synth}")
+            if visual_mode == "on_demand":
+                raise
     elif track == TRACK_ACADEMIC:
         print("🧪 [Dry-Run] Skipping bespoke visual synthesis; use --validate-visuals for the expensive sandbox path.")
 

@@ -113,8 +113,8 @@ when validation finishes.
 python3 pipeline/run_pipeline.py --dry-run
 ```
 
-Use `--validate-visuals` only when you explicitly want the dry run to invoke
-the LLM-backed bespoke visual synthesizer and sandbox checks:
+Use `--validate-visuals` when you want the dry run to invoke the LLM-backed,
+grammar-diverse on-demand visual synthesizer and sandbox checks:
 
 ```bash
 python3 pipeline/run_pipeline.py --dry-run --validate-visuals

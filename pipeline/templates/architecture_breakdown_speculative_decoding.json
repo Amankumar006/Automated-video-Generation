@@ -1,0 +1,606 @@
+{
+  "id": "speculative_decoding",
+  "title": "Speculative Decoding: Turbocharging LLM Generation",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "\ud83d\ude80 TOKEN TURBO",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Do not scale your next training run before you see how Speculative Decoding delivers 210\u202ftok/s.",
+      "visual_focus": "GPU utilization gauge flashing red while a single token icon stalls",
+      "highlight_words": {
+        "half its GPU idle": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "LLM",
+        "action_verb": "spends",
+        "direct_object": "idle GPU cycles",
+        "anchor_word": "waiting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "GPU IDLE PARADOX",
+        "sub": "Massive model, minuscule throughput",
+        "accent_color": "#38BDF8",
+        "params": {
+          "metric_name": "tokens/s",
+          "contestants": [
+            {
+              "name": "Baseline",
+              "value": 140,
+              "display_val": "140\u202ftok/s",
+              "is_hero": false,
+              "color": "#EF4444"
+            },
+            {
+              "name": "Speculative",
+              "value": 280,
+              "display_val": "280\u202ftok/s",
+              "is_hero": true,
+              "color": "#34D399"
+            }
+          ],
+          "delta_badge": "\u26a1 2\u00d7 SPEED"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning"
+    },
+    {
+      "beat_id": 2,
+      "text": "The verifier is a single checkout clerk, halting the stream while a draft model keeps loading boxes.",
+      "visual_focus": "Illustration of a clerk inspecting items while a conveyor belt piles up packages",
+      "highlight_words": {
+        "verifier": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Verifier",
+        "action_verb": "halts",
+        "direct_object": "token stream",
+        "anchor_word": "while",
+        "semantic_role": "causal"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE BOTTLENECK",
+        "sub": "One\u2011by\u2011one inspection",
+        "accent_color": "#38BDF8",
+        "params": {
+          "grid_title": "KV\u2011Cache Timeline",
+          "active_cell_label": "Stalled Slot",
+          "efficiency_label": "Delay (ms)"
+        }
+      },
+      "thriller_role": "villain_introduction",
+      "act": 2
+    },
+    {
+      "beat_id": 3,
+      "text": "Speculative decoding launches a cheap draft model K steps ahead, letting it pre\u2011fill the conveyor.",
+      "visual_focus": "Draft model sprinting ahead, tokens lighting up in a fast\u2011forward lane",
+      "highlight_words": {
+        "draft model K steps ahead": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Draft model",
+        "action_verb": "pre\u2011fills",
+        "direct_object": "future token slots",
+        "anchor_word": "ahead",
+        "semantic_role": "preparation"
+      },
+      "visual_blueprint": {
+        "layout": "split_flow",
+        "title": "THE QUICK START",
+        "sub": "Parallel draft generation",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3
+    },
+    {
+      "beat_id": 4,
+      "text": "A lightweight verifier runs in parallel: matches copy straight, mismatches cue the full model for the correct token.",
+      "visual_focus": "Two\u2011track pipeline; green arrows for matches, red arrows diverting to the full model",
+      "highlight_words": {
+        "lightweight verifier": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Verifier",
+        "action_verb": "copies",
+        "direct_object": "matching tokens",
+        "anchor_word": "while",
+        "semantic_role": "conditional"
+      },
+      "visual_blueprint": {
+        "layout": "attention_prism_refraction",
+        "title": "BATCH VERIFICATION",
+        "sub": "Match vs. fallback path",
+        "accent_color": "#F59E0B",
+        "params": {
+          "token_label": "Draft Logits",
+          "matrix_title": "Top\u2011K Filter"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3
+    },
+    {
+      "beat_id": 5,
+      "text": "Speculative GPT\u20114\u2011Turbo hits 210\u202ftok/s, a 45% lift over 145\u202ftok/s, eclipsing LLaMA\u20112\u202f7B\u2019s 95\u202ftok/s and PyTorch\u2019s 65\u202ftok/s.",
+      "visual_focus": "Bar chart racing: 210\u202ftok/s sprinting past baseline, LLaMA, and PyTorch bars",
+      "highlight_words": {
+        "210\u202ftok/s": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Speculative GPT\u20114\u2011Turbo",
+        "action_verb": "reaches",
+        "direct_object": "210\u202ftok/s",
+        "anchor_word": "eclipsing",
+        "semantic_role": "performance"
+      },
+      "visual_blueprint": {
+        "layout": "radar_pareto_plot",
+        "title": "SPEED UPGRADE",
+        "sub": "Turbo vs. baseline vs. competitors",
+        "accent_color": "#34D399",
+        "params": {
+          "axes": [
+            "Latency",
+            "Throughput",
+            "Quality",
+            "Compute Cost"
+          ],
+          "models": [
+            {
+              "name": "Speculative GPT\u20114\u2011Turbo",
+              "scores": [
+                0.55,
+                0.9,
+                0.94,
+                0.7
+              ],
+              "is_hero": true,
+              "color": "#34D399"
+            },
+            {
+              "name": "Baseline GPT\u20114\u2011Turbo",
+              "scores": [
+                1.0,
+                0.63,
+                0.94,
+                0.7
+              ],
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 45% LATENCY REDUCTION"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4
+    },
+    {
+      "beat_id": 6,
+      "text": "Now the GPU spends cycles generating text, not idling\u2014just like the original paradox, but solved.",
+      "visual_focus": "GPU core glowing while token stream flows uninterrupted",
+      "highlight_words": {
+        "generating text": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "GPU",
+        "action_verb": "spends",
+        "direct_object": "cycles generating text",
+        "anchor_word": "not idling",
+        "semantic_role": "resolution"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "CYCLE RECLAIMED",
+        "sub": "From idle to productive",
+        "accent_color": "#38BDF8",
+        "params": {
+          "field_title": "Speculative Flow",
+          "source_label": "Draft Draft",
+          "target_label": "Verified Output",
+          "stream_formula": "$\\mathbf{v}_{t+1}=\\mathbf{v}_t + \\Delta(\\mathbf{v}_t)$"
+        }
+      },
+      "thriller_role": "paradigm_loop_outro",
+      "act": 4
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$S = \\frac{T_{\\text{baseline}}}{T_{\\text{speculative}}} = 2$",
+      "filename": "speculative_decoding_beat1_scale.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "S",
+          "label": "Speedup factor"
+        },
+        {
+          "term": "T_{\\text{baseline}}",
+          "label": "Baseline token time"
+        },
+        {
+          "term": "T_{\\text{speculative}}",
+          "label": "Speculative token time"
+        }
+      ],
+      "svg_filename": "speculative_decoding_beat1_scale.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(L \\cdot d_{\\text{model}})$",
+      "filename": "speculative_decoding_beat2_bottleneck.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "L",
+          "label": "Context length"
+        },
+        {
+          "term": "d_{\\text{model}}",
+          "label": "Hidden dimension"
+        }
+      ],
+      "svg_filename": "speculative_decoding_beat2_bottleneck.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$y = \\operatorname{argmax}_{k \\leq K}\\big( \\log p_{\\text{draft}}(x_k) + \\log p_{\\text{verifier}}(x_k) \\big)$",
+      "filename": "speculative_decoding_beat3_architecture.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "p_{\\text{draft}}",
+          "label": "Draft model likelihood"
+        },
+        {
+          "term": "p_{\\text{verifier}}",
+          "label": "Verifier model likelihood"
+        },
+        {
+          "term": "K",
+          "label": "Lookahead window size"
+        }
+      ],
+      "svg_filename": "speculative_decoding_beat3_architecture.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\mathbb{1}\\big[ \\operatorname{rank}_{\\text{draft}}(x) \\leq k \\big]$",
+      "filename": "speculative_decoding_beat4_mechanism.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "k",
+          "label": "Top\u2011k threshold"
+        },
+        {
+          "term": "rank_{\\text{draft}}",
+          "label": "Draft token ranking"
+        }
+      ],
+      "svg_filename": "speculative_decoding_beat4_mechanism.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\text{Throughput}_{\\text{spec}} = 1.45 \\times \\text{Throughput}_{\\text{base}} = 210\\;\\text{tok/s}$",
+      "filename": "speculative_decoding_beat5_payoff.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Throughput_{\\text{spec}}",
+          "label": "Speculative token/sec"
+        },
+        {
+          "term": "Throughput_{\\text{base}}",
+          "label": "Baseline token/sec"
+        }
+      ],
+      "svg_filename": "speculative_decoding_beat5_payoff.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "attention_flow | speculative_pipeline",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "FAST_DRAFT",
+          "color": "#38BDF8",
+          "items": [
+            "token_a",
+            "token_b",
+            "token_c"
+          ]
+        },
+        {
+          "name": "VERIFIER",
+          "color": "#10B981",
+          "items": [
+            "logit_x",
+            "logit_y",
+            "logit_z"
+          ]
+        },
+        {
+          "name": "COMMITTED",
+          "color": "#F59E0B",
+          "items": [
+            "out_1",
+            "out_2",
+            "out_3"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"hello\"",
+        "target_cluster": "FAST_DRAFT",
+        "token": "\"hello\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Token 'stalled'",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Token 'mismatch'",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "Fast Draft (LLaMA\u20112\u20117B)",
+    "model_a_specs": [
+      "\u22482\u202fB params",
+      "FP16",
+      "\u22480.5\u202fms/token"
+    ],
+    "model_b": "Verifier (GPT\u20114\u2011Turbo)",
+    "model_b_specs": [
+      "\u2248100\u202fB params",
+      "FP8",
+      "\u22483\u202fms/token"
+    ],
+    "divide_title": "SPECULATIVE VS TRADITIONAL",
+    "model_a_stat": "0.5\u202fms",
+    "model_a_stat_label": "DRAFT LATENCY",
+    "model_b_stat": "3\u202fms",
+    "model_b_stat_label": "VERIFIER LATENCY",
+    "efficiency_badge": "\u26a1 45% LATENCY REDUCTION",
+    "benchmarks": [
+      {
+        "name": "Latency",
+        "score_a": "55\u202fms",
+        "score_b": "100\u202fms"
+      },
+      {
+        "name": "Throughput",
+        "score_a": "210\u202ftok/s",
+        "score_b": "145\u202ftok/s"
+      },
+      {
+        "name": "Quality",
+        "score_a": "94.5\u202f%",
+        "score_b": "94.1\u202f%"
+      }
+    ],
+    "scale_metric": "2\u00d7",
+    "scale_label": "Speedup Factor",
+    "bottleneck_title": "KV\u2011CACHE LATENCY BOTTLENECK",
+    "bottleneck_desc": "Cache stalls block token flow",
+    "solution_title": "SPECULATIVE PIPELINE",
+    "solution_components": "Draft + Verifier Cooperation",
+    "mechanism_title": "TOP\u2011K MASKING",
+    "payoff_stat": "210\u202ftok/s",
+    "payoff_label": "THROUGHPUT",
+    "payoff_sub": "Real\u2011time Generation",
+    "payoff_hero_stat": 210,
+    "payoff_hero_label": "TOKENS/SECOND",
+    "payoff_base_stat": 145,
+    "payoff_base_label": "BASELINE",
+    "payoff_delta_badge": "\u26a1 +45% LATENCY GAIN",
+    "challenger": "Speculative GPT\u20114\u2011Turbo",
+    "incumbent": "Standard GPT\u20114\u2011Turbo"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: TOKEN THROUGHPUT",
+    "metric_name": "Tokens per Second",
+    "unit": "tok/s",
+    "contestants": [
+      {
+        "name": "Speculative GPT\u20114\u2011Turbo",
+        "value": 210.0,
+        "display_val": "210\u202ftok/s",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Baseline GPT\u20114\u2011Turbo",
+        "value": 145.0,
+        "display_val": "145\u202ftok/s",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "LLaMA\u20112\u20117B",
+        "value": 95.0,
+        "display_val": "95\u202ftok/s",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Standard PyTorch",
+        "value": 65.0,
+        "display_val": "65\u202ftok/s",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +45% THROUGHPUT GAIN",
+    "radar_axes": [
+      "Throughput",
+      "Latency",
+      "Quality",
+      "Compute Cost",
+      "Memory Footprint"
+    ]
+  },
+  "code_snippet": {
+    "filename": "speculative_decode.py",
+    "language": "python",
+    "lines": [
+      "def speculative_generate(prompt):",
+      "draft_tokens = draft_model.sample(prompt, lookahead=K)",
+      "verified = verifier.check(draft_tokens)",
+      "return merge(draft_tokens, verified)"
+    ],
+    "highlight_lines": [
+      2,
+      3
+    ],
+    "trace_register": "\u26a1 SPECULATIVE PIPELINE EXECUTION",
+    "explanation": "Fast draft proposes K tokens, verifier validates, mismatches are pruned instantly"
+  },
+  "feynman_certification": {
+    "converged_turn": 2,
+    "final_comprehension_score": 9.1,
+    "final_retention_hook_score": 9.0,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The first beat hit me hard \u2013 half the GPU just sitting idle? That\u2019s a bold claim and made me want to keep watching. Beats 2\u20114 explain the draft\u2011plus\u2011verifier loop well enough that I got the gist. The numbers in Beat 5 are exciting, but I did have to pause at the phrase \u201cK steps ahead\u201d and wonder how big K is. Overall the pacing is good, just a couple of buzz\u2011word\u2011ish spots that made me replay that line."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Verifier Stall",
+    "physical_analogy": "single checkout lane where every item is manually inspected, creating a growing queue",
+    "eureka_mechanism": "Draft\u2011Ahead Speculative Decoding",
+    "paradigm_shift": "GPU cycles now generate text instead of idling"
+  },
+  "hook_gating": {
+    "selected_hook": "Do not scale your next training run before you see how Speculative Decoding delivers 210\u202ftok/s.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 68,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "opening_style": "candidate_selected",
+    "candidates_evaluated": 7,
+    "rankings": [
+      {
+        "hook": "Do not scale your next training run before you see how Speculative Decoding delivers 210\u202ftok/s.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before Speculative Decoding unlocks 210\u202ftok/s gains?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Why should you care about Speculative Decoding? Because your 175\u2011billion\u2011parameter LLM spends half its GPU idle waiting for one token.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 210\u202ftok/s of your hardware performance on the table without Speculative Decoding.",
+        "verdict": 48,
+        "band": "WEAK",
+        "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Your GPU can spend 210\u202ftok/s of its memory budget moving data; Speculative Decoding cuts that overhead.",
+        "verdict": 47,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Your 175\u2011billion\u2011parameter LLM spends half its GPU idle waiting for one token.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until Speculative Decoding proved a 210\u202ftok/s leap.",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ]
+}

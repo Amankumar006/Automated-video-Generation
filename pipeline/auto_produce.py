@@ -48,7 +48,8 @@ def auto_produce(
     skip_repair: bool = False,
     publish_instagram: bool = False,
     publish_x: bool = False,
-    publish_linkedin: bool = False
+    publish_linkedin: bool = False,
+    visual_mode: Optional[str] = None
 ) -> str:
 
 
@@ -77,7 +78,8 @@ def auto_produce(
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
             publish_x=publish_x,
-            publish_linkedin=publish_linkedin
+            publish_linkedin=publish_linkedin,
+            visual_mode=visual_mode,
         )
         # Locate the template generated or used by the English pass
         hi_template = template
@@ -112,7 +114,8 @@ def auto_produce(
             skip_repair=skip_repair,
             publish_instagram=publish_instagram,
             publish_x=publish_x,
-            publish_linkedin=publish_linkedin
+            publish_linkedin=publish_linkedin,
+            visual_mode=visual_mode,
         )
 
 
@@ -176,6 +179,14 @@ def auto_produce(
     if not topic and not spec:
         raise ValueError("Either topic, arxiv, or template must be provided.")
 
+    from pipeline.visual_generation import (
+        ensure_visual_generation_key,
+        resolve_visual_mode,
+        mark_bespoke_visual,
+        require_on_demand_visuals,
+    )
+    resolved_visual_mode = resolve_visual_mode(visual_mode)
+
     if skip_script and not spec:
         # Search for existing template
         query_words = [w.lower().strip(":-_.,") for w in topic.split() if len(w) >= 4]
@@ -197,16 +208,26 @@ def auto_produce(
 
     if not spec:
         print(f"🧠 Step 2: Generating brand-new script directly from paper for '{topic}'...")
+        editorial_brief = arxiv_meta.get("content_strategy") if isinstance(arxiv_meta, dict) else None
         spec = generate_script(
             topic=topic,
             category=category,
             arxiv_meta=arxiv_meta,
             context=(
-                json.dumps(arxiv_meta.get("format_profile"), sort_keys=True)
-                if arxiv_meta and arxiv_meta.get("format_profile")
+                json.dumps(
+                    {
+                        "format_profile": arxiv_meta.get("format_profile"),
+                        "content_strategy": editorial_brief or {},
+                    },
+                    sort_keys=True,
+                )
+                if arxiv_meta and (arxiv_meta.get("format_profile") or editorial_brief)
                 else None
             )
         )
+        if editorial_brief:
+            spec["content_strategy"] = editorial_brief
+            spec.setdefault("metadata", {})["audience_profile"] = "global_ai_builder"
         template_path = templates_dir / f"{spec['category']}_{spec['id']}.json"
 
     # Step 2.3: Extract native arXiv chalkboard-recolored vector figures (skip GitHub code repositories and perks)
@@ -270,6 +291,8 @@ def auto_produce(
     except Exception as e:
         print(f"⚠️ Visual Director bypassed: {e}")
 
+    ensure_visual_generation_key(spec, resolved_visual_mode)
+
     # Resolve target scene track before visual synthesis dispatch
     resolved_category = spec.get("category", category or "academic_breakdown")
     track = resolve_track(resolved_category)
@@ -279,7 +302,10 @@ def auto_produce(
     # Generated Manim snippets are experimental and must not silently replace
     # validated visual blueprints in production renders. Opt in explicitly
     # when experimenting with the bespoke synthesizer.
-    bespoke_visuals_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+    bespoke_visuals_enabled = (
+        resolved_visual_mode in {"hybrid", "on_demand"}
+        or os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+    )
     if track == TRACK_ACADEMIC and bespoke_visuals_enabled:
         print(f"\n🔬 Step 2.9: Synthesizing bespoke 3b1b Manim visual modules on the fly...")
         try:
@@ -287,11 +313,18 @@ def auto_produce(
             for idx, beat in enumerate(spec.get("beats", [])):
                 b_id = beat.get("beat_id", idx + 1)
                 # Prioritize authentic arXiv figures for Beat 3 if available
-                if b_id == 3 and spec.get("paper_figures"):
+                if b_id == 3 and spec.get("paper_figures") and resolved_visual_mode != "on_demand":
                     continue
-                bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+                generated_path = bespoke_synthesizer.synthesize_visual_for_beat(spec, beat, b_id)
+                if resolved_visual_mode in {"hybrid", "on_demand"}:
+                    mark_bespoke_visual(beat, generated_path)
+            require_on_demand_visuals(spec, resolved_visual_mode)
+            if resolved_visual_mode in {"hybrid", "on_demand"}:
+                print(f"   🎨 Visual policy: {resolved_visual_mode} (fresh run key: {spec.get('visual_generation_key')})")
         except Exception as e:
             print(f"⚠️ Bespoke visual synthesis notice: {e}")
+            if resolved_visual_mode == "on_demand":
+                raise
     elif track == TRACK_ACADEMIC:
         print("\n🔬 Step 2.9: Bespoke visual synthesis disabled; using validated blueprint compositions.")
 
@@ -534,6 +567,7 @@ def auto_produce(
 
 
     publish_failures = []
+    youtube_publication = None
 
     # Step 7: Automated YouTube Shorts Distribution
     if publish or dry_run_publish:
@@ -552,7 +586,11 @@ def auto_produce(
             print("=======================================================\n")
         else:
             try:
-                upload_short(final_output, metadata, privacy_status=privacy)
+                youtube_publication = upload_short(final_output, metadata, privacy_status=privacy)
+                publication_path = Path(final_output).with_suffix(".youtube_publication.json")
+                with publication_path.open("w", encoding="utf-8") as publication_file:
+                    json.dump(youtube_publication, publication_file, indent=2)
+                print(f"📌 YouTube publication receipt saved to: {publication_path}")
             except Exception as e:
                 print(f"\n⚠️ YouTube automated upload skipped or failed: {e}")
                 print(f"💡 The produced broadcast video is saved and ready at:\n   {final_output}")
@@ -701,6 +739,12 @@ def main():
     parser.add_argument("--dry-run-publish", action="store_true", help="Preview YouTube title, tags, description without uploading")
     parser.add_argument("--no-music", action="store_true", help="Disable procedural lo-fi ambient background music")
     parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")
+    parser.add_argument(
+        "--visual-mode",
+        choices=["blueprint", "hybrid", "on_demand"],
+        default=None,
+        help="Visual policy: fresh grammar-diverse graphics per run (default), hybrid fallback, or validated blueprints",
+    )
     args = parser.parse_args()
 
     if not args.topic and not args.arxiv and not args.template:
@@ -734,7 +778,8 @@ def main():
         skip_repair=args.skip_repair,
         publish_instagram=args.publish_instagram,
         publish_x=args.publish_x,
-        publish_linkedin=args.publish_linkedin
+        publish_linkedin=args.publish_linkedin,
+        visual_mode=args.visual_mode,
     )
 
 

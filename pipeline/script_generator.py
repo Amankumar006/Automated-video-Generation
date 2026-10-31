@@ -270,6 +270,7 @@ def generate_script(
     category: Optional[str] = None,
     context: Optional[str] = None,
     arxiv_meta: Optional[Dict[str, Any]] = None,
+    editorial_brief: Optional[Dict[str, Any]] = None,
     persist: bool = True,
     output_root: Optional[str | Path] = None,
     extract_figures: bool = True,
@@ -294,12 +295,51 @@ def generate_script(
         or (arxiv_meta and isinstance(arxiv_meta, dict) and bool(arxiv_meta.get("tech_news_metadata") or arxiv_meta.get("key_facts")))
     )
 
+    strategy_brief = editorial_brief
+    if strategy_brief is None and arxiv_meta and isinstance(arxiv_meta, dict):
+        strategy_brief = arxiv_meta.get("content_strategy")
+
+    def apply_strategy_brief(spec: Dict[str, Any]) -> Dict[str, Any]:
+        if strategy_brief:
+            spec["content_strategy"] = strategy_brief
+            spec.setdefault("metadata", {})["audience_profile"] = strategy_brief.get(
+                "audience_profile", "global_ai_builder"
+            )
+            # Carry the evidence URL into every downstream artifact.  The
+            # script engines need the brief for claims, while thumbnails and
+            # publishers read top-level provenance fields.
+            source_url = strategy_brief.get("source_url")
+            if isinstance(source_url, str) and source_url.strip():
+                spec["source_url"] = source_url.strip()
+                spec["canonical_url"] = source_url.strip()
+                spec.setdefault("metadata", {})["source_url"] = source_url.strip()
+            source_name = strategy_brief.get("source") or strategy_brief.get("source_provider")
+            if source_name:
+                spec["source_provider"] = str(source_name)
+                spec.setdefault("metadata", {})["source_provider"] = str(source_name)
+        elif arxiv_meta and isinstance(arxiv_meta, dict):
+            # Legacy callers may not provide a strategy brief, but still have
+            # authoritative source metadata available.
+            source_url = (
+                arxiv_meta.get("source_url")
+                or arxiv_meta.get("canonical_url")
+                or arxiv_meta.get("official_url")
+                or arxiv_meta.get("url")
+            )
+            if isinstance(source_url, str) and source_url.strip():
+                spec["source_url"] = source_url.strip()
+                spec["canonical_url"] = source_url.strip()
+            source_name = arxiv_meta.get("source_provider") or arxiv_meta.get("provider") or arxiv_meta.get("source")
+            if source_name:
+                spec["source_provider"] = str(source_name)
+        return spec
+
     if is_perk:
         from pipeline.developer_perks_script_engine import developer_perks_script_engine
         print(f"🎁 [Track 3] Routing to Developer Perks Script Engine: '{topic}'...")
         spec = developer_perks_script_engine.generate_perks_script(topic=topic, perk_meta=arxiv_meta, context=context)
         return _persist_and_finalize_spec(
-            spec, topic, "developer_perks", persist=persist, output_root=output_root
+            apply_strategy_brief(spec), topic, "developer_perks", persist=persist, output_root=output_root
         )
 
     if is_news:
@@ -307,10 +347,26 @@ def generate_script(
         print(f"📰 [Track 2] Routing to Tech News Script Engine: '{topic}'...")
         spec = tech_news_script_engine.generate_news_script(topic=topic, blog_meta=arxiv_meta, context=context)
         return _persist_and_finalize_spec(
-            spec, topic, "tech_news", persist=persist, output_root=output_root
+            apply_strategy_brief(spec), topic, "tech_news", persist=persist, output_root=output_root
         )
 
     cat_hint = f"Target Category: {category or 'academic_breakdown'}" if category else "Choose the best matching category from: academic_breakdown, architecture_breakdown, model_showdown, mechanism_deepdive."
+
+    strategy_context = ""
+    if strategy_brief:
+        strategy_context = f"""
+Audience-Led Editorial Brief (must be preserved, not invented around):
+Primary audience: {strategy_brief.get('primary_segment', 'developer')}
+Viewer problem: {strategy_brief.get('viewer_problem', '')}
+Promised payoff: {strategy_brief.get('promised_payoff', '')}
+Proof asset: {strategy_brief.get('proof_asset', '')}
+Recommended hook: {strategy_brief.get('recommended_hook', '')}
+Recommended format: {strategy_brief.get('recommended_format', '')}
+Source claims: {json.dumps(strategy_brief.get('source_claims', []), ensure_ascii=False)}
+Risk flags: {json.dumps(strategy_brief.get('risk_flags', []), ensure_ascii=False)}
+Selection evidence: {json.dumps(strategy_brief.get('reasons', []), ensure_ascii=False)}
+Use only the source claims above for factual or numerical statements. Do not invent a different audience, payoff, or numerical claim. Make Beat 1 visibly demonstrate the problem or payoff immediately.
+"""
 
     paper_context = ""
     if arxiv_meta:
@@ -338,6 +394,7 @@ Abstract: {arxiv_meta['abstract']}
 Topic Request: {topic}
 {cat_hint}
 {paper_context}
+{strategy_context}
 {f'Extra Context: {context}' if context else ''}
 
 Generate the complete JSON specification strictly adhering to this structure:
@@ -527,6 +584,9 @@ Generate the complete JSON specification strictly adhering to this structure:
     # Ensure ID slug is filesystem safe
     clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", spec.get("id", "short_topic")).lower()
     spec["id"] = clean_id
+    if strategy_brief:
+        spec["content_strategy"] = strategy_brief
+        spec.setdefault("metadata", {})["audience_profile"] = "global_ai_builder"
 
     # Guarantee exactly 6 beats (auto-append Beat 6 brand outro if omitted by LLM)
     if len(spec.get("beats", [])) == 5:

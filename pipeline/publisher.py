@@ -221,12 +221,39 @@ def _topic_tags(spec: Dict[str, Any], title_raw: str, provenance: Dict[str, str]
     return tags
 
 
+def _audience_led_title(spec: Dict[str, Any], fallback: str) -> str:
+    """Convert a source/academic title into a mobile-safe viewer promise."""
+    strategy = spec.get("content_strategy") if isinstance(spec.get("content_strategy"), dict) else {}
+    if not strategy:
+        return fallback
+
+    seed = str(strategy.get("source_title") or fallback).strip()
+    seed = re.sub(r"\s+", " ", seed).strip(" .:-")
+    seed = re.sub(
+        r"\b(architecture breakdown|technical report|a unified continuous paradigm)\b",
+        "",
+        seed,
+        flags=re.I,
+    )
+    seed = re.sub(r"\s+", " ", seed).strip(" .:-") or fallback
+    fmt = str(strategy.get("recommended_format") or "mechanism")
+    if fmt == "comparison":
+        return f"{seed}: Which One Wins?"
+    if fmt == "practical_demo":
+        return f"{seed}: What It Actually Changes"
+    if fmt == "current_release":
+        return f"Why {seed} Matters Now"
+    return f"How {seed} Actually Works"
+
+
 def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str, Any]:
     """Generates viral, SEO-optimized title, description, tags, and pinned comment from spec."""
     title_raw = str(spec.get("title") or spec.get("topic") or "AI Architecture Deep Dive").strip()
+    title_raw = _audience_led_title(spec, title_raw)
     category = spec.get("category", "mechanism_deepdive")
     meta = spec.get("metadata") if isinstance(spec.get("metadata"), dict) else {}
     provenance = _explicit_provenance(spec, meta)
+    strategy = spec.get("content_strategy") if isinstance(spec.get("content_strategy"), dict) else {}
 
     clean_t = re.sub(r"\s+", " ", title_raw).strip()
     if len(clean_t) > 42:
@@ -325,8 +352,12 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
     hashtags_str = " ".join(hashtags[:12])
 
     # 6. Description construction
+    audience_line = ""
+    if strategy:
+        audience_line = f"\n🎯 FOR BUILDERS: {strategy.get('promised_payoff', 'A practical explanation for AI builders.')}\n"
     description = f"""{title_raw} — {track_meta['description_prefix']}.
 
+{audience_line}
 {b1_text}
 
 {b5_text}
@@ -377,7 +408,9 @@ def generate_shorts_metadata(spec: Dict[str, Any], video_path: str) -> Dict[str,
         "pinned_comment": pinned_comment,
         "privacy_status": "unlisted",
         "language": spec.get("language", "en"),
-        "title_lint": title_lint_report
+        "title_lint": title_lint_report,
+        "audience_profile": strategy.get("audience_profile", "") if strategy else "",
+        "content_strategy": strategy,
     }
     result.update(provenance)
     return result

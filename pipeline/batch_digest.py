@@ -4,6 +4,7 @@ Discovers, scores, and auto-produces shorts from trending arXiv and Hugging Face
 """
 
 import os
+import re
 import sys
 import json
 import time
@@ -72,7 +73,14 @@ def save_history(history: Dict[str, Any]):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
 
-def record_paper_production(arxiv_id: str, title: str, category: str, video_path: str, source: Optional[str] = None):
+def record_paper_production(
+    arxiv_id: str,
+    title: str,
+    category: str,
+    video_path: str,
+    source: Optional[str] = None,
+    content_strategy: Optional[Dict[str, Any]] = None,
+):
     """Logs a completed paper production to history."""
     history = load_history()
     clean_id = extract_arxiv_id(arxiv_id)
@@ -95,6 +103,9 @@ def record_paper_production(arxiv_id: str, title: str, category: str, video_path
         "video_path": video_path,
         "status": "completed"
     }
+    if content_strategy:
+        history["processed_papers"][clean_id]["content_strategy"] = content_strategy
+        history["processed_papers"][clean_id]["content_format"] = content_strategy.get("recommended_format")
     save_history(history)
 
 def fetch_hf_daily_papers(date_str: Optional[str] = None, limit: int = 30) -> List[Dict[str, Any]]:
@@ -126,6 +137,58 @@ def fetch_hf_daily_papers(date_str: Optional[str] = None, limit: int = 30) -> Li
     except Exception as e:
         print(f"⚠️ Hugging Face Daily Papers API error ({e}), falling back to arXiv API...")
         return []
+
+
+def fetch_hf_trending_models(limit: int = 20) -> List[Dict[str, Any]]:
+    """Fetch current Hugging Face model momentum as actionable candidates.
+
+    The API is intentionally used as a source adapter only.  The audience
+    strategy layer still requires dated metadata, a source URL, and a concrete
+    proof/mechanism before a model can reach script generation.
+    """
+    url = "https://huggingface.co/api/models?sort=trendingScore&direction=-1&limit=" + str(limit)
+    req = urllib.request.Request(url, headers={"User-Agent": "TheModelVerse-Pipeline/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        print(f"⚠️ Hugging Face model API error ({e}).")
+        return []
+
+    models: List[Dict[str, Any]] = []
+    for model in data if isinstance(data, list) else []:
+        model_id = str(model.get("id") or model.get("modelId") or "").strip()
+        if not model_id:
+            continue
+        last_modified = model.get("lastModified") or model.get("last_modified")
+        downloads = int(model.get("downloads") or 0)
+        likes = int(model.get("likes") or 0)
+        trending_score = float(model.get("trendingScore") or model.get("trending_score") or 0)
+        tags = [str(tag) for tag in (model.get("tags") or [])[:12]]
+        description = str(model.get("description") or "").strip()
+        models.append({
+            "id": "hf_model_" + re.sub(r"[^a-zA-Z0-9]+", "_", model_id).strip("_").lower(),
+            "title": model_id,
+            "abstract": description or f"Hugging Face model {model_id} with live community activity.",
+            "description": description,
+            "source": "huggingface_models",
+            "url": f"https://huggingface.co/{model_id}",
+            "updated_at": last_modified,
+            "published_at": last_modified,
+            "tags": tags,
+            "downloads": downloads,
+            "likes": likes,
+            "trending_score": trending_score,
+            "model_metadata": {
+                "model_id": model_id,
+                "downloads": downloads,
+                "likes": likes,
+                "trending_score": trending_score,
+                "last_modified": last_modified,
+            },
+            "proof_asset": "Hugging Face model card and live download momentum",
+        })
+    return models
 
 def fetch_arxiv_trending(limit: int = 30) -> List[Dict[str, Any]]:
     """Fetches recent AI/ML papers from official arXiv API as fallback."""
