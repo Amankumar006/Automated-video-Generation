@@ -147,6 +147,52 @@ def validate_code_ast(code_str: str) -> Tuple[bool, Optional[str]]:
     return True, None
 
 
+def validate_visual_quality_contract(code_str: str) -> Tuple[bool, Optional[str]]:
+    """Reject visually lazy or non-deterministic generated modules before render."""
+    try:
+        tree = ast.parse(code_str)
+    except SyntaxError as exc:
+        return False, f"Visual quality lint could not parse code: {exc.msg}"
+
+    source = code_str.lower()
+    if "np.random" in source or "random." in source or "import random" in source:
+        return False, "Visual quality contract: generated coordinates must be deterministic; do not use random sampling."
+
+    call_names = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        if isinstance(node.func, ast.Name):
+            call_names.append(node.func.id)
+        elif isinstance(node.func, ast.Attribute):
+            call_names.append(node.func.attr)
+
+    text_calls = sum(name in {"CleanText", "Text", "MarkupText"} for name in call_names)
+    if text_calls > 3:
+        return False, f"Visual quality contract: use at most three explanatory text objects, found {text_calls}. Let the geometry carry the story."
+
+    primitive_names = {
+        "Arrow", "Arc", "Circle", "Dot", "Line", "Polygon", "VMobject",
+        "StreamLines", "ParametricFunction", "NumberPlane", "DashedLine",
+    }
+    primitive_count = sum(name in primitive_names for name in call_names)
+    if primitive_count < 2:
+        return False, "Visual quality contract: the beat needs at least two connected geometric primitives, not a lone object or text treatment."
+
+    motion_names = {
+        "Create", "Write", "Transform", "ReplacementTransform", "MoveAlongPath",
+        "GrowArrow", "ShowPassingFlash", "FadeTransform", "UpdateFromAlphaFunc",
+    }
+    has_motion = any(name in motion_names for name in call_names) or ".animate" in source
+    if not has_motion:
+        return False, "Visual quality contract: the mechanism must have an intentional transformation or path motion."
+
+    if "arrange_in_grid" in source and "roundedrectangle" in source:
+        return False, "Visual quality contract: repeated rounded UI tiles are not a mechanism visual."
+
+    return True, None
+
+
 def validate_code_in_process(code_str: str) -> Tuple[bool, Optional[str]]:
     """
     Executes dry-run in-process using an isolated namespace (sub-second performance).
