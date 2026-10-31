@@ -1,6 +1,6 @@
 """
 The Model Verse — Multi-Category Audio Synthesizer, SFX Mixer & Lo-Fi Ducking Engine
-Synthesizes local Pocket TTS neural speech, procedural SFX, and mixes
+Synthesizes local Phonon/Pocket neural speech, procedural SFX, and mixes
 procedural Lo-Fi ambient synthpad soundtracks with dynamic sidechain ducking.
 """
 
@@ -39,7 +39,7 @@ def synthesize_audio_for_spec(
     cache_dir: Optional[str] = None,
 ) -> dict:
     """
-    Synthesizes speech using the unified voice router (ElevenLabs, Sarvam AI, Pocket TTS fallback),
+    Synthesizes speech using the unified voice router (Phonon, Gemini TTS, ElevenLabs, Sarvam AI, or explicit Pocket),
     generates procedural SFX, and mixes an ambient synth soundtrack with dynamic ducking.
     Returns: {"master_audio": str, "narration_audio": str, "soundtrack_audio": str, "timing_data": list, "total_duration": float}
     """
@@ -61,7 +61,7 @@ def synthesize_audio_for_spec(
 
     router = UnifiedVoiceRouter(cache_dir=cache_dir) if cache_dir else UnifiedVoiceRouter()
     
-    # Pocket TTS does not expose a tokenizer. The aligner has a deterministic
+    # Local TTS providers do not expose a tokenizer. The aligner has a deterministic
     # text fallback, so alignment remains available without a model-specific
     # dependency.
     aligner = AcousticForcedAligner(tokenizer=None)

@@ -1,0 +1,804 @@
+{
+  "id": "flashattention_3_analysis",
+  "title": "FlashAttention-3: Asynchronous Hardware Mastery",
+  "category": "architecture_breakdown",
+  "domain_taxonomy": "neural_attention",
+  "hook_tag": "HARDWARE BOTTLENECK",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Do not scale your next training run before you see how FlashAttention-3 delivers 1180.",
+      "visual_focus": "A flickering GPU utilization graph dropping to zero.",
+      "highlight_words": {
+        "idling": "#EF4444",
+        "slow VRAM": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Memory Latency",
+        "action_verb": "chokes",
+        "direct_object": "Compute Throughput",
+        "anchor_word": "idling",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "THE MEMORY WALL",
+        "sub": "Compute starvation detected",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 71,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "horizontal_race_bars",
+        "title": "THE MEMORY WALL",
+        "sub": "Compute starvation detected",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform",
+      "visual_grammar": "hero_field",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_1.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 0.0,
+      "end": 5.0,
+      "word_timings": []
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is the Memory Wall, a narrow loading dock forcing your compute units to starve while data crawls across the bus.",
+      "visual_focus": "Animation of data packets stuck in a bottleneck.",
+      "highlight_words": {
+        "Memory Wall": "#EF4444",
+        "starve": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Memory Wall",
+        "action_verb": "strangles",
+        "direct_object": "Data Flow",
+        "anchor_word": "starve",
+        "semantic_role": "problem_definition"
+      },
+      "visual_blueprint": {
+        "layout": "barrier_separation",
+        "title": "THE BOTTLENECK",
+        "sub": "VRAM to SRAM congestion",
+        "accent_color": "#EF4444",
+        "params": {
+          "stream_a_label": "Memory Load",
+          "stream_b_label": "Compute Math",
+          "barrier_label": "Synchronization Barrier",
+          "barrier_sub": "Wait-state penalty"
+        }
+      },
+      "thriller_role": "villain_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "barrier_separation",
+        "title": "THE BOTTLENECK",
+        "sub": "VRAM to SRAM congestion",
+        "accent_color": "#EF4444",
+        "stream_a_label": "Memory Load",
+        "stream_b_label": "Compute Math",
+        "barrier_label": "Synchronization Barrier",
+        "barrier_sub": "Wait-state penalty"
+      },
+      "kinetic_action": "blueprint_transform",
+      "visual_grammar": "physical_analogy",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_2.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 5.0,
+      "end": 10.0,
+      "word_timings": []
+    },
+    {
+      "beat_id": 3,
+      "text": "FlashAttention-3 pivots to asynchronous overlap, hiding data transfer behind active computation to keep the pipeline moving.",
+      "visual_focus": "Parallel bars showing compute and memory moving simultaneously.",
+      "highlight_words": {
+        "asynchronous overlap": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "FlashAttention-3",
+        "action_verb": "hides",
+        "direct_object": "Latency",
+        "anchor_word": "overlap",
+        "semantic_role": "solution_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "paper_figure",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Parallel bars showing compute and memory moving simultaneously.",
+        "params": {
+          "svg_path": null,
+          "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+          "arxiv_id": "2407.08608",
+          "title": "FLASHATTENTION-3 ARCHITECTURE",
+          "sub": "Parallel bars showing compute and memory moving simultaneously.",
+          "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+          "caption": "3 Stage Pipelining",
+          "preferred_renderer": "raster"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "paper_figure",
+      "motif_params": {
+        "svg_path": null,
+        "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+        "arxiv_id": "2407.08608",
+        "title": "FLASHATTENTION-3 ARCHITECTURE",
+        "sub": "Parallel bars showing compute and memory moving simultaneously.",
+        "badge_text": "PRIMARY ARCHITECTURE SPECIFICATION",
+        "caption": "3 Stage Pipelining",
+        "preferred_renderer": "raster"
+      },
+      "kinetic_action": "figure_scan",
+      "visual_grammar": "exploded_mechanism",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_3.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 10.0,
+      "end": 15.0,
+      "word_timings": []
+    },
+    {
+      "beat_id": 4,
+      "text": "It uses cp_async_bulk_tensor instructions to stream data into SRAM while the tensor core crunches FP8 math.",
+      "visual_focus": "Code snippet showing cp_async_bulk_tensor.",
+      "highlight_words": {
+        "cp_async_bulk_tensor": "#3B82F6",
+        "FP8": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "Instructions",
+        "action_verb": "stream",
+        "direct_object": "Data",
+        "anchor_word": "FP8",
+        "semantic_role": "mechanism_detail"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: FLASHATTENTION-3: ",
+        "sub": "Code snippet showing cp_async_bulk_tensor.",
+        "params": {
+          "title": "KERNEL CODE: FLASHATTENTION-3: ",
+          "sub": "Code snippet showing cp_async_bulk_tensor.",
+          "filename": "flash_kernel.cu",
+          "language": "cpp",
+          "lines": [
+            "__global__ void flash_attention_async() {",
+            "cp_async_bulk_tensor(sram, global_vram);",
+            "__syncthreads();",
+            "compute_gemm_fp8(sram_tiles);",
+            "}"
+          ],
+          "highlight_lines": [
+            2,
+            4
+          ],
+          "trace_register": "\u26a1 ASYNC KERNEL PIPELINE",
+          "delta_badge": "Overlapping memory movement with math ops"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: FLASHATTENTION-3: ",
+        "sub": "Code snippet showing cp_async_bulk_tensor.",
+        "filename": "flash_kernel.cu",
+        "language": "cpp",
+        "lines": [
+          "__global__ void flash_attention_async() {",
+          "cp_async_bulk_tensor(sram, global_vram);",
+          "__syncthreads();",
+          "compute_gemm_fp8(sram_tiles);",
+          "}"
+        ],
+        "highlight_lines": [
+          2,
+          4
+        ],
+        "trace_register": "\u26a1 ASYNC KERNEL PIPELINE",
+        "delta_badge": "Overlapping memory movement with math ops"
+      },
+      "visual_grammar": "live_trace",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_4.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 15.0,
+      "end": 20.0,
+      "word_timings": []
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 1,180 TFLOPS, delivering a massive 78% jump over the previous state-of-the-art.",
+      "visual_focus": "Bar chart showing a massive performance spike.",
+      "highlight_words": {
+        "1,180 TFLOPS": "#22C55E",
+        "78% jump": "#22C55E"
+      },
+      "svo_action": {
+        "subject": "Performance",
+        "action_verb": "surges",
+        "direct_object": "Benchmarks",
+        "anchor_word": "jump",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "Bar chart showing a massive performance spike.",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+          "sub": "Bar chart showing a massive performance spike.",
+          "metric_name": "Throughput",
+          "unit": "TFLOPS",
+          "contestants": [
+            {
+              "name": "Our Model",
+              "value": 1180.0,
+              "display_val": "1,180 TFLOPS",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Incumbent SOTA",
+              "value": 660.0,
+              "display_val": "660 TFLOPS",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Alternative Baselines",
+              "value": 610.0,
+              "display_val": "610 TFLOPS",
+              "is_hero": false,
+              "color": "#A855F7"
+            },
+            {
+              "name": "Standard PyTorch",
+              "value": 240.0,
+              "display_val": "240 TFLOPS",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "Bar chart showing a massive performance spike.",
+        "metric_name": "Throughput",
+        "unit": "TFLOPS",
+        "contestants": [
+          {
+            "name": "Our Model",
+            "value": 1180.0,
+            "display_val": "1,180 TFLOPS",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Incumbent SOTA",
+            "value": 660.0,
+            "display_val": "660 TFLOPS",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Alternative Baselines",
+            "value": 610.0,
+            "display_val": "610 TFLOPS",
+            "is_hero": false,
+            "color": "#A855F7"
+          },
+          {
+            "name": "Standard PyTorch",
+            "value": 240.0,
+            "display_val": "240 TFLOPS",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN"
+      },
+      "visual_grammar": "evidence_plot",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_5.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 20.0,
+      "end": 25.0,
+      "word_timings": []
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "Looping animation of the architecture.",
+      "highlight_words": {
+        "The Model Verse": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "Viewer",
+        "action_verb": "follows",
+        "direct_object": "The Model Verse",
+        "anchor_word": "deep-dives",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "THE MODEL VERSE",
+        "sub": "Master the architecture",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "visual_grammar": "synthesis_lockup",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/manim_engine/generated/flashattention_3_analysis/38938c5abab7/beat_6.py",
+      "visual_source": "bespoke",
+      "audio_duration": 5.0,
+      "slot_duration": 5.0,
+      "start": 25.0,
+      "end": 30.0,
+      "word_timings": []
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$T_{load} \\gg T_{compute}$",
+      "filename": "flashattention_3_analysis_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#38BDF8",
+      "term_annotations": [
+        {
+          "term": "T_{load}",
+          "label": "Memory latency"
+        },
+        {
+          "term": "T_{compute}",
+          "label": "Arithmetic time"
+        }
+      ],
+      "svg_filename": "flashattention_3_analysis_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(N^{2})$",
+      "filename": "flashattention_3_analysis_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "N",
+          "label": "Context window"
+        }
+      ],
+      "svg_filename": "flashattention_3_analysis_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$Latency_{hidden} = T_{overlap}$",
+      "filename": "flashattention_3_analysis_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "T_{overlap}",
+          "label": "Asynchronous scheduling"
+        }
+      ],
+      "svg_filename": "flashattention_3_analysis_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$W_{FP8} \\approx \\frac{1}{2} W_{FP16}$",
+      "filename": "flashattention_3_analysis_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "W",
+          "label": "Memory footprint"
+        }
+      ],
+      "svg_filename": "flashattention_3_analysis_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$Perf_{FA3} \\approx 1180 \\, \\mathrm{TFLOPS}$",
+      "filename": "flashattention_3_analysis_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "Perf",
+          "label": "Measured throughput"
+        }
+      ],
+      "svg_filename": "flashattention_3_analysis_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "SRAM",
+          "color": "#38BDF8",
+          "items": [
+            "Registers",
+            "Fast-Cache"
+          ]
+        },
+        {
+          "name": "VRAM",
+          "color": "#F59E0B",
+          "items": [
+            "Weights",
+            "KV-Cache"
+          ]
+        },
+        {
+          "name": "Compute",
+          "color": "#EF4444",
+          "items": [
+            "Tensor-Cores"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token Stream",
+        "target_cluster": "SRAM",
+        "token": "FP8_Vector"
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Stall",
+          "color": "#EF4444"
+        }
+      ]
+    },
+    "model_a": "FlashAttention-3",
+    "model_a_specs": [
+      "FP8 Asynchronous",
+      "Fused Kernels",
+      "Low Latency"
+    ],
+    "model_b": "Standard Attention",
+    "model_b_specs": [
+      "FP16 Sync",
+      "Blocked Memory",
+      "High Latency"
+    ],
+    "divide_title": "HARDWARE THROUGHPUT DIVIDE",
+    "model_a_stat": "1180 TFLOPS",
+    "model_a_stat_label": "PEAK THROUGHPUT",
+    "model_b_stat": "660 TFLOPS",
+    "model_b_stat_label": "BASELINE THROUGHPUT",
+    "efficiency_badge": "\u26a1 +78% SPEEDUP",
+    "benchmarks": [
+      {
+        "name": "Throughput",
+        "score_a": "1180",
+        "score_b": "660"
+      },
+      {
+        "name": "Precision",
+        "score_a": "FP8",
+        "score_b": "FP16"
+      },
+      {
+        "name": "Latency",
+        "score_a": "Hidden",
+        "score_b": "Exposed"
+      }
+    ],
+    "scale_metric": "1180",
+    "scale_label": "Peak TFLOPS",
+    "bottleneck_title": "MEMORY WALL BOTTLENECK",
+    "bottleneck_desc": "Serial synchronization of memory and compute",
+    "solution_title": "ASYNCHRONOUS KERNEL OVERLAP",
+    "solution_components": "Pipeline Interleaving",
+    "mechanism_title": "FP8 SRAM OPTIMIZATION",
+    "payoff_stat": "1180",
+    "payoff_label": "TFLOPS PEAK PERFORMANCE",
+    "payoff_sub": "Outperforming standard FP16 benchmarks",
+    "payoff_hero_stat": 1180,
+    "payoff_hero_label": "FA-3 Throughput",
+    "payoff_base_stat": 660,
+    "payoff_base_label": "Standard Kernel",
+    "payoff_delta_badge": "\u26a1 1.78x PERFORMANCE MULTIPLIER",
+    "challenger": "FlashAttention-3",
+    "incumbent": "Standard PyTorch Kernel"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+    "metric_name": "Throughput",
+    "unit": "TFLOPS",
+    "contestants": [
+      {
+        "name": "Our Model",
+        "value": 1180.0,
+        "display_val": "1,180 TFLOPS",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Incumbent SOTA",
+        "value": 660.0,
+        "display_val": "660 TFLOPS",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Alternative Baselines",
+        "value": 610.0,
+        "display_val": "610 TFLOPS",
+        "is_hero": false,
+        "color": "#A855F7"
+      },
+      {
+        "name": "Standard PyTorch",
+        "value": 240.0,
+        "display_val": "240 TFLOPS",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "VRAM Efficiency",
+      "Accuracy",
+      "Context Length",
+      "Cost Efficiency"
+    ]
+  },
+  "code_snippet": {
+    "filename": "flash_kernel.cu",
+    "language": "cpp",
+    "lines": [
+      "__global__ void flash_attention_async() {",
+      "cp_async_bulk_tensor(sram, global_vram);",
+      "__syncthreads();",
+      "compute_gemm_fp8(sram_tiles);",
+      "}"
+    ],
+    "highlight_lines": [
+      2,
+      4
+    ],
+    "trace_register": "\u26a1 ASYNC KERNEL PIPELINE",
+    "explanation": "Overlapping memory movement with math ops"
+  },
+  "arxiv_id": "2407.08608",
+  "paper_figures": [
+    {
+      "figure_id": "fig_1",
+      "stem": "3_stage_pipelining",
+      "caption": "3 Stage Pipelining",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/3_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_1_3_stage_pipelining.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_2",
+      "stem": "pingpong_pipelining",
+      "caption": "Pingpong Pipelining",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/pingpong_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_2_pingpong_pipelining.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_3",
+      "stem": "2_stage_pipelining",
+      "caption": "2 Stage Pipelining",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/2_stage_pipelining.png",
+      "svg_path": null,
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_3_2_stage_pipelining.png",
+      "original_type": "png",
+      "type": "raster_image",
+      "score": 140
+    },
+    {
+      "figure_id": "fig_4",
+      "stem": "flash3_h100_causal_False_hdim_128_fwd_speed",
+      "caption": "Flash3 H100 Causal False Hdim 128 Fwd Speed",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/flash3_h100_causal_False_hdim_128_fwd_speed.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_4_flash3_h100_causal_False_hdim_128_fwd_speed.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_4_flash3_h100_causal_False_hdim_128_fwd_speed.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    },
+    {
+      "figure_id": "fig_5",
+      "stem": "flash3_h100_fp8_causal_True_hdim_64_fwd_speed",
+      "caption": "Flash3 H100 Fp8 Causal True Hdim 64 Fwd Speed",
+      "page_num": 0,
+      "source_file": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/source/figs/flash3_h100_fp8_causal_True_hdim_64_fwd_speed.pdf",
+      "svg_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_5_flash3_h100_fp8_causal_True_hdim_64_fwd_speed.svg",
+      "image_path": "/Users/amankumar/Aman/Test-WOrkspace/themodelverse-shorts/public/arxiv_cache/2407.08608/chalkboard_figures/fig_5_flash3_h100_fp8_causal_True_hdim_64_fwd_speed.png",
+      "original_type": "pdf",
+      "type": "vector_pdf",
+      "score": 135
+    }
+  ],
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 9.5,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "Finally, a video that doesn't treat me like a toddler. The hook was perfect\u2014calling out H100 idling immediately hits home because everyone knows how expensive those GPUs are. I actually learned something about cp_async_bulk_tensor without having to sit through a 20-minute lecture. It's technical, fast, and doesn't use any of that 'digital brain' or 'smart assistant' cringe."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "The Memory Wall",
+    "physical_analogy": "A high-speed assembly line waiting for raw materials that are stuck in a slow, narrow loading dock.",
+    "eureka_mechanism": "Asynchronous Data Transfer",
+    "paradigm_shift": "Hiding memory latency behind compute cycles to maximize H100 utilization."
+  },
+  "hook_gating": {
+    "selected_hook": "Do not scale your next training run before you see how FlashAttention-3 delivers 1180.",
+    "verdict": 71,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 84,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "opening_style": "candidate_selected",
+    "candidates_evaluated": 9,
+    "rankings": [
+      {
+        "hook": "Do not scale your next training run before you see how FlashAttention-3 delivers 1180.",
+        "verdict": 71,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before FlashAttention-3 unlocks 1180 gains?",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Why should you care about FlashAttention-3? Because your H100s are idling, wasting over half their potential waiting for data from slow VRAM.",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 1180 of your hardware performance on the table without FlashAttention-3.",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Your GPU can spend 1180 of its memory budget moving data; FlashAttention-3 cuts that overhead.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until FlashAttention-3 proved a 1180 leap.",
+        "verdict": 45,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Your H100s are idling, wasting over half their potential waiting for data from slow VRAM.",
+        "verdict": 45,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is FlashAttention-3 a major breakthrough? Because src/abstract.tex.",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Here is the uncomfortable part of FlashAttention-3: src/abstract.tex.",
+        "verdict": 39,
+        "band": "WEAK",
+        "formula": "The Reveal"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "attention_grid",
+      "entity_type": "attention_grid",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {}
+    }
+  ],
+  "script_driven_visuals": true,
+  "visual_generation_key": "38938c5abab7"
+}

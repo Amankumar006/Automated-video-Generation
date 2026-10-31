@@ -18,7 +18,7 @@ from typing import Dict, Any, List, Optional
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-from pipeline.batch_digest import get_trending_digest, record_paper_production, load_history
+from pipeline.batch_digest import get_trending_digest, fetch_hf_trending_models, record_paper_production, load_history
 from pipeline.github_trending_fetcher import get_trending_github_digest
 from pipeline.official_blogs_fetcher import get_official_blogs_digest, official_blogs_fetcher
 from pipeline.auto_produce import auto_produce
@@ -41,6 +41,11 @@ from pipeline.analytics_feedback import (
     get_recommended_pacing
 )
 from pipeline.topic_gate import filter_topic_candidates
+from pipeline.content_strategy import (
+    AUDIENCE_PROFILE,
+    rank_candidates as rank_audience_candidates,
+)
+from pipeline.experiment_ledger import can_schedule, load_ledger, record_video, report as experiment_report
 
 DAEMON_LOGS_DIR = PROJECT_ROOT / "public" / "daemon_logs"
 DAEMON_LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -76,10 +81,9 @@ SLOT_SCHEDULE: Dict[int, Dict[str, Any]] = {
 }
 
 
-# 3 Core Channel Content Pillars for Autonomous Daily Rotation:
-# (1) Academic mechanism deep dives ('arxiv')
-# (2) Official AI lab releases ('blogs' / 'news')
-# (3) Actionable developer perks and startup credits ('perks')
+# Preserve the established round-robin order for the original three pillars;
+# GitHub is added to the audience-led candidate pool when enabled below so
+# existing rotation state remains compatible with older production ledgers.
 CONTENT_PILLARS = ["arxiv", "blogs", "perks"]
 
 # Creative formats rotate independently from source pillars so mixed runs do
@@ -111,11 +115,68 @@ CONTENT_FORMAT_PROFILES: Dict[str, Dict[str, Any]] = {
     },
 }
 
+STRATEGY_FORMAT_TO_ENGINE_FORMAT = {
+    "practical_demo": "tool_reaction",
+    "comparison": "system_reveal",
+    "current_release": "tool_reaction",
+    "mechanism": "motion_story",
+}
+
 PILLAR_DISPLAY_NAMES: Dict[str, str] = {
     "arxiv": "Academic Mechanism Deep Dives (arXiv / HF)",
     "blogs": "Official AI Lab Releases & Tech News (OpenAI, Anthropic, Google DeepMind, HF)",
-    "perks": "Actionable Developer Perks & Startup Credits (Anthropic, Microsoft, Google, AWS)"
+    "perks": "Actionable Developer Perks & Startup Credits (Anthropic, Microsoft, Google, AWS)",
+    "github": "Trending Open-Source AI Repositories & Agent Skills (GitHub)",
+    "models": "Trending Open-Weight Models & Model Cards (Hugging Face)",
 }
+
+
+def _audience_strategy_enabled() -> bool:
+    """Return whether production should use audience-led ranking."""
+    return os.getenv("CONTENT_STRATEGY_MODE", "audience_led").lower() not in {"legacy", "off", "false", "0"}
+
+
+def get_production_pillars() -> List[str]:
+    """Return configured pillars without changing legacy rotation semantics."""
+    pillars = list(CONTENT_PILLARS)
+    include_github = os.getenv("CONTENT_STRATEGY_INCLUDE_GITHUB", "false").lower() in {"1", "true", "yes"}
+    if _audience_strategy_enabled() and include_github and "github" not in pillars:
+        pillars.append("github")
+    include_hf_models = os.getenv("CONTENT_STRATEGY_INCLUDE_HF_MODELS", "false").lower() in {"1", "true", "yes"}
+    if _audience_strategy_enabled() and include_hf_models and "models" not in pillars:
+        pillars.append("models")
+    return pillars
+
+
+def rank_candidates_for_audience(
+    candidates: List[Dict[str, Any]],
+    *,
+    history: Optional[Dict[str, Any]] = None,
+    count: int = 1,
+    preferred_taxonomy: Optional[str] = None,
+    reference_date: Optional[datetime.date] = None,
+) -> List[Dict[str, Any]]:
+    """Apply deterministic audience scoring before any LLM editorial choice."""
+    if not candidates or not _audience_strategy_enabled():
+        return candidates
+
+    analytics = {"category_multipliers": get_performance_category_bias()}
+    ranked = rank_audience_candidates(
+        candidates,
+        count=max(count, min(len(candidates), 10)),
+        history=history,
+        analytics=analytics,
+        reference_date=reference_date,
+        audience_profile=AUDIENCE_PROFILE,
+    )
+    if preferred_taxonomy:
+        preferred = [
+            item for item in ranked
+            if str(item.get("taxonomy") or item.get("domain_taxonomy") or "").lower() == preferred_taxonomy.lower()
+        ]
+        if preferred:
+            ranked = preferred + [item for item in ranked if item not in preferred]
+    return ranked
 
 
 def get_content_format_rotation_order(
@@ -163,7 +224,9 @@ def classify_history_entry_pillar(paper_id: str, record: Dict[str, Any]) -> str:
         return "blogs"
     if src in ("github", "github_api", "curated_trending"):
         return "github"
-    if src in ("arxiv", "hf"):
+    if src in ("huggingface_models", "hf_models"):
+        return "models"
+    if src in ("arxiv", "hf", "huggingface"):
         return "arxiv"
 
     clean_id = str(paper_id).lower()
@@ -303,6 +366,17 @@ def is_candidate_eligible_for_production(
             reference_date=reference_date,
         )
 
+    if src in ("huggingface_models", "hf_models") or c_id.startswith("hf_model_"):
+        model_meta = candidate.get("model_metadata", {})
+        activity_date = model_meta.get("last_modified") or model_meta.get("updated_at") or candidate.get("updated_at")
+        if not activity_date:
+            return False
+        return is_content_recent(
+            activity_date,
+            max_age_days=effective_max_age,
+            reference_date=reference_date,
+        )
+
     # 4. ArXiv / academic papers check
     p_date = candidate.get("published_at") or candidate.get("published_date") or candidate.get("date") or c_id
     return is_content_recent(
@@ -361,6 +435,10 @@ def fetch_candidates_for_pillar(
         gh_candidates = get_trending_github_digest(limit=max(limit * 5, 30))
         candidates = [g for g in gh_candidates if g["id"] not in proc_ids]
 
+    elif pillar == "models":
+        model_candidates = fetch_hf_trending_models(limit=max(limit * 5, 30))
+        candidates = [m for m in model_candidates if m["id"] not in proc_ids]
+
     # Enforce second-layer defensive check on all candidates
     eligible = [
         c for c in candidates
@@ -397,6 +475,13 @@ def evaluate_pedagogical_viability(
 
     if not candidates:
         return []
+
+    # Production candidates arrive here only after the deterministic audience
+    # strategy has ranked and annotated them. Keep this function compatible
+    # with legacy/unit-test candidates that do not carry strategy metadata.
+    strategy_candidates = [c for c in candidates if c.get("content_strategy")]
+    if strategy_candidates:
+        candidates = strategy_candidates
 
     target_count = min(count, len(candidates))
 
@@ -457,11 +542,15 @@ def evaluate_pedagogical_viability(
         c_title = c.get("title", "Untitled Candidate")
         c_id = c.get("id", f"candidate_{i+1}")
         c_abs = str(c.get("abstract") or "")[:250]
+        strategy = c.get("content_strategy") or {}
         cand_summaries.append(
             f"[{i+1}] Title: {c_title}\n"
             f"    Candidate ID: {c_id}\n"
             f"    Domain Taxonomy: {tax} (Audience Velocity Multiplier: {mult:.2f}x)\n"
             f"    Category: {c.get('recommended_category', 'mechanism_deepdive')}\n"
+            f"    Audience Strategy: score={strategy.get('score', 'legacy')} format={strategy.get('recommended_format', 'legacy')}\n"
+            f"    Viewer Problem: {strategy.get('viewer_problem', 'not supplied')}\n"
+            f"    Promised Payoff: {strategy.get('promised_payoff', 'not supplied')}\n"
             f"    Abstract: {c_abs}..."
         )
 
@@ -486,6 +575,7 @@ Review these top {len(cand_summaries)} trending AI papers, official lab announce
 {chr(10).join(cand_summaries)}
 
 Select the {target_count} BEST and MOST DIVERSE topics for 45-second educational animated Shorts.
+The deterministic audience strategy has already rejected weak candidates. Preserve each selected candidate's supplied viewer problem, promised payoff, and evidence; do not invent a different audience benefit.
 Criteria:
 1. High Public Fascination: Does it answer a fascinating question that curious non-specialists care about? (e.g. reasoning, memory, world models, attention, latent circuits, free startup credits/perks, major AI model releases).
 2. Physical Analogy Potential: Can the core idea be explained using everyday tangible comparisons (e.g. library, clouds, mirror, sculptor, train, static, VIP all-access badge)?
@@ -589,10 +679,18 @@ class DailyShortsDaemon:
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
         effective_topic_mode = (topic_mode or TOPIC_SELECTION_MODE).lower()
 
+        # Only public uploads consume the 20-video learning budget.  Local
+        # renders and unlisted review runs remain available for development.
+        if not dry_run and publish and self.privacy == "public":
+            experiment_state = load_ledger()
+            if not can_schedule(experiment_state, requested=count):
+                print(f"🛑 Audience experiment budget exhausted: {experiment_report(experiment_state)}")
+                return []
+
         def fetch_pool(pillar: str, limit: int, history: Dict[str, Any]) -> List[Dict[str, Any]]:
             """Call candidate discovery while keeping older test doubles compatible."""
             try:
-                return fetch_candidates_for_pillar(
+                pool = fetch_candidates_for_pillar(
                     pillar,
                     limit=limit,
                     history=history,
@@ -602,12 +700,22 @@ class DailyShortsDaemon:
             except TypeError as exc:
                 if "topic_mode" not in str(exc):
                     raise
-                return fetch_candidates_for_pillar(
+                pool = fetch_candidates_for_pillar(
                     pillar,
                     limit=limit,
                     history=history,
                     reference_date=reference_date,
                 )
+            ranked = rank_candidates_for_audience(
+                pool,
+                history=history,
+                count=min(limit, len(pool)) if pool else 1,
+                preferred_taxonomy=preferred_taxonomy,
+                reference_date=reference_date,
+            )
+            if _audience_strategy_enabled() and pool and not ranked:
+                print(f"   ⚠️ Audience strategy rejected every candidate from {pillar.upper()}.")
+            return ranked
         print("\n" + "=" * 80)
         print(f"🤖 THE MODEL VERSE — AUTONOMOUS DAILY SHORTS DAEMON")
         print(f"⏰ Cycle Triggered: {timestamp} | Target Quota: {count} Reel(s) | Source: {source.upper()}")
@@ -687,11 +795,12 @@ class DailyShortsDaemon:
             if normalized_source in ("mixed", "auto"):
                 print(f"\n🔄 Step 1: Content Diversification Rotation (Source: {normalized_source.upper()})...")
                 history = load_history()
-                rotation_order = get_content_rotation_order(history)
+                production_pillars = get_production_pillars()
+                rotation_order = get_content_rotation_order(history, pillars=production_pillars)
 
                 print("   Recent Production History Inspection by Content Pillar:")
                 processed_papers = history.get("processed_papers", {})
-                for p in CONTENT_PILLARS:
+                for p in production_pillars:
                     last_time_str = "Never (Queued as high-priority drop)"
                     for pid, pdata in processed_papers.items():
                         if classify_history_entry_pillar(pid, pdata) == p:
@@ -714,7 +823,7 @@ class DailyShortsDaemon:
                 selected_formats = get_content_format_rotation_order(working_history)
 
                 for reel_idx in range(count):
-                    curr_rotation = get_content_rotation_order(working_history)
+                    curr_rotation = get_content_rotation_order(working_history, pillars=production_pillars)
                     chosen_candidate = None
                     chosen_pillar = None
 
@@ -738,7 +847,8 @@ class DailyShortsDaemon:
                                 break
 
                     if chosen_candidate:
-                        content_format = selected_formats[reel_idx % len(selected_formats)]
+                        strategy_format = (chosen_candidate.get("content_strategy") or {}).get("recommended_format")
+                        content_format = STRATEGY_FORMAT_TO_ENGINE_FORMAT.get(strategy_format) or selected_formats[reel_idx % len(selected_formats)]
                         chosen_candidate["content_format"] = content_format
                         chosen_candidate["format_profile"] = CONTENT_FORMAT_PROFILES[content_format]
                         selected_papers.append(chosen_candidate)
@@ -804,6 +914,20 @@ class DailyShortsDaemon:
                 print(f"       💡 Hook: {notes.get('recommended_hook')}")
             if notes.get("suggested_everyday_analogy"):
                 print(f"       🍎 Analogy: {notes.get('suggested_everyday_analogy')}")
+            strategy = p.get("content_strategy", {})
+            if strategy:
+                print(
+                    f"       🎯 Audience Strategy: {strategy.get('score', 0):.2f}/100 | "
+                    f"{strategy.get('recommended_format', 'unknown')} | "
+                    f"{strategy.get('primary_segment', 'developer')}"
+                )
+                print(f"       🧩 Viewer Problem: {strategy.get('viewer_problem', '')}")
+                print(f"       ✅ Promised Payoff: {strategy.get('promised_payoff', '')}")
+                breakdown = strategy.get("score_breakdown", {})
+                if breakdown:
+                    print(f"       📊 Score Breakdown: {json.dumps(breakdown, sort_keys=True)}")
+                if strategy.get("hard_rejections"):
+                    print(f"       🚫 Strategy Rejections: {', '.join(strategy['hard_rejections'])}")
 
         reports = []
 
@@ -814,6 +938,7 @@ class DailyShortsDaemon:
             category = top_paper.get("recommended_category", "mechanism_deepdive")
             notes = top_paper.get("editorial_notes", {})
             content_format = top_paper.get("content_format")
+            content_format = STRATEGY_FORMAT_TO_ENGINE_FORMAT.get(content_format, content_format)
             if content_format not in CONTENT_FORMAT_PROFILES:
                 content_format = get_content_format_rotation_order(load_history())[0]
                 top_paper["content_format"] = content_format
@@ -851,7 +976,14 @@ class DailyShortsDaemon:
                         topic=title,
                         category=category,
                         arxiv_meta=top_paper,
-                        context=json.dumps(top_paper["format_profile"], sort_keys=True),
+                        context=json.dumps(
+                            {
+                                "format_profile": top_paper["format_profile"],
+                                "content_strategy": top_paper.get("content_strategy", {}),
+                            },
+                            sort_keys=True,
+                        ),
+                        persist=False,
                     )
                 except TypeError as exc:
                     # Keep legacy test doubles and downstream integrations that
@@ -870,7 +1002,8 @@ class DailyShortsDaemon:
                     "spec": spec,
                     "audit": audit,
                     "source": cand_source,
-                    "status": "dry_run_success"
+                    "status": "dry_run_success",
+                    "content_strategy": top_paper.get("content_strategy", {}),
                 })
                 continue
 
@@ -901,8 +1034,45 @@ class DailyShortsDaemon:
                 traceback.print_exc()
                 video_out = None
 
+            strategy = top_paper.get("content_strategy", {})
+            publication_receipt: Dict[str, Any] = {}
             if video_out:
-                record_paper_production(arxiv_id, title, category, video_out, source=cand_source)
+                receipt_path = Path(video_out).with_suffix(".youtube_publication.json")
+                if receipt_path.exists():
+                    try:
+                        with receipt_path.open("r", encoding="utf-8") as receipt_file:
+                            publication_receipt = json.load(receipt_file)
+                    except (OSError, ValueError):
+                        publication_receipt = {}
+            experiment_record = {
+                "candidate_id": arxiv_id,
+                "title": title,
+                "source": cand_source,
+                "source_url": strategy.get("source_url") or top_paper.get("url", ""),
+                "source_date": strategy.get("source_date") or top_paper.get("published_at") or top_paper.get("updated_at"),
+                "candidate_score": strategy.get("score"),
+                "score_breakdown": strategy.get("score_breakdown", {}),
+                "selected_format": content_format,
+                "audience_profile": strategy.get("audience_profile", AUDIENCE_PROFILE["id"]),
+                "hook": strategy.get("recommended_hook") or notes.get("recommended_hook"),
+                "video_id": publication_receipt.get("video_id"),
+                "shorts_url": publication_receipt.get("shorts_url"),
+                "published_at": datetime.datetime.now(datetime.timezone.utc).isoformat() if publication_receipt else None,
+                "status": "published" if video_out and publish and self.privacy == "public" else ("produced_unpublished" if video_out else "failed"),
+                "failure_reason": None if video_out else "production or publishing failed",
+                "video_path": video_out,
+            }
+            record_video(experiment_record)
+
+            if video_out:
+                record_paper_production(
+                    arxiv_id,
+                    title,
+                    category,
+                    video_out,
+                    source=cand_source,
+                    content_strategy=strategy,
+                )
 
                 report_item = {
                     "reel_index": idx + 1,
@@ -916,7 +1086,8 @@ class DailyShortsDaemon:
                     "video_path": video_out,
                     "resolution": f"{BROADCAST_WIDTH}x{BROADCAST_HEIGHT} @ {BROADCAST_FPS}fps",
                     "editorial_notes": notes,
-                    "content_format": content_format
+                    "content_format": content_format,
+                    "content_strategy": top_paper.get("content_strategy", {}),
                 }
                 reports.append(report_item)
 
@@ -1016,7 +1187,7 @@ def main():
     parser.add_argument("--run-now", action="store_true", help="Execute production cycle immediately")
     parser.add_argument("--count", type=int, default=1, help="Number of reels to produce (default: 1, e.g. 5)")
     parser.add_argument("--dry-run", action="store_true", help="Test paper discovery and script generation without rendering")
-    parser.add_argument("--source", choices=["arxiv", "github", "perks", "blogs", "news", "mixed", "auto"], default="mixed", help="Candidate source: 'mixed' (auto-rotate between arxiv, blogs, perks), 'arxiv', 'blogs', 'perks', 'github', or 'auto' (default: mixed)")
+    parser.add_argument("--source", choices=["arxiv", "github", "models", "perks", "blogs", "news", "mixed", "auto"], default="mixed", help="Candidate source: 'mixed' (audience-led rotation), 'arxiv', 'blogs', 'perks', 'github', 'models', or 'auto' (default: mixed)")
     parser.add_argument("--topic-mode", choices=["latest_or_viral", "recent", "legacy"], default=TOPIC_SELECTION_MODE, help="Topic gate policy; production defaults to latest-or-viral evidence")
     parser.add_argument("--daemon", action="store_true", help="Run standing daemon in continuous background loop across 5 daily slots")
     parser.add_argument("--slot-hour", type=int, choices=[1, 5, 9, 12, 16], help="Simulate a specific automated upload window (1, 5, 9, 12, 16)")
@@ -1074,6 +1245,9 @@ def main():
             topic_mode=args.topic_mode
         )
         if not produced:
+            if args.privacy == "public" and not can_schedule(load_ledger(), requested=1):
+                print("✅ Audience experiment is complete; no public slot consumed.")
+                return
             print("❌ Production cycle completed with 0 reels produced. Marking run as failed.")
             sys.exit(1)
 

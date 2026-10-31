@@ -206,6 +206,8 @@ class VLMCritic:
                     data["image_file"] = img_path.name
                     data["beat_id"] = beat_id
                     data["model_used"] = model_cand
+                    data["provider_unavailable"] = False
+                    data["inspection_status"] = "inspected"
                     quota_tracker.record_success("gemini_vision")
                     break
                 except Exception as e:
@@ -298,8 +300,12 @@ class VLMCritic:
                             data["overall_score"] = min(max(fallback_score, 1.0), 6.0)
                             data["passed"] = False
                             data["primary_observation"] = "Vision provider unavailable; deterministic fallback did not inspect image semantics."
+                            data["provider_unavailable"] = True
+                            data["inspection_status"] = "provider_unavailable"
                             quota_tracker.record_exhausted("ollama_vision", "Ollama vision unreachable; used heuristic fallback")
                         else:
+                            data["provider_unavailable"] = False
+                            data["inspection_status"] = "inspected"
                             quota_tracker.record_success("ollama_vision")
                         print(f"   👁️ [Ollama Vision] Keyframe inspected via {data['model_used']}: {data.get('primary_observation', '')[:70]}")
                 except Exception as e_ollama:
@@ -322,7 +328,9 @@ class VLMCritic:
                 "suggested_patches": [],
                 "image_file": img_path.name,
                 "beat_id": beat_id,
-                "model_used": "deterministic_layout_heuristics"
+                "model_used": "deterministic_layout_heuristics",
+                "provider_unavailable": True,
+                "inspection_status": "provider_unavailable"
             }
 
         # Deterministic Geometry Verification via layout_solver
@@ -492,6 +500,7 @@ class VLMCritic:
 
         scores = [r.get("overall_score", 0.0) for r in results if "overall_score" in r]
         avg_score = round(sum(scores) / len(scores), 2) if scores else 0.0
+        provider_unavailable = any(r.get("provider_unavailable", False) for r in results)
         diversity_passed = len(diversity_violations) == 0
         audited_ids = {r.get("beat_id") for r in results}
         incomplete_audit = expected_ids != audited_ids
@@ -516,6 +525,7 @@ class VLMCritic:
             "diversity_violations": diversity_violations,
             "audit_timeout": audit_timeout,
             "incomplete_audit": incomplete_audit,
+            "provider_unavailable": provider_unavailable,
             "audited_beat_ids": sorted(audited_ids),
             "unique_layouts_count": len(layout_counts),
             "passed_quality_gate": all_passed,

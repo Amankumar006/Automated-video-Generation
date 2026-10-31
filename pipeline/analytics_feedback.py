@@ -11,6 +11,7 @@ import os
 import sys
 import json
 import datetime
+import statistics
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
@@ -22,6 +23,46 @@ from pipeline.publisher import get_authenticated_service
 PUBLIC_DIR = PROJECT_ROOT / "public"
 LEDGER_PATH = PUBLIC_DIR / "analytics_retention_ledger.json"
 REPORT_PATH = PUBLIC_DIR / "analytics_retention_report.md"
+
+
+def _metric_float(record: Dict[str, Any], key: str, default: float = 0.0) -> float:
+    try:
+        return float(record.get(key, default) or default)
+    except (TypeError, ValueError):
+        return default
+
+
+def qualified_growth_score(record: Dict[str, Any], baseline: Optional[Dict[str, float]] = None) -> float:
+    """Score useful audience growth without letting raw views dominate.
+
+    The score is intentionally bounded and uses watch quality, engagement, and
+    subscriber conversion.  Unknown metrics contribute zero rather than being
+    guessed, which keeps early experiment records honest.
+    """
+    baseline = baseline or {}
+    velocity_baseline = max(float(baseline.get("views_per_hour", 1.0) or 1.0), 1.0)
+    velocity = min(_metric_float(record, "views_per_hour") / velocity_baseline, 2.0) / 2.0
+    percentage = min(_metric_float(record, "average_percentage_watched") / 100.0, 1.0)
+    likes = min(_metric_float(record, "like_ratio_pct") / 10.0, 1.0)
+    comments = min((_metric_float(record, "comments") / max(_metric_float(record, "views"), 1.0)) * 1000.0, 1.0)
+    subscribers = min((_metric_float(record, "subscribers_gained") / max(_metric_float(record, "views"), 1.0)) * 1000.0, 1.0)
+    score = (0.30 * velocity) + (0.30 * percentage) + (0.15 * likes) + (0.10 * comments) + (0.15 * subscribers)
+    return round(max(0.0, min(1.0, score)), 4)
+
+
+def smoothed_relative_weight(
+    category_average: float,
+    overall_average: float,
+    sample_count: int,
+    *,
+    minimum_samples: int = 3,
+) -> float:
+    """Shrink category multipliers toward 1.0 until evidence is sufficient."""
+    if overall_average <= 0:
+        return 1.0
+    raw = max(0.60, min(2.0, category_average / overall_average))
+    confidence = min(1.0, max(0.0, sample_count / float(max(1, minimum_samples))))
+    return round(1.0 + ((raw - 1.0) * confidence), 2)
 
 
 def _parse_iso_duration(iso_duration: str) -> float:
@@ -206,9 +247,13 @@ class YouTubeRetentionAnalytics:
                 "views": views,
                 "likes": likes,
                 "comments": comments,
+                "shares": 0,
+                "subscribers_gained": 0,
                 "views_per_hour": views_per_hour,
                 "like_ratio_pct": like_ratio,
                 "composite_engagement_velocity": composite_engagement,
+                "average_percentage_watched": 0.0,
+                "average_view_duration_seconds": 0.0,
                 "taxonomy": taxonomy,
                 "deep_retention_available": False,
                 "retention_curve": []
@@ -228,24 +273,50 @@ class YouTubeRetentionAnalytics:
                 today_str = datetime.date.today().isoformat()
                 start_str = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()
 
-                # Query average percentage watched per video
-                ret_resp = yt_analytics.reports().query(
-                    ids="channel==MINE",
-                    startDate=start_str,
-                    endDate=today_str,
-                    metrics="views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage",
-                    dimensions="video"
-                ).execute()
+                # Query quality and qualified-growth metrics in one call.  Some
+                # channels/API versions do not expose shares or subscribersGained,
+                # so retry with the original retention-only metric set.
+                metrics = "views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage,likes,comments,shares,subscribersGained"
+                try:
+                    ret_resp = yt_analytics.reports().query(
+                        ids="channel==MINE",
+                        startDate=start_str,
+                        endDate=today_str,
+                        metrics=metrics,
+                        dimensions="video"
+                    ).execute()
+                except Exception:
+                    ret_resp = yt_analytics.reports().query(
+                        ids="channel==MINE",
+                        startDate=start_str,
+                        endDate=today_str,
+                        metrics="views,estimatedMinutesWatched,averageViewDuration,averageViewPercentage",
+                        dimensions="video"
+                    ).execute()
 
                 rows = ret_resp.get("rows", [])
-                ret_map = {row[0]: (float(row[3]), float(row[4])) for row in rows if len(row) >= 5}
+                ret_map = {}
+                for row in rows:
+                    if len(row) < 5:
+                        continue
+                    values = [float(value or 0) for value in row[1:]]
+                    ret_map[row[0]] = {
+                        "average_view_duration_seconds": values[2],
+                        "average_percentage_watched": values[3],
+                        "likes": values[4] if len(values) > 4 else None,
+                        "comments": values[5] if len(values) > 5 else None,
+                        "shares": values[6] if len(values) > 6 else None,
+                        "subscribers_gained": values[7] if len(values) > 7 else None,
+                    }
 
                 for r in video_records:
                     if r["video_id"] in ret_map:
-                        avg_dur, avg_pct = ret_map[r["video_id"]]
+                        metrics_for_video = ret_map[r["video_id"]]
                         r["deep_retention_available"] = True
-                        r["average_view_duration_seconds"] = round(avg_dur, 2)
-                        r["average_percentage_watched"] = round(avg_pct, 2)
+                        for key, value in metrics_for_video.items():
+                            if value is not None:
+                                r[key] = round(value, 2)
+                        r["like_ratio_pct"] = round((r["likes"] / max(r["views"], 1)) * 100.0, 2)
         except Exception as e:
             # YouTube Analytics API v2 not enabled or insufficient quota — fall back gracefully
             pass
@@ -271,7 +342,19 @@ class YouTubeRetentionAnalytics:
                 "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat()
             }
 
-        # Aggregate by taxonomy
+        # Use a winsorized view baseline so one viral outlier cannot dominate
+        # future selection, and attach the same qualified-growth score to each
+        # record for experiment reporting.
+        raw_views = [_metric_float(v, "views") for v in video_records]
+        view_median = statistics.median(raw_views) if raw_views else 0.0
+        robust_cap = max(view_median * 3.0, 1.0)
+        overall_avg_views = sum(min(value, robust_cap) for value in raw_views) / max(len(raw_views), 1)
+        overall_avg_velocity = sum(_metric_float(v, "views_per_hour") for v in video_records) / max(len(video_records), 1)
+        baseline = {"views_per_hour": overall_avg_velocity}
+        for video in video_records:
+            video["qualified_growth_score"] = qualified_growth_score(video, baseline)
+
+        # Aggregate by taxonomy, format, and audience segment.
         taxonomy_stats: Dict[str, Dict[str, Any]] = {}
         for v in video_records:
             tax = v["taxonomy"]
@@ -280,33 +363,43 @@ class YouTubeRetentionAnalytics:
                     "total_views": 0,
                     "total_likes": 0,
                     "total_comments": 0,
+                    "robust_views": 0.0,
                     "count": 0,
                     "avg_velocity": 0.0,
-                    "velocities": []
+                    "velocities": [],
+                    "qualified_growth_scores": [],
+                    "formats": {},
+                    "audience_segments": {},
                 }
             st = taxonomy_stats[tax]
             st["total_views"] += v["views"]
+            st["robust_views"] += min(_metric_float(v, "views"), robust_cap)
             st["total_likes"] += v["likes"]
             st["total_comments"] += v["comments"]
             st["count"] += 1
             st["velocities"].append(v["composite_engagement_velocity"])
+            st["qualified_growth_scores"].append(v["qualified_growth_score"])
+            content_format = v.get("content_format") or v.get("format") or "unknown"
+            st["formats"][content_format] = st["formats"].get(content_format, 0) + 1
+            audience_segment = v.get("audience_segment") or v.get("audience_profile") or "unknown"
+            st["audience_segments"][audience_segment] = st["audience_segments"].get(audience_segment, 0) + 1
 
         # Compute averages & relative weights
-        overall_avg_views = sum(v["views"] for v in video_records) / max(len(video_records), 1)
         category_weights = {}
 
         for tax, st in taxonomy_stats.items():
             avg_views = st["total_views"] / max(st["count"], 1)
             st["avg_views"] = round(avg_views, 1)
             st["avg_velocity"] = round(sum(st["velocities"]) / max(len(st["velocities"]), 1), 2)
+            st["avg_qualified_growth_score"] = round(
+                sum(st["qualified_growth_scores"]) / max(len(st["qualified_growth_scores"]), 1), 4
+            )
 
-            # Weight multiplier between 0.6x and 2.0x based on view performance against overall average
-            if overall_avg_views > 0:
-                raw_weight = avg_views / overall_avg_views
-                clamped_weight = max(0.60, min(2.0, raw_weight))
-            else:
-                clamped_weight = 1.0
-            category_weights[tax] = round(clamped_weight, 2)
+            # Shrink low-sample weights toward neutral until at least three
+            # videos support a strong taxonomy preference.
+            category_weights[tax] = smoothed_relative_weight(
+                st["robust_views"] / max(st["count"], 1), overall_avg_views, st["count"], minimum_samples=3
+            )
 
         # Sort top taxonomy
         top_taxonomy = max(taxonomy_stats.items(), key=lambda x: x[1]["avg_views"])[0]
@@ -395,6 +488,22 @@ class YouTubeRetentionAnalytics:
                 print(f"⚠️ Could not load cached ledger: {e}")
 
         print(f"📥 Processed {len(records)} videos for retention intelligence.")
+
+        # Enrich platform metrics with the editorial dimensions recorded at
+        # publish time so learning can be segmented by format and audience.
+        try:
+            from pipeline.experiment_ledger import load_ledger
+            experiment_records = {
+                str(item.get("video_id")): item
+                for item in load_ledger().get("videos", [])
+                if item.get("video_id")
+            }
+            for video in records:
+                editorial = experiment_records.get(str(video.get("video_id")), {})
+                video["content_format"] = editorial.get("selected_format", video.get("content_format", "unknown"))
+                video["audience_segment"] = editorial.get("audience_profile", video.get("audience_segment", "unknown"))
+        except Exception:
+            pass
 
         intelligence = self.analyze_performance_and_pacing(records)
         print(f"🎯 Top Performing Research Domain: {intelligence['top_performing_taxonomy'].upper()}")
@@ -493,6 +602,27 @@ The paper selector (`daily_shorts_daemon.py`) automatically scales candidate sel
         with open(REPORT_PATH, "w", encoding="utf-8") as f:
             f.write(md_content)
         print(f"📑 Markdown Analytics Report saved to: {REPORT_PATH.name}")
+
+        # Keep the audience experiment ledger in sync when a published video
+        # has a matching YouTube record.  Missing ledger entries are harmless:
+        # analytics collection can run before the production artifact is copied.
+        try:
+            from pipeline.experiment_ledger import update_metrics
+            for video in records:
+                video_id = video.get("video_id")
+                if video_id:
+                    update_metrics(video_id, {
+                        "views": video.get("views", 0),
+                        "likes": video.get("likes", 0),
+                        "comments": video.get("comments", 0),
+                        "subscribers_gained": video.get("subscribers_gained", 0),
+                        "average_view_duration_seconds": video.get("average_view_duration_seconds", 0),
+                        "average_percentage_watched": video.get("average_percentage_watched", 0),
+                        "hours_live": video.get("hours_live", 0),
+                        "qualified_growth_score": video.get("qualified_growth_score", 0),
+                    })
+        except Exception as exc:
+            print(f"ℹ️ Experiment ledger metric sync skipped: {exc}")
 
         return ledger_data
 

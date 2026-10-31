@@ -87,6 +87,20 @@ def test_thumbnail_content_uses_only_explicit_stats_and_model():
     assert content["provider"] == "Moonshot AI"
 
 
+def test_thumbnail_content_preserves_top_level_source_provenance():
+    content = _explicit_thumbnail_content(
+        {
+            "id": "geniex",
+            "title": "GenieX edge-native inference",
+            "category": "mechanism_deepdive",
+            "source_url": "https://github.com/qualcomm/GenieX",
+            "source_provider": "github",
+        }
+    )
+
+    assert content["source_label"] == "github.com"
+
+
 def test_thumbnail_generates_without_unrelated_formula_or_metrics(tmp_path):
     output = tmp_path / "poster.png"
     spec = {"id": "new_topic", "title": "A new model release", "category": "benchmark_news"}

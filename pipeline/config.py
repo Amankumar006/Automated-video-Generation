@@ -31,7 +31,26 @@ load_dotenv(WORKSPACE_ROOT / ".env")
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN") or shutil.which("ffmpeg") or "/Users/amankumar/bin/ffmpeg"
 PUBLIC_DIR = str(WORKSPACE_ROOT / "public")
 OUTPUT_DIR = str(WORKSPACE_ROOT / "output")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 GEMINI_MODEL_NAME = os.environ.get("GEMINI_MODEL_NAME", "gemini-flash-latest")
+GEMINI_TTS_MODEL = os.environ.get("GEMINI_TTS_MODEL", "gemini-3.8-flash-tts")
+GEMINI_TTS_VOICE = os.environ.get("GEMINI_TTS_VOICE", "Charon")
+GEMINI_TTS_STYLE = os.environ.get(
+    "GEMINI_TTS_STYLE",
+    "clear, confident, conversational science explainer; energetic but not theatrical; moderate pace",
+)
+GEMINI_TTS_TIMEOUT_SECONDS = float(os.environ.get("GEMINI_TTS_TIMEOUT_SECONDS", "90"))
+GEMINI_TTS_MIN_INTERVAL_SECONDS = float(os.environ.get("GEMINI_TTS_MIN_INTERVAL_SECONDS", "21"))
+PHONON_TTS_MODEL = os.environ.get("PHONON_TTS_MODEL", "hf://gradium/phonon-31m-en")
+PHONON_TTS_VOICE = os.environ.get("PHONON_TTS_VOICE", "")
+PHONON_TTS_LANGUAGE = os.environ.get("PHONON_TTS_LANGUAGE", "en")
+PHONON_TTS_QUANT = os.environ.get("PHONON_TTS_QUANT", "q8_0")
+PHONON_TTS_BIN = os.environ.get("PHONON_TTS_BIN", "")
+PHONON_TTS_TIMEOUT_SECONDS = float(os.environ.get("PHONON_TTS_TIMEOUT_SECONDS", "180"))
+PHONON_TTS_THREADS = int(os.environ.get("PHONON_TTS_THREADS", "0"))
+FAIL_ON_TTS_PROVIDER_FALLBACK = os.environ.get("FAIL_ON_TTS_PROVIDER_FALLBACK", "false").lower() in {
+    "1", "true", "yes"
+}
 
 # Typography & Visual Design Tokens
 FONT_HELVETICA = "Helvetica Neue"

@@ -130,6 +130,13 @@ class TestInstagramPublisher(unittest.TestCase):
         with open(self.test_video_path, "wb") as f:
             f.write(b"\x00" * 1024)  # 1KB dummy mp4
 
+    def test_resumable_upload_uses_meta_api_upload_endpoint(self):
+        """The binary upload must use Meta's current resumable API host."""
+        self.assertEqual(
+            self.publisher.rupload_url,
+            "https://rupload.facebook.com/ig-api-upload/v21.0",
+        )
+
     def tearDown(self):
         if self.test_video_path.exists():
             self.test_video_path.unlink()

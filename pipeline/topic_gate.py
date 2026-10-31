@@ -16,6 +16,9 @@ from pipeline.config import calculate_content_age_days
 LATEST_WINDOWS = {
     "arxiv": 7,
     "hf": 7,
+    "huggingface": 7,
+    "huggingface_models": 7,
+    "hf_models": 7,
     "blogs": 14,
     "official_blogs": 14,
     "github": 7,
@@ -48,6 +51,9 @@ def _date_value(candidate: Dict[str, Any], source: str) -> Optional[str]:
     blog = candidate.get("blog_metadata") or {}
     if source in {"github", "github_api", "github_search_api", "curated_trending"}:
         return repo.get("pushed_at") or repo.get("updated_at") or candidate.get("updated_at")
+    if source in {"huggingface_models", "hf_models"}:
+        model = candidate.get("model_metadata") or {}
+        return model.get("last_modified") or model.get("updated_at") or candidate.get("updated_at")
     if source in {"perks", "verified_perks"}:
         return candidate.get("last_verified_date") or perk.get("last_verified_date")
     return (

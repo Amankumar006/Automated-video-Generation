@@ -38,6 +38,7 @@ from manim_engine.primitives.particles import (
     create_traveling_photon_stream
 )
 from manim_engine.primitives.typography import CleanText
+from manim_engine.primitives.graphic_identity import create_graphic_identity_overlay
 
 
 VALID_BESPOKE_CODE = '''from manim import *
@@ -440,8 +441,9 @@ def test_run_pipeline_invokes_bespoke_synthesis_loop(monkeypatch, tmp_path):
     except SystemExit:
         pass
 
-    # Beat 3 should be skipped due to paper_figures, others synthesized
-    assert synthesized_beats == [1, 2, 4]
+    # Strict on-demand mode synthesizes every beat, including a beat with an
+    # available paper figure, so visual reuse cannot hide behind an asset.
+    assert synthesized_beats == [1, 2, 3, 4]
 
 
 def test_auto_produce_invokes_bespoke_synthesis_loop(monkeypatch, tmp_path):
@@ -485,7 +487,7 @@ def test_auto_produce_invokes_bespoke_synthesis_loop(monkeypatch, tmp_path):
     except StopAfterSynthesis:
         pass
 
-    assert synthesized_beats == [1, 2]
+    assert synthesized_beats == [1, 2, 3]
 
 
 # ==============================================================================
@@ -676,4 +678,53 @@ def test_seamless_cross_fade_handoff_in_play_brand_outro():
     assert dummy_formula in faded_mobjects
     assert scene.current_motif is None
     assert scene.current_formula_mobj is None
+
+
+def test_brand_outro_advances_graphic_identity_to_final_beat():
+    """The final branded frame must not retain the previous beat's readout."""
+    scene = DummyScriptDrivenScene()
+    scene.spec = {
+        "beats": [
+            {"beat_id": 1, "text": "B1"},
+            {"beat_id": 2, "text": "Outro"},
+        ]
+    }
+    scene.graphic_identity = create_graphic_identity_overlay(scene.spec, total_beats=2)
+
+    scene.play_brand_outro()
+
+    assert scene.graphic_identity.current_beat == 2
+    assert scene.graphic_identity.current_beat_label == "BEAT 02/02"
+
+
+def test_bespoke_layout_safety_moves_text_out_of_mechanism():
+    """Generated labels must not sit on top of the mechanism or subtitle band."""
+    mechanism = Circle(radius=1.0).move_to(ORIGIN)
+    label = Text("OVERLAPPING LABEL", font_size=28).move_to(ORIGIN)
+    motif = VGroup(mechanism, label)
+
+    ScriptDrivenScene.enforce_bespoke_layout_safety(motif)
+
+    assert label.get_center()[1] >= 1.75
+    assert label.get_bottom()[1] >= -2.15
+
+
+def test_bespoke_layout_safety_expands_tiny_mechanism():
+    """A valid but tiny generated drawing must still occupy the hero zone."""
+    mechanism = Line(ORIGIN, RIGHT * 0.4)
+    motif = VGroup(mechanism)
+
+    ScriptDrivenScene.enforce_bespoke_layout_safety(motif)
+
+    assert mechanism.width >= 0.99
+
+
+def test_formula_tray_reserves_a_clear_gap_above_the_hero_mechanism():
+    """Formula overlays must not sit on top of the mechanism's lower nodes."""
+    mechanism = Circle(radius=1.0).move_to([0, -1.9, 0])
+    tray = RoundedRectangle(width=5.5, height=0.8).move_to([0, -2.6, 0])
+
+    ScriptDrivenScene.reserve_formula_tray_space(mechanism, tray)
+
+    assert mechanism.get_bottom()[1] >= tray.get_top()[1] + 0.17
 

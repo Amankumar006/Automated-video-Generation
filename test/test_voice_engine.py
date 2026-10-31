@@ -30,6 +30,8 @@ from pipeline.text_normalizer import (
 from pipeline.voice_engine import (
     DiskAudioCache,
     ElevenLabsVoiceProvider,
+    GeminiTTSVoiceProvider,
+    PhononTTSVoiceProvider,
     SarvamVoiceProvider,
     PocketTTSVoiceProvider,
     UnifiedVoiceRouter,
@@ -141,6 +143,32 @@ def test_pocket_tts_provider_fails_with_actionable_setup_error(monkeypatch):
         provider.synthesize("A local voice test.")
 
 
+def test_phonon_provider_defaults_to_checkpoint_voice(monkeypatch):
+    monkeypatch.delenv("PHONON_TTS_VOICE", raising=False)
+    provider = PhononTTSVoiceProvider()
+    assert provider.resolve_voice(None) == ""
+    assert provider.resolve_voice("eric") == ""
+    assert provider.resolve_voice("custom_catalog_voice") == "custom_catalog_voice"
+
+
+def test_unified_router_routes_phonon_without_remote_fallback(tmp_path):
+    router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
+    dummy_audio = np.zeros(24000, dtype=np.float32)
+    with patch.object(
+        router.phonon,
+        "synthesize",
+        return_value=(dummy_audio, 24000, {"provider": "phonon", "voice": "default"}),
+    ) as mock_phonon:
+        audio, sr, meta = router.synthesize_beat(
+            text="Testing local Phonon routing.",
+            provider="phonon",
+        )
+    mock_phonon.assert_called_once()
+    assert sr == 24000
+    assert len(audio) == 24000
+    assert meta["provider"] == "phonon"
+
+
 # ==============================================================================
 # 4. ElevenLabs Provider Tests
 # ==============================================================================
@@ -197,6 +225,65 @@ def test_elevenlabs_quota_exceeded(mock_post):
     provider = ElevenLabsVoiceProvider(api_key="test_api_key")
     with pytest.raises(VoiceQuotaExceededError):
         provider.synthesize("Test out of credits")
+
+
+# ==============================================================================
+# 4b. Gemini Native TTS Provider
+# ==============================================================================
+
+def test_gemini_resolve_voice_defaults():
+    provider = GeminiTTSVoiceProvider(
+        api_key="fake_key",
+        model="gemini-3.8-flash-tts",
+        default_voice="Charon",
+    )
+    assert provider.resolve_voice(None) == "Charon"
+    assert provider.resolve_voice("Kore") == "Kore"
+
+
+@patch("requests.post")
+def test_gemini_synthesize_mock_success(mock_post):
+    buf = io.BytesIO()
+    sf.write(buf, np.zeros(24000, dtype=np.float32), 24000, format="WAV")
+    encoded = base64.b64encode(buf.getvalue()).decode("ascii")
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.text = "{}"
+    mock_resp.json.return_value = {
+        "output_audio": {"data": encoded}
+    }
+    mock_post.return_value = mock_resp
+
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key", min_interval=0)
+    audio, sr, meta = provider.synthesize("A clear technical explanation.", voice="Charon")
+
+    assert sr == 24000
+    assert len(audio) == 24000
+    assert meta["provider"] == "gemini"
+    assert meta["voice"] == "Charon"
+    request = mock_post.call_args.kwargs
+    assert request["json"]["model"] == provider.model
+    assert request["json"]["generation_config"]["speech_config"][0]["voice"] == "Charon"
+
+
+@patch("requests.post")
+def test_gemini_quota_exceeded(mock_post):
+    mock_resp = MagicMock()
+    mock_resp.status_code = 429
+    mock_resp.text = "Resource exhausted: quota exceeded"
+    mock_post.return_value = mock_resp
+
+    provider = GeminiTTSVoiceProvider(api_key="test_gemini_key", min_interval=0)
+    with pytest.raises(VoiceQuotaExceededError):
+        provider.synthesize("Test out of credits")
+
+
+def test_gemini_fallback_can_be_disabled(monkeypatch, tmp_path):
+    router = UnifiedVoiceRouter(cache_dir=str(tmp_path))
+    monkeypatch.setattr("pipeline.voice_engine.FAIL_ON_TTS_PROVIDER_FALLBACK", True)
+    with patch.object(router.gemini, "synthesize", side_effect=VoiceQuotaExceededError("quota")):
+        with pytest.raises(VoiceEngineError, match="mixed-voice"):
+            router.synthesize_beat("Keep the narration consistent.", provider="gemini")
 
 
 # ==============================================================================
@@ -330,15 +417,24 @@ def test_synthesize_audio_for_spec_integration(tmp_path):
 
 def test_default_tts_provider_is_supported():
     from pipeline.config import DEFAULT_TTS_PROVIDER, DEFAULT_VOICE
-    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "auto", "pocket")
+    assert DEFAULT_TTS_PROVIDER in ("elevenlabs", "gemini", "phonon", "auto", "pocket")
     assert DEFAULT_VOICE in ("eric", "am_eric", "")
 
     router = UnifiedVoiceRouter()
-    with patch.object(router.pocket, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "pocket", "voice": "alba"})):
-        audio, sr, meta = router.synthesize_beat(
-            text="Testing default ElevenLabs routing",
-            language="en"
-        )
+    if DEFAULT_TTS_PROVIDER == "phonon":
+        with patch.object(router.phonon, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "phonon", "voice": "default"})):
+            audio, sr, meta = router.synthesize_beat(
+                text="Testing default Phonon routing",
+                language="en"
+            )
+        assert meta["provider"] == "phonon"
+        assert meta["voice"] == "default"
+    else:
+        with patch.object(router.pocket, "synthesize", return_value=(np.zeros(24000, dtype=np.float32), 24000, {"provider": "pocket", "voice": "alba"})):
+            audio, sr, meta = router.synthesize_beat(
+                text="Testing default fallback routing",
+                language="en"
+            )
         assert meta["provider"] == "pocket"
         assert meta["voice"] == "alba"
 

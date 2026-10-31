@@ -15,6 +15,10 @@ from pathlib import Path
 from typing import Optional, List, Dict, Any, Tuple
 from manim import *
 
+# Keep a reference to Manim's native text class before the scene's CleanText
+# alias is installed. Generated bespoke modules may use either class.
+_ManimText = Text
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
@@ -42,6 +46,7 @@ from manim_engine.primitives.script_motifs import (
 )
 from manim_engine.controllers import SpotlightStagingController, KineticCameraController
 from manim_engine.primitives.particles import create_formula_sparkle_burst, create_formula_halo_pulse
+from manim_engine.primitives.graphic_identity import create_graphic_identity_overlay
 
 
 class ScriptDrivenScene(MovingCameraScene):
@@ -61,6 +66,11 @@ class ScriptDrivenScene(MovingCameraScene):
 
         # 2. Setup 3b1b Chalkboard Canvas (#0A0D14 + dot matrix lattice)
         self.setup_chalkboard()
+
+        # 2.5 Setup the topic-seeded broadcast identity layer.  It stays
+        # behind the mechanism visual and gives every short a consistent
+        # channel grammar without forcing the same diagram on every topic.
+        self.setup_graphic_identity()
 
         # 3. Setup Persistent Brand Header & Formula Tray
         self.current_formula_mobj = None
@@ -96,6 +106,136 @@ class ScriptDrivenScene(MovingCameraScene):
                 self.camera.frame.set(width=FRAME_WIDTH, height=FRAME_HEIGHT).move_to(ORIGIN)
         except Exception:
             pass
+
+    @staticmethod
+    def enforce_bespoke_layout_safety(motif: Mobject) -> None:
+        """Keep generated labels in a dedicated lane when geometry intersects them.
+
+        Model-authored Manim code can be executable yet still place a title on
+        top of a path or a node. This final pass is intentionally conservative:
+        it only moves text that intersects a non-text leaf or enters the
+        subtitle band. The mechanism geometry remains untouched.
+        """
+        text_mobjects: List[Mobject] = []
+        geometry_leaves: List[Mobject] = []
+
+        def collect(mobject: Mobject) -> None:
+            if isinstance(mobject, _ManimText):
+                text_mobjects.append(mobject)
+                return
+            children = getattr(mobject, "submobjects", [])
+            if children:
+                for child in children:
+                    collect(child)
+            elif isinstance(mobject, Mobject):
+                geometry_leaves.append(mobject)
+
+        collect(motif)
+        if not text_mobjects:
+            # Continue below so a text-free mechanism is still prevented from
+            # collapsing to a tiny mark in the middle of the vertical frame.
+            pass
+
+        if geometry_leaves:
+            try:
+                geometry_group = VGroup(*geometry_leaves)
+                geometry_width = geometry_group.width
+                geometry_height = geometry_group.height
+                width_factor = 2.8 / geometry_width if geometry_width > 0.01 else 1.0
+                height_factor = 1.7 / geometry_height if geometry_height > 0.01 else 1.0
+                footprint_factor = min(max(width_factor, height_factor), 2.5)
+                if footprint_factor > 1.05:
+                    geometry_group.scale(footprint_factor, about_point=geometry_group.get_center())
+            except Exception:
+                pass
+
+        if not text_mobjects:
+            return
+
+        def intersects(first: Mobject, second: Mobject) -> bool:
+            try:
+                first_left, first_right = first.get_left()[0], first.get_right()[0]
+                first_bottom, first_top = first.get_bottom()[1], first.get_top()[1]
+                second_left, second_right = second.get_left()[0], second.get_right()[0]
+                second_bottom, second_top = second.get_bottom()[1], second.get_top()[1]
+                overlap_width = min(first_right, second_right) - max(first_left, second_left)
+                overlap_height = min(first_top, second_top) - max(first_bottom, second_bottom)
+                return overlap_width > 0.04 and overlap_height > 0.04
+            except Exception:
+                return False
+
+        moved_labels = 0
+        for text_mobject in text_mobjects:
+            try:
+                if text_mobject.width > 5.7:
+                    text_mobject.scale_to_fit_width(5.7)
+            except Exception:
+                pass
+
+            overlaps_geometry = any(intersects(text_mobject, geometry) for geometry in geometry_leaves)
+            enters_subtitle_band = text_mobject.get_bottom()[1] < -2.15
+            if not overlaps_geometry and not enters_subtitle_band:
+                continue
+
+            # Reserve a readable upper annotation lane. Stack moved labels so
+            # a collision repair cannot create a second text collision.
+            target_y = 2.95 - moved_labels * 0.42
+            target_y = max(1.75, target_y)
+            text_mobject.move_to([0, target_y, 0])
+            moved_labels += 1
+
+            # Generated labels can still be wider than the hero lane after a
+            # collision move. Clamp every label to the mobile-safe horizontal
+            # bounds so long topic names cannot be cut off at the frame edge.
+            try:
+                safe_left, safe_right = -3.35, 3.35
+                if text_mobject.get_left()[0] < safe_left:
+                    text_mobject.shift(RIGHT * (safe_left - text_mobject.get_left()[0]))
+                if text_mobject.get_right()[0] > safe_right:
+                    text_mobject.shift(LEFT * (text_mobject.get_right()[0] - safe_right))
+            except Exception:
+                pass
+
+        # Apply the same horizontal clamp to labels that did not collide.
+        for text_mobject in text_mobjects:
+            try:
+                if text_mobject.width > 5.7:
+                    text_mobject.scale_to_fit_width(5.7)
+                safe_left, safe_right = -3.35, 3.35
+                if text_mobject.get_left()[0] < safe_left:
+                    text_mobject.shift(RIGHT * (safe_left - text_mobject.get_left()[0]))
+                if text_mobject.get_right()[0] > safe_right:
+                    text_mobject.shift(LEFT * (text_mobject.get_right()[0] - safe_right))
+            except Exception:
+                pass
+
+    @staticmethod
+    def reserve_formula_tray_space(motif: Mobject, tray_group: Mobject) -> None:
+        """Keep hero geometry above the fixed formula tray with a visible gap."""
+        if motif is None or tray_group is None:
+            return
+        try:
+            required_bottom = tray_group.get_top()[1] + 0.18
+            current_bottom = motif.get_bottom()[1]
+            if current_bottom >= required_bottom:
+                return
+
+            shift_up = required_bottom - current_bottom
+            shifted_top = motif.get_top()[1] + shift_up
+            if shifted_top <= 5.45:
+                motif.shift(UP * shift_up)
+                return
+
+            # If the composition cannot be shifted without entering the
+            # header, scale it into the remaining hero corridor first.
+            available_height = max(1.0, 5.45 - required_bottom)
+            if motif.height > available_height:
+                motif.scale_to_fit_height(available_height)
+            motif.move_to([motif.get_center()[0], (required_bottom + 5.45) / 2, motif.get_center()[2]])
+        except Exception:
+            # Layout repair must never make a render fail; the VLM/deterministic
+            # QA layer remains the final safety net.
+            return
 
     def load_spec(self) -> Dict[str, Any]:
         """Loads active spec from ACTIVE_SPEC_PATH or latest generated template."""
@@ -180,6 +320,16 @@ class ScriptDrivenScene(MovingCameraScene):
             mob.move_to([cam_center[0], cam_center[1] + 7.1, 0])
         self.header_group.add_updater(update_header)
         self.add(self.header_group)
+
+    def setup_graphic_identity(self):
+        """Add the shared, deterministic graphic-ad frame around the hero zone."""
+        self.graphic_identity = create_graphic_identity_overlay(
+            self.spec,
+            total_beats=len(self.spec.get("beats", [])) or 6,
+        )
+        self.graphic_identity.set_z_index(2)
+        self.add(self.graphic_identity)
+        self.graphic_identity_entered = False
 
     def setup_kinetic_captions(self):
         """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.85 (Depth Layer 3)."""
@@ -372,7 +522,19 @@ class ScriptDrivenScene(MovingCameraScene):
         tray_group = self._build_formula_tray_mobject(beat_id)
         if tray_group is not None and len(tray_group) > 0:
             if self.current_formula_mobj:
-                self.play(ReplacementTransform(self.current_formula_mobj, tray_group), run_time=run_time)
+                # Formula SVGs can have different submobject counts between
+                # beats. ReplacementTransform requires matching family trees
+                # and can crash inside Manim's zip-based interpolation. A
+                # simultaneous fade keeps the visual cross-fade while making
+                # arbitrary generated formulas structurally safe.
+                self.play(
+                    AnimationGroup(
+                        FadeOut(self.current_formula_mobj, shift=DOWN * 0.08),
+                        FadeIn(tray_group, shift=UP * 0.08),
+                        lag_ratio=0.0,
+                    ),
+                    run_time=run_time,
+                )
             else:
                 self.play(FadeIn(tray_group, shift=UP * 0.15), run_time=run_time)
             self.current_formula_mobj = tray_group
@@ -481,6 +643,12 @@ class ScriptDrivenScene(MovingCameraScene):
                 else:
                     motif_type = "visual_composition"
 
+            # Keep the shared broadcast identity synchronized with the active
+            # beat while leaving the mechanism composition fully topic-owned.
+            if hasattr(self, "graphic_identity") and self.graphic_identity is not None:
+                identity_focus = motif_params.get("layout") or motif_type or v_focus or "MECHANISM"
+                self.graphic_identity.update_beat(beat_id, identity_focus)
+
             # Strict audio-synchronous timing anchors
             expected_start = float(b.get("start", self.renderer.time))
             expected_end = expected_start + duration
@@ -520,11 +688,21 @@ class ScriptDrivenScene(MovingCameraScene):
 
             # Instantiate Visual: Check for Bespoke Synthesized Module (Visual Engine 6.0)
             spec_clean_id = re.sub(r"[^a-zA-Z0-9_\-]", "_", self.spec.get("id", "short")).lower()
-            bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
+            requested_bespoke_path = b.get("bespoke_visual_path")
+            if requested_bespoke_path:
+                bespoke_module_path = Path(requested_bespoke_path)
+                if not bespoke_module_path.is_absolute():
+                    bespoke_module_path = PROJECT_ROOT / bespoke_module_path
+            else:
+                bespoke_module_path = PROJECT_ROOT / "manim_engine" / "generated" / spec_clean_id / f"beat_{beat_id}.py"
             motif = None
 
-            bespoke_enabled = os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
-            if bespoke_enabled and bespoke_module_path.exists() and not visual_blueprint:
+            use_requested_bespoke = bool(requested_bespoke_path)
+            bespoke_enabled = (
+                use_requested_bespoke
+                or os.getenv("ENABLE_BESPOKE_VISUALS", "true").lower() in {"1", "true", "yes"}
+            )
+            if bespoke_enabled and bespoke_module_path.exists() and (use_requested_bespoke or not visual_blueprint):
                 try:
                     mod_name = f"bespoke_{spec_clean_id}_beat_{beat_id}"
                     spec_import = importlib.util.spec_from_file_location(mod_name, str(bespoke_module_path))
@@ -556,10 +734,17 @@ class ScriptDrivenScene(MovingCameraScene):
                         motif.scale_to_fit_height(8.4)
                         motif.move_to([0, 1.9, 0])
 
+            # Run the collision pass after scaling and safe-zone placement so
+            # its decisions use the final on-canvas coordinates.
+            if requested_bespoke_path:
+                self.enforce_bespoke_layout_safety(motif)
+
             motif.set_z_index(10)
 
             # Construct formula tray (if authentic formula exists)
             tray_group = self._build_formula_tray_mobject(beat_id)
+            if tray_group is not None:
+                self.reserve_formula_tray_space(motif, tray_group)
 
             enter_time = min(0.75, duration * 0.18)
 
@@ -600,6 +785,12 @@ class ScriptDrivenScene(MovingCameraScene):
             self.active_auxiliary_mobjects = []
 
             entrance_group = []
+            if hasattr(self, "graphic_identity") and self.graphic_identity is not None:
+                if not self.graphic_identity_entered:
+                    entrance_group.append(self.graphic_identity.get_entrance_animation(run_time=enter_time))
+                    self.graphic_identity_entered = True
+                else:
+                    entrance_group.append(self.graphic_identity.get_beat_animation(run_time=enter_time))
             if old_motif is not None:
                 entrance_group.append(FadeOut(old_motif, shift=DOWN * 0.12))
                 for aux_m in old_aux:
@@ -621,7 +812,16 @@ class ScriptDrivenScene(MovingCameraScene):
 
             if tray_group is not None and len(tray_group) > 0:
                 if self.current_formula_mobj:
-                    entrance_group.append(ReplacementTransform(self.current_formula_mobj, tray_group))
+                    # Generated SVG formulas do not guarantee identical
+                    # submobject trees. Cross-fade instead of transforming
+                    # between incompatible vector hierarchies.
+                    entrance_group.append(
+                        AnimationGroup(
+                            FadeOut(self.current_formula_mobj, shift=DOWN * 0.08),
+                            FadeIn(tray_group, shift=UP * 0.08),
+                            lag_ratio=0.0,
+                        )
+                    )
                 else:
                     entrance_group.append(FadeIn(tray_group, shift=UP * 0.12))
                 self.current_formula_mobj = tray_group
@@ -823,6 +1023,9 @@ class ScriptDrivenScene(MovingCameraScene):
         except Exception as e:
             print(f"⚠️ Ambient micro-motion note for {motif_type}: {e}")
 
+        if hasattr(self, "graphic_identity") and self.graphic_identity is not None and self.graphic_identity_entered:
+            anims.append(self.graphic_identity.get_ambient_animation(run_time=remaining_time))
+
         # 3. Dynamic ambient pulse on lower concept/formula tray
         if self.current_formula_mobj:
             anims.append(
@@ -835,6 +1038,14 @@ class ScriptDrivenScene(MovingCameraScene):
         """Standard high-conversion 3Blue1Brown chalkboard outro with seamless cross-fade from final beat."""
         total_beats = len(self.spec.get("beats", []))
         duration = self.get_beat_duration(total_beats, 4.5)
+
+        # The final spec beat is intentionally consumed by this branded outro
+        # instead of play_script_driven_choreography(). Advance the persistent
+        # identity layer before the handoff so the outro never displays the
+        # previous beat's label/focus (for example BEAT 05/06 on the final
+        # frame).
+        if hasattr(self, "graphic_identity") and self.graphic_identity is not None:
+            self.graphic_identity.update_beat(total_beats, "OUTRO")
 
         if hasattr(self, "caption_container") and self.caption_container:
             try:

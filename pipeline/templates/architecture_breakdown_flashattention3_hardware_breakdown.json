@@ -1,22 +1,22 @@
 {
   "id": "flashattention3_hardware_breakdown",
-  "title": "FlashAttention-3 Hardware Breakdown",
+  "title": "FlashAttention-3: Fast and Accurate Attention",
   "category": "architecture_breakdown",
   "domain_taxonomy": "neural_attention",
-  "hook_tag": "MEMORY BANDWIDTH HACK",
+  "hook_tag": "HARDWARE BOTTLENECK",
   "beats": [
     {
       "beat_id": 1,
-      "text": "Your H100 GPU spends most of its life idling, starving for data from the memory bus.",
-      "visual_focus": "A flickering H100 chip icon with a red 'IDLE' status indicator.",
+      "text": "Do not scale your next training run before you see how FlashAttention-3 delivers 1.8x.",
+      "visual_focus": "A high-speed clock ticking while a GPU chip glows red with idle heat.",
       "highlight_words": {
-        "starving": "#EF4444"
+        "doing absolutely nothing": "#EF4444"
       },
       "svo_action": {
-        "subject": "Memory latency",
-        "action_verb": "chokes",
-        "direct_object": "compute throughput",
-        "anchor_word": "starving",
+        "subject": "Memory Latency",
+        "action_verb": "strangles",
+        "direct_object": "Compute Throughput",
+        "anchor_word": "waiting",
         "semantic_role": "state_transition"
       },
       "visual_blueprint": {
@@ -25,92 +25,93 @@
         "sub": "Why your hardware is lying to you",
         "accent_color": "#EF4444",
         "params": {
-          "grid_title": "HBM Bandwidth Saturation",
-          "active_cell_label": "Compute Stalled",
-          "efficiency_label": "20% Utilization"
+          "grid_title": "SRAM/HBM Access Latency",
+          "active_cell_label": "Stalled SM Unit",
+          "efficiency_label": "Memory Bottleneck"
         }
       },
       "thriller_role": "pattern_interrupt_hook",
-      "act": 1
+      "act": 1,
+      "hook_score": 71,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning"
     },
     {
       "beat_id": 2,
-      "text": "The villain is the Memory Wall. Your compute cores are stuck in a single-lane highway, waiting for data to crawl from HBM.",
-      "visual_focus": "A bottlenecked highway animation showing data packets stuck behind a toll booth.",
+      "text": "The villain is the memory wall. Your processor is a Ferrari stuck behind a tractor on a single-lane road.",
+      "visual_focus": "A split screen showing a fast compute core vs a slow memory bus.",
       "highlight_words": {
-        "Memory Wall": "#F59E0B"
+        "memory wall": "#EF4444"
       },
       "svo_action": {
-        "subject": "Memory Wall",
-        "action_verb": "strangles",
-        "direct_object": "data flow",
-        "anchor_word": "bottleneck",
-        "semantic_role": "conflict_definition"
+        "subject": "Memory Bus",
+        "action_verb": "chokes",
+        "direct_object": "Data Flow",
+        "anchor_word": "stuck",
+        "semantic_role": "constraint_definition"
       },
       "visual_blueprint": {
-        "layout": "split_flow",
-        "title": "THE MEMORY WALL",
-        "sub": "Congestion at the HBM interface",
+        "layout": "barrier_separation",
+        "title": "THE BOTTLENECK",
+        "sub": "Compute vs Memory",
         "accent_color": "#EF4444",
-        "params": {}
+        "params": {
+          "stream_a_label": "Compute Stream",
+          "stream_b_label": "Memory Fetch",
+          "barrier_label": "Sync Barrier",
+          "barrier_sub": "Latency Penalty"
+        }
       },
       "thriller_role": "villain_bottleneck",
       "act": 2
     },
     {
       "beat_id": 3,
-      "text": "FlashAttention-3 pivots to asynchronous overlap, treating data movement and matrix math as parallel lanes in a high-speed relay race.",
-      "visual_focus": "Split-screen showing data loading and matrix multiplication happening simultaneously.",
+      "text": "FlashAttention-3 shatters this by using asynchronous pipelining to overlap memory loads with active math operations.",
+      "visual_focus": "A diagram showing data loading and compute happening in parallel streams.",
       "highlight_words": {
-        "asynchronous overlap": "#10B981"
+        "asynchronous pipelining": "#22C55E"
       },
       "svo_action": {
-        "subject": "Asynchrony",
-        "action_verb": "decouples",
-        "direct_object": "compute from memory",
-        "anchor_word": "parallel",
+        "subject": "Pipelining",
+        "action_verb": "overlaps",
+        "direct_object": "Execution",
+        "anchor_word": "shatters",
         "semantic_role": "solution_pivot"
       },
       "visual_blueprint": {
-        "layout": "split_flow",
-        "title": "ASYNCHRONOUS OVERLAP",
-        "sub": "Hiding latency behind computation",
-        "accent_color": "#34D399",
-        "params": {
-          "input_label": "Hardware Thread",
-          "router_label": "Async Controller",
-          "branch_a_label": "Memory Stream",
-          "branch_a_sub": "Prefetching",
-          "branch_b_label": "Compute Stream",
-          "branch_b_sub": "Warp Execution"
-        }
+        "layout": "vector_flow_field",
+        "title": "THE PIVOT",
+        "sub": "Hiding latency in plain sight",
+        "accent_color": "#10B981",
+        "params": {}
       },
-      "thriller_role": "eureka_pivot",
+      "thriller_role": "eureka_mechanism",
       "act": 3
     },
     {
       "beat_id": 4,
-      "text": "By using cp_async to pre-fetch blocks into shared memory, the kernel hides latency behind FP8 matrix operations, keeping SMs constantly busy.",
-      "visual_focus": "Code snippet highlighting cp_async and FP8 register usage.",
+      "text": "It leverages FP8 precision and TMA hardware to ensure the math units never starve for data.",
+      "visual_focus": "Close-up of Tensor Memory Accelerator hardware blocks moving data packets.",
       "highlight_words": {
-        "cp_async": "#3B82F6",
-        "FP8": "#3B82F6"
+        "FP8 precision": "#22C55E",
+        "TMA hardware": "#22C55E"
       },
       "svo_action": {
-        "subject": "cp_async",
-        "action_verb": "pre-fetches",
-        "direct_object": "data blocks",
-        "anchor_word": "latency",
-        "semantic_role": "mechanism_detail"
+        "subject": "TMA",
+        "action_verb": "feeds",
+        "direct_object": "Cores",
+        "anchor_word": "starve",
+        "semantic_role": "technical_mechanism"
       },
       "visual_blueprint": {
         "layout": "attention_prism_refraction",
-        "title": "THE SECRET SAUCE",
-        "sub": "cp_async + FP8 precision",
-        "accent_color": "#F59E0B",
+        "title": "SECRET SAUCE",
+        "sub": "Precision and Hardware",
+        "accent_color": "#38BDF8",
         "params": {
-          "token_label": "FP8 Weight Block",
-          "matrix_title": "Tensor Core Throughput"
+          "token_label": "FP8 Block",
+          "matrix_title": "Asynchronous Tensor Core"
         }
       },
       "thriller_role": "technical_deep_dive",
@@ -118,31 +119,32 @@
     },
     {
       "beat_id": 5,
-      "text": "The result? A massive 1,180 TFLOPS, delivering a 78.8% efficiency gain over standard PyTorch attention implementations.",
-      "visual_focus": "A bar chart showing the massive performance jump compared to standard implementations.",
+      "text": "The result is 1,180 TFLOPS, a 78% efficiency jump that forces the hardware to actually work.",
+      "visual_focus": "A bar chart showing a massive spike in performance metrics.",
       "highlight_words": {
-        "1,180 TFLOPS": "#8B5CF6"
+        "1,180 TFLOPS": "#3B82F6",
+        "78% efficiency": "#3B82F6"
       },
       "svo_action": {
         "subject": "FlashAttention-3",
-        "action_verb": "crushes",
-        "direct_object": "previous benchmarks",
-        "anchor_word": "efficiency",
-        "semantic_role": "victory_payoff"
+        "action_verb": "delivers",
+        "direct_object": "Peak Performance",
+        "anchor_word": "jump",
+        "semantic_role": "empirical_payoff"
       },
       "visual_blueprint": {
         "layout": "horizontal_race_bars",
         "title": "THE PAYOFF",
-        "sub": "78.8% efficiency gain",
+        "sub": "Benchmark annihilation",
         "accent_color": "#34D399",
         "params": {
-          "metric_name": "Kernel Throughput",
+          "metric_name": "TFLOPS",
           "unit": "TFLOPS",
           "contestants": [
             {
               "name": "FlashAttention-3",
               "value": 1180.0,
-              "display_val": "1,180 TFLOPS",
+              "display_val": "1180 TFLOPS",
               "is_hero": true,
               "color": "#34D399"
             },
@@ -151,17 +153,10 @@
               "value": 660.0,
               "display_val": "660 TFLOPS",
               "is_hero": false,
-              "color": "#38BDF8"
-            },
-            {
-              "name": "Standard PyTorch",
-              "value": 240.0,
-              "display_val": "240 TFLOPS",
-              "is_hero": false,
               "color": "#EF4444"
             }
           ],
-          "delta_badge": "\u26a1 +78% SOTA EFFICIENCY GAIN"
+          "delta_badge": "\u26a1 1.8x PERFORMANCE"
         }
       },
       "thriller_role": "empirical_victory",
@@ -169,26 +164,25 @@
     },
     {
       "beat_id": 6,
-      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
-      "visual_focus": "Logo animation with a looping neural network background.",
+      "text": "Follow The Model Verse to see how we stop wasting cycles and start building the future.",
+      "visual_focus": "The Model Verse logo fading into a complex neural network topology.",
       "highlight_words": {
-        "The Model Verse": "#FFFFFF"
+        "stop wasting cycles": "#3B82F6"
       },
       "svo_action": {
         "subject": "Viewer",
         "action_verb": "masters",
-        "direct_object": "AI architecture",
-        "anchor_word": "loop",
-        "semantic_role": "call_to_action"
+        "direct_object": "AI Architecture",
+        "anchor_word": "future",
+        "semantic_role": "loop_closure"
       },
       "visual_blueprint": {
-        "layout": "optimization_landscape",
-        "title": "THE MODEL VERSE",
-        "sub": "Deep-dive into the architecture",
+        "layout": "chalkboard_code_block",
+        "title": "THE LOOP",
+        "sub": "Stay ahead of the curve",
         "accent_color": "#34D399",
         "params": {
-          "landscape_title": "Efficiency Manifold",
-          "optima_label": "Global Maximum"
+          "code_block": "while True:\n  learn_architecture()\n  optimize_system()"
         }
       },
       "thriller_role": "paradigm_shift",
@@ -198,70 +192,70 @@
   "math_formulas": [
     {
       "beat_id": 1,
-      "latex": "$T_{\\mathrm{total}} = T_{\\mathrm{compute}} + T_{\\mathrm{memory}}$",
+      "latex": "$T_{\\mathrm{total}} = T_{\\mathrm{compute}} + T_{\\mathrm{stall}}$",
       "filename": "flashattention3_hardware_breakdown_beat1_formula.svg",
       "fontsize": 24,
-      "color": "#38BDF8",
+      "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "T_{memory}",
-          "label": "Stalled HBM Cycles"
+          "term": "T_{\\mathrm{stall}}",
+          "label": "Latency from HBM wait"
         }
       ],
       "svg_filename": "flashattention3_hardware_breakdown_beat1_formula.svg"
     },
     {
       "beat_id": 2,
-      "latex": "$\\mathcal{O}(N^2 \\cdot D) \\gg \\mathrm{Bandwidth}$",
+      "latex": "$\\mathcal{O}(N^{2}) \\implies \\text{Sync Wait} > \\text{Compute}$",
       "filename": "flashattention3_hardware_breakdown_beat2_formula.svg",
       "fontsize": 24,
       "color": "#EF4444",
       "term_annotations": [
         {
-          "term": "N^2",
-          "label": "Quadratic Memory Scaling"
+          "term": "\\mathcal{O}(N^{2})",
+          "label": "Quadratic Memory Cost"
         }
       ],
       "svg_filename": "flashattention3_hardware_breakdown_beat2_formula.svg"
     },
     {
       "beat_id": 3,
-      "latex": "$T_{\\mathrm{exec}} \\approx \\max(T_{\\mathrm{compute}}, T_{\\mathrm{memory}})$",
+      "latex": "$\\mathrm{Overlap} = \\max(T_{\\mathrm{load}}, T_{\\mathrm{calc}})$",
       "filename": "flashattention3_hardware_breakdown_beat3_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\max",
-          "label": "Overlapping Asynchrony"
+          "term": "Overlap",
+          "label": "Asynchronous Concurrency"
         }
       ],
       "svg_filename": "flashattention3_hardware_breakdown_beat3_formula.svg"
     },
     {
       "beat_id": 4,
-      "latex": "$\\mathrm{GEMM}_{\\mathrm{FP8}} = \\sum W_i \\cdot X_i$",
+      "latex": "$\\text{FP8} = 0.5 \\times \\text{FP16}$",
       "filename": "flashattention3_hardware_breakdown_beat4_formula.svg",
       "fontsize": 24,
-      "color": "#F59E0B",
+      "color": "#38BDF8",
       "term_annotations": [
         {
           "term": "FP8",
-          "label": "Low Precision Throughput"
+          "label": "Low-precision compute"
         }
       ],
       "svg_filename": "flashattention3_hardware_breakdown_beat4_formula.svg"
     },
     {
       "beat_id": 5,
-      "latex": "$\\eta = \\frac{\\mathrm{TFLOPS}_{\\mathrm{FA3}}}{\\mathrm{TFLOPS}_{\\mathrm{Base}}} \\approx 1.78$",
+      "latex": "$\\mathrm{Speedup} = \\frac{\\text{TFLOPS}_{\\mathrm{FA3}}}{\\text{TFLOPS}_{\\mathrm{FA2}}} \\approx 1.8$",
       "filename": "flashattention3_hardware_breakdown_beat5_formula.svg",
       "fontsize": 24,
       "color": "#34D399",
       "term_annotations": [
         {
-          "term": "\\eta",
-          "label": "Performance Gain Ratio"
+          "term": "1.8",
+          "label": "Empirical Throughput"
         }
       ],
       "svg_filename": "flashattention3_hardware_breakdown_beat5_formula.svg"
@@ -309,86 +303,94 @@
     "visual_entities": {
       "clusters": [
         {
-          "name": "Memory",
-          "color": "#EF4444",
+          "name": "Compute",
+          "color": "#38BDF8",
           "items": [
-            "HBM",
-            "DRAM",
+            "SM Core",
+            "Tensor Core",
+            "FP8"
+          ]
+        },
+        {
+          "name": "Memory",
+          "color": "#10B981",
+          "items": [
+            "HBM3",
+            "SRAM",
             "Cache"
           ]
         },
         {
-          "name": "Compute",
-          "color": "#34D399",
+          "name": "Control",
+          "color": "#F59E0B",
           "items": [
-            "Tensor Core",
-            "FP8",
-            "Warp"
+            "TMA",
+            "Asynch Gate"
           ]
         }
       ],
       "incoming_token": {
-        "label": "Token: QKV",
+        "label": "Token Block",
         "target_cluster": "Compute",
-        "token": "QKV"
+        "token": "Matrix_Block_0"
       },
       "bottleneck_tokens": [
         {
-          "word": "Memory Stall",
+          "word": "Sync Stall",
           "color": "#EF4444"
         }
       ]
     },
     "model_a": "FlashAttention-3",
     "model_a_specs": [
-      "Asynchronous",
-      "FP8 Optimized",
-      "H100 Native"
+      "Asynchronous Kernels",
+      "FP8 Support",
+      "H100 Optimized"
     ],
-    "model_b": "Standard Attention",
+    "model_b": "FlashAttention-2",
     "model_b_specs": [
-      "Blocking",
+      "Synchronous Kernels",
       "FP16 Baseline",
-      "Memory Bound"
+      "Standard Path"
     ],
-    "divide_title": "ASYNC VS SERIAL DIVIDE",
-    "model_a_stat": "1180 TFLOPS",
-    "model_a_stat_label": "PEAK THROUGHPUT",
-    "model_b_stat": "240 TFLOPS",
-    "model_b_stat_label": "BASELINE THROUGHPUT",
-    "efficiency_badge": "\u26a1 +78% SPEEDUP",
+    "divide_title": "HARDWARE SERIALIZATION DIVIDE",
+    "model_a_stat": "1180",
+    "model_a_stat_label": "TFLOPS",
+    "model_b_stat": "660",
+    "model_b_stat_label": "TFLOPS",
+    "efficiency_badge": "\u26a1 +80% THROUGHPUT",
     "benchmarks": [
       {
         "name": "Throughput",
         "score_a": "1180",
-        "score_b": "240"
+        "score_b": "660"
       },
       {
-        "name": "Memory Latency",
-        "score_a": "Low",
-        "score_b": "High"
+        "name": "Memory",
+        "score_a": "High",
+        "score_b": "Baseline"
       }
     ],
-    "scale_metric": "1.18",
-    "scale_label": "PetaFLOPS",
-    "bottleneck_title": "MEMORY WALL",
-    "bottleneck_desc": "HBM stalling compute cycles",
-    "solution_title": "ASYNCHRONOUS OVERLAP",
-    "solution_components": "Tensor Core Fusing",
-    "mechanism_title": "FP8 HARDWARE KERNEL",
-    "payoff_stat": "1,180",
-    "payoff_label": "TFLOPS REACHED",
-    "payoff_sub": "Overlapping Compute and Data Movement",
+    "scale_metric": "1180",
+    "scale_label": "TFLOPS Throughput",
+    "bottleneck_title": "SYNCHRONOUS SERIALIZATION",
+    "bottleneck_desc": "Sequential read-compute-write execution cycle",
+    "solution_title": "ASYNCHRONOUS PIPELINING",
+    "solution_components": "TMA & FP8 Block Arithmetics",
+    "mechanism_title": "HARDWARE-LEVEL CONCURRENCY",
+    "payoff_stat": "1.8x",
+    "payoff_label": "PERFORMANCE SPEEDUP",
+    "payoff_sub": "On NVIDIA H100 hardware",
     "payoff_hero_stat": 1180,
     "payoff_hero_label": "FlashAttention-3",
-    "payoff_base_stat": 240,
-    "payoff_base_label": "PyTorch Baseline",
-    "payoff_delta_badge": "\u26a1 +78% EFFICIENCY GAIN",
+    "payoff_base_stat": 660,
+    "payoff_base_label": "FlashAttention-2",
+    "payoff_delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN",
     "challenger": "FlashAttention-3",
-    "incumbent": "Standard Kernels"
+    "incumbent": "FlashAttention-2"
   },
   "benchmark_comparison": {
-    "title": "BENCHMARK SHOWDOWN: KERNEL THROUGHPUT",
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
     "metric_name": "TFLOPS",
     "unit": "TFLOPS",
     "contestants": [
@@ -400,38 +402,39 @@
         "color": "#10B981"
       },
       {
-        "name": "Standard PyTorch",
-        "value": 240.0,
-        "display_val": "240 TFLOPS",
+        "name": "FlashAttention-2",
+        "value": 660.0,
+        "display_val": "660 TFLOPS",
         "is_hero": false,
-        "color": "#EF4444"
+        "color": "#38BDF8"
       }
     ],
     "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN",
     "radar_axes": [
       "Throughput",
       "VRAM Efficiency",
-      "Accuracy",
-      "Context Length",
+      "Latency",
+      "Precision",
       "Cost Efficiency"
     ]
   },
   "code_snippet": {
-    "filename": "fused_kernel.cu",
-    "language": "cpp",
+    "filename": "fa3_kernel.py",
+    "language": "python",
     "lines": [
-      "__global__ void flash_attn_async(...) {",
-      "    cp_async_wait_all();",
-      "    compute_gemm_fp8(q, k, v);",
-      "    __syncthreads();",
-      "}"
+      "def async_attention_forward(Q, K, V):",
+      "# Trigger async memory loads",
+      "tma_load(K, V)",
+      "# Compute while loading next block",
+      "compute_fp8_block(Q)",
+      "return commit_to_sram()"
     ],
     "highlight_lines": [
-      2,
-      3
+      3,
+      5
     ],
-    "trace_register": "\u26a1 ASYNC KERNEL EXECUTION",
-    "explanation": "Overlapping HBM load and Tensor compute"
+    "trace_register": "\u26a1 ASYNCHRONOUS KERNEL PIPELINE",
+    "explanation": "Overlapping memory movement with compute"
   },
   "arxiv_id": "2407.08608",
   "paper_figures": [
@@ -465,15 +468,87 @@
     "final_comprehension_score": 8.8,
     "final_retention_hook_score": 9.5,
     "ai_slop_eliminated": true,
-    "listener_verdict": "The hook actually hit hard\u2014I've seen enough H100 benchmarks to know the memory wall is the real enemy. You didn't waste time with 'Hey guys' or 'Today we're looking at,' which is an instant win. I liked that you actually mentioned cp_async and shared memory instead of just saying 'it makes it faster.' It felt like a dev talking to a dev, not a marketing intern trying to explain AI to a toddler."
+    "listener_verdict": "The hook was solid\u2014straight to the point without that 'In this video' garbage. I liked the warehouse analogy; it actually makes sense for memory stalls. You lost me slightly on 'TMA hardware'\u2014I know it's Tensor Memory Accelerator, but you didn't explain why it's the secret sauce for the async overlap. Otherwise, it's a clean breakdown."
   },
   "thriller_metadata": {
     "engine_version": "7.0",
     "narrative_style": "intellectual_thriller",
-    "villain_entity": "The Memory Wall",
-    "physical_analogy": "A congested single-lane highway where compute cores starve while waiting for data packets.",
-    "eureka_mechanism": "Asynchronous block-level parallelism",
-    "paradigm_shift": "Achieving 78.8% theoretical peak performance on H100 hardware."
+    "villain_entity": "Memory Latency",
+    "physical_analogy": "A high-speed assembly line where workers stand idle waiting for raw materials to arrive from a slow warehouse.",
+    "eureka_mechanism": "Asynchronous Pipelining",
+    "paradigm_shift": "Achieving near-theoretical peak compute utilization by hiding memory access behind active math operations."
+  },
+  "hook_gating": {
+    "selected_hook": "Do not scale your next training run before you see how FlashAttention-3 delivers 1.8x.",
+    "verdict": 71,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 84,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "opening_style": "candidate_selected",
+    "candidates_evaluated": 9,
+    "rankings": [
+      {
+        "hook": "Do not scale your next training run before you see how FlashAttention-3 delivers 1.8x.",
+        "verdict": 71,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before FlashAttention-3 unlocks 1.8x gains?",
+        "verdict": 52,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 1.8x of your hardware performance on the table without FlashAttention-3.",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Impossible Claim"
+      },
+      {
+        "hook": "Your GPU can spend 1.8x of its memory budget moving data; FlashAttention-3 cuts that overhead.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why should you care about FlashAttention-3? Because your H100 GPU spends most of its life doing absolutely nothing while waiting for memory.",
+        "verdict": 49,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until FlashAttention-3 proved a 1.8x leap.",
+        "verdict": 45,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Your H100 GPU spends most of its life doing absolutely nothing while waiting for memory.",
+        "verdict": 41,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Why is FlashAttention-3 a major breakthrough? Because src/abstract.tex.",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Here is the uncomfortable part of FlashAttention-3: src/abstract.tex.",
+        "verdict": 39,
+        "band": "WEAK",
+        "formula": "The Reveal"
+      }
+    ]
   },
   "entity_registry": [
     {

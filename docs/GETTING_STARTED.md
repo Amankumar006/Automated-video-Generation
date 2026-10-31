@@ -51,12 +51,16 @@ recoverable quarantine outside the repository. It does not permanently delete
 anything and intentionally leaves source code, curated assets, model weights,
 and historical documentation untouched.
 
-For a lightweight CPU-only English alternative, install Kyutai's official
-`pocket-tts` binary and set `TTS_PROVIDER=pocket` plus
-`POCKET_TTS_BIN=/absolute/path/to/pocket-tts`. The recommended local profile
-is `POCKET_TTS_LANGUAGE=english_18m_2026-10`. Pocket TTS is the local offline
-fallback; if it is unavailable, the pipeline fails clearly rather than
-silently downloading another model.
+Production CI uses the local Phonon 31M English model. Install the pinned
+`ptts==0.4.2` dependency and set `TTS_PROVIDER=phonon`.
+`PHONON_TTS_MODEL=hf://gradium/phonon-31m-en` and `PHONON_TTS_QUANT=q8_0`
+keep the model small and CPU-friendly. The first run downloads the model from
+Hugging Face; later runs use the runner cache. Set
+`FAIL_ON_TTS_PROVIDER_FALLBACK=true` in production so a local TTS failure stops
+the run instead of creating a mixed-voice short.
+
+Pocket TTS remains available only as an explicit legacy local provider via
+`TTS_PROVIDER=pocket`; it is no longer installed or used by production CI.
 
 ## Validate the installation
 
@@ -109,8 +113,8 @@ when validation finishes.
 python3 pipeline/run_pipeline.py --dry-run
 ```
 
-Use `--validate-visuals` only when you explicitly want the dry run to invoke
-the LLM-backed bespoke visual synthesizer and sandbox checks:
+Use `--validate-visuals` when you want the dry run to invoke the LLM-backed,
+grammar-diverse on-demand visual synthesizer and sandbox checks:
 
 ```bash
 python3 pipeline/run_pipeline.py --dry-run --validate-visuals
