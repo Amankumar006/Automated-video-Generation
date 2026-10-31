@@ -282,7 +282,7 @@ class InstagramPublisher:
             "offset": "0",
             "file_size": str(file_size),
             "Content-Length": str(file_size),
-            "Content-Type": "application/octet-stream"
+            "Content-Type": "video/mp4"
         }
 
         print(f"📤 Uploading binary video stream ({file_size / (1024*1024):.2f} MB) to Instagram...")
