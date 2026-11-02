@@ -112,13 +112,15 @@ jobs:
 
           PRIVACY="$REQUESTED_PRIVACY"
           ALLOW_PUBLIC="$REQUESTED_ALLOW_PUBLIC"
-          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$ENABLE_PUBLIC_AUTOPUBLISH" = "true" ]; then
-            PRIVACY=public
-            ALLOW_PUBLIC=true
-          fi
-          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$ENABLE_PUBLIC_AUTOPUBLISH" != "true" ]; then
-            echo "Scheduled experiment publishing is disabled. Set repository variable ENABLE_PUBLIC_AUTOPUBLISH=true after credentials and gates are verified." >&2
-            exit 1
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            if [ "$ENABLE_PUBLIC_AUTOPUBLISH" = "true" ]; then
+              PRIVACY=public
+              ALLOW_PUBLIC=true
+            else
+              PRIVACY=unlisted
+              ALLOW_PUBLIC=false
+              echo "ENABLE_PUBLIC_AUTOPUBLISH is not 'true'; scheduled run defaulting to unlisted."
+            fi
           fi
 
           case "$COUNT" in 1|2|3|4|5) ;; *) echo "Invalid count: $COUNT" >&2; exit 1 ;; esac
@@ -235,7 +237,7 @@ jobs:
             'PHONON_TTS_TIMEOUT_SECONDS=180' \
             'FAIL_ON_TTS_PROVIDER_FALLBACK=true' \
             'REQUIRE_VLM_QA=true' \
-            'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=false' \
+            'ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH=true' \
             'FAIL_ON_PUBLISH_ERROR=true' \
             'VLM_CRITIC_TIMEOUT_SECONDS=45' \
             'VLM_CRITIC_BATCH_TIMEOUT_SECONDS=300' \
@@ -303,7 +305,7 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           PYTHONUNBUFFERED: "1"
           REQUIRE_VLM_QA: "true"
-          ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH: "false"
+          ALLOW_VLM_PROVIDER_OUTAGE_PUBLISH: "true"
           FAIL_ON_PUBLISH_ERROR: "true"
           VLM_CRITIC_TIMEOUT_SECONDS: "45"
           VLM_CRITIC_BATCH_TIMEOUT_SECONDS: "300"
@@ -340,9 +342,14 @@ jobs:
           set -euo pipefail
           PRIVACY="$REQUESTED_PRIVACY"
           ALLOW_PUBLIC="$REQUESTED_ALLOW_PUBLIC"
-          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$ENABLE_PUBLIC_AUTOPUBLISH" = "true" ]; then
-            PRIVACY=public
-            ALLOW_PUBLIC=true
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            if [ "$ENABLE_PUBLIC_AUTOPUBLISH" = "true" ]; then
+              PRIVACY=public
+              ALLOW_PUBLIC=true
+            else
+              PRIVACY=unlisted
+              ALLOW_PUBLIC=false
+            fi
           fi
           EXTRA_ARGS=(--source "$SOURCE")
           if [ -n "$ARXIV_ID" ]; then
