@@ -8,7 +8,7 @@
     "target_videos": 20,
     "videos_per_week": 5
   },
-  "updated_at": "2026-11-05T20:58:29.900459+00:00",
+  "updated_at": "2026-11-06T03:52:47.030138+00:00",
   "version": "audience-led-experiment-v1",
   "videos": [
     {
@@ -60,15 +60,15 @@
         "average_percentage_watched": 0.0,
         "average_view_duration_seconds": 0.0,
         "comments": 0,
-        "hours_live": 131.7,
+        "hours_live": 138.6,
         "likes": 3,
-        "observed_at": "2026-11-05T20:48:31.588344+00:00",
-        "qualified_growth_score": 0.2085,
+        "observed_at": "2026-11-06T03:46:25.369100+00:00",
+        "qualified_growth_score": 0.2008,
         "subscribers_gained": 0,
-        "views": 158
+        "views": 159
       },
       "published_at": "2026-10-31T08:15:18.599967+00:00",
-      "qualified_growth_score": 0.2085,
+      "qualified_growth_score": 0.2008,
       "score_breakdown": {
         "audience_fit": 6.25,
         "demand": 0.75,
@@ -94,7 +94,19 @@
       "created_at": "2026-11-05T20:58:29.900406+00:00",
       "failure_reason": null,
       "hook": "FrontierPhysics: Evaluating Agents for End-to-End Physics Research: which one actually wins when you use it?",
+      "metrics_24h": {
+        "average_percentage_watched": 0.0,
+        "average_view_duration_seconds": 0.0,
+        "comments": 1,
+        "hours_live": 6.8,
+        "likes": 2,
+        "observed_at": "2026-11-06T03:46:25.366842+00:00",
+        "qualified_growth_score": 0.5428,
+        "subscribers_gained": 0,
+        "views": 21
+      },
       "published_at": "2026-11-05T20:58:29.900244+00:00",
+      "qualified_growth_score": 0.5428,
       "score_breakdown": {
         "audience_fit": 6.25,
         "demand": 9.22,
@@ -112,6 +124,32 @@
       "title": "FrontierPhysics: Evaluating Agents for End-to-End Physics Research",
       "video_id": "ZFPkfTTfInk",
       "video_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_frontierphysics_benchmark_analysis_benchmark_news.mp4"
+    },
+    {
+      "audience_profile": "global_ai_builder",
+      "candidate_id": "gh_vllm_project_vllm",
+      "candidate_score": 72.65,
+      "created_at": "2026-11-06T03:52:47.029969+00:00",
+      "failure_reason": "production or publishing failed",
+      "hook": "How vllm actually runs inside your GPU memory",
+      "published_at": null,
+      "score_breakdown": {
+        "audience_fit": 8.75,
+        "demand": 13.9,
+        "demonstrability": 12.8,
+        "evidence": 10.0,
+        "freshness": 15.0,
+        "utility": 12.2
+      },
+      "selected_format": "tool_reaction",
+      "shorts_url": null,
+      "source": "github",
+      "source_date": "2026-11-06T03:45:40Z",
+      "source_url": "https://github.com/vllm-project/vllm",
+      "status": "failed",
+      "title": "vllm: A high-throughput and memory-efficient inference",
+      "video_id": null,
+      "video_path": null
     }
   ]
 }
