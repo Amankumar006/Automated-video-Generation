@@ -255,15 +255,34 @@ CRITICAL DESIGN & QUALITY PRINCIPLES:
    - Screen height is 16.0 units (Y from -8.0 to +8.0). Keep visual height <= 6.0 units.
    - Center your visual around `ORIGIN + UP * 0.8` so bottom subtitles and top headers don't collide.
 
-5. ZERO TEXT OVERFLOW & ZERO OVERLAP INVARIANT (MANDATORY):
+5. ZERO TEXT OVERFLOW, ZERO OVERLAP & ATOMIC PAIRING INVARIANT (MANDATORY):
+   - ATOMIC PAIRING BEFORE ARRANGE (CRITICAL): When creating labeled bars, cards, or nodes, ALWAYS group each label with its parent mobject in a `VGroup(bar, label)` BEFORE calling `.arrange()` or `.move_to()`!
+     NEVER position labels relative to objects and then arrange/move the objects separately—this leaves labels stranded at the wrong coordinates and triggers fatal collision rejection!
+     CORRECT PATTERN:
+     ```python
+     bar_a = Rectangle(width=0.8, height=2.0, color="#3B82F6", fill_opacity=0.8)
+     lbl_a = CleanText("Standard LLM", font_size=16, color="#94A3B8").next_to(bar_a, UP, buff=0.2)
+     col_a = VGroup(bar_a, lbl_a)
+
+     bar_b = Rectangle(width=0.8, height=3.5, color="#10B981", fill_opacity=0.8)
+     lbl_b = CleanText("Our Method", font_size=16, color="#10B981").next_to(bar_b, UP, buff=0.2)
+     col_b = VGroup(bar_b, lbl_b)
+
+     all_bars = VGroup(col_a, col_b).arrange(RIGHT, buff=1.2, aligned_edge=DOWN)
+     ```
+   - ZERO TEXT-GEOMETRY CLASH: Never place text directly on top of orbital rings, network lattice lines, or geometric paths.
+     Either place text cleanly outside the geometry (e.g. at UP * 2.8 or DOWN * 1.8 with geometry scaled to radius <= 1.6), OR place text inside a solid background pill/card with at least 0.3 units margin.
    - If placing text inside any box, badge, pill, card, or ellipse: The container MUST be strictly wider and taller than the text with at least 0.3 units margin.
    - Always pass `max_width=container.width - 0.4` to `CleanText` or call `text.scale_to_fit_width(container.width - 0.4)`.
    - If a label is wide (e.g. > 15 characters), either use a smaller `font_size` (16-18) or wrap/scale it so it NEVER overflows its parent or container boundaries.
    - ZERO TEXT COLLISION / OVERLAP INVARIANT: NEVER place a numeric value (e.g., "$0.00", "98%", "3.5x") at the exact same spatial coordinates as its text label (e.g., "LIQUID CASH BALANCE"). ALWAYS use vertical stacking: `VGroup(label, number).arrange(DOWN, buff=0.2)` or explicit offsets `.next_to(label, DOWN, buff=0.25)`!
    - COMPARISON BARS / METRICS ZERO OVERLAP: When comparing two or more entities (e.g., Baseline vs New Model, or FP16 vs INT4):
-     NEVER place labels for different items at the same vertical position. Stack the metric bars vertically:
-     Bar 1 with Label 1 at upper slot (e.g. Y = +0.6), and Bar 2 with Label 2 at lower slot (e.g. Y = -0.7) separated by at least 1.2 units vertically.
+     Stack the metric bars vertically or horizontally with labels grouped inside their respective column/row groups.
      Each label must be placed strictly `UP, buff=0.15` above its own bar, or to its `LEFT, buff=0.3`.
+   - STRICT SAFE-ZONE BOUNDS:
+     * Visual bottom edge MUST stay >= -2.40 (kinetic subtitles zone at y = -3.45).
+     * Visual top edge MUST stay <= 5.80 (top branding / platform UI zone).
+     * Visual width MUST stay within [-3.4, 3.4].
 
 6. ZERO GRAPH & CONNECTED NODES MISALIGNMENT INVARIANT (MANDATORY):
    - When animating trees, networks, graphs, circular loops, or coordinate axes:
@@ -494,10 +513,13 @@ FAILING CODE:
 ```
 
 REPAIR INSTRUCTIONS:
-1. Fix the exact syntax error, bounding box violation, or runtime animation crash shown above.
-2. Remember: STRICTLY NO `MathTex` or `Tex`. Use `CleanText` with Unicode symbols (O(N^2), α, β, ∑, →).
-3. Keep visual width <= 6.8 and height <= 7.0 centered around `ORIGIN + UP * 0.8`.
-4. Ensure `get_entrance_animation()` and `get_kinetic_animation()` return valid Manim Animation objects (e.g. Create, Transform, FadeIn, or .animate).
+1. Fix the exact syntax error, bounding box violation, collision error, or runtime animation crash shown above.
+2. If a Collision or Safe-Zone error is reported:
+   - For Text-Shape / Text-Text collisions: Offset labels, stack them (.arrange(DOWN, buff=0.25)), or group labels with their parents before arranging (e.g. `col = VGroup(bar, lbl)`).
+   - For Safe-Zone breaches: Ensure visual bottom >= -2.40 (subtitles zone) and top <= 5.80.
+3. Remember: STRICTLY NO `MathTex` or `Tex`. Use `CleanText` with Unicode symbols (O(N^2), α, β, ∑, →).
+4. Keep visual width <= 6.8 and height <= 6.0 centered around `ORIGIN + UP * 0.8`.
+5. Ensure `get_entrance_animation()` and `get_kinetic_animation()` return valid Manim Animation objects (e.g. Create, Transform, FadeIn, or .animate).
 
 Return ONLY the corrected Python code enclosed in ```python ... ```.
 """

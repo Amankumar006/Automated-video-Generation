@@ -223,7 +223,7 @@ def test_batch_digest_filters_out_stale_papers():
             "id": "2609.40362",
             "title": "Fresh September 2026 Breakthrough",
             "abstract": "Novel KV cache compression.",
-            "published_at": "2026-09-18",
+            "published_at": (datetime.date.today() - datetime.timedelta(days=10)).isoformat(),
             "authors": ["Alice", "Bob"]
         },
         {
