@@ -24,7 +24,7 @@ def pick_highlight_word(words_in_chunk: List[Dict[str, Any]], anchor_hint: Optio
     if anchor_hint:
         clean_hint = re.sub(r"[^\w\s]", "", anchor_hint).strip().lower()
         for w in words_in_chunk:
-            cw = w.get("clean_word", "").lower()
+            cw = w.get("clean_word") or re.sub(r"[^\w]", "", w.get("word", "")).lower().strip()
             if cw and (cw in clean_hint or clean_hint in cw):
                 return w.get("word", "")
 
@@ -37,7 +37,7 @@ def pick_highlight_word(words_in_chunk: List[Dict[str, Any]], anchor_hint: Optio
     # Filter out stopwords and find the most significant word
     candidates = []
     for w in words_in_chunk:
-        clean = w.get("clean_word", "").lower().strip()
+        clean = w.get("clean_word") or re.sub(r"[^\w]", "", w.get("word", "")).lower().strip()
         if clean and clean not in COMMON_STOPWORDS and len(clean) >= 3:
             candidates.append(w.get("word", "").strip(".,!?;:"))
 
@@ -101,6 +101,8 @@ def generate_phrase_chunks(
                 prev["text"] = merged_text
                 prev["end"] = last["end"]
                 prev["duration"] = round(prev["end"] - prev["start"], 3)
+                if "words" in prev and "words" in last:
+                    prev["words"] = prev["words"] + last["words"]
                 chunks.pop()
 
     return chunks
@@ -128,6 +130,7 @@ def _format_chunk(
         "end": end_t,
         "duration": round(end_t - start_t, 3),
         "text": text,
+        "words": list(words_in_chunk),
         "highlight_word": highlight,
         "highlight_color": color,
         "is_outro": is_outro

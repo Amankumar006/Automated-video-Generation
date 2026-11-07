@@ -332,7 +332,7 @@ class ScriptDrivenScene(MovingCameraScene):
         self.graphic_identity_entered = False
 
     def setup_kinetic_captions(self):
-        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.85 (Depth Layer 3)."""
+        """Constructs dynamically updating kinetic subtitle pill positioned at y = -3.45 (Depth Layer 3)."""
         try:
             from pipeline.subtitle_generator import generate_phrase_chunks
             self.caption_chunks = generate_phrase_chunks(self.spec.get("beats", []))
@@ -349,6 +349,7 @@ class ScriptDrivenScene(MovingCameraScene):
             return
 
         self.current_caption_idx = -1
+        self.current_word_idx = -1
 
         def update_caption(mob, dt):
             t = self.renderer.time
@@ -356,21 +357,67 @@ class ScriptDrivenScene(MovingCameraScene):
             for i, c in enumerate(self.caption_chunks):
                 if c["start"] <= t < c["end"]:
                     matched = True
-                    if self.current_caption_idx != i:
-                        self.current_caption_idx = i
-                        raw_text = c["text"]
-                        highlight = c.get("highlight_word", "")
-                        h_color = c.get("highlight_color", "#FDE047")
-                        t2c = {highlight: h_color} if highlight and highlight in raw_text else {}
+                    c_words = c.get("words", [])
+                    highlight = c.get("highlight_word", "").strip(".,!?;:").lower()
+                    h_color = c.get("highlight_color", "#FDE047")
 
-                        txt = Text(
-                            raw_text,
-                            font=FONT_HELVETICA,
-                            font_size=19,
-                            weight=BOLD,
-                            color=WHITE,
-                            t2c=t2c
-                        )
+                    # Identify active word index within the chunk based on acoustic timing
+                    active_w_idx = -1
+                    if c_words:
+                        for w_i, w in enumerate(c_words):
+                            if t >= w.get("start", 0.0):
+                                active_w_idx = w_i
+                    else:
+                        active_w_idx = 0
+
+                    if self.current_caption_idx != i or self.current_word_idx != active_w_idx:
+                        self.current_caption_idx = i
+                        self.current_word_idx = active_w_idx
+
+                        # Dynamic word-by-word illumination:
+                        # - Words already spoken: clean White (#FFFFFF)
+                        # - Current active spoken word: Electric Cyan (#38BDF8) or Radiant Gold (#FDE047)
+                        # - Upcoming words: subtle Dimmed Slate (#475569)
+                        if c_words:
+                            word_mobs = []
+                            for w_i, w in enumerate(c_words):
+                                raw_w = w.get("word", "")
+                                clean_w = raw_w.strip(".,!?;:").lower()
+                                is_hl = (clean_w == highlight)
+
+                                if w_i < active_w_idx:
+                                    col = WHITE
+                                    op = 0.95
+                                elif w_i == active_w_idx:
+                                    col = h_color if is_hl else "#38BDF8"
+                                    op = 1.0
+                                else:
+                                    col = "#475569"
+                                    op = 0.45
+
+                                w_txt = Text(
+                                    raw_w,
+                                    font=FONT_HELVETICA,
+                                    font_size=19,
+                                    weight=BOLD,
+                                    color=col
+                                )
+                                w_txt.set_opacity(op)
+                                word_mobs.append(w_txt)
+
+                            txt = VGroup(*word_mobs).arrange(RIGHT, buff=0.12)
+                        else:
+                            raw_text = c["text"]
+                            t2c = {c.get("highlight_word", ""): h_color} if c.get("highlight_word") in raw_text else {}
+                            txt = Text(
+                                raw_text,
+                                font=FONT_HELVETICA,
+                                font_size=19,
+                                weight=BOLD,
+                                color=WHITE,
+                                t2c=t2c
+                            )
+
                         if txt.width > 6.0:
                             txt.scale_to_fit_width(6.0)
                         pill_w = min(6.5, txt.width + 0.65)
@@ -384,12 +431,13 @@ class ScriptDrivenScene(MovingCameraScene):
                             stroke_color="#334155",
                             stroke_width=1.4
                         )
-                        cam_center = self.camera.frame.get_center()
+                        cam_center = self.camera.frame.get_center() if hasattr(self.camera, "frame") else ORIGIN
                         mob.become(VGroup(bg, txt).move_to([cam_center[0], cam_center[1] + self.caption_target_y, 0]))
                     break
 
             if not matched and self.current_caption_idx != -1:
                 self.current_caption_idx = -1
+                self.current_word_idx = -1
                 mob.become(VGroup())
 
         self.caption_container.add_updater(update_caption)
