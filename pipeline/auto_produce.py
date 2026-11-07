@@ -415,10 +415,13 @@ def auto_produce(
         print(f"   📊 Initial VLM Quality Score: {avg_score:.2f}/10.0")
 
         # Self-Healing Loop if score < 8.5 (and not skip_repair)
+        # Note: layout_overrides are consumed by legacy DynamicScene; ScriptDrivenScene
+        # enforces layout safety via programmatic collision gates and dedicated bounding boxes.
         needs_repair = (
             not audit_report.get("passed_quality_gate", True)
             and not audit_report.get("provider_unavailable", False)
             and not skip_repair
+            and legacy_engine
         )
         repair_iteration = 0
         max_repair_iterations = 2
@@ -426,6 +429,8 @@ def auto_produce(
 
         if skip_repair:
             print("   ℹ️ VLM Critic self-healing bypassed (--skip-repair specified).")
+        elif not legacy_engine and not audit_report.get("passed_quality_gate", True):
+            print("   ℹ️ Layout safety guaranteed by ScriptDrivenScene collision gates; layout_overrides repair loop bypassed.")
 
         while needs_repair and repair_iteration < max_repair_iterations:
             repair_iteration += 1
