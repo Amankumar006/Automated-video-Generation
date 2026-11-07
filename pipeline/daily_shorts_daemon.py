@@ -674,6 +674,7 @@ class DailyShortsDaemon:
         source: str = "mixed",
         reference_date: Optional[datetime.date] = None,
         topic_mode: Optional[str] = None,
+        skip_repair: bool = False,
     ) -> List[Dict[str, Any]]:
         """Executes discovery, production, and publishing for `count` reels aligned with YouTube audience analytics."""
         timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -1025,7 +1026,8 @@ class DailyShortsDaemon:
                     voice=active_voice,
                     publish_instagram=self.publish_instagram,
                     publish_x=self.publish_x,
-                    publish_linkedin=self.publish_linkedin
+                    publish_linkedin=self.publish_linkedin,
+                    skip_repair=skip_repair,
                 )
 
             except Exception as prod_err:
@@ -1200,6 +1202,8 @@ def main():
     parser.add_argument("--publish-instagram", action="store_true", help="Cross-post produced videos to Instagram Reels via Meta Graph API")
     parser.add_argument("--publish-x", "--publish-twitter", dest="publish_x", action="store_true", help="Cross-post produced videos to X (Twitter) as a 4-tweet thread")
     parser.add_argument("--publish-linkedin", action="store_true", help="Cross-post produced videos to LinkedIn")
+    parser.add_argument("--no-upload", "--no-publish", dest="no_publish", action="store_true", help="Render video locally without uploading to YouTube")
+    parser.add_argument("--skip-repair", action="store_true", help="Skip VLM Critic self-healing layout repair iterations")
     parser.add_argument("--quality", default="qh", help="Render quality (default: qh)")
     parser.add_argument("--arxiv", type=str, default="", help="Specific arXiv ID or URL to produce (e.g. 2401.12345)")
     args = parser.parse_args()
@@ -1225,7 +1229,8 @@ def main():
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
             source=args.source,
-            topic_mode=args.topic_mode
+            topic_mode=args.topic_mode,
+            skip_repair=args.skip_repair,
         )
     elif args.daemon:
         daemon.start_standing_daemon()
@@ -1234,7 +1239,7 @@ def main():
         produced = daemon.run_daily_cycle(
             count=args.count,
             dry_run=False,
-            publish=True,
+            publish=not args.no_publish,
             target_arxiv=args.arxiv or None,
             target_perk=args.perk or None,
             target_blog=args.blog or args.news or None,
@@ -1242,7 +1247,8 @@ def main():
             preferred_taxonomy=args.preferred_taxonomy,
             preferred_category=args.category or None,
             source=args.source,
-            topic_mode=args.topic_mode
+            topic_mode=args.topic_mode,
+            skip_repair=args.skip_repair,
         )
         if not produced:
             if args.privacy == "public" and not can_schedule(load_ledger(), requested=1):

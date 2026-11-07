@@ -193,6 +193,155 @@ def validate_visual_quality_contract(code_str: str) -> Tuple[bool, Optional[str]
     return True, None
 
 
+def check_mobject_collisions_and_bounds(visual: Any) -> Tuple[bool, Optional[str]]:
+    """
+    Programmatic geometric gate enforcing zero collisions and safe-zone adherence.
+    Checks:
+    1. Safe-zone vertical/horizontal boundaries (Subtitles: y >= -2.45, Header: y <= 6.0, Sides: |x| <= 3.8).
+    2. Text-Text collisions: No two labels may overlap.
+    3. Text-Shape collisions: Labels may not collide with shapes unless the shape is a properly-sized background container.
+    4. Container overflow: Text must fit inside its enclosing container with margin.
+    5. Solid Shape-Shape collisions: Non-concentric filled shapes may not heavily overlap (IoU > 0.35).
+    """
+    import numpy as np
+
+    # 1. Bounds checks
+    bottom = visual.get_bottom()[1]
+    top = visual.get_top()[1]
+    left = visual.get_left()[0]
+    right = visual.get_right()[0]
+
+    if bottom < -2.45:
+        return False, f"Safe-Zone Breach: Visual bottom edge ({bottom:.2f}) is below -2.45, colliding with 9:16 vertical kinetic subtitles (y = -3.45). Shift visual UP."
+    if top > 6.00:
+        return False, f"Safe-Zone Breach: Visual top edge ({top:.2f}) is above 6.00, colliding with top header watermark. Shift visual DOWN."
+    if left < -3.80 or right > 3.80:
+        return False, f"Safe-Zone Breach: Visual exceeds horizontal safe margins [-3.8, 3.8] (left={left:.2f}, right={right:.2f}). Scale or center visual."
+
+    # Extract elements
+    texts = []
+    shapes = []
+
+    def extract(m):
+        # Treat Text and CleanText as atomic
+        if hasattr(m, "text") or m.__class__.__name__ in ("Text", "CleanText", "MarkupText", "MathTex", "Tex", "Paragraph"):
+            texts.append(m)
+            return
+        if len(m.submobjects) > 0:
+            for sub in m.submobjects:
+                extract(sub)
+        else:
+            # Skip invisible elements
+            fill_op = getattr(m, "fill_opacity", 0.0)
+            stroke_op = getattr(m, "stroke_opacity", 1.0)
+            stroke_w = getattr(m, "stroke_width", 1.0)
+            if fill_op == 0.0 and (stroke_op == 0.0 or stroke_w == 0.0):
+                return
+            shapes.append(m)
+
+    extract(visual)
+
+    def effective_aabb(m):
+        l, r = m.get_left()[0], m.get_right()[0]
+        b, t = m.get_bottom()[1], m.get_top()[1]
+        if r - l < 0.04:
+            cx = (l + r) / 2
+            l, r = cx - 0.02, cx + 0.02
+        if t - b < 0.04:
+            cy = (b + t) / 2
+            b, t = cy - 0.02, cy + 0.02
+        return l, r, b, t
+
+    def get_overlap(bb1, bb2):
+        dx = min(bb1[1], bb2[1]) - max(bb1[0], bb2[0])
+        dy = min(bb1[3], bb2[3]) - max(bb1[2], bb2[2])
+        return dx, dy
+
+    # 2. Text vs Text Collisions
+    for i in range(len(texts)):
+        for j in range(i + 1, len(texts)):
+            t1, t2 = texts[i], texts[j]
+            dx, dy = get_overlap(effective_aabb(t1), effective_aabb(t2))
+            if dx > 0.04 and dy > 0.04:
+                area = dx * dy
+                if area > 0.005:
+                    lbl1 = getattr(t1, "text", t1.__class__.__name__).strip()
+                    lbl2 = getattr(t2, "text", t2.__class__.__name__).strip()
+                    return False, (
+                        f"Text Collision: Label '{lbl1}' overlaps label '{lbl2}' by dx={dx:.2f}, dy={dy:.2f}. "
+                        f"Stack them vertically (.arrange(DOWN, buff=0.25)) or separate their positions."
+                    )
+
+    # 3. Text vs Shape Collisions & Container Overflow
+    for t in texts:
+        t_bb = effective_aabb(t)
+        t_lbl = getattr(t, "text", "Label").strip()
+        t_center = t.get_center()
+
+        for s in shapes:
+            s_bb = effective_aabb(s)
+            dx, dy = get_overlap(t_bb, s_bb)
+            if dx > 0.06 and dy > 0.06:
+                s_cls = s.__class__.__name__
+                is_container_type = s_cls in ("Rectangle", "RoundedRectangle", "Circle", "Ellipse")
+                dist_centers = np.linalg.norm(s.get_center() - t_center)
+                s_fill = getattr(s, "fill_opacity", 0.0)
+
+                # Check if s was positioned as an enclosing container for t (e.g. text inside pill/card)
+                if is_container_type and dist_centers < 0.20:
+                    if t.width > s.width - 0.05 or t.height > s.height - 0.05:
+                        return False, (
+                            f"Container Overflow: Label '{t_lbl}' (w={t.width:.2f}, h={t.height:.2f}) "
+                            f"overflows container {s_cls} (w={s.width:.2f}, h={s.height:.2f}). "
+                            f"Scale text down or widen container."
+                        )
+                    continue  # Clean container
+
+                # Check if s is a large background panel containing t
+                is_large_container = (
+                    is_container_type and
+                    (s_cls in ("Rectangle", "RoundedRectangle") or s_fill >= 0.2) and
+                    s.width >= t.width - 0.05 and s.height >= t.height - 0.05 and
+                    dist_centers <= min(s.width, s.height) * 0.25
+                )
+                if is_large_container:
+                    continue
+
+                # Otherwise it is an unwanted collision with a shape (bar, path, line, or circle)
+                return False, (
+                    f"Text-Shape Collision: Label '{t_lbl}' collides with {s_cls} "
+                    f"by dx={dx:.2f}, dy={dy:.2f}. Reposition label to avoid overlapping geometry."
+                )
+
+    # 4. Heavy Shape vs Shape Collisions
+    for i in range(len(shapes)):
+        for j in range(i + 1, len(shapes)):
+            s1, s2 = shapes[i], shapes[j]
+            s1_2d = s1.__class__.__name__ in ("Rectangle", "RoundedRectangle", "Circle", "Ellipse", "Polygon", "Square", "Star")
+            s2_2d = s2.__class__.__name__ in ("Rectangle", "RoundedRectangle", "Circle", "Ellipse", "Polygon", "Square", "Star")
+            if s1_2d and s2_2d:
+                op1 = getattr(s1, "fill_opacity", 0.0)
+                op2 = getattr(s2, "fill_opacity", 0.0)
+                if op1 > 0.25 and op2 > 0.25:
+                    dx, dy = get_overlap(effective_aabb(s1), effective_aabb(s2))
+                    if dx > 0.10 and dy > 0.10:
+                        dist_centers = np.linalg.norm(s1.get_center() - s2.get_center())
+                        # Concentric rings / glow / halos are allowed
+                        if dist_centers < 0.12:
+                            continue
+                        area_intersect = dx * dy
+                        area1 = s1.width * s1.height
+                        area2 = s2.width * s2.height
+                        iou = area_intersect / (area1 + area2 - area_intersect + 1e-6)
+                        if iou > 0.35:
+                            return False, (
+                                f"Shape Collision: {s1.__class__.__name__} and {s2.__class__.__name__} "
+                                f"heavily overlap (IoU={iou:.2f}). Space them apart."
+                            )
+
+    return True, None
+
+
 def validate_code_in_process(code_str: str) -> Tuple[bool, Optional[str]]:
     """
     Executes dry-run in-process using an isolated namespace (sub-second performance).
@@ -234,19 +383,10 @@ def validate_code_in_process(code_str: str) -> Tuple[bool, Optional[str]]:
         if height > MAX_VISUAL_HEIGHT:
             return False, f"Visual height ({height:.2f}) exceeds 9:16 safe-zone limit {MAX_VISUAL_HEIGHT}"
 
-        # Check for text overflowing container boxes
-        from manim import Text, Rectangle, RoundedRectangle, Ellipse, Circle
-        for subm in visual.submobjects:
-            if hasattr(subm, "submobjects") and len(subm.submobjects) >= 2:
-                containers = [m for m in subm.submobjects if isinstance(m, (Rectangle, RoundedRectangle, Ellipse, Circle))]
-                texts = [m for m in subm.submobjects if isinstance(m, (Text, CleanText))]
-                if containers and texts:
-                    cont = containers[0]
-                    for txt in texts:
-                        dist = np.linalg.norm(txt.get_center() - cont.get_center())
-                        if dist < max(cont.width, cont.height) * 0.4:
-                            if txt.width > cont.width - 0.05:
-                                return False, f"Container overflow: Text '{getattr(txt, 'text', 'label')}' width ({txt.width:.2f}) exceeds box width ({cont.width:.2f}). Scale text or widen container."
+        # Programmatic geometric & collision gate
+        bounds_ok, bounds_err = check_mobject_collisions_and_bounds(visual)
+        if not bounds_ok:
+            return False, bounds_err
 
         # Test animation execution
         scene = Scene()
@@ -262,7 +402,7 @@ def validate_code_in_process(code_str: str) -> Tuple[bool, Optional[str]]:
             return False, "get_kinetic_animation() returned None instead of an Animation"
         scene.play(kin_anim)
 
-        if hasattr(visual, "get_ambient_animation"):
+        if "get_ambient_animation" in visual.__class__.__dict__:
             amb_anim = visual.get_ambient_animation(run_time=0.1)
             if amb_anim is not None:
                 scene.play(amb_anim)
@@ -307,6 +447,11 @@ if width > {MAX_VISUAL_WIDTH}:
 if height > {MAX_VISUAL_HEIGHT}:
     raise ValueError(f"Visual height ({{height:.2f}}) exceeds 9:16 safe-zone height {MAX_VISUAL_HEIGHT}")
 
+from pipeline.code_sandbox import check_mobject_collisions_and_bounds
+bounds_ok, bounds_err = check_mobject_collisions_and_bounds(visual)
+if not bounds_ok:
+    raise ValueError(bounds_err)
+
 # 2. Animation Execution Validation
 scene.add(visual)
 ent_anim = visual.get_entrance_animation(run_time=0.1)
@@ -315,7 +460,7 @@ scene.play(ent_anim)
 kin_anim = visual.get_kinetic_animation(run_time=0.1)
 scene.play(kin_anim)
 
-if hasattr(visual, "get_ambient_animation"):
+if "get_ambient_animation" in visual.__class__.__dict__:
     amb_anim = visual.get_ambient_animation(run_time=0.1)
     if amb_anim is not None:
         scene.play(amb_anim)
@@ -369,6 +514,10 @@ def validate_synthesized_visual_code(code_str: str) -> Tuple[bool, Optional[str]
     run_ok, run_err = validate_code_in_process(code_str)
     if run_ok:
         return True, None
+
+    # If in-process had a collision or bounds violation, do not fallback to subprocess
+    if run_err and any(indicator in run_err for indicator in ("Collision", "Safe-Zone", "Container", "overflow", "width", "height")):
+        return False, run_err
 
     # If in-process had an issue (or missing manim), verify via isolated subprocess
     return validate_code_headless_execution(code_str)

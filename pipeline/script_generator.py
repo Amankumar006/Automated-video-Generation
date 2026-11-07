@@ -65,39 +65,50 @@ Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
   * Keep the humor dry, sharp, and grounded directly in the paper's actual friction—never silly slapstick.
 - STRICTLY BAN TEXTBOOK SUMMARIES & LECTURE INTROS:
   * NEVER start with "Today we explore...", "In this paper...", "In this video...", or "The authors propose...".
-  * The first 3 seconds must be an ABSURD PARADOX or PATTERN INTERRUPT grounded in the paper that stops the viewer from swiping away.
-  * Do not default to the generic imperative "Before you...". Use it only when the paper's actual claim is time-sensitive; otherwise vary the opening across a lived scene, a contradiction, a sharp question, a concrete consequence, or a surprising observation.
-  * Write the first line as something a technically curious human would say aloud to a friend—not as a headline template or a call to action.
-- Ground abstract AI in real developer tools and crisp physical analogies relevant to the paper:
-  * Name REAL models, frameworks, and hardware when appropriate.
-  * Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation.
-  * NEVER use dumbed-down AI slop or baby-talk metaphors: strictly ban 'smart tool', 'safe drawers', 'open desk', 'magic box'. Real developers and curious students cringe at these!
-  * Ground the abstract bottleneck in ONE vivid, relatable physical analogy fitting the actual challenge.
-- AVOID UNEXPLAINED ACADEMIC JARGON:
-  * Don't drop raw unexplained math without intuition.
-  * State what it physically does.
-- Pacing: Exactly 6 beats (125-155 words total).
-- DUAL-CADENCE SENTENCE STRUCTURE (Sync with Visual Action):
-  * Every beat should follow a dual-cadence rhythm: [Setup Clause] + [Action Trigger Clause].
-  * The [Action Trigger Clause] contains the `anchor_word` where on-screen physical action fires.
-- Auditory-Visual Complementarity: The voiceover carries relatable intuition and metaphors; the chalkboard screen illustrates the living geometry, physical fields, and mechanical state.
+  * The first 3 seconds must be a RELATABLE HUMAN QUESTION, ABSURD PARADOX, or PATTERN INTERRUPT that stops a general viewer from swiping away.
+  * Do not default to the generic imperative "Before you...". Use it only when the paper's actual claim is time-sensitive; otherwise vary the opening across a lived human dilemma, a contradiction, a sharp question, a concrete consequence, or a surprising observation.
+  * Write the first line as something a technically curious human would say aloud to a friend—not as an academic title or a command.
 
-The 4-Act Intellectual Thriller Narrative Arc:
-1. ACT 1: Absurd Paradox / Pattern Interrupt Hook (Beat 1, 0-3s, 12-18 words):
-   * Start with a bold, high-stakes curiosity loop or shocking inefficiency from the paper. No textbook greetings!
-   * Illustrative Grounded Examples (DO NOT COPY VERBATIM; DRAFT SPECIFICALLY FOR THE PAPER):
+MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
+* The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers. If you dump unexplained compiler/tensor jargon, they swipe away within 3 seconds!
+* RULE 1: MANDATORY PLAIN-ENGLISH IDENTITY (Beat 2):
+  - In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet PydanticAI: a new Python framework guaranteeing your AI models never output broken data").
+  - NEVER start explaining internal mechanisms before the viewer knows what the subject is!
+* RULE 2: THE JARGON-TO-PHYSICAL-EFFECT RULE:
+  - NEVER drop naked academic or compiler terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
+  - Bad: "It fuses operations with Triton."
+  - Good: "Instead of writing down every step on slow memory chips, it combines five math calculations into a single pass directly on the GPU."
+* RULE 3: ANSWER "WHY SHOULD I CARE?" IN THE FIRST 10 SECONDS:
+  - Connect the paper to real-world stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
+* RULE 4: DOMAIN-AUTHENTIC FRICTION (NEVER FORCE BIZARRE METAPHORS):
+  - For hardware/physics: Use one clean mechanical analogy (memory bottleneck, traffic jam, relay race).
+  - For software tools, agent frameworks, and developer libraries: Explain the AUTHENTIC SOFTWARE PROBLEM directly (e.g. LLMs returning invalid JSON, runtime crashes, silent type errors, broken backends).
+  - NEVER force ridiculous factory/chef analogies (like 'a blind worker on an assembly line' or 'chefs in kitchens') onto pure software code! Real developers cringe at those.
+
+The 6-Beat Curiosity Bridge & Feynman Inversion Narrative Arc (125-155 words total):
+1. BEAT 1: The Universal Dream / High-Stakes Friction Hook (0-5s, 12-18 words):
+   * Open with a bold, relatable human question, dream, or absurd paradox that hooks any tech-curious viewer.
+   * Grounded Examples:
+     - Software/Agents: "Why do AI agents constantly crash the moment you send them real-world data?"
+     - Hardware: "What if you could fine-tune your own private ChatGPT right on your laptop without paying cloud server fees?"
      - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar room."
-     - Hardware: "Scaling context windows beyond eight thousand tokens causes standard models to hit an insurmountable memory wall."
-     - Diffusion: "Generating 10 seconds of high-fidelity video used to require hundreds of repetitive diffusion passes."
-2. ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
-   * Personify the villain/bottleneck and explain WHY it happens using ONE clear, relatable physical analogy.
-3. ACT 3: The Eureka Geometric Mechanism (Beats 3 & 4, 15-40s):
-   * Beat 3 (The Eureka Pivot, 20-25 words): Introduce the actual architectural innovation simply and cleanly.
-   * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): Explain the paper's specific secret sauce with real developer terms.
-4. ACT 4: The Paradigm Shift / Open Loop (Beats 5 & 6, 40-50s):
-   * Beat 5 (Empirical Victory Payoff, 18-24 words): Deliver the concrete payoff with numbers from the paper.
-   * Beat 6 (Paradigm Shift & Seamless Loop, 15-20 words): Crisp outro that naturally loops back to Beat 1.
-     Example: 'Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.'
+     - Diffusion: "Why does generating ten seconds of AI video melt data centers while human brains do it on twenty watts?"
+2. BEAT 2: The Plain-English Identity & Stakes (5-12s, 16-22 words):
+   * Name what this is in plain English, and state why it matters to humanity or developers.
+   * Format: "Meet [Name]: a [plain-English definition] that [solves key human/developer problem]."
+3. BEAT 3: The Relatable Friction / The Real-World Trap (12-24s, 18-25 words):
+   * Explain why standard approaches break down in practice.
+   * For hardware: The physical memory or throughput wall.
+   * For software/agents: The real nightmare (e.g., "Normally, when an LLM returns JSON, one missing quote or unexpected field completely crashes your backend").
+4. BEAT 4: The 'Aha!' Mechanical Insight (24-40s, 20-26 words):
+   * The clever engineering breakthrough that solves the problem.
+   * Ground every technical term in its real-world effect.
+   * For software: "Instead of hoping the model follows instructions, it validates every response against Python types and auto-retries if data is invalid."
+5. BEAT 5: The Concrete Real-World Victory (40-50s, 18-24 words):
+   * Deliver the hard empirical payoff from the paper in terms of human capability and freedom (speedup, memory drop, cost savings).
+6. BEAT 6: The Paradigm Shift & Natural Loop (50-58s, 14-20 words):
+   * Mind-expanding takeaway on how this reshapes the future of technology, looping seamlessly back to Beat 1.
+   * Example: 'You don't need a million-dollar cluster to build frontier AI anymore. Follow The Model Verse for the engineering making AI accessible to everyone.'
 
 Highlight Words Rules:
 - For each beat, select 1 to 3 critical technical keywords from the beat text to highlight.
@@ -108,16 +119,11 @@ Highlight Words Rules:
   * Gold (key metrics/numbers/shared): "#F59E0B"
   * White (standard bold emphasis): "#FFFFFF"
 
-DEDICATED 5-BEAT MATHEMATICAL FORMULAS (STRICT REQUIREMENT):
-- You MUST provide EXACTLY 5 distinct, beat-tailored mathematical formulas in `math_formulas` (one for each beat from Beat 1 to Beat 5).
-- NEVER reuse or repeat a formula. Every beat must have its own fresh equation directly matching the spoken narrative:
-  * Formula 0 (Beat 1): Foundational scale / dimensionality / hypothesis (e.g. '$d_{\\mathrm{model}} = 4096 \\to d_{\\mathrm{SAE}} = 32{,}768$' or '$N = 671 \\times 10^9$').
-  * Formula 1 (Beat 2): The Bottleneck / Superposition / Complexity equation (e.g. '$\\mathbf{x} = \\sum_{i=1}^M \\alpha_i \\mathbf{v}_i$' or '$\\mathcal{O}(N^2)$').
-  * Formula 2 (Beat 3): The Architectural Decomposition / Dictionary / Projection equation (e.g. '$\\mathbf{f}(x) = \\mathrm{ReLU}(\\mathbf{W}_e x + b_e)$' or '$W \\to \\{E_1, \\dots, E_{256}\\}$').
-  * Formula 3 (Beat 4): The Operational Mechanism / Gating / Latent Partition equation (e.g. '$\\mathcal{C}_{\\mathrm{POS}} = \\{k \\mid f_k(x) > \\tau\\}$' or '$\\mathrm{Top8}(\\sigma(W_g x))$').
-  * Formula 4 (Beat 5): The Quantitative Proof / Metric / Accuracy equation (e.g. '$\\mathrm{Accuracy}_{\\mathrm{POS}} = 98.2\\%$' or '$94.5\\% \\text{ Compute Saved}$').
+MEANING-DRIVEN MATHEMATICAL FORMULAS (PEDAGOGICAL STANDARD):
+- Provide mathematical formulas that illustrate dramatic state changes, scaling laws, or intuitive trade-offs (e.g. '$\\mathcal{O}(N^2) \\to \\mathcal{O}(N)$', '$24\\text{GB} \\to 6.5\\text{GB}$', '$\\$10{,}000 \\to \\$0$').
+- Do NOT use intimidating, unexplained multi-variable calculus or tensor homework that alienates general viewers.
+- Provide 1 to 2 `term_annotations` explaining the variables in plain English (e.g. `[{"term": "N", "label": "Context Length"}, {"term": "O(N)", "label": "Linear Memory"}]`).
 - Compatibility constraint: Use valid Matplotlib math mode (wrapped in $). Use `\\mathrm{...}` for words (do NOT use `\\text{...}` inside math). DO NOT use `\\underbrace`, `\\overbrace`, or undefined packages.
-- For each formula, provide 1 to 2 `term_annotations` explaining the variables (e.g. `[{"term": "f(x)", "label": "Sparse Latents"}, {"term": "W_e", "label": "32k Dictionary"}]`).
 
 DYNAMIC VISUAL METAPHOR, SVO TRIPLES & ENTITIES (STRICT REQUIREMENT):
 - `domain_taxonomy`: Choose exactly one matching domain from:
@@ -354,18 +360,25 @@ def generate_script(
 
     strategy_context = ""
     if strategy_brief:
+        rec_hook = strategy_brief.get('recommended_hook', '')
+        viewer_prob = strategy_brief.get('viewer_problem', '')
+        prom_payoff = strategy_brief.get('promised_payoff', '')
         strategy_context = f"""
-Audience-Led Editorial Brief (must be preserved, not invented around):
+Audience-Led Editorial Brief (MANDATORY INHERITANCE):
 Primary audience: {strategy_brief.get('primary_segment', 'developer')}
-Viewer problem: {strategy_brief.get('viewer_problem', '')}
-Promised payoff: {strategy_brief.get('promised_payoff', '')}
+Viewer problem: {viewer_prob}
+Promised payoff: {prom_payoff}
 Proof asset: {strategy_brief.get('proof_asset', '')}
-Recommended hook: {strategy_brief.get('recommended_hook', '')}
+Recommended hook: {rec_hook}
 Recommended format: {strategy_brief.get('recommended_format', '')}
 Source claims: {json.dumps(strategy_brief.get('source_claims', []), ensure_ascii=False)}
 Risk flags: {json.dumps(strategy_brief.get('risk_flags', []), ensure_ascii=False)}
 Selection evidence: {json.dumps(strategy_brief.get('reasons', []), ensure_ascii=False)}
-Use only the source claims above for factual or numerical statements. Do not invent a different audience, payoff, or numerical claim. Make Beat 1 visibly demonstrate the problem or payoff immediately.
+
+CRITICAL CURIOSITY BRIDGE MANDATES:
+1. SEED BEAT 1 WITH THE RECOMMENDED HOOK: '{rec_hook}' (or a close, punchy variation of it). Do NOT invent a dry compiler warning!
+2. GROUND BEAT 2 IN THE VIEWER PROBLEM: State what the tool/model is in plain English and why it solves '{viewer_prob}'.
+3. DELIVER THE PROMISED PAYOFF IN BEAT 5: Explicitly deliver '{prom_payoff}' with concrete numbers from the paper claims.
 """
 
     paper_context = ""

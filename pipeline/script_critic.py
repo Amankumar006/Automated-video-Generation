@@ -92,7 +92,10 @@ EVERYDAY_ANALOGY_ANCHORS = [
     "checklist", "teammate",
     # Developer & Operational physical analogies
     "relay race", "baton", "relay", "assembly line", "factory", "express lane", "cashier", "clerk", "waiter",
-    "bottleneck", "barrier", "wall", "stall", "bridge", "lane", "conveyor", "traffic jam"
+    "bottleneck", "barrier", "wall", "stall", "bridge", "lane", "conveyor", "traffic jam",
+    # Software & system friction metaphors
+    "guardrail", "guardrails", "safety net", "handshake", "firewall", "contract", "blueprint", "checklist",
+    "silent failure", "runtime crash", "schema", "validation", "black box", "leak", "leaking"
 ]
 
 
@@ -183,6 +186,9 @@ class ScriptCriticReport:
     slop_list: List[str] = field(default_factory=list)
     total_textbook_cliches: int = 0
     textbook_list: List[str] = field(default_factory=list)
+    context_clarity_score: float = 10.0
+    plain_english_identity_present: bool = True
+    has_human_stakes: bool = True
 
 
 class ScriptCritic:
@@ -345,6 +351,35 @@ class ScriptCritic:
             # Check for curiosity hooks: questions, second person, curiosity triggers
             if any(w in b1.text.lower() for w in ["you", "your", "?", "bizarre", "imagine", "ever", "vanish", "secret", "waste", "every"]):
                 det_score = min(10.0, det_score + 0.3)
+
+        # Check Audience Context: Plain-English Identity & Human Stakes (Beat 1 or 2)
+        b1_text = beats_data[0].get("text", "").lower() if len(beats_data) > 0 else ""
+        b2_text = beats_data[1].get("text", "").lower() if len(beats_data) > 1 else ""
+        b1_b2_text = f"{b1_text} {b2_text}"
+
+        identity_markers = [
+            "meet", "is a", "is an", "tool", "engine", "model", "library", "framework",
+            "architecture", "algorithm", "technique", "system", "interface", "app",
+            "project", "open-source", "method", "solution", "software", "called"
+        ]
+        plain_english_identity_present = any(im in b1_b2_text for im in identity_markers)
+
+        human_stakes_markers = [
+            "laptop", "home", "pc", "free", "cost", "costs", "dollar", "$", "money",
+            "crash", "crashes", "cloud", "server", "servers", "private", "waste", "wasted",
+            "slow", "faster", "easy", "anyone", "hour", "hours", "day", "days",
+            "bill", "bills", "memory", "gpu", "gpus", "spend", "spending", "drain"
+        ]
+        has_human_stakes = any(sm in b1_b2_text for sm in human_stakes_markers)
+
+        context_clarity_score = 10.0
+        if not plain_english_identity_present:
+            context_clarity_score -= 3.5
+            det_score -= 1.5
+        if not has_human_stakes:
+            context_clarity_score -= 2.0
+            det_score -= 0.5
+        context_clarity_score = max(1.0, min(10.0, round(context_clarity_score, 1)))
                 
         pacing_warnings = []
         if total_words < 90:
@@ -367,13 +402,16 @@ class ScriptCritic:
             overall_grade_level <= (self.target_grade_level + 2.0) and
             len(all_crit_jargon) == 0 and
             len(all_slop_cliches) == 0 and
-            len(all_textbook_cliches) == 0
+            len(all_textbook_cliches) == 0 and
+            plain_english_identity_present
         )
         
         if passed:
             verdict = "✅ APPROVED: The script is conversational, intuitive, grounded in everyday examples, and free of AI slop."
         else:
             reasons = []
+            if not plain_english_identity_present:
+                reasons.append("fails 10-second rule: missing plain-English identity in Beat 1 or 2 (must explain WHAT it is under 14 words)")
             if len(all_textbook_cliches) > 0:
                 reasons.append(f"contains {len(all_textbook_cliches)} textbook lecture cliché(s): {', '.join(all_textbook_cliches)}")
             if len(all_slop_cliches) > 0:
@@ -405,7 +443,10 @@ class ScriptCritic:
             total_slop_cliches=len(all_slop_cliches),
             slop_list=sorted(list(all_slop_cliches)),
             total_textbook_cliches=len(all_textbook_cliches),
-            textbook_list=sorted(list(all_textbook_cliches))
+            textbook_list=sorted(list(all_textbook_cliches)),
+            context_clarity_score=context_clarity_score,
+            plain_english_identity_present=plain_english_identity_present,
+            has_human_stakes=has_human_stakes
         )
 
     def _call_gemini_critic(
