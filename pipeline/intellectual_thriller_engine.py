@@ -78,12 +78,14 @@ STRICT CONSTRAINTS & BANNED PATTERNS:
    - Strictly forbidden: "smart tool", "safe drawers", "open desk", "magic box", "delve into", "tapestry", "game changer".
    - AVOID UNEXPLAINED CRITICAL JARGON: NEVER drop naked compiler or tensor terms without stating their physical real-world effect.
    - Name REAL developer tools and hardware when applicable to the paper's domain.
-3. GROUNDING IN A RELEVANT PHYSICAL ANALOGY:
-   - Ground the paper's core mechanical bottleneck in ONE tangible, memorable analogy tailored to its actual challenge (e.g. an assembly line bottleneck, traffic lane closures, relay race baton handoff, optical refraction, sculpting stone).
+3. AUTHENTIC FRICTION OVER FORCED METAPHORS:
+   - For hardware: Ground the core bottleneck in intuitive physical terms (memory walls, bandwidth traffic, heat).
+   - For software, models, and tools: Focus directly on the AUTHENTIC DEVELOPER OR USER PROBLEM (runtime crashes, invalid outputs, security risks, prompt injection).
+   - NEVER force bizarre factory, chef, or assembly-line metaphors onto software tools! Sound like an insightful engineer or tech reporter, not a children's cartoon.
 
 MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
 * The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers. If you dump unexplained compiler/tensor jargon, they swipe away within 3 seconds!
-* RULE 1: MANDATORY PLAIN-ENGLISH IDENTITY (Beat 2):
+* RULE 1: MANDATORY PLAIN-ENGLISH IDENTITY & 'WHY SHOULD YOU CARE?' (Beat 2):
   - In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet GPT-6 Cyber: a new model built specifically to handle the high-stakes world of cybersecurity").
   - NEVER start explaining internal mechanisms before the viewer knows what the subject is!
 * RULE 2: THE JARGON-TO-PHYSICAL-EFFECT RULE:
@@ -92,17 +94,19 @@ MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES)
   - Connect the paper to real-world stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
 
 THE 6-BEAT CURIOSITY BRIDGE & FEYNMAN INVERSION ARC (EXACTLY 6 BEATS, 125-155 WORDS TOTAL):
-- BEAT 1: THE UNIVERSAL DREAM / HIGH-STAKES FRICTION HOOK (0-5s, 12-18 words):
-  * Open with a bold, relatable human question, dream, or absurd paradox that hooks a general curious viewer before their thumb swipes.
+- BEAT 1: THE HIGH-STAKES HOOK / EVENT ANNOUNCEMENT (0-5s, 12-18 words):
+  * Open with a bold, conversational announcement, question, or paradox that hooks a general curious viewer before their thumb swipes.
   * Grounded Examples:
+    - "OpenAI just dropped a bombshell: GPT-6 Cyber is officially here."
+    - "Why do your AI agents crash the moment they receive messy, real-world data?"
     - "What if you could run a private ChatGPT on your own laptop without paying monthly cloud fees?"
     - "Your GPU spends up to 60% of its inference time waiting on memory bandwidth."
     - "Most humanoid robots freeze the moment they drop a tool in an unfamiliar room."
-- BEAT 2: PLAIN-ENGLISH IDENTITY & STAKES (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
-  * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer.
+- BEAT 2: PLAIN-ENGLISH IDENTITY & 'WHY SHOULD YOU CARE?' (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
+  * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer right now.
   * Example: "Meet Unsloth: a free open-source engine that rewrites AI training code so it runs on standard consumer PCs."
-- BEAT 3: RELATABLE FRICTION & THE INVISIBLE TRAP (12-24s, 18-25 words):
-  * Why couldn't we do this before? Expose the hidden villain or physical bottleneck using ONE vivid, relatable analogy (traffic jam, kitchen counter, assembly line).
+- BEAT 3: THE AUTHENTIC FRICTION / REAL-WORLD TRAP (12-24s, 18-25 words):
+  * Why couldn't we do this before? Expose the authentic bottleneck or engineering nightmare (e.g., memory walls, broken JSON crashes, security exploits).
   * Example: "Normally, training crashes home computers with Out of Memory errors because standard software wastes 80% of its time copying data between memory chips."
 - BEAT 4: THE 'AHA!' MECHANICAL INSIGHT (24-40s, 20-26 words):
   * Reveal the eureka mechanical insight. Every technical term MUST be paired with its physical effect.
@@ -207,12 +211,14 @@ class IntellectualThrillerEngine:
         b1_has_curiosity = any(w in b1_text for w in curiosity_triggers) or ("?" in b1_text) or ("!" in b1_text)
         hook_passed = (3 <= b1_words <= 26) and (not b1_has_textbook) and b1_has_curiosity
 
-        # Check Beat 2: The Villain & Physical Analogy
+        # Check Beat 2: The Villain & Physical / System Analogy
         analogy_keywords = [
             "like a", "like an", "as if", "similar to", "chef", "onion", "salt",
             "traffic", "highway", "baton", "relay", "static", "marble", "waiter",
             "cashier", "sponge", "factory", "assembly", "pipeline", "bottleneck",
-            "wall", "friction", "obstacle", "challenge", "stall"
+            "wall", "friction", "obstacle", "challenge", "stall", "guardrail",
+            "safety net", "contract", "firewall", "schema", "validation", "crash",
+            "broken", "malformed", "black box", "nightmare"
         ]
         has_analogy = any(ak in b2_text for ak in analogy_keywords) or bool(spec.get("thriller_metadata", {}).get("physical_analogy"))
         has_villain = any(w in b2_text for w in [

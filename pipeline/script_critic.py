@@ -92,7 +92,10 @@ EVERYDAY_ANALOGY_ANCHORS = [
     "checklist", "teammate",
     # Developer & Operational physical analogies
     "relay race", "baton", "relay", "assembly line", "factory", "express lane", "cashier", "clerk", "waiter",
-    "bottleneck", "barrier", "wall", "stall", "bridge", "lane", "conveyor", "traffic jam"
+    "bottleneck", "barrier", "wall", "stall", "bridge", "lane", "conveyor", "traffic jam",
+    # Software & system friction metaphors
+    "guardrail", "guardrails", "safety net", "handshake", "firewall", "contract", "blueprint", "checklist",
+    "silent failure", "runtime crash", "schema", "validation", "black box", "leak", "leaking"
 ]
 
 

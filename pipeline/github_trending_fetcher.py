@@ -45,12 +45,29 @@ class TrendingRepo:
     def to_spec_candidate(self) -> Dict[str, Any]:
         """Converts repository record to an auto-producer candidate spec."""
         clean_id = re.sub(r"[^a-zA-Z0-9_]", "_", self.repo_name.replace("/", "_").replace("-", "_")).lower()
+        repo_lower = self.repo_name.lower()
+        desc_lower = (self.description or "").lower()
+        repo_short = self.repo_name.split("/")[-1]
+
+        if any(k in repo_lower or k in desc_lower for k in ["vllm", "sglang", "kernel", "cuda", "bitnet", "sram", "quantization", "gguf", "triton"]):
+            domain_tax = "hardware_efficiency"
+        elif any(k in repo_lower or k in desc_lower for k in ["diffusion", "video", "flux", "image", "generative", "stable"]):
+            domain_tax = "multimodal_diffusion"
+        elif any(k in repo_lower or k in desc_lower for k in ["attention", "transformer", "moe", "mixture of experts", "mamba", "rwkv"]):
+            domain_tax = "neural_attention"
+        else:
+            domain_tax = "general_cs"
+
+        default_hook = f"Why are top AI developers starring {repo_short} on GitHub?"
+        if self.description and len(self.description.strip()) > 10:
+            default_hook = f"Why developers are watching {repo_short}: {self.description[:70].strip()}."
+
         return {
             "id": f"gh_{clean_id}",
             "source": self.source,
             "title": self.title,
             "recommended_category": "mechanism_deepdive",
-            "domain_taxonomy": "hardware_efficiency" if any(k in self.repo_name.lower() for k in ["vllm", "sglang", "kernel", "cuda", "bitnet"]) else "neural_attention",
+            "domain_taxonomy": domain_tax,
             "abstract": f"{self.description} Key open-source repository: {self.repo_name} with {self.stars:,} GitHub stars.",
             "repo_metadata": {
                 "repo_name": self.repo_name,
@@ -63,8 +80,8 @@ class TrendingRepo:
             },
             "code_snippet": asdict(self.code_kernel),
             "editorial_notes": {
-                "recommended_hook": f"How {self.repo_name.split('/')[-1]} actually runs inside your GPU memory",
-                "suggested_everyday_analogy": "A shared filing cabinet where identical papers are never photocopied twice"
+                "recommended_hook": default_hook,
+                "suggested_everyday_analogy": f"A dedicated engineering pipeline for {repo_short}"
             }
         }
 

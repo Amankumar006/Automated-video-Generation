@@ -377,11 +377,11 @@ def get_domain_context_parameters(
     return {
         "domain": "hardware_efficiency",
         "metric_templates": [
+            "Why is {metric} of your compute budget wasted before {clean_topic} fixes it?",
             "Your GPU can spend {metric} of its memory budget moving data; {clean_topic} cuts that overhead.",
             "Why do standard transformer architectures hit a memory wall before {clean_topic} unlocks {metric} gains?",
             "You might be leaving {metric} of your hardware performance on the table without {clean_topic}.",
-            "Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap.",
-            "Do not scale your next training run before you see how {clean_topic} delivers {metric}."
+            "Everyone assumed standard attention was optimal, until {clean_topic} proved a {metric} leap."
         ],
         "general_templates": [
             "Scaling exposes the weak seam in standard architecture; {clean_topic} rethinks that seam.",
@@ -545,14 +545,14 @@ def optimize_script_hook(
     winning_hook, winner_eval, all_evals = gate_and_select_best_hook(candidates)
 
     # Storyline preservation guard:
-    # If the base hook from the LLM has a solid score (>= 58, WORKABLE/STRONG) and is
-    # reasonably close to the top synthetic candidate (<= 8 points), prefer keeping
-    # the LLM's bespoke narrative to avoid generic repetitive templates!
+    # If the base hook from the LLM is present and not a textbook lecture cliché
+    # (e.g. 'Today we explore...', 'In this video...'), ALWAYS prioritize the LLM's bespoke
+    # human curiosity hook over generic, synthetic formula templates!
     if base_hook and base_hook.strip() and not is_generic_before_opening(base_hook):
-        base_eval = score_hook(base_hook.strip())
-        if base_eval["verdict"] >= 58 and (winner_eval["verdict"] - base_eval["verdict"] <= 8):
+        is_textbook = any(cl in base_hook.lower() for cl in ("today we", "in this paper", "in this video", "the authors propose", "we introduce"))
+        if not is_textbook and len(base_hook.split()) >= 4:
             winning_hook = base_hook.strip()
-            winner_eval = base_eval
+            winner_eval = score_hook(winning_hook)
 
     # Update Beat 1 text with winning gated hook
     beats[0]["text"] = winning_hook

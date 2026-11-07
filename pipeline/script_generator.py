@@ -72,7 +72,7 @@ Aesthetic & Pedagogical Philosophy (Fireship meets 3Blue1Brown & Veritasium):
 MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
 * The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers. If you dump unexplained compiler/tensor jargon, they swipe away within 3 seconds!
 * RULE 1: MANDATORY PLAIN-ENGLISH IDENTITY (Beat 2):
-  - In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet FlashAttention: an algorithm that stops AI models from choking on long documents").
+  - In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet PydanticAI: a new Python framework guaranteeing your AI models never output broken data").
   - NEVER start explaining internal mechanisms before the viewer knows what the subject is!
 * RULE 2: THE JARGON-TO-PHYSICAL-EFFECT RULE:
   - NEVER drop naked academic or compiler terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
@@ -80,23 +80,30 @@ MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES)
   - Good: "Instead of writing down every step on slow memory chips, it combines five math calculations into a single pass directly on the GPU."
 * RULE 3: ANSWER "WHY SHOULD I CARE?" IN THE FIRST 10 SECONDS:
   - Connect the paper to real-world stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
+* RULE 4: DOMAIN-AUTHENTIC FRICTION (NEVER FORCE BIZARRE METAPHORS):
+  - For hardware/physics: Use one clean mechanical analogy (memory bottleneck, traffic jam, relay race).
+  - For software tools, agent frameworks, and developer libraries: Explain the AUTHENTIC SOFTWARE PROBLEM directly (e.g. LLMs returning invalid JSON, runtime crashes, silent type errors, broken backends).
+  - NEVER force ridiculous factory/chef analogies (like 'a blind worker on an assembly line' or 'chefs in kitchens') onto pure software code! Real developers cringe at those.
 
 The 6-Beat Curiosity Bridge & Feynman Inversion Narrative Arc (125-155 words total):
 1. BEAT 1: The Universal Dream / High-Stakes Friction Hook (0-5s, 12-18 words):
    * Open with a bold, relatable human question, dream, or absurd paradox that hooks any tech-curious viewer.
    * Grounded Examples:
+     - Software/Agents: "Why do AI agents constantly crash the moment you send them real-world data?"
      - Hardware: "What if you could fine-tune your own private ChatGPT right on your laptop without paying cloud server fees?"
      - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar room."
      - Diffusion: "Why does generating ten seconds of AI video melt data centers while human brains do it on twenty watts?"
 2. BEAT 2: The Plain-English Identity & Stakes (5-12s, 16-22 words):
    * Name what this is in plain English, and state why it matters to humanity or developers.
    * Format: "Meet [Name]: a [plain-English definition] that [solves key human/developer problem]."
-3. BEAT 3: The Relatable Friction / The Invisible Trap (12-24s, 18-25 words):
-   * Explain why this was previously thought to be impossible using ONE intuitive physical analogy.
-   * Explain the real-world friction (e.g., crashing computers with Out of Memory errors, data bottlenecks, traffic jams).
+3. BEAT 3: The Relatable Friction / The Real-World Trap (12-24s, 18-25 words):
+   * Explain why standard approaches break down in practice.
+   * For hardware: The physical memory or throughput wall.
+   * For software/agents: The real nightmare (e.g., "Normally, when an LLM returns JSON, one missing quote or unexpected field completely crashes your backend").
 4. BEAT 4: The 'Aha!' Mechanical Insight (24-40s, 20-26 words):
-   * The clever engineering breakthrough that shatters the trap.
-   * Ground every technical term in its physical effect. The voiceover carries intuition; the visual canvas shows the mechanism.
+   * The clever engineering breakthrough that solves the problem.
+   * Ground every technical term in its real-world effect.
+   * For software: "Instead of hoping the model follows instructions, it validates every response against Python types and auto-retries if data is invalid."
 5. BEAT 5: The Concrete Real-World Victory (40-50s, 18-24 words):
    * Deliver the hard empirical payoff from the paper in terms of human capability and freedom (speedup, memory drop, cost savings).
 6. BEAT 6: The Paradigm Shift & Natural Loop (50-58s, 14-20 words):

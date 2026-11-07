@@ -96,20 +96,22 @@ CRITICAL INTELLECTUAL THRILLER DIRECTIVES (ENGINE 7.0):
    - AVOID UNEXPLAINED ACADEMIC JARGON: NEVER use "autoregressive" (say "step-by-step" or "sequential token generation"), "softmax" (say "probability sampling"), "backpropagation", or "feedforward".
 5. MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
    - The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers.
-   - RULE 1 (Beat 2 Mandatory Plain-English Identity): In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet GPT-6 Cyber: a new model built specifically to handle the high-stakes world of cybersecurity"). NEVER start explaining internal mechanisms before the viewer knows what the subject is!
-   - RULE 2 (The Jargon-to-Physical-Effect Rule): NEVER drop naked compiler or tensor terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
-   - RULE 3 (Real-World Stakes): Connect the paper to real-world developer stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
+   - RULE 1 (Beat 1 High-Stakes Hook): Open with a direct, conversational event or relatable human question (e.g. "OpenAI just dropped a bombshell: GPT-6 Cyber is officially here", "Why do AI agents crash the moment they hit real-world data?"). Sound like an excited tech insider or reporter, not a textbook!
+   - RULE 2 (Beat 2 Mandatory Plain-English Identity & 'Why Should You Care?'): In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language, and immediately answer "Why should you care?". NEVER start explaining internal mechanisms before the viewer knows what the subject is!
+   - RULE 3 (The Jargon-to-Physical-Effect Rule): NEVER drop naked compiler or tensor terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
+   - RULE 4 (Authentic Friction, ZERO Forced Metaphors): For hardware, explain physical memory or bandwidth limits. For software and agent tools, explain the REAL developer friction (broken JSON, silent crashes, schema errors). NEVER force bizarre kitchen/chef or assembly-line metaphors onto software code!
+   - RULE 5 (Real-World Stakes): Connect the paper to real-world developer stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
 
 6. THE 6-BEAT CURIOSITY BRIDGE & FEYNMAN INVERSION ARC (Target: 125-155 words total, ~45-55s at 1.1x speed):
-   - BEAT 1: The Universal Dream / High-Stakes Friction Hook (0-5s, 12-18 words):
-     * Open with a bold, relatable human question, dream, or absurd paradox that hooks a general curious viewer before their thumb swipes.
-   - BEAT 2: Plain-English Identity & Stakes (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
-     * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer.
+   - BEAT 1: The High-Stakes Hook / Event Announcement (0-5s, 12-18 words):
+     * Open with a bold, conversational announcement, question, or paradox that hooks a general curious viewer before their thumb swipes.
+   - BEAT 2: Plain-English Identity & 'Why Should You Care?' (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
+     * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer right now.
      * Example: "Meet Unsloth: a free open-source engine that rewrites AI training code so it runs on standard consumer PCs."
-   - BEAT 3: Relatable Friction & The Invisible Trap (12-24s, 18-25 words):
-     * Expose the hidden villain or physical bottleneck using ONE vivid, relatable analogy (traffic jam, kitchen counter, assembly line).
+   - BEAT 3: The Authentic Friction & Real-World Trap (12-24s, 18-25 words):
+     * Expose the core engineering problem or bottleneck that makes this hard (memory walls, broken schemas, runtime crashes).
    - BEAT 4: The 'Aha!' Mechanical Insight (24-40s, 20-26 words):
-     * Reveal the eureka mechanical insight. Every technical term MUST be paired with its physical effect.
+     * Reveal the eureka mechanical insight. Pair every technical term with its real-world effect.
    - BEAT 5: Concrete Real-World Victory (40-50s, 18-24 words):
      * Hard empirical numbers of human capability and freedom (speedup, memory drop, cost savings).
    - BEAT 6: The Paradigm Shift & Natural Loop (50-58s, 14-20 words):
@@ -716,11 +718,14 @@ Give your candid score and feedback.
         ]
         found_anchors = [a for a in tech_anchors if a in lower]
         
-        # Check for concrete analogy or mechanical bottleneck
+        # Check for concrete friction, mechanical bottleneck, or real-world developer problem
         has_analogy = any(w in lower for w in [
             "like a", "like an", "as if", "similar to", "chef", "salt", "onion",
             "traffic", "car", "relay", "kitchen", "assembly", "pipeline", "bottleneck",
-            "barrier", "wall", "stall", "wait", "friction", "obstacle", "decoupled"
+            "barrier", "wall", "stall", "wait", "friction", "obstacle", "decoupled",
+            "guardrail", "contract", "schema", "validation", "crash", "broken", "malformed",
+            "firewall", "leak", "bug", "error", "failing", "fails", "unstructured", "chaos",
+            "vulnerability", "patch", "attack", "boundary", "hallucination", "hallucinate"
         ])
 
         # Check for Plain-English Identity & Human Stakes in Beat 1 or Beat 2 (Audience Context Gate)
@@ -737,7 +742,8 @@ Give your candid score and feedback.
             r"\bmodel\b", r"\blibrary\b", r"\bframework\b", r"\barchitecture\b",
             r"\balgorithm\b", r"\btechnique\b", r"\bsystem\b", r"\binterface\b",
             r"\bapp\b", r"\bproject\b", r"\bopen-source\b", r"\bmethod\b",
-            r"\bsolution\b", r"\bsoftware\b", r"\bcalled\b"
+            r"\bsolution\b", r"\bsoftware\b", r"\bcalled\b", r"\bofficially\b",
+            r"\bdropped\b", r"\breleased\b", r"\blaunched\b"
         ]
         has_identity = any(re.search(pat, b1_b2_text) for pat in identity_markers)
 
@@ -747,7 +753,8 @@ Give your candid score and feedback.
             r"\bserver\b", r"\bservers\b", r"\bprivate\b", r"\bwaste\b", r"\bwasted\b",
             r"\bslow\b", r"\bfaster\b", r"\beasy\b", r"\banyone\b", r"\bhour\b", r"\bhours\b",
             r"\bday\b", r"\bdays\b", r"\bbill\b", r"\bbills\b", r"\bmemory\b", r"\bgpu\b",
-            r"\bgpus\b", r"\bspend\b", r"\bspending\b", r"\bdrain\b"
+            r"\bgpus\b", r"\bspend\b", r"\bspending\b", r"\bdrain\b", r"\bcare\b", r"\bwhy\b",
+            r"\bdeveloper\b", r"\bdevelopers\b", r"\bproduction\b", r"\breliability\b"
         ]
         has_human_stakes = any(re.search(pat, b1_b2_text) for pat in human_stakes_markers)
 
@@ -769,9 +776,9 @@ Give your candid score and feedback.
         elif not has_identity:
             critique = "Wait, what is this tool or project? Beat 2 needs to tell me what it actually is in plain English before diving into internal mechanics."
         elif approved:
-            critique = "Approved! Clear real-world developer terms and intuitive physical analogy."
+            critique = "Approved! Clear real-world developer terms and authentic friction."
         else:
-            critique = f"Detected AI slop metaphors: {cliches}" if has_slop else "Script needs a clearer physical analogy in Beat 2."
+            critique = f"Detected AI slop metaphors: {cliches}" if has_slop else "Script needs clearer real-world friction in Beat 3."
 
         all_confusing = list(cliches)
         if textbook_found:
