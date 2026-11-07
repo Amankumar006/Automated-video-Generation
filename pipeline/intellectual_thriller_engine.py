@@ -76,29 +76,43 @@ STRICT CONSTRAINTS & BANNED PATTERNS:
    - Treat those as immediate swipe-aways. Every word in the first 3 seconds must create intense curiosity or high-stakes friction.
 2. BAN AI SLOP & BABY-TALK METAPHORS:
    - Strictly forbidden: "smart tool", "safe drawers", "open desk", "magic box", "delve into", "tapestry", "game changer".
-   - AVOID UNEXPLAINED CRITICAL JARGON: NEVER use "autoregressive" (say "step-by-step" or "sequential token generation"), "softmax", "backpropagation", or "feedforward".
+   - AVOID UNEXPLAINED CRITICAL JARGON: NEVER drop naked compiler or tensor terms without stating their physical real-world effect.
    - Name REAL developer tools and hardware when applicable to the paper's domain.
 3. GROUNDING IN A RELEVANT PHYSICAL ANALOGY:
    - Ground the paper's core mechanical bottleneck in ONE tangible, memorable analogy tailored to its actual challenge (e.g. an assembly line bottleneck, traffic lane closures, relay race baton handoff, optical refraction, sculpting stone).
 
-THE 4-ACT INTELLECTUAL THRILLER NARRATIVE ARC (EXACTLY 6 BEATS, 125-155 WORDS TOTAL):
-- ACT 1: ABSURD PARADOX / PATTERN INTERRUPT HOOK (Beat 1, 0-3s, 12-18 words):
-  * State a shocking paradox, counter-intuitive inefficiency, or core problem directly from the paper.
-  * Hook the viewer in under 3 seconds before their thumb can swipe.
-  * Grounded Examples across Domains (DO NOT COPY VERBATIM; WRITE SPECIFICALLY FOR THE PROVIDED PAPER):
-    - Robotics: "Most humanoid robots freeze the moment they drop a tool in an unfamiliar room."
-    - Hardware: "Your GPU spends up to 60% of its inference time waiting on memory bandwidth."
-    - Vision: "Generating 10 seconds of consistent video used to require hundreds of wasted diffusion steps."
-- ACT 2: THE VILLAIN & BOTTLENECK (Beat 2, 3-15s, 20-26 words):
-  * Personify the villain / mechanical bottleneck holding back the architecture.
-  * Anchor in a vivid physical analogy reflecting the paper's actual challenge.
-- ACT 3: THE EUREKA GEOMETRIC MECHANISM (Beats 3 & 4, 15-40s):
-  * Beat 3 (The Eureka Pivot, 20-25 words): The clean architectural breakthrough that shatters the bottleneck.
-  * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): The paper's specific algorithmic trick using real engineering terms.
-- ACT 4: THE PARADIGM SHIFT / OPEN LOOP (Beats 5 & 6, 40-50s):
-  * Beat 5 (Empirical Victory Payoff, 18-24 words): Hard benchmark numbers proving the paradigm shift.
-  * Beat 6 (The Paradigm Shift & Seamless Loop, 15-20 words): Mind-expanding takeaway that naturally loops back to Beat 1.
-    Example: "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood."
+MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
+* The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers. If you dump unexplained compiler/tensor jargon, they swipe away within 3 seconds!
+* RULE 1: MANDATORY PLAIN-ENGLISH IDENTITY (Beat 2):
+  - In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet GPT-6 Cyber: a new model built specifically to handle the high-stakes world of cybersecurity").
+  - NEVER start explaining internal mechanisms before the viewer knows what the subject is!
+* RULE 2: THE JARGON-TO-PHYSICAL-EFFECT RULE:
+  - NEVER drop naked academic or compiler terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
+* RULE 3: ANSWER "WHY SHOULD I CARE?" IN THE FIRST 10 SECONDS:
+  - Connect the paper to real-world stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
+
+THE 6-BEAT CURIOSITY BRIDGE & FEYNMAN INVERSION ARC (EXACTLY 6 BEATS, 125-155 WORDS TOTAL):
+- BEAT 1: THE UNIVERSAL DREAM / HIGH-STAKES FRICTION HOOK (0-5s, 12-18 words):
+  * Open with a bold, relatable human question, dream, or absurd paradox that hooks a general curious viewer before their thumb swipes.
+  * Grounded Examples:
+    - "What if you could run a private ChatGPT on your own laptop without paying monthly cloud fees?"
+    - "Your GPU spends up to 60% of its inference time waiting on memory bandwidth."
+    - "Most humanoid robots freeze the moment they drop a tool in an unfamiliar room."
+- BEAT 2: PLAIN-ENGLISH IDENTITY & STAKES (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
+  * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer.
+  * Example: "Meet Unsloth: a free open-source engine that rewrites AI training code so it runs on standard consumer PCs."
+- BEAT 3: RELATABLE FRICTION & THE INVISIBLE TRAP (12-24s, 18-25 words):
+  * Why couldn't we do this before? Expose the hidden villain or physical bottleneck using ONE vivid, relatable analogy (traffic jam, kitchen counter, assembly line).
+  * Example: "Normally, training crashes home computers with Out of Memory errors because standard software wastes 80% of its time copying data between memory chips."
+- BEAT 4: THE 'AHA!' MECHANICAL INSIGHT (24-40s, 20-26 words):
+  * Reveal the eureka mechanical insight. Every technical term MUST be paired with its physical effect.
+  * Example: "Instead of writing down every step on slow memory chips, it fuses five math operations into a single pass directly on the GPU."
+- BEAT 5: CONCRETE REAL-WORLD VICTORY (40-50s, 18-24 words):
+  * Deliver hard empirical numbers of human capability and freedom (speedup, memory drop, cost savings).
+  * Example: "The payoff? Training runs 5 times faster with 70% less memory—cutting a 3-day cloud run down to an afternoon on your laptop."
+- BEAT 6: THE PARADIGM SHIFT & NATURAL LOOP (50-58s, 14-20 words):
+  * Mind-expanding takeaway that naturally loops back to Beat 1.
+  * Example: "You don't need a million-dollar cluster to build frontier AI anymore. Follow The Model Verse for daily deep-dives into how AI actually works."
 
 JSON OUTPUT SCHEMA:
 Return ONLY valid JSON matching this specification:
@@ -208,6 +222,38 @@ class IntellectualThrillerEngine:
         ]) or bool(spec.get("thriller_metadata", {}).get("villain_entity"))
         act2_passed = has_analogy or has_villain
 
+        # Check Audience Context: Plain-English Identity (Beat 1 or 2)
+        b1_b2_text = f"{b1_text} {b2_text}"
+        identity_markers = [
+            "meet", "is a", "is an", "tool", "engine", "model", "library", "framework",
+            "architecture", "algorithm", "technique", "system", "interface", "app",
+            "project", "open-source", "method", "solution", "software", "called"
+        ]
+        has_plain_english_identity = any(im in b1_b2_text for im in identity_markers)
+
+        # Check Audience Context: Real-World Human Stakes (Beat 1 or 2)
+        human_stakes_markers = [
+            "laptop", "home", "pc", "free", "cost", "costs", "dollar", "$", "money",
+            "crash", "crashes", "cloud", "server", "servers", "private", "waste", "wasted",
+            "slow", "faster", "easy", "anyone", "hour", "hours", "day", "days",
+            "bill", "bills", "memory", "gpu", "gpus", "spend", "spending", "drain"
+        ]
+        has_human_stakes = any(sm in b1_b2_text for sm in human_stakes_markers)
+
+        # Check for Naked Jargon without physical explanation
+        naked_jargon_terms = ["triton", "sram", "swiglu", "backprop", "gemm", "einsum", "kv cache", "rope", "lora"]
+        physical_explanation_markers = [
+            "memory", "chip", "speed", "fast", "cache", "calculation", "pass", "run",
+            "store", "save", "load", "direct", "compress", "rewrite", "fuse", "fuses", "combines"
+        ]
+        naked_jargon_found = []
+        for idx, b in enumerate(beats):
+            bt = b.get("text", "").lower()
+            for nj in naked_jargon_terms:
+                if nj in bt:
+                    if not any(pem in bt for pem in physical_explanation_markers):
+                        naked_jargon_found.append(f"Beat {idx+1}: {nj}")
+
         # Check Beat 5: Empirical Payoff Numbers
         has_payoff_numbers = any(c in b5_text for c in [
             "x", "%", "faster", "speedup", "tflops", "benchmark", "accuracy", "zero",
@@ -224,7 +270,13 @@ class IntellectualThrillerEngine:
         if not hook_passed:
             score -= 2.0
         if not act2_passed:
+            score -= 1.0
+        if not has_plain_english_identity:
             score -= 1.5
+        if not has_human_stakes:
+            score -= 1.0
+        if naked_jargon_found:
+            score -= 0.5 * len(naked_jargon_found)
         if not has_payoff_numbers:
             score -= 1.0
         if not has_outro_loop:
@@ -233,18 +285,21 @@ class IntellectualThrillerEngine:
             score += 0.5
 
         score = max(1.0, min(10.0, round(score, 1)))
-        passed = score >= 8.0 and not detected_textbook_phrases and hook_passed
+        passed = score >= 8.0 and not detected_textbook_phrases and hook_passed and has_plain_english_identity
 
         return {
             "score": score,
             "passed": passed,
             "detected_textbook_phrases": detected_textbook_phrases,
             "hook_passed": hook_passed,
+            "has_plain_english_identity": has_plain_english_identity,
+            "has_human_stakes": has_human_stakes,
+            "naked_jargon_found": naked_jargon_found,
             "act2_villain_passed": act2_passed,
             "act4_payoff_passed": has_payoff_numbers,
             "b1_word_count": b1_words,
             "total_beats": total_beats,
-            "verdict": "APPROVED: High-tempo Intellectual Thriller" if passed else f"REJECTED: Needs thriller rewrite (Score {score}/10)"
+            "verdict": "APPROVED: High-tempo Intellectual Thriller" if passed else f"REJECTED: Needs curiosity/context rewrite (Score {score}/10)"
         }
 
     def rewrite_script_to_thriller(
@@ -273,20 +328,20 @@ class IntellectualThrillerEngine:
             }
 
             user_prompt = f"""
-REWRITE THIS SCRIPT AS A HIGH-TEMPO 4-ACT INTELLECTUAL THRILLER (GROUND TRUTH ONLY):
+REWRITE THIS SCRIPT AS A HIGH-TEMPO CURIOSITY-FIRST THRILLER (GROUND TRUTH ONLY):
 Input Specification:
 {json.dumps(prompt_input, indent=2)}
 
-CRITICAL GROUND TRUTH RULES:
-1. Base ALL facts, hooks, villains, and metrics STRICTLY on this specific paper ({topic}).
-2. NEVER mention Cursor, Claude, or GPU compute waste unless this paper is explicitly about them!
-3. If the paper is about robotics, focus on robotics and physical simulation. If about diffusion, focus on generative visual latency and denoising. If about hardware, focus on memory bandwidth and compute walls.
-4. Eradicate all textbook lecture introductions ("Today we explore...").
-5. Beat 1 MUST be a 0-3s (under 18 words) pattern interrupt hook derived from the paper's core challenge.
-6. Beat 2 MUST establish the villain & mechanical bottleneck with ONE intuitive physical analogy.
-7. Beats 3 & 4 MUST reveal the eureka mechanism and technical secret sauce from the paper.
-8. Beat 5 MUST deliver concrete empirical payoff numbers from the paper.
-9. Beat 6 MUST be a crisp outro looping back to Beat 1.
+CRITICAL AUDIENCE CONTEXT & GROUND TRUTH RULES:
+1. Base ALL facts, hooks, villains, and metrics STRICTLY on this specific paper/project ({topic}).
+2. NEVER mention unrelated tools or GPU compute waste unless this paper is explicitly about them!
+3. Eradicate all textbook lecture introductions ("Today we explore...").
+4. BEAT 1 (0-5s, under 18 words): Bold universal human question, dream, or pattern interrupt hook that makes a general viewer stop swiping.
+5. BEAT 2 (5-12s, 16-22 words): MANDATORY PLAIN-ENGLISH IDENTITY & STAKES. You MUST define WHAT the tool, model, or discovery actually is in plain English (under 14 words), and what real-world problem it solves for developers or users (saving money, preventing crashes, local freedom).
+6. BEAT 3 (12-24s, 18-25 words): Expose the hidden villain or physical bottleneck holding systems back, grounded in ONE relatable physical analogy.
+7. BEAT 4 (24-40s, 20-26 words): Reveal the eureka mechanical insight. Pair every technical term with its physical effect.
+8. BEAT 5 (40-50s, 18-24 words): Concrete empirical payoff numbers from the paper (speedup, memory reduction, cost savings).
+9. BEAT 6 (50-58s, 14-20 words): Crisp outro looping back to Beat 1.
 10. Return exactly 6 beats adhering to the required JSON schema.
 """
             use_ollama = (os.getenv("LLM_PROVIDER", "").lower() == "ollama") or (not self.api_key)
@@ -440,33 +495,39 @@ CRITICAL GROUND TRUTH RULES:
             first_key = words[0] if words else "AI"
             b1["highlight_words"] = {first_key: "#EF4444"}
 
-        # --- ACT 2: Transform Beat 2 into Villain & Bottleneck ---
+        # --- ACT 2: Transform Beat 2 into Plain-English Identity & Stakes ---
         b2 = beats[1]
         b2_raw = b2.get("text", "").strip()
         for cl in TEXTBOOK_LECTURE_CLICHES:
             if b2_raw.lower().startswith(cl):
                 b2_raw = b2_raw[len(cl):].lstrip(" :,.-")
 
-        if not b2_raw or len(b2_raw.split()) < 3:
-            b2["text"] = f"The bottleneck? Traditional systems hit a scaling wall when handling complex workloads without massive friction."
+        identity_terms = ["meet", "is a", "is an", "tool", "engine", "model", "library", "framework", "architecture", "system", "app", "called"]
+        if not b2_raw or len(b2_raw.split()) < 3 or not any(it in b2_raw.lower() for it in identity_terms):
+            b2["text"] = f"Meet {clean_topic[:24]}: an open-source engine built to eliminate wasted compute and run AI on standard hardware."
         else:
             b2["text"] = b2_raw
 
-        b2["thriller_role"] = "villain_bottleneck"
+        b2["thriller_role"] = "identity_and_stakes"
         b2["act"] = 2
         if "highlight_words" not in b2 or not b2["highlight_words"]:
-            b2["highlight_words"] = {"bottleneck": "#F59E0B"}
+            b2["highlight_words"] = {clean_topic[:18]: "#38BDF8"}
 
-        # --- ACT 3: Transform Beats 3 & 4 into Eureka Mechanism & Secret Sauce ---
+        # --- ACT 3: Transform Beats 3 & 4 into Relatable Friction & Mechanical Insight ---
         b3 = beats[2]
         b3_raw = b3.get("text", "").strip()
         for cl in TEXTBOOK_LECTURE_CLICHES:
             if cl in b3_raw.lower():
                 pattern = re.compile(re.escape(cl), re.IGNORECASE)
-                b3_raw = pattern.sub(f"Enter {clean_topic[:28]}:", b3_raw)
-        b3["text"] = b3_raw.strip() or f"Enter {clean_topic[:28]}: an architecture built from the ground up to eliminate this stall."
-        b3["thriller_role"] = "eureka_mechanism"
+                b3_raw = pattern.sub("Normally,", b3_raw)
+        if not b3_raw or len(b3_raw.split()) < 3:
+            b3["text"] = "Normally, standard systems hit an invisible wall because memory transfers choke the processor before computation can finish."
+        else:
+            b3["text"] = b3_raw.strip()
+        b3["thriller_role"] = "relatable_friction"
         b3["act"] = 3
+        if "highlight_words" not in b3 or not b3["highlight_words"]:
+            b3["highlight_words"] = {"invisible wall": "#EF4444"}
 
         b4 = beats[3]
         b4_raw = b4.get("text", "").strip()
@@ -474,8 +535,8 @@ CRITICAL GROUND TRUTH RULES:
             if cl in b4_raw.lower():
                 pattern = re.compile(re.escape(cl), re.IGNORECASE)
                 b4_raw = pattern.sub("Under the hood,", b4_raw)
-        b4["text"] = b4_raw.strip() or "Under the hood, the system coordinates parallel execution without blocking critical paths."
-        b4["thriller_role"] = "technical_secret_sauce"
+        b4["text"] = b4_raw.strip() or "Under the hood, it eliminates wasted cycles by keeping active computations directly inside high-speed chip cache."
+        b4["thriller_role"] = "mechanical_insight"
         b4["act"] = 3
 
         # --- ACT 4: Transform Beats 5 & 6 into Paradigm Shift Payoff & Open Loop ---
@@ -517,10 +578,12 @@ CRITICAL GROUND TRUTH RULES:
             "engine_version": "7.0",
             "narrative_style": "intellectual_thriller",
             "acts": {
-                "act_1_hook": {"beat": 1, "role": "pattern_interrupt_hook"},
-                "act_2_villain": {"beat": 2, "role": "villain_bottleneck"},
-                "act_3_eureka": {"beats": [3, 4], "role": "eureka_mechanism"},
-                "act_4_paradigm_shift": {"beats": [5, 6], "role": "paradigm_shift_open_loop"}
+                "act_1_hook": {"beat": 1, "role": "universal_hook"},
+                "act_2_identity": {"beat": 2, "role": "identity_and_stakes"},
+                "act_3_friction": {"beat": 3, "role": "relatable_friction"},
+                "act_4_insight": {"beat": 4, "role": "mechanical_insight"},
+                "act_5_payoff": {"beat": 5, "role": "empirical_payoff"},
+                "act_6_loop": {"beat": 6, "role": "open_loop_outro"}
             }
         }
         return updated
@@ -536,10 +599,10 @@ CRITICAL GROUND TRUTH RULES:
 
     def _get_default_thriller_role(self, beat_id: int) -> str:
         roles = {
-            1: "pattern_interrupt_hook",
-            2: "villain_bottleneck",
-            3: "eureka_mechanism",
-            4: "technical_secret_sauce",
+            1: "universal_hook",
+            2: "identity_and_stakes",
+            3: "relatable_friction",
+            4: "mechanical_insight",
             5: "empirical_payoff",
             6: "open_loop_outro"
         }
@@ -562,16 +625,16 @@ CRITICAL GROUND TRUTH RULES:
             s3 = sentences[3].rstrip(".?! ")
             s4 = sentences[4].rstrip(".?! ") if len(sentences) >= 5 else f"Proven empirical gains across {clean_topic}"
 
-            t1 = f"Why are top AI researchers calling {clean_topic} a breakthrough? Because {s0[0].lower() + s0[1:]}." if not any(w in s0.lower() for w in ("you", "your")) else s0 + "."
-            t2 = f"The core bottleneck? {s1}."
-            t3 = f"Enter {clean_topic}: {s2[0].lower() + s2[1:]}."
-            t4 = f"Under the hood, {s3[0].lower() + s3[1:]}."
+            t1 = f"What if you could eliminate the biggest bottleneck in AI? Look at {clean_topic}."
+            t2 = f"Meet {clean_topic}: an open-source engine built to make AI accessible on standard hardware."
+            t3 = f"Normally, standard systems hit an invisible wall because {s1[0].lower() + s1[1:]}."
+            t4 = f"Under the hood, {s2[0].lower() + s2[1:]}."
             t5 = f"The result? {s4}."
             t6 = "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood."
 
             defaults = {
                 1: {
-                    "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",
+                    "beat_id": 1, "act": 1, "thriller_role": "universal_hook",
                     "text": t1,
                     "visual_focus": f"System architecture diagram illustrating {clean_topic}.",
                     "highlight_words": {clean_topic: "#38BDF8"},
@@ -579,28 +642,28 @@ CRITICAL GROUND TRUTH RULES:
                     "visual_blueprint": {"layout": "grid_memory", "title": clean_topic.upper(), "sub": "Core Premise", "accent_color": "#38BDF8", "params": {}}
                 },
                 2: {
-                    "beat_id": 2, "act": 2, "thriller_role": "villain_bottleneck",
+                    "beat_id": 2, "act": 2, "thriller_role": "identity_and_stakes",
                     "text": t2,
-                    "visual_focus": "Bottleneck diagram highlighting resource contention and execution stall.",
-                    "highlight_words": {"bottleneck": "#EF4444"},
-                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Pipeline Flow", "anchor_word": "bottleneck", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource Contention", "accent_color": "#EF4444", "params": {}}
+                    "visual_focus": f"Chalkboard identity card introducing {clean_topic} and its core function.",
+                    "highlight_words": {clean_topic: "#38BDF8", "open-source": "#10B981"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "enables", "direct_object": "Standard Hardware", "anchor_word": "engine", "semantic_role": "identity"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": clean_topic.upper(), "sub": "Identity & Real-World Stakes", "accent_color": "#38BDF8", "params": {}}
                 },
                 3: {
-                    "beat_id": 3, "act": 3, "thriller_role": "eureka_mechanism",
+                    "beat_id": 3, "act": 3, "thriller_role": "relatable_friction",
                     "text": t3,
-                    "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
-                    "highlight_words": {clean_topic: "#10B981"},
-                    "svo_action": {"subject": clean_topic, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "Enter", "semantic_role": "mechanism"},
-                    "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled Execution", "accent_color": "#10B981", "params": {}}
+                    "visual_focus": "Bottleneck diagram highlighting resource contention and execution stall.",
+                    "highlight_words": {"invisible wall": "#EF4444"},
+                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Execution Flow", "anchor_word": "wall", "semantic_role": "friction"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "SYSTEM BOTTLENECK", "sub": "Resource Contention", "accent_color": "#EF4444", "params": {}}
                 },
                 4: {
-                    "beat_id": 4, "act": 3, "thriller_role": "technical_secret_sauce",
+                    "beat_id": 4, "act": 3, "thriller_role": "mechanical_insight",
                     "text": t4,
                     "visual_focus": "Low-level coordinate graph demonstrating execution flow without idle states.",
                     "highlight_words": {"Under the hood": "#38BDF8"},
                     "svo_action": {"subject": "Execution Engine", "action_verb": "coordinates", "direct_object": "Task Flow", "anchor_word": "hood", "semantic_role": "innovation"},
-                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "EXECUTION MECHANICS", "sub": "Algorithmic Coordination", "accent_color": "#38BDF8", "params": {}}
+                    "visual_blueprint": {"layout": "chalkboard_code_block", "title": "MECHANICAL INSIGHT", "sub": "Algorithmic Coordination", "accent_color": "#38BDF8", "params": {}}
                 },
                 5: {
                     "beat_id": 5, "act": 4, "thriller_role": "empirical_payoff",
@@ -624,7 +687,7 @@ CRITICAL GROUND TRUTH RULES:
         if cat == "developer_perks":
             defaults = {
                 1: {
-                    "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",
+                    "beat_id": 1, "act": 1, "thriller_role": "universal_hook",
                     "text": f"Stop paying full price for AI tokens before checking out {clean_topic}.",
                     "visual_focus": "Program grant tiers and token subsidization badge.",
                     "highlight_words": {clean_topic: "#38BDF8", "full price": "#EF4444"},
@@ -632,26 +695,26 @@ CRITICAL GROUND TRUTH RULES:
                     "visual_blueprint": {"layout": "catalog_routing", "title": "DEVELOPER PROGRAM", "sub": "Subsidized Model Access", "accent_color": "#38BDF8", "params": {}}
                 },
                 2: {
-                    "beat_id": 2, "act": 2, "thriller_role": "villain_bottleneck",
-                    "text": "The villain? Skyrocketing inference and token expenses that deplete startup runways before launch.",
-                    "visual_focus": "Burn rate chart showing capital exhaustion on token usage.",
-                    "highlight_words": {"deplete": "#EF4444", "runways": "#F59E0B"},
-                    "svo_action": {"subject": "API Costs", "action_verb": "drains", "direct_object": "Engineering Runway", "anchor_word": "deplete", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "barrier_separation", "title": "API COST BOTTLENECK", "sub": "Inference Spend Pressure", "accent_color": "#EF4444", "params": {}}
+                    "beat_id": 2, "act": 2, "thriller_role": "identity_and_stakes",
+                    "text": f"Meet {clean_topic}: an initiative designed to provide startup teams with verified foundation model credits.",
+                    "visual_focus": "Burn rate chart showing capital savings on token usage.",
+                    "highlight_words": {"credits": "#10B981", clean_topic: "#38BDF8"},
+                    "svo_action": {"subject": clean_topic, "action_verb": "subsidizes", "direct_object": "Compute Spend", "anchor_word": "credits", "semantic_role": "identity"},
+                    "visual_blueprint": {"layout": "barrier_separation", "title": "CREDIT SUBSIDY", "sub": "Subsidized Compute", "accent_color": "#10B981", "params": {}}
                 },
                 3: {
-                    "beat_id": 3, "act": 3, "thriller_role": "eureka_mechanism",
-                    "text": f"Enter {clean_topic}. It unlocks dedicated credits and foundation model subsidies.",
+                    "beat_id": 3, "act": 3, "thriller_role": "relatable_friction",
+                    "text": "Normally, skyrocketing API expenses burn through startup runways before products can even launch.",
                     "visual_focus": f"Grant tier dashboard highlighting compute subsidies via {clean_topic}.",
-                    "highlight_words": {clean_topic: "#10B981", "dedicated credits": "#38BDF8"},
-                    "svo_action": {"subject": clean_topic, "action_verb": "unlocks", "direct_object": "Free Compute", "anchor_word": "credits", "semantic_role": "mechanism"},
-                    "visual_blueprint": {"layout": "split_flow", "title": "SUBSIDIZED COMPUTE", "sub": "Foundation Model Credits", "accent_color": "#10B981", "params": {}}
+                    "highlight_words": {"burn": "#EF4444", "runways": "#F59E0B"},
+                    "svo_action": {"subject": "API Costs", "action_verb": "drains", "direct_object": "Engineering Runway", "anchor_word": "burn", "semantic_role": "friction"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "COST PRESSURE", "sub": "Foundation Model Bills", "accent_color": "#EF4444", "params": {}}
                 },
                 4: {
-                    "beat_id": 4, "act": 3, "thriller_role": "technical_secret_sauce",
-                    "text": "Under the hood, qualifying teams bypass expensive bills with verified application steps.",
+                    "beat_id": 4, "act": 3, "thriller_role": "mechanical_insight",
+                    "text": "Under the hood, qualifying teams bypass expensive bills with direct developer grants and partner tiers.",
                     "visual_focus": "Step-by-step application walkthrough showing instant verification.",
-                    "highlight_words": {"bypass": "#34D399", "application steps": "#38BDF8"},
+                    "highlight_words": {"bypass": "#34D399", "grants": "#38BDF8"},
                     "svo_action": {"subject": "Application Portal", "action_verb": "verifies", "direct_object": "Credentials", "anchor_word": "bypass", "semantic_role": "innovation"},
                     "visual_blueprint": {"layout": "chalkboard_code_block", "title": "VERIFICATION STEPS", "sub": "Application & Approval Process", "accent_color": "#38BDF8", "params": {}}
                 },
@@ -676,31 +739,31 @@ CRITICAL GROUND TRUTH RULES:
 
         defaults = {
             1: {
-                "beat_id": 1, "act": 1, "thriller_role": "pattern_interrupt_hook",
-                "text": f"Why are top AI researchers calling {clean_topic} a fundamental breakthrough?",
+                "beat_id": 1, "act": 1, "thriller_role": "universal_hook",
+                "text": f"What if you could eliminate the biggest bottleneck in AI? Look at {clean_topic}.",
                 "visual_focus": "System architecture diagram illustrating the core mechanical tension.",
-                "highlight_words": {clean_topic: "#38BDF8", "breakthrough": "#EF4444"},
-                "svo_action": {"subject": clean_topic, "action_verb": "disrupts", "direct_object": "Standard Paradigms", "anchor_word": "breakthrough", "semantic_role": "state_transition"},
+                "highlight_words": {clean_topic: "#38BDF8", "bottleneck": "#EF4444"},
+                "svo_action": {"subject": clean_topic, "action_verb": "disrupts", "direct_object": "Standard Paradigms", "anchor_word": "bottleneck", "semantic_role": "state_transition"},
                 "visual_blueprint": {"layout": "grid_memory", "title": "ARCHITECTURAL BOTTLENECK", "sub": "Compute units idle waiting for data", "accent_color": "#EF4444", "params": {}}
             },
             2: {
-                "beat_id": 2, "act": 2, "thriller_role": "villain_bottleneck",
-                "text": "The bottleneck? Existing approaches stall when scaling up, hitting severe latency and resource barriers.",
-                "visual_focus": "Bottleneck diagram highlighting the scaling wall and resource stall.",
-                "highlight_words": {"stall": "#EF4444", "resource barriers": "#F59E0B"},
-                "svo_action": {"subject": "Scaling Wall", "action_verb": "stalls", "direct_object": "System Pipeline", "anchor_word": "stall", "semantic_role": "bottleneck"},
-                "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#F59E0B", "params": {}}
+                "beat_id": 2, "act": 2, "thriller_role": "identity_and_stakes",
+                "text": f"Meet {clean_topic}: an open-source engine built to eliminate wasted compute and run on standard hardware.",
+                "visual_focus": f"Identity card highlighting {clean_topic}.",
+                "highlight_words": {clean_topic: "#38BDF8", "standard hardware": "#10B981"},
+                "svo_action": {"subject": clean_topic, "action_verb": "unlocks", "direct_object": "Standard Hardware", "anchor_word": "engine", "semantic_role": "identity"},
+                "visual_blueprint": {"layout": "vector_flow_field", "title": clean_topic.upper(), "sub": "Identity & Real-World Stakes", "accent_color": "#38BDF8", "params": {}}
             },
             3: {
-                "beat_id": 3, "act": 3, "thriller_role": "eureka_mechanism",
-                "text": f"Enter {clean_topic}. It bypasses these limitations with a decoupled, high-throughput pipeline.",
-                "visual_focus": "Parallel pipeline bypassing standard execution walls.",
-                "highlight_words": {clean_topic: "#10B981", "bypasses": "#38BDF8"},
-                "svo_action": {"subject": clean_topic, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "bypasses", "semantic_role": "mechanism"},
-                "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled execution paths", "accent_color": "#10B981", "params": {}}
+                "beat_id": 3, "act": 3, "thriller_role": "relatable_friction",
+                "text": "Normally, existing approaches stall when scaling up, hitting severe memory and resource barriers.",
+                "visual_focus": "Bottleneck diagram highlighting the scaling wall and resource stall.",
+                "highlight_words": {"stall": "#EF4444", "resource barriers": "#F59E0B"},
+                "svo_action": {"subject": "Scaling Wall", "action_verb": "stalls", "direct_object": "System Pipeline", "anchor_word": "stall", "semantic_role": "friction"},
+                "visual_blueprint": {"layout": "split_flow", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#F59E0B", "params": {}}
             },
             4: {
-                "beat_id": 4, "act": 3, "thriller_role": "technical_secret_sauce",
+                "beat_id": 4, "act": 3, "thriller_role": "mechanical_insight",
                 "text": "Under the hood, the system coordinates execution asynchronously, eliminating idle wait states entirely.",
                 "visual_focus": "Asynchronous coordinate graph demonstrating zero idle wait states.",
                 "highlight_words": {"asynchronously": "#38BDF8", "zero idle": "#10B981"},

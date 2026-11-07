@@ -94,30 +94,34 @@ CRITICAL INTELLECTUAL THRILLER DIRECTIVES (ENGINE 7.0):
    - Name REAL tools, models, frameworks, and hardware relevant to the paper's domain.
    - Use standard developer terms that real engineers use: GPU, tokens, RAM, latency, bandwidth, sequential generation.
    - AVOID UNEXPLAINED ACADEMIC JARGON: NEVER use "autoregressive" (say "step-by-step" or "sequential token generation"), "softmax" (say "probability sampling"), "backpropagation", or "feedforward".
-5. THE 4-ACT INTELLECTUAL THRILLER NARRATIVE ARC (Target: 125-155 words total, ~45-55s at 1.1x speed):
-   - ACT 1: Absurd Paradox / Pattern Interrupt Hook (Beat 1, 0-3s, 12-18 words):
-     * State a shocking paradox, counter-intuitive inefficiency, or core problem directly from the paper with wry wit.
-     * Examples across domains (DO NOT COPY VERBATIM; DRAFT SPECIFICALLY FOR THE PAPER):
-       - Robotics: "Most humanoid robots freeze the moment they drop an object in an unfamiliar kitchen."
-       - Hardware: "Scaling context windows beyond eight thousand tokens causes standard models to hit an insurmountable memory wall."
-       - Vision: "Generating 10 seconds of high-fidelity video used to require hundreds of repetitive diffusion passes."
-   - ACT 2: The Villain & Bottleneck (Beat 2, 3-15s, 20-26 words):
-     * Personify the villain / mechanical bottleneck holding back the architecture, grounded in ONE clear physical analogy and relatable friction.
-   - ACT 3: The Eureka Geometric Mechanism (Beats 3 & 4, 15-40s):
-     * Beat 3 (The Eureka Pivot, 20-25 words): Introduce the architectural breakthrough cleanly.
-     * Beat 4 (The Technical Deep-Dive / Secret Sauce, 20-25 words): Explain the paper's specific secret sauce with real engineering terms.
-   - ACT 4: The Paradigm Shift / Open Loop (Beats 5 & 6, 40-50s):
-     * Beat 5 (Empirical Victory Payoff, 18-24 words): Hard benchmark numbers proving the win.
-     * Beat 6 (Paradigm Shift & Seamless Loop, 15-20 words): Crisp outro naturally looping back to Beat 1.
-       Example: "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood."
-6. FIRESHIP PACING & SHORT PUNCHY SENTENCES (GRADE 7-8.5 READING LEVEL):
+5. MANDATORY AUDIENCE CONTEXT & THE 10-SECOND RULE (CRITICAL FOR GENERAL AUDIENCES):
+   - The audience on YouTube Shorts & Reels is smart, tech-curious, but NOT niche PhD researchers.
+   - RULE 1 (Beat 2 Mandatory Plain-English Identity): In Beat 2, you MUST define WHAT the tool, model, or discovery actually is in ONE plain sentence under 14 words using everyday language (e.g. "Meet Unsloth: a free open-source engine that rewrites AI training so it runs on normal PCs", "Meet GPT-6 Cyber: a new model built specifically to handle the high-stakes world of cybersecurity"). NEVER start explaining internal mechanisms before the viewer knows what the subject is!
+   - RULE 2 (The Jargon-to-Physical-Effect Rule): NEVER drop naked compiler or tensor terms (Triton, SRAM, SwiGLU, kernel fusion, KV cache, latent manifold) without IMMEDIATELY stating its physical effect in plain English.
+   - RULE 3 (Real-World Stakes): Connect the paper to real-world developer stakes: money saved ($10k cloud bills -> $0), speed gained (days -> hours), local freedom (runs on your home laptop), or capability (no more Out of Memory crashes).
+
+6. THE 6-BEAT CURIOSITY BRIDGE & FEYNMAN INVERSION ARC (Target: 125-155 words total, ~45-55s at 1.1x speed):
+   - BEAT 1: The Universal Dream / High-Stakes Friction Hook (0-5s, 12-18 words):
+     * Open with a bold, relatable human question, dream, or absurd paradox that hooks a general curious viewer before their thumb swipes.
+   - BEAT 2: Plain-English Identity & Stakes (5-12s, 16-22 words) [MANDATORY CONTEXT GATE]:
+     * Introduce WHAT the tool, model, or discovery actually is in plain English, and why it matters to the viewer.
+     * Example: "Meet Unsloth: a free open-source engine that rewrites AI training code so it runs on standard consumer PCs."
+   - BEAT 3: Relatable Friction & The Invisible Trap (12-24s, 18-25 words):
+     * Expose the hidden villain or physical bottleneck using ONE vivid, relatable analogy (traffic jam, kitchen counter, assembly line).
+   - BEAT 4: The 'Aha!' Mechanical Insight (24-40s, 20-26 words):
+     * Reveal the eureka mechanical insight. Every technical term MUST be paired with its physical effect.
+   - BEAT 5: Concrete Real-World Victory (40-50s, 18-24 words):
+     * Hard empirical numbers of human capability and freedom (speedup, memory drop, cost savings).
+   - BEAT 6: The Paradigm Shift & Natural Loop (50-58s, 14-20 words):
+     * Mind-expanding takeaway that naturally loops back to Beat 1.
+7. FIRESHIP PACING & SHORT PUNCHY SENTENCES (GRADE 7-8.5 READING LEVEL):
    - Real developers and everyday viewers need short, punchy sentences.
    - Break each beat into 2 to 3 short sentences (5-10 words per sentence) instead of one long run-on sentence.
    - Example Beat: "The problem? Large models hit a memory wall. Every token stalls the GPU."
-5. DUAL-CADENCE VISUAL SYNCHRONY:
+8. DUAL-CADENCE VISUAL SYNCHRONY:
    - In each beat, specify:
      * `text`: The spoken voiceover text (20-28 words, Beat 1 under 18 words).
-     * `thriller_role`: "pattern_interrupt_hook" | "villain_bottleneck" | "eureka_mechanism" | "technical_secret_sauce" | "empirical_payoff" | "open_loop_outro"
+     * `thriller_role`: "universal_hook" | "identity_and_stakes" | "relatable_friction" | "mechanical_insight" | "empirical_payoff" | "open_loop_outro"
      * `visual_focus`: Physical scene description for 3Blue1Brown chalkboard.
      * `highlight_words`: 1-2 key phrases mapped to colors (#10B981, #38BDF8, #EF4444, #F59E0B).
      * `svo_action`: {subject, action_verb, direct_object, anchor_word}.
@@ -171,22 +175,26 @@ LISTENER_SYSTEM_PROMPT = """
 You are 'Alex', an 18-year-old Computer Science freshman and junior developer scrolling YouTube Shorts & Instagram Reels.
 You are smart, curious, and love tech, but you have ZERO PATIENCE for:
 1. Academic textbook intros: If someone starts with "Today we explore...", "In this paper...", "In this video...", you INSTANTLY SWIPE AWAY within 1 second.
-2. Academic jargon that isn't explained (e.g., if someone says "asynchronous GEMM warp specialization", your eyes glaze over and you swipe away).
-3. Dumbed-down AI slop baby talk (e.g., if someone says "safe drawers", "smart tools", or "open desks" to describe a database, you cringe and think it's generated junk).
-4. Vague corporate buzzwords ("game-changer", "revolutionary paradigm", "delve into").
+2. Missing plain-English identity: If Beat 2 doesn't tell you WHAT the tool, model, or discovery actually is in plain English before second 10, you are totally confused and swipe away!
+3. Academic jargon that isn't explained (e.g., if someone says "asynchronous GEMM warp specialization" or "SRAM kernel launch overhead" without explaining the physical effect, your eyes glaze over and you swipe away).
+4. No real-world stakes: If the video doesn't tell you why you should care (saving money, running on home PC, stopping crashes, 5x speedup), you swipe away.
+5. Dumbed-down AI slop baby talk (e.g., if someone says "safe drawers", "smart tools", or "open desks" to describe a database, you cringe and think it's generated junk).
+6. Vague corporate buzzwords ("game-changer", "revolutionary paradigm", "delve into").
 
 YOUR AUDITING TASK:
 Read the candidate 6-beat short script carefully and evaluate it on:
-1. `comprehension_score` (1.0 to 10.0): Did you genuinely understand the mechanism and how it works?
-2. `retention_hook_score` (1.0 to 10.0): Did Beat 1 immediately grab you in 2-3 seconds, or would you swipe away? (Give <= 4.0 if it starts like a textbook lecture!)
-3. `ai_slop_detected` (true/false): Does it contain fake metaphors (safe drawers, open desk), corporate fluff, or robotic baby talk?
-4. `textbook_intro_detected` (true/false): Does Beat 1 start with lecture phrases like "Today we explore", "In this video", "In this paper"?
-5. `confusing_elements`: List of exact phrases where your brain stopped and said "Wait, what does that mean?"
-6. `listener_critique`: Conversational, honest feedback in first person ("The hook caught my attention, but in Beat 4 you lost me completely when you said...").
-7. `suggested_fix`: Clear, concrete advice on how the writer can explain it simply with real dev terms.
-8. `approved` (true/false): Set to true ONLY IF:
+1. `comprehension_score` (1.0 to 10.0): Did you genuinely understand what the tool/discovery is and how it works? (Score <= 6.0 if Beat 2 fails to state what the subject is in plain English!)
+2. `retention_hook_score` (1.0 to 10.0): Did Beat 1 immediately grab you in 2-3 seconds with a relatable question or paradox, and did Beat 2 give real-world stakes? (Score <= 5.0 if it feels like an academic paper summary!)
+3. `plain_english_identity_present` (true/false): Does Beat 2 state what the tool or discovery is in under 14 words (e.g. "Meet Unsloth: an open-source engine...")?
+4. `ai_slop_detected` (true/false): Does it contain fake metaphors (safe drawers, open desk), corporate fluff, or robotic baby talk?
+5. `textbook_intro_detected` (true/false): Does Beat 1 start with lecture phrases like "Today we explore", "In this video", "In this paper"?
+6. `confusing_elements`: List of exact phrases where your brain stopped and said "Wait, what does that mean?"
+7. `listener_critique`: Conversational, honest feedback in first person ("The hook caught my attention, but in Beat 2 you never told me what this tool actually is...").
+8. `suggested_fix`: Clear, concrete advice on how the writer can explain it simply with real dev terms.
+9. `approved` (true/false): Set to true ONLY IF:
    - comprehension_score >= 8.5
    - retention_hook_score >= 8.5
+   - plain_english_identity_present is true
    - ai_slop_detected is false
    - textbook_intro_detected is false
    - confusing_elements is empty or minor
@@ -196,6 +204,7 @@ Return ONLY valid JSON matching this schema:
 {
   "comprehension_score": 9.2,
   "retention_hook_score": 9.0,
+  "plain_english_identity_present": true,
   "ai_slop_detected": false,
   "confusing_elements": [],
   "listener_critique": "First-person candid reaction...",
@@ -412,13 +421,13 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
         beats = []
         if len(sentences) >= 4:
             s0 = sentences[0].rstrip(".?! ")
-            t1 = f"Why are top AI researchers watching {clean_title}? Because {s0[0].lower() + s0[1:]}." if not any(w in s0.lower() for w in ("you", "your")) else s0 + "."
+            t1 = f"What if you could eliminate the biggest bottleneck in AI? Look at {clean_title}."
             s1 = sentences[1].rstrip(".?! ")
-            t2 = f"The core challenge? {s1}."
+            t2 = f"Meet {clean_title}: an open-source engine built to make AI fast and accessible on standard hardware."
             s2 = sentences[2].rstrip(".?! ")
-            t3 = f"Enter {clean_title}: {s2[0].lower() + s2[1:]}."
+            t3 = f"Normally, standard systems hit an invisible wall because {s1[0].lower() + s1[1:]}."
             s3 = sentences[3].rstrip(".?! ")
-            t4 = f"Under the hood, {s3[0].lower() + s3[1:]}."
+            t4 = f"Under the hood, {s2[0].lower() + s2[1:]}."
             if len(sentences) >= 5:
                 s4 = sentences[4].rstrip(".?! ")
                 t5 = f"The result? {s4}."
@@ -431,24 +440,24 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
                     "text": t1,
                     "visual_focus": f"System architecture schematic illustrating {clean_title} highlighted in pulsing cyan.",
                     "highlight_words": {clean_title: "#38BDF8"},
-                    "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "watching", "semantic_role": "state_transition"},
+                    "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "bottleneck", "semantic_role": "state_transition"},
                     "visual_blueprint": {"layout": "grid_memory", "title": clean_title.upper(), "sub": "Core Architectural Breakthrough", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 2,
                     "text": t2,
-                    "visual_focus": "Bottleneck diagram showing resource contention and latency backup.",
-                    "highlight_words": {"challenge": "#EF4444"},
-                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "challenge", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#EF4444", "params": {}}
+                    "visual_focus": f"Chalkboard identity card introducing {clean_title} and its core function.",
+                    "highlight_words": {clean_title: "#38BDF8", "standard hardware": "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "unlocks", "direct_object": "Standard Hardware", "anchor_word": "engine", "semantic_role": "identity"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": clean_title.upper(), "sub": "Identity & Real-World Stakes", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 3,
                     "text": t3,
-                    "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
-                    "highlight_words": {clean_title: "#10B981"},
-                    "svo_action": {"subject": clean_title, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "Enter", "semantic_role": "mechanism"},
-                    "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled execution paths", "accent_color": "#10B981", "params": {}}
+                    "visual_focus": "Bottleneck diagram showing resource contention and latency backup.",
+                    "highlight_words": {"invisible wall": "#EF4444"},
+                    "svo_action": {"subject": "System Bottleneck", "action_verb": "stalls", "direct_object": "Execution Flow", "anchor_word": "wall", "semantic_role": "friction"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "SYSTEM BOTTLENECK", "sub": "Resource Contention", "accent_color": "#EF4444", "params": {}}
                 },
                 {
                     "beat_id": 4,
@@ -530,27 +539,27 @@ Elevate clarity, sharpen the analogy, eliminate any detected slop, and ensure th
             beats = [
                 {
                     "beat_id": 1,
-                    "text": f"Why are top AI researchers watching {clean_title}? Because standard architectures hit a bottleneck.",
+                    "text": f"What if you could eliminate the biggest bottleneck in AI? Look at {clean_title}.",
                     "visual_focus": f"System architecture schematic illustrating {clean_title} highlighted in pulsing cyan.",
                     "highlight_words": {clean_title: "#38BDF8", "bottleneck": "#EF4444"},
-                    "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "watching", "semantic_role": "state_transition"},
+                    "svo_action": {"subject": clean_title, "action_verb": "disrupts", "direct_object": "Standard Architecture", "anchor_word": "bottleneck", "semantic_role": "state_transition"},
                     "visual_blueprint": {"layout": "grid_memory", "title": clean_title.upper(), "sub": "Core Architectural Premise", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 2,
-                    "text": "The problem? Scaling workloads triggers severe resource contention and execution delays.",
-                    "visual_focus": "Bottleneck diagram showing resource stall and execution queue backup.",
-                    "highlight_words": {"resource contention": "#EF4444", "delays": "#F59E0B"},
-                    "svo_action": {"subject": "Resource Contention", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "triggers", "semantic_role": "bottleneck"},
-                    "visual_blueprint": {"layout": "vector_flow_field", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#EF4444", "params": {}}
+                    "text": f"Meet {clean_title}: an open-source engine built to eliminate wasted compute and run on standard hardware.",
+                    "visual_focus": f"Identity card introducing {clean_title}.",
+                    "highlight_words": {clean_title: "#38BDF8", "standard hardware": "#10B981"},
+                    "svo_action": {"subject": clean_title, "action_verb": "unlocks", "direct_object": "Standard Hardware", "anchor_word": "engine", "semantic_role": "identity"},
+                    "visual_blueprint": {"layout": "vector_flow_field", "title": clean_title.upper(), "sub": "Identity & Real-World Stakes", "accent_color": "#38BDF8", "params": {}}
                 },
                 {
                     "beat_id": 3,
-                    "text": f"Enter {clean_title}. It breaks the bottleneck with a decoupled, high-throughput pipeline.",
-                    "visual_focus": "Parallel pipeline splitting heavy operations away from the critical execution path.",
-                    "highlight_words": {clean_title: "#10B981", "decoupled": "#38BDF8"},
-                    "svo_action": {"subject": clean_title, "action_verb": "bypasses", "direct_object": "Execution Bottleneck", "anchor_word": "breaks", "semantic_role": "mechanism"},
-                    "visual_blueprint": {"layout": "split_flow", "title": "PARALLEL PIPELINE", "sub": "Decoupled execution paths", "accent_color": "#10B981", "params": {}}
+                    "text": "Normally, standard systems hit an invisible wall because scaling workloads triggers severe memory contention.",
+                    "visual_focus": "Bottleneck diagram showing resource stall and execution queue backup.",
+                    "highlight_words": {"invisible wall": "#EF4444", "memory contention": "#F59E0B"},
+                    "svo_action": {"subject": "Resource Contention", "action_verb": "stalls", "direct_object": "Pipeline Execution", "anchor_word": "wall", "semantic_role": "friction"},
+                    "visual_blueprint": {"layout": "split_flow", "title": "SYSTEM BOTTLENECK", "sub": "Resource contention halts throughput", "accent_color": "#EF4444", "params": {}}
                 },
                 {
                     "beat_id": 4,
@@ -714,16 +723,51 @@ Give your candid score and feedback.
             "barrier", "wall", "stall", "wait", "friction", "obstacle", "decoupled"
         ])
 
+        # Check for Plain-English Identity & Human Stakes in Beat 1 or Beat 2 (Audience Context Gate)
+        b1_b2_text = ""
+        lines = [line.strip() for line in text.split("\n") if line.strip()]
+        for line in lines:
+            if line.lower().startswith("beat 1:") or line.lower().startswith("beat 2:"):
+                b1_b2_text += " " + line.lower()
+        if not b1_b2_text:
+            b1_b2_text = " ".join(lower.split()[:40])
+
+        identity_markers = [
+            r"\bmeet\b", r"\bis a\b", r"\bis an\b", r"\btool\b", r"\bengine\b",
+            r"\bmodel\b", r"\blibrary\b", r"\bframework\b", r"\barchitecture\b",
+            r"\balgorithm\b", r"\btechnique\b", r"\bsystem\b", r"\binterface\b",
+            r"\bapp\b", r"\bproject\b", r"\bopen-source\b", r"\bmethod\b",
+            r"\bsolution\b", r"\bsoftware\b", r"\bcalled\b"
+        ]
+        has_identity = any(re.search(pat, b1_b2_text) for pat in identity_markers)
+
+        human_stakes_markers = [
+            r"\blaptop\b", r"\bhome\b", r"\bpc\b", r"\bfree\b", r"\bcost\b", r"\bcosts\b",
+            r"\bdollar\b", r"\$", r"\bmoney\b", r"\bcrash\b", r"\bcrashes\b", r"\bcloud\b",
+            r"\bserver\b", r"\bservers\b", r"\bprivate\b", r"\bwaste\b", r"\bwasted\b",
+            r"\bslow\b", r"\bfaster\b", r"\beasy\b", r"\banyone\b", r"\bhour\b", r"\bhours\b",
+            r"\bday\b", r"\bdays\b", r"\bbill\b", r"\bbills\b", r"\bmemory\b", r"\bgpu\b",
+            r"\bgpus\b", r"\bspend\b", r"\bspending\b", r"\bdrain\b"
+        ]
+        has_human_stakes = any(re.search(pat, b1_b2_text) for pat in human_stakes_markers)
+
         comp_score = 9.0 if (found_anchors and has_analogy and not has_slop) else (6.5 if has_slop else 8.5)
+        if not has_identity:
+            comp_score -= 2.0
+        if not has_human_stakes:
+            comp_score -= 1.0
+
         if has_textbook:
             hook_score = 3.5
         else:
             hook_score = 9.0 if (len(lower.split()) >= 10 and not has_textbook) else 8.2
 
-        approved = comp_score >= 8.0 and hook_score >= 8.0 and not has_slop and not has_textbook
+        approved = comp_score >= 8.0 and hook_score >= 8.0 and not has_slop and not has_textbook and has_identity
 
         if has_textbook:
             critique = f"Immediate swipe-away! Textbook lecture intro detected: {textbook_found}. Scrap academic greetings and use a high-stakes pattern interrupt hook."
+        elif not has_identity:
+            critique = "Wait, what is this tool or project? Beat 2 needs to tell me what it actually is in plain English before diving into internal mechanics."
         elif approved:
             critique = "Approved! Clear real-world developer terms and intuitive physical analogy."
         else:
@@ -732,15 +776,19 @@ Give your candid score and feedback.
         all_confusing = list(cliches)
         if textbook_found:
             all_confusing.extend(textbook_found)
+        if not has_identity:
+            all_confusing.append("missing_plain_english_identity")
 
         return {
             "comprehension_score": comp_score,
             "retention_hook_score": hook_score,
+            "plain_english_identity_present": has_identity,
+            "has_human_stakes": has_human_stakes,
             "ai_slop_detected": has_slop,
             "textbook_intro_detected": has_textbook,
             "confusing_elements": all_confusing,
             "listener_critique": critique,
-            "suggested_fix": "Start with a 0-3s pattern interrupt hook (under 18 words) and ground the villain in a physical analogy.",
+            "suggested_fix": "Introduce what the tool/model is in plain English by Beat 2, and ground the bottleneck in relatable human stakes.",
             "approved": approved
         }
 
