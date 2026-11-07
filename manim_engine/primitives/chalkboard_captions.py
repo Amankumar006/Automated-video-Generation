@@ -31,7 +31,22 @@ class ChalkboardCaptions:
                 t2c[word] = color
 
         import textwrap
-        display_text = textwrap.fill(text, width=34) if len(text) > 36 else text
+        import re
+
+        words = text.split()
+        if len(words) > 8:
+            # Prevent SaaS text wall dump: extract the primary punchy clause (max 6-7 words)
+            first_clause = re.split(r"[:.!?—–]", text)[0].strip()
+            clause_words = first_clause.split()
+            if 3 <= len(clause_words) <= 7:
+                display_text = first_clause
+            else:
+                display_text = " ".join(words[:6])
+        else:
+            display_text = text
+
+        if len(display_text) > 34:
+            display_text = textwrap.fill(display_text, width=32)
 
         # Clean typography guaranteeing base_size=36 with subpixel scaling and safe bounds
         txt = clean_text(
