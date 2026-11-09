@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-09",
+  "total_reels": 1,
+  "reels": [
+    {
+      "reel_index": 1,
+      "timestamp": "2026-11-09 22:37:09 UTC",
+      "paper_id": "2611.07025",
+      "title": "LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time",
+      "category": "mechanism_deepdive",
+      "source": "arxiv",
+      "taxonomy": "hardware_efficiency",
+      "analytics_multiplier": 1.3,
+      "video_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/final_lowram_kv_compression_mechanism_deepdive.mp4",
+      "resolution": "1440x2560 @ 60fps",
+      "editorial_notes": {
+        "selected_index": 1,
+        "reasoning": "This addresses a high-velocity hardware efficiency topic (1.30x) with a clear, visualizable mechanism for memory bottlenecks that is perfect for chalkboard-style animation.",
+        "recommended_hook": "What if you could shrink your AI's 'short-term memory' by 50% without losing a single thought?",
+        "suggested_everyday_analogy": "Treating the KV cache like a library bookshelf where you replace heavy, dust-covered encyclopedias with pocket-sized cheat sheets."
+      },
+      "content_format": "tool_reaction",
+      "content_strategy": {
+        "version": "audience-led-v1",
+        "audience_profile": "global_ai_builder",
+        "source_title": "LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time",
+        "source_url": "https://arxiv.org/abs/2611.07025",
+        "source_date": "2026-11-04T14:00:06.000Z",
+        "source_claims": [
+          "Autoregressive decoding relies on the KV cache, whose memory footprint grows linearly with context length and caps batch size and throughput. Existing post-training methods exploit redundancy across tokens, layers, and feature dimensions, or lower numerical precision. We identify a complementary axis: within each attention head, values are largely predictable from their corresponding keys. We exploit this with value cache amortisation, which fits a lightweight per-head predictor at test time and"
+        ],
+        "risk_flags": [],
+        "primary_segment": "technical_founder",
+        "viewer_problem": "Builders need to know what LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time changes in a real workflow.",
+        "promised_payoff": "Leave knowing when to try LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time and what limitation to expect.",
+        "proof_asset": "source-backed mechanism",
+        "recommended_hook": "I tested LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time so you can see what it actually changes.",
+        "recommended_format": "practical_demo",
+        "format_profile": {
+          "label": "Practical demo",
+          "brief": "Show a real workflow, result, limitation, and who should use it."
+        },
+        "score": 73.75,
+        "score_breakdown": {
+          "demand": 6.9,
+          "utility": 17.4,
+          "demonstrability": 18.2,
+          "freshness": 15.0,
+          "evidence": 10.0,
+          "audience_fit": 6.25
+        },
+        "penalties": [],
+        "reasons": [
+          "has a builder-facing use case",
+          "can show a concrete mechanism or proof",
+          "is within the latest window"
+        ],
+        "hard_rejections": [],
+        "selection_penalty": 0,
+        "format_target": 8,
+        "format_count_before_selection": 3
+      }
+    }
+  ]
+}
