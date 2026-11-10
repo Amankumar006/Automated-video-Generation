@@ -1,0 +1,1768 @@
+{
+  "id": "sglang_framework_deepdive",
+  "title": "SGLang: High-Performance Serving",
+  "category": "mechanism_deepdive",
+  "domain_taxonomy": "general_cs",
+  "hook_tag": "MEMORY BANDWIDTH HACK",
+  "beats": [
+    {
+      "beat_id": 1,
+      "text": "Do not scale your next training run before you see how SGLang delivers 95%.",
+      "visual_focus": "A glowing memory bus line flickering red and stalling.",
+      "highlight_words": {
+        "wastes half its compute": "#EF4444"
+      },
+      "svo_action": {
+        "subject": "Memory latency",
+        "action_verb": "strangles",
+        "direct_object": "inference throughput",
+        "anchor_word": "waiting",
+        "semantic_role": "state_transition"
+      },
+      "visual_blueprint": {
+        "layout": "grid_memory",
+        "title": "THE MEMORY WALL",
+        "sub": "Latency vs Compute",
+        "accent_color": "#EF4444",
+        "params": {
+          "grid_title": "GPU VRAM Buffer",
+          "active_cell_label": "Fragmented Requests",
+          "efficiency_label": "Low Utilization"
+        }
+      },
+      "thriller_role": "pattern_interrupt_hook",
+      "act": 1,
+      "hook_score": 69,
+      "hook_band": "WORKABLE",
+      "hook_formula": "The Warning",
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "grid_memory",
+        "title": "THE MEMORY WALL",
+        "sub": "Latency vs Compute",
+        "accent_color": "#EF4444",
+        "grid_title": "GPU VRAM Buffer",
+        "active_cell_label": "Fragmented Requests",
+        "efficiency_label": "Low Utilization"
+      },
+      "kinetic_action": "blueprint_transform",
+      "visual_grammar": "evidence_plot",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_1.py",
+      "visual_source": "bespoke",
+      "start": 0.0,
+      "end": 4.87,
+      "duration": 4.87,
+      "word_timings": [
+        {
+          "word": "Do",
+          "clean_word": "do",
+          "phonemes": "Do",
+          "start": 0.085,
+          "end": 0.224,
+          "duration": 0.139,
+          "frame_ahead_trigger": 0.045
+        },
+        {
+          "word": "not",
+          "clean_word": "not",
+          "phonemes": "not",
+          "start": 0.224,
+          "end": 0.455,
+          "duration": 0.231,
+          "frame_ahead_trigger": 0.184
+        },
+        {
+          "word": "scale",
+          "clean_word": "scale",
+          "phonemes": "scale",
+          "start": 0.455,
+          "end": 0.845,
+          "duration": 0.39,
+          "frame_ahead_trigger": 0.415
+        },
+        {
+          "word": "your",
+          "clean_word": "your",
+          "phonemes": "your",
+          "start": 0.845,
+          "end": 1.1,
+          "duration": 0.255,
+          "frame_ahead_trigger": 0.805
+        },
+        {
+          "word": "next",
+          "clean_word": "next",
+          "phonemes": "next",
+          "start": 1.1,
+          "end": 1.35,
+          "duration": 0.25,
+          "frame_ahead_trigger": 1.06
+        },
+        {
+          "word": "training",
+          "clean_word": "training",
+          "phonemes": "training",
+          "start": 1.35,
+          "end": 1.905,
+          "duration": 0.555,
+          "frame_ahead_trigger": 1.31
+        },
+        {
+          "word": "run",
+          "clean_word": "run",
+          "phonemes": "run",
+          "start": 1.905,
+          "end": 2.145,
+          "duration": 0.24,
+          "frame_ahead_trigger": 1.865
+        },
+        {
+          "word": "before",
+          "clean_word": "before",
+          "phonemes": "before",
+          "start": 2.145,
+          "end": 2.49,
+          "duration": 0.345,
+          "frame_ahead_trigger": 2.105
+        },
+        {
+          "word": "you",
+          "clean_word": "you",
+          "phonemes": "you",
+          "start": 2.49,
+          "end": 2.67,
+          "duration": 0.18,
+          "frame_ahead_trigger": 2.45
+        },
+        {
+          "word": "see",
+          "clean_word": "see",
+          "phonemes": "see",
+          "start": 2.67,
+          "end": 2.93,
+          "duration": 0.26,
+          "frame_ahead_trigger": 2.63
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "how",
+          "start": 2.93,
+          "end": 3.18,
+          "duration": 0.25,
+          "frame_ahead_trigger": 2.89
+        },
+        {
+          "word": "SGLang",
+          "clean_word": "sglang",
+          "phonemes": "SGLang",
+          "start": 3.18,
+          "end": 3.535,
+          "duration": 0.355,
+          "frame_ahead_trigger": 3.14
+        },
+        {
+          "word": "delivers",
+          "clean_word": "delivers",
+          "phonemes": "delivers",
+          "start": 3.535,
+          "end": 4.2,
+          "duration": 0.665,
+          "frame_ahead_trigger": 3.495
+        },
+        {
+          "word": "95%.",
+          "clean_word": "95",
+          "phonemes": "95",
+          "start": 4.2,
+          "end": 4.255,
+          "duration": 0.055,
+          "frame_ahead_trigger": 4.16
+        }
+      ],
+      "audio_duration": 4.87,
+      "slot_duration": 5.02
+    },
+    {
+      "beat_id": 2,
+      "text": "The villain is fragmented memory access. Your GPU acts like a worker re-reading the manual for every single bolt on the assembly line.",
+      "visual_focus": "A worker frantically flipping pages while a conveyor belt stops.",
+      "highlight_words": {
+        "fragmented memory access": "#F59E0B"
+      },
+      "svo_action": {
+        "subject": "Fragmented access",
+        "action_verb": "stalls",
+        "direct_object": "the pipeline",
+        "anchor_word": "manual",
+        "semantic_role": "problem_definition"
+      },
+      "visual_blueprint": {
+        "layout": "vector_flow_field",
+        "title": "ASSEMBLY LINE FRICTION",
+        "sub": "Inefficient Instruction Fetching",
+        "accent_color": "#EF4444",
+        "params": {}
+      },
+      "thriller_role": "villain_and_bottleneck",
+      "act": 2,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "vector_flow_field",
+        "title": "ASSEMBLY LINE FRICTION",
+        "sub": "Inefficient Instruction Fetching",
+        "accent_color": "#EF4444"
+      },
+      "kinetic_action": "blueprint_transform",
+      "visual_grammar": "synthesis_lockup",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_2.py",
+      "visual_source": "bespoke",
+      "start": 5.02,
+      "end": 12.23,
+      "duration": 7.21,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "The",
+          "start": 5.129,
+          "end": 5.259,
+          "duration": 0.13,
+          "frame_ahead_trigger": 5.239
+        },
+        {
+          "word": "villain",
+          "clean_word": "villain",
+          "phonemes": "villain",
+          "start": 5.259,
+          "end": 5.669,
+          "duration": 0.41,
+          "frame_ahead_trigger": 5.369
+        },
+        {
+          "word": "is",
+          "clean_word": "is",
+          "phonemes": "is",
+          "start": 5.669,
+          "end": 5.829,
+          "duration": 0.16,
+          "frame_ahead_trigger": 5.779
+        },
+        {
+          "word": "fragmented",
+          "clean_word": "fragmented",
+          "phonemes": "fragmented",
+          "start": 5.829,
+          "end": 6.569,
+          "duration": 0.74,
+          "frame_ahead_trigger": 5.939
+        },
+        {
+          "word": "memory",
+          "clean_word": "memory",
+          "phonemes": "memory",
+          "start": 6.569,
+          "end": 6.799,
+          "duration": 0.23,
+          "frame_ahead_trigger": 6.679
+        },
+        {
+          "word": "access.",
+          "clean_word": "access",
+          "phonemes": "access",
+          "start": 6.799,
+          "end": 7.171,
+          "duration": 0.372,
+          "frame_ahead_trigger": 6.909
+        },
+        {
+          "word": "Your",
+          "clean_word": "your",
+          "phonemes": "Your",
+          "start": 7.171,
+          "end": 7.489,
+          "duration": 0.318,
+          "frame_ahead_trigger": 7.281
+        },
+        {
+          "word": "GPU",
+          "clean_word": "gpu",
+          "phonemes": "GPU",
+          "start": 7.489,
+          "end": 7.591,
+          "duration": 0.102,
+          "frame_ahead_trigger": 7.599
+        },
+        {
+          "word": "acts",
+          "clean_word": "acts",
+          "phonemes": "acts",
+          "start": 7.591,
+          "end": 7.884,
+          "duration": 0.293,
+          "frame_ahead_trigger": 7.701
+        },
+        {
+          "word": "like",
+          "clean_word": "like",
+          "phonemes": "like",
+          "start": 7.884,
+          "end": 8.074,
+          "duration": 0.19,
+          "frame_ahead_trigger": 7.994
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "a",
+          "start": 8.074,
+          "end": 8.132,
+          "duration": 0.057,
+          "frame_ahead_trigger": 8.184
+        },
+        {
+          "word": "worker",
+          "clean_word": "worker",
+          "phonemes": "worker",
+          "start": 8.132,
+          "end": 8.469,
+          "duration": 0.338,
+          "frame_ahead_trigger": 8.242
+        },
+        {
+          "word": "re-reading",
+          "clean_word": "rereading",
+          "phonemes": "rereading",
+          "start": 8.469,
+          "end": 9.104,
+          "duration": 0.635,
+          "frame_ahead_trigger": 8.579
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 9.104,
+          "end": 9.224,
+          "duration": 0.12,
+          "frame_ahead_trigger": 9.214
+        },
+        {
+          "word": "manual",
+          "clean_word": "manual",
+          "phonemes": "manual",
+          "start": 9.224,
+          "end": 9.589,
+          "duration": 0.365,
+          "frame_ahead_trigger": 9.334
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "for",
+          "start": 9.589,
+          "end": 9.839,
+          "duration": 0.25,
+          "frame_ahead_trigger": 9.699
+        },
+        {
+          "word": "every",
+          "clean_word": "every",
+          "phonemes": "every",
+          "start": 9.839,
+          "end": 10.109,
+          "duration": 0.27,
+          "frame_ahead_trigger": 9.949
+        },
+        {
+          "word": "single",
+          "clean_word": "single",
+          "phonemes": "single",
+          "start": 10.109,
+          "end": 10.434,
+          "duration": 0.325,
+          "frame_ahead_trigger": 10.219
+        },
+        {
+          "word": "bolt",
+          "clean_word": "bolt",
+          "phonemes": "bolt",
+          "start": 10.434,
+          "end": 10.579,
+          "duration": 0.145,
+          "frame_ahead_trigger": 10.544
+        },
+        {
+          "word": "on",
+          "clean_word": "on",
+          "phonemes": "on",
+          "start": 10.579,
+          "end": 10.794,
+          "duration": 0.215,
+          "frame_ahead_trigger": 10.689
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 10.794,
+          "end": 11.064,
+          "duration": 0.27,
+          "frame_ahead_trigger": 10.904
+        },
+        {
+          "word": "assembly",
+          "clean_word": "assembly",
+          "phonemes": "assembly",
+          "start": 11.064,
+          "end": 11.389,
+          "duration": 0.325,
+          "frame_ahead_trigger": 11.174
+        },
+        {
+          "word": "line.",
+          "clean_word": "line",
+          "phonemes": "line",
+          "start": 11.389,
+          "end": 11.674,
+          "duration": 0.285,
+          "frame_ahead_trigger": 11.499
+        }
+      ],
+      "audio_duration": 7.21,
+      "slot_duration": 7.36
+    },
+    {
+      "beat_id": 3,
+      "text": "SGLang pivots to Compiled Graph Fusion, pre-optimizing the entire execution path into a single, high-speed stream of operations.",
+      "visual_focus": "Disjointed code blocks snapping together into a singular, glowing stream.",
+      "highlight_words": {
+        "Compiled Graph Fusion": "#10B981"
+      },
+      "svo_action": {
+        "subject": "SGLang",
+        "action_verb": "fuses",
+        "direct_object": "execution paths",
+        "anchor_word": "stream",
+        "semantic_role": "solution_pivot"
+      },
+      "visual_blueprint": {
+        "layout": "chalkboard_code_block",
+        "title": "KERNEL CODE: SGLANG: HIGH-PERFO",
+        "sub": "Disjointed code blocks snapping together into a singular, glowing",
+        "params": {
+          "title": "KERNEL CODE: SGLANG: HIGH-PERFO",
+          "sub": "Disjointed code blocks snapping together into a singular, glowing",
+          "filename": "radix_cache.py",
+          "language": "python",
+          "lines": [
+            "def match_prefix(self, prompt_tokens):",
+            "    node = self.root",
+            "    for token in prompt_tokens:",
+            "        if token in node.children:",
+            "            node = node.children[token]  # Hit",
+            "    return node.kv_cache_pointer"
+          ],
+          "highlight_lines": [
+            4,
+            5
+          ],
+          "trace_register": "\u26a1 RADIX HIT: +2,048 TOKENS REUSED",
+          "delta_badge": "RadixAttention reuses KV-cache trees across branchin"
+        }
+      },
+      "thriller_role": "eureka_pivot",
+      "act": 3,
+      "motif_type": "chalkboard_code_block",
+      "kinetic_action": "pulse",
+      "motif_params": {
+        "title": "KERNEL CODE: SGLANG: HIGH-PERFO",
+        "sub": "Disjointed code blocks snapping together into a singular, glowing",
+        "filename": "radix_cache.py",
+        "language": "python",
+        "lines": [
+          "def match_prefix(self, prompt_tokens):",
+          "    node = self.root",
+          "    for token in prompt_tokens:",
+          "        if token in node.children:",
+          "            node = node.children[token]  # Hit",
+          "    return node.kv_cache_pointer"
+        ],
+        "highlight_lines": [
+          4,
+          5
+        ],
+        "trace_register": "\u26a1 RADIX HIT: +2,048 TOKENS REUSED",
+        "delta_badge": "RadixAttention reuses KV-cache trees across branchin"
+      },
+      "visual_grammar": "hero_field",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_3.py",
+      "visual_source": "bespoke",
+      "start": 12.38,
+      "end": 20.52,
+      "duration": 8.14,
+      "word_timings": [
+        {
+          "word": "SGLang",
+          "clean_word": "sglang",
+          "phonemes": "SGLang",
+          "start": 12.458,
+          "end": 12.923,
+          "duration": 0.465,
+          "frame_ahead_trigger": 12.718
+        },
+        {
+          "word": "pivots",
+          "clean_word": "pivots",
+          "phonemes": "pivots",
+          "start": 12.923,
+          "end": 13.363,
+          "duration": 0.44,
+          "frame_ahead_trigger": 13.183
+        },
+        {
+          "word": "to",
+          "clean_word": "to",
+          "phonemes": "to",
+          "start": 13.363,
+          "end": 13.488,
+          "duration": 0.125,
+          "frame_ahead_trigger": 13.623
+        },
+        {
+          "word": "Compiled",
+          "clean_word": "compiled",
+          "phonemes": "Compiled",
+          "start": 13.488,
+          "end": 14.024,
+          "duration": 0.536,
+          "frame_ahead_trigger": 13.748
+        },
+        {
+          "word": "Graph",
+          "clean_word": "graph",
+          "phonemes": "Graph",
+          "start": 14.024,
+          "end": 14.433,
+          "duration": 0.409,
+          "frame_ahead_trigger": 14.284
+        },
+        {
+          "word": "Fusion,",
+          "clean_word": "fusion",
+          "phonemes": "Fusion",
+          "start": 14.433,
+          "end": 14.863,
+          "duration": 0.43,
+          "frame_ahead_trigger": 14.693
+        },
+        {
+          "word": "pre-optimizing",
+          "clean_word": "preoptimizing",
+          "phonemes": "preoptimizing",
+          "start": 14.863,
+          "end": 15.733,
+          "duration": 0.869,
+          "frame_ahead_trigger": 15.123
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 15.733,
+          "end": 15.868,
+          "duration": 0.136,
+          "frame_ahead_trigger": 15.993
+        },
+        {
+          "word": "entire",
+          "clean_word": "entire",
+          "phonemes": "entire",
+          "start": 15.868,
+          "end": 16.313,
+          "duration": 0.445,
+          "frame_ahead_trigger": 16.128
+        },
+        {
+          "word": "execution",
+          "clean_word": "execution",
+          "phonemes": "execution",
+          "start": 16.313,
+          "end": 17.008,
+          "duration": 0.695,
+          "frame_ahead_trigger": 16.573
+        },
+        {
+          "word": "path",
+          "clean_word": "path",
+          "phonemes": "path",
+          "start": 17.008,
+          "end": 17.413,
+          "duration": 0.405,
+          "frame_ahead_trigger": 17.268
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "into",
+          "start": 17.413,
+          "end": 17.613,
+          "duration": 0.2,
+          "frame_ahead_trigger": 17.673
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "a",
+          "start": 17.613,
+          "end": 17.654,
+          "duration": 0.041,
+          "frame_ahead_trigger": 17.873
+        },
+        {
+          "word": "single,",
+          "clean_word": "single",
+          "phonemes": "single",
+          "start": 17.654,
+          "end": 18.003,
+          "duration": 0.349,
+          "frame_ahead_trigger": 17.914
+        },
+        {
+          "word": "high-speed",
+          "clean_word": "highspeed",
+          "phonemes": "highspeed",
+          "start": 18.003,
+          "end": 18.728,
+          "duration": 0.725,
+          "frame_ahead_trigger": 18.263
+        },
+        {
+          "word": "stream",
+          "clean_word": "stream",
+          "phonemes": "stream",
+          "start": 18.728,
+          "end": 19.149,
+          "duration": 0.421,
+          "frame_ahead_trigger": 18.988
+        },
+        {
+          "word": "of",
+          "clean_word": "of",
+          "phonemes": "of",
+          "start": 19.149,
+          "end": 19.288,
+          "duration": 0.139,
+          "frame_ahead_trigger": 19.409
+        },
+        {
+          "word": "operations.",
+          "clean_word": "operations",
+          "phonemes": "operations",
+          "start": 19.288,
+          "end": 20.003,
+          "duration": 0.715,
+          "frame_ahead_trigger": 19.548
+        }
+      ],
+      "audio_duration": 8.14,
+      "slot_duration": 8.29
+    },
+    {
+      "beat_id": 4,
+      "text": "It matches prefix tokens in the KV cache, treating the prompt as a static map rather than a dynamic, redundant mystery.",
+      "visual_focus": "A KV cache memory map locking onto a static prefix pattern.",
+      "highlight_words": {
+        "KV cache": "#10B981"
+      },
+      "svo_action": {
+        "subject": "KV cache",
+        "action_verb": "eliminates",
+        "direct_object": "redundant computation",
+        "anchor_word": "static",
+        "semantic_role": "technical_mechanism"
+      },
+      "visual_blueprint": {
+        "layout": "convergence_funnel",
+        "title": "PREFIX MATCHING",
+        "sub": "Cache Efficiency",
+        "accent_color": "#34D399",
+        "params": {
+          "input_1_label": "KV-Cache Access",
+          "input_2_label": "Weight Matrix",
+          "input_3_label": "Prompt Tokens",
+          "fused_label": "Fused Kernel Dispatch"
+        }
+      },
+      "thriller_role": "technical_deep_dive",
+      "act": 3,
+      "motif_type": "visual_composition",
+      "motif_params": {
+        "layout": "convergence_funnel",
+        "title": "PREFIX MATCHING",
+        "sub": "Cache Efficiency",
+        "accent_color": "#34D399",
+        "input_1_label": "KV-Cache Access",
+        "input_2_label": "Weight Matrix",
+        "input_3_label": "Prompt Tokens",
+        "fused_label": "Fused Kernel Dispatch"
+      },
+      "kinetic_action": "blueprint_transform",
+      "visual_grammar": "physical_analogy",
+      "mechanism_family": "attention_cache",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_4.py",
+      "visual_source": "bespoke",
+      "start": 20.67,
+      "end": 27.53,
+      "duration": 6.86,
+      "word_timings": [
+        {
+          "word": "It",
+          "clean_word": "it",
+          "phonemes": "It",
+          "start": 20.818,
+          "end": 20.938,
+          "duration": 0.12,
+          "frame_ahead_trigger": 21.228
+        },
+        {
+          "word": "matches",
+          "clean_word": "matches",
+          "phonemes": "matches",
+          "start": 20.938,
+          "end": 21.408,
+          "duration": 0.47,
+          "frame_ahead_trigger": 21.348
+        },
+        {
+          "word": "prefix",
+          "clean_word": "prefix",
+          "phonemes": "prefix",
+          "start": 21.408,
+          "end": 21.813,
+          "duration": 0.405,
+          "frame_ahead_trigger": 21.818
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "tokens",
+          "start": 21.813,
+          "end": 22.198,
+          "duration": 0.385,
+          "frame_ahead_trigger": 22.223
+        },
+        {
+          "word": "in",
+          "clean_word": "in",
+          "phonemes": "in",
+          "start": 22.198,
+          "end": 22.292,
+          "duration": 0.095,
+          "frame_ahead_trigger": 22.608
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 22.292,
+          "end": 22.453,
+          "duration": 0.16,
+          "frame_ahead_trigger": 22.702
+        },
+        {
+          "word": "KV",
+          "clean_word": "kv",
+          "phonemes": "KV",
+          "start": 22.453,
+          "end": 22.648,
+          "duration": 0.195,
+          "frame_ahead_trigger": 22.863
+        },
+        {
+          "word": "cache,",
+          "clean_word": "cache",
+          "phonemes": "cache",
+          "start": 22.648,
+          "end": 23.038,
+          "duration": 0.39,
+          "frame_ahead_trigger": 23.058
+        },
+        {
+          "word": "treating",
+          "clean_word": "treating",
+          "phonemes": "treating",
+          "start": 23.038,
+          "end": 23.478,
+          "duration": 0.44,
+          "frame_ahead_trigger": 23.448
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 23.478,
+          "end": 23.658,
+          "duration": 0.18,
+          "frame_ahead_trigger": 23.888
+        },
+        {
+          "word": "prompt",
+          "clean_word": "prompt",
+          "phonemes": "prompt",
+          "start": 23.658,
+          "end": 24.133,
+          "duration": 0.475,
+          "frame_ahead_trigger": 24.068
+        },
+        {
+          "word": "as",
+          "clean_word": "as",
+          "phonemes": "as",
+          "start": 24.133,
+          "end": 24.152,
+          "duration": 0.019,
+          "frame_ahead_trigger": 24.543
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "a",
+          "start": 24.152,
+          "end": 24.243,
+          "duration": 0.091,
+          "frame_ahead_trigger": 24.562
+        },
+        {
+          "word": "static",
+          "clean_word": "static",
+          "phonemes": "static",
+          "start": 24.243,
+          "end": 24.633,
+          "duration": 0.39,
+          "frame_ahead_trigger": 24.653
+        },
+        {
+          "word": "map",
+          "clean_word": "map",
+          "phonemes": "map",
+          "start": 24.633,
+          "end": 24.793,
+          "duration": 0.16,
+          "frame_ahead_trigger": 25.043
+        },
+        {
+          "word": "rather",
+          "clean_word": "rather",
+          "phonemes": "rather",
+          "start": 24.793,
+          "end": 25.193,
+          "duration": 0.4,
+          "frame_ahead_trigger": 25.203
+        },
+        {
+          "word": "than",
+          "clean_word": "than",
+          "phonemes": "than",
+          "start": 25.193,
+          "end": 25.458,
+          "duration": 0.265,
+          "frame_ahead_trigger": 25.603
+        },
+        {
+          "word": "a",
+          "clean_word": "a",
+          "phonemes": "a",
+          "start": 25.458,
+          "end": 25.498,
+          "duration": 0.04,
+          "frame_ahead_trigger": 25.868
+        },
+        {
+          "word": "dynamic,",
+          "clean_word": "dynamic",
+          "phonemes": "dynamic",
+          "start": 25.498,
+          "end": 25.947,
+          "duration": 0.449,
+          "frame_ahead_trigger": 25.908
+        },
+        {
+          "word": "redundant",
+          "clean_word": "redundant",
+          "phonemes": "redundant",
+          "start": 25.947,
+          "end": 26.483,
+          "duration": 0.536,
+          "frame_ahead_trigger": 26.357
+        },
+        {
+          "word": "mystery.",
+          "clean_word": "mystery",
+          "phonemes": "mystery",
+          "start": 26.483,
+          "end": 26.973,
+          "duration": 0.49,
+          "frame_ahead_trigger": 26.893
+        }
+      ],
+      "audio_duration": 6.86,
+      "slot_duration": 7.01
+    },
+    {
+      "beat_id": 5,
+      "text": "The result? 1,180 tokens per second\u2014a massive 78.8 percent efficiency gain over standard serving frameworks.",
+      "visual_focus": "A bar chart spiking vertically past the old performance ceiling.",
+      "highlight_words": {
+        "78.8 percent": "#3B82F6"
+      },
+      "svo_action": {
+        "subject": "SGLang",
+        "action_verb": "delivers",
+        "direct_object": "massive throughput",
+        "anchor_word": "gain",
+        "semantic_role": "empirical_payoff"
+      },
+      "visual_blueprint": {
+        "layout": "horizontal_race_bars",
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart spiking vertically past the old",
+        "params": {
+          "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+          "sub": "A bar chart spiking vertically past the old",
+          "metric_name": "Throughput",
+          "unit": "tok/s",
+          "contestants": [
+            {
+              "name": "SGLang",
+              "value": 1180.0,
+              "display_val": "1,180 tok/s",
+              "is_hero": true,
+              "color": "#10B981"
+            },
+            {
+              "name": "Baseline",
+              "value": 660.0,
+              "display_val": "660 tok/s",
+              "is_hero": false,
+              "color": "#38BDF8"
+            },
+            {
+              "name": "Standard",
+              "value": 240.0,
+              "display_val": "240 tok/s",
+              "is_hero": false,
+              "color": "#EF4444"
+            }
+          ],
+          "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN"
+        }
+      },
+      "thriller_role": "empirical_victory",
+      "act": 4,
+      "motif_type": "horizontal_race_bars",
+      "kinetic_action": "bar_fill",
+      "motif_params": {
+        "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+        "sub": "A bar chart spiking vertically past the old",
+        "metric_name": "Throughput",
+        "unit": "tok/s",
+        "contestants": [
+          {
+            "name": "SGLang",
+            "value": 1180.0,
+            "display_val": "1,180 tok/s",
+            "is_hero": true,
+            "color": "#10B981"
+          },
+          {
+            "name": "Baseline",
+            "value": 660.0,
+            "display_val": "660 tok/s",
+            "is_hero": false,
+            "color": "#38BDF8"
+          },
+          {
+            "name": "Standard",
+            "value": 240.0,
+            "display_val": "240 tok/s",
+            "is_hero": false,
+            "color": "#EF4444"
+          }
+        ],
+        "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN"
+      },
+      "visual_grammar": "exploded_mechanism",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_5.py",
+      "visual_source": "bespoke",
+      "start": 27.68,
+      "end": 35.83,
+      "duration": 8.16,
+      "word_timings": [
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "The",
+          "start": 27.785,
+          "end": 28.015,
+          "duration": 0.23,
+          "frame_ahead_trigger": 28.345
+        },
+        {
+          "word": "result?",
+          "clean_word": "result",
+          "phonemes": "result",
+          "start": 28.015,
+          "end": 28.546,
+          "duration": 0.532,
+          "frame_ahead_trigger": 28.575
+        },
+        {
+          "word": "1,180",
+          "clean_word": "1180",
+          "phonemes": "1180",
+          "start": 28.546,
+          "end": 28.905,
+          "duration": 0.358,
+          "frame_ahead_trigger": 29.106
+        },
+        {
+          "word": "tokens",
+          "clean_word": "tokens",
+          "phonemes": "tokens",
+          "start": 28.905,
+          "end": 29.41,
+          "duration": 0.505,
+          "frame_ahead_trigger": 29.465
+        },
+        {
+          "word": "per",
+          "clean_word": "per",
+          "phonemes": "per",
+          "start": 29.41,
+          "end": 29.73,
+          "duration": 0.32,
+          "frame_ahead_trigger": 29.97
+        },
+        {
+          "word": "second\u2014a",
+          "clean_word": "seconda",
+          "phonemes": "seconda",
+          "start": 29.73,
+          "end": 30.19,
+          "duration": 0.46,
+          "frame_ahead_trigger": 30.29
+        },
+        {
+          "word": "massive",
+          "clean_word": "massive",
+          "phonemes": "massive",
+          "start": 30.19,
+          "end": 30.86,
+          "duration": 0.67,
+          "frame_ahead_trigger": 30.75
+        },
+        {
+          "word": "78.8",
+          "clean_word": "788",
+          "phonemes": "788",
+          "start": 30.86,
+          "end": 31.08,
+          "duration": 0.22,
+          "frame_ahead_trigger": 31.42
+        },
+        {
+          "word": "percent",
+          "clean_word": "percent",
+          "phonemes": "percent",
+          "start": 31.08,
+          "end": 31.66,
+          "duration": 0.58,
+          "frame_ahead_trigger": 31.64
+        },
+        {
+          "word": "efficiency",
+          "clean_word": "efficiency",
+          "phonemes": "efficiency",
+          "start": 31.66,
+          "end": 32.425,
+          "duration": 0.765,
+          "frame_ahead_trigger": 32.22
+        },
+        {
+          "word": "gain",
+          "clean_word": "gain",
+          "phonemes": "gain",
+          "start": 32.425,
+          "end": 32.795,
+          "duration": 0.37,
+          "frame_ahead_trigger": 32.985
+        },
+        {
+          "word": "over",
+          "clean_word": "over",
+          "phonemes": "over",
+          "start": 32.795,
+          "end": 33.225,
+          "duration": 0.43,
+          "frame_ahead_trigger": 33.355
+        },
+        {
+          "word": "standard",
+          "clean_word": "standard",
+          "phonemes": "standard",
+          "start": 33.225,
+          "end": 33.935,
+          "duration": 0.71,
+          "frame_ahead_trigger": 33.785
+        },
+        {
+          "word": "serving",
+          "clean_word": "serving",
+          "phonemes": "serving",
+          "start": 33.935,
+          "end": 34.45,
+          "duration": 0.515,
+          "frame_ahead_trigger": 34.495
+        },
+        {
+          "word": "frameworks.",
+          "clean_word": "frameworks",
+          "phonemes": "frameworks",
+          "start": 34.45,
+          "end": 35.319,
+          "duration": 0.87,
+          "frame_ahead_trigger": 35.01
+        }
+      ],
+      "audio_duration": 8.16,
+      "slot_duration": 8.3
+    },
+    {
+      "beat_id": 6,
+      "text": "Follow The Model Verse for daily deep-dives into how modern AI actually works under the hood.",
+      "visual_focus": "The Model Verse logo pulsing with a data-stream effect.",
+      "highlight_words": {
+        "The Model Verse": "#FFFFFF"
+      },
+      "svo_action": {
+        "subject": "The Model Verse",
+        "action_verb": "decodes",
+        "direct_object": "AI architecture",
+        "anchor_word": "daily",
+        "semantic_role": "call_to_action"
+      },
+      "visual_blueprint": {
+        "layout": "projection_rays",
+        "title": "THE MODEL VERSE",
+        "sub": "Deep-Dive Daily",
+        "accent_color": "#38BDF8",
+        "params": {}
+      },
+      "thriller_role": "paradigm_shift",
+      "act": 4,
+      "visual_grammar": "live_trace",
+      "mechanism_family": "generic_mechanism",
+      "bespoke_visual_path": "/home/runner/work/Automated-video-Generation/Automated-video-Generation/manim_engine/generated/sglang_framework_deepdive/12f9bac99928/beat_6.py",
+      "visual_source": "bespoke",
+      "start": 35.98,
+      "end": 40.85,
+      "duration": 4.87,
+      "word_timings": [
+        {
+          "word": "Follow",
+          "clean_word": "follow",
+          "phonemes": "Follow",
+          "start": 36.16,
+          "end": 36.465,
+          "duration": 0.305,
+          "frame_ahead_trigger": 36.87
+        },
+        {
+          "word": "The",
+          "clean_word": "the",
+          "phonemes": "The",
+          "start": 36.465,
+          "end": 36.57,
+          "duration": 0.105,
+          "frame_ahead_trigger": 37.175
+        },
+        {
+          "word": "Model",
+          "clean_word": "model",
+          "phonemes": "Model",
+          "start": 36.57,
+          "end": 36.902,
+          "duration": 0.332,
+          "frame_ahead_trigger": 37.28
+        },
+        {
+          "word": "Verse",
+          "clean_word": "verse",
+          "phonemes": "Verse",
+          "start": 36.902,
+          "end": 37.165,
+          "duration": 0.263,
+          "frame_ahead_trigger": 37.612
+        },
+        {
+          "word": "for",
+          "clean_word": "for",
+          "phonemes": "for",
+          "start": 37.165,
+          "end": 37.35,
+          "duration": 0.185,
+          "frame_ahead_trigger": 37.875
+        },
+        {
+          "word": "daily",
+          "clean_word": "daily",
+          "phonemes": "daily",
+          "start": 37.35,
+          "end": 37.675,
+          "duration": 0.325,
+          "frame_ahead_trigger": 38.06
+        },
+        {
+          "word": "deep-dives",
+          "clean_word": "deepdives",
+          "phonemes": "deepdives",
+          "start": 37.675,
+          "end": 38.03,
+          "duration": 0.355,
+          "frame_ahead_trigger": 38.385
+        },
+        {
+          "word": "into",
+          "clean_word": "into",
+          "phonemes": "into",
+          "start": 38.03,
+          "end": 38.27,
+          "duration": 0.24,
+          "frame_ahead_trigger": 38.74
+        },
+        {
+          "word": "how",
+          "clean_word": "how",
+          "phonemes": "how",
+          "start": 38.27,
+          "end": 38.44,
+          "duration": 0.17,
+          "frame_ahead_trigger": 38.98
+        },
+        {
+          "word": "modern",
+          "clean_word": "modern",
+          "phonemes": "modern",
+          "start": 38.44,
+          "end": 38.715,
+          "duration": 0.275,
+          "frame_ahead_trigger": 39.15
+        },
+        {
+          "word": "AI",
+          "clean_word": "ai",
+          "phonemes": "AI",
+          "start": 38.715,
+          "end": 38.875,
+          "duration": 0.16,
+          "frame_ahead_trigger": 39.425
+        },
+        {
+          "word": "actually",
+          "clean_word": "actually",
+          "phonemes": "actually",
+          "start": 38.875,
+          "end": 39.315,
+          "duration": 0.44,
+          "frame_ahead_trigger": 39.585
+        },
+        {
+          "word": "works",
+          "clean_word": "works",
+          "phonemes": "works",
+          "start": 39.315,
+          "end": 39.45,
+          "duration": 0.135,
+          "frame_ahead_trigger": 40.025
+        },
+        {
+          "word": "under",
+          "clean_word": "under",
+          "phonemes": "under",
+          "start": 39.45,
+          "end": 39.86,
+          "duration": 0.41,
+          "frame_ahead_trigger": 40.16
+        },
+        {
+          "word": "the",
+          "clean_word": "the",
+          "phonemes": "the",
+          "start": 39.86,
+          "end": 40.03,
+          "duration": 0.17,
+          "frame_ahead_trigger": 40.57
+        },
+        {
+          "word": "hood.",
+          "clean_word": "hood",
+          "phonemes": "hood",
+          "start": 40.03,
+          "end": 40.19,
+          "duration": 0.16,
+          "frame_ahead_trigger": 40.74
+        }
+      ],
+      "audio_duration": 4.87,
+      "slot_duration": 4.87
+    }
+  ],
+  "math_formulas": [
+    {
+      "beat_id": 1,
+      "latex": "$V_{\\text{waste}} = \\sum_{i=1}^{N} (T_{\\text{idle}} - T_{\\text{active}}) \\cdot BW$",
+      "filename": "sglang_framework_deepdive_beat1_formula.svg",
+      "fontsize": 24,
+      "color": "#EF4444",
+      "term_annotations": [
+        {
+          "term": "T_{idle}",
+          "label": "Idle GPU cycles"
+        },
+        {
+          "term": "BW",
+          "label": "Memory Bandwidth"
+        }
+      ],
+      "svg_filename": "sglang_framework_deepdive_beat1_formula.svg"
+    },
+    {
+      "beat_id": 2,
+      "latex": "$\\mathcal{O}(T_{\\text{latency}}) = \\sum_{k=1}^{L} \\text{Time}(k) \\times \\text{Seq}_k$",
+      "filename": "sglang_framework_deepdive_beat2_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "Seq_k",
+          "label": "Serial dependency factor"
+        }
+      ],
+      "svg_filename": "sglang_framework_deepdive_beat2_formula.svg"
+    },
+    {
+      "beat_id": 3,
+      "latex": "$G = \\{V, E\\} \\implies \\text{Kernel}(G)$",
+      "filename": "sglang_framework_deepdive_beat3_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "G",
+          "label": "Compiled execution graph"
+        }
+      ],
+      "svg_filename": "sglang_framework_deepdive_beat3_formula.svg"
+    },
+    {
+      "beat_id": 4,
+      "latex": "$\\text{Kernel}_{fused} = \\text{Dispatch}(op_1 \\otimes op_2 \\otimes op_n)$",
+      "filename": "sglang_framework_deepdive_beat4_formula.svg",
+      "fontsize": 24,
+      "color": "#F59E0B",
+      "term_annotations": [
+        {
+          "term": "op_n",
+          "label": "Individual compute operations"
+        }
+      ],
+      "svg_filename": "sglang_framework_deepdive_beat4_formula.svg"
+    },
+    {
+      "beat_id": 5,
+      "latex": "$\\text{Efficiency}_{\\text{gain}} = \\frac{\\text{Tokens}_{\\text{SGLang}}}{\\text{Tokens}_{\\text{Baseline}}} > 1.5$",
+      "filename": "sglang_framework_deepdive_beat5_formula.svg",
+      "fontsize": 24,
+      "color": "#34D399",
+      "term_annotations": [
+        {
+          "term": "1.5",
+          "label": "50% throughput improvement"
+        }
+      ],
+      "svg_filename": "sglang_framework_deepdive_beat5_formula.svg"
+    }
+  ],
+  "sfx_cues": [
+    {
+      "timestamp": 0.8,
+      "sound_type": "sub_impact",
+      "volume": 0.45
+    },
+    {
+      "timestamp": 5.2,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 13.5,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 21.5,
+      "sound_type": "sub_impact",
+      "volume": 0.4
+    },
+    {
+      "timestamp": 29.5,
+      "sound_type": "sub_impact",
+      "volume": 0.5
+    },
+    {
+      "timestamp": 37.0,
+      "sound_type": "whoosh",
+      "volume": 0.35
+    },
+    {
+      "timestamp": 38.0,
+      "sound_type": "chime",
+      "volume": 0.4
+    }
+  ],
+  "metadata": {
+    "visual_metaphor": "hardware_memory_hierarchy",
+    "visual_entities": {
+      "clusters": [
+        {
+          "name": "VRAM",
+          "color": "#EF4444",
+          "items": [
+            "Memory",
+            "Allocation",
+            "Idle"
+          ]
+        },
+        {
+          "name": "Compute",
+          "color": "#34D399",
+          "items": [
+            "Kernel",
+            "Fusion",
+            "Throughput"
+          ]
+        },
+        {
+          "name": "Control",
+          "color": "#F59E0B",
+          "items": [
+            "Scheduler",
+            "Compiler",
+            "Graph"
+          ]
+        }
+      ],
+      "incoming_token": {
+        "label": "Token: \"request\"",
+        "target_cluster": "Control",
+        "token": "\"request\""
+      },
+      "bottleneck_tokens": [
+        {
+          "word": "Stall",
+          "color": "#EF4444"
+        },
+        {
+          "word": "Wait",
+          "color": "#F59E0B"
+        }
+      ]
+    },
+    "model_a": "SGLang",
+    "model_a_specs": [
+      "Compiled Graph",
+      "Kernel Fusion",
+      "High Throughput"
+    ],
+    "model_b": "Standard Serving",
+    "model_b_specs": [
+      "Serial Execution",
+      "Fragmented RAM",
+      "High Overhead"
+    ],
+    "divide_title": "SERVING ARCHITECTURE DIVIDE",
+    "model_a_stat": "95%",
+    "model_a_stat_label": "HARDWARE UTILIZATION",
+    "model_b_stat": "45%",
+    "model_b_stat_label": "BASELINE UTILIZATION",
+    "efficiency_badge": "\u26a1 +50% THROUGHPUT GAIN",
+    "benchmarks": [
+      {
+        "name": "Throughput",
+        "score_a": "95%",
+        "score_b": "45%"
+      },
+      {
+        "name": "Latency",
+        "score_a": "Low",
+        "score_b": "High"
+      },
+      {
+        "name": "Efficiency",
+        "score_a": "High",
+        "score_b": "Baseline"
+      }
+    ],
+    "scale_metric": "38.6k",
+    "scale_label": "GITHUB STARS",
+    "bottleneck_title": "SERIAL INTERPRETER BOTTLENECK",
+    "bottleneck_desc": "Sequential token dependency stalls execution",
+    "solution_title": "COMPILED GRAPH FUSION",
+    "solution_components": "SGLang Kernel Fusion Engine",
+    "mechanism_title": "STRUCTURED GRAPH DISPATCH",
+    "payoff_stat": "95%",
+    "payoff_label": "HARDWARE UTILIZATION",
+    "payoff_sub": "Outperforming standard interpreters on GPU clusters",
+    "payoff_hero_stat": 95.0,
+    "payoff_hero_label": "SGLang Utilization",
+    "payoff_base_stat": 45.0,
+    "payoff_base_label": "Standard Baseline",
+    "payoff_delta_badge": "\u26a1 +50% THROUGHPUT GAIN",
+    "challenger": "SGLang",
+    "incumbent": "Standard Framework",
+    "audience_profile": "global_ai_builder"
+  },
+  "benchmark_comparison": {
+    "title": "BENCHMARK SHOWDOWN: THROUGHPUT",
+    "metric_name": "Throughput",
+    "unit": "tok/s",
+    "contestants": [
+      {
+        "name": "SGLang",
+        "value": 1180.0,
+        "display_val": "1,180 tok/s",
+        "is_hero": true,
+        "color": "#10B981"
+      },
+      {
+        "name": "Baseline",
+        "value": 660.0,
+        "display_val": "660 tok/s",
+        "is_hero": false,
+        "color": "#38BDF8"
+      },
+      {
+        "name": "Standard",
+        "value": 240.0,
+        "display_val": "240 tok/s",
+        "is_hero": false,
+        "color": "#EF4444"
+      }
+    ],
+    "delta_badge": "\u26a1 +78.8% SOTA EFFICIENCY GAIN",
+    "radar_axes": [
+      "Throughput",
+      "Latency",
+      "VRAM Efficiency",
+      "Flexibility",
+      "Stability"
+    ]
+  },
+  "code_snippet": {
+    "filename": "radix_cache.py",
+    "language": "python",
+    "lines": [
+      "def match_prefix(self, prompt_tokens):",
+      "    node = self.root",
+      "    for token in prompt_tokens:",
+      "        if token in node.children:",
+      "            node = node.children[token]  # Hit",
+      "    return node.kv_cache_pointer"
+    ],
+    "highlight_lines": [
+      4,
+      5
+    ],
+    "trace_register": "\u26a1 RADIX HIT: +2,048 TOKENS REUSED",
+    "explanation": "RadixAttention reuses KV-cache trees across branching LLM calls for 5x throughput."
+  },
+  "content_strategy": {
+    "version": "audience-led-v1",
+    "audience_profile": "global_ai_builder",
+    "source_title": "sglang: SGLang is a high-performance serving framework f",
+    "source_url": "https://github.com/sgl-project/sglang",
+    "source_date": "2026-11-10T19:54:46Z",
+    "source_claims": [
+      "SGLang is a high-performance serving framework for large language models and multimodal models. Key open-source repository: sgl-project/sglang with 38,685 GitHub stars."
+    ],
+    "risk_flags": [],
+    "primary_segment": "developer",
+    "viewer_problem": "Builders need to know what sglang: SGLang is a high-performance serving framework f changes in a real workflow.",
+    "promised_payoff": "Leave knowing when to try sglang: SGLang is a high-performance serving framework f and what limitation to expect.",
+    "proof_asset": "source code or execution kernel",
+    "recommended_hook": "How sglang actually runs inside your GPU memory",
+    "recommended_format": "practical_demo",
+    "format_profile": {
+      "label": "Practical demo",
+      "brief": "Show a real workflow, result, limitation, and who should use it."
+    },
+    "score": 62.68,
+    "score_breakdown": {
+      "demand": 8.92,
+      "utility": 12.2,
+      "demonstrability": 12.8,
+      "freshness": 15.0,
+      "evidence": 10.0,
+      "audience_fit": 8.75
+    },
+    "penalties": [
+      "repeated format"
+    ],
+    "reasons": [
+      "is within the latest window",
+      "matches the global builder audience"
+    ],
+    "hard_rejections": [],
+    "selection_penalty": 1,
+    "format_target": 8,
+    "format_count_before_selection": 4
+  },
+  "arxiv_id": "gh_sgl_project_sglang",
+  "repo_metadata": {
+    "repo_name": "sgl-project/sglang",
+    "stars": 38685,
+    "forks": 10337,
+    "language": "Python",
+    "url": "https://github.com/sgl-project/sglang",
+    "pushed_at": "2026-11-10T19:54:46Z",
+    "updated_at": "2026-11-10T19:53:17Z"
+  },
+  "feynman_certification": {
+    "converged_turn": 1,
+    "final_comprehension_score": 8.8,
+    "final_retention_hook_score": 9.5,
+    "ai_slop_eliminated": true,
+    "listener_verdict": "The hook was solid\u2014calling out memory bus bottlenecks immediately resonated with me because I've dealt with that pain in CUDA kernels. I liked the assembly line analogy, it wasn't too 'baby-talk' and actually helped visualize the memory fragmentation. However, you dropped 'Compiled Graph Fusion' like I should already know exactly how that's implemented under the hood. I get the 'what' (prefix caching), but the 'how' of the fusion part felt a bit like a buzzword until you explained the KV cache part."
+  },
+  "thriller_metadata": {
+    "engine_version": "7.0",
+    "narrative_style": "intellectual_thriller",
+    "villain_entity": "Fragmented Memory Access",
+    "physical_analogy": "A factory worker re-reading the manual for every single bolt on an assembly line.",
+    "eureka_mechanism": "Compiled Graph Fusion",
+    "paradigm_shift": "Transforming dynamic request streams into optimized, static execution paths."
+  },
+  "hook_gating": {
+    "selected_hook": "Do not scale your next training run before you see how SGLang delivers 95%.",
+    "verdict": 69,
+    "band": "WORKABLE",
+    "formula": "The Warning",
+    "properties": {
+      "SPECIFICITY": 62,
+      "ADDRESS": 96,
+      "STAKES": 62,
+      "CURIOSITY": 58,
+      "BREVITY": 100
+    },
+    "weakest_property": "CURIOSITY",
+    "opening_style": "candidate_selected",
+    "candidates_evaluated": 10,
+    "rankings": [
+      {
+        "hook": "Do not scale your next training run before you see how SGLang delivers 95%.",
+        "verdict": 69,
+        "band": "WORKABLE",
+        "formula": "The Warning"
+      },
+      {
+        "hook": "Why do standard transformer architectures hit a memory wall before SGLang unlocks 95% gains?",
+        "verdict": 50,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "You might be leaving 95% of your hardware performance on the table without SGLang.",
+        "verdict": 48,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Your GPU can spend 95% of its memory budget moving data; SGLang cuts that overhead.",
+        "verdict": 46,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Everyone thought standard methods were enough, until SGLang proved: key open-source repository: sgl-project/sglang with 38,685 GitHub stars.",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Why should you care about SGLang? Because your LLM server wastes half its compute cycles just waiting for the memory bus to wake.",
+        "verdict": 43,
+        "band": "WEAK",
+        "formula": "The Question"
+      },
+      {
+        "hook": "Everyone assumed standard attention was optimal, until SGLang proved a 95% leap.",
+        "verdict": 42,
+        "band": "WEAK",
+        "formula": "The Statistic"
+      },
+      {
+        "hook": "Your LLM server wastes half its compute cycles just waiting for the memory bus to wake.",
+        "verdict": 40,
+        "band": "WEAK",
+        "formula": "Unclassified"
+      },
+      {
+        "hook": "Here is the uncomfortable part of SGLang: SGLang is a high-performance serving framework for large language models and multimodal models.",
+        "verdict": 35,
+        "band": "WEAK",
+        "formula": "The Reveal"
+      },
+      {
+        "hook": "Why is SGLang a major breakthrough? Because sGLang is a high-performance serving framework for large language models and multimodal models.",
+        "verdict": 35,
+        "band": "WEAK",
+        "formula": "The Question"
+      }
+    ]
+  },
+  "entity_registry": [
+    {
+      "entity_id": "dual_metric_gauge",
+      "entity_type": "dual_metric",
+      "z_index": 10,
+      "initial_position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "initial_scale": 1.0,
+      "initial_opacity": 1.0,
+      "parameters": {
+        "model_a_name": "SGLang",
+        "model_a_score": "95%",
+        "model_b_name": "Standard Serving",
+        "model_b_score": "45%",
+        "delta_label": "\u26a1 +50% THROUGHPUT GAIN"
+      }
+    }
+  ],
+  "content_format": "tool_reaction",
+  "format_profile": {
+    "label": "Tool reaction",
+    "brief": "Open with a surprising real tool behaviour or result, then show the smallest reproducible workflow and its limitation.",
+    "best_for": "new tools, model launches, demos, workflows, open-source projects",
+    "visual_language": "screen-like live demo framing, cursor/state changes, before/after proof"
+  },
+  "script_driven_visuals": true,
+  "visual_generation_key": "12f9bac99928"
+}
